@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="main看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数123456intKBENGINE_MAIN(intargc, char* argv[])&amp;#123;	ENGINE_COMPONENT_INFO&amp;amp;info = g_kbeSrvConfig.getXXX();	returnkbeMainT&amp;lt;XXX&amp;gt;(argc, argv, YYY, i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kbe服务端笔记">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/kbe服务端笔记/index.html">
+<meta property="og:site_name" content="nosix&#39;s blog">
+<meta property="og:description" content="main看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数123456intKBENGINE_MAIN(intargc, char* argv[])&amp;#123;	ENGINE_COMPONENT_INFO&amp;amp;info = g_kbeSrvConfig.getXXX();	returnkbeMainT&amp;lt;XXX&amp;gt;(argc, argv, YYY, i">
+<meta property="og:updated_time" content="2017-08-31T00:32:21.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kbe服务端笔记">
+<meta name="twitter:description" content="main看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数123456intKBENGINE_MAIN(intargc, char* argv[])&amp;#123;	ENGINE_COMPONENT_INFO&amp;amp;info = g_kbeSrvConfig.getXXX();	returnkbeMainT&amp;lt;XXX&amp;gt;(argc, argv, YYY, i">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/01/kbe服务端笔记/"/>
+
+
+
+
+
+  <title>kbe服务端笔记 | nosix's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nosix's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/01/kbe服务端笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nosix's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">kbe服务端笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T19:48:28+08:00">
+                2017-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="main"><a href="#main" class="headerlink" title="main"></a><strong>main</strong></h2><p>看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">intKBENGINE_MAIN(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">	ENGINE_COMPONENT_INFO&amp;info = g_kbeSrvConfig.getXXX();</div><div class="line">	returnkbeMainT&lt;XXX&gt;(argc, argv, YYY, info.externalPorts_min, </div><div class="line">		info.externalPorts_max, info.externalInterface, 0, info.internalInterface);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个宏展开是这样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">kbeMain(intargc, char* argv[]);																						\</div><div class="line">intmain(intargc, char* argv[])																						\</div><div class="line">&#123;																														\</div><div class="line">	loadConfig();																										\</div><div class="line">	g_componentID = genUUID64();																						\</div><div class="line">	parseMainCommandArgs(argc, argv);																					\</div><div class="line">	char dumpname[MAX_BUF] = &#123;0&#125;;																						\</div><div class="line">	kbe_snprintf(dumpname, MAX_BUF, &quot;%&quot;PRAppID, g_componentID);															\</div><div class="line">	KBEngine::exception::installCrashHandler(1, dumpname);																\</div><div class="line">	intretcode = -1;																									\</div><div class="line">	THREAD_TRY_EXECUTION;																								\</div><div class="line">	retcode = kbeMain(argc, argv);																						\</div><div class="line">	THREAD_HANDLE_CRASH;																								\</div><div class="line">	returnretcode;																										\</div><div class="line">&#125;																														\</div></pre></td></tr></table></figure></p>
+<p>稍微整理一下之后main函数看起来很像是这个样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">intkbeMain(intargc, char* argv[]);</div><div class="line">intmain(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">    loadConfig();</div><div class="line">    g_componentID = genUUID64();</div><div class="line">    parseMainCommandArgs(argc, argv);</div><div class="line">chardumpname[MAX_BUF] = &#123;0&#125;;</div><div class="line">    kbe_snprintf(dumpname, MAX_BUF, &quot;%&quot;PRAppID, g_componentID);</div><div class="line">    KBEngine::exception::installCrashHandler(1, dumpname);</div><div class="line">intretcode = -1;</div><div class="line">    THREAD_TRY_EXECUTION;</div><div class="line">retcode = kbeMain(argc, argv);</div><div class="line">    THREAD_HANDLE_CRASH;</div><div class="line">return (retcode);</div><div class="line">&#125;</div><div class="line">intkbeMain(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">		ENGINE_COMPONENT_INFO&amp;info = g_kbeSrvConfig.getXXX();</div><div class="line">		return kbeMainT&lt;XXX&gt;(argc, argv, YYY, info.externalPorts_min, info.externalPorts_max, info.externalInterface, 0, info.internalInterface);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>基本可以理解为每个组件的main函数流程都是一样的，只是在特化kbeMainT时所给参数不一样。</p>
+<h2 id="ServerConfig："><a href="#ServerConfig：" class="headerlink" title="ServerConfig："></a><strong>ServerConfig：</strong></h2><p>ServerConfig涉及到服务端每个组件的各种配置选项，比如数据库访问。它的构造在组件名.cpp中，比如loginapp就在loginapp.cpp，machine就在machine.cpp中，loginapp的如下（server/loginapp/loginapp.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServerConfigg_serverConfig;</div><div class="line">KBE_SINGLETON_INIT(Loginapp);</div></pre></td></tr></table></figure></p>
+<p>它的初始化（配置）工作主要由loadConfig接口完成，如下（lib/server/kbemain.h）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">inlinevoidloadConfig()</div><div class="line">&#123;</div><div class="line">	Resmgr::getSingleton().initialize();</div><div class="line"></div><div class="line">	// &quot;../../res/server/kbengine_defs.xml&quot;</div><div class="line">	g_kbeSrvConfig.loadConfig(&quot;server/kbengine_defs.xml&quot;);</div><div class="line"></div><div class="line">	// &quot;../../../assets/res/server/kbengine.xml&quot;</div><div class="line">	g_kbeSrvConfig.loadConfig(&quot;server/kbengine.xml&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Resmgr："><a href="#Resmgr：" class="headerlink" title="Resmgr："></a><strong>Resmgr：</strong></h2><p>Resmgr负责管理kbe的所有资源管理，比如资源路径，环境变量。Resmgr的构造地方如下（lib/network/fixed_messages.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">FixedMessages::FixedMessages():</div><div class="line">_infomap(),</div><div class="line">_loaded(false)</div><div class="line">&#123;</div><div class="line">	newResmgr();</div><div class="line">	Resmgr::getSingleton().initialize();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<pre><code>我们可以理解为FixedMessages构造的时候Resmgr就构造了。
+Resmgr的初始化（配置）工作主要由initialize接口完成，代码如上。
+</code></pre><h2 id="FixedMessages："><a href="#FixedMessages：" class="headerlink" title="FixedMessages："></a><strong>FixedMessages：</strong></h2><p>FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。<br>    它的构造地方如下（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">MessageHandlers::MessageHandlers():</div><div class="line">msgHandlers_(),</div><div class="line">msgID_(1),</div><div class="line">exposedMessages_()</div><div class="line">&#123;</div><div class="line">	g_fm = Network::FixedMessages::getSingletonPtr();</div><div class="line">	if(g_fm == NULL)</div><div class="line">		g_fm = newNetwork::FixedMessages;</div><div class="line"></div><div class="line">	Network::FixedMessages::getSingleton().loadConfig(&quot;server/messages_fixed.xml&quot;);</div><div class="line">	messageHandlers().push_back(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>意即MessageHandlers构造的时候，如果它还没构造，那就构造。<br>它的初始化（配置）是由loadConfig接口来完成的，代码见上。</p>
+<h2 id="loginapp"><a href="#loginapp" class="headerlink" title="loginapp"></a><strong>loginapp</strong></h2><blockquote>
+<p>Loginapp组件主要用来处理账户登录/注册的业务</p>
+</blockquote>
+<h4 id="消息与handler映射的建立："><a href="#消息与handler映射的建立：" class="headerlink" title="消息与handler映射的建立："></a><strong>消息与handler映射的建立：</strong></h4><p>两次包含xxx_interface.h，实现声明和定义：<br>每个app组件的接口定义都在xxxapp_interface.cpp中开始，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#include&quot;loginapp_interface.h&quot;</div><div class="line">#defineDEFINE_IN_INTERFACE</div><div class="line">#defineLOGINAPP</div><div class="line">#include&quot;loginapp_interface.h&quot;</div><div class="line"></div><div class="line">namespaceKBEngine&#123;</div><div class="line">namespaceLoginappInterface&#123;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>所有的戏法都是通过包含loginapp_interface.h前后定义了DEFINE_IN_INTERFACE和LOGINAPP来完成的。第一次的包含就是各种变量，类的声明（当然也有一些类是声明类时使用类inline函数定义完成了，比如MESSAGE_ARGS0/1/2……）。<br>我们看看loginapp_interface.h中的代码：</p>
+<h4 id="消息与handlers的存储"><a href="#消息与handlers的存储" class="headerlink" title="消息与handlers的存储"></a><strong>消息与handlers的存储</strong></h4><p>首先是这一句：<br>NETWORK_INTERFACE_DECLARE_BEGIN(LoginappInterface)<br>此句展开的话声明和定义了Network::MessageHandlers messageHandlers（记住它们都在LoginappInterface命名空间内），展开宏之后的代码看起来像这样（是的，你的眼睛是好的，没有}闭合）：<br>声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">namespaceLoginappInterface &#123;</div><div class="line">extern Network::MessageHandlers messageHandlers;</div><div class="line">定义：</div><div class="line">namespaceLoginappInterface &#123;</div><div class="line">    Network::MessageHandlers messageHandlers;</div></pre></td></tr></table></figure></p>
+<h4 id="消息与handle建立映射"><a href="#消息与handle建立映射" class="headerlink" title="消息与handle建立映射"></a><strong>消息与handle建立映射</strong></h4><p>然后是这一句：<br><code>LOGINAPP_MESSAGE_DECLARE_ARGS0(importClientMessages,                            NETWORK_FIXED_MESSAGE)</code><br>此句展开的话分明声明和定义了一个importClientMessagesLoginappMessagehandler0的类，这个类继承自Network::MessageHandler，这里就是实现了handle的虚函数接口；声明和定义了importClientMessagesLoginappMessagehandler0的一个名为importClientMessages的全局变量；声明和定义了importClientMessagesArgs0的类，这个类继承自Network::MessageArgs。我们一个个地分析一下：<br>首先展开下面的宏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOGINAPP_MESSAGE_DECLARE_ARGS0(importClientMessages,							NETWORK_FIXED_MESSAGE)</div></pre></td></tr></table></figure></p>
+<p>之后是这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#defineLOGINAPP_MESSAGE_DECLARE_ARGS0(NAME, MSG_LENGTH)						\</div><div class="line">LOGINAPP_MESSAGE_HANDLER_ARGS0(NAME)										\</div><div class="line">NETWORK_MESSAGE_DECLARE_ARGS0(Loginapp, NAME,								\</div><div class="line">				NAME##LoginappMessagehandler0, MSG_LENGTH)</div><div class="line">展开LOGINAPP_MESSAGE_HANDLER_ARGS0(NAME)之后分别得到importClientMessagesLoginappMessagehandler0的声明和定义：</div><div class="line">声明：</div><div class="line">classimportClientMessagesLoginappMessagehandler0 : public Network::MessageHandler</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">virtualvoidhandle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s);</div><div class="line">&#125;;</div><div class="line">定义：</div><div class="line">voidimportClientMessagesLoginappMessagehandler0::handle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s)</div><div class="line">&#123;</div><div class="line">    KBEngine::Loginapp::getSingleton().importClientMessages(pChannel);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（handle/handler，傻傻分不清楚。。。这里的handle是xxxApp中真正用来处理这个消息的接口，而这里的handler提供一个中间层的作用，集中处理一些通用的工作，可以将耦合减少一点）<br>上面完成了相当于是importClientMessages消息的handler的声明和定义，下面则将这个类实例化之后添加到messageHandlers：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#defineNETWORK_MESSAGE_DECLARE_ARGS0(DOMAIN, NAME, MSGHANDLER,		\</div><div class="line">											MSG_LENGTH)				\</div><div class="line">	NETWORK_MESSAGE_HANDLER(DOMAIN, NAME, MSGHANDLER, MSG_LENGTH, 0)\</div><div class="line">	MESSAGE_ARGS0(NAME)			</div><div class="line">										\</div></pre></td></tr></table></figure></p>
+<p>展开NETWORK_MESSAGE_HANDLER(DOMAIN, NAME, MSGHANDLER, MSG_LENGTH, 0)之后得到importClientMessages的handler类（importClientMessagesLoginappMessagehandler0）的名为importClientMessages的全局变量（不过欣慰的是他们都在各自的XXXInterface命名空间内）。<br>声明：<br><code>externconstimportClientMessagesLoginappMessagehandler0&amp;importClientMessages;</code></p>
+<p>定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">importClientMessagesLoginappMessagehandler0* pimportClientMessages  = static_cast&lt;importClientMessagesLoginappMessagehandler0*&gt;(messageHandlers.add(&quot;Loginapp::importClientMessages&quot;,new importClientMessagesArgs0, NETWORK_FIXED_MESSAGE, newimportClientMessagesLoginappMessagehandler0);</div><div class="line">constimportClientMessagesLoginappMessagehandler0&amp;importClientMessages = *pimportClientMessages;</div></pre></td></tr></table></figure></p>
+<p>下面的MESSAGE_ARGS0(NAME)展开后对importClientMessagesArgs0进行了声明和定义（其他它声明的时候就已经完成了全部的定义），声明的时候就是个空语句：<br>声明兼定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">classimportClientMessagesArgs0 : public Network::MessageArgs</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">importClientMessagesArgs0() :Network::MessageArgs() &#123;&#125;</div><div class="line">    ~importClientMessagesArgs0() &#123;&#125;</div><div class="line"></div><div class="line">staticvoidstaticAddToBundle(Network::Bundle&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">staticvoidstaticAddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtual int32 dataSize(void)</div><div class="line">    &#123;</div><div class="line">return 0;</div><div class="line">    &#125;</div><div class="line">virtualvoidaddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtualvoidcreateFromStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>唯一需要小注意一下的就是importClientMessagesArgs0的声明（兼定义）是和importClientMessagesLoginappMessagehandler0的实例的声明和定义是错开的，因为后者实例化添加到messageHandlers的时候需要new一个importClientMessagesArgs0的实例。</p>
+<h4 id="流程的伪代码"><a href="#流程的伪代码" class="headerlink" title="流程的伪代码"></a><strong>流程的伪代码</strong></h4><pre><code>稍微整理一下之后，使用LOGINAPP_MESSAGE_HANDLER_ARGSn建立一个消息到handler的映射的代码很像是这样：
+声明：（第一次包含loginapp_interface.h产生的代码）
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">classimportClientMessagesLoginappMessagehandler0 : public Network::MessageHandler</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">virtualvoidhandle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">externconstimportClientMessagesLoginappMessagehandler0&amp;importClientMessages;</div><div class="line"></div><div class="line">classimportClientMessagesArgs0 : public Network::MessageArgs</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">importClientMessagesArgs0() :Network::MessageArgs() &#123;&#125;</div><div class="line">    ~importClientMessagesArgs0() &#123;&#125;</div><div class="line"></div><div class="line">staticvoidstaticAddToBundle(Network::Bundle&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">staticvoidstaticAddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtual int32 dataSize(void)</div><div class="line">    &#123;</div><div class="line">return 0;</div><div class="line">    &#125;</div><div class="line">virtualvoidaddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtualvoidcreateFromStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre><code>定义：（定义DEFINE_IN_INTERFACE和LOGINAPP之后第二次包含loginapp_interface.h产生的代码）
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">voidimportClientMessagesLoginappMessagehandler0::handle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s)</div><div class="line">&#123;</div><div class="line">    KBEngine::Loginapp::getSingleton().importClientMessages(pChannel);</div><div class="line">&#125;</div><div class="line"></div><div class="line">importClientMessagesLoginappMessagehandler0* pimportClientMessages </div><div class="line">= static_cast&lt;importClientMessagesLoginappMessagehandler0*&gt;(messageHandlers.add(&quot;Loginapp::importClientMessages&quot;,</div><div class="line">newimportClientMessagesArgs0,</div><div class="line">                                                                                  NETWORK_FIXED_MESSAGE,</div><div class="line">newimportClientMessagesLoginappMessagehandler0);</div><div class="line">constimportClientMessagesLoginappMessagehandler0&amp;importClientMessages = *pimportClientMessages;</div></pre></td></tr></table></figure>
+<h4 id="消息id：固定消息与非固定消息"><a href="#消息id：固定消息与非固定消息" class="headerlink" title="消息id：固定消息与非固定消息"></a><strong>消息id：固定消息与非固定消息</strong></h4><p>要接着v0.0.3的分析继续写，回过头来要看之前写的东西说实话自己都有点难以理解。。。不过出于幸运或者努力，总算是看懂了;-(，读源代码（感觉特别是C++）本来就不是件容易的事，所以读源代码一定要做好长期战斗的准备。<br>上面我们分析到了，其实一个消息，就是由这样一个宏来和它的handle建立链接的：<br>LOGINAPP_MESSAGE_DECLARE_ARGS0(importClientMessages,    NETWORK_FIXED_MESSAGE)<br>通过上面的分析，我们得知，实际上建立消息和handle映射，起到核心作用的接口是messageHandlers.add(xxx, xxxx)，所以我们跟进去看看（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">MessageHandler* MessageHandlers::add(std::stringihName, MessageArgs* args, </div><div class="line">	int32msgLen, MessageHandler* msgHandler)</div><div class="line">&#123;</div><div class="line">	if(msgID_ == 1)</div><div class="line">	&#123;</div><div class="line">		//printf(&quot;\n------------------------------------------------------------------\n&quot;);</div><div class="line">		//printf(&quot;KBEMessage_handlers begin:\n&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//bool isfixedMsg = false;</div><div class="line"></div><div class="line">	FixedMessages::MSGInfo* msgInfo = FixedMessages::getSingleton().isFixed(ihName.c_str());</div><div class="line">	if(msgInfo == NULL)</div><div class="line">	&#123;</div><div class="line">		while(true)</div><div class="line">		&#123;</div><div class="line">			if(FixedMessages::getSingleton().isFixed(msgID_))</div><div class="line">			&#123;</div><div class="line">				msgID_++;</div><div class="line">				//isfixedMsg = true;</div><div class="line">			&#125;</div><div class="line">			else</div><div class="line">			&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line"></div><div class="line">		msgHandler-&gt;msgID = msgID_++;</div><div class="line">	&#125;</div><div class="line">	else</div><div class="line">	&#123;</div><div class="line">		msgHandler-&gt;msgID = msgInfo-&gt;msgid;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	msgHandler-&gt;name = ihName;					</div><div class="line">	msgHandler-&gt;pArgs = args;</div><div class="line">	msgHandler-&gt;msgLen = msgLen;	</div><div class="line">	msgHandler-&gt;exposed = false;</div><div class="line">	msgHandler-&gt;pMessageHandlers = this;</div><div class="line">	msgHandler-&gt;onInstall();</div><div class="line"></div><div class="line">	msgHandlers_[msgHandler-&gt;msgID] = msgHandler;</div><div class="line">	</div><div class="line">	if(msgLen == NETWORK_VARIABLE_MESSAGE)</div><div class="line">	&#123;</div><div class="line">		//printf(&quot;\tMessageHandlers::add(%d): name=%s, msgID=%d, size=Variable.\n&quot;, </div><div class="line">		//	(int32)msgHandlers_.size(), ihName.c_str(), msgHandler-&gt;msgID);</div><div class="line">	&#125;</div><div class="line">	else</div><div class="line">	&#123;</div><div class="line">		if(msgLen == 0)</div><div class="line">		&#123;</div><div class="line">			msgHandler-&gt;msgLen = args-&gt;dataSize();</div><div class="line"></div><div class="line">			if(msgHandler-&gt;type() == NETWORK_MESSAGE_TYPE_ENTITY)</div><div class="line">			&#123;</div><div class="line">				msgHandler-&gt;msgLen += sizeof(ENTITY_ID);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		//printf(&quot;\tMessageHandlers::add(%d): name=%s, msgID=%d, size=Fixed(%d).\n&quot;, </div><div class="line">		//		(int32)msgHandlers_.size(), ihName.c_str(), msgHandler-&gt;msgID, msgHandler-&gt;msgLen);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//if(isfixedMsg)</div><div class="line">	//	printf(&quot;\t\t!!!message is fixed.!!!\n&quot;);</div><div class="line"></div><div class="line">	returnmsgHandler;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>大意可以理解为，首先看看消息名称是不是一个固定消息，我们跟进去看看（lib/network/fixed_messages.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">FixedMessages::MSGInfo* FixedMessages::isFixed(constchar* msgName)</div><div class="line">&#123;</div><div class="line">	MSGINFO_MAP::iteratoriter = _infomap.find(msgName);</div><div class="line">	if(iter != _infomap.end())</div><div class="line">	&#123;</div><div class="line">		MSGInfo* infos = &amp;iter-&gt;second;</div><div class="line">		returninfos;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	returnNULL;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//-------------------------------------------------------------------------------------</div><div class="line">boolFixedMessages::isFixed(MessageIDmsgid)</div><div class="line">&#123;</div><div class="line">	MSGINFO_MAP::iteratoriter = _infomap.begin();</div><div class="line">	while (iter != _infomap.end())</div><div class="line">	&#123;</div><div class="line">		FixedMessages::MSGInfo&amp;infos = iter-&gt;second;</div><div class="line">		if(infos.msgid == msgid)</div><div class="line">			returntrue;</div><div class="line"></div><div class="line">		++iter;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	returnfalse;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="固定消息"><a href="#固定消息" class="headerlink" title="固定消息"></a><strong>固定消息</strong></h5><p>通过通读FixedMessages（fixed_message.h/.cpp）可以看到这个_infomap是在loadConfig中建立的，这个_infomap就是所谓的固定消息（fixed message）与其id的映射表。loadConfig就是检视server/messages_fixed.xml，将其中的消息名称与其id关联建立这个映射表。我们继续接着看MessageHandlers::add接口。</p>
+<h5 id="非固定消息"><a href="#非固定消息" class="headerlink" title="非固定消息"></a><strong>非固定消息</strong></h5><p>对于isFixed为假的消息（非固定消息），则为其生成一个id（随着调用add的次序依次递增），这个id是在MessageHandlers类中唯一的，而每个组件的MessageHandlers又是处于自己的命名空间内，所以当出现某个组件的非固定消息时，则会为其生成单一组件内唯一的id（但这个id并不是所有组件内唯一的）。于是可能出现这种情况，Loginapp::xxxx与Dbmgr::yyyy都是非固定消息，但他们却有着同样的消息id，此时若有其他组件发送其中任一消息给其他组件，接受消息的组件将无法识别到底是Loginapp::xxxx或者是Dbmgr::yyyy。当然，只要我们将非固定消息发送给所属的组件，则不会有问题（上例中任何组件将Loginapp::xxxx发送给loginapp都是不会出乱子的）。</p>
+<h2 id="dbmgr"><a href="#dbmgr" class="headerlink" title="dbmgr"></a><strong>dbmgr</strong></h2><blockquote>
+<p>dbmgr组件主要负责数据库相关的事务，比如：账户登录/注册事务；账户充值</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/11/kbe的UE4的demo大体解读/" rel="next" title="kbe的UE4的demo大体解读">
+                <i class="fa fa-chevron-left"></i> kbe的UE4的demo大体解读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/02/重读UNIX网络编程第一章笔记修正/" rel="prev" title="重读UNIX网络编程第一章笔记修正">
+                重读UNIX网络编程第一章笔记修正 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-number">1.</span> <span class="nav-text">main</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServerConfig："><span class="nav-number">2.</span> <span class="nav-text">ServerConfig：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resmgr："><span class="nav-number">3.</span> <span class="nav-text">Resmgr：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FixedMessages："><span class="nav-number">4.</span> <span class="nav-text">FixedMessages：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loginapp"><span class="nav-number">5.</span> <span class="nav-text">loginapp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#消息与handler映射的建立："><span class="nav-number">5.0.1.</span> <span class="nav-text">消息与handler映射的建立：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息与handlers的存储"><span class="nav-number">5.0.2.</span> <span class="nav-text">消息与handlers的存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息与handle建立映射"><span class="nav-number">5.0.3.</span> <span class="nav-text">消息与handle建立映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程的伪代码"><span class="nav-number">5.0.4.</span> <span class="nav-text">流程的伪代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息id：固定消息与非固定消息"><span class="nav-number">5.0.5.</span> <span class="nav-text">消息id：固定消息与非固定消息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#固定消息"><span class="nav-number">5.0.5.1.</span> <span class="nav-text">固定消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#非固定消息"><span class="nav-number">5.0.5.2.</span> <span class="nav-text">非固定消息</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dbmgr"><span class="nav-number">6.</span> <span class="nav-text">dbmgr</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

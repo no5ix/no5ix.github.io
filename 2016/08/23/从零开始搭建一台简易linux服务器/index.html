@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vbox," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="#virtualBox网络设置在virtualBox的你的那个虚拟机里的网络设置里添加两张网卡：1.“网络地址转换（NAT）”， 不是那个“NAT网络”噢， 这张网卡是用来访问宿主机和外网的， 但是仅仅有这张网卡宿主机是不能访问你的这个虚拟机的， 所以还需要下面这第2张2.“仅主机（Host-Olny）网络”， 这张网卡是用来让宿主机是访问你的这个虚拟机的， 这样就能用ssh工具从宿主机连到你的这">
+<meta name="keywords" content="vbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始搭建一台简易linux服务器">
+<meta property="og:url" content="http://yoursite.com/2016/08/23/从零开始搭建一台简易linux服务器/index.html">
+<meta property="og:site_name" content="nosix&#39;s blog">
+<meta property="og:description" content="#virtualBox网络设置在virtualBox的你的那个虚拟机里的网络设置里添加两张网卡：1.“网络地址转换（NAT）”， 不是那个“NAT网络”噢， 这张网卡是用来访问宿主机和外网的， 但是仅仅有这张网卡宿主机是不能访问你的这个虚拟机的， 所以还需要下面这第2张2.“仅主机（Host-Olny）网络”， 这张网卡是用来让宿主机是访问你的这个虚拟机的， 这样就能用ssh工具从宿主机连到你的这">
+<meta property="og:updated_time" content="2017-08-31T00:19:56.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从零开始搭建一台简易linux服务器">
+<meta name="twitter:description" content="#virtualBox网络设置在virtualBox的你的那个虚拟机里的网络设置里添加两张网卡：1.“网络地址转换（NAT）”， 不是那个“NAT网络”噢， 这张网卡是用来访问宿主机和外网的， 但是仅仅有这张网卡宿主机是不能访问你的这个虚拟机的， 所以还需要下面这第2张2.“仅主机（Host-Olny）网络”， 这张网卡是用来让宿主机是访问你的这个虚拟机的， 这样就能用ssh工具从宿主机连到你的这">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/23/从零开始搭建一台简易linux服务器/"/>
+
+
+
+
+
+  <title>从零开始搭建一台简易linux服务器 | nosix's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nosix's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/23/从零开始搭建一台简易linux服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nosix's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从零开始搭建一台简易linux服务器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-23T15:11:26+08:00">
+                2016-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="virtualBox网络设置"><a href="#virtualBox网络设置" class="headerlink" title="#virtualBox网络设置"></a>#virtualBox网络设置</h2><p>在virtualBox的你的那个虚拟机里的网络设置里添加两张网卡：<br>1.“网络地址转换（NAT）”， 不是那个“NAT网络”噢， 这张网卡是用来访问宿主机和外网的， 但是仅仅有这张网卡宿主机是不能访问你的这个虚拟机的， 所以还需要下面这第2张<br>2.“仅主机（Host-Olny）网络”， 这张网卡是用来让宿主机是访问你的这个虚拟机的， 这样就能用ssh工具从宿主机连到你的这个虚拟机了</p>
+<h2 id="创建dev用户"><a href="#创建dev用户" class="headerlink" title="#创建dev用户"></a>#创建dev用户</h2><p>sudo adduser dev</p>
+<h2 id="增加dev权限"><a href="#增加dev权限" class="headerlink" title="#增加dev权限"></a>#增加dev权限</h2><p>sudo visudo 添加：dev ALL=(ALL:ALL) ALL</p>
+<h2 id="关于Ubuntu的root密码"><a href="#关于Ubuntu的root密码" class="headerlink" title="关于Ubuntu的root密码"></a>关于Ubuntu的root密码</h2><p>Ubuntu的默认root密码是随机的，<br>即每次开机都有一个新的root密码。我们可以在终端输入命令 sudo passwd，<br>然后输入当前用户的密码，enter，终端会提示我们输入新的密码并确认，<br>此时的密码就是root新密码。修改成功后，输入命令 su root，再输入新的密码就ok了。</p>
+<h2 id="安装ssh服务端"><a href="#安装ssh服务端" class="headerlink" title="安装ssh服务端"></a>安装ssh服务端</h2><p>先更换源， 然后执行sudo apt-get update<br>执行命令：sudo apt-get install openssh-server<br>测试是否安装成功：ssh localhost</p>
+<h2 id="安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><a href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx" class="headerlink" title="安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )"></a>安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</h2><p>执行命令安装nginx：sudo apt-get install nginx<br>测试是否安装成功：在本机的浏览器里访问 localhost ;如果现实”Welcome to nginx!”，表明你的 Nginx 服务器安装成功！<br>启动 Nginx：sudo /etc/init.d/nginx start<br>关闭 Nginx：sudo /etc/init.d/nginx stop<br>重启 nginx：sudo /etc/init.d/nginx restart 或者 sudo service nginx restart<br>sudo service apache2 stop  (如果之前装了apache2则需要sudo apt-get remove apache2 卸载掉apache2然后执行这个stop命令)</p>
+<h2 id="修改nginx的server配置文件"><a href="#修改nginx的server配置文件" class="headerlink" title="修改nginx的server配置文件"></a>修改nginx的server配置文件</h2><ol>
+<li>执行命令：sudo vi /etc/nginx/sites-available/default</li>
+<li>然后将default文件里的内容全部删除，把下面的内容粘贴进去：<br>server {<br>listen 80 default_server;</li>
+</ol>
+<p>root /data/www; #这里表示nginx根目录<br>index index.php index.html index.htm;</p>
+<p>server_name localhost;<br>chunked_transfer_encoding  off;</p>
+<p>location / {<br>try_files $uri $uri/ =404;<br>}</p>
+<p>error_page 404 /index.html;</p>
+<p>location ~ .php$ {   #加上这个代码块就可以用php访问了，这个代码块还有fastcgi的相关内容<br>try_files $uri =404;<br>fastcgi_split_path_info ^(.+.php)(/.+)$;<br>fastcgi_pass 127.0.0.1:9000;<br>fastcgi_index index.php;<br>include fastcgi_params;<br>}<br>}</p>
+<h2 id="安装以及启动fastcgi"><a href="#安装以及启动fastcgi" class="headerlink" title="安装以及启动fastcgi"></a>安装以及启动fastcgi</h2><ol>
+<li>执行命令安装：sudo apt-get install spawn-fcgi</li>
+<li>启动fastcgi ：spawn-fcgi -a 127.0.0.1 -p 9000 -C 10 -u www-data -f /usr/bin/php-cgi</li>
+<li>为了让php-cgi开机自启动： Ubuntu开机之后会执行/etc/rc.local文件中的脚本 所以我们可以直接在/etc/rc.local中添加启动脚本。<br> 将 spawn-fcgi -a 127.0.0.1 -p 9000 -C 10 -u www-data -f /usr/bin/php-cgi 添加到语句：exit 0 前面才行</li>
+</ol>
+<h2 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h2><p>执行命令安装PHP：sudo apt-get install php5-cli php5-cgi php5-fpm php5-mcrypt php5-mysql</p>
+<h2 id="php设置"><a href="#php设置" class="headerlink" title="php设置"></a>php设置</h2><p>sudo vi /etc/php5/fpm/php.ini  #设置cgi.fix_pathinfo=0<br>sudo service php5-fpm restart</p>
+<p>sudo vi /etc/php5/fpm/pool.d/www.conf<br>listen.owner = www-data<br>listen.group = www-data<br>listen.mode = 0660 （去掉原www.conf里“listen.mode = 0660”前的分号，那个分号是注释的意思）<br>sudo service php5-fpm restart</p>
+<h2 id="测试是否可以访问"><a href="#测试是否可以访问" class="headerlink" title="测试是否可以访问"></a>测试是否可以访问</h2><ol>
+<li>在nginx根目录也就是 上面server配置文件里的 /data/www(若没有这个目录就建一个，并改变权限，执行sudo chown dev:dev data/)<br>文件夹里新建index.html（不建此文件将不能在本机访问localhost）<br> 将下面的内容粘贴到index.html文件里 <html><br><head><br><title>Welcome to nginx!</title><br></head><br><body bgcolor="white" text="black"><br><center><h1>Welcome to nginx!</h1></center><br></body><br></html></li>
+<li>第1步完成后将可以在浏览器访问 <a href="http://localhost" target="_blank" rel="external">http://localhost</a></li>
+<li>再在 /data/www文件夹里新建test.php<br>将下面的内容粘贴到test.php文件里<br>&lt;?php phpinfo(); ?&gt;</li>
+<li>第3步完成后将可以在浏览器访问 <a href="http://localhost/test.php" target="_blank" rel="external">http://localhost/test.php</a><br>（注：如果没有启动fastcgi，访问之后将会下载此php文件。若启动了fastcgi，则访问phpinfo的网页;如果出现No input file specified就在<br>上面的server配置文件里的下述地方加入这条语句：fastcgi_param SCRIPT_FILENAME    $document_root$fastcgi_script_name;<br>如下：<br>location ~ .php$ {<br>try_files $uri =404;<br>fastcgi_split_path_info ^(.+.php)(/.+)$;<br>fastcgi_pass 127.0.0.1:9000;<br>fastcgi_index index.php;<br>fastcgi_param SCRIPT_FILENAME    $document_root$fastcgi_script_name;<br>include fastcgi_params;<br>}</li>
+</ol>
+<p>）</p>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>执行命令安装MySQL：sudo apt-get install mysql-server<br>安装的时候会提示填入一个root的初始密码，先输入个8做初始密码吧</p>
+<h2 id="导入客户数据库base-account"><a href="#导入客户数据库base-account" class="headerlink" title="#导入客户数据库base_account"></a>#导入客户数据库base_account</h2><p>mysql -uroot -p &lt; <strong>*</strong>.sql(某个sql文件)</p>
+<h2 id="安装svn并checkout一个svn服务器上的目录"><a href="#安装svn并checkout一个svn服务器上的目录" class="headerlink" title="安装svn并checkout一个svn服务器上的目录"></a>安装svn并checkout一个svn服务器上的目录</h2><ol>
+<li>进入 /data/www目录下 ：cd /data/www</li>
+<li>执行命令安装：sudo apt-get install subversion</li>
+<li>checkout一个目录（比如svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg），<br>执行命令：svn checkout svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg （或者 svn co svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg）</li>
+</ol>
+<h2 id="测试是否可以访问并将相应数据传入数据库中"><a href="#测试是否可以访问并将相应数据传入数据库中" class="headerlink" title="测试是否可以访问并将相应数据传入数据库中"></a>测试是否可以访问并将相应数据传入数据库中</h2><p>访问 localhost/errorMsg/ErrorMsg.php?data=3_2&amp;error_msg=zhangnimashuai<br>然后查看数据库相应表里是否增加了数据</p>
+<h2 id="证书登陆-可选"><a href="#证书登陆-可选" class="headerlink" title="##证书登陆 (可选)"></a>##证书登陆 (可选)</h2><p>#对dev 将id_rsa私钥和id_rsa.pub公钥以及authorized_keys授权文件拷贝至~dev/.ssh/目录<br>chmod 600 id_rsa; chmod 644 id_rsa.pub; chmod 644 authorized_keys</p>
+<h2 id="SSH-证书登陆配置"><a href="#SSH-证书登陆配置" class="headerlink" title="#SSH 证书登陆配置"></a>#SSH 证书登陆配置</h2><p>sudo vi /etc/ssh/sshd_config<br>取消注释    : #AuthorizedKeysFile     .ssh/authorized_keys<br>修改yes-&gt;no : PasswordAuthentication no<br>sudo service ssh restart</p>
+<h2 id="重启服务-测试登陆"><a href="#重启服务-测试登陆" class="headerlink" title="#重启服务 测试登陆"></a>#重启服务 测试登陆</h2><p>sudo service nginx restart<br>sudo service php5-fpm restart</p>
+<h2 id="测试成功后去除dev用户的sudo权限-（可选）"><a href="#测试成功后去除dev用户的sudo权限-（可选）" class="headerlink" title="#测试成功后去除dev用户的sudo权限 （可选）"></a>#测试成功后去除dev用户的sudo权限 （可选）</h2><p>sudo visudo 删除：dev ALL=(ALL:ALL) ALL</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vbox/" rel="tag"># vbox</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/11/UNIX网络编程阅读建议/" rel="next" title="UNIX网络编程阅读建议">
+                <i class="fa fa-chevron-left"></i> UNIX网络编程阅读建议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" rel="prev" title="一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)">
+                一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#virtualBox网络设置"><span class="nav-number">1.</span> <span class="nav-text">#virtualBox网络设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建dev用户"><span class="nav-number">2.</span> <span class="nav-text">#创建dev用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加dev权限"><span class="nav-number">3.</span> <span class="nav-text">#增加dev权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Ubuntu的root密码"><span class="nav-number">4.</span> <span class="nav-text">关于Ubuntu的root密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ssh服务端"><span class="nav-number">5.</span> <span class="nav-text">安装ssh服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><span class="nav-number">6.</span> <span class="nav-text">安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nginx的server配置文件"><span class="nav-number">7.</span> <span class="nav-text">修改nginx的server配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装以及启动fastcgi"><span class="nav-number">8.</span> <span class="nav-text">安装以及启动fastcgi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PHP"><span class="nav-number">9.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php设置"><span class="nav-number">10.</span> <span class="nav-text">php设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试是否可以访问"><span class="nav-number">11.</span> <span class="nav-text">测试是否可以访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Welcome to nginx!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装MySQL"><span class="nav-number">1.</span> <span class="nav-text">安装MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入客户数据库base-account"><span class="nav-number">2.</span> <span class="nav-text">#导入客户数据库base_account</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装svn并checkout一个svn服务器上的目录"><span class="nav-number">3.</span> <span class="nav-text">安装svn并checkout一个svn服务器上的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试是否可以访问并将相应数据传入数据库中"><span class="nav-number">4.</span> <span class="nav-text">测试是否可以访问并将相应数据传入数据库中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证书登陆-可选"><span class="nav-number">5.</span> <span class="nav-text">##证书登陆 (可选)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-证书登陆配置"><span class="nav-number">6.</span> <span class="nav-text">#SSH 证书登陆配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务-测试登陆"><span class="nav-number">7.</span> <span class="nav-text">#重启服务 测试登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试成功后去除dev用户的sudo权限-（可选）"><span class="nav-number">8.</span> <span class="nav-text">#测试成功后去除dev用户的sudo权限 （可选）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="directory," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="目录的可读/可写/可执行权限 不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的  目录可读r  目录可读权限r : 只能获得文件列表 特别注意:如果一个目录为非空, 却没有r权限, 即使你有wx的权限, 你用rm -r也是删不掉的, 因为没有r权限拿不到这个">
+<meta name="keywords" content="directory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux一些不要想当然的事(一)之目录权限">
+<meta property="og:url" content="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/index.html">
+<meta property="og:site_name" content="nosix&#39;s blog">
+<meta property="og:description" content="目录的可读/可写/可执行权限 不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的  目录可读r  目录可读权限r : 只能获得文件列表 特别注意:如果一个目录为非空, 却没有r权限, 即使你有wx的权限, 你用rm -r也是删不掉的, 因为没有r权限拿不到这个">
+<meta property="og:updated_time" content="2017-08-31T00:35:09.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux一些不要想当然的事(一)之目录权限">
+<meta name="twitter:description" content="目录的可读/可写/可执行权限 不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的  目录可读r  目录可读权限r : 只能获得文件列表 特别注意:如果一个目录为非空, 却没有r权限, 即使你有wx的权限, 你用rm -r也是删不掉的, 因为没有r权限拿不到这个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/"/>
+
+
+
+
+
+  <title>linux一些不要想当然的事(一)之目录权限 | nosix's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nosix's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nosix's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux一些不要想当然的事(一)之目录权限</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T17:11:52+08:00">
+                2015-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="目录的可读-可写-可执行权限"><a href="#目录的可读-可写-可执行权限" class="headerlink" title="目录的可读/可写/可执行权限"></a><strong>目录的可读/可写/可执行权限</strong></h2><blockquote>
+<p>不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!<br>记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的</p>
+</blockquote>
+<h3 id="目录可读r"><a href="#目录可读r" class="headerlink" title="目录可读r"></a><strong>目录可读r</strong></h3><blockquote>
+<ul>
+<li><strong>目录可读权限r</strong> : 只能获得文件列表</li>
+<li>特别注意:如果一个目录为非空, 却没有r权限, 即使你有wx的权限, 你用rm -r也是删不掉的, 因为没有r权限拿不到这个目录的文件列表, rm -r 自然也就不晓得要删除什么东西了.只有求助root了<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 444 temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot access temp/dd: Permission denied</div><div class="line">dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cd temp/</div><div class="line">bash: cd: temp/: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat temp/dd </div><div class="line">cat: temp/dd: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/yy</div><div class="line">touch: cannot touch ‘temp/yy’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/dd </div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: descend into write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">rm: remove write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp’: Directory not empty</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="目录可写w"><a href="#目录可写w" class="headerlink" title="目录可写w"></a><strong>目录可写w</strong></h3><blockquote>
+<ul>
+<li><strong>目录可写权限w</strong> : 代表可以在目录下增加或删除档案和目录和改名(但是必须得有目录可执行权限x的支持才可以, 所以一般有w就会有x)</li>
+<li>不要和档案的可写权限混淆了, 即使没有目录可写权限, 有目录可执行x也是可以修改目录下的档案的, 只要拥有要修改的那个档案的可写权限既可.</li>
+<li>但也要注意的是: 档案的w是针对于档案的内容来说的, 你可以编辑修改他的内容, 但是如果想删除这个档案, 你需要这个档案所在的目录的w权限.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 222 temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp/uu</div><div class="line">mkdir: cannot create directory ‘temp/uu’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/oo</div><div class="line">touch: cannot touch ‘temp/oo’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 333 temp </div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp/uu</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/oo</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: cannot remove ‘temp’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp/uu</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/oo</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot open directory temp: Permission denied</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="目录可执行x"><a href="#目录可执行x" class="headerlink" title="目录可执行x"></a><strong>目录可执行x</strong></h3><blockquote>
+<ul>
+<li><strong>目录可执行权限x</strong> : 有进入目录的权限,  有在这个目录下执行命令的权限. 但不可以删除或者增加档案和目录(因为不具备目录的可写权限w)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 111 temp/</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot open directory temp: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ echo &quot;xxd&quot; &gt; temp/dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat temp/dd</div><div class="line">xxd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/yy</div><div class="line">touch: cannot touch ‘temp/yy’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/dd</div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: descend into write-protected directory ‘temp’? y</div><div class="line">rm: remove write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cd temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc/temp$ ls</div><div class="line">ls: cannot open directory .: Permission denied</div></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/directory/" rel="tag"># directory</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/07/Linux常用运维命令笔记整理/" rel="next" title="Linux常用运维命令笔记整理">
+                <i class="fa fa-chevron-left"></i> Linux常用运维命令笔记整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" rel="prev" title="socket可读可写条件与非阻塞connect或accept浅析">
+                socket可读可写条件与非阻塞connect或accept浅析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录的可读-可写-可执行权限"><span class="nav-number">1.</span> <span class="nav-text">目录的可读/可写/可执行权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录可读r"><span class="nav-number">1.1.</span> <span class="nav-text">目录可读r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录可写w"><span class="nav-number">1.2.</span> <span class="nav-text">目录可写w</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录可执行x"><span class="nav-number">1.3.</span> <span class="nav-text">目录可执行x</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

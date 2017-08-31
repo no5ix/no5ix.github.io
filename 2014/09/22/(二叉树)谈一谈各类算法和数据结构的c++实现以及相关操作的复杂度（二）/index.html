@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二叉树," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.  二叉树这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：  有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1  二叉树的二叉链式存储方案的代码表示： 123456type">
+<meta name="keywords" content="二叉树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）">
+<meta property="og:url" content="http://yoursite.com/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/index.html">
+<meta property="og:site_name" content="nosix&#39;s blog">
+<meta property="og:description" content="接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.  二叉树这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：  有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1  二叉树的二叉链式存储方案的代码表示： 123456type">
+<meta property="og:image" content="http://img.blog.csdn.net/20170805013035460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170806185002946?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-30T23:47:45.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）">
+<meta name="twitter:description" content="接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.  二叉树这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：  有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1  二叉树的二叉链式存储方案的代码表示： 123456type">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170805013035460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/"/>
+
+
+
+
+
+  <title>(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二） | nosix's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nosix's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nosix's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-22T19:11:22+08:00">
+                2014-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.</p>
+</blockquote>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a><strong>二叉树</strong></h2><p>这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：<br><img src="http://img.blog.csdn.net/20170805013035460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<blockquote>
+<p><strong>有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1</strong></p>
+</blockquote>
+<p>二叉树的二叉链式存储方案的代码表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef struct BinaryTreeNode</div><div class="line">&#123;</div><div class="line">	int data;</div><div class="line">	BinaryTreeNode *LeftChild, *RightChild;</div><div class="line">	// BTN *LeftChild, *RightChild; // error : BTN doesn&apos;t name a typecat</div><div class="line">&#125;BTN, *BTN_Ptr;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a><strong>创建</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">int create_BT(BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    int temp_data = 0;</div><div class="line">    std::cin &gt;&gt; temp_data;</div><div class="line">    if (temp_data == 0)</div><div class="line">    &#123;</div><div class="line">        *btp = NULL;</div><div class="line">        printf(&quot;leaf\n&quot;);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        if ( !(*btp = (BTN_Ptr)malloc( sizeof(BTN) ) ) ) </div><div class="line">        &#123;</div><div class="line">            printf(&quot;error : malloc error&quot;);</div><div class="line">            return -1;</div><div class="line">        &#125;</div><div class="line">        (*btp)-&gt;data = temp_data;</div><div class="line">        create_BT(&amp;((*btp)-&gt;LeftChild));</div><div class="line">        create_BT(&amp;((*btp)-&gt;RightChild));</div><div class="line">    &#125; </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a><strong>遍历</strong></h3><p>如上图得到的相应的遍历的序列分别为：</p>
+<ul>
+<li>先序遍历 ： ABCDEGF</li>
+<li>中序遍历 ： CBEGDFA</li>
+<li>后序遍历 ： CGEFDBA</li>
+</ul>
+<h4 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a><strong>递归遍历</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">void pre_order_traverse(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    if ( *btp != NULL)</div><div class="line">    &#123;</div><div class="line">        cout &lt;&lt; (*btp)-&gt;data &lt;&lt; endl;</div><div class="line">        pre_order_traverse( &amp;(*btp)-&gt;LeftChild );</div><div class="line">        pre_order_traverse( &amp;(*btp)-&gt;RightChild );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void in_order_traverse(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    if ( *btp != NULL)</div><div class="line">    &#123;</div><div class="line">        in_order_traverse( &amp;(*btp)-&gt;LeftChild );</div><div class="line">        cout &lt;&lt; (*btp)-&gt;data &lt;&lt; endl;</div><div class="line">        in_order_traverse( &amp;(*btp)-&gt;RightChild );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void post_order_traverse(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    if ( *btp != NULL)</div><div class="line">    &#123;</div><div class="line">        post_order_traverse( &amp;(*btp)-&gt;LeftChild );</div><div class="line">        post_order_traverse( &amp;(*btp)-&gt;RightChild );</div><div class="line">        cout &lt;&lt; (*btp)-&gt;data &lt;&lt; endl;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="非递归遍历"><a href="#非递归遍历" class="headerlink" title="非递归遍历"></a><strong>非递归遍历</strong></h4><blockquote>
+<p>非递归的二叉树三种遍历方式其实思想是<strong>统一</strong>的 : 都是从左到右的将各个结点依次入栈, 当左边已经走到头了, 就开始走右边, 在适当的条件就出栈, 只是每个遍历方式的出栈条件不一样而已.</p>
+<p><strong>先序和中序遍历都很好理解, 着重讲一下后序遍历 :</strong><br>后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体F_bt来记录他是否是第一次出栈 (F_bt结构体里有个is_first的数据来记录)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">void pre_order_traverse_non_recursion(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    stack&lt;BTN_Ptr&gt; stack_bt;</div><div class="line">    BTN_Ptr temp_btp = *btp;</div><div class="line">    while ( !stack_bt.empty() || temp_btp != NULL )</div><div class="line">    &#123;</div><div class="line">        while ( temp_btp != NULL )</div><div class="line">        &#123;</div><div class="line">            cout &lt;&lt; temp_btp-&gt;data &lt;&lt; endl;</div><div class="line">            stack_bt.push(temp_btp);</div><div class="line">            temp_btp = temp_btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if ( !stack_bt.empty() )</div><div class="line">        &#123;</div><div class="line">            temp_btp = stack_bt.top()-&gt;RightChild;</div><div class="line">            stack_bt.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void in_order_traverse_non_recursion(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    stack&lt;BTN_Ptr&gt; stack_bt;</div><div class="line">    BTN_Ptr temp_btp = *btp;</div><div class="line">    </div><div class="line">    while ( !stack_bt.empty() || temp_btp != NULL )</div><div class="line">    &#123;</div><div class="line">        while ( temp_btp != NULL )</div><div class="line">        &#123;</div><div class="line">            stack_bt.push(temp_btp);</div><div class="line">            temp_btp = temp_btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if ( !stack_bt.empty() )</div><div class="line">        &#123;</div><div class="line">            cout &lt;&lt; stack_bt.top()-&gt;data &lt;&lt; endl;</div><div class="line">            temp_btp = stack_bt.top()-&gt;RightChild;</div><div class="line">            stack_bt.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">typedef struct</div><div class="line">&#123;</div><div class="line">    BTN_Ptr btnp;</div><div class="line">    int is_first;</div><div class="line">&#125;F_bt, *F_btp;</div><div class="line"></div><div class="line">void post_order_traverse_non_recursion( const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    stack&lt;F_btp&gt; stack_F_btp;</div><div class="line">    BTN_Ptr temp_btp = *btp;</div><div class="line"></div><div class="line">    while ( !stack_F_btp.empty() || temp_btp != NULL )</div><div class="line">    &#123;</div><div class="line">        while ( temp_btp != NULL )</div><div class="line">        &#123;</div><div class="line">            F_btp temp_F_btp = new F_bt;</div><div class="line">            temp_F_btp-&gt;btnp = temp_btp;</div><div class="line">            temp_F_btp-&gt;is_first = 1;</div><div class="line">            stack_F_btp.push(temp_F_btp);</div><div class="line">            temp_btp = temp_btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if ( !stack_F_btp.empty() )</div><div class="line">        &#123;</div><div class="line">            if ( stack_F_btp.top()-&gt;is_first == 1 )</div><div class="line">            &#123;</div><div class="line">                stack_F_btp.top()-&gt;is_first = 0;</div><div class="line">                temp_btp = stack_F_btp.top()-&gt;btnp-&gt;RightChild;</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                cout &lt;&lt; stack_F_btp.top()-&gt;btnp-&gt;data &lt;&lt; endl;</div><div class="line">                delete stack_F_btp.top();</div><div class="line">                stack_F_btp.top() = NULL;</div><div class="line">                stack_F_btp.pop();</div><div class="line">                temp_btp = NULL;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="二叉搜索树-又称二叉查找树或二叉排序树"><a href="#二叉搜索树-又称二叉查找树或二叉排序树" class="headerlink" title="二叉搜索树(又称二叉查找树或二叉排序树)"></a><strong>二叉搜索树(又称二叉查找树或二叉排序树)</strong></h2><blockquote>
+<p>有了上面二叉树的基础, 我们继续学习二叉搜索树.<br>我们这里也不给他那种晦涩难懂的定义, 感性的认识二叉搜索树.<br>直接看图, 很容易看得出来, 二叉搜索树每个结点的左孩子都小于右孩子.<br><img src="http://img.blog.csdn.net/20170806185002946?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><strong>因为具有n个结点的完全二叉树的最大高度为log2n+1</strong><br><strong>而二叉搜索树的查询/增加的时间复杂度都是O(h), h为树的高度,所以复杂度可以看作O(logn), 所以很明显上图中的a树比b树要高效.</strong></p>
+</blockquote>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a><strong>查询</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">BTN_Ptr search(BTN_Ptr btp, int key)</div><div class="line">&#123;</div><div class="line">    while (btp != NULL )</div><div class="line">    &#123;</div><div class="line">        if ( btp-&gt;data != key)</div><div class="line">        &#123;</div><div class="line">            if ( btp-&gt;data &lt; key )</div><div class="line">                btp = btp-&gt;RightChild;</div><div class="line">            else</div><div class="line">                btp = btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            printf(&quot;found\n&quot;);</div><div class="line">            return btp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">   printf(&quot;error : not found!\n&quot;);</div><div class="line">   return NULL;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a><strong>插入</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">BTN_Ptr insert(BTN_Ptr &amp;btp, int key)</div><div class="line">&#123;</div><div class="line">    if (btp == NULL)</div><div class="line">    &#123;</div><div class="line">        btp = new BTN;</div><div class="line">        btp-&gt;data = key;</div><div class="line">        btp-&gt;LeftChild = NULL;</div><div class="line">        btp-&gt;RightChild = NULL;</div><div class="line">        return btp;</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        BTN_Ptr saved_btp = btp;</div><div class="line">        BTN_Ptr temp_btp = NULL;</div><div class="line">        while ( btp != NULL)</div><div class="line">        &#123;</div><div class="line">            temp_btp = btp;</div><div class="line">            if ( key &lt; btp-&gt;data )</div><div class="line">                btp = btp-&gt;LeftChild;</div><div class="line">            else</div><div class="line">                btp = btp-&gt;RightChild;</div><div class="line">        &#125;</div><div class="line">        btp = new BTN;</div><div class="line">        btp-&gt;data = key;</div><div class="line">        btp-&gt;LeftChild = NULL;</div><div class="line">        btp-&gt;RightChild = NULL;</div><div class="line">        if ( key &lt; temp_btp-&gt;data )</div><div class="line">            temp_btp-&gt;LeftChild = btp;</div><div class="line">        else</div><div class="line">            temp_btp-&gt;RightChild = btp;</div><div class="line">        return saved_btp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a><strong>测试程序</strong></h3><p>附上一个测试程序吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line"></div><div class="line">using std::stack;</div><div class="line">using std::cout;</div><div class="line">using std::cin;</div><div class="line">using std::endl;</div><div class="line"></div><div class="line">int main(int argc, char **argv)</div><div class="line">&#123;</div><div class="line">    BTN_Ptr my_btp = NULL;</div><div class="line">    if (create_BT(&amp;my_btp) == -1)</div><div class="line">	    return -1;</div><div class="line">    cout &lt;&lt; &quot;==============pre_order:==============&quot; &lt;&lt; endl;</div><div class="line">    pre_order_traverse(&amp;my_btp);</div><div class="line">    cout &lt;&lt; &quot;==============in_order:==============&quot; &lt;&lt; endl;</div><div class="line">    in_order_traverse(&amp;my_btp);</div><div class="line">    cout &lt;&lt; &quot;==============post_order:==============&quot; &lt;&lt; endl;</div><div class="line">    post_order_traverse(&amp;my_btp);</div><div class="line">    cout &lt;&lt; &quot;==============search : 24==============&quot; &lt;&lt; endl;</div><div class="line">    search(my_btp, 24);</div><div class="line">    cout &lt;&lt; &quot;==============search : 14==============&quot; &lt;&lt; endl;</div><div class="line">    search(my_btp, 14);</div><div class="line">    cout &lt;&lt; &quot;==============insert : 25==============&quot; &lt;&lt; endl;</div><div class="line">    my_btp = insert(my_btp, 25);</div><div class="line">    cout &lt;&lt; &quot;==============pre_order2:==============&quot; &lt;&lt; endl;</div><div class="line">    pre_order_traverse(&amp;my_btp);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/19/(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）/" rel="next" title="(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）">
+                <i class="fa fa-chevron-left"></i> (排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）/" rel="prev" title="(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）">
+                (链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">1.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历"><span class="nav-number">1.2.</span> <span class="nav-text">遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归遍历"><span class="nav-number">1.2.1.</span> <span class="nav-text">递归遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归遍历"><span class="nav-number">1.2.2.</span> <span class="nav-text">非递归遍历</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉搜索树-又称二叉查找树或二叉排序树"><span class="nav-number">2.</span> <span class="nav-text">二叉搜索树(又称二叉查找树或二叉排序树)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">2.1.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入"><span class="nav-number">2.2.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试程序"><span class="nav-number">2.3.</span> <span class="nav-text">测试程序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

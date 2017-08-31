@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="eff," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="xxd?">
-<meta name="keywords" content="eff">
+<meta name="description" content="强大的抓包工具, 博大精深内容太多, 所以这篇博客整理得只说常用, 具体的参考tcpdump用户手册,tcpdump需要root权限, 所以记得加上sudo  常用参数 -nn选项：意思是说当tcpdump遇到协议号或端口号时，不要将这些号码转换成对应的协议名称或端口名称。比如，大家都知道80是http端口，tcpdump就不会将它显示成http了  -c选项：是Count的含义，这设置了我们希">
 <meta property="og:type" content="article">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/2017/08/31/about/index.html">
+<meta property="og:title" content="nosix&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/2017/08/31/Linux常用命令笔记整理之tcpdump/index.html">
 <meta property="og:site_name" content="nosix&#39;s blog">
-<meta property="og:description" content="xxd?">
-<meta property="og:updated_time" content="2017-08-30T22:23:20.798Z">
+<meta property="og:description" content="强大的抓包工具, 博大精深内容太多, 所以这篇博客整理得只说常用, 具体的参考tcpdump用户手册,tcpdump需要root权限, 所以记得加上sudo  常用参数 -nn选项：意思是说当tcpdump遇到协议号或端口号时，不要将这些号码转换成对应的协议名称或端口名称。比如，大家都知道80是http端口，tcpdump就不会将它显示成http了  -c选项：是Count的含义，这设置了我们希">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/Linux常用命令笔记整理之tcpdump/image/tcpdump.png">
+<meta property="og:updated_time" content="2017-08-29T01:35:19.818Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="xxd?">
+<meta name="twitter:title" content="nosix&#39;s blog">
+<meta name="twitter:description" content="强大的抓包工具, 博大精深内容太多, 所以这篇博客整理得只说常用, 具体的参考tcpdump用户手册,tcpdump需要root权限, 所以记得加上sudo  常用参数 -nn选项：意思是说当tcpdump遇到协议号或端口号时，不要将这些号码转换成对应的协议名称或端口名称。比如，大家都知道80是http端口，tcpdump就不会将它显示成http了  -c选项：是Count的含义，这设置了我们希">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/31/Linux常用命令笔记整理之tcpdump/image/tcpdump.png">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/31/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/31/Linux常用命令笔记整理之tcpdump/"/>
 
 
 
 
 
-  <title>about | nosix's blog</title>
+  <title> | nosix's blog</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/about/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/Linux常用命令笔记整理之tcpdump/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">about</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -301,7 +302,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T04:19:52+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T06:55:51+08:00">
                 2017-08-31
               </time>
             
@@ -339,7 +340,65 @@
       
 
       
-        <h2 id="xxd"><a href="#xxd" class="headerlink" title="xxd?"></a>xxd?</h2>
+        <blockquote>
+<p>强大的抓包工具, 博大精深内容太多, 所以这篇博客整理得只说常用, 具体的参考tcpdump用户手册,<br>tcpdump需要root权限, 所以记得加上sudo</p>
+</blockquote>
+<h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a><strong>常用参数</strong></h2><ul>
+<li><p>-nn选项：<br>意思是说当tcpdump遇到协议号或端口号时，不要将这些号码转换成对应的协议名称或端口名称。比如，大家都知道80是http端口，tcpdump就不会将它显示成http了</p>
+</li>
+<li><p>-c选项：<br>是Count的含义，这设置了我们希望tcpdump帮我们抓几个包。</p>
+</li>
+<li><p>-i : 指定哪一张网卡</p>
+</li>
+<li><p>-l : 使得输出变为行缓冲</p>
+</li>
+<li><p>-t :  输出时不打印时间戳</p>
+</li>
+<li><p>-v :  输出更详细的信息</p>
+</li>
+<li><p>-F : 指定过滤表达式所在的文件, 可以建立了一个filter.txt文本文件来存储过滤表达式，然后通过-F来指定filter.txt</p>
+</li>
+<li><p>-w : 将流量保存到文件中</p>
+</li>
+<li><p>-r :  读取raw packets文件</p>
+</li>
+</ul>
+<h2 id="常用过滤规则"><a href="#常用过滤规则" class="headerlink" title="常用过滤规则"></a><strong>常用过滤规则</strong></h2><ul>
+<li>只看到目的机器dst(比如是qq.com)之间的网络包<br>sudo tcpdump -i eth0 ‘dst qq.com’ 也可以写成 sudo tcpdump -i eth0 ‘dst host qq.com’</li>
+</ul>
+<blockquote>
+<p>注 : 上述的那个host可以省略<br>tcpdump支持如下的类型：</p>
+<ol>
+<li>host：指定主机名或IP地址，例如’host roclinux.cn’或’host 202.112.18.34′</li>
+<li>net ：指定网络段，例如’arp net 128.3’或’dst net 128.3′</li>
+<li>portrange：指定端口区域，例如’src or dst portrange 6000-6008′</li>
+<li>port : 端口<br>如果我们没有设置过滤类型，那么默认是host。</li>
+</ol>
+</blockquote>
+<ul>
+<li>只抓udp的包<br>sudo tcpdump -i eth0 ‘udp’</li>
+</ul>
+<blockquote>
+<p>tcpdump具有根据网络包的协议来进行过滤的能力，我们还可以把udp改为ether、ip、ip6、arp、tcp、rarp等</p>
+</blockquote>
+<ul>
+<li><p>只抓目的机器的某个端口的包(比如只抓baidu.com的53或者80端口的包)<br>sudo tcpdump -i eth0 ‘dst baidu.com and (dst port 53 or dst port 80)’</p>
+</li>
+<li><p>通过eth0网卡的，且来源是qq.com服务器或者目标是qq.com服务器的网络包<br>sudo tcpdump -i eth0 ‘host qq.com’</p>
+</li>
+<li><p>通过eth0网卡的，且qq.com和baidu.com之间通讯的网络包，或者qq.com和sina.cn之间通讯的网络包<br>tcpdump -i eth0 ‘host qq.com and (baidu.com or sina.cn)’</p>
+</li>
+<li><p>获取和baidu.com之间建立TCP三次握手中第一个网络包，即带有SYN标记位的网络包<br>sudo tcpdump -i eth0 ‘tcp[tcpflags] &amp; tcp-syn != 0 and dst host baidu.com’</p>
+</li>
+</ul>
+<blockquote>
+<p>注 :<br>因为用proto [ expr : size]语法在写过滤表达式时，你需要把协议格式完全背在脑子里，才能把表达式写对。可这对大多数人来说，可能有些困难。为了让tcpdump工具更人性化一些，有一些常用的偏移量，可以通过一些名称来代替，比如icmptype表示ICMP协议的类型域、icmpcode表示ICMP的code域，tcpflags则表示TCP协议的标志字段域。</p>
+<p>更进一步的，对于ICMP的类型域，可以用这些名称具体指代：icmp-echoreply, icmp-unreach, icmp-sourcequench, icmp-redirect, icmp-echo, icmp-routeradvert, icmp-routersolicit, icmp-timxceed, icmp-paramprob, icmp-tstamp, icmp-tstampreply, icmp-ireq, icmp-ireqreply, icmp-maskreq, icmp-maskreply。</p>
+<p>而对于TCP协议的标志字段域，则可以细分为tcp-fin, tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg。</p>
+</blockquote>
+<h2 id="输出内容解释"><a href="#输出内容解释" class="headerlink" title="输出内容解释"></a><strong>输出内容解释</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo tcpdump -i eth0 &apos;host baidu.com&apos;</div><div class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</div><div class="line">listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes</div><div class="line">06:46:17.487920 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [S], seq 546310089, win 29200, options [mss 1460,sackOK,TS val 1221546 ecr 0,nop,wscale 7], length 0</div><div class="line">06:46:17.530422 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [S.], seq 3245676077, ack 546310090, win 8192, options [mss 1440,sackOK,nop,nop,nop,nop,nop,nop,nop,nop,nop,nop,nop,wscale 5], length 0</div><div class="line">06:46:17.530458 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 1, win 229, length 0</div><div class="line">06:46:17.530982 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [P.], seq 1:504, ack 1, win 229, length 503</div><div class="line">06:46:17.576476 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [.], ack 504, win 216, length 0</div><div class="line">06:46:17.577447 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 1:291, ack 504, win 216, length 290</div><div class="line">06:46:17.577459 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 291, win 237, length 0</div><div class="line">06:46:17.577482 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 291:452, ack 504, win 216, length 161</div><div class="line">06:46:17.577485 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div><div class="line">06:46:17.866950 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 291:452, ack 504, win 216, length 161</div><div class="line">06:46:17.866966 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, options [nop,nop,sack 1 &#123;291:452&#125;], length 0</div><div class="line">06:46:27.865805 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div><div class="line">06:46:27.909962 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [.], ack 504, win 216, length 0</div><div class="line">06:46:37.925624 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div></pre></td></tr></table></figure>
+<p><img src="./image/tcpdump.png" alt="tcpdump"></p>
+
       
     </div>
     
@@ -354,12 +413,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/eff/" rel="tag"># eff</a>
-          
-        </div>
-      
 
       
       
@@ -369,14 +422,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/08/31/gdb多进程多线程调试实战/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/31/about-me/" rel="prev" title="about_me">
-                about_me <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/31/linux常用文本处理命令笔记整理/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -511,7 +568,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#xxd"><span class="nav-number">1.</span> <span class="nav-text">xxd?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用参数"><span class="nav-number">1.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用过滤规则"><span class="nav-number">2.</span> <span class="nav-text">常用过滤规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出内容解释"><span class="nav-number">3.</span> <span class="nav-text">输出内容解释</span></a></li></ol></div>
             
 
           </div>

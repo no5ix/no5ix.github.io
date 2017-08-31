@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="socket,非阻塞," />
 
 
 
@@ -95,6 +95,7 @@
 
 
 <meta name="description" content="socket可读的条件:  socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)">
+<meta name="keywords" content="socket,非阻塞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="socket可读可写条件与非阻塞connect或accept浅析">
 <meta property="og:url" content="http://yoursite.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/index.html">
@@ -102,7 +103,7 @@
 <meta property="og:description" content="socket可读的条件:  socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170822193729519?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-31T00:39:35.082Z">
+<meta property="og:updated_time" content="2017-08-31T18:18:16.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="socket可读可写条件与非阻塞connect或accept浅析">
 <meta name="twitter:description" content="socket可读的条件:  socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)">
@@ -336,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
                   </a>
                 </span>
 
@@ -401,6 +402,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+            <a href="/tags/非阻塞/" rel="tag"># 非阻塞</a>
+          
+        </div>
       
 
       
@@ -511,7 +520,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -522,7 +531,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

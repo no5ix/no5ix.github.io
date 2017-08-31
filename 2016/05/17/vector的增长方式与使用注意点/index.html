@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++,vector,stl,string," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
+<meta name="keywords" content="c++,vector,stl,string">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vector的增长方式与使用注意点">
+<meta property="og:url" content="http://yoursite.com/2016/05/17/vector的增长方式与使用注意点/index.html">
+<meta property="og:site_name" content="烫烫烫">
+<meta property="og:description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-31T17:39:10.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vector的增长方式与使用注意点">
+<meta name="twitter:description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/17/vector的增长方式与使用注意点/"/>
+
+
+
+
+
+  <title>vector的增长方式与使用注意点 | 烫烫烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫烫烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/17/vector的增长方式与使用注意点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vector的增长方式与使用注意点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T00:52:53+08:00">
+                2016-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="增长方式"><a href="#增长方式" class="headerlink" title="增长方式"></a>增长方式</h2><p>为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存<br>储 。</p>
+<blockquote>
+<p>假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string<br>中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中<br>其他位置一一因为元素必须连续存储。</p>
+<p>容器必须分配新的内存空间来保存己有元素和新元素 ， </p>
+<p>将已有元素从 旧位置移动到新空 间中， 然后添加新元素，释放旧存储空间 。</p>
+<p>如果我们每添加一个新元素， vector 就执行一次这样的内存分配和释放操作 ，性能会慢到不可<br>接受 。</p>
+</blockquote>
+<p>为了避免这种代价，标准库实现者采用了可以减少容器空间重新分配次数的策略。</p>
+<blockquote>
+<p>当不得不在取新的内 存空间 时， vector 和 string 的实现通常会分配比新的空间需求更大<br>的内存空间 。</p>
+<p> 容器预留这些空间作为备用 ， 可用来保存更多的新元素 。</p>
+<p> 这样，就不需要每<br>次添加新元素都重新分配容器的内存空间了 。</p>
+<p>这种分配策略比每次添加新元素时都重新分配容器内存空间的策略要高效得多 。</p>
+<p>其实际性能也表现得足够好一一虽然 vector 在每次重新分配内存空间时都要移动所有元素，<br>但使用 此策略后，其扩张操作通常比 list 和 deque 还要快 。</p>
+</blockquote>
+<h2 id="迭代器失效"><a href="#迭代器失效" class="headerlink" title="迭代器失效"></a>迭代器失效</h2><p>看了上方的实现方式, 相信很容易能理解迭代器失效问题了啊</p>
+<blockquote>
+<p>向容器中添加元素和从容器中删除元素 的操作可能会使指向容器元素的指针、引用或<br>法代器失效。 </p>
+<p>一个失效的指针、引用或法代器将不再表示任何元素 。 </p>
+<p>使用失效的指针、引用或迭代器是一种严重的程序设计错误，很可能引起与使用未初始化指针一样的问题</p>
+</blockquote>
+<h2 id="capacity-amp-size"><a href="#capacity-amp-size" class="headerlink" title="capacity &amp; size"></a>capacity &amp; size</h2><blockquote>
+<p>理解 capacity 和 size 的区别非常重要。</p>
+</blockquote>
+<p>容器的 size 是指它已经保存的元素的数目 ; </p>
+<p>而 capacity 则是在不分配新的内存空间的前提下它最多可以保存多少元素。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c.assign(beg,end)</td>
+<td>将[beg; end)区间中的数据赋值给c。</td>
+</tr>
+<tr>
+<td>c.assign(n,elem)</td>
+<td>将n个elem的拷贝赋值给c。</td>
+</tr>
+<tr>
+<td>c.at(idx)</td>
+<td>传回索引idx所指的数据，如果idx越界，抛出out_of_range。</td>
+</tr>
+<tr>
+<td>c.back()</td>
+<td>传回最后一个数据，不检查这个数据是否存在。</td>
+</tr>
+<tr>
+<td><strong>c.begin()</strong></td>
+<td>传回迭代器重的可一个数据。</td>
+</tr>
+<tr>
+<td><strong>c.capacity()</strong></td>
+<td>返不分配新的内存空间的前提下它最多可以保存多少元素。</td>
+</tr>
+<tr>
+<td><strong>c.clear()</strong></td>
+<td>移除容器中所有数据。</td>
+</tr>
+<tr>
+<td><strong>c.empty()</strong></td>
+<td>判断容器是否为空。</td>
+</tr>
+<tr>
+<td>c.end()</td>
+<td>指向迭代器中的最后一个数据地址。</td>
+</tr>
+<tr>
+<td>c.erase(pos)</td>
+<td>删除pos位置的数据，传回下一个数据的位置。</td>
+</tr>
+<tr>
+<td>c.erase(beg,end)</td>
+<td>删除[beg,end)区间的数据，传回下一个数据的位置。 </td>
+</tr>
+<tr>
+<td>c.front()</td>
+<td>传回第一个数据。</td>
+</tr>
+<tr>
+<td>get_allocator</td>
+<td>使用构造函数返回一个拷贝。</td>
+</tr>
+<tr>
+<td><strong>c.insert(pos,elem)</strong></td>
+<td>在pos位置插入一个elem拷贝，传回新数据位置。</td>
+</tr>
+<tr>
+<td>c.insert(pos,n,elem)</td>
+<td>在pos位置插入n个elem数据。无返回值。</td>
+</tr>
+<tr>
+<td>c.insert(pos,beg,end)</td>
+<td>在pos位置插入在[beg,end)区间的数据。无返回值。</td>
+</tr>
+<tr>
+<td>c.max_size()</td>
+<td>返回容器中最大数据的数量。</td>
+</tr>
+<tr>
+<td><strong>c.pop_back()</strong></td>
+<td>删除最后一个数据。</td>
+</tr>
+<tr>
+<td><strong>c.push_back(elem)</strong></td>
+<td>在尾部加入一个数据。</td>
+</tr>
+<tr>
+<td>c.rbegin()</td>
+<td>传回一个逆向队列的第一个数据。</td>
+</tr>
+<tr>
+<td>c.rend()</td>
+<td>传回一个逆向队列的最后一个数据的下一个位置。</td>
+</tr>
+<tr>
+<td>c.resize(num)</td>
+<td>重新指定队列的长度。</td>
+</tr>
+<tr>
+<td>c.reserve()</td>
+<td>保留适当的容量。</td>
+</tr>
+<tr>
+<td><strong>c.size()</strong></td>
+<td>返回容器中实际数据的个数。</td>
+</tr>
+<tr>
+<td>c1.swap(c2)</td>
+<td>将c1和c2元素互换。</td>
+</tr>
+<tr>
+<td><strong>swap(c1,c2)</strong></td>
+<td>同上操作。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="构造-amp-销毁"><a href="#构造-amp-销毁" class="headerlink" title="构造 &amp; 销毁"></a>构造 &amp; 销毁</h2><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vector<elem> c</elem></td>
+<td>创建一个空的vector。</td>
+</tr>
+<tr>
+<td>vector <elem> c1(c2)</elem></td>
+<td>复制一个vector。</td>
+</tr>
+<tr>
+<td>vector <elem> c(n)</elem></td>
+<td>创建一个vector，含有n个数据，数据均已缺省构造产生。</td>
+</tr>
+<tr>
+<td>vector <elem> c(n, elem)</elem></td>
+<td>创建一个含有n个elem拷贝的vector。</td>
+</tr>
+<tr>
+<td>vector <elem> c(beg,end)</elem></td>
+<td>创建一个以[beg;end)区间的vector。</td>
+</tr>
+<tr>
+<td>c.~ vector <elem>()</elem></td>
+<td>销毁所有数据，释放内存。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+            <a href="/tags/vector/" rel="tag"># vector</a>
+          
+            <a href="/tags/stl/" rel="tag"># stl</a>
+          
+            <a href="/tags/string/" rel="tag"># string</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/26/stl关联容器的特性/" rel="next" title="stl关联容器的特性">
+                <i class="fa fa-chevron-left"></i> stl关联容器的特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/22/http笔记之php与cgi/" rel="prev" title="http笔记之php与cgi">
+                http笔记之php与cgi <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nosix1992" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#增长方式"><span class="nav-number">1.</span> <span class="nav-text">增长方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器失效"><span class="nav-number">2.</span> <span class="nav-text">迭代器失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity-amp-size"><span class="nav-number">3.</span> <span class="nav-text">capacity & size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造-amp-销毁"><span class="nav-number">5.</span> <span class="nav-text">构造 & 销毁</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

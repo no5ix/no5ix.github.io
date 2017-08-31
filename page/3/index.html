@@ -1204,6 +1204,566 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/17/vector的增长方式与使用注意点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/17/vector的增长方式与使用注意点/" itemprop="url">vector的增长方式与使用注意点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T00:52:53+08:00">
+                2016-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="增长方式"><a href="#增长方式" class="headerlink" title="增长方式"></a>增长方式</h2><p>为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存<br>储 。</p>
+<blockquote>
+<p>假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string<br>中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中<br>其他位置一一因为元素必须连续存储。</p>
+<p>容器必须分配新的内存空间来保存己有元素和新元素 ， </p>
+<p>将已有元素从 旧位置移动到新空 间中， 然后添加新元素，释放旧存储空间 。</p>
+<p>如果我们每添加一个新元素， vector 就执行一次这样的内存分配和释放操作 ，性能会慢到不可<br>接受 。</p>
+</blockquote>
+<p>为了避免这种代价，标准库实现者采用了可以减少容器空间重新分配次数的策略。</p>
+<blockquote>
+<p>当不得不在取新的内 存空间 时， vector 和 string 的实现通常会分配比新的空间需求更大<br>的内存空间 。</p>
+<p> 容器预留这些空间作为备用 ， 可用来保存更多的新元素 。</p>
+<p> 这样，就不需要每<br>次添加新元素都重新分配容器的内存空间了 。</p>
+<p>这种分配策略比每次添加新元素时都重新分配容器内存空间的策略要高效得多 。</p>
+<p>其实际性能也表现得足够好一一虽然 vector 在每次重新分配内存空间时都要移动所有元素，<br>但使用 此策略后，其扩张操作通常比 list 和 deque 还要快 。</p>
+</blockquote>
+<h2 id="迭代器失效"><a href="#迭代器失效" class="headerlink" title="迭代器失效"></a>迭代器失效</h2><p>看了上方的实现方式, 相信很容易能理解迭代器失效问题了啊</p>
+<blockquote>
+<p>向容器中添加元素和从容器中删除元素 的操作可能会使指向容器元素的指针、引用或<br>法代器失效。 </p>
+<p>一个失效的指针、引用或法代器将不再表示任何元素 。 </p>
+<p>使用失效的指针、引用或迭代器是一种严重的程序设计错误，很可能引起与使用未初始化指针一样的问题</p>
+</blockquote>
+<h2 id="capacity-amp-size"><a href="#capacity-amp-size" class="headerlink" title="capacity &amp; size"></a>capacity &amp; size</h2><blockquote>
+<p>理解 capacity 和 size 的区别非常重要。</p>
+</blockquote>
+<p>容器的 size 是指它已经保存的元素的数目 ; </p>
+<p>而 capacity 则是在不分配新的内存空间的前提下它最多可以保存多少元素。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c.assign(beg,end)</td>
+<td>将[beg; end)区间中的数据赋值给c。</td>
+</tr>
+<tr>
+<td>c.assign(n,elem)</td>
+<td>将n个elem的拷贝赋值给c。</td>
+</tr>
+<tr>
+<td>c.at(idx)</td>
+<td>传回索引idx所指的数据，如果idx越界，抛出out_of_range。</td>
+</tr>
+<tr>
+<td>c.back()</td>
+<td>传回最后一个数据，不检查这个数据是否存在。</td>
+</tr>
+<tr>
+<td><strong>c.begin()</strong></td>
+<td>传回迭代器重的可一个数据。</td>
+</tr>
+<tr>
+<td><strong>c.capacity()</strong></td>
+<td>返不分配新的内存空间的前提下它最多可以保存多少元素。</td>
+</tr>
+<tr>
+<td><strong>c.clear()</strong></td>
+<td>移除容器中所有数据。</td>
+</tr>
+<tr>
+<td><strong>c.empty()</strong></td>
+<td>判断容器是否为空。</td>
+</tr>
+<tr>
+<td>c.end()</td>
+<td>指向迭代器中的最后一个数据地址。</td>
+</tr>
+<tr>
+<td>c.erase(pos)</td>
+<td>删除pos位置的数据，传回下一个数据的位置。</td>
+</tr>
+<tr>
+<td>c.erase(beg,end)</td>
+<td>删除[beg,end)区间的数据，传回下一个数据的位置。 </td>
+</tr>
+<tr>
+<td>c.front()</td>
+<td>传回第一个数据。</td>
+</tr>
+<tr>
+<td>get_allocator</td>
+<td>使用构造函数返回一个拷贝。</td>
+</tr>
+<tr>
+<td><strong>c.insert(pos,elem)</strong></td>
+<td>在pos位置插入一个elem拷贝，传回新数据位置。</td>
+</tr>
+<tr>
+<td>c.insert(pos,n,elem)</td>
+<td>在pos位置插入n个elem数据。无返回值。</td>
+</tr>
+<tr>
+<td>c.insert(pos,beg,end)</td>
+<td>在pos位置插入在[beg,end)区间的数据。无返回值。</td>
+</tr>
+<tr>
+<td>c.max_size()</td>
+<td>返回容器中最大数据的数量。</td>
+</tr>
+<tr>
+<td><strong>c.pop_back()</strong></td>
+<td>删除最后一个数据。</td>
+</tr>
+<tr>
+<td><strong>c.push_back(elem)</strong></td>
+<td>在尾部加入一个数据。</td>
+</tr>
+<tr>
+<td>c.rbegin()</td>
+<td>传回一个逆向队列的第一个数据。</td>
+</tr>
+<tr>
+<td>c.rend()</td>
+<td>传回一个逆向队列的最后一个数据的下一个位置。</td>
+</tr>
+<tr>
+<td>c.resize(num)</td>
+<td>重新指定队列的长度。</td>
+</tr>
+<tr>
+<td>c.reserve()</td>
+<td>保留适当的容量。</td>
+</tr>
+<tr>
+<td><strong>c.size()</strong></td>
+<td>返回容器中实际数据的个数。</td>
+</tr>
+<tr>
+<td>c1.swap(c2)</td>
+<td>将c1和c2元素互换。</td>
+</tr>
+<tr>
+<td><strong>swap(c1,c2)</strong></td>
+<td>同上操作。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="构造-amp-销毁"><a href="#构造-amp-销毁" class="headerlink" title="构造 &amp; 销毁"></a>构造 &amp; 销毁</h2><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vector<elem> c</elem></td>
+<td>创建一个空的vector。</td>
+</tr>
+<tr>
+<td>vector <elem> c1(c2)</elem></td>
+<td>复制一个vector。</td>
+</tr>
+<tr>
+<td>vector <elem> c(n)</elem></td>
+<td>创建一个vector，含有n个数据，数据均已缺省构造产生。</td>
+</tr>
+<tr>
+<td>vector <elem> c(n, elem)</elem></td>
+<td>创建一个含有n个elem拷贝的vector。</td>
+</tr>
+<tr>
+<td>vector <elem> c(beg,end)</elem></td>
+<td>创建一个以[beg;end)区间的vector。</td>
+</tr>
+<tr>
+<td>c.~ vector <elem>()</elem></td>
+<td>销毁所有数据，释放内存。</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/26/stl关联容器的特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/26/stl关联容器的特性/" itemprop="url">stl关联容器的特性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-26T01:32:47+08:00">
+                2016-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概绍"><a href="#概绍" class="headerlink" title="概绍"></a>概绍</h2><blockquote>
+<p>关联容器和 顺序容器有着根本的不问 :</p>
+<p>关联容器中的元素是按关键字来保在和访问的 。</p>
+<p>与之相对，顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的 。</p>
+</blockquote>
+<p>关联容器支持高效的关键字查找和访问 。 两个主要的关联容器类型是 </p>
+<ul>
+<li>map </li>
+<li>set</li>
+</ul>
+<p>map 中 的元素是一些关键字一值 ( key-value )对 : </p>
+<blockquote>
+<p>关键字起到索 引 的<br>作用，值则表示与索引相关联的数据 。 </p>
+</blockquote>
+<p>set 中每个元素只包含一个关键字 :</p>
+<blockquote>
+<p>set 支持高效的关键字检查一个给定关键字是否在 set 中 。 例如，在某些文本处理过程中，<br>可以用一个 set 来保存想要忽略的单词。字典则是一个很好的使用 map 的例子 : 可 以将<br>单词作为关键字 ， 将单词释义作为值 。</p>
+</blockquote>
+<h2 id="map-amp-set-的实现"><a href="#map-amp-set-的实现" class="headerlink" title="map &amp; set 的实现"></a><strong>map &amp; set 的实现</strong></h2><p>因为需要快速定位到键值的关系, 以红黑树的结构实现，其自平衡特性可以让插入删除等操作都可以在O(log n)时间内完成</p>
+<h2 id="map的基本操作函数"><a href="#map的基本操作函数" class="headerlink" title="map的基本操作函数"></a>map的基本操作函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin()</td>
+<td>返回指向map头部的迭代器</td>
+</tr>
+<tr>
+<td>clear(） 删除所有元素</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>返回指定元素出现的次数</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>如果map为空则返回true</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向map末尾的迭代器</td>
+</tr>
+<tr>
+<td>equal_range()</td>
+<td>返回特殊条目的迭代器对</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除一个元素</td>
+</tr>
+<tr>
+<td>find()</td>
+<td>查找一个元素</td>
+</tr>
+<tr>
+<td>get_allocator()</td>
+<td>返回map的配置器</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>插入元素</td>
+</tr>
+<tr>
+<td>key_comp()</td>
+<td>返回比较元素key的函数</td>
+</tr>
+<tr>
+<td>lower_bound()</td>
+<td>返回键值&gt;=给定元素的第一个位置</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回可以容纳的最大元素个数</td>
+</tr>
+<tr>
+<td>rbegin()</td>
+<td>返回一个指向map尾部的逆向迭代器</td>
+</tr>
+<tr>
+<td>rend()</td>
+<td>返回一个指向map头部的逆向迭代器</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回map中元素的个数</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换两个map</td>
+</tr>
+<tr>
+<td>upper_bound()</td>
+<td>返回键值&gt;给定元素的第一个位置</td>
+</tr>
+<tr>
+<td>value_comp()</td>
+<td>返回比较元素value的函数</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/12/5分钟学会git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1951,404 +2511,6 @@ int i = 0;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/21/linux常用文本处理命令笔记整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/10/21/linux常用文本处理命令笔记整理/" itemprop="url">linux常用文本处理命令笔记整理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-21T20:54:19+08:00">
-                2015-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。<br>首先抛出问题， 带着问题来学记忆知识更有动力：</p>
-<ul>
-<li>如何通过一条命令取得eth0的IP4地址 ： <pre><code>` ifconfig eth0 | grep -w &apos;inet&apos; | awk &apos;{print $2}&apos; | awk -F: &apos;{print $2}&apos;`
-</code></pre></li>
-<li>如何通过一条命令替换当前路径下所有文件中的所有“xxx”为“yyy“ ： <pre><code>`ls -alF | grep &apos;^-&apos; | xargs sed -i &apos;s/xxx/yyy/g&apos;`
-</code></pre></li>
-<li>如何通过一条命令杀掉占用端口34600的进程 ：<pre><code>` sudo lsof -i:34600 | grep -v &apos;PID&apos; | awk &apos;{print $2}&apos; | xargs kill -9`
-</code></pre></li>
-</ul>
-<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a><strong>grep</strong></h1><blockquote>
-<p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
-</blockquote>
-<ul>
-<li>-a 不要忽略二进制数据。</li>
-<li>-A&lt;显示列数&gt; 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</li>
-<li>-b 在显示符合范本样式的那一行之外，并显示该行之前的内容。</li>
-<li>-c 计算符合范本样式的列数。</li>
-<li>-C&lt;显示列数&gt;或-&lt;显示列数&gt; 除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</li>
-<li>-d&lt;进行动作&gt; 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</li>
-<li>-e&lt;范本样式&gt; 指定字符串作为查找文件内容的范本样式。</li>
-<li>-E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</li>
-<li>-f&lt;范本文件&gt; 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</li>
-<li>-F 将范本样式视为固定字符串的列表。</li>
-<li>-G 将范本样式视为普通的表示法来使用。</li>
-<li>-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</li>
-<li>-H 在显示符合范本样式的那一列之前，标示该列的文件名称。</li>
-<li>-i 胡列字符大小写的差别。（<strong>常用</strong>）</li>
-<li>-l 列出文件内容符合指定的范本样式的文件名称。</li>
-<li>-L 列出文件内容不符合指定的范本样式的文件名称。</li>
-<li>-n 在显示符合范本样式的那一列之前，标示出该列的编号。</li>
-<li>-q 不显示任何信息。</li>
-<li>-R/-r 此参数的效果和指定“-d recurse”参数相同。</li>
-<li>-s 不显示错误信息。</li>
-<li>-v 反转查找。（<strong>常用</strong>）</li>
-<li>-w 只显示全字符合的列。（<strong>常用</strong>）</li>
-<li>-x 只显示全列符合的列。</li>
-<li>-y 此参数效果跟“-i”相同。</li>
-<li>-o 只输出文件中匹配到的部分。</li>
-</ul>
-<h1 id="awk"><a href="#awk" class="headerlink" title="awk"></a><strong>awk</strong></h1><blockquote>
-<p>awk是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。</p>
-</blockquote>
-<h3 id="常用命令选项"><a href="#常用命令选项" class="headerlink" title="常用命令选项"></a><strong>常用命令选项</strong></h3><ul>
-<li>-F fs   fs指定输入分隔符（awk默认的分隔符是空格），fs可以是字符串或正则表达式，如-F: </li>
-<li>-v var=value   赋值一个用户定义变量，将外部变量传递给awk</li>
-</ul>
-<h3 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a><em>常用用法</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">klj;k uu</div><div class="line">&amp;&amp; ss&amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3 | awk &apos;&#123;print $NF&#125;&apos;</div><div class="line">uu</div><div class="line">ss&amp;</div></pre></td></tr></table></figure>
-<p>cat abc3 | awk ‘{print $NF}’的含义是：输出abc3文件的每一行的最后一列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3 | grep k | awk -F\; &apos;&#123;print $1&#125;&apos;</div><div class="line">klj</div></pre></td></tr></table></figure></p>
-<p>cat abc3 | grep k | awk -F\; ‘{print $1}’的含义是：<br>先输入含有k的那一行（即klj；k）， 然后对那一行以；（\;， 这个分号需要转义）分隔，打印出分隔后的第一列（即klj）</p>
-<h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a><strong>sed</strong></h1><blockquote>
-<p>sed是一种流编辑器，它是文本处理中非常中的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
-</blockquote>
-<h3 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a><strong>sed命令</strong></h3><ul>
-<li>a\ 在当前行下面插入文本。</li>
-<li>i\ 在当前行上面插入文本。</li>
-<li>c\ 把选定的行改为新的文本。</li>
-<li>d 删除，删除选择的行。</li>
-<li>D 删除模板块的第一行。</li>
-<li>s 替换指定字符 h 拷贝模板块的内容到内存中的缓冲区。</li>
-<li>H 追加模板块的内容到内存中的缓冲区。</li>
-<li>g 获得内存缓冲区的内容，并替代当前模板块中的文本。</li>
-<li>G 获得内存缓冲区的内容，并追加到当前模板块文本的后面。</li>
-<li>l 列表不能打印字符的清单。</li>
-<li>n 读取下一个输入行，用下一个命令处理新的行而不是用第一个命令。</li>
-<li>N 追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码。</li>
-<li>p 打印模板块的行。</li>
-<li>P(大写) 打印模板块的第一行。</li>
-<li>q 退出Sed。</li>
-<li>b lable 分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾。</li>
-<li>r file 从file中读行。</li>
-<li>t label if分支，从最后一行开始，条件一旦满足或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</li>
-<li>T label 错误分支，从最后一行开始，一旦发生错误或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</li>
-<li>w file 写并追加模板块到file末尾。</li>
-<li>W file 写并追加模板块的第一行到file末尾。</li>
-<li>! 表示后面的命令对所有没有被选定的行发生作用。</li>
-<li>= 打印当前行号码。</li>
-<li><h1 id="把注释扩展到下一个换行符以前。"><a href="#把注释扩展到下一个换行符以前。" class="headerlink" title="把注释扩展到下一个换行符以前。"></a>把注释扩展到下一个换行符以前。</h1></li>
-</ul>
-<h3 id="sed替换标记"><a href="#sed替换标记" class="headerlink" title="sed替换标记"></a><strong>sed替换标记</strong></h3><ul>
-<li>g 表示行内全面替换。</li>
-<li>p 表示打印行。</li>
-<li>w 表示把行写入一个文件。</li>
-<li>x 表示互换模板块中的文本和缓冲区中的文本。</li>
-<li>y 表示把一个字符翻译为另外的字符（但是不用于正则表达式） \1 子串匹配标记 &amp; 已匹配字符串标记</li>
-</ul>
-<h3 id="sed元字符集"><a href="#sed元字符集" class="headerlink" title="sed元字符集"></a><strong>sed元字符集</strong></h3><ul>
-<li>^ 匹配行开始，如：/^sed/匹配所有以sed开头的行。</li>
-<li>$ 匹配行结束，如：/sed$/匹配所有以sed结尾的行。</li>
-<li>. 匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。</li>
-<li>* 匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。</li>
-<li>[] 匹配一个指定范围内的字符，如/[ss]ed/匹配sed和Sed。</li>
-<li>[^] 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。</li>
-<li>(..) 匹配子串，保存匹配的字符，如s/(love)able/\1rs，loveable被替换成lovers。</li>
-<li>&amp; 保存搜索字符用来替换其他字符，如s/love/<strong>&amp;</strong>/，love这成<strong>love</strong>。</li>
-<li>\&lt; 匹配单词的开始，如:/\ 匹配单词的结束，如/love>/匹配包含以love结尾的单词的行。</li>
-<li>x{m} 重复字符x，m次，如：/0{5}/匹配包含5个0的行。</li>
-<li>x{m,} 重复字符x，至少m次，如：/0{5,}/匹配至少有5个0的行。</li>
-<li>x{m,n} 重复字符x，至少m次，不多于n次，如：/0{5,10}/匹配5~10个0的行。</li>
-</ul>
-<p><code>直接编辑文件选项-i，否则并不会修改源文件</code></p>
-<h3 id="sed常用用法1：增"><a href="#sed常用用法1：增" class="headerlink" title="sed常用用法1：增"></a><em>sed常用用法1：增</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">&amp;&amp; gg&amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ sed -i &apos;/gg/a\hello, my friend&apos; abc3</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">&amp;&amp; gg&amp;</div><div class="line">hello, my friend</div></pre></td></tr></table></figure>
-<p>sed -i ‘/gg/a\hello, my friend’ abc3的含义是：<br>在abc3文件中的“gg”字符串的下一行插入“hello， my friend”</p>
-<h3 id="sed常用用法2：删"><a href="#sed常用用法2：删" class="headerlink" title="sed常用用法2：删"></a><em>sed常用用法2：删</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">&amp;&amp; gg&amp;</div><div class="line">hello, my friend</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ sed -i &apos;/gg/d&apos; abc3</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">hello, my friend</div></pre></td></tr></table></figure>
-<p>sed -i ‘/gg/d’ abc3的含义是：<br>将abc3文件中所有包含的“gg”字符串的行删除</p>
-<h3 id="sed常用用法3：改"><a href="#sed常用用法3：改" class="headerlink" title="sed常用用法3：改"></a><em>sed常用用法3：改</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">hello, my friend</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ sed -i &apos;s/hello/welcome/g&apos; abc3</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">welcome, my friend</div></pre></td></tr></table></figure>
-<p>sed -i ‘s/hello/welcome/g’ abc3的含义是：<br>将abc3文件中所有包含的“gg”字符串都修改为“welcome”</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/09/C++ 易混淆点（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/09/C++ 易混淆点（二）/" itemprop="url">C++ 易混淆点（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-09T13:35:25+08:00">
-                2015-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="位操作运算符的问题"><a href="#位操作运算符的问题" class="headerlink" title="位操作运算符的问题"></a><strong>位操作运算符的问题</strong></h3><p>二进制的100 的第0位是 0<br>1(第二位)  0(第一位)  0(第0位)，<br>所以把一个数的第三位进行清零、置位、取反的操作如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line"></div><div class="line">#define Bit3 (0X01&lt;&lt;3)</div><div class="line">/*对一个数的第三位进行清零、置位、取反*/</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	int a=15 ;      // 0000 1111</div><div class="line"></div><div class="line">	printf(&quot;原大小：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a &amp;= ~Bit3;     //清零, 0000 0111</div><div class="line">	printf(&quot;清零后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a |= Bit3;     //置位, 0000 1111</div><div class="line">	printf(&quot;置位后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a ^= Bit3;     //取反, 0000 0111</div><div class="line">	printf(&quot;取反后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="字符串分配的位置问题"><a href="#字符串分配的位置问题" class="headerlink" title="字符串分配的位置问题"></a><strong>字符串分配的位置问题</strong></h3><p>程序的存储区域分为：代码段、只读数据段、已初始化的读写数据段、未初始化的数据段、堆、栈。<br>1、代码段、只读数据段、已初始化的读写数据段、未初始化的数据段都属于静态区域。<br>2、堆内存只在程序运行时出现，一般有程序员分配和释放。<br>3、栈内存只在程序运行时出现，在函数内部使用的变量，函数参数以及返回值将使用栈空间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">char* get_str()</div><div class="line">&#123;</div><div class="line">    char *str = &quot;hello&quot;; //第一种情况：分配在静态存储区上</div><div class="line">    //char str[] = &quot;hello&quot;; //第二种情况分配在栈上</div><div class="line">    return str;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    char* p = get_str();</div><div class="line">    // 如果是第一种情况，下述打印可以打印出正确的值；但是第二种情况打印结果是错的。</div><div class="line">    printf(&quot;%s/n&quot;, p);</div><div class="line">    *++p = &apos;a&apos;; // 如果是第一种情况，运行时将会段错误，因为不能修改它；</div><div class="line">    printf(&quot;%s/n&quot;, p);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="复杂类型的声明和typedef定义"><a href="#复杂类型的声明和typedef定义" class="headerlink" title="复杂类型的声明和typedef定义"></a><strong>复杂类型的声明和typedef定义</strong></h3><ul>
-<li><p>用变量a给出下面的定义:<br>一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数 int (*a[10])(int);</p>
-</li>
-<li><p>typedef表示一个长度为4的数组;<br>typedef  int  ARR[4];</p>
-</li>
-<li><p>typedef表示一个函数指针有一个整型参数并返回一个整型数：<br>typedef int（*FUNC）（int）；</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2399,7 +2561,7 @@ int i = 0;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2421,7 +2583,7 @@ int i = 0;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

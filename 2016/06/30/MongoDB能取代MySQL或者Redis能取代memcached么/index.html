@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mongodb,redis,mysql,memcached," />
 
 
 
@@ -94,13 +94,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="nosix&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/MySQL/index.html">
-<meta property="og:site_name" content="nosix&#39;s blog">
+<meta name="description" content="mongodb和memcached不是一个范畴内的东西。 mongodb是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据。 mongodb和memcached不存在谁替换谁的问题。和memcached更为接近的是redis。 它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据&amp;gt; 类型有限，查询功能不强，一般用作缓存。 一般现在的">
+<meta name="keywords" content="mongodb,redis,mysql,memcached">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB能取代MySQL或者Redis能取代memcached么">
+<meta property="og:url" content="http://yoursite.com/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/index.html">
+<meta property="og:site_name" content="烫烫烫">
+<meta property="og:description" content="mongodb和memcached不是一个范畴内的东西。 mongodb是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据。 mongodb和memcached不存在谁替换谁的问题。和memcached更为接近的是redis。 它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据&amp;gt; 类型有限，查询功能不强，一般用作缓存。 一般现在的">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-31T16:32:05.608Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nosix&#39;s blog">
+<meta name="twitter:title" content="MongoDB能取代MySQL或者Redis能取代memcached么">
+<meta name="twitter:description" content="mongodb和memcached不是一个范畴内的东西。 mongodb是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据。 mongodb和memcached不存在谁替换谁的问题。和memcached更为接近的是redis。 它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据&amp;gt; 类型有限，查询功能不强，一般用作缓存。 一般现在的">
 
 
 
@@ -129,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/MySQL/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/"/>
 
 
 
 
 
-  <title>Category: MySQL | nosix's blog</title>
+  <title>MongoDB能取代MySQL或者Redis能取代memcached么 | 烫烫烫</title>
   
 
 
@@ -160,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -171,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">nosix's blog</span>
+        <span class="site-title">烫烫烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -264,83 +269,196 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>MySQL<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/06/14/MySQL必须得清楚的/" itemprop="url">
-              
-                <span itemprop="name">MySQL必须得清楚的</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">MongoDB能取代MySQL或者Redis能取代memcached么</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-14T11:02:16+08:00"
-              content="2016-06-14" >
-          06-14
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-30T00:22:58+08:00">
+                2016-06-30
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2015/02/27/MySQL的这些显而易见的坑/" itemprop="url">
-              
-                <span itemprop="name">MySQL的这些显而易见的坑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-02-27T22:51:11+08:00"
-              content="2015-02-27" >
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <blockquote>
+<p>mongodb和memcached不是一个范畴内的东西。</p>
+<p>mongodb是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据。</p>
+<p>mongodb和memcached不存在谁替换谁的问题。和memcached更为接近的是redis。</p>
+<p>它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据&gt; 类型有限，查询功能不强，一般用作缓存。</p>
+<p>一般现在的项目中，用redis来替代memcached。</p>
+</blockquote>
+<p>Redis相比memcached：</p>
+<ul>
+<li>redis具有持久化机制，可以定期将内存中的数据持久化到硬盘上。</li>
+<li>redis具备binlog功能，可以将所有操作写入日志，当redis出现故障，可依照binlog进行数据恢复。</li>
+<li>redis支持virtual memory，可以限定内存使用大小，当数据超过阈值，则通过类似LRU的算法把内存中的最不常用数据保存到硬盘的页面文件中。</li>
+<li>redis原生支持的数据类型更多，使用的想象空间更大。</li>
+</ul>
+<blockquote>
+<p>mongodb 是文档数据库，用于方便懒人替代mysql等关系数据库的。<br>不过mongodb在内存足够的情况下读写性能不错，大部分应用可以省去cache这一层了。</p>
+<p>根据业务场景, 懒人可以使用MongoDB来取代MySQL+memcached,.</p>
+</blockquote>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+            <a href="/tags/memcached/" rel="tag"># memcached</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/14/MySQL必须得清楚的/" rel="next" title="MySQL必须得清楚的">
+                <i class="fa fa-chevron-left"></i> MySQL必须得清楚的
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/04/linux编程须知(阅读开源服务器源码基础)/" rel="prev" title="linux编程须知(阅读开源服务器源码基础)">
+                linux编程须知(阅读开源服务器源码基础) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -348,6 +466,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -376,7 +498,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -384,7 +506,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -406,7 +528,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -568,10 +690,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

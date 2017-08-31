@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="redis,mysql,php,yii,nginx,tcp,http,udp,workerman,Capistrano,ruby," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，">
+<meta name="keywords" content="redis,mysql,php,yii,nginx,tcp,http,udp,workerman,Capistrano,ruby">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速完成一个slg游戏思路">
+<meta property="og:url" content="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路/index.html">
+<meta property="og:site_name" content="烫烫烫">
+<meta property="og:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路/slg1.png">
+<meta property="og:updated_time" content="2017-08-31T15:22:23.095Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速完成一个slg游戏思路">
+<meta name="twitter:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，">
+<meta name="twitter:image" content="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路/slg1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路/"/>
+
+
+
+
+
+  <title>快速完成一个slg游戏思路 | 烫烫烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫烫烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">快速完成一个slg游戏思路</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T22:19:29+08:00">
+                2016-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2016/12/04/快速完成一个slg游戏思路/slg1.png" alt="slg1.png" title="">
+<h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
+<p>验证完玩家信息, </p>
+<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
+<blockquote>
+<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
+<p>这个key也可以用来完成封号操作</p>
+</blockquote>
+<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
+<p>因为弱交互/短连接的关系, </p>
+<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
+<p>打一下对方的离线数据，</p>
+<p>计算下排行榜，排行榜是实时计算的, </p>
+<p>存在redis里, 做了分页处理</p>
+<p>买卖下道具即可</p>
+<p>所以 MainServer 选择了:</p>
+</blockquote>
+<ul>
+<li>yii</li>
+<li>redis</li>
+<li>mysql</li>
+<li>nginx</li>
+</ul>
+<h2 id="pvpServeer"><a href="#pvpServeer" class="headerlink" title="pvpServeer"></a>pvpServeer</h2><p>而 pvpServer 则选择 workerman 的tcp模式,</p>
+<p>实时交互数据, </p>
+<p>MainServer 和 pvpServer之间通信并接同一个数据库.</p>
+<blockquote>
+<p>其实这里可以不选择用tcp, 而自撸一个可靠udp来提高效率</p>
+</blockquote>
+<h2 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h2><blockquote>
+<p>从登录成功就开始连接, </p>
+<p>注册一个Chat_ID, </p>
+<p>player_ID 和 Chat_ID相互对应, </p>
+<p>会注册相应的房间频道, </p>
+<p>并为每位Player存了一份黑名单, </p>
+<p>在客户端做了本地黑名单, </p>
+<p>聊天服务器也做了黑名单二次验证处理.</p>
+</blockquote>
+<ul>
+<li><p>世界频道 : 则用MsgServer的非实时推送思路</p>
+</li>
+<li><p>私密聊天 : 则选择 workerman 的tcp, </p>
+</li>
+</ul>
+<h2 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h2><ul>
+<li>实时推送 : workerman 的tcp</li>
+<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
+</ul>
+<h2 id="deployTool"><a href="#deployTool" class="headerlink" title="deployTool"></a>deployTool</h2><p>Capistrano是一个开源的部署工具, 用ruby来写, 语法超简洁的</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>实时则走 workerman </li>
+<li>非实时则跑 yii</li>
+</ul>
+<blockquote>
+<p>访问一下，请求一下关卡数据，玩完了又提交一下，</p>
+<p>验算一下是否合法，获得什么奖励，</p>
+<p>数据库用单台 MySQL或者 MongoDB即可，后端的 Redis做缓存</p>
+<p>此类服务器用来实现一款三国类策略或者卡牌及酷跑的游戏已经绰绰有余，</p>
+<p>这类游戏因为逻辑简单，玩家之间交互不强，</p>
+<p>使用HTTP来开发的话，开发速度快，调试只需要一个浏览器就可以把逻辑调试清楚了</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+            <a href="/tags/yii/" rel="tag"># yii</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+            <a href="/tags/tcp/" rel="tag"># tcp</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+            <a href="/tags/udp/" rel="tag"># udp</a>
+          
+            <a href="/tags/workerman/" rel="tag"># workerman</a>
+          
+            <a href="/tags/Capistrano/" rel="tag"># Capistrano</a>
+          
+            <a href="/tags/ruby/" rel="tag"># ruby</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" rel="next" title="一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)">
+                <i class="fa fa-chevron-left"></i> 一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/27/IPC进程间通信/" rel="prev" title="IPC进程间通信">
+                IPC进程间通信 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nosix1992" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoginServer-GateWay"><span class="nav-number">1.</span> <span class="nav-text">LoginServer(GateWay)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MainServer"><span class="nav-number">2.</span> <span class="nav-text">MainServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pvpServeer"><span class="nav-number">3.</span> <span class="nav-text">pvpServeer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatServer"><span class="nav-number">4.</span> <span class="nav-text">ChatServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MsgServer"><span class="nav-number">5.</span> <span class="nav-text">MsgServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deployTool"><span class="nav-number">6.</span> <span class="nav-text">deployTool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">7.</span> <span class="nav-text">优点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

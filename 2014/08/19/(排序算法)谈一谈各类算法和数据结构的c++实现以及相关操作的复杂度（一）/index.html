@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="排序," />
+  <meta name="keywords" content="c++,排序," />
 
 
 
@@ -95,18 +95,18 @@
 
 
 <meta name="description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识 常用算法的复杂度 冒泡排序 想象就是很多泡泡，最大的泡泡每次">
-<meta name="keywords" content="排序">
+<meta name="keywords" content="c++,排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）">
 <meta property="og:url" content="http://yoursite.com/2014/08/19/(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）/index.html">
-<meta property="og:site_name" content="nosix&#39;s blog">
+<meta property="og:site_name" content="烫烫烫">
 <meta property="og:description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识 常用算法的复杂度 冒泡排序 想象就是很多泡泡，最大的泡泡每次">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170804205144200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170804201637199?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170804224210669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170804224023832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-30T23:49:35.008Z">
+<meta property="og:updated_time" content="2017-08-31T16:33:51.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）">
 <meta name="twitter:description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识 常用算法的复杂度 冒泡排序 想象就是很多泡泡，最大的泡泡每次">
@@ -145,7 +145,7 @@
 
 
 
-  <title>(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一） | nosix's blog</title>
+  <title>(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一） | 烫烫烫</title>
   
 
 
@@ -181,7 +181,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">nosix's blog</span>
+        <span class="site-title">烫烫烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -297,7 +297,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nosix's blog">
+      <meta itemprop="name" content="烫烫烫">
     </span>
 
     
@@ -436,6 +436,8 @@
       
         <div class="post-tags">
           
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
             <a href="/tags/排序/" rel="tag"># 排序</a>
           
         </div>
@@ -526,7 +528,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -534,7 +536,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -556,7 +558,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

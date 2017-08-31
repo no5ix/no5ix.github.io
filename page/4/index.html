@@ -94,13 +94,16 @@
 
 
 
+<meta name="description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="nosix&#39;s blog">
+<meta property="og:title" content="烫烫烫">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
-<meta property="og:site_name" content="nosix&#39;s blog">
+<meta property="og:site_name" content="烫烫烫">
+<meta property="og:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nosix&#39;s blog">
+<meta name="twitter:title" content="烫烫烫">
+<meta name="twitter:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
 
@@ -135,7 +138,7 @@
 
 
 
-  <title>nosix's blog</title>
+  <title>烫烫烫</title>
   
 
 
@@ -173,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">nosix's blog</span>
+        <span class="site-title">烫烫烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -280,6 +283,934 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/31/gdb多进程多线程调试实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/08/31/gdb多进程多线程调试实战/" itemprop="url">gdb多进程调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-31T14:20:23+08:00">
+                2015-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="gdb多进程调试"><a href="#gdb多进程调试" class="headerlink" title="gdb多进程调试"></a><strong>gdb多进程调试</strong></h1><ul>
+<li>set follow-fork-mode [parent|child]   set detach-on-fork [on|off]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>follow-fork-mode</th>
+<th style="text-align:center">detach-on-fork</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td style="text-align:center">on</td>
+<td>只调试主进程（GDB默认）</td>
+</tr>
+<tr>
+<td>child</td>
+<td style="text-align:center">on</td>
+<td>只调试子进程</td>
+</tr>
+<tr>
+<td>parent</td>
+<td style="text-align:center">off</td>
+<td>同时调试两个进程，gdb跟主进程，子进程block在fork位置</td>
+</tr>
+<tr>
+<td>child</td>
+<td style="text-align:center">off</td>
+<td>同时调试两个进程，gdb跟子进程，主进程block在fork位置</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>查询正在调试的进程：info inferiors</li>
+<li>切换调试的进程： inferior +inferior number</li>
+<li>catch fork命令可以捕获进程的创建</li>
+<li>attach + pid ， 可以附到一个正在运行的进程上进行调试</li>
+</ul>
+<h1 id="gdb多线程调试"><a href="#gdb多线程调试" class="headerlink" title="gdb多线程调试"></a><strong>gdb多线程调试</strong></h1><ul>
+<li>show scheduler-locking  //显示当前scheduler-locking</li>
+<li>set scheduler-locking [on/off/step]  //设置scheduler-locking<ul>
+<li>on：只有当前调试线程运行，其他线程处于暂停状态。</li>
+<li>off：当前调试线程外的其他线程一直在正常运行。</li>
+<li>step：其他线程跟随当前调试线程运行，但具体怎么协同运行，测试中无法体现。</li>
+<li>注意：set scheduler-locking要处于线程运行环境下才能生效，也就是程序已经运行并且暂停在某个断点处，否则会出现“Target ‘exec’ cannot support this command.”这样的错误；而且经过测试，设置后的scheduler-locking值在整个进程内有效，不属于某个线程。</li>
+</ul>
+</li>
+</ul>
+<h1 id="gdb多进程-多线程调试实战例子"><a href="#gdb多进程-多线程调试实战例子" class="headerlink" title="gdb多进程/多线程调试实战例子"></a><strong>gdb多进程/多线程调试实战例子</strong></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/Documents/temp_test$ sudo gdb ./o_multi_thread_process </div><div class="line">[sudo] password for b: </div><div class="line">GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1</div><div class="line">Copyright (C) 2014 Free Software Foundation, Inc.</div><div class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</div><div class="line">This is free software: you are free to change and redistribute it.</div><div class="line">There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;</div><div class="line">and &quot;show warranty&quot; for details.</div><div class="line">This GDB was configured as &quot;x86_64-linux-gnu&quot;.</div><div class="line">Type &quot;show configuration&quot; for configuration details.</div><div class="line">For bug reporting instructions, please see:</div><div class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</div><div class="line">Find the GDB manual and other documentation resources online at:</div><div class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</div><div class="line">For help, type &quot;help&quot;.</div><div class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</div><div class="line">Reading symbols from ./o_multi_thread_process...done.</div><div class="line">(gdb) attach 3027</div><div class="line">Attaching to program: /home/b/Documents/temp_test/o_multi_thread_process, process 3027</div><div class="line">Reading symbols from /lib/x86_64-linux-gnu/libpthread.so.0...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libpthread-2.19.so...done.</div><div class="line">done.</div><div class="line">[New LWP 3029]</div><div class="line">[Thread debugging using libthread_db enabled]</div><div class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</div><div class="line">Loaded symbols for /lib/x86_64-linux-gnu/libpthread.so.0</div><div class="line">Reading symbols from /lib/x86_64-linux-gnu/libc.so.6...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libc-2.19.so...done.</div><div class="line">done.</div><div class="line">Loaded symbols for /lib/x86_64-linux-gnu/libc.so.6</div><div class="line">Reading symbols from /lib64/ld-linux-x86-64.so.2...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/ld-2.19.so...done.</div><div class="line">done.</div><div class="line">Loaded symbols for /lib64/ld-linux-x86-64.so.2</div><div class="line">0x00007f5c9acb8dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81</div><div class="line">81	../sysdeps/unix/syscall-template.S: No such file or directory.</div><div class="line">(gdb) set follow-fork-mode parent </div><div class="line">(gdb) set detach-on-fork off</div><div class="line">(gdb) catch fork</div><div class="line">Catchpoint 1 (fork)</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">[Thread debugging using libthread_db enabled]</div><div class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</div><div class="line"></div><div class="line">Catchpoint 1 (forked process 3002), 0x00007ffff78b7ee4 in __libc_fork ()</div><div class="line">    at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130</div><div class="line">130	../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.</div><div class="line">(gdb) info inferiors </div><div class="line">  Num  Description       Executable        </div><div class="line">* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">(gdb) b 14</div><div class="line">Breakpoint 2 at 0x7ffff78b7f5b: file ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c, line 14.</div><div class="line">(gdb) info breakpoints </div><div class="line">Num     Type           Disp Enb Address            What</div><div class="line">1       catchpoint     keep y                      fork, process 3002 </div><div class="line">	catchpoint already hit 1 time</div><div class="line">2       breakpoint     keep y   0x00007ffff78b7f5b in __libc_fork </div><div class="line">                                                   at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:14</div><div class="line">(gdb) d 2</div><div class="line">(gdb) info breakpoints </div><div class="line">Num     Type           Disp Enb Address            What</div><div class="line">1       catchpoint     keep y                      fork, process 3002 </div><div class="line">	catchpoint already hit 1 time</div><div class="line">(gdb) b multi_thread_process.cpp : 14</div><div class="line">Breakpoint 3 at 0x4007f4: file ./multi_thread_process.cpp, line 14.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">[New process 3002]</div><div class="line">[Thread debugging using libthread_db enabled]</div><div class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</div><div class="line">Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/libpthread-2.19.so...done.</div><div class="line">Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.19.so...done.</div><div class="line">Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.19.so...done.</div><div class="line"></div><div class="line">Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15</div><div class="line">15	  if(pid != 0)</div><div class="line">(gdb) info inferiors </div><div class="line">  Num  Description       Executable        </div><div class="line">  2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">(gdb) inferior 2</div><div class="line">[Switching to inferior 2 [process 3002] (/home/b/Documents/temp_test/o_multi_thread_process)]</div><div class="line">[Switching to thread 2 (Thread 0x7ffff7fdf740 (LWP 3002))] </div><div class="line">0  0x00007ffff78b7ee4 in __libc_fork () at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130</div><div class="line">130	../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.</div><div class="line">(gdb) set scheduler-locking on</div><div class="line">(gdb) b multi_thread_process.cpp : 50</div><div class="line">Breakpoint 4 at 0x400916: multi_thread_process.cpp:50. (2 locations)</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7ee4 in __libc_fork ()</div><div class="line">    at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130</div><div class="line">  1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line"></div><div class="line">Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15</div><div class="line">15	  if(pid != 0)</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">  1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">ProcessB: 3002 step1</div><div class="line">ProcessB: 3002 step2</div><div class="line">ProcessB: 3002 step3</div><div class="line">^C</div><div class="line">Program received signal SIGINT, Interrupt.</div><div class="line">0x00007ffff78b7de0 in __nanosleep_nocancel () at ../sysdeps/unix/syscall-template.S:81</div><div class="line">81	../sysdeps/unix/syscall-template.S: No such file or directory.</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7de0 in __nanosleep_nocancel ()</div><div class="line">    at ../sysdeps/unix/syscall-template.S:81</div><div class="line">  1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">(gdb) info inferiors </div><div class="line">  Num  Description       Executable        </div><div class="line">* 2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">  1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">(gdb) inferior 1</div><div class="line">[Switching to inferior 1 [process 2998] (/home/b/Documents/temp_test/o_multi_thread_process)]</div><div class="line">[Switching to thread 1 (Thread 0x7ffff7fdf740 (LWP 2998))] </div><div class="line">0  main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15</div><div class="line">15	  if(pid != 0)</div><div class="line">(gdb) list</div><div class="line">10	  &#123;</div><div class="line">11	  int pid;</div><div class="line">12	</div><div class="line">13	  pid = fork();</div><div class="line">14	</div><div class="line">15	  if(pid != 0)</div><div class="line">16	    processA();</div><div class="line">17	  else</div><div class="line">18	    processB();</div><div class="line">19	</div><div class="line">(gdb) r</div><div class="line">The program being debugged has been started already.</div><div class="line">Start it from the beginning? (y or n) n</div><div class="line">Program not restarted.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">ProcessA: 2998 step1</div><div class="line">[New Thread 0x7ffff77f6700 (LWP 3017)]</div><div class="line">^C</div><div class="line">Program received signal SIGINT, Interrupt.</div><div class="line">0x00007ffff78b7dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81</div><div class="line">81	../sysdeps/unix/syscall-template.S: No such file or directory.</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">  3    Thread 0x7ffff77f6700 (LWP 3017) &quot;o_multi_thread_&quot; clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:81</div><div class="line">  2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7de0 in __nanosleep_nocancel ()</div><div class="line">    at ../sysdeps/unix/syscall-template.S:81</div><div class="line">* 1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; 0x00007ffff78b7dfd in nanosleep ()</div><div class="line">    at ../sysdeps/unix/syscall-template.S:81</div><div class="line">(gdb)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-22T21:56:12+08:00">
+                2015-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件: "></a><strong>socket可读的条件: </strong></h2><ol>
+<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1.</li>
+<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
+<li><strong>给监听套接字准备好新连接</strong></li>
+<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
+</ol>
+<h2 id="socket可写的条件"><a href="#socket可写的条件" class="headerlink" title="socket可写的条件: "></a><strong>socket可写的条件: </strong></h2><ol>
+<li>socket的发送缓冲区中的数据字节大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用SO_SNDLOWAT socket选项来设置该socket的低水位标记。对于TCP和UDPsocket而言，其缺省值为2048</li>
+<li>该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。</li>
+<li><strong>使用非阻塞connect的套接字已建立连接, 或者connect已经以失败告终</strong></li>
+<li>有一个socket异常错误条件待处理.对于这样的socket的写操作将不会阻塞并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可以通过指定socket选项SO_ERROR调用getsockopt函数来取得并清除;</li>
+</ol>
+<h2 id="非阻塞connect-accept相关"><a href="#非阻塞connect-accept相关" class="headerlink" title="非阻塞connect/accept相关"></a><strong>非阻塞connect/accept相关</strong></h2><p>述的各种条件可以大体总结为下图<br><img src="http://img.blog.csdn.net/20170822193729519?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>注意 : 当socket异常错误的时候socket是可读并可写的, 所以在非阻塞connect(判断是否可写)/accept(判断是否可读)的时候要特别注意这种情况, 要用getsockopt函数, 使用SO_ERROR选项来检查处理.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/" itemprop="url">linux一些不要想当然的事(一)之目录权限</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T17:11:52+08:00">
+                2015-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="目录的可读-可写-可执行权限"><a href="#目录的可读-可写-可执行权限" class="headerlink" title="目录的可读/可写/可执行权限"></a><strong>目录的可读/可写/可执行权限</strong></h2><blockquote>
+<p>不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!<br>记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的</p>
+</blockquote>
+<h3 id="目录可读r"><a href="#目录可读r" class="headerlink" title="目录可读r"></a><strong>目录可读r</strong></h3><blockquote>
+<ul>
+<li><strong>目录可读权限r</strong> : 只能获得文件列表</li>
+<li>特别注意:如果一个目录为非空, 却没有r权限, 即使你有wx的权限, 你用rm -r也是删不掉的, 因为没有r权限拿不到这个目录的文件列表, rm -r 自然也就不晓得要删除什么东西了.只有求助root了<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 444 temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot access temp/dd: Permission denied</div><div class="line">dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cd temp/</div><div class="line">bash: cd: temp/: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat temp/dd </div><div class="line">cat: temp/dd: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/yy</div><div class="line">touch: cannot touch ‘temp/yy’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/dd </div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: descend into write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">rm: remove write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp’: Directory not empty</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="目录可写w"><a href="#目录可写w" class="headerlink" title="目录可写w"></a><strong>目录可写w</strong></h3><blockquote>
+<ul>
+<li><strong>目录可写权限w</strong> : 代表可以在目录下增加或删除档案和目录和改名(但是必须得有目录可执行权限x的支持才可以, 所以一般有w就会有x)</li>
+<li>不要和档案的可写权限混淆了, 即使没有目录可写权限, 有目录可执行x也是可以修改目录下的档案的, 只要拥有要修改的那个档案的可写权限既可.</li>
+<li>但也要注意的是: 档案的w是针对于档案的内容来说的, 你可以编辑修改他的内容, 但是如果想删除这个档案, 你需要这个档案所在的目录的w权限.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 222 temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp/uu</div><div class="line">mkdir: cannot create directory ‘temp/uu’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/oo</div><div class="line">touch: cannot touch ‘temp/oo’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 333 temp </div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp/uu</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/oo</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: cannot remove ‘temp’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp/uu</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/oo</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot open directory temp: Permission denied</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="目录可执行x"><a href="#目录可执行x" class="headerlink" title="目录可执行x"></a><strong>目录可执行x</strong></h3><blockquote>
+<ul>
+<li><strong>目录可执行权限x</strong> : 有进入目录的权限,  有在这个目录下执行命令的权限. 但不可以删除或者增加档案和目录(因为不具备目录的可写权限w)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 111 temp/</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot open directory temp: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ echo &quot;xxd&quot; &gt; temp/dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat temp/dd</div><div class="line">xxd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/yy</div><div class="line">touch: cannot touch ‘temp/yy’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/dd</div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: descend into write-protected directory ‘temp’? y</div><div class="line">rm: remove write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cd temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc/temp$ ls</div><div class="line">ls: cannot open directory .: Permission denied</div></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/07/Linux常用运维命令笔记整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/07/Linux常用运维命令笔记整理/" itemprop="url">Linux常用运维命令笔记整理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-07T19:46:26+08:00">
+                2015-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在linux服务器开发过程中， 经常需要各种命令配合来查看各种状态，所以整理了一些老的笔记来备忘。</p>
+<h1 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a><strong>iostat</strong></h1><blockquote>
+<p>iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息</p>
+</blockquote>
+<ul>
+<li>-c 仅显示CPU统计信息.与-d选项互斥.</li>
+<li>-d 仅显示磁盘统计信息.与-c选项互斥.</li>
+<li>-k 以K为单位显示每秒的磁盘请求数,默认单位块.</li>
+<li>-t  在输出数据时,打印搜集数据的时间.</li>
+<li>-V 打印版本号和帮助信息.</li>
+<li>-x  输出扩展信息.</li>
+</ul>
+<hr>
+<h3 id="iostat常用用法1：iostat-d"><a href="#iostat常用用法1：iostat-d" class="headerlink" title="iostat常用用法1：iostat -d"></a><em>iostat常用用法1：iostat -d</em></h3><p>指定采样时间间隔与采样次数</p>
+<p>我们可以以”iostat interval [count] ”形式指定iostat命令的采样间隔和采样次数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">linux # iostat -d 1 2</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn</div><div class="line">sda               0.55         8.93        36.27    6737086   27367728</div><div class="line">sdb               0.00         0.00         0.00        928          0</div><div class="line"></div><div class="line">Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn</div><div class="line">sda               2.00         0.00        72.00          0         72</div><div class="line">sdb               0.00         0.00         0.00          0          0</div></pre></td></tr></table></figure></p>
+<p>以上命令输出Device的信息，采样时间为1秒，采样2次，若不指定采样次数，则iostat会一直输出采样信息，直到按”ctrl+c”退出命令。注意，第1次采样信息与单独执行iostat的效果一样，为从系统开机到当前执行时刻的统计信息。</p>
+<hr>
+<h3 id="iostat常用用法2：-iostat-x-k-d"><a href="#iostat常用用法2：-iostat-x-k-d" class="headerlink" title="iostat常用用法2： iostat -x -k -d"></a><em>iostat常用用法2： iostat -x -k -d</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">linux # iostat -x -k -d 1</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">……</div><div class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await  svctm  %util</div><div class="line">sda               0.00  9915.00    1.00   90.00     4.00 34360.00   755.25    11.79  120.57   6.33  57.60</div></pre></td></tr></table></figure>
+<p>以上各列的含义如下：</p>
+<ul>
+<li>rrqm/s: 每秒对该设备的读请求被合并次数，文件系统会对读取同块(block)的请求进行合并</li>
+<li>wrqm/s: 每秒对该设备的写请求被合并次数</li>
+<li>r/s: 每秒完成的读次数</li>
+<li>w/s: 每秒完成的写次数</li>
+<li>rkB/s: 每秒读数据量(kB为单位)</li>
+<li>wkB/s: 每秒写数据量(kB为单位)</li>
+<li>avgrq-sz:平均每次IO操作的数据量(扇区数为单位)</li>
+<li>avgqu-sz: 平均等待处理的IO请求队列长度</li>
+<li>await: 平均每次IO请求等待时间(包括等待时间和处理时间，毫秒为单位)</li>
+<li>svctm: 平均每次IO请求的处理时间(毫秒为单位)</li>
+<li>%util: 采用周期内用于IO操作的时间比率，即IO队列非空的时间比率</li>
+</ul>
+<p>对于以上示例输出，我们可以获取到以下信息：</p>
+<p>每秒向磁盘上写30M左右数据(wkB/s值)<br>每秒有91次IO操作(r/s+w/s)，其中以写操作为主体<br>平均每次IO请求等待处理的时间为120.57毫秒，处理耗时为6.33毫秒<br>等待处理的IO请求队列中，平均有11.79个请求驻留</p>
+<h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat "></a><strong>netstat </strong></h1><blockquote>
+<p>netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
+</blockquote>
+<ul>
+<li>-a或–all：显示所有连线中的Socket；</li>
+<li>-A&lt;网络类型&gt;或–&lt;网络类型&gt;：列出该网络类型连线中的相关地址；</li>
+<li>-c或–continuous：持续列出网络状态；</li>
+<li>-C或–cache：显示路由器配置的快取信息；</li>
+<li>-e或–extend：显示网络其他相关信息；</li>
+<li>-F或–fib：显示FIB；</li>
+<li>-g或–groups：显示多重广播功能群组组员名单；</li>
+<li>-h或–help：在线帮助；</li>
+<li>-i或–interfaces：显示网络界面信息表单；</li>
+<li>-l或–listening：显示监控中的服务器的Socket；</li>
+<li>-M或–masquerade：显示伪装的网络连线；</li>
+<li>-n或–numeric：直接使用ip地址，而不通过域名服务器；</li>
+<li>-N或–netlink或–symbolic：显示网络硬件外围设备的符号连接名称；</li>
+<li>-o或–timers：显示计时器；</li>
+<li>-p或–programs：显示正在使用Socket的程序识别码和程序名称；</li>
+<li>-r或–route：显示Routing Table；</li>
+<li>-s或–statistice：显示网络工作信息统计表；</li>
+<li>-t或–tcp：显示TCP传输协议的连线状况；</li>
+<li>-u或–udp：显示UDP传输协议的连线状况；</li>
+<li>-v或–verbose：显示指令执行过程；</li>
+<li>-V或–version：显示版本信息；</li>
+<li>-w或–raw：显示RAW传输协议的连线状况；</li>
+<li>-x或–unix：此参数的效果和指定”-A unix”参数相同；</li>
+<li>–ip或–inet：此参数的效果和指定”-A inet”参数相同。</li>
+</ul>
+<h3 id="netstat常用用法：netstat-anlp"><a href="#netstat常用用法：netstat-anlp" class="headerlink" title="netstat常用用法：netstat -anlp"></a><em>netstat常用用法：netstat -anlp</em></h3><p>netstat -anlpt的含义是 ： 列出所有处于使用tcp协议的 Sockets<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo netstat -anlpt</div><div class="line">Active Internet connections (servers and established)</div><div class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</div><div class="line">tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      1075/dnsmasq    </div><div class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      935/sshd        </div><div class="line">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      2271/cupsd      </div><div class="line">tcp6       0      0 :::22                   :::*                    LISTEN      935/sshd        </div><div class="line">tcp6       0      0 ::1:631                 :::*                    LISTEN      2271/cupsd      </div><div class="line">tcp6       1      0 ::1:50654               ::1:631                 CLOSE_WAIT  1027/cups-browsed</div></pre></td></tr></table></figure></p>
+<p>查看udp的就是netstat -anlpu；<br>只查看tcp和udp的就是netstat -anlptu</p>
+<h1 id="lsof-（list-open-files）"><a href="#lsof-（list-open-files）" class="headerlink" title="lsof （list open files）"></a><strong>lsof</strong> （list open files）</h1><blockquote>
+<p>lsof命令用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为lsof命令需要访问核心内存和各种文件，所以需要root用户执行。 </p>
+</blockquote>
+<p>在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。<br>所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。<br>因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。</p>
+<ul>
+<li>-a：列出打开文件存在的进程；</li>
+<li>-c&lt;进程名&gt;：列出指定进程所打开的文件；</li>
+<li>-g：列出GID号进程详情；</li>
+<li>-d&lt;文件号&gt;：列出占用该文件号的进程；</li>
+<li>+d&lt;目录&gt;：列出目录下被打开的文件；</li>
+<li>+D&lt;目录&gt;：递归列出目录下被打开的文件；</li>
+<li>-n&lt;目录&gt;：列出使用NFS的文件；</li>
+<li>-i&lt;条件&gt;：列出符合条件的进程。（4、6、协议、:端口、 @ip ） -p&lt;进程号&gt;：列出指定进程号所打开的文件；</li>
+<li>-u：列出UID号进程详情；</li>
+<li>-h：显示帮助信息；</li>
+<li>-v：显示版本信息</li>
+<li>-R: 显示PPID（父进程ID）</li>
+</ul>
+<h3 id="lsof常用用法1：lsof-p"><a href="#lsof常用用法1：lsof-p" class="headerlink" title="lsof常用用法1：lsof -p"></a><em>lsof常用用法1：lsof -p</em></h3><p>ps -ef |grep sshd|grep -v grep| awk ‘{print $2}’|xargs sudo lsof -p的含义是：<br>列出sshd进程打开的所有文件描述符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ ps -ef |grep sshd|grep -v grep| awk &apos;&#123;print $2&#125;&apos;|xargs sudo lsof -p</div><div class="line">lsof: WARNING: can&apos;t stat() fuse.gvfsd-fuse file system /run/user/1000/gvfs</div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND PID USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">sshd    935 root  cwd    DIR    8,1     4096      2 /</div><div class="line">sshd    935 root  rtd    DIR    8,1     4096      2 /</div><div class="line">sshd    935 root  txt    REG    8,1   770944 301274 /usr/sbin/sshd</div><div class="line">sshd    935 root  mem    REG    8,1    43616 136982 /lib/x86_64-linux-gnu/libnss_files-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    47760 136992 /lib/x86_64-linux-gnu/libnss_nis-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    39824 136978 /lib/x86_64-linux-gnu/libnss_compat-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   101240 137033 /lib/x86_64-linux-gnu/libresolv-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    14256 136950 /lib/x86_64-linux-gnu/libkeyutils.so.1.4</div><div class="line">sshd    935 root  mem    REG    8,1    43672 403209 /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1</div><div class="line">sshd    935 root  mem    REG    8,1   186824 403203 /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1</div><div class="line">sshd    935 root  mem    REG    8,1    31792 137035 /lib/x86_64-linux-gnu/librt-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   141574 137027 /lib/x86_64-linux-gnu/libpthread-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   252032 137010 /lib/x86_64-linux-gnu/libpcre.so.3.13.1</div><div class="line">sshd    935 root  mem    REG    8,1    14664 136924 /lib/x86_64-linux-gnu/libdl-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    97296 136976 /lib/x86_64-linux-gnu/libnsl-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1  1840928 136907 /lib/x86_64-linux-gnu/libc-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    14592 136916 /lib/x86_64-linux-gnu/libcom_err.so.2.1</div><div class="line">sshd    935 root  mem    REG    8,1   831616 403207 /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3</div><div class="line">sshd    935 root  mem    REG    8,1   290520 403037 /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2</div><div class="line">sshd    935 root  mem    REG    8,1    43368 136917 /lib/x86_64-linux-gnu/libcrypt-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   100728 137070 /lib/x86_64-linux-gnu/libz.so.1.2.8</div><div class="line">sshd    935 root  mem    REG    8,1    10680 137062 /lib/x86_64-linux-gnu/libutil-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1  1934624 136919 /lib/x86_64-linux-gnu/libcrypto.so.1.0.0</div><div class="line">sshd    935 root  mem    REG    8,1   281552 136921 /lib/x86_64-linux-gnu/libdbus-1.so.3.7.6</div><div class="line">sshd    935 root  mem    REG    8,1    14536 440884 /usr/lib/x86_64-linux-gnu/libck-connector.so.0.0.0</div><div class="line">sshd    935 root  mem    REG    8,1   134296 137037 /lib/x86_64-linux-gnu/libselinux.so.1</div><div class="line">sshd    935 root  mem    REG    8,1    55856 136999 /lib/x86_64-linux-gnu/libpam.so.0.83.1</div><div class="line">sshd    935 root  mem    REG    8,1   104936 136897 /lib/x86_64-linux-gnu/libaudit.so.1.0.0</div><div class="line">sshd    935 root  mem    REG    8,1    36632 137067 /lib/x86_64-linux-gnu/libwrap.so.0.7.6</div><div class="line">sshd    935 root  mem    REG    8,1   149120 136883 /lib/x86_64-linux-gnu/ld-2.19.so</div><div class="line">sshd    935 root    0u   CHR    1,3      0t0      6 /dev/null</div><div class="line">sshd    935 root    1u   CHR    1,3      0t0      6 /dev/null</div><div class="line">sshd    935 root    2u   CHR    1,3      0t0      6 /dev/null</div><div class="line">sshd    935 root    3u  IPv4  10479      0t0    TCP *:ssh (LISTEN)</div><div class="line">sshd    935 root    4u  IPv6  10481      0t0    TCP *:ssh (LISTEN)</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>ps -ef | grep sshd | grep -v grep : 获取ps打印出来的列表中的sshd进程所在的那一行（grep -v grep的含义是清除掉包含“grep”字符串的那一行）, 即为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ ps -ef | grep sshd | grep -v grep</div><div class="line">root       935     1  0 17:37 ?        00:00:00 /usr/sbin/sshd -D</div></pre></td></tr></table></figure>
+</li>
+<li><p>awk ‘{print $2}’ : 获取上述命令打印出来结果的第2列（上述结果的第二列为sshd的pid， 是935）</p>
+</li>
+<li>xargs sudo lsof -p ： 列出上述结果pid为935的进程打开的所有文件描述符， 等价于sudo lsof -p 935的结果</li>
+</ul>
+<h3 id="lsof常用用法：lsof-i"><a href="#lsof常用用法：lsof-i" class="headerlink" title="lsof常用用法：lsof -i:"></a><em>lsof常用用法：lsof -i:</em></h3><p>sudo lsof -i:22含义为列出占用22的进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo lsof -i:22</div><div class="line">COMMAND PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">sshd    935 root    3u  IPv4  10479      0t0  TCP *:ssh (LISTEN)</div><div class="line">sshd    935 root    4u  IPv6  10481      0t0  TCP *:ssh (LISTEN)</div></pre></td></tr></table></figure></p>
+<h1 id="df"><a href="#df" class="headerlink" title="df"></a><strong>df</strong></h1><blockquote>
+<p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+</blockquote>
+<ul>
+<li>-a或–all：包含全部的文件系统；</li>
+<li>–block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
+<li>-h或–human-readable：以可读性较高的方式来显示信息；</li>
+<li>-H或–si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
+<li>-i或–inodes：显示inode的信息；</li>
+<li>-k或–kilobytes：指定区块大小为1024字节；</li>
+<li>-l或–local：仅显示本地端的文件系统；</li>
+<li>-m或–megabytes：指定区块大小为1048576字节；</li>
+<li>–no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
+<li>-P或–portability：使用POSIX的输出格式；</li>
+<li>–sync：在取得磁盘使用信息前，先执行sync指令；</li>
+<li>-t&lt;文件系统类型&gt;或–type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
+<li>-T或–print-type：显示文件系统的类型；</li>
+<li>-x&lt;文件系统类型&gt;或–exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
+<li>–help：显示帮助；</li>
+<li>–version：显示版本信息</li>
+</ul>
+<h3 id="df常用用法：df-h"><a href="#df常用用法：df-h" class="headerlink" title="df常用用法：df -h"></a><em>df常用用法：df -h</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">udev            990M  4.0K  990M   1% /dev</div><div class="line">tmpfs           201M  968K  200M   1% /run</div><div class="line">/dev/sda1       8.8G  4.1G  4.3G  49% /</div><div class="line">none            4.0K     0  4.0K   0% /sys/fs/cgroup</div><div class="line">none            5.0M     0  5.0M   0% /run/lock</div><div class="line">none           1001M   76K 1001M   1% /run/shm</div><div class="line">none            100M   36K  100M   1% /run/user</div><div class="line">/dev/sr0         57M   57M     0 100% /media/b/VBOXADDITIONS_5.1.22_115126</div></pre></td></tr></table></figure>
+<h1 id="free"><a href="#free" class="headerlink" title="free"></a><strong>free</strong></h1><blockquote>
+<p>free命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
+</blockquote>
+<h3 id="free常用用法：free-m或者free-g"><a href="#free常用用法：free-m或者free-g" class="headerlink" title="free常用用法：free -m或者free -g"></a><em>free常用用法：free -m或者free -g</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ free -m</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:          2000       1231        768          9         72        456</div><div class="line">-/+ buffers/cache:        702       1297</div><div class="line">Swap:         1021          0       1021</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/27/MySQL的这些显而易见的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫烫烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/27/MySQL的这些显而易见的坑/" itemprop="url">MySQL的这些显而易见的坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-27T22:51:11+08:00">
+                2015-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a><strong>distinct关键字</strong></h2><blockquote>
+<p>distinct是应用于所有列的, 而不是某一个列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one, two from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one from test_table;</div><div class="line">+------+</div><div class="line">| one  |</div><div class="line">+------+</div><div class="line">| 56   |</div><div class="line">| 52   |</div><div class="line">+------+</div><div class="line">2 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="and关键字"><a href="#and关键字" class="headerlink" title="and关键字"></a><strong>and关键字</strong></h2><blockquote>
+<p>and的组合优先级比or高</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">5 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select one, two from test_table where one = 52 or one = 56 and two &gt; 12;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select one, two from test_table where one = 52 or (one = 56 and two &gt; 12);</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select one, two from test_table where (one = 52 or one = 56) and two &gt; 12;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<h2 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a><strong>NULL</strong></h2><blockquote>
+<p>null和空字符是不一样的, 找到他和删除他的方式也比较特别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into test_table(one , two) values (null, null);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;  delete from test_table where one = NULL;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;  delete from test_table where one = &apos; &apos;;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; delete from test_table where isnull(one);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">Empty set (0.00 sec)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="rollback"><a href="#rollback" class="headerlink" title="rollback"></a><strong>rollback</strong></h2><blockquote>
+<ul>
+<li>并不是什么都可以回滚的, 典型的如创建表和删除表这些都是不能回退的.</li>
+<li>事务是用来管理 insert,update,delete 语句的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set autocommit = 0;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_tab;</div><div class="line">+-----+-----+-------+</div><div class="line">| one | two | three |</div><div class="line">+-----+-----+-------+</div><div class="line">|   3 | 4   |     5 |</div><div class="line">+-----+-----+-------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; set autocommit = 0;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; insert into test_tab value  (4, 4, 5);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; rollback;</div><div class="line">Query OK, 0 rows affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_tab;</div><div class="line">+-----+-----+-------+</div><div class="line">| one | two | three |</div><div class="line">+-----+-----+-------+</div><div class="line">|   3 | 4   |     5 |</div><div class="line">+-----+-----+-------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; drop table test_tab;</div><div class="line">Query OK, 0 rows affected (0.02 sec)</div><div class="line"></div><div class="line">mysql&gt; rollback;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_tab;</div><div class="line">ERROR 1146 (42S02): Table &apos;b_test_database.test_tab&apos; doesn&apos;t exist</div></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -289,7 +1220,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nosix's blog">
+      <meta itemprop="name" content="烫烫烫">
     </span>
 
     
@@ -449,7 +1380,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nosix's blog">
+      <meta itemprop="name" content="烫烫烫">
     </span>
 
     
@@ -619,7 +1550,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nosix's blog">
+      <meta itemprop="name" content="烫烫烫">
     </span>
 
     
@@ -822,7 +1753,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -830,7 +1761,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -852,7 +1783,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

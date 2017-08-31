@@ -269,6 +269,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nosix's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）/" itemprop="url">(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-22T23:19:21+08:00">
+                2014-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了</p>
+<p>这是一篇偏向单链表进阶的博客, 并不会讲单链表的建立/增加/删除等等, 而且这篇博客大多数只说思想不写代码(因为其实蛮简单的..)</p>
+</blockquote>
+<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a><strong>存储结构</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef struct Node</div><div class="line">&#123;</div><div class="line">	DataType data;</div><div class="line">	struct Node *next;</div><div class="line">&#125;Node, *Node_Ptr;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170823224405993?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h4 id="1-找一个单链表的中间结点"><a href="#1-找一个单链表的中间结点" class="headerlink" title="1.找一个单链表的中间结点"></a><strong>1.找一个单链表的中间结点</strong></h4><blockquote>
+<p>算法思想 :<br>(<strong>快慢指针的使用</strong>)设置两个指针，一个每次移动两个位置，一个每次移动一个位置，当第一个指针到达尾节点时，第二个指针就达到了中间节点的位置</p>
+</blockquote>
+<h4 id="2-判断链表中是否有环"><a href="#2-判断链表中是否有环" class="headerlink" title="2.判断链表中是否有环"></a><strong>2.判断链表中是否有环</strong></h4><blockquote>
+<p>算法思想 :<br>(<strong>快慢指针的使用</strong>)链表中有环，其实也就是自相交. 用两个指针pslow和pfast从头开始遍历链表，pslow每次前进一个节点，pfast每次前进两个结点，若存在环，则pslow和pfast肯定会在环中相遇，若不存在，则pslow和pfast能正常到达最后一个节点</p>
+</blockquote>
+<h4 id="3-判断两个链表是否相交-假设两个链表均不带环"><a href="#3-判断两个链表是否相交-假设两个链表均不带环" class="headerlink" title="3.判断两个链表是否相交, 假设两个链表均不带环"></a><strong>3.判断两个链表是否相交, 假设两个链表均不带环</strong></h4><blockquote>
+<p>算法思想 :<br>如果两个链表相交于某一节点，那么在这个相交节点之后的所有节点都是两个链表所共有的。也就是说，如果两个链表相交，那么最后一个节点肯定是共有的。先遍历第一个链表，记住最后一个节点，然后遍历第二个链表，到最后一个节点时和第一个链表的最后一个节点做比较，如果相同，则相交，否则不相交。</p>
+</blockquote>
+<h4 id="4-链表反转"><a href="#4-链表反转" class="headerlink" title="4.链表反转"></a><strong>4.链表反转</strong></h4><p>比如一个链表:<br>A-&gt;B-&gt;C-&gt;D-&gt;E<br>反转成为:<br>E-&gt;D-&gt;C-&gt;B-&gt;A</p>
+<blockquote>
+<p>算法思想 :<br>取一个指针指向A的后面那个元素elem, 每次把element放到链表的第一个位置, 遍历完毕之后就反转完毕了,过程如下:<br>第一轮 : A-&gt;B-&gt;C-&gt;D-&gt;E, 把A后面的B设置为element<br>第二轮 : B-&gt;A-&gt;C-&gt;D-&gt;E, 把当前的element(即为B)放到链表的第一个位置, 并把A后面的C设置为element<br>第三轮 : C-&gt;B-&gt;A-&gt;D-&gt;E, 把当前的element(即为C)放到链表的第一个位置, 并把A后面的D设置为element<br>第四轮 : D-&gt;C-&gt;B-&gt;A-&gt;E, 把当前的element(即为D)放到链表的第一个位置, 并把A后面的E设置为element<br>第五轮 : E-&gt;D-&gt;C-&gt;B-&gt;A, 把当前的element(即为E)放到链表的第一个位置, 遍历完毕</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -659,7 +819,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -681,7 +841,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

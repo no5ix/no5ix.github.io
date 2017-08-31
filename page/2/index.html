@@ -269,6 +269,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/IPC进程间通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nosix's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/27/IPC进程间通信/" itemprop="url">IPC进程间通信</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T21:01:59+08:00">
+                2017-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##IPC进程间通信</p>
+<ul>
+<li><p>1.匿名管道( pipe )：<br>匿名管道是一种半双工的通信方式，通常是在父子进程间使用。</p>
+</li>
+<li><p>2.命名管道 (named pipe) ：<br>命名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</p>
+</li>
+<li><p>3.信号量( semophore ) ：<br>信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
+</li>
+<li><p>4.消息队列( message queue ) ：<br>消息队列是消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
+</li>
+<li><p>5.信号 ( sinal ) ：<br>信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</p>
+</li>
+<li><p>6.共享内存( shared memory ) ：<br>共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</p>
+</li>
+<li><p>7.套接字( socket ) ：套接字也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同进程间的进程通信。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1944,239 +2102,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/12/5分钟学会git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nosix's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/12/5分钟学会git/" itemprop="url">5分钟学会git</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-12T23:26:16+08:00">
-                2016-04-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>我之前有一份私人git笔记老长老长了, 今天得空, 把它浓缩成5分钟版本.<br>感觉纯基础性的东西整理成博客差也差不多了, 还有很多凌乱的工作笔记慢慢在一点一点整理放上来吧,<br>估计下面几篇博客就开始游戏服务器的开发心得之类的了.</p>
-<p>本篇博客因为要5分钟撸完git, 所以语言尽量精简, 只说新人必须知道的, 如果要git进阶的, 后面再另写博客说明, 不该说的废话就不说了</p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h2><blockquote>
-<p>sudo apt-get install git</p>
-</blockquote>
-<h2 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a><strong>查看状态</strong></h2><blockquote>
-<ul>
-<li>比如查看当前分支的状态 : git status, 这条命令也会给很多其他的git命令提示的喔</li>
-<li>查看当前在哪个分支 : git branch<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch</div><div class="line">  master</div><div class="line">  new_test_branch</div><div class="line">* old_demo</div><div class="line">  plugin</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p>标记为*的那个就是当前分支, 也就是old_demo分支</p>
-<h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a><strong>克隆</strong></h2><blockquote>
-<p>比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:nosix1992/Flock-AI-Fish-Unreal-VR.git<br>这个地址是这样得来的, 如图 :<br><img src="/images/archives_image/git1.png" alt="克隆地址图"></p>
-</blockquote>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a><strong>分支</strong></h2><ul>
-<li>比如创建一个新的分支test_branch : git branch test_branch</li>
-<li>比如切换到分支test_branch : git checkout test_branch</li>
-<li><p>比如把test_branch合并到主分支master上来 : 先切换到master上来git checkout  master 然后</p>
-<ul>
-<li>git merge test_branch</li>
-<li>git rebase test_branch<blockquote>
-<p>rebase 跟 merge 的区别你们可以理解成有两个书架，你需要把两个书架的书整理到一起去，第一种做法是 merge ，比较粗鲁暴力，就直接腾出一块地方把另一个书架的书全部放进去，虽然暴力，但是这种做法你可以知道哪些书是来自另一个书架的；第二种做法就是 rebase ，他会把两个书架的书先进行比较，按照购书的时间来给他重新排序，然后重新放置好，这样做的好处就是合并之后的书架看起来很有逻辑，但是你很难清晰的知道哪些书来自哪个书架的。各有好处的，不同的团队根据不同的需要以及不同的习惯来选择就好。 </p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>比如删除分支test_branch : </p>
-<ul>
-<li>git branch -d test_branch</li>
-<li>git branch -D test_branch<blockquote>
-<p>有些时候可能会删除失败，比如如果a分支的代码还没有合并到master，你执行 git branch -d a 是删除不了的，它会智能的提示你a分支还有未合并的代码，但是如果你非要删除，那就执行 git branch -D a 就可以强制删除a分支。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a><strong>提交</strong></h2><ul>
-<li>比如将修改之后的文件test_file加入到暂存区里 : git add test_file<ul>
-<li>撤销刚刚的git add(也就是说把test_file从暂存区中移出) : git reset HEAD test_file</li>
-</ul>
-</li>
-<li>比如将暂存区里的提交并加入提交信息”update test_file” : git commit -m “update test_file”<ul>
-<li>把git commit撤销 : <ul>
-<li><strong>只是把commit撤销并且把文件从暂存区中移出, 但保留已有的文件更改</strong> : 通用命令为 git reset commit_id, 这个commit_id用git log命令来查看, 比如要恢复到刚刚提交的上一次提交的版本, 就用git reset HEAD^(这句命令的意思是说: 恢复到commit id 为HEAD^的版本, HEAD是指向最新的提交，上一次提交是HEAD^,上上次是HEAD^^,也可以写成HEAD～2 ,依次类推. )</li>
-<li><strong>把commit撤销且不保留已有的文件更改</strong> :   git reset –hard commit_id</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>比如只是撤销某个文件test_file的修改 : git checkout –test_file</p>
-</li>
-<li><p>将代码推到远端 : 这之前的所有这些add, commit都是本地仓库的操作,  比如我们把本地的master分支推到github的那个项目的master分支 : git push origin master</p>
-</li>
-</ul>
-<h2 id="贮藏stash"><a href="#贮藏stash" class="headerlink" title="贮藏stash"></a><strong>贮藏stash</strong></h2><blockquote>
-<p>设想一个场景，假设我们正在一个新的分支做新的功能，这个时候突然有一个紧急的bug需要修复，而且修复完之后需要立即发布。当然你说我先把刚写的一点代码进行提交不就行了么？这样理论上当然是ok的，但是这会产品垃圾commit，原则上我们每次的commit都要有实际的意义，你的代码只是刚写了一半，还没有什么实际的意义是不建议就这样commit的，那么有没有一种比较好的办法，可以让我暂时切到别的分支，修复完bug再切回来，而且代码也能保留的呢？</p>
-<p>试试git stash吧</p>
-<ul>
-<li>git stash : 把当前的文件改动贮藏起来</li>
-<li>git stash list: 查看当前有哪些贮藏记录</li>
-<li>git stash pop stash_list_id: 会帮你把代码还原，还自动帮你把这条 stash 记录删除</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo </div><div class="line">error: Your local changes to the following files would be overwritten by checkout:</div><div class="line">	README.md</div><div class="line">Please, commit your changes or stash them before you can switch branches.</div><div class="line">Aborting</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash </div><div class="line">Saved working directory and index state WIP on new_test_branch: b3ad5d2 modify md</div><div class="line">HEAD is now at b3ad5d2 modify md</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo </div><div class="line">Switched to branch &apos;old_demo&apos;</div><div class="line">Your branch is up-to-date with &apos;origin/old_demo&apos;.</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout new_test_branch </div><div class="line">Switched to branch &apos;new_test_branch&apos;</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash list</div><div class="line">stash@&#123;0&#125;: WIP on new_test_branch: b3ad5d2 modify md</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash pop stash@&#123;0&#125;</div><div class="line">On branch new_test_branch</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">	modified:   README.md</div><div class="line"></div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div><div class="line">Dropped stash@&#123;0&#125; (88cd440c10c80bb6eaef9f4d86ab4a0be3d6dc00)</div></pre></td></tr></table></figure>
-<h2 id="对比diff"><a href="#对比diff" class="headerlink" title="对比diff"></a><strong>对比diff</strong></h2><ul>
-<li>比如查看当前还未git add的文件的不同 : git diff</li>
-<li>比如查看当前已经add 没有commit 的改动 :  git diff –cached</li>
-<li>比如查看当前所有改动和HEAD的区别(当前还未git add的文件的改动和当前当前已经add 但没有commit 的改动), 也就是上面两条命令的合并 : git diff HEAD</li>
-<li>比如查看 commit_id为a和commit_id为b的temp文件夹的差异 : git diff a b temp</li>
-</ul>
-<h2 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a><strong>处理冲突</strong></h2><blockquote>
-<p>假设这样一个场景，A和B两位同学各自开了两个分支来开发不同的功能，大部分情况下都会尽量互不干扰的，但是有一个需求A需要改动一个基础库中的一个类的方法，不巧B这个时候由于业务需要也改动了基础库的这个方法，因为这种情况比较特殊，A和B都认为不会对地方造成影响，等两人各自把功能做完了，需要合并的到主分支 master 的时候，我们假设先合并A的分支，这个时候没问题的，之后再继续合并B的分支，这个时候想想也知道就有冲突了，因为A和B两个人同时更改了同一个地方，Git 本身他没法判断你们两个谁更改的对，但是这个时候他会智能的提示有 conflicts</p>
-<p>就像下面这种情况 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git merge plugin </div><div class="line">Auto-merging README.md</div><div class="line">CONFLICT (content): Merge conflict in README.md</div><div class="line">Automatic merge failed; fix conflicts and then commit the result.</div></pre></td></tr></table></figure></p>
-<p>打开READ.md文件一看发现冲突的地方如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</div><div class="line">mmmp</div><div class="line">=======</div><div class="line">nani</div><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; plugin</div></pre></td></tr></table></figure></p>
-<p>冲突的地方由 ==== 分出了上下两个部分，上部分一个叫 HEAD 的字样代表是我当前所在分支的代码，下半部分是一个叫 plugin 分支的代码，可以看到 HEAD 是那里加了一行mmmp，而plugin分支则加了一句nani, 所以我们得跟团队的其他人商量一下看看要改成什么样，而且同时也要把那些 «&lt; HEAD、==== 以及 »»»plugin 这些标记符号也一并删除，最后进行一次 commit 就ok了。</p>
-</blockquote>
-<h2 id="标签tag"><a href="#标签tag" class="headerlink" title="标签tag"></a><strong>标签tag</strong></h2><blockquote>
-<p>主要介绍附注标签( annotated tag)</p>
-</blockquote>
-<h4 id="创建附注标签"><a href="#创建附注标签" class="headerlink" title="创建附注标签"></a><strong>创建附注标签</strong></h4><p>git tag -a v0.1.2 -m “0.1.2版本”</p>
-<p>创建轻量标签不需要传递参数，直接指定标签名称即可。<br>创建附注标签时，参数a即annotated的缩写，指定标签类型，后附标签名。参数m指定标签说明，说明信息会保存在标签对象中。</p>
-<h4 id="切换到标签"><a href="#切换到标签" class="headerlink" title="切换到标签"></a><strong>切换到标签</strong></h4><p>与切换分支命令相同，用git checkout [tagname]</p>
-<h4 id="查看标签信息"><a href="#查看标签信息" class="headerlink" title="查看标签信息"></a><strong>查看标签信息</strong></h4><p>用git show命令可以查看标签的版本信息：<br>git show v0.1.2</p>
-<h4 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a><strong>删除标签</strong></h4><p>误打或需要修改标签时，需要先将标签删除，再打新标签。<br>git tag -d v0.1.2 # 删除标签</p>
-<p>参数d即delete的缩写，意为删除其后指定的标签。</p>
-<h4 id="给指定的commit打标签"><a href="#给指定的commit打标签" class="headerlink" title="给指定的commit打标签"></a><strong>给指定的commit打标签</strong></h4><p>打标签不必要在head之上，也可在之前的版本上打，这需要你知道某个提交对象的校验和（通过git log获取）。<br>git tag -a v0.1.1 9fbc3d0</p>
-<h4 id="标签发布"><a href="#标签发布" class="headerlink" title="标签发布"></a><strong>标签发布</strong></h4><p>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作：</p>
-<p>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器<br>git push origin –tags # 将本地所有标签一次性提交到git服务器</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2227,7 +2152,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2249,7 +2174,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

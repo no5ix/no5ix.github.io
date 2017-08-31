@@ -65,7 +65,7 @@
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -389,7 +389,7 @@
 </blockquote>
 <p>标记为*的那个就是当前分支, 也就是old_demo分支</p>
 <h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a><strong>克隆</strong></h2><blockquote>
-<p>比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:nosix1992/Flock-AI-Fish-Unreal-VR.git<br>这个地址是这样得来的, 如图 :<br><img src="/images/archives_image/git1.png" alt="克隆地址图"></p>
+<p>比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:nosix1992/Flock-AI-Fish-Unreal-VR.git<br>这个地址是这样得来的, 如图 :<br><img src="/img/git1.png" alt="克隆地址图"></p>
 </blockquote>
 <h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a><strong>分支</strong></h2><ul>
 <li>比如创建一个新的分支test_branch : git branch test_branch</li>
@@ -992,8 +992,7 @@ int i = 0;
 <p>而对于TCP协议的标志字段域，则可以细分为tcp-fin, tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg。</p>
 </blockquote>
 <h2 id="输出内容解释"><a href="#输出内容解释" class="headerlink" title="输出内容解释"></a><strong>输出内容解释</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo tcpdump -i eth0 &apos;host baidu.com&apos;</div><div class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</div><div class="line">listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes</div><div class="line">06:46:17.487920 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [S], seq 546310089, win 29200, options [mss 1460,sackOK,TS val 1221546 ecr 0,nop,wscale 7], length 0</div><div class="line">06:46:17.530422 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [S.], seq 3245676077, ack 546310090, win 8192, options [mss 1440,sackOK,nop,nop,nop,nop,nop,nop,nop,nop,nop,nop,nop,wscale 5], length 0</div><div class="line">06:46:17.530458 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 1, win 229, length 0</div><div class="line">06:46:17.530982 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [P.], seq 1:504, ack 1, win 229, length 503</div><div class="line">06:46:17.576476 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [.], ack 504, win 216, length 0</div><div class="line">06:46:17.577447 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 1:291, ack 504, win 216, length 290</div><div class="line">06:46:17.577459 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 291, win 237, length 0</div><div class="line">06:46:17.577482 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 291:452, ack 504, win 216, length 161</div><div class="line">06:46:17.577485 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div><div class="line">06:46:17.866950 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 291:452, ack 504, win 216, length 161</div><div class="line">06:46:17.866966 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, options [nop,nop,sack 1 &#123;291:452&#125;], length 0</div><div class="line">06:46:27.865805 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div><div class="line">06:46:27.909962 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [.], ack 504, win 216, length 0</div><div class="line">06:46:37.925624 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div></pre></td></tr></table></figure>
-<p><img src="/images/archives_image/tcpdump1.png" alt="tcpdump"></p>
-
+<img src="/2015/11/03/Linux常用命令笔记整理之tcpdump/tcpdump1.png" alt="tcpdump" title="tcpdump">
           
         
       
@@ -2426,7 +2425,7 @@ int i = 0;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

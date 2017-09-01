@@ -12,6 +12,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -87,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
 
 
 
@@ -102,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T11:11:16.033Z">
+<meta property="og:updated_time" content="2017-09-01T15:25:18.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个简单的游戏服务器框架demo(源码已经放在GitHub)">
 <meta name="twitter:description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
@@ -416,13 +426,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag"># c++</a>
+            <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c++</a>
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
           
-            <a href="/tags/boost/" rel="tag"># boost</a>
+            <a href="/tags/boost/" rel="tag"><i class="fa fa-tag"></i> boost</a>
           
-            <a href="/tags/glog/" rel="tag"># glog</a>
+            <a href="/tags/glog/" rel="tag"><i class="fa fa-tag"></i> glog</a>
           
         </div>
       
@@ -444,6 +454,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/01/风/" rel="prev" title="风">
+                风 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -520,7 +534,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -531,7 +545,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -542,7 +556,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -620,17 +634,6 @@
   <span class="author" itemprop="copyrightHolder">nosix</span>
 </div>
 
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -768,3 +771,7 @@
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

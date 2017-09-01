@@ -12,6 +12,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -87,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
 
 
 
@@ -410,11 +420,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/UNP/" rel="tag"># UNP</a>
+            <a href="/tags/UNP/" rel="tag"><i class="fa fa-tag"></i> UNP</a>
           
-            <a href="/tags/TLPI/" rel="tag"># TLPI</a>
+            <a href="/tags/TLPI/" rel="tag"><i class="fa fa-tag"></i> TLPI</a>
           
-            <a href="/tags/APUE/" rel="tag"># APUE</a>
+            <a href="/tags/APUE/" rel="tag"><i class="fa fa-tag"></i> APUE</a>
           
         </div>
       
@@ -507,7 +517,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -518,7 +528,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -529,7 +539,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -591,17 +601,6 @@
   <span class="author" itemprop="copyrightHolder">nosix</span>
 </div>
 
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -739,3 +738,7 @@
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -12,6 +12,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -87,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
 
 
 
@@ -98,11 +108,11 @@
 <meta name="keywords" content="redis,mysql,php,yii,nginx,tcp,http,udp,workerman,Capistrano,ruby">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速完成一个slg游戏思路(一)">
-<meta property="og:url" content="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(一)/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/index.html">
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T14:17:11.469Z">
+<meta property="og:updated_time" content="2017-09-01T15:23:05.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速完成一个slg游戏思路(一)">
 <meta name="twitter:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
@@ -134,7 +144,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(一)/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/"/>
 
 
 
@@ -283,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(一)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -312,8 +322,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T22:19:29+08:00">
-                2017-07-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-30T22:19:29+08:00">
+                2016-07-30
               </time>
             
 
@@ -419,27 +429,27 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"># redis</a>
+            <a href="/tags/redis/" rel="tag"><i class="fa fa-tag"></i> redis</a>
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
           
-            <a href="/tags/php/" rel="tag"># php</a>
+            <a href="/tags/php/" rel="tag"><i class="fa fa-tag"></i> php</a>
           
-            <a href="/tags/yii/" rel="tag"># yii</a>
+            <a href="/tags/yii/" rel="tag"><i class="fa fa-tag"></i> yii</a>
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/nginx/" rel="tag"><i class="fa fa-tag"></i> nginx</a>
           
-            <a href="/tags/tcp/" rel="tag"># tcp</a>
+            <a href="/tags/tcp/" rel="tag"><i class="fa fa-tag"></i> tcp</a>
           
-            <a href="/tags/http/" rel="tag"># http</a>
+            <a href="/tags/http/" rel="tag"><i class="fa fa-tag"></i> http</a>
           
-            <a href="/tags/udp/" rel="tag"># udp</a>
+            <a href="/tags/udp/" rel="tag"><i class="fa fa-tag"></i> udp</a>
           
-            <a href="/tags/workerman/" rel="tag"># workerman</a>
+            <a href="/tags/workerman/" rel="tag"><i class="fa fa-tag"></i> workerman</a>
           
-            <a href="/tags/Capistrano/" rel="tag"># Capistrano</a>
+            <a href="/tags/Capistrano/" rel="tag"><i class="fa fa-tag"></i> Capistrano</a>
           
-            <a href="/tags/ruby/" rel="tag"># ruby</a>
+            <a href="/tags/ruby/" rel="tag"><i class="fa fa-tag"></i> ruby</a>
           
         </div>
       
@@ -452,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/29/kbe服务端笔记(二)/" rel="next" title="kbe服务端笔记(二)">
-                <i class="fa fa-chevron-left"></i> kbe服务端笔记(二)
+              <a href="/2016/07/11/服务端常用架构(三)/" rel="next" title="服务端常用架构(三)">
+                <i class="fa fa-chevron-left"></i> 服务端常用架构(三)
               </a>
             
           </div>
@@ -462,7 +472,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/30/快速完成一个slg游戏思路(二)/" rel="prev" title="快速完成一个slg游戏思路(二)">
+              <a href="/2016/07/30/快速完成一个slg游戏思路(二)/" rel="prev" title="快速完成一个slg游戏思路(二)">
                 快速完成一个slg游戏思路(二) <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -541,7 +551,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -552,7 +562,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -563,7 +573,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -641,17 +651,6 @@
   <span class="author" itemprop="copyrightHolder">nosix</span>
 </div>
 
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -789,3 +788,7 @@
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

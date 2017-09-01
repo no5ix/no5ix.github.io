@@ -12,6 +12,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -87,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
 
 
 
@@ -437,6 +447,506 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/30/快速完成一个slg游戏思路(二)/" itemprop="url">快速完成一个slg游戏思路(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-30T22:57:29+08:00">
+                2016-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h2><blockquote>
+<p>从登录成功就开始连接, </p>
+<p>注册一个Chat_ID, </p>
+<p>player_ID 和 Chat_ID相互对应, </p>
+<p>会注册相应的房间频道, </p>
+<p>并为每位Player存了一份黑名单, </p>
+<p>在客户端做了本地黑名单, </p>
+<p>聊天服务器也做了黑名单二次验证处理.</p>
+</blockquote>
+<ul>
+<li><p>世界频道 : 则用MsgServer的非实时推送思路</p>
+</li>
+<li><p>私密聊天 : 则选择 workerman 的tcp, </p>
+</li>
+</ul>
+<h2 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h2><ul>
+<li>实时推送 : workerman 的tcp</li>
+<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/30/快速完成一个slg游戏思路(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/30/快速完成一个slg游戏思路(一)/" itemprop="url">快速完成一个slg游戏思路(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-30T22:19:29+08:00">
+                2016-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
+<p>验证完玩家信息, </p>
+<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
+<blockquote>
+<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
+<p>这个key也可以用来完成封号操作</p>
+</blockquote>
+<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
+<p>因为弱交互/短连接的关系, </p>
+<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
+<p>打一下对方的离线数据，</p>
+<p>计算下排行榜，排行榜是实时计算的, </p>
+<p>存在redis里, 做了分页处理</p>
+<p>买卖下道具即可</p>
+<p>所以 MainServer 选择了:</p>
+</blockquote>
+<ul>
+<li>yii</li>
+<li>redis</li>
+<li>mysql</li>
+<li>nginx</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/30/快速完成一个slg游戏思路(一)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" itemprop="url">一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-18T19:29:22+08:00">
+                2016-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UE4/" itemprop="url" rel="index">
+                    <span itemprop="name">UE4</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="fish"><a href="#fish" class="headerlink" title="fish"></a>fish</h1><p>A fish flock AI Plugin for Unreal Engine 4</p>
+<blockquote>
+<p>一个基于虚幻4的鱼群 AI 插件 </p>
+</blockquote>
+<p>this Plugin version can Run <strong>2000+</strong> fishes at the same time</p>
+<blockquote>
+<p>这个插件版本可以同时运行 <strong>2000+</strong> 条鱼儿</p>
+</blockquote>
+<p><img src="/img/OldDemoScreenshot.png" alt="OldDemoScreenshot.png"></p>
+<h2 id="Video-Preview"><a href="#Video-Preview" class="headerlink" title="Video Preview"></a>Video Preview</h2><ul>
+<li><p>Watch the <a href="http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html" target="_blank" rel="external">Video Preview</a></p>
+<blockquote>
+<p>查看 <a href="http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html" target="_blank" rel="external">视频演示</a> </p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Download-amp-Play"><a href="#Download-amp-Play" class="headerlink" title="Download &amp; Play"></a>Download &amp; Play</h2><h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a><strong>Download</strong></h4><ul>
+<li><p>Download <a href="http://pan.baidu.com/s/1qYbBrHU" target="_blank" rel="external"><strong>MyFish.exe (Win64)</strong></a>  (<em>This is packaged by an unoptimized version( check out  branch old_demo)</em>)</p>
+<blockquote>
+<p>下载  <a href="http://pan.baidu.com/s/1qYbBrHU" target="_blank" rel="external"><strong>MyFish.exe (Win64)</strong></a> 玩玩 </p>
+<p><em>这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)</em></p>
+</blockquote>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -572,484 +1082,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(二)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/30/快速完成一个slg游戏思路(二)/" itemprop="url">快速完成一个slg游戏思路(二)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T22:57:29+08:00">
-                2017-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h2><blockquote>
-<p>从登录成功就开始连接, </p>
-<p>注册一个Chat_ID, </p>
-<p>player_ID 和 Chat_ID相互对应, </p>
-<p>会注册相应的房间频道, </p>
-<p>并为每位Player存了一份黑名单, </p>
-<p>在客户端做了本地黑名单, </p>
-<p>聊天服务器也做了黑名单二次验证处理.</p>
-</blockquote>
-<ul>
-<li><p>世界频道 : 则用MsgServer的非实时推送思路</p>
-</li>
-<li><p>私密聊天 : 则选择 workerman 的tcp, </p>
-</li>
-</ul>
-<h2 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h2><ul>
-<li>实时推送 : workerman 的tcp</li>
-<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/30/快速完成一个slg游戏思路(二)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(一)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/30/快速完成一个slg游戏思路(一)/" itemprop="url">快速完成一个slg游戏思路(一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T22:19:29+08:00">
-                2017-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
-<p>验证完玩家信息, </p>
-<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
-<blockquote>
-<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
-<p>这个key也可以用来完成封号操作</p>
-</blockquote>
-<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
-<p>因为弱交互/短连接的关系, </p>
-<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
-<p>打一下对方的离线数据，</p>
-<p>计算下排行榜，排行榜是实时计算的, </p>
-<p>存在redis里, 做了分页处理</p>
-<p>买卖下道具即可</p>
-<p>所以 MainServer 选择了:</p>
-</blockquote>
-<ul>
-<li>yii</li>
-<li>redis</li>
-<li>mysql</li>
-<li>nginx</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/30/快速完成一个slg游戏思路(一)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/29/kbe服务端笔记(二)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/29/kbe服务端笔记(二)/" itemprop="url">kbe服务端笔记(二)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T23:59:38+08:00">
-                2017-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kbe/" itemprop="url" rel="index">
-                    <span itemprop="name">kbe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="FixedMessages："><a href="#FixedMessages：" class="headerlink" title="FixedMessages："></a><strong>FixedMessages：</strong></h2><p>FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。<br>    它的构造地方如下（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">MessageHandlers::MessageHandlers():</div><div class="line">msgHandlers_(),</div><div class="line">msgID_(1),</div><div class="line">exposedMessages_()</div><div class="line">&#123;</div><div class="line">	g_fm = Network::FixedMessages::getSingletonPtr();</div><div class="line">	if(g_fm == NULL)</div><div class="line">		g_fm = newNetwork::FixedMessages;</div><div class="line"></div><div class="line">	Network::FixedMessages::getSingleton().loadConfig(&quot;server/messages_fixed.xml&quot;);</div><div class="line">	messageHandlers().push_back(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>意即MessageHandlers构造的时候，如果它还没构造，那就构造。<br>它的初始化（配置）是由loadConfig接口来完成的，代码见上。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/29/kbe服务端笔记(二)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1100,7 +1132,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1111,7 +1143,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1122,7 +1154,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1184,17 +1216,6 @@
   <span class="author" itemprop="copyrightHolder">nosix</span>
 </div>
 
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -1332,3 +1353,7 @@
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -12,6 +12,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -87,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
 
 
 
@@ -107,7 +117,7 @@
 <meta property="og:image" content="http://yoursite.com/img/HowToUse2.png">
 <meta property="og:image" content="http://yoursite.com/img/HowToUse3.png">
 <meta property="og:image" content="http://yoursite.com/img/HowToUse4.png">
-<meta property="og:updated_time" content="2017-09-01T12:16:28.913Z">
+<meta property="og:updated_time" content="2017-09-01T15:23:27.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)">
 <meta name="twitter:description" content="fishA fish flock AI Plugin for Unreal Engine 4  一个基于虚幻4的鱼群 AI 插件   this Plugin version can Run 2000+ fishes at the same time  这个插件版本可以同时运行 2000+ 条鱼儿   Video Preview Watch the Video Preview  查看 视频演示">
@@ -486,11 +496,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag"># c++</a>
+            <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c++</a>
           
-            <a href="/tags/UE4/" rel="tag"># UE4</a>
+            <a href="/tags/UE4/" rel="tag"><i class="fa fa-tag"></i> UE4</a>
           
-            <a href="/tags/AI/" rel="tag"># AI</a>
+            <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
           
         </div>
       
@@ -592,7 +602,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -603,7 +613,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -614,7 +624,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -692,17 +702,6 @@
   <span class="author" itemprop="copyrightHolder">nosix</span>
 </div>
 
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -840,3 +839,7 @@
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -12,6 +12,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
 
@@ -87,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
 
 
 
@@ -101,7 +111,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="FixedMessages：FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。    它的构造地方如下（lib/network/message_handler.cpp）：123456789101112MessageHandlers::MessageHandlers():msgHandlers_(),msgID_(">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T14:26:13.285Z">
+<meta property="og:updated_time" content="2017-09-01T15:12:30.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kbe服务端笔记(二)">
 <meta name="twitter:description" content="FixedMessages：FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。    它的构造地方如下（lib/network/message_handler.cpp）：123456789101112MessageHandlers::MessageHandlers():msgHandlers_(),msgID_(">
@@ -433,8 +443,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/30/快速完成一个slg游戏思路(一)/" rel="prev" title="快速完成一个slg游戏思路(一)">
-                快速完成一个slg游戏思路(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/" rel="prev" title="浅谈当前流行的pomelo和skynet和kbengine">
+                浅谈当前流行的pomelo和skynet和kbengine <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -512,7 +522,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -523,7 +533,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -534,7 +544,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -612,17 +622,6 @@
   <span class="author" itemprop="copyrightHolder">nosix</span>
 </div>
 
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -760,3 +759,7 @@
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

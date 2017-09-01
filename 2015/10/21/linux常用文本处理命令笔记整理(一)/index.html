@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="文本处理," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。首先抛出问题， 带着问题来学记忆知识更有动力：  如何通过一条命令取得eth0的IP4地址 ： ` ifconfig eth0 | grep -w &amp;apos;inet&amp;apos; | awk &amp;apos;{print $2}&amp;apos; | awk -F: &amp;apos;{print $2}&amp;apo">
+<meta name="keywords" content="文本处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用文本处理命令笔记整理(一)">
+<meta property="og:url" content="http://yoursite.com/2015/10/21/linux常用文本处理命令笔记整理(一)/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。首先抛出问题， 带着问题来学记忆知识更有动力：  如何通过一条命令取得eth0的IP4地址 ： ` ifconfig eth0 | grep -w &amp;apos;inet&amp;apos; | awk &amp;apos;{print $2}&amp;apos; | awk -F: &amp;apos;{print $2}&amp;apo">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-09-01T13:35:13.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux常用文本处理命令笔记整理(一)">
+<meta name="twitter:description" content="linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。首先抛出问题， 带着问题来学记忆知识更有动力：  如何通过一条命令取得eth0的IP4地址 ： ` ifconfig eth0 | grep -w &amp;apos;inet&amp;apos; | awk &amp;apos;{print $2}&amp;apos; | awk -F: &amp;apos;{print $2}&amp;apo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/10/21/linux常用文本处理命令笔记整理(一)/"/>
+
+
+
+
+
+  <title>linux常用文本处理命令笔记整理(一) | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/21/linux常用文本处理命令笔记整理(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux常用文本处理命令笔记整理(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-21T20:54:19+08:00">
+                2015-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。<br>首先抛出问题， 带着问题来学记忆知识更有动力：</p>
+<ul>
+<li>如何通过一条命令取得eth0的IP4地址 ： <pre><code>` ifconfig eth0 | grep -w &apos;inet&apos; | awk &apos;{print $2}&apos; | awk -F: &apos;{print $2}&apos;`
+</code></pre></li>
+<li>如何通过一条命令替换当前路径下所有文件中的所有“xxx”为“yyy“ ： <pre><code>`ls -alF | grep &apos;^-&apos; | xargs sed -i &apos;s/xxx/yyy/g&apos;`
+</code></pre></li>
+<li>如何通过一条命令杀掉占用端口34600的进程 ：<pre><code>` sudo lsof -i:34600 | grep -v &apos;PID&apos; | awk &apos;{print $2}&apos; | xargs kill -9`
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a><strong>grep</strong></h1><blockquote>
+<p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
+</blockquote>
+<ul>
+<li>-a 不要忽略二进制数据。</li>
+<li>-A&lt;显示列数&gt; 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</li>
+<li>-b 在显示符合范本样式的那一行之外，并显示该行之前的内容。</li>
+<li>-c 计算符合范本样式的列数。</li>
+<li>-C&lt;显示列数&gt;或-&lt;显示列数&gt; 除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</li>
+<li>-d&lt;进行动作&gt; 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</li>
+<li>-e&lt;范本样式&gt; 指定字符串作为查找文件内容的范本样式。</li>
+<li>-E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</li>
+<li>-f&lt;范本文件&gt; 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</li>
+<li>-F 将范本样式视为固定字符串的列表。</li>
+<li>-G 将范本样式视为普通的表示法来使用。</li>
+<li>-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</li>
+<li>-H 在显示符合范本样式的那一列之前，标示该列的文件名称。</li>
+<li>-i 胡列字符大小写的差别。（<strong>常用</strong>）</li>
+<li>-l 列出文件内容符合指定的范本样式的文件名称。</li>
+<li>-L 列出文件内容不符合指定的范本样式的文件名称。</li>
+<li>-n 在显示符合范本样式的那一列之前，标示出该列的编号。</li>
+<li>-q 不显示任何信息。</li>
+<li>-R/-r 此参数的效果和指定“-d recurse”参数相同。</li>
+<li>-s 不显示错误信息。</li>
+<li>-v 反转查找。（<strong>常用</strong>）</li>
+<li>-w 只显示全字符合的列。（<strong>常用</strong>）</li>
+<li>-x 只显示全列符合的列。</li>
+<li>-y 此参数效果跟“-i”相同。</li>
+<li>-o 只输出文件中匹配到的部分。</li>
+</ul>
+<h1 id="awk"><a href="#awk" class="headerlink" title="awk"></a><strong>awk</strong></h1><blockquote>
+<p>awk是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。</p>
+</blockquote>
+<h3 id="常用命令选项"><a href="#常用命令选项" class="headerlink" title="常用命令选项"></a><strong>常用命令选项</strong></h3><ul>
+<li>-F fs   fs指定输入分隔符（awk默认的分隔符是空格），fs可以是字符串或正则表达式，如-F: </li>
+<li>-v var=value   赋值一个用户定义变量，将外部变量传递给awk</li>
+</ul>
+<h3 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a><em>常用用法</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">klj;k uu</div><div class="line">&amp;&amp; ss&amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3 | awk &apos;&#123;print $NF&#125;&apos;</div><div class="line">uu</div><div class="line">ss&amp;</div></pre></td></tr></table></figure>
+<p>cat abc3 | awk ‘{print $NF}’的含义是：输出abc3文件的每一行的最后一列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3 | grep k | awk -F\; &apos;&#123;print $1&#125;&apos;</div><div class="line">klj</div></pre></td></tr></table></figure></p>
+<p>cat abc3 | grep k | awk -F\; ‘{print $1}’的含义是：<br>先输入含有k的那一行（即klj；k）， 然后对那一行以；（\;， 这个分号需要转义）分隔，打印出分隔后的第一列（即klj）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/文本处理/" rel="tag"># 文本处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/09/C++ 很基础的易混淆点（一）/" rel="next" title="C++ 很基础的易混淆点（一）">
+                <i class="fa fa-chevron-left"></i> C++ 很基础的易混淆点（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/23/linux常用文本处理命令笔记整理(二)/" rel="prev" title="linux常用文本处理命令笔记整理(二)">
+                linux常用文本处理命令笔记整理(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nosix1992" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep"><span class="nav-number">1.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#awk"><span class="nav-number">2.</span> <span class="nav-text">awk</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令选项"><span class="nav-number">2.0.1.</span> <span class="nav-text">常用命令选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用用法"><span class="nav-number">2.0.2.</span> <span class="nav-text">常用用法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -99,11 +99,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="socket可读可写条件与非阻塞connect或accept浅析">
 <meta property="og:url" content="http://yoursite.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="socket可读的条件:  socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170822193729519?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-31T18:18:16.456Z">
+<meta property="og:updated_time" content="2017-09-01T13:51:51.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="socket可读可写条件与非阻塞connect或accept浅析">
 <meta name="twitter:description" content="socket可读的条件:  socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)">
@@ -115,7 +115,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -142,7 +142,7 @@
 
 
 
-  <title>socket可读可写条件与非阻塞connect或accept浅析 | 烫烫烫</title>
+  <title>socket可读可写条件与非阻塞connect或accept浅析 | 烫</title>
   
 
 
@@ -178,7 +178,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -294,7 +294,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -380,6 +380,7 @@
 <li><strong>给监听套接字准备好新连接</strong></li>
 <li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
 </ol>
+<a id="more"></a>
 <h2 id="socket可写的条件"><a href="#socket可写的条件" class="headerlink" title="socket可写的条件: "></a><strong>socket可写的条件: </strong></h2><ol>
 <li>socket的发送缓冲区中的数据字节大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用SO_SNDLOWAT socket选项来设置该socket的低水位标记。对于TCP和UDPsocket而言，其缺省值为2048</li>
 <li>该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。</li>
@@ -509,7 +510,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -531,7 +532,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -551,17 +552,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -628,7 +618,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

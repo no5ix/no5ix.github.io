@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -99,10 +99,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="重读UNIX网络编程第一章笔记修正">
 <meta property="og:url" content="http://yoursite.com/2017/06/02/重读UNIX网络编程第一章笔记修正/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="又准备从头看一遍unp, 把一些老笔记放到博客里来就当网盘吧, 顺便修正以及删减一些之前不够精炼的老笔记内容.   第一章重点如下 :        OSI (open systems interconnection), 即计算机通信开放系统互联模型 OSI分为七层, 从上到下依次为 应用层 表现层 会话层 传输层 网络层 数据链路层 物理层   对于网际网协议族, OSI顶上三层合并为一层, 称">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-31T00:45:55.248Z">
+<meta property="og:updated_time" content="2017-09-01T12:38:45.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重读UNIX网络编程第一章笔记修正">
 <meta name="twitter:description" content="又准备从头看一遍unp, 把一些老笔记放到博客里来就当网盘吧, 顺便修正以及删减一些之前不够精炼的老笔记内容.   第一章重点如下 :        OSI (open systems interconnection), 即计算机通信开放系统互联模型 OSI分为七层, 从上到下依次为 应用层 表现层 会话层 传输层 网络层 数据链路层 物理层   对于网际网协议族, OSI顶上三层合并为一层, 称">
@@ -113,7 +113,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -140,7 +140,7 @@
 
 
 
-  <title>重读UNIX网络编程第一章笔记修正 | 烫烫烫</title>
+  <title>重读UNIX网络编程第一章笔记修正 | 烫</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -387,6 +387,9 @@
 </ul>
 </li>
 <li>对于网际网协议族, OSI顶上三层合并为一层, 称为应用层. 传输层对应着tcp/udp等, 网络层对应着IPv4/IPv6, OSI的数据链路层和物理层是随系统提供的设备驱动程序和网络硬件</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>套接字编程接口是从OSI顶上三层(网际协议的应用层)进入传输层的接口.</li>
 <li>为何套接字要设计为顶上三层进入传输层的接口??因为OSI顶上三层处理具体网络应用的所有细节却对通信细节了解很少;底下四层对具体网络应用了解不多, 却处理所有的通信细节.</li>
 </ul>
@@ -424,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/01/kbe服务端笔记/" rel="next" title="kbe服务端笔记">
-                <i class="fa fa-chevron-left"></i> kbe服务端笔记
+              <a href="/2017/04/02/kbe服务端笔记(二)/" rel="next" title="kbe服务端笔记(二)">
+                <i class="fa fa-chevron-left"></i> kbe服务端笔记(二)
               </a>
             
           </div>
@@ -504,7 +507,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -526,7 +529,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -546,17 +549,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -607,7 +599,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

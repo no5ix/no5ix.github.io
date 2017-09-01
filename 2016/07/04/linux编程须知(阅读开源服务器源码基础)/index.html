@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁  如何避免死锁 顺序加锁(例如，线程2和线程3只有在获取了锁A之后才能尝试获取锁C(译者注：获取锁A是">
+<meta name="description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁">
 <meta name="keywords" content="UNP,TLPI,APUE,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux编程须知(阅读开源服务器源码基础)">
 <meta property="og:url" content="http://yoursite.com/2016/07/04/linux编程须知(阅读开源服务器源码基础)/index.html">
-<meta property="og:site_name" content="烫烫烫">
-<meta property="og:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁  如何避免死锁 顺序加锁(例如，线程2和线程3只有在获取了锁A之后才能尝试获取锁C(译者注：获取锁A是">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-31T18:17:03.224Z">
+<meta property="og:updated_time" content="2017-09-01T13:47:55.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux编程须知(阅读开源服务器源码基础)">
-<meta name="twitter:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁  如何避免死锁 顺序加锁(例如，线程2和线程3只有在获取了锁A之后才能尝试获取锁C(译者注：获取锁A是">
+<meta name="twitter:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -115,7 +115,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -142,7 +142,7 @@
 
 
 
-  <title>linux编程须知(阅读开源服务器源码基础) | 烫烫烫</title>
+  <title>linux编程须知(阅读开源服务器源码基础) | 烫</title>
   
 
 
@@ -178,7 +178,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -294,7 +294,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -384,6 +384,7 @@
 <li>自旋锁</li>
 <li>读写锁</li>
 </ul>
+<a id="more"></a>
 <h2 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a><strong>如何避免死锁</strong></h2><ul>
 <li><strong>顺序加锁</strong>(例如，线程2和线程3只有在获取了锁A之后才能尝试获取锁C(译者注：获取锁A是获取锁C的必要条件)。因为线程1已经拥有了锁A，所以线程2和3需要一直等到锁A被释放。然后在它们尝试对B或C加锁之前，必须成功地对A加了锁。</li>
 <li><strong>加锁时限</strong>(另外一个可以避免死锁的方法是在尝试获取锁的时候加一个超时时间，这也就意味着在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求。)</li>
@@ -403,18 +404,6 @@
 <li><p>RR（时间片轮转调度）。</p>
 </li>
 </ol>
-<h2 id="NAT有哪些类型及其穿透原理是什么"><a href="#NAT有哪些类型及其穿透原理是什么" class="headerlink" title="NAT有哪些类型及其穿透原理是什么?"></a><strong>NAT有哪些类型及其穿透原理是什么?</strong></h2><h4 id="NAT类型"><a href="#NAT类型" class="headerlink" title="NAT类型 : "></a><strong>NAT类型 : </strong></h4><ol>
-<li><p><strong>锥NAT </strong></p>
-<ol>
-<li>全锥NAT ：全锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。任何一个外部主机均可通过该映射发送数据包到该内部主机。</li>
-<li>限制性锥NAT ：限制性锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。但是, 和全锥NAT 不同的是：只有当内部主机先给外部主机发送数据包, 该外部主机才能向该内部主机发送数据包。</li>
-<li>端口限制性锥NAT ：端口限制性锥NAT 与限制性锥NAT 类似, 只是多了端口号的限制, 即只有内部主机先向外部地址：端口号对发送数据包, 该外部主机才能使用特定的端口号向内部主机发送数据包。</li>
-</ol>
-</li>
-<li><p><strong>对称NAT</strong> ：对称NAT 与上述3 种类型都不同, 不管是全锥NAT ，限制性锥NAT 还是端口限制性锥NAT ，它们都属于锥NAT （Cone NAT ）。当同一内部主机使用相同的端口与不同地址的外部主机进行通信时, 对称NAT 会重新建立一个Session ，为这个Session 分配不同的端口号，或许还会改变IP 地址。</p>
-</li>
-</ol>
-<h4 id="穿透原理"><a href="#穿透原理" class="headerlink" title="穿透原理 : "></a><strong>穿透原理 : </strong></h4><p><a href="http://blog.csdn.net/leisure512/article/details/4900191" title="P2P，UDP和TCP穿透NAT" target="_blank" rel="external">查看这篇博客</a></p>
 
       
     </div>
@@ -461,8 +450,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/11/服务端常用架构/" rel="prev" title="服务端常用架构">
-                服务端常用架构 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/11/服务端常用架构(一)/" rel="prev" title="服务端常用架构(一)">
+                服务端常用架构(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -540,7 +529,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -562,7 +551,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -582,17 +571,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -621,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的内存布局是什么样的"><span class="nav-number">1.</span> <span class="nav-text">进程的内存布局是什么样的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的同步机制有哪些"><span class="nav-number">2.</span> <span class="nav-text">线程的同步机制有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免死锁"><span class="nav-number">3.</span> <span class="nav-text">如何避免死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间的同步机制-也就是进程间通信-能通信就能同步了嘛-有哪些"><span class="nav-number">4.</span> <span class="nav-text">进程间的同步机制(也就是进程间通信, 能通信就能同步了嘛)有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux的任务调度机制是什么？"><span class="nav-number">5.</span> <span class="nav-text">linux的任务调度机制是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAT有哪些类型及其穿透原理是什么"><span class="nav-number">6.</span> <span class="nav-text">NAT有哪些类型及其穿透原理是什么?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NAT类型"><span class="nav-number">6.0.1.</span> <span class="nav-text">NAT类型 : </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#穿透原理"><span class="nav-number">6.0.2.</span> <span class="nav-text">穿透原理 : </span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的内存布局是什么样的"><span class="nav-number">1.</span> <span class="nav-text">进程的内存布局是什么样的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的同步机制有哪些"><span class="nav-number">2.</span> <span class="nav-text">线程的同步机制有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免死锁"><span class="nav-number">3.</span> <span class="nav-text">如何避免死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间的同步机制-也就是进程间通信-能通信就能同步了嘛-有哪些"><span class="nav-number">4.</span> <span class="nav-text">进程间的同步机制(也就是进程间通信, 能通信就能同步了嘛)有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux的任务调度机制是什么？"><span class="nav-number">5.</span> <span class="nav-text">linux的任务调度机制是什么？</span></a></li></ol></div>
             
 
           </div>
@@ -659,7 +637,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

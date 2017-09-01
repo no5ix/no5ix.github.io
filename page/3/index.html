@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,13 +96,13 @@
 
 <meta name="description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="烫烫烫">
+<meta property="og:title" content="烫">
 <meta property="og:url" content="http://yoursite.com/page/3/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="烫烫烫">
+<meta name="twitter:title" content="烫">
 <meta name="twitter:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -138,7 +138,7 @@
 
 
 
-  <title>烫烫烫</title>
+  <title>烫</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/11/kbe的UE4的demo大体解读/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/" itemprop="url">MongoDB能取代MySQL或者Redis能取代memcached么</a></h1>
+                <a class="post-title-link" href="/2017/03/11/kbe的UE4的demo大体解读/" itemprop="url">kbe的UE4的demo大体解读</a></h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-30T00:22:58+08:00">
-                2016-06-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-11T11:41:58+08:00">
+                2017-03-11
               </time>
             
 
@@ -337,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
                   </a>
                 </span>
 
@@ -376,24 +376,7 @@
       
         
           
-            <blockquote>
-<p>mongodb和memcached不是一个范畴内的东西。</p>
-<p>mongodb是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据。</p>
-<p>mongodb和memcached不存在谁替换谁的问题。和memcached更为接近的是redis。</p>
-<p>它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据&gt; 类型有限，查询功能不强，一般用作缓存。</p>
-<p>一般现在的项目中，用redis来替代memcached。</p>
-</blockquote>
-<p>Redis相比memcached：</p>
-<ul>
-<li>redis具有持久化机制，可以定期将内存中的数据持久化到硬盘上。</li>
-<li>redis具备binlog功能，可以将所有操作写入日志，当redis出现故障，可依照binlog进行数据恢复。</li>
-<li>redis支持virtual memory，可以限定内存使用大小，当数据超过阈值，则通过类似LRU的算法把内存中的最不常用数据保存到硬盘的页面文件中。</li>
-<li>redis原生支持的数据类型更多，使用的想象空间更大。</li>
-</ul>
-<blockquote>
-<p>mongodb 是文档数据库，用于方便懒人替代mysql等关系数据库的。<br>不过mongodb在内存足够的情况下读写性能不错，大部分应用可以省去cache这一层了。</p>
-<p>根据业务场景, 懒人可以使用MongoDB来取代MySQL+memcached,.</p>
-</blockquote>
+            <p>写到一半发现论坛的热门帖子里官方写了个u3d的demo源码解析,  内容几乎重复, u3d跟ue4的demo框架流程几乎都是差不多的, 直接给出官方帖子的链接好了, 尴尬:<br><a href="http://bbs.kbengine.org/forum.php?mod=viewthread&amp;tid=166" target="_blank" rel="external">http://bbs.kbengine.org/forum.php?mod=viewthread&amp;tid=166</a></p>
 
           
         
@@ -442,7 +425,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/14/MySQL进阶/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/10/kbe之ubuntu下的编译/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -451,7 +434,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -461,7 +444,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/06/14/MySQL进阶/" itemprop="url">MySQL进阶</a></h1>
+                <a class="post-title-link" href="/2017/02/10/kbe之ubuntu下的编译/" itemprop="url">kbe之ubuntu下的编译</a></h1>
         
 
         <div class="post-meta">
@@ -473,8 +456,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-14T11:02:16+08:00">
-                2016-06-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T12:31:29+08:00">
+                2017-02-10
               </time>
             
 
@@ -496,8 +479,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
                   </a>
                 </span>
 
@@ -534,136 +517,16 @@
 
       
         
-          
-            <h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a><strong>引擎</strong></h2><blockquote>
-<p>MySQL是有多个引擎的, 不同的场景情况用不同的引擎以提升性能和灵活性.<br> 三大最常用的引擎 : </p>
+          <blockquote>
+<p>感觉之前的博客已经整理了大多数之前的关于基础的私人笔记, 现在应该可以讨论一下实操的东西了.<br>先来一发之前的kbe在ubuntu下的编译笔记吧, 因为官方对于ubuntu下的kbe编译文档是有问题的.</p>
 </blockquote>
-<ul>
-<li>InnoDB : 可靠的事务处理引擎 ,不支持全文搜索</li>
-<li>MyISAM : 支持全文搜索, 不支持事务处理</li>
-<li>MEMORY :  功能等同于MyISAM, 但数据存储在内存而不是磁盘, 所以速度非常快, 特别适用于临时表(temporary table)</li>
-</ul>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a><strong>索引</strong></h2><blockquote>
-<p>索引是用来改善搜索性能的, 不要滥用索引, 索引会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。</p>
-</blockquote>
-<h4 id="索引有三种"><a href="#索引有三种" class="headerlink" title="索引有三种 : "></a><strong>索引有三种 : </strong></h4><ul>
-<li>普通索引normal</li>
-<li>唯一索引unique : 它与前面的普通索引类似，不同的就是：索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一。</li>
-<li>全文索引fulltext : 表示 全文搜索的索引。 FULLTEXT 用于搜索很长一篇文章的时候，效果最好。用在比较短的文本，如果就一两行字的，普通的 INDEX 也可以。</li>
-</ul>
-<h4 id="建立索引需要遵守的规则"><a href="#建立索引需要遵守的规则" class="headerlink" title="建立索引需要遵守的规则 : "></a><strong>建立索引需要遵守的规则 : </strong></h4><ul>
-<li>选择唯一性索引</li>
-<li>为经常需要排序、分组和联合操作的字段建立索引</li>
-<li>为常作为查询条件的字段建立索引</li>
-<li>限制索引的数目</li>
-<li>尽量使用数据量少的索引</li>
-<li>尽量使用前缀来索引</li>
-<li>删除不再使用或者很少使用的索引</li>
-</ul>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a><strong>事务</strong></h2><blockquote>
-<p>MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！</p>
-</blockquote>
-<ul>
-<li>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。</li>
-<li>事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。</li>
-<li>事务用来管理 insert,update,delete 语句</li>
-</ul>
-<h4 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a><strong>ACID</strong></h4><blockquote>
-<p>一般来说，事务是必须满足4个条件（ACID）： Atomicity（原子性）、Consistency（一致性或稳定性）、Isolation（隔离性）、Durability（持久性）</p>
-</blockquote>
-<ul>
-<li>事务的原子性：一组事务，要么成功；要么撤回。</li>
-<li>稳定性 ：有非法数据（外键约束之类），事务撤回。</li>
-<li>隔离性：事务独立运行。一个事务处理后的结果，影响了其他事务，那么其他事务会撤回。事务的100%隔离，需要牺牲速度。</li>
-<li>持久性：软、硬件崩溃后，InnoDB数据表驱动会利用日志文件重构修改。可靠性和高速度不可兼得.</li>
-</ul>
-<blockquote>
-<p>在 MySQL 命令行的默认设置下，事务都是自动提交的，即执行 SQL 语句后就会马上执行 COMMIT 操作。因此要显式地开启一个事务务须使用命令 BEGIN 或 START TRANSACTION，或者执行命令 SET AUTOCOMMIT=0，用来禁止使用当前会话的自动提交。</p>
-</blockquote>
-<h4 id="事物控制语句："><a href="#事物控制语句：" class="headerlink" title="事物控制语句："></a><strong>事物控制语句：</strong></h4><ul>
-<li>BEGIN或START TRANSACTION；显式地开启一个事务；</li>
-<li>COMMIT；也可以使用COMMIT WORK，不过二者是等价的。COMMIT会提交事务，并使已对数据库进行的所有修改称为永久性的；</li>
-<li>ROLLBACK；有可以使用ROLLBACK WORK，不过二者是等价的。回滚会结束用户的事务，并撤销正在进行的所有未提交的修改；</li>
-<li>SAVEPOINT identifier；SAVEPOINT允许在事务中创建一个保存点，一个事务中可以有多个SAVEPOINT；</li>
-<li>RELEASE SAVEPOINT identifier；删除一个事务的保存点，当没有指定的保存点时，执行该语句会抛出一个异常；</li>
-<li>ROLLBACK TO identifier；把事务回滚到标记点；</li>
-<li>SET TRANSACTION；用来设置事务的隔离级别。InnoDB存储引擎提供事务的隔离级别有READ UNCOMMITTED、READ COMMITTED、REPEATABLE READ和SERIALIZABLE。</li>
-</ul>
-<h4 id="MYSQL-事务处理主要有两种方法："><a href="#MYSQL-事务处理主要有两种方法：" class="headerlink" title="MYSQL 事务处理主要有两种方法："></a><strong>MYSQL 事务处理主要有两种方法：</strong></h4><ul>
-<li>用 BEGIN, ROLLBACK, COMMIT来实现<ul>
-<li>BEGIN 开始一个事务</li>
-<li>ROLLBACK 事务回滚</li>
-<li>COMMIT 事务确认</li>
-</ul>
-</li>
-<li>直接用 SET 来改变 MySQL 的自动提交模式:<ul>
-<li>SET AUTOCOMMIT=0 禁止自动提交</li>
-<li>SET AUTOCOMMIT=1 开启自动提交</li>
-</ul>
-</li>
-</ul>
-<h4 id="事务的4个隔离级别"><a href="#事务的4个隔离级别" class="headerlink" title="事务的4个隔离级别"></a><strong>事务的4个隔离级别</strong></h4><blockquote>
-<p>具体例子参考<a href="http://www.cnblogs.com/zhoujinyi/p/3437475.html" title="MySQL 四种事务隔离级的说明" target="_blank" rel="external">这篇博客</a></p>
-</blockquote>
-<ul>
-<li><p>未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据</p>
-</li>
-<li><p>提交读(Read Committed)：只能读取到已经提交的数据。Oracle等多数数据库默认都是该级别 (不重复读)</p>
-</li>
-<li><p>可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻象读</p>
-</li>
-<li><p>串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞</p>
-</li>
-</ul>
-<blockquote>
-<p><em>相关术语</em></p>
-<ul>
-<li><strong>脏读</strong> :<br>脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。</li>
-<li><strong>不可重复读</strong> :<br>是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。</li>
-<li><strong>幻读</strong> :<br>第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。</li>
-</ul>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20170810011253357?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a><strong>临时表</strong></h2><p>临时表在我们需要保存一些临时数据时是非常有用的。临时表只在当前连接可见，当关闭连接时，Mysql会自动删除表并释放所有空间。</p>
-<h2 id="防SQL注入"><a href="#防SQL注入" class="headerlink" title="防SQL注入"></a><strong>防SQL注入</strong></h2><blockquote>
-<p>防止SQL注入，我们需要注意以下几个要点：</p>
-</blockquote>
-<ul>
-<li>永远不要信任用户的输入。对用户的输入进行校验，可以通过正则表达式，或限制长度；对单引号和 双”-“进行转换等。</li>
-<li>永远不要使用动态拼装sql，可以使用参数化的sql或者直接使用存储过程进行数据查询存取。</li>
-<li>永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。</li>
-<li>不要把机密信息直接存放，加密或者hash掉密码和敏感的信息。</li>
-<li>应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装</li>
-<li>sql注入的检测方法一般采取辅助软件或网站平台来检测，软件一般采用sql注入检测工具jsky，网站平台就有亿思网站安全平台检测工具。MDCSOFT SCAN等。采用MDCSOFT-IPS可以有效的防御SQL注入，XSS攻击等。</li>
-</ul>
-<blockquote>
-<p>可以总结为 : </p>
-<ul>
-<li>连接权限</li>
-<li>包装提示</li>
-<li>校验输入</li>
-</ul>
-</blockquote>
-<h2 id="一些优化建议"><a href="#一些优化建议" class="headerlink" title="一些优化建议"></a><strong>一些优化建议</strong></h2><ul>
-<li><p><strong>like和fulltext</strong></p>
-<blockquote>
-<p>like没有fulltext快, 但需要大内容的全文本搜索的时候来一发fulltext吧</p>
-</blockquote>
-</li>
-<li><p><strong>选择正确数据类型</strong></p>
-<blockquote>
-<p>比如 : 定长的数据类型比可变长度的数据类型性能要高</p>
-</blockquote>
-</li>
-<li><p><strong>正确使用索引</strong></p>
-</li>
-<li><p><strong>勿滥用select *语句</strong></p>
-</li>
-<li><p><strong>关闭自动提交</strong></p>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/10/kbe之ubuntu下的编译/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -710,7 +573,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/31/UE4旋转笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/09/kbe之1分钟完成安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -719,7 +582,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -729,7 +592,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/31/UE4旋转笔记/" itemprop="url">UE4旋转笔记</a></h1>
+                <a class="post-title-link" href="/2017/02/09/kbe之1分钟完成安装/" itemprop="url">kbe之1分钟完成安装</a></h1>
         
 
         <div class="post-meta">
@@ -741,8 +604,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-31T18:28:21+08:00">
-                2016-05-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T12:38:21+08:00">
+                2017-02-09
               </time>
             
 
@@ -764,8 +627,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UE4/" itemprop="url" rel="index">
-                    <span itemprop="name">UE4</span>
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
                   </a>
                 </span>
 
@@ -802,24 +665,20 @@
 
       
         
-          
-            <blockquote>
-<p>最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。<br>下面我们做个实验：</p>
+          <blockquote>
+<p>官方是有自动化的安装py脚本的, 不过还是有很多小坑的.<br>不过其实脚本主要也就是只做两件事, 其他都是可选的: </p>
+<ul>
+<li>配置环境变量</li>
+<li>安装mysql</li>
+</ul>
 </blockquote>
-<p><img src="http://img.blog.csdn.net/20160913104257997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<blockquote>
-<p>我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。<br>上面那个为renti_a_gear，下面那个为renti_a_gear2.</p>
-</blockquote>
-<h2 id="第一种情况：-绕自身坐标系来旋转"><a href="#第一种情况：-绕自身坐标系来旋转" class="headerlink" title="第一种情况： 绕自身坐标系来旋转"></a>第一种情况： 绕自身坐标系来旋转</h2><p><img src="http://img.blog.csdn.net/20160913105150452?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<blockquote>
-<p>如上图，<br>两个staticMesh旋转之后rotation是一样的，<br>可以证明，绕自身坐标系旋转的顺序是Z-&gt;Y-&gt;X</p>
-</blockquote>
-<h2 id="第二种情况：-绕世界坐标系来旋转"><a href="#第二种情况：-绕世界坐标系来旋转" class="headerlink" title="第二种情况： 绕世界坐标系来旋转"></a>第二种情况： 绕世界坐标系来旋转</h2><p><img src="http://img.blog.csdn.net/20160913110908943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<blockquote>
-<p>如上图，两个staticMesh旋转之后rotation是一样的，可以证明，绕世界坐标系旋转的顺序跟第一种情况刚好反过来， 是X-&gt;Y-&gt;Z</p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/09/kbe之1分钟完成安装/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -866,7 +725,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/24/http笔记整理之报文/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/IPC进程间通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -875,7 +734,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -885,7 +744,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/24/http笔记整理之报文/" itemprop="url">http报文笔记整理</a></h1>
+                <a class="post-title-link" href="/2017/01/27/IPC进程间通信/" itemprop="url">IPC进程间通信</a></h1>
         
 
         <div class="post-meta">
@@ -897,8 +756,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-24T21:12:46+08:00">
-                2016-05-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T21:01:59+08:00">
+                2017-01-27
               </time>
             
 
@@ -920,8 +779,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
                   </a>
                 </span>
 
@@ -959,1323 +818,21 @@
       
         
           
-            <blockquote>
-<p>看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20170830060728031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="报文的组成"><a href="#报文的组成" class="headerlink" title="报文的组成"></a><strong>报文的组成</strong></h2><ul>
-<li>起始行(start line)</li>
-<li>首部(header)</li>
-<li>主体(body)</li>
-</ul>
-<p>可细分为 : </p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法 :"></a><strong>方法</strong> :</h3><p>如GET, HEAD, POST<br><img src="http://img.blog.csdn.net/20170830061634966?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="关于HTTP请求GET和POST的区别"><a href="#关于HTTP请求GET和POST的区别" class="headerlink" title="关于HTTP请求GET和POST的区别 : "></a><strong>关于HTTP请求GET和POST的区别 : </strong></h4><p><strong>1.提交方式的区别: </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协议头＜request-line＞中），以?分割URL和传输数据，多个参数用&amp;连接;例如：login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0 %E5%A5%BD。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如： %E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。</div><div class="line"></div><div class="line">- POST提交：把提交的数据放置在是HTTP包的包体＜request-body＞中。上文示例中红色字体标明的就是实际的传输数据</div><div class="line"></div><div class="line">因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变</div></pre></td></tr></table></figure></p>
-<p><strong>2.传输数据的大小：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">首先声明,HTTP协议没有对传输的数据大小进行限制，HTTP协议规范也没有对URL长度进行限制。 而在实际开发中存在的限制主要有：</div><div class="line"></div><div class="line">GET:特定浏览器和服务器对URL长度有限制，例如IE对URL长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系统的支持。</div><div class="line"></div><div class="line">因此对于GET提交时，传输数据就会受到URL长度的限制。</div><div class="line"></div><div class="line">POST:由于不是通过URL传值，理论上数据不受限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置。</div></pre></td></tr></table></figure></p>
-<p><strong>安全性：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">POST的安全性要比GET的安全性高。注意：这里所说的安全性和上面GET提到的“安全”不是</div><div class="line">同个概念。上面“安全”的含义仅仅是不作数据修改，而这里安全的含义是真正的Security</div><div class="line">的含义，比如：通过GET提交数据，用户名和密码将明文出现在URL上，因为(1)</div><div class="line">登录页面有可能被浏览器缓存， (2)</div><div class="line">其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，</div></pre></td></tr></table></figure></p>
-<h3 id="请求URL"><a href="#请求URL" class="headerlink" title="请求URL "></a><strong>请求URL </strong></h3><p>URL是浏览器寻找信息时所需的资源位置 .<br>URL分为三个部分 : </p>
+            <p>##IPC进程间通信</p>
 <ul>
-<li>URL文案</li>
-<li>服务器位置</li>
-<li>资源路径<br><img src="http://img.blog.csdn.net/20170830063116038?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="5"></li>
-</ul>
-<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a><strong>版本号</strong></h3><p>上图中的HTTP/1.0 200 OK, HTTP/1.0就是版本号</p>
-<h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码 : "></a><strong>状态码 : </strong></h3><p>如最著名的404, 302, 如上图中的HTTP/1.0 200 OK中, 状态码就是200<br>  <img src="http://img.blog.csdn.net/20170830061832111?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<h3 id="原因短语"><a href="#原因短语" class="headerlink" title="原因短语"></a><strong>原因短语</strong></h3><p> 如上图中的HTTP/1.0 200 OK中, OK就是原因短语</p>
-<h3 id="首部"><a href="#首部" class="headerlink" title="首部"></a><strong>首部</strong></h3><p><img src="http://img.blog.csdn.net/20170830062551108?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="主体"><a href="#主体" class="headerlink" title="主体"></a><strong>主体</strong></h3><p>主体部分是可选的, 主体是http报文要传输的内容, 可以承载很多类型的数字数据 : 图片, 视频, 软件应用程序, 电子邮件等</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/22/http笔记之php与cgi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/22/http笔记之php与cgi/" itemprop="url">php与cgi</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-22T21:22:26+08:00">
-                2016-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先，CGI是干嘛的？CGI是为了保证web server传递过来的数据是标准格式的，方便CGI程序的编写者。</p>
-<blockquote>
-<p>web server（比如说nginx）只是内容的分发者。比如，如果请求/index.html，那么web server会去文件系统中找到这个文件，发送给浏览器，这里分发的是静态数据。好了，如果现在请求的是/index.php，根据配置文件，nginx知道这个不是静态文件，需要去找PHP解析器来处理，那么他会把这个请求简单处理后交给PHP解析器。Nginx会传哪些数据给PHP解析器呢？url要有吧，查询字符串也得有吧，POST数据也要有，HTTP header不能少吧，好的，CGI就是规定要传哪些数据、以什么样的格式传递给后方处理这个请求的协议。仔细想想，你在PHP代码中使用的用户从哪里来的。</p>
-<p>当web server收到/index.php这个请求后，会启动对应的CGI程序，这里就是PHP的解析器。接下来PHP解析器会解析php.ini文件，初始化执行环境，然后处理请求，再以规定CGI规定的格式返回处理后的结果，退出进程。web server再把结果返回给浏览器。</p>
-</blockquote>
-<p>好了，CGI是个协议，跟进程什么的没关系。那fastcgi又是什么呢？Fastcgi是用来提高CGI程序性能的。</p>
-<blockquote>
-<p>提高性能，那么CGI程序的性能问题在哪呢？”PHP解析器会解析php.ini文件，初始化执行环境”，就是这里了。标准的CGI对每个请求都会执行这些步骤（不闲累啊！启动进程很累的说！），所以处理每个时间的时间会比较长。这明显不合理嘛！那么Fastcgi是怎么做的呢？首先，Fastcgi会先启一个master，解析配置文件，初始化执行环境，然后再启动多个worker。当请求过来时，master会传递给一个worker，然后立即可以接受下一个请求。这样就避免了重复的劳动，效率自然是高。而且当worker不够用时，master可以根据配置预先启动几个worker等着；当然空闲worker太多时，也会停掉一些，这样就提高了性能，也节约了资源。这就是fastcgi的对进程的管理。</p>
-</blockquote>
-<p>那PHP-FPM又是什么呢？是一个实现了Fastcgi的程序，被PHP官方收了。</p>
-<blockquote>
-<p>大家都知道，PHP的解释器是php-cgi。php-cgi只是个CGI程序，他自己本身只能解析请求，返回结果，不会进程管理（皇上，臣妾真的做不到啊！）所以就出现了一些能够调度php-cgi进程的程序，比如说由lighthttpd分离出来的spawn-fcgi。好了PHP-FPM也是这么个东东，在长时间的发展后，逐渐得到了大家的认可（要知道，前几年大家可是抱怨PHP-FPM稳定性太差的），也越来越流行。<br>好了，最后来回来你的问题。</p>
-</blockquote>
-<p>网上有的说，fastcgi是一个协议，php-fpm实现了这个协议</p>
-<blockquote>
-<p>对。</p>
-</blockquote>
-<p>有的说，php-fpm是fastcgi进程的管理器，用来管理fastcgi进程的</p>
-<blockquote>
-<p>对。php-fpm的管理对象是php-cgi。但不能说php-fpm是fastcgi进程的管理器，因为前面说了fastcgi是个协议，似乎没有这么个进程存在，就算存在php-fpm也管理不了他（至少目前是）。 有的说，php-fpm是php内核的一个补丁</p>
-<p>以前是对的。因为最开始的时候php-fpm没有包含在PHP内核里面，要使用这个功能，需要找到与源码版本相同的php-fpm对内核打补丁，然后再编译。后来PHP内核集成了PHP-FPM之后就方便多了，使用–enalbe-fpm这个编译参数即可。</p>
-</blockquote>
-<p>有的说，修改了php.ini配置文件后，没办法平滑重启，所以就诞生了php-fpm</p>
-<blockquote>
-<p>是的，修改php.ini之后，php-cgi进程的确是没办法平滑重启的。php-fpm对此的处理机制是新的worker用新的配置，已经存在的worker处理完手上的活就可以歇着了，通过这种机制来平滑过度。</p>
-</blockquote>
-<p>还有的说PHP-CGI是PHP自带的FastCGI管理器，那这样的话干吗又弄个php-fpm出</p>
-<blockquote>
-<p>不对。php-cgi只是解释PHP脚本的程序而已。</p>
-</blockquote>
-<p><a href="https://segmentfault.com/q/1010000000256516" title="参考" target="_blank" rel="external">参考</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/17/vector的增长方式与使用注意点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/17/vector的增长方式与使用注意点/" itemprop="url">vector的增长方式与使用注意点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T00:52:53+08:00">
-                2016-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="增长方式"><a href="#增长方式" class="headerlink" title="增长方式"></a>增长方式</h2><p>为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存<br>储 。</p>
-<blockquote>
-<p>假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string<br>中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中<br>其他位置一一因为元素必须连续存储。</p>
-<p>容器必须分配新的内存空间来保存己有元素和新元素 ， </p>
-<p>将已有元素从 旧位置移动到新空 间中， 然后添加新元素，释放旧存储空间 。</p>
-<p>如果我们每添加一个新元素， vector 就执行一次这样的内存分配和释放操作 ，性能会慢到不可<br>接受 。</p>
-</blockquote>
-<p>为了避免这种代价，标准库实现者采用了可以减少容器空间重新分配次数的策略。</p>
-<blockquote>
-<p>当不得不在取新的内 存空间 时， vector 和 string 的实现通常会分配比新的空间需求更大<br>的内存空间 。</p>
-<p> 容器预留这些空间作为备用 ， 可用来保存更多的新元素 。</p>
-<p> 这样，就不需要每<br>次添加新元素都重新分配容器的内存空间了 。</p>
-<p>这种分配策略比每次添加新元素时都重新分配容器内存空间的策略要高效得多 。</p>
-<p>其实际性能也表现得足够好一一虽然 vector 在每次重新分配内存空间时都要移动所有元素，<br>但使用 此策略后，其扩张操作通常比 list 和 deque 还要快 。</p>
-</blockquote>
-<h2 id="迭代器失效"><a href="#迭代器失效" class="headerlink" title="迭代器失效"></a>迭代器失效</h2><p>看了上方的实现方式, 相信很容易能理解迭代器失效问题了啊</p>
-<blockquote>
-<p>向容器中添加元素和从容器中删除元素 的操作可能会使指向容器元素的指针、引用或<br>法代器失效。 </p>
-<p>一个失效的指针、引用或法代器将不再表示任何元素 。 </p>
-<p>使用失效的指针、引用或迭代器是一种严重的程序设计错误，很可能引起与使用未初始化指针一样的问题</p>
-</blockquote>
-<h2 id="capacity-amp-size"><a href="#capacity-amp-size" class="headerlink" title="capacity &amp; size"></a>capacity &amp; size</h2><blockquote>
-<p>理解 capacity 和 size 的区别非常重要。</p>
-</blockquote>
-<p>容器的 size 是指它已经保存的元素的数目 ; </p>
-<p>而 capacity 则是在不分配新的内存空间的前提下它最多可以保存多少元素。</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><table>
-<thead>
-<tr>
-<th>函数</th>
-<th>表述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>c.assign(beg,end)</td>
-<td>将[beg; end)区间中的数据赋值给c。</td>
-</tr>
-<tr>
-<td>c.assign(n,elem)</td>
-<td>将n个elem的拷贝赋值给c。</td>
-</tr>
-<tr>
-<td>c.at(idx)</td>
-<td>传回索引idx所指的数据，如果idx越界，抛出out_of_range。</td>
-</tr>
-<tr>
-<td>c.back()</td>
-<td>传回最后一个数据，不检查这个数据是否存在。</td>
-</tr>
-<tr>
-<td><strong>c.begin()</strong></td>
-<td>传回迭代器重的可一个数据。</td>
-</tr>
-<tr>
-<td><strong>c.capacity()</strong></td>
-<td>返不分配新的内存空间的前提下它最多可以保存多少元素。</td>
-</tr>
-<tr>
-<td><strong>c.clear()</strong></td>
-<td>移除容器中所有数据。</td>
-</tr>
-<tr>
-<td><strong>c.empty()</strong></td>
-<td>判断容器是否为空。</td>
-</tr>
-<tr>
-<td>c.end()</td>
-<td>指向迭代器中的最后一个数据地址。</td>
-</tr>
-<tr>
-<td>c.erase(pos)</td>
-<td>删除pos位置的数据，传回下一个数据的位置。</td>
-</tr>
-<tr>
-<td>c.erase(beg,end)</td>
-<td>删除[beg,end)区间的数据，传回下一个数据的位置。 </td>
-</tr>
-<tr>
-<td>c.front()</td>
-<td>传回第一个数据。</td>
-</tr>
-<tr>
-<td>get_allocator</td>
-<td>使用构造函数返回一个拷贝。</td>
-</tr>
-<tr>
-<td><strong>c.insert(pos,elem)</strong></td>
-<td>在pos位置插入一个elem拷贝，传回新数据位置。</td>
-</tr>
-<tr>
-<td>c.insert(pos,n,elem)</td>
-<td>在pos位置插入n个elem数据。无返回值。</td>
-</tr>
-<tr>
-<td>c.insert(pos,beg,end)</td>
-<td>在pos位置插入在[beg,end)区间的数据。无返回值。</td>
-</tr>
-<tr>
-<td>c.max_size()</td>
-<td>返回容器中最大数据的数量。</td>
-</tr>
-<tr>
-<td><strong>c.pop_back()</strong></td>
-<td>删除最后一个数据。</td>
-</tr>
-<tr>
-<td><strong>c.push_back(elem)</strong></td>
-<td>在尾部加入一个数据。</td>
-</tr>
-<tr>
-<td>c.rbegin()</td>
-<td>传回一个逆向队列的第一个数据。</td>
-</tr>
-<tr>
-<td>c.rend()</td>
-<td>传回一个逆向队列的最后一个数据的下一个位置。</td>
-</tr>
-<tr>
-<td>c.resize(num)</td>
-<td>重新指定队列的长度。</td>
-</tr>
-<tr>
-<td>c.reserve()</td>
-<td>保留适当的容量。</td>
-</tr>
-<tr>
-<td><strong>c.size()</strong></td>
-<td>返回容器中实际数据的个数。</td>
-</tr>
-<tr>
-<td>c1.swap(c2)</td>
-<td>将c1和c2元素互换。</td>
-</tr>
-<tr>
-<td><strong>swap(c1,c2)</strong></td>
-<td>同上操作。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="构造-amp-销毁"><a href="#构造-amp-销毁" class="headerlink" title="构造 &amp; 销毁"></a>构造 &amp; 销毁</h2><table>
-<thead>
-<tr>
-<th>写法</th>
-<th>表述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>vector<elem> c</elem></td>
-<td>创建一个空的vector。</td>
-</tr>
-<tr>
-<td>vector <elem> c1(c2)</elem></td>
-<td>复制一个vector。</td>
-</tr>
-<tr>
-<td>vector <elem> c(n)</elem></td>
-<td>创建一个vector，含有n个数据，数据均已缺省构造产生。</td>
-</tr>
-<tr>
-<td>vector <elem> c(n, elem)</elem></td>
-<td>创建一个含有n个elem拷贝的vector。</td>
-</tr>
-<tr>
-<td>vector <elem> c(beg,end)</elem></td>
-<td>创建一个以[beg;end)区间的vector。</td>
-</tr>
-<tr>
-<td>c.~ vector <elem>()</elem></td>
-<td>销毁所有数据，释放内存。</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/26/stl关联容器的特性/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/26/stl关联容器的特性/" itemprop="url">stl关联容器的特性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-26T01:32:47+08:00">
-                2016-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="概绍"><a href="#概绍" class="headerlink" title="概绍"></a>概绍</h2><blockquote>
-<p>关联容器和 顺序容器有着根本的不问 :</p>
-<p>关联容器中的元素是按关键字来保在和访问的 。</p>
-<p>与之相对，顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的 。</p>
-</blockquote>
-<p>关联容器支持高效的关键字查找和访问 。 两个主要的关联容器类型是 </p>
-<ul>
-<li>map </li>
-<li>set</li>
-</ul>
-<p>map 中 的元素是一些关键字一值 ( key-value )对 : </p>
-<blockquote>
-<p>关键字起到索 引 的<br>作用，值则表示与索引相关联的数据 。 </p>
-</blockquote>
-<p>set 中每个元素只包含一个关键字 :</p>
-<blockquote>
-<p>set 支持高效的关键字检查一个给定关键字是否在 set 中 。 例如，在某些文本处理过程中，<br>可以用一个 set 来保存想要忽略的单词。字典则是一个很好的使用 map 的例子 : 可 以将<br>单词作为关键字 ， 将单词释义作为值 。</p>
-</blockquote>
-<h2 id="map-amp-set-的实现"><a href="#map-amp-set-的实现" class="headerlink" title="map &amp; set 的实现"></a><strong>map &amp; set 的实现</strong></h2><p>因为需要快速定位到键值的关系, 以红黑树的结构实现，其自平衡特性可以让插入删除等操作都可以在O(log n)时间内完成</p>
-<h2 id="map的基本操作函数"><a href="#map的基本操作函数" class="headerlink" title="map的基本操作函数"></a>map的基本操作函数</h2><table>
-<thead>
-<tr>
-<th>函数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>begin()</td>
-<td>返回指向map头部的迭代器</td>
-</tr>
-<tr>
-<td>clear(） 删除所有元素</td>
-</tr>
-<tr>
-<td>count()</td>
-<td>返回指定元素出现的次数</td>
-</tr>
-<tr>
-<td>empty()</td>
-<td>如果map为空则返回true</td>
-</tr>
-<tr>
-<td>end()</td>
-<td>返回指向map末尾的迭代器</td>
-</tr>
-<tr>
-<td>equal_range()</td>
-<td>返回特殊条目的迭代器对</td>
-</tr>
-<tr>
-<td>erase()</td>
-<td>删除一个元素</td>
-</tr>
-<tr>
-<td>find()</td>
-<td>查找一个元素</td>
-</tr>
-<tr>
-<td>get_allocator()</td>
-<td>返回map的配置器</td>
-</tr>
-<tr>
-<td>insert()</td>
-<td>插入元素</td>
-</tr>
-<tr>
-<td>key_comp()</td>
-<td>返回比较元素key的函数</td>
-</tr>
-<tr>
-<td>lower_bound()</td>
-<td>返回键值&gt;=给定元素的第一个位置</td>
-</tr>
-<tr>
-<td>max_size()</td>
-<td>返回可以容纳的最大元素个数</td>
-</tr>
-<tr>
-<td>rbegin()</td>
-<td>返回一个指向map尾部的逆向迭代器</td>
-</tr>
-<tr>
-<td>rend()</td>
-<td>返回一个指向map头部的逆向迭代器</td>
-</tr>
-<tr>
-<td>size()</td>
-<td>返回map中元素的个数</td>
-</tr>
-<tr>
-<td>swap()</td>
-<td>交换两个map</td>
-</tr>
-<tr>
-<td>upper_bound()</td>
-<td>返回键值&gt;给定元素的第一个位置</td>
-</tr>
-<tr>
-<td>value_comp()</td>
-<td>返回比较元素value的函数</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/12/5分钟学会git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/12/5分钟学会git/" itemprop="url">5分钟学会git</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-12T23:26:16+08:00">
-                2016-04-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>我之前有一份私人git笔记老长老长了, 今天得空, 把它浓缩成5分钟版本.<br>感觉纯基础性的东西整理成博客差也差不多了, 还有很多凌乱的工作笔记慢慢在一点一点整理放上来吧,<br>估计下面几篇博客就开始游戏服务器的开发心得之类的了.</p>
-<p>本篇博客因为要5分钟撸完git, 所以语言尽量精简, 只说新人必须知道的, 如果要git进阶的, 后面再另写博客说明, 不该说的废话就不说了</p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h2><blockquote>
-<p>sudo apt-get install git</p>
-</blockquote>
-<h2 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a><strong>查看状态</strong></h2><blockquote>
-<ul>
-<li>比如查看当前分支的状态 : git status, 这条命令也会给很多其他的git命令提示的喔</li>
-<li>查看当前在哪个分支 : git branch<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch</div><div class="line">  master</div><div class="line">  new_test_branch</div><div class="line">* old_demo</div><div class="line">  plugin</div></pre></td></tr></table></figure>
+<li><p>1.匿名管道( pipe )：<br>匿名管道是一种半双工的通信方式，通常是在父子进程间使用。</p>
 </li>
-</ul>
-</blockquote>
-<p>标记为*的那个就是当前分支, 也就是old_demo分支</p>
-<h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a><strong>克隆</strong></h2><blockquote>
-<p>比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:nosix1992/Flock-AI-Fish-Unreal-VR.git<br>这个地址是这样得来的, 如图 :<br><img src="/img/git1.png" alt="克隆地址图"></p>
-</blockquote>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a><strong>分支</strong></h2><ul>
-<li>比如创建一个新的分支test_branch : git branch test_branch</li>
-<li>比如切换到分支test_branch : git checkout test_branch</li>
-<li><p>比如把test_branch合并到主分支master上来 : 先切换到master上来git checkout  master 然后</p>
-<ul>
-<li>git merge test_branch</li>
-<li>git rebase test_branch<blockquote>
-<p>rebase 跟 merge 的区别你们可以理解成有两个书架，你需要把两个书架的书整理到一起去，第一种做法是 merge ，比较粗鲁暴力，就直接腾出一块地方把另一个书架的书全部放进去，虽然暴力，但是这种做法你可以知道哪些书是来自另一个书架的；第二种做法就是 rebase ，他会把两个书架的书先进行比较，按照购书的时间来给他重新排序，然后重新放置好，这样做的好处就是合并之后的书架看起来很有逻辑，但是你很难清晰的知道哪些书来自哪个书架的。各有好处的，不同的团队根据不同的需要以及不同的习惯来选择就好。 </p>
-</blockquote>
+<li><p>2.命名管道 (named pipe) ：<br>命名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</p>
 </li>
-</ul>
+<li><p>3.信号量( semophore ) ：<br>信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
 </li>
-<li><p>比如删除分支test_branch : </p>
-<ul>
-<li>git branch -d test_branch</li>
-<li>git branch -D test_branch<blockquote>
-<p>有些时候可能会删除失败，比如如果a分支的代码还没有合并到master，你执行 git branch -d a 是删除不了的，它会智能的提示你a分支还有未合并的代码，但是如果你非要删除，那就执行 git branch -D a 就可以强制删除a分支。</p>
-</blockquote>
+<li><p>4.消息队列( message queue ) ：<br>消息队列是消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
 </li>
-</ul>
+<li><p>5.信号 ( sinal ) ：<br>信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</p>
 </li>
-</ul>
-<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a><strong>提交</strong></h2><ul>
-<li>比如将修改之后的文件test_file加入到暂存区里 : git add test_file<ul>
-<li>撤销刚刚的git add(也就是说把test_file从暂存区中移出) : git reset HEAD test_file</li>
-</ul>
+<li><p>6.共享内存( shared memory ) ：<br>共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</p>
 </li>
-<li>比如将暂存区里的提交并加入提交信息”update test_file” : git commit -m “update test_file”<ul>
-<li>把git commit撤销 : <ul>
-<li><strong>只是把commit撤销并且把文件从暂存区中移出, 但保留已有的文件更改</strong> : 通用命令为 git reset commit_id, 这个commit_id用git log命令来查看, 比如要恢复到刚刚提交的上一次提交的版本, 就用git reset HEAD^(这句命令的意思是说: 恢复到commit id 为HEAD^的版本, HEAD是指向最新的提交，上一次提交是HEAD^,上上次是HEAD^^,也可以写成HEAD～2 ,依次类推. )</li>
-<li><strong>把commit撤销且不保留已有的文件更改</strong> :   git reset –hard commit_id</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>比如只是撤销某个文件test_file的修改 : git checkout –test_file</p>
-</li>
-<li><p>将代码推到远端 : 这之前的所有这些add, commit都是本地仓库的操作,  比如我们把本地的master分支推到github的那个项目的master分支 : git push origin master</p>
-</li>
-</ul>
-<h2 id="贮藏stash"><a href="#贮藏stash" class="headerlink" title="贮藏stash"></a><strong>贮藏stash</strong></h2><blockquote>
-<p>设想一个场景，假设我们正在一个新的分支做新的功能，这个时候突然有一个紧急的bug需要修复，而且修复完之后需要立即发布。当然你说我先把刚写的一点代码进行提交不就行了么？这样理论上当然是ok的，但是这会产品垃圾commit，原则上我们每次的commit都要有实际的意义，你的代码只是刚写了一半，还没有什么实际的意义是不建议就这样commit的，那么有没有一种比较好的办法，可以让我暂时切到别的分支，修复完bug再切回来，而且代码也能保留的呢？</p>
-<p>试试git stash吧</p>
-<ul>
-<li>git stash : 把当前的文件改动贮藏起来</li>
-<li>git stash list: 查看当前有哪些贮藏记录</li>
-<li>git stash pop stash_list_id: 会帮你把代码还原，还自动帮你把这条 stash 记录删除</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo </div><div class="line">error: Your local changes to the following files would be overwritten by checkout:</div><div class="line">	README.md</div><div class="line">Please, commit your changes or stash them before you can switch branches.</div><div class="line">Aborting</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash </div><div class="line">Saved working directory and index state WIP on new_test_branch: b3ad5d2 modify md</div><div class="line">HEAD is now at b3ad5d2 modify md</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo </div><div class="line">Switched to branch &apos;old_demo&apos;</div><div class="line">Your branch is up-to-date with &apos;origin/old_demo&apos;.</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout new_test_branch </div><div class="line">Switched to branch &apos;new_test_branch&apos;</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash list</div><div class="line">stash@&#123;0&#125;: WIP on new_test_branch: b3ad5d2 modify md</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash pop stash@&#123;0&#125;</div><div class="line">On branch new_test_branch</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">	modified:   README.md</div><div class="line"></div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div><div class="line">Dropped stash@&#123;0&#125; (88cd440c10c80bb6eaef9f4d86ab4a0be3d6dc00)</div></pre></td></tr></table></figure>
-<h2 id="对比diff"><a href="#对比diff" class="headerlink" title="对比diff"></a><strong>对比diff</strong></h2><ul>
-<li>比如查看当前还未git add的文件的不同 : git diff</li>
-<li>比如查看当前已经add 没有commit 的改动 :  git diff –cached</li>
-<li>比如查看当前所有改动和HEAD的区别(当前还未git add的文件的改动和当前当前已经add 但没有commit 的改动), 也就是上面两条命令的合并 : git diff HEAD</li>
-<li>比如查看 commit_id为a和commit_id为b的temp文件夹的差异 : git diff a b temp</li>
-</ul>
-<h2 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a><strong>处理冲突</strong></h2><blockquote>
-<p>假设这样一个场景，A和B两位同学各自开了两个分支来开发不同的功能，大部分情况下都会尽量互不干扰的，但是有一个需求A需要改动一个基础库中的一个类的方法，不巧B这个时候由于业务需要也改动了基础库的这个方法，因为这种情况比较特殊，A和B都认为不会对地方造成影响，等两人各自把功能做完了，需要合并的到主分支 master 的时候，我们假设先合并A的分支，这个时候没问题的，之后再继续合并B的分支，这个时候想想也知道就有冲突了，因为A和B两个人同时更改了同一个地方，Git 本身他没法判断你们两个谁更改的对，但是这个时候他会智能的提示有 conflicts</p>
-<p>就像下面这种情况 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git merge plugin </div><div class="line">Auto-merging README.md</div><div class="line">CONFLICT (content): Merge conflict in README.md</div><div class="line">Automatic merge failed; fix conflicts and then commit the result.</div></pre></td></tr></table></figure></p>
-<p>打开READ.md文件一看发现冲突的地方如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</div><div class="line">mmmp</div><div class="line">=======</div><div class="line">nani</div><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; plugin</div></pre></td></tr></table></figure></p>
-<p>冲突的地方由 ==== 分出了上下两个部分，上部分一个叫 HEAD 的字样代表是我当前所在分支的代码，下半部分是一个叫 plugin 分支的代码，可以看到 HEAD 是那里加了一行mmmp，而plugin分支则加了一句nani, 所以我们得跟团队的其他人商量一下看看要改成什么样，而且同时也要把那些 «&lt; HEAD、==== 以及 »»»plugin 这些标记符号也一并删除，最后进行一次 commit 就ok了。</p>
-</blockquote>
-<h2 id="标签tag"><a href="#标签tag" class="headerlink" title="标签tag"></a><strong>标签tag</strong></h2><blockquote>
-<p>主要介绍附注标签( annotated tag)</p>
-</blockquote>
-<h4 id="创建附注标签"><a href="#创建附注标签" class="headerlink" title="创建附注标签"></a><strong>创建附注标签</strong></h4><p>git tag -a v0.1.2 -m “0.1.2版本”</p>
-<p>创建轻量标签不需要传递参数，直接指定标签名称即可。<br>创建附注标签时，参数a即annotated的缩写，指定标签类型，后附标签名。参数m指定标签说明，说明信息会保存在标签对象中。</p>
-<h4 id="切换到标签"><a href="#切换到标签" class="headerlink" title="切换到标签"></a><strong>切换到标签</strong></h4><p>与切换分支命令相同，用git checkout [tagname]</p>
-<h4 id="查看标签信息"><a href="#查看标签信息" class="headerlink" title="查看标签信息"></a><strong>查看标签信息</strong></h4><p>用git show命令可以查看标签的版本信息：<br>git show v0.1.2</p>
-<h4 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a><strong>删除标签</strong></h4><p>误打或需要修改标签时，需要先将标签删除，再打新标签。<br>git tag -d v0.1.2 # 删除标签</p>
-<p>参数d即delete的缩写，意为删除其后指定的标签。</p>
-<h4 id="给指定的commit打标签"><a href="#给指定的commit打标签" class="headerlink" title="给指定的commit打标签"></a><strong>给指定的commit打标签</strong></h4><p>打标签不必要在head之上，也可在之前的版本上打，这需要你知道某个提交对象的校验和（通过git log获取）。<br>git tag -a v0.1.1 9fbc3d0</p>
-<h4 id="标签发布"><a href="#标签发布" class="headerlink" title="标签发布"></a><strong>标签发布</strong></h4><p>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作：</p>
-<p>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器<br>git push origin –tags # 将本地所有标签一次性提交到git服务器</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/09/C++ 易混淆点（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/09/C++ 易混淆点（一）/" itemprop="url">C++ 易混淆点（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-09T13:35:25+08:00">
-                2015-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>###2.1.1 : </p>
-<blockquote>
-<ul>
-<li><p>C++标准规定的各种算术类型的尺寸的最小值, 同时允许编译器赋予这些类型更大的尺寸.</p>
-<pre><code>比如char的最小尺寸为8位
-</code></pre></li>
-<li><p>执行浮点数运算选用double ，这是因为float 通常精度不够而且双精度浮点</p>
-<pre><code>数和单精度浮点数的计算代价相差无儿。事实上， 对于某些机器来说，双精度运
-算甚至比单精度还快
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.1.2 : </p>
-<blockquote>
-<ul>
-<li><p>当我们赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号类型表</p>
-<pre><code>示数值总数取棋后的余数。例如， 8 比特大小的un signe d char 可以表示0 至
-255 区间内的值，如果我们赋了一个区间以外的值，则实际的结果是该值对256
-取模后所得的余数。因此，把 -1 赋给8 比特大小的uns 工gned char 所得的结果
-是255 
-</code></pre></li>
-<li><p>当我们赋给带符号类型一个超出它表示范围的值时，结果是未定义的( undefined )。</p>
-<pre><code>此时， 程序，可能继续工作、可能崩溃，也可能生成垃圾数据。
-</code></pre></li>
-<li><p>如果表达式里既有带符号类型又有无符号类型， 当带符号类型取值为负时会出现异</p>
-<pre><code>常结果， 这是因为带符号数会自动地转换成无符号数。例如，在一个形如a*b 的式子
-中，如果a = -1 , b = 1 ，而且a 和b 都是int ，则表达式的值显然为- 1 0 然而，如
-果a 是int ， 而b 是unsigned ， 则结果须视在当前机器上int 所占位数而定。在我
-们的环境里，结果是4294967295
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.2.1 : </p>
-<blockquote>
-<ul>
-<li><p>如果是内置类型的变量未被显式初始化，它的值由定义的位置决定。定义于任何函数</p>
-<pre><code>体之外的变量被初始化为0 。然而如6. 1. 1 节(第1 85 页〉所示， 一种例外情况是，定义
-在函数体内部的内置类型变量将不被初始化( tminitialized ) 。一个未被初始化的内置类型
-变量的值是未定义的(参见2. 1. 2 节， 第33 页) ，如果试图拷贝或以其他形式谛问此类值
-将引发错误
-</code></pre></li>
-<li><p>定义于函数体内的内置类型的对象如果没有初始化，时值未定义。类的对象</p>
-<pre><code>如果没有显式地初始化，则其位由类确定。    
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.2.2 :</p>
-<blockquote>
-<ul>
-<li><p>为了支持分离式编译， C←←语言将声明和定义区分开来。声明( declaration ) 使得名字</p>
-<pre><code>为程序所知， 一个文件如果想使用别处定义的名字则必须包含对那个名字的声明。而定义
-( defi nition ) 负责创建与名字关联的实体。
-变量声明规定了变量的类型和名字， 在这一点上定义与之相同。但是除此之外，定义
-还申请存储空间，也可能会为变量赋一个初始值。
-如果想声明一个变量;而非定义它，就在变量名前添加关键字extern ，而且不要显式
-地初始化变量:
-</code></pre><p>  extern int i ; // 声明i 而非定义i</p>
-<pre><code>int j ; / / 声明并定义j
-</code></pre><p>任何包含了显式初始化的声明即成为定义。我们能给由extern 关键字标记的变量赋</p>
-<pre><code>一个初始值，但是这么做也就抵消了extern 的作用。extern 语句如果包含初始值就不
-再是声明，而变成定义了:
-extern doub1e pi = 3 . 1416 ; // 定义
-在函数体内部，如果试图初始化一个由extern 关键字标记的变革， 将引发错误
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.2.3 :</p>
-<blockquote>
-<ul>
-<li>C++也为标准库保留了一些名字。用户在自定义的标识符中不能连续出现两个下<pre><code>画钱，也不能以下画线紧连大写字句开头。此外，定义在函数体外的标识稍不能以下画线
-开头。 比如: int _ = 3; 是合法的
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.3.1 :</p>
-<blockquote>
-<ul>
-<li><p>其他所</p>
-<pre><code> 有引用的类型都要和l 与之绑定的对象严格匹配。而且，引用只能绑定在对象上，而不能与
- 字面值或某个表达式的计算结果绑定在一起， 相关原因将在2 .4 . 1 节详述:
-
-int &amp;refVa14 = 10 ; //错误· 引用类型的初始值必须是一个对象
-   double dval = 3.14 ;
-   int &amp;refVa15 = dva1 ; // 错误: 此处引用类型的初始位必须是int 型对象
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.3.2 :</p>
-<blockquote>
-<ul>
-<li>因为引用不是对象， 没有实际地址，所以不能定义指向引用的指针。</li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.4 :</p>
-<blockquote>
-<ul>
-<li><p><strong>默认状态下， const 对象仅在文件内有效</strong></p>
-<p> 当以编译时初始化的方式定义一个const 对象时，就如对bufSize 的定义一样:</p>
-<pre><code>const int bufS 工ze = 512; 11 输入缓冲区大小
-</code></pre><p> 编译器将在编译过程中把用到该变量的地方都替换成对应的值。也就是说，编译器会找到</p>
-<pre><code>   代码中所有用到bufSize 的地方，然后用512 替换。
-   为了执行上述替换， 编译器必须知道变量的初始值。如果程序包含多个文件，则每个
-   用了co nst 对象的文件都必须得能访问到它的初始值才行。要做到这一点，就必须在每
-   一个用到变量的文件中都有对它的定义(参见2.2.2 节， 第4 1 页)。为了支持这一用法，
-   同时避免对同一变量的重复定义，默认情况下， const 对象被设定为仅在文件内有效。、
-   多个文件中出现了同名的const 变量时，其实等同于在不同文件中分别定义了独立的变量。
-   某些时候有这样一种const 变量，它的初始值不是一个常量表达式，但又确实有必
-   要在文件间共享。这种情况f ， 我们不希望编译器为每个文件分别生成独立的变量。相反，
-   我们想让这类const 对象像其他(非常量)对象一样工作，也就是说，只在一个文件中
-   定义const ，而在其他多个文件中声明并使用它。
-   解决的办法是，对于c o nst 变量不管是声明还是定义都添加extern 关键字， 这样
-   只需定义一次就可以了:
-
-// file 1 . cc 定义并初始化了一个常壶，该常量能被其他文件访问
-   extern const int bufS 工ze = fcn();
-   // file 1 . h 头文件
-   extern const int bufSize ; /1 与f ile 1. cc 中定义的bufS 工ze 是同一个
-</code></pre><p> 如上述程序所示， fi1e 1. cc 定义并初始化了bufSize 。因为这条语句包含了初始值，</p>
-<pre><code>所以它(显然〉是一次定义。然而，因为b ufSize 是←个常量，必须用extern 加以限
-定使其被其他文件使用。
-file 1. h 头文件中的声明也由extern 做了限定，其作用是指明bufS 工ze 并非本
-文件FiIi 独有，它的定义将在别处出现。
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.4.1</p>
-<blockquote>
-<ul>
-<li><p><strong>初始化和对const 的引用</strong></p>
-<p> 2 . 3 . 1 节(第46 页〉提到， 号| 用的类型必须与其所引用对象的类型→致，但是有两个</p>
-<pre><code>   例外。第一种例外情况就是在初始化常量引用时允许用任意表达式作为初始值，只要该表
-   达式的结果能转换成(参见2.1 .2 节，第3 2 页)引用的类型叩可。尤其，允许为一个常量
-   引用绑定非常量的对象、字面值， 甚至是个-般表达式:
-
-int i= 42 ; .
-   const int &amp;r1 = i ; // ft许将c ons t in t&amp;#~ 定到一个普通int 对象上
-   const int &amp;r2 = 42; // 正确r1 是一个常量引用
-   const int &amp;r3 = r1 * 2 ; // 正确r3 是一个常受引用
-   int &amp;r4 = r1 * 2 ; // 错误r4 是一个普通的非常受引用
-</code></pre><p> 要想、理解这种例外情况的原因，陆简单的办法是弄清楚当一个常量引用被绑定到另外一种</p>
-<pre><code>   类型上时到底发生了什么:
-
-doub1e dval = 3 . 14 ;
-   const int &amp;ri = dva1 ;
-</code></pre><p> 此处ri 引用了一个int 型的数。对口的操作应该是整数运算，但dval 却是一个双精</p>
-<pre><code>   度浮点数而非整数。因此为了确保让rl 绑定一个整数，编译器把上述代码变成了如下
-   形式:
-
-const int temp = dval; 1/ 由双精度浮点数生成一个临时的整型常量
-   const int &amp;ri = temp ; 11 让rl 绑定这个临时受
-</code></pre><p> 在这种情况下， ri 绑定了一个临时量( tempo ra ry )对象。所谓临时量对象就是当编译器</p>
-<pre><code>而要一个空间来暂存表达式的求值结果时临时创建的一个未命名的对象。c++程序员们常
-常把临时量对象简称为临时量。
-接下来探讨当ri 不是常量时，如果执行了类似于上面的初始化过程将带来什么样的
-后果。如果且不是常量，就允许对ri 赋值，这样就会改变ri 所引用对象的值。注意，
-此时绑定的对象是一个临时量;而三11:: dvalo 程序员既然让rl 引用dval ， 就肯定想通过
-ri 改变dval 的值，否则干什么要给ri 赋值l呢?如此看来， 既然大家基本上不会想着把
-引用绑定到临时量上， c++语言也就把这种行为归为非法。
-</code></pre></li>
-</ul>
-</blockquote>
-</li>
-<li><p>###2.5.2</p>
-<blockquote>
-<ul>
-<li><p>和原来另I~些只对应一种特定类型的说明符(比如double) 不|司. auto 让编译器通QÐ</p>
-<pre><code>过初始值来推算变量的类型。显然. auto 定义的变量必须有初始值:
-</code></pre></li>
-<li><p>使用auto 也能在一条语句中声明多个变量。因为一条声明语句只能有一个基本数据</p>
-<pre><code>  类型，所以该语句中所有变量的初始基本数据类型都必须一样:
-
-int i = 0; 
-  const int ci = i;
-  auto &amp;n = i, *p = &amp;ci    // 错误i 的类型是int 而&amp; ci 的类型是const int
-</code></pre></li>
-</ul>
-</blockquote>
+<li><p>7.套接字( socket ) ：套接字也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同进程间的进程通信。</p>
 </li>
 </ul>
 
@@ -2326,7 +883,7 @@ int i = 0;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/03/Linux常用命令笔记整理之tcpdump/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -2335,7 +892,7 @@ int i = 0;
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -2345,7 +902,7 @@ int i = 0;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/11/03/Linux常用命令笔记整理之tcpdump/" itemprop="url">Linux常用命令笔记整理之tcpdump</a></h1>
+                <a class="post-title-link" href="/2016/12/04/快速完成一个slg游戏思路(二)/" itemprop="url">快速完成一个slg游戏思路(二)</a></h1>
         
 
         <div class="post-meta">
@@ -2357,8 +914,8 @@ int i = 0;
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-03T19:25:59+08:00">
-                2015-11-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T22:57:29+08:00">
+                2016-12-04
               </time>
             
 
@@ -2380,8 +937,8 @@ int i = 0;
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -2418,66 +975,32 @@ int i = 0;
 
       
         
-          
-            <blockquote>
-<p>强大的抓包工具, 博大精深内容太多, 所以这篇博客整理得只说常用, 具体的参考tcpdump用户手册,<br>tcpdump需要root权限, 所以记得加上sudo</p>
-</blockquote>
-<h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a><strong>常用参数</strong></h2><ul>
-<li><p>-nn选项：<br>意思是说当tcpdump遇到协议号或端口号时，不要将这些号码转换成对应的协议名称或端口名称。比如，大家都知道80是http端口，tcpdump就不会将它显示成http了</p>
-</li>
-<li><p>-c选项：<br>是Count的含义，这设置了我们希望tcpdump帮我们抓几个包。</p>
-</li>
-<li><p>-i : 指定哪一张网卡</p>
-</li>
-<li><p>-l : 使得输出变为行缓冲</p>
-</li>
-<li><p>-t :  输出时不打印时间戳</p>
-</li>
-<li><p>-v :  输出更详细的信息</p>
-</li>
-<li><p>-F : 指定过滤表达式所在的文件, 可以建立了一个filter.txt文本文件来存储过滤表达式，然后通过-F来指定filter.txt</p>
-</li>
-<li><p>-w : 将流量保存到文件中</p>
-</li>
-<li><p>-r :  读取raw packets文件</p>
-</li>
-</ul>
-<h2 id="常用过滤规则"><a href="#常用过滤规则" class="headerlink" title="常用过滤规则"></a><strong>常用过滤规则</strong></h2><ul>
-<li>只看到目的机器dst(比如是qq.com)之间的网络包<br>sudo tcpdump -i eth0 ‘dst qq.com’ 也可以写成 sudo tcpdump -i eth0 ‘dst host qq.com’</li>
-</ul>
-<blockquote>
-<p>注 : 上述的那个host可以省略<br>tcpdump支持如下的类型：</p>
-<ol>
-<li>host：指定主机名或IP地址，例如’host roclinux.cn’或’host 202.112.18.34′</li>
-<li>net ：指定网络段，例如’arp net 128.3’或’dst net 128.3′</li>
-<li>portrange：指定端口区域，例如’src or dst portrange 6000-6008′</li>
-<li>port : 端口<br>如果我们没有设置过滤类型，那么默认是host。</li>
-</ol>
+          <h2 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h2><blockquote>
+<p>从登录成功就开始连接, </p>
+<p>注册一个Chat_ID, </p>
+<p>player_ID 和 Chat_ID相互对应, </p>
+<p>会注册相应的房间频道, </p>
+<p>并为每位Player存了一份黑名单, </p>
+<p>在客户端做了本地黑名单, </p>
+<p>聊天服务器也做了黑名单二次验证处理.</p>
 </blockquote>
 <ul>
-<li>只抓udp的包<br>sudo tcpdump -i eth0 ‘udp’</li>
-</ul>
-<blockquote>
-<p>tcpdump具有根据网络包的协议来进行过滤的能力，我们还可以把udp改为ether、ip、ip6、arp、tcp、rarp等</p>
-</blockquote>
-<ul>
-<li><p>只抓目的机器的某个端口的包(比如只抓baidu.com的53或者80端口的包)<br>sudo tcpdump -i eth0 ‘dst baidu.com and (dst port 53 or dst port 80)’</p>
+<li><p>世界频道 : 则用MsgServer的非实时推送思路</p>
 </li>
-<li><p>通过eth0网卡的，且来源是qq.com服务器或者目标是qq.com服务器的网络包<br>sudo tcpdump -i eth0 ‘host qq.com’</p>
-</li>
-<li><p>通过eth0网卡的，且qq.com和baidu.com之间通讯的网络包，或者qq.com和sina.cn之间通讯的网络包<br>tcpdump -i eth0 ‘host qq.com and (baidu.com or sina.cn)’</p>
-</li>
-<li><p>获取和baidu.com之间建立TCP三次握手中第一个网络包，即带有SYN标记位的网络包<br>sudo tcpdump -i eth0 ‘tcp[tcpflags] &amp; tcp-syn != 0 and dst host baidu.com’</p>
+<li><p>私密聊天 : 则选择 workerman 的tcp, </p>
 </li>
 </ul>
-<blockquote>
-<p>注 :<br>因为用proto [ expr : size]语法在写过滤表达式时，你需要把协议格式完全背在脑子里，才能把表达式写对。可这对大多数人来说，可能有些困难。为了让tcpdump工具更人性化一些，有一些常用的偏移量，可以通过一些名称来代替，比如icmptype表示ICMP协议的类型域、icmpcode表示ICMP的code域，tcpflags则表示TCP协议的标志字段域。</p>
-<p>更进一步的，对于ICMP的类型域，可以用这些名称具体指代：icmp-echoreply, icmp-unreach, icmp-sourcequench, icmp-redirect, icmp-echo, icmp-routeradvert, icmp-routersolicit, icmp-timxceed, icmp-paramprob, icmp-tstamp, icmp-tstampreply, icmp-ireq, icmp-ireqreply, icmp-maskreq, icmp-maskreply。</p>
-<p>而对于TCP协议的标志字段域，则可以细分为tcp-fin, tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg。</p>
-</blockquote>
-<h2 id="输出内容解释"><a href="#输出内容解释" class="headerlink" title="输出内容解释"></a><strong>输出内容解释</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo tcpdump -i eth0 &apos;host baidu.com&apos;</div><div class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</div><div class="line">listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes</div><div class="line">06:46:17.487920 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [S], seq 546310089, win 29200, options [mss 1460,sackOK,TS val 1221546 ecr 0,nop,wscale 7], length 0</div><div class="line">06:46:17.530422 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [S.], seq 3245676077, ack 546310090, win 8192, options [mss 1440,sackOK,nop,nop,nop,nop,nop,nop,nop,nop,nop,nop,nop,wscale 5], length 0</div><div class="line">06:46:17.530458 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 1, win 229, length 0</div><div class="line">06:46:17.530982 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [P.], seq 1:504, ack 1, win 229, length 503</div><div class="line">06:46:17.576476 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [.], ack 504, win 216, length 0</div><div class="line">06:46:17.577447 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 1:291, ack 504, win 216, length 290</div><div class="line">06:46:17.577459 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 291, win 237, length 0</div><div class="line">06:46:17.577482 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 291:452, ack 504, win 216, length 161</div><div class="line">06:46:17.577485 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div><div class="line">06:46:17.866950 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [P.], seq 291:452, ack 504, win 216, length 161</div><div class="line">06:46:17.866966 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, options [nop,nop,sack 1 &#123;291:452&#125;], length 0</div><div class="line">06:46:27.865805 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div><div class="line">06:46:27.909962 IP 111.13.101.208.http &gt; 192.168.1.57.60110: Flags [.], ack 504, win 216, length 0</div><div class="line">06:46:37.925624 IP 192.168.1.57.60110 &gt; 111.13.101.208.http: Flags [.], ack 452, win 245, length 0</div></pre></td></tr></table></figure>
-<img src="/2015/11/03/Linux常用命令笔记整理之tcpdump/tcpdump1.png" alt="tcpdump" title="tcpdump">
-          
+<h2 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h2><ul>
+<li>实时推送 : workerman 的tcp</li>
+<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/04/快速完成一个slg游戏思路(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2515,7 +1038,7 @@ int i = 0;
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2561,7 +1084,7 @@ int i = 0;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2583,7 +1106,7 @@ int i = 0;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -2603,17 +1126,6 @@ int i = 0;
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -2664,7 +1176,7 @@ int i = 0;
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

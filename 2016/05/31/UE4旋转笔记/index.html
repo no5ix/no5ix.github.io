@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,21 +94,21 @@
 
 
 
-<meta name="description" content="最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。下面我们做个实验：    我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。上面那个为renti_a_gear，下面那个为renti_a_gear2.  第一种情况： 绕自身坐标系来旋转  如上图，两个staticMesh旋转之后rotation是一样的，可以证明，绕自身坐标系旋">
+<meta name="description" content="最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。下面我们做个实验：    我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。上面那个为renti_a_gear，下面那个为renti_a_gear2.">
 <meta name="keywords" content="UE4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UE4旋转笔记">
 <meta property="og:url" content="http://yoursite.com/2016/05/31/UE4旋转笔记/index.html">
-<meta property="og:site_name" content="烫烫烫">
-<meta property="og:description" content="最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。下面我们做个实验：    我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。上面那个为renti_a_gear，下面那个为renti_a_gear2.  第一种情况： 绕自身坐标系来旋转  如上图，两个staticMesh旋转之后rotation是一样的，可以证明，绕自身坐标系旋">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。下面我们做个实验：    我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。上面那个为renti_a_gear，下面那个为renti_a_gear2.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20160913104257997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20160913105150452?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20160913110908943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2017-08-31T11:15:45.253Z">
+<meta property="og:updated_time" content="2017-09-01T13:51:44.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UE4旋转笔记">
-<meta name="twitter:description" content="最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。下面我们做个实验：    我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。上面那个为renti_a_gear，下面那个为renti_a_gear2.  第一种情况： 绕自身坐标系来旋转  如上图，两个staticMesh旋转之后rotation是一样的，可以证明，绕自身坐标系旋">
+<meta name="twitter:description" content="最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。下面我们做个实验：    我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。上面那个为renti_a_gear，下面那个为renti_a_gear2.">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160913104257997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 
 
@@ -117,7 +117,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -144,7 +144,7 @@
 
 
 
-  <title>UE4旋转笔记 | 烫烫烫</title>
+  <title>UE4旋转笔记 | 烫</title>
   
 
 
@@ -180,7 +180,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -296,7 +296,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -383,6 +383,7 @@
 <blockquote>
 <p>我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。<br>上面那个为renti_a_gear，下面那个为renti_a_gear2.</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="第一种情况：-绕自身坐标系来旋转"><a href="#第一种情况：-绕自身坐标系来旋转" class="headerlink" title="第一种情况： 绕自身坐标系来旋转"></a>第一种情况： 绕自身坐标系来旋转</h2><p><img src="http://img.blog.csdn.net/20160913105150452?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
 <blockquote>
 <p>如上图，<br>两个staticMesh旋转之后rotation是一样的，<br>可以证明，绕自身坐标系旋转的顺序是Z-&gt;Y-&gt;X</p>
@@ -431,8 +432,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/14/MySQL进阶/" rel="prev" title="MySQL进阶">
-                MySQL进阶 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/14/MySQL进阶(一)/" rel="prev" title="MySQL进阶(一)">
+                MySQL进阶(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -510,7 +511,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -532,7 +533,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -552,17 +553,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -629,7 +619,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

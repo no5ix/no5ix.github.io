@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,22 +94,20 @@
 
 
 
-<meta name="description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识 常用算法的复杂度 冒泡排序 想象就是很多泡泡，最大的泡泡每次">
+<meta name="description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识">
 <meta name="keywords" content="c++,排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）">
 <meta property="og:url" content="http://yoursite.com/2014/08/19/(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）/index.html">
-<meta property="og:site_name" content="烫烫烫">
-<meta property="og:description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识 常用算法的复杂度 冒泡排序 想象就是很多泡泡，最大的泡泡每次">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170804205144200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170804201637199?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170804224210669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170804224023832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-31T16:33:51.205Z">
+<meta property="og:updated_time" content="2017-09-01T12:57:06.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）">
-<meta name="twitter:description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识 常用算法的复杂度 冒泡排序 想象就是很多泡泡，最大的泡泡每次">
+<meta name="twitter:description" content="因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。  注：以下所有代码皆可以直接运行， 都已经测试过。 必须掌握的知识">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170804205144200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -118,7 +116,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -145,7 +143,7 @@
 
 
 
-  <title>(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一） | 烫烫烫</title>
+  <title>(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一） | 烫</title>
   
 
 
@@ -181,7 +179,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -297,7 +295,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -382,43 +380,8 @@
 </blockquote>
 <p><strong>注：以下所有代码皆可以直接运行， 都已经测试过。</strong></p>
 <h2 id="必须掌握的知识"><a href="#必须掌握的知识" class="headerlink" title="必须掌握的知识"></a><strong>必须掌握的知识</strong></h2><p><img src="http://img.blog.csdn.net/20170804205144200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<a id="more"></a>
 <h2 id="常用算法的复杂度"><a href="#常用算法的复杂度" class="headerlink" title="常用算法的复杂度"></a><strong>常用算法的复杂度</strong></h2><p><img src="http://img.blog.csdn.net/20170804201637199?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h2><blockquote>
-<p>想象就是很多泡泡，最大的泡泡每次浮到那个数组最后面</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">void bubble_sort(int a[], int n)</div><div class="line">&#123;</div><div class="line">    int i, j, temp;</div><div class="line">    for (j = 0; j &lt; n - 1; j++)</div><div class="line">        for (i = 0; i &lt; n - 1 - j; i++)</div><div class="line">        &#123;</div><div class="line">            if(a[i] &gt; a[i + 1])</div><div class="line">            &#123;</div><div class="line">                temp = a[i];</div><div class="line">                a[i] = a[i + 1];</div><div class="line">                a[i + 1] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a><strong>插入排序</strong></h2><blockquote>
-<p>想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">void insertion_sort(int test_array[], size_t length)</div><div class="line">&#123;</div><div class="line">	int i = 0, key = 0;</div><div class="line">	for (size_t index = 1; index &lt; length; ++index)</div><div class="line">	&#123;</div><div class="line">		i = index - 1, key = test_array[index];</div><div class="line">		while (i &gt;= 0 &amp;&amp; key &lt; test_array[i])</div><div class="line">		&#123;</div><div class="line">			test_array[i + 1] = test_array[i];</div><div class="line">			i = i - 1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		test_array[i + 1] = key;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	for (size_t ii = 0; ii &lt; length; ++ii, ++test_array)</div><div class="line">	&#123;</div><div class="line"></div><div class="line">		cout &lt;&lt; *test_array &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a><strong>归并排序</strong></h2><blockquote>
-<p>归并排序用了分治的思想，有很多算法在结构上是递归的：为了解决一个给定的问题，算法要一次或多次地递归调用其自身来解决相关的子问题。这些算法通常采用分治策略（divide-and-conquier）：将原问题划分成n个规模较小而结构与原问题相似的子问题；递归地解决这些子问题，然后再合并其结果，就得到原问题的解。</p>
-</blockquote>
-<p><strong>分治模式</strong>在每一层递归上都有三个步骤：</p>
-<ul>
-<li><p>分解（divide）：将原问题分解成一系列子问题；</p>
-</li>
-<li><p>解决（conquer）：递归地解各子问题。若子问题足够小，则直接求解；</p>
-</li>
-<li><p>合并：将子问题的结果合并成原问题的解。</p>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20170804224210669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<blockquote>
-<p>下面是一个比较直白明了的归并c++实现（其实可以写成不用动态分配内存的，但是这里为了直白起见）：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * p: 左数组第一个元素下标</div><div class="line"> * q: 左数组最后一个元素下标</div><div class="line"> * r: 右数组最后一个元素下标</div><div class="line"> */</div><div class="line">void merge(int *array, int p, int q, int r)</div><div class="line">&#123;</div><div class="line">    int n1, n2, i, j, k;</div><div class="line">    int *left=NULL, *right=NULL;</div><div class="line"> </div><div class="line">    n1 = q-p+1;</div><div class="line">    n2 = r-q;</div><div class="line"> </div><div class="line">    left = (int *)malloc(sizeof(int)*(n1));</div><div class="line">    right = (int *)malloc(sizeof(int)*(n2));</div><div class="line">    for(i=0; i&lt;n1; i++)</div><div class="line">    &#123;</div><div class="line">                  left[i] = array[p+i];</div><div class="line">    &#125;</div><div class="line">    for(j=0; j&lt;n2; j++)</div><div class="line">    &#123;</div><div class="line">                  right[j] = array[q+1+j];</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    i = j = 0;</div><div class="line">    k = p;</div><div class="line">    while(i&lt;n1 &amp;&amp; j&lt;n2)</div><div class="line">    &#123;</div><div class="line">                  if(left[i] &lt;= right[j])</div><div class="line">                  &#123;</div><div class="line">                        array[k++] = left[i++];</div><div class="line">                  &#125;</div><div class="line">                  else</div><div class="line">                  &#123;</div><div class="line">                        array[k++] = right[j++];</div><div class="line">                  &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    for(; i&lt;n1; i++)</div><div class="line">    &#123;</div><div class="line">                  array[k++] = left[i];</div><div class="line">    &#125;</div><div class="line">    for(; j&lt;n2; j++)</div><div class="line">    &#123;</div><div class="line">                  array[k++] = right[j];</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    free(left);</div><div class="line">    free(right);</div><div class="line">    left = NULL;</div><div class="line">    right = NULL;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void merge_sort(int *array, int p, int r)</div><div class="line">&#123;</div><div class="line">    int q;</div><div class="line"> </div><div class="line">    if(p &lt; r)</div><div class="line">    &#123;</div><div class="line">                  q = (int)((p+r)/2);</div><div class="line">                  merge_sort(array, p, q);</div><div class="line">                  merge_sort(array, q+1, r);</div><div class="line">                  merge(array, p, q, r);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a><strong>快速排序</strong></h2><blockquote>
-<p>与归并排序一样， 快排也是用了分治的思想。<br>你可以想象一个两副牌然后随意取出一张牌pivot，其他的所有牌都跟这张pivot牌比较， 大的放右边那一摞A，小的放左边B。<br>接着再从左边这一摞B再随意取出一张牌pivot，其他的所有牌都跟这张pivot牌比较， 大的放右边那一摞，小的放左边，递归下去。<br>A也重复上述步骤递归。<br>递归结束之后， 左边的都比右边的小， 而且是有序的。<br><img src="http://img.blog.csdn.net/20170804224023832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">void swap(int *a, int *b)</div><div class="line">&#123;</div><div class="line">    int temp = 0;</div><div class="line">    temp = *a;</div><div class="line">    *a = *b;</div><div class="line">    *b = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int partition(int *array, int p, int r)</div><div class="line">&#123;</div><div class="line">    int i = 0, j = 0, pivot = 0;</div><div class="line">    pivot = array[r];</div><div class="line">    i = p-1;</div><div class="line">    for(j=p; j&lt;=r-1; j++)</div><div class="line">    &#123;</div><div class="line">         if(array[j] &lt;= pivot)</div><div class="line">         &#123;</div><div class="line">	          i++;</div><div class="line">              swap(&amp;array[i], &amp;array[j]);</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">    swap(&amp;array[i+1], &amp;array[r]);</div><div class="line">    return i+1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*</div><div class="line">通常，我们可以向一个算法中加入随机化成分，以便对于所有输入，它均能获得较好的平均情况性能。将这种方法用于快速排序时，不是始终采用A[r]作为主元，而是从子数组A[p..r]中随机选择一个元素，即将A[r]与从A[p..r]中随机选出的一个元素交换。</div><div class="line">*/</div><div class="line"> int rand_patition(int  test_arr[], int p, int r)</div><div class="line"> &#123;</div><div class="line">	srand(static_cast&lt;unsigned&gt;(time(nullptr)));</div><div class="line">	int rand_index = (rand() % (r - p) ) + p + 1;</div><div class="line">	swap(&amp;test_arr[rand_index], &amp;test_arr[r]);</div><div class="line">	return partition(test_arr, p, r);</div><div class="line"> &#125;</div><div class="line"></div><div class="line">void quick_sort(int *array, int p, int r)</div><div class="line">&#123;</div><div class="line">    int q = 0;</div><div class="line">    if(p &lt; r)</div><div class="line">    &#123;</div><div class="line">         q = rand_patition(array, p, r);</div><div class="line">         quick_sort(array, p, q-1);</div><div class="line">         quick_sort(array, q+1, r);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h4 id="快速排序思想的应用"><a href="#快速排序思想的应用" class="headerlink" title="快速排序思想的应用"></a><strong>快速排序思想的应用</strong></h4><blockquote>
-<p><strong>问题</strong> : 查找数组中第k大的数字<br><strong>算法思想</strong> : 因为快排每次将数组划分为两组加一个枢纽元素，每一趟划分你只需要将k与枢纽元素的下标进行比较，如果比枢纽元素下标大就从右边的子数组中找，如果比枢纽元素下标小从左边的子数组中找，如果一样则就是枢纽元素，找到，如果需要从左边或者右边的子数组中再查找的话，只需要递归一边查找即可，无需像快排一样两边都需要递归，所以复杂度必然降低。</p>
-</blockquote>
-<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a><strong>二分查找</strong></h2><blockquote>
-<p>二分查找的复杂度计算方法：<br>时间复杂度可以视为while循环的次数。<br>总共有n个元素，<br>渐渐跟下去就是n,n/2,n/4,….n/2^k（接下来操作元素的剩余个数），其中k就是循环的次数<br>由于你n/2^k取整后&gt;=1（接下来操作元素的剩余个数至少为一个）<br>即令n/2^k=1<br>可得k=log2n,（是以2为底，n的对数）<br>所以时间复杂度可以表示O(h)=O(log2n)</p>
-</blockquote>
-<p><strong>递归版本：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">int binary_search(int arr[], int low, int high, int key)</div><div class="line">&#123;</div><div class="line">    if ( low &lt;= high)</div><div class="line">    &#123;</div><div class="line">        int mid = (low + high) / 2;</div><div class="line">        if ( key == arr[mid] )</div><div class="line">            return mid;</div><div class="line">        else if ( key &lt; arr[mid])</div><div class="line">            binary_search(arr, low, mid - 1, key);</div><div class="line">        else </div><div class="line">            binary_search(arr, mid + 1, high, key);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">        return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>非递归版本：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">int non_recursion_bs(int arr[], int low, int high, int key)</div><div class="line">&#123;</div><div class="line">    int mid = 0;</div><div class="line">    while (low &lt;= high)</div><div class="line">    &#123;</div><div class="line">        mid = ( low + high ) / 2;</div><div class="line">        if ( key == arr[mid] )</div><div class="line">            return mid;</div><div class="line">        else if ( key &lt; arr[mid] )</div><div class="line">            high = mid - 1;</div><div class="line">        else</div><div class="line">            low = mid + 1;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -457,8 +420,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/" rel="prev" title="(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）">
-                (二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二） <i class="fa fa-chevron-right"></i>
+              <a href="/2014/08/20/(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度(二)/" rel="prev" title="(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）">
+                (排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -536,7 +499,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -558,7 +521,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -578,17 +541,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -617,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#必须掌握的知识"><span class="nav-number">1.</span> <span class="nav-text">必须掌握的知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用算法的复杂度"><span class="nav-number">2.</span> <span class="nav-text">常用算法的复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡排序"><span class="nav-number">3.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">4.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">5.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">6.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序思想的应用"><span class="nav-number">6.0.1.</span> <span class="nav-text">快速排序思想的应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找"><span class="nav-number">7.</span> <span class="nav-text">二分查找</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#必须掌握的知识"><span class="nav-number">1.</span> <span class="nav-text">必须掌握的知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用算法的复杂度"><span class="nav-number">2.</span> <span class="nav-text">常用算法的复杂度</span></a></li></ol></div>
             
 
           </div>
@@ -655,7 +607,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

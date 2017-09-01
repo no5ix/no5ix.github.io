@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -99,7 +99,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）">
 <meta property="og:url" content="http://yoursite.com/2017/06/05/重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="为加深理解, 故本章老笔记内容大幅删减重写.第二章重点如下 :   TCP (Transmission Control Protocol)传输控制协议. 特性如下 :  面向连接 全双工 可靠, 关心确认/超时/重传等, 保证顺序 流量控制 字节流, 没有任何记录边界   UDP (User Datagram Protocol)用户数据报协议. 特性如下 :  无连接 不可靠, 不保证顺序/是否到">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170604224047107?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170604234715314?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170607102732371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170607102827548?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-31T00:45:49.513Z">
+<meta property="og:updated_time" content="2017-09-01T12:41:57.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）">
 <meta name="twitter:description" content="为加深理解, 故本章老笔记内容大幅删减重写.第二章重点如下 :   TCP (Transmission Control Protocol)传输控制协议. 特性如下 :  面向连接 全双工 可靠, 关心确认/超时/重传等, 保证顺序 流量控制 字节流, 没有任何记录边界   UDP (User Datagram Protocol)用户数据报协议. 特性如下 :  无连接 不可靠, 不保证顺序/是否到">
@@ -120,7 +120,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -147,7 +147,7 @@
 
 
 
-  <title>重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理） | 烫烫烫</title>
+  <title>重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理） | 烫</title>
   
 
 
@@ -183,7 +183,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -299,7 +299,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -404,6 +404,9 @@
 <li>时间戳选项, 对于高速网络连接是必要的.</li>
 </ul>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>TCP连接终止 :<br><img src="http://img.blog.csdn.net/20170604230427728?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP连接终止图"></p>
 </li>
 <li><p>TCP状态转换图<br><img src="http://img.blog.csdn.net/20170604234518885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP状态转换图"></p>
@@ -497,8 +500,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理/" rel="prev" title="重读UNIX网络编程第三章到第十一章笔记整理">
-                重读UNIX网络编程第三章到第十一章笔记整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理(一)/" rel="prev" title="重读UNIX网络编程第三章到第十一章笔记整理(一)">
+                重读UNIX网络编程第三章到第十一章笔记整理(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +570,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -589,7 +592,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -609,17 +612,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -670,7 +662,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

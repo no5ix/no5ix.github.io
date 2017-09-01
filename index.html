@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,13 +96,13 @@
 
 <meta name="description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="烫烫烫">
+<meta property="og:title" content="烫">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="烫烫烫">
+<meta name="twitter:title" content="烫">
 <meta name="twitter:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -138,7 +138,7 @@
 
 
 
-  <title>烫烫烫</title>
+  <title>烫</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -375,8 +375,7 @@
 
       
         
-          
-            <h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a><strong>GitHub</strong></h1><p><a href="https://github.com/nosix1992/JoyServer" title="GitHub地址" target="_blank" rel="external">GitHub地址</a></p>
+          <h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a><strong>GitHub</strong></h1><p><a href="https://github.com/nosix1992/JoyServer" title="GitHub地址" target="_blank" rel="external">GitHub地址</a></p>
 <h1 id="框架简介"><a href="#框架简介" class="headerlink" title="框架简介"></a><strong>框架简介</strong></h1><p>一个简单的游戏服务器框架demo</p>
 <h1 id="框架概要"><a href="#框架概要" class="headerlink" title="框架概要"></a><strong>框架概要</strong></h1><p>采用C++开发，依赖 : </p>
 <ul>
@@ -385,25 +384,13 @@
 <li>google-glog日志记录框架</li>
 </ul>
 <p>主要处理游戏客户端和游戏数据库的数据交换。<br>通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果<br>返回给游戏客户端，即完成了前后端的数据交换。</p>
-<h1 id="框架处理流程："><a href="#框架处理流程：" class="headerlink" title="框架处理流程："></a><strong>框架处理流程：</strong></h1><p>客户端连接→</p>
-<p>服务器分配线程池中的线程处理→</p>
-<p>线程将协议数据递交给Worker → </p>
-<p>Worker调用统一协议处理逻辑Process开始处理→ </p>
-<p>Process对协议命令码分类，并将协议包内容递交给相应的业务类→</p>
-<p>业务类处理完成后调用统一处理逻辑Process处理完成→ </p>
-<p>Worker将返回数据递交给线程并返回给客户端</p>
-<h1 id="协议处理流程："><a href="#协议处理流程：" class="headerlink" title="协议处理流程："></a><strong>协议处理流程：</strong></h1><p>客户端初次连接服务器，发送心跳→</p>
-<p>服务器返回连接成功状态→</p>
-<p>客户端发起本次协议→</p>
-<p>业务类处理数据库操作并将数据返回给客户端</p>
-<h1 id="他日将改进之处"><a href="#他日将改进之处" class="headerlink" title="他日将改进之处"></a><strong>他日将改进之处</strong></h1><ul>
-<li>降低模块间耦合度</li>
-<li>新业务协议的添加略显繁琐, business模块可以遵循开闭原则来适当重构</li>
-<li>编写维护工具</li>
-<li>数据传输协议待优化</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/27/一个简单的游戏服务器框架demo(源码已经放在GitHub)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -450,7 +437,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -459,7 +446,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -469,7 +456,170 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）/" itemprop="url">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）</a></h1>
+                <a class="post-title-link" href="/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/" itemprop="url">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T19:42:21+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="16章"><a href="#16章" class="headerlink" title="16章"></a><strong>16章</strong></h1><ul>
+<li>16.3节 ： 非阻塞connect<ul>
+<li>有三个用途：<ul>
+<li>我们想在connect的时候处理其他事情</li>
+<li>可以同时建立多个连接</li>
+<li>可以通过select设置一个更短一点的超时时间</li>
+</ul>
+</li>
+<li>实现步骤：<ol>
+<li>用fcntl把套接字设置为非阻塞</li>
+<li>处理客户端和服务器都在同一主机上的情况</li>
+<li>使用select设置超时，并处理超时情况</li>
+<li>处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/" itemprop="url">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)</a></h1>
         
 
         <div class="post-meta">
@@ -542,72 +692,17 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容</p>
 </blockquote>
-<h1 id="13章"><a href="#13章" class="headerlink" title="13章"></a><strong>13章</strong></h1><ul>
-<li>13.4节：自定义一个daemon_init函数，涉及到知识点为“如何创建一个daemon（守护进程）”，实现步骤如下：<ol>
-<li>fork之后杀掉父进程（此时子进程被init收养）这是为了为下一步setsid做准备，因为只有不是进程组首进程的进程才能调用setsid，</li>
-<li>setsid，创建一个新的会话并断开与之前的控制终端的关系，</li>
-<li>再次fork并杀掉首进程， 这样就确保了子进程不是一个会话首进程， 根据linux中获取终端的规则（只有会话首进程才能请求一个控制终端）， 这样进程永远不会重新请求一个控制终端</li>
-<li>清楚进程的umask，确保daemon创建文件和目录时拥有相应的权限</li>
-<li>修改进程的当前工作目录， 通常修改到/目录</li>
-<li>关闭进程所有不再需要的文件描述符</li>
-<li>打开/dev/null使文件描述符0、1、2指向这个设备， 以防止daemon调用在这些描述符上做I/O操作的库函数而不会意外的失败<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">#include    &quot;unp.h&quot;</div><div class="line">#include    &lt;syslog.h&gt;</div><div class="line"></div><div class="line">#define MAXFD   64</div><div class="line"></div><div class="line">extern int  daemon_proc;    /* defined in error.c */</div><div class="line"></div><div class="line">int</div><div class="line">daemon_init(const char *pname, int facility)</div><div class="line">&#123;</div><div class="line">    int     i;  </div><div class="line">    pid_t   pid;</div><div class="line"></div><div class="line">    if ( (pid = Fork()) &lt; 0)</div><div class="line">        return (-1);</div><div class="line">    else if (pid)</div><div class="line">        _exit(0);           /* parent terminates */</div><div class="line"></div><div class="line">    /* child 1 continues... */</div><div class="line"></div><div class="line">    if (setsid() &lt; 0)           /* become session leader */</div><div class="line">        return (-1);</div><div class="line"></div><div class="line">    Signal(SIGHUP, SIG_IGN);</div><div class="line">    if ( (pid = Fork()) &lt; 0)</div><div class="line">        return (-1);</div><div class="line">    else if (pid)</div><div class="line">        _exit(0);           /* child 1 terminates */</div><div class="line"></div><div class="line">    /* child 2 continues... */</div><div class="line"></div><div class="line">    daemon_proc = 1;            /* for err_XXX() functions */</div><div class="line"></div><div class="line">    chdir(&quot;/&quot;);             /* change working directory */</div><div class="line"></div><div class="line">    /* close off file descriptors */</div><div class="line">    for (i = 0; i &lt; MAXFD; i++)</div><div class="line">        close(i);</div><div class="line"></div><div class="line">    /* redirect stdin, stdout, and stderr to /dev/null */</div><div class="line">    open(&quot;/dev/null&quot;, O_RDONLY);</div><div class="line">    open(&quot;/dev/null&quot;, O_RDWR);</div><div class="line">    open(&quot;/dev/null&quot;, O_RDWR);</div><div class="line"></div><div class="line">    openlog(pname, LOG_PID, facility);</div><div class="line"></div><div class="line">    return (0);             /* success */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ul>
-<h1 id="引申知识，作业控制以及相关命令："><a href="#引申知识，作业控制以及相关命令：" class="headerlink" title="引申知识，作业控制以及相关命令："></a><strong>引申知识，作业控制以及相关命令：</strong></h1><p> <img src="http://img.blog.csdn.net/20170730195853561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ul>
-<li>另注：</li>
-</ul>
-<blockquote>
-<p>注：但是如上方到后台执行的进程，其父进程还是当前终端shell的进程，而一旦父进程退出，则会发送hangup信号给所有子进程，子进程收到hangup以后也会退出。</p>
-</blockquote>
-<h3 id="nohup和setsid用法"><a href="#nohup和setsid用法" class="headerlink" title="nohup和setsid用法"></a><strong>nohup和setsid用法</strong></h3><blockquote>
-<p>如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将父进程设为init进程；<br><img src="http://img.blog.csdn.net/20170731003942100?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test$ nohup ./o_multi_thread_process &amp;</div><div class="line">[1] 3487</div><div class="line">b@b-VirtualBox:~/my_temp_test$ nohup: ignoring input and appending output to ‘nohup.out’</div><div class="line">^C</div><div class="line">b@b-VirtualBox:~/my_temp_test$ jobs</div><div class="line">[1]+  Running                 nohup ./o_multi_thread_process &amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test$ ps -ef | grep multi</div><div class="line">b         3487  3004  0 20:05 pts/3    00:00:00 ./o_multi_thread_process</div><div class="line">b         3488  3487  0 20:05 pts/3    00:00:00 ./o_multi_thread_process</div><div class="line">b         3491  3004  0 20:05 pts/3    00:00:00 grep --color=auto multi</div><div class="line">b@b-VirtualBox:~/my_temp_test$ bg %1</div><div class="line">bash: bg: job 1 already in background</div><div class="line">b@b-VirtualBox:~/my_temp_test$ fg %1</div><div class="line">nohup ./o_multi_thread_process</div><div class="line">^Z</div><div class="line">[1]+  Stopped                 nohup ./o_multi_thread_process</div><div class="line">b@b-VirtualBox:~/my_temp_test$ bg %1</div><div class="line">[1]+ nohup ./o_multi_thread_process &amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test$ jobs -l</div><div class="line">[1]+  3487 Running                 nohup ./o_multi_thread_process &amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test$ fg %1</div><div class="line">nohup ./o_multi_thread_process</div><div class="line">^C</div><div class="line">b@b-VirtualBox:~/my_temp_test$ jobs</div><div class="line">b@b-VirtualBox:~/my_temp_test$ ps -ef | grep multi</div><div class="line">b         3499  3004  0 20:11 pts/3    00:00:00 grep --color=auto multi</div><div class="line">b@b-VirtualBox:~/my_temp_test$ setsid ./o_multi_thread_process &amp;</div><div class="line">[1] 3502</div><div class="line">b@b-VirtualBox:~/my_temp_test$ ProcessA: 3503 step1</div><div class="line">ProcessA: 3503 thread 139947724490496 step2</div><div class="line">ProcessA: 3503 thread 139947724490496 step3</div><div class="line">ProcessB: 3504 step1</div><div class="line">ProcessB: 3504 step2</div><div class="line">ProcessB: 3504 step3</div><div class="line">^C</div><div class="line">[1]+  Done                    setsid ./o_multi_thread_process</div><div class="line">b@b-VirtualBox:~/my_temp_test$ ps -ef | grep multi</div><div class="line">b         3503  1256  0 20:12 ?        00:00:00 ./o_multi_thread_process</div><div class="line">b         3504  3503  0 20:12 ?        00:00:00 ./o_multi_thread_process</div><div class="line">b         3507  3004  0 20:12 pts/3    00:00:00 grep --color=auto multi</div><div class="line">b@b-VirtualBox:~/my_temp_test$ jobs</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="disown用法"><a href="#disown用法" class="headerlink" title="disown用法"></a><strong>disown用法</strong></h3><blockquote>
-<p>那么对于已经在后台运行的进程，该怎么办呢？可以使用disown命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test$ ./o_multi_thread_process &amp;</div><div class="line">[1] 3523</div><div class="line">b@b-VirtualBox:~/my_temp_test$ ProcessA: 3523 step1</div><div class="line">ProcessA: 3523 thread 140501901821696 step2</div><div class="line">ProcessA: 3523 thread 140501901821696 step3</div><div class="line">ProcessB: 3524 step1</div><div class="line">ProcessB: 3524 step2</div><div class="line">ProcessB: 3524 step3</div><div class="line">^C</div><div class="line">b@b-VirtualBox:~/my_temp_test$ jobs -l</div><div class="line">[1]+  3523 Running                 ./o_multi_thread_process &amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test$ disown -h %1</div><div class="line">b@b-VirtualBox:~/my_temp_test$ jobs</div><div class="line">[1]+  Running                 ./o_multi_thread_process &amp;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h1 id="16章"><a href="#16章" class="headerlink" title="16章"></a><strong>16章</strong></h1><ul>
-<li><p>16.3节 ： 非阻塞connect</p>
-<ul>
-<li>有三个用途：<ul>
-<li>我们想在connect的时候处理其他事情</li>
-<li>可以同时建立多个连接</li>
-<li>可以通过select设置一个更短一点的超时时间</li>
-</ul>
-</li>
-<li>实现步骤：<ol>
-<li>用fcntl把套接字设置为非阻塞</li>
-<li>处理客户端和服务器都在同一主机上的情况</li>
-<li>使用select设置超时，并处理超时情况</li>
-<li>处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>16.6节 ： 非阻塞accept，</p>
-<ul>
-<li><p>用于解决下面问题：</p>
-<blockquote>
-<p>“用select检测socket状态，如果有连接就调用accept，这样如果在select检测到由连接请求，在调用accept之前，这个请求断开了，然后调用accept的时候就会阻塞在哪里，除非这时有另外一个连接请求，如果没有，则一直被阻塞在那里。”</p>
-</blockquote>
-</li>
-<li><p>解决方案：</p>
-<blockquote>
-<p>使用select在一个监听套接字准备好要被accept时总是把套接字设置为非阻塞</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="26章和30章"><a href="#26章和30章" class="headerlink" title="26章和30章"></a><strong>26章和30章</strong></h1><p>介绍了线程和并发/并行的服务器设计范式，等下篇TLPI/APUE的笔记一起整理吧</p>
-
-          
+<h1 id="13章"><a href="#13章" class="headerlink" title="13章"></a><strong>13章</strong></h1><h1 id="引申知识，作业控制以及相关命令："><a href="#引申知识，作业控制以及相关命令：" class="headerlink" title="引申知识，作业控制以及相关命令："></a><strong>引申知识，作业控制以及相关命令：</strong></h1><p> <img src="http://img.blog.csdn.net/20170730195853561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -663,7 +758,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -746,8 +841,7 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>crontab命令被用来提交和管理用户的需要周期性执行的任务，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
 </blockquote>
 <ul>
@@ -756,23 +850,13 @@
 <li>-r：删除该用户的计时器设置；</li>
 <li>-u&lt;用户名称&gt;：指定要设定计时器的用户名称</li>
 </ul>
-<blockquote>
-<p>m h  dom mon dow   command<br>分 时 日 月 周 命令</p>
-</blockquote>
-<ul>
-<li>星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作</li>
-<li>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9” </li>
-<li>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</li>
-<li>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。<br>同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</li>
-</ul>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a><strong>例子</strong></h3><ul>
-<li><p><code>*/1 * * * * sed -i &#39;$a\nani&#39; /home/b/my_temp_test/practice.cpp</code><br>每隔一分钟就在practice.cpp文件的最后一行插入字符串“nani”</p>
-</li>
-<li><p><code>3,15 8-11/2 * 12 0 sed -i &#39;$a\nani&#39; /home/b/my_temp_test/practice.cpp</code><br>12月的周日的8-11时的时间段每隔两个小时就在第3分钟和第15分钟的时候，<br>在practice.cpp文件的最后一行插入字符串“nani”</p>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/09/crontab笔记整理/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -819,7 +903,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/03/重读UNIX网络编程第三章到第十一章笔记整理(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -828,7 +912,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -838,7 +922,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理/" itemprop="url">重读UNIX网络编程第三章到第十一章笔记整理</a></h1>
+                <a class="post-title-link" href="/2017/07/03/重读UNIX网络编程第三章到第十一章笔记整理(二)/" itemprop="url">重读UNIX网络编程第三章到第十一章笔记整理(二)</a></h1>
         
 
         <div class="post-meta">
@@ -850,8 +934,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-02T19:01:21+08:00">
-                2017-07-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-03T21:01:21+08:00">
+                2017-07-03
               </time>
             
 
@@ -911,54 +995,7 @@
 
       
         
-          
-            <blockquote>
-<p>因为第二章之后基本都是纯Socket API的内容， 第三章到第十一章的笔记整理合并到一起。</p>
-</blockquote>
-<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a><strong>第三章</strong></h1><ul>
-<li>3.4 ：字节排序函数，涉及到大小端，处理网络字节序和主机字节序的转换</li>
-<li>3.6 ： 地址转换函数，吹在ASCII字符串与网络字节序的二进制值之间转换网际地址<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a><strong>第四章</strong></h1></li>
-<li><p><img src="http://img.blog.csdn.net/20170729013008696?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729013634366?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729013930226?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p>4.9节：close函数， 涉及到描述符引用计数，所以多进程并发服务器才可以共享已连接套接字，因为父进程调用close函数知识把该套接字标记成已关闭并导致该套接字描述符减1。只要引用计数的值仍大于0，就不会引发tcp的四分组连接终止序列</p>
-</li>
-</ul>
-<h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a><strong>第五章</strong></h1><ul>
-<li>5.9节：处理SIGCHLD信号， 涉及到僵死进程（子进程终止时给父进程发送了一个SIGCHLD信号，若父进程未加处理，则子进程进入僵死状态），所以要建立该信号处理函数，并在函数中调用waitpid来处理</li>
-<li>5.10节 ：使用wait或者waitpid来处理已终止的子进程，通常是使用waitpid并指定WNOHANG选项，来告知waitpid在有尚未终止的子进程在运行时不要阻塞。</li>
-</ul>
-<h1 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a><strong>第六章</strong></h1><ul>
-<li><p><img src="http://img.blog.csdn.net/20170729020522848?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="列表内容"></p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729020609873?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729020641599?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729020801057?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729020828685?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p>同步I/O操作：导致请求进程阻塞，知道I/O操作完成</p>
-</li>
-<li><p>异步I/O操作：不导致请求进程阻塞</p>
-</li>
-<li><p><img src="http://img.blog.csdn.net/20170729021237265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p>6.3节 ： select函数，必须得清楚select跟linux特有的epoll的区别， 有三点：</p>
-<ul>
-<li>数量限制 ： select默认只支持1024个；epoll并没有最大数目限制</li>
-<li>内存拷贝 ： select需要把fd_set数据结构从用户态到内核态来回拷贝； 而epoll是基于mmap技术用同一块内存实现的</li>
-<li>效率 ： select每次都要遍历所有文件描述符， 集合越大速度越慢；而epoll维护着一个就绪列表， 每次只需要简单的从列表里取出就行了，只有活跃的socket才会触发相关callback </li>
-</ul>
-</li>
-<li><p>6.6节 ： shutdown函数，shutdown可以不用管引用计数就激发tcp的正常连接终止序列。当关闭连接的写这一半，对于tcp连接， 这称为<strong>半关闭（half-close）</strong><img src="http://img.blog.csdn.net/20170729022856179?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-</ul>
-<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a><strong>第七章</strong></h1><ul>
+          <h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a><strong>第七章</strong></h1><ul>
 <li><p>7.5节 ： 通用套接字选项， 常用的有</p>
 <ul>
 <li>SO_KEEPALIVE</li>
@@ -975,1056 +1012,13 @@
 </li>
 <li>7.11节 ：fcntl函数，常用的用法是使用F_SETFL命令设置O_NOBLOCK文件状态标志， 我们可以把一个套接字设置为非阻塞型。</li>
 </ul>
-<h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a><strong>第八章</strong></h1><ul>
-<li><p><img src="http://img.blog.csdn.net/20170729024826032?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="列表内容"></p>
-</li>
-<li><p>8.11节 ： UDP的connect函数，可以获得性能提升，因为未连接的udp每次sendto发送数据报的时候都要连接然后发送然后断开， 之后第二个数据报又要重复上述步骤，而连接后的udp套接字只需要连接然后发送第一个数据报然后发送第二个、第三个就行了<br><img src="http://img.blog.csdn.net/20170729025132709?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/05/重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）/" itemprop="url">重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T19:01:21+08:00">
-                2017-06-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>为加深理解, 故本章老笔记内容大幅删减重写.<br>第二章重点如下 : </p>
-<ul>
-<li>TCP (Transmission Control Protocol)传输控制协议. 特性如下 : <ul>
-<li>面向连接</li>
-<li>全双工</li>
-<li>可靠, 关心确认/超时/重传等, 保证顺序</li>
-<li>流量控制</li>
-<li>字节流, 没有任何记录边界</li>
-</ul>
-</li>
-<li>UDP (User Datagram Protocol)用户数据报协议. 特性如下 : <ul>
-<li>无连接</li>
-<li>不可靠, 不保证顺序/是否到达/是否重复</li>
-<li>每个数据报都有一个长度</li>
-</ul>
-</li>
-<li><p>TCP三路握手(three-way handshake)<br><img src="http://img.blog.csdn.net/20170604224047107?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP三路握手图"></p>
-</li>
-<li><p>TCP选项 : </p>
-<ul>
-<li>MSS选项 发送SYN的TCP一端使用本选项通告对端他的最大分节大小(maximum segment size)</li>
-<li>窗口规模选项</li>
-<li>时间戳选项, 对于高速网络连接是必要的.</li>
-</ul>
-</li>
-<li><p>TCP连接终止 :<br><img src="http://img.blog.csdn.net/20170604230427728?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP连接终止图"></p>
-</li>
-<li><p>TCP状态转换图<br><img src="http://img.blog.csdn.net/20170604234518885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP状态转换图"></p>
-</li>
-<li><p>TCP连接的分组交换<br><img src="http://img.blog.csdn.net/20170604234715314?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP连接的分组交换图"></p>
-</li>
-<li><p>TIME_WAIT状态存在的理由 :</p>
-<ul>
-<li>可靠地实现TCP全双工连接的终止</li>
-<li>允许老的重复分节在网络中消逝 </li>
-</ul>
-</li>
-<li>分节是TCP传递给IP的数据单元</li>
-<li>Linux下面一共有65535个端口<ul>
-<li>其中1–1023是系统保留的，</li>
-<li>1024–65535是供用户使用的。</li>
-<li>0到1024是众所周知的端口（知名端口，常用于系统服务等，例如http服务的端口号是80)。个人写的应用程序，尽量不要使用0到1024之间的端口号。</li>
-</ul>
-</li>
-<li>套接字对是一个定义该连接的两个端点的四元组:<ul>
-<li>本地IP地址</li>
-<li>本地TCP端口号</li>
-<li>外地IP地址</li>
-<li>外地TCP端口号</li>
-</ul>
-</li>
-<li>缓冲区大小及限制<ul>
-<li>IPv4数据报的最大大小为65535字节, 因为其总长度字段占据16位</li>
-<li>以太网的MTU是1500字节, </li>
-<li>IPv4要求的最小链路MTU是68字节, 这允许最大的IPv4首部(包括20字节的固定长度部分和最多40字节的选项部分)拼接最小的片段</li>
-<li>在两个主机之间的路径中最小的MTU成为路径MTU</li>
-<li>当一个IP数据报将从某个接口送出时, 如果他的大小超过相应链路的MTU, IPv4和IPv6都将执行分片</li>
-<li>IPv4首部的”不分片(don’t fragment)”位(即DF位)若被设置, 那么不管是发送这些数据报的主机还是转发他们的路由器, 都不允许对他们分片</li>
-<li>IPv4和IPv6都定义了最小重组缓冲区大小(minimum reassembly buffersize), IPv4的主机要求不能超过576字节的数据， 所以很多使用UDP的IPv4应用（如DNS）都避免产生大于这个大小的数据报</li>
-<li>MSS : TCP最大分节大小， 在以太网中使用IPv4的MSS值为1460（以太网的MTU - IPv4首部 - TCP首部 = 1500 - 20 - 20）</li>
-</ul>
-</li>
-<li>TCP输出示意图 :<br><img src="http://img.blog.csdn.net/20170607102732371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP输出示意图"></li>
-<li>UDP输出示意图 (因为UDP是不可靠的, 他不必保存应用进程数据的一个副本, 因此无需一个真正的发送缓冲区, 所以为虚线框):<br><img src="http://img.blog.csdn.net/20170607102827548?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="UDP输出示意图"></li>
-<li>常见因特网应用所使用的协议<ul>
-<li>ping ： ICMP</li>
-<li>DNS ： UDP、TCP </li>
-<li>DHCP : UDP</li>
-<li>SSH : TCP</li>
-<li>FTP : TCP</li>
-<li>HTTP : TCP</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/重读UNIX网络编程第一章笔记修正/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/02/重读UNIX网络编程第一章笔记修正/" itemprop="url">重读UNIX网络编程第一章笔记修正</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T19:01:21+08:00">
-                2017-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>又准备从头看一遍unp, 把一些老笔记放到博客里来就当网盘吧, 顺便修正以及删减一些之前不够精炼的老笔记内容.  </p>
-<p>第一章重点如下 :      </p>
-<ul>
-<li>OSI (open systems interconnection), 即计算机通信开放系统互联模型</li>
-<li>OSI分为七层, 从上到下依次为<ul>
-<li>应用层</li>
-<li>表现层</li>
-<li>会话层</li>
-<li>传输层</li>
-<li>网络层</li>
-<li>数据链路层</li>
-<li>物理层</li>
-</ul>
-</li>
-<li>对于网际网协议族, OSI顶上三层合并为一层, 称为应用层. 传输层对应着tcp/udp等, 网络层对应着IPv4/IPv6, OSI的数据链路层和物理层是随系统提供的设备驱动程序和网络硬件</li>
-<li>套接字编程接口是从OSI顶上三层(网际协议的应用层)进入传输层的接口.</li>
-<li>为何套接字要设计为顶上三层进入传输层的接口??因为OSI顶上三层处理具体网络应用的所有细节却对通信细节了解很少;底下四层对具体网络应用了解不多, 却处理所有的通信细节.</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/01/kbe服务端笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/01/kbe服务端笔记/" itemprop="url">kbe服务端笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T19:48:28+08:00">
-                2017-04-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kbe/" itemprop="url" rel="index">
-                    <span itemprop="name">kbe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="main"><a href="#main" class="headerlink" title="main"></a><strong>main</strong></h2><p>看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">intKBENGINE_MAIN(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">	ENGINE_COMPONENT_INFO&amp;info = g_kbeSrvConfig.getXXX();</div><div class="line">	returnkbeMainT&lt;XXX&gt;(argc, argv, YYY, info.externalPorts_min, </div><div class="line">		info.externalPorts_max, info.externalInterface, 0, info.internalInterface);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这个宏展开是这样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">kbeMain(intargc, char* argv[]);																						\</div><div class="line">intmain(intargc, char* argv[])																						\</div><div class="line">&#123;																														\</div><div class="line">	loadConfig();																										\</div><div class="line">	g_componentID = genUUID64();																						\</div><div class="line">	parseMainCommandArgs(argc, argv);																					\</div><div class="line">	char dumpname[MAX_BUF] = &#123;0&#125;;																						\</div><div class="line">	kbe_snprintf(dumpname, MAX_BUF, &quot;%&quot;PRAppID, g_componentID);															\</div><div class="line">	KBEngine::exception::installCrashHandler(1, dumpname);																\</div><div class="line">	intretcode = -1;																									\</div><div class="line">	THREAD_TRY_EXECUTION;																								\</div><div class="line">	retcode = kbeMain(argc, argv);																						\</div><div class="line">	THREAD_HANDLE_CRASH;																								\</div><div class="line">	returnretcode;																										\</div><div class="line">&#125;																														\</div></pre></td></tr></table></figure></p>
-<p>稍微整理一下之后main函数看起来很像是这个样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">intkbeMain(intargc, char* argv[]);</div><div class="line">intmain(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">    loadConfig();</div><div class="line">    g_componentID = genUUID64();</div><div class="line">    parseMainCommandArgs(argc, argv);</div><div class="line">chardumpname[MAX_BUF] = &#123;0&#125;;</div><div class="line">    kbe_snprintf(dumpname, MAX_BUF, &quot;%&quot;PRAppID, g_componentID);</div><div class="line">    KBEngine::exception::installCrashHandler(1, dumpname);</div><div class="line">intretcode = -1;</div><div class="line">    THREAD_TRY_EXECUTION;</div><div class="line">retcode = kbeMain(argc, argv);</div><div class="line">    THREAD_HANDLE_CRASH;</div><div class="line">return (retcode);</div><div class="line">&#125;</div><div class="line">intkbeMain(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">		ENGINE_COMPONENT_INFO&amp;info = g_kbeSrvConfig.getXXX();</div><div class="line">		return kbeMainT&lt;XXX&gt;(argc, argv, YYY, info.externalPorts_min, info.externalPorts_max, info.externalInterface, 0, info.internalInterface);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>基本可以理解为每个组件的main函数流程都是一样的，只是在特化kbeMainT时所给参数不一样。</p>
-<h2 id="ServerConfig："><a href="#ServerConfig：" class="headerlink" title="ServerConfig："></a><strong>ServerConfig：</strong></h2><p>ServerConfig涉及到服务端每个组件的各种配置选项，比如数据库访问。它的构造在组件名.cpp中，比如loginapp就在loginapp.cpp，machine就在machine.cpp中，loginapp的如下（server/loginapp/loginapp.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServerConfigg_serverConfig;</div><div class="line">KBE_SINGLETON_INIT(Loginapp);</div></pre></td></tr></table></figure></p>
-<p>它的初始化（配置）工作主要由loadConfig接口完成，如下（lib/server/kbemain.h）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">inlinevoidloadConfig()</div><div class="line">&#123;</div><div class="line">	Resmgr::getSingleton().initialize();</div><div class="line"></div><div class="line">	// &quot;../../res/server/kbengine_defs.xml&quot;</div><div class="line">	g_kbeSrvConfig.loadConfig(&quot;server/kbengine_defs.xml&quot;);</div><div class="line"></div><div class="line">	// &quot;../../../assets/res/server/kbengine.xml&quot;</div><div class="line">	g_kbeSrvConfig.loadConfig(&quot;server/kbengine.xml&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="Resmgr："><a href="#Resmgr：" class="headerlink" title="Resmgr："></a><strong>Resmgr：</strong></h2><p>Resmgr负责管理kbe的所有资源管理，比如资源路径，环境变量。Resmgr的构造地方如下（lib/network/fixed_messages.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">FixedMessages::FixedMessages():</div><div class="line">_infomap(),</div><div class="line">_loaded(false)</div><div class="line">&#123;</div><div class="line">	newResmgr();</div><div class="line">	Resmgr::getSingleton().initialize();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<pre><code>我们可以理解为FixedMessages构造的时候Resmgr就构造了。
-Resmgr的初始化（配置）工作主要由initialize接口完成，代码如上。
-</code></pre><h2 id="FixedMessages："><a href="#FixedMessages：" class="headerlink" title="FixedMessages："></a><strong>FixedMessages：</strong></h2><p>FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。<br>    它的构造地方如下（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">MessageHandlers::MessageHandlers():</div><div class="line">msgHandlers_(),</div><div class="line">msgID_(1),</div><div class="line">exposedMessages_()</div><div class="line">&#123;</div><div class="line">	g_fm = Network::FixedMessages::getSingletonPtr();</div><div class="line">	if(g_fm == NULL)</div><div class="line">		g_fm = newNetwork::FixedMessages;</div><div class="line"></div><div class="line">	Network::FixedMessages::getSingleton().loadConfig(&quot;server/messages_fixed.xml&quot;);</div><div class="line">	messageHandlers().push_back(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>意即MessageHandlers构造的时候，如果它还没构造，那就构造。<br>它的初始化（配置）是由loadConfig接口来完成的，代码见上。</p>
-<h2 id="loginapp"><a href="#loginapp" class="headerlink" title="loginapp"></a><strong>loginapp</strong></h2><blockquote>
-<p>Loginapp组件主要用来处理账户登录/注册的业务</p>
-</blockquote>
-<h4 id="消息与handler映射的建立："><a href="#消息与handler映射的建立：" class="headerlink" title="消息与handler映射的建立："></a><strong>消息与handler映射的建立：</strong></h4><p>两次包含xxx_interface.h，实现声明和定义：<br>每个app组件的接口定义都在xxxapp_interface.cpp中开始，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#include&quot;loginapp_interface.h&quot;</div><div class="line">#defineDEFINE_IN_INTERFACE</div><div class="line">#defineLOGINAPP</div><div class="line">#include&quot;loginapp_interface.h&quot;</div><div class="line"></div><div class="line">namespaceKBEngine&#123;</div><div class="line">namespaceLoginappInterface&#123;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>所有的戏法都是通过包含loginapp_interface.h前后定义了DEFINE_IN_INTERFACE和LOGINAPP来完成的。第一次的包含就是各种变量，类的声明（当然也有一些类是声明类时使用类inline函数定义完成了，比如MESSAGE_ARGS0/1/2……）。<br>我们看看loginapp_interface.h中的代码：</p>
-<h4 id="消息与handlers的存储"><a href="#消息与handlers的存储" class="headerlink" title="消息与handlers的存储"></a><strong>消息与handlers的存储</strong></h4><p>首先是这一句：<br>NETWORK_INTERFACE_DECLARE_BEGIN(LoginappInterface)<br>此句展开的话声明和定义了Network::MessageHandlers messageHandlers（记住它们都在LoginappInterface命名空间内），展开宏之后的代码看起来像这样（是的，你的眼睛是好的，没有}闭合）：<br>声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">namespaceLoginappInterface &#123;</div><div class="line">extern Network::MessageHandlers messageHandlers;</div><div class="line">定义：</div><div class="line">namespaceLoginappInterface &#123;</div><div class="line">    Network::MessageHandlers messageHandlers;</div></pre></td></tr></table></figure></p>
-<h4 id="消息与handle建立映射"><a href="#消息与handle建立映射" class="headerlink" title="消息与handle建立映射"></a><strong>消息与handle建立映射</strong></h4><p>然后是这一句：<br><code>LOGINAPP_MESSAGE_DECLARE_ARGS0(importClientMessages,                            NETWORK_FIXED_MESSAGE)</code><br>此句展开的话分明声明和定义了一个importClientMessagesLoginappMessagehandler0的类，这个类继承自Network::MessageHandler，这里就是实现了handle的虚函数接口；声明和定义了importClientMessagesLoginappMessagehandler0的一个名为importClientMessages的全局变量；声明和定义了importClientMessagesArgs0的类，这个类继承自Network::MessageArgs。我们一个个地分析一下：<br>首先展开下面的宏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOGINAPP_MESSAGE_DECLARE_ARGS0(importClientMessages,							NETWORK_FIXED_MESSAGE)</div></pre></td></tr></table></figure></p>
-<p>之后是这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#defineLOGINAPP_MESSAGE_DECLARE_ARGS0(NAME, MSG_LENGTH)						\</div><div class="line">LOGINAPP_MESSAGE_HANDLER_ARGS0(NAME)										\</div><div class="line">NETWORK_MESSAGE_DECLARE_ARGS0(Loginapp, NAME,								\</div><div class="line">				NAME##LoginappMessagehandler0, MSG_LENGTH)</div><div class="line">展开LOGINAPP_MESSAGE_HANDLER_ARGS0(NAME)之后分别得到importClientMessagesLoginappMessagehandler0的声明和定义：</div><div class="line">声明：</div><div class="line">classimportClientMessagesLoginappMessagehandler0 : public Network::MessageHandler</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">virtualvoidhandle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s);</div><div class="line">&#125;;</div><div class="line">定义：</div><div class="line">voidimportClientMessagesLoginappMessagehandler0::handle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s)</div><div class="line">&#123;</div><div class="line">    KBEngine::Loginapp::getSingleton().importClientMessages(pChannel);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>（handle/handler，傻傻分不清楚。。。这里的handle是xxxApp中真正用来处理这个消息的接口，而这里的handler提供一个中间层的作用，集中处理一些通用的工作，可以将耦合减少一点）<br>上面完成了相当于是importClientMessages消息的handler的声明和定义，下面则将这个类实例化之后添加到messageHandlers：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#defineNETWORK_MESSAGE_DECLARE_ARGS0(DOMAIN, NAME, MSGHANDLER,		\</div><div class="line">											MSG_LENGTH)				\</div><div class="line">	NETWORK_MESSAGE_HANDLER(DOMAIN, NAME, MSGHANDLER, MSG_LENGTH, 0)\</div><div class="line">	MESSAGE_ARGS0(NAME)			</div><div class="line">										\</div></pre></td></tr></table></figure></p>
-<p>展开NETWORK_MESSAGE_HANDLER(DOMAIN, NAME, MSGHANDLER, MSG_LENGTH, 0)之后得到importClientMessages的handler类（importClientMessagesLoginappMessagehandler0）的名为importClientMessages的全局变量（不过欣慰的是他们都在各自的XXXInterface命名空间内）。<br>声明：<br><code>externconstimportClientMessagesLoginappMessagehandler0&amp;importClientMessages;</code></p>
-<p>定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">importClientMessagesLoginappMessagehandler0* pimportClientMessages  = static_cast&lt;importClientMessagesLoginappMessagehandler0*&gt;(messageHandlers.add(&quot;Loginapp::importClientMessages&quot;,new importClientMessagesArgs0, NETWORK_FIXED_MESSAGE, newimportClientMessagesLoginappMessagehandler0);</div><div class="line">constimportClientMessagesLoginappMessagehandler0&amp;importClientMessages = *pimportClientMessages;</div></pre></td></tr></table></figure></p>
-<p>下面的MESSAGE_ARGS0(NAME)展开后对importClientMessagesArgs0进行了声明和定义（其他它声明的时候就已经完成了全部的定义），声明的时候就是个空语句：<br>声明兼定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">classimportClientMessagesArgs0 : public Network::MessageArgs</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">importClientMessagesArgs0() :Network::MessageArgs() &#123;&#125;</div><div class="line">    ~importClientMessagesArgs0() &#123;&#125;</div><div class="line"></div><div class="line">staticvoidstaticAddToBundle(Network::Bundle&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">staticvoidstaticAddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtual int32 dataSize(void)</div><div class="line">    &#123;</div><div class="line">return 0;</div><div class="line">    &#125;</div><div class="line">virtualvoidaddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtualvoidcreateFromStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>唯一需要小注意一下的就是importClientMessagesArgs0的声明（兼定义）是和importClientMessagesLoginappMessagehandler0的实例的声明和定义是错开的，因为后者实例化添加到messageHandlers的时候需要new一个importClientMessagesArgs0的实例。</p>
-<h4 id="流程的伪代码"><a href="#流程的伪代码" class="headerlink" title="流程的伪代码"></a><strong>流程的伪代码</strong></h4><pre><code>稍微整理一下之后，使用LOGINAPP_MESSAGE_HANDLER_ARGSn建立一个消息到handler的映射的代码很像是这样：
-声明：（第一次包含loginapp_interface.h产生的代码）
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">classimportClientMessagesLoginappMessagehandler0 : public Network::MessageHandler</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">virtualvoidhandle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">externconstimportClientMessagesLoginappMessagehandler0&amp;importClientMessages;</div><div class="line"></div><div class="line">classimportClientMessagesArgs0 : public Network::MessageArgs</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">importClientMessagesArgs0() :Network::MessageArgs() &#123;&#125;</div><div class="line">    ~importClientMessagesArgs0() &#123;&#125;</div><div class="line"></div><div class="line">staticvoidstaticAddToBundle(Network::Bundle&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">staticvoidstaticAddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtual int32 dataSize(void)</div><div class="line">    &#123;</div><div class="line">return 0;</div><div class="line">    &#125;</div><div class="line">virtualvoidaddToStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">virtualvoidcreateFromStream(MemoryStream&amp;s)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<pre><code>定义：（定义DEFINE_IN_INTERFACE和LOGINAPP之后第二次包含loginapp_interface.h产生的代码）
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">voidimportClientMessagesLoginappMessagehandler0::handle(Network::Channel* pChannel, KBEngine::MemoryStream&amp;s)</div><div class="line">&#123;</div><div class="line">    KBEngine::Loginapp::getSingleton().importClientMessages(pChannel);</div><div class="line">&#125;</div><div class="line"></div><div class="line">importClientMessagesLoginappMessagehandler0* pimportClientMessages </div><div class="line">= static_cast&lt;importClientMessagesLoginappMessagehandler0*&gt;(messageHandlers.add(&quot;Loginapp::importClientMessages&quot;,</div><div class="line">newimportClientMessagesArgs0,</div><div class="line">                                                                                  NETWORK_FIXED_MESSAGE,</div><div class="line">newimportClientMessagesLoginappMessagehandler0);</div><div class="line">constimportClientMessagesLoginappMessagehandler0&amp;importClientMessages = *pimportClientMessages;</div></pre></td></tr></table></figure>
-<h4 id="消息id：固定消息与非固定消息"><a href="#消息id：固定消息与非固定消息" class="headerlink" title="消息id：固定消息与非固定消息"></a><strong>消息id：固定消息与非固定消息</strong></h4><p>要接着v0.0.3的分析继续写，回过头来要看之前写的东西说实话自己都有点难以理解。。。不过出于幸运或者努力，总算是看懂了;-(，读源代码（感觉特别是C++）本来就不是件容易的事，所以读源代码一定要做好长期战斗的准备。<br>上面我们分析到了，其实一个消息，就是由这样一个宏来和它的handle建立链接的：<br>LOGINAPP_MESSAGE_DECLARE_ARGS0(importClientMessages,    NETWORK_FIXED_MESSAGE)<br>通过上面的分析，我们得知，实际上建立消息和handle映射，起到核心作用的接口是messageHandlers.add(xxx, xxxx)，所以我们跟进去看看（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">MessageHandler* MessageHandlers::add(std::stringihName, MessageArgs* args, </div><div class="line">	int32msgLen, MessageHandler* msgHandler)</div><div class="line">&#123;</div><div class="line">	if(msgID_ == 1)</div><div class="line">	&#123;</div><div class="line">		//printf(&quot;\n------------------------------------------------------------------\n&quot;);</div><div class="line">		//printf(&quot;KBEMessage_handlers begin:\n&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//bool isfixedMsg = false;</div><div class="line"></div><div class="line">	FixedMessages::MSGInfo* msgInfo = FixedMessages::getSingleton().isFixed(ihName.c_str());</div><div class="line">	if(msgInfo == NULL)</div><div class="line">	&#123;</div><div class="line">		while(true)</div><div class="line">		&#123;</div><div class="line">			if(FixedMessages::getSingleton().isFixed(msgID_))</div><div class="line">			&#123;</div><div class="line">				msgID_++;</div><div class="line">				//isfixedMsg = true;</div><div class="line">			&#125;</div><div class="line">			else</div><div class="line">			&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line"></div><div class="line">		msgHandler-&gt;msgID = msgID_++;</div><div class="line">	&#125;</div><div class="line">	else</div><div class="line">	&#123;</div><div class="line">		msgHandler-&gt;msgID = msgInfo-&gt;msgid;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	msgHandler-&gt;name = ihName;					</div><div class="line">	msgHandler-&gt;pArgs = args;</div><div class="line">	msgHandler-&gt;msgLen = msgLen;	</div><div class="line">	msgHandler-&gt;exposed = false;</div><div class="line">	msgHandler-&gt;pMessageHandlers = this;</div><div class="line">	msgHandler-&gt;onInstall();</div><div class="line"></div><div class="line">	msgHandlers_[msgHandler-&gt;msgID] = msgHandler;</div><div class="line">	</div><div class="line">	if(msgLen == NETWORK_VARIABLE_MESSAGE)</div><div class="line">	&#123;</div><div class="line">		//printf(&quot;\tMessageHandlers::add(%d): name=%s, msgID=%d, size=Variable.\n&quot;, </div><div class="line">		//	(int32)msgHandlers_.size(), ihName.c_str(), msgHandler-&gt;msgID);</div><div class="line">	&#125;</div><div class="line">	else</div><div class="line">	&#123;</div><div class="line">		if(msgLen == 0)</div><div class="line">		&#123;</div><div class="line">			msgHandler-&gt;msgLen = args-&gt;dataSize();</div><div class="line"></div><div class="line">			if(msgHandler-&gt;type() == NETWORK_MESSAGE_TYPE_ENTITY)</div><div class="line">			&#123;</div><div class="line">				msgHandler-&gt;msgLen += sizeof(ENTITY_ID);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		//printf(&quot;\tMessageHandlers::add(%d): name=%s, msgID=%d, size=Fixed(%d).\n&quot;, </div><div class="line">		//		(int32)msgHandlers_.size(), ihName.c_str(), msgHandler-&gt;msgID, msgHandler-&gt;msgLen);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//if(isfixedMsg)</div><div class="line">	//	printf(&quot;\t\t!!!message is fixed.!!!\n&quot;);</div><div class="line"></div><div class="line">	returnmsgHandler;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>大意可以理解为，首先看看消息名称是不是一个固定消息，我们跟进去看看（lib/network/fixed_messages.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">FixedMessages::MSGInfo* FixedMessages::isFixed(constchar* msgName)</div><div class="line">&#123;</div><div class="line">	MSGINFO_MAP::iteratoriter = _infomap.find(msgName);</div><div class="line">	if(iter != _infomap.end())</div><div class="line">	&#123;</div><div class="line">		MSGInfo* infos = &amp;iter-&gt;second;</div><div class="line">		returninfos;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	returnNULL;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//-------------------------------------------------------------------------------------</div><div class="line">boolFixedMessages::isFixed(MessageIDmsgid)</div><div class="line">&#123;</div><div class="line">	MSGINFO_MAP::iteratoriter = _infomap.begin();</div><div class="line">	while (iter != _infomap.end())</div><div class="line">	&#123;</div><div class="line">		FixedMessages::MSGInfo&amp;infos = iter-&gt;second;</div><div class="line">		if(infos.msgid == msgid)</div><div class="line">			returntrue;</div><div class="line"></div><div class="line">		++iter;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	returnfalse;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h5 id="固定消息"><a href="#固定消息" class="headerlink" title="固定消息"></a><strong>固定消息</strong></h5><p>通过通读FixedMessages（fixed_message.h/.cpp）可以看到这个_infomap是在loadConfig中建立的，这个_infomap就是所谓的固定消息（fixed message）与其id的映射表。loadConfig就是检视server/messages_fixed.xml，将其中的消息名称与其id关联建立这个映射表。我们继续接着看MessageHandlers::add接口。</p>
-<h5 id="非固定消息"><a href="#非固定消息" class="headerlink" title="非固定消息"></a><strong>非固定消息</strong></h5><p>对于isFixed为假的消息（非固定消息），则为其生成一个id（随着调用add的次序依次递增），这个id是在MessageHandlers类中唯一的，而每个组件的MessageHandlers又是处于自己的命名空间内，所以当出现某个组件的非固定消息时，则会为其生成单一组件内唯一的id（但这个id并不是所有组件内唯一的）。于是可能出现这种情况，Loginapp::xxxx与Dbmgr::yyyy都是非固定消息，但他们却有着同样的消息id，此时若有其他组件发送其中任一消息给其他组件，接受消息的组件将无法识别到底是Loginapp::xxxx或者是Dbmgr::yyyy。当然，只要我们将非固定消息发送给所属的组件，则不会有问题（上例中任何组件将Loginapp::xxxx发送给loginapp都是不会出乱子的）。</p>
-<h2 id="dbmgr"><a href="#dbmgr" class="headerlink" title="dbmgr"></a><strong>dbmgr</strong></h2><blockquote>
-<p>dbmgr组件主要负责数据库相关的事务，比如：账户登录/注册事务；账户充值</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/11/kbe的UE4的demo大体解读/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/11/kbe的UE4的demo大体解读/" itemprop="url">kbe的UE4的demo大体解读</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-11T11:41:58+08:00">
-                2017-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kbe/" itemprop="url" rel="index">
-                    <span itemprop="name">kbe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>写到一半发现论坛的热门帖子里官方写了个u3d的demo源码解析,  内容几乎重复, u3d跟ue4的demo框架流程几乎都是差不多的, 直接给出官方帖子的链接好了, 尴尬:<br><a href="http://bbs.kbengine.org/forum.php?mod=viewthread&amp;tid=166" target="_blank" rel="external">http://bbs.kbengine.org/forum.php?mod=viewthread&amp;tid=166</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/10/kbe之ubuntu下的编译/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/10/kbe之ubuntu下的编译/" itemprop="url">kbe之ubuntu下的编译</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T12:31:29+08:00">
-                2017-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kbe/" itemprop="url" rel="index">
-                    <span itemprop="name">kbe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>感觉之前的博客已经整理了大多数之前的关于基础的私人笔记, 现在应该可以讨论一下实操的东西了.<br>先来一发之前的kbe在ubuntu下的编译笔记吧, 因为官方对于ubuntu下的kbe编译文档是有问题的.</p>
-</blockquote>
-<h2 id="编译步骤"><a href="#编译步骤" class="headerlink" title="编译步骤"></a><strong>编译步骤</strong></h2><ol>
-<li><p>安装openssl : </p>
-<ol>
-<li>sudo apt-get install libssl-dev</li>
-</ol>
-</li>
-<li><p>安装mysql : </p>
-<ol>
-<li>sudo apt-get install libmysqld-dev</li>
-<li>sudo apt-get install mysql-server</li>
-</ol>
-</li>
-<li><p>编译kbe : </p>
-<ol>
-<li>cd kbengine/kbe/src</li>
-<li>chmod -R 755 .</li>
-<li>make</li>
-</ol>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/09/kbe之1分钟完成安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/09/kbe之1分钟完成安装/" itemprop="url">kbe之1分钟完成安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T12:38:21+08:00">
-                2017-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kbe/" itemprop="url" rel="index">
-                    <span itemprop="name">kbe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>官方是有自动化的安装py脚本的, 不过还是有很多小坑的.<br>不过其实脚本主要也就是只做两件事, 其他都是可选的: </p>
-<ul>
-<li>配置环境变量</li>
-<li>安装mysql</li>
-</ul>
-</blockquote>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a><strong>安装步骤</strong></h2><blockquote>
-<p>安装kbe之前请提前在mysql里</p>
-<ul>
-<li>建一个数据库(比如建一个数据库kbe_database)</li>
-<li>一个至少拥有select,insert,update,delete,create,drop权限的用户(比如这个用户是kbe_user)</li>
-</ul>
-<p>(<em>具体详情请谷歌, 本篇文章是讲kbe的安装的, 不讨论mysql, 弄完mysql之后就可以开始下面的1分钟kbe安装教程啦</em>)</p>
-</blockquote>
-<ul>
-<li>找到你的kbe根目录, 然后进入根目录, 比如你的kbe根目录是kbengine, 则 : <ol>
-<li>cd kbengine</li>
-<li>sudo python kbengine/kbe/tools/server/install/installer.py install</li>
-</ol>
-</li>
-<li>然后它就会问你 :<br><code>Install KBEngine to Linux-account(No input is kbe):</code><br>   为了简单起见, 建议直接填写你当前的linux用户名称, 比如我的是”b”</li>
-<li>然后就是开始配置环境变量了, 它就会显示</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Check the dependences:</div><div class="line">- kbe_environment: checking...</div><div class="line">ERROR: KBE_ROOT: is error! The directory or file not found:</div><div class="line">KBE_ROOT//kbe</div><div class="line">KBE_ROOT=</div><div class="line"></div><div class="line">KBE_ROOT current: </div><div class="line">reset KBE_ROOT(No input is [/home/b/kbengine-0.9.18/]):</div></pre></td></tr></table></figure>
-<p>直接敲回车</p>
-<ul>
-<li>他之后显示的都直接敲回车, 用默认的就可以, 直到他开始问你mysql的东西, 到mysql他会问</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- mysql: checking...</div><div class="line">- MySQL is installed on the remote machine?[yes/no]</div></pre></td></tr></table></figure>
-<p>这里我们直接填yes, 然后就直接填我们之前建立好的数据库kbe_database和用户kbe_user即可, 它会显示 : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- Enter mysql ip-address:127.0.0.1</div><div class="line">- Enter mysql ip-port:3306</div><div class="line">- Enter mysql-account:kbe_user</div><div class="line">- Enter mysql-password:123456</div><div class="line">- Enter mysql-databaseName:kbe_database</div><div class="line">- mysql: yes</div><div class="line">Modified: /home/b/kbengine-0.9.18//kbe/res/server/kbengine_defs.xml</div><div class="line">KBEngine has been successfully installed!</div></pre></td></tr></table></figure>
-<h2 id="是否安装成功"><a href="#是否安装成功" class="headerlink" title="是否安装成功"></a><strong>是否安装成功</strong></h2><ul>
-<li>找到你的kbe根目录, 然后进入根目录, 比如你的kbe根目录是kbengine, 则<pre><code>1. 进入kbe根目录下的assets目录 : cd kbengine/assets
-2. 运行启动脚本 : sh ./start_server.sh 
-</code></pre></li>
-<li>用ps检查一下是否有以下进程再跑 : </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/kbengine-0.9.18/assets$ ps -ef | grep -v grep | grep -i kbe</div><div class="line">b        15504  1372  0 04:28 pts/1    00:00:01 /home/b/kbengine-0.9.18/kbe/bin/server//machine --cid=2129652375332859700 --gus=1</div><div class="line">b        15505  1372  0 04:28 pts/1    00:00:05 /home/b/kbengine-0.9.18/kbe/bin/server//logger --cid=1129653375331859700 --gus=2</div><div class="line">b        15506  1372  0 04:28 pts/1    00:00:02 /home/b/kbengine-0.9.18/kbe/bin/server//interfaces --cid=1129652375332859700 --gus=3</div><div class="line">b        15507  1372  0 04:28 pts/1    00:00:06 /home/b/kbengine-0.9.18/kbe/bin/server//dbmgr --cid=3129652375332859700 --gus=4</div><div class="line">b        15508  1372  0 04:28 pts/1    00:00:07 /home/b/kbengine-0.9.18/kbe/bin/server//baseappmgr --cid=4129652375332859700 --gus=5</div><div class="line">b        15509  1372  0 04:28 pts/1    00:00:07 /home/b/kbengine-0.9.18/kbe/bin/server//cellappmgr --cid=5129652375332859700 --gus=6</div><div class="line">b        15510  1372  0 04:28 pts/1    00:00:03 /home/b/kbengine-0.9.18/kbe/bin/server//baseapp --cid=6129652375332859700 --gus=7</div><div class="line">b        15511  1372  0 04:28 pts/1    00:00:03 /home/b/kbengine-0.9.18/kbe/bin/server//cellapp --cid=7129652375332859700 --gus=8</div><div class="line">b        15512  1372  0 04:28 pts/1    00:00:06 /home/b/kbengine-0.9.18/kbe/bin/server//loginapp --cid=8129652375332859700 --gus=9</div></pre></td></tr></table></figure>
-<ul>
-<li>检查我们mysql中的kbe_database数据库里是否多了几个表 : </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show tables;</div><div class="line">+---------------------------+</div><div class="line">| Tables_in_b_test_database |</div><div class="line">+---------------------------+</div><div class="line">| kbe_accountinfos          |</div><div class="line">| kbe_email_verification    |</div><div class="line">| kbe_entitylog             |</div><div class="line">| kbe_serverlog             |</div><div class="line">| tbl_Account               |</div><div class="line">+---------------------------+</div><div class="line">5 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-<p>好, 如果都有基本安装完成!</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/03/重读UNIX网络编程第三章到第十一章笔记整理(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2062,7 +1056,7 @@ Resmgr的初始化（配置）工作主要由initialize接口完成，代码如�
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2108,7 +1102,7 @@ Resmgr的初始化（配置）工作主要由initialize接口完成，代码如�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2130,7 +1124,7 @@ Resmgr的初始化（配置）工作主要由initialize接口完成，代码如�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -2150,17 +1144,6 @@ Resmgr的初始化（配置）工作主要由initialize接口完成，代码如�
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -2211,7 +1194,7 @@ Resmgr的初始化（配置）工作主要由initialize接口完成，代码如�
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

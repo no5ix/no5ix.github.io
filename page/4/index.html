@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,13 +96,13 @@
 
 <meta name="description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="烫烫烫">
+<meta property="og:title" content="烫">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="烫烫烫">
+<meta name="twitter:title" content="烫">
 <meta name="twitter:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -138,7 +138,7 @@
 
 
 
-  <title>烫烫烫</title>
+  <title>烫</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/21/linux常用文本处理命令笔记整理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/10/21/linux常用文本处理命令笔记整理/" itemprop="url">linux常用文本处理命令笔记整理</a></h1>
+                <a class="post-title-link" href="/2016/12/04/快速完成一个slg游戏思路(一)/" itemprop="url">快速完成一个slg游戏思路(一)</a></h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-21T20:54:19+08:00">
-                2015-10-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T22:19:29+08:00">
+                2016-12-04
               </time>
             
 
@@ -337,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -375,115 +375,35 @@
 
       
         
-          
-            <p>linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。<br>首先抛出问题， 带着问题来学记忆知识更有动力：</p>
-<ul>
-<li>如何通过一条命令取得eth0的IP4地址 ： <pre><code>` ifconfig eth0 | grep -w &apos;inet&apos; | awk &apos;{print $2}&apos; | awk -F: &apos;{print $2}&apos;`
-</code></pre></li>
-<li>如何通过一条命令替换当前路径下所有文件中的所有“xxx”为“yyy“ ： <pre><code>`ls -alF | grep &apos;^-&apos; | xargs sed -i &apos;s/xxx/yyy/g&apos;`
-</code></pre></li>
-<li>如何通过一条命令杀掉占用端口34600的进程 ：<pre><code>` sudo lsof -i:34600 | grep -v &apos;PID&apos; | awk &apos;{print $2}&apos; | xargs kill -9`
-</code></pre></li>
-</ul>
-<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a><strong>grep</strong></h1><blockquote>
-<p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
+          <h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
+<p>验证完玩家信息, </p>
+<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
+<blockquote>
+<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
+<p>这个key也可以用来完成封号操作</p>
+</blockquote>
+<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
+<p>因为弱交互/短连接的关系, </p>
+<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
+<p>打一下对方的离线数据，</p>
+<p>计算下排行榜，排行榜是实时计算的, </p>
+<p>存在redis里, 做了分页处理</p>
+<p>买卖下道具即可</p>
+<p>所以 MainServer 选择了:</p>
 </blockquote>
 <ul>
-<li>-a 不要忽略二进制数据。</li>
-<li>-A&lt;显示列数&gt; 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</li>
-<li>-b 在显示符合范本样式的那一行之外，并显示该行之前的内容。</li>
-<li>-c 计算符合范本样式的列数。</li>
-<li>-C&lt;显示列数&gt;或-&lt;显示列数&gt; 除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</li>
-<li>-d&lt;进行动作&gt; 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</li>
-<li>-e&lt;范本样式&gt; 指定字符串作为查找文件内容的范本样式。</li>
-<li>-E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</li>
-<li>-f&lt;范本文件&gt; 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</li>
-<li>-F 将范本样式视为固定字符串的列表。</li>
-<li>-G 将范本样式视为普通的表示法来使用。</li>
-<li>-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</li>
-<li>-H 在显示符合范本样式的那一列之前，标示该列的文件名称。</li>
-<li>-i 胡列字符大小写的差别。（<strong>常用</strong>）</li>
-<li>-l 列出文件内容符合指定的范本样式的文件名称。</li>
-<li>-L 列出文件内容不符合指定的范本样式的文件名称。</li>
-<li>-n 在显示符合范本样式的那一列之前，标示出该列的编号。</li>
-<li>-q 不显示任何信息。</li>
-<li>-R/-r 此参数的效果和指定“-d recurse”参数相同。</li>
-<li>-s 不显示错误信息。</li>
-<li>-v 反转查找。（<strong>常用</strong>）</li>
-<li>-w 只显示全字符合的列。（<strong>常用</strong>）</li>
-<li>-x 只显示全列符合的列。</li>
-<li>-y 此参数效果跟“-i”相同。</li>
-<li>-o 只输出文件中匹配到的部分。</li>
+<li>yii</li>
+<li>redis</li>
+<li>mysql</li>
+<li>nginx</li>
 </ul>
-<h1 id="awk"><a href="#awk" class="headerlink" title="awk"></a><strong>awk</strong></h1><blockquote>
-<p>awk是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。</p>
-</blockquote>
-<h3 id="常用命令选项"><a href="#常用命令选项" class="headerlink" title="常用命令选项"></a><strong>常用命令选项</strong></h3><ul>
-<li>-F fs   fs指定输入分隔符（awk默认的分隔符是空格），fs可以是字符串或正则表达式，如-F: </li>
-<li>-v var=value   赋值一个用户定义变量，将外部变量传递给awk</li>
-</ul>
-<h3 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a><em>常用用法</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">klj;k uu</div><div class="line">&amp;&amp; ss&amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3 | awk &apos;&#123;print $NF&#125;&apos;</div><div class="line">uu</div><div class="line">ss&amp;</div></pre></td></tr></table></figure>
-<p>cat abc3 | awk ‘{print $NF}’的含义是：输出abc3文件的每一行的最后一列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3 | grep k | awk -F\; &apos;&#123;print $1&#125;&apos;</div><div class="line">klj</div></pre></td></tr></table></figure></p>
-<p>cat abc3 | grep k | awk -F\; ‘{print $1}’的含义是：<br>先输入含有k的那一行（即klj；k）， 然后对那一行以；（\;， 这个分号需要转义）分隔，打印出分隔后的第一列（即klj）</p>
-<h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a><strong>sed</strong></h1><blockquote>
-<p>sed是一种流编辑器，它是文本处理中非常中的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
-</blockquote>
-<h3 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a><strong>sed命令</strong></h3><ul>
-<li>a\ 在当前行下面插入文本。</li>
-<li>i\ 在当前行上面插入文本。</li>
-<li>c\ 把选定的行改为新的文本。</li>
-<li>d 删除，删除选择的行。</li>
-<li>D 删除模板块的第一行。</li>
-<li>s 替换指定字符 h 拷贝模板块的内容到内存中的缓冲区。</li>
-<li>H 追加模板块的内容到内存中的缓冲区。</li>
-<li>g 获得内存缓冲区的内容，并替代当前模板块中的文本。</li>
-<li>G 获得内存缓冲区的内容，并追加到当前模板块文本的后面。</li>
-<li>l 列表不能打印字符的清单。</li>
-<li>n 读取下一个输入行，用下一个命令处理新的行而不是用第一个命令。</li>
-<li>N 追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码。</li>
-<li>p 打印模板块的行。</li>
-<li>P(大写) 打印模板块的第一行。</li>
-<li>q 退出Sed。</li>
-<li>b lable 分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾。</li>
-<li>r file 从file中读行。</li>
-<li>t label if分支，从最后一行开始，条件一旦满足或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</li>
-<li>T label 错误分支，从最后一行开始，一旦发生错误或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</li>
-<li>w file 写并追加模板块到file末尾。</li>
-<li>W file 写并追加模板块的第一行到file末尾。</li>
-<li>! 表示后面的命令对所有没有被选定的行发生作用。</li>
-<li>= 打印当前行号码。</li>
-<li><h1 id="把注释扩展到下一个换行符以前。"><a href="#把注释扩展到下一个换行符以前。" class="headerlink" title="把注释扩展到下一个换行符以前。"></a>把注释扩展到下一个换行符以前。</h1></li>
-</ul>
-<h3 id="sed替换标记"><a href="#sed替换标记" class="headerlink" title="sed替换标记"></a><strong>sed替换标记</strong></h3><ul>
-<li>g 表示行内全面替换。</li>
-<li>p 表示打印行。</li>
-<li>w 表示把行写入一个文件。</li>
-<li>x 表示互换模板块中的文本和缓冲区中的文本。</li>
-<li>y 表示把一个字符翻译为另外的字符（但是不用于正则表达式） \1 子串匹配标记 &amp; 已匹配字符串标记</li>
-</ul>
-<h3 id="sed元字符集"><a href="#sed元字符集" class="headerlink" title="sed元字符集"></a><strong>sed元字符集</strong></h3><ul>
-<li>^ 匹配行开始，如：/^sed/匹配所有以sed开头的行。</li>
-<li>$ 匹配行结束，如：/sed$/匹配所有以sed结尾的行。</li>
-<li>. 匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。</li>
-<li>* 匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。</li>
-<li>[] 匹配一个指定范围内的字符，如/[ss]ed/匹配sed和Sed。</li>
-<li>[^] 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。</li>
-<li>(..) 匹配子串，保存匹配的字符，如s/(love)able/\1rs，loveable被替换成lovers。</li>
-<li>&amp; 保存搜索字符用来替换其他字符，如s/love/<strong>&amp;</strong>/，love这成<strong>love</strong>。</li>
-<li>\&lt; 匹配单词的开始，如:/\ 匹配单词的结束，如/love>/匹配包含以love结尾的单词的行。</li>
-<li>x{m} 重复字符x，m次，如：/0{5}/匹配包含5个0的行。</li>
-<li>x{m,} 重复字符x，至少m次，如：/0{5,}/匹配至少有5个0的行。</li>
-<li>x{m,n} 重复字符x，至少m次，不多于n次，如：/0{5,10}/匹配5~10个0的行。</li>
-</ul>
-<p><code>直接编辑文件选项-i，否则并不会修改源文件</code></p>
-<h3 id="sed常用用法1：增"><a href="#sed常用用法1：增" class="headerlink" title="sed常用用法1：增"></a><em>sed常用用法1：增</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">&amp;&amp; gg&amp;</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ sed -i &apos;/gg/a\hello, my friend&apos; abc3</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">&amp;&amp; gg&amp;</div><div class="line">hello, my friend</div></pre></td></tr></table></figure>
-<p>sed -i ‘/gg/a\hello, my friend’ abc3的含义是：<br>在abc3文件中的“gg”字符串的下一行插入“hello， my friend”</p>
-<h3 id="sed常用用法2：删"><a href="#sed常用用法2：删" class="headerlink" title="sed常用用法2：删"></a><em>sed常用用法2：删</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">&amp;&amp; gg&amp;</div><div class="line">hello, my friend</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ sed -i &apos;/gg/d&apos; abc3</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">hello, my friend</div></pre></td></tr></table></figure>
-<p>sed -i ‘/gg/d’ abc3的含义是：<br>将abc3文件中所有包含的“gg”字符串的行删除</p>
-<h3 id="sed常用用法3：改"><a href="#sed常用用法3：改" class="headerlink" title="sed常用用法3：改"></a><em>sed常用用法3：改</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">hello, my friend</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ sed -i &apos;s/hello/welcome/g&apos; abc3</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat abc3</div><div class="line">welcome, my friend</div></pre></td></tr></table></figure>
-<p>sed -i ‘s/hello/welcome/g’ abc3的含义是：<br>将abc3文件中所有包含的“gg”字符串都修改为“welcome”</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/04/快速完成一个slg游戏思路(一)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -530,7 +450,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/09/C++ 易混淆点（二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -539,7 +459,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -549,7 +469,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/09/C++ 易混淆点（二）/" itemprop="url">C++ 易混淆点（二）</a></h1>
+                <a class="post-title-link" href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" itemprop="url">一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)</a></h1>
         
 
         <div class="post-meta">
@@ -561,8 +481,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-09T13:35:25+08:00">
-                2015-09-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-18T19:29:22+08:00">
+                2016-10-18
               </time>
             
 
@@ -584,8 +504,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
+                  <a href="/categories/UE4/" itemprop="url" rel="index">
+                    <span itemprop="name">UE4</span>
                   </a>
                 </span>
 
@@ -622,19 +542,37 @@
 
       
         
-          
-            <h3 id="位操作运算符的问题"><a href="#位操作运算符的问题" class="headerlink" title="位操作运算符的问题"></a><strong>位操作运算符的问题</strong></h3><p>二进制的100 的第0位是 0<br>1(第二位)  0(第一位)  0(第0位)，<br>所以把一个数的第三位进行清零、置位、取反的操作如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line"></div><div class="line">#define Bit3 (0X01&lt;&lt;3)</div><div class="line">/*对一个数的第三位进行清零、置位、取反*/</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	int a=15 ;      // 0000 1111</div><div class="line"></div><div class="line">	printf(&quot;原大小：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a &amp;= ~Bit3;     //清零, 0000 0111</div><div class="line">	printf(&quot;清零后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a |= Bit3;     //置位, 0000 1111</div><div class="line">	printf(&quot;置位后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a ^= Bit3;     //取反, 0000 0111</div><div class="line">	printf(&quot;取反后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="字符串分配的位置问题"><a href="#字符串分配的位置问题" class="headerlink" title="字符串分配的位置问题"></a><strong>字符串分配的位置问题</strong></h3><p>程序的存储区域分为：代码段、只读数据段、已初始化的读写数据段、未初始化的数据段、堆、栈。<br>1、代码段、只读数据段、已初始化的读写数据段、未初始化的数据段都属于静态区域。<br>2、堆内存只在程序运行时出现，一般有程序员分配和释放。<br>3、栈内存只在程序运行时出现，在函数内部使用的变量，函数参数以及返回值将使用栈空间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">char* get_str()</div><div class="line">&#123;</div><div class="line">    char *str = &quot;hello&quot;; //第一种情况：分配在静态存储区上</div><div class="line">    //char str[] = &quot;hello&quot;; //第二种情况分配在栈上</div><div class="line">    return str;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    char* p = get_str();</div><div class="line">    // 如果是第一种情况，下述打印可以打印出正确的值；但是第二种情况打印结果是错的。</div><div class="line">    printf(&quot;%s/n&quot;, p);</div><div class="line">    *++p = &apos;a&apos;; // 如果是第一种情况，运行时将会段错误，因为不能修改它；</div><div class="line">    printf(&quot;%s/n&quot;, p);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="复杂类型的声明和typedef定义"><a href="#复杂类型的声明和typedef定义" class="headerlink" title="复杂类型的声明和typedef定义"></a><strong>复杂类型的声明和typedef定义</strong></h3><ul>
-<li><p>用变量a给出下面的定义:<br>一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数 int (*a[10])(int);</p>
-</li>
-<li><p>typedef表示一个长度为4的数组;<br>typedef  int  ARR[4];</p>
-</li>
-<li><p>typedef表示一个函数指针有一个整型参数并返回一个整型数：<br>typedef int（*FUNC）（int）；</p>
+          <h1 id="fish"><a href="#fish" class="headerlink" title="fish"></a>fish</h1><p>A fish flock AI Plugin for Unreal Engine 4</p>
+<blockquote>
+<p>一个基于虚幻4的鱼群 AI 插件 </p>
+</blockquote>
+<p>this Plugin version can Run <strong>2000+</strong> fishes at the same time</p>
+<blockquote>
+<p>这个插件版本可以同时运行 <strong>2000+</strong> 条鱼儿</p>
+</blockquote>
+<p><img src="/img/OldDemoScreenshot.png" alt="OldDemoScreenshot.png"></p>
+<h2 id="Video-Preview"><a href="#Video-Preview" class="headerlink" title="Video Preview"></a>Video Preview</h2><ul>
+<li><p>Watch the <a href="http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html" target="_blank" rel="external">Video Preview</a></p>
+<blockquote>
+<p>查看 <a href="http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html" target="_blank" rel="external">视频演示</a> </p>
+</blockquote>
 </li>
 </ul>
-
-          
+<h2 id="Download-amp-Play"><a href="#Download-amp-Play" class="headerlink" title="Download &amp; Play"></a>Download &amp; Play</h2><h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a><strong>Download</strong></h4><ul>
+<li><p>Download <a href="http://pan.baidu.com/s/1qYbBrHU" target="_blank" rel="external"><strong>MyFish.exe (Win64)</strong></a>  (<em>This is packaged by an unoptimized version( check out  branch old_demo)</em>)</p>
+<blockquote>
+<p>下载  <a href="http://pan.baidu.com/s/1qYbBrHU" target="_blank" rel="external"><strong>MyFish.exe (Win64)</strong></a> 玩玩 </p>
+<p><em>这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)</em></p>
+</blockquote>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -681,7 +619,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/31/gdb多进程多线程调试实战/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/PHP的魔术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -690,7 +628,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -700,7 +638,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/31/gdb多进程多线程调试实战/" itemprop="url">gdb多进程调试</a></h1>
+                <a class="post-title-link" href="/2016/09/01/PHP的魔术/" itemprop="url">PHP的魔术</a></h1>
         
 
         <div class="post-meta">
@@ -712,8 +650,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-31T14:20:23+08:00">
-                2015-08-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-01T00:16:06+08:00">
+                2016-09-01
               </time>
             
 
@@ -735,8 +673,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
                   </a>
                 </span>
 
@@ -773,60 +711,16 @@
 
       
         
-          
-            <h1 id="gdb多进程调试"><a href="#gdb多进程调试" class="headerlink" title="gdb多进程调试"></a><strong>gdb多进程调试</strong></h1><ul>
-<li>set follow-fork-mode [parent|child]   set detach-on-fork [on|off]</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>follow-fork-mode</th>
-<th style="text-align:center">detach-on-fork</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>parent</td>
-<td style="text-align:center">on</td>
-<td>只调试主进程（GDB默认）</td>
-</tr>
-<tr>
-<td>child</td>
-<td style="text-align:center">on</td>
-<td>只调试子进程</td>
-</tr>
-<tr>
-<td>parent</td>
-<td style="text-align:center">off</td>
-<td>同时调试两个进程，gdb跟主进程，子进程block在fork位置</td>
-</tr>
-<tr>
-<td>child</td>
-<td style="text-align:center">off</td>
-<td>同时调试两个进程，gdb跟子进程，主进程block在fork位置</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>查询正在调试的进程：info inferiors</li>
-<li>切换调试的进程： inferior +inferior number</li>
-<li>catch fork命令可以捕获进程的创建</li>
-<li>attach + pid ， 可以附到一个正在运行的进程上进行调试</li>
-</ul>
-<h1 id="gdb多线程调试"><a href="#gdb多线程调试" class="headerlink" title="gdb多线程调试"></a><strong>gdb多线程调试</strong></h1><ul>
-<li>show scheduler-locking  //显示当前scheduler-locking</li>
-<li>set scheduler-locking [on/off/step]  //设置scheduler-locking<ul>
-<li>on：只有当前调试线程运行，其他线程处于暂停状态。</li>
-<li>off：当前调试线程外的其他线程一直在正常运行。</li>
-<li>step：其他线程跟随当前调试线程运行，但具体怎么协同运行，测试中无法体现。</li>
-<li>注意：set scheduler-locking要处于线程运行环境下才能生效，也就是程序已经运行并且暂停在某个断点处，否则会出现“Target ‘exec’ cannot support this command.”这样的错误；而且经过测试，设置后的scheduler-locking值在整个进程内有效，不属于某个线程。</li>
-</ul>
-</li>
-</ul>
-<h1 id="gdb多进程-多线程调试实战例子"><a href="#gdb多进程-多线程调试实战例子" class="headerlink" title="gdb多进程/多线程调试实战例子"></a><strong>gdb多进程/多线程调试实战例子</strong></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/Documents/temp_test$ sudo gdb ./o_multi_thread_process </div><div class="line">[sudo] password for b: </div><div class="line">GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1</div><div class="line">Copyright (C) 2014 Free Software Foundation, Inc.</div><div class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</div><div class="line">This is free software: you are free to change and redistribute it.</div><div class="line">There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;</div><div class="line">and &quot;show warranty&quot; for details.</div><div class="line">This GDB was configured as &quot;x86_64-linux-gnu&quot;.</div><div class="line">Type &quot;show configuration&quot; for configuration details.</div><div class="line">For bug reporting instructions, please see:</div><div class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</div><div class="line">Find the GDB manual and other documentation resources online at:</div><div class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</div><div class="line">For help, type &quot;help&quot;.</div><div class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</div><div class="line">Reading symbols from ./o_multi_thread_process...done.</div><div class="line">(gdb) attach 3027</div><div class="line">Attaching to program: /home/b/Documents/temp_test/o_multi_thread_process, process 3027</div><div class="line">Reading symbols from /lib/x86_64-linux-gnu/libpthread.so.0...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libpthread-2.19.so...done.</div><div class="line">done.</div><div class="line">[New LWP 3029]</div><div class="line">[Thread debugging using libthread_db enabled]</div><div class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</div><div class="line">Loaded symbols for /lib/x86_64-linux-gnu/libpthread.so.0</div><div class="line">Reading symbols from /lib/x86_64-linux-gnu/libc.so.6...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libc-2.19.so...done.</div><div class="line">done.</div><div class="line">Loaded symbols for /lib/x86_64-linux-gnu/libc.so.6</div><div class="line">Reading symbols from /lib64/ld-linux-x86-64.so.2...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/ld-2.19.so...done.</div><div class="line">done.</div><div class="line">Loaded symbols for /lib64/ld-linux-x86-64.so.2</div><div class="line">0x00007f5c9acb8dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81</div><div class="line">81	../sysdeps/unix/syscall-template.S: No such file or directory.</div><div class="line">(gdb) set follow-fork-mode parent </div><div class="line">(gdb) set detach-on-fork off</div><div class="line">(gdb) catch fork</div><div class="line">Catchpoint 1 (fork)</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">[Thread debugging using libthread_db enabled]</div><div class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</div><div class="line"></div><div class="line">Catchpoint 1 (forked process 3002), 0x00007ffff78b7ee4 in __libc_fork ()</div><div class="line">    at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130</div><div class="line">130	../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.</div><div class="line">(gdb) info inferiors </div><div class="line">  Num  Description       Executable        </div><div class="line">* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">(gdb) b 14</div><div class="line">Breakpoint 2 at 0x7ffff78b7f5b: file ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c, line 14.</div><div class="line">(gdb) info breakpoints </div><div class="line">Num     Type           Disp Enb Address            What</div><div class="line">1       catchpoint     keep y                      fork, process 3002 </div><div class="line">	catchpoint already hit 1 time</div><div class="line">2       breakpoint     keep y   0x00007ffff78b7f5b in __libc_fork </div><div class="line">                                                   at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:14</div><div class="line">(gdb) d 2</div><div class="line">(gdb) info breakpoints </div><div class="line">Num     Type           Disp Enb Address            What</div><div class="line">1       catchpoint     keep y                      fork, process 3002 </div><div class="line">	catchpoint already hit 1 time</div><div class="line">(gdb) b multi_thread_process.cpp : 14</div><div class="line">Breakpoint 3 at 0x4007f4: file ./multi_thread_process.cpp, line 14.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">[New process 3002]</div><div class="line">[Thread debugging using libthread_db enabled]</div><div class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</div><div class="line">Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/libpthread-2.19.so...done.</div><div class="line">Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.19.so...done.</div><div class="line">Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.19.so...done.</div><div class="line"></div><div class="line">Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15</div><div class="line">15	  if(pid != 0)</div><div class="line">(gdb) info inferiors </div><div class="line">  Num  Description       Executable        </div><div class="line">  2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">(gdb) inferior 2</div><div class="line">[Switching to inferior 2 [process 3002] (/home/b/Documents/temp_test/o_multi_thread_process)]</div><div class="line">[Switching to thread 2 (Thread 0x7ffff7fdf740 (LWP 3002))] </div><div class="line">0  0x00007ffff78b7ee4 in __libc_fork () at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130</div><div class="line">130	../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.</div><div class="line">(gdb) set scheduler-locking on</div><div class="line">(gdb) b multi_thread_process.cpp : 50</div><div class="line">Breakpoint 4 at 0x400916: multi_thread_process.cpp:50. (2 locations)</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7ee4 in __libc_fork ()</div><div class="line">    at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130</div><div class="line">  1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line"></div><div class="line">Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15</div><div class="line">15	  if(pid != 0)</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">  1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">ProcessB: 3002 step1</div><div class="line">ProcessB: 3002 step2</div><div class="line">ProcessB: 3002 step3</div><div class="line">^C</div><div class="line">Program received signal SIGINT, Interrupt.</div><div class="line">0x00007ffff78b7de0 in __nanosleep_nocancel () at ../sysdeps/unix/syscall-template.S:81</div><div class="line">81	../sysdeps/unix/syscall-template.S: No such file or directory.</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7de0 in __nanosleep_nocancel ()</div><div class="line">    at ../sysdeps/unix/syscall-template.S:81</div><div class="line">  1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)</div><div class="line">    at ./multi_thread_process.cpp:15</div><div class="line">(gdb) info inferiors </div><div class="line">  Num  Description       Executable        </div><div class="line">* 2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">  1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process </div><div class="line">(gdb) inferior 1</div><div class="line">[Switching to inferior 1 [process 2998] (/home/b/Documents/temp_test/o_multi_thread_process)]</div><div class="line">[Switching to thread 1 (Thread 0x7ffff7fdf740 (LWP 2998))] </div><div class="line">0  main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15</div><div class="line">15	  if(pid != 0)</div><div class="line">(gdb) list</div><div class="line">10	  &#123;</div><div class="line">11	  int pid;</div><div class="line">12	</div><div class="line">13	  pid = fork();</div><div class="line">14	</div><div class="line">15	  if(pid != 0)</div><div class="line">16	    processA();</div><div class="line">17	  else</div><div class="line">18	    processB();</div><div class="line">19	</div><div class="line">(gdb) r</div><div class="line">The program being debugged has been started already.</div><div class="line">Start it from the beginning? (y or n) n</div><div class="line">Program not restarted.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">ProcessA: 2998 step1</div><div class="line">[New Thread 0x7ffff77f6700 (LWP 3017)]</div><div class="line">^C</div><div class="line">Program received signal SIGINT, Interrupt.</div><div class="line">0x00007ffff78b7dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81</div><div class="line">81	../sysdeps/unix/syscall-template.S: No such file or directory.</div><div class="line">(gdb) info threads </div><div class="line">  Id   Target Id         Frame </div><div class="line">  3    Thread 0x7ffff77f6700 (LWP 3017) &quot;o_multi_thread_&quot; clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:81</div><div class="line">  2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7de0 in __nanosleep_nocancel ()</div><div class="line">    at ../sysdeps/unix/syscall-template.S:81</div><div class="line">* 1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; 0x00007ffff78b7dfd in nanosleep ()</div><div class="line">    at ../sysdeps/unix/syscall-template.S:81</div><div class="line">(gdb)</div></pre></td></tr></table></figure>
-
-          
+          <blockquote>
+<p>PHP 将所有以 <strong>（两个下划线）开头的类方法保留为魔术方法。所以在定义类方法时，除了上述魔术方法，建议不要以 </strong> 为前缀。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/01/PHP的魔术/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -873,7 +767,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/27/从零开始搭建一台简易linux服务器(三)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -882,7 +776,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -892,7 +786,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
+                <a class="post-title-link" href="/2016/08/27/从零开始搭建一台简易linux服务器(三)/" itemprop="url">从零开始搭建一台简易linux服务器(三)</a></h1>
         
 
         <div class="post-meta">
@@ -904,8 +798,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-22T21:56:12+08:00">
-                2015-06-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-27T15:11:26+08:00">
+                2016-08-27
               </time>
             
 
@@ -927,8 +821,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -965,23 +859,20 @@
 
       
         
-          
-            <h2 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件: "></a><strong>socket可读的条件: </strong></h2><ol>
-<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1.</li>
-<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
-<li><strong>给监听套接字准备好新连接</strong></li>
-<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
+          <h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>执行命令安装MySQL：sudo apt-get install mysql-server<br>安装的时候会提示填入一个root的初始密码，先输入个8做初始密码吧</p>
+<h2 id="导入客户数据库base-account"><a href="#导入客户数据库base-account" class="headerlink" title="#导入客户数据库base_account"></a>#导入客户数据库base_account</h2><p>mysql -uroot -p &lt; <strong>*</strong>.sql(某个sql文件)</p>
+<h2 id="安装svn并checkout一个svn服务器上的目录"><a href="#安装svn并checkout一个svn服务器上的目录" class="headerlink" title="安装svn并checkout一个svn服务器上的目录"></a>安装svn并checkout一个svn服务器上的目录</h2><ol>
+<li>进入 /data/www目录下 ：cd /data/www</li>
+<li>执行命令安装：sudo apt-get install subversion</li>
+<li>checkout一个目录（比如svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg），<br>执行命令：svn checkout svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg （或者 svn co svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg）</li>
 </ol>
-<h2 id="socket可写的条件"><a href="#socket可写的条件" class="headerlink" title="socket可写的条件: "></a><strong>socket可写的条件: </strong></h2><ol>
-<li>socket的发送缓冲区中的数据字节大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用SO_SNDLOWAT socket选项来设置该socket的低水位标记。对于TCP和UDPsocket而言，其缺省值为2048</li>
-<li>该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。</li>
-<li><strong>使用非阻塞connect的套接字已建立连接, 或者connect已经以失败告终</strong></li>
-<li>有一个socket异常错误条件待处理.对于这样的socket的写操作将不会阻塞并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可以通过指定socket选项SO_ERROR调用getsockopt函数来取得并清除;</li>
-</ol>
-<h2 id="非阻塞connect-accept相关"><a href="#非阻塞connect-accept相关" class="headerlink" title="非阻塞connect/accept相关"></a><strong>非阻塞connect/accept相关</strong></h2><p>述的各种条件可以大体总结为下图<br><img src="http://img.blog.csdn.net/20170822193729519?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>注意 : 当socket异常错误的时候socket是可读并可写的, 所以在非阻塞connect(判断是否可写)/accept(判断是否可读)的时候要特别注意这种情况, 要用getsockopt函数, 使用SO_ERROR选项来检查处理.</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/27/从零开始搭建一台简易linux服务器(三)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1028,7 +919,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/25/从零开始搭建一台简易linux服务器(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -1037,7 +928,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -1047,7 +938,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/" itemprop="url">linux一些不要想当然的事(一)之目录权限</a></h1>
+                <a class="post-title-link" href="/2016/08/25/从零开始搭建一台简易linux服务器(二)/" itemprop="url">从零开始搭建一台简易linux服务器(二)</a></h1>
         
 
         <div class="post-meta">
@@ -1059,8 +950,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T17:11:52+08:00">
-                2015-03-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-25T15:11:26+08:00">
+                2016-08-25
               </time>
             
 
@@ -1082,8 +973,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -1120,962 +1011,14 @@
 
       
         
-          
-            <h2 id="目录的可读-可写-可执行权限"><a href="#目录的可读-可写-可执行权限" class="headerlink" title="目录的可读/可写/可执行权限"></a><strong>目录的可读/可写/可执行权限</strong></h2><blockquote>
-<p>不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!<br>记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的</p>
-</blockquote>
-<h3 id="目录可读r"><a href="#目录可读r" class="headerlink" title="目录可读r"></a><strong>目录可读r</strong></h3><blockquote>
-<ul>
-<li><strong>目录可读权限r</strong> : 只能获得文件列表</li>
-<li>特别注意:如果一个目录为非空, 却没有r权限, 即使你有wx的权限, 你用rm -r也是删不掉的, 因为没有r权限拿不到这个目录的文件列表, rm -r 自然也就不晓得要删除什么东西了.只有求助root了<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 444 temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot access temp/dd: Permission denied</div><div class="line">dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cd temp/</div><div class="line">bash: cd: temp/: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat temp/dd </div><div class="line">cat: temp/dd: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/yy</div><div class="line">touch: cannot touch ‘temp/yy’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/dd </div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: descend into write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">rm: remove write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp’: Directory not empty</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<h3 id="目录可写w"><a href="#目录可写w" class="headerlink" title="目录可写w"></a><strong>目录可写w</strong></h3><blockquote>
-<ul>
-<li><strong>目录可写权限w</strong> : 代表可以在目录下增加或删除档案和目录和改名(但是必须得有目录可执行权限x的支持才可以, 所以一般有w就会有x)</li>
-<li>不要和档案的可写权限混淆了, 即使没有目录可写权限, 有目录可执行x也是可以修改目录下的档案的, 只要拥有要修改的那个档案的可写权限既可.</li>
-<li>但也要注意的是: 档案的w是针对于档案的内容来说的, 你可以编辑修改他的内容, 但是如果想删除这个档案, 你需要这个档案所在的目录的w权限.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 222 temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp/uu</div><div class="line">mkdir: cannot create directory ‘temp/uu’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/oo</div><div class="line">touch: cannot touch ‘temp/oo’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 333 temp </div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ mkdir temp/uu</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/oo</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: cannot remove ‘temp’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp/uu</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/oo</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot open directory temp: Permission denied</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<h3 id="目录可执行x"><a href="#目录可执行x" class="headerlink" title="目录可执行x"></a><strong>目录可执行x</strong></h3><blockquote>
-<ul>
-<li><strong>目录可执行权限x</strong> : 有进入目录的权限,  有在这个目录下执行命令的权限. 但不可以删除或者增加档案和目录(因为不具备目录的可写权限w)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ chmod 111 temp/</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ ls temp</div><div class="line">ls: cannot open directory temp: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ echo &quot;xxd&quot; &gt; temp/dd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cat temp/dd</div><div class="line">xxd</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ touch temp/yy</div><div class="line">touch: cannot touch ‘temp/yy’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm temp/dd</div><div class="line">rm: cannot remove ‘temp/dd’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ rm -r temp</div><div class="line">rm: descend into write-protected directory ‘temp’? y</div><div class="line">rm: remove write-protected directory ‘temp’? y</div><div class="line">rm: cannot remove ‘temp’: Permission denied</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc$ cd temp</div><div class="line">b@b-VirtualBox:~/my_temp_test/abc/temp$ ls</div><div class="line">ls: cannot open directory .: Permission denied</div></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/07/Linux常用运维命令笔记整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/03/07/Linux常用运维命令笔记整理/" itemprop="url">Linux常用运维命令笔记整理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-07T19:46:26+08:00">
-                2015-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在linux服务器开发过程中， 经常需要各种命令配合来查看各种状态，所以整理了一些老的笔记来备忘。</p>
-<h1 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a><strong>iostat</strong></h1><blockquote>
-<p>iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息</p>
-</blockquote>
-<ul>
-<li>-c 仅显示CPU统计信息.与-d选项互斥.</li>
-<li>-d 仅显示磁盘统计信息.与-c选项互斥.</li>
-<li>-k 以K为单位显示每秒的磁盘请求数,默认单位块.</li>
-<li>-t  在输出数据时,打印搜集数据的时间.</li>
-<li>-V 打印版本号和帮助信息.</li>
-<li>-x  输出扩展信息.</li>
-</ul>
-<hr>
-<h3 id="iostat常用用法1：iostat-d"><a href="#iostat常用用法1：iostat-d" class="headerlink" title="iostat常用用法1：iostat -d"></a><em>iostat常用用法1：iostat -d</em></h3><p>指定采样时间间隔与采样次数</p>
-<p>我们可以以”iostat interval [count] ”形式指定iostat命令的采样间隔和采样次数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">linux # iostat -d 1 2</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn</div><div class="line">sda               0.55         8.93        36.27    6737086   27367728</div><div class="line">sdb               0.00         0.00         0.00        928          0</div><div class="line"></div><div class="line">Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn</div><div class="line">sda               2.00         0.00        72.00          0         72</div><div class="line">sdb               0.00         0.00         0.00          0          0</div></pre></td></tr></table></figure></p>
-<p>以上命令输出Device的信息，采样时间为1秒，采样2次，若不指定采样次数，则iostat会一直输出采样信息，直到按”ctrl+c”退出命令。注意，第1次采样信息与单独执行iostat的效果一样，为从系统开机到当前执行时刻的统计信息。</p>
-<hr>
-<h3 id="iostat常用用法2：-iostat-x-k-d"><a href="#iostat常用用法2：-iostat-x-k-d" class="headerlink" title="iostat常用用法2： iostat -x -k -d"></a><em>iostat常用用法2： iostat -x -k -d</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">linux # iostat -x -k -d 1</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">……</div><div class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await  svctm  %util</div><div class="line">sda               0.00  9915.00    1.00   90.00     4.00 34360.00   755.25    11.79  120.57   6.33  57.60</div></pre></td></tr></table></figure>
-<p>以上各列的含义如下：</p>
-<ul>
-<li>rrqm/s: 每秒对该设备的读请求被合并次数，文件系统会对读取同块(block)的请求进行合并</li>
-<li>wrqm/s: 每秒对该设备的写请求被合并次数</li>
-<li>r/s: 每秒完成的读次数</li>
-<li>w/s: 每秒完成的写次数</li>
-<li>rkB/s: 每秒读数据量(kB为单位)</li>
-<li>wkB/s: 每秒写数据量(kB为单位)</li>
-<li>avgrq-sz:平均每次IO操作的数据量(扇区数为单位)</li>
-<li>avgqu-sz: 平均等待处理的IO请求队列长度</li>
-<li>await: 平均每次IO请求等待时间(包括等待时间和处理时间，毫秒为单位)</li>
-<li>svctm: 平均每次IO请求的处理时间(毫秒为单位)</li>
-<li>%util: 采用周期内用于IO操作的时间比率，即IO队列非空的时间比率</li>
-</ul>
-<p>对于以上示例输出，我们可以获取到以下信息：</p>
-<p>每秒向磁盘上写30M左右数据(wkB/s值)<br>每秒有91次IO操作(r/s+w/s)，其中以写操作为主体<br>平均每次IO请求等待处理的时间为120.57毫秒，处理耗时为6.33毫秒<br>等待处理的IO请求队列中，平均有11.79个请求驻留</p>
-<h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat "></a><strong>netstat </strong></h1><blockquote>
-<p>netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
-</blockquote>
-<ul>
-<li>-a或–all：显示所有连线中的Socket；</li>
-<li>-A&lt;网络类型&gt;或–&lt;网络类型&gt;：列出该网络类型连线中的相关地址；</li>
-<li>-c或–continuous：持续列出网络状态；</li>
-<li>-C或–cache：显示路由器配置的快取信息；</li>
-<li>-e或–extend：显示网络其他相关信息；</li>
-<li>-F或–fib：显示FIB；</li>
-<li>-g或–groups：显示多重广播功能群组组员名单；</li>
-<li>-h或–help：在线帮助；</li>
-<li>-i或–interfaces：显示网络界面信息表单；</li>
-<li>-l或–listening：显示监控中的服务器的Socket；</li>
-<li>-M或–masquerade：显示伪装的网络连线；</li>
-<li>-n或–numeric：直接使用ip地址，而不通过域名服务器；</li>
-<li>-N或–netlink或–symbolic：显示网络硬件外围设备的符号连接名称；</li>
-<li>-o或–timers：显示计时器；</li>
-<li>-p或–programs：显示正在使用Socket的程序识别码和程序名称；</li>
-<li>-r或–route：显示Routing Table；</li>
-<li>-s或–statistice：显示网络工作信息统计表；</li>
-<li>-t或–tcp：显示TCP传输协议的连线状况；</li>
-<li>-u或–udp：显示UDP传输协议的连线状况；</li>
-<li>-v或–verbose：显示指令执行过程；</li>
-<li>-V或–version：显示版本信息；</li>
-<li>-w或–raw：显示RAW传输协议的连线状况；</li>
-<li>-x或–unix：此参数的效果和指定”-A unix”参数相同；</li>
-<li>–ip或–inet：此参数的效果和指定”-A inet”参数相同。</li>
-</ul>
-<h3 id="netstat常用用法：netstat-anlp"><a href="#netstat常用用法：netstat-anlp" class="headerlink" title="netstat常用用法：netstat -anlp"></a><em>netstat常用用法：netstat -anlp</em></h3><p>netstat -anlpt的含义是 ： 列出所有处于使用tcp协议的 Sockets<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo netstat -anlpt</div><div class="line">Active Internet connections (servers and established)</div><div class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</div><div class="line">tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      1075/dnsmasq    </div><div class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      935/sshd        </div><div class="line">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      2271/cupsd      </div><div class="line">tcp6       0      0 :::22                   :::*                    LISTEN      935/sshd        </div><div class="line">tcp6       0      0 ::1:631                 :::*                    LISTEN      2271/cupsd      </div><div class="line">tcp6       1      0 ::1:50654               ::1:631                 CLOSE_WAIT  1027/cups-browsed</div></pre></td></tr></table></figure></p>
-<p>查看udp的就是netstat -anlpu；<br>只查看tcp和udp的就是netstat -anlptu</p>
-<h1 id="lsof-（list-open-files）"><a href="#lsof-（list-open-files）" class="headerlink" title="lsof （list open files）"></a><strong>lsof</strong> （list open files）</h1><blockquote>
-<p>lsof命令用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为lsof命令需要访问核心内存和各种文件，所以需要root用户执行。 </p>
-</blockquote>
-<p>在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。<br>所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。<br>因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。</p>
-<ul>
-<li>-a：列出打开文件存在的进程；</li>
-<li>-c&lt;进程名&gt;：列出指定进程所打开的文件；</li>
-<li>-g：列出GID号进程详情；</li>
-<li>-d&lt;文件号&gt;：列出占用该文件号的进程；</li>
-<li>+d&lt;目录&gt;：列出目录下被打开的文件；</li>
-<li>+D&lt;目录&gt;：递归列出目录下被打开的文件；</li>
-<li>-n&lt;目录&gt;：列出使用NFS的文件；</li>
-<li>-i&lt;条件&gt;：列出符合条件的进程。（4、6、协议、:端口、 @ip ） -p&lt;进程号&gt;：列出指定进程号所打开的文件；</li>
-<li>-u：列出UID号进程详情；</li>
-<li>-h：显示帮助信息；</li>
-<li>-v：显示版本信息</li>
-<li>-R: 显示PPID（父进程ID）</li>
-</ul>
-<h3 id="lsof常用用法1：lsof-p"><a href="#lsof常用用法1：lsof-p" class="headerlink" title="lsof常用用法1：lsof -p"></a><em>lsof常用用法1：lsof -p</em></h3><p>ps -ef |grep sshd|grep -v grep| awk ‘{print $2}’|xargs sudo lsof -p的含义是：<br>列出sshd进程打开的所有文件描述符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ ps -ef |grep sshd|grep -v grep| awk &apos;&#123;print $2&#125;&apos;|xargs sudo lsof -p</div><div class="line">lsof: WARNING: can&apos;t stat() fuse.gvfsd-fuse file system /run/user/1000/gvfs</div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND PID USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">sshd    935 root  cwd    DIR    8,1     4096      2 /</div><div class="line">sshd    935 root  rtd    DIR    8,1     4096      2 /</div><div class="line">sshd    935 root  txt    REG    8,1   770944 301274 /usr/sbin/sshd</div><div class="line">sshd    935 root  mem    REG    8,1    43616 136982 /lib/x86_64-linux-gnu/libnss_files-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    47760 136992 /lib/x86_64-linux-gnu/libnss_nis-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    39824 136978 /lib/x86_64-linux-gnu/libnss_compat-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   101240 137033 /lib/x86_64-linux-gnu/libresolv-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    14256 136950 /lib/x86_64-linux-gnu/libkeyutils.so.1.4</div><div class="line">sshd    935 root  mem    REG    8,1    43672 403209 /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1</div><div class="line">sshd    935 root  mem    REG    8,1   186824 403203 /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1</div><div class="line">sshd    935 root  mem    REG    8,1    31792 137035 /lib/x86_64-linux-gnu/librt-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   141574 137027 /lib/x86_64-linux-gnu/libpthread-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   252032 137010 /lib/x86_64-linux-gnu/libpcre.so.3.13.1</div><div class="line">sshd    935 root  mem    REG    8,1    14664 136924 /lib/x86_64-linux-gnu/libdl-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    97296 136976 /lib/x86_64-linux-gnu/libnsl-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1  1840928 136907 /lib/x86_64-linux-gnu/libc-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1    14592 136916 /lib/x86_64-linux-gnu/libcom_err.so.2.1</div><div class="line">sshd    935 root  mem    REG    8,1   831616 403207 /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3</div><div class="line">sshd    935 root  mem    REG    8,1   290520 403037 /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2</div><div class="line">sshd    935 root  mem    REG    8,1    43368 136917 /lib/x86_64-linux-gnu/libcrypt-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1   100728 137070 /lib/x86_64-linux-gnu/libz.so.1.2.8</div><div class="line">sshd    935 root  mem    REG    8,1    10680 137062 /lib/x86_64-linux-gnu/libutil-2.19.so</div><div class="line">sshd    935 root  mem    REG    8,1  1934624 136919 /lib/x86_64-linux-gnu/libcrypto.so.1.0.0</div><div class="line">sshd    935 root  mem    REG    8,1   281552 136921 /lib/x86_64-linux-gnu/libdbus-1.so.3.7.6</div><div class="line">sshd    935 root  mem    REG    8,1    14536 440884 /usr/lib/x86_64-linux-gnu/libck-connector.so.0.0.0</div><div class="line">sshd    935 root  mem    REG    8,1   134296 137037 /lib/x86_64-linux-gnu/libselinux.so.1</div><div class="line">sshd    935 root  mem    REG    8,1    55856 136999 /lib/x86_64-linux-gnu/libpam.so.0.83.1</div><div class="line">sshd    935 root  mem    REG    8,1   104936 136897 /lib/x86_64-linux-gnu/libaudit.so.1.0.0</div><div class="line">sshd    935 root  mem    REG    8,1    36632 137067 /lib/x86_64-linux-gnu/libwrap.so.0.7.6</div><div class="line">sshd    935 root  mem    REG    8,1   149120 136883 /lib/x86_64-linux-gnu/ld-2.19.so</div><div class="line">sshd    935 root    0u   CHR    1,3      0t0      6 /dev/null</div><div class="line">sshd    935 root    1u   CHR    1,3      0t0      6 /dev/null</div><div class="line">sshd    935 root    2u   CHR    1,3      0t0      6 /dev/null</div><div class="line">sshd    935 root    3u  IPv4  10479      0t0    TCP *:ssh (LISTEN)</div><div class="line">sshd    935 root    4u  IPv6  10481      0t0    TCP *:ssh (LISTEN)</div></pre></td></tr></table></figure></p>
-<ul>
-<li><p>ps -ef | grep sshd | grep -v grep : 获取ps打印出来的列表中的sshd进程所在的那一行（grep -v grep的含义是清除掉包含“grep”字符串的那一行）, 即为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ ps -ef | grep sshd | grep -v grep</div><div class="line">root       935     1  0 17:37 ?        00:00:00 /usr/sbin/sshd -D</div></pre></td></tr></table></figure>
-</li>
-<li><p>awk ‘{print $2}’ : 获取上述命令打印出来结果的第2列（上述结果的第二列为sshd的pid， 是935）</p>
-</li>
-<li>xargs sudo lsof -p ： 列出上述结果pid为935的进程打开的所有文件描述符， 等价于sudo lsof -p 935的结果</li>
-</ul>
-<h3 id="lsof常用用法：lsof-i"><a href="#lsof常用用法：lsof-i" class="headerlink" title="lsof常用用法：lsof -i:"></a><em>lsof常用用法：lsof -i:</em></h3><p>sudo lsof -i:22含义为列出占用22的进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ sudo lsof -i:22</div><div class="line">COMMAND PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">sshd    935 root    3u  IPv4  10479      0t0  TCP *:ssh (LISTEN)</div><div class="line">sshd    935 root    4u  IPv6  10481      0t0  TCP *:ssh (LISTEN)</div></pre></td></tr></table></figure></p>
-<h1 id="df"><a href="#df" class="headerlink" title="df"></a><strong>df</strong></h1><blockquote>
-<p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-</blockquote>
-<ul>
-<li>-a或–all：包含全部的文件系统；</li>
-<li>–block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
-<li>-h或–human-readable：以可读性较高的方式来显示信息；</li>
-<li>-H或–si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
-<li>-i或–inodes：显示inode的信息；</li>
-<li>-k或–kilobytes：指定区块大小为1024字节；</li>
-<li>-l或–local：仅显示本地端的文件系统；</li>
-<li>-m或–megabytes：指定区块大小为1048576字节；</li>
-<li>–no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
-<li>-P或–portability：使用POSIX的输出格式；</li>
-<li>–sync：在取得磁盘使用信息前，先执行sync指令；</li>
-<li>-t&lt;文件系统类型&gt;或–type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
-<li>-T或–print-type：显示文件系统的类型；</li>
-<li>-x&lt;文件系统类型&gt;或–exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
-<li>–help：显示帮助；</li>
-<li>–version：显示版本信息</li>
-</ul>
-<h3 id="df常用用法：df-h"><a href="#df常用用法：df-h" class="headerlink" title="df常用用法：df -h"></a><em>df常用用法：df -h</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">udev            990M  4.0K  990M   1% /dev</div><div class="line">tmpfs           201M  968K  200M   1% /run</div><div class="line">/dev/sda1       8.8G  4.1G  4.3G  49% /</div><div class="line">none            4.0K     0  4.0K   0% /sys/fs/cgroup</div><div class="line">none            5.0M     0  5.0M   0% /run/lock</div><div class="line">none           1001M   76K 1001M   1% /run/shm</div><div class="line">none            100M   36K  100M   1% /run/user</div><div class="line">/dev/sr0         57M   57M     0 100% /media/b/VBOXADDITIONS_5.1.22_115126</div></pre></td></tr></table></figure>
-<h1 id="free"><a href="#free" class="headerlink" title="free"></a><strong>free</strong></h1><blockquote>
-<p>free命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
-</blockquote>
-<h3 id="free常用用法：free-m或者free-g"><a href="#free常用用法：free-m或者free-g" class="headerlink" title="free常用用法：free -m或者free -g"></a><em>free常用用法：free -m或者free -g</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ free -m</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:          2000       1231        768          9         72        456</div><div class="line">-/+ buffers/cache:        702       1297</div><div class="line">Swap:         1021          0       1021</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/27/MySQL的这些显而易见的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/27/MySQL的这些显而易见的坑/" itemprop="url">MySQL一些需要注意的小细节</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-27T22:51:11+08:00">
-                2015-02-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a><strong>distinct关键字</strong></h2><blockquote>
-<p>distinct是应用于所有列的, 而不是某一个列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one, two from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one from test_table;</div><div class="line">+------+</div><div class="line">| one  |</div><div class="line">+------+</div><div class="line">| 56   |</div><div class="line">| 52   |</div><div class="line">+------+</div><div class="line">2 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="and关键字"><a href="#and关键字" class="headerlink" title="and关键字"></a><strong>and关键字</strong></h2><blockquote>
-<p>and的组合优先级比or高</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">5 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select one, two from test_table where one = 52 or one = 56 and two &gt; 12;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select one, two from test_table where one = 52 or (one = 56 and two &gt; 12);</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select one, two from test_table where (one = 52 or one = 56) and two &gt; 12;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
-<h2 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a><strong>NULL</strong></h2><blockquote>
-<p>null和空字符是不一样的, 找到他和删除他的方式也比较特别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into test_table(one , two) values (null, null);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;  delete from test_table where one = NULL;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;  delete from test_table where one = &apos; &apos;;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| NULL | NULL |</div><div class="line">+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; delete from test_table where isnull(one);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_table;</div><div class="line">Empty set (0.00 sec)</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="rollback"><a href="#rollback" class="headerlink" title="rollback"></a><strong>rollback</strong></h2><blockquote>
-<ul>
-<li>并不是什么都可以回滚的, 典型的如创建表和删除表这些都是不能回退的.</li>
-<li>事务是用来管理 insert,update,delete 语句的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set autocommit = 0;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_tab;</div><div class="line">+-----+-----+-------+</div><div class="line">| one | two | three |</div><div class="line">+-----+-----+-------+</div><div class="line">|   3 | 4   |     5 |</div><div class="line">+-----+-----+-------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; set autocommit = 0;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; insert into test_tab value  (4, 4, 5);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; rollback;</div><div class="line">Query OK, 0 rows affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_tab;</div><div class="line">+-----+-----+-------+</div><div class="line">| one | two | three |</div><div class="line">+-----+-----+-------+</div><div class="line">|   3 | 4   |     5 |</div><div class="line">+-----+-----+-------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; drop table test_tab;</div><div class="line">Query OK, 0 rows affected (0.02 sec)</div><div class="line"></div><div class="line">mysql&gt; rollback;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from test_tab;</div><div class="line">ERROR 1146 (42S02): Table &apos;b_test_database.test_tab&apos; doesn&apos;t exist</div></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）/" itemprop="url">(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（三）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-22T23:19:21+08:00">
-                2014-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了</p>
-<p>这是一篇偏向单链表进阶的博客, 并不会讲单链表的建立/增加/删除等等, 而且这篇博客大多数只说思想不写代码(因为其实蛮简单的..)</p>
-</blockquote>
-<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a><strong>存储结构</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef struct Node</div><div class="line">&#123;</div><div class="line">	DataType data;</div><div class="line">	struct Node *next;</div><div class="line">&#125;Node, *Node_Ptr;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20170823224405993?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="1-找一个单链表的中间结点"><a href="#1-找一个单链表的中间结点" class="headerlink" title="1.找一个单链表的中间结点"></a><strong>1.找一个单链表的中间结点</strong></h4><blockquote>
-<p>算法思想 :<br>(<strong>快慢指针的使用</strong>)设置两个指针，一个每次移动两个位置，一个每次移动一个位置，当第一个指针到达尾节点时，第二个指针就达到了中间节点的位置</p>
-</blockquote>
-<h4 id="2-判断链表中是否有环"><a href="#2-判断链表中是否有环" class="headerlink" title="2.判断链表中是否有环"></a><strong>2.判断链表中是否有环</strong></h4><blockquote>
-<p>算法思想 :<br>(<strong>快慢指针的使用</strong>)链表中有环，其实也就是自相交. 用两个指针pslow和pfast从头开始遍历链表，pslow每次前进一个节点，pfast每次前进两个结点，若存在环，则pslow和pfast肯定会在环中相遇，若不存在，则pslow和pfast能正常到达最后一个节点</p>
-</blockquote>
-<h4 id="3-判断两个链表是否相交-假设两个链表均不带环"><a href="#3-判断两个链表是否相交-假设两个链表均不带环" class="headerlink" title="3.判断两个链表是否相交, 假设两个链表均不带环"></a><strong>3.判断两个链表是否相交, 假设两个链表均不带环</strong></h4><blockquote>
-<p>算法思想 :<br>如果两个链表相交于某一节点，那么在这个相交节点之后的所有节点都是两个链表所共有的。也就是说，如果两个链表相交，那么最后一个节点肯定是共有的。先遍历第一个链表，记住最后一个节点，然后遍历第二个链表，到最后一个节点时和第一个链表的最后一个节点做比较，如果相同，则相交，否则不相交。</p>
-</blockquote>
-<h4 id="4-链表反转"><a href="#4-链表反转" class="headerlink" title="4.链表反转"></a><strong>4.链表反转</strong></h4><p>比如一个链表:<br>A-&gt;B-&gt;C-&gt;D-&gt;E<br>反转成为:<br>E-&gt;D-&gt;C-&gt;B-&gt;A</p>
-<blockquote>
-<p>算法思想 :<br>取一个指针指向A的后面那个元素elem, 每次把element放到链表的第一个位置, 遍历完毕之后就反转完毕了,过程如下:<br>第一轮 : A-&gt;B-&gt;C-&gt;D-&gt;E, 把A后面的B设置为element<br>第二轮 : B-&gt;A-&gt;C-&gt;D-&gt;E, 把当前的element(即为B)放到链表的第一个位置, 并把A后面的C设置为element<br>第三轮 : C-&gt;B-&gt;A-&gt;D-&gt;E, 把当前的element(即为C)放到链表的第一个位置, 并把A后面的D设置为element<br>第四轮 : D-&gt;C-&gt;B-&gt;A-&gt;E, 把当前的element(即为D)放到链表的第一个位置, 并把A后面的E设置为element<br>第五轮 : E-&gt;D-&gt;C-&gt;B-&gt;A, 把当前的element(即为E)放到链表的第一个位置, 遍历完毕</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）/" itemprop="url">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-22T19:11:22+08:00">
-                2014-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.</p>
-</blockquote>
-<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a><strong>二叉树</strong></h2><p>这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：<br><img src="http://img.blog.csdn.net/20170805013035460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<blockquote>
-<p><strong>有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1</strong></p>
-</blockquote>
-<p>二叉树的二叉链式存储方案的代码表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef struct BinaryTreeNode</div><div class="line">&#123;</div><div class="line">	int data;</div><div class="line">	BinaryTreeNode *LeftChild, *RightChild;</div><div class="line">	// BTN *LeftChild, *RightChild; // error : BTN doesn&apos;t name a typecat</div><div class="line">&#125;BTN, *BTN_Ptr;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a><strong>创建</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">int create_BT(BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    int temp_data = 0;</div><div class="line">    std::cin &gt;&gt; temp_data;</div><div class="line">    if (temp_data == 0)</div><div class="line">    &#123;</div><div class="line">        *btp = NULL;</div><div class="line">        printf(&quot;leaf\n&quot;);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        if ( !(*btp = (BTN_Ptr)malloc( sizeof(BTN) ) ) ) </div><div class="line">        &#123;</div><div class="line">            printf(&quot;error : malloc error&quot;);</div><div class="line">            return -1;</div><div class="line">        &#125;</div><div class="line">        (*btp)-&gt;data = temp_data;</div><div class="line">        create_BT(&amp;((*btp)-&gt;LeftChild));</div><div class="line">        create_BT(&amp;((*btp)-&gt;RightChild));</div><div class="line">    &#125; </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a><strong>遍历</strong></h3><p>如上图得到的相应的遍历的序列分别为：</p>
-<ul>
-<li>先序遍历 ： ABCDEGF</li>
-<li>中序遍历 ： CBEGDFA</li>
-<li>后序遍历 ： CGEFDBA</li>
-</ul>
-<h4 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a><strong>递归遍历</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">void pre_order_traverse(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    if ( *btp != NULL)</div><div class="line">    &#123;</div><div class="line">        cout &lt;&lt; (*btp)-&gt;data &lt;&lt; endl;</div><div class="line">        pre_order_traverse( &amp;(*btp)-&gt;LeftChild );</div><div class="line">        pre_order_traverse( &amp;(*btp)-&gt;RightChild );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void in_order_traverse(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    if ( *btp != NULL)</div><div class="line">    &#123;</div><div class="line">        in_order_traverse( &amp;(*btp)-&gt;LeftChild );</div><div class="line">        cout &lt;&lt; (*btp)-&gt;data &lt;&lt; endl;</div><div class="line">        in_order_traverse( &amp;(*btp)-&gt;RightChild );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void post_order_traverse(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    if ( *btp != NULL)</div><div class="line">    &#123;</div><div class="line">        post_order_traverse( &amp;(*btp)-&gt;LeftChild );</div><div class="line">        post_order_traverse( &amp;(*btp)-&gt;RightChild );</div><div class="line">        cout &lt;&lt; (*btp)-&gt;data &lt;&lt; endl;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="非递归遍历"><a href="#非递归遍历" class="headerlink" title="非递归遍历"></a><strong>非递归遍历</strong></h4><blockquote>
-<p>非递归的二叉树三种遍历方式其实思想是<strong>统一</strong>的 : 都是从左到右的将各个结点依次入栈, 当左边已经走到头了, 就开始走右边, 在适当的条件就出栈, 只是每个遍历方式的出栈条件不一样而已.</p>
-<p><strong>先序和中序遍历都很好理解, 着重讲一下后序遍历 :</strong><br>后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体F_bt来记录他是否是第一次出栈 (F_bt结构体里有个is_first的数据来记录)</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">void pre_order_traverse_non_recursion(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    stack&lt;BTN_Ptr&gt; stack_bt;</div><div class="line">    BTN_Ptr temp_btp = *btp;</div><div class="line">    while ( !stack_bt.empty() || temp_btp != NULL )</div><div class="line">    &#123;</div><div class="line">        while ( temp_btp != NULL )</div><div class="line">        &#123;</div><div class="line">            cout &lt;&lt; temp_btp-&gt;data &lt;&lt; endl;</div><div class="line">            stack_bt.push(temp_btp);</div><div class="line">            temp_btp = temp_btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if ( !stack_bt.empty() )</div><div class="line">        &#123;</div><div class="line">            temp_btp = stack_bt.top()-&gt;RightChild;</div><div class="line">            stack_bt.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void in_order_traverse_non_recursion(const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    stack&lt;BTN_Ptr&gt; stack_bt;</div><div class="line">    BTN_Ptr temp_btp = *btp;</div><div class="line">    </div><div class="line">    while ( !stack_bt.empty() || temp_btp != NULL )</div><div class="line">    &#123;</div><div class="line">        while ( temp_btp != NULL )</div><div class="line">        &#123;</div><div class="line">            stack_bt.push(temp_btp);</div><div class="line">            temp_btp = temp_btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if ( !stack_bt.empty() )</div><div class="line">        &#123;</div><div class="line">            cout &lt;&lt; stack_bt.top()-&gt;data &lt;&lt; endl;</div><div class="line">            temp_btp = stack_bt.top()-&gt;RightChild;</div><div class="line">            stack_bt.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">typedef struct</div><div class="line">&#123;</div><div class="line">    BTN_Ptr btnp;</div><div class="line">    int is_first;</div><div class="line">&#125;F_bt, *F_btp;</div><div class="line"></div><div class="line">void post_order_traverse_non_recursion( const BTN_Ptr *btp)</div><div class="line">&#123;</div><div class="line">    stack&lt;F_btp&gt; stack_F_btp;</div><div class="line">    BTN_Ptr temp_btp = *btp;</div><div class="line"></div><div class="line">    while ( !stack_F_btp.empty() || temp_btp != NULL )</div><div class="line">    &#123;</div><div class="line">        while ( temp_btp != NULL )</div><div class="line">        &#123;</div><div class="line">            F_btp temp_F_btp = new F_bt;</div><div class="line">            temp_F_btp-&gt;btnp = temp_btp;</div><div class="line">            temp_F_btp-&gt;is_first = 1;</div><div class="line">            stack_F_btp.push(temp_F_btp);</div><div class="line">            temp_btp = temp_btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if ( !stack_F_btp.empty() )</div><div class="line">        &#123;</div><div class="line">            if ( stack_F_btp.top()-&gt;is_first == 1 )</div><div class="line">            &#123;</div><div class="line">                stack_F_btp.top()-&gt;is_first = 0;</div><div class="line">                temp_btp = stack_F_btp.top()-&gt;btnp-&gt;RightChild;</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                cout &lt;&lt; stack_F_btp.top()-&gt;btnp-&gt;data &lt;&lt; endl;</div><div class="line">                delete stack_F_btp.top();</div><div class="line">                stack_F_btp.top() = NULL;</div><div class="line">                stack_F_btp.pop();</div><div class="line">                temp_btp = NULL;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="二叉搜索树-又称二叉查找树或二叉排序树"><a href="#二叉搜索树-又称二叉查找树或二叉排序树" class="headerlink" title="二叉搜索树(又称二叉查找树或二叉排序树)"></a><strong>二叉搜索树(又称二叉查找树或二叉排序树)</strong></h2><blockquote>
-<p>有了上面二叉树的基础, 我们继续学习二叉搜索树.<br>我们这里也不给他那种晦涩难懂的定义, 感性的认识二叉搜索树.<br>直接看图, 很容易看得出来, 二叉搜索树每个结点的左孩子都小于右孩子.<br><img src="http://img.blog.csdn.net/20170806185002946?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><strong>因为具有n个结点的完全二叉树的最大高度为log2n+1</strong><br><strong>而二叉搜索树的查询/增加的时间复杂度都是O(h), h为树的高度,所以复杂度可以看作O(logn), 所以很明显上图中的a树比b树要高效.</strong></p>
-</blockquote>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a><strong>查询</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">BTN_Ptr search(BTN_Ptr btp, int key)</div><div class="line">&#123;</div><div class="line">    while (btp != NULL )</div><div class="line">    &#123;</div><div class="line">        if ( btp-&gt;data != key)</div><div class="line">        &#123;</div><div class="line">            if ( btp-&gt;data &lt; key )</div><div class="line">                btp = btp-&gt;RightChild;</div><div class="line">            else</div><div class="line">                btp = btp-&gt;LeftChild;</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            printf(&quot;found\n&quot;);</div><div class="line">            return btp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">   printf(&quot;error : not found!\n&quot;);</div><div class="line">   return NULL;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a><strong>插入</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">BTN_Ptr insert(BTN_Ptr &amp;btp, int key)</div><div class="line">&#123;</div><div class="line">    if (btp == NULL)</div><div class="line">    &#123;</div><div class="line">        btp = new BTN;</div><div class="line">        btp-&gt;data = key;</div><div class="line">        btp-&gt;LeftChild = NULL;</div><div class="line">        btp-&gt;RightChild = NULL;</div><div class="line">        return btp;</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        BTN_Ptr saved_btp = btp;</div><div class="line">        BTN_Ptr temp_btp = NULL;</div><div class="line">        while ( btp != NULL)</div><div class="line">        &#123;</div><div class="line">            temp_btp = btp;</div><div class="line">            if ( key &lt; btp-&gt;data )</div><div class="line">                btp = btp-&gt;LeftChild;</div><div class="line">            else</div><div class="line">                btp = btp-&gt;RightChild;</div><div class="line">        &#125;</div><div class="line">        btp = new BTN;</div><div class="line">        btp-&gt;data = key;</div><div class="line">        btp-&gt;LeftChild = NULL;</div><div class="line">        btp-&gt;RightChild = NULL;</div><div class="line">        if ( key &lt; temp_btp-&gt;data )</div><div class="line">            temp_btp-&gt;LeftChild = btp;</div><div class="line">        else</div><div class="line">            temp_btp-&gt;RightChild = btp;</div><div class="line">        return saved_btp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a><strong>测试程序</strong></h3><p>附上一个测试程序吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line"></div><div class="line">using std::stack;</div><div class="line">using std::cout;</div><div class="line">using std::cin;</div><div class="line">using std::endl;</div><div class="line"></div><div class="line">int main(int argc, char **argv)</div><div class="line">&#123;</div><div class="line">    BTN_Ptr my_btp = NULL;</div><div class="line">    if (create_BT(&amp;my_btp) == -1)</div><div class="line">	    return -1;</div><div class="line">    cout &lt;&lt; &quot;==============pre_order:==============&quot; &lt;&lt; endl;</div><div class="line">    pre_order_traverse(&amp;my_btp);</div><div class="line">    cout &lt;&lt; &quot;==============in_order:==============&quot; &lt;&lt; endl;</div><div class="line">    in_order_traverse(&amp;my_btp);</div><div class="line">    cout &lt;&lt; &quot;==============post_order:==============&quot; &lt;&lt; endl;</div><div class="line">    post_order_traverse(&amp;my_btp);</div><div class="line">    cout &lt;&lt; &quot;==============search : 24==============&quot; &lt;&lt; endl;</div><div class="line">    search(my_btp, 24);</div><div class="line">    cout &lt;&lt; &quot;==============search : 14==============&quot; &lt;&lt; endl;</div><div class="line">    search(my_btp, 14);</div><div class="line">    cout &lt;&lt; &quot;==============insert : 25==============&quot; &lt;&lt; endl;</div><div class="line">    my_btp = insert(my_btp, 25);</div><div class="line">    cout &lt;&lt; &quot;==============pre_order2:==============&quot; &lt;&lt; endl;</div><div class="line">    pre_order_traverse(&amp;my_btp);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/19/(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/08/19/(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）/" itemprop="url">(排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-19T17:38:55+08:00">
-                2014-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。</p>
-</blockquote>
-<p><strong>注：以下所有代码皆可以直接运行， 都已经测试过。</strong></p>
-<h2 id="必须掌握的知识"><a href="#必须掌握的知识" class="headerlink" title="必须掌握的知识"></a><strong>必须掌握的知识</strong></h2><p><img src="http://img.blog.csdn.net/20170804205144200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="常用算法的复杂度"><a href="#常用算法的复杂度" class="headerlink" title="常用算法的复杂度"></a><strong>常用算法的复杂度</strong></h2><p><img src="http://img.blog.csdn.net/20170804201637199?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h2><blockquote>
-<p>想象就是很多泡泡，最大的泡泡每次浮到那个数组最后面</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">void bubble_sort(int a[], int n)</div><div class="line">&#123;</div><div class="line">    int i, j, temp;</div><div class="line">    for (j = 0; j &lt; n - 1; j++)</div><div class="line">        for (i = 0; i &lt; n - 1 - j; i++)</div><div class="line">        &#123;</div><div class="line">            if(a[i] &gt; a[i + 1])</div><div class="line">            &#123;</div><div class="line">                temp = a[i];</div><div class="line">                a[i] = a[i + 1];</div><div class="line">                a[i + 1] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a><strong>插入排序</strong></h2><blockquote>
-<p>想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">void insertion_sort(int test_array[], size_t length)</div><div class="line">&#123;</div><div class="line">	int i = 0, key = 0;</div><div class="line">	for (size_t index = 1; index &lt; length; ++index)</div><div class="line">	&#123;</div><div class="line">		i = index - 1, key = test_array[index];</div><div class="line">		while (i &gt;= 0 &amp;&amp; key &lt; test_array[i])</div><div class="line">		&#123;</div><div class="line">			test_array[i + 1] = test_array[i];</div><div class="line">			i = i - 1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		test_array[i + 1] = key;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	for (size_t ii = 0; ii &lt; length; ++ii, ++test_array)</div><div class="line">	&#123;</div><div class="line"></div><div class="line">		cout &lt;&lt; *test_array &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a><strong>归并排序</strong></h2><blockquote>
-<p>归并排序用了分治的思想，有很多算法在结构上是递归的：为了解决一个给定的问题，算法要一次或多次地递归调用其自身来解决相关的子问题。这些算法通常采用分治策略（divide-and-conquier）：将原问题划分成n个规模较小而结构与原问题相似的子问题；递归地解决这些子问题，然后再合并其结果，就得到原问题的解。</p>
-</blockquote>
-<p><strong>分治模式</strong>在每一层递归上都有三个步骤：</p>
-<ul>
-<li><p>分解（divide）：将原问题分解成一系列子问题；</p>
-</li>
-<li><p>解决（conquer）：递归地解各子问题。若子问题足够小，则直接求解；</p>
-</li>
-<li><p>合并：将子问题的结果合并成原问题的解。</p>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20170804224210669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<blockquote>
-<p>下面是一个比较直白明了的归并c++实现（其实可以写成不用动态分配内存的，但是这里为了直白起见）：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * p: 左数组第一个元素下标</div><div class="line"> * q: 左数组最后一个元素下标</div><div class="line"> * r: 右数组最后一个元素下标</div><div class="line"> */</div><div class="line">void merge(int *array, int p, int q, int r)</div><div class="line">&#123;</div><div class="line">    int n1, n2, i, j, k;</div><div class="line">    int *left=NULL, *right=NULL;</div><div class="line"> </div><div class="line">    n1 = q-p+1;</div><div class="line">    n2 = r-q;</div><div class="line"> </div><div class="line">    left = (int *)malloc(sizeof(int)*(n1));</div><div class="line">    right = (int *)malloc(sizeof(int)*(n2));</div><div class="line">    for(i=0; i&lt;n1; i++)</div><div class="line">    &#123;</div><div class="line">                  left[i] = array[p+i];</div><div class="line">    &#125;</div><div class="line">    for(j=0; j&lt;n2; j++)</div><div class="line">    &#123;</div><div class="line">                  right[j] = array[q+1+j];</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    i = j = 0;</div><div class="line">    k = p;</div><div class="line">    while(i&lt;n1 &amp;&amp; j&lt;n2)</div><div class="line">    &#123;</div><div class="line">                  if(left[i] &lt;= right[j])</div><div class="line">                  &#123;</div><div class="line">                        array[k++] = left[i++];</div><div class="line">                  &#125;</div><div class="line">                  else</div><div class="line">                  &#123;</div><div class="line">                        array[k++] = right[j++];</div><div class="line">                  &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    for(; i&lt;n1; i++)</div><div class="line">    &#123;</div><div class="line">                  array[k++] = left[i];</div><div class="line">    &#125;</div><div class="line">    for(; j&lt;n2; j++)</div><div class="line">    &#123;</div><div class="line">                  array[k++] = right[j];</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    free(left);</div><div class="line">    free(right);</div><div class="line">    left = NULL;</div><div class="line">    right = NULL;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void merge_sort(int *array, int p, int r)</div><div class="line">&#123;</div><div class="line">    int q;</div><div class="line"> </div><div class="line">    if(p &lt; r)</div><div class="line">    &#123;</div><div class="line">                  q = (int)((p+r)/2);</div><div class="line">                  merge_sort(array, p, q);</div><div class="line">                  merge_sort(array, q+1, r);</div><div class="line">                  merge(array, p, q, r);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a><strong>快速排序</strong></h2><blockquote>
-<p>与归并排序一样， 快排也是用了分治的思想。<br>你可以想象一个两副牌然后随意取出一张牌pivot，其他的所有牌都跟这张pivot牌比较， 大的放右边那一摞A，小的放左边B。<br>接着再从左边这一摞B再随意取出一张牌pivot，其他的所有牌都跟这张pivot牌比较， 大的放右边那一摞，小的放左边，递归下去。<br>A也重复上述步骤递归。<br>递归结束之后， 左边的都比右边的小， 而且是有序的。<br><img src="http://img.blog.csdn.net/20170804224023832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">void swap(int *a, int *b)</div><div class="line">&#123;</div><div class="line">    int temp = 0;</div><div class="line">    temp = *a;</div><div class="line">    *a = *b;</div><div class="line">    *b = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int partition(int *array, int p, int r)</div><div class="line">&#123;</div><div class="line">    int i = 0, j = 0, pivot = 0;</div><div class="line">    pivot = array[r];</div><div class="line">    i = p-1;</div><div class="line">    for(j=p; j&lt;=r-1; j++)</div><div class="line">    &#123;</div><div class="line">         if(array[j] &lt;= pivot)</div><div class="line">         &#123;</div><div class="line">	          i++;</div><div class="line">              swap(&amp;array[i], &amp;array[j]);</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">    swap(&amp;array[i+1], &amp;array[r]);</div><div class="line">    return i+1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*</div><div class="line">通常，我们可以向一个算法中加入随机化成分，以便对于所有输入，它均能获得较好的平均情况性能。将这种方法用于快速排序时，不是始终采用A[r]作为主元，而是从子数组A[p..r]中随机选择一个元素，即将A[r]与从A[p..r]中随机选出的一个元素交换。</div><div class="line">*/</div><div class="line"> int rand_patition(int  test_arr[], int p, int r)</div><div class="line"> &#123;</div><div class="line">	srand(static_cast&lt;unsigned&gt;(time(nullptr)));</div><div class="line">	int rand_index = (rand() % (r - p) ) + p + 1;</div><div class="line">	swap(&amp;test_arr[rand_index], &amp;test_arr[r]);</div><div class="line">	return partition(test_arr, p, r);</div><div class="line"> &#125;</div><div class="line"></div><div class="line">void quick_sort(int *array, int p, int r)</div><div class="line">&#123;</div><div class="line">    int q = 0;</div><div class="line">    if(p &lt; r)</div><div class="line">    &#123;</div><div class="line">         q = rand_patition(array, p, r);</div><div class="line">         quick_sort(array, p, q-1);</div><div class="line">         quick_sort(array, q+1, r);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h4 id="快速排序思想的应用"><a href="#快速排序思想的应用" class="headerlink" title="快速排序思想的应用"></a><strong>快速排序思想的应用</strong></h4><blockquote>
-<p><strong>问题</strong> : 查找数组中第k大的数字<br><strong>算法思想</strong> : 因为快排每次将数组划分为两组加一个枢纽元素，每一趟划分你只需要将k与枢纽元素的下标进行比较，如果比枢纽元素下标大就从右边的子数组中找，如果比枢纽元素下标小从左边的子数组中找，如果一样则就是枢纽元素，找到，如果需要从左边或者右边的子数组中再查找的话，只需要递归一边查找即可，无需像快排一样两边都需要递归，所以复杂度必然降低。</p>
-</blockquote>
-<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a><strong>二分查找</strong></h2><blockquote>
-<p>二分查找的复杂度计算方法：<br>时间复杂度可以视为while循环的次数。<br>总共有n个元素，<br>渐渐跟下去就是n,n/2,n/4,….n/2^k（接下来操作元素的剩余个数），其中k就是循环的次数<br>由于你n/2^k取整后&gt;=1（接下来操作元素的剩余个数至少为一个）<br>即令n/2^k=1<br>可得k=log2n,（是以2为底，n的对数）<br>所以时间复杂度可以表示O(h)=O(log2n)</p>
-</blockquote>
-<p><strong>递归版本：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">int binary_search(int arr[], int low, int high, int key)</div><div class="line">&#123;</div><div class="line">    if ( low &lt;= high)</div><div class="line">    &#123;</div><div class="line">        int mid = (low + high) / 2;</div><div class="line">        if ( key == arr[mid] )</div><div class="line">            return mid;</div><div class="line">        else if ( key &lt; arr[mid])</div><div class="line">            binary_search(arr, low, mid - 1, key);</div><div class="line">        else </div><div class="line">            binary_search(arr, mid + 1, high, key);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">        return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>非递归版本：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">int non_recursion_bs(int arr[], int low, int high, int key)</div><div class="line">&#123;</div><div class="line">    int mid = 0;</div><div class="line">    while (low &lt;= high)</div><div class="line">    &#123;</div><div class="line">        mid = ( low + high ) / 2;</div><div class="line">        if ( key == arr[mid] )</div><div class="line">            return mid;</div><div class="line">        else if ( key &lt; arr[mid] )</div><div class="line">            high = mid - 1;</div><div class="line">        else</div><div class="line">            low = mid + 1;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
+          <h2 id="安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><a href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx" class="headerlink" title="安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )"></a>安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</h2><p>执行命令安装nginx：sudo apt-get install nginx<br>测试是否安装成功：在本机的浏览器里访问 localhost ;如果现实”Welcome to nginx!”，表明你的 Nginx 服务器安装成功！<br>启动 Nginx：sudo /etc/init.d/nginx start<br>关闭 Nginx：sudo /etc/init.d/nginx stop<br>重启 nginx：sudo /etc/init.d/nginx restart 或者 sudo service nginx restart<br>sudo service apache2 stop  (如果之前装了apache2则需要sudo apt-get remove apache2 卸载掉apache2然后执行这个stop命令)</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/25/从零开始搭建一台简易linux服务器(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2113,7 +1056,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2159,7 +1102,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2181,7 +1124,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -2201,17 +1144,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -2262,7 +1194,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

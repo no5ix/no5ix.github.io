@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,22 +94,22 @@
 
 
 
-<meta name="description" content="看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.   报文的组成 起始行(start line) 首部(header) 主体(body)  可细分为 :  方法 :如GET, HEAD, POST 关于HTTP请求GET和POST的区别 : 1.提交方式的区别: 12345- GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协">
+<meta name="description" content="看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.   报文的组成 起始行(start line) 首部(header) 主体(body)  可细分为 :  方法 :如GET, HEAD, POST">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http报文笔记整理">
 <meta property="og:url" content="http://yoursite.com/2016/05/24/http笔记整理之报文/index.html">
-<meta property="og:site_name" content="烫烫烫">
-<meta property="og:description" content="看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.   报文的组成 起始行(start line) 首部(header) 主体(body)  可细分为 :  方法 :如GET, HEAD, POST 关于HTTP请求GET和POST的区别 : 1.提交方式的区别: 12345- GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.   报文的组成 起始行(start line) 首部(header) 主体(body)  可细分为 :  方法 :如GET, HEAD, POST">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170830060728031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170830061634966?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170830063116038?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170830061832111?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170830062551108?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-08-31T18:20:47.023Z">
+<meta property="og:updated_time" content="2017-09-01T13:17:22.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http报文笔记整理">
-<meta name="twitter:description" content="看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.   报文的组成 起始行(start line) 首部(header) 主体(body)  可细分为 :  方法 :如GET, HEAD, POST 关于HTTP请求GET和POST的区别 : 1.提交方式的区别: 12345- GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协">
+<meta name="twitter:description" content="看了书和各种网上资料, 学东西嘛, 要做总结, 这些老笔记整理一下, 供以后方便查阅也加强印象和理解.   报文的组成 起始行(start line) 首部(header) 主体(body)  可细分为 :  方法 :如GET, HEAD, POST">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170830060728031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -118,7 +118,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -145,7 +145,7 @@
 
 
 
-  <title>http报文笔记整理 | 烫烫烫</title>
+  <title>http报文笔记整理 | 烫</title>
   
 
 
@@ -181,7 +181,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -297,7 +297,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -388,6 +388,7 @@
 </ul>
 <p>可细分为 : </p>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法 :"></a><strong>方法</strong> :</h3><p>如GET, HEAD, POST<br><img src="http://img.blog.csdn.net/20170830061634966?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<a id="more"></a>
 <h4 id="关于HTTP请求GET和POST的区别"><a href="#关于HTTP请求GET和POST的区别" class="headerlink" title="关于HTTP请求GET和POST的区别 : "></a><strong>关于HTTP请求GET和POST的区别 : </strong></h4><p><strong>1.提交方式的区别: </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协议头＜request-line＞中），以?分割URL和传输数据，多个参数用&amp;连接;例如：login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0 %E5%A5%BD。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如： %E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。</div><div class="line"></div><div class="line">- POST提交：把提交的数据放置在是HTTP包的包体＜request-body＞中。上文示例中红色字体标明的就是实际的传输数据</div><div class="line"></div><div class="line">因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变</div></pre></td></tr></table></figure></p>
 <p><strong>2.传输数据的大小：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">首先声明,HTTP协议没有对传输的数据大小进行限制，HTTP协议规范也没有对URL长度进行限制。 而在实际开发中存在的限制主要有：</div><div class="line"></div><div class="line">GET:特定浏览器和服务器对URL长度有限制，例如IE对URL长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系统的支持。</div><div class="line"></div><div class="line">因此对于GET提交时，传输数据就会受到URL长度的限制。</div><div class="line"></div><div class="line">POST:由于不是通过URL传值，理论上数据不受限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置。</div></pre></td></tr></table></figure></p>
 <p><strong>安全性：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">POST的安全性要比GET的安全性高。注意：这里所说的安全性和上面GET提到的“安全”不是</div><div class="line">同个概念。上面“安全”的含义仅仅是不作数据修改，而这里安全的含义是真正的Security</div><div class="line">的含义，比如：通过GET提交数据，用户名和密码将明文出现在URL上，因为(1)</div><div class="line">登录页面有可能被浏览器缓存， (2)</div><div class="line">其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，</div></pre></td></tr></table></figure></p>
@@ -515,7 +516,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -537,7 +538,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -557,17 +558,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -634,7 +624,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

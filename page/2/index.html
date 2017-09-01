@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,13 +96,13 @@
 
 <meta name="description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="烫烫烫">
+<meta property="og:title" content="烫">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="烫烫烫">
+<meta name="twitter:title" content="烫">
 <meta name="twitter:description" content="私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -138,7 +138,7 @@
 
 
 
-  <title>烫烫烫</title>
+  <title>烫</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/IPC进程间通信/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/27/IPC进程间通信/" itemprop="url">IPC进程间通信</a></h1>
+                <a class="post-title-link" href="/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理(一)/" itemprop="url">重读UNIX网络编程第三章到第十一章笔记整理(一)</a></h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T21:01:59+08:00">
-                2017-01-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-02T19:01:21+08:00">
+                2017-07-02
               </time>
             
 
@@ -375,228 +375,364 @@
 
       
         
+          <blockquote>
+<p>因为第二章之后基本都是纯Socket API的内容， 第三章到第十一章的笔记整理合并到一起。</p>
+</blockquote>
+<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a><strong>第三章</strong></h1><ul>
+<li>3.4 ：字节排序函数，涉及到大小端，处理网络字节序和主机字节序的转换</li>
+<li>3.6 ： 地址转换函数，吹在ASCII字符串与网络字节序的二进制值之间转换网际地址<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a><strong>第四章</strong></h1></li>
+<li><p><img src="http://img.blog.csdn.net/20170729013008696?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+</li>
+<li><p><img src="http://img.blog.csdn.net/20170729013634366?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+</li>
+<li><p><img src="http://img.blog.csdn.net/20170729013930226?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+</li>
+<li><p>4.9节：close函数， 涉及到描述符引用计数，所以多进程并发服务器才可以共享已连接套接字，因为父进程调用close函数知识把该套接字标记成已关闭并导致该套接字描述符减1。只要引用计数的值仍大于0，就不会引发tcp的四分组连接终止序列</p>
+</li>
+</ul>
+<h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a><strong>第五章</strong></h1><ul>
+<li>5.9节：处理SIGCHLD信号， 涉及到僵死进程（子进程终止时给父进程发送了一个SIGCHLD信号，若父进程未加处理，则子进程进入僵死状态），所以要建立该信号处理函数，并在函数中调用waitpid来处理</li>
+<li>5.10节 ：使用wait或者waitpid来处理已终止的子进程，通常是使用waitpid并指定WNOHANG选项，来告知waitpid在有尚未终止的子进程在运行时不要阻塞。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/02/重读UNIX网络编程第三章到第十一章笔记整理(一)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/05/重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）/" itemprop="url">重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T19:01:21+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-            <p>##IPC进程间通信</p>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>为加深理解, 故本章老笔记内容大幅删减重写.<br>第二章重点如下 : </p>
 <ul>
-<li><p>1.匿名管道( pipe )：<br>匿名管道是一种半双工的通信方式，通常是在父子进程间使用。</p>
-</li>
-<li><p>2.命名管道 (named pipe) ：<br>命名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</p>
-</li>
-<li><p>3.信号量( semophore ) ：<br>信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
-</li>
-<li><p>4.消息队列( message queue ) ：<br>消息队列是消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
-</li>
-<li><p>5.信号 ( sinal ) ：<br>信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</p>
-</li>
-<li><p>6.共享内存( shared memory ) ：<br>共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</p>
-</li>
-<li><p>7.套接字( socket ) ：套接字也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同进程间的进程通信。</p>
-</li>
+<li>TCP (Transmission Control Protocol)传输控制协议. 特性如下 : <ul>
+<li>面向连接</li>
+<li>全双工</li>
+<li>可靠, 关心确认/超时/重传等, 保证顺序</li>
+<li>流量控制</li>
+<li>字节流, 没有任何记录边界</li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/04/快速完成一个slg游戏思路/" itemprop="url">快速完成一个slg游戏思路</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T22:19:29+08:00">
-                2016-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2016/12/04/快速完成一个slg游戏思路/slg1.png" alt="slg1.png" title="">
-<h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
-<p>验证完玩家信息, </p>
-<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
-<blockquote>
-<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
-<p>这个key也可以用来完成封号操作</p>
-</blockquote>
-<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
-<p>因为弱交互/短连接的关系, </p>
-<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
-<p>打一下对方的离线数据，</p>
-<p>计算下排行榜，排行榜是实时计算的, </p>
-<p>存在redis里, 做了分页处理</p>
-<p>买卖下道具即可</p>
-<p>所以 MainServer 选择了:</p>
-</blockquote>
+</li>
+<li>UDP (User Datagram Protocol)用户数据报协议. 特性如下 : <ul>
+<li>无连接</li>
+<li>不可靠, 不保证顺序/是否到达/是否重复</li>
+<li>每个数据报都有一个长度</li>
+</ul>
+</li>
+<li><p>TCP三路握手(three-way handshake)<br><img src="http://img.blog.csdn.net/20170604224047107?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="TCP三路握手图"></p>
+</li>
+<li><p>TCP选项 : </p>
 <ul>
-<li>yii</li>
-<li>redis</li>
-<li>mysql</li>
-<li>nginx</li>
+<li>MSS选项 发送SYN的TCP一端使用本选项通告对端他的最大分节大小(maximum segment size)</li>
+<li>窗口规模选项</li>
+<li>时间戳选项, 对于高速网络连接是必要的.</li>
 </ul>
-<h2 id="pvpServeer"><a href="#pvpServeer" class="headerlink" title="pvpServeer"></a>pvpServeer</h2><p>而 pvpServer 则选择 workerman 的tcp模式,</p>
-<p>实时交互数据, </p>
-<p>MainServer 和 pvpServer之间通信并接同一个数据库.</p>
-<blockquote>
-<p>其实这里可以不选择用tcp, 而自撸一个可靠udp来提高效率</p>
-</blockquote>
-<h2 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h2><blockquote>
-<p>从登录成功就开始连接, </p>
-<p>注册一个Chat_ID, </p>
-<p>player_ID 和 Chat_ID相互对应, </p>
-<p>会注册相应的房间频道, </p>
-<p>并为每位Player存了一份黑名单, </p>
-<p>在客户端做了本地黑名单, </p>
-<p>聊天服务器也做了黑名单二次验证处理.</p>
-</blockquote>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/05/重读UNIX网络编程第二章笔记修正（结合TLPI和APUE两书的笔记整理）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/重读UNIX网络编程第一章笔记修正/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/02/重读UNIX网络编程第一章笔记修正/" itemprop="url">重读UNIX网络编程第一章笔记修正</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T19:01:21+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>又准备从头看一遍unp, 把一些老笔记放到博客里来就当网盘吧, 顺便修正以及删减一些之前不够精炼的老笔记内容.  </p>
+<p>第一章重点如下 :      </p>
 <ul>
-<li><p>世界频道 : 则用MsgServer的非实时推送思路</p>
+<li>OSI (open systems interconnection), 即计算机通信开放系统互联模型</li>
+<li>OSI分为七层, 从上到下依次为<ul>
+<li>应用层</li>
+<li>表现层</li>
+<li>会话层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
 </li>
-<li><p>私密聊天 : 则选择 workerman 的tcp, </p>
-</li>
+<li>对于网际网协议族, OSI顶上三层合并为一层, 称为应用层. 传输层对应着tcp/udp等, 网络层对应着IPv4/IPv6, OSI的数据链路层和物理层是随系统提供的设备驱动程序和网络硬件</li>
 </ul>
-<h2 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h2><ul>
-<li>实时推送 : workerman 的tcp</li>
-<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
-</ul>
-<h2 id="deployTool"><a href="#deployTool" class="headerlink" title="deployTool"></a>deployTool</h2><p>Capistrano是一个开源的部署工具, 用ruby来写, 语法超简洁的</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>实时则走 workerman </li>
-<li>非实时则跑 yii</li>
-</ul>
-<blockquote>
-<p>访问一下，请求一下关卡数据，玩完了又提交一下，</p>
-<p>验算一下是否合法，获得什么奖励，</p>
-<p>数据库用单台 MySQL或者 MongoDB即可，后端的 Redis做缓存</p>
-<p>此类服务器用来实现一款三国类策略或者卡牌及酷跑的游戏已经绰绰有余，</p>
-<p>这类游戏因为逻辑简单，玩家之间交互不强，</p>
-<p>使用HTTP来开发的话，开发速度快，调试只需要一个浏览器就可以把逻辑调试清楚了</p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/02/重读UNIX网络编程第一章笔记修正/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -643,7 +779,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/02/kbe服务端笔记(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -652,7 +788,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -662,7 +798,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" itemprop="url">一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)</a></h1>
+                <a class="post-title-link" href="/2017/04/02/kbe服务端笔记(二)/" itemprop="url">kbe服务端笔记(二)</a></h1>
         
 
         <div class="post-meta">
@@ -674,8 +810,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-18T19:29:22+08:00">
-                2016-10-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-02T19:18:38+08:00">
+                2017-04-02
               </time>
             
 
@@ -697,8 +833,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UE4/" itemprop="url" rel="index">
-                    <span itemprop="name">UE4</span>
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
                   </a>
                 </span>
 
@@ -735,99 +871,15 @@
 
       
         
-          
-            <h1 id="fish"><a href="#fish" class="headerlink" title="fish"></a>fish</h1><p>A fish flock AI Plugin for Unreal Engine 4</p>
-<blockquote>
-<p>一个基于虚幻4的鱼群 AI 插件 </p>
-</blockquote>
-<p>this Plugin version can Run <strong>2000+</strong> fishes at the same time</p>
-<blockquote>
-<p>这个插件版本可以同时运行 <strong>2000+</strong> 条鱼儿</p>
-</blockquote>
-<p><img src="/img/OldDemoScreenshot.png" alt="OldDemoScreenshot.png"></p>
-<h2 id="Video-Preview"><a href="#Video-Preview" class="headerlink" title="Video Preview"></a>Video Preview</h2><ul>
-<li><p>Watch the <a href="http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html" target="_blank" rel="external">Video Preview</a></p>
-<blockquote>
-<p>查看 <a href="http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html" target="_blank" rel="external">视频演示</a> </p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Download-amp-Play"><a href="#Download-amp-Play" class="headerlink" title="Download &amp; Play"></a>Download &amp; Play</h2><h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a><strong>Download</strong></h4><ul>
-<li><p>Download <a href="http://pan.baidu.com/s/1qYbBrHU" target="_blank" rel="external"><strong>MyFish.exe (Win64)</strong></a>  (<em>This is packaged by an unoptimized version( check out  branch old_demo)</em>)</p>
-<blockquote>
-<p>下载  <a href="http://pan.baidu.com/s/1qYbBrHU" target="_blank" rel="external"><strong>MyFish.exe (Win64)</strong></a> 玩玩 </p>
-<p><em>这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)</em></p>
-</blockquote>
-</li>
-</ul>
-<h4 id="How-to-play"><a href="#How-to-play" class="headerlink" title="How to play"></a><strong>How to play</strong></h4><ul>
-<li><p><em>VR</em> : </p>
-<p>  <em>(My Device is HTC Vive)</em></p>
-<ul>
-<li><p>Motion Controller FaceButton1 =&gt; Move forward</p>
-<p>  <code>手柄圆盘上键                  =&gt; 往前移动</code></p>
-</li>
-<li><p>PC’s KeyBoard Arrow UP and Down    =&gt; Move faster or slower</p>
-<p>  <code>电脑键盘的上下箭头键          =&gt;  调整移动速度</code></p>
-</li>
-<li><p>Hold Motion Controller Trigger Down     =&gt; Attract fishes</p>
-<p>  <code>按住手柄扳机键                    =&gt; 吸引鱼群</code></p>
-</li>
-</ul>
-</li>
-<li><p><em>PC</em> :</p>
-<ul>
-<li><p>EQ        =&gt;  Up &amp; Down</p>
-<p>  <code>EQ  键     =&gt;  上下</code></p>
-</li>
-<li><p>WASD         =&gt;  Basic movement </p>
-<p>  <code>WASD 键     =&gt;  基本的移动指令(前后左右)</code></p>
-</li>
-<li><p>Hold Left Mouse Button Down  =&gt;  Attract fishes</p>
-<p>  <code>按住鼠标左键           =&gt;  吸引鱼群</code></p>
-</li>
-<li><p>Arrow UP and Down  =&gt;  Move faster or slower</p>
-<p>  <code>上下箭头键         =&gt;  调整移动速度</code></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>place Plugins folder in your project root directory, then just like</p>
-<blockquote>
-<p>把Plugins文件夹放在你项目的根目录, 接下来如图</p>
-</blockquote>
-<p><img src="/img/HowToUse1.png" alt="HowToUse1"></p>
-<p><img src="/img/HowToUse2.png" alt="HowToUse2"></p>
-<p><img src="/img/HowToUse3.png" alt="HowToUse3"></p>
-<p><img src="/img/HowToUse4.png" alt="HowToUse4"></p>
-<h2 id="About-This"><a href="#About-This" class="headerlink" title="About This"></a>About This</h2><ul>
-<li><p>Unreal Engine Version</p>
-<p>  4.15</p>
-</li>
-<li><p>Read <a href="http://www.red3d.com/cwr/boids/" target="_blank" rel="external">Craig Reynolds’s thesis</a>  </p>
-<blockquote>
-<p>查看 <a href="http://www.red3d.com/cwr/boids/" target="_blank" rel="external">Craig Reynolds的论文</a> </p>
-</blockquote>
-</li>
-<li><p>This project implements a new flocking Ai algorithm, with 3 components : </p>
-<blockquote>
-<p>算法简要</p>
-</blockquote>
-<ul>
-<li><p>Separation : every fish will try to steer away from their neighbors </p>
-<p>  <code>分离性 ：每条鱼都会与周围的鱼保持距离</code></p>
-</li>
-<li><p>Following the leader : every fish will try to follow its leader</p>
-<p>  <code>跟随一个领头者 ： 每条鱼都会跟随一个领头者</code></p>
-</li>
-<li><p>Avoiding enemies.</p>
-<p>  <code>躲避敌人</code></p>
-</li>
-</ul>
-</li>
-</ul>
-
-          
+          <h2 id="FixedMessages："><a href="#FixedMessages：" class="headerlink" title="FixedMessages："></a><strong>FixedMessages：</strong></h2><p>FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。<br>    它的构造地方如下（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">MessageHandlers::MessageHandlers():</div><div class="line">msgHandlers_(),</div><div class="line">msgID_(1),</div><div class="line">exposedMessages_()</div><div class="line">&#123;</div><div class="line">	g_fm = Network::FixedMessages::getSingletonPtr();</div><div class="line">	if(g_fm == NULL)</div><div class="line">		g_fm = newNetwork::FixedMessages;</div><div class="line"></div><div class="line">	Network::FixedMessages::getSingleton().loadConfig(&quot;server/messages_fixed.xml&quot;);</div><div class="line">	messageHandlers().push_back(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>意即MessageHandlers构造的时候，如果它还没构造，那就构造。<br>它的初始化（配置）是由loadConfig接口来完成的，代码见上。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/02/kbe服务端笔记(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -874,7 +926,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/PHP的魔术/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/01/kbe服务端笔记(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -883,7 +935,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -893,7 +945,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/01/PHP的魔术/" itemprop="url">PHP的魔术</a></h1>
+                <a class="post-title-link" href="/2017/04/01/kbe服务端笔记(一)/" itemprop="url">kbe服务端笔记(一)</a></h1>
         
 
         <div class="post-meta">
@@ -905,8 +957,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-01T00:16:06+08:00">
-                2016-09-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T19:48:28+08:00">
+                2017-04-01
               </time>
             
 
@@ -928,8 +980,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
                   </a>
                 </span>
 
@@ -966,1070 +1018,14 @@
 
       
         
-          
-            <blockquote>
-<p>PHP 将所有以 <strong>（两个下划线）开头的类方法保留为魔术方法。所以在定义类方法时，除了上述魔术方法，建议不要以 </strong> 为前缀。</p>
-</blockquote>
-<h2 id="PHP魔幻（术）方法"><a href="#PHP魔幻（术）方法" class="headerlink" title="PHP魔幻（术）方法"></a>PHP魔幻（术）方法</h2><ul>
-<li>__construct() 实例化类时自动调用。</li>
-<li>__destruct() 类对象使用结束时自动调用。</li>
-<li>__set() 在给未定义的属性赋值的时候调用。</li>
-<li>__get() 调用未定义的属性时候调用。</li>
-<li>__isset() 使用isset()或empty()函数时候会调用。</li>
-<li>__unset() 使用unset()时候会调用。</li>
-<li>__sleep() 使用serialize序列化时候调用。</li>
-<li>__wakeup() 使用unserialize反序列化的时候调用。</li>
-<li>__call() 调用一个不存在的方法的时候调用。</li>
-<li>__callStatic()调用一个不存在的静态方法是调用。</li>
-<li>__toString() 把对象转换成字符串的时候会调用。比如 echo。</li>
-<li>__invoke() 当尝试把对象当方法调用时调用。</li>
-<li>__set_state() 当使用var_export()函数时候调用。接受一个数组参数。</li>
-<li>__clone() 当使用clone复制一个对象时候调用。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/23/从零开始搭建一台简易linux服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/23/从零开始搭建一台简易linux服务器/" itemprop="url">从零开始搭建一台简易linux服务器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-23T15:11:26+08:00">
-                2016-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="virtualBox网络设置"><a href="#virtualBox网络设置" class="headerlink" title="#virtualBox网络设置"></a>#virtualBox网络设置</h2><p>在virtualBox的你的那个虚拟机里的网络设置里添加两张网卡：<br>1.“网络地址转换（NAT）”， 不是那个“NAT网络”噢， 这张网卡是用来访问宿主机和外网的， 但是仅仅有这张网卡宿主机是不能访问你的这个虚拟机的， 所以还需要下面这第2张<br>2.“仅主机（Host-Olny）网络”， 这张网卡是用来让宿主机是访问你的这个虚拟机的， 这样就能用ssh工具从宿主机连到你的这个虚拟机了</p>
-<h2 id="创建dev用户"><a href="#创建dev用户" class="headerlink" title="#创建dev用户"></a>#创建dev用户</h2><p>sudo adduser dev</p>
-<h2 id="增加dev权限"><a href="#增加dev权限" class="headerlink" title="#增加dev权限"></a>#增加dev权限</h2><p>sudo visudo 添加：dev ALL=(ALL:ALL) ALL</p>
-<h2 id="关于Ubuntu的root密码"><a href="#关于Ubuntu的root密码" class="headerlink" title="关于Ubuntu的root密码"></a>关于Ubuntu的root密码</h2><p>Ubuntu的默认root密码是随机的，<br>即每次开机都有一个新的root密码。我们可以在终端输入命令 sudo passwd，<br>然后输入当前用户的密码，enter，终端会提示我们输入新的密码并确认，<br>此时的密码就是root新密码。修改成功后，输入命令 su root，再输入新的密码就ok了。</p>
-<h2 id="安装ssh服务端"><a href="#安装ssh服务端" class="headerlink" title="安装ssh服务端"></a>安装ssh服务端</h2><p>先更换源， 然后执行sudo apt-get update<br>执行命令：sudo apt-get install openssh-server<br>测试是否安装成功：ssh localhost</p>
-<h2 id="安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><a href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx" class="headerlink" title="安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )"></a>安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</h2><p>执行命令安装nginx：sudo apt-get install nginx<br>测试是否安装成功：在本机的浏览器里访问 localhost ;如果现实”Welcome to nginx!”，表明你的 Nginx 服务器安装成功！<br>启动 Nginx：sudo /etc/init.d/nginx start<br>关闭 Nginx：sudo /etc/init.d/nginx stop<br>重启 nginx：sudo /etc/init.d/nginx restart 或者 sudo service nginx restart<br>sudo service apache2 stop  (如果之前装了apache2则需要sudo apt-get remove apache2 卸载掉apache2然后执行这个stop命令)</p>
-<h2 id="修改nginx的server配置文件"><a href="#修改nginx的server配置文件" class="headerlink" title="修改nginx的server配置文件"></a>修改nginx的server配置文件</h2><ol>
-<li>执行命令：sudo vi /etc/nginx/sites-available/default</li>
-<li>然后将default文件里的内容全部删除，把下面的内容粘贴进去：<br>server {<br>listen 80 default_server;</li>
-</ol>
-<p>root /data/www; #这里表示nginx根目录<br>index index.php index.html index.htm;</p>
-<p>server_name localhost;<br>chunked_transfer_encoding  off;</p>
-<p>location / {<br>try_files $uri $uri/ =404;<br>}</p>
-<p>error_page 404 /index.html;</p>
-<p>location ~ .php$ {   #加上这个代码块就可以用php访问了，这个代码块还有fastcgi的相关内容<br>try_files $uri =404;<br>fastcgi_split_path_info ^(.+.php)(/.+)$;<br>fastcgi_pass 127.0.0.1:9000;<br>fastcgi_index index.php;<br>include fastcgi_params;<br>}<br>}</p>
-<h2 id="安装以及启动fastcgi"><a href="#安装以及启动fastcgi" class="headerlink" title="安装以及启动fastcgi"></a>安装以及启动fastcgi</h2><ol>
-<li>执行命令安装：sudo apt-get install spawn-fcgi</li>
-<li>启动fastcgi ：spawn-fcgi -a 127.0.0.1 -p 9000 -C 10 -u www-data -f /usr/bin/php-cgi</li>
-<li>为了让php-cgi开机自启动： Ubuntu开机之后会执行/etc/rc.local文件中的脚本 所以我们可以直接在/etc/rc.local中添加启动脚本。<br> 将 spawn-fcgi -a 127.0.0.1 -p 9000 -C 10 -u www-data -f /usr/bin/php-cgi 添加到语句：exit 0 前面才行</li>
-</ol>
-<h2 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h2><p>执行命令安装PHP：sudo apt-get install php5-cli php5-cgi php5-fpm php5-mcrypt php5-mysql</p>
-<h2 id="php设置"><a href="#php设置" class="headerlink" title="php设置"></a>php设置</h2><p>sudo vi /etc/php5/fpm/php.ini  #设置cgi.fix_pathinfo=0<br>sudo service php5-fpm restart</p>
-<p>sudo vi /etc/php5/fpm/pool.d/www.conf<br>listen.owner = www-data<br>listen.group = www-data<br>listen.mode = 0660 （去掉原www.conf里“listen.mode = 0660”前的分号，那个分号是注释的意思）<br>sudo service php5-fpm restart</p>
-<h2 id="测试是否可以访问"><a href="#测试是否可以访问" class="headerlink" title="测试是否可以访问"></a>测试是否可以访问</h2><ol>
-<li>在nginx根目录也就是 上面server配置文件里的 /data/www(若没有这个目录就建一个，并改变权限，执行sudo chown dev:dev data/)<br>文件夹里新建index.html（不建此文件将不能在本机访问localhost）<br> 将下面的内容粘贴到index.html文件里 <html><br><head><br><title>Welcome to nginx!</title><br></head><br><body bgcolor="white" text="black"><br><center><h1>Welcome to nginx!</h1></center><br></body><br></html></li>
-<li>第1步完成后将可以在浏览器访问 <a href="http://localhost" target="_blank" rel="external">http://localhost</a></li>
-<li>再在 /data/www文件夹里新建test.php<br>将下面的内容粘贴到test.php文件里<br>&lt;?php phpinfo(); ?&gt;</li>
-<li>第3步完成后将可以在浏览器访问 <a href="http://localhost/test.php" target="_blank" rel="external">http://localhost/test.php</a><br>（注：如果没有启动fastcgi，访问之后将会下载此php文件。若启动了fastcgi，则访问phpinfo的网页;如果出现No input file specified就在<br>上面的server配置文件里的下述地方加入这条语句：fastcgi_param SCRIPT_FILENAME    $document_root$fastcgi_script_name;<br>如下：<br>location ~ .php$ {<br>try_files $uri =404;<br>fastcgi_split_path_info ^(.+.php)(/.+)$;<br>fastcgi_pass 127.0.0.1:9000;<br>fastcgi_index index.php;<br>fastcgi_param SCRIPT_FILENAME    $document_root$fastcgi_script_name;<br>include fastcgi_params;<br>}</li>
-</ol>
-<p>）</p>
-<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>执行命令安装MySQL：sudo apt-get install mysql-server<br>安装的时候会提示填入一个root的初始密码，先输入个8做初始密码吧</p>
-<h2 id="导入客户数据库base-account"><a href="#导入客户数据库base-account" class="headerlink" title="#导入客户数据库base_account"></a>#导入客户数据库base_account</h2><p>mysql -uroot -p &lt; <strong>*</strong>.sql(某个sql文件)</p>
-<h2 id="安装svn并checkout一个svn服务器上的目录"><a href="#安装svn并checkout一个svn服务器上的目录" class="headerlink" title="安装svn并checkout一个svn服务器上的目录"></a>安装svn并checkout一个svn服务器上的目录</h2><ol>
-<li>进入 /data/www目录下 ：cd /data/www</li>
-<li>执行命令安装：sudo apt-get install subversion</li>
-<li>checkout一个目录（比如svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg），<br>执行命令：svn checkout svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg （或者 svn co svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg）</li>
-</ol>
-<h2 id="测试是否可以访问并将相应数据传入数据库中"><a href="#测试是否可以访问并将相应数据传入数据库中" class="headerlink" title="测试是否可以访问并将相应数据传入数据库中"></a>测试是否可以访问并将相应数据传入数据库中</h2><p>访问 localhost/errorMsg/ErrorMsg.php?data=3_2&amp;error_msg=zhangnimashuai<br>然后查看数据库相应表里是否增加了数据</p>
-<h2 id="证书登陆-可选"><a href="#证书登陆-可选" class="headerlink" title="##证书登陆 (可选)"></a>##证书登陆 (可选)</h2><p>#对dev 将id_rsa私钥和id_rsa.pub公钥以及authorized_keys授权文件拷贝至~dev/.ssh/目录<br>chmod 600 id_rsa; chmod 644 id_rsa.pub; chmod 644 authorized_keys</p>
-<h2 id="SSH-证书登陆配置"><a href="#SSH-证书登陆配置" class="headerlink" title="#SSH 证书登陆配置"></a>#SSH 证书登陆配置</h2><p>sudo vi /etc/ssh/sshd_config<br>取消注释    : #AuthorizedKeysFile     .ssh/authorized_keys<br>修改yes-&gt;no : PasswordAuthentication no<br>sudo service ssh restart</p>
-<h2 id="重启服务-测试登陆"><a href="#重启服务-测试登陆" class="headerlink" title="#重启服务 测试登陆"></a>#重启服务 测试登陆</h2><p>sudo service nginx restart<br>sudo service php5-fpm restart</p>
-<h2 id="测试成功后去除dev用户的sudo权限-（可选）"><a href="#测试成功后去除dev用户的sudo权限-（可选）" class="headerlink" title="#测试成功后去除dev用户的sudo权限 （可选）"></a>#测试成功后去除dev用户的sudo权限 （可选）</h2><p>sudo visudo 删除：dev ALL=(ALL:ALL) ALL</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/" itemprop="url">关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-11T16:07:43+08:00">
-                2016-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书心得/" itemprop="url" rel="index">
-                    <span itemprop="name">读书心得</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>这本书不能一次性所有都想看完。</p>
-<blockquote>
-<p>要有目的性的看，因为这本书类似于百科全书所有都讲， 不分轻重， 如果都看，硬啃，只会迷失了自己，反而不知道看了什么</p>
-</blockquote>
-</li>
-<li><p>这本书不能单独看。</p>
-<blockquote>
-<p>这本书必须配合TCP/IP详解和UNIX环境高级编程（简称APUE）以及The Linux Programming Interface（不知道这本书的译名是什么， 简称TLPI）来看</p>
-</blockquote>
-</li>
-<li><p>个人看的是卷一第三版，因当前工作经验范围和阅历受限，对于IT码农，IPv6的和SCTP的章节暂且略过，所以目前大概划出的必看章节（其他可挑选）是</p>
-<ul>
-<li>1</li>
-<li>2</li>
-<li>3</li>
-<li>4</li>
-<li>5</li>
-<li>6</li>
-<li>7</li>
-<li>8</li>
-<li>11 </li>
-<li>13</li>
-<li>16</li>
-<li>22</li>
-<li>26</li>
-<li>30</li>
-</ul>
-</li>
-<li><p>书中的源码在linux环境下不一定能一次性编译过。</p>
-<blockquote>
-<p>有些地方得自己修改</p>
-</blockquote>
-</li>
-<li><p>建议阅读电子版。</p>
-<blockquote>
-<p>使用可以搜索书签的pdf阅读器（比较推荐福昕）， 并且多开几个此书的副本，因为经常会源码和源码讲解对照着看，如果有双屏效率会极大的提高</p>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/02/重新看unix网络编程的一些心得/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/02/重新看unix网络编程的一些心得/" itemprop="url">重新看unix网络编程的一些心得</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-02T12:01:21+08:00">
-                2016-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书心得/" itemprop="url" rel="index">
-                    <span itemprop="name">读书心得</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>老书新看, 有了许多不同的见解, 也准备拿出以前自己私人的老笔记做修正放到博客里, 加深理解.</li>
-<li>在这个浮躁人人都能写书的时代基本要看一本书需要挑很久, 谁写的, 写得怎么样, 是否是业界经典, 都要需要一一斟酌各种查证方可, 不然看一本烂书事半功倍, 浪费生命,影响效率, 被误导跑偏, 能让人静下心来的书籍不多, 能让人看好几遍仍回味无穷的经典就更少了</li>
-<li>陈硕说过, 学东西不要只是从网上看点大牛的博客总结就行了, 总要完整地看些相关领域的经典著作的, 系统的知识结构打下坚实的基础才能继续看有关优化效率方面的书籍, 深以为然</li>
-<li>孟岩说, 最近不止一次听到当一个人拥有相关领域的知识基础之后就可以找一本effective*的书来研读了, 颇有道理</li>
-<li>看书的顺序忌胶柱鼓瑟, 并不是他的目录结构怎么编排你就该怎么看的, 大多数经典书籍基本都是面面俱到, 如果直接跟着这种面向知识体系本身的编排思路去看, 容易迷失乏味而无法继续, 应该找到属于自己看书顺序</li>
-<li>个人总结的看书顺序是先翻阅自己感兴趣的,接着仔细观察他的目录来确定他的编排思路, 然后花一到两天的时间通览全书以获得大体知识体系构架, 之后找到实战性最强的章节来实操并逐个突破实战过程中的各个知识点 </li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/12/浅谈当前流行的pomelo和skynet和kbengine/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/12/浅谈当前流行的pomelo和skynet和kbengine/" itemprop="url">浅谈当前流行的pomelo和skynet和kbengine</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-12T15:54:47+08:00">
-                2016-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>根据之前的博文&lt;&lt;服务端常用架构&gt;&gt;来看</p>
-<h2 id="网易pomelo"><a href="#网易pomelo" class="headerlink" title="网易pomelo"></a>网易pomelo</h2><p>属于第二代游戏服务端五型的架构，即图7的架构。</p>
-<h2 id="skynet"><a href="#skynet" class="headerlink" title="skynet"></a>skynet</h2><p>因为是一个服务端框架，官方只是提供了login server 和 gate server的参考实现，其他的需要自己来实现，编程的自由度变大了，架构完全取决于程序员自己的选择，程序员可以自己尝试去实现第二代的架构，也可以实现第三代的架构。注意: skynet仅仅是框架，其他属于完整解决方案。</p>
-<h2 id="Kbengine"><a href="#Kbengine" class="headerlink" title="Kbengine"></a>Kbengine</h2><p>属于第三代服务端框架，可能类似于图10。（这个理解不确定）<br>Kbengine引擎应该是对图10中的Gate服务器和NODE和OBJ进行了细分。在功能上大体划分为与位置有关（在Kbengine中称为Cellapp）和与位置无关（在Kbengine中称为Baseapp）。类似于下面的示图架构。</p>
-<img src="/2016/07/12/浅谈当前流行的pomelo和skynet和kbengine/image001.png" alt="image001.png" title="">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/11/服务端常用架构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/11/服务端常用架构/" itemprop="url">服务端常用架构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-11T12:24:44+08:00">
-                2016-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>基于<a href="http://www.zhihu.com/question/29779732" target="_blank" rel="external">知乎问答</a>整理而成。</p>
-<h2 id="卡牌、跑酷等弱交互服务端"><a href="#卡牌、跑酷等弱交互服务端" class="headerlink" title="卡牌、跑酷等弱交互服务端"></a>卡牌、跑酷等弱交互服务端</h2><p>卡牌跑酷类因为交互弱，玩家和玩家之间不需要实时面对面PK，打一下对方的离线数据，计算下排行榜，买卖下道具即可，所以实现往往使用简单的 HTTP服务器：</p>
-<img src="/2016/07/11/服务端常用架构/image001.png" alt="image001.png" title="">
-<p>登录时可以使用非对称加密（RSA, DH），服务器根据客户端uid，当前时间戳还有服务端私钥，计算哈希得到的加密 key 并发送给客户端。之后双方都用 HTTP通信，并用那个key进行RC4加密。客户端收到key和时间戳后保存在内存，用于之后通信，服务端不需要保存 key，因为每次都可以根据客户端传上来的 uid 和时间戳以及服务端自己的私钥计算得到。用模仿 TLS的行为，来保证多次 HTTP请求间的客户端身份，并通过时间戳保证同一人两次登录密钥不同。</p>
-<p>每局开始时，访问一下，请求一下关卡数据，玩完了又提交一下，验算一下是否合法，获得什么奖励，数据库用单台 MySQL或者 MongoDB即可，后端的 Redis做缓存（可选）。如果要实现通知，那么让客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，即便两人聊天，延迟也能自适应。</p>
-<p>此类服务器用来实现一款三国类策略或者卡牌及酷跑的游戏已经绰绰有余，这类游戏因为逻辑简单，玩家之间交互不强，使用 HTTP来开发的话，开发速度快，调试只需要一个浏览器就可以把逻辑调试清楚了。</p>
-<h2 id="第一代游戏服务器-1978"><a href="#第一代游戏服务器-1978" class="headerlink" title="第一代游戏服务器 1978"></a>第一代游戏服务器 1978</h2><p>1978年，英国著名的财经学校University of Essex的学生 Roy Trubshaw编写了世界上第一个MUD程序《MUD1》，在University of Essex于1980年接入 ARPANET之后加入了不少外部的玩家，甚至包括国外的玩家。《MUD1》程序的源代码在 ARPANET共享之后出现了众多的改编版本，至此MUD才在全世界广泛流行起来。不断完善的 MUD1的基础上产生了开源的 MudOS（1991），成为众多网游的鼻祖：</p>
- <img src="/2016/07/11/服务端常用架构/image002.png" alt="image002.png" title="">
-<p>MUDOS采用 C语言开发，因为玩家和玩家之间有比较强的交互（聊天，交易，PK），MUDOS使用单线程无阻塞套接字来服务所有玩家，所有玩家的请求都发到同一个线程去处理，主线程每隔1秒钟更新一次所有对象（网络收发，更新对象状态机，处理超时，刷新地图，刷新NPC）。</p>
-<p>游戏世界采用房间的形式组织起来，每个房间有东南西北四个方向可以移动到下一个房间，由于欧美最早的网游都是地牢迷宫形式的，因此场景的基本单位被成为 “房间”。MUDOS使用一门称为LPC的脚本语言来描述整个世界（包括房间拓扑，配置，NPC，以及各种剧情）。游戏里面的高级玩家（巫师），可以不断的通过修改脚本来为游戏添加房间以及增加剧情。早年 MUD1上线时只有17个房间，Roy Trubshaw毕业以后交给他的师弟 Richard Battle，在 Richard Battle手上，不断的添加各种玩法到一百多个房间，终于让 MUD发扬光大。</p>
-<p>用户使用 Telnet之类的客户端用 Tcp协议连接到 MUDOS上，使用纯文字进行游戏，每条指令用回车进行分割。比如 1995年国内第一款 MUD游戏《侠客行》，你敲入：”go east”，游戏就会提示你：“后花园 - 这里是归云庄的后花园，种满了花草，几个庄丁正在浇花。此地乃是含羞草生长之地。这里唯一的出口是 north。这里有：花待阿牧（A mu），还有二位庄丁（Zhuang Ding）”，然后你继续用文字操作，查看阿牧的信息：“look a mu”，系统提示：“花待阿牧（A mu）他是陆乘风的弟子，受命在此看管含羞草。他看起来三十多岁，生得眉清目秀，端正大方，一表人才。他的武艺看上去【不是很高】，出手似乎【极轻】”。然后你可以选择击败他获得含羞草，但是你吃了含羞草却又可能会中毒死亡。在早期网上资源贫乏的时候，这样的游戏有很强的代入感。</p>
-<p>用户数据保存在文件中，每个用户登录时，从文本文件里把用户的数据全部加载进来，操作全部在内存里面进行，无需马上刷回磁盘。用户退出了，或者每隔5分钟检查到数据改动了，都会保存会磁盘。这样的系统在当时每台服务器承载个4000人同时游戏，不是特别大的问题。从1991年的 MUDOS发布后，全球各地都在为他改进，扩充，退出新版本，随着 Windows图形机能的增强。1997游戏《UO》在 MUDOS的基础上为角色增加的x,y坐标，为每个房间增加了地图，并且为每个角色增加了动画，形成了第一代的图形网络游戏。</p>
-<p>因为游戏内容基本可以通过 LPC脚本进行定制，所以MUDOS也成为名副其实的第一款服务端引擎，引擎一次性开发出来，然后制作不同游戏内容。后续国内的《万王之王》等游戏，很多都是跟《UO》一样，直接在 MUDOS上进行二次开发，加入房间的地图还有角色的坐标等要素，该架构一直为国内的第一代 MMORPG提供了稳固的支持，直到 2003年，还有游戏基于 MUDOS开发。</p>
-<p>虽然后面图形化增加了很多东西，但是这些MMORPG后端的本质还是 MUDOS。随着游戏内容的越来越复杂，架构变得越来越吃不消了，各种负载问题慢慢浮上水面，于是有了我们的第二代游戏服务器。</p>
-<p>类型3：第二代游戏服务器 2003</p>
-<p>2000年后，网游已经脱离最初的文字MUD，进入全面图形化年代。最先承受不住的其实是很多小文件，用户上下线，频繁的读取写入用户数据，导致负载越来越大。随着在线人数的增加和游戏数据的增加，服务器变得不抗重负。同时早期 EXT磁盘分区比较脆弱，稍微停电，容易发生大面积数据丢失。因此第一步就是拆分文件存储到数据库去。</p>
- <img src="/2016/07/11/服务端常用架构/image003.png" alt="image003.png" title="">
-<p>此时游戏服务端已经脱离陈旧的 MUDOS体系，各个公司在参考 MUDOS结构的情况下，开始自己用 C在重新开发自己的游戏服务端。并且脚本也抛弃了 LPC，采用扩展性更好的 Python或者 Lua来代替。由于主逻辑使用单线程模型，随着游戏内容的增加，传统单服务器的结构进一步成为瓶颈。于是有人开始拆分游戏世界，变为下面的模型：</p>
- <img src="/2016/07/11/服务端常用架构/image004.png" alt="image004.png" title="">
-<p>游戏服务器压力拆分后得意缓解，但是两台游戏服务器同时访问数据库，大量重复访问，大量数据交换，使得数据库成为下一个瓶颈。于是形成了数据库前端代理（DB Proxy），游戏服务器不直接访问数据库而是访问代理，再有代理访问数据库，同时提供内存级别的cache。早年 MySQL4之前没有提供存储过程，这个前端代理一般和 MySQL跑在同一台上，它转化游戏服务器发过来的高级数据操作指令，拆分成具体的数据库操作，一定程度上代替了存储过程：</p>
-<img src="/2016/07/11/服务端常用架构/image005.png" alt="image005.png" title=""> 
-<p>但是这样的结构并没有持续太长时间，因为玩家切换场景经常要切换连接，中间的状态容易错乱。而且游戏服务器多了以后，相互之间数据交互又会变得比较麻烦，于是人们拆分了网络功能，独立出一个网关服务 Gate（有的地方叫 Session，有的地方叫 LinkSvr之类的，名字不同而已）：</p>
- <img src="/2016/07/11/服务端常用架构/image006.png" alt="image006.png" title="">
-<p>把网络功能单独提取出来，让用户统一去连接一个网关服务器，再有网关服务器转发数据到后端游戏服务器。而游戏服务器之间数据交换也统一连接到网管进行交换。这样类型的服务器基本能稳定的为玩家提供游戏服务，一台网关服务1-2万人，后面的游戏服务器每台服务5k-1w，依游戏类型和复杂度不同而已，图中隐藏了很多不重要的服务器，如登录和管理。这是目前应用最广的一个模型，到今天任然很多新项目会才用这样的结构来搭建。</p>
-<p>人都是有惯性的，按照先前的经验，似乎把 MUDOS拆分的越开性能越好。于是大家继续想，网关可以拆分呀，基础服务如聊天交易，可以拆分呀，还可以提供web接口，数据库可以拆分呀，于是有了下面的模型：</p>
- <img src="/2016/07/11/服务端常用架构/image007.png" alt="image007.png" title="">
-<p>这样的模型好用么？确实有成功游戏使用类似这样的架构，并且发挥了它的性能优势，比如一些大型 MMORPG。但是有两个挑战：每增加一级服务器，状态机复杂度可能会翻倍，导致研发和找bug的成本上升；并且对开发组挑战比较大，一旦项目时间吃紧，开发人员经验不足，很容易弄挂。</p>
-<p>比如我见过某上海一线游戏公司的一个 RPG上来就要上这样的架构，我看了下他们团队成员的经验，问了下他们的上线日期，劝他们用前面稍微简单一点的模型。人家自信得很，认为有成功项目是这么做的，他们也要这么做，自己很想实现一套。于是他们义无反顾的开始编码，项目做了一年多，然后，就没有然后了。</p>
-<p>现今在游戏成功率不高的情况下，一开始上一套比较复杂的架构需要考虑投资回报率，比如你的游戏上线半年内 PCU会去到多少？如果一个 APRG游戏，每组服务器5千人都到不了的话，那么选择一套更为贴近实际情况的结构更为经济。即使后面你的项目真的超过5千人朝着1万人目标奔的话，相信那个时候你的项目已经挣大钱了，你数着钱加着班去逐步迭代，一次次拆分它，相信心里也是乐开花的。</p>
-<p>上面这些类型基本都是从拆分 MUDOS开始，将 MUDOS中的各个部件从单机一步步拆成分布式。虽然今天任然很多新项目在用上面某一种类似的结构，或者自己又做了其他热点模块的拆分。因为他们本质上都是对 MUDOS的分解，故将他们归纳为第二代游戏服务器。</p>
-<h2 id="第三代游戏服务器-2007"><a href="#第三代游戏服务器-2007" class="headerlink" title="第三代游戏服务器 2007"></a>第三代游戏服务器 2007</h2><p>从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：</p>
- <img src="/2016/07/11/服务端常用架构/image008.png" alt="image008.png" title="">
-<p>每台 Node服务器用来管理一块地图区域，由 NodeMaster（NM）来为他们提供总体管理。更高层次的 World则提供大陆级别的管理服务。这里省略若干细节服务器，比如传统数据库前端，登录服务器，日志和监控等，统统用 ADMIN概括。在这样的结构下，玩家从一块区域走向另外一块区域需要简单处理一下：</p>
- <img src="/2016/07/11/服务端常用架构/image009.png" alt="image009.png" title="">
-<p>玩家1完全由节点A控制，玩家3完全由节点B控制。而处在两个节点边缘的2号玩家，则同时由A和B提供服务。玩家2从A移动到B的过程中，会同时向A请求左边的情况，并向B请求右边的情况。但是此时玩家2还是属于A管理。直到玩家2彻底离开AB边界很远，才彻底交由B管理。按照这样的逻辑将世界地图分割为一块一块的区域，交由不同的 Node去管理。</p>
-<p>对于一个 Node所负责的区域，地理上没必要连接在一起，比如大陆的四周边缘部分和高山部分的区块人比较少，可以统一交给一个Node去管理，而这些区块在地理上并没有联系在一起的必要性。一个 Node到底管理哪些区块，可以根据游戏实时运行的负载情况，定时维护的时候进行更改 NodeMaster 上面的配置。</p>
-<p>于是碰到第一个问题是很多 Node服务器需要和玩家进行通信，需要问管理服务器特定UID为多少的玩家到底在哪台 Gate上，以前按场景切割的服务器这个问题不大，问了一次以后就可以缓存起来了，但是现在服务器种类增加不少，玩家又会飘来飘去，按UID查找玩家比较麻烦；另外一方面 GATE需要动态根据坐标计算和哪些 Node通信，导致逻辑越来越厚，于是把：“用户对象”从负责连接管理的 GATE中切割出来势在必行于是有了下面的模型：</p>
- <img src="/2016/07/11/服务端常用架构/image010.png" alt="image010.png" title="">
-<p>网关服务器再次退回到精简的网络转发功能，而用户逻辑则由按照 UID划分的 OBJ服务器来承担，GATE是按照网络接入时的负载来分布，而 OBJ则是按照资源的编号（UID）来分布，这样和一个用户通信直接根据 UID计算出 OBJ服务器编号发送数据即可。而新独立出来的 OBJ则提供了更多高层次的服务：</p>
-<p>•    对象移动：管理具体玩家在不同的 Node所管辖的区域之间的移动，并同需要的 Node进行沟通。<br>•    数据广播：Node可以给每个用户设置若干 TAG，然后通知 Object Master 按照TAG广播。<br>•    对象消息：通用消息推送，给某个用户发送数据，直接告诉 OBJ，不需要直接和 GATE打交道。<br>•    好友聊天：角色之间聊天直接走 OBJ/OBJ MASTER。<br>整个服务器主体分为三层以后，NODE专注场景，OBJ专注玩家对象，GATE专注网络。这样的模型在无缝场景服务器中得到广泛的应用。但是随着时间的推移，负载问题也越来越明显，做个活动，远来不活跃的区域变得十分活跃，靠每周维护来调整还是比较笨重的，于是有了动态负载均衡。</p>
-<p>动态负载均衡有两种方法，第一种是按照负载，由 Node Master 定时动态移动修改一下各个 Node的边界，而不同的玩家对象按照先前的方法从一台 Node上迁移到另外一台 Node上：</p>
- <img src="/2016/07/11/服务端常用架构/image011.png" alt="image011.png" title="">
-<p>图11 动态负载均衡</p>
-<p>这样 Node Master定时查找地图上的热点区域，计算新的场景切割方式，然后告诉其他服务器开始调整，具体处理方式还是和上面对象跨越边界移动的方法一样。</p>
-<p>但是上面这种方式实现相对复杂一些，于是人们设计出了更为简单直接的一种新方法：</p>
- <img src="/2016/07/11/服务端常用架构/image012.png" alt="image012.png" title="">
-<p>图12 基于网格的动态负载均衡</p>
-<p>还是将地图按照标准尺寸均匀切割成静态的网格，每个格子由一个具体的Node负责，但是根据负载情况，能够实时的迁移到其他 Node上。在迁移分为三个阶段：准备，切换，完成。三个状态由Node Master负责维护。准备阶段新的 Node开始同步老 Node上面该网格的数据，完成后告诉NM；NM确认OK后同时通知新旧 Node完成切换。完成切换后，如果 Obj服务器还在和老的 Node进行通信，老的 Node将会对它进行纠正，得到纠正的 OBJ将修正自己的状态，和新的 Node进行通信。</p>
-<p>很多无缝动态负载均衡的服务端宣称自己支持无限的人数，但不意味着 MMORPG游戏的人数上限真的可以无限扩充，因为这样的体系会受制于网络带宽和客户端性能。带宽决定了同一个区域最大广播上限，而客户端性能决定了同一个屏幕到底可以绘制多少个角色。</p>
-<p>从无缝地图引入了分布式对象模型开始，已经完全脱离 MUDOS体系，成为一种新的服务端模型。又由于动态负载均衡的引入，让无缝服务器如虎添翼，容纳着超过上一代游戏服务器数倍的人数上限，并提供了更好的游戏体验，我们称其为第三代游戏服务端架构。网游以大型多人角色扮演为开端，RPG网游在相当长的时间里一度占据90%以上，使得基于 MMORPG的服务端架构得到了蓬勃的发展，然而随着玩家对RPG的疲惫，各种非MMORPG游戏如雨后春笋般的出现在人们眼前，受到市场的欢迎。</p>
-<h2 id="战网游戏服务器"><a href="#战网游戏服务器" class="headerlink" title="战网游戏服务器"></a>战网游戏服务器</h2><p>经典战网服务端和 RPG游戏有两个区别：RPG是分区分服的，北京区的用户和广州区的用户老死不相往来。而战网，虽然每局游戏一般都是 8人以内，但全国只有一套服务器，所有的玩家都可以在一起游戏，而玩家和玩家之使用 P2P的方式连接在一起，组成一局游戏： </p>
-<img src="/2016/07/11/服务端常用架构/image013.png" alt="image013.png" title="">
-<p>玩家通过 Match Making 服务器使用：创建、加入、自动匹配、邀请等方式组成一局游戏。服务器会选择一个人做 Host，其他人 P2P连接到做主的玩家上来。STUN是帮助玩家之间建立 P2P的牵引服务器，而由于 P2P联通情况大概只有 75%，实在联不通的玩家会通过 Forward进行转发。</p>
-<p>大量的连接对战，体育竞技游戏采用类似的结构。P2P有网状模型（所有玩家互相连接），和星状模型（所有玩家连接一个主玩家）。复杂的游戏状态在网状模型下难以形成一致，因此星状P2P模型经受住了历史的考验。除去游戏数据，支持语音的战网系统也会将所有人的语音数据发送到做主的那个玩家机器上，通过混音去重再编码的方式返回给所有用户。</p>
-<p>战网类游戏，以竞技、体育、动作等类型的游戏为主，较慢节奏的 RPG（包括ARPG）有本质上的区别，而激烈的游戏过程必然带来到较 RPG复杂的多的同步策略，这样的同步机制往往带来的是很多游戏结果由客户端直接计算得出，那在到处都是破解的今天，如何保证游戏结果的公正呢？</p>
-<p>主要方法就是投票法，所有客户端都会独立计算，然后传递给服务器。如果结果相同就更新记录，如果结果不一致，会采取类似投票的方式确定最终结果。同时记录本剧游戏的所有输入，在可能的情况下，找另外闲散的游戏客户端验算整局游戏是否为该结果。并且记录经常有作弊嫌疑的用户，供运营人员封号时参考。</p>
-<h2 id="休闲游戏服务器"><a href="#休闲游戏服务器" class="headerlink" title="休闲游戏服务器"></a>休闲游戏服务器</h2><p>休闲游戏同战网服务器类似，都是全区架构，不同的是有房间服务器，还有具体的游戏服务器，游戏主体不再以玩家 P2P进行，而是连接到专门的游戏服务器处理：</p>
- <img src="/2016/07/11/服务端常用架构/image014.png" alt="image014.png" title="">
-<p>和战网一样的全区架构，用户数据不能象分区的 RPG那样一次性load到内存，然后在内存里面直接修改。全区架构下，为了应对一个用户同时玩几个游戏，用户数据需要区分基本数据和不同的游戏数据，而游戏数据又需要区分积分数据、和文档数据。胜平负之类的积分可以直接提交增量修改，而更为普遍的文档类数据则需要提供读写令牌，写令牌只有一块，读令牌有很多块。同帐号同一个游戏同时在两台电脑上玩时，最先开始的那个游戏获得写令牌，可以操作任意的用户数据。而后开始的那个游戏除了可以提交胜平负积分的增量改变外，对用户数据采用只读的方式，保证游戏能运行下去，但是会提示用户，游戏数据锁定。</p>
-<h2 id="现代动作类网游"><a href="#现代动作类网游" class="headerlink" title="现代动作类网游"></a>现代动作类网游</h2><p>从早期的韩国动作游戏开始，传统的战网动作类游戏和 RPG游戏开始尝试融合。单纯的动作游戏玩家容易疲倦，留存也没有 RPG那么高；而单纯 RPG战斗却又慢节奏的乏味，无法满足很多玩家激烈对抗的期望，于是二者开始融合成为新一代的：动作 + 城镇模式。玩家在城镇中聚集，然后以开副本的方式几个人出去以动作游戏的玩法来完成各种 RPG任务。本质就是一套 RPG服务端+副本服务端。由于每次副本时人物可以控制在8人以内，因此可以获得更为实时的游戏体验，让玩家玩的更加爽快。</p>
-<p>说了那么多的游戏服务器类型，其实也差不多了，剩下的类型大家拼凑一下其实也就是这个样子而已。游戏服务端经历了那么多结构上的变迁，内部开发模式是否依然不变？究竟是继续延续传统的开发方式？还是有了更多突破性的方法？经历那么多次架构变迁，后面是否有共通的逻辑？未来的发展还会存在哪些困难？游戏服务端开发如何达到最终的彼岸？请看下节：技术的演进。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/04/linux编程须知(阅读开源服务器源码基础)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/04/linux编程须知(阅读开源服务器源码基础)/" itemprop="url">linux编程须知(阅读开源服务器源码基础)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-04T19:01:46+08:00">
-                2016-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.<br>这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.<br>还是那句老话, <strong>带着问题阅读是最容易让人类迅速进入状态的</strong>.</p>
-</blockquote>
-<h2 id="进程的内存布局是什么样的"><a href="#进程的内存布局是什么样的" class="headerlink" title="进程的内存布局是什么样的?"></a><strong>进程的内存布局是什么样的?</strong></h2><p><img src="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="线程的同步机制有哪些"><a href="#线程的同步机制有哪些" class="headerlink" title="线程的同步机制有哪些?"></a><strong>线程的同步机制有哪些?</strong></h2><ul>
-<li>互斥量</li>
-<li>条件变量</li>
-<li>自旋锁</li>
-<li>读写锁</li>
-</ul>
-<h2 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a><strong>如何避免死锁</strong></h2><ul>
-<li><strong>顺序加锁</strong>(例如，线程2和线程3只有在获取了锁A之后才能尝试获取锁C(译者注：获取锁A是获取锁C的必要条件)。因为线程1已经拥有了锁A，所以线程2和3需要一直等到锁A被释放。然后在它们尝试对B或C加锁之前，必须成功地对A加了锁。</li>
-<li><strong>加锁时限</strong>(另外一个可以避免死锁的方法是在尝试获取锁的时候加一个超时时间，这也就意味着在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求。)</li>
-</ul>
-<h2 id="进程间的同步机制-也就是进程间通信-能通信就能同步了嘛-有哪些"><a href="#进程间的同步机制-也就是进程间通信-能通信就能同步了嘛-有哪些" class="headerlink" title="进程间的同步机制(也就是进程间通信, 能通信就能同步了嘛)有哪些?"></a><strong>进程间的同步机制(也就是进程间通信, 能通信就能同步了嘛)有哪些?</strong></h2><ul>
-<li>管道</li>
-<li>FIFO</li>
-<li>消息队列</li>
-<li>信号量</li>
-<li>共享内存</li>
-<li>套接字</li>
-</ul>
-<h2 id="linux的任务调度机制是什么？"><a href="#linux的任务调度机制是什么？" class="headerlink" title="linux的任务调度机制是什么？"></a><strong>linux的任务调度机制是什么？</strong></h2><p>Linux 分实时进程和普通进程，实时进程应该先于普通进程而运行。<br>而实时进程的调度机制为：</p>
-<ol>
-<li><p>FIFO(先入先出服务调度)</p>
-</li>
-<li><p>RR（时间片轮转调度）。</p>
-</li>
-</ol>
-<h2 id="NAT有哪些类型及其穿透原理是什么"><a href="#NAT有哪些类型及其穿透原理是什么" class="headerlink" title="NAT有哪些类型及其穿透原理是什么?"></a><strong>NAT有哪些类型及其穿透原理是什么?</strong></h2><h4 id="NAT类型"><a href="#NAT类型" class="headerlink" title="NAT类型 : "></a><strong>NAT类型 : </strong></h4><ol>
-<li><p><strong>锥NAT </strong></p>
-<ol>
-<li>全锥NAT ：全锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。任何一个外部主机均可通过该映射发送数据包到该内部主机。</li>
-<li>限制性锥NAT ：限制性锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。但是, 和全锥NAT 不同的是：只有当内部主机先给外部主机发送数据包, 该外部主机才能向该内部主机发送数据包。</li>
-<li>端口限制性锥NAT ：端口限制性锥NAT 与限制性锥NAT 类似, 只是多了端口号的限制, 即只有内部主机先向外部地址：端口号对发送数据包, 该外部主机才能使用特定的端口号向内部主机发送数据包。</li>
-</ol>
-</li>
-<li><p><strong>对称NAT</strong> ：对称NAT 与上述3 种类型都不同, 不管是全锥NAT ，限制性锥NAT 还是端口限制性锥NAT ，它们都属于锥NAT （Cone NAT ）。当同一内部主机使用相同的端口与不同地址的外部主机进行通信时, 对称NAT 会重新建立一个Session ，为这个Session 分配不同的端口号，或许还会改变IP 地址。</p>
-</li>
-</ol>
-<h4 id="穿透原理"><a href="#穿透原理" class="headerlink" title="穿透原理 : "></a><strong>穿透原理 : </strong></h4><p><a href="http://blog.csdn.net/leisure512/article/details/4900191" title="P2P，UDP和TCP穿透NAT" target="_blank" rel="external">查看这篇博客</a></p>
-
-          
+          <h2 id="main"><a href="#main" class="headerlink" title="main"></a><strong>main</strong></h2><p>看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">intKBENGINE_MAIN(intargc, char* argv[])</div><div class="line">&#123;</div><div class="line">	ENGINE_COMPONENT_INFO&amp;info = g_kbeSrvConfig.getXXX();</div><div class="line">	returnkbeMainT&lt;XXX&gt;(argc, argv, YYY, info.externalPorts_min, </div><div class="line">		info.externalPorts_max, info.externalInterface, 0, info.internalInterface);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/01/kbe服务端笔记(一)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2067,7 +1063,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2113,7 +1109,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2135,7 +1131,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -2155,17 +1151,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -2216,7 +1201,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

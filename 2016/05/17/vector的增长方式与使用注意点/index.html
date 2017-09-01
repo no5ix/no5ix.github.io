@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c++,stl,vector,string," />
+  <meta name="keywords" content="c++,vector,stl,string," />
 
 
 
@@ -95,14 +95,14 @@
 
 
 <meta name="description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
-<meta name="keywords" content="c++,stl,vector,string">
+<meta name="keywords" content="c++,vector,stl,string">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector的增长方式与使用注意点">
 <meta property="og:url" content="http://yoursite.com/2016/05/17/vector的增长方式与使用注意点/index.html">
-<meta property="og:site_name" content="烫烫烫">
+<meta property="og:site_name" content="烫">
 <meta property="og:description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-31T17:39:10.710Z">
+<meta property="og:updated_time" content="2017-09-01T13:51:35.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vector的增长方式与使用注意点">
 <meta name="twitter:description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
@@ -113,7 +113,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -140,7 +140,7 @@
 
 
 
-  <title>vector的增长方式与使用注意点 | 烫烫烫</title>
+  <title>vector的增长方式与使用注意点 | 烫</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">烫烫烫</span>
+        <span class="site-title">烫</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫烫烫">
+      <meta itemprop="name" content="烫">
     </span>
 
     
@@ -379,6 +379,7 @@
 <p>将已有元素从 旧位置移动到新空 间中， 然后添加新元素，释放旧存储空间 。</p>
 <p>如果我们每添加一个新元素， vector 就执行一次这样的内存分配和释放操作 ，性能会慢到不可<br>接受 。</p>
 </blockquote>
+<a id="more"></a>
 <p>为了避免这种代价，标准库实现者采用了可以减少容器空间重新分配次数的策略。</p>
 <blockquote>
 <p>当不得不在取新的内 存空间 时， vector 和 string 的实现通常会分配比新的空间需求更大<br>的内存空间 。</p>
@@ -565,9 +566,9 @@
           
             <a href="/tags/c/" rel="tag"># c++</a>
           
-            <a href="/tags/stl/" rel="tag"># stl</a>
-          
             <a href="/tags/vector/" rel="tag"># vector</a>
+          
+            <a href="/tags/stl/" rel="tag"># stl</a>
           
             <a href="/tags/string/" rel="tag"># string</a>
           
@@ -671,7 +672,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -693,7 +694,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -713,17 +714,6 @@
                   
                     
                       GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="nosix1992@gmail.com/1145263208@qq.com" target="_blank" title="E-Mail">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                    
-                      E-Mail
                     
                 </a>
               </span>
@@ -790,7 +780,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

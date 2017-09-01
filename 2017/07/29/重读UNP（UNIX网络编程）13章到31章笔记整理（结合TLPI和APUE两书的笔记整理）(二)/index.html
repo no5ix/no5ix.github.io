@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="redis,mysql,php,yii,nginx,tcp,http,udp,workerman,Capistrano,ruby," />
+  <meta name="keywords" content="UNP,TLPI,APUE," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
-<meta name="keywords" content="redis,mysql,php,yii,nginx,tcp,http,udp,workerman,Capistrano,ruby">
+<meta name="description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
+<meta name="keywords" content="UNP,TLPI,APUE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速完成一个slg游戏思路(一)">
-<meta property="og:url" content="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路(一)/index.html">
+<meta property="og:title" content="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)">
+<meta property="og:url" content="http://yoursite.com/2017/07/29/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
+<meta property="og:description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T12:26:00.216Z">
+<meta property="og:updated_time" content="2017-09-01T14:20:59.077Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速完成一个slg游戏思路(一)">
-<meta name="twitter:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
+<meta name="twitter:title" content="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)">
+<meta name="twitter:description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路(一)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/29/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/"/>
 
 
 
 
 
-  <title>快速完成一个slg游戏思路(一) | 烫</title>
+  <title>重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二) | 烫</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路(一)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/29/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">快速完成一个slg游戏思路(一)</h1>
+          <h1 class="post-title" itemprop="name headline">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T22:19:29+08:00">
-                2016-12-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T19:42:21+08:00">
+                2017-07-29
               </time>
             
 
@@ -335,8 +335,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
                   </a>
                 </span>
 
@@ -372,36 +372,42 @@
       
 
       
-        
-<h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
-<p>验证完玩家信息, </p>
-<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
-<blockquote>
-<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
-<p>这个key也可以用来完成封号操作</p>
-</blockquote>
-<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
-<p>因为弱交互/短连接的关系, </p>
-<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
-<p>打一下对方的离线数据，</p>
-<p>计算下排行榜，排行榜是实时计算的, </p>
-<p>存在redis里, 做了分页处理</p>
-<p>买卖下道具即可</p>
-<p>所以 MainServer 选择了:</p>
-</blockquote>
-<ul>
-<li>yii</li>
-<li>redis</li>
-<li>mysql</li>
-<li>nginx</li>
+        <h1 id="16章"><a href="#16章" class="headerlink" title="16章"></a><strong>16章</strong></h1><ul>
+<li>16.3节 ： 非阻塞connect<ul>
+<li>有三个用途：<ul>
+<li>我们想在connect的时候处理其他事情</li>
+<li>可以同时建立多个连接</li>
+<li>可以通过select设置一个更短一点的超时时间</li>
+</ul>
+</li>
+<li>实现步骤：<ol>
+<li>用fcntl把套接字设置为非阻塞</li>
+<li>处理客户端和服务器都在同一主机上的情况</li>
+<li>使用select设置超时，并处理超时情况</li>
+<li>处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况</li>
+</ol>
+</li>
+</ul>
+</li>
 </ul>
 <a id="more"></a>
-<h2 id="pvpServeer"><a href="#pvpServeer" class="headerlink" title="pvpServeer"></a>pvpServeer</h2><p>而 pvpServer 则选择 workerman 的tcp模式,</p>
-<p>实时交互数据, </p>
-<p>MainServer 和 pvpServer之间通信并接同一个数据库.</p>
+<ul>
+<li><p>16.6节 ： 非阻塞accept，</p>
+<ul>
+<li><p>用于解决下面问题：</p>
 <blockquote>
-<p>其实这里可以不选择用tcp, 而自撸一个可靠udp来提高效率</p>
+<p>“用select检测socket状态，如果有连接就调用accept，这样如果在select检测到由连接请求，在调用accept之前，这个请求断开了，然后调用accept的时候就会阻塞在哪里，除非这时有另外一个连接请求，如果没有，则一直被阻塞在那里。”</p>
 </blockquote>
+</li>
+<li><p>解决方案：</p>
+<blockquote>
+<p>使用select在一个监听套接字准备好要被accept时总是把套接字设置为非阻塞</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="26章和30章"><a href="#26章和30章" class="headerlink" title="26章和30章"></a><strong>26章和30章</strong></h1><p>介绍了线程和并发/并行的服务器设计范式，等下篇TLPI/APUE的笔记一起整理吧</p>
 
       
     </div>
@@ -419,27 +425,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"># redis</a>
+            <a href="/tags/UNP/" rel="tag"># UNP</a>
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/TLPI/" rel="tag"># TLPI</a>
           
-            <a href="/tags/php/" rel="tag"># php</a>
-          
-            <a href="/tags/yii/" rel="tag"># yii</a>
-          
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
-          
-            <a href="/tags/tcp/" rel="tag"># tcp</a>
-          
-            <a href="/tags/http/" rel="tag"># http</a>
-          
-            <a href="/tags/udp/" rel="tag"># udp</a>
-          
-            <a href="/tags/workerman/" rel="tag"># workerman</a>
-          
-            <a href="/tags/Capistrano/" rel="tag"># Capistrano</a>
-          
-            <a href="/tags/ruby/" rel="tag"># ruby</a>
+            <a href="/tags/APUE/" rel="tag"># APUE</a>
           
         </div>
       
@@ -452,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" rel="next" title="一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)">
-                <i class="fa fa-chevron-left"></i> 一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)
+              <a href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/" rel="next" title="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)">
+                <i class="fa fa-chevron-left"></i> 重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)
               </a>
             
           </div>
@@ -462,8 +452,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/04/快速完成一个slg游戏思路(二)/" rel="prev" title="快速完成一个slg游戏思路(二)">
-                快速完成一个slg游戏思路(二) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/29/kbe服务端笔记(二)/" rel="prev" title="kbe服务端笔记(二)">
+                kbe服务端笔记(二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -611,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoginServer-GateWay"><span class="nav-number">1.</span> <span class="nav-text">LoginServer(GateWay)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MainServer"><span class="nav-number">2.</span> <span class="nav-text">MainServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pvpServeer"><span class="nav-number">3.</span> <span class="nav-text">pvpServeer</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#16章"><span class="nav-number">1.</span> <span class="nav-text">16章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#26章和30章"><span class="nav-number">2.</span> <span class="nav-text">26章和30章</span></a></li></ol></div>
             
 
           </div>

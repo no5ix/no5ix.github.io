@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/快速完成一个slg游戏思路(一)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/09/kbe之1分钟完成安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/04/快速完成一个slg游戏思路(一)/" itemprop="url">快速完成一个slg游戏思路(一)</a></h1>
+                <a class="post-title-link" href="/2017/02/09/kbe之1分钟完成安装/" itemprop="url">kbe之1分钟完成安装</a></h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T22:19:29+08:00">
-                2016-12-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T12:38:21+08:00">
+                2017-02-09
               </time>
             
 
@@ -337,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
                   </a>
                 </span>
 
@@ -375,35 +375,178 @@
 
       
         
-          <h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
-<p>验证完玩家信息, </p>
-<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
-<blockquote>
-<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
-<p>这个key也可以用来完成封号操作</p>
-</blockquote>
-<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
-<p>因为弱交互/短连接的关系, </p>
-<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
-<p>打一下对方的离线数据，</p>
-<p>计算下排行榜，排行榜是实时计算的, </p>
-<p>存在redis里, 做了分页处理</p>
-<p>买卖下道具即可</p>
-<p>所以 MainServer 选择了:</p>
-</blockquote>
+          <blockquote>
+<p>官方是有自动化的安装py脚本的, 不过还是有很多小坑的.<br>不过其实脚本主要也就是只做两件事, 其他都是可选的: </p>
 <ul>
-<li>yii</li>
-<li>redis</li>
-<li>mysql</li>
-<li>nginx</li>
+<li>配置环境变量</li>
+<li>安装mysql</li>
 </ul>
+</blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/12/04/快速完成一个slg游戏思路(一)/#more" rel="contents">
+            <a class="btn" href="/2017/02/09/kbe之1分钟完成安装/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/IPC进程间通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/27/IPC进程间通信/" itemprop="url">IPC进程间通信</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T21:01:59+08:00">
+                2017-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##IPC进程间通信</p>
+<ul>
+<li><p>1.匿名管道( pipe )：<br>匿名管道是一种半双工的通信方式，通常是在父子进程间使用。</p>
+</li>
+<li><p>2.命名管道 (named pipe) ：<br>命名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</p>
+</li>
+<li><p>3.信号量( semophore ) ：<br>信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
+</li>
+<li><p>4.消息队列( message queue ) ：<br>消息队列是消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
+</li>
+<li><p>5.信号 ( sinal ) ：<br>信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</p>
+</li>
+<li><p>6.共享内存( shared memory ) ：<br>共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</p>
+</li>
+<li><p>7.套接字( socket ) ：套接字也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同进程间的进程通信。</p>
+</li>
+</ul>
+
+          
         
       
     </div>
@@ -869,152 +1012,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/08/27/从零开始搭建一台简易linux服务器(三)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/25/从零开始搭建一台简易linux服务器(二)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/25/从零开始搭建一台简易linux服务器(二)/" itemprop="url">从零开始搭建一台简易linux服务器(二)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-25T15:11:26+08:00">
-                2016-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><a href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx" class="headerlink" title="安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )"></a>安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</h2><p>执行命令安装nginx：sudo apt-get install nginx<br>测试是否安装成功：在本机的浏览器里访问 localhost ;如果现实”Welcome to nginx!”，表明你的 Nginx 服务器安装成功！<br>启动 Nginx：sudo /etc/init.d/nginx start<br>关闭 Nginx：sudo /etc/init.d/nginx stop<br>重启 nginx：sudo /etc/init.d/nginx restart 或者 sudo service nginx restart<br>sudo service apache2 stop  (如果之前装了apache2则需要sudo apt-get remove apache2 卸载掉apache2然后执行这个stop命令)</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/25/从零开始搭建一台简易linux服务器(二)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>

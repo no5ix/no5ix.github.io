@@ -437,7 +437,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -456,7 +456,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/" itemprop="url">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)</a></h1>
+                <a class="post-title-link" href="/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/" itemprop="url">浅谈当前流行的pomelo和skynet和kbengine</a></h1>
         
 
         <div class="post-meta">
@@ -468,8 +468,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T19:42:21+08:00">
-                2017-08-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T15:54:47+08:00">
+                2017-08-01
               </time>
             
 
@@ -491,8 +491,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -529,27 +529,12 @@
 
       
         
-          <h1 id="16章"><a href="#16章" class="headerlink" title="16章"></a><strong>16章</strong></h1><ul>
-<li>16.3节 ： 非阻塞connect<ul>
-<li>有三个用途：<ul>
-<li>我们想在connect的时候处理其他事情</li>
-<li>可以同时建立多个连接</li>
-<li>可以通过select设置一个更短一点的超时时间</li>
-</ul>
-</li>
-<li>实现步骤：<ol>
-<li>用fcntl把套接字设置为非阻塞</li>
-<li>处理客户端和服务器都在同一主机上的情况</li>
-<li>使用select设置超时，并处理超时情况</li>
-<li>处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
+          <p>根据之前的博文&lt;&lt;服务端常用架构&gt;&gt;来看</p>
+<h2 id="网易pomelo"><a href="#网易pomelo" class="headerlink" title="网易pomelo"></a>网易pomelo</h2><p>属于第二代游戏服务端五型的架构，即图7的架构。</p>
+<h2 id="skynet"><a href="#skynet" class="headerlink" title="skynet"></a>skynet</h2><p>因为是一个服务端框架，官方只是提供了login server 和 gate </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/#more" rel="contents">
+            <a class="btn" href="/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -600,7 +585,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -619,7 +604,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/" itemprop="url">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)</a></h1>
+                <a class="post-title-link" href="/2017/07/30/快速完成一个slg游戏思路(二)/" itemprop="url">快速完成一个slg游戏思路(二)</a></h1>
         
 
         <div class="post-meta">
@@ -631,8 +616,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T19:01:21+08:00">
-                2017-07-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T22:57:29+08:00">
+                2017-07-30
               </time>
             
 
@@ -654,8 +639,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -692,167 +677,28 @@
 
       
         
-          <blockquote>
-<p>因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容</p>
-</blockquote>
-<h1 id="13章"><a href="#13章" class="headerlink" title="13章"></a><strong>13章</strong></h1><h1 id="引申知识，作业控制以及相关命令："><a href="#引申知识，作业控制以及相关命令：" class="headerlink" title="引申知识，作业控制以及相关命令："></a><strong>引申知识，作业控制以及相关命令：</strong></h1><p> <img src="http://img.blog.csdn.net/20170730195853561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/09/crontab笔记整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/09/crontab笔记整理/" itemprop="url">crontab笔记整理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-09T12:38:21+08:00">
-                2017-07-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>crontab命令被用来提交和管理用户的需要周期性执行的任务，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
+          <h2 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h2><blockquote>
+<p>从登录成功就开始连接, </p>
+<p>注册一个Chat_ID, </p>
+<p>player_ID 和 Chat_ID相互对应, </p>
+<p>会注册相应的房间频道, </p>
+<p>并为每位Player存了一份黑名单, </p>
+<p>在客户端做了本地黑名单, </p>
+<p>聊天服务器也做了黑名单二次验证处理.</p>
 </blockquote>
 <ul>
-<li>-e：编辑该用户的计时器设置；</li>
-<li>-l：列出该用户的计时器设置；</li>
-<li>-r：删除该用户的计时器设置；</li>
-<li>-u&lt;用户名称&gt;：指定要设定计时器的用户名称</li>
+<li><p>世界频道 : 则用MsgServer的非实时推送思路</p>
+</li>
+<li><p>私密聊天 : 则选择 workerman 的tcp, </p>
+</li>
+</ul>
+<h2 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h2><ul>
+<li>实时推送 : workerman 的tcp</li>
+<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/09/crontab笔记整理/#more" rel="contents">
+            <a class="btn" href="/2017/07/30/快速完成一个slg游戏思路(二)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -903,7 +749,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/03/重读UNIX网络编程第三章到第十一章笔记整理(二)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/快速完成一个slg游戏思路(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -922,7 +768,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/03/重读UNIX网络编程第三章到第十一章笔记整理(二)/" itemprop="url">重读UNIX网络编程第三章到第十一章笔记整理(二)</a></h1>
+                <a class="post-title-link" href="/2017/07/30/快速完成一个slg游戏思路(一)/" itemprop="url">快速完成一个slg游戏思路(一)</a></h1>
         
 
         <div class="post-meta">
@@ -934,8 +780,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-03T21:01:21+08:00">
-                2017-07-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T22:19:29+08:00">
+                2017-07-30
               </time>
             
 
@@ -957,8 +803,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -995,26 +841,178 @@
 
       
         
-          <h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a><strong>第七章</strong></h1><ul>
-<li><p>7.5节 ： 通用套接字选项， 常用的有</p>
+          <h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
+<p>验证完玩家信息, </p>
+<p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
+<blockquote>
+<p>在redis中存了一份玩家在线有效时间key,<br>超时则掉线, </p>
+<p>这个key也可以用来完成封号操作</p>
+</blockquote>
+<h2 id="MainServer"><a href="#MainServer" class="headerlink" title="MainServer"></a>MainServer</h2><blockquote>
+<p>因为弱交互/短连接的关系, </p>
+<p>大多数情况玩家和玩家之间不需要实时面对面PK，</p>
+<p>打一下对方的离线数据，</p>
+<p>计算下排行榜，排行榜是实时计算的, </p>
+<p>存在redis里, 做了分页处理</p>
+<p>买卖下道具即可</p>
+<p>所以 MainServer 选择了:</p>
+</blockquote>
 <ul>
-<li>SO_KEEPALIVE</li>
-<li>SO_REVBUF</li>
-<li>SO_SNDBUF</li>
-<li>SO_REUSEADDR</li>
-</ul>
-</li>
-<li><p>7.9节 ：  tcp套接字选项， 常用的有</p>
-<ul>
-<li>TCP_NODELAY</li>
-<li>TCP_MAXSEG </li>
-</ul>
-</li>
-<li>7.11节 ：fcntl函数，常用的用法是使用F_SETFL命令设置O_NOBLOCK文件状态标志， 我们可以把一个套接字设置为非阻塞型。</li>
+<li>yii</li>
+<li>redis</li>
+<li>mysql</li>
+<li>nginx</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/03/重读UNIX网络编程第三章到第十一章笔记整理(二)/#more" rel="contents">
+            <a class="btn" href="/2017/07/30/快速完成一个slg游戏思路(一)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/29/kbe服务端笔记(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/29/kbe服务端笔记(二)/" itemprop="url">kbe服务端笔记(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T23:59:38+08:00">
+                2017-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kbe/" itemprop="url" rel="index">
+                    <span itemprop="name">kbe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="FixedMessages："><a href="#FixedMessages：" class="headerlink" title="FixedMessages："></a><strong>FixedMessages：</strong></h2><p>FixedMessages存储所有固定消息（有显示制定id的消息，当然，这并不表示非固定消息就没有id，也是有的，只是不是显示制定的）。<br>    它的构造地方如下（lib/network/message_handler.cpp）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">MessageHandlers::MessageHandlers():</div><div class="line">msgHandlers_(),</div><div class="line">msgID_(1),</div><div class="line">exposedMessages_()</div><div class="line">&#123;</div><div class="line">	g_fm = Network::FixedMessages::getSingletonPtr();</div><div class="line">	if(g_fm == NULL)</div><div class="line">		g_fm = newNetwork::FixedMessages;</div><div class="line"></div><div class="line">	Network::FixedMessages::getSingleton().loadConfig(&quot;server/messages_fixed.xml&quot;);</div><div class="line">	messageHandlers().push_back(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>意即MessageHandlers构造的时候，如果它还没构造，那就构造。<br>它的初始化（配置）是由loadConfig接口来完成的，代码见上。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/29/kbe服务端笔记(二)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>

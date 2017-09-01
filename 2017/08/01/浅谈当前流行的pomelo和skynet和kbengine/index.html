@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="UNP,TLPI,APUE," />
+  <meta name="keywords" content="skynet,pomelo,kbengine," />
 
 
 
@@ -94,18 +94,20 @@
 
 
 
-<meta name="description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
-<meta name="keywords" content="UNP,TLPI,APUE">
+<meta name="description" content="根据之前的博文&amp;lt;&amp;lt;服务端常用架构&amp;gt;&amp;gt;来看 网易pomelo属于第二代游戏服务端五型的架构，即图7的架构。 skynet因为是一个服务端框架，官方只是提供了login server 和 gate">
+<meta name="keywords" content="skynet,pomelo,kbengine">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)">
-<meta property="og:url" content="http://yoursite.com/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/index.html">
+<meta property="og:title" content="浅谈当前流行的pomelo和skynet和kbengine">
+<meta property="og:url" content="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
+<meta property="og:description" content="根据之前的博文&amp;lt;&amp;lt;服务端常用架构&amp;gt;&amp;gt;来看 网易pomelo属于第二代游戏服务端五型的架构，即图7的架构。 skynet因为是一个服务端框架，官方只是提供了login server 和 gate">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T12:15:54.509Z">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/image001.png">
+<meta property="og:updated_time" content="2017-09-01T14:19:31.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)">
-<meta name="twitter:description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
+<meta name="twitter:title" content="浅谈当前流行的pomelo和skynet和kbengine">
+<meta name="twitter:description" content="根据之前的博文&amp;lt;&amp;lt;服务端常用架构&amp;gt;&amp;gt;来看 网易pomelo属于第二代游戏服务端五型的架构，即图7的架构。 skynet因为是一个服务端框架，官方只是提供了login server 和 gate">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/image001.png">
 
 
 
@@ -134,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/"/>
 
 
 
 
 
-  <title>重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二) | 烫</title>
+  <title>浅谈当前流行的pomelo和skynet和kbengine | 烫</title>
   
 
 
@@ -283,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -300,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)</h1>
+          <h1 class="post-title" itemprop="name headline">浅谈当前流行的pomelo和skynet和kbengine</h1>
         
 
         <div class="post-meta">
@@ -312,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T19:42:21+08:00">
-                2017-08-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T15:54:47+08:00">
+                2017-08-01
               </time>
             
 
@@ -335,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -372,43 +374,13 @@
       
 
       
-        <h1 id="16章"><a href="#16章" class="headerlink" title="16章"></a><strong>16章</strong></h1><ul>
-<li>16.3节 ： 非阻塞connect<ul>
-<li>有三个用途：<ul>
-<li>我们想在connect的时候处理其他事情</li>
-<li>可以同时建立多个连接</li>
-<li>可以通过select设置一个更短一点的超时时间</li>
-</ul>
-</li>
-<li>实现步骤：<ol>
-<li>用fcntl把套接字设置为非阻塞</li>
-<li>处理客户端和服务器都在同一主机上的情况</li>
-<li>使用select设置超时，并处理超时情况</li>
-<li>处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
+        <p>根据之前的博文&lt;&lt;服务端常用架构&gt;&gt;来看</p>
+<h2 id="网易pomelo"><a href="#网易pomelo" class="headerlink" title="网易pomelo"></a>网易pomelo</h2><p>属于第二代游戏服务端五型的架构，即图7的架构。</p>
+<h2 id="skynet"><a href="#skynet" class="headerlink" title="skynet"></a>skynet</h2><p>因为是一个服务端框架，官方只是提供了login server 和 gate </p>
 <a id="more"></a>
-<ul>
-<li><p>16.6节 ： 非阻塞accept，</p>
-<ul>
-<li><p>用于解决下面问题：</p>
-<blockquote>
-<p>“用select检测socket状态，如果有连接就调用accept，这样如果在select检测到由连接请求，在调用accept之前，这个请求断开了，然后调用accept的时候就会阻塞在哪里，除非这时有另外一个连接请求，如果没有，则一直被阻塞在那里。”</p>
-</blockquote>
-</li>
-<li><p>解决方案：</p>
-<blockquote>
-<p>使用select在一个监听套接字准备好要被accept时总是把套接字设置为非阻塞</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="26章和30章"><a href="#26章和30章" class="headerlink" title="26章和30章"></a><strong>26章和30章</strong></h1><p>介绍了线程和并发/并行的服务器设计范式，等下篇TLPI/APUE的笔记一起整理吧</p>
-
+<p>server的参考实现，其他的需要自己来实现，编程的自由度变大了，架构完全取决于程序员自己的选择，程序员可以自己尝试去实现第二代的架构，也可以实现第三代的架构。注意: skynet仅仅是框架，其他属于完整解决方案。</p>
+<h2 id="Kbengine"><a href="#Kbengine" class="headerlink" title="Kbengine"></a>Kbengine</h2><p>属于第三代服务端框架，可能类似于图10。（这个理解不确定）<br>Kbengine引擎应该是对图10中的Gate服务器和NODE和OBJ进行了细分。在功能上大体划分为与位置有关（在Kbengine中称为Cellapp）和与位置无关（在Kbengine中称为Baseapp）。类似于下面的示图架构。</p>
+<img src="/2017/08/01/浅谈当前流行的pomelo和skynet和kbengine/image001.png" alt="image001.png" title="">
       
     </div>
     
@@ -425,11 +397,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/UNP/" rel="tag"># UNP</a>
+            <a href="/tags/skynet/" rel="tag"># skynet</a>
           
-            <a href="/tags/TLPI/" rel="tag"># TLPI</a>
+            <a href="/tags/pomelo/" rel="tag"># pomelo</a>
           
-            <a href="/tags/APUE/" rel="tag"># APUE</a>
+            <a href="/tags/kbengine/" rel="tag"># kbengine</a>
           
         </div>
       
@@ -442,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/28/重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)/" rel="next" title="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)">
-                <i class="fa fa-chevron-left"></i> 重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(一)
+              <a href="/2017/07/30/快速完成一个slg游戏思路(二)/" rel="next" title="快速完成一个slg游戏思路(二)">
+                <i class="fa fa-chevron-left"></i> 快速完成一个slg游戏思路(二)
               </a>
             
           </div>
@@ -601,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#16章"><span class="nav-number">1.</span> <span class="nav-text">16章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#26章和30章"><span class="nav-number">2.</span> <span class="nav-text">26章和30章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网易pomelo"><span class="nav-number">1.</span> <span class="nav-text">网易pomelo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#skynet"><span class="nav-number">2.</span> <span class="nav-text">skynet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kbengine"><span class="nav-number">3.</span> <span class="nav-text">Kbengine</span></a></li></ol></div>
             
 
           </div>

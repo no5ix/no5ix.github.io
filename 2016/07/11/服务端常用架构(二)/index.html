@@ -104,17 +104,24 @@
 
 
 
-<meta name="description" content="基于知乎问答整理而成。 第三代游戏服务器 2007从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：   每台 Node服务器用来管">
+<meta name="description" content="第三代游戏服务器 2007从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：   每台 Node服务器用来管理一块地图区域，由 No">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务端常用架构(二)">
 <meta property="og:url" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="基于知乎问答整理而成。 第三代游戏服务器 2007从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：   每台 Node服务器用来管">
+<meta property="og:description" content="第三代游戏服务器 2007从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：   每台 Node服务器用来管理一块地图区域，由 No">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T12:36:25.920Z">
+<meta property="og:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image008.png">
+<meta property="og:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image009.png">
+<meta property="og:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image010.png">
+<meta property="og:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image011.png">
+<meta property="og:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image012.png">
+<meta property="og:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image013.png">
+<meta property="og:updated_time" content="2017-09-02T12:57:14.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务端常用架构(二)">
-<meta name="twitter:description" content="基于知乎问答整理而成。 第三代游戏服务器 2007从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：   每台 Node服务器用来管">
+<meta name="twitter:description" content="第三代游戏服务器 2007从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：   每台 Node服务器用来管理一块地图区域，由 No">
+<meta name="twitter:image" content="http://yoursite.com/2016/07/11/服务端常用架构(二)/image008.png">
 
 
 
@@ -381,30 +388,29 @@
       
 
       
-        <p>基于<a href="http://www.zhihu.com/question/29779732" target="_blank" rel="external">知乎问答</a>整理而成。</p>
-<h2 id="第三代游戏服务器-2007"><a href="#第三代游戏服务器-2007" class="headerlink" title="第三代游戏服务器 2007"></a>第三代游戏服务器 2007</h2><p>从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：</p>
- 
+        <h2 id="第三代游戏服务器-2007"><a href="#第三代游戏服务器-2007" class="headerlink" title="第三代游戏服务器 2007"></a>第三代游戏服务器 2007</h2><p>从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：</p>
+ <img src="/2016/07/11/服务端常用架构(二)/image008.png" alt="image008.png" title="">
 <p>每台 Node服务器用来管理一块地图区域，由 NodeMaster（NM）来为他们提供总体管理。更高层次的 World则提供大陆级别的管理服务。这里省略若干细节服务器，比如传统数据库前端，登录服务器，日志和监控等，统统用 ADMIN概括。在这样的结构下，玩家从一块区域走向另外一块区域需要简单处理一下：</p>
- 
+ <img src="/2016/07/11/服务端常用架构(二)/image009.png" alt="image009.png" title="">
 <p>玩家1完全由节点A控制，玩家3完全由节点B控制。而处在两个节点边缘的2号玩家，则同时由A和B提供服务。玩家2从A移动到B的过程中，会同时向A请求左边的情况，并向B请求右边的情况。但是此时玩家2还是属于A管理。直到玩家2彻底离开AB边界很远，才彻底交由B管理。按照这样的逻辑将世界地图分割为一块一块的区域，交由不同的 Node去管理。</p>
 <p>对于一个 Node所负责的区域，地理上没必要连接在一起，比如大陆的四周边缘部分和高山部分的区块人比较少，可以统一交给一个Node去管理，而这些区块在地理上并没有联系在一起的必要性。一个 Node到底管理哪些区块，可以根据游戏实时运行的负载情况，定时维护的时候进行更改 NodeMaster 上面的配置。</p>
 <p>于是碰到第一个问题是很多 Node服务器需要和玩家进行通信，需要问管理服务器特定UID为多少的玩家到底在哪台 Gate上，以前按场景切割的服务器这个问题不大，问了一次以后就可以缓存起来了，但是现在服务器种类增加不少，玩家又会飘来飘去，按UID查找玩家比较麻烦；另外一方面 GATE需要动态根据坐标计算和哪些 Node通信，导致逻辑越来越厚，于是把：“用户对象”从负责连接管理的 GATE中切割出来势在必行于是有了下面的模型：</p>
- 
+ <img src="/2016/07/11/服务端常用架构(二)/image010.png" alt="image010.png" title="">
 <a id="more"></a>
 <p>网关服务器再次退回到精简的网络转发功能，而用户逻辑则由按照 UID划分的 OBJ服务器来承担，GATE是按照网络接入时的负载来分布，而 OBJ则是按照资源的编号（UID）来分布，这样和一个用户通信直接根据 UID计算出 OBJ服务器编号发送数据即可。而新独立出来的 OBJ则提供了更多高层次的服务：</p>
 <p>•    对象移动：管理具体玩家在不同的 Node所管辖的区域之间的移动，并同需要的 Node进行沟通。<br>•    数据广播：Node可以给每个用户设置若干 TAG，然后通知 Object Master 按照TAG广播。<br>•    对象消息：通用消息推送，给某个用户发送数据，直接告诉 OBJ，不需要直接和 GATE打交道。<br>•    好友聊天：角色之间聊天直接走 OBJ/OBJ MASTER。<br>整个服务器主体分为三层以后，NODE专注场景，OBJ专注玩家对象，GATE专注网络。这样的模型在无缝场景服务器中得到广泛的应用。但是随着时间的推移，负载问题也越来越明显，做个活动，远来不活跃的区域变得十分活跃，靠每周维护来调整还是比较笨重的，于是有了动态负载均衡。</p>
 <p>动态负载均衡有两种方法，第一种是按照负载，由 Node Master 定时动态移动修改一下各个 Node的边界，而不同的玩家对象按照先前的方法从一台 Node上迁移到另外一台 Node上：</p>
- 
+ <img src="/2016/07/11/服务端常用架构(二)/image011.png" alt="image011.png" title="">
 <p>图11 动态负载均衡</p>
 <p>这样 Node Master定时查找地图上的热点区域，计算新的场景切割方式，然后告诉其他服务器开始调整，具体处理方式还是和上面对象跨越边界移动的方法一样。</p>
 <p>但是上面这种方式实现相对复杂一些，于是人们设计出了更为简单直接的一种新方法：</p>
- 
+ <img src="/2016/07/11/服务端常用架构(二)/image012.png" alt="image012.png" title="">
 <p>图12 基于网格的动态负载均衡</p>
 <p>还是将地图按照标准尺寸均匀切割成静态的网格，每个格子由一个具体的Node负责，但是根据负载情况，能够实时的迁移到其他 Node上。在迁移分为三个阶段：准备，切换，完成。三个状态由Node Master负责维护。准备阶段新的 Node开始同步老 Node上面该网格的数据，完成后告诉NM；NM确认OK后同时通知新旧 Node完成切换。完成切换后，如果 Obj服务器还在和老的 Node进行通信，老的 Node将会对它进行纠正，得到纠正的 OBJ将修正自己的状态，和新的 Node进行通信。</p>
 <p>很多无缝动态负载均衡的服务端宣称自己支持无限的人数，但不意味着 MMORPG游戏的人数上限真的可以无限扩充，因为这样的体系会受制于网络带宽和客户端性能。带宽决定了同一个区域最大广播上限，而客户端性能决定了同一个屏幕到底可以绘制多少个角色。</p>
 <p>从无缝地图引入了分布式对象模型开始，已经完全脱离 MUDOS体系，成为一种新的服务端模型。又由于动态负载均衡的引入，让无缝服务器如虎添翼，容纳着超过上一代游戏服务器数倍的人数上限，并提供了更好的游戏体验，我们称其为第三代游戏服务端架构。网游以大型多人角色扮演为开端，RPG网游在相当长的时间里一度占据90%以上，使得基于 MMORPG的服务端架构得到了蓬勃的发展，然而随着玩家对RPG的疲惫，各种非MMORPG游戏如雨后春笋般的出现在人们眼前，受到市场的欢迎。</p>
 <h2 id="战网游戏服务器"><a href="#战网游戏服务器" class="headerlink" title="战网游戏服务器"></a>战网游戏服务器</h2><p>经典战网服务端和 RPG游戏有两个区别：RPG是分区分服的，北京区的用户和广州区的用户老死不相往来。而战网，虽然每局游戏一般都是 8人以内，但全国只有一套服务器，所有的玩家都可以在一起游戏，而玩家和玩家之使用 P2P的方式连接在一起，组成一局游戏： </p>
-
+<img src="/2016/07/11/服务端常用架构(二)/image013.png" alt="image013.png" title="">
 <p>玩家通过 Match Making 服务器使用：创建、加入、自动匹配、邀请等方式组成一局游戏。服务器会选择一个人做 Host，其他人 P2P连接到做主的玩家上来。STUN是帮助玩家之间建立 P2P的牵引服务器，而由于 P2P联通情况大概只有 75%，实在联不通的玩家会通过 Forward进行转发。</p>
 <p>大量的连接对战，体育竞技游戏采用类似的结构。P2P有网状模型（所有玩家互相连接），和星状模型（所有玩家连接一个主玩家）。复杂的游戏状态在网状模型下难以形成一致，因此星状P2P模型经受住了历史的考验。除去游戏数据，支持语音的战网系统也会将所有人的语音数据发送到做主的那个玩家机器上，通过混音去重再编码的方式返回给所有用户。</p>
 <p>战网类游戏，以竞技、体育、动作等类型的游戏为主，较慢节奏的 RPG（包括ARPG）有本质上的区别，而激烈的游戏过程必然带来到较 RPG复杂的多的同步策略，这样的同步机制往往带来的是很多游戏结果由客户端直接计算得出，那在到处都是破解的今天，如何保证游戏结果的公正呢？</p>
@@ -514,7 +520,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">私人笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -533,7 +539,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -544,7 +550,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

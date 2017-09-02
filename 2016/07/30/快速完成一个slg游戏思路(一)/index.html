@@ -104,19 +104,19 @@
 
 
 
-<meta name="description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，">
+<meta name="description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
 <meta name="keywords" content="redis,mysql,php,yii,nginx,tcp,http,udp,workerman,Capistrano,ruby">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速完成一个slg游戏思路(一)">
 <meta property="og:url" content="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，">
+<meta property="og:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/slg1.png">
-<meta property="og:updated_time" content="2017-09-01T15:23:05.433Z">
+<meta property="og:updated_time" content="2017-09-02T13:21:13.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速完成一个slg游戏思路(一)">
-<meta name="twitter:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，">
+<meta name="twitter:description" content="LoginServer(GateWay)当完成渠道sdk回调验证之后,  验证完玩家信息,  用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器,   在redis中存了一份玩家在线有效时间key,超时则掉线,  这个key也可以用来完成封号操作  MainServer 因为弱交互/短连接的关系,  大多数情况玩家和玩家之间不需要实时面对面PK， 打一下对方的离线数据， 计算下排行榜，排">
 <meta name="twitter:image" content="http://yoursite.com/2016/07/30/快速完成一个slg游戏思路(一)/slg1.png">
 
 
@@ -384,8 +384,7 @@
       
 
       
-        <img src="/2016/07/30/快速完成一个slg游戏思路(一)/slg1.png" alt="slg1.png" title="">
-<h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
+        <h2 id="LoginServer-GateWay"><a href="#LoginServer-GateWay" class="headerlink" title="LoginServer(GateWay)"></a>LoginServer(GateWay)</h2><p>当完成渠道sdk回调验证之后, </p>
 <p>验证完玩家信息, </p>
 <p>用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, </p>
 <blockquote>
@@ -414,6 +413,7 @@
 <blockquote>
 <p>其实这里可以不选择用tcp, 而自撸一个可靠udp来提高效率</p>
 </blockquote>
+<img src="/2016/07/30/快速完成一个slg游戏思路(一)/slg1.png" alt="slg1.png" title="">
 
       
     </div>

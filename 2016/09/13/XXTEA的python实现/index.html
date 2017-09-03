@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,xxtea," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在数据的加解密领域，算法分为对称密钥与非对称密钥两种。 对称密钥与非对称密钥由于各自的特点，所应用的领域是不尽相同的。 对称密钥加密算法由于其速度快，一般用于整体数据的加密，而非对称密钥加密算法的安全性能佳，在数字签名领域得到广泛的应用。 微型加密算法（TEA）及其相关变种（XTEA，Block TEA，XXTEA） 都是分组加密算法，它们很容易被描述，实现也很简单（典型的几行代码）。 TEA是T">
+<meta name="keywords" content="python,xxtea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XXTEA的python实现">
+<meta property="og:url" content="http://yoursite.com/2016/09/13/XXTEA的python实现/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="在数据的加解密领域，算法分为对称密钥与非对称密钥两种。 对称密钥与非对称密钥由于各自的特点，所应用的领域是不尽相同的。 对称密钥加密算法由于其速度快，一般用于整体数据的加密，而非对称密钥加密算法的安全性能佳，在数字签名领域得到广泛的应用。 微型加密算法（TEA）及其相关变种（XTEA，Block TEA，XXTEA） 都是分组加密算法，它们很容易被描述，实现也很简单（典型的几行代码）。 TEA是T">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2016/09/13/XXTEA的python实现/py_xxtea1.png">
+<meta property="og:updated_time" content="2017-09-02T18:08:42.308Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XXTEA的python实现">
+<meta name="twitter:description" content="在数据的加解密领域，算法分为对称密钥与非对称密钥两种。 对称密钥与非对称密钥由于各自的特点，所应用的领域是不尽相同的。 对称密钥加密算法由于其速度快，一般用于整体数据的加密，而非对称密钥加密算法的安全性能佳，在数字签名领域得到广泛的应用。 微型加密算法（TEA）及其相关变种（XTEA，Block TEA，XXTEA） 都是分组加密算法，它们很容易被描述，实现也很简单（典型的几行代码）。 TEA是T">
+<meta name="twitter:image" content="http://yoursite.com/2016/09/13/XXTEA的python实现/py_xxtea1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/13/XXTEA的python实现/"/>
+
+
+
+
+
+  <title>XXTEA的python实现 | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/13/XXTEA的python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XXTEA的python实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-13T02:04:00+08:00">
+                2016-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在数据的加解密领域，算法分为对称密钥与非对称密钥两种。</p>
+<p>对称密钥与非对称密钥由于各自的特点，所应用的领域是不尽相同的。</p>
+<p>对称密钥加密算法由于其速度快，一般用于整体数据的加密，而非对称密钥加密算法的安全性能佳，在数字签名领域得到广泛的应用。</p>
+<p>微型加密算法（TEA）及其相关变种（XTEA，Block TEA，XXTEA） 都是分组加密算法，它们很容易被描述，实现也很简单（典型的几行代码）。</p>
+<p>TEA是Tiny Encryption Algorithm的缩写，以加密解密速度快，实现简单著称。</p>
+<p>TEA 算法最初是由剑桥计算机实验室的 David Wheeler 和 Roger Needham 在 1994 年设计的。</p>
+<p>该算法使用 128 位的密钥为 64 位的信息块进行加密，它需要进行 64 轮迭代，尽管作者认为 32 轮已经足够了。</p>
+<p>该算法使用了一个神秘常数δ作为倍数，它来源于黄金比率，以保证每一轮加密都不相同。</p>
+<p>但δ的精确值似乎并不重要，这里 TEA 把它定义为 δ=「(√5 - 1)231」（也就是程序中的 0×9E3779B9）。</p>
+<p>之后 TEA 算法被发现存在缺陷，作为回应，设计者提出了一个 TEA 的升级版本——XTEA（有时也被称为“tean”）。</p>
+<p>XTEA 跟 TEA 使用了相同的简单运算，但它采用了截然不同的顺序，为了阻止密钥表攻击，四个子密钥（在加密过程中，原 128 位的密钥被拆分为 4 个 32 位的子密钥）采用了一种不太正规的方式进行混合，但速度更慢了。</p>
+<p>在跟描述 XTEA 算法的同一份报告中，还介绍了另外一种被称为 Block TEA 算法的变种，它可以对 32 位大小任意倍数的变量块进行操作。</p>
+<p>该算法将 XTEA 轮循函数依次应用于块中的每个字，并且将它附加于它的邻字。</p>
+<p>该操作重复多少轮依赖于块的大小，但至少需要 6 轮。</p>
+<p>该方法的优势在于它无需操作模式（CBC，OFB，CFB 等），密钥可直接用于信息。</p>
+<p>对于长的信息它可能比 XTEA 更有效率。</p>
+<p>在 1998 年，Markku-Juhani Saarinen 给出了一个可有效攻击 Block TEA 算法的代码，但之后很快 David J. Wheeler 和 Roger M. Needham 就给出了 Block TEA 算法的修订版，这个算法被称为 XXTEA。</p>
+<p>XXTEA 使用跟 Block TEA 相似的结构，但在处理块中每个字时利用了相邻字。</p>
+<p>它利用一个更复杂的 MX 函数代替了 XTEA 轮循函数，MX 使用 2 个输入量。</p>
+<p>XXTEA 算法很安全，而且非常快速，非常适合应用于 Web 开发中。</p>
+<img src="/2016/09/13/XXTEA的python实现/py_xxtea1.png" alt="py_xxtea1.png" title="">
+<p>TEA算法是由剑桥大学计算机实验室的David Wheeler和Roger Needham于1994年发明，</p>
+<p>TEA是Tiny Encryption Algorithm的缩写，以加密解密速度快，实现简单著称。</p>
+<p>TEA算法每一次可以操作64bit(8byte)，采用128bit(16byte)作为key，算法采用迭代的形式，推荐的迭代轮数是64轮，最少32轮。</p>
+<p>为解决TEA算法密钥表攻击的问题，TEA算法先后经历了几次改进，从XTEA到BLOCK TEA，直至最新的XXTEA。</p>
+<p>XTEA也称做TEAN，它使用与TEA相同的简单运算，但四个子密钥采取不正规的方式进行混合以阻止密钥表攻击。</p>
+<p>Block TEA算法可以对32位的任意整数倍长度的变量块进行加解密的操作，该算法将XTEA轮循函数依次应用于块中的每个字，并且将它附加于被应用字的邻字。</p>
+<p>XXTEA使用跟Block TEA相似的结构，但在处理块中每个字时利用了相邻字，且用拥有两个输入量的MX函数代替了XTEA轮循函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import struct  </div><div class="line">  </div><div class="line">_DELTA = 0x9E3779B9  </div><div class="line">  </div><div class="line">def _long2str(v, w):  </div><div class="line">    n = (len(v) - 1) &lt;&lt; 2  </div><div class="line">    if w:  </div><div class="line">        m = v[-1]  </div><div class="line">        if (m &lt; n - 3) or (m &gt; n): return &apos;&apos;  </div><div class="line">        n = m  </div><div class="line">    s = struct.pack(&apos;&lt;%iL&apos; % len(v), *v)  </div><div class="line">    return s[0:n] if w else s  </div><div class="line">  </div><div class="line">def _str2long(s, w):  </div><div class="line">    n = len(s)  </div><div class="line">    m = (4 - (n &amp; 3) &amp; 3) + n  </div><div class="line">    s = s.ljust(m, &quot;\0&quot;)  </div><div class="line">    v = list(struct.unpack(&apos;&lt;%iL&apos; % (m &gt;&gt; 2), s))  </div><div class="line">    if w: v.append(n)  </div><div class="line">    return v  </div><div class="line">  </div><div class="line">def encrypt(str, key):  </div><div class="line">    if str == &apos;&apos;: return str  </div><div class="line">    v = _str2long(str, True)  </div><div class="line">    k = _str2long(key.ljust(16, &quot;\0&quot;), False)  </div><div class="line">    n = len(v) - 1  </div><div class="line">    z = v[n]  </div><div class="line">    y = v[0]  </div><div class="line">    sum = 0  </div><div class="line">    q = 6 + 52 // (n + 1)  </div><div class="line">    while q &gt; 0:  </div><div class="line">        sum = (sum + _DELTA) &amp; 0xffffffff  </div><div class="line">        e = sum &gt;&gt; 2 &amp; 3  </div><div class="line">        for p in xrange(n):  </div><div class="line">            y = v[p + 1]  </div><div class="line">            v[p] = (v[p] + ((z &gt;&gt; 5 ^ y &lt;&lt; 2) + (y &gt;&gt; 3 ^ z &lt;&lt; 4) ^ (sum ^ y) + (k[p &amp; 3 ^ e] ^ z))) &amp; 0xffffffff  </div><div class="line">            z = v[p]  </div><div class="line">        y = v[0]  </div><div class="line">        v[n] = (v[n] + ((z &gt;&gt; 5 ^ y &lt;&lt; 2) + (y &gt;&gt; 3 ^ z &lt;&lt; 4) ^ (sum ^ y) + (k[n &amp; 3 ^ e] ^ z))) &amp; 0xffffffff  </div><div class="line">        z = v[n]  </div><div class="line">        q -= 1  </div><div class="line">    return _long2str(v, False)  </div><div class="line">  </div><div class="line">def decrypt(str, key):  </div><div class="line">    if str == &apos;&apos;: return str  </div><div class="line">    v = _str2long(str, False)  </div><div class="line">    k = _str2long(key.ljust(16, &quot;\0&quot;), False)  </div><div class="line">    n = len(v) - 1  </div><div class="line">    z = v[n]  </div><div class="line">    y = v[0]  </div><div class="line">    q = 6 + 52 // (n + 1)  </div><div class="line">    sum = (q * _DELTA) &amp; 0xffffffff  </div><div class="line">    while (sum != 0):  </div><div class="line">        e = sum &gt;&gt; 2 &amp; 3  </div><div class="line">        for p in xrange(n, 0, -1):  </div><div class="line">            z = v[p - 1]  </div><div class="line">            v[p] = (v[p] - ((z &gt;&gt; 5 ^ y &lt;&lt; 2) + (y &gt;&gt; 3 ^ z &lt;&lt; 4) ^ (sum ^ y) + (k[p &amp; 3 ^ e] ^ z))) &amp; 0xffffffff  </div><div class="line">            y = v[p]  </div><div class="line">        z = v[n]  </div><div class="line">        v[0] = (v[0] - ((z &gt;&gt; 5 ^ y &lt;&lt; 2) + (y &gt;&gt; 3 ^ z &lt;&lt; 4) ^ (sum ^ y) + (k[0 &amp; 3 ^ e] ^ z))) &amp; 0xffffffff  </div><div class="line">        y = v[0]  </div><div class="line">        sum = (sum - _DELTA) &amp; 0xffffffff  </div><div class="line">    return _long2str(v, True)  </div><div class="line">  </div><div class="line">if __name__ == &quot;__main__&quot;:  </div><div class="line">    print decrypt(encrypt(&apos;Hello XXTEA!&apos;, &apos;16bytelongstring&apos;), &apos;16bytelongstring&apos;)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/xxtea/" rel="tag"><i class="fa fa-tag"></i> xxtea</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/01/PHP的魔术/" rel="next" title="PHP的魔术">
+                <i class="fa fa-chevron-left"></i> PHP的魔术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/18/一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)/" rel="prev" title="一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)">
+                一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nosix1992" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

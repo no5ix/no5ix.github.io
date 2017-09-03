@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="df df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。   -a或–all：包含全部的文件系统； –block-size=&amp;lt;区块大小&amp;gt;：以指定的区块大小来显示区块数目； -h或–human-readable：以可读性较高的方式来显示信息； -H或–si：与-h参数相同，但在计算时是以1000 Byte">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T13:46:08.585Z">
+<meta property="og:updated_time" content="2017-09-02T17:15:02.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用运维命令(df和free)笔记整理(三)">
 <meta name="twitter:description" content="df df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。   -a或–all：包含全部的文件系统； –block-size=&amp;lt;区块大小&amp;gt;：以指定的区块大小来显示区块数目； -h或–human-readable：以可读性较高的方式来显示信息； -H或–si：与-h参数相同，但在计算时是以1000 Byte">
@@ -404,11 +404,11 @@
 <li>–version：显示版本信息</li>
 </ul>
 <a id="more"></a>
-<h3 id="df常用用法：df-h"><a href="#df常用用法：df-h" class="headerlink" title="df常用用法：df -h"></a><em>df常用用法：df -h</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">udev            990M  4.0K  990M   1% /dev</div><div class="line">tmpfs           201M  968K  200M   1% /run</div><div class="line">/dev/sda1       8.8G  4.1G  4.3G  49% /</div><div class="line">none            4.0K     0  4.0K   0% /sys/fs/cgroup</div><div class="line">none            5.0M     0  5.0M   0% /run/lock</div><div class="line">none           1001M   76K 1001M   1% /run/shm</div><div class="line">none            100M   36K  100M   1% /run/user</div><div class="line">/dev/sr0         57M   57M     0 100% /media/b/VBOXADDITIONS_5.1.22_115126</div></pre></td></tr></table></figure>
+<h2 id="df常用用法：df-h"><a href="#df常用用法：df-h" class="headerlink" title="df常用用法：df -h"></a><em>df常用用法：df -h</em></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">udev            990M  4.0K  990M   1% /dev</div><div class="line">tmpfs           201M  968K  200M   1% /run</div><div class="line">/dev/sda1       8.8G  4.1G  4.3G  49% /</div><div class="line">none            4.0K     0  4.0K   0% /sys/fs/cgroup</div><div class="line">none            5.0M     0  5.0M   0% /run/lock</div><div class="line">none           1001M   76K 1001M   1% /run/shm</div><div class="line">none            100M   36K  100M   1% /run/user</div><div class="line">/dev/sr0         57M   57M     0 100% /media/b/VBOXADDITIONS_5.1.22_115126</div></pre></td></tr></table></figure>
 <h1 id="free"><a href="#free" class="headerlink" title="free"></a><strong>free</strong></h1><blockquote>
 <p>free命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
 </blockquote>
-<h3 id="free常用用法：free-m或者free-g"><a href="#free常用用法：free-m或者free-g" class="headerlink" title="free常用用法：free -m或者free -g"></a><em>free常用用法：free -m或者free -g</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ free -m</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:          2000       1231        768          9         72        456</div><div class="line">-/+ buffers/cache:        702       1297</div><div class="line">Swap:         1021          0       1021</div></pre></td></tr></table></figure>
+<h2 id="free常用用法：free-m或者free-g"><a href="#free常用用法：free-m或者free-g" class="headerlink" title="free常用用法：free -m或者free -g"></a><em>free常用用法：free -m或者free -g</em></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~$ free -m</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:          2000       1231        768          9         72        456</div><div class="line">-/+ buffers/cache:        702       1297</div><div class="line">Swap:         1021          0       1021</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -520,7 +520,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -528,7 +528,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -550,7 +550,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -598,7 +598,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#df"><span class="nav-number">1.</span> <span class="nav-text">df</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#df常用用法：df-h"><span class="nav-number">1.0.1.</span> <span class="nav-text">df常用用法：df -h</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#free"><span class="nav-number">2.</span> <span class="nav-text">free</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#free常用用法：free-m或者free-g"><span class="nav-number">2.0.1.</span> <span class="nav-text">free常用用法：free -m或者free -g</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#df"><span class="nav-number">1.</span> <span class="nav-text">df</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#df常用用法：df-h"><span class="nav-number">1.1.</span> <span class="nav-text">df常用用法：df -h</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#free"><span class="nav-number">2.</span> <span class="nav-text">free</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#free常用用法：free-m或者free-g"><span class="nav-number">2.1.</span> <span class="nav-text">free常用用法：free -m或者free -g</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="引擎 MySQL是有多个引擎的, 不同的场景情况用不同的引擎以提升性能和灵活性. 三大最常用的引擎 :    InnoDB : 可靠的事务处理引擎 ,不支持全文搜索 MyISAM : 支持全文搜索, 不支持事务处理 MEMORY :  功能等同于MyISAM, 但数据存储在内存而不是磁盘, 所以速度非常快, 特别适用于临时表(temporary table)  索引 索引是用来改善搜索性能的, 不">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T13:54:06.956Z">
+<meta property="og:updated_time" content="2017-09-02T15:02:27.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL进阶(一)">
 <meta name="twitter:description" content="引擎 MySQL是有多个引擎的, 不同的场景情况用不同的引擎以提升性能和灵活性. 三大最常用的引擎 :    InnoDB : 可靠的事务处理引擎 ,不支持全文搜索 MyISAM : 支持全文搜索, 不支持事务处理 MEMORY :  功能等同于MyISAM, 但数据存储在内存而不是磁盘, 所以速度非常快, 特别适用于临时表(temporary table)  索引 索引是用来改善搜索性能的, 不">
@@ -393,12 +393,12 @@
 <p>索引是用来改善搜索性能的, 不要滥用索引, 索引会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。</p>
 </blockquote>
 <a id="more"></a>
-<h4 id="索引有三种"><a href="#索引有三种" class="headerlink" title="索引有三种 : "></a><strong>索引有三种 : </strong></h4><ul>
+<h3 id="索引有三种"><a href="#索引有三种" class="headerlink" title="索引有三种 : "></a><strong>索引有三种 : </strong></h3><ul>
 <li>普通索引normal</li>
 <li>唯一索引unique : 它与前面的普通索引类似，不同的就是：索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一。</li>
 <li>全文索引fulltext : 表示 全文搜索的索引。 FULLTEXT 用于搜索很长一篇文章的时候，效果最好。用在比较短的文本，如果就一两行字的，普通的 INDEX 也可以。</li>
 </ul>
-<h4 id="建立索引需要遵守的规则"><a href="#建立索引需要遵守的规则" class="headerlink" title="建立索引需要遵守的规则 : "></a><strong>建立索引需要遵守的规则 : </strong></h4><ul>
+<h3 id="建立索引需要遵守的规则"><a href="#建立索引需要遵守的规则" class="headerlink" title="建立索引需要遵守的规则 : "></a><strong>建立索引需要遵守的规则 : </strong></h3><ul>
 <li>选择唯一性索引</li>
 <li>为经常需要排序、分组和联合操作的字段建立索引</li>
 <li>为常作为查询条件的字段建立索引</li>
@@ -530,7 +530,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -538,7 +538,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -560,7 +560,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -608,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引擎"><span class="nav-number">1.</span> <span class="nav-text">引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">2.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引有三种"><span class="nav-number">2.0.1.</span> <span class="nav-text">索引有三种 : </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立索引需要遵守的规则"><span class="nav-number">2.0.2.</span> <span class="nav-text">建立索引需要遵守的规则 : </span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些优化建议"><span class="nav-number">3.</span> <span class="nav-text">一些优化建议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引擎"><span class="nav-number">1.</span> <span class="nav-text">引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">2.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引有三种"><span class="nav-number">2.1.</span> <span class="nav-text">索引有三种 : </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立索引需要遵守的规则"><span class="nav-number">2.2.</span> <span class="nav-text">建立索引需要遵守的规则 : </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些优化建议"><span class="nav-number">3.</span> <span class="nav-text">一些优化建议</span></a></li></ol></div>
             
 
           </div>

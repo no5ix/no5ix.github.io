@@ -104,16 +104,16 @@
 
 
 
-<meta name="description" content="老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
+<meta name="description" content="以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="烫">
 <meta property="og:url" content="http://yoursite.com/page/6/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
+<meta property="og:description" content="以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="烫">
-<meta name="twitter:description" content="老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
+<meta name="twitter:description" content="以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
 
@@ -279,6 +279,508 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/15/boost之program_options/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/15/boost之program_options/" itemprop="url">boost之program_options</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-15T15:11:26+08:00">
+                2016-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>命令行接口是普遍,基础的人机交互接口，从命令行提取程序的运行时选项的方法有很多。</p>
+<p>你可以自己编写相对应的完整的解析函数，或许你有丰富的C语言编程经验，熟知getopt()函数的用法，又或许使用Python的你已经在使用optparse库来简化这一工作。</p>
+<p>大家在平时不断地谈及到“不要重复造轮子”，那就需要掌握一些顺手的库，这里介绍一种C++方式来解析命令行选项的方法，就是使用Boost.Program_options库。</p>
+<p>program_options提供程序员一种方便的命令行和配置文件进行程序选项设置的方法。</p>
+<p>使用program_options库而不是你自己动手写相关的解析代码，因为它更简单，声明程序选项的语法简洁，并且库自身也非常小。</p>
+<p>将选项值转换为适合的类型值的工作也都能自动完成。</p>
+<p>库有着完备的错误检查机制，如果自己手写解析代码时，就可能会错过对一些出错情况的检查了。</p>
+<p>最后，选项值不仅能从命令行获取，也能从配置文件，甚至于环境变量中提取，而这些选择不会增加明显的工作量。</p>
+<h1 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h1><p>以下面简单的hello程序进行说明，默认打印hello world,如果传入-p选项，就会打印出人的姓名，另外通过传入-h选项，可以打印出帮助选项。</p>
+<p>略微看一眼代码文件和相应的屏幕输入输出，然后我们再一起来看看这些是如何发生的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//hello.cpp </div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;boost/program_options.hpp&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    using namespace boost::program_options;</div><div class="line">    //声明需要的选项</div><div class="line">    options_description desc(&quot;Allowed options&quot;);</div><div class="line">    desc.add_options()</div><div class="line">        (&quot;help,h&quot;, &quot;produce help message&quot;)</div><div class="line">        (&quot;person,p&quot;, value&lt;string&gt;()-&gt;default_value(&quot;world&quot;), &quot;who&quot;)</div><div class="line">        ;</div><div class="line"></div><div class="line">    variables_map vm;        </div><div class="line">    store(parse_command_line(argc, argv, desc), vm);</div><div class="line">    notify(vm);    </div><div class="line"></div><div class="line">    if (vm.count(&quot;help&quot;)) &#123;</div><div class="line">        cout &lt;&lt; desc;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line">    cout &lt;&lt; &quot;Hello &quot; &lt;&lt; vm[&quot;person&quot;].as&lt;string&gt;() &lt;&lt; endl;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是在Windows命令提示符窗口上的输入输出结果，其中”&gt;”表示提示符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt;hello </div><div class="line">Hello world</div><div class="line"></div><div class="line">&gt;hello -h</div><div class="line">Allowed options:</div><div class="line">  -h [ --help ]                produce help message</div><div class="line">  -p [ --person ] arg (=world) who</div><div class="line"></div><div class="line">&gt;hello --person len</div><div class="line">Hello len</div></pre></td></tr></table></figure>
+<p>首先通过options_description类声明了需要的选项，add_options返回了定义了operator()的特殊的代理对象。</p>
+<p>这个调用看起来有点奇怪，其参数依次为选项名，选项值，以及选项的描述。</p>
+<p>注意到示例中的选项名为”help,h”，是因为声明了具有短选项名和长选项名的选项，这跟gnu程序的命令行具有一致性。</p>
+<p>当然你可以省略短选项名，但是这样就不能用命令选项简写了。</p>
+<p>第二个选项的声明，定义了选项值为string类型，其默认值为world.</p>
+<p>接下来,声明了variables_map类的对象，它主要用来存储选项值，并且能储存任意类型的值。</p>
+<p>然后，store,parse_command_line和notify函数使vm能存储在命令行中发现的选项。</p>
+<p>最后我们就自由地使用这些选项了，variables_map类的使用就像使用std::map一样，除了它必须用as方法去获取值。</p>
+<p>如果as方法调用的指定类型与实际存储的类型不同，就会有异常抛出。</p>
+<p>具有编程的你可能有这样的经验，使用cl或gcc对源文件进行编译时，可直接将源文件名放置在命令行中，而无需什么选项字母，如gcc a.c之类的。</p>
+<p>prgram_options也能处理这种情况，在库中被称为”positional options”(位置选项),但这需要程序员的一点儿帮助才能完成。</p>
+<p>看下面的经过对应修改的代码，我们无需传入”-p”选项，就能可指定”person”选项值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">positional_options_description p;</div><div class="line">p.add(&quot;person&quot;, -1);</div><div class="line">store(command_line_parser(argc, argv).options(desc).positional(p).run(), vm);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;hello len</div><div class="line">Hello len</div></pre></td></tr></table></figure>
+<p>前面新增的两行是为了说明所有的位置选项都应被解释成”person”选项，这里还采用了command_line_parser类来解析命令行，而不是用parse_command_line函数。</p>
+<p>后者只是对前者类的简单封装，但是现在我们需要传入一些额外的信息，所以要使用类本身。</p>
+<p>选项复合来源<br>一般来说，在命令行上指定所有选项，对用户来说是非常烦人的。</p>
+<p>如果有些选项要应用于每次运行，那该怎么办呢。</p>
+<p>我们当然希望能创建出带有些常用设置的选项文件，跟命令行一起应用于程序中。</p>
+<p>当然这一切需要将命令行与配置文件中的值结合起来。</p>
+<p>比如，在命令行中指定的某些选项值应该能覆盖配置文件中的对应值，或者将这些值组合起来。</p>
+<p>下面的代码段将选项通过文件读取，这文件是文本格式，可用”#”表示注释，格式如命令行中的参数一样，选项=值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ifstream ifs(&quot;config.cfg&quot;);</div><div class="line">store(parse_config_file(ifs,config),vm);</div><div class="line">notify(vm);</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.boost.org/doc/libs/1_35_0/doc/html/program_options.html" target="_blank" rel="external">Boost.prgram_options库文档</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/" itemprop="url">关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-11T16:07:43+08:00">
+                2016-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书心得/" itemprop="url" rel="index">
+                    <span itemprop="name">读书心得</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li><p>这本书不能一次性所有都想看完。</p>
+<blockquote>
+<p>要有目的性的看，因为这本书类似于百科全书所有都讲， 不分轻重， 如果都看，硬啃，只会迷失了自己，反而不知道看了什么</p>
+</blockquote>
+</li>
+<li><p>这本书不能单独看。</p>
+<blockquote>
+<p>这本书必须配合TCP/IP详解和UNIX环境高级编程（简称APUE）以及The Linux Programming Interface（不知道这本书的译名是什么， 简称TLPI）来看</p>
+</blockquote>
+</li>
+<li><p>个人看的是卷一第三版，因当前工作经验范围和阅历受限，对于IT码农，IPv6的和SCTP的章节暂且略过，所以目前大概划出的必看章节（其他可挑选）是</p>
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li>4</li>
+<li>5</li>
+<li>6</li>
+<li>7</li>
+<li>8</li>
+<li>11 </li>
+<li>13</li>
+<li>16</li>
+<li>22</li>
+<li>26</li>
+<li>30</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/02/重新看unix网络编程的一些心得/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/02/重新看unix网络编程的一些心得/" itemprop="url">重新看unix网络编程的一些心得</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-02T12:01:21+08:00">
+                2016-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书心得/" itemprop="url" rel="index">
+                    <span itemprop="name">读书心得</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>老书新看, 有了许多不同的见解, 也准备拿出以前自己私人的老笔记做修正放到博客里, 加深理解.</li>
+<li>在这个浮躁人人都能写书的时代基本要看一本书需要挑很久, 谁写的, 写得怎么样, 是否是业界经典, 都要需要一一斟酌各种查证方可, 不然看一本烂书事半功倍, 浪费生命,影响效率, 被误导跑偏, 能让人静下心来的书籍不多, 能让人看好几遍仍回味无穷的经典就更少了</li>
+<li>陈硕说过, 学东西不要只是从网上看点大牛的博客总结就行了, 总要完整地看些相关领域的经典著作的, 系统的知识结构打下坚实的基础才能继续看有关优化效率方面的书籍, 深以为然</li>
+<li>孟岩说, 最近不止一次听到当一个人拥有相关领域的知识基础之后就可以找一本effective*的书来研读了, 颇有道理</li>
+<li>看书的顺序忌胶柱鼓瑟, 并不是他的目录结构怎么编排你就该怎么看的, 大多数经典书籍基本都是面面俱到, 如果直接跟着这种面向知识体系本身的编排思路去看, 容易迷失乏味而无法继续, 应该找到属于自己看书顺序</li>
+<li>个人总结的看书顺序是先翻阅自己感兴趣的,接着仔细观察他的目录来确定他的编排思路, 然后花一到两天的时间通览全书以获得大体知识体系构架, 之后找到实战性最强的章节来实操并逐个突破实战过程中的各个知识点 </li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -581,471 +1083,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/11/服务端常用架构(一)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/11/服务端常用架构(一)/" itemprop="url">服务端常用架构(一)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-11T12:24:44+08:00">
-                2016-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="卡牌、跑酷等弱交互服务端"><a href="#卡牌、跑酷等弱交互服务端" class="headerlink" title="卡牌、跑酷等弱交互服务端"></a>卡牌、跑酷等弱交互服务端</h2><p>卡牌跑酷类因为交互弱，玩家和玩家之间不需要实时面对面PK，打一下对方的离线数据，计算下排行榜，买卖下道具即可，所以实现往往使用简单的 HTTP服务器：</p>
-<img src="/2016/07/11/服务端常用架构(一)/image001.png" alt="image001.png" title="">
-<p>登录时可以使用非对称加密（RSA, DH），服务器根据客户端uid，当前时间戳还有服务端私钥，计算哈希得到的加密 key 并发送给客户端。之后双方都用 HTTP通信，并用那个key进行RC4加密。客户端收到key和时间戳后保存在内存，用于之后通信，服务端不需要保存 key，因为每次都可以根据客户端传上来的 uid 和时间戳以及服务端自己的私钥计算得到。用模仿 TLS的行为，来保证多次 HTTP请求间的客户端身份，并通过时间戳保证同一人两次登录密钥不同。</p>
-<p>每局开始时，访问一下，请求一下关卡数据，玩完了又提交一下，验算一下是否合法，获得什么奖励，数据库用单台 MySQL或者 MongoDB即可，后端的 Redis做缓存（可选）。如果要实现通知，那么让客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，即便两人聊天，延迟也能自适应。</p>
-<p>此类服务器用来实现一款三国类策略或者卡牌及酷跑的游戏已经绰绰有余，这类游戏因为逻辑简单，玩家之间交互不强，使用 HTTP来开发的话，开发速度快，调试只需要一个浏览器就可以把逻辑调试清楚了。</p>
-<h2 id="第一代游戏服务器-1978"><a href="#第一代游戏服务器-1978" class="headerlink" title="第一代游戏服务器 1978"></a>第一代游戏服务器 1978</h2><p>1978年，英国著名的财经学校University of Essex的学生 Roy Trubshaw编写了世界上第一个MUD程序《MUD1》，在University of Essex于1980年接入 ARPANET之后加入了不少外部的玩家，甚至包括国外的玩家。《MUD1》程序的源代码在 ARPANET共享之后出现了众多的改编版本，至此MUD才在全世界广泛流行起来。不断完善的 MUD1的基础上产生了开源的 MudOS（1991），成为众多网游的鼻祖：</p>
- <img src="/2016/07/11/服务端常用架构(一)/image002.png" alt="image002.png" title="">
-<p>MUDOS采用 C语言开发，因为玩家和玩家之间有比较强的交互（聊天，交易，PK），MUDOS使用单线程无阻塞套接字来服务所有玩家，所有玩家的请求都发到同一个线程去处理，主线程每隔1秒钟更新一次所有对象（网络收发，更新对象状态机，处理超时，刷新地图，刷新NPC）。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/11/服务端常用架构(一)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/04/linux编程须知(阅读开源服务器源码基础)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/04/linux编程须知(阅读开源服务器源码基础)/" itemprop="url">linux编程须知(阅读开源服务器源码基础)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-04T19:01:46+08:00">
-                2016-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.<br>这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.<br>还是那句老话, <strong>带着问题阅读是最容易让人类迅速进入状态的</strong>.</p>
-</blockquote>
-<h2 id="进程的内存布局是什么样的"><a href="#进程的内存布局是什么样的" class="headerlink" title="进程的内存布局是什么样的?"></a><strong>进程的内存布局是什么样的?</strong></h2><p><img src="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="线程的同步机制有哪些"><a href="#线程的同步机制有哪些" class="headerlink" title="线程的同步机制有哪些?"></a><strong>线程的同步机制有哪些?</strong></h2><ul>
-<li>互斥量</li>
-<li>条件变量</li>
-<li>自旋锁</li>
-<li>读写锁</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/04/linux编程须知(阅读开源服务器源码基础)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/" itemprop="url">MongoDB能取代MySQL或者Redis能取代memcached么</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-30T00:22:58+08:00">
-                2016-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>mongodb和memcached不是一个范畴内的东西。</p>
-<p>mongodb是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据。</p>
-<p>mongodb和memcached不存在谁替换谁的问题。和memcached更为接近的是redis。</p>
-<p>它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据&gt; 类型有限，查询功能不强，一般用作缓存。</p>
-<p>一般现在的项目中，用redis来替代memcached。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1083,7 +1125,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -1091,7 +1133,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1113,7 +1155,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

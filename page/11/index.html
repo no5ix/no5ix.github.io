@@ -104,16 +104,16 @@
 
 
 
-<meta name="description" content="老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
+<meta name="description" content="以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="烫">
 <meta property="og:url" content="http://yoursite.com/page/11/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
+<meta property="og:description" content="以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="烫">
-<meta name="twitter:description" content="老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.">
+<meta name="twitter:description" content="以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.">
 
 
 
@@ -293,6 +293,645 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-22T21:56:12+08:00">
+                2015-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件: "></a><strong>socket可读的条件: </strong></h2><ol>
+<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1.</li>
+<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
+<li><strong>给监听套接字准备好新连接</strong></li>
+<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/" itemprop="url">linux一些不要想当然的事(一)之目录权限</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T17:11:52+08:00">
+                2015-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="目录的可读-可写-可执行权限"><a href="#目录的可读-可写-可执行权限" class="headerlink" title="目录的可读/可写/可执行权限"></a><strong>目录的可读/可写/可执行权限</strong></h2><blockquote>
+<p>不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!<br>记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/11/Linux常用运维命令(df和free)笔记整理(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/11/Linux常用运维命令(df和free)笔记整理(三)/" itemprop="url">Linux常用运维命令(df和free)笔记整理(三)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-11T12:16:56+08:00">
+                2015-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="df"><a href="#df" class="headerlink" title="df"></a><strong>df</strong></h1><blockquote>
+<p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+</blockquote>
+<ul>
+<li>-a或–all：包含全部的文件系统；</li>
+<li>–block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
+<li>-h或–human-readable：以可读性较高的方式来显示信息；</li>
+<li>-H或–si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
+<li>-i或–inodes：显示inode的信息；</li>
+<li>-k或–kilobytes：指定区块大小为1024字节；</li>
+<li>-l或–local：仅显示本地端的文件系统；</li>
+<li>-m或–megabytes：指定区块大小为1048576字节；</li>
+<li>–no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
+<li>-P或–portability：使用POSIX的输出格式；</li>
+<li>–sync：在取得磁盘使用信息前，先执行sync指令；</li>
+<li>-t&lt;文件系统类型&gt;或–type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
+<li>-T或–print-type：显示文件系统的类型；</li>
+<li>-x&lt;文件系统类型&gt;或–exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
+<li>–help：显示帮助；</li>
+<li>–version：显示版本信息</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/11/Linux常用运维命令(df和free)笔记整理(三)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/09/Linux常用运维命令(netstat和lsof)笔记整理(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/09/Linux常用运维命令(netstat和lsof)笔记整理(二)/" itemprop="url">Linux常用运维命令(netstat和lsof)笔记整理(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-09T23:16:16+08:00">
+                2015-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat "></a><strong>netstat </strong></h1><blockquote>
+<p>netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
+</blockquote>
+<ul>
+<li>-a或–all：显示所有连线中的Socket；</li>
+<li>-A&lt;网络类型&gt;或–&lt;网络类型&gt;：列出该网络类型连线中的相关地址；</li>
+<li>-c或–continuous：持续列出网络状态；</li>
+<li>-C或–cache：显示路由器配置的快取信息；</li>
+<li>-e或–extend：显示网络其他相关信息；</li>
+<li>-F或–fib：显示FIB；</li>
+<li>-g或–groups：显示多重广播功能群组组员名单；</li>
+<li>-h或–help：在线帮助；</li>
+<li>-i或–interfaces：显示网络界面信息表单；</li>
+<li>-l或–listening：显示监控中的服务器的Socket；</li>
+<li>-M或–masquerade：显示伪装的网络连线；</li>
+<li>-n或–numeric：直接使用ip地址，而不通过域名服务器；</li>
+<li>-N或–netlink或–symbolic：显示网络硬件外围设备的符号连接名称；</li>
+<li>-o或–timers：显示计时器；</li>
+<li>-p或–programs：显示正在使用Socket的程序识别码和程序名称；</li>
+<li>-r或–route：显示Routing Table；</li>
+<li>-s或–statistice：显示网络工作信息统计表；</li>
+<li>-t或–tcp：显示TCP传输协议的连线状况；</li>
+<li>-u或–udp：显示UDP传输协议的连线状况；</li>
+<li>-v或–verbose：显示指令执行过程；</li>
+<li>-V或–version：显示版本信息；</li>
+<li>-w或–raw：显示RAW传输协议的连线状况；</li>
+<li>-x或–unix：此参数的效果和指定”-A unix”参数相同；</li>
+<li>–ip或–inet：此参数的效果和指定”-A inet”参数相同。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/09/Linux常用运维命令(netstat和lsof)笔记整理(二)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/07/Linux常用运维命令(iostat)笔记整理(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -437,609 +1076,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/27/MySQL一些需要注意的小细节/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/27/MySQL一些需要注意的小细节/" itemprop="url">MySQL一些需要注意的小细节</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-27T22:51:11+08:00">
-                2015-02-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a><strong>distinct关键字</strong></h2><blockquote>
-<p>distinct是应用于所有列的, 而不是某一个列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one, two from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one from test_table;</div><div class="line">+------+</div><div class="line">| one  |</div><div class="line">+------+</div><div class="line">| 56   |</div><div class="line">| 52   |</div><div class="line">+------+</div><div class="line">2 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/02/27/MySQL一些需要注意的小细节/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）/" itemprop="url">(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-22T23:19:21+08:00">
-                2014-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了</p>
-<p>这是一篇偏向单链表进阶的博客, 并不会讲单链表的建立/增加/删除等等, 而且这篇博客大多数只说思想不写代码(因为其实蛮简单的..)</p>
-</blockquote>
-<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a><strong>存储结构</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef struct Node</div><div class="line">&#123;</div><div class="line">	DataType data;</div><div class="line">	struct Node *next;</div><div class="line">&#125;Node, *Node_Ptr;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20170823224405993?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/24/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/24/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）/" itemprop="url">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-24T19:17:32+08:00">
-                2014-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="二叉搜索树-又称二叉查找树或二叉排序树"><a href="#二叉搜索树-又称二叉查找树或二叉排序树" class="headerlink" title="二叉搜索树(又称二叉查找树或二叉排序树)"></a><strong>二叉搜索树(又称二叉查找树或二叉排序树)</strong></h2><blockquote>
-<p>有了上面二叉树的基础, 我们继续学习二叉搜索树.<br>我们这里也不给他那种晦涩难懂的定义, 感性的认识二叉搜索树.<br>直接看图, 很容易看得出来, 二叉搜索树每个结点的左孩子都小于右孩子.<br><img src="http://img.blog.csdn.net/20170806185002946?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><strong>因为具有n个结点的完全二叉树的最大高度为log2n+1</strong><br><strong>而二叉搜索树的查询/增加的时间复杂度都是O(h), h为树的高度,所以复杂度可以看作O(logn), 所以很明显上图中的a树比b树要高效.</strong></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/09/24/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/23/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/23/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）/" itemprop="url">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-23T12:11:22+08:00">
-                2014-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a><strong>遍历</strong></h3><p>如上图得到的相应的遍历的序列分别为：</p>
-<ul>
-<li>先序遍历 ： ABCDEGF</li>
-<li>中序遍历 ： CBEGDFA</li>
-<li>后序遍历 ： CGEFDBA</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/09/23/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1077,7 +1118,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -1085,7 +1126,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1107,7 +1148,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

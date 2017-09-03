@@ -104,18 +104,18 @@
 
 
 
-<meta name="description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
+<meta name="description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架 curl库  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
 <meta name="keywords" content="c++,mysql,boost,glog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个简单的游戏服务器框架demo(源码已经放在GitHub)">
 <meta property="og:url" content="http://yoursite.com/2017/08/27/一个简单的游戏服务器框架demo(源码已经放在GitHub)/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
+<meta property="og:description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架 curl库  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T15:25:18.645Z">
+<meta property="og:updated_time" content="2017-09-02T22:54:35.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个简单的游戏服务器框架demo(源码已经放在GitHub)">
-<meta name="twitter:description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
+<meta name="twitter:description" content="GitHubGitHub地址 框架简介一个简单的游戏服务器框架demo 框架概要采用C++开发，依赖 :   boost库 MySQL数据库 google-glog日志记录框架 curl库  主要处理游戏客户端和游戏数据库的数据交换。通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果返回给游戏客户端，即完成了前后端的数据交换。">
 
 
 
@@ -389,6 +389,7 @@
 <li>boost库</li>
 <li>MySQL数据库</li>
 <li>google-glog日志记录框架</li>
+<li>curl库</li>
 </ul>
 <p>主要处理游戏客户端和游戏数据库的数据交换。<br>通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果<br>返回给游戏客户端，即完成了前后端的数据交换。</p>
 <a id="more"></a>
@@ -408,6 +409,7 @@
 <li>新业务协议的添加略显繁琐, business模块可以遵循开闭原则来适当重构</li>
 <li>编写维护工具</li>
 <li>数据传输协议待优化</li>
+<li>编写测试工具</li>
 </ul>
 
       
@@ -526,7 +528,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -534,7 +536,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -556,7 +558,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

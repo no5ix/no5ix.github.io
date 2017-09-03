@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="在linux服务器开发过程中， 经常需要各种命令配合来查看各种状态，所以整理了一些老的笔记来备忘。 iostat iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息   -c 仅显示CPU统计信息.与-d选项互斥. -d 仅显示磁盘统计">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T13:45:20.176Z">
+<meta property="og:updated_time" content="2017-09-02T17:14:36.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用运维命令(iostat)笔记整理(一)">
 <meta name="twitter:description" content="在linux服务器开发过程中， 经常需要各种命令配合来查看各种状态，所以整理了一些老的笔记来备忘。 iostat iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息   -c 仅显示CPU统计信息.与-d选项互斥. -d 仅显示磁盘统计">
@@ -396,11 +396,11 @@
 </ul>
 <a id="more"></a>
 <hr>
-<h3 id="iostat常用用法1：iostat-d"><a href="#iostat常用用法1：iostat-d" class="headerlink" title="iostat常用用法1：iostat -d"></a><em>iostat常用用法1：iostat -d</em></h3><p>指定采样时间间隔与采样次数</p>
+<h2 id="iostat常用用法1：iostat-d"><a href="#iostat常用用法1：iostat-d" class="headerlink" title="iostat常用用法1：iostat -d"></a><em>iostat常用用法1：iostat -d</em></h2><p>指定采样时间间隔与采样次数</p>
 <p>我们可以以”iostat interval [count] ”形式指定iostat命令的采样间隔和采样次数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">linux # iostat -d 1 2</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn</div><div class="line">sda               0.55         8.93        36.27    6737086   27367728</div><div class="line">sdb               0.00         0.00         0.00        928          0</div><div class="line"></div><div class="line">Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn</div><div class="line">sda               2.00         0.00        72.00          0         72</div><div class="line">sdb               0.00         0.00         0.00          0          0</div></pre></td></tr></table></figure></p>
 <p>以上命令输出Device的信息，采样时间为1秒，采样2次，若不指定采样次数，则iostat会一直输出采样信息，直到按”ctrl+c”退出命令。注意，第1次采样信息与单独执行iostat的效果一样，为从系统开机到当前执行时刻的统计信息。</p>
 <hr>
-<h3 id="iostat常用用法2：-iostat-x-k-d"><a href="#iostat常用用法2：-iostat-x-k-d" class="headerlink" title="iostat常用用法2： iostat -x -k -d"></a><em>iostat常用用法2： iostat -x -k -d</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">linux # iostat -x -k -d 1</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">……</div><div class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await  svctm  %util</div><div class="line">sda               0.00  9915.00    1.00   90.00     4.00 34360.00   755.25    11.79  120.57   6.33  57.60</div></pre></td></tr></table></figure>
+<h2 id="iostat常用用法2：-iostat-x-k-d"><a href="#iostat常用用法2：-iostat-x-k-d" class="headerlink" title="iostat常用用法2： iostat -x -k -d"></a><em>iostat常用用法2： iostat -x -k -d</em></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">linux # iostat -x -k -d 1</div><div class="line">Linux 2.6.16.60-0.21-smp (linux)     06/13/12</div><div class="line"></div><div class="line">……</div><div class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await  svctm  %util</div><div class="line">sda               0.00  9915.00    1.00   90.00     4.00 34360.00   755.25    11.79  120.57   6.33  57.60</div></pre></td></tr></table></figure>
 <p>以上各列的含义如下：</p>
 <ul>
 <li>rrqm/s: 每秒对该设备的读请求被合并次数，文件系统会对读取同块(block)的请求进行合并</li>
@@ -447,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/02/27/MySQL一些需要注意的小细节/" rel="next" title="MySQL一些需要注意的小细节">
-                <i class="fa fa-chevron-left"></i> MySQL一些需要注意的小细节
+              <a href="/2015/03/02/python的struct模块/" rel="next" title="python的struct模块">
+                <i class="fa fa-chevron-left"></i> python的struct模块
               </a>
             
           </div>
@@ -528,7 +528,7 @@
                alt="nosix" />
           <p class="site-author-name" itemprop="name">nosix</p>
            
-              <p class="site-description motion-element" itemprop="description">老笔记整理为博客, 既启发了他人, 也锻炼了自己的描述交流能力.</p>
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -536,7 +536,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -558,7 +558,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -606,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iostat"><span class="nav-number">1.</span> <span class="nav-text">iostat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iostat常用用法1：iostat-d"><span class="nav-number">1.0.1.</span> <span class="nav-text">iostat常用用法1：iostat -d</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iostat常用用法2：-iostat-x-k-d"><span class="nav-number">1.0.2.</span> <span class="nav-text">iostat常用用法2： iostat -x -k -d</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iostat"><span class="nav-number">1.</span> <span class="nav-text">iostat</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iostat常用用法1：iostat-d"><span class="nav-number">1.1.</span> <span class="nav-text">iostat常用用法1：iostat -d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iostat常用用法2：-iostat-x-k-d"><span class="nav-number">1.2.</span> <span class="nav-text">iostat常用用法2： iostat -x -k -d</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -613,6 +613,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -713,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tmpfs"><span class="nav-number">1.</span> <span class="nav-text">tmpfs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#make-j"><span class="nav-number">2.</span> <span class="nav-text">make -j</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ccache"><span class="nav-number">3.</span> <span class="nav-text">ccache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#distcc"><span class="nav-number">4.</span> <span class="nav-text">distcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tmpfs"><span class="nav-text">tmpfs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#make-j"><span class="nav-text">make -j</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ccache"><span class="nav-text">ccache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#distcc"><span class="nav-text">distcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -754,6 +756,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

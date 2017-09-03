@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -686,6 +686,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -786,7 +788,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#增长方式"><span class="nav-number">1.</span> <span class="nav-text">增长方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器失效"><span class="nav-number">2.</span> <span class="nav-text">迭代器失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity-amp-size"><span class="nav-number">3.</span> <span class="nav-text">capacity & size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造-amp-销毁"><span class="nav-number">5.</span> <span class="nav-text">构造 & 销毁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#增长方式"><span class="nav-text">增长方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器失效"><span class="nav-text">迭代器失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity-amp-size"><span class="nav-text">capacity & size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造-amp-销毁"><span class="nav-text">构造 & 销毁</span></a></li></ol></div>
             
 
           </div>
@@ -827,6 +829,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

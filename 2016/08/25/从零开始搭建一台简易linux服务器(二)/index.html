@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -531,6 +531,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -631,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><span class="nav-number">1.</span> <span class="nav-text">安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nginx的server配置文件"><span class="nav-number">2.</span> <span class="nav-text">修改nginx的server配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装以及启动fastcgi"><span class="nav-number">3.</span> <span class="nav-text">安装以及启动fastcgi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PHP"><span class="nav-number">4.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php设置"><span class="nav-number">5.</span> <span class="nav-text">php设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试是否可以访问"><span class="nav-number">6.</span> <span class="nav-text">测试是否可以访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Welcome to nginx!</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><span class="nav-text">安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nginx的server配置文件"><span class="nav-text">修改nginx的server配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装以及启动fastcgi"><span class="nav-text">安装以及启动fastcgi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PHP"><span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php设置"><span class="nav-text">php设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试是否可以访问"><span class="nav-text">测试是否可以访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Welcome to nginx!</span></a></div>
             
 
           </div>
@@ -672,6 +674,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

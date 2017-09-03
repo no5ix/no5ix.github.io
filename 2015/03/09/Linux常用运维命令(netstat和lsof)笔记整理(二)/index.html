@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -565,6 +565,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -665,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#netstat"><span class="nav-number">1.</span> <span class="nav-text">netstat </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat常用用法：netstat-anlp"><span class="nav-number">1.1.</span> <span class="nav-text">netstat常用用法：netstat -anlp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lsof-（list-open-files）"><span class="nav-number">2.</span> <span class="nav-text">lsof （list open files）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lsof常用用法1：lsof-p"><span class="nav-number">2.1.</span> <span class="nav-text">lsof常用用法1：lsof -p</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lsof常用用法：lsof-i"><span class="nav-number">2.2.</span> <span class="nav-text">lsof常用用法：lsof -i:</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#netstat"><span class="nav-text">netstat </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat常用用法：netstat-anlp"><span class="nav-text">netstat常用用法：netstat -anlp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lsof-（list-open-files）"><span class="nav-text">lsof （list open files）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lsof常用用法1：lsof-p"><span class="nav-text">lsof常用用法1：lsof -p</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lsof常用用法：lsof-i"><span class="nav-text">lsof常用用法：lsof -i:</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -706,6 +708,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

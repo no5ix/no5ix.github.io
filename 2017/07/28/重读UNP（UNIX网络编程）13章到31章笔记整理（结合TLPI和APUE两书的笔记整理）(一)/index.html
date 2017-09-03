@@ -127,7 +127,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -542,6 +542,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -642,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#13章"><span class="nav-number">1.</span> <span class="nav-text">13章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引申知识，作业控制以及相关命令："><span class="nav-number">2.</span> <span class="nav-text">引申知识，作业控制以及相关命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup和setsid用法"><span class="nav-number">2.0.1.</span> <span class="nav-text">nohup和setsid用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disown用法"><span class="nav-number">2.0.2.</span> <span class="nav-text">disown用法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#13章"><span class="nav-text">13章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引申知识，作业控制以及相关命令："><span class="nav-text">引申知识，作业控制以及相关命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup和setsid用法"><span class="nav-text">nohup和setsid用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disown用法"><span class="nav-text">disown用法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -683,6 +685,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

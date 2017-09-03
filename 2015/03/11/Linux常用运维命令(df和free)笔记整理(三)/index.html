@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -532,6 +532,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -632,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#df"><span class="nav-number">1.</span> <span class="nav-text">df</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#df常用用法：df-h"><span class="nav-number">1.1.</span> <span class="nav-text">df常用用法：df -h</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#free"><span class="nav-number">2.</span> <span class="nav-text">free</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#free常用用法：free-m或者free-g"><span class="nav-number">2.1.</span> <span class="nav-text">free常用用法：free -m或者free -g</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#df"><span class="nav-text">df</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#df常用用法：df-h"><span class="nav-text">df常用用法：df -h</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#free"><span class="nav-text">free</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#free常用用法：free-m或者free-g"><span class="nav-text">free常用用法：free -m或者free -g</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -673,6 +675,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

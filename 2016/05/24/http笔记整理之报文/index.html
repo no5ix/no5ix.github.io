@@ -129,7 +129,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -530,6 +530,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -630,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#报文的组成"><span class="nav-number">1.</span> <span class="nav-text">报文的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法 :</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于HTTP请求GET和POST的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">关于HTTP请求GET和POST的区别 : </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求URL"><span class="nav-number">1.2.</span> <span class="nav-text">请求URL </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本号"><span class="nav-number">1.3.</span> <span class="nav-text">版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态码"><span class="nav-number">1.4.</span> <span class="nav-text">状态码 : </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因短语"><span class="nav-number">1.5.</span> <span class="nav-text">原因短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首部"><span class="nav-number">1.6.</span> <span class="nav-text">首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主体"><span class="nav-number">1.7.</span> <span class="nav-text">主体</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#报文的组成"><span class="nav-text">报文的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-text">方法 :</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于HTTP请求GET和POST的区别"><span class="nav-text">关于HTTP请求GET和POST的区别 : </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求URL"><span class="nav-text">请求URL </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本号"><span class="nav-text">版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态码"><span class="nav-text">状态码 : </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因短语"><span class="nav-text">原因短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首部"><span class="nav-text">首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主体"><span class="nav-text">主体</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -671,6 +673,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -558,6 +558,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -658,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatServer"><span class="nav-number">1.</span> <span class="nav-text">ChatServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MsgServer"><span class="nav-number">2.</span> <span class="nav-text">MsgServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deployTool"><span class="nav-number">3.</span> <span class="nav-text">deployTool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">4.</span> <span class="nav-text">优点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatServer"><span class="nav-text">ChatServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MsgServer"><span class="nav-text">MsgServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deployTool"><span class="nav-text">deployTool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-text">优点</span></a></li></ol></div>
             
 
           </div>
@@ -699,6 +701,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

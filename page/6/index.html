@@ -327,6 +327,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/27/从零开始搭建一台简易linux服务器(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/27/从零开始搭建一台简易linux服务器(三)/" itemprop="url">从零开始搭建一台简易linux服务器(三)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-27T15:11:26+08:00">
+                2016-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>执行命令安装MySQL：sudo apt-get install mysql-server<br>安装的时候会提示填入一个root的初始密码，先输入个8做初始密码吧</p>
+<h2 id="导入客户数据库base-account"><a href="#导入客户数据库base-account" class="headerlink" title="#导入客户数据库base_account"></a>#导入客户数据库base_account</h2><p>mysql -uroot -p &lt; <strong>*</strong>.sql(某个sql文件)</p>
+<h2 id="安装svn并checkout一个svn服务器上的目录"><a href="#安装svn并checkout一个svn服务器上的目录" class="headerlink" title="安装svn并checkout一个svn服务器上的目录"></a>安装svn并checkout一个svn服务器上的目录</h2><ol>
+<li>进入 /data/www目录下 ：cd /data/www</li>
+<li>执行命令安装：sudo apt-get install subversion</li>
+<li>checkout一个目录（比如svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg），<br>执行命令：svn checkout svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg （或者 svn co svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg）</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/27/从零开始搭建一台简易linux服务器(三)/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/25/从零开始搭建一台简易linux服务器(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -961,212 +1113,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/07/Reactor和Proactor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/07/Reactor和Proactor/" itemprop="url">Reactor模式和Proactor</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-07T23:01:00+08:00">
-                2016-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>在高性能的I/O设计中，有两个比较著名的模式Reactor和Proactor模式，其中Reactor模式用于同步I/O，而Proactor运用于异步I/O操作。</p>
-</blockquote>
-<p>在比较这两个模式之前，我们首先的搞明白几个概念，什么是阻塞和非阻塞，什么是同步和异步,</p>
-<blockquote>
-<p>同步和异步是针对应用程序和内核的交互而言的，</p>
-</blockquote>
-<ul>
-<li><p>同步指的是用户进程触发IO操作并等待或者轮询的去查看IO操作是否就绪，</p>
-</li>
-<li><p>异步是指用户进程触发IO操作以后便开始做自己的事情，而当IO操作已经完成的时候会得到IO完成的通知。</p>
-</li>
-</ul>
-<blockquote>
-<p>而阻塞和非阻塞是针对于进程在访问数据的时候，根据IO操作的就绪状态来采取的不同方式，</p>
-</blockquote>
-<p>说白了是一种读取或者写入操作函数的实现方式，</p>
-<ul>
-<li><p>阻塞方式下读取或者写入函数将一直等待，</p>
-</li>
-<li><p>非阻塞方式下，读取或者写入函数会立即返回一个状态值。</p>
-</li>
-</ul>
-<h1 id="同步-vs-异步"><a href="#同步-vs-异步" class="headerlink" title="同步 vs 异步"></a>同步 vs 异步</h1><p>一般来说I/O模型可以分为：</p>
-<ul>
-<li>同步阻塞，</li>
-<li>同步非阻塞，</li>
-<li>异步阻塞，</li>
-<li>异步非阻塞IO</li>
-</ul>
-<h2 id="同步阻塞IO："><a href="#同步阻塞IO：" class="headerlink" title="同步阻塞IO："></a>同步阻塞IO：</h2><p>在此种方式下，用户进程在发起一个IO操作以后，必须等待IO操作的完成，只有当真正完成了IO操作以后，用户进程才能运行。</p>
-<p>JAVA传统的IO模型属于此种方式！</p>
-<h2 id="同步非阻塞IO"><a href="#同步非阻塞IO" class="headerlink" title="同步非阻塞IO:"></a>同步非阻塞IO:</h2><p>在此种方式下，用户进程发起一个IO操作以后边可返回做其它事情，但是用户进程需要时不时的询问IO操作是否就绪，</p>
-<p>这就要求用户进程不停的去询问，从而引入不必要的CPU资源浪费。</p>
-<p>其中目前JAVA的NIO就属于同步非阻塞IO。</p>
-<h2 id="异步阻塞IO："><a href="#异步阻塞IO：" class="headerlink" title="异步阻塞IO："></a>异步阻塞IO：</h2><p>此种方式下是指应用发起一个IO操作以后，不等待内核IO操作的完成，等内核完成IO操作以后会通知应用程序，这其实就是同步和异步最关键的区别，同步必须等待或者主动的去询问IO是否完成，那么为什么说是阻塞的呢？因为此时是通过select系统调用来完成的，而select函数本身的实现方式是阻塞的，而采用select函数有个好处就是它可以同时监听多个文件句柄，从而提高系统的并发性！</p>
-<h2 id="异步非阻塞IO"><a href="#异步非阻塞IO" class="headerlink" title="异步非阻塞IO:"></a>异步非阻塞IO:</h2><p>在此种模式下，用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的IO读写操作，因为真正的IO读取或者写入操作已经由内核完成了。</p>
-<p>目前Java中还没有支持此种IO模型。</p>
-<h1 id="Reactor-vs-Proactor"><a href="#Reactor-vs-Proactor" class="headerlink" title="Reactor vs Proactor"></a>Reactor vs Proactor</h1><p>搞清楚了以上概念以后，我们再回过头来看看，Reactor模式和Proactor模式。</p>
-<h2 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h2><p>首先来看看Reactor模式，Reactor模式应用于同步I/O的场景。</p>
-<p>我们分别以读操作和写操作为例来看看Reactor中的具体步骤：</p>
-<h3 id="读取操作："><a href="#读取操作：" class="headerlink" title="读取操作："></a>读取操作：</h3><ol>
-<li>应用程序注册读就需事件和相关联的事件处理器</li>
-<li>事件分离器等待事件的发生</li>
-<li>当发生读就需事件的时候，事件分离器调用第一步注册的事件处理器</li>
-<li>事件处理器首先执行实际的读取操作，然后根据读取到的内容进行进一步的处理</li>
-</ol>
-<h3 id="写入操作"><a href="#写入操作" class="headerlink" title="写入操作:"></a>写入操作:</h3><p>类似于读取操作，只不过第一步注册的是写就绪事件。</p>
-<h2 id="Proactor"><a href="#Proactor" class="headerlink" title="Proactor"></a>Proactor</h2><p>下面我们来看看Proactor模式中读取操作和写入操作的过程：</p>
-<h3 id="读取操作：-1"><a href="#读取操作：-1" class="headerlink" title="读取操作："></a>读取操作：</h3><ol>
-<li>应用程序初始化一个异步读取操作，然后注册相应的事件处理器，此时事件处理器不关注读取就绪事件，而是关注读取完成事件，这是区别于Reactor的关键。</li>
-<li>事件分离器等待读取操作完成事件</li>
-<li>在事件分离器等待读取操作完成的时候，操作系统调用内核线程完成读取操作，并将读取的内容放入用户传递过来的缓存区中。</li>
-</ol>
-<p>这也是区别于Reactor的一点，Proactor中，应用程序需要传递缓存区。</p>
-<ol>
-<li>事件分离器捕获到读取完成事件后，激活应用程序注册的事件处理器，事件处理器直接从缓存区读取数据，而不需要进行实际的读取操作。</li>
-</ol>
-<h3 id="写入操作-1"><a href="#写入操作-1" class="headerlink" title="写入操作:"></a>写入操作:</h3><p>Proactor中写入操作和读取操作类似，只不过感兴趣的事件是写入完成事件。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从上面可以看出，Reactor和Proactor模式的主要区别就是真正的读取和写入操作是有谁来完成的，</p>
-<p>Reactor中需要应用程序自己读取或者写入数据，而Proactor模式中，应用程序不需要进行实际的读写过程，</p>
-<p>它只需要从缓存区读取或者写入即可，操作系统会读取缓存区或者写入缓存区到真正的IO设备.</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>综上所述，同步和异步是相对于应用和内核的交互方式而言的，同步 需要主动去询问，</p>
-<p>而异步的时候内核在IO事件发生的时候通知应用程序，</p>
-<p>而阻塞和非阻塞仅仅是系统在调用系统调用的时候函数的实现方式而已。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1219,7 +1165,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -122,7 +122,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -313,6 +313,194 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/12/5分钟上手boost.asio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/12/5分钟上手boost.asio/" itemprop="url">5分钟上手boost.asio</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-12T23:26:16+08:00">
+                2017-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Boost-Asio入门"><a href="#Boost-Asio入门" class="headerlink" title="Boost.Asio入门"></a>Boost.Asio入门</h1><p>首先，让我们先来了解一下什么是Boost.Asio？怎么编译它？</p>
+<p>linux下直接 : sudo apt-get install libboost-all-dev</p>
+<h1 id="什么是Boost-Asio"><a href="#什么是Boost-Asio" class="headerlink" title="什么是Boost.Asio"></a>什么是Boost.Asio</h1><p>简单来说，Boost.Asio是一个跨平台的、主要用于网络和其他一些底层输入/输出编程的C++库。</p>
+<h1 id="异步VS同步"><a href="#异步VS同步" class="headerlink" title="异步VS同步"></a>异步VS同步</h1><blockquote>
+<p>首先，异步编程和同步编程是非常不同的。</p>
+</blockquote>
+<p>在同步编程中，所有的操作都是顺序执行的，比如从socket中读取（请求），然后写入（回应）到socket中。</p>
+<p>每一个操作都是阻塞的。</p>
+<p>因为操作是阻塞的，所以为了不影响主程序，当在socket上读写时，通常会创建一个或多个线程来处理socket的输入/输出。</p>
+<p>因此，同步的服务端/客户端通常是多线程的。</p>
+<p>相反的，异步编程是事件驱动的。</p>
+<p>虽然启动了一个操作，但是你不知道它何时会结束；它只是提供一个回调给你，当操作结束时，它会调用这个API，并返回操作结果。</p>
+<p>对于有着丰富经验的QT（诺基亚用来创建跨平台图形用户界面应用程序的库）程序员来说，这就是他们的第二天性。</p>
+<p>因此，在异步编程中，你只需要一个线程。</p>
+<p>因为中途做改变会非常困难而且容易出错，所以你在项目初期（最好是一开始）就得决定用同步还是异步的方式实现网络通信。</p>
+<p>不仅API有极大的不同，你程序的语意也会完全改变（异步网络通信通常比同步网络通信更加难以测试和调试）。</p>
+<p>你需要考虑是采用阻塞调用和多线程的方式（同步，通常比较简单），或者是更少的线程和事件驱动（异步，通常更复杂）。</p>
+<h1 id="同步例子"><a href="#同步例子" class="headerlink" title="同步例子"></a>同步例子</h1><h2 id="同步客户端"><a href="#同步客户端" class="headerlink" title="同步客户端"></a>同步客户端</h2><p>下面是一个基础的同步客户端例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">using boost::asio;</div><div class="line">io_service service;</div><div class="line">ip::tcp::endpoint ep( ip::address::from_string(&quot;127.0.0.1&quot;), 2001);</div><div class="line">ip::tcp::socket sock(service);</div><div class="line">sock.connect(ep);</div></pre></td></tr></table></figure>
+<p>首先，你的程序至少需要一个io_service实例。</p>
+<p>Boost.Asio使用io_service同操作系统的输入/输出服务进行交互。</p>
+<p>通常一个io_service的实例就足够了。</p>
+<p>然后，创建你想要连接的地址和端口，再建立socket。</p>
+<p>把socket连接到你创建的地址和端口。</p>
+<h2 id="同步服务端"><a href="#同步服务端" class="headerlink" title="同步服务端"></a>同步服务端</h2><p>下面是一个简单的同步Boost.Asio的服务端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">typedef boost::shared_ptr&lt;ip::tcp::socket&gt; socket_ptr;</div><div class="line">io_service service;</div><div class="line">ip::tcp::endpoint ep( ip::tcp::v4(), 2001)); // listen on 2001</div><div class="line">ip::tcp::acceptor acc(service, ep);</div><div class="line">while ( true) &#123;</div><div class="line">    socket_ptr sock(new ip::tcp::socket(service));</div><div class="line">    acc.accept(*sock);</div><div class="line">    boost::thread( boost::bind(client_session, sock));</div><div class="line">&#125;</div><div class="line">void client_session(socket_ptr sock) &#123;</div><div class="line">    while ( true) &#123;</div><div class="line">        char data[512];</div><div class="line">        size_t len = sock-&gt;read_some(buffer(data));</div><div class="line">        if ( len &gt; 0)</div><div class="line">            write(*sock, buffer(&quot;ok&quot;, 2));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先，同样是至少需要一个io_service实例。</p>
+<p>然后你指定你想要监听的端口，再创建一个接收器——一个用来接收客户端连接的对象。</p>
+<p> 在接下来的循环中，你创建一个虚拟的socket来等待客户端的连接。</p>
+<p> 然后当一个连接被建立时，你创建一个线程来处理这个连接。</p>
+<p>在client_session线程中来读取一个客户端的请求，进行解析，然后返回结果。</p>
+<h1 id="异步例子"><a href="#异步例子" class="headerlink" title="异步例子"></a>异步例子</h1><h2 id="异步客户端"><a href="#异步客户端" class="headerlink" title="异步客户端"></a>异步客户端</h2><p>而创建一个异步的客户端，你需要做如下的事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">using boost::asio;</div><div class="line">io_service service;</div><div class="line">ip::tcp::endpoint ep( ip::address::from_string(&quot;127.0.0.1&quot;), 2001);</div><div class="line">ip::tcp::socket sock(service);</div><div class="line">sock.async_connect(ep, connect_handler);</div><div class="line">service.run();</div><div class="line">void connect_handler(const boost::system::error_code &amp; ec) &#123;</div><div class="line">    // 如果ec返回成功我们就可以知道连接成功了</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在程序中你需要创建至少一个io_service实例。</p>
+<p>你需要指定连接的地址以及创建socket。</p>
+<p>当连接完成时（其完成处理程序）你就异步地连接到了指定的地址和端口，也就是说，connect_handler被调用了。</p>
+<p>当connect_handler被调用时，检查错误代码（ec），如果成功，你就可以向服务端进行异步的写入。</p>
+<p>注意：只要还有待处理的异步操作，servece.run()循环就会一直运行。</p>
+<p>在上述例子中，只执行了一个这样的操作，就是socket的async_connect。</p>
+<p>在这之后，service.run()就退出了。</p>
+<p>每一个异步操作都有一个完成处理程序——一个操作完成之后被调用的函数。</p>
+<h2 id="异步服务端"><a href="#异步服务端" class="headerlink" title="异步服务端"></a>异步服务端</h2><p> 下面的代码是一个基本的异步服务端<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">using boost::asio;</div><div class="line">typedef boost::shared_ptr&lt;ip::tcp::socket&gt; socket_ptr;</div><div class="line">io_service service;</div><div class="line">ip::tcp::endpoint ep( ip::tcp::v4(), 2001)); // 监听端口2001</div><div class="line">ip::tcp::acceptor acc(service, ep);</div><div class="line">socket_ptr sock(new ip::tcp::socket(service));</div><div class="line">start_accept(sock);</div><div class="line">service.run();</div><div class="line">void start_accept(socket_ptr sock) &#123;</div><div class="line">    acc.async_accept(*sock, boost::bind( handle_accept, sock, _1) );</div><div class="line">&#125;</div><div class="line">void handle_accept(socket_ptr sock, const boost::system::error_code &amp;</div><div class="line">err) &#123;</div><div class="line">    if ( err) return;</div><div class="line">    // 从这里开始, 你可以从socket读取或者写入</div><div class="line">    socket_ptr sock(new ip::tcp::socket(service));</div><div class="line">    start_accept(sock);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在上述代码片段中，首先，你创建一个io_service实例，指定监听的端口。</p>
+<p>然后，你创建接收器acc——一个接受客户端连接，创建虚拟的socket，异步等待客户端连接的对象。</p>
+<p>最后，运行异步service.run()循环。</p>
+<p>当接收到客户端连接时，handle_accept被调用（调用async_accept的完成处理程序）。</p>
+<p>如果没有错误，这个socket就可以用来做读写操作。</p>
+<p>在使用这个socket之后，你创建了一个新的socket，然后再次调用start_accept()，用来创建另外一个“等待客户端连接”的异步操作，从而使service.run()循环一直保持忙碌状态。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1029,152 +1217,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/25/从零开始搭建一台简易linux服务器(二)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/25/从零开始搭建一台简易linux服务器(二)/" itemprop="url">从零开始搭建一台简易linux服务器(二)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-25T15:11:26+08:00">
-                2016-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx"><a href="#安装nginx-如若有有不明白，还可以前往参考-wiki-ubuntu-org-cn-Nginx" class="headerlink" title="安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )"></a>安装nginx(如若有有不明白，还可以前往参考 wiki.ubuntu.org.cn/Nginx )</h2><p>执行命令安装nginx：sudo apt-get install nginx<br>测试是否安装成功：在本机的浏览器里访问 localhost ;如果现实”Welcome to nginx!”，表明你的 Nginx 服务器安装成功！<br>启动 Nginx：sudo /etc/init.d/nginx start<br>关闭 Nginx：sudo /etc/init.d/nginx stop<br>重启 nginx：sudo /etc/init.d/nginx restart 或者 sudo service nginx restart<br>sudo service apache2 stop  (如果之前装了apache2则需要sudo apt-get remove apache2 卸载掉apache2然后执行这个stop命令)</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/25/从零开始搭建一台简易linux服务器(二)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1227,7 +1269,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1238,7 +1280,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1249,7 +1291,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1322,8 +1364,6 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

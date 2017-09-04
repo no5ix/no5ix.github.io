@@ -31,8 +31,8 @@
       </categories>
       <tags>
         <tag>c++</tag>
-        <tag>mysql</tag>
         <tag>boost</tag>
+        <tag>mysql</tag>
         <tag>glog</tag>
       </tags>
   </entry>
@@ -52,7 +52,7 @@
     <url>%2F2017%2F07%2F29%2F%E9%87%8D%E8%AF%BBUNP%EF%BC%88UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%8913%E7%AB%A0%E5%88%B031%E7%AB%A0%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%EF%BC%88%E7%BB%93%E5%90%88TLPI%E5%92%8CAPUE%E4%B8%A4%E4%B9%A6%E7%9A%84%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%EF%BC%89(%E4%BA%8C)%2F</url>
     <content type="text"><![CDATA[16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间 实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况 16.6节 ： 非阻塞accept， 用于解决下面问题： “用select检测socket状态，如果有连接就调用accept，这样如果在select检测到由连接请求，在调用accept之前，这个请求断开了，然后调用accept的时候就会阻塞在哪里，除非这时有另外一个连接请求，如果没有，则一直被阻塞在那里。” 解决方案： 使用select在一个监听套接字准备好要被accept时总是把套接字设置为非阻塞 26章和30章介绍了线程和并发/并行的服务器设计范式，等下篇TLPI/APUE的笔记一起整理吧]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -65,7 +65,7 @@
     <url>%2F2017%2F07%2F28%2F%E9%87%8D%E8%AF%BBUNP%EF%BC%88UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%8913%E7%AB%A0%E5%88%B031%E7%AB%A0%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%EF%BC%88%E7%BB%93%E5%90%88TLPI%E5%92%8CAPUE%E4%B8%A4%E4%B9%A6%E7%9A%84%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%EF%BC%89(%E4%B8%80)%2F</url>
     <content type="text"><![CDATA[因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容 13章引申知识，作业控制以及相关命令： 另注： 注：但是如上方到后台执行的进程，其父进程还是当前终端shell的进程，而一旦父进程退出，则会发送hangup信号给所有子进程，子进程收到hangup以后也会退出。 13.4节：自定义一个daemon_init函数，涉及到知识点为“如何创建一个daemon（守护进程）”，实现步骤如下： fork之后杀掉父进程（此时子进程被init收养）这是为了为下一步setsid做准备，因为只有不是进程组首进程的进程才能调用setsid， setsid，创建一个新的会话并断开与之前的控制终端的关系， 再次fork并杀掉首进程， 这样就确保了子进程不是一个会话首进程， 根据linux中获取终端的规则（只有会话首进程才能请求一个控制终端）， 这样进程永远不会重新请求一个控制终端 清楚进程的umask，确保daemon创建文件和目录时拥有相应的权限 修改进程的当前工作目录， 通常修改到/目录 关闭进程所有不再需要的文件描述符 打开/dev/null使文件描述符0、1、2指向这个设备， 以防止daemon调用在这些描述符上做I/O操作的库函数而不会意外的失败 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include &quot;unp.h&quot;#include &lt;syslog.h&gt;#define MAXFD 64extern int daemon_proc; /* defined in error.c */intdaemon_init(const char *pname, int facility)&#123; int i; pid_t pid; if ( (pid = Fork()) &lt; 0) return (-1); else if (pid) _exit(0); /* parent terminates */ /* child 1 continues... */ if (setsid() &lt; 0) /* become session leader */ return (-1); Signal(SIGHUP, SIG_IGN); if ( (pid = Fork()) &lt; 0) return (-1); else if (pid) _exit(0); /* child 1 terminates */ /* child 2 continues... */ daemon_proc = 1; /* for err_XXX() functions */ chdir(&quot;/&quot;); /* change working directory */ /* close off file descriptors */ for (i = 0; i &lt; MAXFD; i++) close(i); /* redirect stdin, stdout, and stderr to /dev/null */ open(&quot;/dev/null&quot;, O_RDONLY); open(&quot;/dev/null&quot;, O_RDWR); open(&quot;/dev/null&quot;, O_RDWR); openlog(pname, LOG_PID, facility); return (0); /* success */&#125; nohup和setsid用法 如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将父进程设为init进程；1234567891011121314151617181920212223242526272829303132333435363738394041b@b-VirtualBox:~/my_temp_test$ nohup ./o_multi_thread_process &amp;[1] 3487b@b-VirtualBox:~/my_temp_test$ nohup: ignoring input and appending output to ‘nohup.out’^Cb@b-VirtualBox:~/my_temp_test$ jobs[1]+ Running nohup ./o_multi_thread_process &amp;b@b-VirtualBox:~/my_temp_test$ ps -ef | grep multib 3487 3004 0 20:05 pts/3 00:00:00 ./o_multi_thread_processb 3488 3487 0 20:05 pts/3 00:00:00 ./o_multi_thread_processb 3491 3004 0 20:05 pts/3 00:00:00 grep --color=auto multib@b-VirtualBox:~/my_temp_test$ bg %1bash: bg: job 1 already in backgroundb@b-VirtualBox:~/my_temp_test$ fg %1nohup ./o_multi_thread_process^Z[1]+ Stopped nohup ./o_multi_thread_processb@b-VirtualBox:~/my_temp_test$ bg %1[1]+ nohup ./o_multi_thread_process &amp;b@b-VirtualBox:~/my_temp_test$ jobs -l[1]+ 3487 Running nohup ./o_multi_thread_process &amp;b@b-VirtualBox:~/my_temp_test$ fg %1nohup ./o_multi_thread_process^Cb@b-VirtualBox:~/my_temp_test$ jobsb@b-VirtualBox:~/my_temp_test$ ps -ef | grep multib 3499 3004 0 20:11 pts/3 00:00:00 grep --color=auto multib@b-VirtualBox:~/my_temp_test$ setsid ./o_multi_thread_process &amp;[1] 3502b@b-VirtualBox:~/my_temp_test$ ProcessA: 3503 step1ProcessA: 3503 thread 139947724490496 step2ProcessA: 3503 thread 139947724490496 step3ProcessB: 3504 step1ProcessB: 3504 step2ProcessB: 3504 step3^C[1]+ Done setsid ./o_multi_thread_processb@b-VirtualBox:~/my_temp_test$ ps -ef | grep multib 3503 1256 0 20:12 ? 00:00:00 ./o_multi_thread_processb 3504 3503 0 20:12 ? 00:00:00 ./o_multi_thread_processb 3507 3004 0 20:12 pts/3 00:00:00 grep --color=auto multib@b-VirtualBox:~/my_temp_test$ jobs disown用法 那么对于已经在后台运行的进程，该怎么办呢？可以使用disown命令1234567891011121314b@b-VirtualBox:~/my_temp_test$ ./o_multi_thread_process &amp;[1] 3523b@b-VirtualBox:~/my_temp_test$ ProcessA: 3523 step1ProcessA: 3523 thread 140501901821696 step2ProcessA: 3523 thread 140501901821696 step3ProcessB: 3524 step1ProcessB: 3524 step2ProcessB: 3524 step3^Cb@b-VirtualBox:~/my_temp_test$ jobs -l[1]+ 3523 Running ./o_multi_thread_process &amp;b@b-VirtualBox:~/my_temp_test$ disown -h %1b@b-VirtualBox:~/my_temp_test$ jobs[1]+ Running ./o_multi_thread_process &amp;]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -89,7 +89,7 @@
     <url>%2F2017%2F07%2F03%2F%E9%87%8D%E8%AF%BBUNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%88%B0%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86(%E4%BA%8C)%2F</url>
     <content type="text"><![CDATA[第七章 7.5节 ： 通用套接字选项， 常用的有 SO_KEEPALIVE SO_REVBUF SO_SNDBUF SO_REUSEADDR 7.9节 ： tcp套接字选项， 常用的有 TCP_NODELAY TCP_MAXSEG 7.11节 ：fcntl函数，常用的用法是使用F_SETFL命令设置O_NOBLOCK文件状态标志， 我们可以把一个套接字设置为非阻塞型。 第八章 8.11节 ： UDP的connect函数，可以获得性能提升，因为未连接的udp每次sendto发送数据报的时候都要连接然后发送然后断开， 之后第二个数据报又要重复上述步骤，而连接后的udp套接字只需要连接然后发送第一个数据报然后发送第二个、第三个就行了]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -102,7 +102,7 @@
     <url>%2F2017%2F07%2F02%2F%E9%87%8D%E8%AF%BBUNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%88%B0%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86(%E4%B8%80)%2F</url>
     <content type="text"><![CDATA[因为第二章之后基本都是纯Socket API的内容， 第三章到第十一章的笔记整理合并到一起。 第三章 3.4 ：字节排序函数，涉及到大小端，处理网络字节序和主机字节序的转换 3.6 ： 地址转换函数，吹在ASCII字符串与网络字节序的二进制值之间转换网际地址第四章 4.9节：close函数， 涉及到描述符引用计数，所以多进程并发服务器才可以共享已连接套接字，因为父进程调用close函数知识把该套接字标记成已关闭并导致该套接字描述符减1。只要引用计数的值仍大于0，就不会引发tcp的四分组连接终止序列 第五章 5.9节：处理SIGCHLD信号， 涉及到僵死进程（子进程终止时给父进程发送了一个SIGCHLD信号，若父进程未加处理，则子进程进入僵死状态），所以要建立该信号处理函数，并在函数中调用waitpid来处理 5.10节 ：使用wait或者waitpid来处理已终止的子进程，通常是使用waitpid并指定WNOHANG选项，来告知waitpid在有尚未终止的子进程在运行时不要阻塞。 第六章 同步I/O操作：导致请求进程阻塞，知道I/O操作完成 异步I/O操作：不导致请求进程阻塞 6.3节 ： select函数，必须得清楚select跟linux特有的epoll的区别， 有三点： 数量限制 ： select默认只支持1024个；epoll并没有最大数目限制 内存拷贝 ： select需要把fd_set数据结构从用户态到内核态来回拷贝； 而epoll是基于mmap技术用同一块内存实现的 效率 ： select每次都要遍历所有文件描述符， 集合越大速度越慢；而epoll维护着一个就绪列表， 每次只需要简单的从列表里取出就行了，只有活跃的socket才会触发相关callback 6.6节 ： shutdown函数，shutdown可以不用管引用计数就激发tcp的正常连接终止序列。当关闭连接的写这一半，对于tcp连接， 这称为半关闭（half-close）]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -115,7 +115,7 @@
     <url>%2F2017%2F06%2F05%2F%E9%87%8D%E8%AF%BBUNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AC%94%E8%AE%B0%E4%BF%AE%E6%AD%A3%EF%BC%88%E7%BB%93%E5%90%88TLPI%E5%92%8CAPUE%E4%B8%A4%E4%B9%A6%E7%9A%84%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%EF%BC%89%2F</url>
     <content type="text"><![CDATA[为加深理解, 故本章老笔记内容大幅删减重写.第二章重点如下 : TCP (Transmission Control Protocol)传输控制协议. 特性如下 : 面向连接 全双工 可靠, 关心确认/超时/重传等, 保证顺序 流量控制 字节流, 没有任何记录边界 UDP (User Datagram Protocol)用户数据报协议. 特性如下 : 无连接 不可靠, 不保证顺序/是否到达/是否重复 每个数据报都有一个长度 TCP三路握手(three-way handshake) TCP选项 : MSS选项 发送SYN的TCP一端使用本选项通告对端他的最大分节大小(maximum segment size) 窗口规模选项 时间戳选项, 对于高速网络连接是必要的. TCP连接终止 : TCP状态转换图 TCP连接的分组交换 TIME_WAIT状态存在的理由 : 可靠地实现TCP全双工连接的终止 允许老的重复分节在网络中消逝 分节是TCP传递给IP的数据单元 Linux下面一共有65535个端口 其中1–1023是系统保留的， 1024–65535是供用户使用的。 0到1024是众所周知的端口（知名端口，常用于系统服务等，例如http服务的端口号是80)。个人写的应用程序，尽量不要使用0到1024之间的端口号。 套接字对是一个定义该连接的两个端点的四元组: 本地IP地址 本地TCP端口号 外地IP地址 外地TCP端口号 缓冲区大小及限制 IPv4数据报的最大大小为65535字节, 因为其总长度字段占据16位 以太网的MTU是1500字节, IPv4要求的最小链路MTU是68字节, 这允许最大的IPv4首部(包括20字节的固定长度部分和最多40字节的选项部分)拼接最小的片段 在两个主机之间的路径中最小的MTU成为路径MTU 当一个IP数据报将从某个接口送出时, 如果他的大小超过相应链路的MTU, IPv4和IPv6都将执行分片 IPv4首部的”不分片(don’t fragment)”位(即DF位)若被设置, 那么不管是发送这些数据报的主机还是转发他们的路由器, 都不允许对他们分片 IPv4和IPv6都定义了最小重组缓冲区大小(minimum reassembly buffersize), IPv4的主机要求不能超过576字节的数据， 所以很多使用UDP的IPv4应用（如DNS）都避免产生大于这个大小的数据报 MSS : TCP最大分节大小， 在以太网中使用IPv4的MSS值为1460（以太网的MTU - IPv4首部 - TCP首部 = 1500 - 20 - 20） TCP输出示意图 : UDP输出示意图 (因为UDP是不可靠的, 他不必保存应用进程数据的一个副本, 因此无需一个真正的发送缓冲区, 所以为虚线框): 常见因特网应用所使用的协议 ping ： ICMP DNS ： UDP、TCP DHCP : UDP SSH : TCP FTP : TCP HTTP : TCP]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -128,7 +128,7 @@
     <url>%2F2017%2F06%2F02%2F%E9%87%8D%E8%AF%BBUNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B0%E4%BF%AE%E6%AD%A3%2F</url>
     <content type="text"><![CDATA[又准备从头看一遍unp, 把一些老笔记放到博客里来就当网盘吧, 顺便修正以及删减一些之前不够精炼的老笔记内容. 第一章重点如下 : OSI (open systems interconnection), 即计算机通信开放系统互联模型 OSI分为七层, 从上到下依次为 应用层 表现层 会话层 传输层 网络层 数据链路层 物理层 对于网际网协议族, OSI顶上三层合并为一层, 称为应用层. 传输层对应着tcp/udp等, 网络层对应着IPv4/IPv6, OSI的数据链路层和物理层是随系统提供的设备驱动程序和网络硬件 套接字编程接口是从OSI顶上三层(网际协议的应用层)进入传输层的接口. 为何套接字要设计为顶上三层进入传输层的接口??因为OSI顶上三层处理具体网络应用的所有细节却对通信细节了解很少;底下四层对具体网络应用了解不多, 却处理所有的通信细节.]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -185,10 +185,23 @@
     <url>%2F2017%2F01%2F27%2FIPC%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%2F</url>
     <content type="text"><![CDATA[IPC进程间通信 1.匿名管道( pipe )：匿名管道是一种半双工的通信方式，通常是在父子进程间使用。 2.命名管道 (named pipe) ：命名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。 3.信号量( semophore ) ：信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。 4.消息队列( message queue ) ：消息队列是消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。 5.信号 ( sinal ) ：信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。 6.共享内存( shared memory ) ：共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。 7.套接字( socket ) ：套接字也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同进程间的进程通信。]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>IPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[5分钟上手boost.asio]]></title>
+    <url>%2F2017%2F01%2F12%2F5%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8Bboost.asio%2F</url>
+    <content type="text"><![CDATA[Boost.Asio入门首先，让我们先来了解一下什么是Boost.Asio？怎么编译它？ linux下直接 : sudo apt-get install libboost-all-dev 什么是Boost.Asio简单来说，Boost.Asio是一个跨平台的、主要用于网络和其他一些底层输入/输出编程的C++库。 异步VS同步 首先，异步编程和同步编程是非常不同的。 在同步编程中，所有的操作都是顺序执行的，比如从socket中读取（请求），然后写入（回应）到socket中。 每一个操作都是阻塞的。 因为操作是阻塞的，所以为了不影响主程序，当在socket上读写时，通常会创建一个或多个线程来处理socket的输入/输出。 因此，同步的服务端/客户端通常是多线程的。 相反的，异步编程是事件驱动的。 虽然启动了一个操作，但是你不知道它何时会结束；它只是提供一个回调给你，当操作结束时，它会调用这个API，并返回操作结果。 对于有着丰富经验的QT（诺基亚用来创建跨平台图形用户界面应用程序的库）程序员来说，这就是他们的第二天性。 因此，在异步编程中，你只需要一个线程。 因为中途做改变会非常困难而且容易出错，所以你在项目初期（最好是一开始）就得决定用同步还是异步的方式实现网络通信。 不仅API有极大的不同，你程序的语意也会完全改变（异步网络通信通常比同步网络通信更加难以测试和调试）。 你需要考虑是采用阻塞调用和多线程的方式（同步，通常比较简单），或者是更少的线程和事件驱动（异步，通常更复杂）。 同步例子同步客户端下面是一个基础的同步客户端例子： 12345using boost::asio;io_service service;ip::tcp::endpoint ep( ip::address::from_string(&quot;127.0.0.1&quot;), 2001);ip::tcp::socket sock(service);sock.connect(ep); 首先，你的程序至少需要一个io_service实例。 Boost.Asio使用io_service同操作系统的输入/输出服务进行交互。 通常一个io_service的实例就足够了。 然后，创建你想要连接的地址和端口，再建立socket。 把socket连接到你创建的地址和端口。 同步服务端下面是一个简单的同步Boost.Asio的服务端：1234567891011121314151617typedef boost::shared_ptr&lt;ip::tcp::socket&gt; socket_ptr;io_service service;ip::tcp::endpoint ep( ip::tcp::v4(), 2001)); // listen on 2001ip::tcp::acceptor acc(service, ep);while ( true) &#123; socket_ptr sock(new ip::tcp::socket(service)); acc.accept(*sock); boost::thread( boost::bind(client_session, sock));&#125;void client_session(socket_ptr sock) &#123; while ( true) &#123; char data[512]; size_t len = sock-&gt;read_some(buffer(data)); if ( len &gt; 0) write(*sock, buffer(&quot;ok&quot;, 2)); &#125;&#125; 首先，同样是至少需要一个io_service实例。 然后你指定你想要监听的端口，再创建一个接收器——一个用来接收客户端连接的对象。 在接下来的循环中，你创建一个虚拟的socket来等待客户端的连接。 然后当一个连接被建立时，你创建一个线程来处理这个连接。 在client_session线程中来读取一个客户端的请求，进行解析，然后返回结果。 异步例子异步客户端而创建一个异步的客户端，你需要做如下的事情： 123456789using boost::asio;io_service service;ip::tcp::endpoint ep( ip::address::from_string(&quot;127.0.0.1&quot;), 2001);ip::tcp::socket sock(service);sock.async_connect(ep, connect_handler);service.run();void connect_handler(const boost::system::error_code &amp; ec) &#123; // 如果ec返回成功我们就可以知道连接成功了&#125; 在程序中你需要创建至少一个io_service实例。 你需要指定连接的地址以及创建socket。 当连接完成时（其完成处理程序）你就异步地连接到了指定的地址和端口，也就是说，connect_handler被调用了。 当connect_handler被调用时，检查错误代码（ec），如果成功，你就可以向服务端进行异步的写入。 注意：只要还有待处理的异步操作，servece.run()循环就会一直运行。 在上述例子中，只执行了一个这样的操作，就是socket的async_connect。 在这之后，service.run()就退出了。 每一个异步操作都有一个完成处理程序——一个操作完成之后被调用的函数。 异步服务端 下面的代码是一个基本的异步服务端 123456789101112131415161718using boost::asio;typedef boost::shared_ptr&lt;ip::tcp::socket&gt; socket_ptr;io_service service;ip::tcp::endpoint ep( ip::tcp::v4(), 2001)); // 监听端口2001ip::tcp::acceptor acc(service, ep);socket_ptr sock(new ip::tcp::socket(service));start_accept(sock);service.run();void start_accept(socket_ptr sock) &#123; acc.async_accept(*sock, boost::bind( handle_accept, sock, _1) );&#125;void handle_accept(socket_ptr sock, const boost::system::error_code &amp;err) &#123; if ( err) return; // 从这里开始, 你可以从socket读取或者写入 socket_ptr sock(new ip::tcp::socket(service)); start_accept(sock);&#125; 在上述代码片段中，首先，你创建一个io_service实例，指定监听的端口。 然后，你创建接收器acc——一个接受客户端连接，创建虚拟的socket，异步等待客户端连接的对象。 最后，运行异步service.run()循环。 当接收到客户端连接时，handle_accept被调用（调用async_accept的完成处理程序）。 如果没有错误，这个socket就可以用来做读写操作。 在使用这个socket之后，你创建了一个新的socket，然后再次调用start_accept()，用来创建另外一个“等待客户端连接”的异步操作，从而使service.run()循环一直保持忙碌状态。]]></content>
+      <categories>
+        <category>server</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
+        <tag>boost</tag>
+        <tag>asio</tag>
       </tags>
   </entry>
   <entry>
@@ -290,10 +303,24 @@
     <url>%2F2016%2F08%2F11%2F%E5%85%B3%E4%BA%8EUNP%E4%B8%8EAPUE%E4%B8%8ETLPI%E4%B8%89%E6%9C%AC%E5%A4%A7%E9%83%A8%E5%A4%B4%E7%9A%84%E9%98%85%E8%AF%BB%E5%BB%BA%E8%AE%AE(%E7%9D%80%E9%87%8D%E8%AE%B2UNP)%2F</url>
     <content type="text"><![CDATA[这本书不能一次性所有都想看完。 要有目的性的看，因为这本书类似于百科全书所有都讲， 不分轻重， 如果都看，硬啃，只会迷失了自己，反而不知道看了什么 这本书不能单独看。 这本书必须配合TCP/IP详解和UNIX环境高级编程（简称APUE）以及The Linux Programming Interface（不知道这本书的译名是什么， 简称TLPI）来看 个人看的是卷一第三版，因当前工作经验范围和阅历受限，对于IT码农，IPv6的和SCTP的章节暂且略过，所以目前大概划出的必看章节（其他可挑选）是 1 2 3 4 5 6 7 8 11 13 16 22 26 30 书中的源码在linux环境下不一定能一次性编译过。 有些地方得自己修改 建议阅读电子版。 使用可以搜索书签的pdf阅读器（比较推荐福昕）， 并且多开几个此书的副本，因为经常会源码和源码讲解对照着看，如果有双屏效率会极大的提高]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Reactor模式和Proactor]]></title>
+    <url>%2F2016%2F08%2F07%2FReactor%E5%92%8CProactor%2F</url>
+    <content type="text"><![CDATA[在高性能的I/O设计中，有两个比较著名的模式Reactor和Proactor模式，其中Reactor模式用于同步I/O，而Proactor运用于异步I/O操作。 在比较这两个模式之前，我们首先的搞明白几个概念，什么是阻塞和非阻塞，什么是同步和异步, 同步和异步是针对应用程序和内核的交互而言的， 同步指的是用户进程触发IO操作并等待或者轮询的去查看IO操作是否就绪， 异步是指用户进程触发IO操作以后便开始做自己的事情，而当IO操作已经完成的时候会得到IO完成的通知。 而阻塞和非阻塞是针对于进程在访问数据的时候，根据IO操作的就绪状态来采取的不同方式， 说白了是一种读取或者写入操作函数的实现方式， 阻塞方式下读取或者写入函数将一直等待， 非阻塞方式下，读取或者写入函数会立即返回一个状态值。 同步 vs 异步一般来说I/O模型可以分为： 同步阻塞， 同步非阻塞， 异步阻塞， 异步非阻塞IO 同步阻塞IO：在此种方式下，用户进程在发起一个IO操作以后，必须等待IO操作的完成，只有当真正完成了IO操作以后，用户进程才能运行。 JAVA传统的IO模型属于此种方式！ 同步非阻塞IO:在此种方式下，用户进程发起一个IO操作以后边可返回做其它事情，但是用户进程需要时不时的询问IO操作是否就绪， 这就要求用户进程不停的去询问，从而引入不必要的CPU资源浪费。 其中目前JAVA的NIO就属于同步非阻塞IO。 异步阻塞IO：此种方式下是指应用发起一个IO操作以后，不等待内核IO操作的完成，等内核完成IO操作以后会通知应用程序，这其实就是同步和异步最关键的区别，同步必须等待或者主动的去询问IO是否完成，那么为什么说是阻塞的呢？因为此时是通过select系统调用来完成的，而select函数本身的实现方式是阻塞的，而采用select函数有个好处就是它可以同时监听多个文件句柄，从而提高系统的并发性！ 异步非阻塞IO:在此种模式下，用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的IO读写操作，因为真正的IO读取或者写入操作已经由内核完成了。 目前Java中还没有支持此种IO模型。 Reactor vs Proactor搞清楚了以上概念以后，我们再回过头来看看，Reactor模式和Proactor模式。 Reactor首先来看看Reactor模式，Reactor模式应用于同步I/O的场景。 我们分别以读操作和写操作为例来看看Reactor中的具体步骤： 读取操作： 应用程序注册读就需事件和相关联的事件处理器 事件分离器等待事件的发生 当发生读就需事件的时候，事件分离器调用第一步注册的事件处理器 事件处理器首先执行实际的读取操作，然后根据读取到的内容进行进一步的处理 写入操作:类似于读取操作，只不过第一步注册的是写就绪事件。 Proactor下面我们来看看Proactor模式中读取操作和写入操作的过程： 读取操作： 应用程序初始化一个异步读取操作，然后注册相应的事件处理器，此时事件处理器不关注读取就绪事件，而是关注读取完成事件，这是区别于Reactor的关键。 事件分离器等待读取操作完成事件 在事件分离器等待读取操作完成的时候，操作系统调用内核线程完成读取操作，并将读取的内容放入用户传递过来的缓存区中。 这也是区别于Reactor的一点，Proactor中，应用程序需要传递缓存区。 事件分离器捕获到读取完成事件后，激活应用程序注册的事件处理器，事件处理器直接从缓存区读取数据，而不需要进行实际的读取操作。 写入操作:Proactor中写入操作和读取操作类似，只不过感兴趣的事件是写入完成事件。 小结从上面可以看出，Reactor和Proactor模式的主要区别就是真正的读取和写入操作是有谁来完成的， Reactor中需要应用程序自己读取或者写入数据，而Proactor模式中，应用程序不需要进行实际的读写过程， 它只需要从缓存区读取或者写入即可，操作系统会读取缓存区或者写入缓存区到真正的IO设备. 总结综上所述，同步和异步是相对于应用和内核的交互方式而言的，同步 需要主动去询问， 而异步的时候内核在IO事件发生的时候通知应用程序， 而阻塞和非阻塞仅仅是系统在调用系统调用的时候函数的实现方式而已。]]></content>
+      <categories>
+        <category>server</category>
+      </categories>
+      <tags>
+        <tag>proactor</tag>
+        <tag>reactor</tag>
+        <tag>同步</tag>
+        <tag>异步</tag>
       </tags>
   </entry>
   <entry>
@@ -301,7 +328,7 @@
     <url>%2F2016%2F08%2F02%2F%E9%87%8D%E6%96%B0%E7%9C%8Bunix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97%2F</url>
     <content type="text"><![CDATA[老书新看, 有了许多不同的见解, 也准备拿出以前自己私人的老笔记做修正放到博客里, 加深理解. 在这个浮躁人人都能写书的时代基本要看一本书需要挑很久, 谁写的, 写得怎么样, 是否是业界经典, 都要需要一一斟酌各种查证方可, 不然看一本烂书事半功倍, 浪费生命,影响效率, 被误导跑偏, 能让人静下心来的书籍不多, 能让人看好几遍仍回味无穷的经典就更少了 陈硕说过, 学东西不要只是从网上看点大牛的博客总结就行了, 总要完整地看些相关领域的经典著作的, 系统的知识结构打下坚实的基础才能继续看有关优化效率方面的书籍, 深以为然 孟岩说, 最近不止一次听到当一个人拥有相关领域的知识基础之后就可以找一本effective*的书来研读了, 颇有道理 看书的顺序忌胶柱鼓瑟, 并不是他的目录结构怎么编排你就该怎么看的, 大多数经典书籍基本都是面面俱到, 如果直接跟着这种面向知识体系本身的编排思路去看, 容易迷失乏味而无法继续, 应该找到属于自己看书顺序 个人总结的看书顺序是先翻阅自己感兴趣的,接着仔细观察他的目录来确定他的编排思路, 然后花一到两天的时间通览全书以获得大体知识体系构架, 之后找到实战性最强的章节来实操并逐个突破实战过程中的各个知识点]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>UNP</tag>
@@ -419,7 +446,7 @@
     <url>%2F2016%2F06%2F21%2FNAT%E7%A9%BF%E8%B6%8A%E5%9F%BA%E7%A1%80%2F</url>
     <content type="text"><![CDATA[NAT有哪些类型及其穿透原理是什么? NAT类型 : 锥NAT 全锥NAT ：全锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。任何一个外部主机均可通过该映射发送数据包到该内部主机。 限制性锥NAT ：限制性锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。但是, 和全锥NAT 不同的是：只有当内部主机先给外部主机发送数据包, 该外部主机才能向该内部主机发送数据包。 端口限制性锥NAT ：端口限制性锥NAT 与限制性锥NAT 类似, 只是多了端口号的限制, 即只有内部主机先向外部地址：端口号对发送数据包, 该外部主机才能使用特定的端口号向内部主机发送数据包。 对称NAT ：对称NAT 与上述3 种类型都不同, 不管是全锥NAT ，限制性锥NAT 还是端口限制性锥NAT ，它们都属于锥NAT （Cone NAT ）。当同一内部主机使用相同的端口与不同地址的外部主机进行通信时, 对称NAT 会重新建立一个Session ，为这个Session 分配不同的端口号，或许还会改变IP 地址。 穿透原理 : 查看这篇博客]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>nat</tag>
@@ -503,7 +530,7 @@
   <entry>
     <title><![CDATA[5分钟学会git(二)]]></title>
     <url>%2F2016%2F04%2F13%2F5%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Agit(%E4%BA%8C)%2F</url>
-    <content type="text"><![CDATA[贮藏stash 设想一个场景，假设我们正在一个新的分支做新的功能，这个时候突然有一个紧急的bug需要修复，而且修复完之后需要立即发布。当然你说我先把刚写的一点代码进行提交不就行了么？这样理论上当然是ok的，但是这会产品垃圾commit，原则上我们每次的commit都要有实际的意义，你的代码只是刚写了一半，还没有什么实际的意义是不建议就这样commit的，那么有没有一种比较好的办法，可以让我暂时切到别的分支，修复完bug再切回来，而且代码也能保留的呢？ 试试git stash吧 git stash : 把当前的文件改动贮藏起来 git stash list: 查看当前有哪些贮藏记录 git stash pop stash_list_id: 会帮你把代码还原，还自动帮你把这条 stash 记录删除 12345678910111213141516171819202122232425b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo error: Your local changes to the following files would be overwritten by checkout: README.mdPlease, commit your changes or stash them before you can switch branches.Abortingb@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash Saved working directory and index state WIP on new_test_branch: b3ad5d2 modify mdHEAD is now at b3ad5d2 modify mdb@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo Switched to branch &apos;old_demo&apos;Your branch is up-to-date with &apos;origin/old_demo&apos;.b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout new_test_branch Switched to branch &apos;new_test_branch&apos;b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash liststash@&#123;0&#125;: WIP on new_test_branch: b3ad5d2 modify mdb@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash pop stash@&#123;0&#125;On branch new_test_branchChanges not staged for commit: (use &quot;git add &lt;file&gt;...&quot; to update what will be committed) (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory) modified: README.mdno changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)Dropped stash@&#123;0&#125; (88cd440c10c80bb6eaef9f4d86ab4a0be3d6dc00) 对比diff 比如查看当前还未git add的文件的不同 : git diff 比如查看当前已经add 没有commit 的改动 : git diff –cached 比如查看当前所有改动和HEAD的区别(当前还未git add的文件的改动和当前当前已经add 但没有commit 的改动), 也就是上面两条命令的合并 : git diff HEAD 比如查看 commit_id为a和commit_id为b的temp文件夹的差异 : git diff a b temp 处理冲突 假设这样一个场景，A和B两位同学各自开了两个分支来开发不同的功能，大部分情况下都会尽量互不干扰的，但是有一个需求A需要改动一个基础库中的一个类的方法，不巧B这个时候由于业务需要也改动了基础库的这个方法，因为这种情况比较特殊，A和B都认为不会对地方造成影响，等两人各自把功能做完了，需要合并的到主分支 master 的时候，我们假设先合并A的分支，这个时候没问题的，之后再继续合并B的分支，这个时候想想也知道就有冲突了，因为A和B两个人同时更改了同一个地方，Git 本身他没法判断你们两个谁更改的对，但是这个时候他会智能的提示有 conflicts 就像下面这种情况 :1234b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git merge plugin Auto-merging README.mdCONFLICT (content): Merge conflict in README.mdAutomatic merge failed; fix conflicts and then commit the result. 打开READ.md文件一看发现冲突的地方如下:12345&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEADmmmp=======nani&gt;&gt;&gt;&gt;&gt;&gt;&gt; plugin 冲突的地方由 ==== 分出了上下两个部分，上部分一个叫 HEAD 的字样代表是我当前所在分支的代码，下半部分是一个叫 plugin 分支的代码，可以看到 HEAD 是那里加了一行mmmp，而plugin分支则加了一句nani, 所以我们得跟团队的其他人商量一下看看要改成什么样，而且同时也要把那些 «&lt; HEAD、==== 以及 »»»plugin 这些标记符号也一并删除，最后进行一次 commit 就ok了。 标签tag 主要介绍附注标签( annotated tag) 创建附注标签git tag -a v0.1.2 -m “0.1.2版本” 创建轻量标签不需要传递参数，直接指定标签名称即可。创建附注标签时，参数a即annotated的缩写，指定标签类型，后附标签名。参数m指定标签说明，说明信息会保存在标签对象中。 切换到标签与切换分支命令相同，用git checkout [tagname] 查看标签信息用git show命令可以查看标签的版本信息：git show v0.1.2 删除标签误打或需要修改标签时，需要先将标签删除，再打新标签。git tag -d v0.1.2 # 删除标签 参数d即delete的缩写，意为删除其后指定的标签。 给指定的commit打标签打标签不必要在head之上，也可在之前的版本上打，这需要你知道某个提交对象的校验和（通过git log获取）。git tag -a v0.1.1 9fbc3d0 标签发布通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作： git push origin v0.1.2 # 将v0.1.2标签提交到git服务器git push origin –tags # 将本地所有标签一次性提交到git服务器]]></content>
+    <content type="text"><![CDATA[贮藏stash 设想一个场景，假设我们正在一个新的分支做新的功能，这个时候突然有一个紧急的bug需要修复，而且修复完之后需要立即发布。当然你说我先把刚写的一点代码进行提交不就行了么？这样理论上当然是ok的，但是这会产品垃圾commit，原则上我们每次的commit都要有实际的意义，你的代码只是刚写了一半，还没有什么实际的意义是不建议就这样commit的，那么有没有一种比较好的办法，可以让我暂时切到别的分支，修复完bug再切回来，而且代码也能保留的呢？ 试试git stash吧 git stash : 把当前的文件改动贮藏起来 git stash list: 查看当前有哪些贮藏记录 git stash pop stash_list_id: 会帮你把代码还原，还自动帮你把这条 stash 记录删除 12345678910111213141516171819202122232425b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo error: Your local changes to the following files would be overwritten by checkout: README.mdPlease, commit your changes or stash them before you can switch branches.Abortingb@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash Saved working directory and index state WIP on new_test_branch: b3ad5d2 modify mdHEAD is now at b3ad5d2 modify mdb@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo Switched to branch &apos;old_demo&apos;Your branch is up-to-date with &apos;origin/old_demo&apos;.b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout new_test_branch Switched to branch &apos;new_test_branch&apos;b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash liststash@&#123;0&#125;: WIP on new_test_branch: b3ad5d2 modify mdb@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash pop stash@&#123;0&#125;On branch new_test_branchChanges not staged for commit: (use &quot;git add &lt;file&gt;...&quot; to update what will be committed) (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory) modified: README.mdno changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)Dropped stash@&#123;0&#125; (88cd440c10c80bb6eaef9f4d86ab4a0be3d6dc00) 对比diff 比如查看当前还未git add的文件的不同 : git diff 比如查看当前已经add 没有commit 的改动 : git diff –cached 比如查看当前所有改动和HEAD的区别(当前还未git add的文件的改动和当前当前已经add 但没有commit 的改动), 也就是上面两条命令的合并 : git diff HEAD 比如查看 commit_id为a和commit_id为b的temp文件夹的差异 : git diff a b temp 处理冲突 假设这样一个场景，A和B两位同学各自开了两个分支来开发不同的功能，大部分情况下都会尽量互不干扰的，但是有一个需求A需要改动一个基础库中的一个类的方法，不巧B这个时候由于业务需要也改动了基础库的这个方法，因为这种情况比较特殊，A和B都认为不会对地方造成影响，等两人各自把功能做完了，需要合并的到主分支 master 的时候，我们假设先合并A的分支，这个时候没问题的，之后再继续合并B的分支，这个时候想想也知道就有冲突了，因为A和B两个人同时更改了同一个地方，Git 本身他没法判断你们两个谁更改的对，但是这个时候他会智能的提示有 conflicts 就像下面这种情况 :1234b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git merge plugin Auto-merging README.mdCONFLICT (content): Merge conflict in README.mdAutomatic merge failed; fix conflicts and then commit the result. 打开READ.md文件一看发现冲突的地方如下:12345&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEADmmmp=======nani&gt;&gt;&gt;&gt;&gt;&gt;&gt; plugin 冲突的地方由 ==== 分出了上下两个部分，上部分一个叫 HEAD 的字样代表是我当前所在分支的代码，下半部分是一个叫 plugin 分支的代码，可以看到 HEAD 是那里加了一行mmmp，而plugin分支则加了一句nani, 所以我们得跟团队的其他人商量一下看看要改成什么样，而且同时也要把那些 «&lt; HEAD、==== 以及 »»»plugin 这些标记符号也一并删除，最后进行一次 commit 就ok了。 标签tag 主要介绍附注标签( annotated tag) 创建附注标签git tag -a v0.1.2 -m “0.1.2版本” 创建轻量标签不需要传递参数，直接指定标签名称即可。创建附注标签时，参数a即annotated的缩写，指定标签类型，后附标签名。参数m指定标签说明，说明信息会保存在标签对象中。 切换到标签与切换分支命令相同，用git checkout [tagname] 查看标签信息用git show命令可以查看标签的版本信息：git show v0.1.2 删除标签误打或需要修改标签时，需要先将标签删除，再打新标签。git tag -d v0.1.2 # 删除标签 参数d即delete的缩写，意为删除其后指定的标签。 给指定的commit打标签打标签不必要在head之上，也可在之前的版本上打，这需要你知道某个提交对象的校验和（通过git log获取）。git tag -a v0.1.1 9fbc3d0 标签发布通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作： git push origin v0.1.2 # 将v0.1.2标签提交到git服务器git push origin -–tags # 将本地所有标签一次性提交到git服务器]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -607,7 +634,7 @@
     <url>%2F2015%2F06%2F22%2Fsocket%E5%8F%AF%E8%AF%BB%E5%8F%AF%E5%86%99%E6%9D%A1%E4%BB%B6%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9Econnect%E6%88%96accept%E6%B5%85%E6%9E%90%2F</url>
     <content type="text"><![CDATA[socket可读的条件: socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWATsocket选项来设置该socket的低水位标记。对于TCP和UDP .socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0 给监听套接字准备好新连接 有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除; socket可写的条件: socket的发送缓冲区中的数据字节大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用SO_SNDLOWAT socket选项来设置该socket的低水位标记。对于TCP和UDPsocket而言，其缺省值为2048 该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。 使用非阻塞connect的套接字已建立连接, 或者connect已经以失败告终 有一个socket异常错误条件待处理.对于这样的socket的写操作将不会阻塞并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可以通过指定socket选项SO_ERROR调用getsockopt函数来取得并清除; 非阻塞connect/accept相关述的各种条件可以大体总结为下图 注意 : 当socket异常错误的时候socket是可读并可写的, 所以在非阻塞connect(判断是否可写)/accept(判断是否可读)的时候要特别注意这种情况, 要用getsockopt函数, 使用SO_ERROR选项来检查处理.]]></content>
       <categories>
-        <category>UNIX网络编程</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>socket</tag>
@@ -763,8 +790,8 @@
         <category>c++</category>
       </categories>
       <tags>
-        <tag>c++</tag>
         <tag>二叉树</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -775,8 +802,8 @@
         <category>c++</category>
       </categories>
       <tags>
-        <tag>c++</tag>
         <tag>二叉树</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -787,8 +814,8 @@
         <category>c++</category>
       </categories>
       <tags>
-        <tag>c++</tag>
         <tag>二叉树</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -799,8 +826,8 @@
         <category>c++</category>
       </categories>
       <tags>
-        <tag>排序</tag>
         <tag>c++</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
@@ -811,8 +838,8 @@
         <category>c++</category>
       </categories>
       <tags>
-        <tag>排序</tag>
         <tag>c++</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
@@ -823,8 +850,8 @@
         <category>c++</category>
       </categories>
       <tags>
-        <tag>排序</tag>
         <tag>c++</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
 </search>

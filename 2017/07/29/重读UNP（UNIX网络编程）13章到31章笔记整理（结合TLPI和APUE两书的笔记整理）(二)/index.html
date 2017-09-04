@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T14:20:59.077Z">
+<meta property="og:updated_time" content="2017-09-04T00:45:37.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重读UNP（UNIX网络编程）13章到31章笔记整理（结合TLPI和APUE两书的笔记整理）(二)">
 <meta name="twitter:description" content="16章 16.3节 ： 非阻塞connect 有三个用途： 我们想在connect的时候处理其他事情 可以同时建立多个连接 可以通过select设置一个更短一点的超时时间   实现步骤： 用fcntl把套接字设置为非阻塞 处理客户端和服务器都在同一主机上的情况 使用select设置超时，并处理超时情况 处理当连接建立的时候，描述符变为可写；以及当连接建立遇到错误的时候， 描述符变为可写并可读的情况">
@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -379,8 +379,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX网络编程</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -577,7 +577,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -588,7 +588,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -599,7 +599,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -688,8 +688,6 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

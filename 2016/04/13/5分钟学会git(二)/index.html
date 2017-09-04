@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="贮藏stash 设想一个场景，假设我们正在一个新的分支做新的功能，这个时候突然有一个紧急的bug需要修复，而且修复完之后需要立即发布。当然你说我先把刚写的一点代码进行提交不就行了么？这样理论上当然是ok的，但是这会产品垃圾commit，原则上我们每次的commit都要有实际的意义，你的代码只是刚写了一半，还没有什么实际的意义是不建议就这样commit的，那么有没有一种比较好的办法，可以让我暂时切到">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T13:13:32.580Z">
+<meta property="og:updated_time" content="2017-09-04T06:21:54.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5分钟学会git(二)">
 <meta name="twitter:description" content="贮藏stash 设想一个场景，假设我们正在一个新的分支做新的功能，这个时候突然有一个紧急的bug需要修复，而且修复完之后需要立即发布。当然你说我先把刚写的一点代码进行提交不就行了么？这样理论上当然是ok的，但是这会产品垃圾commit，原则上我们每次的commit都要有实际的意义，你的代码只是刚写了一半，还没有什么实际的意义是不建议就这样commit的，那么有没有一种比较好的办法，可以让我暂时切到">
@@ -124,7 +124,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -450,7 +450,7 @@
 <p>参数d即delete的缩写，意为删除其后指定的标签。</p>
 <h4 id="给指定的commit打标签"><a href="#给指定的commit打标签" class="headerlink" title="给指定的commit打标签"></a><strong>给指定的commit打标签</strong></h4><p>打标签不必要在head之上，也可在之前的版本上打，这需要你知道某个提交对象的校验和（通过git log获取）。<br>git tag -a v0.1.1 9fbc3d0</p>
 <h4 id="标签发布"><a href="#标签发布" class="headerlink" title="标签发布"></a><strong>标签发布</strong></h4><p>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作：</p>
-<p>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器<br>git push origin –tags # 将本地所有标签一次性提交到git服务器</p>
+<p>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器<br>git push origin -–tags # 将本地所有标签一次性提交到git服务器</p>
 
       
     </div>
@@ -572,7 +572,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -583,7 +583,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -594,7 +594,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -683,8 +683,6 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

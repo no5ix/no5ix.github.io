@@ -431,7 +431,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo </div><div class="line">error: Your local changes to the following files would be overwritten by checkout:</div><div class="line">	README.md</div><div class="line">Please, commit your changes or stash them before you can switch branches.</div><div class="line">Aborting</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash </div><div class="line">Saved working directory and index state WIP on new_test_branch: b3ad5d2 modify md</div><div class="line">HEAD is now at b3ad5d2 modify md</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout old_demo </div><div class="line">Switched to branch &apos;old_demo&apos;</div><div class="line">Your branch is up-to-date with &apos;origin/old_demo&apos;.</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git checkout new_test_branch </div><div class="line">Switched to branch &apos;new_test_branch&apos;</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash list</div><div class="line">stash@&#123;0&#125;: WIP on new_test_branch: b3ad5d2 modify md</div><div class="line">b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git stash pop stash@&#123;0&#125;</div><div class="line">On branch new_test_branch</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">	modified:   README.md</div><div class="line"></div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div><div class="line">Dropped stash@&#123;0&#125; (88cd440c10c80bb6eaef9f4d86ab4a0be3d6dc00)</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/13/5分钟学会git(二)/#more" rel="contents">
+            <a class="btn" href="/2016/04/13/5分钟学会git(二)/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -591,7 +591,7 @@
 <p>标记为*的那个就是当前分支, 也就是old_demo分支</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/12/5分钟学会git(一)/#more" rel="contents">
+            <a class="btn" href="/2016/04/12/5分钟学会git(一)/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -737,7 +737,7 @@
           <h3 id="位操作运算符的问题"><a href="#位操作运算符的问题" class="headerlink" title="位操作运算符的问题"></a><strong>位操作运算符的问题</strong></h3><p>二进制的100 的第0位是 0<br>1(第二位)  0(第一位)  0(第0位)，<br>所以把一个数的第三位进行清零、置位、取反的操作如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line"></div><div class="line">#define Bit3 (0X01&lt;&lt;3)</div><div class="line">/*对一个数的第三位进行清零、置位、取反*/</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	int a=15 ;      // 0000 1111</div><div class="line"></div><div class="line">	printf(&quot;原大小：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a &amp;= ~Bit3;     //清零, 0000 0111</div><div class="line">	printf(&quot;清零后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a |= Bit3;     //置位, 0000 1111</div><div class="line">	printf(&quot;置位后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	a ^= Bit3;     //取反, 0000 0111</div><div class="line">	printf(&quot;取反后：%d\n&quot;, a);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/09/C++ 很基础的易混淆点（二）/#more" rel="contents">
+            <a class="btn" href="/2015/12/09/C++ 很基础的易混淆点（二）/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -905,7 +905,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/11/03/Linux常用命令笔记整理之tcpdump/#more" rel="contents">
+            <a class="btn" href="/2015/11/03/Linux常用命令笔记整理之tcpdump/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1053,7 +1053,7 @@
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/10/23/linux常用文本处理命令笔记整理(二)/#more" rel="contents">
+            <a class="btn" href="/2015/10/23/linux常用文本处理命令笔记整理(二)/" rel="contents">
               Read more &raquo;
             </a>
           </div>

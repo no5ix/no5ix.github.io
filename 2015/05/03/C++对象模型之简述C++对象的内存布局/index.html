@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('Password') !== ''){
+                alert('Error!');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++,内存模型," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在C++中，有两种类的成员变量：static和非static，有三种成员函数：static、非static和virtual。那么，它们如何影响C++的对象在内存中的分布呢？ 当存在继承的情况下，其内存分布又是如何呢？  下面就一个非常简单的类，通过逐渐向其中加入各种成员，来逐一分析上述两种成员变量及三种成员函数对类的对象的内存分布的影响。  注：以下的代码的测试结果均是基于Ubuntu 14.04">
+<meta name="keywords" content="c++,内存模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++对象模型之简述C++对象的内存布局">
+<meta property="og:url" content="http://yoursite.com/2015/05/03/C++对象模型之简述C++对象的内存布局/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="在C++中，有两种类的成员变量：static和非static，有三种成员函数：static、非static和virtual。那么，它们如何影响C++的对象在内存中的分布呢？ 当存在继承的情况下，其内存分布又是如何呢？  下面就一个非常简单的类，通过逐渐向其中加入各种成员，来逐一分析上述两种成员变量及三种成员函数对类的对象的内存分布的影响。  注：以下的代码的测试结果均是基于Ubuntu 14.04">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023309556?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023352769?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023400565?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023520285?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023548880?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023651170?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023659996?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023810465?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150522023800275?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150530005022692?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-09-12T10:52:25.888Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++对象模型之简述C++对象的内存布局">
+<meta name="twitter:description" content="在C++中，有两种类的成员变量：static和非static，有三种成员函数：static、非static和virtual。那么，它们如何影响C++的对象在内存中的分布呢？ 当存在继承的情况下，其内存分布又是如何呢？  下面就一个非常简单的类，通过逐渐向其中加入各种成员，来逐一分析上述两种成员变量及三种成员函数对类的对象的内存分布的影响。  注：以下的代码的测试结果均是基于Ubuntu 14.04">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150522023309556?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/05/03/C++对象模型之简述C++对象的内存布局/"/>
+
+
+
+
+
+  <title>C++对象模型之简述C++对象的内存布局 | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/03/C++对象模型之简述C++对象的内存布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++对象模型之简述C++对象的内存布局</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-03T10:05:48+08:00">
+                2015-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div id="article_content" class="article_content tracking-ad" data-mod="popu_307" data-dsm="post"><br><div><span style="font-size:18px;">在C++中，有两种类的成员变量：static和非static，有三种成员函数：static、非static和virtual。那么，它们如何影响C++的对象在内存中的分布呢？ 当存在继承的情况下，其内存分布又是如何呢？<br></span> <div><span style="font-size:18px;"><br></span> <div><span style="font-size:18px;">下面就一个非常简单的类，通过逐渐向其中加入各种成员，来逐一分析上述两种成员变量及三种成员函数对类的对象的内存分布的影响。<br></span> <div><span style="font-size:18px;"><br> 注：以下的代码的测试结果均是基于Ubuntu 14.04 64位系统下的G++ 4.8.2，若在其他的系统上或使用其他的编译器，可能会运行出不同的结果。<br></span> </div></div></div></div><div><span style="font-size:18px;"><br></span> </div><div><span style="font-size:18px;color:red;">1、含有非static成员变量及成员函数的类的对象的内存分布</span><span style="font-size:18px;"><br> </span><div><span style="font-size:18px;">类Persion的定义如下： </span><br> <pre code_snippet_id="672528" snippet_file_name="blog_20150522_1_9940117" name="code" class="cpp">class Person<br>{<br>    public:<br>        Person():mId(0), mAge(20){}<br>        void print()<br>        {<br>            cout &lt;&lt; &quot;id: &quot; &lt;&lt; mId<br>                 &lt;&lt; &quot;, age: &quot; &lt;&lt; mAge &lt;&lt; endl;<br>        }<br>    private:<br>        int mId;<br>        int mAge;<br>}; </pre><br><span style="font-size:18px;">Person类包含两个非static的int型的成员变量，一个构造函数和一个非static成员函数。为弄清楚该类的对象的内存分布，对该类的对象进行一些操作如下： </span><br> <div><div><pre code_snippet_id="672528" snippet_file_name="blog_20150522_2_3401017" name="code" class="cpp">int main()<br>{<br>    Person p1;<br>    cout &lt;&lt; &quot;sizeof(p1) == &quot; &lt;&lt; sizeof(p1) &lt;&lt; endl;<br>    int <em>p = (int</em>)&amp;p1;<br>    cout &lt;&lt; &quot;p.id == &quot; &lt;&lt; <em>p &lt;&lt; &quot;, address: &quot;  &lt;&lt; p &lt;&lt; endl;<br>    ++p;<br>    cout &lt;&lt; &quot;p.age == &quot; &lt;&lt; </em>p &lt;&lt; &quot;, address: &quot; &lt;&lt; p &lt;&lt; endl;<br>    cout &lt;&lt; endl;<br><br>    Person p2;<br>    cout &lt;&lt; &quot;sizeof(p2) == &quot; &lt;&lt; sizeof(p1) &lt;&lt; endl;<br>    p = (int<em>)&amp;p2;<br>    cout &lt;&lt; &quot;p.id == &quot; &lt;&lt; </em>p &lt;&lt; &quot;, address: &quot; &lt;&lt; p &lt;&lt; endl;<br>    ++p;<br>    cout &lt;&lt; &quot;p.age == &quot; &lt;&lt; <em>p &lt;&lt; &quot;, address: &quot; &lt;&lt; p &lt;&lt; endl;<br>    return 0;<br>} </em></pre><br><span style="font-size:18px;">其运行结果如下： </span><br> <div><div><div><div>&nbsp;<img src="http://img.blog.csdn.net/20150522023309556?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br> <div><br> <div><div><div><div><span style="font-size:18px;">从上图可以看到类的对象的占用的内存均为8字节，使用普通的int＊指针可以遍历输出对象内的非static成员变量的值，且两个对象中的相同的非static成员变量的地址各不相同。<br></span> <span style="font-size:18px;"><br></span> </div><div><span style="font-size:18px;">据此，可以得出结论，在C++中，非static成员变量被放置于每一个类对象中，非static成员函数放在类的对象之外，且非static成员变量在内存中的存放顺序与其在类内的声明顺序一致。即person对象的内存分布如下图所示： </span><br> <div><img src="http://img.blog.csdn.net/20150522023352769?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br> </div></div></div><br> </div><br> </div></div></div></div></div></div></div></div></div></div><div><span style="font-size:18px;color:red;">2、含有static和非static成员变量和成员函数的类的对象的内存分布<br> </span><span style="font-size:18px;"> </span><div><span style="color:red;"><span style="color:black;"><span style="font-size:18px;"><br> 向Person类中加入一个static成员变量和一个static成员函数，如下：</span><br></span></span><pre code_snippet_id="672528" snippet_file_name="blog_20150522_3_7177560" name="code" class="cpp">class Person<br>{<br>     public:<br>         Person():mId(0), mAge(20){ ++sCount; }<br>         ~Person(){ –sCount; }<br>         void print()<br>         {<br>             cout &lt;&lt; &quot;id: &quot; &lt;&lt; mId<br>                  &lt;&lt; &quot;, age: &quot; &lt;&lt; mAge &lt;&lt; endl;<br>         }<br>         static int personCount()<br>         {<br>             return sCount;<br>         }<br>     private:<br>         static int sCount;<br>         int mId;<br>         int mAge;<br>}; </pre><br><span style="font-size:18px;">测试代码不变，与第1节中的代码相同。其运行结果不变，与第1节中的运行结果相同。<br> </span><div><span style="font-size:18px;"><br></span><div><span style="font-size:18px;"> 据此，可以得出：static成员变量存放在类的对象之外，static成员函数也放在类的对象之外。<br></span><div><span style="font-size:18px;"><br>其内存分布如下图所示：</span><br></div></div><div><img src="http://img.blog.csdn.net/20150522023400565?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><br></div></div></div></div><span style="font-size:18px;color:red;">3、</span><span style="font-family:微软雅黑;font-size:18px;color:#000000;background-color:#FFFFFF;font-style:normal;font-weight:normal;text-align:left;"><span style="color:black;"><span style="color:red;">加入virtual成员函数的类的对象的内存分布</span><br> </span></span><span style="font-size:18px;">  </span><div><span style="font-size:18px;"><br>在Person类中加入一个virtual函数，并把前面的print函数修改为函数，如下： </span><br> <pre code_snippet_id="672528" snippet_file_name="blog_20150522_4_3212754" name="code" class="cpp">class Person<br>{<br>    public:<br>        Person():mId(0), mAge(20){ ++sCount; }<br>        static int personCount()<br>        {<br>            return sCount;<br>        }<br><br>        virtual void print()<br>        {<br>            cout &lt;&lt; &quot;id: &quot; &lt;&lt; mId<br>                 &lt;&lt; &quot;, age: &quot; &lt;&lt; mAge &lt;&lt; endl;<br>        }<br>        virtual void job()<br>        {<br>            cout &lt;&lt; &quot;Person&quot; &lt;&lt; endl;<br>        }<br>        virtual ~Person()<br>        {<br>            –sCount;<br>            cout &lt;&lt; &quot;~Person&quot; &lt;&lt; endl;<br>        }<br><br>    protected:<br>        static int sCount;<br>        int mId;<br>        int mAge;<br>};</pre><br></div><div><span style="font-size:18px;">为了查看类的对象的内存分布，对类的对象执行如下的操作代码，如下： </span><br><div> <pre code_snippet_id="672528" snippet_file_name="blog_20150522_5_1903251" name="code" class="cpp">int main()<br>{<br>    Person person;<br>    cout &lt;&lt; sizeof(person) &lt;&lt; endl;<br>    int p = (int<em>)&amp;person;<br>    for (int i = 0; i &lt; sizeof(person) / sizeof(int); ++i, ++p)<br>    {<br>        cout &lt;&lt; </em>p &lt;&lt; endl;<br>    }<br>    return 0;<br>} </pre><br><div><div><span style="font-size:18px;">其运行结果如下： </span><br><div> <img src="http://img.blog.csdn.net/20150522023520285?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br> </div><div><br><div><span style="font-size:18px;">从上图可以看出，加virtual成员函数后，类的对象的大小为16字节，增加了8。通过int＊指针遍历该对象的内存，可以看到，最后两行显示的是成员数据的值。<br></span><div><span style="font-size:18px;"><br></span><div><span style="font-size:18px;">C++中的虚函数是通过虚函数表（vtbl）来实现，每一个类为每一个virtual函数产生一个指针，放在表格中，这个表格就是虚函数表。每一个类对象会被安插一个指针（vptr），指向该类的虚函数表。vptr的设定和重置都由每一个类的构造函数、析构函数和复制赋值运算符自动完成。<br></span><div><span style="font-size:18px;"><br></span><div><div><span style="font-size:18px;">由于本人的系统是64位的系统，一个指针的大小为8字节，所以可以推出，在本人的环境中，类的对象的安插的vptr放在该对象所占内存的最前面。其内存分布图如下：<br></span><div><span style="font-size:18px;">注：虚函数的顺序是按虚函数定义顺序定义的，但是它还包含其他的一些字段，本人还未明白它是什么，在下一节会详细说明虚函数表的内容。</span><br></div></div><div><img src="http://img.blog.csdn.net/20150522023548880?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><br><div><span style="font-size:18px;color:red;">4、虚函数表（vtbl）的内容及</span><span style="font-size:18px;color:red;">函数指针存放顺序</span><span style="font-size:18px;"><br></span><div><span style="font-size:18px;">在第3节中，我们可以知道了指向虚函数表的指针（vptr）在类中的位置了，而函数表中的数据都是函数指针，于是便可利用这点来遍历虚函数表，并测试出虚函数表中的内容。<br></span><div><span style="font-size:18px;"><br></span><div><span style="font-size:18px;">测试代码如下：</span><br><pre code_snippet_id="672528" snippet_file_name="blog_20150522_6_7971463" name="code" class="cpp">typedef void (<em>FuncPtr)();<br>int main()<br>{<br>    Person person;<br>    int <strong>vtbl = (int</strong>)</em>(int<strong>)&amp;person;<br>    for (int i = 0; i &lt; 3 &amp;&amp; <em>vtbl != NULL; ++i)<br>    {<br>        FuncPtr func = (FuncPtr)</em>vtbl;<br>        func();<br>        ++vtbl;<br>    }<br><br>    while (<em>vtbl)<br>    {<br>        cout &lt;&lt; &quot;</em>vtbl == &quot; &lt;&lt; *vtbl &lt;&lt; endl;<br>        ++vtbl;<br>    }<br>    return 0;<br>}</strong></pre><br><div><div><span style="font-size:18px;">代码解释：<br>由于虚函数表位于对象的首位置上，且虚函数表保存的是函数的指针，若把虚函数表当作一个数组，则要指向该数组需要一个双指针。我们可以通过如下方式获取Person类的对象的地址，并转化成int指针：</span></div><div><div><div><div><pre code_snippet_id="672528" snippet_file_name="blog_20150522_7_6241129" name="code" class="cpp">Person person;<br>int <strong>p = (int</strong>)&amp;person;</pre><br><div><span style="font-size:18px;">再通过如下的表达式，获取虚函数表的地址：</span><br><div><div><div>&nbsp;<pre code_snippet_id="672528" snippet_file_name="blog_20150522_8_8589213" name="code" class="cpp">int <strong>vtbl = (int</strong>)<em>p;</em></pre><br><span style="font-size:18px;">然后，通过如下语句获得虚函数表中函数的地址，并调用函数。</span><br></div></div></div></div></div></div><pre code_snippet_id="672528" snippet_file_name="blog_20150522_9_6543235" name="code" class="cpp">FuncPtr func = (FuncPtr)vtbl;<br>func();</pre><br><div><div><span style="font-size:18px;">最后，通过++vtbl可以得到函数表中下一项地址，从而遍历整个虚函数表。<br></span></div><span style="font-size:18px;"><br></span></div></div><div><span style="font-size:18px;">其运行结果如下图所示：</span><br><div><img src="http://img.blog.csdn.net/20150522023651170?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><div><br><div><div><span style="font-size:18px;">从上图可以看出，遍历虚函数表，并根据虚函数表中的函数地址调用函数，它先调用print函数，再调用job函数，最后调用析构函数。函数的调用顺序与Person类中的虚函数的定义顺序一致，其内存分布与第3节中的对象内存分布图相一致。从代码和运行结果，可以看出，虚函数表以NULL标志表的结束。但是虚函数表中还含有其他的数据，本人还没有清楚其作用。<br></span><div><span style="font-size:18px;"><br></span><div><span style="font-size:18px;color:red;">5、继承对于类的对象的内存分布的影响</span><span style="font-size:18px;"><br></span><div><span style="font-size:18px;">本文并不打算详细地介绍继承对对象的内存分布的影响，也不介绍虚函数的实现机制。这里主要给出一个经过本人测试的大概的对象内存模型，由于代码较多，不一一贴出。假设所有的类都有非static的成员变量和成员函数、static的成员变量及成员函数和virtual函数。<br></span><div><div><div><span style="font-size:18px;">1）单继承（只有一个父类）<br>类的继承关系为：class Derived : public Base</span><br></div><div><img src="http://img.blog.csdn.net/20150522023659996?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><div><span style="font-size:18px;">Derived类的对象的内存布局为：虚函数表指针、Base类的非static成员变量、Derived类的非static成员变量。<br><br></span></div></div></div><div><div><div><span style="font-size:18px;">2）多重继承（多个父类）<br>类的继承关系如下：class Derived : public Base1, public Base2</span><br></div><div><img src="http://img.blog.csdn.net/20150522023810465?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><div><span style="font-size:18px;">Derived类的对象的内存布局为：基类Base1子对象和基类Base2子对象及Derived类的非static成员变量组成。基类子对象包括其虚函数表指针和其非static的成员变量。<br><br></span></div></div></div><div><div><div><span style="font-size:18px;">3）重复继承（<span style="color:#000000;font-size: 16px;">继承的多个父类中其父类有相同的超类</span>）<br></span><div><span style="font-size:18px;">类的继承关系如下：<br></span><div><span style="font-size:18px;">class Base1 : public Base<br></span><div><span style="font-size:18px;">class Base2:&nbsp; public Base<br></span><div><span style="font-size:18px;">class Derived : public Base1, public Base2</span><br><div><img src="http://img.blog.csdn.net/20150522023800275?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><span style="font-size:18px;">Derived类的对象的内存布局与多继承相似，但是可以看到基类Base的子对象在Derived类的对象的内存中存在一份拷贝。这样直接使用Derived中基类Base的相关成员时，就会引发歧义，可使用多重虚拟继承消除之。<br></span></div></div></div></div></div></div><span style="font-size:18px;"><br></span></div><span style="font-size:18px;">4）<span style="color:#000000;font-size: 16px;">多重虚拟继承（使用virtual方式继承，为了保证继承后父类的内存布局只会存在一份</span>）<br></span></div></div></div></div></div></div></div><div><div><span style="font-size:18px;">类的继承关系如下：<br>class Base1 : virtual public Base<br>class Base2:&nbsp; virtual public Base<br>class Derived : public Base1, public Base2</span><br></div><div><img src="http://img.blog.csdn.net/20150530005022692?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><span style="font-size:18px;">Derived类的对象的内存布局与重复继承的类的对象的内存分布类似，但是基类Base的子对象没有拷贝一份，在对象的内存中仅存在在一个Base类的子对象。但是它的非static成员变量放置在对象的末尾处。<br></span></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><div><span style="font-size:18px;"><br></span></div><span style="font-size: 18px;">关于继承对对象的内存布局的影响以及虚函数的实现机制的详细介绍，请参阅——<a href="http://blog.csdn.net/ljianhui/article/details/46408645" target="_blank" rel="external"><span style="color:#ff0000;">C++对象模型之详述C++对象的内存布局</span></a></span><br><br></div>
+
+
+<p>转自CDSN<a href="http://blog.csdn.net/ljianhui/article/details/45903939" target="_blank" rel="external">阅读原文</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c++</a>
+          
+            <a href="/tags/内存模型/" rel="tag"><i class="fa fa-tag"></i> 内存模型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/" rel="next" title="linux一些不要想当然的事(一)之目录权限">
+                <i class="fa fa-chevron-left"></i> linux一些不要想当然的事(一)之目录权限
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/03/C++对象模型之详述C++对象的内存布局/" rel="prev" title="C++对象模型之详述C++对象的内存布局">
+                C++对象模型之详述C++对象的内存布局 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="nosix" />
+          <p class="site-author-name" itemprop="name">nosix</p>
+           
+              <p class="site-description motion-element" itemprop="description">以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nosix1992" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nosix</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -104,19 +104,19 @@
 
 
 
-<meta name="description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁">
+<meta name="description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁 屏障">
 <meta name="keywords" content="UNP,TLPI,APUE,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux编程须知(阅读开源服务器源码基础)">
 <meta property="og:url" content="http://yoursite.com/2016/07/04/linux编程须知(阅读开源服务器源码基础)/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁">
+<meta property="og:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁 屏障">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-09-01T13:47:55.438Z">
+<meta property="og:updated_time" content="2017-09-07T12:04:33.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux编程须知(阅读开源服务器源码基础)">
-<meta name="twitter:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁">
+<meta name="twitter:description" content="当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.还是那句老话, 带着问题阅读是最容易让人类迅速进入状态的.  进程的内存布局是什么样的? 线程的同步机制有哪些? 互斥量 条件变量 自旋锁 读写锁 屏障">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -427,6 +427,7 @@
 <li>条件变量</li>
 <li>自旋锁</li>
 <li>读写锁</li>
+<li>屏障</li>
 </ul>
 <a id="more"></a>
 <h2 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a><strong>如何避免死锁</strong></h2><ul>
@@ -575,7 +576,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -597,7 +598,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

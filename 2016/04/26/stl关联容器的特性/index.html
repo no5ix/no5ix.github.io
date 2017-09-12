@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="概绍 关联容器和 顺序容器有着根本的不问 : 关联容器中的元素是按关键字来保在和访问的 。 与之相对，顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的 。  关联容器支持高效的关键字查找和访问 。 两个主要的关联容器类型是   map  set  map 中 的元素是一些关键字一值 ( key-value )对 :   关键字起到索 引 的作用，值则表示与索引相关联的数据 。   set">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T13:51:48.260Z">
+<meta property="og:updated_time" content="2017-09-08T05:37:38.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="stl关联容器的特性">
 <meta name="twitter:description" content="概绍 关联容器和 顺序容器有着根本的不问 : 关联容器中的元素是按关键字来保在和访问的 。 与之相对，顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的 。  关联容器支持高效的关键字查找和访问 。 两个主要的关联容器类型是   map  set  map 中 的元素是一些关键字一值 ( key-value )对 :   关键字起到索 引 的作用，值则表示与索引相关联的数据 。   set">
@@ -480,7 +480,7 @@
 <td>返回map的配置器</td>
 </tr>
 <tr>
-<td>insert()</td>
+<td><strong>insert()</strong></td>
 <td>插入元素</td>
 </tr>
 <tr>
@@ -521,7 +521,7 @@
 </tr>
 </tbody>
 </table>
-
+<h2 id="一个map基本例子"><a href="#一个map基本例子" class="headerlink" title="一个map基本例子"></a>一个map基本例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	map&lt;int, string&gt; map_student;</div><div class="line">	map_student.insert(pair&lt;int, string&gt;(1, &quot;stu1&quot;));</div><div class="line">	map_student.insert(pair&lt;int, string&gt;(2, &quot;stu2&quot;));</div><div class="line">	map&lt;int, string&gt;:iterator iter;</div><div class="line"></div><div class="line">	for (iter = map_student.begin(); iter != map_student.end(); iter++)</div><div class="line">	&#123;</div><div class="line">		cout &lt;&lt; iter-&gt;first &lt;&lt; &quot; : &quot; &lt;&lt; iter-&gt;second &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -648,7 +648,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -670,7 +670,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -718,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概绍"><span class="nav-text">概绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-amp-set-的实现"><span class="nav-text">map & set 的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map的基本操作函数"><span class="nav-text">map的基本操作函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概绍"><span class="nav-text">概绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-amp-set-的实现"><span class="nav-text">map & set 的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map的基本操作函数"><span class="nav-text">map的基本操作函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个map基本例子"><span class="nav-text">一个map基本例子</span></a></li></ol></div>
             
 
           </div>

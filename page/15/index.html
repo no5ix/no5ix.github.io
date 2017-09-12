@@ -327,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/04/分布式系统设计概要笔记-一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/27/MySQL一些需要注意的小细节/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -346,7 +346,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/01/04/分布式系统设计概要笔记-一/" itemprop="url">分布式系统设计概要笔记-一</a></h1>
+                <a class="post-title-link" href="/2015/02/27/MySQL一些需要注意的小细节/" itemprop="url">MySQL一些需要注意的小细节</a></h1>
         
 
         <div class="post-meta">
@@ -358,8 +358,311 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-04T01:28:42+08:00">
-                2015-01-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-27T22:51:11+08:00">
+                2015-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a><strong>distinct关键字</strong></h2><blockquote>
+<p>distinct是应用于所有列的, 而不是某一个列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one, two from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one from test_table;</div><div class="line">+------+</div><div class="line">| one  |</div><div class="line">+------+</div><div class="line">| 56   |</div><div class="line">| 52   |</div><div class="line">+------+</div><div class="line">2 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/02/27/MySQL一些需要注意的小细节/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/10/python中的__name__和__main()__/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/10/python中的__name__和__main()__/" itemprop="url">python中的__name__和__main()__</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-10T22:19:29+08:00">
+                2015-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#hello.py</div><div class="line">def sayHello():</div><div class="line">    str=&quot;hello&quot;</div><div class="line">    print(str);</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">    print (&apos;This is main of module &quot;hello.py&quot;&apos;)</div><div class="line">    sayHello()</div></pre></td></tr></table></figure>
+<p>python作为一种脚本语言，我们用python写的各个module都可以包含以上那么一个累死c中的main函数，只不过python中的这种<code>__main__</code>与c中有一些区别，类似于php的魔术那一套, 主要体现在：</p>
+<p>1、当单独执行该module时，比如单独执行以上hello.py： python hello.py，则输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">This is main of module &quot;hello.py&quot;</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p>可以理解为<code>&quot;if __name__==&quot;__main__&quot;:&quot;</code>这一句与c中的main()函数所表述的是一致的，即作为入口；</p>
+<p>2、当该module被其它module 引入使用时，其中的<code>&quot;if __name__==&quot;__main__&quot;:&quot;</code></p>
+<p>所表示的Block不会被执行,</p>
+<p>这是因为此时module被其它module引用时，</p>
+<p>其<code>__name__</code>的值将发生变化，<code>__name__</code>的值将会是module的名字。</p>
+<p>比如在python shell中import hello后，查看<code>hello.__name__</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import hello</div><div class="line">hello.__name__</div><div class="line">&apos;hello&apos;</div></pre></td></tr></table></figure>
+<p>3、因此，在python中，当一个module作为整体被执行时,moduel.<strong>name</strong>的值将是<code>&quot;__main__&quot;；</code></p>
+<p>而当一个module被其它module引用时，<code>module.__name__</code>将是module自己的名字，</p>
+<p>当然一个module被其它module引用时，其本身并不需要一个可执行的入口main了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/10/分布式系统设计概要笔记-四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/01/10/分布式系统设计概要笔记-四/" itemprop="url">分布式系统设计概要笔记-四</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-10T23:58:12+08:00">
+                2015-01-10
               </time>
             
 
@@ -419,10 +722,11 @@
 
       
         
-          <h1 id="分布式系统中的概念"><a href="#分布式系统中的概念" class="headerlink" title="分布式系统中的概念"></a>分布式系统中的概念</h1><h2 id="三元组"><a href="#三元组" class="headerlink" title="三元组"></a>三元组</h2><p>其实，分布式系统说白了，就是很多机器组成的集群，靠彼此之间的网络通信，担当的角色可能不同，共同完成同一个事情的系统。</p>
+          <h1 id="分布式系统设计实践"><a href="#分布式系统设计实践" class="headerlink" title="分布式系统设计实践"></a>分布式系统设计实践</h1><p>基本的理论和策略简单介绍这么多，后面本人会从工程的角度，细化说一下”数据分布“、”副本控制”和”高可用协议”</p>
+<p>在分布式系统中，无论是计算还是存储，处理的对象都是数据，数据不存在于一台机器或进程中，</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/01/04/分布式系统设计概要笔记-一/" rel="contents">
+            <a class="btn" href="/2015/01/10/分布式系统设计概要笔记-四/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -473,7 +777,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/07/分布式系统设计概要笔记-三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -492,7 +796,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）/" itemprop="url">(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）</a></h1>
+                <a class="post-title-link" href="/2015/01/07/分布式系统设计概要笔记-三/" itemprop="url">分布式系统设计概要笔记-三</a></h1>
         
 
         <div class="post-meta">
@@ -504,8 +808,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-22T23:19:21+08:00">
-                2014-12-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-07T13:28:22+08:00">
+                2015-01-07
               </time>
             
 
@@ -527,8 +831,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -565,15 +869,12 @@
 
       
         
-          <blockquote>
-<p>只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了</p>
-<p>这是一篇偏向单链表进阶的博客, 并不会讲单链表的建立/增加/删除等等, 而且这篇博客大多数只说思想不写代码(因为其实蛮简单的..)</p>
-</blockquote>
-<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a><strong>存储结构</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef struct Node</div><div class="line">&#123;</div><div class="line">	DataType data;</div><div class="line">	struct Node *next;</div><div class="line">&#125;Node, *Node_Ptr;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20170823224405993?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+          <h1 id="分布式系统设计策略"><a href="#分布式系统设计策略" class="headerlink" title="分布式系统设计策略"></a>分布式系统设计策略</h1><h2 id="重试机制"><a href="#重试机制" class="headerlink" title="重试机制"></a>重试机制</h2><p>一般情况下，写一段网络交互的代码，发起rpc或者http，都会遇到请求超时而失败情况。</p>
+<p>可能是网络抖动(暂时的网络变更导致包不可达，比如拓扑变更)或者对端挂掉。</p>
+<p>这时一般处理逻辑是将请求包在一个重试循环块里，如下：<br>[cpp] view plain copy print?<br>int retry = 3;<br>while(!request() &amp;&amp; retry–)<br>sched_yield();   // or usleep(100)  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/22/(链表进阶)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（七）/" rel="contents">
+            <a class="btn" href="/2015/01/07/分布式系统设计概要笔记-三/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -624,7 +925,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/24/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/05/分布式系统设计概要笔记-二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -643,7 +944,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/09/24/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）/" itemprop="url">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）</a></h1>
+                <a class="post-title-link" href="/2015/01/05/分布式系统设计概要笔记-二/" itemprop="url">分布式系统设计概要笔记-二</a></h1>
         
 
         <div class="post-meta">
@@ -655,8 +956,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-24T19:17:32+08:00">
-                2014-09-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-05T23:28:22+08:00">
+                2015-01-05
               </time>
             
 
@@ -678,8 +979,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
+                  <a href="/categories/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
                   </a>
                 </span>
 
@@ -716,318 +1017,16 @@
 
       
         
-          <h2 id="二叉搜索树-又称二叉查找树或二叉排序树"><a href="#二叉搜索树-又称二叉查找树或二叉排序树" class="headerlink" title="二叉搜索树(又称二叉查找树或二叉排序树)"></a><strong>二叉搜索树(又称二叉查找树或二叉排序树)</strong></h2><blockquote>
-<p>有了上面二叉树的基础, 我们继续学习二叉搜索树.<br>我们这里也不给他那种晦涩难懂的定义, 感性的认识二叉搜索树.<br>直接看图, 很容易看得出来, 二叉搜索树每个结点的左孩子都小于右孩子.<br><img src="http://img.blog.csdn.net/20170806185002946?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><strong>因为具有n个结点的完全二叉树的最大高度为log2n+1</strong><br><strong>而二叉搜索树的查询/增加的时间复杂度都是O(h), h为树的高度,所以复杂度可以看作O(logn), 所以很明显上图中的a树比b树要高效.</strong></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/09/24/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（六）/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/23/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/23/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）/" itemprop="url">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-23T12:11:22+08:00">
-                2014-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a><strong>遍历</strong></h3><p>如上图得到的相应的遍历的序列分别为：</p>
+          <h1 id="分布式系统特性"><a href="#分布式系统特性" class="headerlink" title="分布式系统特性"></a>分布式系统特性</h1><p>CAP是分布式系统里最著名的理论，wiki百科如下</p>
 <ul>
-<li>先序遍历 ： ABCDEGF</li>
-<li>中序遍历 ： CBEGDFA</li>
-<li>后序遍历 ： CGEFDBA</li>
+<li>Consistency(all nodes see the same data at the same time)</li>
+<li>Availability (a guarantee that every request receives a response about whether it was successful or failed)</li>
+<li>Partition tolerance (the system continues to operate despite arbitrary message loss or failure of part of the system)<pre><code>(摘自 ：http://en.wikipedia.org/wiki/CAP_theorem)
+</code></pre></li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/09/23/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（五）/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（四）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（四）/" itemprop="url">(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（四）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-22T19:11:22+08:00">
-                2014-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.</p>
-</blockquote>
-<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a><strong>二叉树</strong></h2><p>这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：<br><img src="http://img.blog.csdn.net/20170805013035460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<blockquote>
-<p><strong>有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1</strong></p>
-</blockquote>
-<p>二叉树的二叉链式存储方案的代码表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef struct BinaryTreeNode</div><div class="line">&#123;</div><div class="line">	int data;</div><div class="line">	BinaryTreeNode *LeftChild, *RightChild;</div><div class="line">	// BTN *LeftChild, *RightChild; // error : BTN doesn&apos;t name a typecat</div><div class="line">&#125;BTN, *BTN_Ptr;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/09/22/(二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（四）/" rel="contents">
+            <a class="btn" href="/2015/01/05/分布式系统设计概要笔记-二/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1069,7 +1068,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1117,7 +1116,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1139,7 +1138,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

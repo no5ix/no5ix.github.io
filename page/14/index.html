@@ -327,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/27/MySQL一些需要注意的小细节/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/18/linux一些不要想当然的事(一)之目录权限/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -346,7 +346,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/02/27/MySQL一些需要注意的小细节/" itemprop="url">MySQL一些需要注意的小细节</a></h1>
+                <a class="post-title-link" href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/" itemprop="url">linux一些不要想当然的事(一)之目录权限</a></h1>
         
 
         <div class="post-meta">
@@ -358,8 +358,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-27T22:51:11+08:00">
-                2015-02-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T17:11:52+08:00">
+                2015-03-18
               </time>
             
 
@@ -381,8 +381,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -419,12 +419,12 @@
 
       
         
-          <h2 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a><strong>distinct关键字</strong></h2><blockquote>
-<p>distinct是应用于所有列的, 而不是某一个列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 12   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one, two from test_table;</div><div class="line">+------+------+</div><div class="line">| one  | two  |</div><div class="line">+------+------+</div><div class="line">| 56   | 12   |</div><div class="line">| 52   | 10   |</div><div class="line">| 56   | 13   |</div><div class="line">+------+------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct one from test_table;</div><div class="line">+------+</div><div class="line">| one  |</div><div class="line">+------+</div><div class="line">| 56   |</div><div class="line">| 52   |</div><div class="line">+------+</div><div class="line">2 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
+          <h2 id="目录的可读-可写-可执行权限"><a href="#目录的可读-可写-可执行权限" class="headerlink" title="目录的可读/可写/可执行权限"></a><strong>目录的可读/可写/可执行权限</strong></h2><blockquote>
+<p>不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!<br>记忆技巧 : 档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/02/27/MySQL一些需要注意的小细节/" rel="contents">
+            <a class="btn" href="/2015/03/18/linux一些不要想当然的事(一)之目录权限/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -475,7 +475,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/10/python中的__name__和__main()__/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/11/Linux常用运维命令(df和free)笔记整理(三)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nosix">
@@ -494,7 +494,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/02/10/python中的__name__和__main()__/" itemprop="url">python中的__name__和__main()__</a></h1>
+                <a class="post-title-link" href="/2015/03/11/Linux常用运维命令(df和free)笔记整理(三)/" itemprop="url">Linux常用运维命令(df和free)笔记整理(三)</a></h1>
         
 
         <div class="post-meta">
@@ -506,8 +506,505 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-10T22:19:29+08:00">
-                2015-02-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-11T12:16:56+08:00">
+                2015-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="df"><a href="#df" class="headerlink" title="df"></a><strong>df</strong></h1><blockquote>
+<p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+</blockquote>
+<ul>
+<li>-a或–all：包含全部的文件系统；</li>
+<li>–block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
+<li>-h或–human-readable：以可读性较高的方式来显示信息；</li>
+<li>-H或–si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
+<li>-i或–inodes：显示inode的信息；</li>
+<li>-k或–kilobytes：指定区块大小为1024字节；</li>
+<li>-l或–local：仅显示本地端的文件系统；</li>
+<li>-m或–megabytes：指定区块大小为1048576字节；</li>
+<li>–no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
+<li>-P或–portability：使用POSIX的输出格式；</li>
+<li>–sync：在取得磁盘使用信息前，先执行sync指令；</li>
+<li>-t&lt;文件系统类型&gt;或–type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
+<li>-T或–print-type：显示文件系统的类型；</li>
+<li>-x&lt;文件系统类型&gt;或–exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
+<li>–help：显示帮助；</li>
+<li>–version：显示版本信息</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/11/Linux常用运维命令(df和free)笔记整理(三)/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/09/Linux常用运维命令(netstat和lsof)笔记整理(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/09/Linux常用运维命令(netstat和lsof)笔记整理(二)/" itemprop="url">Linux常用运维命令(netstat和lsof)笔记整理(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-09T23:16:16+08:00">
+                2015-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat "></a><strong>netstat </strong></h1><blockquote>
+<p>netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
+</blockquote>
+<ul>
+<li>-a或–all：显示所有连线中的Socket；</li>
+<li>-A&lt;网络类型&gt;或–&lt;网络类型&gt;：列出该网络类型连线中的相关地址；</li>
+<li>-c或–continuous：持续列出网络状态；</li>
+<li>-C或–cache：显示路由器配置的快取信息；</li>
+<li>-e或–extend：显示网络其他相关信息；</li>
+<li>-F或–fib：显示FIB；</li>
+<li>-g或–groups：显示多重广播功能群组组员名单；</li>
+<li>-h或–help：在线帮助；</li>
+<li>-i或–interfaces：显示网络界面信息表单；</li>
+<li>-l或–listening：显示监控中的服务器的Socket；</li>
+<li>-M或–masquerade：显示伪装的网络连线；</li>
+<li>-n或–numeric：直接使用ip地址，而不通过域名服务器；</li>
+<li>-N或–netlink或–symbolic：显示网络硬件外围设备的符号连接名称；</li>
+<li>-o或–timers：显示计时器；</li>
+<li>-p或–programs：显示正在使用Socket的程序识别码和程序名称；</li>
+<li>-r或–route：显示Routing Table；</li>
+<li>-s或–statistice：显示网络工作信息统计表；</li>
+<li>-t或–tcp：显示TCP传输协议的连线状况；</li>
+<li>-u或–udp：显示UDP传输协议的连线状况；</li>
+<li>-v或–verbose：显示指令执行过程；</li>
+<li>-V或–version：显示版本信息；</li>
+<li>-w或–raw：显示RAW传输协议的连线状况；</li>
+<li>-x或–unix：此参数的效果和指定”-A unix”参数相同；</li>
+<li>–ip或–inet：此参数的效果和指定”-A inet”参数相同。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/09/Linux常用运维命令(netstat和lsof)笔记整理(二)/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/07/Linux常用运维命令(iostat)笔记整理(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/07/Linux常用运维命令(iostat)笔记整理(一)/" itemprop="url">Linux常用运维命令(iostat)笔记整理(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-07T19:46:26+08:00">
+                2015-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在linux服务器开发过程中， 经常需要各种命令配合来查看各种状态，所以整理了一些老的笔记来备忘。</p>
+<h1 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a><strong>iostat</strong></h1><blockquote>
+<p>iostat主要用于监控系统设备的IO负载情况，iostat首次运行时显示自系统启动开始的各项统计信息，之后运行iostat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息</p>
+</blockquote>
+<ul>
+<li>-c 仅显示CPU统计信息.与-d选项互斥.</li>
+<li>-d 仅显示磁盘统计信息.与-c选项互斥.</li>
+<li>-k 以K为单位显示每秒的磁盘请求数,默认单位块.</li>
+<li>-t  在输出数据时,打印搜集数据的时间.</li>
+<li>-V 打印版本号和帮助信息.</li>
+<li>-x  输出扩展信息.</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/07/Linux常用运维命令(iostat)笔记整理(一)/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/02/python的struct模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nosix">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/02/python的struct模块/" itemprop="url">python的struct模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-02T21:49:19+08:00">
+                2015-03-02
               </time>
             
 
@@ -568,469 +1065,40 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#hello.py</div><div class="line">def sayHello():</div><div class="line">    str=&quot;hello&quot;</div><div class="line">    print(str);</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">    print (&apos;This is main of module &quot;hello.py&quot;&apos;)</div><div class="line">    sayHello()</div></pre></td></tr></table></figure>
-<p>python作为一种脚本语言，我们用python写的各个module都可以包含以上那么一个累死c中的main函数，只不过python中的这种<code>__main__</code>与c中有一些区别，类似于php的魔术那一套, 主要体现在：</p>
-<p>1、当单独执行该module时，比如单独执行以上hello.py： python hello.py，则输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">This is main of module &quot;hello.py&quot;</div><div class="line">hello</div></pre></td></tr></table></figure>
-<p>可以理解为<code>&quot;if __name__==&quot;__main__&quot;:&quot;</code>这一句与c中的main()函数所表述的是一致的，即作为入口；</p>
-<p>2、当该module被其它module 引入使用时，其中的<code>&quot;if __name__==&quot;__main__&quot;:&quot;</code></p>
-<p>所表示的Block不会被执行,</p>
-<p>这是因为此时module被其它module引用时，</p>
-<p>其<code>__name__</code>的值将发生变化，<code>__name__</code>的值将会是module的名字。</p>
-<p>比如在python shell中import hello后，查看<code>hello.__name__</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import hello</div><div class="line">hello.__name__</div><div class="line">&apos;hello&apos;</div></pre></td></tr></table></figure>
-<p>3、因此，在python中，当一个module作为整体被执行时,moduel.<strong>name</strong>的值将是<code>&quot;__main__&quot;；</code></p>
-<p>而当一个module被其它module引用时，<code>module.__name__</code>将是module自己的名字，</p>
-<p>当然一个module被其它module引用时，其本身并不需要一个可执行的入口main了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/10/分布式系统设计概要笔记-四/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/01/10/分布式系统设计概要笔记-四/" itemprop="url">分布式系统设计概要笔记-四</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-10T23:58:12+08:00">
-                2015-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分布式系统设计实践"><a href="#分布式系统设计实践" class="headerlink" title="分布式系统设计实践"></a>分布式系统设计实践</h1><p>基本的理论和策略简单介绍这么多，后面本人会从工程的角度，细化说一下”数据分布“、”副本控制”和”高可用协议”</p>
-<p>在分布式系统中，无论是计算还是存储，处理的对象都是数据，数据不存在于一台机器或进程中，</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/01/10/分布式系统设计概要笔记-四/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/07/分布式系统设计概要笔记-三/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/01/07/分布式系统设计概要笔记-三/" itemprop="url">分布式系统设计概要笔记-三</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-07T13:28:22+08:00">
-                2015-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分布式系统设计策略"><a href="#分布式系统设计策略" class="headerlink" title="分布式系统设计策略"></a>分布式系统设计策略</h1><h2 id="重试机制"><a href="#重试机制" class="headerlink" title="重试机制"></a>重试机制</h2><p>一般情况下，写一段网络交互的代码，发起rpc或者http，都会遇到请求超时而失败情况。</p>
-<p>可能是网络抖动(暂时的网络变更导致包不可达，比如拓扑变更)或者对端挂掉。</p>
-<p>这时一般处理逻辑是将请求包在一个重试循环块里，如下：<br>[cpp] view plain copy print?<br>int retry = 3;<br>while(!request() &amp;&amp; retry–)<br>sched_yield();   // or usleep(100)  </p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/01/07/分布式系统设计概要笔记-三/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/05/分布式系统设计概要笔记-二/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nosix">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/01/05/分布式系统设计概要笔记-二/" itemprop="url">分布式系统设计概要笔记-二</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-05T23:28:22+08:00">
-                2015-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分布式系统特性"><a href="#分布式系统特性" class="headerlink" title="分布式系统特性"></a>分布式系统特性</h1><p>CAP是分布式系统里最著名的理论，wiki百科如下</p>
+            <blockquote>
+<p>struct, 这玩意c/c++也有, 顾名思义, 能联想到这玩意是啥了</p>
+</blockquote>
+<p>模块的主要作用就是对python基本类型值与</p>
+<p>用python字符串格式表示的C struct类型间</p>
+<p>的转化（This module performs conversions between Python values and C structs represented as Python strings.）</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import struct</div><div class="line">import binascii</div><div class="line">values = (1, &apos;abc&apos;, 2.7)</div><div class="line">s = struct.Struct(&apos;I3sf&apos;)</div><div class="line">packed_data = s.pack(*values)</div><div class="line">unpacked_data = s.unpack(packed_data)</div><div class="line"> </div><div class="line">print &apos;Original values:&apos;, values</div><div class="line">print &apos;Format string :&apos;, s.format</div><div class="line">print &apos;Uses :&apos;, s.size, &apos;bytes&apos;</div><div class="line">print &apos;Packed Value :&apos;, binascii.hexlify(packed_data)</div><div class="line">print &apos;Unpacked Type :&apos;, type(unpacked_data), &apos; Value:&apos;, unpacked_data</div></pre></td></tr></table></figure>
+<p>输出为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Original values: (1, &apos;abc&apos;, 2.7) </div><div class="line">Format string : I3sf </div><div class="line">Uses : 12 bytes </div><div class="line">Packed Value : 0100000061626300cdcc2c40 </div><div class="line">Unpacked Type : &lt;type &apos;tuple&apos;&gt;  Value: (1, &apos;abc&apos;, 2.700000047683716)</div></pre></td></tr></table></figure></p>
+<p>代码中，</p>
+<p>首先定义了一个元组数据，</p>
+<p>包含int、string、float三种数据类型，</p>
+<p>然后定义了struct对象，并制定了format‘I3sf’，</p>
 <ul>
-<li>Consistency(all nodes see the same data at the same time)</li>
-<li>Availability (a guarantee that every request receives a response about whether it was successful or failed)</li>
-<li>Partition tolerance (the system continues to operate despite arbitrary message loss or failure of part of the system)<pre><code>(摘自 ：http://en.wikipedia.org/wiki/CAP_theorem)
-</code></pre></li>
+<li><p>I 表示int，</p>
+</li>
+<li><p>3s表示三个字符长度的字符串，</p>
+</li>
+<li><p>f 表示 float。最后通过struct的pack和unpack进行打包和解包。通过输出结果可以发现，</p>
+</li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/01/05/分布式系统设计概要笔记-二/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>value被pack之后，</p>
+<p>转化为了一段二进制字节串，</p>
+<p>而unpack可以把该字节串再转换回一个元组，</p>
+<p>但是值得注意的是对于float的精度发生了改变，</p>
+<p>这是由一些比如操作系统等客观因素所决定的。打包之后的数据所占用的字节数与C语言中的struct十分相似。定义format可以参照官方api提供的对照表：</p>
+<img src="/2015/03/02/python的struct模块/py_struct1.png" alt="py_struct1.png" title="">
+<h2 id="字节序设置"><a href="#字节序设置" class="headerlink" title="字节序设置"></a>字节序设置</h2><p>另一方面，打包的后的字节顺序默认上是由操作系统的决定的，</p>
+<p>当然struct模块也提供了自定义字节顺序的功能，</p>
+<p>可以指定大端存储、小端存储等特定的字节顺序，</p>
+<p>对于底层通信的字节顺序是十分重要的，</p>
+<p>不同的字节顺序和存储方式也会导致字节大小的不同。在format字符串前面加上特定的符号即可以表示不同的字节顺序存储方式，</p>
+<p>例如采用小端存储 s = struct.Struct(‘&lt;I3sf’)就可以了。官方api library 也提供了相应的对照列表：</p>
+<img src="/2015/03/02/python的struct模块/py_struct2.png" alt="py_struct2.png" title="">
+          
         
       
     </div>
@@ -1068,7 +1136,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1116,7 +1184,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1138,7 +1206,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

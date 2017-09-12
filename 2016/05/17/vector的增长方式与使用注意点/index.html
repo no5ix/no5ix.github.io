@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-01T13:51:35.136Z">
+<meta property="og:updated_time" content="2017-09-08T05:54:26.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vector的增长方式与使用注意点">
 <meta name="twitter:description" content="增长方式为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存储 。  假定容器中元素是连续存储 的， 且容器的大小是可变的 ， 考虑 向 vector 或 string中添加元素会发生什么 : 如果没有空间容纳新元素，容器不可能简单地将它添加到内存中其他位置一一因为元素必须连续存储。 容器必须分配新的内存空间来保存己有元素和新元素 ，  将已有元素从 旧位置移动到新">
@@ -591,6 +591,7 @@
 </tr>
 </tbody>
 </table>
+<h2 id="一个vector基本例子"><a href="#一个vector基本例子" class="headerlink" title="一个vector基本例子"></a>一个vector基本例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#include &lt;vector&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	vector&lt;char&gt; alpha_vector;</div><div class="line">	for (int i = 0; i &lt; 10; i++)</div><div class="line">	&#123;</div><div class="line">		alpha_vector.push_back(i + 65);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	vector&lt;char&gt;::iterator iter;</div><div class="line"></div><div class="line">	for (iter = alpha_vector.begin(); iter != alpha_vector.end(); ++iter)</div><div class="line">	&#123;</div><div class="line">		cout &lt;&lt; *iter &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -718,7 +719,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -740,7 +741,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -788,7 +789,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#增长方式"><span class="nav-text">增长方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器失效"><span class="nav-text">迭代器失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity-amp-size"><span class="nav-text">capacity & size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造-amp-销毁"><span class="nav-text">构造 & 销毁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#增长方式"><span class="nav-text">增长方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器失效"><span class="nav-text">迭代器失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity-amp-size"><span class="nav-text">capacity & size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造-amp-销毁"><span class="nav-text">构造 & 销毁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个vector基本例子"><span class="nav-text">一个vector基本例子</span></a></li></ol></div>
             
 
           </div>

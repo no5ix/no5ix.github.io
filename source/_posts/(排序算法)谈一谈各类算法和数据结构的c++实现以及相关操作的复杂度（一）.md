@@ -1,0 +1,23 @@
+---
+title: (排序算法)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（一）
+date: 2014-08-19 17:38:55
+tags:
+- 排序
+- c++
+categories:
+- c++
+---
+
+> 因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。
+
+
+
+
+## **必须掌握的知识**
+![这里写图片描述](http://img.blog.csdn.net/20170804205144200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+<!-- more -->
+
+## **常用算法的复杂度**
+
+![这里写图片描述](http://img.blog.csdn.net/20170804201637199?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)

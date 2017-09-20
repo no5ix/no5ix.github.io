@@ -1,0 +1,60 @@
+---
+title: (二叉树)谈一谈各类算法和数据结构的c++实现以及相关操作的复杂度（四）
+date: 2014-09-22 19:11:22
+tags:
+- 二叉树
+- c++
+categories:
+- c++
+---
+
+
+>接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.
+
+## **二叉树**
+这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：
+![这里写图片描述](http://img.blog.csdn.net/20170805013035460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+>**有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1**
+
+二叉树的二叉链式存储方案的代码表示：
+
+```
+typedef struct BinaryTreeNode
+{
+	int data;
+	BinaryTreeNode *LeftChild, *RightChild;
+	// BTN *LeftChild, *RightChild; // error : BTN doesn't name a typecat
+}BTN, *BTN_Ptr;
+```
+![这里写图片描述](http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+<!-- more -->
+
+### **创建**
+
+```
+int create_BT(BTN_Ptr *btp)
+{
+    int temp_data = 0;
+    std::cin >> temp_data;
+    if (temp_data == 0)
+    {
+        *btp = NULL;
+        printf("leaf\n");
+    }
+    else
+    {
+        if ( !(*btp = (BTN_Ptr)malloc( sizeof(BTN) ) ) ) 
+        {
+            printf("error : malloc error");
+            return -1;
+        }
+        (*btp)->data = temp_data;
+        create_BT(&((*btp)->LeftChild));
+        create_BT(&((*btp)->RightChild));
+    } 
+    return 0;
+}
+```
+

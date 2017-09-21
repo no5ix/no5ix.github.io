@@ -18,7 +18,15 @@ categories:
 </span> <div><span style="font-size:18px;">
  注：以下的代码的测试结果均是基于Ubuntu 14.04 64位系统下的G++ 4.8.2，若在其他的系统上或使用其他的编译器，可能会运行出不同的结果。 
 </span> </div></div></div></div><div><span style="font-size:18px;">
-</span> </div><div><span style="font-size:18px;color:red;">1、含有非static成员变量及成员函数的类的对象的内存分布</span><span style="font-size:18px;"> 
+</span> </div>
+
+<!-- 
+<span style="font-size:18px;color:red;">1、含有非static成员变量及成员函数的类的对象的内存分布</span> -->
+
+# 1、含有非static成员变量及成员函数的类的对象的内存分布
+
+<div>
+<span style="font-size:18px;"> 
  </span><div><span style="font-size:18px;">类Persion的定义如下： </span>
  <pre code_snippet_id="672528" snippet_file_name="blog_20150522_1_9940117"  code_snippet_id="672528" snippet_file_name="blog_20150522_1_9940117" name="code" class="cpp">class Person
 {
@@ -61,8 +69,14 @@ categories:
  <div>![](http://img.blog.csdn.net/20150522023352769?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
  </div></div></div>
  </div>
- </div></div></div></div></div></div></div></div></div></div><div><span style="font-size:18px;color:red;">2、含有static和非static成员变量和成员函数的类的对象的内存分布
- </span><span style="font-size:18px;"> </span><div><span style="color:red;"><span style="color:black;"><span style="font-size:18px;">
+ </div></div></div></div></div></div></div></div></div></div>
+
+<!-- <span style="font-size:18px;color:red;">2、含有static和非static成员变量和成员函数的类的对象的内存分布
+ </span> -->
+
+ # 2、含有static和非static成员变量和成员函数的类的对象的内存分布
+
+ <div><span style="font-size:18px;"> </span><div><span style="color:red;"><span style="color:black;"><span style="font-size:18px;">
  向Person类中加入一个static成员变量和一个static成员函数，如下：</span>
 </span></span><pre code_snippet_id="672528" snippet_file_name="blog_20150522_3_7177560"  code_snippet_id="672528" snippet_file_name="blog_20150522_3_7177560" name="code" class="cpp">class Person
 {
@@ -90,7 +104,12 @@ categories:
 其内存分布如下图所示：</span>
 </div></div><div>![](http://img.blog.csdn.net/20150522023400565?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-</div></div></div></div><span style="font-size:18px;color:red;">3、</span><span style="font-family:微软雅黑;font-size:18px;color:#000000;background-color:#FFFFFF;font-style:normal;font-weight:normal;text-align:left;"><span style="color:black;"><span style="color:red;">加入virtual成员函数的类的对象的内存分布</span>
+</div></div></div></div>
+
+<!-- <span style="font-size:18px;color:red;">3、</span><span style="font-family:微软雅黑;font-size:18px;color:#000000;background-color:#FFFFFF;font-style:normal;font-weight:normal;text-align:left;"><span style="color:black;"><span style="color:red;">加入virtual成员函数的类的对象的内存分布</span> -->
+
+# 3、加入virtual成员函数的类的对象的内存分布
+
  </span></span><span style="font-size:18px;">  </span><div><span style="font-size:18px;">
 在Person类中加入一个virtual函数，并把前面的print函数修改为函数，如下： </span>
  <pre code_snippet_id="672528" snippet_file_name="blog_20150522_4_3212754"  code_snippet_id="672528" snippet_file_name="blog_20150522_4_3212754" name="code" class="cpp">class Person
@@ -145,7 +164,16 @@ categories:
 </span><div><span style="font-size:18px;">注：虚函数的顺序是按虚函数定义顺序定义的，但是它还包含其他的一些字段，本人还未明白它是什么，在下一节会详细说明虚函数表的内容。</span>
 </div></div><div>![](http://img.blog.csdn.net/20150522023548880?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGppYW5odWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-<div><span style="font-size:18px;color:red;">4、虚函数表（vtbl）的内容及</span><span style="font-size:18px;color:red;">函数指针存放顺序</span><span style="font-size:18px;">
+
+<div>
+<!-- 
+<div>
+# 虚函数表（vtbl）的内容及函数指针存放顺序
+</div> -->
+
+<span style="font-size:18px;color:red;">4、虚函数表（vtbl）的内容及</span><span style="font-size:18px;color:red;">函数指针存放顺序</span>
+
+<span style="font-size:18px;">
 </span><div><span style="font-size:18px;">在第3节中，我们可以知道了指向虚函数表的指针（vptr）在类中的位置了，而函数表中的数据都是函数指针，于是便可利用这点来遍历虚函数表，并测试出虚函数表中的内容。
 </span><div><span style="font-size:18px;">
 </span><div><span style="font-size:18px;">测试代码如下：</span>
@@ -183,7 +211,13 @@ func();</pre>
 <div>
 <div><div><span style="font-size:18px;">从上图可以看出，遍历虚函数表，并根据虚函数表中的函数地址调用函数，它先调用print函数，再调用job函数，最后调用析构函数。函数的调用顺序与Person类中的虚函数的定义顺序一致，其内存分布与第3节中的对象内存分布图相一致。从代码和运行结果，可以看出，虚函数表以NULL标志表的结束。但是虚函数表中还含有其他的数据，本人还没有清楚其作用。
 </span><div><span style="font-size:18px;">
-</span><div><span style="font-size:18px;color:red;">5、继承对于类的对象的内存分布的影响</span><span style="font-size:18px;">
+</span>
+
+
+
+<!-- # 继承对于类的对象的内存分布的影响 -->
+
+<div><span style="font-size:18px;color:red;">5、继承对于类的对象的内存分布的影响</span><span style="font-size:18px;">
 </span><div><span style="font-size:18px;">本文并不打算详细地介绍继承对对象的内存分布的影响，也不介绍虚函数的实现机制。这里主要给出一个经过本人测试的大概的对象内存模型，由于代码较多，不一一贴出。假设所有的类都有非static的成员变量和成员函数、static的成员变量及成员函数和virtual函数。
 </span><div><div><div><span style="font-size:18px;">1）单继承（只有一个父类）
 类的继承关系为：class Derived : public Base</span>

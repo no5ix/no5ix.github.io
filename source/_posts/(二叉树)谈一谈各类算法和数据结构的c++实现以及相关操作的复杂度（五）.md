@@ -9,6 +9,8 @@ categories:
 ---
 
 
+![这里写图片描述](http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
 
 
 ### **遍历**
@@ -155,7 +157,7 @@ void post_order_traverse_non_recursion( const BTN_Ptr *btp)
 
 ### 交换所有左右孩子
 
-
+```
 /*交换二叉树所有左右孩子结点
 *@param pstRoot 指向二叉树根结点指针
 */
@@ -173,3 +175,4 @@ void SwapBinaryTree(LPBINARYNODE pstRoot)
     }
 
 }
+```

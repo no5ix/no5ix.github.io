@@ -151,3 +151,25 @@ void post_order_traverse_non_recursion( const BTN_Ptr *btp)
 }
 
 ```
+
+
+### 交换所有左右孩子
+
+
+/*交换二叉树所有左右孩子结点
+*@param pstRoot 指向二叉树根结点指针
+*/
+void SwapBinaryTree(LPBINARYNODE pstRoot)
+{
+    if (pstRoot != NULL)
+    {
+        LPBINARYNODE temp = NULL;
+        temp = pstRoot->pLChild;
+        pstRoot->pLChild = pstRoot->pRChild;
+        pstRoot->pRChild = temp;
+
+        SwapBinaryTree(pstRoot->pLChild);
+        SwapBinaryTree(pstRoot->pRChild);
+    }
+
+}

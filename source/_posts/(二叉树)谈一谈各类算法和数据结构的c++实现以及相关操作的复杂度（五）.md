@@ -157,7 +157,89 @@ void post_order_traverse_non_recursion( const BTN_Ptr *btp)
 
 ### 交换所有左右孩子
 
+#### 代码实例
+
 ```
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+
+struct BinaryNode
+{
+    struct BinaryNode *pRChild;
+    struct BinaryNode *pLChild;
+    char pData;
+};
+typedef struct BinaryNode * LPBINARYNODE;
+
+
+int create_BT(LPBINARYNODE *btp)
+{
+    char temp_data = 0;
+    std::cin >> temp_data;
+    if (temp_data == '1')
+    {
+        *btp = NULL;
+        printf("leaf\n");
+    }
+    else
+    {
+        if ( !(*btp = (LPBINARYNODE)malloc( sizeof(BinaryNode) ) ) ) 
+        {
+            printf("error : malloc error");
+            return -1;
+        }
+        (*btp)->pData = temp_data;
+        create_BT(&((*btp)->pLChild));
+        create_BT(&((*btp)->pRChild));
+    } 
+    return 0;
+}
+
+void CreateBinaryTree(LPBINARYNODE &pstRoot)
+{
+
+    char data = 0;
+    scanf("%c", &data);
+    fflush(stdin);
+    //std::cin >> data;
+    //printf("data is : %c \n", data);
+
+    if (data == '1')
+    {
+        pstRoot = NULL;
+        printf("leaf\n");
+    }
+    else
+    {
+
+        pstRoot = new BinaryNode;
+
+        if (!pstRoot)
+        {
+            printf("malloc error");
+            return;
+        }
+
+        pstRoot->pData = data;
+        CreateBinaryTree(pstRoot->pLChild);
+        CreateBinaryTree(pstRoot->pRChild);
+
+    }
+    
+}
+
+void PreOrderTraverse(LPBINARYNODE pstRoot)
+{
+    if (pstRoot)
+    {
+        printf("%c\n", pstRoot->pData);
+        PreOrderTraverse(pstRoot->pLChild);
+        PreOrderTraverse(pstRoot->pRChild);
+    }
+}
+
 /*交换二叉树所有左右孩子结点
 *@param pstRoot 指向二叉树根结点指针
 */
@@ -175,4 +257,72 @@ void SwapBinaryTree(LPBINARYNODE pstRoot)
     }
 
 }
+
+int main()
+{
+    LPBINARYNODE test_bt = NULL;
+    CreateBinaryTree(test_bt);
+
+    //create_BT(&test_bt);
+
+    printf("create finished!\n");
+
+    PreOrderTraverse(test_bt);
+    
+    printf("============\n");
+
+    SwapBinaryTree(test_bt);
+
+    PreOrderTraverse(test_bt);
+
+    return 0;
+}
+```
+
+#### 演示结果 ：
+
+对于本文开头的那张图中的二叉树我们得到以下演示结果：
+
+```
+a
+b
+c
+1
+leaf
+1
+leaf
+d
+e
+1
+leaf
+g
+1
+leaf
+1
+leaf
+f
+1
+leaf
+1
+leaf
+1
+leaf
+create finished!
+a
+b
+c
+d
+e
+g
+f
+============
+a
+b
+d
+f
+e
+g
+c
+请按任意键继续. . .
+
 ```

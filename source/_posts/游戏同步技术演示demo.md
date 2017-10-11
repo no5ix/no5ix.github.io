@@ -1,5 +1,5 @@
 ---
-title: 游戏同步技术
+title: 游戏同步技术演示demo
 date: 2017-10-10 11:18:54
 tags:
 - 游戏同步
@@ -10,15 +10,11 @@ categories:
 
 # 怎么玩
 
-- **移动蓝球** ：受 Player 1控制, 用左右箭头键
-- **移动红球** ：受Player 2控制, 用A和D键
+- **移动蓝球** ：受 Player1 控制, 用左右箭头键
+- **移动红球** ：受 Player2 控制, 用A和D键
   
-</head>
 <body>
 <div class="main">
-<header>
-<h1 class="title">Fast-Paced Multiplayer: Sample Code and Live Demo</h1>
-</header>
 
 <style>
 canvas {
@@ -26,6 +22,7 @@ canvas {
     padding:0;
     background: lightgray;
 }</style>
+
 <p>This is a sample implementation of a client-server architecture demonstrating the main concepts explained in my <a href="http://www.gabrielgambetta.com/client-side-prediction-live-demo.html">Fast-Paced Multiplayer(原文出处)</a> series of articles. It won’t make much sense unless you’ve read the articles first.</p>
 <p>The code is pure JavaScript and it’s fully contained in this page. It’s less than 500 lines of code, including a lot of comments, showing that once you really understand the concepts, implementing them is relatively straightforward.</p>
 <p>Although it’s not production-quality code, you may use this code in your own applications. Credit is appreciated although not required.</p>

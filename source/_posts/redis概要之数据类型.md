@@ -23,6 +23,8 @@ categories:
 
 > Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好
 
+<!-- more -->
+
 ## String(字符串)
 
 string是redis最基本的类型，你可以理解成与Memcached一模一样的类型，

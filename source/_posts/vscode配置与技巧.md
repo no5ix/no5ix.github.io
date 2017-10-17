@@ -56,4 +56,33 @@ categories:
 
 ## 解决方案
 
-不过vscode多行编辑的ctrl+d快捷键被插件占用了, 所以我们要把vscode原来的ctrl+d改为ctrl+q
+- 不过vscode多行编辑的ctrl+d快捷键被插件占用了, 所以我们要把vscode原来的ctrl+d改为ctrl+q
+- vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列编辑）。
+`
+　光标移到某行行首，上下键选择行，按I（i的大写字母），输入##，
+  然后按<ESC>键，这样就在多行行首添加##了。也可以在多行的固定位置添加固定字符。
+  切记一定要按了I之后再按键盘上的home或者end键光标才能百分之百到行首或者行尾
+　如果要删除这些##，进入visual block模式，选中这些##，按d即可。
+`
+- 还可以使用vscode自带的多行编辑快捷键, alt+shift+拖动鼠标左键或者alt+左键多处选择
+
+# Lua插件
+
+参考[LuaIde文档导航页](http://www.jianshu.com/p/47fbe1de123d)
+
+到这个页面下载他的免费版本安装即可.
+
+# Python插件
+
+直接安装vscode商城中推荐的作者为Don Jayamanne的python插件
+
+# vscode常用快捷键
+
+- ctrl+p 搜文件
+- ctrl+shift+o 搜当前文件的符号
+- f12 转到定义
+- f12+ctrl 转到声明
+- alt+-> 导航前进
+- alt+<- 导航后退
+
+

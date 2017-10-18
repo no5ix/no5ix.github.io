@@ -129,9 +129,9 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 
 ## lua插件三件套
 
-1. keyring 的 Lua插件来完成提示
-2. xxxg0001的lua-for-vscode来完成跳转
-3. trixnz的vscode-lua来完成代码linting和列出属性以及方法
+- keyring 的 Lua插件来完成提示
+- xxxg0001的lua-for-vscode来完成跳转
+- trixnz的vscode-lua来完成代码linting和列出属性以及方法
 
 # Python插件
 

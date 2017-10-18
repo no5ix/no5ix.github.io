@@ -1,5 +1,5 @@
 ---
-title: Lua网络编程环境简单安装
+title: Lua的win和linux环境简单安装
 date: 2015-11-08 19:29:22
 tags:
 - lua
@@ -7,15 +7,15 @@ categories:
 - 脚本
 ---
 
+# Linux环境
 
-
-# Install lua
+## Install lua
 
 sudo apt-get install lua5.1
 
 <!--more -->
 
-# luarocks
+## luarocks
 
 到luarocks的官网下载luarocks, 直接apt-get的已经太老旧, 默认的配置文件有错
 
@@ -46,7 +46,7 @@ luarocks 命令：
 - luarocks    unpack                 Unpack the contents of a rock.
 
 
-# Install lua-socket
+## Install lua-socket
 
 如果有安装 Lua 模块的安装和部署工具 -- luarocks，
 
@@ -54,7 +54,7 @@ luarocks 命令：
 
 luarocks install luasocket
 
-# 关于json
+## 关于json
 
 如果想安装一个解析 JSON(JavaScript Object Notation) 的模块，
 可以用 search 参数先搜索一下有什么可安装的解析 JSON 的模块：
@@ -64,3 +64,11 @@ luarocks search json
 假设想安装一个名为 json4lua 模块，可以用 install 参数来安装：
 
 luarocks install json4lua
+
+# Windows环境
+
+## lua安装
+
+首先要安装一个微软依赖 : https://www.microsoft.com/en-us/download/details.aspx?id=3387&fa43d42b-25b5-4a42-fe9b-1634f450f5ee=True
+
+然后安装lua for windows : http://luaforge.net/projects/luaforwindows/

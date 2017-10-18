@@ -115,17 +115,23 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 
 # Lua插件
 
+## luaide国人的插件
 参考[LuaIde文档导航页](http://www.jianshu.com/p/47fbe1de123d)
 
 到这个页面下载他的免费版本安装即可.
 
-## 免费版本的已知问题 :
+### luaide免费版本的已知问题 :
 
 - 对于包含lua文件很多的文件夹来说:
 `他要扫描非常久, 而且每次都要扫描, 解决方案就是把要用的小文件夹单独开一个vscode窗口来工作`
 - 有时候不解析, 无法跳转或者无法列出当前文件的方法和属性: 
 ` 随便编辑一下这个lua文件, 再ctrl+z, 这个文件就被解析了`
 
+## lua插件三件套
+
+1. keyring 的 Lua插件来完成提示
+2. xxxg0001的lua-for-vscode来完成跳转
+3. trixnz的vscode-lua来完成代码linting和列出属性以及方法
 
 # Python插件
 

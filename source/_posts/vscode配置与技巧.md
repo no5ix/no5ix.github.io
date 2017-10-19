@@ -5,7 +5,7 @@ tags:
 - vscode
 - vim
 categories:
-- 脚本
+- 杂
 ---
 
 

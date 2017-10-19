@@ -5,3 +5,4 @@ db.json
 public/
 .deploy*/
 node_modules/
+.history/

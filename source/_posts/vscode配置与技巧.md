@@ -61,11 +61,11 @@ categories:
 - ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
 
-# 设置同步插件
+# 不同机器间同步vscode设置的插件(必装)
 
 Shan khan的Settings Sync插件, 可以同步你的快键键/用户设置/icon/snippet/主题等等, 这样你到另一台电脑上就可以同步你在公司所用的设置了
 
-# Vim插件
+# Vim插件(不推荐)
 
 > vscode的欢迎页就有推荐vim的插件, 几乎所有键盘映射都移植过来了,
 > 还加了一些特性,比如多行编辑.
@@ -122,6 +122,12 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 
 # Lua插件
 
+## lua插件三件套(推荐)
+
+- keyring 的 Lua插件来完成提示
+- xxxg0001的lua-for-vscode来完成跳转
+- trixnz的vscode-lua来完成代码linting和列出属性以及方法
+
 ## luaide国人的插件
 参考[LuaIde文档导航页](http://www.jianshu.com/p/47fbe1de123d)
 
@@ -134,11 +140,7 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 - 有时候不解析, 无法跳转或者无法列出当前文件的方法和属性: 
 ` 随便编辑一下这个lua文件, 再ctrl+z, 这个文件就被解析了`
 
-## lua插件三件套
 
-- keyring 的 Lua插件来完成提示
-- xxxg0001的lua-for-vscode来完成跳转
-- trixnz的vscode-lua来完成代码linting和列出属性以及方法
 
 # Python插件
 

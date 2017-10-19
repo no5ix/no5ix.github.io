@@ -10,7 +10,9 @@ categories:
 top: 2
 ---
 
-# fish
+# GitHub
+
+[GitHub](https://github.com/no5ix/fish)
 
 A fish flock AI Plugin for Unreal Engine 4
 
@@ -24,14 +26,13 @@ this Plugin version can Run **2000+** fishes at the same time
 
 ![OldDemoScreenshot.png](https://ooo.0o0.ooo/2016/10/18/58060a188d281.png)
 
-## Video Preview 
+# Video Preview 
 * Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
 
-## Download & Play
 
-#### **Download**
+# **Download**
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)
 
 	> 下载  [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU) 玩玩 
@@ -40,7 +41,7 @@ this Plugin version can Run **2000+** fishes at the same time
 
 
 
-#### **How to play**
+# **How to play**
 
 - *VR* : 
 
@@ -78,7 +79,7 @@ this Plugin version can Run **2000+** fishes at the same time
 
 
 
-## How to use
+# How to use
 
 place Plugins folder in your project root directory, then just like
 > 把Plugins文件夹放在你项目的根目录, 接下来如图
@@ -91,7 +92,7 @@ place Plugins folder in your project root directory, then just like
 
 ![HowToUse4](/img/HowToUse4.png)
 
-## About This 
+# About This 
 
 
 * Unreal Engine Version

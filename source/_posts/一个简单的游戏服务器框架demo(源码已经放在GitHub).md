@@ -12,7 +12,7 @@ top: 5
 ---
 
 # **GitHub**
-[GitHub地址](https://github.com/nosix1992/JoyServer "GitHub地址")
+[GitHub地址](https://github.com/no5ix/JoyServer "GitHub地址")
 
 # **框架简介**
 

@@ -63,7 +63,19 @@ categories:
 
 # 不同机器间同步vscode设置的插件(必装)
 
-Shan khan的Settings Sync插件, 可以同步你的快键键/用户设置/icon/snippet/主题等等, 这样你到另一台电脑上就可以同步你在公司所用的设置了
+> Shan khan的Settings Sync插件, 可以同步你的快键键/用户设置/icon/snippet/主题等等, 这样你
+> 另一台电脑上就可以同步你在公司所用的设置了.
+
+## 另一个机器也获得上传settings权限的方法
+
+> 这个是插件官方说明页面没有写的, 官方页面只教了你如何在另一台机器上下载之前机器的settings
+
+到另外一个机器也装上这个插件, 
+
+然后ctrl+shift+p调出控制命令板然后输出sync选中Sync : Advanced Options, 
+
+然后选中Edit Extension local settings, 就会打开一个配置文件, 然后填入你的token即可
+
 
 # Vim插件(不推荐)
 

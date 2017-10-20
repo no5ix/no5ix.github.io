@@ -20,6 +20,8 @@ SSH 的默认端口是 22，有时您或您的公司的防火墙会完全屏蔽�
 
 # ssh的config配置
 
+在home目录下的.ssh文件夹里新建一个config文件, 添加如下代码即可
+
 ```
 Host github.com
 User "xxxxx@email.com"

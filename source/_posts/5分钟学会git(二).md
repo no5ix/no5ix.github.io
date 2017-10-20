@@ -4,7 +4,7 @@ date: 2016-04-13 22:36:56
 tags: 
 - git
 categories:
-- linux
+- 杂
 ---
 
 ## **贮藏stash**

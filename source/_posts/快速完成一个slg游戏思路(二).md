@@ -15,7 +15,7 @@ tags:
 - ruby
 categories:
 - server
-top: 4
+top: 2
 ---
 
 

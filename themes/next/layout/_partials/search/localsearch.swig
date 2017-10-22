@@ -1,16 +1,13 @@
-<div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="{{ __('search.placeholder') }}" spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
+{% if theme.scheme %}
+  <form class="site-search-form">
+  <span class="search-icon fa fa-search"></span>
+    <input type="text" id="local-search-input" class="st-search-input" />
+  </form>
+  <div id="local-search-result" class="local-search-result-cls"></div>
+{% endif %}
+
+<script type="text/javascript" id="local.search.active">
+var inputArea       = document.querySelector("#local-search-input");
+inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script>

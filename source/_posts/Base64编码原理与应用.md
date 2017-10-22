@@ -37,6 +37,8 @@ categories:
 
 > 是为了方便把含有不可见字符串的信息用可见字符串表示出来，以便复制粘贴
 
+<!-- more -->
+
 # 详细解释
 
 转自[Base64编码原理与应用](http://blog.xiayf.cn/2016/01/24/base64-encoding/)

@@ -7,7 +7,6 @@ tags:
 - kbengine
 categories:
 - server
-top: 1
 ---
 
 根据之前的博文 [服务端常用架构](2016/07/11/服务端常用架构一)

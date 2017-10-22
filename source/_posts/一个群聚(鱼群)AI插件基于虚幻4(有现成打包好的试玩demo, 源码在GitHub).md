@@ -7,7 +7,7 @@ tags:
 - c++
 categories:
 - UE4
-top: 2
+top: 4
 ---
 
 # GitHub
@@ -22,7 +22,6 @@ this Plugin version can Run **2000+** fishes at the same time
 
 > 这个插件版本可以同时运行 **2000+** 条鱼儿
 
-<!-- more -->
 
 ![OldDemoScreenshot.png](https://ooo.0o0.ooo/2016/10/18/58060a188d281.png)
 
@@ -31,6 +30,8 @@ this Plugin version can Run **2000+** fishes at the same time
 
 	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
 
+
+<!-- more -->
 
 # **Download**
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)

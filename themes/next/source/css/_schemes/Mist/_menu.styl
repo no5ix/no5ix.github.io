@@ -35,6 +35,23 @@
 
     &:hover { background: #e1e1e1; }
   }
+  
+  .menu-item-active a {
+    background: #dcdcdc;
+    +mobile() {
+      &:after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        margin-top: -3px;
+        right: 15px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $grey;
+      }
+    }
+  }
 
   a::before {
       display: none;
@@ -43,4 +60,14 @@
     }
 
   +mobile() { float: none; }
+}
+
+.menu-left {   
+  float: left;
+  margin-left: 45px;    
+  +mobile() 
+  { 
+    float: none; 
+    margin-left: 0px;
+  }
 }

@@ -1,102 +1,124 @@
-.local-search-pop-overlay
-  position: fixed
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  z-index: 2080
-  background-color: rgba(0, 0, 0, 0.3)
+// 记得在 style.stylus 中引入进去
 
-.local-search-popup
-  display: none
-  position: fixed
-  top: 10%
-  left: 50%
-  margin-left: -350px
-  width: 700px
-  height: 80%
-  padding: 0
-  background: #fff
-  color: #333
-  z-index: 9999
-  border-radius: 5px
-  +mobile()
-    padding: 0
-    top: 0
-    left: 0
-    margin: 0
-    width: 100%
-    height: 100%
-    border-radius: 0
+.local-search {
+  position: relative;
+  text-align: left;
+  margin-bottom: 10px;
+}
 
-  ul.search-result-list
-    padding: 0
-    margin: 0 5px
+.local-search-input-cls {
+  width: 200px;
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #CCC;
+  color: #666;
+  font-size: 14px;
+}
 
-  p.search-result
-    border-bottom: 1px dashed #ccc
-    padding: 5px 0
+#local-search-close {
+  content: 'x';
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: #fff;
+  color: #888;
+  border-radius: 100%;
+  line-height: 20px;
+  text-align: center;
+  font-size: 16px;
+  font-family: consolas;
+  border: 1px solid #CCC;
+  display: block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  transform: rotateZ(0);
+  transition: all 0.3s;
+  &:hover {
+    border-color: #666;
+    color: #222;
+    transform: rotateZ(180deg);
+    transition: all 0.3s;
+  }
+}
 
-  a.search-result-title
-    font-weight: bold
-    font-size: 16px
+.local-search-result-cls {
+  position: absolute;
+  z-index: 99;
+  width: 400px;
+  top: 50px;
+  right: 0;
+  .local-search-empty {
+    color: #888;
+    line-height: 44px;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+  }
+  ul {
+    width: 360px;
+    max-height: 450px;
+    min-height: 0;
+    height: auto;
+    overflow-y: auto;
+    border: 1px solid #CCC;
+    padding: 10px 20px;
+    background: #f5f5f5;
+    box-shadow: 1px 2px 4px #CCC;
+    li {
+      text-align: left;
+      border-bottom: 1px solid #CCC;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      line-height: 30px;
+      font-weight: normal;
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      a {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+      p {
+        margin-top: 10px;
+        font-size: 14px;
+        max-height: 124px;
+        overflow: hidden;
+      }
+      em.search-keyword {
+        color: #e58c7c;
+      }
+    }
+  }
+}
 
-  .search-keyword
-    border-bottom: 1px dashed #f00
-    font-weight: bold
-    color: #f00
+.local-search-plugin {
+  .local-search-input-cls {
+    opacity: 0.6;
+    width: 160px;
+    transition: all 0.3s;
+    &:hover {
+      opacity: 1;
+      width: 200px;
+      transition: all 0.3s;
+    }
+  }
+  .icon {
+    position: relative;
+    left: -30px;
+    color: #999;
+    cursor: pointer;
+  }
+}
 
-  .local-search-header
-    padding: 5px
-    height: 36px
-    background: #f5f5f5
-    border-top-left-radius: 5px
-    border-top-right-radius: 5px
 
-  #local-search-result
-    overflow: auto
-    position: relative
-    padding: 5px 25px
-    height: calc(100% - 55px)
+.search-icon {
+  position: absolute;
+  top: 9px;
+}
 
-  .local-search-input-wrapper
-    display: inline-block
-    width: calc(100% - 90px)
-    height: 36px
-    line-height: 36px
-    padding: 0 5px
-
-  .local-search-input-wrapper input
-    padding: 8px 0
-    height: 20px
-    display: block
-    width: 100%
-    outline: none
-    border: none
-    background: transparent
-    vertical-align: middle
-
-  .search-icon, .popup-btn-close
-    display: inline-block
-    font-size: 18px
-    color: #999
-    height: 36px
-    width: 18px
-    padding-left: 10px
-    padding-right: 10px
-
-  .search-icon
-    float: left
-
-  .popup-btn-close
-    border-left: 1px solid #eee
-    float: right
-    cursor: pointer
-
-  #no-result
-    position: absolute
-    left: 50%
-    top: 50%
-    -webkit-transform: translate(-50%, -50%)
-    transform: translate(-50%, -50%)
-    color: #ccc

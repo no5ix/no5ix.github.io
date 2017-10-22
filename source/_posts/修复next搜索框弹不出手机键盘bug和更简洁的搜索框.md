@@ -1,5 +1,5 @@
 ---
-title: 修复next搜索框弹不出手机键盘bug和美化搜索框
+title: 修复next搜索框弹不出手机键盘bug和更简洁的搜索框
 date: 2017-10-22 22:59:31
 tags:
 - next

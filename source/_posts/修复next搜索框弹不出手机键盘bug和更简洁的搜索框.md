@@ -7,14 +7,15 @@ categories:
 - 杂
 ---
 
+
 # 动机
 
-- next自带的搜索框在iPhone上有键盘不能自动弹出来的bug, 需要点击两次才可以弹出来
-- next自带的搜索框达不到它一直倡导的简洁风的要求
+- next自带的搜索框有手机键盘不能自动弹出来的bug, 需要点击两次才可以弹出来
+- 渴望拥有更简洁的搜索框
 
 # 展示图
 
-如本博客右上角所示
+如[我博客](https://no5ix.github.io/2017/10/22/%E4%BF%AE%E5%A4%8Dnext%E6%90%9C%E7%B4%A2%E6%A1%86%E5%BC%B9%E4%B8%8D%E5%87%BA%E6%89%8B%E6%9C%BA%E9%94%AE%E7%9B%98bug%E5%92%8C%E7%BE%8E%E5%8C%96%E6%90%9C%E7%B4%A2%E6%A1%86/)右上角所示
 
 # GitHub
 
@@ -22,7 +23,4 @@ categories:
 
 如果你也喜欢这样的搜索框, 参考这个[commit](https://github.com/no5ix/no5ix.github.io/commit/3dea59d520457ddc0a1aeaea7e229e6c29ea5bd0)便可改成跟我一样.
 
-## 已知问题
-
-归档(archives)界面下, 搜索结果内容和归档内容混在一起了, 所以我暂时禁用了归档(反正这玩意也没啥用), 待修复.
 

@@ -202,8 +202,11 @@ NexT.utils = NexT.$u = {
    */
   addActiveClassToMenuItem: function () {
     var path = window.location.pathname;
-    path = path === '/' ? path : path.substring(0, path.length - 1);
-    $('.menu-item a[href^="' + path + '"]:first').parent().addClass('menu-item-active');
+    if (path === '/') {
+      return;
+    }
+    path = path.substring(0, path.length - 1);
+    $('.menu-item a[href^="' + path + '"]').parent().addClass('menu-item-active');
   },
 
   hasMobileUA: function () {

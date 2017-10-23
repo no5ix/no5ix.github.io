@@ -33,7 +33,7 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 <!-- more -->
 
 ## **克隆**
-> 比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:nosix1992/Flock-AI-Fish-Unreal-VR.git
+> 比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:no5ix/Flock-AI-Fish-Unreal-VR.git
 > 这个地址是这样得来的, 如图 : 
 > ![克隆地址图](/img/git1.png)
 

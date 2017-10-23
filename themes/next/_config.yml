@@ -364,7 +364,16 @@ changyan:
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
+# 此处设置成true之后，将themes/next/layout/_partials/head.swig 
+# 下把默认的百度和 google 验证值替换为搜索引擎为你提供的完整HTML标签即可
+# 作者：小矮人Ethan
+# 链接：http://www.jianshu.com/p/8c0707ce5da4
+# 來源：简书
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 #google_site_verification:
+baidu_site_verification: ir1H0bCtCR
+
+
 
 # Google Analytics
 #google_analytics:
@@ -459,7 +468,7 @@ busuanzi_count:
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: false
+baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page

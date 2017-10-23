@@ -48,9 +48,9 @@ index_with_subtitle: true
 menu:
   #home: /
   categories: /categories/
-  about: /about/
-  #archives: /archives/
+  archives: /archives/
   tags: /tags/
+  about: /about/
   #sitemap: /sitemap.xml
   #commonweal: /404/
 

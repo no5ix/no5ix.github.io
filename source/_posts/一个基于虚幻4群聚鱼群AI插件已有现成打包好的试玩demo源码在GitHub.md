@@ -21,7 +21,6 @@ this Plugin version can Run **2000+** fishes at the same time
 
 > 这个插件版本可以同时运行 **2000+** 条鱼儿
 
-{% asset_img OldDemoScreenshot.png %}
 
 # Video Preview 
 * Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
@@ -30,6 +29,8 @@ this Plugin version can Run **2000+** fishes at the same time
 
 
 <!-- more -->
+
+{% asset_img OldDemoScreenshot.png %}
 
 # **Download**
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)

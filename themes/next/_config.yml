@@ -92,7 +92,7 @@ scheme: Mist
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 social:
   GitHub: https://github.com/no5ix
-  #E-Mail: nosix1992@gmail.com/1145263208@qq.com
+  # E-Mail: mailto:no5ix@foxmail.com
   #LinkLabel: Link
 
 # Social Links Icons
@@ -329,6 +329,16 @@ disqus:
   enable: false
   shortname:
   count: true
+
+# Gitalk
+gitalk:
+  enable: true
+  githubID: no5ix	 
+  repo: no5ix.github.io
+  ClientID: 582a3627e4d839fa768b
+  ClientSecret: 831e862e4f053f798ff370bc1ae70d32efbbdf29
+  adminUser: no5ix
+  distractionFreeMode: true
 
 # Hypercomments
 #hypercomments_id:

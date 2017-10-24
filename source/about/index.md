@@ -36,12 +36,3 @@ no5ix@foxmail.com
 这是我的[博客源码](https://github.com/no5ix/no5ix.github.io/tree/source), 
 
 欢迎Fork+Star.
-
-
-# 想评论一哈?
-
-> 不想在博客引入第三方评论模块了, 不稳定又丑
-
-想评论的话, 直接去我GitHub的博客源码项目下的提issue吧(没错, 路子就是这么野)
-
-[点我评论!](https://github.com/no5ix/no5ix.github.io/issues/new)

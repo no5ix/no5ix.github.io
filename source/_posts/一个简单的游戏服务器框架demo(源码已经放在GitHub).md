@@ -11,8 +11,7 @@ categories:
 top: 5
 ---
 
-# **GitHub**
-[GitHub地址](https://github.com/no5ix/JoyServer "GitHub地址")
+[GitHub](https://github.com/no5ix/JoyServer)
 
 # **框架简介**
 

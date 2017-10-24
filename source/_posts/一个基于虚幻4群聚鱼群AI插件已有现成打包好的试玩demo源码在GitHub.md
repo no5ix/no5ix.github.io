@@ -1,5 +1,5 @@
 ---
-title: 一个群聚(鱼群)AI插件基于虚幻4(有现成打包好的试玩demo, 源码在GitHub)
+title: 一个基于虚幻4群聚鱼群AI插件已有现成打包好的试玩demo源码在GitHub
 date: 2016-10-18 19:29:22
 tags:
 - AI
@@ -10,7 +10,6 @@ categories:
 top: 4
 ---
 
-# GitHub
 
 [GitHub](https://github.com/no5ix/fish)
 

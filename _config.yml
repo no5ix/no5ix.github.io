@@ -77,8 +77,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-- type: git
-  repo: git@github.com:no5ix/no5ix.github.io.git,master
+# - type: git
+#   repo: git@github.com:no5ix/no5ix.github.io.git,master
 - type: git
   repo: git@git.coding.net:no5ix/no5ix.git,master
 

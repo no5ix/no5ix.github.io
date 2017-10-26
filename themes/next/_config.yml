@@ -330,7 +330,7 @@ disqus:
   shortname:
   count: true
 
-# # github Gitalk
+# # Github Gitalk support
 # gitalk:
 #   enable: true
 #   githubID: no5ix	 
@@ -340,7 +340,7 @@ disqus:
 #   adminUser: no5ix
 #   distractionFreeMode: true
 
-# coding Gitalk
+# Coding Gitalk support
 gitalk:
   enable: true
   githubID: no5ix	 

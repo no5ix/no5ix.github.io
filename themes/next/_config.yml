@@ -330,13 +330,23 @@ disqus:
   shortname:
   count: true
 
-# Gitalk
+# # github Gitalk
+# gitalk:
+#   enable: true
+#   githubID: no5ix	 
+#   repo: no5ix.github.io
+#   ClientID: 582a3627e4d839fa768b
+#   ClientSecret: 831e862e4f053f798ff370bc1ae70d32efbbdf29
+#   adminUser: no5ix
+#   distractionFreeMode: true
+
+# coding Gitalk
 gitalk:
   enable: true
   githubID: no5ix	 
   repo: no5ix.github.io
-  ClientID: 582a3627e4d839fa768b
-  ClientSecret: 831e862e4f053f798ff370bc1ae70d32efbbdf29
+  ClientID: 2f3abd05748c8dc831f4
+  ClientSecret: c0523a0c7888c6cd962df0a706292895ef3170fc
   adminUser: no5ix
   distractionFreeMode: true
 

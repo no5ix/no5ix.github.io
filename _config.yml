@@ -83,6 +83,6 @@ deploy:
 
 search:
   path: search.xml
-  field: all
+  field: post
   format: html
-  limit: 10000
+  limit: 10

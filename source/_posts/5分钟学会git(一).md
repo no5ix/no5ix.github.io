@@ -58,8 +58,8 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 - 比如将暂存区里的提交并加入提交信息"update test_file" : git commit -m "update test_file"
 	- 把git commit撤销 : 
 		-  **只是把commit撤销并且把文件从暂存区中移出, 但保留已有的文件更改** : 通用命令为 git reset commit_id, 这个commit_id用git log命令来查看, 比如要恢复到刚刚提交的上一次提交的版本, 就用git reset HEAD^(这句命令的意思是说: 恢复到commit id 为HEAD^的版本, HEAD是指向最新的提交，上一次提交是HEAD^,上上次是HEAD^^,也可以写成HEAD～2 ,依次类推. )
-		- **把commit撤销且不保留已有的文件更改** :   git reset --hard commit_id
-- 比如只是撤销某个文件test_file的修改 : git checkout --test_file
+		- **把commit撤销且不保留已有的文件更改** :   `git reset --hard commit_id`
+- 比如只是撤销某个文件test_file的修改 : `git checkout --test_file`
 
 - 将代码推到远端 : 这之前的所有这些add, commit都是本地仓库的操作,  比如我们把本地的master分支推到github的那个项目的master分支 : git push origin master
 

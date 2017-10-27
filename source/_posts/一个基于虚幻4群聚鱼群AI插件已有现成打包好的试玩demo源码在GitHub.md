@@ -11,7 +11,7 @@ top: 4
 ---
 
 
-[GitHub](https://github.com/no5ix/fish)
+插件源码 : [**GitHub**](https://github.com/no5ix/fish)
 
 A fish flock AI Plugin for Unreal Engine 4
 

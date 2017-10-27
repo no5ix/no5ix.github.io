@@ -912,10 +912,10 @@
   clear: both;
 }
 .gt-container .gt-counts {
+  float: right;
   margin: 0 0.625em 0 0;
 }
 .gt-container .gt-user {
-  float: right;
   margin: 0;
   font-size: 92%;
 }
@@ -949,9 +949,9 @@
 }
 .gt-container .gt-popup {
   position: absolute;
-  right: 0;
+  left:55px;
   top: 40px;
-  background: #fff;
+  background: #fafbfc;
   display: inline-block;
   border-radius: 10px;
   border: 1px solid #e9e9e9;
@@ -1027,6 +1027,7 @@
   clear: both;
 }
 .gt-container .gt-header-controls-tip {
+  display: none;
   font-size: 0.875em;
   color: #6190e8;
   text-decoration: none;
@@ -1038,7 +1039,7 @@
   }
 }
 .gt-container .gt-header-controls .gt-btn {
-  float: right;
+    float: left;
 }
 @media (max-width: 479px) {
   .gt-container .gt-header-controls .gt-btn {

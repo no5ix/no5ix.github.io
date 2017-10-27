@@ -3,6 +3,7 @@ title: vscode配置与技巧
 date: 2017-10-16 18:45:48
 tags:
 - vscode
+- vim
 categories:
 - 脚本
 ---
@@ -43,6 +44,19 @@ categories:
  ```
  这样支持这样几种编码方式，最下面的就是默认的， 这个默认支持GB2312,还需要其他编码可以自己按需要添加
 
+# vscode常用快捷键以及改键
+
+- ctrl+p 搜文件
+- ctrl+shift+o 搜当前文件的符号
+- f12 转到定义
+- f12+ctrl 转到声明
+- alt+-> 导航前进
+- alt+<- 导航后退
+
+## 改键
+
+- ctrl+shift+f 从在文件夹中查找改为当前文件中查找, 因为ctrl+f跟vim的冲突
+- ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
 # Vim插件
 
@@ -59,14 +73,14 @@ categories:
 首先因为vscode多行编辑的ctrl+d快捷键被插件占用了, 所以我们要把vscode原来的ctrl+d改为ctrl+q
 
 - 对于多个不止一个单字符多处编辑的情况 :
-`
+```
  当处于normal mode的时候, 
  按下v键, 选中想要多处编辑的字符串, 然后按ctrl+q,
  此时vscode编辑器左下角会提示你目前处于visual mode multi cursor状态,
  我们得按下esc退到normal mode multi cursor状态,
  然后按下i进入insert mode multi mode状态, 此时就可以多处编辑了,
  按两次esc就可以退回到normal mode了
-`
+```
 - 对于多个单字符多处编辑的情况 : 因为vim的v模式选中一个字符, vscode的ctrl+q选中了多个单字符还是无法同时编辑, 所以我们用vim的宏, 例子如下 :
 ```
 比如：
@@ -90,13 +104,13 @@ q    #退出宏录制状态
 ```
 
 - 对于某一纵列多行编辑的情况 : 
-`
+```
 vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列编辑）。
-　光标移到某行行首，上下键选择行，按I（i的大写字母），输入##，
-  然后按<ESC>键，这样就在多行行首添加##了。也可以在多行的固定位置添加固定字符。
-  切记一定要按了I之后再按键盘上的home或者end键光标才能百分之百到行首或者行尾
-　如果要删除这些##，进入visual block模式，选中这些##，按d即可。
-`
+光标移到某行行首，上下键选择行，按I（i的大写字母），输入##，
+然后按<ESC>键，这样就在多行行首添加##了。也可以在多行的固定位置添加固定字符。
+切记一定要按了I之后再按键盘上的home或者end键光标才能百分之百到行首或者行尾
+如果要删除这些##，进入visual block模式，选中这些##，按d即可。
+```
 - 还可以使用vscode自带的多行编辑快捷键, alt+shift+拖动鼠标左键或者alt+左键多处选择
 
 # Lua插件
@@ -105,7 +119,7 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 
 到这个页面下载他的免费版本安装即可.
 
-##免费版本的已知问题 :
+## 免费版本的已知问题 :
 
 对于包含lua文件很多的文件夹来说,
 他要扫描非常久, 而且每次都要扫描, 
@@ -116,18 +130,5 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 
 直接安装vscode商城中推荐的作者为Don Jayamanne的python插件
 
-# vscode常用快捷键以及改键
-
-- ctrl+p 搜文件
-- ctrl+shift+o 搜当前文件的符号
-- f12 转到定义
-- f12+ctrl 转到声明
-- alt+-> 导航前进
-- alt+<- 导航后退
-
-## 改键
-
-- ctrl+shift+f 从在文件夹中查找改为当前文件中查找, 因为ctrl+f跟vim的冲突
-- ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
 

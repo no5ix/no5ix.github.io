@@ -150,35 +150,61 @@
   top: 9px;
 }
 
+
 /* loading css1 : Dot Css Loader*/
-.loader
-  position absolute
-  top 35px
-  left 40%
-  margin-left 10%
-  transform translate3d(-50%,-50%,0)
-
-.dot
-  width 15px
-  height 15px
-  background #3ac
-  border-radius 100%
-  display inline-block
-  animation slide 1s infinite
-
-for n in (1..5)
-  .dot:nth-child({n})
-    animation-delay (.1s * n)
-    background red(#3ac, (50 * n))
-
-@keyframes slide
-  0%
-    transform scale(1)
-  50%
-    opacity .3
-    transform scale(2)
-  100%
-    transform scale(1)
+.loader:before,
+.loader:after,
+.loader {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  margin: 4em auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #888888;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #888;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #888888;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #888;
+  }
+}
 
 
 /* loading css2 : Pure Css Loader - Square */

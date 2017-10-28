@@ -59,6 +59,11 @@ categories:
 - alt+shift+q 改为格式化选中代码快捷键
 - ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
+
+# 设置同步插件
+
+Shan khan的Settings Sync插件, 可以同步你的快键键/用户设置/icon/snippet/主题等等, 这样你到另一台电脑上就可以同步你在公司所用的设置了
+
 # Vim插件
 
 > vscode的欢迎页就有推荐vim的插件, 几乎所有键盘映射都移植过来了,
@@ -137,6 +142,5 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 # Python插件
 
 直接安装vscode商城中推荐的作者为Don Jayamanne的python插件
-
 
 

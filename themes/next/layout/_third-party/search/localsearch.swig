@@ -7,7 +7,35 @@
       var BTN = "<i id='local-search-close'>×</i>";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $resultContent.innerHTML = BTN + 
+      "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……</span>" +
+
+      /* loading css1 : Dot Css Loader*/
+
+        "<div class='loader'>" +
+          "<div class='dot'></div>" +
+          "<div class='dot'></div>" +
+          "<div class='dot'></div>" +
+          "<div class='dot'></div>" +
+          "<div class='dot'></div>" +
+        "</div>" +
+      "</ul>";
+
+      /* loading css2 : Pure Css Loader - Square */
+      
+      // "<div class='loader'>" +
+      //   "<div class='square' ></div>" +
+      //   "<div class='square'></div>" +
+      //   "<div class='square last'></div>" +
+      //   "<div class='square clear'></div>" +
+      //   "<div class='square'></div>" +
+      //   "<div class='square last'></div>" +
+      //   "<div class='square clear'></div>" +
+      //   "<div class='square '></div>" +
+      //   "<div class='square last'></div>" +
+      // "</div>";
+
+
       $.ajax({
         // 0x01. load xml file
         url: path,

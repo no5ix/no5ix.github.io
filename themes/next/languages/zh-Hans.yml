@@ -71,7 +71,7 @@ state:
   categories: 分类
 
 search:
-  placeholder: 搜索...
+  placeholder: 移动设备长按此处两秒可弹出键盘...
 
 cheers:
   um: 嗯..

@@ -55,7 +55,8 @@ categories:
 
 ## 改键
 
-- ctrl+shift+f 从在文件夹中查找改为当前文件中查找, 因为ctrl+f跟vim的冲突
+- alt+shift+f 从在文件夹中查找改为当前文件中查找, 因为ctrl+f跟vim的冲突
+- alt+shift+q 改为格式化选中代码快捷键
 - ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
 # Vim插件

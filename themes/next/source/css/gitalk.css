@@ -731,15 +731,15 @@
   color: #6190e8;
 }
 .gt-container a:hover {
-  color: #81a6ed;
-  border-color: #81a6ed;
+  color: rgb(255, 253, 253);
+  /* border-color: #81a6ed; */
 }
 .gt-container a.is--active {
-  color: #333;
+  color: #555;
   cursor: default !important;
 }
 .gt-container a.is--active:hover {
-  color: #333;
+  color: rgb(255, 253, 253);
 }
 .gt-container .gt-svg {
   display: inline-block;
@@ -1080,7 +1080,8 @@
   z-index: 10000;
 }
 .gt-container .gt-comments {
-  padding-top: 1.25em;
+  width: 95%;
+  padding-top: 2.25em;
 }
 .gt-container .gt-comments-null {
   text-align: center;
@@ -1108,8 +1109,8 @@
   transition: all ease 0.25s;
 }
 .gt-container .gt-comment-content:hover {
-  -webkit-box-shadow: 0 0.625em 3.75em 0 #f4f4f4;
-          box-shadow: 0 0.625em 3.75em 0 #f4f4f4;
+  -webkit-box-shadow: 0.625em 0.625em 0.75em 0 #ccc;
+          box-shadow: 0.625em 0.625em 0.75em 0 #ccc;
 }
 @media (max-width: 479px) {
   .gt-container .gt-comment-content {
@@ -1154,6 +1155,7 @@
   color: #333 !important;
 }
 .gt-container .gt-comment-admin .gt-comment-content {
+  border-radius: 20px;
   background-color: #f6f9fe;
 }
 @-webkit-keyframes gt-kf-rotate {
@@ -1229,7 +1231,7 @@
   /* display: none; */
   position: absolute;
   top: 35px;
-  left: 17px;
+  left: 35px;
   /* width: 108px; */
   /* height: 102px; */
   z-index: 99999;    
@@ -1274,7 +1276,7 @@
 }
 
 .gt-popup ul a:hover {
-  background-color: #fafbfc;
+  background-color: #4cbeff;
   /* background-image: linear-gradient(#04acec, #0186ba); */
 }
 
@@ -1295,7 +1297,7 @@
 }
 
 .gt-popup ul li:first-child a:hover:after {
-  border-bottom-color: #fafbfc; 
+  border-bottom-color: #4cbeff; 
 }
 
 .gt-popup ul li:last-child a {

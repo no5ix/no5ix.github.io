@@ -137,6 +137,7 @@
         temp_keyword = this.value.trim();
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         if (temp_keyword.length <= 0) {
+          $resultContent.innerHTML = "";
           return;
         }
         

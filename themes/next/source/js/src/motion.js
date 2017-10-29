@@ -249,7 +249,7 @@ $(document).ready(function () {
           e: $(element),
           p: {translateX: translateX},
           o: {
-            duration: 500,
+            duration: 200,
             sequenceQueue: false
           }
         };
@@ -271,7 +271,7 @@ $(document).ready(function () {
     menu: function (integrator) {
       $('.menu-item').velocity('transition.slideDownIn', {
         display: null,
-        duration: 200,
+        duration: 75,
         complete: function () {
           integrator.next();
         }

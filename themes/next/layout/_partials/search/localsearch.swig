@@ -3,7 +3,6 @@
   <span class="search-icon fa fa-search"></span>
     <input type="text" id="local-search-input" class="st-search-input" />
   </form>
-  <div id="local-search-result" class="local-search-result-cls"></div>
 {% endif %}
 
 <script type="text/javascript" id="local.search.active">

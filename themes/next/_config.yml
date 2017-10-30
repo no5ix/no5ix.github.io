@@ -330,25 +330,25 @@ disqus:
   shortname:
   count: true
 
-# # Gitalk for GitHub
-# gitalk:
-#   enable: true
-#   githubID: no5ix	 
-#   repo: no5ix.github.io
-#   ClientID: 582a3627e4d839fa768b
-#   ClientSecret: 831e862e4f053f798ff370bc1ae70d32efbbdf29
-#   adminUser: no5ix
-#   distractionFreeMode: true
-
-# Gitalk for Coding
+# Gitalk for GitHub
 gitalk:
   enable: true
   githubID: no5ix	 
   repo: no5ix.github.io
-  ClientID: 2f3abd05748c8dc831f4
-  ClientSecret: c0523a0c7888c6cd962df0a706292895ef3170fc
+  ClientID: 582a3627e4d839fa768b
+  ClientSecret: 831e862e4f053f798ff370bc1ae70d32efbbdf29
   adminUser: no5ix
   distractionFreeMode: true
+
+# # Gitalk for Coding
+# gitalk:
+#   enable: true
+#   githubID: no5ix	 
+#   repo: no5ix.github.io
+#   ClientID: 2f3abd05748c8dc831f4
+#   ClientSecret: c0523a0c7888c6cd962df0a706292895ef3170fc
+#   adminUser: no5ix
+#   distractionFreeMode: true
 
 # Hypercomments
 #hypercomments_id:
@@ -391,7 +391,7 @@ changyan:
 # 來源：简书
 # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 #google_site_verification:
-baidu_site_verification: ir1H0bCtCR
+# baidu_site_verification: ir1H0bCtCR
 
 
 
@@ -488,7 +488,7 @@ busuanzi_count:
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: true
+# baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page

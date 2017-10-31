@@ -78,7 +78,13 @@
     width: 360px;
     max-height: 610px;
     min-height: 0;
-    height: auto;
+    height: 610px;
+
+    animation:mymove 0.5s;
+    -moz-animation:mymove 0.5s; /* Firefox */
+    -webkit-animation:mymove 0.5s; /* Safari and Chrome */
+    -o-animation:mymove 0.5s; /* Opera */
+
     overflow-y: auto;
     border-radius: 15px;
     border: 0px solid #CCC;
@@ -118,6 +124,16 @@
         color: #e58c7c;
       }
     }
+  }
+}
+
+@keyframes mymove
+{
+  from {
+      height: 100px;
+  }
+  to {
+      height: 610px;
   }
 }
 

@@ -73,10 +73,10 @@ input[id$=search-input] {
   border-radius: 0;
 
   width: 140px;
-  transition:width 0.5s;
-  -moz-transition:width 0.5s; /* Firefox 4 */
-  -webkit-transition:width 0.5s; /* Safari and Chrome */
-  -o-transition:width 0.5s; /* Opera */
+  transition:width 0.3s;
+  -moz-transition:width 0.3s; /* Firefox 4 */
+  -webkit-transition:width 0.3s; /* Safari and Chrome */
+  -o-transition:width 0.3s; /* Opera */
 
   outline: none;
   border-bottom: 1px solid $grey-dark;
@@ -86,6 +86,11 @@ input[id$=search-input] {
 };
 
 input[id$=search-input]:hover {
+  border-bottom: 1px solid rgb(15, 15, 15)
+  width: 170px;
+}
+
+input[id$=search-input]:focus {
   border-bottom: 1px solid rgb(15, 15, 15)
   width: 170px;
 }

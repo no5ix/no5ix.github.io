@@ -89,7 +89,7 @@
     border-radius: 15px;
     border: 0px solid #CCC;
     padding: 34px;
-    background: #eee;
+    background: #e8e8e8;
     box-shadow: 0.625em 0.625em 0.75em 0 #ccc;
     +mobile() {
       max-height: none;
@@ -124,6 +124,23 @@
         color: #e58c7c;
       }
     }
+  }
+}
+
+.local-search-result-cls ul:before {
+  content: "";
+  position: absolute;
+  border: 30px solid #e8e8e8;
+  border-top: 0 solid transparent !important;
+  border-right: 30px solid transparent !important;
+  border-left: 30px solid transparent !important;
+  right: 92px;
+  top: -8px;
+  +mobile() {
+    border-right: 8px solid transparent !important;
+    border-left: 13px solid transparent !important;
+    right: initial;
+    top: -19px;
   }
 }
 

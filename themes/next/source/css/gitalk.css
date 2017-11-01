@@ -1210,14 +1210,14 @@ dropdown label{
   position: relative;
   z-index: 2;
 }
-dropdown label:hover, dropdown ul li:hover{
+/* dropdown label:hover,  */
+dropdown ul li:hover{
   color: white;
   cursor: pointer;
 }
-dropdown label:hover {
+/* dropdown label:hover {
   background: #ccc;
-  /* box-shadow: 0.625em 0.625em 0.75em 0 #ccc; */
-}
+} */
 dropdown ul li:hover{
   background: #e2e2e2;
 }
@@ -1242,11 +1242,9 @@ dropdown input ~ ul{
 dropdown input:checked + label{
   background: #ccc;
   color: white;
-  /* box-shadow: 0.625em 0.625em 0.75em 0 #ccc; */
 }
 dropdown input:checked ~ ul{
   border-radius: 0em 0em 0.5em 0em;
-  /* box-shadow: 0.625em 0.625em 0.75em 0 #ccc; */
   visibility: visible;
   opacity: 1;
   top: 0;

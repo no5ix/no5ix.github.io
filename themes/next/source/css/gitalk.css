@@ -1210,14 +1210,13 @@ dropdown label{
   position: relative;
   z-index: 2;
 }
-/* dropdown label:hover,  */
-dropdown ul li:hover{
+dropdown label:hover, dropdown ul li:hover{
   color: white;
   cursor: pointer;
 }
-/* dropdown label:hover {
+dropdown label:hover {
   background: #ccc;
-} */
+}
 dropdown ul li:hover{
   background: #e2e2e2;
 }

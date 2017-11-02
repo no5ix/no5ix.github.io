@@ -29,7 +29,7 @@
 
       $resultContent.innerHTML = 
         BTN + 
-        "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
+        "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
         DotLoader;
 
       var str = "";
@@ -45,7 +45,7 @@
         {
           $resultContent.innerHTML = 
             BTN + 
-            "<ul><span class='local-search-empty'>索引文件还未加载完成, 请稍候……</span>" +
+            "<ul class='local-search-empty-ul'><span class='local-search-empty'>索引文件还未加载完成, 请稍候……</span>" +
             DotLoader;
         }
         else
@@ -124,7 +124,7 @@
 
           str += "</ul>";
           if (str.indexOf('<li>') === -1) {
-            return $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            return $resultContent.innerHTML = BTN + "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
           }
           $resultContent.innerHTML = BTN + str;
         }
@@ -167,7 +167,14 @@
 
       $(document).on('click', '#local-search-close', function() {
         $('#local-search-input').val('');
-        $('#local-search-result').html('');
+        $('.search-result-list').slideUp("fast", function(){
+          // $('.search-result-list').fadeOut(20000);
+          $('#local-search-result').html('');
+        });
+        $('.local-search-empty-ul').slideUp("fast", function(){
+          // $('.search-result-list').fadeOut("slow");
+          $('#local-search-result').html('');
+        });
       });
     }
 

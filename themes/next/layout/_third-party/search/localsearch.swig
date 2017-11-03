@@ -36,6 +36,21 @@
       var keywords = "";
       var temp_keyword = "";
 
+      function slideUpFadeOut()
+      {
+        $('#local-search-input').val('');
+
+        $('#local-search-close').hide();
+
+        $('.search-result-list').animate({height:0, opacity:0},'normal', function(){
+          $('#local-search-result').html('');
+        });
+
+        $('.local-search-empty-ul').animate({height:0, opacity:0},'normal', function(){
+          $('#local-search-result').html('');
+        });
+      }
+
       function handleSearch()
       {
         $resultContent.innerHTML = "";
@@ -137,7 +152,7 @@
         temp_keyword = this.value.trim();
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         if (temp_keyword.length <= 0) {
-          $resultContent.innerHTML = "";
+          slideUpFadeOut();
           return;
         }
         
@@ -166,16 +181,9 @@
       });
 
       $(document).on('click', '#local-search-close', function() {
-        $('#local-search-input').val('');
-        $('.search-result-list').slideUp("fast", function(){
-          // $('.search-result-list').fadeOut(20000);
-          $('#local-search-result').html('');
-        });
-        $('.local-search-empty-ul').slideUp("fast", function(){
-          // $('.search-result-list').fadeOut("slow");
-          $('#local-search-result').html('');
-        });
+        slideUpFadeOut();
       });
+      
     }
 
     var getSearchFile = function(){

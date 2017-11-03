@@ -23,7 +23,7 @@ categories:
 <!-- more --> 
 
 #### **递归遍历**
-```
+``` c++
 
 void pre_order_traverse(const BTN_Ptr *btp)
 {
@@ -64,7 +64,7 @@ void post_order_traverse(const BTN_Ptr *btp)
 >**先序和中序遍历都很好理解, 着重讲一下后序遍历 :**
 > 后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体F_bt来记录他是否是第一次出栈 (F_bt结构体里有个is_first的数据来记录)
 
-```
+``` c++
 
 void pre_order_traverse_non_recursion(const BTN_Ptr *btp)
 {
@@ -159,7 +159,7 @@ void post_order_traverse_non_recursion( const BTN_Ptr *btp)
 
 #### 代码实例
 
-```
+``` c++
 #include <stdio.h>
 #include <iostream>
 

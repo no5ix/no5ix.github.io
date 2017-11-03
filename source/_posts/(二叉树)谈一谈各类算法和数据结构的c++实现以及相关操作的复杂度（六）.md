@@ -22,7 +22,7 @@ categories:
 
 
 ### **查询**
-```
+``` c++
 BTN_Ptr search(BTN_Ptr btp, int key)
 {
     while (btp != NULL )
@@ -48,7 +48,7 @@ BTN_Ptr search(BTN_Ptr btp, int key)
 
 ### **插入**
 
-```
+``` c++
 BTN_Ptr insert(BTN_Ptr &btp, int key)
 {
     if (btp == NULL)
@@ -88,7 +88,7 @@ BTN_Ptr insert(BTN_Ptr &btp, int key)
 
 ### **测试程序**
 附上一个测试程序吧
-```
+``` c++
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>

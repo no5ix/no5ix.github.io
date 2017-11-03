@@ -18,7 +18,7 @@ categories:
 
 ## 基本用法
 
-```
+``` python
 import struct
 import binascii
 values = (1, 'abc', 2.7)

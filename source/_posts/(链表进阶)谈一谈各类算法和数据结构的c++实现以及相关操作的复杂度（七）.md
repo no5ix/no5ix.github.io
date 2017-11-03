@@ -70,7 +70,7 @@ typedef struct Node
 > 手写的代码， 已经跑过了，可直接用
 > 下面代码中反转函数为 ReverseList ， 且有详细注释以及总结
 
-```
+``` c++
 #include <stdio.h>
 
 struct TList

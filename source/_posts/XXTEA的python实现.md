@@ -77,7 +77,7 @@ XXTEA使用跟Block TEA相似的结构，但在处理块中每个字时利用了
 
 
 
-```
+``` python
 
 import struct  
   

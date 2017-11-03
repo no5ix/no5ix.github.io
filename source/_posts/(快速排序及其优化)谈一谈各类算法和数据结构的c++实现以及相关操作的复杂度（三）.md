@@ -34,7 +34,7 @@ A也重复上述步骤递归。
 
 <!-- more -->
 
-```
+``` c++
 void swap(int *a, int *b)
 {
     int temp = 0;
@@ -129,7 +129,7 @@ void quick_sort(int *array, int p, int r)
 所以时间复杂度可以表示O(h)=O(log2n)
 
 ## 递归版本：
-```
+``` c++
 int binary_search(int arr[], int low, int high, int key)
 {
     if ( low <= high)
@@ -148,7 +148,7 @@ int binary_search(int arr[], int low, int high, int key)
 
 ```
 ## 非递归版本：
-```
+``` c++
 int non_recursion_bs(int arr[], int low, int high, int key)
 {
     int mid = 0;

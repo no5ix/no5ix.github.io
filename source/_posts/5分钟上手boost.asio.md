@@ -59,7 +59,7 @@ linux下直接 : sudo apt-get install libboost-all-dev
 
 下面是一个基础的同步客户端例子：
 
-```
+``` c++
 using boost::asio;
 io_service service;
 ip::tcp::endpoint ep( ip::address::from_string("127.0.0.1"), 2001);
@@ -80,7 +80,7 @@ Boost.Asio使用io_service同操作系统的输入/输出服务进行交互。
 ## 同步服务端
 
 下面是一个简单的同步Boost.Asio的服务端：
-```
+``` c++
 typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
 io_service service;
 ip::tcp::endpoint ep( ip::tcp::v4(), 2001)); // listen on 2001
@@ -120,7 +120,7 @@ void client_session(socket_ptr sock) {
 
 而创建一个异步的客户端，你需要做如下的事情：
 
-```
+``` c++
 using boost::asio;
 io_service service;
 ip::tcp::endpoint ep( ip::address::from_string("127.0.0.1"), 2001);
@@ -156,7 +156,7 @@ void connect_handler(const boost::system::error_code & ec) {
 ## 异步服务端
 
  下面的代码是一个基本的异步服务端
- ```
+ ``` c++
 using boost::asio;
 typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
 io_service service;

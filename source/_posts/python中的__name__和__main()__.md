@@ -9,7 +9,7 @@ categories:
 
 
 
-```
+``` python
 #hello.py
 def sayHello():
     str="hello"
@@ -43,7 +43,7 @@ hello
 
 比如在python shell中import hello后，查看`hello.__name__`：
 
-```
+``` python
 import hello
 hello.__name__
 'hello'

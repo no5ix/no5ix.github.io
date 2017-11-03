@@ -33,7 +33,7 @@ typedef struct BinaryTreeNode
 
 ### **创建**
 
-```
+``` c++
 int create_BT(BTN_Ptr *btp)
 {
     int temp_data = 0;

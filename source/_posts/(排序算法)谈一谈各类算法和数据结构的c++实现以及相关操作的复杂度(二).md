@@ -15,7 +15,7 @@ categories:
 
 > 想象就是很多泡泡，最大的泡泡每次浮到那个数组最后面
 
-```
+``` c++
 void bubble_sort(int a[], int n)
 {
     int i, j, temp;
@@ -38,7 +38,7 @@ void bubble_sort(int a[], int n)
 
 > 想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置
 
-```
+``` c++
 void insertion_sort(int test_array[], size_t length)
 {
 	int i = 0, key = 0;
@@ -79,7 +79,7 @@ void insertion_sort(int test_array[], size_t length)
 
 > 下面是一个比较直白明了的归并c++实现（其实可以写成不用动态分配内存的，但是这里为了直白起见）：
 
-```
+``` c++
 /*
  * p: 左数组第一个元素下标
  * q: 左数组最后一个元素下标

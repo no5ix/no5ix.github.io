@@ -7,7 +7,7 @@ type: "about"
 
 # 入行几年啦?
 
-3年多
+3年半
 
 # 搞什么方向?
 
@@ -18,7 +18,7 @@ type: "about"
 
  - C/C++/网络编程：                ★★★★  
  - PHP/Python：                  ★★★★  
- - Linux基础命令：                 ★★★★  
+ - Linux：                 ★★★★  
  - 虚幻4引擎：                    ★★★   
  - MySQL/Redis/：                 ★★★   
  - Vim/Git/Markdown/番茄工作法：   ★★★★★ 

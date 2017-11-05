@@ -4,7 +4,7 @@
     var searchFunc = function (path, search_id, content_id) {
       // 0x00. environment initialization
       'use strict';
-      var BTN = "<i id='local-search-close'>×</i>";
+      var local_search_close_x = "<i id='local-search-close'>×</i>";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
       var datas = [];
@@ -27,14 +27,17 @@
           "<div class='square last'></div>" +
         "</div>";
 
-      $resultContent.innerHTML = 
-        BTN + 
-        "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
-        DotLoader;
+      // $resultContent.innerHTML = 
+      //   local_search_close_x + 
+      //   "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
+      //   DotLoader;
 
       var str = "";
       var keywords = "";
       var temp_keyword = "";
+      var first_char_flag = 0;
+      var local_search_init_ul_anim_lock = 0;
+      var empty_flag = 0;
 
       function slideUpFadeOut()
       {
@@ -42,11 +45,11 @@
 
         $('#local-search-close').hide();
 
-        $('.search-result-list').animate({height:0, opacity:0},'normal', function(){
+        $('.search-result-list').animate({height:0, opacity:0},'fast', function(){
           $('#local-search-result').html('');
         });
 
-        $('.local-search-empty-ul').animate({height:0, opacity:0},'normal', function(){
+        $('.local-search-empty-ul').animate({height:0, opacity:0},'fast', function(){
           $('#local-search-result').html('');
         });
       }
@@ -59,8 +62,9 @@
         if (is_load_xml_finished == 0)
         {
           $resultContent.innerHTML = 
-            BTN + 
-            "<ul class='local-search-empty-ul'><span class='local-search-empty'>索引文件还未加载完成, 请稍候……</span>" +
+            local_search_close_x + 
+            "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
+            // "<ul class='local-search-empty-ul'><span class='local-search-empty'>索引文件还未加载完成, 请稍候……</span>" +
             DotLoader;
         }
         else
@@ -139,9 +143,9 @@
 
           str += "</ul>";
           if (str.indexOf('<li>') === -1) {
-            return $resultContent.innerHTML = BTN + "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            return $resultContent.innerHTML = local_search_close_x + "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
           }
-          $resultContent.innerHTML = BTN + str;
+          $resultContent.innerHTML = local_search_close_x + str;
         }
       }
 
@@ -151,12 +155,45 @@
         str = '<ul class=\"search-result-list\">';
         temp_keyword = this.value.trim();
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
-        if (temp_keyword.length <= 0) {
-          slideUpFadeOut();
-          return;
-        }
         
-        handleSearch();
+        if (first_char_flag == 0)
+        {
+          if (temp_keyword.length <= 0) {
+            empty_flag = 1;
+          }
+          if (local_search_init_ul_anim_lock == 0)
+          {
+            local_search_init_ul_anim_lock = 1;
+            $resultContent.innerHTML = "<ul class='local-search-init-ul'></ul>";
+            $('.local-search-init-ul').animate({height:'600px', opacity:1},'normal', function(){
+              if (empty_flag == 1) {
+                empty_flag = 0;
+                first_char_flag = 0;
+                local_search_init_ul_anim_lock = 0;
+                $('.local-search-init-ul').animate({height:'0px', opacity:0},'normal',  function(){
+                  $('#local-search-result').html('');
+                });
+                return;
+              }
+              
+              if (first_char_flag == 0)
+              {
+                handleSearch();
+                first_char_flag = 1;
+                local_search_init_ul_anim_lock = 0;
+              }
+            });
+          }
+        }
+        else if (first_char_flag = 1)
+        {
+          if (temp_keyword.length <= 0) {
+            first_char_flag = 0;
+            slideUpFadeOut();
+            return;
+          }
+          handleSearch();
+        }
       });
 
 
@@ -181,6 +218,7 @@
       });
 
       $(document).on('click', '#local-search-close', function() {
+        first_char_flag = 0;
         slideUpFadeOut();
       });
       

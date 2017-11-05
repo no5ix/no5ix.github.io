@@ -170,7 +170,7 @@
                 empty_flag = 0;
                 first_char_flag = 0;
                 local_search_init_ul_anim_lock = 0;
-                $('.local-search-init-ul').animate({height:'0px', opacity:0},'normal',  function(){
+                $('.local-search-init-ul').animate({height:'0px', opacity:0},'fast',  function(){
                   $('#local-search-result').html('');
                 });
                 return;

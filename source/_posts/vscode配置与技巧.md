@@ -53,6 +53,7 @@ categories:
 - f12+ctrl 转到声明
 - alt+-> 导航前进
 - alt+<- 导航后退
+- ctrl+shift+\ 跳到对应的括号
 
 ## 改键
 

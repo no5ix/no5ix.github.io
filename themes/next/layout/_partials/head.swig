@@ -8,7 +8,14 @@
         if('{{ page.password }}'){
             if (prompt('Password') !== '{{ page.password }}'){
                 alert('Error!');
-                history.back();
+                if (history.length > 1)
+                {
+                  history.back();
+                }
+                else
+                {
+                  window.location.href = "about:blank";
+                }
             }
         }
     })();

@@ -1,6 +1,6 @@
 ---
-title: lua需要注意的特别之处整理篇
-date: 2017-11-03 10:12:15
+title: lua传的是值还是引用
+date: 2016-11-03 10:12:15
 tags:
 - lua
 categories:

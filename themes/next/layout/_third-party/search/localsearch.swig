@@ -35,8 +35,12 @@
       var str = "";
       var keywords = "";
       var temp_keyword = "";
+
+      // 是否为第一个字母被键入的标志位
       var first_char_flag = 0;
+      // 针对 local-search-init-ul 的动画锁, 防止动画重叠或冲突
       var local_search_init_ul_anim_lock = 0;
+      // 为了处理"用户键入一个字母立马又删除"的情况, 保证这种情况的动画完整性以及 local-search-result 被正确清除
       var empty_flag = 0;
 
       function slideUpFadeOut()
@@ -156,6 +160,9 @@
         temp_keyword = this.value.trim();
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个 local-search-init-ul 逐渐拉长(height 从 0 逐渐 增加至 600px)且逐渐显现(opacity 从 0 逐渐 增加至 1)的动画
         if (first_char_flag == 0)
         {
           if (temp_keyword.length <= 0) {

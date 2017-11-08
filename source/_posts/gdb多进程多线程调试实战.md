@@ -1,5 +1,5 @@
 ---
-title: gdb多进程调试
+title: gdb多进程多线程调试实战
 date: 2015-08-31 14:20:23
 tags: 
 - gdb
@@ -34,8 +34,183 @@ categories:
 	- off：当前调试线程外的其他线程一直在正常运行。
 	- step：其他线程跟随当前调试线程运行，但具体怎么协同运行，测试中无法体现。
 	- 注意：set scheduler-locking要处于线程运行环境下才能生效，也就是程序已经运行并且暂停在某个断点处，否则会出现“Target 'exec' cannot support this command.”这样的错误；而且经过测试，设置后的scheduler-locking值在整个进程内有效，不属于某个线程。
+- 查询线程：info threads
+- 切换调试线程：thread + thread_number
 
-# **gdb多进程/多线程调试实战例子**
+# gdb多进程/多线程调试实战例子
+
+## _例程_
+
+``` c
+
+#include <stdio.h>
+#include <pthread.h>
+
+void processA();
+void processB();
+void *processAworker(void *arg);
+
+int main(int argc, const char *argv[])
+{
+    int pid;
+
+    pid = fork();
+
+    if (pid != 0)
+        processA();
+    else
+        processB();
+
+    return 0;
+}
+
+void processA()
+{
+    pid_t pid = getpid();
+    char prefix[] = "ProcessA: ";
+    char tprefix[] = "thread ";
+    int tstatus;
+    pthread_t pt;
+
+    printf("%s%lu %s\n", prefix, pid, "step1");
+
+    tstatus = pthread_create(&pt, NULL, processAworker, NULL);
+    if (tstatus != 0)
+    {
+        printf("ProcessA: Can not create new thread.");
+    }
+
+    processAworker(NULL);
+    sleep(1);
+}
+
+void *processAworker(void *arg)
+{
+    pid_t pid = getpid();
+    pthread_t tid = pthread_self();
+    char prefix[] = "ProcessA: ";
+    char tprefix[] = "thread ";
+
+    printf("%s%lu %s%lu %s\n", prefix, pid, tprefix, tid, "step2");
+    printf("%s%lu %s%lu %s\n", prefix, pid, tprefix, tid, "step3");
+
+    return NULL;
+}
+
+void processB()
+{
+    pid_t pid = getpid();
+    char prefix[] = "ProcessB: ";
+    printf("%s%lu %s\n", prefix, pid, "step1");
+    printf("%s%lu %s\n", prefix, pid, "step2");
+    printf("%s%lu %s\n", prefix, pid, "step3");
+}
+```
+
+## _输出：_
+
+```
+[cnwuwil@centos c-lab]$ ./test
+ProcessA: 802 step1
+ProcessB: 803 step1
+ProcessB: 803 step2
+ProcessB: 803 step3
+ProcessA: 802 thread 3077555904 step2
+ProcessA: 802 thread 3077555904 step3
+ProcessA: 802 thread 3077553008 step2
+ProcessA: 802 thread 3077553008 step3
+```
+
+## _实战调试1_
+
+1. 调试主进程，block子进程。
+
+```
+(gdb) set detach-on-fork off
+(gdb) show detach-on-fork
+Whether gdb will detach the child of a fork is off.
+(gdb) catch fork
+Catchpoint 1 (fork)
+(gdb) r
+[Thread debugging using libthread_db enabled]
+
+Catchpoint 1 (forked process 3475), 0x00110424 in __kernel_vsyscall ()
+Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.47.el6.i686
+(gdb) break test.c:14
+Breakpoint 2 at 0x8048546: file test.c, line 14.
+(gdb) cont
+[New process 3475]
+[Thread debugging using libthread_db enabled]
+
+Breakpoint 2, main (argc=1, argv=0xbffff364) at test.c:14
+Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.47.el6.i686
+(gdb) info inferiors
+  Num  Description       Executable       
+  2    process 3475      /home/cnwuwil/labs/c-lab/test
+* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+```
+
+2. 切换到子进程：
+
+```
+(gdb) inferior 2
+[Switching to inferior 2 [process 3475] (/home/cnwuwil/labs/c-lab/test)]
+[Switching to thread 2 (Thread 0xb7fe86c0 (LWP 3475))]
+#0  0x00110424 in ?? ()
+(gdb) info inferiors
+  Num  Description       Executable       
+* 2    process 3475      /home/cnwuwil/labs/c-lab/test
+  1    process 3472      /home/cnwuwil/labs/c-lab/test
+(gdb) inferior 1
+[Switching to inferior 1 [process 3472] (/home/cnwuwil/labs/c-lab/test)]
+[Switching to thread 1 (Thread 0xb7fe86c0 (LWP 3472))]
+#0  main (argc=1, argv=0xbffff364) at test.c:14
+(gdb) info inferiors
+  Num  Description       Executable       
+  2    process 3475      /home/cnwuwil/labs/c-lab/test
+* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+```
+
+3. 设断点继续调试主进程，主进程产生两个子线程：
+
+```
+(gdb) break test.c:50
+Breakpoint 3 at 0x804867d: file test.c, line 50. (2 locations)
+(gdb) cont
+ProcessA: 3472 step1
+[New Thread 0xb7fe7b70 (LWP 3562)]
+ProcessA: 3472 thread 3086911168 step2
+
+Breakpoint 3, processAworker (arg=0x0) at test.c:50
+(gdb) info inferiors
+  Num  Description       Executable       
+  2    process 3475      /home/cnwuwil/labs/c-lab/test
+* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+(gdb) info threads
+  3 Thread 0xb7fe7b70 (LWP 3562)  0x00110424 in __kernel_vsyscall ()
+  2 Thread 0xb7fe86c0 (LWP 3475)  0x00110424 in ?? ()
+* 1 Thread 0xb7fe86c0 (LWP 3472)  processAworker (arg=0x0) at test.c:50
+```
+
+4. 切换到主进程中的子线程，注意：线程2为前面产生的子进程
+
+```
+(gdb) thread 3
+[Switching to thread 3 (Thread 0xb7fe7b70 (LWP 3562))]#0  0x00110424 in __kernel_vsyscall ()
+(gdb) cont
+ProcessA: 3472 thread 3086911168 step3
+ProcessA: 3472 thread 3086908272 step2
+[Switching to Thread 0xb7fe7b70 (LWP 3562)]
+
+Breakpoint 3, processAworker (arg=0x0) at test.c:50
+(gdb) info threads
+* 3 Thread 0xb7fe7b70 (LWP 3562)  processAworker (arg=0x0) at test.c:50
+  2 Thread 0xb7fe86c0 (LWP 3475)  0x00110424 in ?? ()
+  1 Thread 0xb7fe86c0 (LWP 3472)  0x00110424 in __kernel_vsyscall ()
+(gdb) thread 1
+```
+
+## _实战调试2_
 
 ```
 b@b-VirtualBox:~/Documents/temp_test$ sudo gdb ./o_multi_thread_process 
@@ -199,3 +374,4 @@ Program received signal SIGINT, Interrupt.
 
 ```
 
+[参考](http://blog.csdn.net/pbymw8iwm/article/details/7876797)

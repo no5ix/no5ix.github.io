@@ -43,9 +43,9 @@ sdb               0.00         0.00         0.00          0          0
 以上命令输出Device的信息，采样时间为1秒，采样2次，若不指定采样次数，则iostat会一直输出采样信息，直到按”ctrl+c”退出命令。注意，第1次采样信息与单独执行iostat的效果一样，为从系统开机到当前执行时刻的统计信息。
 
 ----------
-## *iostat常用用法2： iostat -x -k -d*
+## *iostat常用用法2： iostat -xdk*
 ```
-linux # iostat -x -k -d 1
+linux # iostat -xdk 1
 Linux 2.6.16.60-0.21-smp (linux)     06/13/12
 
 ……

@@ -45,6 +45,22 @@ categories:
  ```
  这样支持这样几种编码方式，最下面的就是默认的， 这个默认支持GB2312,还需要其他编码可以自己按需要添加
 
+# 设置搜索文件排除文件夹
+
+例如在此工作区设置内设置不搜索Map文件里的文件和扩展名为xml的文件, 
+
+```
+"search.exclude": {
+    "**/Map": true,
+    "*.xml": true,
+},
+```
+
+jj: xxdfadfaxxgggsdfmmmptttttttttmmmpadaggg
+xx: jjxxgggkdfalgggmmmpdfaammmp
+dfalkjljjxxxadfadfagggadfagggmmmpdafafmmmpdfa
+
+
 # vscode常用快捷键以及改键
 
 - ctrl+p 搜文件
@@ -54,12 +70,11 @@ categories:
 - alt+-> 导航前进
 - alt+<- 导航后退
 - ctrl+shift+\ 跳到对应的括号
+- ctrl+shift+p 打开命令输入框
+- ctrl+shift+a 切换块注释
+- ctrl+/ 切换行注释
+- 多行编辑 : alt+shift+拖动鼠标左键或者alt+左键多处选择
 
-## 改键
-
-- alt+shift+f 从在文件夹中查找改为当前文件中查找, 因为ctrl+f跟vim的冲突
-- alt+shift+q 改为格式化选中代码快捷键
-- ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
 
 # 不同机器间同步vscode设置的插件(必装)
@@ -78,10 +93,24 @@ categories:
 然后选中Edit Extension local settings, 就会打开一个配置文件, 然后填入你的token即可
 
 
-# Vim插件(不推荐)
+# Vim插件1:amVim
+
+作者为auiWorks的名为amVim的插件, 装上即可使用, 无须配置, 跟vscode默认的多行编辑也不冲突
+
+
+# Vim插件2:vim
+
+作者为vscodevim的名为vim的插件, 不推荐使用这个插件, 下面说一下他的不足之处
 
 > vscode的欢迎页就有推荐vim的插件, 几乎所有键盘映射都移植过来了,
 > 还加了一些特性,比如多行编辑.
+
+
+## 如果要用此插件建议改键
+
+- alt+shift+f 从在文件夹中查找改为当前文件中查找, 因为ctrl+f跟vim的冲突
+- alt+shift+q 改为格式化选中代码快捷键
+- ctrl+d改为ctrl+q, 因为ctrl+d跟vim的冲突
 
 ## 难用之处
 

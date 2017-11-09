@@ -171,7 +171,7 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 - xxxg0001的lua-for-vscode来完成跳转
 - trixnz的vscode-lua来完成代码linting和列出属性以及方法
 
-## luaide国人的插件
+## luaide国人的插件(不推荐)
 参考[LuaIde文档导航页](http://www.jianshu.com/p/47fbe1de123d)
 
 到这个页面下载他的免费版本安装即可.

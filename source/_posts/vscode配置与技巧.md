@@ -56,11 +56,6 @@ categories:
 },
 ```
 
-jj: xxdfadfaxxgggsdfmmmptttttttttmmmpadaggg
-xx: jjxxgggkdfalgggmmmpdfaammmp
-dfalkjljjxxxadfadfagggadfagggmmmpdafafmmmpdfa
-
-
 # vscode常用快捷键以及改键
 
 - ctrl+p 搜文件
@@ -97,8 +92,14 @@ dfalkjljjxxxadfadfagggadfagggmmmpdafafmmmpdfa
 
 作者为auiWorks的名为amVim的插件, 装上即可使用, 无须配置, 跟vscode默认的多行编辑也不冲突
 
+切记在键盘快捷方式中把amVim的ctrl+c快捷键改成其他键或者直接删除, 否则vscode内的东西无法复制到vscode外
 
-# Vim插件2:vim
+## MetaGo(一个类似EasyMotion的插件)
+
+目前类似EasyMotion的插件只有这个兼容amVim, 改键改成ctrl+shift之后非常好用.
+
+
+# Vim插件2:vim(不推荐)
 
 作者为vscodevim的名为vim的插件, 不推荐使用这个插件, 下面说一下他的不足之处
 

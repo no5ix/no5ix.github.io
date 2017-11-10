@@ -9,34 +9,36 @@ categories:
 - linux
 ---
 
->因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容
+因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容
 
-# **13章**
+## 引申知识，作业控制以及相关命令：
 
-# **引申知识，作业控制以及相关命令：**
  ![这里写图片描述](http://img.blog.csdn.net/20170730195853561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 <!-- more -->
 
- - 另注：
-
->注：但是如上方到后台执行的进程，其父进程还是当前终端shell的进程，而一旦父进程退出，则会发送hangup信号给所有子进程，子进程收到hangup以后也会退出。
 
 
-
- - 13.4节：自定义一个daemon_init函数，涉及到知识点为“如何创建一个daemon（守护进程）”，实现步骤如下：
-     1. fork之后杀掉父进程（此时子进程被init收养）这是为了为下一步setsid做准备，因为只有不是进程组首进程的进程才能调用setsid，
-     2. setsid，创建一个新的会话并断开与之前的控制终端的关系，
-     3. 再次fork并杀掉首进程， 这样就确保了子进程不是一个会话首进程， 根据linux中获取终端的规则（只有会话首进程才能请求一个控制终端）， 这样进程永远不会重新请求一个控制终端
-     4. 清楚进程的umask，确保daemon创建文件和目录时拥有相应的权限
-     5. 修改进程的当前工作目录， 通常修改到/目录
-     6. 关闭进程所有不再需要的文件描述符
-     7. 打开/dev/null使文件描述符0、1、2指向这个设备， 以防止daemon调用在这些描述符上做I/O操作的库函数而不会意外的失败
+**注:** 但是如上方到后台执行的进程，其父进程还是当前终端shell的进程，而一旦父进程退出，则会发送hangup信号给所有子进程，子进程收到hangup以后也会退出。
 
 
 
+## 13.4节：
 
-```
+自定义一个daemon_init函数，涉及到知识点为“如何创建一个daemon（守护进程）”，实现步骤如下(两fork一set, u工文dev)：
+
+1. fork之后杀掉父进程（此时子进程被init收养）这是为了为下一步setsid做准备，因为只有不是进程组首进程的进程才能调用setsid，
+2. setsid，创建一个新的会话并断开与之前的控制终端的关系，
+3. 再次fork并杀掉首进程， 这样就确保了子进程不是一个会话首进程， 根据linux中获取终端的规则（只有会话首进程才能请求一个控制终端）， 这样进程永远不会重新请求一个控制终端
+4. 清楚进程的umask，确保daemon创建文件和目录时拥有相应的权限
+5. 修改进程的当前工作目录， 通常修改到/目录
+6. 关闭进程所有不再需要的文件描述符
+7. 打开/dev/null使文件描述符0、1、2指向这个设备， 以防止daemon调用在这些描述符上做I/O操作的库函数而不会意外的失败
+
+
+### 创建守护进程的例子程序
+
+``` c
 #include    "unp.h"
 #include    <syslog.h>
 
@@ -88,11 +90,12 @@ daemon_init(const char *pname, int facility)
 
 ```
 
+## nohup和setsid用法
 
-### **nohup和setsid用法**
->如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将父进程设为init进程；
->![这里写图片描述](http://img.blog.csdn.net/20170731003942100?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-```
+如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将父进程设为init进程；
+![这里写图片描述](http://img.blog.csdn.net/20170731003942100?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+``` sh
 b@b-VirtualBox:~/my_temp_test$ nohup ./o_multi_thread_process &
 [1] 3487
 b@b-VirtualBox:~/my_temp_test$ nohup: ignoring input and appending output to ‘nohup.out’
@@ -135,12 +138,13 @@ b         3504  3503  0 20:12 ?        00:00:00 ./o_multi_thread_process
 b         3507  3004  0 20:12 pts/3    00:00:00 grep --color=auto multi
 b@b-VirtualBox:~/my_temp_test$ jobs
 
-
 ```
 
-### **disown用法**
->那么对于已经在后台运行的进程，该怎么办呢？可以使用disown命令
-```
+## disown用法
+
+那么对于已经在后台运行的进程，如果我们要在退出shell的时候继续运行进程, 该怎么办呢？可以使用disown命令
+
+``` sh
 b@b-VirtualBox:~/my_temp_test$ ./o_multi_thread_process &
 [1] 3523
 b@b-VirtualBox:~/my_temp_test$ ProcessA: 3523 step1

@@ -93,6 +93,7 @@ scheme: Mist
 social:
   GitHub: https://github.com/no5ix
   # E-Mail: mailto:no5ix@foxmail.com
+  Music: http://music.163.com/#/user/home?id=47256866
   #LinkLabel: Link
 
 # Social Links Icons
@@ -117,6 +118,7 @@ social_icons:
   Instagram: instagram
   StackOverflow: stack-overflow
   Weibo: weibo
+  Music: music
 
 # Blog rolls
 #links_title: Links
@@ -166,15 +168,15 @@ sidebar:
   offset: 12
   offset_float: 12
 
-  # Back to top in sidebar
-  b2t: false
-
   # Scroll percent label in b2t button
   scrollpercent: true
   
   # Enable sidebar on narrow view
   onmobile: true
 
+
+# Show the Back to top on mobile
+b2t_onmobile: false
 
 # ---------------------------------------------------------------
 # Post Settings

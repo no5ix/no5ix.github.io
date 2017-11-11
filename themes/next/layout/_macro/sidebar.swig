@@ -97,6 +97,20 @@
               </span>
             {% endfor %}
           {% endif %}
+          
+          <!-- 网易云音乐 -->
+            <style>
+              .netease-cloud-music 
+              {
+                position: relative;
+                top: 150px;
+              }
+            </style>
+            <div class="netease-cloud-music">
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=5023440&auto=0&height=32"></iframe>
+            </div>
+          <!-- 网易云音乐 -->
+
         </div>
 
         {% set cc = {'by': 1, 'by-nc': 1, 'by-nc-nd': 1, 'by-nc-sa': 1, 'by-nd': 1, 'by-sa': 1, 'zero': 1} %}
@@ -126,6 +140,8 @@
         {% endif %}
 
         {% include '../_custom/sidebar.swig' %}
+        
+
 
       </section>
 
@@ -149,15 +165,6 @@
           </div>
         </section>
       <!--/noindex-->
-      {% endif %}
-
-      {% if theme.sidebar.b2t %}
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          {% if theme.sidebar.scrollpercent %}
-            <span id="scrollpercent"><span>0</span>%</span>
-          {% endif %}
-        </div>
       {% endif %}
 
     </div>

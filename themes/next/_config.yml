@@ -175,7 +175,7 @@ sidebar:
   onmobile: true
 
 
-# (Deprecated) Show the Back to top on mobile
+# Show the Back to top on mobile
 b2t_onmobile: false
 
 # ---------------------------------------------------------------

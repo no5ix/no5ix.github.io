@@ -93,7 +93,7 @@ scheme: Mist
 social:
   GitHub: https://github.com/no5ix
   # E-Mail: mailto:no5ix@foxmail.com
-  Music: http://music.163.com/#/user/home?id=47256866
+  Playlist: http://music.163.com/#/user/home?id=47256866
   #LinkLabel: Link
 
 # Social Links Icons
@@ -118,7 +118,7 @@ social_icons:
   Instagram: instagram
   StackOverflow: stack-overflow
   Weibo: weibo
-  Music: music
+  Playlist: music
 
 # Blog rolls
 #links_title: Links
@@ -175,7 +175,7 @@ sidebar:
   onmobile: true
 
 
-# Show the Back to top on mobile
+# (Deprecated) Show the Back to top on mobile
 b2t_onmobile: false
 
 # ---------------------------------------------------------------

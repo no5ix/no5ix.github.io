@@ -344,7 +344,7 @@ disqus:
 
 # Gitalk for Coding
 gitalk:
-  enable: true
+  enable: false
   githubID: no5ix	 
   repo: no5ix.github.io
   ClientID: 2f3abd05748c8dc831f4

@@ -1,6 +1,6 @@
 ---
-title: C++ 很基础的易混淆点（一）
-date: 2015-09-09 13:35:25
+title: C++很基础的易混淆点一
+date: 2014-09-09 13:35:25
 tags: 
 - C++Primer
 - EffectiveC++
@@ -93,7 +93,7 @@ categories:
 
 	>		当以编译时初始化的方式定义一个const 对象时，就如对bufSize 的定义一样:
 
-	>			const int bufS 工ze = 512; 11 输入缓冲区大小
+	>			const int bufSize = 512; 11 输入缓冲区大小
 
 	>		编译器将在编译过程中把用到该变量的地方都替换成对应的值。也就是说，编译器会找到
 				代码中所有用到bufSize 的地方，然后用512 替换。
@@ -110,14 +110,14 @@ categories:
 				只需定义一次就可以了:
 
 	>			// file 1 . cc 定义并初始化了一个常壶，该常量能被其他文件访问
-				extern const int bufS 工ze = fcn();
+				extern const int bufSize = fcn();
 				// file 1 . h 头文件
-				extern const int bufSize ; /1 与f ile 1. cc 中定义的bufS 工ze 是同一个
+				extern const int bufSize ; /1 与f ile 1. cc 中定义的bufSize 是同一个
 
 	>		如上述程序所示， fi1e 1. cc 定义并初始化了bufSize 。因为这条语句包含了初始值，
-				所以它(显然〉是一次定义。然而，因为b ufSize 是←个常量，必须用extern 加以限
+				所以它(显然〉是一次定义。然而，因为bufSize 是←个常量，必须用extern 加以限
 				定使其被其他文件使用。
-				file 1. h 头文件中的声明也由extern 做了限定，其作用是指明bufS 工ze 并非本
+				file 1. h 头文件中的声明也由extern 做了限定，其作用是指明bufSize 并非本
 				文件FiIi 独有，它的定义将在别处出现。
 
 - ###2.4.1

@@ -8,11 +8,11 @@ categories:
 ---
 
 
-# **netstat **
+# netstat 
 
 >netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
 
-- -a或--all：显示所有连线中的Socket；
+- -**a或--all：显示所有连线中的Socket；**
 - -A<网络类型>或--<网络类型>：列出该网络类型连线中的相关地址；
 - -c或--continuous：持续列出网络状态；
 - -C或--cache：显示路由器配置的快取信息；
@@ -21,12 +21,12 @@ categories:
 - -g或--groups：显示多重广播功能群组组员名单；
 - -h或--help：在线帮助；
 - -i或--interfaces：显示网络界面信息表单；
-- -l或--listening：显示监控中的服务器的Socket；
+- -**l或--listening：显示监控中的服务器的Socket；**
 - -M或--masquerade：显示伪装的网络连线；
-- -n或--numeric：直接使用ip地址，而不通过域名服务器；
+- -**n或--numeric：直接使用ip地址，而不通过域名服务器；**
 - -N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称；
 - -o或--timers：显示计时器；
-- -p或--programs：显示正在使用Socket的程序识别码和程序名称；
+- -**p或--programs：显示正在使用Socket的程序识别码和程序名称；**
 - -r或--route：显示Routing Table；
 - -s或--statistice：显示网络工作信息统计表；
 - -t或--tcp：显示TCP传输协议的连线状况；
@@ -57,7 +57,7 @@ tcp6       1      0 ::1:50654               ::1:631                 CLOSE_WAIT  
 查看udp的就是netstat -anlpu；
 只查看tcp和udp的就是netstat -anlptu
 
-# **lsof** （list open files）
+# lsof （list open files）
 
 > lsof命令用于查看你进程开打的文件，打开文件的进程，进程打开的端口(TCP、UDP)。找回/恢复删除的文件。是十分方便的系统监视工具，因为lsof命令需要访问核心内存和各种文件，所以需要root用户执行。 
 
@@ -72,7 +72,8 @@ tcp6       1      0 ::1:50654               ::1:631                 CLOSE_WAIT  
 - +d<目录>：列出目录下被打开的文件；
 - +D<目录>：递归列出目录下被打开的文件；
 - -n<目录>：列出使用NFS的文件；
-- -i<条件>：列出符合条件的进程。（4、6、协议、:端口、 @ip ） -p<进程号>：列出指定进程号所打开的文件；
+- -**i<条件>：列出符合条件的进程。（4、6、协议、:端口、 @ip ）**
+- -**p<进程号>：列出指定进程号所打开的文件；**
 - -u：列出UID号进程详情；
 - -h：显示帮助信息；
 - -v：显示版本信息

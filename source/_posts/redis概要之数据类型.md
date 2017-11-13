@@ -21,7 +21,7 @@ categories:
 
 # Redis数据类型
 
-> Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好
+Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好
 
 <!-- more -->
 
@@ -48,29 +48,71 @@ redis 127.0.0.1:6379> GET name
 "runoob"
 ```
 
-## Hash（哈希）
+## Hash（哈希表）
 
 Redis hash 是一个键名对集合。
-
 Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。
 
 实例 : 
 ```
-127.0.0.1:6379> HMSET user:1 username runoob password runoob points 200
-OK
-127.0.0.1:6379> HGETALL user:1
-1) "username"
-2) "runoob"
-3) "password"
-4) "runoob"
-5) "points"
-6) "200"
+redis> HSET people jack "Jack Sparrow"
+(integer) 1
+
+redis> HSET people gump "Forrest Gump"
+(integer) 1
+
+redis> HGETALL people
+1) "jack"          # 域
+2) "Jack Sparrow"  # 值
+3) "gump"
+4) "Forrest Gump"
 ```
 
+```
+redis> HMSET pet dog "doudou" cat "nounou"    # 一次设置多个域
+OK
+
+redis> HMGET pet dog cat fake_pet             # 返回值的顺序和传入参数的顺序一样
+1) "doudou"
+2) "nounou"
+3) (nil)                                      # 不存在的域返回nil值
+```
+
+```
+redis> HMSET website google www.google.com yahoo www.yahoo.com
+OK
+
+redis> HGET website google
+"www.google.com"
+
+redis> HGET website yahoo
+"www.yahoo.com"
+```
+
+```
+redis> HSET website google "www.g.cn"       # 设置一个新域
+(integer) 1
+
+redis> HSET website google "www.google.com" # 覆盖一个旧域
+(integer) 0
+```
+
+```
+# 域存在
+
+redis> HSET site redis redis.com
+(integer) 1
+
+redis> HGET site redis
+"redis.com"
+
+
+# 域不存在
+
+redis> HGET site mysql
+(nil)
+```
 以上实例中 hash 数据类型存储了包含用户脚本信息的用户对象。
-
- 实例中我们使用了 Redis HMSET, HGETALL 命令，user:1 为键值。
-
 每个 hash 可以存储 232 -1 键值对（40多亿）。
 
 ## List（列表）

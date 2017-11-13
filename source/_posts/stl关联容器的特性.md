@@ -10,7 +10,7 @@ categories:
 - c++
 ---
 
-## 概绍
+# 概绍
 
 > 关联容器和 顺序容器有着根本的不问 :
 
@@ -23,37 +23,36 @@ categories:
 - map 
 - set
 
-map 中 的元素是一些关键字一值 ( key-value )对 : 
+## map概绍
 
- > 关键字起到索 引 的
-作用，值则表示与索引相关联的数据 。 
+map 中 的元素是一些关键字一值 ( key-value )对 : 关键字起到索 引 的作用，值则表示与索引相关联的数据 。 
+字典则是一个很好的使用 map 的例子, 可以将单词作为关键字，将单词释义作为值 。
 
-set 中每个元素只包含一个关键字 :
+## set概绍
 
-> set 支持高效的关键字检查一个给定关键字是否在 set 中 。 例如，在某些文本处理过程中，
-可以用一个 set 来保存想要忽略的单词。字典则是一个很好的使用 map 的例子 : 可 以将
-单词作为关键字 ， 将单词释义作为值 。
+set 中每个元素只包含一个关键字 : set 支持高效的关键字检查一个给定关键字是否在 set 中 。
+例如，在某些文本处理过程中，可以用一个 set 来保存想要忽略的单词。
 
 <!-- more -->
 
-## **map & set 的实现**
+# **map & set 的实现**
 
 因为需要快速定位到键值的关系, 以红黑树的结构实现，其自平衡特性可以让插入删除等操作都可以在O(log n)时间内完成
 
 
 
-## map的基本操作函数
+# map的基本操作函数
 
 | 函数 | 含义
 | --- | ---- |
-|begin() | 返回指向map头部的迭代器
-|clear(） 删除所有元素
+|**begin()** | 返回指向map头部的迭代器
+|clear() | 删除所有元素
 |count() | 返回指定元素出现的次数
 |empty() | 如果map为空则返回true
-|end() | 返回指向map末尾的迭代器
+|**end()** | 返回指向map末尾的迭代器
 |equal_range() | 返回特殊条目的迭代器对
-|erase() | 删除一个元素
-|find() | 查找一个元素
+|**erase()** | 删除一个元素
+|**find()** | 查找一个元素
 |get_allocator() | 返回map的配置器
 |**insert()** | 插入元素
 |key_comp() | 返回比较元素key的函数
@@ -66,9 +65,9 @@ set 中每个元素只包含一个关键字 :
 |upper_bound() | 返回键值>给定元素的第一个位置
 |value_comp() | 返回比较元素value的函数
 
-## 迭代器失效
+# 迭代器失效
 
-```
+``` c++
 #include <map>
 #include <string>
 #include <iostream>
@@ -95,16 +94,12 @@ int main()
 		if (iter->first == 2)
 		{
 			map_student.erase(iter); 
-			// 移除元素会让迭代器失效, 所以上面这行应改为:iter = map_student.erase(iter);
-
+			// 移除元素会让迭代器失效, 所以上面这行应改为: iter = map_student.erase(iter);
 
 			// map_student.insert(pair<int, string>(5, "stu5")); 
 			// map增加元素并不会使迭代器失效, 因为map增加元素跟vector不一样, 
-
 			// vector要重新找一块内存把当前所有元素复制过去并释放原有元素所以会导致vector的迭代器失效, 
-
 			// 但是map只是直接在红黑树上增加一个结点而已, 并不会移动原有元素, 内存没动, 
-
 			// 自然map的迭代器不会失效了
 		}
 		cout << iter->first << " : " << iter->second << endl;

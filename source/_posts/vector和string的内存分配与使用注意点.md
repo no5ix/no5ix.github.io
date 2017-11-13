@@ -1,5 +1,5 @@
 ---
-title: vector的内存分配与使用注意点
+title: vector和string的内存分配与使用注意点
 date: 2016-05-17 00:52:53
 tags:
 - c++
@@ -11,7 +11,7 @@ categories:
 ---
 
 
-## 增长方式
+# 增长方式
 
 为了支持快速随机访问 ， vector 将元素连续存储一一每个元素紧挨着前一个元素存
 储 。
@@ -46,35 +46,35 @@ categories:
 > 其实际性能也表现得足够好一一虽然 vector 在每次重新分配内存空间时都要移动所有元素，
 > 但使用 此策略后，其扩张操作通常比 list 和 deque 还要快 。
 
-### 增长方式的具体实现
+## 增长方式的具体实现
 
 STL提供了很多泛型容器，如vector，list和map。程序员在使用这些容器时只需关心何时往容器内塞对象，而不用关心如何管理内存，需要用多少内存，这些STL容器极大地方便了C++程序的编写。例如可以通过以下语句创建一个vector，它实际上是一个按需增长的动态数组，其每个元素的类型为int整型：
 
-`stl::vector<int> array;`
+`stl::vector<int> testVector;`
 
 拥有这样一个动态数组后，用户只需要调用push_back方法往里面添加对象，而不需要考虑需要多少内存：
 
-```
-array.push_back(10); 
-array.push_back(2);
+``` c++
+testVector.push_back(10); 
+testVector.push_back(2);
 ```
 
-vector会根据需要自动增长内存，在array退出其作用域时也会自动销毁占有的内存，这些对于用户来说是透明的，stl容器巧妙的避开了繁琐且易出错的内存管理工作。
+vector会根据需要自动增长内存，在testVector退出其作用域时也会自动销毁占有的内存，这些对于用户来说是透明的，stl容器巧妙的避开了繁琐且易出错的内存管理工作。
 
 隐藏在这些容器后的内存管理工作是通过STL提供的一个默认的allocator实现的。当然，用户也可以定制自己的allocator，只要实现allocator模板所定义的接口方法即可，然后通过将自定义的allocator作为模板参数传递给STL容器，创建一个使用自定义allocator的STL容器对象，如：
 
-`stl::vector<int, UserDefinedAllocator> array;`
+`stl::vector<int, UserDefinedAllocator> testVector;`
 
 大多数情况下，STL默认的allocator就已经足够了。这个allocator是一个由两级分配器构成的内存管理器，当申请的内存大小大于128byte时，就启动第一级分配器通过malloc直接向系统的堆空间分配，如果申请的内存大小小于128byte时，就启动第二级分配器，从一个预先分配好的内存池中取一块内存交付给用户，这个内存池由16个不同大小（8的倍数，8~128byte）的空闲列表组成，allocator会根据申请内存的大小（将这个大小round up成8的倍数）从对应的空闲块列表取表头块给用户。
 
 这种做法有两个优点：
 
-- 1）小对象的快速分配。小对象是从内存池分配的，这个内存池是系统调用一次malloc分配一块足够大的区域给程序备用，当内存池耗尽时再向系统申请一块新的区域，整个过程类似于批发和零售，起先是由allocator向总经商批发一定量的货物，然后零售给用户，与每次都总经商要一个货物再零售给用户的过程相比，显然是快捷了。当然，这里的一个问题时，内存池会带来一些内存的浪费，比如当只需分配一个小对象时，为了这个小对象可能要申请一大块的内存池，但这个浪费还是值得的，况且这种情况在实际应用中也并不多见。
+- 小对象的快速分配。小对象是从内存池分配的，这个内存池是系统调用一次malloc分配一块足够大的区域给程序备用，当内存池耗尽时再向系统申请一块新的区域，整个过程类似于批发和零售，起先是由allocator向总经商批发一定量的货物，然后零售给用户，与每次都总经商要一个货物再零售给用户的过程相比，显然是快捷了。当然，这里的一个问题时，内存池会带来一些内存的浪费，比如当只需分配一个小对象时，为了这个小对象可能要申请一大块的内存池，但这个浪费还是值得的，况且这种情况在实际应用中也并不多见。
 
-- 2）避免了内存碎片的生成。程序中的小对象的分配极易造成内存碎片，给操作系统的内存管理带来了很大压力，系统中碎片的增多不但会影响内存分配的速度，而且会极大地降低内存的利用率。以内存池组织小对象的内存，从系统的角度看，只是一大块内存池，看不到小对象内存的分配和释放。
+- 避免了内存碎片的生成。程序中的小对象的分配极易造成内存碎片，给操作系统的内存管理带来了很大压力，系统中碎片的增多不但会影响内存分配的速度，而且会极大地降低内存的利用率。以内存池组织小对象的内存，从系统的角度看，只是一大块内存池，看不到小对象内存的分配和释放。
 
 
-### vector的内存释放
+## vector的内存释放
 
 由于vector的内存占用空间只增不减，比如你首先分配了10,000个字节，
 
@@ -88,10 +88,94 @@ vector所占用的内存空间依然如故，无法保证内存的回收。
 
 如果需要空间动态缩小，可以考虑使用deque。如果vector，可以用swap()来帮助你释放内存。具体方法如下：
 
-`vector<Point>().swap(pointVec); //或者pointVec.swap(vector<Point> ())`
+`vector<int>().swap(tempVector); //或者 tempVector.swap(vector<int>())`
+
+### vector的内存释放代码实例1
+
+``` c++
+
+#include <iostream>
+#include <vector>
+
+int main()
+{
+    std::vector<int> foo;
+    foo.push_back(1);
+    foo.push_back(2);
+    foo.push_back(3);
+    foo.push_back(4);
+    foo.push_back(5);
+
+    std::vector<int> bar;  
+    bar.push_back(1);
+    bar.push_back(2);
 
 
-## 迭代器失效
+    std::cout << "foo size:" << foo.size() << std::endl;
+    std::cout << "foo capacity:" << foo.capacity() << std::endl;
+
+    std::cout << "bar size:" << bar.size() << std::endl;
+    std::cout << "bar capacity:" << bar.capacity() << std::endl;
+    foo.swap(bar);
+
+    std::cout << "after swap foo size:" << foo.size() << std::endl;
+    std::cout << "after swap foo capacity:" << foo.capacity() << std::endl;
+
+    std::cout << "after swap bar size:" << bar.size() << std::endl;
+    std::cout << "after swap bar capacity:" << bar.capacity() << std::endl;
+
+    return 0;
+}
+```
+
+**输出：**
+```
+foo size:5
+foo capacity:6
+bar size:2
+bar capacity:2
+after swap foo size:2
+after swap foo capacity:2
+after swap bar size:5
+after swap bar capacity:6
+```
+
+看到了吗，swap之后，不仅仅是size变化了，capacity也是变化了。那么于是就把swap替代clear了：
+
+### vector的内存释放代码实例2
+
+``` c++
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    v.push_back(4);
+    v.push_back(5);
+
+    cout << "size:" << v.size() << endl;
+    cout << "capacity:" << v.capacity() << endl;
+
+    vector<int>().swap(v);
+    cout << "after swap size:" << v.size() << endl;
+    cout << "after swap capacity:" << v.capacity() << endl;
+    return 0;
+}
+```
+
+**输出：**
+```
+size:5
+capacity:6
+after swap size:0
+after swap capacity:0
+```
+
+# 迭代器失效
 
 看了上方的实现方式, 相信很容易能理解迭代器失效问题了啊
 
@@ -104,16 +188,16 @@ vector所占用的内存空间依然如故，无法保证内存的回收。
 
 **以下三种情况都是在ubuntu g++环境测试的, 不同平台不同编译器会有不同表现, 比如同样的代码有可能会在vs下崩溃
 所以**
-> **向容器中添加元素和从容器中删除元素 的操作都需要重置一下迭代器 : **
+> **向容器中添加元素和从容器中删除元素 的操作都需要用以下方法重置一下迭代器 : **
 
 - `i = q.insert(i,22);`
 
 - `i = q.erase(i);`
 
 
-### 删除元素
+## 删除元素
 
-```
+``` c++
 //erase操作
 #include<vector>
 #include<iostream>
@@ -174,9 +258,9 @@ output:
 
 
 
-### 添加元素时若预分配的内存足够迭代器就不会失效
+## 添加元素时若预分配的内存足够迭代器就不会失效
 
-```
+``` c++
 //insert操作
 //内存充足情况
 #include<vector>
@@ -245,9 +329,9 @@ int main(){
 
 
 
-### 添加元素时若预分配的内存不足迭代器就会失效
+## 添加元素时若预分配的内存不足迭代器就会失效
 
-```
+``` c++
 //insert操作
 //内存不够情况
 #include<vector>
@@ -274,8 +358,8 @@ int main(){
         if(*i == 3&&!flag){
             flag = 1;
             i = q.insert(i,22);
-            cout<<"\n插入后第二个元素:"<<*j<<endl;
-            cout<<"插入后第二个元素地址:"<<&(*j)<<endl;
+            cout<<"\n插入后原第二个元素:"<<*j<<endl;
+            cout<<"插入后原第二个元素地址:"<<&(*j)<<endl;
             cout<<"插入元素后vector分配的容量:" <<q.capacity() <<endl;
         }
         cout << *i << endl;
@@ -331,7 +415,7 @@ vector内存分配策略为 二倍扩容 , 每次当内存不够的情况下vect
 指向二号元素的迭代器在插入操作之后指向的值由2变成了15007936,也验证了上述结论.
 
 
-## capacity & size
+# capacity & size
 
 > 理解 capacity 和 size 的区别非常重要。
 
@@ -340,15 +424,15 @@ vector内存分配策略为 二倍扩容 , 每次当内存不够的情况下vect
 而 capacity 则是在不分配新的内存空间的前提下它最多可以保存多少元素。
 
 
-## 函数
+# 函数
 
 |函数|表述
 | -----| -----|
 |c.assign(beg,end) | 将[beg; end)区间中的数据赋值给c。
 |c.assign(n,elem) | 将n个elem的拷贝赋值给c。
 |c.at(idx) | 传回索引idx所指的数据，如果idx越界，抛出out_of_range。
-|c.back() | 传回最后一个数据，不检查这个数据是否存在。
-| **c.begin()** | 传回迭代器重的可一个数据。
+|c.back() | 传回指向最后一个元素的迭代器
+| **c.begin()** | 传回指向第一个元素的迭代器。
 | **c.capacity()** | 返不分配新的内存空间的前提下它最多可以保存多少元素。
 | **c.clear()** | 移除容器中所有数据。
 | **c.empty()** | 判断容器是否为空。
@@ -371,7 +455,7 @@ vector内存分配策略为 二倍扩容 , 每次当内存不够的情况下vect
 |c1.swap(c2) | 将c1和c2元素互换。
 |**swap(c1,c2)** | 同上操作。
 
-## 构造 & 销毁
+# 构造 & 销毁
 
 |写法|表述
 | -----| -----|

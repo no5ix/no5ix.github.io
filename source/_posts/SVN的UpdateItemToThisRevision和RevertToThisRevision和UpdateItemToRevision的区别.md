@@ -7,7 +7,6 @@ categories:
 - 杂
 ---
 
-[转自](#http://blog.csdn.net/albertsh/article/details/52964037)
 
 # 前言
 

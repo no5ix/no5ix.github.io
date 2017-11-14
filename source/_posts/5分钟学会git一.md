@@ -1,5 +1,5 @@
 ---
-title: 5分钟学会git(一)
+title: 5分钟学会git一
 date: 2016-04-12 23:26:16
 tags: 
 - git
@@ -13,11 +13,11 @@ categories:
 
 > 本篇博客因为要5分钟撸完git, 所以语言尽量精简, 只说新人必须知道的, 如果要git进阶的, 后面再另写博客说明, 不该说的废话就不说了
 
-## **安装**
+## 安装
 > sudo apt-get install git
 
 
-## **查看状态**
+## 查看状态
 
 > - 比如查看当前分支的状态 : git status, 这条命令也会给很多其他的git命令提示的喔
 > - 查看当前在哪个分支 : git branch
@@ -32,12 +32,12 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 
 <!-- more -->
 
-## **克隆**
+## 克隆
 > 比如从我的一个远端github项目克隆一份到本地 : git clone git@github.com:no5ix/Flock-AI-Fish-Unreal-VR.git
 > 这个地址是这样得来的, 如图 : 
 > ![克隆地址图](/img/git1.png)
 
-## **分支**
+## 分支
 
 - 比如创建一个新的分支test_branch : git branch test_branch
 - 比如切换到分支test_branch : git checkout test_branch
@@ -51,7 +51,7 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 	- git branch -D test_branch
 > 有些时候可能会删除失败，比如如果a分支的代码还没有合并到master，你执行 git branch -d a 是删除不了的，它会智能的提示你a分支还有未合并的代码，但是如果你非要删除，那就执行 git branch -D a 就可以强制删除a分支。
 
-## **提交**
+## 提交
 
 - 比如将修改之后的文件test_file加入到暂存区里 : git add test_file
 	- 撤销刚刚的git add(也就是说把test_file从暂存区中移出) : git reset HEAD test_file

@@ -189,13 +189,13 @@ zset的成员是唯一的,但分数(score)却可以重复。
 `zadd key score member` 
 实例 : 
 ```
-redis 127.0.0.1:6379> zadd runoob 0 redis
+redis 127.0.0.1:6379> zadd runoob 1 redis
 (integer) 1
-redis 127.0.0.1:6379> zadd runoob 0 mongodb
+redis 127.0.0.1:6379> zadd runoob 3 mongodb
 (integer) 1
-redis 127.0.0.1:6379> zadd runoob 0 rabitmq
+redis 127.0.0.1:6379> zadd runoob 4 rabitmq
 (integer) 1
-redis 127.0.0.1:6379> zadd runoob 0 rabitmq
+redis 127.0.0.1:6379> zadd runoob 7 rabitmq
 (integer) 0
 redis 127.0.0.1:6379> ZRANGEBYSCORE runoob 0 1000
 

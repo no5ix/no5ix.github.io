@@ -1,5 +1,5 @@
 ---
-title: 从零开始搭建一台简易linux服务器(二)
+title: 从零开始搭建一台简易linux服务器二
 date: 2016-08-25 15:11:26
 tags:
 - vbox

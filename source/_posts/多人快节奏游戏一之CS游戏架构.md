@@ -1,5 +1,5 @@
 ---
-title: FastPacedMultiplayerPartIClientServerGameArchitecture
+title: 多人快节奏游戏一之CS游戏架构
 date: 2016-07-16 22:20:34
 tags:
 - gabrielgambetta

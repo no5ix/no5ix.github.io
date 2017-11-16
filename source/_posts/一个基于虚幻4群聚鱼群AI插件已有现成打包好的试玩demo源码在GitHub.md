@@ -24,6 +24,11 @@ this Plugin version can Run **2000+** fishes at the same time
 
 # Video Preview 
 
+* Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
+
+	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
+
+
 <iframe height=255 width=500 src='http://player.youku.com/embed/XMTc2NTM4MjkyMA==' frameborder=0 'allowfullscreen'></iframe>
 
 

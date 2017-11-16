@@ -23,14 +23,9 @@ this Plugin version can Run **2000+** fishes at the same time
 
 
 # Video Preview 
-* Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
-	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
+<iframe height=255 width=500 src='http://player.youku.com/embed/XMTc2NTM4MjkyMA==' frameborder=0 'allowfullscreen'></iframe>
 
-
-<!-- more -->
-
-{% asset_img OldDemoScreenshot.png %}
 
 # **Download**
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)
@@ -40,6 +35,7 @@ this Plugin version can Run **2000+** fishes at the same time
     > *这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)*
 
 
+<!-- more -->
 
 # **How to play**
 
@@ -119,3 +115,5 @@ place Plugins folder in your project root directory, then just like
 
 		`躲避敌人`
 
+
+{% asset_img OldDemoScreenshot.png %}

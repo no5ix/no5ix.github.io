@@ -2,6 +2,7 @@
 title: 游戏同步技术演示demo
 date: 2017-10-10 11:18:54
 tags:
+- gabrielgambetta
 - 游戏同步
 categories:
 - server

@@ -1,0 +1,61 @@
+---
+title: FastPacedMultiplayerPartIVLagCompensation
+date: 2016-07-19 22:20:34
+tags:
+- gabrielgambetta
+- 游戏同步
+categories:
+- server
+---
+
+[原文出处](http://www.gabrielgambetta.com/lag-compensation.html)
+
+<h1 class="title">Fast-Paced Multiplayer (Part IV): Lag Compensation</h1>
+
+------------------
+
+<h2 id="introduction">Introduction</h2>
+<p>The previous three articles explained a client-server game architecture which can be summarized as follows:</p>
+<ul>
+<li><p>Server gets inputs from all the clients, with timestamps</p></li>
+<li><p>Server processes inputs and updates world status</p></li>
+<li><p>Server sends regular world snapshots to all clients</p></li>
+<li><p>Client sends input and simulates their effects locally</p></li>
+<li><p>Client get world updates and</p>
+<ul>
+<li><p>Syncs predicted state to authoritative state</p></li>
+<li><p>Interpolates known past states for other entities</p></li>
+</ul></li>
+</ul>
+<p>From a player’s point of view, this has two important consequences:</p>
+<ul>
+<li><p>Player sees <strong>himself</strong> in the <strong>present</strong></p></li>
+<li><p>Player sees <strong>other entities</strong> in the <strong>past</strong></p></li>
+</ul>
+<p>This situation is generally fine, but it’s quite problematic for very time- and space-sensitive events; for example, shooting your enemy in the head!</p>
+<h2 id="lag-compensation">Lag Compensation</h2>
+<p>So you’re aiming perfectly at the target’s head with your sniper rifle. You shoot - it’s a shot you can’t miss.</p>
+<p>But you miss.</p>
+<p>Why does this happen?</p>
+<p>Because of the client-server architecture explained before, you were aiming at where the enemy’s head was 100ms <em>before</em> you shot - <em>not</em> when you shot!</p>
+<p>In a way, it’s like playing in an universe where the speed of light is really, really slow; you’re aiming at the past position of your enemy, but he’s long gone by the time you squeeze the trigger.</p>
+<p>Fortunately, there’s a relatively simple solution for this, which is also pleasant for <em>most</em> players <em>most</em> of the time (with the one exception discussed below).</p>
+<p>Here’s how it works:</p>
+<ul>
+<li><p>When you shoot, client sends this event to the server with full information: the exact timestamp of your shot, and the exact aim of the weapon.</p></li>
+<li><p><strong>Here’s the crucial step</strong>. Since the server gets all the input with timestamps, it can authoritatively reconstruct the world at any instant in the past. In particular, it can reconstruct the world exactly as it looked like to any client at any point in time.</p></li>
+<li><p>This means the server can know exactly what was on your weapon’s sights the instant you shot. It was the <em>past</em> position of your enemy’s head, but the server knows it was the position of his head in <em>your</em> present.</p></li>
+<li><p>The server processes the shot <em>at that point in time</em>, and updates the clients.</p></li>
+</ul>
+<p>And everyone is happy!</p>
+<p>The server is happy because he’s the server. He’s always happy.</p>
+<p>You’re happy because you were aiming at your enemy’s head, shot, and got a rewarding headshot!</p>
+<p>The enemy may be the only one not entirely happy. If he was standing still when he got shot, it’s his fault, right? If he was moving… wow, you’re a really awesome sniper.</p>
+<p>But what if he was in an open position, got behind a wall, and <em>then</em> got shot, a fraction of a second later, when he thought he was safe?</p>
+<p>Well, that can happen. That’s the tradeoff you make. Because you shoot at him in the past, he may still be shot up to a few milliseconds after he took cover.</p>
+<p>It is somewhat unfair, but it’s the most agreeable solution for everyone involved. It would be much worse to miss an unmissable shot!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This ends my series on Fast-paced Multiplayer. This kind of thing is clearly tricky to get right, but with a clear conceptual understanding about what’s going on, it’s not exceedingly difficult.</p>
+<p>Although the audience of these articles were game developers, it found another group of interested readers: gamers! From a gamer point of view it’s also interesting to understand why some things happen the way they happen.</p>
+<h3 id="further-reading">Further Reading</h3>
+<p>As clever as these techniques are, I can’t claim any credit for them; these articles are just an easy to understand guide to some concepts I’ve learned from other sources, including articles and source code, and some experimentation.</p>

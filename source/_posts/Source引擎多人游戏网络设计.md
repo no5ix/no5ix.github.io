@@ -12,7 +12,8 @@ categories:
 
 [原文出处](https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking)
 
-<h2 id="Source-Multiplayer-Networking">Source Multiplayer Networking</h2>
+
+原文标题 : **Source Multiplayer Networking**
 
 ----------------
 
@@ -85,12 +86,19 @@ Tickrate 66
 </p>
 <h2 id="Lag_compensation">Lag compensation</h2>
 <dl>
-<dd><i>All source code for lag compensation and view interpolation is available in the Source SDK. See <a href="/wiki/Lag_compensation" title="Lag compensation">Lag compensation</a> for implementation details.</i>
+<dd><i>All source code for lag compensation and view interpolation is available in the Source SDK. See 
+
+{% post_link CS游戏协议中延迟补偿的设计和优化方法 %}
+
+ for implementation details.</i>
 </dd>
 </dl>
 <p>Let's say a player shoots at a target at client time 10.5. The firing information is packed into a user command and sent to the server. While the packet is on its way through the network, the server continues to simulate the world, and the target might have moved to a different position. The user command arrives at server time 10.6 and the server wouldn't detect the hit, even though the player has aimed exactly at the target. This error is corrected by the server-side lag compensation.
 </p><p>The lag compensation system keeps a history of all recent player positions for one second. If a user command is executed, the server estimates at what time the command was created as follows:
-</p><p><span style="text-align:center;font-family:monospace;display:block;font-size:1.2em;"><strong>Command Execution Time</strong> = <strong>Current Server Time</strong> - <strong>Packet Latency</strong> - <strong>Client View <a href="/wiki/Interpolation" title="Interpolation">Interpolation</a></strong></span>
+</p><p>
+
+    **Command Execution Time** = **Current Server Time** - **Packet Latency** - **Client View** <a href="/wiki/Interpolation" title="Interpolation">**Interpolation**</a>
+
 </p><p>Then the server moves all other players - <i>only</i> players - back to where they were at the command execution time. The user command is executed and the hit is detected correctly. After the user command has been processed, the players revert to their original positions.
 </p>
 <div title="Information" style="margin:0.4em 1em 0.5em;"><strong style="display:table-cell;text-align:right;white-space:nowrap;padding-right:0.3em;">Note:</strong><span style="display:table-cell;">Since entity interpolation is included in the equation, failing to have it on can cause undesired results.</span></div>

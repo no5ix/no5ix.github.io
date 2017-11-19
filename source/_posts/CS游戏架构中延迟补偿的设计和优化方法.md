@@ -1,5 +1,5 @@
 ---
-title: CS游戏协议中延迟补偿的设计和优化方法
+title: C/S游戏架构中延迟补偿的设计和优化方法
 date: 2016-01-06 20:37:38
 tags:
 - valve
@@ -13,7 +13,7 @@ categories:
 [原文出处](https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization)
 
 
-<h2 class="title">Latency Compensating Methods in Client/Server In-game Protocol Design and Optimization</h2>
+原文标题 : **Latency Compensating Methods in Client/Server In-game Protocol Design and Optimization**
 
 --------------
 
@@ -265,7 +265,7 @@ Your game must behave well in this world. This discussion will give you a sense 
 </p>
 <p><br>
 <span style="font-size:18px">Basic Architecture of a Client / Server Game</span></p>
-<h2 id="2.C/S游戏的基本架构">S游戏的基本架构</h2>
+<h2 id="C/S游戏的基本架构">C/S游戏的基本架构</h2>
 <p><br>
 <br>
 Most action games played on the net today are modified client / server games. Games such as Half-Life, including its mods such as Counter-Strike and Team Fortress Classic, operate on such a system, as do games based on the Quake3 engine and the Unreal Tournament

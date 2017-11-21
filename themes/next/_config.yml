@@ -143,6 +143,9 @@ toc:
   # If true, all words will placed on next lines if header width longer than sidebar width.
   wrap: true
 
+  # If true, all sub header will be collapsed.
+  collapse_all: false
+
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
 # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero

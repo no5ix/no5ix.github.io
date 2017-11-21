@@ -99,13 +99,6 @@
           {% endif %}
           
           <!-- 网易云音乐 -->
-            <style>
-              .netease-cloud-music 
-              {
-                position: relative;
-                top: 80px;
-              }
-            </style>
             <div class="netease-cloud-music">
               <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe>
             </div>

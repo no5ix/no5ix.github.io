@@ -1,6 +1,8 @@
 ---
 title: MySQL入门二之一些小注意点
 date: 2015-03-02 01:51:11
+tags:
+- mysql
 categories:
 - DB
 ---

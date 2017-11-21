@@ -1,6 +1,8 @@
 ---
 title: MySQL进阶二
 date: 2016-06-16 19:01:56
+tags:
+- mysql
 categories:
 - DB
 ---

@@ -2,7 +2,8 @@
 title: 白话TCP快速重传
 date: 2017-09-23 18:11:22
 tags: [tcp, rudp]
-categories: [linux, tcp]
+categories: 
+- linux
 ---
 
 # 前提知识

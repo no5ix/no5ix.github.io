@@ -8,6 +8,32 @@ categories:
 - server
 ---
 
+
+# 自我总结
+
+注 : V社这篇文章相当有价值, 所以会有尽可能详细的注解以及对原译文各种翻译纰漏的修正.
+
+广义的延迟补偿主要包括两个方面 :
+
+- **A 如何显示目标**
+	- **a. 对于本玩家自己**
+		- **客户端预表现**(本文翻译为"客户端预测") : 比如对于玩家移动的预测, 可以把服务器确认过的movement信息作为开始, 然后使用自己本地的movement input来进行预表现, 服务器跟客户端共享同一套move代码, 当服务器的确认信息过来之后就直接使用服务器发过来的from state进行修正并以from state为基础执行之后的预测.
+	- **b. 对于其他玩家**
+		- **i. 外推法** : 即航位推测法, 外推法把其它玩家/物体看作一个点，这个点开始的位置、方向、速度已知，沿着自己的弹道向前移动。因此，假设延时是100ms，最新的协议通知客户端这个玩家奔跑速度是500单位每秒，方向垂直于玩家视线，客户端就可以假设事实上这个玩家当前实际的位置已经向前移动了50个单位。客户端可以在这个外推的位置渲染这个玩家. 这个方法不适用于FPS游戏, 因为大部分FPS游戏采用非现实的玩家系统，玩家可以随时转弯，可以在任意角度作用不现实的加速度，因此外推法得到的结果经常是错误地
+		- **ii. 内推法** : 即影子跟随法, 这种方法是用延时来换取平滑, 客户端物体实际移动位置总是滞后一段时间。举个例子，如果服务器每秒同步10次世界信息，客户端渲染的时候会有100ms滞后。这样，每一帧渲染的时候，我们通过最新收到的位置信息和前100ms的位置信息（或者上一帧渲染位置）进行差值得到结果.
+			- **如果一个更新包没有收到，有2种处理方法** : 
+				- 用上面介绍的外推法（有可能产生较大误差）；
+				- 保持玩家位于当前位置直到收到下一个更新包(会导致玩家移动顿挫)
+- **B. 延迟补偿**, 步骤如下 : 
+
+	1. 为玩家计算一个相当精确的延迟时间
+	2. 对每个玩家，从服务器历史信息中找一个已发送给这个玩家并且这个玩家已收到的的world update, 这个world update是在这个玩家将要执行这个movement command之前的world update
+	3.  对于每一个玩家，将其从上述的world update处拉回到这个玩家生成此user command的更新时间中执行用户命令。这个回退时间需要考虑到命令执行的时候的网络延时和插值量
+	4.  执行玩家命令（包括武器开火等。）
+	5.  将所有移动的、错位的玩家移动到他们当前正确位置
+
+
+
 # 原文
 
 [原文出处](https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization)
@@ -298,7 +324,7 @@ For this discussion, all of the messaging and coordination needed to start up th
 <p><strong>8.结束时间减去开始时间就是下一帧的模拟时间</strong><br>
 Each time the client makes a full pass through this loop, the &quot;frametime&quot; is used for determining how much simulation is needed on the next frame. If your framerate is totally constant then frametime will be a correct measure. Otherwise, the frametimes will
  be incorrect, but there isn't really a solution to this (unless you could deterministically figure out exactly how long it was going to take to run the next frame loop iteration before running it...).</p>
-<p><strong>客户端每完成一个帧循环，就用“frametime”来决定下一帧需要多少时间，如果帧率恒定，“frametime”就是准确的，否则就没办法获得准确的“frametime”（因为在没一帧开始你不可能知道这一帧需要多长时间）</strong><br>
+<p><strong>客户端每完成一个帧循环，就用“frametime”来决定下一帧需要多少时间，如果帧率恒定，“frametime”就是准确的，否则就没办法获得准确的“frametime”（因为在每一帧开始之前你不可能知道这一帧需要多长时间）</strong><br>
 </p>
 <p><br>
 The server has a somewhat similar loop:</p>
@@ -381,35 +407,45 @@ For prediction, the last acknowledged movement from the server is used as a star
  then the client will have stored up five user commands ahead of the last one acknowledged by the server. These five user commands are simulated on the client as a part of client-side prediction. Assuming full prediction[1], the client will want to start with
  the latest data from the server, and then run the five user commands through &quot;similar logic&quot; to what the server uses for simulation of client movement. Running these commands should produce an accurate final state on the client (final player position is most
  important) that can be used to determine from what position to render the scene during the current frame.</p>
-<p><strong>预测的过程中，我们把服务器确认的移动信息作为开始，这样客户端就可以确定服务器执行上次命令以后游戏中玩家的准确信息（比如位置）。如果网络有延迟，这个确认命令也会有一定延迟。假设客户端运行帧率为50fps，网络延时为100ms，这样在客户端收到服务器的确认命令的时候，本地命令队列中已经有5条信息，这5条信息被用来执行客户端预测。假设执行完全预测【1】客户端在收到来自服务器的最新信息后，就开始按照与服务器相同的逻辑执行本地消息队列中的5个命令。这些命令执行以后得到当前状态（最重要的是位置），然后根据玩家的状态信息渲染当前帧。</strong><br>
+<p><strong>预测的过程中，我们把服务器确认的移动信息作为开始，这样客户端就可以确定服务器执行上次命令以后游戏中玩家的准确信息（比如位置）。如果网络有延迟，这个确认命令也会有一定延迟。假设客户端运行帧率为50fps，网络延时为100ms，这样在客户端收到服务器的确认命令的时候，本地命令队列中已经有5条信息，这5条信息被用来执行客户端预测。假设执行完全预测【1】客户端在收到来自服务器的最新信息后，就开始按照与服务器相同的逻辑执行本地消息队列中的5个命令。这些命令执行以后得到当前状态（最重要的是玩家最后的位置），然后根据玩家的状态信息渲染当前帧。</strong><br>
 In Half-Life, minimizing discrepancies between client and server in the prediction logic is accomplished by sharing the identical movement code for players in both the server-side game code and the client-side game code. These are the routines in the pm_shared/
  (which stands for &quot;player movement shared&quot;) folder of the HL SDK. The input to the shared routines is encapsulated by the user command and a &quot;from&quot; player state. The output is the new player state after issuing the user command. The general algorithm on the
  client is as follows:</p>
 <p><strong>在半条命这个游戏中，客户端跟服务器采用相同的代码来计算移动，这样可以减小客户端预测跟服务器之间的误差。这些代码位于HLSDK中的pm_shared/（意思是“player movement shared”）。这段代码的输入是玩家操作和客户端的初始状态，输出是玩家操作以后的状态。客户端算法大致如下：</strong></p>
-<p>&quot;from state&quot; &lt;- state after last user command acknowledged by the server;<br>
-<br>
-&quot;command&quot; &lt;- first command after last user command acknowledged by server;</p>
-<p>while (true)<br>
-{<br>
-<span style="white-space:pre"></span>run &quot;command&quot; on &quot;from state&quot; to generate &quot;to state&quot;;<br>
-<span style="white-space:pre"></span>if (this was the most up to date &quot;command&quot;)<br>
-<span style="white-space:pre"></span>break;<br>
-<br>
-<span style="white-space:pre"></span>&quot;from state&quot; = &quot;to state&quot;;<br>
-<span style="white-space:pre"></span>&quot;command&quot; = next &quot;command&quot;;<br>
-};</p>
-<p><strong>“初始状态” &lt;-上个玩家命令执行以后玩家的状态</strong></p>
-<p><strong>&quot;命令&quot; &lt;-尚未执行的下一条命令</strong></p>
-<p><strong>while (true)<br>
-{<br>
-以<strong>&quot;from state&quot; 为基础执行&quot;</strong>command&quot;得到 &quot;to state&quot;;<br>
-<span style="white-space:pre"></span>if (没有更多的 &quot;command&quot;)<br>
-<span style="white-space:pre"></span>break;<br>
-<br>
-<span style="white-space:pre"></span>&quot;from state&quot; = &quot;to state&quot;;<br>
-<span style="white-space:pre"></span>&quot;command&quot; = next &quot;command&quot;;<br>
-};<br>
-</strong></p>
+
+``` c
+“from state” <- state after last user command acknowledged by the server;
+
+“command” <- first command after last user command acknowledged by server;
+
+while (true)
+{
+    run “command” on “from state” to generate “to state”;
+    if (this was the most up to date “command”)
+        break;
+
+    “from state” = “to state”;
+    “command” = next “command”;
+};
+
+```
+
+``` c
+“初始状态” <- 上一条已被服务器确认过的玩家command之后的state
+"命令" <- 上一条已被服务器确认过的玩家command之后的command
+
+while (true)
+{
+	以"from state" 为基础执行"command"得到 "to state";
+	if (这是最新的 "command")
+		break;
+
+	"from state" = "to state";
+	"command" = next "command";
+}
+```
+
+
 <p>The origin and other state info in the final &quot;to state&quot; is the prediction result and is used for rendering the scene that frame. The portion where the command is run is simply the portion where all of the player state data is copied into the shared data
  structure, the user command is processed (by executing the common code in the pm_shared routines in Half-Life's case), and the resulting data is copied back out to the &quot;to state&quot;.</p>
 <p><strong>玩家的初始状态和预测结果用来渲染场景。命令的执行过程就是：将玩家状态复制到共享数据结构中，执行玩家操作（执行hlsdk中pm_shared中的共用代码），然后将结果复制到目标状态（to state）</strong></p>
@@ -418,7 +454,7 @@ In Half-Life, minimizing discrepancies between client and server in the predicti
  created in the shared code. Because commands can be run over and over again, it's important not to create footstep sounds, etc. multiple times as the old commands are re-run to update the predicted position. In addition, it's important for the server not to
  send the client effects that are already being predicted on the client. However, the client still must re-run the old commands or else there will be no way for the server to correct any erroneous prediction by the client. The solution to this problem is easy:
  the client just marks those commands which have not been predicted yet on the client and only plays effects if the user command is being run for the first time on the client.</p>
-<p><strong>这个系统中有几个需要注意的地方，首先，由于网络延迟，客户端又在不停地以一定速度（客户端帧率）生成命令，一个命令通常会被客户端多次执行，知道得到服务器的确定以后将其从命令列表中删除（这就是半条命中的滑动窗口）。首先要考虑的是如何处理共享代码中生成的声效和动画效果。因为命令可能会被多次执行，预测位置的过程被多次执行的时候要注意避免重声等不正确的效果。另外，服务器也要避免客户端意见预测的效果。然而，客户端必须重新运行旧的命令，否则就没法根据服务器来纠正客户端的预测错误。解决方法很简单：客户端将没有执行的客户端命令进行标记，如果这些命令在客户端第一次执行，则播放相应的效果。</strong><br>
+<p><strong>这个系统中有几个需要注意的地方，首先，由于网络延迟，客户端又在不停地以一定速度（客户端帧率）生成命令，一个命令通常会被客户端反复执行，直到得到服务器的确认以后才将其从命令列表中删除（这就是半条命中的滑动窗口）。首先要考虑的是如何处理共享代码中生成的声效和动画效果。因为命令可能会被多次执行，预测位置的过程被多次执行的时候要注意避免重声等不正确的效果。另外，服务器也要避免客户端意见预测的效果。然而，客户端必须重新运行旧的命令，否则就没法根据服务器来纠正客户端的预测错误。解决方法很简单：客户端将没有执行的客户端命令进行标记，如果这些命令在客户端第一次执行，则播放相应的效果。</strong><br>
 The other caveat is with respect to state data that exists solely on the client and is not part of the authoritative update data from the server. If you don't have any of this type of data, then you can simply use the last acknowledged state from the server
  as a starting point, and run the prediction user commands &quot;quot;in-place&quot; on that data to arrive at a final state (which includes your position for rendering). In this case, you don't need to keep all of the intermediate results along the route for predicting from
  the last acknowledged state to the current time. However, if you are doing any logic totally client side (this logic could include functionality such as determining where the eye position is when you are in the process of crouching—and it's not really totally
@@ -538,12 +574,12 @@ Lag compensation is a method of normalizing server-side the state of the world f
 1.Before executing a player's current user command, the server:</p>
 <p><strong>1.服务器执行客户端命令之前执行以下操作：</strong><br>
 &nbsp; &nbsp; 1.Computes a fairly accurate latency for the player</p>
-<p><strong>&nbsp; &nbsp; 1.计算玩家正确的延迟</strong><br>
-&nbsp; &nbsp; 2.Searches the server history (for the current player) for the world update that was sent to the player and received by the player just before the player would have issued &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;the movement command</p>
-<p>&nbsp; &nbsp;&nbsp;<strong>2.对每个玩家，从服务器历史信息中找到发送给玩家信息和收到玩家响应的信息。</strong><br>
+<p><strong>&nbsp; &nbsp; 1.为玩家计算一个相当精确的延迟时间</strong><br>
+&nbsp; &nbsp; 2.Searches the server history (for the current player) for the world update that was sent to the player and received by the player just before the player would have issued the movement command</p>
+<p>&nbsp; &nbsp;&nbsp;<strong>2.对每个玩家，从服务器历史信息中找一个已发送给这个玩家并且这个玩家已收到的的world update, 这个world update是在这个玩家将要执行这个movement command之前的world update</strong><br>
 &nbsp; &nbsp; 3.From that update (and the one following it based on the exact target time being used), for each player in the update, move the other players backwards in time to &nbsp;<span style="white-space:pre"></span>exactly &nbsp;where they were when the current player's
  user command was created. This moving backwards must account for both connection latency and<span style="white-space:pre"></span>the&nbsp;<span style="white-space:pre"></span>interpolation amount[8] the client was using that frame.</p>
-<p><strong>&nbsp; &nbsp; 3.对于每一个玩家，将其拉回到这个更新时间（插&#20540;得到的精确时间）中执行用户命令。这个回退时间需要考虑到命令执行的时候的网络延时和插&#20540;量【8】</strong><br>
+<p><strong>&nbsp; &nbsp; 3. 对于每一个玩家，将其从上述的world update处拉回到这个玩家生成此user command的更新时间中执行用户命令。这个回退时间需要考虑到命令执行的时候的网络延时和插&#20540;量【8】</strong><br>
 2.Allow the user command to execute (including any weapon firing commands, etc., that will run ray casts against all of the other players in their &quot;old&quot; positions).</p>
 <p><strong>2.执行玩家命令（包括武器开火等。）</strong><br>
 3.Move all of the moved/time-warped players back to their correct/current positions</p>

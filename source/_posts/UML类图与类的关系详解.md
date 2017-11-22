@@ -24,6 +24,8 @@ categories:
 <p><img src="/img/uml_illustrate/afca0365.jpg" width="246" height="184"> 
 </p>
 
+<!-- more -->
+
 # 泛化
 
 <p>泛化(generalization)：表示is-a的关系，是对象之间耦合度最大的一种关系，子类继承父类的所有细节。直接使用语言中的继承表达。在类图中使用带三角箭头的实线表示，箭头从子类指向父类。</p>

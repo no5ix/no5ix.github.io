@@ -7,13 +7,7 @@ categories:
 - linux
 ---
 
-1. [水平触发与边缘触发](#%E6%B0%B4%E5%B9%B3%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91)
-2. [epoll 编程接口](#epoll-%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3)
-3. [epoll与select的区别 (口诀 : 校内树)](#epoll%E4%B8%8Eselect%E7%9A%84%E5%8C%BA%E5%88%AB-%E5%8F%A3%E8%AF%80-%E6%A0%A1%E5%86%85%E6%A0%91)
-4. [常见的epoll编程模型](#%E5%B8%B8%E8%A7%81%E7%9A%84epoll%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B)
-    1. [*单I/O 线程epoll*](#%E5%8D%95io-%E7%BA%BF%E7%A8%8Bepoll)
-    2. [_线程池实现要点_](#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E8%A6%81%E7%82%B9)
-5. [epoll代码实例](#epoll%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B)
+
 
 # 水平触发与边缘触发
 

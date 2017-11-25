@@ -22,15 +22,6 @@ this Plugin version can Run **2000+** fishes at the same time
 > 这个插件版本可以同时运行 **2000+** 条鱼儿
 
 
-# Video Preview 
-
-* Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
-
-	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
-
-
-<iframe height=255 width=500 src='http://player.youku.com/embed/XMTc2NTM4MjkyMA==' frameborder=0 'allowfullscreen'></iframe>
-
 
 # **Download**
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)
@@ -39,6 +30,15 @@ this Plugin version can Run **2000+** fishes at the same time
 
     > *这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)*
 
+
+# Video Preview 
+
+* Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
+
+	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
+
+
+<iframe height=255 width=500 src='http://player.youku.com/embed/XMTc2NTM4MjkyMA==' frameborder=0 'allowfullscreen'></iframe>
 
 <!-- more -->
 

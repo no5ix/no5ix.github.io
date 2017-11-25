@@ -1,5 +1,5 @@
 ---
-title: 快速完成一个slg游戏思路(二)
+title: 快速完成一个简易slg游戏思路二
 date: 2016-07-30 22:57:29
 tags:
 - php
@@ -11,7 +11,7 @@ tags:
 - http
 - udp
 - workerman
-- Capistrano
+- capistrano
 - ruby
 categories:
 - server

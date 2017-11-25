@@ -1,5 +1,5 @@
 ---
-title: 快速完成一个slg游戏思路(一)
+title: 快速完成一个简易slg游戏思路一
 date: 2016-07-30 22:19:29
 tags:
 - php
@@ -11,7 +11,7 @@ tags:
 - http
 - udp
 - workerman
-- Capistrano
+- capistrano
 - ruby
 categories:
 - server
@@ -21,7 +21,7 @@ top: 3
 
 
 
-## LoginServer(GateWay)
+## LoginServer(Gate)
 
 当完成渠道sdk回调验证之后, 
 

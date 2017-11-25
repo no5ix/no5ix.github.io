@@ -4,7 +4,34 @@
     var searchFunc = function (path, search_id, content_id) {
       // 0x00. environment initialization
       'use strict';
-      var local_search_close_x = "<i id='local-search-close'>×</i>";
+
+      function IsOnMobile()
+      {
+        //平台、设备和操作系统 
+        var system = { 
+          win: false, 
+          mac: false, 
+          xll: false, 
+          ipad:false 
+        }; 
+        //检测平台 
+        var p = navigator.platform; 
+        system.win = p.indexOf("Win") == 0; 
+        system.mac = p.indexOf("Mac") == 0; 
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
+        if (system.win || system.mac || system.xll||system.ipad) 
+        {
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      }
+
+      var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
       var datas = [];
@@ -42,6 +69,8 @@
       var local_search_init_ul_anim_lock = 0;
       // 为了处理"用户键入一个字母立马又删除"的情况, 保证这种情况的动画完整性以及 local-search-result 被正确清除
       var empty_flag = 0;
+
+
 
       function slideUpFadeOut()
       {
@@ -232,21 +261,8 @@
       $(document).on('blur', '#local-search-input', function(e) {
         // console.log(document.activeElement.getAttribute('class'));
         
-        //平台、设备和操作系统 
-        var system = { 
-            win: false, 
-            mac: false, 
-            xll: false, 
-            ipad:false 
-        }; 
-        //检测平台 
-        var p = navigator.platform; 
-        system.win = p.indexOf("Win") == 0; 
-        system.mac = p.indexOf("Mac") == 0; 
-        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
-        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
-        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
-        if (system.win || system.mac || system.xll||system.ipad) {
+        if (IsOnMobile() == false)
+        {
           first_char_flag = 0;
           slideUpFadeOut();
         }

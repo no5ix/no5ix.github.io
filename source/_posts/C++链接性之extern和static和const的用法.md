@@ -1,5 +1,5 @@
 ---
-title: c++链接性之extern和static和const的用法
+title: C++链接性之extern和static和const的用法
 date: 2015-07-19 17:24:19
 tags:
 - extern

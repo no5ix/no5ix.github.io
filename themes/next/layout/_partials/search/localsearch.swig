@@ -10,6 +10,7 @@
   var inputArea            = document.querySelector("#local-search-input");
   var datas                = [];
   var is_load_xml_finished = 0;
+  var is_load_xml_finished_reset = 1;
   $(document).ready(function(){
     var path = "/search.xml";
     $.ajax({
@@ -27,10 +28,11 @@
         }).get();
 
         is_load_xml_finished = 1;
-        getSearchFile(datas, is_load_xml_finished);
+        is_load_xml_finished_reset = 1;
+        getSearchFile(datas, is_load_xml_finished, is_load_xml_finished_reset);
       }
     });
   });
-  inputArea.onclick   = function(){ getSearchFile(datas, is_load_xml_finished); this.onclick = null }
+  inputArea.onclick   = function(){ is_load_xml_finished_reset = 0; getSearchFile(datas, is_load_xml_finished, is_load_xml_finished_reset); this.onclick = null }
   inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 </script>

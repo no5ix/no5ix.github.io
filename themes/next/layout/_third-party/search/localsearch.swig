@@ -1,7 +1,7 @@
 {% if theme.local_search.enable %}
   <script type="text/javascript">
 
-    var searchFunc = function (search_id, content_id, datas, is_load_xml_finished) {
+    var searchFunc = function (search_id, content_id, datas, is_load_xml_finished, is_load_xml_finished_reset) {
       // 0x00. environment initialization
       'use strict';
 
@@ -34,6 +34,13 @@
       var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
+
+      if (is_load_xml_finished_reset == 1)
+      {
+        $resultContent.innerHTML = "";
+        $resultContent.innerHTML = "<i id='local-search-close'>×</i>" + "<ul class='local-search-empty-ul'><span class='local-search-empty'>索引文件加载完毕<span></ul>";
+        // slideUpFadeOut('slow');
+      }
 
       /* loading css1 : Dot Css Loader*/
       var DotLoader = "<div class='loader'>Loading...</div>";
@@ -70,17 +77,17 @@
 
 
 
-      function slideUpFadeOut()
+      function slideUpFadeOut(speed)
       {
         $('#local-search-input').val('');
 
         $('#local-search-close').hide();
 
-        $('.search-result-list').animate({height:0, opacity:0},'fast', function(){
+        $('.search-result-list').animate( {height:0, opacity:0}, speed, function(){
           $('#local-search-result').html('');
         });
 
-        $('.local-search-empty-ul').animate({height:0, opacity:0},'fast', function(){
+        $('.local-search-empty-ul').animate( {height:0, opacity:0}, speed, function(){
           $('#local-search-result').html('');
         });
       }
@@ -174,7 +181,7 @@
 
           str += "</ul>";
           if (str.indexOf('<li>') === -1) {
-            return $resultContent.innerHTML = local_search_close_x + "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            return $resultContent.innerHTML = local_search_close_x + "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词<span></ul>";
           }
           $resultContent.innerHTML = local_search_close_x + str;
         }
@@ -223,7 +230,7 @@
         {
           if (temp_keyword.length <= 0) {
             first_char_flag = 0;
-            slideUpFadeOut();
+            slideUpFadeOut('fast');
             return;
           }
           handleSearch();
@@ -232,7 +239,7 @@
 
       $(document).on('click', '#local-search-close', function() {
         first_char_flag = 0;
-        slideUpFadeOut();
+        slideUpFadeOut('fast');
       });
 
       $(document).on('blur', '#local-search-input', function(e) {
@@ -241,15 +248,15 @@
         if (IsOnMobile() == false)
         {
           first_char_flag = 0;
-          slideUpFadeOut();
+          slideUpFadeOut('fast');
         }
       });
       
       
     }
 
-    var getSearchFile = function(datas, is_load_xml_finished){
-      searchFunc('local-search-input', 'local-search-result', datas, is_load_xml_finished);
+    var getSearchFile = function(datas, is_load_xml_finished, is_load_xml_finished_reset){
+      searchFunc('local-search-input', 'local-search-result', datas, is_load_xml_finished, is_load_xml_finished_reset);
     }
 
   </script>

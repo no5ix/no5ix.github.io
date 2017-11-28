@@ -1,7 +1,7 @@
 {% if theme.local_search.enable %}
   <script type="text/javascript">
 
-    var searchFunc = function (path, search_id, content_id) {
+    var searchFunc = function (search_id, content_id, datas, is_load_xml_finished) {
       // 0x00. environment initialization
       'use strict';
 
@@ -34,8 +34,6 @@
       var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      var datas = [];
-      var is_load_xml_finished = 0;
 
       /* loading css1 : Dot Css Loader*/
       var DotLoader = "<div class='loader'>Loading...</div>";
@@ -232,27 +230,6 @@
         }
       });
 
-
-      $.ajax({
-        // 0x01. load xml file
-        url: path,
-        dataType: "xml",
-        success: function (xmlResponse) {
-          // 0x02. parse xml file
-          datas = $("entry", xmlResponse).map(function () {
-            return {
-              title: $("title", this).text(),
-              content: $("content", this).text(),
-              url: $("url", this).text()
-            };
-          }).get();
-
-          is_load_xml_finished = 1;
-
-          handleSearch();
-        }
-      });
-
       $(document).on('click', '#local-search-close', function() {
         first_char_flag = 0;
         slideUpFadeOut();
@@ -271,9 +248,8 @@
       
     }
 
-    var getSearchFile = function(){
-      var path = "/search.xml";
-      searchFunc(path, 'local-search-input', 'local-search-result');
+    var getSearchFile = function(datas, is_load_xml_finished){
+      searchFunc('local-search-input', 'local-search-result', datas, is_load_xml_finished);
     }
 
   </script>

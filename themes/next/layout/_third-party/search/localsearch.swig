@@ -31,7 +31,8 @@
         }
       }
 
-      var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
+      var local_search_close_x = "<i id='local-search-close'>×</i>";
+      // var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
       var datas = [];
@@ -258,15 +259,15 @@
         slideUpFadeOut();
       });
 
-      $(document).on('blur', '#local-search-input', function(e) {
-        // console.log(document.activeElement.getAttribute('class'));
+      // $(document).on('blur', '#local-search-input', function(e) {
+      //   // console.log(document.activeElement.getAttribute('class'));
         
-        if (IsOnMobile() == false)
-        {
-          first_char_flag = 0;
-          slideUpFadeOut();
-        }
-      });
+      //   if (IsOnMobile() == false)
+      //   {
+      //     first_char_flag = 0;
+      //     slideUpFadeOut();
+      //   }
+      // });
       
       
     }

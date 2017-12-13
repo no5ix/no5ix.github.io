@@ -56,8 +56,8 @@ public:
     ~A() { delete [] m_cBuffer; }
 };
 A *a = new A[10];
-delete a;         //仅释放了a指针指向的全部内存空间 但是只调用了a[0]对象的析构函数 剩下的从a[1]到a[9]这9个用户自行分配的m_cBuffer对应内存空间将不能释放 从而造成内存泄漏
-delete [] a;      //调用使用类对象的析构函数释放用户自己分配内存空间并且   释放了a指针指向的全部内存空间
+delete a;         //仅释放了a指针指向的这个数组的全部内存空间, 而且只调用了a[0]对象的析构函数, 但是剩下的从a[1]到a[9]这9个用户自行分配的m_cBuffer对应内存空间没有释放 从而造成内存泄漏
+delete [] a;      //调用使用类对象的析构函数释放用户自己分配内存空间并且释放了a指针指向的全部内存空间
 ```
 
 ##  总结
@@ -70,67 +70,6 @@ delete [] a;      //调用使用类对象的析构函数释放用户自己分配
 	- delete[] rg   用来释放rg指向的内存！！还逐一调用数组中每个对象的destructor！！
 
 
-# 例子
-
-我们来看下面的例子，通过例子的学习了解C++中的delete和delete[]的使用方法
-
-``` c++
-
-#include <iostream>
-
-using namespace std;
-
-/////////class Babe
-class Babe
-{
-public:
-	Babe()
-	{
-		cout << "Create a Babe to talk with me" << endl;
-	}
-	~Babe()
-	{
-		cout << "Babe don't go away,listen to me" << endl;
-	}
-};
-
-//////////main function
-int main()
-{
-	Babe *pbabe2 = new Babe[3];
-	delete [] pbabe2;
-
-	cout << endl;
-
-	Babe * pbabe3 = new Babe;
-	delete [] pbabe3;
-
-/*
-	cout << endl;
-
-	Babe* pbabe1 = new Babe[3];
-	delete pbabe1; // 这个在vs2015环境下, 会崩溃; vs2005则不会崩溃
-*/
-	return 0;
-}
-```
-
-vs2005环境下, 打印结果是:
-
-Create a Babe to talk with me
-Create a Babe to talk with me
-Create a Babe to talk with me
-Babe don't go away,listen to me
-Babe don't go away,listen to me
-Babe don't go away,listen to me
-Create a Babe to talk with me
-Create a Babe to talk with me
-Create a Babe to talk with me
-Babe don't go away,listen to me
-
-然后就卡在这里了
-
-
 # 习题
 
 ``` c++
@@ -141,6 +80,9 @@ A *pa = new A();
 A *pas = new A[NUM]();
 ```
 
-1.delete []pas; //详细流程
-2.delete []pa; //会发生什么
-3.delete pas; //哪些指针会变成野指针
+- delete []pas; //详细流程
+答案见上文
+- delete []pa; //会发生什么
+答案是调用未知次数的A的析构函数. 因为delete[]会去通过pa+offset找一个基于pa的偏移量找一个内存里的数据, 他假定这个内存里放了要调用析构的次数n这个数据, 而这个内存里到底是多少是未知的.
+- delete pas; //哪些指针会变成野指针
+答案是pas和A[0]中的指针会变成野指针. 因为只有这两个指针指向的内存被释放了.

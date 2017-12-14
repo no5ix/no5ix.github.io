@@ -55,37 +55,21 @@
           "<div class='square last'></div>" +
         "</div>";
 
-      // $resultContent.innerHTML = 
-      //   local_search_close_x + 
-      //   "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
-      //   DotLoader;
-
       var str = "";
       var keywords = "";
       var temp_keyword = "";
 
-      // 是否为第一个字母被键入的标志位
-      var first_char_flag = 0;
-      // 针对 local-search-init-ul 的动画锁, 防止动画重叠或冲突
-      var local_search_init_ul_anim_lock = 0;
-      // 为了处理"用户键入一个字母立马又删除"的情况, 保证这种情况的动画完整性以及 local-search-result 被正确清除
-      var empty_flag = 0;
 
 
-
-      function slideUpFadeOut()
+      function CloseLocalSearch()
       {
         $('#local-search-input').val('');
 
         $('#local-search-close').hide();
 
-        $('.search-result-list').animate({height:0, opacity:0},'fast', function(){
-          $('#local-search-result').html('');
-        });
-
-        $('.local-search-empty-ul').animate({height:0, opacity:0},'fast', function(){
-          $('#local-search-result').html('');
-        });
+        $('#local-search-result').html('');
+        
+        $('#local-search-result').html('');
       }
 
       function handleSearch()
@@ -98,7 +82,6 @@
           $resultContent.innerHTML = 
             local_search_close_x + 
             "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
-            // "<ul class='local-search-empty-ul'><span class='local-search-empty'>索引文件还未加载完成, 请稍候……</span>" +
             DotLoader;
         }
         else
@@ -190,47 +173,11 @@
         temp_keyword = this.value.trim();
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         
-        // 当用户键入第一个字母的时候的动画处理逻辑 : 
-        // 当 first_char_flag 为 0 的时候, 
-        // 要播放一个 local-search-init-ul 逐渐拉长(height 从 0 逐渐 增加至 600px)且逐渐显现(opacity 从 0 逐渐 增加至 1)的动画
-        if (first_char_flag == 0)
-        {
-          if (temp_keyword.length <= 0) {
-            empty_flag = 1;
-          }
-          if (local_search_init_ul_anim_lock == 0)
-          {
-            local_search_init_ul_anim_lock = 1;
-            $resultContent.innerHTML = "<ul class='local-search-init-ul'></ul>";
-            $('.local-search-init-ul').animate({height:'600px', opacity:1},'normal', function(){
-              if (empty_flag == 1) {
-                empty_flag = 0;
-                first_char_flag = 0;
-                local_search_init_ul_anim_lock = 0;
-                $('.local-search-init-ul').animate({height:'0px', opacity:0},'fast',  function(){
-                  $('#local-search-result').html('');
-                });
-                return;
-              }
-              
-              if (first_char_flag == 0)
-              {
-                handleSearch();
-                first_char_flag = 1;
-                local_search_init_ul_anim_lock = 0;
-              }
-            });
-          }
+        if (temp_keyword.length <= 0) {
+          CloseLocalSearch();
+          return;
         }
-        else if (first_char_flag = 1)
-        {
-          if (temp_keyword.length <= 0) {
-            first_char_flag = 0;
-            slideUpFadeOut();
-            return;
-          }
-          handleSearch();
-        }
+        handleSearch();
       });
 
 
@@ -255,8 +202,7 @@
       });
 
       $(document).on('click', '#local-search-close', function() {
-        first_char_flag = 0;
-        slideUpFadeOut();
+        CloseLocalSearch();
       });
 
       // $(document).on('blur', '#local-search-input', function(e) {
@@ -264,8 +210,7 @@
         
       //   if (IsOnMobile() == false)
       //   {
-      //     first_char_flag = 0;
-      //     slideUpFadeOut();
+      //     CloseLocalSearch();
       //   }
       // });
       

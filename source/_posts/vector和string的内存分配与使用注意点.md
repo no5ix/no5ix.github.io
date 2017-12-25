@@ -423,11 +423,11 @@ vector内存分配策略为 二倍扩容 , 每次当内存不够的情况下vect
 | **c1.swap(c2)** | 将c1和c2这两个容器中的元素互换。
 | **swap(c1,c2)** | 同上操作。
 | **c.empty()** | 判断容器是否为空。
+|**c.erase(iter)** | 删除pos位置的数据，传回下一个数据的位置。
 |c.assign(beg,end) | 将[beg; end)区间中的数据赋值给c。
 |c.assign(n,elem) | 将n个elem的拷贝赋值给c。
 |c.at(idx) | 传回索引idx所指的数据，如果idx越界，抛出out_of_range。
 |c.back() | 传回指向最后一个元素的迭代器
-|c.erase(iter) | 删除pos位置的数据，传回下一个数据的位置。
 | c.erase(beg,end) | 删除[beg,end)区间的数据，传回下一个数据的位置。 
 | c.front() | 传回第一个数据。
 |get_allocator| 使用构造函数返回一个拷贝。

@@ -20,7 +20,7 @@ top: 2
 
 
 
-## ChatServer
+# ChatServer
 
 
 
@@ -45,18 +45,18 @@ player_ID 和 Chat_ID相互对应,
 
 
 
-## MsgServer
+# MsgServer
 
 - 实时推送 : workerman 的tcp
 - 非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，
 
 <!-- more -->
 
-## deployTool
+# deployTool
 
 Capistrano是一个开源的部署工具, 用ruby来写, 语法超简洁的
 
-## 优点
+# 优点
 
 - 实时则走 workerman 
 - 非实时则跑 yii

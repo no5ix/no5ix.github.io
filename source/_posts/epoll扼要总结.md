@@ -13,15 +13,47 @@ categories:
 
 在深入讨论多种可选的m机制之前，我们需要先区分两种文件描述符准备就绪的通知模式。
 
-- **水平触发**通知：如果文件描述符上可以非阻塞地执行I/O系统调用，此时认为它已经
+- **水平触发**通知(epoll默认的通知方式)：如果文件描述符上可以非阻塞地执行I/O系统调用，此时认为它已经
 就绪。
 - **边缘触发**通知：如果文件描述符自上次状态检查以来有了新的I/O活动（比如新的输
 入），此时需要触发通知。
 
-表63-1总结了I/O多路复用、信号驱动I/O以及epoll所采用的通知模型。epoll API同其
+下图总结了I/O多路复用、信号驱动I/O以及epoll所采用的通知模型。epoll API同其
 他两种I/O模型的区别在于它对水平触发（默认）和边缘触发都支持。
 
 {% asset_img epoll1.png epoll %}
+
+## 水平触发与边缘触发的区别
+
+**默认情况下 epoll 提供的是水平触发通知**.要使用边缘触发通知，我们在调用epoll_ctl()时在ev．events字段中指定EPOLLET标志。
+
+``` c
+struct epoll_event ev;
+ev．data．fd=fd
+ev.events : EPOLLIN I EPOLLET;
+if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) :: -1)
+	errExit("epoll_ctl");
+```
+
+我们通过一个例子来说明epoll的水平触发和边缘触发通知之间的区别。
+假设我们使用epoll来监视一个套接字上的输入（EPOLLIN），接下来会发生如下的事件。
+
+1．套接字上有输入到来。
+2．我们调用一次epoll_wait()。无论我们采用的是水平触发还是边缘触发通知，该调用
+都会告诉我们套接字已经处于就绪态了。
+3．再次调用epoll_wait()。
+
+如果我们采用的是水平触发通知，那么第二个epoll_wait()调用将告诉我们套接字处于就
+绪态。而如果我们采用边缘触发通知，那么第二个epoll_wait()调用将阻塞，因为自从上一次
+调用epoll_wait()以来并没有新的输入到来。
+
+边缘触发通知通常和非阻塞的文件描述符结合使用。因而，采用epoll的边缘触发通知机制的程序基本框架如下:
+
+1．让所有待监视的文件描述符都成为非阻塞的。
+2．通过epoll_ctl()构建epoll的兴趣列表。
+3．通过如下的循环处理I/O事件 : 
+(a)通过epoll_wait()取得处于就绪态的描述符列表。
+(b)针对每一个处于就绪态的文件描述符，不断进行I/O处理直到相关的系统调用( 例如read()、write()，recv()、send()或accept() )返回EAGAIN或EWOULDBLOCK错误。
 
 # epoll 编程接口
 
@@ -49,18 +81,18 @@ epoll API由以下3个系统调用组成。
 
 # epoll与select的区别 (口诀 : 校内树)
 
-- **效率: ** 每次调用select0和poll0时，内核必须检查所有在调用中指定的文件描述符。与之相
-反，当通过epoll_ctl0指定了需要监视的文件描述符时，内核会在与打开的文件描述
+- **效率: ** 每次调用select()和poll()时，内核必须检查所有在调用中指定的文件描述符。与之相
+反，当通过epoll_ctl()指定了需要监视的文件描述符时，内核会在与打开的文件描述
 上下文相关联的列表中记录该描述符。之后每当执行I／O操作使得文件描述符成为就
 绪态时，内核就在epoll描述符的就绪列表中添加一个元素。（单个打开的文件描述上
 下文中的一次I]O事件可能导致与之相关的多个文件描述符成为就绪态。）之后的
-epoll_wait0调用从就绪列表中简单地取出这些元素。
+epoll_wait()调用从就绪列表中简单地取出这些元素。
 
-- **内存: ** 每次调用select0或poll()时，我们传递一个标记了所有待监视的文件描述符的
+- **内存: ** 每次调用select()或poll()时，我们传递一个标记了所有待监视的文件描述符的
 数据结构给内核，调用返回时，内核将所有标记为就绪态的文件描述符的数据
 结构再传回给我们。与之相反，在epoll中我们使用epoll_ctl()在内核空间中建
 立一个数据结构，该数据结构会将待监视的文件描述符都记录下来。一旦这个
-数据结构建立完成，稍后每次调用epoll_wait0时就不需要再传递任何与文件描
+数据结构建立完成，稍后每次调用epoll_wait()时就不需要再传递任何与文件描
 述符有关的信息给内核了，而调用返回的信息中只包含那些已经处于就绪态的
 描述符。
 
@@ -286,7 +318,7 @@ int main()
 
 				epoll_ctl(epfd, EPOLL_CTL_ADD, connfd, &ev);
 			}
-			else if (events[i].events & EPOLLIN)
+			else if (events[i].events & EPOLLIN) // 读请求
 			{
 				//printf("reading!/n");
 
@@ -313,7 +345,7 @@ int main()
 				pthread_cond_broadcast(&cond1);
 				pthread_mutex_unlock(&mutex);
 			}
-			else if (events[i].events & EPOLLOUT)
+			else if (events[i].events & EPOLLOUT) // 写请求
 			{
 				
 				// rdata=(struct user_data *)events[i].data.ptr;

@@ -21,7 +21,7 @@ top: 3
 
 
 
-## LoginServer(Gate)
+# LoginServer(Gate)
 
 当完成渠道sdk回调验证之后, 
 
@@ -36,7 +36,7 @@ top: 3
 
 
 
-## MainServer
+# MainServer
 
 因为弱交互/短连接的关系, 
 
@@ -59,7 +59,7 @@ top: 3
 
 <!-- more -->
 
-## pvpServeer
+# pvpServeer
 
 而 pvpServer 则选择 workerman 的tcp模式,
 

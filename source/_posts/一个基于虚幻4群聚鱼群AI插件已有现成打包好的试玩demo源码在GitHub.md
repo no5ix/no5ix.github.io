@@ -23,7 +23,7 @@ this Plugin version can Run **2000+** fishes at the same time
 
 
 
-# **Download**
+# Download
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)
 
 	> 下载  [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU) 玩玩 
@@ -42,7 +42,7 @@ this Plugin version can Run **2000+** fishes at the same time
 
 <!-- more -->
 
-# **How to play**
+# How to play
 
 - *VR* : 
 

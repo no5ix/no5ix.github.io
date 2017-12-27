@@ -11,32 +11,36 @@ categories:
 top: 5
 ---
 
-先上菜 : [**GitHub**](https://github.com/no5ix/JoyServer)
+先上菜 : [GitHub](https://github.com/no5ix/JoyServer)
 
-# **框架简介**
+# 框架简介
 
 
 一个简单的游戏服务器框架demo
 
 
 
-# **框架概要**
+# 框架概要
 
+采用C++开发，
+主要处理游戏客户端和游戏数据库的数据交换。
+通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果
+返回给游戏客户端，即完成了前后端的数据交换。
 
-采用C++开发，依赖 : 
+<!-- 依赖 : 
 
 - boost库
 - MySQL数据库
 - google-glog日志记录框架
 - curl库
 
-主要处理游戏客户端和游戏数据库的数据交换。
-通信采用socket发送协议包的方式，服务器根据协议包命令码去做相应的逻辑处理，并将处理结果
-返回给游戏客户端，即完成了前后端的数据交换。
+> sudo apt-get install g++ make libboost-all-dev libmysqlclient-dev libgoogle-glog-dev libcurl4-gnutls-dev
+-->
+
 
 <!-- more -->
 
-# **框架处理流程：**
+# 框架处理流程：
 
 
 客户端连接→
@@ -55,7 +59,7 @@ Worker将返回数据递交给线程并返回给客户端
 
 
 
-# **协议处理流程：**
+# 协议处理流程：
 
 
 客户端初次连接服务器，发送心跳→
@@ -68,7 +72,7 @@ Worker将返回数据递交给线程并返回给客户端
 
 
 
-# **他日将改进之处**
+# 他日将改进之处
 
 
 - 降低模块间耦合度

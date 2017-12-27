@@ -8,7 +8,9 @@ categories:
 ---
 
 # distinct关键字
-> distinct是应用于所有列的, 而不是某一个列
+
+distinct是应用于所有列的, 而不是某一个列
+
 ```
 mysql> select * from test_table;
 +------+------+
@@ -44,7 +46,8 @@ mysql> select distinct one from test_table;
 <!-- more -->
 
 # and关键字
-> and的组合优先级比or高
+
+and的组合优先级比or高
 
 ```
 mysql> select * from test_table;
@@ -87,7 +90,9 @@ mysql> select one, two from test_table where (one = 52 or one = 56) and two > 12
 ```
 
 # NULL
-> null和空字符是不一样的, 找到他和删除他的方式也比较特别
+
+null和空字符是不一样的, 找到他和删除他的方式也比较特别
+
 ```
 mysql> insert into test_table(one , two) values (null, null);
 Query OK, 1 row affected (0.00 sec)
@@ -130,8 +135,10 @@ Empty set (0.00 sec)
 ```
 
 # rollback
-> - 并不是什么都可以回滚的, 典型的如创建表和删除表这些都是不能回退的.
-> - 事务是用来管理 insert,update,delete 语句的
+
+- 并不是什么都可以回滚的, 典型的如创建表和删除表这些都是不能回退的.
+- 事务是用来管理 insert,update,delete 语句的
+- 
 ```
 mysql> set autocommit = 0;
 Query OK, 0 rows affected (0.00 sec)

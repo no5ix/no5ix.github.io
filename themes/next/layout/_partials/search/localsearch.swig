@@ -1,7 +1,7 @@
 {% if theme.scheme %}
   <form class="site-search-form">
   <span class="search-icon fa fa-search"></span>
-    <input type="text" id="local-search-input" class="st-search-input" />
+    <input type="text" id="local-search-input" class="st-search-input" placeholder="{{ __('search.placeholder') }}" />
   </form>
 {% endif %}
 

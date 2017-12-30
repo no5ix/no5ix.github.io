@@ -72,7 +72,7 @@ state:
   categories: categories
 
 search:
-  placeholder: Searching...
+  placeholder: Not support IE ...
 
 cheers:
   um: Um..

@@ -255,8 +255,12 @@
 
 
 
-    <footer class="post-footer">
 
+    {#################}
+    {### POST BODY ###}
+    {#################}
+    <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if post.direction && post.direction.toLowerCase() === 'rtl' %} rtl{% endif %}" itemprop="articleBody">
+      
       {% if not is_index %}
       {% if theme.rating.enable or (theme.vkontakte_api.enable and theme.vkontakte_api.like) or (theme.facebook_sdk.enable and theme.facebook_sdk.like_button) %}
         <div class="post-widgets">
@@ -317,12 +321,6 @@
       {% if is_index and not isLast %}
         <div class="post-eof"></div>
       {% endif %}
-    </footer>
-
-    {#################}
-    {### POST BODY ###}
-    {#################}
-    <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if post.direction && post.direction.toLowerCase() === 'rtl' %} rtl{% endif %}" itemprop="articleBody">
 
       {# Gallery support #}
       {% if post.photos and post.photos.length %}
@@ -405,6 +403,78 @@
         {% include 'post-copyright.swig' with { post: post } %}
       </div>
     {% endif %}
+
+    
+    <footer class="post-footer">
+      {% if post.tags and post.tags.length and not is_index %}
+        <div class="post-tags">
+          {% for tag in post.tags %}
+            <a href="{{ url_for(tag.path) }}" rel="tag"><i class="fa fa-tag"></i> {{ tag.name }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if not is_index %}
+      {% if theme.rating.enable or (theme.vkontakte_api.enable and theme.vkontakte_api.like) or (theme.facebook_sdk.enable and theme.facebook_sdk.like_button) %}
+        <div class="post-widgets">
+        {% if theme.rating.enable %}
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        {% endif %}
+
+        {% if (theme.vkontakte_api.enable and theme.vkontakte_api.like) or (theme.facebook_sdk.enable and theme.facebook_sdk.like_button) %}
+          <div class="social-like">
+            {% if theme.vkontakte_api.enable and theme.vkontakte_api.like %}
+              <div class="vk_like">
+                <span id="vk_like"></span>
+              </div>
+            {% endif %}
+
+            {% if theme.facebook_sdk.enable and theme.facebook_sdk.like_button %}
+              <div class="fb_like">
+                <div class="fb-like" data-layout="button_count" data-share="true"></div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        </div>
+      {% endif %}
+      {% endif %}
+
+      {% if not is_index and (post.prev or post.next) %}
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            {% if post.next %}
+              <a href="{{ url_for(post.next.path) }}" rel="next" title="{{ post.next.title }}">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  {{ post.next.title }}
+                </p> 
+              </a>
+            {% endif %}
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            {% if post.prev %}
+              <a href="{{ url_for(post.prev.path) }}" rel="prev" title="{{ post.prev.title }}">
+              <p class="post-nav-pre-next-title">
+                  {{ post.prev.title }}
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% set isLast = loop.index % page.per_page === 0 %}
+      {% if is_index and not isLast %}
+        <div class="post-eof"></div>
+      {% endif %}
+    </footer>
 
   </div>
   {######################}

@@ -88,12 +88,12 @@ search:
   format: html
   limit: 10000
 
-algolia:
-  applicationID: 'FHGT24ISPZ'
-  apiKey: '69dedbec45eb6249c0d884dff2185b31'
-  adminApiKey: 'b0be72c8676b07390c2d9569bdf4a82f'
-  indexName: 'nosix_NAME'
-  chunkSize: 5000
+# algolia:
+#   applicationID: 'FHGT24ISPZ'
+#   apiKey: '69dedbec45eb6249c0d884dff2185b31'
+#   adminApiKey: 'b0be72c8676b07390c2d9569bdf4a82f'
+#   indexName: 'nosix_NAME'
+#   chunkSize: 5000
 
 # # 自动生成sitemap
 # sitemap: 

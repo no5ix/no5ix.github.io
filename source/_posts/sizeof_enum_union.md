@@ -189,22 +189,24 @@ class test_class
 {
 public:
 	static float i;
+
 	union test_union
 	{
 		int bb;
 		char aa[13];
 		short cc;
 	};
+	
 	enum test_enum
 	{
 		monday,
 		tuesday,
 		sunday
 	};
+
 	virtual void testFunc() {}
+	
 	char xmly;
-protected:
-private:
 };
 
 # pragma pack()
@@ -218,7 +220,7 @@ int main()
 
 请问打印结果?
 
-sizeof(test_class) : 6
+`sizeof(test_class) : 6`
 
 为什么呢?
 注意看共用体 test_union 和枚举 test_enum其实并没有声明变量, 如果写成
@@ -232,46 +234,40 @@ class test_class
 {
 public:
 	static float i;
+
 	union test_union
 	{
 		int bb;
 		char aa[13];
 		short cc;
 	}uVar;
+
 	enum test_enum
 	{
 		monday,
 		tuesday,
 		sunday
 	}eVar;
-	virtual void testFunc() {}
-	char xmly;
-protected:
-private:
-};
 
+	virtual void testFunc() {}
+
+	char xmly;
+};
 # pragma pack()
 
 enum enum_x 
-
 { 
-
 	x1=5, 
-
 	x2, 
-
 	x3, 
-
 	x4, 
-
 }; 
-
 enum enum_x x=x3; 
 
 int main()
 {
-    cout << "sizeof(test_class) : " << sizeof(test_class) << endl; 
-    
+	cout << "sizeof(test_class) : " << sizeof(test_class) << endl; 
+
 	cout << "x : " << x << endl;
 
 	test_class::test_enum i;

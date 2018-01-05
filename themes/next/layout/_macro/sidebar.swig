@@ -9,7 +9,9 @@
 
   <aside id="sidebar" class="sidebar">
     {% if theme.sidebar.onmobile %}
-      <div id="sidebar-dimmer"></div>
+      {% if theme.sidebar.dimmer %}
+        <div id="sidebar-dimmer"></div>
+      {% endif %}
     {% endif %}
     <div class="sidebar-inner">
 

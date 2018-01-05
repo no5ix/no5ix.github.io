@@ -96,7 +96,7 @@ scheme: Mist
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 social:
   GitHub: https://github.com/no5ix
-  # E-Mail: mailto:no5ix@foxmail.com
+  # E-Mail: http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VGVlYGFmYmdmZGwUJSV6Nzs5
   Playlist: http://music.163.com/#/user/home?id=47256866
   #LinkLabel: Link
 
@@ -180,6 +180,9 @@ sidebar:
   
   # Enable sidebar on narrow view
   onmobile: true
+
+  # Enable onmobile sidebar dimmer(only available if onmobile is true)
+  dimmer: false
 
 
 # Show the Back to top on mobile

@@ -11,12 +11,10 @@
     &:hover { opacity: 0.8; }
 
   +tablet() {
-    fixbutton() if hexo-config('sidebar.onmobile');
-    hide() if not hexo-config('sidebar.onmobile');
+    display: none;
   }
   +mobile() {
-    fixbutton() if hexo-config('sidebar.onmobile');
-    hide() if not hexo-config('sidebar.onmobile');
+    display: none;
   }
 
   &.back-to-top-on {

@@ -42,7 +42,13 @@
   }
 }
 
-@import "sidebar-toggle";
+$pos = hexo-config('sidebar.position');
+
+if $pos in ('left')
+  @import "sidebar-toggle";
+else if $pos in ('right')
+  @import "sidebar-toggle-right";
+
 @import "sidebar-author";
 @import "site-state";
 @import "sidebar-feed-link";

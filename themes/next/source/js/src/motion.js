@@ -54,8 +54,8 @@ $(document).ready(function () {
   var sidebarToggleLine1st = new SidebarToggleLine({
     el: '.sidebar-toggle-line-first',
     status: {
-      arrow: {width: '50%', rotateZ: '-45deg', top: '2px'},
-      close: {width: '100%', rotateZ: '-45deg', top: '5px'}
+      arrow: {width: '50%', rotateZ: '45deg',left:'6px', top: '2px'},
+      close: {width: '100%', rotateZ: '45deg',left:'0px', top: '5px'}
     }
   });
   var sidebarToggleLine2nd = new SidebarToggleLine({
@@ -68,8 +68,8 @@ $(document).ready(function () {
   var sidebarToggleLine3rd = new SidebarToggleLine({
     el: '.sidebar-toggle-line-last',
     status: {
-      arrow: {width: '50%', rotateZ: '45deg', top: '-2px'},
-      close: {width: '100%', rotateZ: '45deg', top: '-5px'}
+      arrow: {width: '50%', rotateZ: '-45deg',left:'6px', top: '-2px'},
+      close: {width: '100%', rotateZ: '-45deg',left:'0px', top: '-5px'}
     }
   });
 
@@ -79,26 +79,23 @@ $(document).ready(function () {
 
   var SIDEBAR_WIDTH = '320px';
   var SIDEBAR_DISPLAY_DURATION = 200;
-  var xPos, yPos;
 
   var sidebarToggleMotion = {
     toggleEl: $('.sidebar-toggle'),
-    dimmerEl: $('#sidebar-dimmer'),
     sidebarEl: $('.sidebar'),
     isSidebarVisible: false,
     init: function () {
+      this.sidebarEl.css('left',0);
+      // this.toggleEl.css('left','50px');
+      // $('.back-to-top').css('left','76px');
       this.toggleEl.on('click', this.clickHandler.bind(this));
-      this.dimmerEl.on('click', this.clickHandler.bind(this));
       this.toggleEl.on('mouseenter', this.mouseEnterHandler.bind(this));
       this.toggleEl.on('mouseleave', this.mouseLeaveHandler.bind(this));
-      this.sidebarEl.on('touchstart', this.touchstartHandler.bind(this));
-      this.sidebarEl.on('touchend', this.touchendHandler.bind(this));
-      this.sidebarEl.on('touchmove', function(e){e.preventDefault();});
 
       $(document)
         .on('sidebar.isShowing', function () {
           NexT.utils.isDesktop() && $('body').velocity('stop').velocity(
-            {paddingRight: SIDEBAR_WIDTH},
+            {paddingLeft: SIDEBAR_WIDTH},
             SIDEBAR_DISPLAY_DURATION
           );
         })
@@ -121,17 +118,6 @@ $(document).ready(function () {
       }
       sidebarToggleLines.init();
     },
-    touchstartHandler: function(e) {
-      xPos = e.originalEvent.touches[0].clientX;
-      yPos = e.originalEvent.touches[0].clientY;
-    },
-    touchendHandler: function(e) {
-      var _xPos = e.originalEvent.changedTouches[0].clientX;
-      var _yPos = e.originalEvent.changedTouches[0].clientY;
-      if (_xPos-xPos > 30 && Math.abs(_yPos-yPos) < 20) {
-          this.clickHandler();
-      }
-    },
     showSidebar: function () {
       var self = this;
 
@@ -144,7 +130,7 @@ $(document).ready(function () {
           duration: SIDEBAR_DISPLAY_DURATION,
           begin: function () {
             $('.sidebar .motion-element').velocity(
-              'transition.slideRightIn',
+              'transition.slideLeftIn',
               {
                 stagger: 50,
                 drag: true,
@@ -164,7 +150,7 @@ $(document).ready(function () {
       this.sidebarEl.trigger('sidebar.isShowing');
     },
     hideSidebar: function () {
-      NexT.utils.isDesktop() && $('body').velocity('stop').velocity({paddingRight: 0});
+      NexT.utils.isDesktop() && $('body').velocity('stop').velocity({paddingLeft: 0});
       this.sidebarEl.find('.motion-element').velocity('stop').css('display', 'none');
       this.sidebarEl.velocity('stop').velocity({width: 0}, {display: 'none'});
 

@@ -1,6 +1,6 @@
 .sidebar-toggle {
   position: fixed;
-  left: $st-position-left-right;
+  right: $st-position-left-right;
   bottom: 5px;
   width: 14px;
   height: 14px;
@@ -12,11 +12,11 @@
   -webkit-transform: translateZ(0);
 
   +tablet() {
-    fixLeftButton() if hexo-config('sidebar.onmobile');
+    fixRightButton() if hexo-config('sidebar.onmobile');
     hide() if not hexo-config('sidebar.onmobile');
   }
   +mobile() {
-    fixLeftButton() if hexo-config('sidebar.onmobile');
+    fixRightButton() if hexo-config('sidebar.onmobile');
     hide() if not hexo-config('sidebar.onmobile');
   }
 }

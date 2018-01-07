@@ -46,8 +46,12 @@ $pos = hexo-config('sidebar.position');
 
 if $pos in ('left')
   @import "sidebar-toggle";
+  if hexo-config('sidebar.onmobile')
+    @import "sidebar-dimmer"
 else if $pos in ('right')
   @import "sidebar-toggle-right";
+  if hexo-config('sidebar.onmobile')
+    @import "sidebar-dimmer-right"
 
 @import "sidebar-author";
 @import "site-state";
@@ -56,4 +60,4 @@ else if $pos in ('right')
 @import "sidebar-blogroll";
 @import "sidebar-nav";
 @import "sidebar-toc";
-@import "sidebar-dimmer" if hexo-config('sidebar.onmobile');
+/* @import "sidebar-dimmer" if hexo-config('sidebar.onmobile') and he; */

@@ -8,11 +8,13 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+
     {% if theme.sidebar.onmobile %}
       {% if theme.sidebar.dimmer %}
         <div id="sidebar-dimmer"></div>
       {% endif %}
     {% endif %}
+    
     <div class="sidebar-inner">
 
       {% set display_toc = is_post and theme.toc.enable or is_page and theme.toc.enable %}

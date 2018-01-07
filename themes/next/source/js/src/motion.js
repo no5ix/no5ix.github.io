@@ -77,11 +77,12 @@ $(document).ready(function () {
   sidebarToggleLines.push(sidebarToggleLine2nd);
   sidebarToggleLines.push(sidebarToggleLine3rd);
 
-  var SIDEBAR_WIDTH = '320px';
-  var SIDEBAR_DISPLAY_DURATION = 200;
+  var SIDEBAR_WIDTH = '285px';
+  var SIDEBAR_DISPLAY_DURATION = 150;
 
   var sidebarToggleMotion = {
     toggleEl: $('.sidebar-toggle'),
+    dimmerEl: $('#sidebar-dimmer'),
     sidebarEl: $('.sidebar'),
     isSidebarVisible: false,
     init: function () {
@@ -89,6 +90,7 @@ $(document).ready(function () {
       // this.toggleEl.css('left','50px');
       // $('.back-to-top').css('left','76px');
       this.toggleEl.on('click', this.clickHandler.bind(this));
+      this.dimmerEl.on('click', this.clickHandler.bind(this));
       this.toggleEl.on('mouseenter', this.mouseEnterHandler.bind(this));
       this.toggleEl.on('mouseleave', this.mouseLeaveHandler.bind(this));
 

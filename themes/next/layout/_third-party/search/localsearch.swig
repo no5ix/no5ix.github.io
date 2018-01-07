@@ -56,7 +56,7 @@
         "</div>";
 
       var str = "";
-      var keywords = "";
+      var keywords = [];
       var temp_keyword = "";
 
 
@@ -74,6 +74,9 @@
 
       function handleSearch()
       {
+        if (keywords.length <= 0) {
+          return;
+        }
         $resultContent.innerHTML = "";
         
         // 0x04. perform local searching
@@ -171,12 +174,11 @@
         // 0x03. parse query to keywords list
         str = '<ul class=\"search-result-list\">';
         temp_keyword = this.value.trim();
-        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
-        
         if (temp_keyword.length <= 0) {
           CloseLocalSearch();
           return;
         }
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         handleSearch();
       });
 

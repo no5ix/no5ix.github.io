@@ -4,7 +4,7 @@ date: 2016-08-27 15:11:26
 tags:
 - vbox
 categories:
-- server
+- 杂
 ---
 
 

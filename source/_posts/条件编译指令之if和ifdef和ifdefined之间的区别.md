@@ -2,9 +2,7 @@
 title: 条件编译指令之#if和#ifdef和#if defined之间的区别
 date: 2015-02-09 17:24:19
 tags:
-- "#if"
-- "#ifdef"
-- "#if define"
+- c++
 categories:
 - c++
 ---

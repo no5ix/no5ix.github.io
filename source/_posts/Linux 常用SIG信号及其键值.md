@@ -3,7 +3,6 @@ title: Linux 常用SIG信号及其键值
 date: 2015-08-04 13:08:56
 tags:
 - linux
-- sig
 categories:
 - linux
 ---

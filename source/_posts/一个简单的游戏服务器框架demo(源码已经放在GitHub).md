@@ -4,7 +4,6 @@ date: 2017-08-27 23:08:56
 tags:
 - boost
 - mysql
-- glog
 - c++
 categories:
 - server

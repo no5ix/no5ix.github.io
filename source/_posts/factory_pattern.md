@@ -4,7 +4,7 @@ date: 2015-01-07 12:18:54
 tags:
 - 设计模式
 categories:
-- c++
+- 杂
 ---
 
 
@@ -15,15 +15,17 @@ categories:
 <p><strong>模式的问题</strong>：你如何能轻松方便地构造对象实例，而不必关心构造对象实例的细节和复杂过程呢？</p>
 <strong>解决方案</strong>：<a href="http://blog.csdn.net/hguisu/article/details/7505909">建立一个工厂来创建对象</a>。
 <p><strong>实现：</strong></p>
-<p><span style="font-size:16px"><strong>一、引言<br>
-</strong></span>&nbsp; &nbsp; <span style="font-family:Arial">1）还没有工厂时代：假如还没有工业革命，如果一个客户要一款宝马车,一般的做法是客户去创建一款宝马车，然后拿来用。<br>
+<p><span style="font-size:16px">
+<h1 id=引言>引言</h1>
+</span>&nbsp; &nbsp; <span style="font-family:Arial">1）还没有工厂时代：假如还没有工业革命，如果一个客户要一款宝马车,一般的做法是客户去创建一款宝马车，然后拿来用。<br>
 &nbsp;&nbsp;&nbsp; 2）简单工厂模式：后来出现工业革命。用户不用去创建宝马车。因为客户有一个工厂来帮他创建宝马.想要什么车，这个工厂就可以建。比如想要320i系列车。工厂就创建这个系列的车。即工厂可以创建产品。<br>
 &nbsp; &nbsp; 3）工厂方法模式时代：为了满足客户，宝马车系列越来越多，如320i，523i,30li等系列一个工厂无法创建所有的宝马系列。于是由单独分出来多个具体的工厂。每个具体工厂创建一种系列。即具体工厂类只能创建一个具体产品。但是宝马工厂还是个抽象。你需要指定某个具体的工厂才能生产车出来。<br>
 &nbsp;&nbsp;&nbsp; 4）抽象工厂模式时代：随着客户的要求越来越高，宝马车必须配置空调。而且这空调必须对应给系列车才能使用。于是这个工厂开始生产宝马车和需要的空调。<br>
 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最终是客户只要对宝马的销售员说：我要523i空调车，销售员就直接给他523i空调车了。而不用自己去创建523i空调车宝马车.<br>
 &nbsp; &nbsp;（我只是举个例子，说到宝马配置空调完全是为了举例，甚至有点扯，哪有车和空调必须对应才能使用啊）<br>
 &nbsp; &nbsp; &nbsp;这就是工厂模式。<br>
-<span style="font-size:16px"><strong>二、分类</strong></span>&nbsp;<br>
+<span style="font-size:16px">
+<h1 id="分类">分类</h1></span>&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工厂模式主要是为创建对象提供过渡接口，以便将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。&nbsp;<br>
 工厂模式可以分为三类：&nbsp;<br>
 1）<a href="http://blog.csdn.net/hguisu/article/details/7505909">简单工厂模式</a>（Simple Factory）&nbsp;<br>
@@ -31,8 +33,9 @@ categories:
 3）<a href="http://blog.csdn.net/hguisu/article/details/7505909">抽象工厂模式</a>（Abstract Factory）&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这三种模式从上到下逐步抽象，并且更具一般性。&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模式（Factory Method）与抽象工厂模式（Abstract Factory）。将简单工厂模式（Simple Factory）看为工厂方法模式的一种特例，两者归为一类。&nbsp;<br>
-<span style="font-size:16px"><strong>三、区别&nbsp;<br>
-</strong></span>工厂方法模式：<br>
+<span style="font-size:16px">
+<h1 id="区别">区别</h1>
+</span>工厂方法模式：<br>
 一个抽象产品类，可以派生出多个具体产品类。 &nbsp;&nbsp;<br>
 一个抽象工厂类，可以派生出多个具体工厂类。 &nbsp;&nbsp;<br>
 每个具体工厂类只能创建一个具体产品类的实例。<br>
@@ -45,8 +48,9 @@ categories:
 工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个。</span><br>
 两者皆可。&nbsp;</p>
 <p><br>
-<span style="font-size:16px"><strong>四、简单工厂模式&nbsp;<br>
-</strong></span>建立一个工厂（一个函数或一个类方法）来制造新的对象。<br>
+<span style="font-size:16px">
+<h1 id="简单工厂模式">简单工厂模式</h1>
+</span>建立一个工厂（一个函数或一个类方法）来制造新的对象。<br>
 分布说明引子：从无到有。客户自己创建宝马车，然后拿来用。<br>
 &nbsp;<img alt="" src="http://my.csdn.net/uploads/201204/25/1335357036_2095.jpg"><br>
 <br>
@@ -154,8 +158,8 @@ class Customer {
  或者上帝类。&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;我们举的例子是最简单的情况，而在实际应用中，很可能产品是一个多层次的树状结构。由于简单工厂模式中只有一个工厂类来对应这些产品，所以这可能会把我们的上帝累坏了，也累坏了我们这些程序员:(&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于是工厂方法模式作为救世主出现了。 工厂类定义成了接口,而每新增的车种类型,就增加该车种类型对应工厂类的实现,这样工厂的设计就可以扩展了,而不必去修改原来的代码。<br>
-<strong><span style="font-size:16px">五、工厂方法模式&nbsp;<br>
-</span></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工厂方法模式去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承。这样在简单工厂模式里集中在工厂方法上的压力可以由工厂方法模式里不同的工厂子类来分担。&nbsp;<br>
+<h1 id="工厂方法模式">工厂方法模式</h1>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工厂方法模式去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承。这样在简单工厂模式里集中在工厂方法上的压力可以由工厂方法模式里不同的工厂子类来分担。&nbsp;<br>
 工厂方法模式组成：&nbsp;<br>
 &nbsp; &nbsp; &nbsp; &nbsp;1)抽象工厂角色： 这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在java中它由抽象类或者接口来实现。&nbsp;<br>
 &nbsp; &nbsp; &nbsp; &nbsp;2)具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。&nbsp;<br>
@@ -271,7 +275,9 @@ class Customer {
 }
 </pre>
 <p><span style="font-size:16px"><strong></strong></span>&nbsp;</p>
-<p><span style="font-size:16px"><strong>六、抽象工厂模式&nbsp;</strong></span><br>
+<p><span style="font-size:16px">
+<h1 id="抽象工厂模式">抽象工厂模式</h1>
+</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着客户的要求越来越高，宝马车需要配置空调。于是这个工厂开始生产宝马车和配置需要的空调。这时候工厂有二个系列的产品:宝马车和空调.宝马车必须使用对应的空调才能使用.这时候分别使用一个车工厂和一个空调工厂都不能满足我们的需求,我们必须确认车跟空调的对应关系。因此把车工厂跟空调工厂联系在一起。因此出现了抽象工厂模式。<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 可以说，抽象工厂模式和工厂方法模式的区别就在于需要创建对象的复杂程度上。而且抽象工厂模式是三个里面最为抽象、最具一般性的。 <br>
 抽象工厂模式的用意为：给客户端提供一个接口，可以创建多个产品族中的产品对象 ，<span style="color:#ff0000">而且使用抽象工厂模式还要满足一下条件：<br>

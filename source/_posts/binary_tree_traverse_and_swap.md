@@ -23,7 +23,7 @@ typedef struct BinaryTreeNode
 
 # 二叉树的遍历
 
-![这里写图片描述](http://img.blog.csdn.net/20170805023144001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+{% asset_img binary_tree_traverse_and_swap_1.png %}
 
 如上图得到的相应的三种**深度优先遍历**的序列分别为 ： 
 
@@ -47,26 +47,25 @@ void BreadthFirstTraverse(BTNP btnp)
 		return;
 	}
 
-	deque<BTNP> dequeBNTP;
-	BTNP tempBTNP = NULL;
+	deque<BTNP> deque_BTNP;
 
-	dequeBNTP.push_back(btnp);
+	deque_BTNP.push_back(btnp);
 
-	while (!dequeBNTP.empty())
+	while (!deque_BTNP.empty())
 	{
-		tempBTNP = dequeBNTP.front();
-		cout << *(char *)(tempBTNP->data) << endl;
+		cout << *(char *)(deque_BTNP.front()->data) << endl;
 
-		dequeBNTP.pop_front();
+		if (deque_BTNP.front()->LeftNode)
+		{
+			deque_BTNP.push_back(deque_BTNP.front()->LeftNode);
+		}
 
-		if (tempBTNP->LeftNode)
+		if (deque_BTNP.front()->RightNode)
 		{
-			dequeBNTP.push_back(tempBTNP->LeftNode);
+			deque_BTNP.push_back(deque_BTNP.front()->RightNode);
 		}
-		if (tempBTNP->RightNode)
-		{
-			dequeBNTP.push_back(tempBTNP->RightNode);
-		}
+
+		deque_BTNP.pop_front();
 	}
 }
 ```
@@ -119,23 +118,28 @@ void PostOrderTraverse_Recursion(BTNP btnp)
 ### 迭代式先序遍历代码实现
 
 ``` c++
-
 void PreOrderTraverse_Iteration(BTNP btnp)
 {
-	BTNP tempBTNP = btnp;
-	stack<BTNP> stackBTNP;
-	while (!stackBTNP.empty() || tempBTNP)
+	if (!btnp)
 	{
-		while (tempBTNP)
+		return;
+	}
+
+	stack<BTNP> stack_BTNP;
+
+	while (btnp || !stack_BTNP.empty())
+	{
+		while (btnp)
 		{
-			cout << *(char *)tempBTNP->data << endl;
-			stackBTNP.push(tempBTNP);
-			tempBTNP = tempBTNP->LeftNode;
+			cout << *(char *)btnp->data << endl;
+			stack_BTNP.push(btnp);
+			btnp = btnp->LeftNode;
 		}
-		if (!stackBTNP.empty())
+
+		if (!stack_BTNP.empty())
 		{
-			tempBTNP = stackBTNP.top()->RightNode;
-			stackBTNP.pop();
+			btnp = stack_BTNP.top()->RightNode;
+			stack_BTNP.pop();
 		}
 	}
 }
@@ -144,24 +148,29 @@ void PreOrderTraverse_Iteration(BTNP btnp)
 ### 迭代式中序遍历代码实现
 
 ``` c++
-
 void InOrderTraverse_Iteration(BTNP btnp)
 {
-	BTNP tempBTNP = btnp;
-	stack<BTNP> stackBTNP;
-	while (!stackBTNP.empty() || tempBTNP)
+	if (!btnp)
 	{
-		while (tempBTNP)
+		return;
+	}
+
+	stack<BTNP> stack_BTNP;
+
+	while (btnp || !stack_BTNP.empty())
+	{
+		while (btnp)
 		{
-			stackBTNP.push(tempBTNP);
-			tempBTNP = tempBTNP->LeftNode;
+			//cout << *(char *)btnp->data << endl;
+			stack_BTNP.push(btnp);
+			btnp = btnp->LeftNode;
 		}
 
-		if (!stackBTNP.empty())
+		if (!stack_BTNP.empty())
 		{
-			cout << *(char*)(stackBTNP.top()->data) << endl;
-			tempBTNP = stackBTNP.top()->RightNode;
-			stackBTNP.pop();
+			cout << *(char *)(stack_BTNP.top()->data) << endl;
+			btnp = stack_BTNP.top()->RightNode;
+			stack_BTNP.pop();
 		}
 	}
 }
@@ -169,59 +178,62 @@ void InOrderTraverse_Iteration(BTNP btnp)
 
 ### 迭代式后序遍历代码实现
 
-后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体F_bt来记录他是否是第一次出栈 (F_bt结构体里有个 isFirst 的数据来记录)
+后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体`POST_BTN`来记录他是否是第一次出栈 (`POST_BTN`结构体里有个 `is_first` 的数据来记录)
 
 **所以我们代码中的思路就是 : **
-把每个将要入栈的结点的 isFirst 标志都置为 true , 当第一次遍历到结点p的时候, 不使p出栈, 但使p的 isFirst 标志变为 false, 然后 "temp_btp = 栈顶->右孩子" 开始遍历他的右子树. 当p的右子树都遍历完了之后(也就是p的右子树都依次出栈了之后)又会遍历到p自己, 不过这一次他的 isFirst 标志已经为 false 了, 我们通过这个标志知道不是第一次遍历到p了, 所以这时我们使p出栈, 并且将 temp_btp 置为 NULL ( 因为此时p的右子树都已经遍历完了, 所以不用像之前一样再 "temp_btp = 栈顶->右孩子" 了 )
+把每个将要入栈的结点的 `is_first` 标志都置为 true , 当第一次遍历到结点p的时候, 不使p出栈, 但使p的 `is_first` 标志变为 false, 然后 "`btnp` = 栈顶->右孩子" 开始遍历他的右子树. 当p的右子树都遍历完了之后(也就是p的右子树都依次出栈了之后)又会遍历到p自己, 不过这一次他的 `is_first` 标志已经为 false 了, 我们通过这个标志知道不是第一次遍历到p了, 所以这时我们使p出栈, 并且将 `btnp` 置为 NULL ( 因为此时p的右子树都已经遍历完了, 所以不用像之前一样再 "`btnp` = 栈顶->右孩子" 了 )
 
 ``` c++
-
-typedef struct  
+typedef struct
 {
-	bool isFirst;
-	BTNP btn_ptr;
-}Post_BTN, *Post_BTN_Ptr;
+	BTNP post_btnp;
+	bool is_first;
+}POST_BTN, *POST_BTNP;
 
 void PostOrderTraverse_Iteration(BTNP btnp)
 {
-	BTNP tempBTNP = btnp;
-	stack<Post_BTN_Ptr> stackPBP;
-
-	while (!stackPBP.empty() || tempBTNP)
+	if (!btnp)
 	{
-		while (tempBTNP)
+		return;
+	}
+
+	stack<POST_BTNP> stack_POST_BTNP;
+
+	while (!stack_POST_BTNP.empty() || btnp)
+	{
+		while (btnp)
 		{
-			Post_BTN_Ptr tempPBP = new Post_BTN;
-			tempPBP->isFirst = true;
-			tempPBP->btn_ptr = tempBTNP;
+			POST_BTNP temp_post_btnp = new POST_BTN;
+			temp_post_btnp->is_first = true;
+			temp_post_btnp->post_btnp = btnp;
 
-			stackPBP.push(tempPBP);
+			stack_POST_BTNP.push(temp_post_btnp);
 
-			tempBTNP = tempBTNP->LeftNode;
+			btnp = btnp->LeftNode;
 		}
 
-		if (!stackPBP.empty())
+		if (!stack_POST_BTNP.empty())
 		{
-			if (stackPBP.top()->isFirst)
+
+			if (stack_POST_BTNP.top()->is_first)
 			{
-				stackPBP.top()->isFirst = false;
-				tempBTNP = stackPBP.top()->btn_ptr->RightNode;
+				btnp = stack_POST_BTNP.top()->post_btnp->RightNode;
+				stack_POST_BTNP.top()->is_first = false;
 			}
 			else
 			{
-				cout << *(char*)(stackPBP.top()->btn_ptr->data) << endl;
+				cout << *(char *)(stack_POST_BTNP.top()->post_btnp->data) << endl;
 
-				delete stackPBP.top();
-				stackPBP.top() = NULL;
+				delete stack_POST_BTNP.top();
+				stack_POST_BTNP.top() = nullptr;
 
-				tempBTNP = NULL;
+				stack_POST_BTNP.pop();
 
-				stackPBP.pop();
+				btnp = nullptr;
 			}
 		}
 	}
 }
-
 ```
 
 ### 深度优先的迭代式遍历之总结

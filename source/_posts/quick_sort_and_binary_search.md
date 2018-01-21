@@ -33,13 +33,12 @@ A也重复上述步骤递归。
 
 ## 算法导论的快排C++实现版本
 
-
-![这里写图片描述](http://img.blog.csdn.net/20170804224023832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+{% asset_img quick_sort_1.png quick_sort %}
 
 <!-- more -->
 
 这个c++实现版本主要用于说明算法思想, 而对于代码鲁棒性有太多关注, 
-下面有个我自己手写的[命名清晰的小白版本](#命名清晰的小白版本)会比较多的关注鲁棒性
+下面有个我自己手写的[命名清晰版本](#命名清晰版本)会比较多的关注鲁棒性以及易读性
 
 ``` c++
 void swap(int *a, int *b)
@@ -102,71 +101,90 @@ void quick_sort(int *array, int p, int r)
 
 ```
 
-## 命名清晰的小白版本
+## 命名清晰版本
 
 自己手写的, 已测试. 写得略啰嗦, 但只是希望能一目了然吧.
 
+QuickSort.h
+
 ``` c++
+#pragma once
 
-void Swap(int * testArray, int indexA, int indexB)
-{
-    if (!testArray)
-        return;
-	int temp = testArray[indexA];
-	testArray[indexA] = testArray[indexB];
-	testArray[indexB] = temp;
-}
+void DoQuickSort(int arr[], int start_index, int end_index);
 
-int Partition(int testArray[], int startIndex, int endIndex)
-{
-    if (!testArray)
-        return -1;
-	// 因为是从startIndex一直扫描到endIndex-1, 所以需要一个"扫描index"递增来扫描各个元素,
-	// currentScanIndex就是当前扫描到的那个元素的index
-	int currentScanIndex = startIndex;
-	// 当前处于分隔位置的那个元素的index
-	int currentPartitionIndex = startIndex;
-	while (currentScanIndex <= endIndex-1)
-	{
-		if (testArray[currentScanIndex] < testArray[endIndex])
-		{
-			Swap(testArray, currentScanIndex, currentPartitionIndex);
-			++currentPartitionIndex;
-		}
-        ++currentScanIndex;
-	}
-	Swap(testArray, endIndex, currentPartitionIndex);
-	return currentPartitionIndex;
-}
+int partition(int arr[], int start_index, int end_index);
 
-void QuickSort(int testArray[], int startIndex, int endIndex)
-{
-	if (startIndex < endIndex && testArray && startIndex >= 0 && endIndex >= 0)
-	{
-		int partitionIndex = Partition(testArray, startIndex, endIndex);
-		QuickSort(testArray, startIndex, partitionIndex-1);
-		QuickSort(testArray, partitionIndex+1, endIndex);
-	}
-}
+void swap(int &a, int &b);
 
 template <unsigned N>
-void HandleQuickSort(int (&testArray)[N])
+void QuickSort(int(&arr)[N], int start_index, int end_index)
 {
-	int testArrayLen = sizeof(testArray) / sizeof(int);
-    cout << "testArrayLen : " << testArrayLen << endl;
-    if (testArrayLen >= 2)
-        QuickSort(testArray, 0, testArrayLen-1);
+	if (!arr
+		|| start_index < 0
+		|| end_index < 0
+		|| end_index <= start_index
+		|| end_index >= sizeof(arr) / sizeof(int))
+	{
+		return;
+	}
+
+	DoQuickSort(arr, start_index, end_index);
 }
+```
+
+QuickSort.cpp
+
+``` c++
+#include "QuickSort.h"
+
+void DoQuickSort(int arr[], int start_index, int end_index)
+{
+	int partition_index = 0;
+	if (start_index < end_index)
+	{
+		partition_index = partition(arr, start_index, end_index);
+		DoQuickSort(arr, start_index, partition_index - 1);
+		DoQuickSort(arr, partition_index + 1, end_index);
+	}
+}
+
+int partition(int arr[], int start_index, int end_index)
+{
+	int partition_index = start_index - 1;
+
+	for (int i = start_index; i < end_index; ++i)
+	{
+		if (arr[i] < arr[end_index])
+		{
+			swap(arr[++partition_index], arr[i]);
+		}
+	}
+
+	swap(arr[++partition_index], arr[end_index]);
+	return partition_index;
+}
+
+void swap(int &a, int &b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
+```
+
+main.cpp
+
+``` c++
+#include <iostream>
+#include "QuickSort.h"
 
 int main()
 {
-	int testArr[] = { 3, 6, 2, 7, 1, 8, 5, 9 };
-	HandleQuickSort(testArr);
-
-	int testArrayLen = sizeof(testArr) / sizeof(int);
-	for (int index = 0; index < testArrayLen; ++index)
+	int test_arr[] = { 4, 2, 3, 5, 6, 1 };
+	QuickSort(test_arr, 2, 5);
+	for (auto i : test_arr)
 	{
-		cout << testArr[index] << endl;
+		std::cout << i << std::endl;
 	}
 	return 0;
 }

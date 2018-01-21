@@ -9,13 +9,21 @@ categories:
 ---
 
 此文用的是最大堆, 最大堆的堆排序之后的数组是升序, 最小堆反之.
-堆排序 HeapSort 由 堆化 MaxHeapify 和 建堆 BuildMaxHeap 组成.
+堆排序 HeapSort 由 以下两部分组成 :
+
+- 堆化 MaxHeapify 
+- 建堆 BuildMaxHeap.
 
 # 堆化MaxHeapify
 
 具体过程如下图 : 
 
 {% asset_img MaxHeapify.png MaxHeapify %}
+
+**注意** : 
+在调用MaxHeapify的时候, 我们假定索引为index的元素的左子树和右子树都是最大堆, 不然你如果注意看的话, 你会发现上图中index为10的那个元素其实是没有计算到的, 因为我们假定以index=5为根节点的二叉树都是最大堆了, 所以无需计算他. 
+那为何要作如此假设呢?
+因为要跟建堆 BuildMaxHeap 配合来完成堆排序, 而建堆 BuildMaxHeap是从下至上的.
 
 ```  c++
 void MaxHeapify(int arr[], int index, int length)
@@ -64,9 +72,19 @@ void MaxHeapify(int arr[], int index, int length)
 
 # 建堆BuildMaxHeap
 
-因为 c++ 数组的 index 是从0开始的(跟上图中有所不同, 图中的 index 是从1开始的), 
-而根据算法导论中的结论我们可以知道数组中 index 大于等于 length/2 的元素都是树的叶结点,
-所以我们对每一个不是叶结点的元素(即为 index 小于等于 length/2 - 1 的元素 )自底向上调用一次 MaxHeapify 就可以把一个大小为 length 的数组转换为最大堆. 
+伪代码如下图 : 
+
+{% asset_img build_max_heap_1.png %}
+
+具体过程如下图 : 
+
+{% asset_img build_max_heap_2.png BuildMaxHeap %}
+
+
+**注意** : 因为 c++ 数组的 index 是从0开始的(跟上图中有所不同, 图中的 index 是从1开始的),
+所以根据算法导论中的结论我们可以知道 c++数组中 index 大于等于 length/2 的元素都是树的叶结点,
+所以我们对每一个不是叶结点的元素(即为 index 小于等于 length/2 - 1 的元素 )自底向上调用一次 MaxHeapify 就可以把一个大小为 length 的数组转换为最大堆.
+
 
 ```  c++
 void BuildMaxHeap(int arr[], int length)
@@ -84,6 +102,10 @@ void BuildMaxHeap(int arr[], int length)
 ```
 
 # 堆排序HeapSort
+
+伪代码如下图 : 
+
+{% asset_img HeapSort3.png %}
 
 具体过程如下图 : 
 

@@ -54,9 +54,9 @@ void BubbleSort(int arr[], int startIndex, int endIndex)
 
 ``` c++
 
-void InsertSort(int arr[], int startIndex, int endIndex)
+void InsertSort(int arr[], int startIndex, int endIndex, int arr_len)
 {
-	if (!arr || endIndex < 0 || startIndex < 0 || endIndex - startIndex <= 1)
+	if (!arr || endIndex < 0 || startIndex < 0 || endIndex - startIndex <= 1 || end_index >= arr_len)
 	{
 		return;
 	}
@@ -101,81 +101,130 @@ void InsertSort(int arr[], int startIndex, int endIndex)
 显露一张新牌）并牌面朝下地将该牌放置到输出堆。
 重复这个步骤，直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
 
-![merge_sort](http://img.blog.csdn.net/20170804224210669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+{% asset_img merge_sort_1.png merge_sort %}
 
 ## 归并的算法实现
 
-下面是一个比较直白明了的归并c++实现（其实可以写成不用动态分配内存的，但是这里为了直白起见）：
+下面是手写的一个比较直白明了的归并排序的 c++ 实现：
+
+MergeSort.h
 
 ``` c++
+#pragma once
 
-void Merge(int arr[], int startIndex, int midIndex, int endIndex)
+template <unsigned N>
+void MergeSort(int (&arr)[N], int start_index, int end_index)
 {
-	if (!arr || startIndex < 0 || midIndex < 0 || endIndex < 0 || endIndex < startIndex || midIndex < startIndex || endIndex < midIndex)
+	// check
+	if (!arr
+		|| start_index < 0
+		|| end_index < 0
+		|| end_index <= start_index
+		|| end_index >= sizeof(arr) / sizeof(int))
 	{
 		return;
 	}
-	int leftArrLength = midIndex - startIndex + 1;
-	int RightArrLength = endIndex - midIndex;
-	int *LeftArr = new int[leftArrLength];
-	int *RightArr = new int[RightArrLength];
 
-	for (int index = 0; index < leftArrLength; ++index)
+	DoMergeSort(arr, start_index, end_index);
+}
+
+void DoMergeSort(int arr[], int start_index, int end_index);
+void Merge(int arr[], int start_index, int mid_index, int end_index);
+```
+
+MergeSort.cpp
+
+``` c++
+#include "MergeSort.h"
+
+void DoMergeSort(int arr[], int start_index, int end_index)
+{
+	if (start_index >= end_index)
 	{
-		LeftArr[index] = arr[startIndex + index];
+		return;
 	}
 
-	for (int index = 0; index < RightArrLength; ++index)
+	int mid_index = (start_index + end_index) / 2;
+	DoMergeSort(arr, start_index, mid_index);
+	DoMergeSort(arr, mid_index + 1, end_index);
+	Merge(arr, start_index, mid_index, end_index);
+
+}
+
+void Merge(int arr[], int start_index, int mid_index, int end_index)
+{
+	int arr_left_len = mid_index - start_index + 1;
+	int arr_right_len = end_index - mid_index;
+
+	int *arr_left = new int[arr_left_len];
+	int *arr_right = new int[arr_right_len];
+
+	if (!arr_left || !arr_right)
 	{
-		RightArr[index] = arr[midIndex + 1 + index];
+		return;
 	}
 
-	int CurIndex = startIndex;
-	int leftCurIndex = 0;
-	int rightCurIndex = 0; 
-	while (leftCurIndex < leftArrLength && rightCurIndex < RightArrLength)
+	for (int i = start_index; i <= end_index; ++i)
 	{
-		if (LeftArr[leftCurIndex] < RightArr[rightCurIndex])
+		if ( i > mid_index )
 		{
-			arr[CurIndex++] = LeftArr[leftCurIndex++];
+			arr_right[i - mid_index - 1] = arr[i];
 		}
 		else
 		{
-			arr[CurIndex++] = RightArr[rightCurIndex++];
+			arr_left[i - start_index] = arr[i];
 		}
 	}
 
-	while (rightCurIndex < RightArrLength)
+	int arr_left_index = 0;
+	int arr_right_index = 0;
+
+	int arr_index = start_index;
+	while (arr_left_index < arr_left_len && arr_right_index < arr_right_len)
 	{
-		arr[CurIndex++] = RightArr[rightCurIndex++];
-	}
-	while (leftCurIndex < leftArrLength)
-	{
-		arr[CurIndex++] = LeftArr[leftCurIndex++];
+		if (arr_left[arr_left_index] < arr_right[arr_right_index])
+		{
+			arr[arr_index++] = arr_left[arr_left_index++];
+		}
+		else
+		{
+			arr[arr_index++] = arr_right[arr_right_index++];
+		}
 	}
 
-	delete[] LeftArr;
-	LeftArr = NULL;
-	delete[] RightArr;
-	RightArr = NULL;
+	while(arr_left_index < arr_left_len)
+	{
+		arr[arr_index++] = arr_left[arr_left_index++];
+	}
+
+	while(arr_right_index < arr_right_len)
+	{
+		arr[arr_index++] = arr_right[arr_right_index++];
+	}
+
+	delete[] arr_left;
+	arr_left = nullptr;
+	delete[] arr_right;
+	arr_right = nullptr;
 }
-
-void MergeSort(int arr[], int startIndex, int endIndex)
-{
-	if (!arr || startIndex < 0 || endIndex < 0 || startIndex >= endIndex)
-	{
-		return;
-	}
-
-	int midIndex = (endIndex + startIndex) / 2;
-	MergeSort(arr, startIndex, midIndex);
-	MergeSort(arr, midIndex + 1, endIndex);
-	Merge(arr, startIndex, midIndex, endIndex);
-}
-
 ```
 
+main.cpp
 
+``` c++
 
+#include <iostream>
+#include "MergeSort.h"
 
+int main()
+{
+	int test_arr[] = { 4, 2, 3, 5, 6, 1 };
+	MergeSort(test_arr, 2, 5);
+	for (auto i : test_arr)
+	{
+		std::cout << i << std::endl;
+	}
+	return 0;
+}
+```
 

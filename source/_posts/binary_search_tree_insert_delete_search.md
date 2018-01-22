@@ -14,8 +14,8 @@ categories:
 
 # 二叉搜索树的定义
 
-**二叉查找树(Binary Search Tree), 又名"二叉搜索树"或"二叉排序树":**
-设 x 是二叉搜索树中的一个结点. 如果 y 是 x 左子树的一个结点, 那么 y.key < x.key. 如果 y 是 x 右子树中的一个结点, 那么 y.key > x.key.
+**二叉查找树(Binary Search Tree, 简称"BST"), 又名"二叉搜索树"或"二叉排序树":**
+它或者是一棵空树，或者是具有下列性质的二叉树： 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值； 它的左、右子树也分别为二叉排序树。
 
 {% asset_img BinarySearchTree.png %}
 
@@ -23,7 +23,7 @@ categories:
 
 
 **注 : **
-二叉树的二叉链式存储方案的代码表示为
+我们本文中二叉树的二叉链式存储方案的代码表示为
 ``` c++
 typedef struct BinaryTreeNode
 {
@@ -35,30 +35,27 @@ typedef struct BinaryTreeNode
 
 # 二叉搜索树的查询
 ``` c++
-
-BTNP SearchBinarySearchTree(BTNP btnp, char key)
+BTNP SearchBST(BTNP btnp, char key_data)
 {
 	while (btnp)
 	{
-		if (*(char *)btnp->data > key)
+		if ( key_data < (*(char *)(btnp->data)) )
 		{
 			btnp = btnp->LeftNode;
 		}
-		else if (*(char *)btnp->data < key)
+		else if ( key_data >(*(char *)(btnp->data)) )
 		{
 			btnp = btnp->RightNode;
 		}
 		else
 		{
-			cout << "found!!" << endl;
+			cout << "found" << endl;
 			return btnp;
 		}
 	}
-
-	cout << "not found!!" << endl;
-	return NULL;
+	cout << "not found" << endl;
+	return nullptr;
 }
-
 ```
 
 # 二叉搜索树的插入
@@ -67,51 +64,55 @@ BTNP SearchBinarySearchTree(BTNP btnp, char key)
 
 
 ``` c++
-
-void InsertBinarySearchTree(BTNP &btnp, char key)
+void InsertBST(BTNP &btnp, char key_data)
 {
-	BTNP keyBTNP = new BTN;
 
-	char * tempData = new char;
-	*tempData = key;
-	keyBTNP->data = tempData;
+	char * temp_key_data = new char;
+	*temp_key_data = key_data;
 
-	keyBTNP->LeftNode = NULL;
-	keyBTNP->RightNode = NULL;
+	BTNP new_btnp = new BTN;
+	new_btnp->data = temp_key_data;
+	new_btnp->LeftNode = nullptr;
+	new_btnp->RightNode = nullptr;
 
 	if (!btnp)
 	{
-		btnp = keyBTNP;
+		btnp = new_btnp;
 		return;
 	}
 
-	BTNP tempBTNP = btnp, savedBTNP = NULL;
-	bool isLeft = true;
-	while (tempBTNP)
+	BTNP temp_btnp = btnp;
+	BTNP parent_btnp = nullptr;
+	bool is_left = true;
+	while (temp_btnp)
 	{
-		savedBTNP = tempBTNP;
-		if (*(char *)tempBTNP->data > key)
+		parent_btnp = temp_btnp;
+		if (key_data < (*(char *)(temp_btnp->data)))
 		{
-			tempBTNP = tempBTNP->LeftNode;
-			isLeft = true;
+			temp_btnp = temp_btnp->LeftNode;
+			is_left = true;
+		}
+		else if (key_data > (*(char *)(temp_btnp->data)))
+		{
+			temp_btnp = temp_btnp->RightNode;
+			is_left = false;
 		}
 		else
 		{
-			tempBTNP = tempBTNP->RightNode;
-			isLeft = false;
+			cout << "already has a same key_data" << endl;
+			return;
 		}
 	}
 
-	if (isLeft)
+	if (is_left == true)
 	{
-		savedBTNP->LeftNode = keyBTNP;
+		parent_btnp->LeftNode = new_btnp;
 	}
 	else
 	{
-		savedBTNP->RightNode = keyBTNP;
+		parent_btnp->RightNode = new_btnp;
 	}
 }
-
 ```
 
 # 二叉搜索树之删除某个结点

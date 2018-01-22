@@ -92,3 +92,6 @@
   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
   <script type="text/javascript" src="/js/src/fireworks.js"></script>
 {% endif %}
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 

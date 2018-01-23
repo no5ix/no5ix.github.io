@@ -1,5 +1,5 @@
 ---
-title: 一个简单的游戏服务器框架demo(源码已经放在GitHub)
+title: 一个简单的游戏服务器框架demo
 date: 2017-08-27 23:08:56
 tags:
 - boost

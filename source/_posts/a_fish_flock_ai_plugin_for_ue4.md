@@ -25,7 +25,7 @@ this Plugin version can Run **2000+** fishes at the same time
 
 # Download
 
-[<i class="fa fa-download fa-lg fa-fw"></i>MyFish.exe (Win64)](http://pan.baidu.com/s/1qYbBrHU)
+[<i class="fa fa-download fa-lg fa-fw"></i>MyFish.exe (Win64)](https://pan.baidu.com/s/1ghnKNjt)
 
 This is packaged by an unoptimized version( check out  branch old_demo)
 

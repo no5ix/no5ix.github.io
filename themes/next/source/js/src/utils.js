@@ -18,24 +18,49 @@ NexT.utils = NexT.$u = {
           $imageWrapLink = $image.wrap('<a href="' + imageLink + '"></a>').parent('a');
         }
 
-        $imageWrapLink.addClass('fancybox fancybox.image');
-        $imageWrapLink.attr('rel', 'group');
-
+        if (!$imageWrapLink.attr('data-fancybox')) {
+          $imageWrapLink.attr('data-fancybox', 'group');
+        }
+      
         if (imageTitle) {
           $imageWrapLink.append('<p class="image-caption">' + imageTitle + '</p>');
-
+  
           //make sure img title tag will show correctly in fancybox
           $imageWrapLink.attr('title', imageTitle);
         }
       });
 
-    $('.fancybox').fancybox({
-      helpers: {
-        overlay: {
-          locked: false
-        }
-      }
+    $('[data-fancybox]').fancybox({
+      buttons : [
+        // 'slideShow',
+        'fullScreen',
+        'thumbs',
+        // 'share',
+        //'download',
+        //'zoom',
+        'close'
+      ],
+      animationEffect : "zoom-in-out",
+      transitionEffect : "slide",
+      mobile : {
+        idleTime : false,
+        margin   : 0,
+
+        clickContent : function( current, event ) {
+            return current.type === 'image' ? 'toggleControls' : false;
+        },
+        clickSlide : function( current, event ) {
+            return current.type === 'image' ? 'close' : false;
+        },
+        dblclickContent : function( current, event ) {
+            return current.type === 'image' ? 'zoom' : false;
+        },
+        // dblclickSlide : function( current, event ) {
+        //     return current.type === 'image' ? 'zoom' : false;
+        // }
+      },
     });
+    
   },
 
   lazyLoadPostsImages: function () {

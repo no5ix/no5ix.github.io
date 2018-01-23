@@ -97,3 +97,25 @@
 
 
 <script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<script>
+    (function(){
+        if('{{ page.password }}'){
+          var password = prompt('password');
+          if (password !== '{{ page.password }}'){
+            if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+            {
+              alert('Error!');
+            }
+            if (history.length > 1)
+            {
+              history.back();
+            }
+            else
+            {
+              window.location.href = "about:blank";
+            }
+          }
+        }
+    })();
+</script>

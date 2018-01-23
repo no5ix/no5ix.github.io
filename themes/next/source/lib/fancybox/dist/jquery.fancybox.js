@@ -137,10 +137,10 @@
         //   "fade"
         //   "zoom-in-out"
         //
-        animationEffect : "zoom-in-out",
+        animationEffect : "circular",
 
         // Duration in ms for open/close animation
-        animationDuration : 300,
+        animationDuration : 500,
 
         // Should image change opacity while zooming
         // If opacity is "auto", then opacity will be changed if image and thumbnail have different aspect ratios
@@ -157,7 +157,7 @@
         //   "zoom-in-out'
         //   "rotate'
         //
-        transitionEffect : "slide",
+        transitionEffect : "circular",
 
         // Duration in ms for transition animation
         transitionDuration : 366,

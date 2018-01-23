@@ -40,8 +40,8 @@ NexT.utils = NexT.$u = {
         //'zoom',
         'close'
       ],
-      animationEffect : "zoom-in-out",
-      transitionEffect : "slide",
+      animationEffect : "circular",
+      transitionEffect : "circular",
       mobile : {
         idleTime : false,
         margin   : 0,
@@ -60,7 +60,7 @@ NexT.utils = NexT.$u = {
         // }
       },
     });
-    
+
   },
 
   lazyLoadPostsImages: function () {

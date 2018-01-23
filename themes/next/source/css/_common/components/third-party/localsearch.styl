@@ -61,7 +61,7 @@
   right: 0;
 
   +mobile() {
-    top: 104%
+    top: 226px
     padding: 0
     left: 3%
     margin: 0
@@ -86,13 +86,6 @@
     max-height: 650px;
     min-height: 0;
 
-    animation:local_search_ul_anim 0.7s;
-    /* animation-delay:0.5s; */
-    -moz-animation:local_search_ul_anim 0.7s; /* Firefox */
-    -webkit-animation:local_search_ul_anim 0.7s; /* Safari and Chrome */
-    /* -webkit-animation-delay:0.5s; */
-    -o-animation:local_search_ul_anim 0.7s; /* Opera */
-    /* animation-fill-mode: forwards; */
 
     overflow-y: auto;
     border-radius: 15px;
@@ -108,13 +101,6 @@
       width: initial;
       height: auto;
 
-      animation:local_search_ul_anim 0s;
-      animation-delay:0s;
-      -moz-animation:local_search_ul_anim 0s; /* Firefox */
-      -webkit-animation:local_search_ul_anim 0s; /* Safari and Chrome */
-      -webkit-animation-delay:0s;
-      -o-animation:local_search_ul_anim 0s; /* Opera */
-      animation-fill-mode: none;
     }
     li {
       text-align: left;
@@ -144,16 +130,6 @@
   }
 }
 
-@keyframes local_search_ul_anim {
-  from {
-    /* height: 200px; */
-    /* width: 360px; */
-  }
-  to {
-    /* height: 600px; */
-    /* width: 500px; */
-  }
-}
 
 .local-search-result-cls ul:before {
   content: "";

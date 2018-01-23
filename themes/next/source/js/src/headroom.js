@@ -446,10 +446,10 @@
      */
     Headroom.options = {
       tolerance : {
-        up : 0,
-        down : 0
+        up : 50,
+        down : 50
       },
-      offset : 0,
+      offset : 100,
       scroller: window,
       classes : {
         pinned : 'headroom--pinned',
@@ -466,10 +466,9 @@
     return Headroom;
   }));
 
-  
-  // grab an element
-  var myElement = document.querySelector("header");
-  // construct an instance of Headroom, passing the element
-  var headroom  = new Headroom(myElement);
-  // initialise
-  headroom.init();
+// grab an element
+var myElement = document.querySelector("header");
+// construct an instance of Headroom, passing the element
+var headroom  = new Headroom(myElement);
+// initialise
+headroom.init();

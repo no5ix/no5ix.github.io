@@ -71,7 +71,7 @@
     <div class="menu-item site-search">
       {% include 'search.swig' %}
     </div>
-    <div id="local-search-result" class="local-search-result-cls"></div>
+    <div id="local-search-result-pc" class="local-search-result-cls"></div>
   {% endif %}
 </nav>
 

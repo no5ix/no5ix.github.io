@@ -5,32 +5,6 @@
       // 0x00. environment initialization
       'use strict';
 
-      function IsOnMobile()
-      {
-        //平台、设备和操作系统 
-        var system = { 
-          win: false, 
-          mac: false, 
-          xll: false, 
-          ipad:false 
-        }; 
-        //检测平台 
-        var p = navigator.platform; 
-        system.win = p.indexOf("Win") == 0; 
-        system.mac = p.indexOf("Mac") == 0; 
-        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
-        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
-        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
-        if (system.win || system.mac || system.xll||system.ipad) 
-        {
-          return false;
-        }
-        else
-        {
-          return true;
-        }
-      }
-
       var local_search_close_x = "<i id='local-search-close'>×</i>";
       // var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
@@ -67,9 +41,8 @@
 
         $('#local-search-close').hide();
 
-        $('#local-search-result').html('');
-        
-        $('#local-search-result').html('');
+        $('#local-search-result-mobile').html('');
+        $('#local-search-result-pc').html('');
       }
 
       function handleSearch()
@@ -170,6 +143,10 @@
       }
 
       $input.addEventListener('input', function () {
+        if (IsOnMobile())
+        {
+          $('body').velocity('scroll');
+        }
 
         // 0x03. parse query to keywords list
         str = '<ul class=\"search-result-list\">';
@@ -219,9 +196,43 @@
       
     }
 
+
+    function IsOnMobile()
+    {
+      //平台、设备和操作系统 
+      var system = { 
+        win: false, 
+        mac: false, 
+        xll: false, 
+        ipad:false 
+      }; 
+      //检测平台 
+      var p = navigator.platform; 
+      system.win = p.indexOf("Win") == 0; 
+      system.mac = p.indexOf("Mac") == 0; 
+      system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+      system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
+      //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
+      if (system.win || system.mac || system.xll||system.ipad) 
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+
     var getSearchFile = function(){
       var path = "/search.xml";
-      searchFunc(path, 'local-search-input', 'local-search-result');
+      if (IsOnMobile())
+      {
+        searchFunc(path, 'local-search-input', 'local-search-result-mobile');
+      }
+      else
+      {
+        searchFunc(path, 'local-search-input', 'local-search-result-pc');
+      }
     }
 
   </script>

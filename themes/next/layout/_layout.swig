@@ -26,6 +26,8 @@
       <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
     </header>
 
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">

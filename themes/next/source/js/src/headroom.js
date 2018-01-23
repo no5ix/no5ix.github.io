@@ -446,10 +446,10 @@
      */
     Headroom.options = {
       tolerance : {
-        up : 50,
-        down : 50
+        up : 30,
+        down : 30
       },
-      offset : 100,
+      offset : 60,
       scroller: window,
       classes : {
         pinned : 'headroom--pinned',

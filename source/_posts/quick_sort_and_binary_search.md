@@ -105,9 +105,9 @@ void quick_sort(int *array, int p, int r)
 
 自己手写的, 已测试. 写得略啰嗦, 但只是希望能一目了然吧.
 
-QuickSort.h
 
-``` c++
+
+``` c++ QuickSort.h
 #pragma once
 
 void DoQuickSort(int arr[], int start_index, int end_index);
@@ -132,9 +132,9 @@ void QuickSort(int(&arr)[N], int start_index, int end_index)
 }
 ```
 
-QuickSort.cpp
 
-``` c++
+
+``` c++ QuickSort.cpp
 #include "QuickSort.h"
 
 void DoQuickSort(int arr[], int start_index, int end_index)
@@ -172,9 +172,9 @@ void swap(int &a, int &b)
 }
 ```
 
-main.cpp
 
-``` c++
+
+```c++ main.cpp
 #include <iostream>
 #include "QuickSort.h"
 

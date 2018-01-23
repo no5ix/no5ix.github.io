@@ -21,7 +21,7 @@ typedef struct Node
 }Node, *Node_Ptr;
 ```
 
-![这里写图片描述](http://img.blog.csdn.net/20170823224405993?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+{% asset_img advanced_linked_list_1.png %}
 
 <!-- more -->
 

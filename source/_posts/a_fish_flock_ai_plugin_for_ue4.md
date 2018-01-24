@@ -91,7 +91,7 @@ place Plugins folder in your project root directory, then just like
 	4.15
 
 * Read [Craig Reynolds's thesis](http://www.red3d.com/cwr/boids/)  
-查看 [Craig Reynolds的论文](http://www.red3d.com/cwr/boids/)
+查看 **Craig Reynolds的论文**
 
 * This project implements a new flocking Ai algorithm, with 3 components : 
 

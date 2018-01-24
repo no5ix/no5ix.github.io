@@ -446,7 +446,7 @@
      */
     Headroom.options = {
       tolerance : {
-        up : 30,
+        up : 40,
         down : 30
       },
       offset : 60,

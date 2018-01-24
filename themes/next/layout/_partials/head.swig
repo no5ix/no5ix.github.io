@@ -55,7 +55,7 @@
 
 
 {% if theme.fancybox %}
-  {% set fancybox_css_uri = url_for(theme.vendors._internal + '/fancybox/dist/jquery.fancybox.css?v=3.2.0') %}
+  {% set fancybox_css_uri = url_for(theme.vendors._internal + '/fancybox/dist/jquery.fancybox.css?v=3.2.10') %}
   {% if theme.vendors.fancybox_css %}
     {% set fancybox_css_uri = theme.vendors.fancybox_css %}
   {% endif %}

@@ -88,9 +88,15 @@ input[id$=search-input] {
 input[id$=search-input]:hover {
   border-bottom: 1px solid rgb(15, 15, 15)
   width: 150px;
+  +mobile() {
+    width: 140px;
+  }
 }
 
 input[id$=search-input]:focus {
   border-bottom: 1px solid rgb(15, 15, 15)
   width: 160px;
+  +mobile() {
+    width: 140px;
+  }
 }

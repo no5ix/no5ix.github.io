@@ -61,7 +61,7 @@ typedef struct Node
 有两种解法 : 
 
 - **反转链表解法** : 反转链表之后再从头到尾打印 (这样会改变原来的链表)
-- **栈存储解法** : 用栈存储之后再逐个出栈一一打印 (这样不会改变原来的链表)
+- **栈存储解法**(比较简单, 本文不详讲了) : 用栈存储之后再逐个出栈一一打印 (这样不会改变原来的链表)
 
 ## 反转链表解法
 
@@ -71,9 +71,6 @@ typedef struct Node
 头指针->E->D->C->B->A
 
 ### 算法思想 : 
-
-1. 取一个指针 pFirst 来一直指向A
-2. 取一个指针 pTemp 来临时保存一下头指针后面的那个元素
 
 第一轮 : 头指针->A->B->C->D->E
 第二轮 : 头指针->B->A->C->D->E
@@ -86,8 +83,8 @@ typedef struct Node
 手写的代码， 已经跑过了，可直接用
 下面代码中反转函数为 ReverseList ， 且有详细注释以及总结
 
-``` c++
-#include <stdio.h>
+``` c++ LinkedList.h
+#pragma once
 
 struct TList
 {
@@ -96,94 +93,203 @@ struct TList
 };
 typedef struct TList *LPTLIST;
 
+void AppendElem(LPTLIST *ppstHead);
+
+void ReverseList(LPTLIST *ppstHead);
+
+void PrintList(LPTLIST *ppstHead);
+
+void DestroyList(LPTLIST *ppstHead);
+```
+
+
+``` c++ LinkedList.cpp
+#include "LinkedList.h"
+#include <iostream>
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::cin;
+
+void AppendElem(LPTLIST *ppstHead)
+{
+	if (!ppstHead)
+	{
+		cout << "ppstHead is null" << endl;
+		return;
+	}
+
+	if (!*ppstHead)
+	{
+		*ppstHead = new TList;
+		if (!*ppstHead)
+		{
+			cout << "*ppstHead malloc error" << endl;
+			return;
+		}
+		(*ppstHead)->pData = nullptr;
+		(*ppstHead)->pNext = nullptr;
+	}
+
+	LPTLIST temp_elem_ptr = *ppstHead;
+
+	cout << "input '.' to finish" << endl;
+
+	char key_data = '.';
+	while (1)
+	{
+		cin >> key_data;
+		if (key_data != '.')
+		{
+
+			char * temp_key_data = new char;
+			if (!temp_key_data)
+			{
+				cout << "temp_key_data malloc error" << endl;
+				return;
+			}
+			*temp_key_data = key_data;
+
+			LPTLIST new_elem_ptr = new TList;
+			if (!new_elem_ptr)
+			{
+				cout << "new_elem malloc error" << endl;
+				return;
+			}
+			new_elem_ptr->pData = temp_key_data;
+			new_elem_ptr->pNext = nullptr;
+
+			temp_elem_ptr->pNext = new_elem_ptr;
+			temp_elem_ptr = new_elem_ptr;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
 /* 将单链表反转, 要求只能扫描链表一次.
 *@param ppstHead 指向链表首节点的指针
 */
 void ReverseList(LPTLIST *ppstHead)
 {
 	if (!ppstHead)
+	{
+		cout << "ppstHead is null" << endl;
 		return;
+	}
+
+	if (!*ppstHead)
+	{
+		cout << "*ppstHead is null" << endl;
+		return;
+	}
 
 	// 我们只用上述算法思想中第二轮来说明一下此算法, 即为 "第二轮 : 头指针->B->A->C->D->E"
-	LPTLIST pFirst = (*ppstHead)->pNext; // 这个指针一直指向着原来链表头指针后面的那个元素（即原第一个元素， 这个指针的指向一直都不会变， 一直都是指向A）
 
-	while (pFirst && pFirst->pNext) // 需要两个判断, 不然当pFirst为NULL的时候会出错, 且pFirst->pNext为NULL的时候也没必要继续循环了
+	// origin_first_elem_ptr指针一直指向着原来链表头指针后面的那个元素
+	//（即原第一个元素， 这个指针的指向一直都不会变， 一直都是指向A）
+	LPTLIST origin_first_elem_ptr = (*ppstHead)->pNext; 
+
+	LPTLIST temp_elem_ptr = nullptr;
+
+	// 需要两个判断, 不然当 origin_first_elem_ptr 为NULL的时候会出错, 
+	// 且 origin_first_elem_ptr ->pNext为NULL的时候也没必要继续循环了
+	while (origin_first_elem_ptr && origin_first_elem_ptr->pNext)	 
 	{
-		LPTLIST pTemp = (*ppstHead)->pNext; // 临时保存一下头指针后面的那个元素A
-		(*ppstHead)->pNext = pFirst->pNext; // 把目前第一个元素A替换为原第一个元素的后面那个元素B : 头指针->B (第1步)
-		pFirst->pNext = pFirst->pNext->pNext; // 原第一个元素A的pnext指到它后面的后面那个元素C : A->C (第2步)
-		(*ppstHead)->pNext->pNext = pTemp; // 让B指向A : B->A (第3步)
-		// 综上所述只需要3步
+		// 临时保存一下元素A后面的后面那个元素C
+		temp_elem_ptr = origin_first_elem_ptr->pNext->pNext;	
+
+
+		// 让B指向A : B->A (第1步)
+		origin_first_elem_ptr->pNext->pNext = (*ppstHead)->pNext;
+
+		// 把目前第一个元素A替换为原第一个元素的后面那个元素B : 头指针->B (第2步)
+		(*ppstHead)->pNext = origin_first_elem_ptr->pNext;
+
+		// 原第一个元素A的pnext指到它后面的后面那个元素C : A->C (第3步)
+		origin_first_elem_ptr->pNext = temp_elem_ptr;
 	}
-	// 总结， 链表反转需要两个指针， 见上面两个指针, 一个pFirst, 一个pTemp
+	// 综上所述只需要3步, 链表反转需要两个指针， 
+	// 见上面两个指针, 一个 origin_first_elem_ptr, 一个 temp_elem_ptr
 }
 
-LPTLIST print_tlist(LPTLIST *ppstHead)
+void PrintList(LPTLIST *ppstHead)
 {
-	LPTLIST origin_tlist = *ppstHead;
-	if (*ppstHead)
+	if (!ppstHead)
 	{
-
-		while ((*ppstHead)->pNext)
-		{
-			*ppstHead = (*ppstHead)->pNext;
-			printf("%d ->", *(int*)( (*ppstHead)->pData ) );
-		}
-		printf("\n");
+		cout << "ppstHead is null" << endl;
+		return;
 	}
-	return origin_tlist;
+
+	if (!*ppstHead)
+	{
+		cout << "*ppstHead is null" << endl;
+		return;
+	}
+
+	LPTLIST temp_elem_ptr = *ppstHead;
+	while (temp_elem_ptr = temp_elem_ptr->pNext)
+	{
+		cout << *(char *)(temp_elem_ptr->pData) << "->";
+	}
+	cout << endl;
 }
 
-LPTLIST append_elem(LPTLIST *ppstHead, void *data)
+void DestroyList(LPTLIST *ppstHead)
 {
-
-	LPTLIST origin_tlist = *ppstHead;
-	if (*ppstHead)
+	if (!ppstHead)
 	{
-		while ((*ppstHead)->pNext)
-		{
-			*ppstHead = (*ppstHead)->pNext;
-		}
-		LPTLIST new_node = new TList;
-		new_node->pNext = NULL;
-		new_node->pData = data;
-
-		(*ppstHead)->pNext = new_node;
+		cout << "ppstHead is null" << endl;
+		return;
 	}
-	return origin_tlist;
 
+	if (!*ppstHead)
+	{
+		cout << "*ppstHead is null" << endl;
+		return;
+	}
+
+	LPTLIST temp_elem_ptr = *ppstHead, temp_next_ptr = nullptr;
+
+	while (temp_elem_ptr)
+	{
+		temp_next_ptr = temp_elem_ptr->pNext;
+
+		delete (char *)(temp_elem_ptr->pData);
+		temp_elem_ptr->pData = nullptr;
+
+		delete temp_elem_ptr;
+		temp_elem_ptr = temp_next_ptr;
+	}
+
+	cout << "DestroyList finished." << endl;
 }
+```
 
+
+```c++ main.cpp
+#include "LinkedList.h"
 int main()
 {
-	LPTLIST temp = NULL;
-	print_tlist(&temp);
+	TList *test_list = nullptr;
 
-	LPTLIST test_tlist = new TList;
-	test_tlist->pNext = NULL;
-	test_tlist->pData = NULL;
+	AppendElem(&test_list);
+	PrintList(&test_list);
 
-	// LPTLIST origin_tlist = test_tlist;
+	ReverseList(&test_list);
+	PrintList(&test_list);
 
-	int elem1 = 1;
-	int elem2 = 2;
-	int elem3 = 7;
-
-	test_tlist = append_elem(&test_tlist, &elem1);
-	test_tlist = append_elem(&test_tlist, &elem2);
-	test_tlist = append_elem(&test_tlist, &elem3);
-
-	test_tlist = print_tlist(&test_tlist);
-
-	ReverseList(&test_tlist);
-
-	print_tlist(&test_tlist);
+	DestroyList(&test_list);
 
 	return 0;
 }
 ```
 
 
+<!-- 
 ## 栈存储解法
 
 ``` c++
@@ -272,4 +378,4 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-```
+``` -->

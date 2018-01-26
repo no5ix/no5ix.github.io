@@ -94,7 +94,7 @@ $(document).ready(function () {
         $(document)
           .on('sidebar.isShowing', function () {
             NexT.utils.isDesktop() && $('body').velocity('stop').velocity(
-              document.body.scrollHeight < 20000 ? {paddingRight: SIDEBAR_WIDTH} : null,
+              document.body.scrollHeight < 20000 ? {paddingRight: SIDEBAR_WIDTH} : {paddingRight: 0},
               SIDEBAR_DISPLAY_DURATION
             );
           })

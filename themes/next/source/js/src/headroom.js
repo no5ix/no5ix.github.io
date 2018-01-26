@@ -466,9 +466,24 @@
     return Headroom;
   }));
 
+  
 // grab an element
-var myElement = document.querySelector("header");
+var my_header = document.querySelector("header");
 // construct an instance of Headroom, passing the element
-var headroom  = new Headroom(myElement);
+var headroom_my_header  = new Headroom(my_header);
 // initialise
-headroom.init();
+headroom_my_header.init();
+
+
+// grab an element
+var my_local_search_result = document.querySelector(".local-search-result-cls");
+// set options
+var local_search_result_headroom_options = {
+  classes : {
+    initial : 'headroom-local-search'
+  }
+};
+// construct an instance of Headroom, passing the element
+var my_local_search_result_headroom  = new Headroom(my_local_search_result, local_search_result_headroom_options);
+// initialise
+my_local_search_result_headroom.init();

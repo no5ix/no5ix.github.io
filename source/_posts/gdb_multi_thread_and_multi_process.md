@@ -133,24 +133,31 @@ void processB()
 1.调试主进程，block子进程。
 
 
+	
 	(gdb) set detach-on-fork off
+	
 	(gdb) show detach-on-fork
 	Whether gdb will detach the child of a fork is off.
+	
 	(gdb) catch fork
 	Catchpoint 1 (fork)
+	
 	(gdb) r
 	[Thread debugging using libthread_db enabled]
 
 	Catchpoint 1 (forked process 3475), 0x00110424 in __kernel_vsyscall ()
 	Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.47.el6.i686
+	
 	(gdb) break test.c:14
 	Breakpoint 2 at 0x8048546: file test.c, line 14.
+	
 	(gdb) cont
 	[New process 3475]
 	[Thread debugging using libthread_db enabled]
 
 	Breakpoint 2, main (argc=1, argv=0xbffff364) at test.c:14
 	Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.47.el6.i686
+	
 	(gdb) info inferiors
 		Num  Description       Executable       
 		2    process 3475      /home/cnwuwil/labs/c-lab/test
@@ -160,18 +167,22 @@ void processB()
 2.切换到子进程：
 
 
+	
 	(gdb) inferior 2
 	[Switching to inferior 2 [process 3475] (/home/cnwuwil/labs/c-lab/test)]
 	[Switching to thread 2 (Thread 0xb7fe86c0 (LWP 3475))]
 	#0  0x00110424 in ?? ()
+	
 	(gdb) info inferiors
 		Num  Description       Executable       
 	* 2    process 3475      /home/cnwuwil/labs/c-lab/test
 		1    process 3472      /home/cnwuwil/labs/c-lab/test
+	
 	(gdb) inferior 1
 	[Switching to inferior 1 [process 3472] (/home/cnwuwil/labs/c-lab/test)]
 	[Switching to thread 1 (Thread 0xb7fe86c0 (LWP 3472))]
 	#0  main (argc=1, argv=0xbffff364) at test.c:14
+	
 	(gdb) info inferiors
 		Num  Description       Executable       
 		2    process 3475      /home/cnwuwil/labs/c-lab/test
@@ -181,18 +192,22 @@ void processB()
 3.设断点继续调试主进程，主进程产生两个子线程：
 
 
+	
 	(gdb) break test.c:50
 	Breakpoint 3 at 0x804867d: file test.c, line 50. (2 locations)
+	
 	(gdb) cont
 	ProcessA: 3472 step1
 	[New Thread 0xb7fe7b70 (LWP 3562)]
 	ProcessA: 3472 thread 3086911168 step2
 
 	Breakpoint 3, processAworker (arg=0x0) at test.c:50
+	
 	(gdb) info inferiors
 		Num  Description       Executable       
 		2    process 3475      /home/cnwuwil/labs/c-lab/test
 	* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+	
 	(gdb) info threads
 		3 Thread 0xb7fe7b70 (LWP 3562)  0x00110424 in __kernel_vsyscall ()
 		2 Thread 0xb7fe86c0 (LWP 3475)  0x00110424 in ?? ()
@@ -202,18 +217,22 @@ void processB()
 4.切换到主进程中的子线程，注意：线程2为前面产生的子进程
 
 
+	
 	(gdb) thread 3
 	[Switching to thread 3 (Thread 0xb7fe7b70 (LWP 3562))]#0  0x00110424 in __kernel_vsyscall ()
+	
 	(gdb) cont
 	ProcessA: 3472 thread 3086911168 step3
 	ProcessA: 3472 thread 3086908272 step2
 	[Switching to Thread 0xb7fe7b70 (LWP 3562)]
 
 	Breakpoint 3, processAworker (arg=0x0) at test.c:50
+	
 	(gdb) info threads
 	* 3 Thread 0xb7fe7b70 (LWP 3562)  processAworker (arg=0x0) at test.c:50
 		2 Thread 0xb7fe86c0 (LWP 3475)  0x00110424 in ?? ()
 		1 Thread 0xb7fe86c0 (LWP 3472)  0x00110424 in __kernel_vsyscall ()
+	
 	(gdb) thread 1
 
 
@@ -237,6 +256,7 @@ void processB()
 	For help, type "help".
 	Type "apropos word" to search for commands related to "word"...
 	Reading symbols from ./o_multi_thread_process...done.
+	
 	(gdb) attach 3027
 	Attaching to program: /home/b/Documents/temp_test/o_multi_thread_process, process 3027
 	Reading symbols from /lib/x86_64-linux-gnu/libpthread.so.0...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libpthread-2.19.so...done.
@@ -253,10 +273,14 @@ void processB()
 	Loaded symbols for /lib64/ld-linux-x86-64.so.2
 	0x00007f5c9acb8dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81
 	81	../sysdeps/unix/syscall-template.S: No such file or directory.
+	
 	(gdb) set follow-fork-mode parent 
+	
 	(gdb) set detach-on-fork off
+	
 	(gdb) catch fork
 	Catchpoint 1 (fork)
+	
 	(gdb) r
 	Starting program: /home/b/Documents/temp_test/o_multi_thread_process 
 	[Thread debugging using libthread_db enabled]
@@ -265,24 +289,31 @@ void processB()
 	Catchpoint 1 (forked process 3002), 0x00007ffff78b7ee4 in __libc_fork ()
 			at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130
 	130	../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.
+	
 	(gdb) info inferiors 
 		Num  Description       Executable        
 	* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process 
+	
 	(gdb) b 14
 	Breakpoint 2 at 0x7ffff78b7f5b: file ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c, line 14.
+	
 	(gdb) info breakpoints 
 	Num     Type           Disp Enb Address            What
 	1       catchpoint     keep y                      fork, process 3002 
 		catchpoint already hit 1 time
 	2       breakpoint     keep y   0x00007ffff78b7f5b in __libc_fork 
 																										at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:14
+	
 	(gdb) d 2
+	
 	(gdb) info breakpoints 
 	Num     Type           Disp Enb Address            What
 	1       catchpoint     keep y                      fork, process 3002 
 		catchpoint already hit 1 time
+	
 	(gdb) b multi_thread_process.cpp : 14
 	Breakpoint 3 at 0x4007f4: file ./multi_thread_process.cpp, line 14.
+	
 	(gdb) c
 	Continuing.
 	[New process 3002]
@@ -294,35 +325,43 @@ void processB()
 
 	Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15
 	15	  if(pid != 0)
+	
 	(gdb) info inferiors 
 		Num  Description       Executable        
 		2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process 
 	* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process 
+	
 	(gdb) inferior 2
 	[Switching to inferior 2 [process 3002] (/home/b/Documents/temp_test/o_multi_thread_process)]
 	[Switching to thread 2 (Thread 0x7ffff7fdf740 (LWP 3002))] 
 	0  0x00007ffff78b7ee4 in __libc_fork () at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130
 	130	../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.
+	
 	(gdb) set scheduler-locking on
+	
 	(gdb) b multi_thread_process.cpp : 50
 	Breakpoint 4 at 0x400916: multi_thread_process.cpp:50. (2 locations)
+	
 	(gdb) info threads 
 		Id   Target Id         Frame 
 	* 2    Thread 0x7ffff7fdf740 (LWP 3002) "o_multi_thread_" 0x00007ffff78b7ee4 in __libc_fork ()
 			at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130
 		1    Thread 0x7ffff7fdf740 (LWP 2998) "o_multi_thread_" main (argc=1, argv=0x7fffffffe598)
 			at ./multi_thread_process.cpp:15
+	
 	(gdb) c
 	Continuing.
 
 	Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15
 	15	  if(pid != 0)
+	
 	(gdb) info threads 
 		Id   Target Id         Frame 
 	* 2    Thread 0x7ffff7fdf740 (LWP 3002) "o_multi_thread_" main (argc=1, argv=0x7fffffffe598)
 			at ./multi_thread_process.cpp:15
 		1    Thread 0x7ffff7fdf740 (LWP 2998) "o_multi_thread_" main (argc=1, argv=0x7fffffffe598)
 			at ./multi_thread_process.cpp:15
+	
 	(gdb) c
 	Continuing.
 	ProcessB: 3002 step1
@@ -332,21 +371,25 @@ void processB()
 	Program received signal SIGINT, Interrupt.
 	0x00007ffff78b7de0 in __nanosleep_nocancel () at ../sysdeps/unix/syscall-template.S:81
 	81	../sysdeps/unix/syscall-template.S: No such file or directory.
+	
 	(gdb) info threads 
 		Id   Target Id         Frame 
 	* 2    Thread 0x7ffff7fdf740 (LWP 3002) "o_multi_thread_" 0x00007ffff78b7de0 in __nanosleep_nocancel ()
 			at ../sysdeps/unix/syscall-template.S:81
 		1    Thread 0x7ffff7fdf740 (LWP 2998) "o_multi_thread_" main (argc=1, argv=0x7fffffffe598)
 			at ./multi_thread_process.cpp:15
+	
 	(gdb) info inferiors 
 		Num  Description       Executable        
 	* 2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process 
 		1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process 
+	
 	(gdb) inferior 1
 	[Switching to inferior 1 [process 2998] (/home/b/Documents/temp_test/o_multi_thread_process)]
 	[Switching to thread 1 (Thread 0x7ffff7fdf740 (LWP 2998))] 
 	0  main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15
 	15	  if(pid != 0)
+	
 	(gdb) list
 	10	  {
 	11	  int pid;
@@ -358,10 +401,12 @@ void processB()
 	17	  else
 	18	    processB();
 	19	
+	
 	(gdb) r
 	The program being debugged has been started already.
 	Start it from the beginning? (y or n) n
 	Program not restarted.
+	
 	(gdb) c
 	Continuing.
 	ProcessA: 2998 step1
@@ -370,6 +415,7 @@ void processB()
 	Program received signal SIGINT, Interrupt.
 	0x00007ffff78b7dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81
 	81	../sysdeps/unix/syscall-template.S: No such file or directory.
+	
 	(gdb) info threads 
 		Id   Target Id         Frame 
 		3    Thread 0x7ffff77f6700 (LWP 3017) "o_multi_thread_" clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:81
@@ -377,6 +423,7 @@ void processB()
 			at ../sysdeps/unix/syscall-template.S:81
 	* 1    Thread 0x7ffff7fdf740 (LWP 2998) "o_multi_thread_" 0x00007ffff78b7dfd in nanosleep ()
 			at ../sysdeps/unix/syscall-template.S:81
+	
 	(gdb) 
 
 

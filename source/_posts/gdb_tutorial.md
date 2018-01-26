@@ -4,7 +4,7 @@ date: 2015-02-02 12:18:54
 tags:
 - gdb
 categories:
-- 杂
+- linux
 ---
 
 # GDB 操作提示

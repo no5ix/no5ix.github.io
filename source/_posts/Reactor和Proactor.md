@@ -2,12 +2,10 @@
 title: Reactor模式和Proactor
 date: 2016-08-07 23:01:00
 tags:
-- proactor
-- reactor
-- 同步
-- 异步
+- Proactor
+- Reactor
 categories:
-- server
+- Server
 ---
 
 

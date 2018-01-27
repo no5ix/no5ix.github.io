@@ -4,7 +4,7 @@ date: 2016-07-30 22:57:29
 tags:
 - SLG
 categories:
-- server
+- Server
 top: 2
 ---
 

@@ -5,7 +5,7 @@ tags:
 - 分布式
 - RPC
 categories:
-- server
+- Server
 ---
 
 # RPC 是什么？ 

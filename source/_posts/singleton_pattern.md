@@ -4,7 +4,7 @@ date: 2015-02-02 12:18:54
 tags:
 - 设计模式
 categories:
-- 杂
+- Miscellaneous
 ---
 
 

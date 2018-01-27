@@ -5,7 +5,7 @@ tags:
 - Lua
 - Python
 categories:
-- 脚本
+-  Script
 ---
 
 

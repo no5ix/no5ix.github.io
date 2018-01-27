@@ -4,9 +4,9 @@ date: 2016-10-18 19:29:22
 tags:
 - AI
 - UE4
-- c++
+- CPP
 categories:
-- 杂
+- Miscellaneous
 top: 4
 ---
 

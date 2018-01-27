@@ -4,7 +4,7 @@ date: 2015-12-03 10:12:15
 tags:
 - Lua
 categories:
-- 脚本
+-  Script
 ---
 
 

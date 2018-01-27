@@ -2,7 +2,7 @@
 title: UML类图与类的关系详解
 date: 2017-11-22 10:47:01
 categories:
-- 杂
+- Miscellaneous
 ---
 
 [原文出处](http://www.uml.org.cn/oobject/201104212.asp)

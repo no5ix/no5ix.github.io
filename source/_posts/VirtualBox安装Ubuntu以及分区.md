@@ -4,7 +4,7 @@ date: 2018-01-01 23:00:31
 tags:
 - VBox
 categories:
-- 杂
+- Miscellaneous
 ---
 
 最近因某些原因重装了Win10, 虚拟机也需要重装, 记录一下过程, 供以后查阅, 以免走更多弯路

@@ -6,7 +6,7 @@ tags:
 - TLPI
 - APUE
 categories:
-- Linux
+- NP
 ---
 
 >因为第二章之后基本都是纯Socket API的内容， 第三章到第十一章的笔记整理合并到一起。

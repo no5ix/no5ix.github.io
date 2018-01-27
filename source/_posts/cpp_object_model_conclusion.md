@@ -4,7 +4,7 @@ date: 2015-02-21 17:49:01
 tags:
 - 对象模型
 categories:
-- c++
+- CPP
 ---
 
 # 介绍

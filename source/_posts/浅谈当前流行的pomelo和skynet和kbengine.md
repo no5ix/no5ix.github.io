@@ -6,7 +6,7 @@ tags:
 - Pomelo
 - KBE
 categories:
-- server
+- Server
 ---
 
 根据之前的博文 {% post_link 服务端常用架构一 服务端常用架构 %}

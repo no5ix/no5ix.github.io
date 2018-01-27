@@ -5,7 +5,7 @@ tags:
 - new
 - delete
 categories:
-- c++
+- CPP
 ---
 
 

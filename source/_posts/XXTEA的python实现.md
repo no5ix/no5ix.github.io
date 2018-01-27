@@ -5,7 +5,7 @@ tags:
 - Python
 - XXTEA
 categories:
-- 脚本
+-  Script
 ---
 
 在数据的加解密领域，算法分为对称密钥与非对称密钥两种。

@@ -6,7 +6,7 @@ tags:
 - TLPI
 - APUE
 categories:
-- Linux
+- NP
 ---
 
 因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容

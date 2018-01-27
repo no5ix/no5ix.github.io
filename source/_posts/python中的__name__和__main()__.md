@@ -4,7 +4,7 @@ date: 2015-02-10 22:19:29
 tags:
 - Python
 categories:
-- 脚本
+-  Script
 ---
 
 

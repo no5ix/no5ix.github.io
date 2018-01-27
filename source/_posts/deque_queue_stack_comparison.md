@@ -2,10 +2,10 @@
 title: STL之队列和双端队列和栈的比较
 date: 2014-09-25 19:11:22
 tags:
-- c++
+- CPP
 - STL
 categories:
-- c++
+- CPP
 ---
 
 # 队列和双端队列的比较

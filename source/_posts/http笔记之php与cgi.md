@@ -5,7 +5,7 @@ tags:
 - PHP
 - CGI
 categories:
-- 脚本
+-  Script
 ---
 
 首先，CGI是干嘛的？CGI是为了保证web server传递过来的数据是标准格式的，方便CGI程序的编写者。

@@ -6,7 +6,7 @@ tags:
 - TLPI
 - APUE
 categories:
-- Linux
+- NP
 ---
 
 

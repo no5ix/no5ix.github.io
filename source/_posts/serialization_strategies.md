@@ -4,7 +4,7 @@ date: 2017-02-25 17:13:35
 tags:
 - GafferOnGames
 categories:
-- server
+- Server
 ---
 
 # 自我总结本篇概要

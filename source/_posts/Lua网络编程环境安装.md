@@ -4,7 +4,7 @@ date: 2015-11-08 19:29:22
 tags:
 - Lua
 categories:
-- 脚本
+-  Script
 ---
 
 # Linux环境

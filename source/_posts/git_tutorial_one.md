@@ -4,7 +4,7 @@ date: 2016-04-12 23:26:16
 tags: 
 - Git
 categories:
-- 杂
+- Miscellaneous
 ---
 
 之前有一份私人git笔记老长老长了, 今天得空, 把它浓缩成5分钟版本.

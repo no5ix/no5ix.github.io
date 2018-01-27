@@ -5,7 +5,7 @@ tags:
 - VSCode
 - Vim
 categories:
-- 杂
+- Miscellaneous
 ---
 
 

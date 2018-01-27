@@ -4,7 +4,7 @@ date: 2016-08-23 15:11:26
 tags:
 - VBox
 categories:
-- 杂
+- Miscellaneous
 ---
 
 #virtualBox网络设置

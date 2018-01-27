@@ -5,7 +5,7 @@ tags:
 - Gabriel Gambetta
 - 游戏同步
 categories:
-- server
+- Server
 ---
 
 [原文出处](http://www.gabrielgambetta.com/client-server-game-architecture.html)

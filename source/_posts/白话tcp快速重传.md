@@ -4,7 +4,7 @@ date: 2017-09-23 18:11:22
 tags: 
 - TCP
 categories: 
-- Linux
+- NP
 ---
 
 # 快速重传算法概绍

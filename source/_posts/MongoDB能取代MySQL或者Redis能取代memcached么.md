@@ -2,10 +2,10 @@
 title: MongoDB能取代MySQL或者Redis能取代memcached么
 date: 2016-06-30 00:22:58
 tags:
-- mongodb
-- redis
-- mysql
-- memcached
+- MongoDB
+- Redis
+- MySQL
+- Memcached
 categories:
 - DB
 ---

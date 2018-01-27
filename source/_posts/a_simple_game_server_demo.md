@@ -2,8 +2,8 @@
 title: 一个简单的游戏服务器框架demo
 date: 2017-08-27 23:08:56
 tags:
-- boost
-- mysql
+- Boost
+- MySQL
 - c++
 categories:
 - server

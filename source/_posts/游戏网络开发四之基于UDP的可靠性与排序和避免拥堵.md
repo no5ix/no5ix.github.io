@@ -2,8 +2,8 @@
 title: 游戏网络开发四之基于UDP的可靠性与排序和避免拥堵
 date: 2016-11-17 22:20:34
 tags:
-- udp
-- gafferongames
+- UDP
+- GafferOnGames
 categories:
 - server
 ---

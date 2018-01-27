@@ -2,7 +2,7 @@
 title: PHP的超级全局变量小结
 date: 2015-07-13 19:29:22
 tags:
-- php
+- PHP
 categories:
 - 脚本
 ---

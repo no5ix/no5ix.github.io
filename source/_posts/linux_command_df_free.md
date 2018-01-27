@@ -4,7 +4,7 @@ date: 2015-03-11 12:16:56
 tags: 
 - 运维
 categories:
-- linux
+- Linux
 ---
 
 # **df**

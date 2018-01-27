@@ -2,8 +2,8 @@
 title: vscode配置与技巧
 date: 2017-10-16 18:45:48
 tags:
-- vscode
-- vim
+- VSCode
+- Vim
 categories:
 - 杂
 ---

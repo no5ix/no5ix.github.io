@@ -2,9 +2,9 @@
 title: tcp拥塞控制之慢启动和拥塞避免
 date: 2016-12-31 01:45:12
 tags:
-- tcp
+- TCP
 categories:
-- linux
+- Linux
 ---
 
 # TCP拥塞控制概览

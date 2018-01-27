@@ -2,7 +2,7 @@
 title: Base64编码原理与应用
 date: 2017-10-13 12:22:54
 tags:
-- base64
+- Base64
 categories:
 - 杂
 ---

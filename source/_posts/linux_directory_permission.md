@@ -4,7 +4,7 @@ date: 2015-03-18 17:11:52
 tags:
 - directory
 categories:
-- linux
+- Linux
 ---
 
 # 目录的可读/可写/可执行权限

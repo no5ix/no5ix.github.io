@@ -4,7 +4,7 @@ date: 2015-10-21 20:54:19
 tags: 
 - 文本处理
 categories:
-- linux
+- Linux
 ---
 
 linux常用文本处理的命令的使用率很高， 所以整理了一些之前的笔记，用markdown来记录备忘。

@@ -6,7 +6,7 @@ tags:
 - TLPI
 - APUE
 categories:
-- linux
+- Linux
 ---
 
 又准备从头看一遍unp, 把一些老笔记放到博客里来就当网盘吧, 顺便修正以及删减一些之前不够精炼的老笔记内容.  

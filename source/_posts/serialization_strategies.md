@@ -2,7 +2,7 @@
 title: 构建游戏网络协议二之序列化策略
 date: 2017-02-25 17:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

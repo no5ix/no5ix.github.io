@@ -2,7 +2,7 @@
 title: MySQL入门一之增删查改与关联
 date: 2015-02-27 22:51:11
 tags:
-- mysql
+- MySQL
 categories:
 - DB
 ---

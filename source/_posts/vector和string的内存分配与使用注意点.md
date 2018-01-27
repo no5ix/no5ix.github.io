@@ -3,7 +3,7 @@ title: vector和string的内存分配与使用注意点
 date: 2016-05-17 00:52:53
 tags:
 - c++
-- stl
+- STL
 categories:
 - c++
 ---

@@ -2,7 +2,7 @@
 title: 网络物理模拟六之状态同步
 date: 2017-01-26 11:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

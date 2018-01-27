@@ -2,7 +2,7 @@
 title: MySQL入门三之GroupBy
 date: 2015-04-17 12:11:21
 tags:
-- mysql
+- MySQL
 categories:
 - DB
 ---

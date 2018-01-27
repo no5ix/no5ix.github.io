@@ -2,7 +2,7 @@
 title: python的struct模块
 date: 2015-03-02 21:49:19
 tags:
-- python
+- Python
 categories:
 - 脚本
 ---

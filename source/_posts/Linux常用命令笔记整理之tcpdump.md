@@ -2,9 +2,9 @@
 title: Linux常用命令笔记整理之tcpdump
 date: 2015-11-03 19:25:59
 tags: 
-- tcpdump
+- TcpDump
 categories:
-- linux
+- Linux
 ---
 
 强大的抓包工具, 博大精深内容太多, 所以这篇博客整理得只说常用, 具体的参考tcpdump用户手册, 

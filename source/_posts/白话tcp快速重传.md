@@ -1,9 +1,10 @@
 ---
 title: 白话TCP快速重传
 date: 2017-09-23 18:11:22
-tags: [tcp, udp]
+tags: 
+- TCP
 categories: 
-- linux
+- Linux
 ---
 
 # 快速重传算法概绍

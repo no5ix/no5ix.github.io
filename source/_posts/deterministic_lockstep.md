@@ -2,7 +2,7 @@
 title: 网络物理模拟三之具有确定性的帧同步
 date: 2017-01-22 11:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

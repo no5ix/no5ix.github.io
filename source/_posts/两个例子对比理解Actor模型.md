@@ -2,7 +2,7 @@
 title: 两个例子对比理解Actor模型
 date: 2017-11-25 15:45:58
 tags:
-- actor
+- Actor
 categories:
 - server
 ---

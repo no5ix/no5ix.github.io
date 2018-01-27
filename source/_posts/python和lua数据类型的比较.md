@@ -2,8 +2,8 @@
 title: python和lua数据类型的比较
 date: 2015-07-11 09:29:22
 tags:
-- lua
-- python
+- Lua
+- Python
 categories:
 - 脚本
 ---

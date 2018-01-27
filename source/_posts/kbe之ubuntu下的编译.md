@@ -2,7 +2,7 @@
 title: kbe之ubuntu下的编译
 date: 2017-02-10 12:31:29
 tags:
-- kbe
+- KBE
 categories:
 - 杂
 ---

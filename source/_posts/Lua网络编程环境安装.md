@@ -2,7 +2,7 @@
 title: Lua的win和linux环境简单安装
 date: 2015-11-08 19:29:22
 tags:
-- lua
+- Lua
 categories:
 - 脚本
 ---

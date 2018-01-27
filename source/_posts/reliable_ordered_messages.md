@@ -2,7 +2,7 @@
 title: 构建游戏网络协议五之可靠的有序消息
 date: 2017-03-29 13:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

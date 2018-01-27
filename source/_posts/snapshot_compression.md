@@ -2,7 +2,7 @@
 title: 网络物理模拟五之快照压缩
 date: 2017-01-24 11:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

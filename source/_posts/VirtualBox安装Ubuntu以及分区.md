@@ -2,7 +2,7 @@
 title: VirtualBox安装Ubuntu以及分区
 date: 2018-01-01 23:00:31
 tags:
-- vbox
+- VBox
 categories:
 - 杂
 ---

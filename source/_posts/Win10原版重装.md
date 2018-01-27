@@ -2,7 +2,7 @@
 title: Win10原版重装
 date: 2018-01-01 20:22:24
 tags:
-- win10
+- Win10
 categories:
 - 杂
 ---

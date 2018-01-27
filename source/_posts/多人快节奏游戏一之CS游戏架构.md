@@ -2,7 +2,7 @@
 title: 多人快节奏游戏一之C/S游戏架构
 date: 2016-07-16 22:20:34
 tags:
-- gabrielgambetta
+- Gabriel Gambetta
 - 游戏同步
 categories:
 - server

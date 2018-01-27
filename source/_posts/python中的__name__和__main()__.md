@@ -2,7 +2,7 @@
 title: python中的__name__和__main()__
 date: 2015-02-10 22:19:29
 tags:
-- python
+- Python
 categories:
 - 脚本
 ---

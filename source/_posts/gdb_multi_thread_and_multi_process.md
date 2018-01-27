@@ -1,13 +1,13 @@
 ---
-title: gdb多进程多线程调试实战
+title: GDB多进程多线程调试实战
 date: 2015-08-31 14:20:23
 tags: 
-- gdb
+- GDB
 categories:
-- linux
+- Linux
 ---
 
-# gdb多进程/多线程调试实战例子
+# GDB多进程/多线程调试实战例子
 
 在gcc编译的时候，记得附加 -lpthread参数, 否则会出现 undefined reference to 'pthread_create' 的错误.
 (因为在链接的时候，无法找到phread库中哥函数的入口地址，于是链接会失败。)
@@ -97,7 +97,7 @@ void processB()
 
 
 
-# gdb多进程调试命令
+# GDB多进程调试命令
 
 - set follow-fork-mode [parent|child]   set detach-on-fork [on|off]
 
@@ -105,8 +105,8 @@ void processB()
 | --------------- |:---------------:| -----|
 |parent           |       on        |        只调试主进程（GDB默认）
 |child            |        on       |        只调试子进程
-|parent           |       off       |       同时调试两个进程，gdb跟主进程，子进程block在fork位置
-|child            |        off      |        同时调试两个进程，gdb跟子进程，主进程block在fork位置
+|parent           |       off       |       同时调试两个进程，GDB跟主进程，子进程block在fork位置
+|child            |        off      |        同时调试两个进程，GDB跟子进程，主进程block在fork位置
 
 
 - 查询正在调试的进程：info inferiors
@@ -116,7 +116,7 @@ void processB()
 
 ... <!-- more -->
 
-# gdb多线程调试命令
+# GDB多线程调试命令
 
 - show scheduler-locking  //显示当前scheduler-locking
 - set scheduler-locking [on/off/step]  //设置scheduler-locking

@@ -2,7 +2,7 @@
 title: lua传的是值还是引用
 date: 2015-12-03 10:12:15
 tags:
-- lua
+- Lua
 categories:
 - 脚本
 ---

@@ -2,8 +2,8 @@
 title: 修复next搜索框弹不出手机键盘bug和更简洁的搜索框
 date: 2017-11-07 22:59:31
 tags:
-- hexo
-- next
+- Hexo
+- Next
 categories:
 - 杂
 ---

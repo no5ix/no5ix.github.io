@@ -2,8 +2,8 @@
 title: 基于hexo的next个性化配置小技巧
 date: 2017-09-21 11:01:27
 tags:
-- next
-- hexo
+- Next
+- Hexo
 categories:
 - 杂
 ---

@@ -2,7 +2,7 @@
 title: MySQL进阶一
 date: 2016-06-14 11:02:16
 tags:
-- mysql
+- MySQL
 categories:
 - DB
 ---

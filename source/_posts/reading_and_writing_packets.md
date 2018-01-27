@@ -2,7 +2,7 @@
 title: 构建游戏网络协议一之数据包的读取和写入
 date: 2017-02-24 13:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

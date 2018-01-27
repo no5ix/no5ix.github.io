@@ -2,8 +2,8 @@
 title: redis概要之数据类型
 date: 2015-07-11 09:29:22
 tags:
-- redis
-- nosql
+- Redis
+- NoSQL
 categories:
 - DB
 ---

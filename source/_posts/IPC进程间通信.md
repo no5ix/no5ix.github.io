@@ -4,7 +4,7 @@ date: 2017-01-27 21:01:59
 tags:
 - IPC
 categories:
-- linux
+- Linux
 ---
 
 ## IPC进程间通信

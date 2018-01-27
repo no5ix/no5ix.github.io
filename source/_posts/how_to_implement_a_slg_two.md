@@ -2,17 +2,7 @@
 title: 快速完成一个简易SLG游戏思路二
 date: 2016-07-30 22:57:29
 tags:
-- php
-- yii
-- redis
-- mysql
-- nginx
-- tcp
-- http
-- udp
-- workerman
-- capistrano
-- ruby
+- SLG
 categories:
 - server
 top: 2

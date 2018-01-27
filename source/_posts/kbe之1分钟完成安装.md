@@ -2,7 +2,7 @@
 title: kbe之1分钟完成安装
 date: 2017-02-09 12:38:21
 tags:
-- kbe
+- KBE
 categories:
 - 杂
 ---
@@ -47,7 +47,7 @@ reset KBE_ROOT(No input is [/home/b/kbengine-0.9.18/]):
 - 他之后显示的都直接敲回车, 用默认的就可以, 直到他开始问你mysql的东西, 到mysql他会问
 
 ```
-- mysql: checking...
+- MySQL: checking...
 - MySQL is installed on the remote machine?[yes/no]
 ```
 这里我们直接填yes, 然后就直接填我们之前建立好的数据库kbe_database和用户kbe_user即可, 它会显示 : 
@@ -58,7 +58,7 @@ reset KBE_ROOT(No input is [/home/b/kbengine-0.9.18/]):
 - Enter mysql-account:kbe_user
 - Enter mysql-password:123456
 - Enter mysql-databaseName:kbe_database
-- mysql: yes
+- MySQL: yes
 Modified: /home/b/kbengine-0.9.18//kbe/res/server/kbengine_defs.xml
 KBEngine has been successfully installed!
 

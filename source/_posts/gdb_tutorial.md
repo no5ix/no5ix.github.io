@@ -2,9 +2,9 @@
 title: GDB基础教程
 date: 2015-02-02 12:18:54
 tags:
-- gdb
+- GDB
 categories:
-- linux
+- Linux
 ---
 
 # GDB 操作提示
@@ -30,7 +30,7 @@ GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。
 	- info threads	列出当前的线程。
 	- info locals	列出Local variables of current stack frame
 - step(简写一个s也可)		进入下一行代码的执行，会进入函数内部。
-- next(简写一个n也可)		执行下一行代码。但不会进入函数内部。
+- Next(简写一个n也可)		执行下一行代码。但不会进入函数内部。
 - continue(c)	继续执行直到下一个断点或观察点。
 - kill	停止程序执行。
 - quit(q)	退出 GDB调试器

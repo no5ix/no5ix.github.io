@@ -2,17 +2,7 @@
 title: 快速完成一个简易SLG游戏思路一
 date: 2016-07-30 22:19:29
 tags:
-- php
-- yii
-- redis
-- mysql
-- nginx
-- tcp
-- http
-- udp
-- workerman
-- capistrano
-- ruby
+- SLG
 categories:
 - server
 top: 3
@@ -53,9 +43,9 @@ top: 3
 所以 MainServer 选择了:
 
 - yii
-- redis
-- mysql
-- nginx
+- Redis
+- MySQL
+- Nginx
 
 ... <!-- more -->
 

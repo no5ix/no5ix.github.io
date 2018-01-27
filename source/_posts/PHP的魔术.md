@@ -2,7 +2,7 @@
 title: PHP的魔术
 date: 2016-09-01 00:16:06
 tags:
-- php
+- PHP
 categories:
 - 脚本
 ---

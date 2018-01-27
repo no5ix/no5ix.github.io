@@ -2,9 +2,7 @@
 title: hash索引btree索引聚簇索引非聚簇索引
 date: 2015-09-12 10:05:48
 tags:
-- btree索引
-- hash索引
-- 聚簇索引
+- MySQL
 categories:
 - DB
 ---

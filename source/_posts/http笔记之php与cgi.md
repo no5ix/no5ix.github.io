@@ -2,8 +2,8 @@
 title: php与cgi
 date: 2016-05-22 21:22:26
 tags: 
-- php
-- cgi
+- PHP
+- CGI
 categories:
 - 脚本
 ---

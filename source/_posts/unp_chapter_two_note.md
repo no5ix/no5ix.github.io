@@ -6,7 +6,7 @@ tags:
 - TLPI
 - APUE
 categories:
-- linux
+- Linux
 ---
 
 为加深理解, 故本章老笔记内容大幅删减重写.

@@ -2,8 +2,8 @@
 title: XXTEA的python实现
 date: 2016-09-13 02:04:00
 tags:
-- python
-- xxtea
+- Python
+- XXTEA
 categories:
 - 脚本
 ---

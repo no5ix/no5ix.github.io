@@ -2,7 +2,7 @@
 title: 网络物理模拟四之快照插值
 date: 2017-01-23 11:13:35
 tags:
-- gafferongames
+- GafferOnGames
 categories:
 - server
 ---

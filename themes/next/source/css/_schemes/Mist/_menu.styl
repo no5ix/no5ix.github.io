@@ -38,17 +38,18 @@
     }
 
     &:hover { 
-      background: #ddd;
+      background: #999;
       /* box-shadow: inset 0.475em 0.375em 0.45em 0 #999; */
       color: #fff;
     }
   }
   
   .menu-item-active a {
-    background: #ddd;
+    background: #999;
     /* box-shadow: inset 0.475em 0.375em 0.45em 0 #888; */
     color: #fff;
     +mobile() {
+      background: #ddd;
       &:after {
         content: " ";
         position: absolute;

@@ -15,7 +15,7 @@ categories:
 - -u<用户名称>：指定要设定计时器的用户名称
 
 
-<!-- more -->
+... <!-- more -->
 
 >m h  dom mon dow   command
 >分 时 日 月 周 命令

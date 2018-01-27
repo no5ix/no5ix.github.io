@@ -6,7 +6,7 @@
       'use strict';
 
       var local_search_close_x = "<i id='local-search-close'>×</i>";
-      // var local_search_close_x = IsOnMobile() == true ? "<i id='local-search-close'>×</i>" : "";
+      // var local_search_close_x = isMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
       var datas = [];
@@ -143,7 +143,7 @@
       }
 
       $input.addEventListener('input', function () {
-        if (IsOnMobile())
+        if (isMobile())
         {
           $('body').velocity('scroll');
         }
@@ -187,7 +187,7 @@
       // $(document).on('blur', '#local-search-input', function(e) {
       //   // console.log(document.activeElement.getAttribute('class'));
         
-      //   if (IsOnMobile() == false)
+      //   if (isMobile() == false)
       //   {
       //     CloseLocalSearch();
       //   }
@@ -196,36 +196,37 @@
       
     }
 
+    function isMobile() {
+      var userAgent = window.navigator.userAgent;
 
-    function IsOnMobile()
-    {
-      //平台、设备和操作系统 
-      var system = { 
-        win: false, 
-        mac: false, 
-        xll: false, 
-        ipad:false 
-      }; 
-      //检测平台 
-      var p = navigator.platform; 
-      system.win = p.indexOf("Win") == 0; 
-      system.mac = p.indexOf("Mac") == 0; 
-      system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
-      system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
-      //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
-      if (system.win || system.mac || system.xll||system.ipad) 
-      {
-        return false;
-      }
-      else
-      {
-        return true;
-      }
+      var isiPad = userAgent.match(/iPad/i) !== null;
+      var mobileUA = [
+        'iphone', 'android', 'phone', 'mobile',
+        'wap', 'netfront', 'x11', 'java', 'opera mobi',
+        'opera mini', 'ucweb', 'windows ce', 'symbian',
+        'symbianos', 'series', 'webos', 'sony',
+        'blackberry', 'dopod', 'nokia', 'samsung',
+        'palmsource', 'xda', 'pieplus', 'meizu',
+        'midp' ,'cldc' , 'motorola', 'foma',
+        'docomo', 'up.browser', 'up.link', 'blazer',
+        'helio', 'hosin', 'huawei', 'novarra',
+        'coolpad', 'webos', 'techfaith', 'palmsource',
+        'alcatel', 'amoi', 'ktouch', 'nexian',
+        'ericsson', 'philips', 'sagem', 'wellcom',
+        'bunjalloo', 'maui', 'smartphone', 'iemobile',
+        'spice', 'bird', 'zte-', 'longcos',
+        'pantech', 'gionee', 'portalmmm', 'jig browser',
+        'hiptop', 'benq', 'haier', '^lct',
+        '320x320', '240x320', '176x220'
+      ];
+      var pattern = new RegExp(mobileUA.join('|'), 'i');
+
+      return !isiPad && userAgent.match(pattern);
     }
 
     var getSearchFile = function(){
       var path = "/search.xml";
-      if (IsOnMobile())
+      if (isMobile())
       {
         searchFunc(path, 'local-search-input', 'local-search-result-mobile');
       }

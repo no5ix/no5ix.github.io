@@ -57,7 +57,7 @@ top: 3
 - mysql
 - nginx
 
-<!-- more -->
+... <!-- more -->
 
 # pvpServeer
 

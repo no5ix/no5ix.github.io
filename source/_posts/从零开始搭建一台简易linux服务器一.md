@@ -27,7 +27,7 @@ sudo adduser dev
 -----------------
 sudo visudo 添加：dev ALL=(ALL:ALL) ALL
 
-<!-- more -->
+... <!-- more -->
 
 
 关于Ubuntu的root密码

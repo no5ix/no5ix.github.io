@@ -98,7 +98,7 @@ categories:
  - 5.10节 ：
 	使用wait或者waitpid来处理已终止的子进程，通常是使用waitpid并指定WNOHANG选项，来告知waitpid在有尚未终止的子进程在运行时不要阻塞。
 	 
-<!-- more -->
+... <!-- more -->
 	 
 # **第六章**
 

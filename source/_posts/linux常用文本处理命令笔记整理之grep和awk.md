@@ -25,7 +25,7 @@ sudo lsof -i:34600 | grep -v 'PID' | awk '{print $2}' | xargs kill -9
 
 这些命令它们分别具体是什么意思呢?为何能达到上述效果?
 
-<!-- more -->
+... <!-- more -->
 
 # **grep**
 

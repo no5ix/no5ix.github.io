@@ -21,7 +21,7 @@ categories:
  - -x  输出扩展信息.
  
 
-<!-- more -->
+... <!-- more -->
 
 ------------
 ## *iostat常用用法1：iostat -d*

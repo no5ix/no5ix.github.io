@@ -22,7 +22,7 @@ categories:
 > 
 > 一般现在的项目中，用redis来替代memcached。
 
-<!-- more -->
+... <!-- more -->
 
 Redis相比memcached：
 

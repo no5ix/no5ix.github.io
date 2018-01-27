@@ -15,7 +15,7 @@ categories:
 > 我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。
 上面那个为renti_a_gear，下面那个为renti_a_gear2.
 
-<!-- more -->
+... <!-- more -->
 
 ## 第一种情况： 绕自身坐标系来旋转
 

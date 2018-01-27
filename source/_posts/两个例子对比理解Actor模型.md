@@ -19,7 +19,7 @@ Actor的基础就是消息传递, Actor由状态(state)、行为(Behavior)和邮
 - 行为(Behavior)：行为指定的是Actor中计算逻辑，通过Actor接收到消息来改变Actor的状态
 - 邮箱(mailBox)：邮箱是Actor和Actor之间的通信桥梁，邮箱内部通过FIFO消息队列来存储发送方Actor消息，接受方Actor从邮箱队列中获取消息
 
-<!-- more -->
+... <!-- more -->
 
 # 使用Actor模型的好处
 

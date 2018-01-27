@@ -46,7 +46,7 @@ Dropped stash@{0} (88cd440c10c80bb6eaef9f4d86ab4a0be3d6dc00)
 
 ```
 
-<!-- more -->
+... <!-- more -->
 
 # 处理冲突
 

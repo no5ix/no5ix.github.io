@@ -14,7 +14,7 @@ categories:
 > - 安装mysql
 
 
-<!-- more -->
+... <!-- more -->
 
 ## **安装步骤**
 > 安装kbe之前请提前在mysql里

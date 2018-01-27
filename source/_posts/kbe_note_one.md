@@ -18,7 +18,7 @@ intKBENGINE_MAIN(intargc, char* argv[])
 }
 ```
 
-<!-- more -->
+... <!-- more -->
 
 这个宏展开是这样子：
 ```

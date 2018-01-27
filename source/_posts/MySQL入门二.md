@@ -43,7 +43,7 @@ mysql> select distinct one from test_table;
 2 rows in set (0.00 sec)
 ```
 
-<!-- more -->
+... <!-- more -->
 
 # and关键字
 

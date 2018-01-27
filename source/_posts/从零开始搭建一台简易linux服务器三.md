@@ -31,7 +31,7 @@ mysql -uroot -p < *****.sql(某个sql文件)
 2. checkout一个目录（比如svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg），
 执行命令：svn checkout svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg （或者 svn co svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg）
 
-<!-- more -->
+... <!-- more -->
 
 
 测试是否可以访问并将相应数据传入数据库中

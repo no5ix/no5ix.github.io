@@ -447,7 +447,7 @@
     Headroom.options = {
       tolerance : {
         up : 40,
-        down : 30
+        down : 60
       },
       offset : 60,
       scroller: window,

@@ -107,7 +107,6 @@ $(document).ready(function () {
         });
     },
     clickHandler: function () {
-      console.log(this.isSidebarVisible);
       this.isSidebarVisible ? this.hideSidebar() : this.showSidebar();
       this.isSidebarVisible = !this.isSidebarVisible;
     },

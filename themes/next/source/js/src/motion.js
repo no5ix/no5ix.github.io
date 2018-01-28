@@ -110,13 +110,19 @@ $(document).ready(function () {
       this.isSidebarVisible ? this.hideSidebar() : this.showSidebar();
       this.isSidebarVisible = !this.isSidebarVisible;
     },
+    toggleEl_inside_clickHandler: function () {
+      this.isSidebarVisible ? this.hideSidebar() : this.showSidebar();
+      this.isSidebarVisible = !this.isSidebarVisible;
+    },
     mouseEnterHandler: function () {
+      console.log("eff?");
       if (this.isSidebarVisible) {
         return;
       }
       sidebarToggleLines.arrow();
     },
     mouseLeaveHandler: function () {
+      console.log("eff2?");
       if (this.isSidebarVisible) {
         return;
       }

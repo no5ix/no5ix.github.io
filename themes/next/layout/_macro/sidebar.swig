@@ -8,16 +8,16 @@
         <div id="sidebar-dimmer"></div>
       {% endif %}
     {% endif %}
-    
-    <div class="sidebar-toggle-inside">
-      <div class="sidebar-toggle-line-wrap">
-        <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-        <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-        <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-      </div>
-    </div>
 
     <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
 
       {% set display_toc = is_post and theme.toc.enable or is_page and theme.toc.enable %}
 

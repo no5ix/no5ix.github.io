@@ -23,7 +23,7 @@
       {% endif %}
   </div>
 
-  <div class="sidebar-toggle">
+  <div class="menu-item sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
       <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
       <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>

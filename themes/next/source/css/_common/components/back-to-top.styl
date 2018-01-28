@@ -2,7 +2,7 @@
   box-sizing: border-box;
   position: fixed;
   bottom: $b2t-position-bottom;
-  left: $st-position-left-right + 26;
+  right: $st-position-left-right + 26;
   z-index: $zindex-5;
   padding: 0 6px;
   width: hexo-config('sidebar.scrollpercent') ? initial : 24px;
@@ -25,6 +25,6 @@
   }
 
   &.back-to-top-on {
-    bottom: $b2t-position-bottom-on;
+    bottom: $b2t-position-bottom-on + 10;
   }
 }

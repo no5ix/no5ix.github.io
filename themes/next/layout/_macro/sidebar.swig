@@ -1,11 +1,5 @@
 {% macro render(is_post) %}
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+  
 
   <aside id="sidebar" class="sidebar">
 
@@ -15,6 +9,14 @@
       {% endif %}
     {% endif %}
     
+    <div class="sidebar-toggle-inside">
+      <div class="sidebar-toggle-line-wrap">
+        <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+        <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+        <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+      </div>
+    </div>
+
     <div class="sidebar-inner">
 
       {% set display_toc = is_post and theme.toc.enable or is_page and theme.toc.enable %}
@@ -42,6 +44,48 @@
               <p class="site-description motion-element" itemprop="description">{{ theme.description }}</p>
           {% endif %}
         </div>
+
+        <nav class="site-state motion-element">
+
+          {% if config.archive_dir != '/' %}
+            <div class="site-state-item site-state-posts">
+              <a href="{{ url_for(theme.menu.archives) }}">
+                <span class="site-state-item-count">{{ site.posts.length }}</span>
+                <span class="site-state-item-name">{{ __('state.posts') }}</span>
+              </a>
+            </div>
+          {% endif %}
+
+          {% if site.categories.length > 0 %}
+            {% set categoriesPageQuery = site.pages.find({type: 'categories'}, {lean: true}) %}
+            {% set hasCategoriesPage = categoriesPageQuery.length > 0 %}
+            <div class="site-state-item site-state-categories">
+              {% if hasCategoriesPage %}<a href="{{ url_for(categoriesPageQuery[0].path) }}">{% endif %}
+                <span class="site-state-item-count">{{ site.categories.length }}</span>
+                <span class="site-state-item-name">{{ __('state.categories') }}</span>
+              {% if hasCategoriesPage %}</a>{% endif %}
+            </div>
+          {% endif %}
+
+          {% if site.tags.length > 0 %}
+            {% set tagsPageQuery = site.pages.find({type: 'tags'}, {lean: true}) %}
+            {% set hasTagsPage = tagsPageQuery.length > 0 %}
+            <div class="site-state-item site-state-tags">
+              {% if hasTagsPage %}<a href="{{ url_for(tagsPageQuery[0].path) }}">{% endif %}
+                <span class="site-state-item-count">{{ site.tags.length }}</span>
+                <span class="site-state-item-name">{{ __('state.tags') }}</span>
+              {% if hasTagsPage %}</a>{% endif %}
+            </div>
+          {% endif %}
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">关于</span>
+            </a>
+          </div>
+          
+        </nav>
 
         {% if theme.rss %}
           <div class="feed-link motion-element">

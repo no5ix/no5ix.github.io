@@ -88,6 +88,10 @@ search:
   format: html
   limit: 10000
 
+# Extensions
+## Plugins: http://hexo.io/plugins/
+plugins: hexo-generate-feed
+
 # algolia:
 #   applicationID: 'FHGT24ISPZ'
 #   apiKey: '69dedbec45eb6249c0d884dff2185b31'

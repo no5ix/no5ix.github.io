@@ -33,7 +33,7 @@ This is packaged by an unoptimized version( check out  branch old_demo)
 Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 查看**视频演示**
 
-... <!-- more -->
+<!-- more -->
 
 <iframe height=255 width=500 src='http://player.youku.com/embed/XMTc2NTM4MjkyMA==' frameborder=0 'allowfullscreen'></iframe>
 

@@ -31,7 +31,7 @@ tcpdump需要root权限, 所以记得加上sudo
 
 - -r :  读取raw packets文件
 
-... <!-- more -->
+<!-- more -->
 
 ## **常用过滤规则**
 

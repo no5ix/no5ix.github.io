@@ -30,7 +30,7 @@ exposedMessages_()
 意即MessageHandlers构造的时候，如果它还没构造，那就构造。
 它的初始化（配置）是由loadConfig接口来完成的，代码见上。
 
-... <!-- more -->
+<!-- more -->
 
 ## **loginapp**
 

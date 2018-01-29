@@ -17,7 +17,7 @@ CAP是分布式系统里最著名的理论，wiki百科如下
 - Partition tolerance (the system continues to operate despite arbitrary message loss or failure of part of the system)
                 (摘自 ：http://en.wikipedia.org/wiki/CAP_theorem)
 
-... <!-- more -->
+<!-- more -->
 
 早些时候，国外的大牛已经证明了CAP三者是不能兼得，很多实践也证明了。
 

@@ -42,18 +42,10 @@
         first_char_flag = 0;
 
         $('#local-search-input').val('');
-
         $('#local-search-close').hide();
 
-        $('#' + content_id).velocity('transition.bounceUpOut', {
-          display: null,
-          duration: 400,
-          delay: 200,
-          complete: function () {
-            $('#' + content_id).html('');
-          }
-        });
-
+        $('#' + content_id).attr("is_closed_local_search_result","true"); 
+        $('#' + content_id).velocity('transition.bounceUpOut', 200);
       }
 
       function handleSearch()
@@ -192,6 +184,7 @@
         if (first_char_flag == 0)
         {
           first_char_flag = 1;
+          $('#' + content_id).removeAttr("is_closed_local_search_result");
           $('#' + content_id).velocity('transition.slideDownIn',200);
         }
 

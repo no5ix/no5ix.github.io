@@ -196,8 +196,14 @@
        * Unpins the header if it's currently pinned
        */
       unpin : function() {
-        this.elem.removeAttribute("style");
-        this.elem.style.opacity = "1";
+
+        // exclude the div of cloesed local search result
+        if (!this.elem.hasAttribute("is_closed_local_search_result") )
+        {
+          this.elem.removeAttribute("style");
+          this.elem.style.opacity = "1";
+        }
+
         var classList = this.elem.classList,
           classes = this.classes;
     

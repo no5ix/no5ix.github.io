@@ -81,14 +81,8 @@ deploy:
   repo: git@github.com:no5ix/no5ix.github.io.git,master
 - type: git
   repo: git@git.coding.net:no5ix/no5ix.git,master
-- type: rsync
-  host: 172.96.239.56
-  user: root
-  root: /www/hexo/blog/
-  port: 29986
-  delete: true
-  verbose: true
-  ignore_errors: false
+- type: git
+  repo: git@172.96.239.56:blog.git/,master
 
 search:
   path: search.xml

@@ -476,7 +476,7 @@
 
   
 // grab an element
-var my_header = document.querySelector("header");
+var my_header = document.getElementById("header");
 // construct an instance of Headroom, passing the element
 var headroom_my_header  = new Headroom(my_header);
 // initialise
@@ -484,7 +484,7 @@ headroom_my_header.init();
 
 
 // grab an element
-var my_local_search_result = document.querySelector(".local-search-result-cls");
+var my_local_search_result = document.getElementById("local-search-result-pc");
 // set options
 var local_search_result_headroom_options = {
   classes : {

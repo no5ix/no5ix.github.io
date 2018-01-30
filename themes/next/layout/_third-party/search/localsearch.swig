@@ -57,7 +57,7 @@
         {
           $resultContent.innerHTML = 
             local_search_close_x + 
-            "<ul class='local-search-empty-ul'><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍候……</span>" +
+            "<ul class='local-search-empty-ul'><span class='local-search-empty'>玩命搜索中!! 研究表明, 人类能够忍受的最长等待时间为8秒...</span>" +
             DotLoader;
         }
         else

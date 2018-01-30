@@ -6,7 +6,7 @@
   display: none; 
 
   width: 0;
-  z-index: $zindex-4;
+  /* z-index: $zindex-4; */
   box-shadow: 0.625em 0 3.75em 0 #000;
   background: $black-deep;
   -webkit-transform: translateZ(0); // http://stackoverflow.com/questions/17079857/position-fixed-broken-in-chrome-with-flash-behind
@@ -31,6 +31,11 @@
   padding: 20px 10px;
   color: $grey-dark;
   text-align: center;
+  margin-top: 100px;
+  +mobile()
+  {
+    margin-top: 60px;
+  }
 }
 
 .netease-cloud-music 

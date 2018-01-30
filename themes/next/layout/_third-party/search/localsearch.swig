@@ -33,16 +33,22 @@
       var keywords = [];
       var temp_keyword = "";
 
-
+      // 是否为第一个字母被键入的标志位
+      var first_char_flag = 0;
 
       function CloseLocalSearch()
       {
+        first_char_flag = 0;
+
         $('#local-search-input').val('');
 
         $('#local-search-close').hide();
 
-        $('#local-search-result-mobile').html('');
-        $('#local-search-result-pc').html('');
+        // $('#local-search-result-mobile').html('');
+        // $('#local-search-result-pc').html('');
+
+        $('#' + content_id).velocity('transition.bounceUpOut',400);
+
       }
 
       function handleSearch()
@@ -51,7 +57,7 @@
           return;
         }
         $resultContent.innerHTML = "";
-        
+
         // 0x04. perform local searching
         if (is_load_xml_finished == 0)
         {
@@ -157,6 +163,16 @@
         }
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+          first_char_flag = 1;
+          $('#' + content_id).velocity('transition.slideDownIn',200);
+        }
+
       });
 
 
@@ -226,14 +242,8 @@
 
     var getSearchFile = function(){
       var path = "/search.xml";
-      if (isMobile())
-      {
-        searchFunc(path, 'local-search-input', 'local-search-result-mobile');
-      }
-      else
-      {
-        searchFunc(path, 'local-search-input', 'local-search-result-pc');
-      }
+      var local_search_result_name = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+      searchFunc(path, 'local-search-input', local_search_result_name);
     }
 
   </script>

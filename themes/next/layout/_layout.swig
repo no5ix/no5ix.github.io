@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 {% set html_class = 'theme-next ' + theme.scheme %}
-{% if theme.use_motion %}
+{% if theme.motion.enable %}
   {% set html_class = html_class + ' use-motion' %}
 {% endif %}
 
@@ -80,6 +80,8 @@
   {% include '_third-party/mathjax.swig' %}
   {% include '_third-party/scroll-cookie.swig' %}
   {% include '_third-party/exturl.swig' %}
+
+  <!-- {% include '_custom/custom.swig' %}-->
 </body>
 </html>
 

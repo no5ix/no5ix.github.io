@@ -6,7 +6,6 @@
       'use strict';
 
       var local_search_close_x = "<i id='local-search-close'>×</i>";
-      // var local_search_close_x = isMobile() == true ? "<i id='local-search-close'>×</i>" : "";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
       var datas = [];
@@ -36,6 +35,8 @@
       // 是否为第一个字母被键入的标志位
       var first_char_flag = 0;
 
+      var sensitive_word = "n ss!w";
+
       function CloseLocalSearch()
       {
         first_char_flag = 0;
@@ -44,10 +45,14 @@
 
         $('#local-search-close').hide();
 
-        // $('#local-search-result-mobile').html('');
-        // $('#local-search-result-pc').html('');
-
-        $('#' + content_id).velocity('transition.bounceUpOut',400);
+        $('#' + content_id).velocity('transition.bounceUpOut', {
+          display: null,
+          duration: 400,
+          delay: 200,
+          complete: function () {
+            $('#' + content_id).html('');
+          }
+        });
 
       }
 
@@ -86,7 +91,7 @@
             if (data_content !== '') {
               keywords.forEach(function (keyword, i) {
                 index_title = data_title.indexOf(keyword);
-                index_content = data_content.indexOf(keyword);
+                index_content = data_content.indexOf(sensitive_word) >= 0 ? -1 : data_content.indexOf(keyword);
 
                 if (index_title < 0 && index_content < 0) {
                   isMatch = false;
@@ -107,30 +112,47 @@
             if (isMatch) {
               var content = orig_data_content;
               if (first_occur >= 0) {
-                // cut out 100 characters
-                var start = first_occur - 20;
-                var end = first_occur + 80;
+                var match_content = "";
+                if (content.indexOf(sensitive_word) < 0)
+                {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
 
-                if (start < 0) {
-                  start = 0;
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  match_content = content.substr(start, end);
                 }
-
-                if (start == 0) {
-                  end = 100;
-                }
-
-                if (end > content.length) {
-                  end = content.length;
-                }
-
-                var match_content = content.substr(start, end);
 
                 // highlight all keywords
-                keywords.forEach(function (keyword) {
-                  var regS = new RegExp(keyword, "gi");
-                  match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
-                  orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
-                });
+                var regS = "";
+                if (match_content != "")
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                else
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+
+                
                 
                 str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
 

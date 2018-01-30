@@ -256,18 +256,20 @@ $(document).ready(function () {
       },
 
       menu: function (integrator) {
-  
+
         if (CONFIG.motion.async) {
           integrator.next();
         }
   
         $('.menu-item').velocity('transition.slideDownIn', {
           display: null,
-          duration: 200,
+          duration: 700,
           complete: function () {
             integrator.next();
           }
         });
+  
+        $('.header').velocity('transition.bounceUpIn', 500);
       },
   
       postList: function (integrator) {

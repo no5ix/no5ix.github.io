@@ -196,6 +196,8 @@
        * Unpins the header if it's currently pinned
        */
       unpin : function() {
+        this.elem.removeAttribute("style");
+        this.elem.style.opacity = "1";
         var classList = this.elem.classList,
           classes = this.classes;
     

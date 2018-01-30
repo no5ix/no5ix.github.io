@@ -269,18 +269,10 @@ $(document).ready(function () {
         duration: 700,
         complete: function () {
           integrator.next();
-          $('.header').removeAttr("style");
-          $(".header").css("opacity","1");
         }
       });
 
-      $('.header').velocity('transition.bounceUpIn', {
-        display: null,
-        duration: 500,
-        complete: function () {
-          integrator.next();
-        }
-      });
+      $('.header').velocity('transition.bounceUpIn', 500);
     },
 
     postList: function (integrator) {

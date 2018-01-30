@@ -54,21 +54,21 @@ $(document).ready(function () {
     var sidebarToggleLine1st = new SidebarToggleLine({
       el: '.sidebar-toggle-line-first',
       status: {
-        arrow: {width: '50%', rotateZ: '-30deg', top: '2px'},
+        arrow: {width: '56%', rotateZ: '-30deg', top: '2px'},
         close: {width: '80%', rotateZ: '-45deg', top: '5px'}
       }
     });
     var sidebarToggleLine2nd = new SidebarToggleLine({
       el: '.sidebar-toggle-line-middle',
       status: {
-        arrow: {width: '65%'},
+        arrow: {width: '78%'},
         close: {opacity: 0}
       }
     });
     var sidebarToggleLine3rd = new SidebarToggleLine({
       el: '.sidebar-toggle-line-last',
       status: {
-        arrow: {width: '50%', rotateZ: '30deg', top: '-2px'},
+        arrow: {width: '56%', rotateZ: '30deg', top: '-2px'},
         close: {width: '80%', rotateZ: '45deg', top: '-5px'}
       }
     });

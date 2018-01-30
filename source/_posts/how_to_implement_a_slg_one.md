@@ -13,13 +13,13 @@ top: 3
 
 # LoginServer(Gate)
 
-当完成渠道sdk回调验证之后, 
+当完成渠道SDK回调验证之后, 
 
 验证完玩家信息, 
 
-用了nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, 
+用了Nginx的负载均衡给每位玩家分配一台不繁忙的游戏服务器, 
 
-在redis中存了一份玩家在线有效时间key, 
+在Redis中存了一份玩家在线有效时间key, 
 超时则掉线, 
 
 这个key也可以用来完成封号操作
@@ -36,7 +36,7 @@ top: 3
 
 计算下排行榜，排行榜是实时计算的, 
 
-存在redis里, 做了分页处理
+存在Redis里, 做了分页处理
 
 买卖下道具即可
 
@@ -49,14 +49,14 @@ top: 3
 
 <!-- more -->
 
-# pvpServeer
+# BattleServer
 
-而 pvpServer 则选择 workerman 的tcp模式,
+而 BattleServer 则选择 WorkerMan 的TCP模式,
 
 实时交互数据, 
 
-MainServer 和 pvpServer之间通信并接同一个数据库.
+MainServer 和 BattleServer 之间通信并接同一个数据库.
 
-> 其实这里可以不选择用tcp, 而自撸一个可靠udp来提高效率
+> 其实这里可以不选择用TCP, 而自撸一个可靠UDP来提高效率
 
 {% asset_img slg1.png %}

@@ -18,11 +18,11 @@ top: 2
 
 注册一个Chat_ID, 
 
-player_ID 和 Chat_ID相互对应, 
+Player_ID 和 Chat_ID相互对应, 
 
 会注册相应的房间频道, 
 
-并为每位Player存了一份黑名单, 
+并为每位 Player 存了一份黑名单, 
 
 在客户端做了本地黑名单, 
 
@@ -30,25 +30,25 @@ player_ID 和 Chat_ID相互对应,
 
 - 世界频道 : 则用MsgServer的非实时推送思路
 
-- 私密聊天 : 则选择 workerman 的tcp, 
+- 私密聊天 : 则选择 WorkerMan 的TCP, 
 
 
 
 
 # MsgServer
 
-- 实时推送 : workerman 的tcp
+- 实时推送 : WorkerMan 的 TCP
 - 非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，
 
 <!-- more -->
 
-# deployTool
+# DeployTool
 
-Capistrano是一个开源的部署工具, 用ruby来写, 语法超简洁的
+Capistrano是一个开源的部署工具, 用Ruby来写, 语法超简洁的
 
 # 优点
 
-- 实时则走 workerman 
+- 实时则走 WorkerMan 
 - 非实时则跑 yii
 
 访问一下，请求一下关卡数据，玩完了又提交一下，

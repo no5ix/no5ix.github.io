@@ -15,7 +15,7 @@ categories:
 - **给监听套接字准备好新连接**
 - 有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # socket可写的条件:
 

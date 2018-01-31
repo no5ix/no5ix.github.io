@@ -22,7 +22,7 @@ categories:
 重启 nginx：sudo /etc/init.d/nginx restart 或者 sudo service nginx restart
 sudo service apache2 stop  (如果之前装了apache2则需要sudo apt-get remove apache2 卸载掉apache2然后执行这个stop命令)
 
-<!-- more -->
+**. . .**<!-- more -->
 
 
 # 修改nginx的server配置文件

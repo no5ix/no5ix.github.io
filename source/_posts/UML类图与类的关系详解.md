@@ -22,7 +22,7 @@ categories:
 <p><img src="/img/uml_illustrate/afca0365.jpg" width="246" height="184"> 
 </p>
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # 泛化
 

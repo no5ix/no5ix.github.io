@@ -33,7 +33,7 @@ typedef struct BinaryTreeNode
 
 而得到的**广度优先遍历**的序列为 : ABCDEFG
 
-<!-- more --> 
+**. . .**<!-- more --> 
 
 ## 二叉树的广度优先遍历
 

@@ -36,7 +36,7 @@ top: 5
 > sudo apt-get install g++ make libboost-all-dev libmysqlclient-dev libgoogle-glog-dev libcurl4-gnutls-dev
 -->
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # 框架处理流程：
 

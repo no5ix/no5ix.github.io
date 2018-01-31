@@ -23,7 +23,7 @@ typedef struct Node
 
 {% asset_img advanced_linked_list_1.png %}
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # 在O(1)时间删除链表结点
 

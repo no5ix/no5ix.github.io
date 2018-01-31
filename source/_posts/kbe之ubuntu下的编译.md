@@ -11,7 +11,7 @@ categories:
 先来一发之前的kbe在ubuntu下的编译笔记吧, 因为官方对于ubuntu下的kbe编译文档是有问题的.
 
 
-<!-- more -->
+**. . .**<!-- more -->
 
 ## **编译步骤**
 

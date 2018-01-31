@@ -19,7 +19,7 @@ categories:
 即使装了convert2utf还是无法解决搜索中文字符串的问题, 因为搜索的时候sublime是没有转码的所以无法搜到想要的中文.
 所以转战vscode, 谨以这篇笔记来记录vscode心得.
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # 编码问题
 

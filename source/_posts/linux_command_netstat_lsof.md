@@ -37,7 +37,7 @@ categories:
 - -x或--unix：此参数的效果和指定"-A unix"参数相同；
 - --ip或--inet：此参数的效果和指定"-A inet"参数相同。
 
-<!-- more -->
+**. . .**<!-- more -->
 
 ## *netstat常用用法：netstat -anlp*
 

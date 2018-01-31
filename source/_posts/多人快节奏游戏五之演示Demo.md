@@ -14,7 +14,7 @@ categories:
 - **移动蓝球** ：受 Player1 控制, 用左右箭头键
 - **移动红球** ：受 Player2 控制, 用A和D键
 
-<!-- more -->
+**. . .**<!-- more -->
 
 <body>
 <div class="main">

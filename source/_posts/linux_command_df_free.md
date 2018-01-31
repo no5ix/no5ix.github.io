@@ -28,7 +28,7 @@ categories:
 - --help：显示帮助；
 - --version：显示版本信息
 
-<!-- more -->
+**. . .**<!-- more -->
 
 ## *df常用用法：df -h*
 ```

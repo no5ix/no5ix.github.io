@@ -42,7 +42,7 @@ void BubbleSort(int arr[], int startIndex, int endIndex)
 
 ```
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # **插入排序**
 

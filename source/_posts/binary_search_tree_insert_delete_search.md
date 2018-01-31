@@ -19,7 +19,7 @@ categories:
 
 {% asset_img BinarySearchTree.png %}
 
-<!-- more -->
+**. . .**<!-- more -->
 
 
 **注 : **

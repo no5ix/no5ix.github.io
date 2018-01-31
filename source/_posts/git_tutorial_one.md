@@ -42,7 +42,7 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 ```
 标记为*的那个就是当前分支, 也就是old_demo分支
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # 克隆
 

@@ -33,7 +33,7 @@ typedef struct BinaryTreeNode
 
 {% asset_img binary_tree_create_and_destroy_2.png %}
 
-<!-- more -->
+**. . .**<!-- more -->
 
 ## 二叉树的创建
 

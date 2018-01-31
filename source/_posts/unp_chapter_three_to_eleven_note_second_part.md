@@ -23,7 +23,7 @@ categories:
 	- TCP_MAXSEG 
 - 7.11节 ：fcntl函数，常用的用法是使用F_SETFL命令设置O_NOBLOCK文件状态标志， 我们可以把一个套接字设置为非阻塞型。
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # **第八章**
 

@@ -114,7 +114,7 @@ void processB()
 - catch fork命令可以捕获进程的创建
 - attach + pid ， 可以附到一个正在运行的进程上进行调试
 
-<!-- more -->
+**. . .**<!-- more -->
 
 # GDB多线程调试命令
 

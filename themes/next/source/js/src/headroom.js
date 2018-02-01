@@ -197,8 +197,8 @@
        */
       unpin : function() {
 
-        // exclude the div of cloesed local search result
-        if (!this.elem.hasAttribute("is_closed_local_search_result") )
+        // exclude the elem which has special Attribute
+        if (!this.elem.hasAttribute("headroom_special_attr") )
         {
           this.elem.removeAttribute("style");
           this.elem.style.opacity = "1";

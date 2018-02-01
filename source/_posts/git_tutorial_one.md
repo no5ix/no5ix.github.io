@@ -96,8 +96,9 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 
 - 比如只是撤销某个文件test_file的修改(还未被add的) : 
 `git checkout -- test_file`
-- 撤销刚刚的git add(也就是说把test_file从**暂存区**中移出) : 
-`git reset HEAD test_file`
+- 撤销刚刚的git add : 
+	- `git reset HEAD` : 把add了的都从**暂存区**中移出
+	- `git reset HEAD test_file` : 只把test_file从**暂存区**中移出
 
 - **把git commit回退(在公司很少用, 因为把之前的commit都弄没了)** `git reset` : 
 `git reset` 是回到某次提交A，提交A及之前的commit都会被保留，A之后的commit都没有了, A之后的修改都会被退回到暂存区

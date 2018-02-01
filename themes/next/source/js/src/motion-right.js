@@ -78,7 +78,7 @@ $(document).ready(function () {
     sidebarToggleLines.push(sidebarToggleLine3rd);
   
     var SIDEBAR_WIDTH = '285px';
-    var SIDEBAR_DISPLAY_DURATION = 150;
+    var SIDEBAR_DISPLAY_DURATION = 100;
   
     var sidebarToggleMotion = {
       toggleEl: $('.sidebar-toggle'),
@@ -263,13 +263,13 @@ $(document).ready(function () {
   
         $('.menu-item').velocity('transition.slideDownIn', {
           display: null,
-          duration: 700,
+          duration: 150,
           complete: function () {
             integrator.next();
           }
         });
   
-        $('.header').velocity('transition.bounceUpIn', 500);
+        $('.header').velocity('transition.slideDownIn', 200);
       },
   
       postList: function (integrator) {

@@ -42,7 +42,7 @@
         $('#local-search-input').val('');
         $('#local-search-close').hide();
 
-        $('#' + content_id).attr("is_closed_local_search_result","true"); 
+        $('#' + content_id).attr("headroom_special_attr","true"); 
         $('#' + content_id).velocity('transition.bounceUpOut', 200);
       }
 
@@ -182,7 +182,7 @@
         if (first_char_flag == 0)
         {
           first_char_flag = 1;
-          $('#' + content_id).removeAttr("is_closed_local_search_result");
+          $('#' + content_id).removeAttr("headroom_special_attr");
           $('#' + content_id).velocity('transition.slideDownIn',200);
         }
 

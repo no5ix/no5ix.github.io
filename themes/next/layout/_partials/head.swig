@@ -117,6 +117,7 @@
     root: '{{ theme.root }}',
     scheme: '{{ theme.scheme }}',
     sidebar: {{ theme.sidebar | json_encode }},
+    local_search: {{ theme.local_search | json_encode }},
     fancybox: {{ theme.fancybox }},
     tabs: {{ theme.tabs.enable }},
     motion: {{ theme.motion | json_encode }},

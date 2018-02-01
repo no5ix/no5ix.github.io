@@ -35,8 +35,6 @@
       // 是否为第一个字母被键入的标志位
       var first_char_flag = 0;
 
-      var sensitive_word = "n ss!w";
-
       function CloseLocalSearch()
       {
         first_char_flag = 0;
@@ -83,7 +81,7 @@
             if (data_content !== '') {
               keywords.forEach(function (keyword, i) {
                 index_title = data_title.indexOf(keyword);
-                index_content = data_content.indexOf(sensitive_word) >= 0 ? -1 : data_content.indexOf(keyword);
+                index_content = data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0 ? -1 : data_content.indexOf(keyword);
 
                 if (index_title < 0 && index_content < 0) {
                   isMatch = false;
@@ -105,7 +103,7 @@
               var content = orig_data_content;
               if (first_occur >= 0) {
                 var match_content = "";
-                if (content.indexOf(sensitive_word) < 0)
+                if (content.indexOf(CONFIG.local_search.sensitive_word) < 0)
                 {
                   // cut out 100 characters
                   var start = first_occur - 20;

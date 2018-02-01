@@ -43,7 +43,7 @@
         $('#local-search-close').hide();
 
         $('#' + content_id).attr("headroom_special_attr","true"); 
-        $('#' + content_id).velocity('transition.bounceUpOut', 200);
+        $('#' + content_id).velocity('stop').velocity('transition.bounceUpOut', 200);
       }
 
       function handleSearch()
@@ -183,7 +183,7 @@
         {
           first_char_flag = 1;
           $('#' + content_id).removeAttr("headroom_special_attr");
-          $('#' + content_id).velocity('transition.slideDownIn',200);
+          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn',200);
         }
 
       });

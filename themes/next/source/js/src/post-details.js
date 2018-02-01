@@ -98,14 +98,15 @@ $(document).ready(function () {
 
     var currentTarget = $('.' + activePanelClassName);
     var target = $('.' + item.data('target'));
-
     hasVelocity ?
-      currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-        target
-          .velocity('stop')
-          .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-          .addClass(activePanelClassName);
-      }) :
+      currentTarget
+        .removeClass(activePanelClassName)
+        .velocity('stop').velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
       currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
         currentTarget.hide();
         target

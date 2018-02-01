@@ -122,6 +122,7 @@ $(document).ready(function () {
       showSidebar: function () {
         var self = this;
   
+        $('.sidebar-inner').css('display', 'block');
         sidebarToggleLines.close();
   
         this.sidebarEl.velocity('stop').velocity({
@@ -152,19 +153,21 @@ $(document).ready(function () {
       },
       hideSidebar: function () {
         NexT.utils.isDesktop() && $('body').velocity('stop').velocity({paddingRight: 0});
-        this.sidebarEl.find('.motion-element').velocity('stop').css('display', 'none');
+        $('.sidebar-inner').css('display', 'none');
         this.sidebarEl.velocity('stop').velocity({width: 0}, {display: 'none'});
   
         sidebarToggleLines.init();
   
         this.sidebarEl.removeClass('sidebar-active');
         this.sidebarEl.trigger('sidebar.isHiding');
-  
-        //在 post 页面下按下隐藏 sidebar 时如果当前选中的是“站点概览”，将 toc 去除 motion 效果
-        //防止再次打开时会出现在“站点概览”下的 bug
+
+        // 在 post 页面下按下隐藏 sidebar 时如果当前选中的是“站点概览”，将 toc 去除 motion 效果
+        // 防止再次打开时toc会出现在“站点概览”下的 bug
         if (!!$('.post-toc-wrap')) {
           if ($('.site-overview').css('display') === 'block') {
             $('.post-toc-wrap').removeClass('motion-element');
+          } else {
+            $('.post-toc-wrap').addClass('motion-element');
           }
         }
       }

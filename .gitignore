@@ -7,3 +7,5 @@ public/
 node_modules/
 .history/
 .vscode/
+
+alice*.md

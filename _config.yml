@@ -82,7 +82,7 @@ deploy:
 # - type: git
 #   repo: git@git.coding.net:no5ix/no5ix.git,master
 - type: git
-  repo: git@hulinhong.com:blog.git/,master
+  repo: git@hulinhong.com:blog.git,master
 
 search:
   path: search.xml

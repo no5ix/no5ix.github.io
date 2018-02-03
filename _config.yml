@@ -5,14 +5,14 @@
 # Site
 title: 烫
 subtitle: 烫烫烫烫烫
-description: 本博客不支持IE. 以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.
+description: 本博客不支持IE6. 以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.
 author: no5ix
 language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://no5ix.coding.me
+url: https://hulinhong.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -77,10 +77,10 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-- type: git
-  repo: git@github.com:no5ix/no5ix.github.io.git,master
-- type: git
-  repo: git@git.coding.net:no5ix/no5ix.git,master
+# - type: git
+#   repo: git@github.com:no5ix/no5ix.github.io.git,master
+# - type: git
+#   repo: git@git.coding.net:no5ix/no5ix.git,master
 - type: git
   repo: git@172.96.239.56:blog.git/,master
 
@@ -92,7 +92,7 @@ search:
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
-plugins: hexo-generate-feed
+# plugins: hexo-generate-feed
 
 # algolia:
 #   applicationID: 'FHGT24ISPZ'

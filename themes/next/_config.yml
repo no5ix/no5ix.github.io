@@ -15,7 +15,7 @@ keywords: "Hexo, NexT"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss: /atom.xml
+# rss: /atom.xml
 
 # Specify the date when the site was setup
 since: 2014
@@ -596,8 +596,8 @@ motion:
     # slideUpBigIn | slideUpBigOut | slideDownBigIn | slideDownBigOut | slideLeftBigIn | slideLeftBigOut | slideRightBigIn | slideRightBigOut
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
     post_block: fadeIn
-    post_header: slideDownIn
-    post_body: slideDownIn
+    post_header: slideLeftBigIn
+    post_body: slideRightBigIn
     coll_header: slideLeftIn
 
 # Fancybox

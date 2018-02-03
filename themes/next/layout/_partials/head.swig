@@ -6,7 +6,7 @@
 <script>
     (function(){
         if('{{ page.password }}'){
-          alert('此文并不公开, 可能需要填写通行码');
+          alert('你的生日');
           var password = prompt();
           if (password !== '{{ page.password }}'){
             if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消

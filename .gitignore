@@ -4,7 +4,32 @@ db.json
 *.log
 public/
 .deploy*/
-node_modules/
+
+
+node_modules/*
+
+# ignore node_modules but not tagcloud.js
+
+!node_modules/hexo/
+node_modules/hexo/*
+!node_modules/hexo/lib/
+node_modules/hexo/lib/*
+!node_modules/hexo/lib/plugins/
+node_modules/hexo/lib/plugins/*
+!node_modules/hexo/lib/plugins/helper/
+node_modules/hexo/lib/plugins/helper/*
+!node_modules/hexo/lib/plugins/helper/tagcloud.js
+
+
+# ignore node_modules but not generator.js
+
+!node_modules/hexo-generator-index/
+node_modules/hexo-generator-index/*
+!node_modules/hexo-generator-index/lib/
+node_modules/hexo-generator-index/lib/*
+!node_modules/hexo-generator-index/lib/generator.js
+
+
 .history/
 .vscode/
 

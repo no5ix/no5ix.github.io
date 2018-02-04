@@ -657,6 +657,11 @@ vendors:
   fancybox:
   fancybox_css:
 
+  # css : https://static1.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9160/assets/styles/site.css?9276
+  # js : https://static1.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9276/scripts/pages/home-winter-2017/index.js
+  squarespace:
+  squarespace_css:
+
   # Internal version: 1.0.6
   # See: https://github.com/ftlabs/fastclick
   fastclick:

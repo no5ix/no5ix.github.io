@@ -1,4 +1,4 @@
-{% extends '_layout.swig' %}
+{% extends 'home.swig' %}
 {% import '_macro/post.swig' as post_template %}
 {% import '_macro/sidebar.swig' as sidebar_template %}
 

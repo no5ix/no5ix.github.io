@@ -252,7 +252,7 @@ $(document).ready(function () {
   
       postList: function (integrator) {
         //var $post = $('.post');
-        var $postBlock = $('.post-block, .pagination, .comments');
+        var $postBlock = $('.pagination, .comments');
         var $postBlockTransition = CONFIG.motion.transition.post_block;
         var $postHeader = $('.post-header');
         var $postHeaderTransition = CONFIG.motion.transition.post_header;

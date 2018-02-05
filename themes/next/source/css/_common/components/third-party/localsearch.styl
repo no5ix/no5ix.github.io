@@ -395,3 +395,34 @@
   margin-right: 0;
 } */
     
+
+
+/* loading css3 : progress bar */
+/****START PROGRESS****/
+.progress-bar {
+  top: 10px;
+  margin: -1em auto;
+  position: relative;
+  height: 10px;
+  width: 140px;
+  border: solid 1px;
+  color: #999;
+}
+
+.progress-bar-charge {
+  height: 10px;
+  background-color: #999;
+  animation: charge 8s infinite;
+  -webkit-animation: charge 8s infinite;
+}
+
+@-webkit-keyframes charge {
+  0% {width : 0px;}
+  100% {width : 101%;}
+}
+
+@keyframes charge {
+  0% {width : 0px;}
+  100% {width : 101%;}
+}
+/****FIN PROGRESS****/

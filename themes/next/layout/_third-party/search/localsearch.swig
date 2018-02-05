@@ -28,12 +28,21 @@
           "<div class='square last'></div>" +
         "</div>";
 
+      var ProgressBar = 
+          "<div class='progress-bar'>" +
+            "<div class='progress-bar-charge'></div>" +
+          "</div>";
+
       var str = "";
       var keywords = [];
       var temp_keyword = "";
 
       // 是否为第一个字母被键入的标志位
       var first_char_flag = 0;
+
+      var local_search_tips = 
+            "<span class='local-search-empty'>" + "玩命搜索中!! 研究表明, 人类能够忍受的最长等待时间为8秒..." + "</span>" +
+            "<span class='local-search-empty'>" + "但请相信我, 我绝对不可能那么旷日持久的..." + "</span>";
 
       function CloseLocalSearch()
       {
@@ -42,8 +51,11 @@
         $('#local-search-input').val('');
         $('#local-search-close').hide();
 
+        // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+
         $('#' + content_id).attr("headroom_special_attr","true"); 
-        $('#' + content_id).velocity('stop').velocity('transition.bounceUpOut', 200);
+        $('#' + content_id).velocity('stop').velocity('transition.bounceUpOut', 400);
+
       }
 
       function handleSearch()
@@ -58,8 +70,9 @@
         {
           $resultContent.innerHTML = 
             local_search_close_x + 
-            "<ul class='local-search-empty-ul'><span class='local-search-empty'>玩命搜索中!! 研究表明, 人类能够忍受的最长等待时间为8秒...</span>" +
-            DotLoader;
+            "<ul class='local-search-empty-ul'>" + 
+            local_search_tips +
+            ProgressBar;
         }
         else
         {
@@ -184,6 +197,8 @@
           first_char_flag = 1;
           $('#' + content_id).removeAttr("headroom_special_attr");
           $('#' + content_id).velocity('stop').velocity('transition.slideDownIn',200);
+
+          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
         }
 
       });

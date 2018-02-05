@@ -54,7 +54,7 @@
         // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
 
         $('#' + content_id).attr("headroom_special_attr","true"); 
-        $('#' + content_id).velocity('stop').velocity('transition.bounceUpOut', 400);
+        $('#' + content_id).velocity('stop').velocity('transition.bounceUpOut', 200);
 
       }
 
@@ -218,9 +218,17 @@
             };
           }).get();
 
+          // setTimeout(function(){
+          //   is_load_xml_finished = 1;
+
+          //   handleSearch();
+          //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+          // }, 2000);
+          
           is_load_xml_finished = 1;
 
           handleSearch();
+          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
         }
       });
 

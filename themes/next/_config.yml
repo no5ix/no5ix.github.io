@@ -601,7 +601,7 @@ motion:
     post_header: slideDownIn
     post_body: slideDownIn
     coll_header: slideRightIn
-    footer: slideUpIn
+    footer: fadeIn
 
 # Fancybox
 fancybox: true

@@ -37,10 +37,9 @@ type: "about"
 - GitHub : https://github.com/no5ix
 - 网易云音乐 : https://music.163.com/#/user/home?id=47256866
 
-<!-- # 也想做一个这样的博客?
+# 也想做一个这样的博客?
 
-这是我的[博客源码](https://github.com/no5ix/no5ix.github.io/tree/source) , 
-有不清楚的可以登录评论留言哈
+这是我的[博客源码](https://github.com/no5ix/MyBlog)
 
 我的[**GitHub**](https://github.com/no5ix/)中还有些其他的游戏项目, 
-欢迎Fork+Star -->
+欢迎Fork+Star

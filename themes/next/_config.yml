@@ -597,9 +597,9 @@ motion:
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
     header: slideDownIn
     logo: slideDownIn
-    post_block: slideRightIn
-    post_header: slideDownIn
-    post_body: slideDownIn
+    post_block_else: fadeIn
+    post_header: slideLeftIn
+    post_body: slideRightIn
     coll_header: slideRightIn
     footer: fadeIn
 

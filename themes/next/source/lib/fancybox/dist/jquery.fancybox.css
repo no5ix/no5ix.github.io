@@ -185,7 +185,7 @@ body.fancybox-iosfix {
   padding: 0;
   border: 0;
   z-index: 99995;
-  background: #fff;
+  background: transparent;
   cursor: default;
   overflow: visible;
   -webkit-transform-origin: top left;

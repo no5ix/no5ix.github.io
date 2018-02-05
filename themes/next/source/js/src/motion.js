@@ -258,8 +258,8 @@ $(document).ready(function () {
 
     postList: function (integrator) {
       //var $post = $('.post');
-      var $postBlock = $('.pagination, .comments');
-      var $postBlockTransition = CONFIG.motion.transition.post_block;
+      var $postBlockElse = $('.pagination, .comments');
+      var $postBlockElseTransition = CONFIG.motion.transition.post_block_else;
       var $postHeader = $('.post-header');
       var $postHeaderTransition = CONFIG.motion.transition.post_header;
       var $postBody = $('.post-body');
@@ -268,7 +268,7 @@ $(document).ready(function () {
       var $collHeaderTransition = CONFIG.motion.transition.coll_header;
       var $sidebarAffix = $('.sidebar-inner');
       var $sidebarAffixTransition = CONFIG.motion.transition.sidebar;
-      var hasPost = $postBlock.size() > 0;
+      var hasPost = $('.post-block').size() > 0;
 
       hasPost ? postMotion() : integrator.next();
 
@@ -290,8 +290,8 @@ $(document).ready(function () {
         };
 
         //$post.velocity('transition.slideDownIn', postMotionOptions);
-        if (CONFIG.motion.transition.post_block) {
-          $postBlock.velocity('transition.' + $postBlockTransition, postMotionOptions);
+        if (CONFIG.motion.transition.post_block_else) {
+          $postBlockElse.velocity('transition.' + $postBlockElseTransition, postMotionOptions);
         }
         if (CONFIG.motion.transition.post_header) {
           $postHeader.velocity('transition.' + $postHeaderTransition, postMotionOptions);

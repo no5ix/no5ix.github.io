@@ -50,15 +50,6 @@
 
         <nav class="site-state motion-element">
 
-          {% if config.archive_dir != '/' %}
-            <div class="site-state-item site-state-posts">
-              <a href="{{ url_for(theme.menu.archives) }}">
-                <span class="site-state-item-count">{{ site.posts.length }}</span>
-                <span class="site-state-item-name">{{ __('state.posts') }}</span>
-              </a>
-            </div>
-          {% endif %}
-
           {% if site.categories.length > 0 %}
             {% set categoriesPageQuery = site.pages.find({type: 'categories'}, {lean: true}) %}
             {% set hasCategoriesPage = categoriesPageQuery.length > 0 %}
@@ -67,6 +58,15 @@
                 <span class="site-state-item-count">{{ site.categories.length }}</span>
                 <span class="site-state-item-name">{{ __('state.categories') }}</span>
               {% if hasCategoriesPage %}</a>{% endif %}
+            </div>
+          {% endif %}
+
+          {% if config.archive_dir != '/' %}
+            <div class="site-state-item site-state-posts">
+              <a href="{{ url_for(theme.menu.archives) }}">
+                <span class="site-state-item-count">{{ site.posts.length }}</span>
+                <span class="site-state-item-name">{{ __('state.posts') }}</span>
+              </a>
             </div>
           {% endif %}
 

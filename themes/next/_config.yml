@@ -600,7 +600,7 @@ motion:
     post_block_else: fadeIn
     post_header: slideLeftIn
     post_body: slideRightIn
-    coll_header: bounceDownIn
+    coll_header: perspectiveDownIn
     footer: fadeIn
 
 # Fancybox

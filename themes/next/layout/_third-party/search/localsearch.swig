@@ -5,7 +5,6 @@
       // 0x00. environment initialization
       'use strict';
 
-      var local_search_close_x = "<i id='local-search-close'>×</i>";
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
       var datas = [];
@@ -69,7 +68,6 @@
         if (is_load_xml_finished == 0)
         {
           $resultContent.innerHTML = 
-            local_search_close_x + 
             "<ul class='local-search-empty-ul'>" + 
             local_search_tips +
             ProgressBar;
@@ -166,10 +164,11 @@
           });
 
           str += "</ul>";
+          $('#local-search-close').show();
           if (str.indexOf('<li>') === -1) {
-            return $resultContent.innerHTML = local_search_close_x + "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            return $resultContent.innerHTML = "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
           }
-          $resultContent.innerHTML = local_search_close_x + str;
+          $resultContent.innerHTML = str;
         }
       }
 

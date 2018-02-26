@@ -17,8 +17,8 @@
 #local-search-close {
   content: 'x';
   position: absolute;
-  right: -137px;
-  top: 25px;
+  right: 0;
+  top: 7px;
   opacity: 1;
   background: #888;
   color: #fff;
@@ -38,9 +38,11 @@
   transform: rotateZ(0);
   transition: all 0.3s;
 
+  display: none;
+
   +mobile() {
-    right: 10px;
-    top: 10px;
+    right: -38px;
+    top: 8px;
     opacity: 1;
   }
   +tablet() {

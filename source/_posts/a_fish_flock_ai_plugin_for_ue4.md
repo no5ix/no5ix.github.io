@@ -21,7 +21,6 @@ this Plugin version can Run **2000+** fishes at the same time
 源码已放到[**GitHub**](https://github.com/no5ix/fish)
 
 
-{% asset_img OldDemoScreenshot.png %}
 
 # Download
 
@@ -71,6 +70,8 @@ Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 	 上下箭头键         =>  调整移动速度
 
 
+
+{% asset_img OldDemoScreenshot.png %}
 
 # How to use
 

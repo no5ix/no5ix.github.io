@@ -16,11 +16,11 @@ categories:
 
 **. . .**<!-- more -->
 
-## **安装步骤**
+# **安装步骤**
 > 安装kbe之前请提前在mysql里
 > 
 > - 建一个数据库(比如建一个数据库kbe_database)
-> - 一个至少拥有select,insert,update,delete,create,drop权限的用户(比如这个用户是kbe_user)
+> - 一个拥有所有权限(免得多事...)的用户(比如这个用户是kbe_user)
 > 
 > (*具体详情请谷歌, 本篇文章是讲kbe的安装的, 不讨论mysql, 弄完mysql之后就可以开始下面的1分钟kbe安装教程啦*)
 
@@ -42,9 +42,14 @@ KBE_ROOT=
 KBE_ROOT current: 
 reset KBE_ROOT(No input is [/home/b/kbengine-0.9.18/]):
 ```
-直接敲回车
 
-- 他之后显示的都直接敲回车, 用默认的就可以, 直到他开始问你mysql的东西, 到mysql他会问
+`KBE_ROOT`这里填写你的kbe根目录所在路径, 比如像我的是`~/kbengine-0.9.18`, 那就填`~/kbengine-0.9.18`
+
+- 他之后显示的都直接敲回车, 用默认的就可以, 
+- 如果直到他开始问你mysql的东西都没有弹出`Check to some problems, if you are sure this is not a problem please skip: [yes|no]yes
+`, 说明基本没填错
+
+- 到mysql他会问
 
 ```
 - MySQL: checking...
@@ -64,7 +69,7 @@ KBEngine has been successfully installed!
 
 ```
 
-## **是否安装成功**
+# **是否安装成功**
 
 - 找到你的kbe根目录, 然后进入根目录, 比如你的kbe根目录是kbengine, 则
 	  1. 进入kbe根目录下的assets目录 : cd kbengine/assets

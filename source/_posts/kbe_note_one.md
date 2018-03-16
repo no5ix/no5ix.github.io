@@ -7,7 +7,7 @@ categories:
 - Miscellaneous
 ---
 
-## **main**
+# **main**
 看起来似乎所有的组件都有一个这样的宏(KBENGINE_MAIN)来包裹main函数
 ```
 intKBENGINE_MAIN(intargc, char* argv[])
@@ -65,7 +65,7 @@ intkbeMain(intargc, char* argv[])
 
 
 
-## **ServerConfig：**
+# **ServerConfig：**
 ServerConfig涉及到服务端每个组件的各种配置选项，比如数据库访问。它的构造在组件名.cpp中，比如loginapp就在loginapp.cpp，machine就在machine.cpp中，loginapp的如下（server/loginapp/loginapp.cpp）：
 ```
 ServerConfigg_serverConfig;
@@ -87,7 +87,7 @@ inlinevoidloadConfig()
 
 
 
-## **Resmgr：**
+# **Resmgr：**
 Resmgr负责管理kbe的所有资源管理，比如资源路径，环境变量。Resmgr的构造地方如下（lib/network/fixed_messages.cpp）：
 ```
 FixedMessages::FixedMessages():

@@ -13,7 +13,7 @@ categories:
 
 **. . .**<!-- more -->
 
-## **编译步骤**
+# **编译步骤**
 
  1. 安装openssl : 
 	1. sudo apt-get install libssl-dev
@@ -27,3 +27,10 @@ categories:
    2. chmod -R 755 .
    3. make
 
+
+# 编译出错解决方法
+
+查看是否是以下问题导致的
+
+- 内存不足
+- 硬盘容量不足(编译完要占2个G左右的硬盘空间)

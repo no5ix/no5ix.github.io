@@ -60,7 +60,7 @@ categories:
  
 	{% asset_img unix3_11_3.jpg %}
 
-# **第四章**
+# **第四章基本TCP套接字编程**
 
  -    {% asset_img unix3_11_5.jpg %}
 
@@ -69,7 +69,7 @@ categories:
  - listen函数
 
 	int listen(int sockfd, int backlog);
-	{% asset_img unix3_11_5.jpg %}
+	{% asset_img unix3_11_6.jpg %}
 	当来自客户的SYN到达时，TCP在未完成连接队列中创建个新项，然后响应以三路握手
 	的第—个分节服务器的SYN响应，其中捎带对客户SYN的ACK（2.6节）。这一项．直保留在
 	未完成连接队列中，直到三路握手的第二个分节（客户对服务器SYN的ACK）到达或者该项超

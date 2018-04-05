@@ -4,7 +4,7 @@ date: 2016-06-21 12:51:46
 tags:
 - NAT
 categories:
-- Miscellaneous
+- Misc
 ---
 
 

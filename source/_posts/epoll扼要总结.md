@@ -9,9 +9,98 @@ categories:
 
 
 
+# epoll 编程接口
+
+epoll API是Linux系统专有的，在2.6版中新增。
+
+epoll API的核心数据结构称作epoll实例，它和一个打开的文件描述符相关联。这个文件
+描述符不是用来做I/O操作的，相反，它是内核数据结构的句柄，这些内核数据结构实现了两
+个目的。
+
+- 记录了在进程中声明过的感兴趣的文件描述符列表-**interest list（兴趣列表）**。
+- 维护了处于I/O就绪态的文件描述符列表-**ready list（就绪列表）**。
+
+ready list中的成员是interest list的子集。
+
+对于由epoll检查的每一个文件描述符，我们可以指定一个位掩码来表示我们感兴趣的事
+件。这些位掩码同poll()所使用的位掩码有着紧密的关联。
+
+## epoll概要
+
+需要包含epoll.h头文件, 即 : `#include <sys/epoll.h>`
+epoll只有epoll_create, epoll_ctl, epoll_wait 3个系统调用 : 
+
+- 系统调用**epoll_create()**创建一个epoll实例，返回代表该实例的文件描述符。
+- 系统调用**epoll_ctl()**操作同epoll实例相关联的兴趣列表。通过epoll_ctl()，我们可以增
+加新的描述符到列表中，或者将已有的文件描述符从该列表中移除，也可以修改代表文件描述
+符七事件类型的位掩码。
+- 系统调用**epoll_wait()**返回与epoll实例相关联的就绪列表中的成员。
+
+
+## epoll_create
+
+`int epoll_create(int size);`
+Returns file descriptor on success, or -1 on error.
+
+创建一个epoll的句柄。自从linux2.6.8之后，size参数是被忽略的。
+需要注意的是，当创建好epoll句柄后，它就是会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的，所以在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽。
+
+## epoll_ctl
+
+`int epoll_ctl(int epfd, int op, int fd, struct epoll_event *ev);`
+Returns 0 on success, or -1 on error.
+
+epoll的事件注册函数，它不同于select()是在监听事件时告诉内核要监听什么类型的事件，而是在这里先注册要监听的事件类型。
+
+- 第一个参数是epoll_create()的返回值。
+- 第二个参数表示动作，用三个宏来表示：
+	- EPOLL_CTL_ADD：注册新的fd到epfd中；
+	- EPOLL_CTL_MOD：修改已经注册的fd的监听事件；
+	- EPOLL_CTL_DEL：从epfd中删除一个fd；
+- 第三个参数是需要监听的fd。
+- 第四个参数是告诉内核需要监听什么事，参数ev是指向结构体epoll_event的指针, 
+	struct epoll_event结构如下：
+	```
+	struct epoll_event {  
+		__uint32_t events; /* Epoll events */  
+		epoll_data_t data; /* User data variable */  
+	}; 
+	```
+	结构体epoll_event中的data字段的类型为:
+	``` 
+	typedef union epoll_data {  
+		void *ptr;  
+		int fd;  
+		__uint32_t u32;  
+		__uint64_t u64;  
+	} epoll_data_t;
+	```
+	结构体epoll_event中的events字段是一个位掩码, 他只定了我们为待检查的描述符fd上所感兴趣的事件集合.
+	可以是以下几个宏的集合：
+
+	- EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
+	- EPOLLOUT：表示对应的文件描述符可以写；
+	- EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
+	- EPOLLERR：表示对应的文件描述符发生错误；
+	- EPOLLHUP：表示对应的文件描述符被挂断；
+	- EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。(后文会说水平触发和边缘触发的区别)
+	- EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+
+## epoll_wait
+
+`int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);`
+Returns number of ready file descriptors, 0 on timeout, or -1 on error.
+
+epoll_wait收集在epoll监控的事件中已经发送的事件。
+
+- 参数events是分配好的epoll_event结构体数组，epoll将会把发生的事件赋值到events数组中（events不可以是空指针，内核只负责把数据复制到这个events数组中，不会去帮助我们在用户态中分配内存）。
+- maxevents告之内核这个events有多大，这个 maxevents的值不能大于创建epoll_create()时的size，
+- 参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。如果函数调用成功，返回对应I/O上已准备好的文件描述符数目，如返回0表示已超时。
+
+
 # 水平触发与边缘触发
 
-在深入讨论多种可选的m机制之前，我们需要先区分两种文件描述符准备就绪的通知模式。
+在深入讨论多种可选的机制之前，我们需要先区分两种文件描述符准备就绪的通知模式。
 
 - **水平触发**通知(epoll默认的通知方式)：如果文件描述符上可以非阻塞地执行I/O系统调用，此时认为它已经
 就绪。
@@ -25,13 +114,15 @@ categories:
 
 ## 水平触发与边缘触发的区别
 
-**默认情况下 epoll 提供的是水平触发通知**.要使用边缘触发通知，我们在调用epoll_ctl()时在ev．events字段中指定EPOLLET标志。
+**默认情况下 epoll 提供的是水平触发通知**.要使用边缘触发通知，我们在调用epoll_ctl()时在ev．events字段中指定EPOLLET标志.
+
+例如 : 
 
 ``` c
 struct epoll_event ev;
-ev．data．fd=fd
-ev.events : EPOLLIN I EPOLLET;
-if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) :: -1)
+ev.data.fd = fd;
+ev.events = EPOLLIN | EPOLLET;
+if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) == -1)
 	errExit("epoll_ctl");
 ```
 
@@ -55,32 +146,10 @@ if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) :: -1)
 (a)通过epoll_wait()取得处于就绪态的描述符列表。
 (b)针对每一个处于就绪态的文件描述符，不断进行I/O处理直到相关的系统调用( 例如read()、write()，recv()、send()或accept() )返回EAGAIN或EWOULDBLOCK错误。
 
-# epoll 编程接口
 
-epoll API是Linux系统专有的，在2.6版中新增。
+# epoll与select的区别
 
-epoll API的核心数据结构称作epoll实例，它和一个打开的文件描述符相关联。这个文件
-描述符不是用来做I/O操作的，相反，它是内核数据结构的句柄，这些内核数据结构实现了两
-个目的。
-
-- 记录了在进程中声明过的感兴趣的文件描述符列表-**interest list（兴趣列表）**。
-- 维护了处于I/O就绪态的文件描述符列表-**ready list（就绪列表）**。
-
-ready list中的成员是interest list的子集。
-
-对于由epoll检查的每一个文件描述符，我们可以指定一个位掩码来表示我们感兴趣的事
-件。这些位掩码同poll()所使用的位掩码有着紧密的关联。
-
-epoll API由以下3个系统调用组成。
-
-- 系统调用**epoll_create()**创建一个epoll实例，返回代表该实例的文件描述符。
-- 系统调用**epoll_ctl()**操作同epoll实例相关联的兴趣列表。通过epoll_ctl()，我们可以增
-加新的描述符到列表中，将已有的文件描述符从该列表中移除，以及修改代表文件描述
-符七事件类型的位掩码。
-- 系统调用**epoll_wait()**返回与epoll实例相关联的就绪列表申的成员。
-
-# epoll与select的区别 (口诀 : 校内树)
-
+ (口诀 : 校内树)
 - **效率: ** 每次调用select()和poll()时，内核必须检查所有在调用中指定的文件描述符。与之相
 反，当通过epoll_ctl()指定了需要监视的文件描述符时，内核会在与打开的文件描述
 上下文相关联的列表中记录该描述符。之后每当执行I／O操作使得文件描述符成为就
@@ -117,7 +186,7 @@ epoll_wait()调用从就绪列表中简单地取出这些元素。
 
 
 
-## *单I/O 线程epoll*
+## 单I/O线程epoll
 
 实现单I/O线程的epoll模型是本架构的第一个技术要点，主要思想如下： 
 
@@ -150,13 +219,50 @@ while(server running)
 }
 ```
 
-伪码可能写的不太好，其实就是基本的epoll使用。
+伪码可能写的不太好，其实就是基本的epoll使用, 大概如下 : 
+```
+for( ; ; )  
+{  
+	nfds = epoll_wait(epfd,events,20,500);  
+	for(i=0;i<nfds;++i)  
+	{  
+		if(events[i].data.fd==listenfd) //有新的连接  
+		{  
+			connfd = accept(listenfd,(sockaddr *)&clientaddr, &clilen); //accept这个连接  
+			ev.data.fd=connfd;  
+			ev.events=EPOLLIN|EPOLLET;  
+			epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev); //将新的fd添加到epoll的监听队列中  
+		}  
+
+		else if( events[i].events&EPOLLIN ) //接收到数据，读socket  
+		{  
+			n = read(sockfd, line, MAXLINE)) < 0    //读  
+			ev.data.ptr = md;     //md为自定义类型，添加数据  
+			ev.events=EPOLLOUT|EPOLLET;  
+			epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);//修改标识符，等待下一个循环时发送数据，异步处理的精髓  
+		}  
+		else if(events[i].events&EPOLLOUT) //有数据待发送，写socket  
+		{  
+			struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;    //取数据  
+			sockfd = md->fd;  
+			send( sockfd, md->ptr, strlen((char*)md->ptr), 0 );        //发送数据  
+			ev.data.fd=sockfd;  
+			ev.events=EPOLLIN|EPOLLET;  
+			epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev); //修改标识符，等待下一个循环时接收数据  
+		}  
+		else  
+		{  
+			//其他的处理  
+		}  
+	}  
+}  
+```
 
 但要注意和线程池的配合使用，如果线程池取不到空闲的工作者线程，还需要做一些处理。
 
  
 
-## _线程池实现要点_
+## 线程池实现要点
 
 server启动时，创建一定数量的工作者线程加入线程池，如（20个），供I/O线程来取用；
 
@@ -252,29 +358,28 @@ int main()
 
 	pthread_mutex_init(&mutex, NULL);
 	pthread_cond_init(&cond1, NULL);
-	//初始化用于读线程池的线程
 
+	//初始化用于读线程池的线程
 	pthread_create(&tid1, NULL, readtask, NULL);
 	pthread_create(&tid2, NULL, readtask, NULL);
 
 	//生成用于处理accept的epoll专用的文件描述符
-
 	epfd = epoll_create(256);
 
 	struct sockaddr_in clientaddr;
 	struct sockaddr_in serveraddr;
 	listenfd = socket(AF_INET, SOCK_STREAM, 0);
+
 	//把socket设置为非阻塞方式
-
 	setnonblocking(listenfd);
+
 	//设置与要处理的事件相关的文件描述符
-
 	ev.data.fd = listenfd;
+
 	//设置要处理的事件类型
-
 	ev.events = EPOLLIN | EPOLLET;
-	//注册epoll事件
 
+	//注册epoll事件
 	epoll_ctl(epfd, EPOLL_CTL_ADD, listenfd, &ev);
 
 	bzero(&serveraddr, sizeof(serveraddr));
@@ -288,10 +393,9 @@ int main()
 	for (;;)
 	{
 		//等待epoll事件的发生
-
 		nfds = epoll_wait(epfd, events, 20, 500);
-		//处理所发生的所有事件
 
+		//处理所发生的所有事件
 		for (i = 0; i < nfds; ++i)
 		{
 			if (events[i].data.fd == listenfd)
@@ -309,13 +413,12 @@ int main()
 				//std::cout<<"connec_ from >>"<<str<<std::endl;
 
 				//设置用于读操作的文件描述符
-
 				ev.data.fd = connfd;
-				//设置用于注测的读操作事件
 
+				//设置用于注册的读操作事件
 				ev.events = EPOLLIN | EPOLLET;
-				//注册ev
 
+				//注册ev
 				epoll_ctl(epfd, EPOLL_CTL_ADD, connfd, &ev);
 			}
 			else if (events[i].events & EPOLLIN) // 读请求
@@ -327,8 +430,8 @@ int main()
 				new_task = new task();
 				new_task->fd = sockfd;
 				new_task->next = NULL;
-				//添加新的读任务
 
+				//添加新的读任务
 				pthread_mutex_lock(&mutex);
 				if (readhead == NULL)
 				{
@@ -340,8 +443,8 @@ int main()
 					readtail->next = new_task;
 					readtail = new_task;
 				}
-				//唤醒所有等待cond1条件的线程
 
+				//唤醒所有等待cond1条件的线程
 				pthread_cond_broadcast(&cond1);
 				pthread_mutex_unlock(&mutex);
 			}
@@ -404,7 +507,6 @@ void *readtask(void *args)
 			{
 				//由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可
 				//读在这里就当作是该次事件已处理过。
-
 				if (errno == EAGAIN)
 				{
 					printf("EAGAIN\n");

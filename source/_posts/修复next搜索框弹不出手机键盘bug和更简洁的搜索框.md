@@ -5,7 +5,7 @@ tags:
 - Hexo
 - Next
 categories:
-- Miscellaneous
+- Misc
 ---
 
 

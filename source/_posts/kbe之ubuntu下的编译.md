@@ -4,7 +4,7 @@ date: 2017-02-10 12:31:29
 tags:
 - KBE
 categories:
-- Miscellaneous
+- Misc
 ---
 
 > 感觉之前的博客已经整理了大多数之前的关于基础的私人笔记, 现在应该可以讨论一下实操的东西了.

@@ -4,7 +4,7 @@ date: 2017-11-14 23:42:44
 tags:
 - Next
 categories:
-- Miscellaneous
+- Misc
 ---
 
 

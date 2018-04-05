@@ -4,7 +4,7 @@ date: 2017-02-09 12:38:21
 tags:
 - KBE
 categories:
-- Miscellaneous
+- Misc
 ---
 
 > 官方是有自动化的安装py脚本的, 不过还是有很多小坑的.

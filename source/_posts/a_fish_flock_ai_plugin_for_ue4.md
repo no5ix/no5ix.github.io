@@ -6,7 +6,7 @@ tags:
 - UE4
 - CPP
 categories:
-- Miscellaneous
+- Misc
 top: 4
 ---
 

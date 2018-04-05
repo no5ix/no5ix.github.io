@@ -4,7 +4,7 @@ date: 2017-10-20 11:01:41
 tags:
 - Hexo
 categories:
-- Miscellaneous
+- Misc
 ---
 
 # 无法使用 22 端口的 SSH 服务怎么办？

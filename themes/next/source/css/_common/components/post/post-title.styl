@@ -1,6 +1,6 @@
 .posts-expand .post-title {
   font-size: 26px;
-  text-align: center;
+  /* text-align: center; */
   word-break: break-word;
   font-weight: $posts-expand-title-font-weight
 
@@ -11,19 +11,20 @@
 .posts-expand .post-title-link {
   display: inline-block;
   position: relative;
-  color: #000;
+  color: $black-light;
+  /* color: $grey-dim; */
   border-bottom: none;
   line-height: 1.2;
   vertical-align: top;
   font-weight: bolder;
-  font-size: 36px;
+  font-size: 32px;
 
   +mobile() {
     font-size: 24px;
   }
 
   &:hover {
-    color: $grey-dim;
+    color: #000;
   }
 
   &::before {
@@ -45,4 +46,8 @@
   }
 
   .fa { font-size: 16px; }
+}
+
+.posts-expand .post-title, .posts-expand .post-meta {
+  text-align: left;
 }

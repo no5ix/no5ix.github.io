@@ -26,7 +26,11 @@ socks5代理服务器，默认端口1080
 
 `git@github.com:archerie/learngit.git`
 
-那么，你使用的是SSH协议连接的远程仓库。因为git依赖ssh去连接，所以，我们需要配置ssh的socks5代理实现git的代理。在ssh的配置文件~/.ssh/config（没有则新建）使用ProxyCommand配置：
+那么，你使用的是SSH协议连接的远程仓库。因为git依赖ssh去连接，所以，
+
+**. . .**<!-- more -->
+
+我们需要配置ssh的socks5代理实现git的代理。在ssh的配置文件~/.ssh/config（没有则新建）使用ProxyCommand配置：
 ```
 # Linux 环境
 Host bitbucket.org

@@ -24,30 +24,30 @@
   <title>{% block title %}{% endblock %}</title>
   {% include '_third-party/analytics/index.swig' %}
 
-  <style>
-    // html, body {
-    //   position: relative;
-    //   height: 100%;
-    // }
-    // body {
-    //   background: #000;
-    //   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    //   font-size: 14px;
-    //   color:#000;
-    //   margin: 0;
-    //   padding: 0;
-    // }
-    body {
-      background: linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.3) 100%),linear-gradient(to bottom,#6e8882 0%,#95a495 31%,#b3ac95 68%,#95846b 83%,#5c5041 100%)
-    }
-    .swiper-container {
-      width: 100%;
-      height: 100%;
-    }
-    .swiper-slide {
-      overflow: hidden;
-    }
-  </style>
+  // <style>
+  //   // html, body {
+  //   //   position: relative;
+  //   //   height: 100%;
+  //   // }
+  //   // body {
+  //   //   background: #000;
+  //   //   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  //   //   font-size: 14px;
+  //   //   color:#000;
+  //   //   margin: 0;
+  //   //   padding: 0;
+  //   // }
+  //   body {
+  //     background: linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.3) 100%),linear-gradient(to bottom,#6e8882 0%,#95a495 31%,#b3ac95 68%,#95846b 83%,#5c5041 100%)
+  //   }
+  //   .swiper-container {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+  //   .swiper-slide {
+  //     overflow: hidden;
+  //   }
+  // </style>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="{{ page.lang || page.language || config.language }}">
@@ -67,30 +67,30 @@
     <div id="local-search-result-mobile" class="local-search-result-cls"></div>
 
   
-        <div class="swiper-container swiper-container-horizontal">
-        <div class="swiper-wrapper" style="transform: translate3d(-2126px, 0px, 0px); transition-duration: 0ms;">
-        <div class="swiper-slide" style="width: 1063px;">
-        <div class="swiper-zoom-container">
-        <img src="http://lorempixel.com/800/800/sports/1/">
-        </div>
-        </div>
-        <div class="swiper-slide swiper-slide-prev" style="width: 1063px;">
-        <div class="swiper-zoom-container">
-        <img src="http://lorempixel.com/800/400/sports/2/">
-        </div>
-        </div>
-        <div class="swiper-slide swiper-slide-active" style="width: 1063px;">
-        <div class="swiper-zoom-container">
-        <img src="http://lorempixel.com/400/800/sports/3/">
-        </div>
-        </div>
-        </div>
+        // <div class="swiper-container swiper-container-horizontal">
+        // <div class="swiper-wrapper" style="transform: translate3d(-2126px, 0px, 0px); transition-duration: 0ms;">
+        // <div class="swiper-slide" style="width: 1063px;">
+        // <div class="swiper-zoom-container">
+        // <img src="http://lorempixel.com/800/800/sports/1/">
+        // </div>
+        // </div>
+        // <div class="swiper-slide swiper-slide-prev" style="width: 1063px;">
+        // <div class="swiper-zoom-container">
+        // <img src="http://lorempixel.com/800/400/sports/2/">
+        // </div>
+        // </div>
+        // <div class="swiper-slide swiper-slide-active" style="width: 1063px;">
+        // <div class="swiper-zoom-container">
+        // <img src="http://lorempixel.com/400/800/sports/3/">
+        // </div>
+        // </div>
+        // </div>
 
-        <div class="swiper-pagination swiper-pagination-white swiper-pagination-bullets"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
+        // <div class="swiper-pagination swiper-pagination-white swiper-pagination-bullets"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
 
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next swiper-button-disabled"></div>
-        </div>
+        // <div class="swiper-button-prev"></div>
+        // <div class="swiper-button-next swiper-button-disabled"></div>
+        // </div>
 
         {% if theme.sidebar.display !== 'remove' %}
           {% block sidebar %}{% endblock %}

@@ -127,7 +127,7 @@ int main()
 
 - [使用局部静态变量](#使用局部静态变量)
 - [加锁](#加锁)
-- [pthread_once](#pthread_once)
+- [pthread_once](#pthread-once)
 - [DCL](#DCL)
 
 ### 使用局部静态变量

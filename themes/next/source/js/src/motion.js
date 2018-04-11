@@ -328,6 +328,14 @@ $(document).ready(function () {
         duration: 200,
         complete: function () {
           integrator.next();
+          
+          // 此处动画是为了防止有锚点的页面加载时候被 headroom 挡住的问题, 所以播了一个网上滚动170px的动画
+          if(window.location.hash) {
+            $('html,body').animate({
+              scrollTop: window.pageYOffset - 170
+            },
+            400);
+          }
         }
       });
     },

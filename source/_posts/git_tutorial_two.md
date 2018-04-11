@@ -1,5 +1,5 @@
 ---
-title: 5分钟学会git二
+title: 5分钟学会Git二
 date: 2016-04-13 22:36:56
 tags: 
 - Git

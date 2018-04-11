@@ -78,13 +78,13 @@ Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 place Plugins folder in your project root directory, then just like
 把Plugins文件夹放在你项目的根目录, 接下来如图
 
-![HowToUse1](/img/HowToUse1.png)
+![HowToUse1](/img/a_fish_flock_ai_plugin_for_ue4/HowToUse1.png)
 
-![HowToUse2](/img/HowToUse2.png)
+![HowToUse2](/img/a_fish_flock_ai_plugin_for_ue4/HowToUse2.png)
 
-![HowToUse3](/img/HowToUse3.png)
+![HowToUse3](/img/a_fish_flock_ai_plugin_for_ue4/HowToUse3.png)
 
-![HowToUse4](/img/HowToUse4.png)
+![HowToUse4](/img/a_fish_flock_ai_plugin_for_ue4/HowToUse4.png)
 
 # About This 
 

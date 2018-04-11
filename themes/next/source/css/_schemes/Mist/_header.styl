@@ -17,10 +17,14 @@
   margin-left: -20px;
   line-height: normal;
   border-radius: 6px;
+  
+  transition-property: background;
+  the-transition();
 
   +mobile() {
     margin-left: 10px;
     /* margin-bottom: 5px; */
+    transition-property: none;
     float: right;
   }
 

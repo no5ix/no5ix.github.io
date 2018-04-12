@@ -39,12 +39,24 @@
       // 是否为第一个字母被键入的标志位
       var first_char_flag = 0;
 
+      // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+      var last_page_y = 0;
+
       var local_search_tips = 
             "<span class='local-search-empty'>" + "玩命搜索中!! 研究表明, 人类能够忍受的最长等待时间为8秒..." + "</span>" +
             "<span class='local-search-empty'>" + "但请相信我, 我绝对不可能那么旷日持久的..." + "</span>";
 
       function CloseLocalSearch()
       {
+        
+        if (isMobile())
+        {
+          $('html,body').animate({
+            scrollTop: last_page_y
+          },
+          0);
+        }
+
         first_char_flag = 0;
 
         $('#local-search-input').val('');
@@ -173,10 +185,7 @@
       }
 
       $input.addEventListener('input', function () {
-        if (isMobile())
-        {
-          $('body').velocity('scroll');
-        }
+        
 
         // 0x03. parse query to keywords list
         str = '<ul class=\"search-result-list\">';
@@ -185,6 +194,17 @@
           CloseLocalSearch();
           return;
         }
+        
+        if (isMobile())
+        {
+          last_page_y = window.pageYOffset;
+          // $('body').velocity('scroll', 600);
+          $('html,body').animate({
+            scrollTop: 0
+          }, 
+          0);
+        }
+
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         handleSearch();
 

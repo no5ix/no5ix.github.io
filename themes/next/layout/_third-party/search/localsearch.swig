@@ -62,8 +62,7 @@
         // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
 
         $('#' + content_id).attr("headroom_special_attr","true"); 
-        $('#' + content_id).velocity('stop').velocity('transition.bounceUpOut', 200);
-
+        $('#' + content_id).velocity('stop').velocity( isMobile() ? 'transition.slideUpOut' : 'transition.bounceUpOut', isMobile() ? 500 : 200 );
       }
 
       function handleSearch()
@@ -208,7 +207,8 @@
           }
           first_char_flag = 1;
           $('#' + content_id).removeAttr("headroom_special_attr");
-          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn',200);
+          
+          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', 500);
 
           $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
         }

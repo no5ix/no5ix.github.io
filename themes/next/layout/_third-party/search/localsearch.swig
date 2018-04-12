@@ -51,10 +51,7 @@
         
         if (isMobile())
         {
-          $('html,body').animate({
-            scrollTop: last_page_y
-          },
-          0);
+          $('body').scrollTop(last_page_y);
         }
 
         first_char_flag = 0;
@@ -194,16 +191,6 @@
           CloseLocalSearch();
           return;
         }
-        
-        if (isMobile())
-        {
-          last_page_y = window.pageYOffset;
-          // $('body').velocity('scroll', 600);
-          $('html,body').animate({
-            scrollTop: 0
-          }, 
-          0);
-        }
 
         keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
         handleSearch();
@@ -213,6 +200,12 @@
         // 要播放一个动画
         if (first_char_flag == 0)
         {
+        
+          if (isMobile())
+          {
+            last_page_y = window.pageYOffset;
+            $('body').scrollTop(0);
+          }
           first_char_flag = 1;
           $('#' + content_id).removeAttr("headroom_special_attr");
           $('#' + content_id).velocity('stop').velocity('transition.slideDownIn',200);

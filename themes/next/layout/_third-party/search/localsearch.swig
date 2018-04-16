@@ -243,9 +243,9 @@
           first_char_flag = 1;
           $('#' + content_id).removeAttr("headroom_special_attr");
           
-          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', 500);
+          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', 300);
 
-          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 1000);
         }
 
       });

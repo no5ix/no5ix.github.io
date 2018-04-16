@@ -124,11 +124,12 @@ social_icons:
   网易云音乐: music
 
 # Blog rolls
-#links_title: Links
-#links_layout: block
-#links_layout: inline
-#links:
-  #Title: http://example.com/
+links_title: 友情链接
+links_layout: block
+# links_layout: inline
+links:
+  # Title: http://example.com/
+  KSun: http://119.23.17.57
   
 
 # Sidebar Avatar

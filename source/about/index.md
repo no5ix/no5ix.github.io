@@ -6,11 +6,11 @@ type: "about"
 
 # 为何此博客乱码或排版混乱或过渡动画卡顿?
 
-本博客没有对IE6做兼容.
+本博客没有对IE6做兼容, 勉强对Edge做了兼容但在Edge上依旧有轻微动画卡顿.
 
 可以的话, 请使用 Chrome(推荐) 或者 Firefox 打开本博客.
 
-在PC端使用 QQ浏览器 或 360浏览器 或 UC浏览器 等的用户, 请在地址栏切换成其极速模式(切换成Chrome内核)来浏览此博客以得到最佳效果.
+如果您在PC端使用的是 QQ浏览器 或 360浏览器 或 UC浏览器, 请在地址栏切换成其极速模式(切换成Chrome内核)来浏览此博客可以得到最佳效果.
 
 # 入行几年啦?
 
@@ -23,13 +23,12 @@ type: "about"
 
 # 具体什么技能效果? 
 
- - C/C++/网络编程：                ★★★★ 
- - Linux：                        ★★★★   
- - PHP/Python/Lua：               ★★★ 
- - 虚幻4引擎：                     ★★★   
- - MySQL/Redis/：                 ★★★   
- - Vim/Git/Markdown/番茄工作法：   ★★★★★ 
-
+ - C/C++/网络编程 : ★★★★
+ - Linux : ★★★★
+ - PHP/Python/Lua : ★★★
+ - 虚幻4引擎 : ★★★
+ - MySQL/Redis/ : ★★★
+ - Vim/Git/Markdown/番茄工作法 : ★★★★★
 
 # 交流一哈?
 
@@ -41,5 +40,5 @@ type: "about"
 
 这是我的[博客源码](https://github.com/no5ix/MyBlog)
 
-我的[**GitHub**](https://github.com/no5ix/)中还有些其他的游戏项目, 
+我的[<i class="fa fa-fw fa-github fa-lg"></i>**GitHub**](https://github.com/no5ix/)中还有些其他的游戏项目, 
 欢迎Fork+Star

@@ -125,7 +125,9 @@ $(document).ready(function () {
   // TOC item animation navigate & prevent #item selector in adress bar.
   // $('.post-toc a').on('click', function (e) {
   // 上面两行的注释已无效, 下面这段代码用于实现锚点链接的平滑滚动, 且在浏览器URL处不显示锚点(即#之后的内容), 即URL地址不会发生变化
-  $('a[href*=#],area[href*=#]').on('click', function (e) {
+  // $('a[href^=#],area[href^=#]') 表示 href开头为#的元素
+  // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
+  $('a[href^=#],area[href^=#]').on('click', function (e) {
     e.preventDefault();
     var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
     var offset = $(targetSelector).offset().top - 170; // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题

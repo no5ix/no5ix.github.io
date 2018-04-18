@@ -10,7 +10,7 @@ categories:
 top: 5
 ---
 
-先上菜 : [GitHub](https://github.com/no5ix/JoyServer)
+先上菜 : [<i class="fa fa-fw fa-github fa-2x"></i>GitHub](https://github.com/no5ix/JoyServer)
 
 # 框架简介
 

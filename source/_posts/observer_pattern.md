@@ -5,9 +5,11 @@ tags:
 - 设计模式
 categories:
 - Misc
+password: pw
 ---
 
 
+<p><span style="font-size:16px; color:#000099"><strong>本文因原文作者版权声明未经同意不得转载, 故此文于本博客中无法公开</strong></span></p>
 
 # 概述
 

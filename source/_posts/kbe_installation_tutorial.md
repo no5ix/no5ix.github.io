@@ -7,6 +7,20 @@ categories:
 - Misc
 ---
 
+
+# KBEngine概绍
+
+根据之前的博文 {% post_link 游戏服务端常用架构二 游戏服务端常用架构 %}
+[游戏服务端常用架构](/2016/07/11/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%9E%B6%E6%9E%84%E4%BA%8C/#第三代游戏服务器-2007)
+[游戏服务端常用架构](/2016/07/11/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%9E%B6%E6%9E%84%E4%BA%8C)
+
+属于第三代服务端框架，可能类似于图10。（这个理解不确定）
+Kbengine引擎应该是对图10中的Gate服务器和NODE和OBJ进行了细分。在功能上大体划分为与位置有关（在Kbengine中称为Cellapp）和与位置无关（在Kbengine中称为Baseapp）。类似于下面的示图架构。
+
+![kbe_introduction](/img/kbe_installation_tutorial/kbe_introduction.png)
+
+# KBE安装介绍
+
 > 官方是有自动化的安装py脚本的, 不过还是有很多小坑的.
 不过其实脚本主要也就是只做两件事, 其他都是可选的: 
 

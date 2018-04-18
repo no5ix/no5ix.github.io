@@ -5,11 +5,12 @@ tags:
 - 设计模式
 categories:
 - Misc
+password: pw
 ---
 
 
-<p><span style="font-size:16px; color:#000099"><strong><span class="link_title"><a href="http://blog.csdn.net/hguisu/article/details/7505909">转自 ：设计模式一 工厂模式Factory</a></span></strong></span></p>
-<p><span style="font-size:16px; color:#000099"><strong></strong></span></p>
+<p><span style="font-size:16px; color:#000099"><strong>本文因原文作者版权声明未经同意不得转载, 故此文于本博客中无法公开</strong></span></p>
+
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在面向对象编程中, 最通常的方法是一个new操作符产生一个对象实例,new操作符就是用来构造对象实例的。但是在一些情况下, new操作符直接生成对象会带来一些问题。举例来说, 许多类型对象的创造需要一系列的步骤: 你可能需要计算或取得对象的初始设置; 选择生成哪个子对象实例; 或在生成你需要的对象之前必须先生成一些辅助功能的对象。 在这些情况,新对象的建立就是一个 “过程”，不仅是一个操作，像一部大机器中的一个齿轮传动。</p>
 <p></p>
 <p><strong>模式的问题</strong>：你如何能轻松方便地构造对象实例，而不必关心构造对象实例的细节和复杂过程呢？</p>
@@ -387,3 +388,5 @@ class Customer {
 </p>
    
 </div>
+
+<p><span style="font-size:16px; color:#000099"><strong><span class="link_title"><a href="http://blog.csdn.net/hguisu/article/details/7505909">转自 ：设计模式一 工厂模式Factory</a></span></strong></span></p>

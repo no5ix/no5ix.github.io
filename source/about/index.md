@@ -40,5 +40,5 @@ type: "about"
 
 这是我的[博客源码](https://github.com/no5ix/MyBlog)
 
-我的[<i class="fa fa-fw fa-github fa-lg"></i>**GitHub**](https://github.com/no5ix/)中还有些其他的游戏项目, 
+我的[<i class="fa fa-fw fa-github fa-2x"></i>**GitHub**](https://github.com/no5ix/) 中还有些其他的游戏项目, 
 欢迎Fork+Star

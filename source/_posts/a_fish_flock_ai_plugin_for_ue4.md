@@ -11,20 +11,20 @@ top: 4
 ---
 
 
-
 A fish flock AI Plugin for Unreal Engine 4
 一个基于虚幻4的鱼群 AI 插件
 
 this Plugin version can Run **2000+** fishes at the same time
 这个插件版本可以同时运行 **2000+** 条鱼儿
 
-源码已放到[**GitHub**](https://github.com/no5ix/fish)
+源码已放到[<i class="fa fa-fw fa-github fa-2x"></i>**GitHub**](https://github.com/no5ix/fish)
 
+<!--使用 fa-lg (33%递增)、fa-2x、 fa-3x、fa-4x，或者 fa-5x 类 来放大图标。 -->
 
 
 # Download
 
-[<i class="fa fa-download fa-lg fa-fw"></i>MyFish.exe (Win64)](https://pan.baidu.com/s/1ghnKNjt)
+[<i class="fa fa-download fa-2x fa-fw"></i>MyFish.exe (Win64)](https://pan.baidu.com/s/1ghnKNjt)
 
 This is packaged by an unoptimized version( check out  branch old_demo)
 下载一个打包好的试玩看看, 这个包是没有经过优化过的版本打包出来的( 是用old_demo分支的版本打包的 )
@@ -32,8 +32,7 @@ This is packaged by an unoptimized version( check out  branch old_demo)
 
 # Video Preview 
 
-Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
-查看 [**视频演示**](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
+Watch the [<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 **. . .**<!-- more -->
 

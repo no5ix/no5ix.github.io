@@ -136,6 +136,15 @@ root       935     1  0 17:37 ?        00:00:00 /usr/sbin/sshd -D
 - awk '{print $2}' : 获取上述命令打印出来结果的第2列（上述结果的第二列为sshd的pid， 是935）
 - xargs sudo lsof -p ： 列出上述结果pid为935的进程打开的所有文件描述符， 等价于sudo lsof -p 935的结果
 
+因为在 Linux 中一切皆为文件, socket 不也例外, 我们在上面的例子的最后两行可以看到
+```
+sshd    935 root    3u  IPv4  10479      0t0    TCP *:ssh (LISTEN)
+sshd    935 root    4u  IPv6  10481      0t0    TCP *:ssh (LISTEN)
+```
+10479 和 10481 就是 ssh 打开的两个socket文件描述符了. 用命令 `ls -l /proc/命令ID/fd` , 也可查看所打开的文件.
+本例中pid为 935 , 则相应的命令为 `ls -l /proc/935/fd`
+
+
 ## *lsof常用用法：lsof -i:*
 sudo lsof -i:22含义为列出占用22的进程
 ```

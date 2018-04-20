@@ -70,7 +70,7 @@ Watch the [<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频�
 
 
 
-{% asset_img OldDemoScreenshot.png %}
+![OldDemoScreenshot](/img/a_fish_flock_ai_plugin_for_ue4/OldDemoScreenshot.png)
 
 # How to use
 

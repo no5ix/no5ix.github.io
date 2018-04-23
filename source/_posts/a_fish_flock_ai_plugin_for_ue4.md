@@ -22,21 +22,26 @@ this Plugin version can Run **2000+** fishes at the same time
 <!--使用 fa-lg (33%递增)、fa-2x、 fa-3x、fa-4x，或者 fa-5x 类 来放大图标。 -->
 
 
+<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
+
+<video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls">
+<source src="/img/a_fish_flock_ai_plugin_for_ue4/Flock_AI_Fish_Unreal_VR_Video_Preview_640P.mp4" type="video/mp4" />
+</video>
+
+
 # Download
 
 [<i class="fa fa-download fa-2x fa-fw"></i>MyFish.exe (Win64)](https://pan.baidu.com/s/1ghnKNjt)
+
+**. . .**<!-- more -->
 
 This is packaged by an unoptimized version( check out  branch old_demo)
 下载一个打包好的试玩看看, 这个包是没有经过优化过的版本打包出来的( 是用old_demo分支的版本打包的 )
 
 
-# Video Preview 
 
-Watch the [<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
+<!-- (http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) -->
 
-**. . .**<!-- more -->
-
-<iframe height=255 width=500 src='http://player.youku.com/embed/XMTc2NTM4MjkyMA==' frameborder=0 'allowfullscreen'></iframe>
 
 
 # How to play

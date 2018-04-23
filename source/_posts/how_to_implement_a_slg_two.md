@@ -5,7 +5,6 @@ tags:
 - SLG
 categories:
 - Server
-top: 2
 ---
 
 

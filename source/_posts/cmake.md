@@ -29,16 +29,16 @@ categories:
 # CMakeLists实例讲解
 
 比如有一个目录结构如下的项目 : 
-```
-├─TempServer
+
     ├─TempServer
-    │  ├─a.h
-    │  ├─a.cpp
-    │  ├─b.h
-    │  ├─b.cpp
-    │  └─...
-    ├─CMakeFiles.txt
-```
+        ├─TempServer
+        │  ├─a.h
+        │  ├─a.cpp
+        │  ├─b.h
+        │  ├─b.cpp
+        │  └─...
+        ├─CMakeFiles.txt
+
 
 这是一个比较通用的CMakeLists.txt : 
 
@@ -103,14 +103,19 @@ IF(WIN32) # Check if we are on Windows
 	  	message(SEND_ERROR "You are using an unsupported Windows compiler! (Not MSVC or GCC)")
   	endif()
 elseif(UNIX)
-  	# Nothing special required
+    # Inhibit all warning messages.
+    if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+        # Update if necessary
+        # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+    endif()
+  	# For gdb
     set(CMAKE_BUILD_TYPE "Debug")
     set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
     set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 else()
   	message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
 ENDIF()
-
 ```
 
 对于像上面这样一个CMake的CMakeLists来说, 需要着重解释的有以下几点 :
@@ -123,3 +128,9 @@ ENDIF()
 
 - `file(GLOB_RECURSE CURRENT_HEADERS  *.h *.hpp)
 source_group("Include" FILES ${CURRENT_HEADERS})` 这句是为了解决在vs下不显示头文件的问题 
+
+- `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")`
+`-w`的意思是关闭编译时的警告，也就是编译后不显示任何warning，因为有时在编译之后编译器会显示一些例如数据转换之类的警告，这些警告是我们平时可以忽略的。
+`-Wall`选项意思是编译后显示所有警告。
+`-W`选项类似-Wall，会显示警告，但是只显示编译器认为会出现错误的警告。
+在编译一些项目的时候可以-W和-Wall选项一起使用。[这里](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html)可以查看gcc的各种警告级别.

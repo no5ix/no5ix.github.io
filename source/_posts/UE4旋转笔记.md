@@ -4,7 +4,7 @@ date: 2016-05-31 18:28:21
 tags:
 - UE4
 categories:
-- Misc
+- UE4
 ---
 
 > 最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。

@@ -4,7 +4,7 @@ date: 2015-01-07 13:28:22
 tags:
 - 分布式
 categories:
-- Server
+- GS
 ---
 
 # 分布式系统设计策略

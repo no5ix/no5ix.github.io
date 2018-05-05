@@ -6,7 +6,7 @@ tags:
 - UDP
 - GafferOnGames
 categories:
-- Server
+- GS
 ---
 
 # 原文

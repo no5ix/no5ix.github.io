@@ -5,7 +5,7 @@ tags:
 - Valve
 - 延迟补偿
 categories:
-- Server
+- GS
 ---
 
 

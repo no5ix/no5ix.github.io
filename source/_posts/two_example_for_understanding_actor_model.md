@@ -4,7 +4,7 @@ date: 2018-01-17 15:45:58
 tags:
 - Actor
 categories:
-- Server
+- NP
 ---
 
 # Actor模型介绍

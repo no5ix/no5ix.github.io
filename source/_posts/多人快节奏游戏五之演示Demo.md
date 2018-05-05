@@ -5,7 +5,7 @@ tags:
 - Gabriel Gambetta
 - 游戏同步
 categories:
-- Server
+- GS
 ---
 
 

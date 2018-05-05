@@ -5,15 +5,11 @@ tags:
 - 分布式
 - RPC
 categories:
-- Server
+- NP
 ---
 
 # RPC 是什么？ 
 RPC 的全称是 Remote Procedure Call 是一种进程间通信方式。它允许程序调用另一个地址空间（通常是共享网络的另一台机器上）的过程或函数，而不用程序员显式编码这个远程调用的细节。即程序员无论是调用本地的还是远程的，本质上编写的调用代码基本相同。 像腾讯的[phxrpc框架](https://github.com/Tencent/phxrpc)是使用Protobuf作为IDL用于描述RPC接口以及通信数据结构
-
-引用一个图 :
-
-![](http://img.blog.csdn.net/20150108170231000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbWluZGZsb2F0aW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 
 # c++ RPC的实现

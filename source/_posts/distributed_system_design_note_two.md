@@ -4,7 +4,7 @@ date: 2015-01-05 23:28:22
 tags:
 - 分布式
 categories:
-- Server
+- GS
 ---
 
 

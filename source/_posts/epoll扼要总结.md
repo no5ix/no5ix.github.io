@@ -43,7 +43,10 @@ epoll只有epoll_create, epoll_ctl, epoll_wait 3个系统调用 :
 Returns file descriptor on success, or -1 on error.
 
 创建一个epoll的句柄。自从linux2.6.8之后，size参数是被忽略的。
-需要注意的是，当创建好epoll句柄后，它就是会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的，所以在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽。
+函数返回代表新创建的 epoll 实例的文件描述符(一般用 epfd表示),
+ 这个文件描述符在其他几个 epoll 系统调用中用来表示 epoll 实例.
+需要注意的是，当创建好epoll句柄后，它就是会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的，
+所以在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽。
 
 ## epoll_ctl
 
@@ -52,39 +55,60 @@ Returns 0 on success, or -1 on error.
 
 epoll的事件注册函数，它不同于select()是在监听事件时告诉内核要监听什么类型的事件，而是在这里先注册要监听的事件类型。
 
-- 第一个参数是epoll_create()的返回值。
+- 第一个参数是epoll_create()的返回值, 也就是新创建的 epoll 实例的文件描述符。
 - 第二个参数表示动作，用三个宏来表示：
-	- EPOLL_CTL_ADD：注册新的fd到epfd中；
-	- EPOLL_CTL_MOD：修改已经注册的fd的监听事件；
-	- EPOLL_CTL_DEL：从epfd中删除一个fd；
-- 第三个参数是需要监听的fd。
+	- EPOLL_CTL_ADD：注册新的fd到epfd中的兴趣列表；
+	- EPOLL_CTL_MOD：修改已经注册的fd的设定事件；
+	- EPOLL_CTL_DEL：从epfd的兴趣列表中删除一个fd；
+- 第三个参数指要修改兴趣列表中的哪一个文件描述符的设定。
 - 第四个参数是告诉内核需要监听什么事，参数ev是指向结构体epoll_event的指针, 
 	struct epoll_event结构如下：
-	```
+	``` c
 	struct epoll_event {  
 		__uint32_t events; /* Epoll events */  
 		epoll_data_t data; /* User data variable */  
 	}; 
 	```
 	结构体epoll_event中的data字段的类型为:
-	``` 
+	``` c
 	typedef union epoll_data {  
-		void *ptr;  
+		void *ptr;   /* Pointer to user-defined data */
 		int fd;  
 		__uint32_t u32;  
 		__uint64_t u64;  
 	} epoll_data_t;
 	```
-	结构体epoll_event中的events字段是一个位掩码, 他只定了我们为待检查的描述符fd上所感兴趣的事件集合.
+	- 结构体epoll_event中的events字段是一个位掩码, 他指定了我们为待检查的描述符fd上所感兴趣的事件集合.
 	可以是以下几个宏的集合：
 
-	- EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
-	- EPOLLOUT：表示对应的文件描述符可以写；
-	- EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
-	- EPOLLERR：表示对应的文件描述符发生错误；
-	- EPOLLHUP：表示对应的文件描述符被挂断；
-	- EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。(后文会说水平触发和边缘触发的区别)
-	- EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+		- EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
+		- EPOLLOUT：表示对应的文件描述符可以写；
+		- EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
+		- EPOLLERR：表示对应的文件描述符发生错误；
+		- EPOLLHUP：表示对应的文件描述符被挂断；
+		- EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。(后文会说水平触发和边缘触发的区别)
+		- EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+
+	- data 字段是一个联合体, 当描述符 fd 稍后成为就绪态时, 联合体的成员可用来指定传回给调用进程的信息
+
+
+## 使用 epoll_create() 和 epoll_ctl()的例子
+
+使用 epoll_create() 和 epoll_ctl()
+
+``` c++
+int epdf;
+struct epoll_event ev;
+
+epfd = epoll_create( 5 );
+if ( epfd == -1 )
+	errExit( "epoll_create" );
+
+ev.data.fd = fd;
+ev.events = EPOLLIN;
+if ( epoll_ctl( epofd, EPOLL_CTL_ADD, fd, ev ) == -1 )
+	errExit( "epoll_ctl" );
+```
 
 ## epoll_wait
 
@@ -95,8 +119,131 @@ epoll_wait收集在epoll监控的事件中已经发送的事件。
 
 - 参数events是分配好的epoll_event结构体数组，epoll将会把发生的事件赋值到events数组中（events不可以是空指针，内核只负责把数据复制到这个events数组中，不会去帮助我们在用户态中分配内存）。
 - maxevents告之内核这个events有多大，这个 maxevents的值不能大于创建epoll_create()时的size，
-- 参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。如果函数调用成功，返回对应I/O上已准备好的文件描述符数目，如返回0表示已超时。
+- 参数timeout是超时时间, 用来确定 epoll_wait() 的阻塞行为, 有如下几种 : 
+	- 如果 timeout 等于 -1, 调用将一直阻塞, 直到兴趣列表中的文件描述符有事件产生, 或者直到捕获到一个信号为止
+	- 如果 timeout 等于 0, 执行一次非阻塞的检查, 立即返回, 看兴趣列表中的文件描述符上产生了哪个事件
+	- 如果 timeout 大于 0, 调用将阻塞至多 timeout 毫秒, 知道文件描述符上有事件产生, 或者直到捕获到一个信号为止
 
+
+## TLPI书上的例子
+
+``` c
+/*************************************************************************\
+*                  Copyright (C) Michael Kerrisk, 2017.                   *
+*                                                                         *
+* This program is free software. You may use, modify, and redistribute it *
+* under the terms of the GNU General Public License as published by the   *
+* Free Software Foundation, either version 3 or (at your option) any      *
+* later version. This program is distributed without any warranty.  See   *
+* the file COPYING.gpl-v3 for details.                                    *
+\*************************************************************************/
+
+/* Listing 63-5 */
+
+/* epoll_input.c
+
+   Example of the use of the Linux epoll API.
+
+   Usage: epoll_input file...
+
+   This program opens all of the files named in its command-line arguments
+   and monitors the resulting file descriptors for input events.
+
+   This program is Linux (2.6 and later) specific.
+*/
+#include <sys/epoll.h>
+#include <fcntl.h>
+#include "tlpi_hdr.h"
+
+#define MAX_BUF     1000        /* Maximum bytes fetched by a single read() */
+#define MAX_EVENTS     5        /* Maximum number of events to be returned from
+                                   a single epoll_wait() call */
+
+int
+main(int argc, char *argv[])
+{
+    int epfd, ready, fd, s, j, numOpenFds;
+    struct epoll_event ev;
+    struct epoll_event evlist[MAX_EVENTS];
+    char buf[MAX_BUF];
+
+    if (argc < 2 || strcmp(argv[1], "--help") == 0)
+        usageErr("%s file...\n", argv[0]);
+
+    epfd = epoll_create(argc - 1);
+    if (epfd == -1)
+        errExit("epoll_create");
+
+    /* Open each file on command line, and add it to the "interest
+       list" for the epoll instance */
+
+    for (j = 1; j < argc; j++) {
+        fd = open(argv[j], O_RDONLY);
+        if (fd == -1)
+            errExit("open");
+        printf("Opened \"%s\" on fd %d\n", argv[j], fd);
+
+        ev.events = EPOLLIN;            /* Only interested in input events */
+        ev.data.fd = fd;
+        if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, &ev) == -1)
+            errExit("epoll_ctl");
+    }
+
+    numOpenFds = argc - 1;
+
+    while (numOpenFds > 0) {
+
+        /* Fetch up to MAX_EVENTS items from the ready list of the
+           epoll instance */
+
+        printf("About to epoll_wait()\n");
+        ready = epoll_wait(epfd, evlist, MAX_EVENTS, -1);
+        if (ready == -1) {
+            if (errno == EINTR)
+                continue;               /* Restart if interrupted by signal */
+            else
+                errExit("epoll_wait");
+        }
+
+        printf("Ready: %d\n", ready);
+
+        /* Deal with returned list of events */
+
+        for (j = 0; j < ready; j++) {
+            printf("  fd=%d; events: %s%s%s\n", evlist[j].data.fd,
+                    (evlist[j].events & EPOLLIN)  ? "EPOLLIN "  : "",
+                    (evlist[j].events & EPOLLHUP) ? "EPOLLHUP " : "",
+                    (evlist[j].events & EPOLLERR) ? "EPOLLERR " : "");
+
+            if (evlist[j].events & EPOLLIN) {
+                s = read(evlist[j].data.fd, buf, MAX_BUF);
+                if (s == -1)
+                    errExit("read");
+                printf("    read %d bytes: %.*s\n", s, s, buf);
+
+            } else if (evlist[j].events & (EPOLLHUP | EPOLLERR)) {
+
+                /* After the epoll_wait(), EPOLLIN and EPOLLHUP may both have
+                   been set. But we'll only get here, and thus close the file
+                   descriptor, if EPOLLIN was not set. This ensures that all
+                   outstanding input (possibly more than MAX_BUF bytes) is
+                   consumed (by further loop iterations) before the file
+                   descriptor is closed. */
+
+                printf("    closing fd %d\n", evlist[j].data.fd);
+				// 关闭一个文件描述符会自动的将其从所有的 epoll 实例的兴趣列表中移除
+                if (close(evlist[j].data.fd) == -1)
+                    errExit("close");
+                numOpenFds--;
+            }
+        }
+    }
+
+    printf("All file descriptors closed; bye\n");
+    exit(EXIT_SUCCESS);
+}
+
+```
 
 # 水平触发与边缘触发
 
@@ -154,7 +301,7 @@ if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) == -1)
 反，当通过epoll_ctl()指定了需要监视的文件描述符时，内核会在与打开的文件描述
 上下文相关联的列表中记录该描述符。之后每当执行I／O操作使得文件描述符成为就
 绪态时，内核就在epoll描述符的就绪列表中添加一个元素。（单个打开的文件描述上
-下文中的一次I]O事件可能导致与之相关的多个文件描述符成为就绪态。）之后的
+下文中的一次I/O事件可能导致与之相关的多个文件描述符成为就绪态。）之后的
 epoll_wait()调用从就绪列表中简单地取出这些元素。
 
 - **内存: ** 每次调用select()或poll()时，我们传递一个标记了所有待监视的文件描述符的
@@ -278,7 +425,7 @@ server启动时，创建一定数量的工作者线程加入线程池，如（20
 
 # epoll代码实例
 
-> 代码来自互联网, 有疏漏, 也有命名不规范之处, 大概看看就好
+代码来自互联网, 有疏漏, 也有命名不规范之处, 用于理解一下范式, 大概看看即可
 
 ``` c
 #include <iostream>

@@ -30,16 +30,78 @@ GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。
 	- info threads	列出当前的线程。
 	- info locals	列出Local variables of current stack frame
 - step(简写一个s也可)		进入下一行代码的执行，会进入函数内部。
-- Next(简写一个n也可)		执行下一行代码。但不会进入函数内部。
+- next(简写一个n也可)		执行下一行代码。但不会进入函数内部。
+- finish 跳出当前代码（之前跳入调试）
 - continue(c)	继续执行直到下一个断点或观察点。
+- b  断点
 - kill	停止程序执行。
 - quit(q)	退出 GDB调试器
 - run(r)	从头开始执行程序，也允许进行重定向。
 - print(p) variable	打印指定变量的值。
 	- p variable
 	- p file::variable
-	- p 'file'::variable	
-	- 
+	- p 'file'::variables
+
+
+# 细说断点
+
+给 test.c 的第10行设置一个断点 : 
+
+	b test.c:10 
+
+## 断点删除
+
+断点的删除与断点的设置同样的重要。删除断点的命令有两个:
+- [delete](#delete)
+- [clear](#clear)
+
+
+### delete
+
+用法：delete [breakpoints num] [range...]
+delete可删除单个断点，也可删除一个断点的集合，这个集合用连续的断点号来描述。
+例如：
+
+	delete 5
+	delete 1-10
+
+
+### clear
+
+用法:
+- clear 删除所选定的环境中所有的断点
+- clear location location描述具体的断点。
+
+clear 删除断点是基于行的，不是把所有的断点都删除。
+例如：
+
+	clear list_insert         //删除函数的所有断点
+	clear list.c:list_delet   //删除文件：函数的所有断点
+	clear 12                  //删除行号的所有断点
+	clear list.c:12           //删除文件：行号的所有断点
+
+
+## 断点的使能和禁止
+
+对断点的控制除了建立和删除外，还可以通过使能和禁止来控制，后一种方法更灵活。
+
+断点的四种使能操作：
+
+- enable [breakpoints] [range...] 完全使能
+- enable                //激活所有断点
+- enable 4            //激活4断点
+- enable 5-6            //激活5～6断点
+- disable [breakpoints] [range...] 禁止
+- enable once [breakpoints] [range...] 使能一次，触发后禁止
+- enable delete [breakpoints] [range...]使能一次，触发后删除
+
+用法举例：
+
+	diable                //禁止所有断点
+	disble 2            //禁止第二个断点
+	disable 1-5            //禁止第1到第5个断点
+
+
 
 # GDB帮助
 

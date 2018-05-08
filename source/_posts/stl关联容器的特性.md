@@ -84,12 +84,17 @@ int main()
 		cout << "found" << endl;
 	}
 
-	for (iter = map_student.begin(); iter != map_student.end(); iter++)
+	for (iter = map_student.begin(); iter != map_student.end(); ++iter)
 	{
 		if (iter->first == 2)
 		{
 			map_student.erase(iter); 
-			// 移除元素会让迭代器失效, 所以上面这行应改为: iter = map_student.erase(iter);
+			// 移除元素会让迭代器失效, 所以上面这5行应改为: 
+			// for (iter = map_student.begin(); iter != map_student.end();) // 注意, 这里没有 `++iter` 了
+			// {
+			// 	if (iter->first == 2)
+			// 	{
+			// 		iter = map_student.erase(iter); // 这里也可以用 `map_student.erase(iter++);`代替
 
 			// map_student.insert(pair<int, string>(5, "stu5")); 
 			// map增加元素并不会使迭代器失效, 因为map增加元素跟vector不一样, 

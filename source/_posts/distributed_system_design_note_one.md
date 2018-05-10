@@ -4,7 +4,7 @@ date: 2015-01-04 01:28:42
 tags:
 - 分布式
 categories:
-- GS
+- NP
 ---
 
 

@@ -95,8 +95,17 @@ nani
 ## 删除标签
 
 误打或需要修改标签时，需要先将标签删除，再打新标签。
+
+### 删除本地标签
+
 `git tag -d v0.1.2`
 参数d即delete的缩写，意为删除其后指定的标签。
+
+### 删除远程标签
+
+用法 : `git push origin :refs/tags/标签名`  
+  
+比如 : `git push origin :refs/tags/protobuf-2.5.0rc1`  
 
 ## 给指定的commit打标签
 

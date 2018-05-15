@@ -51,7 +51,9 @@ centos 6 的gcc版本太低才4.4.7, 要安装高版本的4.8才完全支持c++1
 
     scl enable devtoolset-2 bash
 
+当然你也可以把下面这条语句加入到你的 ` .bashrc ` 里来让 devtoolset-2 bash 环境一直保持开启 : 
 
+    source /opt/rh/devtoolset-2/enable
 
 
     

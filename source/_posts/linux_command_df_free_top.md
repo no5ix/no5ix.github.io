@@ -1,5 +1,5 @@
 ---
-title: Linux常用运维命令(df和free)笔记整理(三)
+title: Linux常用运维命令(df和free和top)笔记整理(三)
 date: 2015-03-11 12:16:56
 tags: 
 - 运维
@@ -56,3 +56,27 @@ Mem:          2000       1231        768          9         72        456
 -/+ buffers/cache:        702       1297
 Swap:         1021          0       1021
 ```
+
+# top
+
+- PID：进程的ID
+- USER：进程所有者
+- PR：进程的优先级别，越小越优先被执行
+- NInice：值
+- VIRT：进程占用的虚拟内存
+- RES：进程占用的物理内存
+- SHR：进程使用的共享内存
+- S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数
+- %CPU：进程占用CPU的使用率
+- %MEM：进程使用的物理内存和总内存的百分比
+- TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。
+- COMMAND：进程启动命令名称
+
+另 :
+
+- 1：使用 ps -ef|grep xxx 命令查找需要查看的进程，xxx是进程名字
+- 2：top -p pid 查看程序的情况 
+- 3：ps -aux | grep process_name
+- 4：cat /proc/pid/status 
+这里会打印出当前进程详细的情况，其中，内存是 VmRSS。 
+( 注：pid是要替换成一个id数字的。)

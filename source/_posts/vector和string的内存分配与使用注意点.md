@@ -424,6 +424,7 @@ vector内存分配策略为 二倍扩容 , 每次当内存不够的情况下vect
 | **swap(c1,c2)** | 同上操作。
 | **c.empty()** | 判断容器是否为空。
 |**c.erase(iter)** | 删除pos位置的数据，传回下一个数据的位置。
+|**c.reserve()** | 保留(预先分配)适当的容量。
 |c.assign(beg,end) | 将[beg; end)区间中的数据赋值给c。
 |c.assign(n,elem) | 将n个elem的拷贝赋值给c。
 |c.at(idx) | 传回索引idx所指的数据，如果idx越界，抛出out_of_range。
@@ -437,7 +438,6 @@ vector内存分配策略为 二倍扩容 , 每次当内存不够的情况下vect
 |c.rbegin() | 传回一个逆向队列的第一个数据。
 |c.rend() | 传回一个逆向队列的最后一个数据的下一个位置。
 |c.resize(num) | 重新指定队列的长度。
-|c.reserve() | 保留适当的容量。
 
 # 构造 & 销毁
 

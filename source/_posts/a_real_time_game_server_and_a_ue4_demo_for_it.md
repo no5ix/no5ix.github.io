@@ -10,14 +10,18 @@ top: 6
 ---
 
 
-A real time game server and a UE4 demo for it. 
+A real time game server from scratch
 
-一个实时游戏服务器和一个对应的UE4游戏前端Demo.
+从零开始写一个实时游戏服务器
+
+And a UE4 demo for it
+
+附一个UE4游戏前端演示Demo
 
 
 ![UE4DemoScreenshot.png](/img/a_real_time_game_server_and_a_ue4_demo_for_it/UE4DemoScreenshot.png)
 
-
+<!-- 
 # Download & Play
 
  
@@ -29,7 +33,7 @@ A real time game server and a UE4 demo for it.
 - **Server** : A server instance is running on my VPS, so just double click the UE4ClientDemo.exe that will connect to my server automatically, enjoy !
 
 - 服务器 : 我VPS上运行着一个服务器实例, 你只需要双击 UE4ClientDemo.exe , 它就会自动连到服务器啦 !
-
+ -->
 
 # GitHub
 
@@ -37,6 +41,17 @@ A real time game server and a UE4 demo for it.
 
 # About This 
 
+<!-- - 可靠UDP
+
+    - 冗余应答
+
+- 增量更新
+
+- 二进制流
+
+    - 大数据块的分包与重组
+
+- 延迟渲染 -->
 
 - Unreal Engine Version : 4.16 - 4.19
 

@@ -4,7 +4,7 @@ date: 2013-08-23 15:11:26
 tags:
 - VBox
 categories:
-- Misc
+- Linux
 ---
 
 # VirtualBox安装Ubuntu以及分区

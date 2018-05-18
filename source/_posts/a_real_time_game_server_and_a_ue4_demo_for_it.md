@@ -1,5 +1,5 @@
 ---
-title: 一个实时游戏服务器和一个对应的UE4游戏前端Demo
+title: 一个实时游戏服务器附一个UE4游戏前端演示Demo
 date: 2018-05-02 17:56:12
 tags:
 - GitHub
@@ -44,6 +44,9 @@ And a UE4 demo for it
 <!-- - 可靠UDP
 
     - 冗余应答
+    - 跨平台
+        - Linux/Epoll 
+        - Win/非阻塞轮询
 
 - 增量更新
 

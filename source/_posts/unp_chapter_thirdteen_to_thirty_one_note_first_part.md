@@ -11,9 +11,9 @@ categories:
 
 因为UNP第三部分（第三版13-31章）的内容结合APUE（UNIX环境高级编程）和TLPI（The Linux Programming Interface）来看才能比较清晰，所以笔记整理会穿插很多这两本书的内容
 
-# 引申知识，作业控制以及相关命令：
+# 引申知识，作业控制以及相关命令
 
- ![这里写图片描述](http://img.blog.csdn.net/20170730195853561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ ![daemon_command](/img/unp_chapter_thirdteen_to_thirty_one_note_first_part/daemon_command.jpg)
 
 **. . .**<!-- more -->
 
@@ -23,7 +23,7 @@ categories:
 
 
 
-# 13.4节：
+# 13.4节
 
 本节主要讲守护进程的相关知识
 
@@ -98,6 +98,70 @@ getrlimit函数（见7.11节）来判定最高文件描述符值，并关闭直�
 **(7)某些守护进程打开/dev/null使其具有文件描述符0、l和2．这样，任何一个试图读标准输入、写标准输出或标准错误的库例程都不会产生任何效果。**
 因为守护进程并不与终端设备相关联，所以其输出无处显示，也无处从交互式用户那里接收输入。
 即使守护进程是从交互式会话启动的，但是守护进程是在后台运行的，所以登录会话的终止并不影响守护进程。如果其他用户在同一终端设备上登录，我们不希望在该终端上见到守护进程的输出，用户也不期望他们在终端上的输入被守护进程读取。
+(
+
+在关闭了文件描述符0、1和2之后，daemon通常会打开/dev/null并使用dup2()（或类似
+的函数）使所有这些描述符指向这个设备。之所以要这样做是因为下面两个原因 :
+
+- 它确保了当daemon调用了在这些描述符上执行I/O的库函数时不会出乎意料地
+    失败。
+- 它防止了daemon后面使用描述符1或2打开…个文件的情况，因为库函数会将这些
+    描述符当做标准输出和标准错误来写入数据（进而破坏了原有的数据）。
+
+)
+
+
+## dup介绍
+
+函数原型 : `int dup( int oldfd )`
+
+dup() 调用复制一个打开的文件描述符 oldfd , 并返回一个新描述符, 二者都指向同一打开的文件句柄. 系统会保证新描述符一定是编号值最低的未用文件描述符.
+
+假设发起如下调用 : 
+
+`newfd = dup(1);`
+
+再假定在正常情况下, shell已经代表程序打开了文件描述符0, 1和2, 且没有其他描述符在用, dup()调用会创建文件描述符1的副本, 返回的文件描述符编号值为3.
+
+如果希望返回的文件描述符为2, 可以使用如下技术 :
+
+``` c++
+close(2);
+newfd = dup(1);
+```
+
+只有当描述符 0 已经打开时, 这段代码方可工作. 
+
+
+## dup2介绍
+
+如果想进一步简化上述代码, 同时总是能获得所期望的文件描述符, 可以调用dup2().
+
+函数原型 : `int dup2( int oldfd, int newfd )`
+
+dup2函数跟dup函数相似，但dup2函数允许调用者规定一个有效描述符和目标描述符的id
+
+。dup2函数成功返回时，目标描述符（dup2函数的第二个参数）将变成源描述符（dup2函数的
+
+第一个参数）的复制品，换句话说，两个文件描述符现在都指向同一个文件，并且是函数第一
+
+个参数指向的文件。
+
+下面我们用一段代码加以说明：
+``` c
+int oldfd;   
+oldfd = open("app_log", (O_RDWR | O_CREATE), 0644 );    
+dup2( oldfd, 1 );    
+close( oldfd );
+```
+
+本例中，我们打开了一个新文件，称为“app_log”，并收到一个文件描述符，该描述符
+
+叫做fd1。我们调用dup2函数，参数为oldfd和1，这会导致用我们新打开的文件描述符替换掉
+
+由1代表的文件描述符（即stdout，因为标准输出文件的id为1）。任何写到stdout的东西，现
+
+在都将改为写入名为“app_log”的文件中。
 
 
 ## umask介绍
@@ -199,9 +263,15 @@ becomeDaemon(int flags)
     }
 
     if (!(flags & BD_NO_REOPEN_STD_FDS)) {
+
+        // /* Standard file descriptors. */
+        // #define STDIN_FILENO 0 /* Standard input. */
+        // #define STDOUT_FILENO 1 /* Standard output. */
+        // #define STDERR_FILENO 2 /* Standard error output. */
+
         close(STDIN_FILENO);            /* Reopen standard fd's to /dev/null */
 
-        fd = open("/dev/null", O_RDWR);
+        fd = open("/dev/null", O_RDWR); // open 返回的文件描述符一定是最小的未被使用的描述符。
 
         if (fd != STDIN_FILENO)         /* 'fd' should be 0 */
             return -1;
@@ -220,7 +290,9 @@ becomeDaemon(int flags)
 # nohup和setsid用法
 
 如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将父进程设为init进程；
-![这里写图片描述](http://img.blog.csdn.net/20170731003942100?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+ ![setid](/img/unp_chapter_thirdteen_to_thirty_one_note_first_part/setid.jpg)
+
 
 ``` sh
 b@b-VirtualBox:~/my_temp_test$ nohup ./o_multi_thread_process &

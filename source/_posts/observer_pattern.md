@@ -5,11 +5,10 @@ tags:
 - 设计模式
 categories:
 - Misc
-password: pw
 ---
 
 
-<p><span style="font-size:16px; color:#000099"><strong>本文因原文作者版权声明未经同意不得转载, 故此文于本博客中无法公开</strong></span></p>
+<!-- <p><span style="font-size:16px; color:#000099"><strong>本文因原文作者版权声明未经同意不得转载, 故此文于本博客中无法公开</strong></span></p> -->
 
 # 概述
 
@@ -313,14 +312,15 @@ $subject->setState(2);  
 # 与其他相关模式
 
 - 终结者模式 Mediator: 通过封装复杂的更新语义 , ChangeManager 充当目标和观察者之间的中介者。
-- 单间模式 Singleton: ChangeManager 可使用 Singleton 模式来保证它是唯一的并且是可全局访问
+- 单例模式 Singleton: ChangeManager 可使用 Singleton 模式来保证它是唯一的并且是可全局访问
 的。
 
 # 总结与分析
 
 通过 Observer 模式，把一对多对象之间的通知依赖关系的变得更为松散，大大地提高了程序的可维护性和可扩展性，也很好的符合了开放 - 封闭原则。
 
-
+<!-- 
 # 参考
 
 [原文地址](http://blog.csdn.net/hguisu/article/details/7556625)
+ -->

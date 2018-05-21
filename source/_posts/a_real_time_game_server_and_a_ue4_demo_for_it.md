@@ -19,7 +19,7 @@ And a UE4 demo for it
 附一个UE4游戏前端演示Demo
 
 
-![UE4DemoScreenshot.png](/img/a_real_time_game_server_and_a_ue4_demo_for_it/UE4DemoScreenshot.png)
+![UE4DemoScreenshot.jpg](/img/a_real_time_game_server_and_a_ue4_demo_for_it/UE4DemoScreenshot.jpg)
 
 <!-- 
 # Download & Play
@@ -43,6 +43,7 @@ And a UE4 demo for it
 
 <!-- - 可靠UDP
 
+    - 抗抖动
     - 冗余应答
     - 跨平台
         - Linux/Epoll 

@@ -123,6 +123,10 @@ Reactor 从线程池和 Reactor 的选择上可以细分为如下几种：
 
 ![](/img/reactor_intro/1100082-931396ffc90437ef.png)
 
+如果上图表达得不够明白, 还可以看看下图
+
+![](/img/reactor_intro/basic_reactor_design.jpg)
+
 这个模型和上面的 NIO 流程很类似，只是将消息相关处理独立到了 Handler 中去了！
 
 虽然上面说到 NIO 一个线程就可以支持所有的 IO 处理。但是瓶颈也是显而易见的！我们看一个客户端的情况，如果这个客户端多次进行请求，如果在 Handler 中的处理速度较慢，那么后续的客户端请求都会被积压，导致响应变慢！所以引入了 Reactor 多线程模型!
@@ -131,6 +135,10 @@ Reactor 从线程池和 Reactor 的选择上可以细分为如下几种：
 
 ![](/img/reactor_intro/1100082-b21e4c2555478155.png)
 
+如果上图表达得不够明白, 还可以看看下图
+
+![](/img/reactor_intro/worker_thread_pools.jpg)
+
 Reactor 多线程模型就是将 Handler 中的 IO 操作和非 IO 操作分开，操作 IO 的线程称为 IO 线程，非 IO 操作的线程称为工作线程! 这样的话，客户端的请求会直接被丢到线程池中，客户端发送请求就不会堵塞！
 
 但是当用户进一步增加的时候，Reactor 会出现瓶颈！因为 Reactor 既要处理 IO 操作请求，又要响应连接请求！为了分担 Reactor 的负担，所以引入了主从 Reactor 模型!
@@ -138,5 +146,11 @@ Reactor 多线程模型就是将 Handler 中的 IO 操作和非 IO 操作分开�
 ## 主从 Reactor 模型
 
 ![](/img/reactor_intro/1100082-794d7f69b6e2409a.png)
+
+如果上图表达得不够明白, 还可以看看下图
+
+![](/img/reactor_intro/using_multiple_reactors_with_thread_pool.jpg)
+
+
 
 主 Reactor 用于响应连接请求，从 Reactor 用于处理 IO 操作请求！

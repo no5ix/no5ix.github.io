@@ -41,14 +41,15 @@ And a UE4 demo for it
 
 # About This 
 
+
 <!-- - 可靠UDP
 
     - 抗抖动
     - 冗余应答
     - 跨平台
-        - Linux/Epoll 
-        - Win/非阻塞轮询
-
+        - Linux/Epoll/多线程
+        - Win/NIO/单线程
+- C++11 
 - 增量更新
 
 - 二进制流

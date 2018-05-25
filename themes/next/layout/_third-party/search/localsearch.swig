@@ -209,7 +209,8 @@
           str += "</ul>";
           $('#local-search-close').show();
           if (str.indexOf('<li>') === -1) {
-            return $resultContent.innerHTML = "<ul class='local-search-empty-ul'><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            return $resultContent.innerHTML = 
+              "<ul class='local-search-empty-ul'><span class='local-search-empty'>找不到, 换个搜索关键字试一哈.<span></ul>";
           }
           $resultContent.innerHTML = str;
         }

@@ -200,7 +200,7 @@ int main()
 - 尾递归化
 - 三数取中
 - 当待排序序列的长度分割到一定大小后，使用插入排序
-- MultiThread
+- 多线程
 
 具体方案查看[这篇博客](http://blog.csdn.net/insistgogo/article/details/7785038)
 

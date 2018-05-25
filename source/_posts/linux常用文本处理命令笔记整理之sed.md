@@ -2,7 +2,7 @@
 title: linux常用文本处理命令笔记整理之sed
 date: 2015-10-23 12:51:19
 tags: 
-- 文本处理
+- Command
 categories:
 - Linux
 ---

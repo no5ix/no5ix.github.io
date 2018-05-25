@@ -2,7 +2,7 @@
 title: Linux常用运维命令(netstat和lsof)笔记整理(二)
 date: 2015-03-09 23:16:16
 tags: 
-- 运维
+- Command
 categories:
 - Linux
 ---

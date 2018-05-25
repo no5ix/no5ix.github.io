@@ -2,7 +2,7 @@
 title: linux一些不要想当然的事(一)之目录权限
 date: 2015-03-18 17:11:52
 tags:
-- directory
+- Linux
 categories:
 - Linux
 ---

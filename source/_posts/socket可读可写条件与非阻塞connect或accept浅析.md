@@ -2,7 +2,7 @@
 title: socket可读可写条件与非阻塞connect或accept浅析
 date: 2015-06-22 21:56:12
 tags:
-- socket
+- NP
 categories:
 - NP
 ---

@@ -2,7 +2,7 @@
 title: epoll扼要总结
 date: 2015-06-22 21:56:12
 tags:
-- epoll
+- Linux
 categories:
 - Linux
 ---

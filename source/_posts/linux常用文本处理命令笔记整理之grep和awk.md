@@ -2,7 +2,7 @@
 title: linux常用文本处理命令笔记整理之grep和awk
 date: 2015-10-21 20:54:19
 tags: 
-- 文本处理
+- Command
 categories:
 - Linux
 ---

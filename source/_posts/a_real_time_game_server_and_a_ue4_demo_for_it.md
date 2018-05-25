@@ -46,7 +46,7 @@ And a UE4 demo for it
 
     - 抗抖动
     - 冗余应答
-    - 跨平台
+    - CrossPlatform
         - Linux/Epoll/多线程
         - Win/NIO/单线程
 - C++11 

@@ -2,7 +2,7 @@
 title: C++对象模型之实例总结讲解
 date: 2015-02-21 17:49:01
 tags:
-- 对象模型
+- ObjectModel
 categories:
 - CPP
 ---

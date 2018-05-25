@@ -2,7 +2,7 @@
 title: 排序算法三之谈一谈快排优化和二分查找
 date: 2014-08-22 12:18:54
 tags:
-- 排序
+- Sort
 - CPP
 categories:
 - CPP
@@ -200,7 +200,7 @@ int main()
 - 尾递归化
 - 三数取中
 - 当待排序序列的长度分割到一定大小后，使用插入排序
-- 多线程
+- MultiThread
 
 具体方案查看[这篇博客](http://blog.csdn.net/insistgogo/article/details/7785038)
 

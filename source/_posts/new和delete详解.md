@@ -2,8 +2,7 @@
 title: new和delete详解
 date: 2015-01-22 00:05:48
 tags:
-- new
-- delete
+- CPP
 categories:
 - CPP
 ---

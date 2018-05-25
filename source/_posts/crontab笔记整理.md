@@ -2,7 +2,8 @@
 title: crontab笔记整理
 date: 2017-07-09 12:38:21
 tags: 
-- crontab
+- Linux
+- Command
 categories:
 - Linux
 ---

@@ -2,7 +2,7 @@
 title: 分布式具体实现重要组件之RPC
 date: 2017-01-10 13:18:12
 tags:
-- 分布式
+- Distributed 
 - RPC
 categories:
 - NP

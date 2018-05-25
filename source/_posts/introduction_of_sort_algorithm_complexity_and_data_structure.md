@@ -2,7 +2,7 @@
 title: 排序算法一之谈一谈各类算法的复杂度和常用数据结构
 date: 2014-08-19 17:38:55
 tags:
-- 排序
+- Sort
 - CPP
 categories:
 - CPP
@@ -15,7 +15,7 @@ categories:
 
 # 必须掌握的知识
 
-- 数据结构
+- DataStructure
     - 链表
     - 二叉树
     - 栈

@@ -38,8 +38,28 @@ int testBind( int* a, int b, int c )
 	return *a;
 }
 
+struct Foo
+{
+	Foo() = default;
+	Foo( const Foo & a )
+	{
+		data = a.data;
+		std::cout << "复制构造" << std::endl;
+	}
+	void print_sum( int n1, int n2 )
+	{
+		std::cout << n1 + n2 << '\n';
+	}
+	int data = 10;
+};
+
 int main()
 {
+	//绑定类成员函数用对象的指针
+	Foo foo;
+	auto f3 = std::bind( &Foo::print_sum, &foo, 95, _1 );
+	f3( 5 );
+
 	auto check_testBind = std::bind( testBind, std::placeholders::_1, 3, 9 );
 	int * p = new int( 7 );
 	cout << check_testBind( p ) << endl;
@@ -65,6 +85,7 @@ int main()
 
 打印结果 :
 
+	100
 	119
 	7
 	347

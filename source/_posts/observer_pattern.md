@@ -2,7 +2,7 @@
 title: 观察者模式
 date: 2015-01-07 12:18:54
 tags:
-- 设计模式
+- DesignPattern
 categories:
 - Misc
 ---

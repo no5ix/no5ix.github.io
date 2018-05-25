@@ -2,7 +2,7 @@
 title: 排序算法二之谈一谈冒泡插入归并
 date: 2014-08-20 19:38:55
 tags:
-- 排序
+- Sort
 - CPP
 categories:
 - CPP

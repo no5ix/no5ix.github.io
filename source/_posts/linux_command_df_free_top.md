@@ -2,7 +2,7 @@
 title: Linux常用运维命令(df和free和top)笔记整理(三)
 date: 2015-03-11 12:16:56
 tags: 
-- 运维
+- Command
 categories:
 - Linux
 ---

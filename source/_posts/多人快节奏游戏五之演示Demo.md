@@ -2,8 +2,8 @@
 title: 多人快节奏游戏五之演示Demo
 date: 2017-10-10 11:18:54
 tags:
-- Gabriel Gambetta
-- 游戏同步
+- GabrielGambetta
+
 categories:
 - GS
 ---

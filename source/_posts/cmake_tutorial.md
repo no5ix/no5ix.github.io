@@ -2,8 +2,9 @@
 title: 跨平台开发之CMake笔记
 date: 2015-09-21 09:38:55
 tags:
-- CMake
-- 跨平台
+- CrossPlatform
+- Compile
+- Make
 categories:
 - Misc
 ---

@@ -599,11 +599,13 @@ motion:
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
     header: slideDownIn
     logo: slideDownIn
-    post_block_else: fadeIn
-    post_header: slideLeftIn
-    post_body: slideRightIn
+    post_block_else: slideDownIn
+    # post_header: slideLeftIn
+    # post_body: slideRightIn
+    post_header: slideDownIn
+    post_body: slideDownIn
     coll_header: slideDownBigIn
-    footer: fadeIn
+    footer: swoopIn
 
 # Fancybox
 fancybox: true

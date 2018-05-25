@@ -2,7 +2,7 @@
 title: 单例模式的析构问题和线程安全问题
 date: 2015-02-02 12:18:54
 tags:
-- 设计模式
+- DesignPattern
 categories:
 - Misc
 ---

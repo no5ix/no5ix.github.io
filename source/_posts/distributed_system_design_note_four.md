@@ -2,7 +2,7 @@
 title: 分布式系统设计概要笔记-四
 date: 2015-01-10 23:58:12
 tags:
-- 分布式
+- Distributed 
 categories:
 - NP
 ---

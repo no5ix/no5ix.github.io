@@ -2,7 +2,7 @@
 title: Linux常用运维命令(iostat)笔记整理(一)
 date: 2015-03-07 19:46:26
 tags: 
-- 运维
+- Command
 categories:
 - Linux
 ---

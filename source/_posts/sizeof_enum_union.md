@@ -2,7 +2,7 @@
 title: 共用体和枚举占多少内存
 date: 2015-04-12 23:30:01
 tags:
-- 对象模型
+- ObjectModel
 categories:
 - CPP
 ---

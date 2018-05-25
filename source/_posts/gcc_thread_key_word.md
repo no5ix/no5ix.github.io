@@ -3,6 +3,7 @@ title: GCC的__thread关键字
 date: 2014-12-22 23:19:21
 tags:
 - CPP
+- MultiThread
 categories:
 - CPP
 ---

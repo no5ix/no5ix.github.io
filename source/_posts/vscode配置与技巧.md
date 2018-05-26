@@ -11,7 +11,7 @@ categories:
 
 # 序
 
-> 听说网易云音乐可以一玩就是一个下午, 但有些编辑器怕是一玩就是一辈子...
+听说网易云音乐可以一玩就是一个下午, 但有些编辑器怕是一玩就是一辈子...
 
 # 转vscode原因
 
@@ -190,3 +190,6 @@ vim进了多行编辑模式：<ESC>之后按CTRL+V进入visual block模式（列
 直接安装vscode商城中推荐的作者为Don Jayamanne的python插件
 
 
+# 把terminal换成GitBash
+
+如果你的PATH里有 git bash 的话, 按照直接 Shift-Ctrl-p 然后 输入 `Select Default Shell`即可选择.

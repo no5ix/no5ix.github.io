@@ -46,14 +46,14 @@ In short:
 #include <stdlib.h>
 
 void *g_p1;
-void *g_p2;
+int *g_p2;
 int ** fun1(void)
 {
     //付给了局部变量, 函数结束而不释放,为肯定丢失.
     //把函数尾部语句return p; 改为return 0;更能说明这个问题.
     int **p=(int **)malloc(16); 
     g_p1=malloc(20);  //付给了全局变量, 内存可以访问
-    g_p2=malloc(30);
+    g_p2=(int*)malloc(30);
     g_p2++;            //付给了全局变量, 内存可以访问,但是指针被移动过,为可能丢失
     p[1]=(int *)malloc(40); //如果p丢失了,则p[1]为间接丢失.
     return p;
@@ -70,40 +70,68 @@ int main(int argc, char *argv[])
 }
 ```
 
+执行编译命令`g++ val_test.cpp -o v`, 然后
 
-附上当不free的时候, valgrind 的内存错误报告 :
+当执行`valgrind ./v` 命令之后的**简易**内存错误报告 :
 
-    ==28209== Memcheck, a memory error detector
-    ==28209== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-    ==28209== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
-    ==28209== Command: ./main
-    ==28209== 
-    ==28209== 
-    ==28209== HEAP SUMMARY:
-    ==28209==     in use at exit: 106 bytes in 4 blocks
-    ==28209==   total heap usage: 4 allocs, 0 frees, 106 bytes allocated
-    ==28209== 
-    ==28209== 30 bytes in 1 blocks are possibly lost in loss record 2 of 4
-    ==28209==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-    ==28209==    by 0x40055E: fun1 (main.c:15)
-    ==28209==    by 0x4005AB: main (main.c:23)
-    ==28209== 
-    ==28209== 56 (16 direct, 40 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 4
-    ==28209==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-    ==28209==    by 0x40053F: fun1 (main.c:13)
-    ==28209==    by 0x4005AB: main (main.c:23)
-    ==28209== 
-    ==28209== LEAK SUMMARY:
-    ==28209==    definitely lost: 16 bytes in 1 blocks
-    ==28209==    indirectly lost: 40 bytes in 1 blocks
-    ==28209==      possibly lost: 30 bytes in 1 blocks
-    ==28209==    still reachable: 20 bytes in 1 blocks
-    ==28209==         suppressed: 0 bytes in 0 blocks
-    ==28209== Reachable blocks (those to which a pointer was found) are not shown.
-    ==28209== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-    ==28209== 
-    ==28209== For counts of detected and suppressed errors, rerun with: -v
-    ==28209== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+    ==4765== Memcheck, a memory error detector
+    ==4765== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+    ==4765== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+    ==4765== Command: ./v
+    ==4765== 
+    ==4765== 
+    ==4765== HEAP SUMMARY:
+    ==4765==     in use at exit: 106 bytes in 4 blocks
+    ==4765==   total heap usage: 4 allocs, 0 frees, 106 bytes allocated
+    ==4765== 
+    ==4765== LEAK SUMMARY:
+    ==4765==    definitely lost: 16 bytes in 1 blocks
+    ==4765==    indirectly lost: 40 bytes in 1 blocks
+    ==4765==      possibly lost: 30 bytes in 1 blocks
+    ==4765==    still reachable: 20 bytes in 1 blocks
+    ==4765==         suppressed: 0 bytes in 0 blocks
+    ==4765== Rerun with --leak-check=full to see details of leaked memory
+    ==4765== 
+    ==4765== For counts of detected and suppressed errors, rerun with: -v
+    ==4765== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+    b@b-VirtualBox:~/tc/valgrind_test$ valgrind --leak-check=full
+    valgrind: no program specified
+    valgrind: Use --help for more information.
+
+
+当执行`valgrind --leak-check=full ./v` 命令之后的**详细**内存错误报告 :
+
+    ==4767== Memcheck, a memory error detector
+    ==4767== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+    ==4767== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+    ==4767== Command: ./v
+    ==4767== 
+    ==4767== 
+    ==4767== HEAP SUMMARY:
+    ==4767==     in use at exit: 106 bytes in 4 blocks
+    ==4767==   total heap usage: 4 allocs, 0 frees, 106 bytes allocated
+    ==4767== 
+    ==4767== 30 bytes in 1 blocks are possibly lost in loss record 2 of 4
+    ==4767==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==4767==    by 0x40055E: fun1() (val_test.cpp:12)
+    ==4767==    by 0x4005AB: main (val_test.cpp:20)
+    ==4767== 
+    ==4767== 56 (16 direct, 40 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 4
+    ==4767==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==4767==    by 0x40053F: fun1() (val_test.cpp:10)
+    ==4767==    by 0x4005AB: main (val_test.cpp:20)
+    ==4767== 
+    ==4767== LEAK SUMMARY:
+    ==4767==    definitely lost: 16 bytes in 1 blocks
+    ==4767==    indirectly lost: 40 bytes in 1 blocks
+    ==4767==      possibly lost: 30 bytes in 1 blocks
+    ==4767==    still reachable: 20 bytes in 1 blocks
+    ==4767==         suppressed: 0 bytes in 0 blocks
+    ==4767== Reachable blocks (those to which a pointer was found) are not shown.
+    ==4767== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+    ==4767== 
+    ==4767== For counts of detected and suppressed errors, rerun with: -v
+    ==4767== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 
     
 ## 总结
@@ -121,5 +149,13 @@ int main(int argc, char *argv[])
 
 由肯定丢失而引起的进一步的内存丢失为间接丢失.
 
-**所以碰到问题你首先要解决什么问题? 肯定丢失, 然后是可能丢失,然后间接丢失,然后still reachable!!!**
+
+# 解决内存泄漏的顺序
+
+**所以碰到问题你首先要解决什么问题?**
+
+肯定丢失, 
+然后是可能丢失,
+然后间接丢失,
+然后still reachable!!!
 

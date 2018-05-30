@@ -23,25 +23,32 @@ GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。
 
 # GDB常用命令
 
-- help	列出 gdb 帮助信息。
+- help						列出 gdb 帮助信息。
 - info+subcommand , 比如 :
-	- info breakpoints	列出断点。
-	- info watchpoints	列出观察点。
-	- info threads	列出当前的线程。
-	- info locals	列出Local variables of current stack frame
-- step(简写一个s也可)		进入下一行代码的执行，会进入函数内部。
-- next(简写一个n也可)		执行下一行代码。但不会进入函数内部。
-- finish 跳出当前代码（之前跳入调试）
-- continue(c)	继续执行直到下一个断点或观察点。
-- b  断点
-- kill	停止程序执行。
-- quit(q)	退出 GDB调试器
-- run(r)	从头开始执行程序，也允许进行重定向。
-- print(p) variable	打印指定变量的值。
+	- info breakpoints	: 列出断点。
+	- info watchpoints	: 列出观察点。
+	- info threads		: 列出当前的线程。
+	- info locals		: 列出Local variables of current stack frame
+	- 
+- step(简写一个s也可)		 进入下一行代码的执行，会进入函数内部。
+- next(简写一个n也可)		 执行下一行代码。但不会进入函数内部。
+- finish 					跳出当前代码（之前跳入调试）
+- continue(c)				继续执行直到下一个断点或观察点。
+- b  						断点
+- kill						停止程序执行。
+- quit(q)					退出 GDB调试器
+- run(r)					从头开始执行程序，也允许进行重定向。
+- print(p) variable			打印指定变量的值。
 	- p variable
 	- p file::variable
 	- p 'file'::variables
-
+	- 
+- backtrace(简写bt), 显示函数调用栈
+	- bt :						显示所有函数调用栈
+	- bt n : 			显示程序的调用栈信息，只显示栈顶n桢(frame)
+	- bt -n : 			显示程序的调用栈信息，只显示栈底部n桢(frame)
+	- set backtrace limit n : 	设置bt显示的最大桢层数
+	- where 和 info stack ：		都是bt的别名，功能一样
 
 # 细说断点
 

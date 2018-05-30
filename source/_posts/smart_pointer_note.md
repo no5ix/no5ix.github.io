@@ -1,5 +1,5 @@
 ---
-title: 智能指针与多线程笔记
+title: 智能指针笔记
 date: 2015-04-11 12:26:26
 tags: 
 - CPP
@@ -144,7 +144,7 @@ process 的参数是传值方式传递的，因此实参会被拷贝到 ptr 巾 
 使用此函数的正确方法是传递给它一个 shared_ptr :
 
 ```  c++
-shared_ptr<int> p(new int(42)) ; // 引用计幸生为 1
+shared_ptr<int> p(new int(42)) ; // 引用计数为 1
 process(p); // 拷贝 p 会递增它的引用计数 ;在 process 中引用计数位为 2
 int i = *p; // 正确:引用计数位为 1
 ```

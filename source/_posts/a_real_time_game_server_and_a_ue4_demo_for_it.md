@@ -37,7 +37,7 @@ And a UE4 demo for it
 
 # GitHub
 
-[<i class="fa fa-fw fa-github fa-2x"></i>**RealTimeServer**](https://github.com/no5ix/RealTimeServer) 
+[<i class="fa fa-fw fa-github fa-2x"></i>real-time-server](https://github.com/no5ix/RealTimeServer) 
 
 # About This 
 

@@ -64,6 +64,7 @@ mkdir -p ~/.trash
 # original rm
 alias or='/bin/rm' 
 
+
 alias rm=trash
 alias r=trash
 alias lr='ls -alF ~/.trash'
@@ -73,16 +74,22 @@ alias er=emptytrash
 
 undelfile()
 {
-  mv -i ~/.trash/$@ ./
+    mv -i ~/.trash/$@ ./
 }
 trash()
 {
-  mv $@ ~/.trash/
+    mv $@ ~/.trash/
 }
 emptytrash()
 {
     read -p "clear sure?[n]" confirm
     [ $confirm == 'y' ] || [ $confirm == 'Y' ]  && or -rf ~/.trash/*
+}
+
+# mkdir and cd it
+mc()
+{
+    mkdir -p "$1" && cd "$1"
 }
 ```
 

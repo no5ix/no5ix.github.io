@@ -17,10 +17,12 @@ linux支持的哪些操作是具有原子特性的？知道这些东西是理解
 
 # 原子操作的api函数
 
-gcc从4.1.2以后提供了__sync_*系列的内嵌函数，提供用于针对数字或布尔型变量的原子操作。
+gcc从4.1.2以后提供了 `__sync_* ` 系列的下面几类的内嵌函数，提供用于针对数字或布尔型变量的原子操作。
 
-## 直接操作数的原子操作
-第一组返回更新前的值，第二组返回更新后的值
+
+## n++类
+
+这组返回更新前的值
 
 	type __sync_fetch_and_add (type *ptr, type value, ...)
 	type __sync_fetch_and_sub (type *ptr, type value, ...)
@@ -28,6 +30,10 @@ gcc从4.1.2以后提供了__sync_*系列的内嵌函数，提供用于针对数�
 	type __sync_fetch_and_and (type *ptr, type value, ...)
 	type __sync_fetch_and_xor (type *ptr, type value, ...)
 	type __sync_fetch_and_nand (type *ptr, type value, ...)
+
+## ++n类
+
+这组返回更新后的值
 
 	type __sync_add_and_fetch (type *ptr, type value, ...)
 	type __sync_sub_and_fetch (type *ptr, type value, ...)
@@ -48,23 +54,40 @@ type可以是1,2,4或8字节长度的int类型，即：
 后面的可扩展参数(...)用来指出哪些变量需要memory barrier,因为目前gcc实现的是full barrier（类似于linux kernel 中的mb(),表示这个操作之前的所有内存操作不会被重排序到这个操作之后）,所以可以略掉这个参数。
 
 
-## 比较后操作数的原子操作
+## CAS类
 
-bool __sync_bool_compare_and_swap (type *ptr, type oldval type newval, ...)
-type __sync_val_compare_and_swap (type *ptr, type oldval type newval, ...)
+CAS 即 compare-and-swap , 
 
-这两个函数提供原子的比较和交换，如果*ptr == oldval,就将newval写入*ptr,
-第一个函数在相等并写入的情况下返回true.
-第二个函数在返回操作之前的值。
+下面这两个函数提供原子的比较和交换，如果 ` *ptr == oldval `,就将 `newval` 写入 ` *ptr ` 
+
+
+- 此函数在相等并写入的情况下返回 true
+
+        bool __sync_bool_compare_and_swap (type *ptr, type oldval, type newval, ...)
+        /* 对应的伪代码 */
+        { if (*ptr == oldval) { *ptr = newval; return true; } else { return false; } }
+
+
+- 此函数在返回 ` oldval `
+
+        type __sync_val_compare_and_swap (type *ptr, type oldval, type newval, ...)
+        /* 对应的伪代码 */
+        { if (*ptr == oldval) { *ptr = newval; } return oldval; }
+
+
+
 
 
 ## 其他原子操作
 
-type __sync_lock_test_and_set (type *ptr, type value, ...)
-   将*ptr设为value并返回*ptr操作之前的值。
+    type __sync_lock_test_and_set (type *ptr, type value, ...)
 
-void __sync_lock_release (type *ptr, ...)
-     将*ptr置0
+将  `*ptr` 设为value并返回 `*ptr` 操作之前的值。
+
+
+    void __sync_lock_release (type *ptr, ...)
+
+将 `*ptr` 置 0
 
 
 

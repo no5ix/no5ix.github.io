@@ -47,17 +47,17 @@ set 中每个元素只包含一个关键字 : set 支持高效的关键字检查
 | **end()** | 返回指向map末尾的迭代器
 | **erase()** | 删除一个元素
 | **find()** | 查找一个元素
-|count() | 返回指定元素出现的次数
+|**lower_bound()** | 返回键值>=给定元素的第一个元素的迭代器
+|**upper_bound()** | 返回键值>给定元素的第一个元素的迭代器
+|**size()** | 返回map中元素的个数
+|**count()** | 返回指定元素出现的次数
 |equal_range() | 返回特殊条目的迭代器对
 |get_allocator() | 返回map的配置器
 |key_comp() | 返回比较元素key的函数
-|lower_bound() | 返回键值>=给定元素的第一个位置
 |max_size() | 返回可以容纳的最大元素个数
 |rbegin() | 返回一个指向map尾部的逆向迭代器
 |rend() | 返回一个指向map头部的逆向迭代器
-|size() | 返回map中元素的个数
 |swap() | 交换两个map
-|upper_bound() | 返回键值>给定元素的第一个位置
 |value_comp() | 返回比较元素value的函数
 
 # 迭代器失效
@@ -77,7 +77,6 @@ int main()
 	map_student.insert(pair<int, string>(3, "stu3"));
 	map_student.insert(pair<int, string>(4, "stu4"));
 	map<int, string>::iterator iter;
-
 
 	if (map_student.find(2) != map_student.end())
 	{
@@ -104,6 +103,18 @@ int main()
 		}
 		cout << iter->first << " : " << iter->second << endl;
 	}
+
+
+	// test lower_bound & upper_bound
+	set<int> s;
+    s.insert(1);
+    s.insert(3);
+    s.insert(4);
+    cout<<*s.lower_bound(2)<<endl; // output : 3
+    cout<<*s.lower_bound(3)<<endl; // output : 3
+    cout<<*s.upper_bound(3)<<endl; // output : 4
+    cout<<*s.upper_bound(1)<<endl; // output : 3
+
 	return 0;
 }
 ```

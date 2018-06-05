@@ -34,7 +34,7 @@ type: "about"
 
 - Email : no5ix@foxmail.com
 - GitHub : https://github.com/no5ix
-- 网易云音乐 : https://music.163.com/#/user/home?id=47256866
+<!-- - 网易云音乐 : https://music.163.com/#/user/home?id=47256866 -->
 
 # 也想做一个这样的博客?
 

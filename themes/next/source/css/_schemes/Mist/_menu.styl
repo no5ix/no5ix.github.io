@@ -32,22 +32,76 @@
     border-radius: 12px;
     transition-property: background;
 
+    menu-item-background-style() {
+      background-image: -webkit-gradient(linear, left top, left bottom, from($grey-dark), to($grey-dark));
+      background-image: -webkit-linear-gradient($grey-dark, $grey-dark);
+      background-image: linear-gradient($grey-dark, $grey-dark);
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center bottom, center -webkit-calc(100% - 1px);
+      background-position: center bottom, center calc(100% - 1px);
+      background-size: 0 1px;
+      -webkit-transition: background 0.3s ease-out;
+      transition: background 0.3s ease-out;
+    }
+
+    +desktop() {
+      menu-item-background-style()
+    }
+
+    +tablet() {
+      menu-item-background-style()
+    }
+    
     +mobile() {
       text-align: left;
       border-radius: 8px;
     }
 
     &:hover { 
-      background: #999;
+      /* background: #999; */
       /* box-shadow: inset 0.475em 0.375em 0.45em 0 #999; */
-      color: #fff;
+      /* color: #fff; */
+      
+      +desktop() {
+        /* border-bottom: 1px solid rgb(15, 15, 15); */
+        /* width: 100px; */
+        /* transform: scaleX(1); */
+        background-size: 100% 1px;
+      }
+      
+      +tablet() {
+        /* border-bottom: 1px solid rgb(15, 15, 15); */
+        /* width: 100px; */
+        /* transform: scaleX(1); */
+        background-size: 100% 1px;
+      }
     }
   }
   
   .menu-item-active a {
-    background: #999;
+    /* background: #999; */
     /* box-shadow: inset 0.475em 0.375em 0.45em 0 #888; */
-    color: #fff;
+    /* color: #fff; */
+    menu-item-active-background-style() {
+      background-image: -webkit-gradient(linear, left top, left bottom, from($grey-dark), to($grey-dark));
+      background-image: -webkit-linear-gradient($grey-dark, $grey-dark);
+      background-image: linear-gradient($grey-dark, $grey-dark);
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center bottom, center -webkit-calc(100% - 1px);
+      background-position: center bottom, center calc(100% - 1px);
+      background-size: 100% 1px;
+    }
+
+    +desktop() {
+      menu-item-active-background-style()
+    }
+
+    +tablet() {
+      menu-item-active-background-style()
+    }
+
     +mobile() {
       background: #ddd;
       &:after {

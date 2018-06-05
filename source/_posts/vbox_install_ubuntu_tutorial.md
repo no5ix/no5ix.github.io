@@ -17,7 +17,8 @@ categories:
 - 建议给虚拟机分配4G内存
 
 
-<!--more -->
+**. . .**<!-- more -->
+
 
 
 # virtualBox网络设置

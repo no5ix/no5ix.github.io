@@ -18,6 +18,8 @@ categories:
 
 下面的代码取自我的GitHub项目 [<i class="fa fa-fw fa-github fa-2x"></i>**RealTimeServer**](https://github.com/no5ix/RealTimeServer) 
 
+**. . .**<!-- more -->
+
 ``` c++ RealTimeSrvEntityFactory.h
 // Fill out your copyright notice in the Description page of Project Settings.
 

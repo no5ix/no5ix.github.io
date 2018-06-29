@@ -33,7 +33,7 @@ type: "about"
 
 # 交流一哈?
 
-- Email : no5ix@foxmail.com
+- Email : no5ix#foxmail.com (将#替换为@)
 - GitHub : https://github.com/no5ix
 <!-- - 网易云音乐 : https://music.163.com/#/user/home?id=47256866 -->
 

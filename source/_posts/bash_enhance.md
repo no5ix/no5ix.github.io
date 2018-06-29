@@ -39,6 +39,7 @@ if [ -f ~/.bashrc ]; then
 fi
 ```
 
+**. . .**<!-- more -->
 
 # 安全的rm
 
@@ -62,8 +63,7 @@ alias ll='ls -alF'
 mkdir -p ~/.trash
 
 # original rm
-alias or='/bin/rm' 
-
+alias or='/bin/rm'
 
 alias rm=trash
 alias r=trash
@@ -74,11 +74,31 @@ alias er=emptytrash
 
 undelfile()
 {
-    mv -i ~/.trash/$@ ./
+  mv -i ~/.trash/$@ ./
 }
 trash()
 {
-    mv $@ ~/.trash/
+    for TARGET_NAME in $@
+    do
+        TARGET_WITH_NO_LAST_SLASH=~/.trash/${TARGET_NAME%*/}
+        if [ -d ${TARGET_WITH_NO_LAST_SLASH} ]; then
+        # or -rf ${TARGET_WITH_NO_LAST_SLASH}
+            mv ${TARGET_WITH_NO_LAST_SLASH} ${TARGET_WITH_NO_LAST_SLASH}_`date '+%x%X'`
+            echo "rename the old one with the sameName_currentTime successfully."
+        fi
+        if [ -f ${TARGET_WITH_NO_LAST_SLASH} ]; then
+        # or -rf ${TARGET_WITH_NO_LAST_SLASH}
+            mv ${TARGET_WITH_NO_LAST_SLASH} ${TARGET_WITH_NO_LAST_SLASH}_`date '+%x%X'`
+            echo "rename the old one with the sameName_currentTime successfully."
+        fi
+        if [ -L ${TARGET_WITH_NO_LAST_SLASH} ]; then
+        # or -rf ${TARGET_WITH_NO_LAST_SLASH}
+            mv ${TARGET_WITH_NO_LAST_SLASH} ${TARGET_WITH_NO_LAST_SLASH}_`date '+%x%X'`
+            echo "rename the old one with the sameName_currentTime successfully."
+        fi
+    done
+    ORIGIN_TARGET=$@
+    mv ${ORIGIN_TARGET%*/} ~/.trash/    #${ORIGIN_TARGET%*/} for removing the last slash
 }
 emptytrash()
 {
@@ -86,11 +106,23 @@ emptytrash()
     [ $confirm == 'y' ] || [ $confirm == 'Y' ]  && or -rf ~/.trash/*
 }
 
-# mkdir and cd it
-mc()
+
+# mkdir and enter it
+alias mc=mkdircd
+mkdircd()
 {
     mkdir -p "$1" && cd "$1"
 }
+
+# cd and ls -alF dir
+alias cd=cdll
+cdll()
+{
+        builtin cd "$@" && ll;
+}
+
+
+
 ```
 
 如果想清空回收站彻底删除所有, 用`er`就可以了.

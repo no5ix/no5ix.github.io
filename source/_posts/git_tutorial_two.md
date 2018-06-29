@@ -103,9 +103,10 @@ nani
 
 ### 删除远程标签
 
-用法 : `git push origin :refs/tags/标签名`  
+用法 : `git push origin :refs/tags/标签名`  或 `git push origin --delete tag 标签名`
+
   
-比如 : `git push origin :refs/tags/protobuf-2.5.0rc1`  
+比如 : `git push origin :refs/tags/protobuf-2.5.0rc1` 或 `git push origin --delete tag protobuf-2.5.0rc1`
 
 ## 给指定的commit打标签
 

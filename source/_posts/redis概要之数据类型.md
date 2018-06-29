@@ -119,20 +119,20 @@ redis> HGET site mysql
 
 Redis 列表是简单的字符串列表，按照插入顺序排序。
 
-你可以添加一个元素到列表的头部（左边）或者尾部（右边）。
+你可以添加一个元素到列表的头部（左边lpush）或者尾部（右边rpush）。
 
 实例 :
 ```
 redis 127.0.0.1:6379> lpush runoob redis
 (integer) 1
-redis 127.0.0.1:6379> lpush runoob mongodb
+redis 127.0.0.1:6379> rpush runoob mongodb
 (integer) 2
 redis 127.0.0.1:6379> lpush runoob rabitmq
 (integer) 3
 redis 127.0.0.1:6379> lrange runoob 0 10
 1) "rabitmq"
-2) "mongodb"
-3) "redis"
+2) "redis"
+3) "mongodb"
 redis 127.0.0.1:6379>
 ```
 

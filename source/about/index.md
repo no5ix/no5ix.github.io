@@ -24,10 +24,10 @@ type: "about"
 
 # 具体什么技能效果? 
 
- - C/C++/网络编程 : ★★★★
+ - C/C++ : ★★★★
  - Linux : ★★★★
- - PHP/Python/Lua : ★★★
- - 虚幻4引擎 : ★★★
+ <!-- - PHP/Python/Lua : ★★★ -->
+ - UE4 : ★★
  - MySQL/Redis/ : ★★★
  <!-- - Vim/Git/Markdown/番茄工作法 : ★★★★★ -->
 

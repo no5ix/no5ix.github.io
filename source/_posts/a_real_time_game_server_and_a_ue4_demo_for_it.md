@@ -10,7 +10,7 @@ top: 6
 ---
 
 
-A real time game server.
+A realtime game server.
 
 一个实时游戏服务器.
 

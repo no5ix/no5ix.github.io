@@ -1,6 +1,6 @@
 ---
 title: UE4打印大全
-date: 2018-05-02 15:56:12
+date: 2017-05-02 15:56:12
 tags:
 - UE4
 categories:
@@ -10,7 +10,6 @@ categories:
 
 # 介绍
 
-下面的代码取自我的GitHub项目 [<i class="fa fa-fw fa-github fa-2x"></i>**RealTimeServer**](https://github.com/no5ix/RealTimeServer)
 都是自描述性的且项目无关的, 可以直接放心使用.
 
 **. . .**<!-- more -->
@@ -33,7 +32,7 @@ categories:
 
 # 示例代码
 
-``` c++ RealTimeSrvHelper.h
+``` c++ PrintHelper.h
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
@@ -99,7 +98,7 @@ categories:
 // 
 #define A_LOG_M(FormatString, ...)     				if (ACTION_SHOW_DEBUG_OUTPUT_LOG) UE_LOG(LogTemp, Warning, TEXT("%s  :  %s"), *STR_CUR_CLASS_FUNC_LINE, *FString::Printf(TEXT(FormatString), ##__VA_ARGS__ ) )
 
-class RealTimeSrvHelper
+class PrintHelper
 {
 public:
 
@@ -110,27 +109,27 @@ public:
 ```
 
 
-``` c++ RealTimeSrvHelper.cpp
+``` c++ PrintHelper.cpp
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "RealTimeSrvHelper.h"
+#include "PrintHelper.h"
 
 
 //ScreenMsg
-void RealTimeSrvHelper::ScreenMsg( const FString& Msg )
+void PrintHelper::ScreenMsg( const FString& Msg )
 {
 	if (!ACTION_SHOW_DEBUG_SCREEN_MSG) return;
 	GEngine->AddOnScreenDebugMessage( -1, 55.f, FColor::Red, *Msg );
 }
 
-void RealTimeSrvHelper::ScreenMsg( const FString& Msg, const FString& Msg2 )
+void PrintHelper::ScreenMsg( const FString& Msg, const FString& Msg2 )
 {
 	if (!ACTION_SHOW_DEBUG_SCREEN_MSG) return;
 	GEngine->AddOnScreenDebugMessage( -1, 55.f, FColor::Red, FString::Printf( TEXT( "%s %s" ), *Msg, *Msg2 ) );
 }
 
-void RealTimeSrvHelper::ScreenMsg( const FString& Msg, const float Value )
+void PrintHelper::ScreenMsg( const FString& Msg, const float Value )
 {
 	if (!ACTION_SHOW_DEBUG_SCREEN_MSG) return;
 	GEngine->AddOnScreenDebugMessage( -1, 55.f, FColor::Red, FString::Printf( TEXT( "%s %f" ), *Msg, Value ) );

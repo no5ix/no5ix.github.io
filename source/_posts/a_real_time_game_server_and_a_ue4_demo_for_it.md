@@ -1,5 +1,5 @@
 ---
-title: 一个实时游戏服务器附一个UE4游戏前端演示Demo
+title: 一个实时游戏服务器
 date: 2018-05-02 17:56:12
 tags:
 - GitHub
@@ -10,16 +10,24 @@ top: 6
 ---
 
 
-A real time game server from scratch
+A real time game server.
 
-从零开始写一个实时游戏服务器
-
-And a UE4 demo for it
-
-附一个UE4游戏前端演示Demo
+一个实时游戏服务器.
 
 
-![UE4DemoScreenshot.jpg](/img/a_real_time_game_server_and_a_ue4_demo_for_it/UE4DemoScreenshot_small.jpg)
+<!-- ![UE4DemoScreenshot.jpg](/img/a_real_time_game_server_and_a_ue4_demo_for_it/UE4DemoScreenshot_small.jpg) -->
+
+
+# GitHub
+
+[<i class="fa fa-fw fa-github fa-2x"></i>realtime-server](https://github.com/no5ix/realtime-server) 
+
+
+<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
+
+<video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls">
+<source src="/img/a_real_time_game_server_and_a_ue4_demo_for_it/ue4_demo_for_rs_1080p.mp4" type="video/mp4" />
+</video>
 
 <!-- 
 # Download & Play
@@ -35,12 +43,18 @@ And a UE4 demo for it
 - 服务器 : 我VPS上运行着一个服务器实例, 你只需要双击 UE4ClientDemo.exe , 它就会自动连到服务器啦 !
  -->
 
-# GitHub
-
-[<i class="fa fa-fw fa-github fa-2x"></i>realtime-server](https://github.com/no5ix/RealTimeServer) 
 
 # About This 
 
+- Win/Linux
+- RUDP
+- C++11
+- Bit Stream
+- Add UDP support for muduo
+- And a [UE4 demo](https://github.com/no5ix/realtime-server-ue4-demo) for it
+    - Unreal Engine Version : 4.16 - 4.19
+    - No Replication component from UE4, just socket
+    - A realtime-server example for this ue4 demo.(see [this](https://github.com/no5ix/realtime-server/tree/master/example/for_ue4_demo))
 
 <!-- - 可靠UDP
 
@@ -58,11 +72,9 @@ And a UE4 demo for it
 
 - 延迟渲染 -->
 
-- Unreal Engine Version : 4.16 - 4.19
-
-- 虚幻引擎版本 : 兼容 4.16 - 4.19
-
+<!-- 
 - (Old) Checkout branch 4.15 for UE4.15 version of the client and the corresponding server
 
-- (老版本的) 切到 4.15 的 Git 分支上查看虚幻引擎4.15版本的客户端以及对应的服务器
+- (老版本的) 切到 4.15 的 Git 分支上查看虚幻引擎4.15版本的客户端以及对应的服务器 
+- -->
 

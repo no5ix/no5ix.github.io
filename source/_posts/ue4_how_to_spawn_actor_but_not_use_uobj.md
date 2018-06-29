@@ -1,6 +1,6 @@
 ---
 title: UE4中如何不继承UObject就能spawn一个actor
-date: 2018-04-22 21:56:12
+date: 2017-04-22 21:56:12
 tags:
 - UE4
 categories:
@@ -16,7 +16,6 @@ categories:
 
 # 示例代码
 
-下面的代码取自我的GitHub项目 [<i class="fa fa-fw fa-github fa-2x"></i>**RealTimeServer**](https://github.com/no5ix/RealTimeServer) 
 
 **. . .**<!-- more -->
 

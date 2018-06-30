@@ -1,5 +1,5 @@
 ---
-title: 一个实时游戏服务器
+title: 一个实时的专用游戏服务器
 date: 2018-05-02 17:56:12
 tags:
 - GitHub
@@ -10,9 +10,9 @@ top: 6
 ---
 
 
-A realtime game server.
+A realtime dedicated game server.
 
-一个实时游戏服务器.
+一个实时的专用游戏服务器.
 
 
 <!-- ![UE4DemoScreenshot.jpg](/img/a_real_time_game_server_and_a_ue4_demo_for_it/UE4DemoScreenshot_small.jpg) -->

@@ -7,13 +7,60 @@ categories:
 -  Script
 ---
 
-# Linux环境
+# ubuntu环境
 
-## Install lua
+因为tolua++只支持5.1所以我们优先装5.1版本, 当然, 5.3版本也会介绍.
 
-sudo apt-get install lua5.1
+**. . .**<!--more -->
 
-<!--more -->
+
+## 测试文件
+
+``` c++ a.cpp
+extern "C" {
+    #include "lua.h"
+    #include "lualib.h"
+    #include "lauxlib.h"
+};  // 注意 : 这个extern "C" {} 非常重要, 不然会找不到相关库函数
+
+//#include "lua.h"
+//#include "lauxlib.h"
+int main(int argc, char **argv)
+{
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+    luaL_dostring(L, "print('hello, '.._VERSION)");
+    return 0;
+}
+```
+
+
+## lua5.1 
+
+    sudo apt-get install lua5.1
+    sudo apt-get install liblua5.1-0-dev
+
+编译命令 : ` gcc a.cpp -I/usr/include/lua5.1 -llua5.1 -lm `
+
+生成 a.out 之后, 运行 a.out, 若打印 ` hello, Lua 5.1 ` 即为安装成功.
+
+
+## lua5.3
+
+    apt-get install libreadline-dev
+    curl -R -O http://www.lua.org/ftp/lua-5.3.0.tar.gz
+    tar zxf lua-5.3.0.tar.gz
+    cd lua-5.3.0
+    make linux test
+    make install
+
+编译命令 : ` g++ a.cpp -llua -ldl `
+
+生成 a.out 之后, 运行 a.out, 若打印 ` hello, Lua 5.3 ` 即为安装成功.
+
+
+
+
 
 ## luarocks
 
@@ -65,10 +112,14 @@ luarocks search json
 
 luarocks install json4lua
 
+
 # Windows环境
 
-## lua安装
 
 首先要安装一个微软依赖 : https://www.microsoft.com/en-us/download/details.aspx?id=3387&fa43d42b-25b5-4a42-fe9b-1634f450f5ee=True
 
-然后安装lua for windows : http://luaforge.net/projects/luaforwindows/
+然后安装lua for windows : 
+- http://www.runoob.com/lua/lua-environment.html 
+- 或 http://luaforge.net/projects/luaforwindows/
+
+

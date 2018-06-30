@@ -66,7 +66,8 @@ TOLUAPP = 'tolua++5.1'
     9
     10
     Student Run
-    Student Run101
+    Student Run10
+    1
     2
     3
     4
@@ -77,7 +78,8 @@ TOLUAPP = 'tolua++5.1'
     9
     10
     Student Run
-    Student Run101
+    Student Run10
+    1
     2
     3
     4

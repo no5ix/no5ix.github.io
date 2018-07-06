@@ -20,6 +20,8 @@ Both string and bytes literals may optionally be prefixed with a letter 'r' or '
 那么，它的这一特性有什么好处呢？
 不用正则，不知 raw string 大法好！我们知道，正则表达式里，有很多[元字符](http://deerchao.net/tutorials/regex/regex.htm#metacode)，当没有 raw string 时，我们需要在书写正则表达式的时候使用'\\'来表示元字符里的'\'，这样将导致正则表达式变得冗长，而且可读性也会降低。
 
+**. . .**<!--more -->
+
 C++ 11 中的 raw string，简化了我们在使用 regex 库时正则表达式的书写。下面是我找到的一些资料：
 
 [C++11 raw strings literals tutorial](http://solarianprogrammer.com/2011/10/16/cpp-11-raw-strings-literals-tutorial/)

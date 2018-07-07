@@ -48,10 +48,10 @@ A realtime dedicated game server.
 
 - A [UE4 State Synchronization demo](https://github.com/no5ix/realtime-server-ue4-demo) for it
 - 附一个[虚幻4状态同步Demo](https://github.com/no5ix/realtime-server-ue4-demo)
-    - No Replication component from UE4, just socket
+    - No replication component from UE4, just socket
     - 没有用UE4的网络同步组件, 唯socket而已
     - 
-    - Unreal Engine Version : 4.16 - 4.19
+    - Unreal Engine version : 4.16 - 4.19
     - 虚幻引擎版本 : 兼容 4.16 - 4.19
     - 
     - A [realtime-server example](https://github.com/no5ix/realtime-server/tree/master/example/for_ue4_demo) for this UE4 demo

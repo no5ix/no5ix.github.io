@@ -3,6 +3,7 @@ title: 进程间的通信与同步
 date: 2017-01-27 21:01:59
 tags:
 - IPC
+- noodle
 categories:
 - Linux
 ---
@@ -56,6 +57,19 @@ Linux 的 2.2.x 内核支持多种共享内存方式，如 mmap() 系统调用�
 
 上面涉及到了一些数据结构，围绕数据结构理解问题会容易一些。
 
+
+# 共享内存的优缺点
+
+使用共享内存的优缺点如下所述 。
+
+- 优点：使用共享内存进行进程间的通信非常方便，而且函数的接口也简单，数据的
+共享还使进程间的数据不用传送，而是直接访问内存，也加快了程序的效率。 同时，它也不
+像无名管道那样要求通信的进程有一定的父子关系 。
+
+- 缺点：共享 内存没有提供同步的机制，这使得在使用共享 内存进行进程间通信时，
+往往要借助其他的手段来进行进程间的同步工作 。
+
+
 # mmap
 
 mmap() 系统调用使得进程之间通过映射同一个普通文件实现共享内存。普通文件被映射到进程地址空间后，进程可以向访问普通内存一样对文件进行访问，不必再调用 read()，write（）等操作。
@@ -64,19 +78,37 @@ mmap() 系统调用使得进程之间通过映射同一个普通文件实现共�
 
 ## mmap() 系统调用形式如下
 
-void* mmap (void * addr , size_t len , int prot , int flags , int fd , off_t offset)
-参数 fd 为即将映射到进程空间的文件描述字，一般由 open() 返回，同时，fd 可以指定为 - 1，此时须指定 flags 参数中的 MAP_ANON，表明进行的是匿名映射（不涉及具体的文件名，避免了文件的创建及打开，很显然只能用于具有亲缘关系的进程间通信）。len 是映射到调用进程地址空间的字节数，它从被映射文件开头 offset 个字节开始算起。prot 参数指定共享内存的访问权限。可取如下几个值的或：PROT_READ（可读） , PROT_WRITE （可写）, PROT_EXEC （可执行）, PROT_NONE（不可访问）。flags 由以下几个常值指定：MAP_SHARED , MAP_PRIVATE , MAP_FIXED，其中，MAP_SHARED , MAP_PRIVATE 必选其一，而 MAP_FIXED 则不推荐使用。offset 参数一般设为 0，表示从文件头开始映射。参数 addr 指定文件应被映射到进程空间的起始地址，一般被指定一个空指针，此时选择起始地址的任务留给内核来完成。函数的返回值为最后文件映射到进程空间的地址，进程可直接操作起始地址为该值的有效地址。这里不再详细介绍 mmap() 的参数，读者可参考 mmap() 手册页获得进一步的信息。
+` void* mmap (void * addr , size_t len , int prot , int flags , int fd , off_t offset) `
+
+- 参数 fd 为即将映射到进程空间的文件描述字，一般由 open() 返回，同时，fd 可以指定为 - 1，此时须指定 flags 参数中的 MAP_ANON，表明进行的是匿名映射（不涉及具体的文件名，避免了文件的创建及打开，很显然只能用于具有亲缘关系的进程间通信）。
+- len 是映射到调用进程地址空间的字节数，它从被映射文件开头 offset 个字节开始算起。
+- prot 参数指定共享内存的访问权限。
+可取如下几个值的或：PROT_READ（可读） , PROT_WRITE （可写）, PROT_EXEC （可执行）, PROT_NONE（不可访问）。
+- flags 由以下几个常值指定：MAP_SHARED , MAP_PRIVATE , MAP_FIXED，其中，MAP_SHARED , MAP_PRIVATE 必选其一，而 MAP_FIXED 则不推荐使用。
+- offset 参数一般设为 0，表示从文件头开始映射。
+- 参数 addr 指定文件应被映射到进程空间的起始地址，一般被指定一个空指针，此时选择起始地址的任务留给内核来完成。
+
+函数的返回值为最后文件映射到进程空间的地址，进程可直接操作起始地址为该值的有效地址。
+这里不再详细介绍 mmap() 的参数，读者可参考 mmap() 手册页获得进一步的信息。
+
 
 ## 系统调用 mmap() 用于共享内存的两种方式
 
 - （1）使用普通文件提供的内存映射：适用于任何进程之间； 此时，需要打开或创建一个文件，然后再调用 mmap()；典型调用代码如下：
 
-`fd=open(name, flag, mode);`
+    `fd=open(name, flag, mode);`
 
-ptr=mmap(NULL, len , PROT_READ|PROT_WRITE, MAP_SHARED , fd , 0); 通过 mmap() 实现共享内存的通信方式有许多特点和要注意的地方，我们将在范例中进行具体说明。
+    ptr=mmap(NULL, len , PROT_READ|PROT_WRITE, MAP_SHARED , fd , 0); 通过 mmap() 实现共享内存的通信方式有许多特点和要注意的地方，我们将在范例中进行具体说明。
 
-- （2）使用特殊文件提供匿名内存映射：适用于具有亲缘关系的进程之间； 由于父子进程特殊的亲缘关系，在父进程中先调用 mmap()，然后调用 fork()。那么在调用 fork() 之后，子进程继承父进程匿名映射后的地址空间，同样也继承 mmap() 返回的地址，这样，父子进程就可以通过映射区域进行通信了。注意，这里不是一般的继承关系。一般来说，子进程单独维护从父进程继承下来的一些变量。而 mmap() 返回的地址，却由父子进程共同维护。
-对于具有亲缘关系的进程实现共享内存最好的方式应该是采用匿名内存映射的方式。此时，不必指定具体的文件，只要设置相应的标志即可，参见范例 2。
+- （2）使用特殊文件提供匿名内存映射：适用于具有亲缘关系的进程之间； 由于父子进程特殊的亲缘关系，在父进程中先调用 mmap()，然后调用 fork()。
+
+    那么在调用 fork() 之后，子进程继承父进程匿名映射后的地址空间，同样也继承 mmap() 返回的地址，这样，父子进程就可以通过映射区域进行通信了。
+    注意，这里不是一般的继承关系。
+    一般来说，子进程单独维护从父进程继承下来的一些变量。
+    而 mmap() 返回的地址，却由父子进程共同维护。
+    对于具有亲缘关系的进程实现共享内存最好的方式应该是采用匿名内存映射的方式。
+    此时，不必指定具体的文件，只要设置相应的标志即可，参见范例 2。
+
 
 ## 系统调用 munmap()
 
@@ -90,11 +122,21 @@ ptr=mmap(NULL, len , PROT_READ|PROT_WRITE, MAP_SHARED , fd , 0); 通过 mmap() �
 
 ## mmap() 范例
 
-下面将给出使用 mmap() 的两个范例：范例 1 给出两个进程通过映射普通文件实现共享内存通信；范例 2 给出父子进程通过匿名映射实现共享内存。系统调用 mmap() 有许多有趣的地方，下面是通过 mmap（）映射普通文件实现进程间的通信的范例，我们通过该范例来说明 mmap() 实现共享内存的特点及注意事项。
+下面将给出使用 mmap() 的两个范例：
+- 范例 1 给出两个进程通过映射普通文件实现共享内存通信；
+- 范例 2 给出父子进程通过匿名映射实现共享内存。
 
-### 两个进程通过映射普通文件实现共享内存通信
+系统调用 mmap() 有许多有趣的地方，下面是通过 mmap（）映射普通文件实现进程间的通信的范例，我们通过该范例来说明 mmap() 实现共享内存的特点及注意事项。
 
-范例 1 包含两个子程序：map_normalfile1.c 及 map_normalfile2.c。编译两个程序，可执行文件分别为 map_normalfile1 及 map_normalfile2。两个程序通过命令行参数指定同一个文件来实现共享内存方式的进程间通信。map_normalfile2 试图打开命令行参数指定的一个普通文件，把该文件映射到进程的地址空间，并对映射后的地址空间进行写操作。map_normalfile1 把命令行参数指定的文件映射到进程地址空间，然后对映射后的地址空间执行读操作。这样，两个进程通过命令行参数指定同一个文件来实现共享内存方式的进程间通信。
+### 范例1两个进程通过映射普通文件实现共享内存通信
+
+范例1 包含两个子程序：map_normalfile1.c 及 map_normalfile2.c。
+编译两个程序，可执行文件分别为 map_normalfile1 及 map_normalfile2。
+两个程序通过命令行参数指定同一个文件来实现共享内存方式的进程间通信。
+
+map_normalfile2 试图打开命令行参数指定的一个普通文件，把该文件映射到进程的地址空间，并对映射后的地址空间进行写操作。
+map_normalfile1 把命令行参数指定的文件映射到进程地址空间，然后对映射后的地址空间执行读操作。
+这样，两个进程通过命令行参数指定同一个文件来实现共享内存方式的进程间通信。
 
 下面是两个程序代码：
 
@@ -104,34 +146,37 @@ ptr=mmap(NULL, len , PROT_READ|PROT_WRITE, MAP_SHARED , fd , 0); 通过 mmap() �
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
-typedef struct{
+
+typedef struct
+{
   char name[4];
   int  age;
 }people;
+
 main(int argc, char** argv) // map a normal file as shared mem:
 {
-  int fd,i;
-  people *p_map;
-  char temp;
-   
-  fd=open(argv[1],O_CREAT|O_RDWR|O_TRUNC,00777);
-  lseek(fd,sizeof(people)*5-1,SEEK_SET);
-  write(fd,"",1);
-   
-  p_map = (people*) mmap( NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,
-        MAP_SHARED,fd,0 );
-  close( fd );
-  temp = 'a';
-  for(i=0; i<10; i++)
-  {
-    temp += 1;
-    memcpy( ( *(p_map+i) ).name, &temp,2 );
-    ( *(p_map+i) ).age = 20+i;
-  }
-  printf(" initialize over \n ")；
-  sleep(10);
-  munmap( p_map, sizeof(people)*10 );
-  printf( "umap ok \n" );
+    int fd,i;
+    people *p_map;
+    char temp;
+    
+    fd=open(argv[1],O_CREAT|O_RDWR|O_TRUNC,00777);
+    lseek(fd,sizeof(people)*5-1,SEEK_SET);
+    write(fd,"",1);
+    
+    p_map = (people*) mmap( NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,
+          MAP_SHARED,fd,0 );
+    close( fd );
+    temp = 'a';
+    for(i=0; i<10; i++)
+    {
+        temp += 1;
+        memcpy( ( *(p_map+i) ).name, &temp,2 );
+        ( *(p_map+i) ).age = 20+i;
+    }
+    printf(" initialize over \n ");
+    sleep(10);
+    munmap( p_map, sizeof(people)*10 );
+    printf( "umap ok \n" );
 }
 ```
 
@@ -141,22 +186,25 @@ main(int argc, char** argv) // map a normal file as shared mem:
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
-typedef struct{
-  char name[4];
-  int  age;
+
+typedef struct
+{
+    char name[4];
+    int  age;
 }people;
+
 main(int argc, char** argv)  // map a normal file as shared mem:
 {
-  int fd,i;
-  people *p_map;
-  fd=open( argv[1],O_CREAT|O_RDWR,00777 );
-  p_map = (people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,
-       MAP_SHARED,fd,0);
-  for(i = 0;i<10;i++)
-  {
-  printf( "name: %s age %d;\n",(*(p_map+i)).name, (*(p_map+i)).age );
-  }
-  munmap( p_map,sizeof(people)*10 );
+    int fd,i;
+    people *p_map;
+    fd=open( argv[1],O_CREAT|O_RDWR,00777 );
+    p_map = (people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,
+        MAP_SHARED,fd,0);
+    for(i = 0;i<10;i++)
+    {
+        printf( "name: %s age %d;\n",(*(p_map+i)).name, (*(p_map+i)).age );
+    }
+    munmap( p_map,sizeof(people)*10 );
 }
 ```
 
@@ -201,65 +249,169 @@ map_normfile2.c 只是简单的映射一个文件，并以 people 数据结构�
 
 - 1、 最终被映射文件的内容的长度不会超过文件本身的初始大小，即映射不能改变文件的大小；
 
-- 2、 可以用于进程通信的有效地址空间大小大体上受限于被映射文件的大小，但不完全受限于文件大小。打开文件被截短为 5 个 people 结构大小，而在 map_normalfile1 中初始化了 10 个 people 数据结构，在恰当时候（map_normalfile1 输出 initialize over 之后，输出 umap ok 之前）调用 map_normalfile2 会发现 map_normalfile2 将输出全部 10 个 people 结构的值，后面将给出详细讨论。
-注：在 linux 中，内存的保护是以页为基本单位的，即使被映射文件只有一个字节大小，内核也会为映射分配一个页面大小的内存。当被映射文件小于一个页面大小时，进程可以对从 mmap() 返回地址开始的一个页面大小进行访问，而不会出错；但是，如果对一个页面以外的地址空间进行访问，则导致错误发生，后面将进一步描述。因此，可用于进程间通信的有效地址空间大小不会超过文件大小及一个页面大小的和。
+- 2、 可以用于进程通信的有效地址空间大小大体上受限于被映射文件的大小，但不完全受限于文件大小。打开文件被截短为 5 个 people 结构大小，而在 map_normalfile1 中初始化了 10 个 people 数据结构，在恰当时候（map_normalfile1 输出 initialize over 之后，输出 umap ok 之前）调用 map_normalfile2 会发现 map_normalfile2 将输出全部 10 个 people 结构的值，[后面](#理解页式管理机制)将给出详细讨论。
+        注：在 linux 中，内存的保护是以页为基本单位的，即使被映射文件只有一个字节大小，
+        内核也会为映射分配一个页面大小的内存。当被映射文件小于一个页面大小时，
+        进程可以对从 mmap() 返回地址开始的一个页面大小进行访问，
+        而不会出错；但是，
+        如果对一个页面以外的地址空间进行访问，
+        则导致错误发生，
+        后面将进一步描述。因此，
+        可用于进程间通信的有效地址空间大小不会超过文件大小及一个页面大小的和。
 
 - 3、 文件一旦被映射后，调用 mmap() 的进程对返回地址的访问是对某一内存区域的访问，暂时脱离了磁盘上文件的影响。所有对 mmap() 返回地址空间的操作只在内存中有意义，只有在调用了 munmap() 后或者 msync() 时，才把内存中的相应内容写回磁盘文件，所写内容仍然不能超过文件的大小。
 
-### 父子进程通过匿名映射实现共享内存
+### 范例2父子进程通过匿名映射实现共享内存并用semaphore同步
 
-``` c
-#include <sys/mman.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <unistd.h>
-typedef struct{
-  char name[4];
-  int  age;
-}people;
-main(int argc, char** argv)
-{
-  int i;
-  people *p_map;
-  char temp;
-  p_map=(people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,
-       MAP_SHARED|MAP_ANONYMOUS,-1,0);
-  if(fork() == 0)
-  {
-    sleep(2);
-    for(i = 0;i<5;i++)
-      printf("child read: the %d people's age is %d\n",i+1,(*(p_map+i)).age);
-    (*p_map).age = 100;
-    munmap(p_map,sizeof(people)*10); //实际上，进程终止时，会自动解除映射。
-    exit();
-  }
-  temp = 'a';
-  for(i = 0;i<5;i++)
-  {
-    temp += 1;
-    memcpy((*(p_map+i)).name, &temp,2);
-    (*(p_map+i)).age=20+i;
-  }
-  sleep(5);
-  printf( "parent read: the first people,s age is %d\n",(*p_map).age );
-  printf("umap\n");
-  munmap( p_map,sizeof(people)*10 );
-  printf( "umap ok\n" );
-}
+主要介绍下在多进程中使用信号量semaphore的方法。在上一文中，我们已经知道semaphore和mutex对临界区访问控制的一个最主要区别就是semaphore可以跨进程使用，而mutex只能在一个进程中使用。我们再来看下sem_init的原型，熟悉决定进程共享或者线程共享的方法：
+``` c++
+#include <semaphore.h>
+int sem_init(sem_t *sem, int pshared, unsigned int value);
 ```
 
-考察程序的输出结果，体会父子进程匿名共享内存：
+通过设置pshared的值来控制信号量是属于进程间共享还是线程间共享，若pshared为0表明是多线程共享，否则就是多进程间共享。
 
-    child read: the 1 people's age is 20
-    child read: the 2 people's age is 21
-    child read: the 3 people's age is 22
-    child read: the 4 people's age is 23
-    child read: the 5 people's age is 24
-    parent read: the first people,s age is 100
-    umap
-    umap ok
+接下来我们实验思路是：创建两个进程，一个进程负责读取用户在界面输入的数据，然后存入本地的test.txt文件；另一个进程负责读取该文件，然后在标准输出上显示读取的内容。
 
-## 对 mmap() 返回地址的访问
+为此，我们需要创建两个个支持两个进程访问的信号量sem1和sem2，读文件时需要获取sem1信号，读取结束后释放sem2信号；写文件需要获取sem2信号，写文件结束后方式sem1信号。
+
+sem2的初始值为1，sem1的初始值为0，以保证先写入再进行读取，源代码如下，稍后挑关键内容进行解释：
+
+``` c mmap_fork_sync.c
+#include<stdio.h>
+#include<stdlib.h>
+#include<pthread.h>
+#include<semaphore.h>
+#include<string.h>
+#include<sys/mman.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<fcntl.h>
+#define BUF_SIZE 30
+ 
+void readfile(sem_t* psem1,sem_t* psem2)
+{
+    FILE* fp;
+    char buf[BUF_SIZE];
+    int str_len,str_seek=0;
+    while(1)
+    {
+        sem_wait(psem1);
+        fp=fopen("data.txt","r+");
+        if(fp==NULL)
+        return ;
+        memset(buf,0,sizeof(BUF_SIZE));
+        fseek(fp,str_seek,SEEK_SET);
+        str_len=fread(buf,sizeof(char),BUF_SIZE-1,fp);
+        buf[str_len]=0;
+        str_seek+=str_len;
+        fputs("output:",stdout);
+        puts(buf);
+        fclose(fp);
+        sem_post(psem2);
+    }
+}
+void writefile(sem_t* psem1,sem_t* psem2)
+{
+        FILE* fp;
+        char buf[BUF_SIZE];
+        while(1)
+        {
+            sem_wait(psem2);
+            fp=fopen("data.txt","a");
+            if(fp==NULL)
+            return;
+            memset(buf,0,BUF_SIZE);
+            fputs("Input:",stdout);
+            fgets(buf,BUF_SIZE,stdin);
+            fwrite(buf,sizeof(char),strlen(buf),fp);
+            fclose(fp);
+            sem_post(psem1);
+        }
+}
+ 
+int main()
+{
+    int pid;
+    int fd1,fd2;
+    void* pv;
+    sem_t* psem1;
+    sem_t* psem2;
+    fd1=open("data1",O_CREAT|O_RDWR|O_TRUNC,0666);
+    fd2=open("data2",O_CREAT|O_RDWR|O_TRUNC,0666);\
+    ftruncate(fd1,8192);
+    ftruncate(fd2,8192);
+    //lseek(fd,5000,SEEK_SET);
+    psem1=(sem_t*)mmap(NULL,sizeof(sem_t),PROT_READ|PROT_WRITE,MAP_SHARED,fd1,0);
+    psem2=(sem_t*)mmap(NULL,sizeof(sem_t),PROT_READ|PROT_WRITE,MAP_SHARED,fd2,0);
+    sem_init(psem1,1,0);
+    sem_init(psem2,1,1);
+    pid=fork();
+    if(pid==0)
+    {
+        puts("进入子进程");
+        writefile(psem1,psem2);
+    }
+    else
+    {
+        puts("进入父进程");
+        readfile(psem1,psem2);
+    }
+    sem_destroy(psem1);
+    sem_destroy(psem2);
+    munmap(psem1,sizeof(sem_t));
+    munmap(psem2,sizeof(sem_t));
+    close(fd1);
+    close(fd2);
+    return 0; 
+}
+
+```
+
+为了能够跨进程使用 semaphore ，我们引入了跨进程的技术mmap,第61、第62行分别打开了两个mmap需要映射的文件，和我们平时用的open函数不同，这里面为程序赋予了该文件的666权限。这点很重要，因为mmap需要映射的本地文件必须明确赋予其可读写的权限，否则无法通信。
+
+- 第63行和第64行分别设置两个本地映射文件的大小，以保证有充分的空间在mmap中映射并容纳我们定义的sem_t变量。这点也很重要，如果空间不够会造成总线错误。
+- 第66行和第67行分别利用mmap在共享内存中映射了两个sem_t类型的指针，这就是我们需要sem_init的信号量。
+- 第68、69行开始初始化信号量。
+- 70行fork了两个进程，在子进程中我们进行写操作，在主进程中我们进行读操作。读写操作的代码比较简单，在这里不再多说。
+- 第81到86行在使用完信号量后分别是销毁信号量、释放共享内存、关闭文件操作符。
+
+程序写到这里基本上完成了这个实验，可以考察程序的输出结果，
+编译命令 : ` gcc mmap_fork_sync.c -o mmap_fork_sync -pthread ` , 体会父子进程匿名共享内存：
+
+    b@b-VirtualBox:~/tc/mmap_test$ ./mmap_fork_sync
+    进入父进程
+    进入子进程
+    Input:4
+    output:4
+
+    Input:5
+    output:5
+
+    Input:6
+    output:6
+
+    Input:7
+    output:7
+
+    Input:7
+    output:7
+
+    ...
+
+我们可以顺便可以简单总结下在多进程中使用信号量的步骤：
+
+（1）open()用于进行mmap映射的文件，得到文件操作符fd；
+（2）把映射文件用ftruncate或者fseek重新设置大小，以保证有足够的空间容纳我们需要传递的sem_t变量；
+（3）利用mmap函数在共享内存中创建sen_t类型的指针。
+（4）用sem_init()函数初始化第（3）步中创建的指针，也就得到了我们需要的信号量。
+（5）用sem_wait()和sem_post()函数进行信号量的等待和释放。
+（6）用sem_destroy()销毁信号量。
+（7）用munmap()释放共享内存以及用close()函数关闭文件操作符。
+
+
+## 理解页式管理机制
 
 前面对范例运行结构的讨论中已经提到，linux 采用的是页式管理机制。对于用 mmap() 映射普通文件来说，进程会在自己的地址空间新增一块空间，空间大小由 mmap() 的 len 参数指定，注意，进程并不一定能够对全部新增空间都能进行有效访问。进程能够访问的有效地址大小取决于文件被映射部分的大小。简单的说，能够容纳文件被映射部分大小的最少页面个数决定了进程从 mmap() 返回的地址开始，能够有效访问的地址空间大小。超过这个空间大小，内核会根据超过的严重程度返回发送不同的信号给进程。可用如下图示说明：
 
@@ -272,10 +424,13 @@ main(int argc, char** argv)
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
-typedef struct{
+
+typedef struct
+{
     char name[4];
     int  age;
 }people;
+
 main(int argc, char** argv)
 {
     int fd,i;
@@ -445,55 +600,65 @@ int main(void){
 
 ```
 
+然后是writer
+
 ``` c++ writer.cpp
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/shm.h>
-#include <errno.h>
-#define SEM_KEY 4001
-#define SHM_KEY 5678
-union semun {
-	int val;
-};
-int main(void){
-	/*create a shm*/
-	int semid,shmid;
-	shmid = shmget(SHM_KEY,sizeof(int),IPC_CREAT|0666);
-	if(shmid<0){
-	  printf("create shm error\n");
-	  return -1;
-	}
-	void * shmptr;
-	shmptr =shmat(shmid,NULL,0);
-	if(shmptr == (void *)-1){
-	  printf("shmat error:%s\n",strerror(errno));
-	  return -1;
-	}
-	int * data = (int *)shmptr;	
-	semid = semget(SEM_KEY,2,0666);
-	struct sembuf sembuf1;
-	union semun semun1;
-	while(1){
-	  sembuf1.sem_num=1;/*这里指向第2个信号量（sem_num=1）*/
-	  sembuf1.sem_op=-1;/*操作是-1，因为第2个信号量初始值为1，所以下面不会阻塞*/
-    sembuf1.sem_flg=SEM_UNDO;
-	  semop(semid,&sembuf1,1);/*继续*/
-	  scanf("%d",data);  /*用户在终端输入数据*/
-	  sembuf1.sem_num=0;/*这里指向第一个信号量*/
-	  sembuf1.sem_op=1;/*操作加1*/	
-	  sembuf1.sem_flg=SEM_UNDO;
-	  semop(semid,&sembuf1,1);/*执行+1后，我们发现，reader阻塞正是由于第一个信号量为0，无法减一，而现在writer先为其加1，那reader就绪！writer继续循环，发现第二个信号量已经减为0，则阻塞了，我们回到reader*/
+    #include <sys/types.h>
+    #include <sys/ipc.h>
+    #include <sys/sem.h>
+    #include <stdio.h>
+    #include <unistd.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <sys/shm.h>
+    #include <errno.h>
+    #define SEM_KEY 4001
+    #define SHM_KEY 5678
+
+    union semun 
+    {
+      int val;
+    };
+
+    int main(void)
+    {
+      /*create a shm*/
+      int semid,shmid;
+      shmid = shmget(SHM_KEY,sizeof(int),IPC_CREAT|0666);
+      if(shmid<0)
+      {
+        printf("create shm error\n");
+        return -1;
+      }
+      void * shmptr;
+      shmptr =shmat(shmid,NULL,0);
+      if(shmptr == (void *)-1)
+      {
+        printf("shmat error:%s\n",strerror(errno));
+        return -1;
+      }
+      int * data = (int *)shmptr;	
+      semid = semget(SEM_KEY,2,0666);
+      struct sembuf sembuf1;
+      union semun semun1;
+      while(1)
+      {
+        sembuf1.sem_num=1;//这里指向第2个信号量（sem_num=1）
+        sembuf1.sem_op=-1;//操作是-1，因为第2个信号量初始值为1，所以下面不会阻塞
+        sembuf1.sem_flg=SEM_UNDO;
+        semop(semid,&sembuf1,1);/*继续*/
+        scanf("%d",data);  /*用户在终端输入数据*/
+        sembuf1.sem_num=0;/*这里指向第一个信号量*/
+        sembuf1.sem_op=1;/*操作加1*/	
+        sembuf1.sem_flg=SEM_UNDO;
+        semop(semid,&sembuf1,1);
+        //执行+1后，我们发现，reader阻塞正是由于第一个信号量为0，
+        //无法减一，而现在writer先为其加1，那reader就绪！writer继续循环，
+        //发现第二个信号量已经减为0，则阻塞了，我们回到reader*/
+      }
+      return 0;
     }
-	 return 0;
-}
-
 ```
-
 ## 输出
 
 多打开几个终端，同时执行 writer 程序，看是否 reader 能够正确地读到数据
@@ -533,16 +698,7 @@ reader :
 操作 。 
 例如，**使用[信号量](#System-V信号量)来进行进程的同步 。 因为对信号量的操作都是原子性的 。**
 
-## 共享内存的优缺点
 
-使用共享内存的优缺点如下所述 。
-
-- 优点：使用共享内存进行进程间的通信非常方便，而且函数的接口也简单，数据的
-共享还使进程间的数据不用传送，而是直接访问内存，也加快了程序的效率。 同时，它也不
-像无名管道那样要求通信的进程有一定的父子关系 。
-
-- 缺点：共享 内存没有提供同步的机制，这使得在使用共享 内存进行进程间通信时，
-往往要借助其他的手段来进行进程间的同步工作 。
 
 
 # System V信号量

@@ -9,7 +9,6 @@ categories:
 
 # ubuntu环境
 
-因为tolua++只支持5.1所以我们优先装5.1版本, 当然, 5.3版本也会介绍.
 
 **. . .**<!--more -->
 
@@ -58,7 +57,20 @@ int main(int argc, char **argv)
 
 生成 a.out 之后, 运行 a.out, 若打印 ` hello, Lua 5.3 ` 即为安装成功.
 
+## luajit
 
+<!-- luaJIT 官网 http://luajit.org/index.html -->
+
+//下载
+git clone http://luajit.org/git/luajit-2.0.git
+tar zxf LuaJIT-2.0.4.tar.gz
+cd LuaJIT-2.0.4
+//linux下编译
+make
+//安装
+sudo make install
+luajit -v
+出现版权信息即为安装成功。
 
 
 

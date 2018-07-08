@@ -47,7 +47,7 @@ A realtime dedicated game server.
 # About This 
 
 - A [UE4 State Synchronization demo](https://github.com/no5ix/realtime-server-ue4-demo) for it
-- 附一个[虚幻4的demo](https://github.com/no5ix/realtime-server-ue4-demo)    - 
+- 附一个[虚幻4的demo](https://github.com/no5ix/realtime-server-ue4-demo)
     - State Sync 状态同步
     - 
     - No replication component from UE4, just socket

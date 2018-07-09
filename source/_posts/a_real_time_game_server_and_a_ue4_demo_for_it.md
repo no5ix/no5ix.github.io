@@ -44,26 +44,30 @@ A realtime dedicated game server.
  -->
 
 
+
+
 # About This 
 
-- A [UE4 State Synchronization demo](https://github.com/no5ix/realtime-server-ue4-demo) for it
-- 附一个[虚幻4的demo](https://github.com/no5ix/realtime-server-ue4-demo)
-    - State Sync 状态同步
-    - 
-    - No replication component from UE4, just socket
-    - 没有用UE4的网络同步组件, 唯socket而已
-    - 
-    - Unreal Engine version : 4.16 - 4.19
-    - 虚幻引擎版本 : 兼容 4.16 - 4.19
-    - 
-    - A [realtime-server example](https://github.com/no5ix/realtime-server/tree/master/example/for_ue4_demo) for this UE4 demo
-    - 为这个 UE4 的demo写了一个[realtime-server的例子](https://github.com/no5ix/realtime-server/tree/master/example/for_ue4_demo)
+
+
 - Win/Linux
-- RUDP
 - Multi-Thread
+- RUDP
 - C++11
 - Bit Stream
 - Add UDP support for [muduo](https://github.com/chenshuo/muduo)
+- Support Lua
+
+
+# Example
+
+- Server side 服务端 : [realtime-server example](https://github.com/no5ix/realtime-server/tree/master/example/for_ue4_demo)
+- Client side 客户端 : [UE4 demo](https://github.com/no5ix/realtime-server-ue4-demo)
+    - State Sync 状态同步
+    - No replication component from UE4, just socket 没有用UE4的网络同步组件, 唯socket而已
+    - UE4: 4.16 - 4.19
+
+
 
 
 <!-- - 可靠UDP

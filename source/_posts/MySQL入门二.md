@@ -138,7 +138,6 @@ Empty set (0.00 sec)
 
 - 并不是什么都可以回滚的, 典型的如创建表和删除表这些都是不能回退的.
 - 事务是用来管理 insert,update,delete 语句的
-- 
 ```
 mysql> set autocommit = 0;
 Query OK, 0 rows affected (0.00 sec)

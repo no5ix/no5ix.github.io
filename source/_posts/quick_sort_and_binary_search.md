@@ -4,6 +4,7 @@ date: 2014-08-22 12:18:54
 tags:
 - Sort
 - CPP
+- noodle
 categories:
 - CPP
 ---
@@ -101,7 +102,7 @@ void quick_sort(int *array, int p, int r)
 
 ```
 
-## 命名清晰版本
+## 命名清晰的递归版本
 
 自己手写的, 已测试. 写得略啰嗦, 但只是希望能一目了然吧.
 
@@ -189,6 +190,53 @@ int main()
 	return 0;
 }
 ```
+
+## 快排的非递归版本
+
+我们知道快递排序大部分的版本都是递归的方式来实现的：通过Pritation来实现划分，并递归实现前后的划分。
+
+因为我们大部分看到的都是递归方式来实现快速排序。并没有关注非递归的方式。
+
+但是仔细想想也是可以做的，因为递归的本质是栈，因此我们非递归实现的过程中，借助栈来保存中间变量就可以实现非递归了。
+
+在这里中间变量也就是通过Pritation函数划分之后分成左右两部分的首尾指针，只需要保存这两部分的首尾指针即可。
+
+``` c++
+void QuickSortNonRecursion( int *a, int left, int right )
+{
+	if ( a == NULL || left < 0 || right <= 0 || left>right )
+		return;
+	stack<int>temp;
+	int i, j;
+	//（注意保存顺序）先将初始状态的左右指针压栈
+	temp.push( right );//先存右指针
+	temp.push( left );//再存左指针
+	while ( !temp.empty() )
+	{
+		i = temp.top();//先弹出左指针
+		temp.pop();
+		j = temp.top();//再弹出右指针
+		temp.pop();
+		if ( i < j )
+		{
+			int k = partition( a, i, j );
+			//if ( k > i )
+			{
+				temp.push( k - 1 );//保存中间变量
+				temp.push( i );  //保存中间变量 
+			}
+			//if ( j > k )
+			{
+				temp.push( j );
+				temp.push( k + 1 );
+			}
+		}
+
+	}
+}
+```
+从上面的代码可以看出，保存中间变量的时候需要注意保存的顺序，因为栈是后进先出的方式。
+
 
 ## 快速排序的优化
 

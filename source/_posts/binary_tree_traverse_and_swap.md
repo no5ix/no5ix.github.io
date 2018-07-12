@@ -4,6 +4,7 @@ date: 2014-09-23 12:11:22
 tags:
 - DataStructure
 - CPP
+- noodle
 categories:
 - CPP
 ---
@@ -11,27 +12,17 @@ categories:
 二叉树的二叉链式存储方案的代码表示：
 
 ``` c++
-typedef struct BinaryTreeNode
+typedef struct BinTreeNode
 {
-	void *data;
-	BinaryTreeNode *LeftNode;
-	BinaryTreeNode *RightNode;
-}BTN, *BTNP;
+	BinTreeNode( char Data ) : data_( Data ), left_( nullptr ), right_( nullptr ) {}
+	char data_;
+	struct BinTreeNode *left_, *right_;
+}btn, *btnp;
 ```
 
 
 
 # 二叉树的遍历
-
-{% asset_img binary_tree_traverse_and_swap_1.png %}
-
-如上图得到的相应的三种**深度优先遍历**的序列分别为 ： 
-
- - **先(根)序遍历** ： ABCDEGF
- - **中(根)序遍历** ： CBEGDFA
- - **后(根)序遍历** ： CGEFDBA
-
-而得到的**广度优先遍历**的序列为 : ABCDEFG
 
 **. . .**<!-- more --> 
 
@@ -40,41 +31,42 @@ typedef struct BinaryTreeNode
 {% asset_img BreadthFirstTraverse1.png BreadthFirstTraverse %}
 
 ``` c++
-void BreadthFirstTraverse(BTNP btnp)
+void BreadthFirstTraverse( btnp bTreeNode )
 {
-	if (!btnp)
+	if ( !bTreeNode )
 	{
 		return;
 	}
-
-	deque<BTNP> deque_BTNP;
-
-	deque_BTNP.push_back(btnp);
-
-	while (!deque_BTNP.empty())
+	std::queue<btnp> tempQueue;
+	tempQueue.push( bTreeNode );
+	while ( !tempQueue.empty() )
 	{
-		cout << *(char *)(deque_BTNP.front()->data) << endl;
-
-		if (deque_BTNP.front()->LeftNode)
+		cout << tempQueue.front()->data_ << endl;
+		if ( tempQueue.front()->left_ )
 		{
-			deque_BTNP.push_back(deque_BTNP.front()->LeftNode);
+			tempQueue.push( tempQueue.front()->left_ );
 		}
-
-		if (deque_BTNP.front()->RightNode)
+		if ( tempQueue.front()->right_ )
 		{
-			deque_BTNP.push_back(deque_BTNP.front()->RightNode);
+			tempQueue.push( tempQueue.front()->right_ );
 		}
-
-		deque_BTNP.pop_front();
+		tempQueue.pop();
 	}
 }
 ```
 
 ## 深度优先的递归式遍历
 
-递归式遍历的代码实现非常简洁, 但效率却不尽人意.
+递归式遍历的代码实现非常简洁, 但生产环境一般不允许递归, 因为怕栈溢出.
 
 ``` c++
+
+typedef struct BinaryTreeNode
+{
+	void *data;
+	BinaryTreeNode *LeftNode;
+	BinaryTreeNode *RightNode;
+}BTN, *BTNP;
 
 void PreOrderTraverse_Recursion(BTNP btnp)
 {
@@ -111,6 +103,8 @@ void PostOrderTraverse_Recursion(BTNP btnp)
 
 ## 深度优先的迭代式遍历
 
+递归的本质就是出栈入栈, 所以我们用栈来模拟递归, 写出以下三种迭代式遍历
+
 迭代的二叉树三种遍历方式其实思想是**统一**的 : 
 
 都是从左子树的各个结点依次入栈, 当左边已经走到头了, 就开始走右边, 在适当的条件就出栈, 只是每个遍历方式的出栈条件不一样而已, 或者是打印结点的时机不同而已.
@@ -118,28 +112,27 @@ void PostOrderTraverse_Recursion(BTNP btnp)
 ### 迭代式先序遍历代码实现
 
 ``` c++
-void PreOrderTraverse_Iteration(BTNP btnp)
+void PreOrderTraverseNonRecursion( btnp bTreeNode )
 {
-	if (!btnp)
+	if ( !bTreeNode )
 	{
 		return;
 	}
+	std::stack<btnp> tempStack;
 
-	stack<BTNP> stack_BTNP;
-
-	while (btnp || !stack_BTNP.empty())
+	while ( !tempStack.empty() || bTreeNode )
 	{
-		while (btnp)
+		while ( bTreeNode )
 		{
-			cout << *(char *)btnp->data << endl;
-			stack_BTNP.push(btnp);
-			btnp = btnp->LeftNode;
+			cout << bTreeNode->data_ << endl;
+			tempStack.push( bTreeNode );
+			bTreeNode = bTreeNode->left_;
 		}
 
-		if (!stack_BTNP.empty())
+		if ( !tempStack.empty() )
 		{
-			btnp = stack_BTNP.top()->RightNode;
-			stack_BTNP.pop();
+			bTreeNode = tempStack.top()->right_;
+			tempStack.pop();
 		}
 	}
 }
@@ -148,29 +141,27 @@ void PreOrderTraverse_Iteration(BTNP btnp)
 ### 迭代式中序遍历代码实现
 
 ``` c++
-void InOrderTraverse_Iteration(BTNP btnp)
+void InOrderTraverseNonRecursion( btnp bTreeNode )
 {
-	if (!btnp)
+	if ( !bTreeNode )
 	{
 		return;
 	}
+	std::stack<btnp> tempStack;
 
-	stack<BTNP> stack_BTNP;
-
-	while (btnp || !stack_BTNP.empty())
+	while ( !tempStack.empty() || bTreeNode )
 	{
-		while (btnp)
+		while ( bTreeNode )
 		{
-			//cout << *(char *)btnp->data << endl;
-			stack_BTNP.push(btnp);
-			btnp = btnp->LeftNode;
+			tempStack.push( bTreeNode );
+			bTreeNode = bTreeNode->left_;
 		}
 
-		if (!stack_BTNP.empty())
+		if ( !tempStack.empty() )
 		{
-			cout << *(char *)(stack_BTNP.top()->data) << endl;
-			btnp = stack_BTNP.top()->RightNode;
-			stack_BTNP.pop();
+			cout << tempStack.top()->data_ << endl;
+			bTreeNode = tempStack.top()->right_;
+			tempStack.pop();
 		}
 	}
 }
@@ -178,61 +169,106 @@ void InOrderTraverse_Iteration(BTNP btnp)
 
 ### 迭代式后序遍历代码实现
 
-后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体`POST_BTN`来记录他是否是第一次出栈 (`POST_BTN`结构体里有个 `is_first` 的数据来记录)
+后序遍历的出栈条件有点不一样, 因为后序是先左后右再中的, 比如某个结点p要出栈, 需要遍历完了p的所有右子树之后才能出栈, 而不能第一次就出栈, 所以专门构造了一个结构体`PostOrderBT`来记录他是否是第一次出栈 (`PostOrderBT`结构体里有个 `isFirstTime_` 的数据来记录)
 
 **所以我们代码中的思路就是 : **
-把每个将要入栈的结点的 `is_first` 标志都置为 true , 当第一次遍历到结点p的时候, 不使p出栈, 但使p的 `is_first` 标志变为 false, 然后 "`btnp` = 栈顶->右孩子" 开始遍历他的右子树. 当p的右子树都遍历完了之后(也就是p的右子树都依次出栈了之后)又会遍历到p自己, 不过这一次他的 `is_first` 标志已经为 false 了, 我们通过这个标志知道不是第一次遍历到p了, 所以这时我们使p出栈, 并且将 `btnp` 置为 NULL ( 因为此时p的右子树都已经遍历完了, 所以不用像之前一样再 "`btnp` = 栈顶->右孩子" 了 )
+把每个将要入栈的结点的 `isFirstTime_` 标志都置为 true , 当第一次遍历到结点p的时候, 不使p出栈, 但使p的 `isFirstTime_` 标志变为 false, 然后 "`bTreeNode` = 栈顶->右孩子" 开始遍历他的右子树. 当p的右子树都遍历完了之后(也就是p的右子树都依次出栈了之后)又会遍历到p自己, 不过这一次他的 `isFirstTime_` 标志已经为 false 了, 我们通过这个标志知道不是第一次遍历到p了, 所以这时我们使p出栈( 此时p的右子树都已经遍历完了, 所以不用像之前一样再 "`bTreeNode` = 栈顶->右孩子" 了 )
 
 ``` c++
-typedef struct
+void PostOrderTraverseNonRecursion( btnp bTreeNode )
 {
-	BTNP post_btnp;
-	bool is_first;
-}POST_BTN, *POST_BTNP;
-
-void PostOrderTraverse_Iteration(BTNP btnp)
-{
-	if (!btnp)
+	if ( !bTreeNode )
 	{
 		return;
 	}
 
-	stack<POST_BTNP> stack_POST_BTNP;
-
-	while (!stack_POST_BTNP.empty() || btnp)
+	typedef struct PostOrderBTreeNode
 	{
-		while (btnp)
+		PostOrderBTreeNode( btnp OriginBT, bool IsFirstTime )
+			: bt_( OriginBT ), isFirstTime_( IsFirstTime ) {}
+		btnp bt_;
+		bool isFirstTime_;
+	}pobtn, *pobtnp;
+
+	std::stack<pobtn> tempStack;
+	while ( !tempStack.empty() || bTreeNode )
+	{
+		while ( bTreeNode )
 		{
-			POST_BTNP temp_post_btnp = new POST_BTN;
-			temp_post_btnp->is_first = true;
-			temp_post_btnp->post_btnp = btnp;
-
-			stack_POST_BTNP.push(temp_post_btnp);
-
-			btnp = btnp->LeftNode;
+			pobtn np( bTreeNode, true );
+			tempStack.push( np );
+			bTreeNode = bTreeNode->left_;
 		}
 
-		if (!stack_POST_BTNP.empty())
+		if ( !tempStack.empty() )
 		{
-
-			if (stack_POST_BTNP.top()->is_first)
+			if ( tempStack.top().isFirstTime_ )
 			{
-				btnp = stack_POST_BTNP.top()->post_btnp->RightNode;
-				stack_POST_BTNP.top()->is_first = false;
+				tempStack.top().isFirstTime_ = false;
+				bTreeNode = tempStack.top().bt_->right_;
 			}
 			else
 			{
-				cout << *(char *)(stack_POST_BTNP.top()->post_btnp->data) << endl;
-
-				delete stack_POST_BTNP.top();
-				stack_POST_BTNP.top() = nullptr;
-
-				stack_POST_BTNP.pop();
-
-				btnp = nullptr;
+				cout << tempStack.top().bt_->data_ << endl;
+				tempStack.pop();
 			}
 		}
 	}
+}
+```
+
+### 遍历测试代码
+
+
+{% asset_img binary_tree_traverse_and_swap_1.png %}
+
+如上图得到的相应的三种**深度优先遍历**的序列分别为 ： 
+
+ - **先(根)序遍历** ： ABCDEGF
+ - **中(根)序遍历** ： CBEGDFA
+ - **后(根)序遍历** ： CGEFDBA
+
+而得到的**广度优先遍历**的序列为 : ABCDEFG
+
+参照上图构建如下二叉树 : 
+
+``` c++
+#include <iostream>
+#include <queue>
+#include <stack>
+
+using std::cout;
+using std::endl;
+using std::stack;
+using std::queue;
+
+int main()
+{
+	btn testbt = btn( 'A' );
+	auto testB = btn( 'B' );
+	auto testC = btn( 'C' );
+	auto testD = btn( 'D' );
+	auto testE = btn( 'E' );
+	auto testG = btn( 'G' );
+	auto testF = btn( 'F' );
+
+	testbt.left_ = &testB;
+	testbt.left_->left_ = &testC;
+	testbt.left_->right_ = &testD;
+	testbt.left_->right_->left_ = &testE;
+	testbt.left_->right_->left_->right_ = &testG;
+	testbt.left_->right_->right_ = &testF;
+
+	cout << "BreadthFirstTraverse : \n";
+	BreadthFirstTraverse( &testbt );
+	cout << "PreOrderTraverseNonRecursion : \n";
+	PreOrderTraverseNonRecursion( &testbt );
+	cout << "InOrderTraverseNonRecursion : \n";
+	InOrderTraverseNonRecursion( &testbt );
+	cout << "PostOrderTraverseNonRecursion : \n";
+	PostOrderTraverseNonRecursion( &testbt );
+
+	return 0;
 }
 ```
 
@@ -250,6 +286,42 @@ void PostOrderTraverse_Iteration(BTNP btnp)
 	- 中序遍历的打印结点时机是第二次出栈时就打印
 
 # 交换所有左右孩子
+
+## 非递归方式Swap
+
+``` c++
+void SwapBT( btnp bTreeNode )
+{
+	std::stack<btnp> tempStack;
+	tempStack.push( bTreeNode );
+
+	btnp tempForTop = nullptr;
+	btnp tempForSwap = nullptr;
+
+	while ( !tempStack.empty() )
+	{
+		tempForTop = tempStack.top();
+		
+		// swap
+		tempForSwap = tempForTop->left_;
+		tempForTop->left_ = tempForTop->right_;
+		tempForTop->right_ = tempForSwap;
+
+		tempStack.pop();
+
+		if ( tempForTop->left_ )
+		{
+			tempStack.push( tempForTop->left_ );
+		}
+		if ( tempForTop->right_ )
+		{
+			tempStack.push( tempForTop->right_ );
+		}
+	}
+}
+```
+
+## 递归方式Swap
 
 交换左右孩子用递归很容易做到
 

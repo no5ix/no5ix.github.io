@@ -4,6 +4,7 @@ date: 2014-08-20 19:38:55
 tags:
 - Sort
 - CPP
+- noodle
 categories:
 - CPP
 ---
@@ -51,25 +52,25 @@ void BubbleSort(int arr[], int startIndex, int endIndex)
 {% asset_img sort_algo_1.png  %}
 {% asset_img sort_algo_2.png insert_sort %}
 
-
 ``` c++
-
-void InsertSort(int arr[], int startIndex, int endIndex, int arr_len)
+void InsertSort( int arr[], int startIndex, int endIndex, int arrLen )
 {
-	if (!arr || endIndex < 0 || startIndex < 0 || endIndex - startIndex <= 1 || end_index >= arr_len)
+	if ( !arr || arrLen <= 0 || endIndex - startIndex > arrLen
+		|| startIndex < 0 || startIndex >= endIndex )
 	{
 		return;
 	}
-	int innerIndex = 0;
-	int key = 0;
-	for (int outerIndex = startIndex; outerIndex <= endIndex; ++outerIndex)
+
+	for ( int outerIndex = startIndex; outerIndex <= endIndex; ++outerIndex )
 	{
-		key = arr[outerIndex];
-		for (innerIndex = outerIndex - 1; innerIndex >= startIndex && key < arr[innerIndex]; --innerIndex)
+		for ( int innerIndex = outerIndex;
+			innerIndex - 1 >= startIndex && arr[innerIndex] < arr[innerIndex - 1];
+			--innerIndex )
 		{
-			arr[innerIndex + 1] = arr[innerIndex];
+			auto temp = arr[innerIndex];
+			arr[innerIndex] = arr[innerIndex - 1];
+			arr[innerIndex - 1] = temp;
 		}
-		arr[innerIndex + 1] = key;
 	}
 }
 ```

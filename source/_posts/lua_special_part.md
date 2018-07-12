@@ -1,5 +1,5 @@
 ---
-title: Lua特别之处
+title: Lua特别之处笔记
 date: 2015-02-03 18:12:15
 tags:
 - Lua

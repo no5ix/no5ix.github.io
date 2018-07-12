@@ -108,7 +108,6 @@ void DestroyList(LPTLIST *ppstHead);
 #include <iostream>
 
 using std::cout;
-using std::cin;
 using std::endl;
 using std::cin;
 
@@ -202,7 +201,6 @@ void ReverseList(LPTLIST *ppstHead)
 		// 临时保存一下元素A后面的后面那个元素C
 		temp_elem_ptr = origin_first_elem_ptr->pNext->pNext;	
 
-
 		// 让B指向A : B->A (第1步)
 		origin_first_elem_ptr->pNext->pNext = (*ppstHead)->pNext;
 
@@ -214,6 +212,7 @@ void ReverseList(LPTLIST *ppstHead)
 	}
 	// 综上所述只需要3步, 链表反转需要两个指针， 
 	// 见上面两个指针, 一个 origin_first_elem_ptr, 一个 temp_elem_ptr
+	// 且要注意while条件中循环的是origin_first_elem_ptr, 而非ppstHead
 }
 
 void PrintList(LPTLIST *ppstHead)

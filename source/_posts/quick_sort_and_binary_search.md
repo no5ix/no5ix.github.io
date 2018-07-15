@@ -202,36 +202,43 @@ int main()
 在这里中间变量也就是通过Pritation函数划分之后分成左右两部分的首尾指针，只需要保存这两部分的首尾指针即可。
 
 ``` c++
-void QuickSortNonRecursion( int *a, int left, int right )
+void QuickSort_NonRecursion( int *arr, int startIndex, int endIndex )
 {
-	if ( a == NULL || left < 0 || right <= 0 || left>right )
-		return;
-	stack<int>temp;
-	int i, j;
-	//（注意保存顺序）先将初始状态的左右指针压栈
-	temp.push( right );//先存右指针
-	temp.push( left );//再存左指针
-	while ( !temp.empty() )
+	if ( !arr )
 	{
-		i = temp.top();//先弹出左指针
-		temp.pop();
-		j = temp.top();//再弹出右指针
-		temp.pop();
-		if ( i < j )
+		return;
+	}
+	std::stack<int> tempStack;
+
+	//（注意保存顺序）先将初始状态的左右Index压栈
+	tempStack.push( endIndex );//先存尾Index
+	tempStack.push( startIndex );//再存首Index
+
+	int tempStartIndex = 0;
+	int tempEndIndex = 0;
+	int tempPartitionIndex = 0;
+	while ( !tempStack.empty() )
+	{
+		tempStartIndex = tempStack.top();
+		tempStack.pop();
+		tempEndIndex = tempStack.top();
+		tempStack.pop();
+
+		if ( tempStartIndex < tempEndIndex )
 		{
-			int k = partition( a, i, j );
-			//if ( k > i )
-			{
-				temp.push( k - 1 );//保存中间变量
-				temp.push( i );  //保存中间变量 
+			tempPartitionIndex = Partition( arr, tempStartIndex, tempEndIndex );
+			{ // 块1
+				tempStack.push( tempPartitionIndex - 1 );
+				tempStack.push( tempStartIndex );
 			}
-			//if ( j > k )
-			{
-				temp.push( j );
-				temp.push( k + 1 );
+
+			// 块1 和 块2 调换顺序也可以
+
+			{ // 块2
+				tempStack.push( tempEndIndex );
+				tempStack.push( tempPartitionIndex + 1 );
 			}
 		}
-
 	}
 }
 ```

@@ -1,5 +1,5 @@
 ---
-title: C++对象模型之实例总结讲解
+title: C++对象模型之虚函数实例讲解
 date: 2015-02-21 17:49:01
 tags:
 - ObjectModel

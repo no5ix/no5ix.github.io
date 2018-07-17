@@ -13,10 +13,6 @@ type: "about"
 可以的话, 请使用 Chrome(推荐) / Firefox 打开本博客.
 
 
-# 入行几年啦?
-
-4年
-
 # 主要技能加点是?
 
 游戏服务器开发
@@ -40,7 +36,7 @@ type: "about"
 # 也想做一个这样的博客?
 
 这是我的[博客源码](https://github.com/no5ix/MyBlog) ,
-我修改了很多[Next](https://github.com/iissnan/hexo-theme-next)的代码来对原版NexT做了增强, 如下 : 
+我修改了很多[NexT](https://github.com/iissnan/hexo-theme-next)的代码来对原版 NexT 做了增强, 如下 : 
 
 - 改了NexT的很多地方来优化移动端的表现,
     -  header的布局

@@ -49,14 +49,16 @@ A realtime dedicated game server.
 # About This 
 
 
+
 - Linux/Win
 - Multi-Thread
 - RUDP
 - Bit Stream
-- Lock-free MQ
+- Lock-Free Concurrency MQ
 - Add UDP support for [muduo](https://github.com/chenshuo/muduo)
 - Support Lua
 - C++11
+
 
 
 # Example

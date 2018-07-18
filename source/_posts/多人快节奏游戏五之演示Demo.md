@@ -3,9 +3,9 @@ title: 多人快节奏游戏五之演示Demo
 date: 2017-10-10 11:18:54
 tags:
 - GabrielGambetta
-
 categories:
 - GS
+top: 3
 ---
 
 
@@ -14,7 +14,6 @@ categories:
 - **移动蓝球** ：受 Player1 控制, 用左右箭头键
 - **移动红球** ：受 Player2 控制, 用A和D键
 
-**. . .**<!-- more -->
 
 <body>
 <div class="main">

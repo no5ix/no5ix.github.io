@@ -6,7 +6,6 @@ tags:
 - Zen
 categories:
 - UE4
-password: 233
 ---
 
 # 在地图加载完后的回调
@@ -42,4 +41,3 @@ void UMyObject::ExcuteFun(UWorld* world)){}
 this->RemoveFromRoot()
 ```
 
-`-- encrypted`

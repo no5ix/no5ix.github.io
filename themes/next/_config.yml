@@ -541,7 +541,7 @@ local_search:
   # show top n results per article, show all results by setting to -1
   top_n_per_article: 1
   # exclude articles that contain sensitive word.
-  sensitive_word: "n ss!w"
+  sensitive_word: "encrypted"
 
 # ---------------------------------------------------------------
 # Tags Settings

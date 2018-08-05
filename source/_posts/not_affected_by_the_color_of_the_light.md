@@ -9,8 +9,8 @@ categories:
 password: 233
 ---
 
-
 `-- encrypted`
+**. . .**<!-- more -->
 
 
 # 让物体不受光照的颜色影响
@@ -18,11 +18,8 @@ password: 233
 
  让物体不受光照颜色影响，总的来说，我的实现方式就是找到光照颜色的地方，然后对颜色去饱和度。去饱和度的代码大概如下：
 
-**. . .**<!-- more -->
-
-
 ``` c++
-//计算亮度，这个各个颜色分量可以自己感觉调整，我用的是虚幻默认的数值,alpha 可以调整去多少饱和度，用 0 ~ 1 表示，1表示完全去除
+// 计算亮度，这个各个颜色分量可以自己感觉调整，我用的是虚幻默认的数值,alpha 可以调整去多少饱和度，用 0 ~ 1 表示，1表示完全去除
 float lum = Color.r * 0.3f + Color.g * 0.59f + Color.b * 0.11f;
 Color  = lerp(Color, float4(lum, lum, lum, 0), alpha);
 ```
@@ -80,7 +77,6 @@ float3 SurfaceShading( FGBufferData GBuffer, float3 LobeRoughness,
 	}
 }
 ```
-
 这样的话，除了天光以外的光源颜色就不会对用了这个shader model 的材质造成影响。
 
 # 处理天光
@@ -108,24 +104,24 @@ if (ShadingModelId == SHADINGMODELID_MyTestModel)
 
 ## 为非动态天光去饱和度
 
-非动态天光就在 BasePassPixelShader.usf 文件的 ` LightAccumulator_Add(LightAccumulator, Color, 0, 1.0f, false); ` 的这行代码上面添加判断让颜色去饱和度
+非动态天光就在 BasePassPixelShader.usf 文件的 GetPrecomputedIndirectLightingAndSkyLight(MaterialParameters, Interpolants, BasePassInterpolants, DiffuseDir, VolumetricLightmapBrickTextureUVs, DiffuseIndirectLighting, SubsurfaceIndirectLighting, IndirectIrradiance);这行代码下面添加判断让颜色去饱和度
 
 ``` c++
 if (GBuffer.ShadingModelID == SHADINGMODELID_MyTestModel)
 {
-	half Lum = Color.r * 0.3f + Color.g * 0.59f + Color.b * 0.11f;
-	Color = lerp(Color + DiffuseColor, half4(Lum, Lum, Lum, 0), 1.0f);
+	half DiffLum = DiffuseIndirectLighting.r * 0.3f + DiffuseIndirectLighting.g * 0.59f + DiffuseIndirectLighting.b * 0.11f;
+	DiffuseIndirectLighting = lerp(DiffuseIndirectLighting, half4(DiffLum, DiffLum, DiffLum, 0), 0.8f);
 }
 LightAccumulator_Add(LightAccumulator, Color, 0, 1.0f, false);
 ```
 
 
 这样就可以让这个材质不会受到光照颜色的影响，但是会有明暗对比。 
+
 这样做之后，只要在材质里面使用这个自定义 shader model 的物体，就不会受到灯光颜色的影响，但是会有明暗对比。再次说明一次，lerp函数的第3个参数就是一个alpha 值，可以通过调整这个值来改变受光颜色的比例。我设置成 1， 所以不会受到灯光颜色的影响
 
 
 # 出现的问题
 
 目前遇到的问题有，在受到的天光，纵使天光的颜色是白色的，也会和原来的颜色不会完全一样。总的来说，就是相对来说比原来偏白了一点。补上漫反射颜色后就和原来一样，但是这样就会受到漫反射颜色，导致了物体会受光的颜色，所以暂时没找到解决方法。
-
 

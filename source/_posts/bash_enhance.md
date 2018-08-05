@@ -7,6 +7,7 @@ categories:
 - Linux
 ---
 
+
 # profile和bashrc和bash_profile的区别
 
 

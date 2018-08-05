@@ -292,6 +292,9 @@ int main()
 ``` c++
 void SwapBT( btnp bTreeNode )
 {
+	if (!bTreeNode)
+		return;
+		
 	std::stack<btnp> tempStack;
 	tempStack.push( bTreeNode );
 

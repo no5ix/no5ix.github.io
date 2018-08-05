@@ -21,7 +21,7 @@ top: 3
 <style>
 canvas {
     border: dotted 1px;
-    padding:0;
+    padding: 0;
     background: lightgray;
 }</style>
 
@@ -30,7 +30,7 @@ canvas {
 <p>Although it’s not production-quality code, you may use this code in your own applications. Credit is appreciated although not required.</p>
 <div style="border: 5px solid blue; padding: 15px;">
 <p><b>Player 1 view</b> - move with LEFT and RIGHT arrow keys<br> Lag = <input type="text" id="player1_lag" size=5 value="250" onchange="updateParameters();">ms</input> · <input type="checkbox" id="player1_prediction" onchange="updateParameters();">Prediction</input> · <input type="checkbox" id="player1_reconciliation" onchange="updateParameters();">Reconciliation</input> · <input type="checkbox" id="player1_interpolation" onchange="updateParameters();">Interpolation</input></p>
-<canvas id="player1_canvas" width="920" height="75">
+<canvas id="player1_canvas" width="300" height="75">
 </canvas>
 <div id="player1_status" style="font-family:courier;">
 Waiting for connection…
@@ -41,7 +41,7 @@ Waiting for connection…
 </div>
 <div style="border: 2px solid grey; padding: 15px;">
 <p><b>Server view</b> · Update <input type="text" id="server_fps" size=5 value="3" onchange="updateParameters();"> times per second</input></p>
-<canvas id="server_canvas" width="920" height="75">
+<canvas id="server_canvas" width="300" height="75">
 </canvas>
 <div id="server_status" style="font-family:courier;">
 
@@ -52,7 +52,7 @@ Waiting for connection…
 </div>
 <div style="border: 5px solid red; padding: 15px;">
 <p><b>Player 2 view</b> - move with A and D keys<br> Lag = <input type="text" id="player2_lag" size=5 value="150" onchange="updateParameters();">ms</input> · <input type="checkbox" id="player2_prediction" onchange="updateParameters();">Prediction</input> · <input type="checkbox" id="player2_reconciliation" onchange="updateParameters();">Reconciliation</input> · <input type="checkbox" id="player2_interpolation" onchange="updateParameters();">Interpolation</input></p>
-<canvas id="player2_canvas" width="920" height="75">
+<canvas id="player2_canvas" width="300" height="75">
 </canvas>
 <div id="player2_status" style="font-family:courier;">
 Waiting for connection…
@@ -450,7 +450,7 @@ var renderWorld = function(canvas, entities) {
     var entity = entities[i];
 
     // Compute size and position.
-    var radius = canvas.height*0.9/2;
+    var radius = canvas.height*0.4/2;
     var x = (entity.x / 10.0)*canvas.width;
 
     // Draw the entity.

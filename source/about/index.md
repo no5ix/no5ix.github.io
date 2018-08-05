@@ -18,15 +18,6 @@ type: "about"
 游戏服务器开发
 
 
-# 具体什么技能效果? 
-
- - C/C++ : ★★★★
- - Linux : ★★★★
- <!-- - PHP/Python/Lua : ★★★ -->
- - UE4 : ★★
- - MySQL/Redis/ : ★★★
- <!-- - Vim/Git/Markdown/番茄工作法 : ★★★★★ -->
-
 # 交流一哈?
 
 - <i class="fa fa-fw fa-envelope fa-2x"></i>Email : no5ix#foxmail.com (将#替换为@)

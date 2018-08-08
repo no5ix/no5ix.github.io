@@ -11,4 +11,5 @@ categories:
 **. . .**<!-- more -->
 
 
-![kcp_intro](/img/kcp_intro/kcp_intro.png)
+<!-- ![kcp_intro](/img/kcp_intro/kcp_intro.png) -->
+![kcp_intro_mobile](/img/kcp_intro/kcp_intro_mobile.png)

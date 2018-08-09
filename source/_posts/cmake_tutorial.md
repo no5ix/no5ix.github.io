@@ -7,7 +7,6 @@ tags:
 - Make
 categories:
 - Misc
-top: 1
 ---
 
 因为近来需要把一些 Linux 项目转到 Windows 上来开发, 所以有了一些跨平台开发的笔记, 此篇讲CMake, 供以后查阅.

@@ -18,7 +18,7 @@ A fish flock AI Plugin for Unreal Engine 4
 this Plugin version can Run **2000+** fishes at the same time
 这个插件版本可以同时运行 **2000+** 条鱼儿
 
-源码已放到[<i class="fa fa-fw fa-github fa-2x"></i>GitHub](https://github.com/no5ix/fish)
+源码已放到[<i class="fa fa-fw fa-github fa-2x"></i>fish](https://github.com/no5ix/fish)
 
 <!--使用 fa-lg (33%递增)、fa-2x、 fa-3x、fa-4x，或者 fa-5x 类 来放大图标。 -->
 

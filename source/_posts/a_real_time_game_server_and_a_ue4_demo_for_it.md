@@ -54,7 +54,7 @@ A realtime dedicated game server.
 - Multi-Thread
 - RUDP
 - Bit Stream
-- Add UDP support for [muduo](https://github.com/chenshuo/muduo)
+- Add KCP support for [muduo](https://github.com/chenshuo/muduo)
 - C++11
 
 

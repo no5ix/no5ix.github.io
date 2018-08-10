@@ -78,6 +78,7 @@ Ubuntu 的软件源配置文件是 /etc/apt/sources.list。将系统自带的该
 # 必装软件
 
 - sudo apt-get install openssh-server
+- sudo apt-get install g++
 - sudo apt-get install cmake
 - sudo apt-get install gdb
 

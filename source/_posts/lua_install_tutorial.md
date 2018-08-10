@@ -46,12 +46,12 @@ int main(int argc, char **argv)
 
 ## lua5.3
 
-    apt-get install libreadline-dev
-    curl -R -O http://www.lua.org/ftp/lua-5.3.0.tar.gz
-    tar zxf lua-5.3.0.tar.gz
-    cd lua-5.3.0
-    make linux test
-    make install
+    sudo apt-get install libreadline-dev
+    sudo curl -R -O http://www.lua.org/ftp/lua-5.3.0.tar.gz
+    sudo tar zxf lua-5.3.0.tar.gz
+    sudo cd lua-5.3.0
+    sudo make linux test
+    sudo make install
 
 编译命令 : ` g++ a.cpp -llua -ldl `
 

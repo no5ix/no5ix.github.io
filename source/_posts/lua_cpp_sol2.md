@@ -18,10 +18,13 @@ Sol是一个用于C++绑定Lua脚本的库，仅由头文件组成，方便集�
 
 Sol支持Lua的绝大多数版本，包括 5.1、5.2、5.3和LuaJit等，但由于代码中用到了许多C++11/14特性，因此编译时需要编译器支持C++14标准甚至C++17标准, 本人测试g++4.8.2无法编译过Sol2.20+的版本, 用g++6.2方能编过.
 
+# 安装方法
+
+去 https://github.com/ThePhD/sol2 下载一个sol.hpp , 然后放到 ` /usr/local/include ` 里即可
 
 # 为什么强大
 
-只需要包含一个sol.hpp头文件即可, 不需要任何其他的东西, 没有什么静态库/动态库之类的东西, 也不需要像tolua++一样那么麻烦每个类都要写pkg文件. 只需要稍微学习一下Sol2的导出API即可.
+只需要包含一个sol.hpp头文件即可,需要任何其他的东西, 没有什么静态库/动态库之类的东西, 也不需要像tolua++一样那么麻烦每个类都要写pkg文件. 只需要稍微学习一下Sol2的导出API即可.
 
 **. . .**<!--more -->
 
@@ -45,7 +48,7 @@ g++ test.cpp -Isolpath/single/sol -llua -std=c++1z
     ├─test_sol2.lua
     ├─sol.hpp
 
-编译命令 : ` g++ *.cpp -llua -std= c++1z `
+编译命令 : ` g++ *.cpp -llua -std=c++1z `
 
 ``` c++ test_sol2.cpp
 #define SOL_CHECK_ARGUMENTS 1

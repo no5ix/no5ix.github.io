@@ -33,8 +33,8 @@ type: "about"
 
 # 也想做一个这样的博客?
 
-这是我的[博客源码](https://github.com/no5ix/MyBlog) ,
-我修改了很多[NexT](https://github.com/iissnan/hexo-theme-next)的代码来对原版 NexT 做了增强, 如下 : 
+这是我的[博客源码](https://github.com/no5ix/hexo-theme-next-optimized) ,
+我修改了很多[NexT](https://github.com/iissnan/hexo-theme-next)的代码来对原版 NexT 做了优化, 如下 : 
 
 - 改了NexT的很多地方来优化移动端的表现,
     -  header的布局

@@ -1,8 +1,8 @@
-# A enhanced hexo-theme-next
+# A optimized hexo-theme-next
 
-一个增强版的NexT主题. 
+一个优化过的NexT主题. 
 
-我修改了很多[NexT](https://github.com/iissnan/hexo-theme-next)的代码来对原版 NexT 做了增强, 如下 : 
+我修改了很多[NexT](https://github.com/iissnan/hexo-theme-next)的代码来对原版 NexT 做了优化, 如下 : 
 
 - 改了NexT的很多地方来优化移动端的表现,
     -  header的布局

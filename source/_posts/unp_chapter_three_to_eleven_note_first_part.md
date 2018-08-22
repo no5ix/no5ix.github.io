@@ -117,12 +117,7 @@ categories:
 
 - ![这里写图片描述](http://img.blog.csdn.net/20170729021237265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-- 6.3节 ： 
-	博客中有文章详细论述了{% post_link epoll扼要总结 epoll %}
-	select函数，必须得清楚select跟linux特有的epoll的区别， 有三点(遍内树)：
-	- 遍历 ： select每次都要遍历所有文件描述符， 集合越大速度越慢；而epoll维护着一个就绪列表， 每次只需要简单的从列表里取出就行了，只有活跃的socket才会触发相关callback 
-	- 内存拷贝 ： select需要把fd_set数据结构从用户态到内核态来回拷贝； 而epoll是基于mmap技术用同一块内存实现的
-	- 数量限制 ： select默认只支持1024个；epoll并没有最大数目限制
+
 
 - 6.6节 ： 
 	shutdown函数，shutdown可以不用管引用计数就激发tcp的正常连接终止序列。当关闭连接的写这一半，对于tcp连接， 这称为**半关闭（half-close）**![这里写图片描述](http://img.blog.csdn.net/20170729022856179?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)

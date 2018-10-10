@@ -1,5 +1,5 @@
 ---
-title: KCP详细注释
+title: 一个轻量级的kcp会话实现
 date: 2018-08-09 01:09:39
 tags: 
 - KCP
@@ -15,13 +15,6 @@ top: 1
 
 - 只需包含 `kcpsess.h` 这一个头文件即可
 - 只需调用 `KcpSession::Send` 和 `KcpSession::Recv` 和 `KcpSession::Update` 即可完成UDP的链接状态管理、会话控制、 RUDP协议调度
-
-# kcpsess Examples
-
-- [realtime-server](https://github.com/no5ix/realtime-server) : A realtime dedicated game server ( FPS / MOBA ). 一个实时的专用游戏服务器.
-- [realtime-server-ue4-demo](https://github.com/no5ix/realtime-server-ue4-demo) :  A UE4 State Synchronization demo for realtime-server. 为realtime-server而写的一个UE4状态同步demo, [Video Preview 视频演示](https://hulinhong.com)
-- [TestKcpSessionServer.cpp](https://github.com/no5ix/kcpsess/blob/master/TestKcpSessionServer.cpp)
-- [TestKcpSessionClient.cpp](https://github.com/no5ix/kcpsess/blob/master/TestKcpSessionClient.cpp)
 
 
 # kcpsess Usage
@@ -61,6 +54,17 @@ End
 
 The Recv/Send/Update functions of kcpsess are guaranteed to be non-blocking.
 Please read [TestKcpSessionClient.cpp](https://github.com/no5ix/kcpsess/blob/master/TestKcpSessionClient.cpp) and [TestKcpSessionServer.cpp](https://github.com/no5ix/kcpsess/blob/master/TestKcpSessionServer.cpp) for some basic usage.
+
+
+**. . .**<!-- more -->
+
+
+# kcpsess Examples
+
+- [realtime-server](https://github.com/no5ix/realtime-server) : A realtime dedicated game server ( FPS / MOBA ). 一个实时的专用游戏服务器.
+- [realtime-server-ue4-demo](https://github.com/no5ix/realtime-server-ue4-demo) :  A UE4 State Synchronization demo for realtime-server. 为realtime-server而写的一个UE4状态同步demo, [Video Preview 视频演示](https://hulinhong.com)
+- [TestKcpSessionServer.cpp](https://github.com/no5ix/kcpsess/blob/master/TestKcpSessionServer.cpp)
+- [TestKcpSessionClient.cpp](https://github.com/no5ix/kcpsess/blob/master/TestKcpSessionClient.cpp)
 
 
 # kcpsess build & test

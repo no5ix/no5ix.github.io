@@ -247,15 +247,16 @@ void QuickSort_NonRecursion( int *arr, int startIndex, int endIndex )
 
 ## 快速排序的优化
 
-优化方式有一部分已经在上面的代码里体现比如： 尾递归优化、随机选取基准（pivot），
+优化方式有一部分已经在上面的代码里体现比如： 尾递归优化、随机选取枢轴（pivot），
 
 主要的优化方案有 ：
 
-- 随机选取基准（pivot）
-- 尾递归化
-- 三数取中
+- 聚集相等元素
+- 三数取中(选择分区的第一个、中间、最后一个元素的中值作为枢轴)
 - 当待排序序列的长度分割到一定大小后，使用插入排序
 - 多线程
+- 随机选取枢轴（pivot）
+- 尾递归化
 
 具体方案查看[这篇博客](http://blog.csdn.net/insistgogo/article/details/7785038)
 

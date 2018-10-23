@@ -32,6 +32,9 @@
 
     新建一个 `source` 文件夹
 
+3\. modify /_config.yml & /themes/next/_config.yml
+
+    修改 /_config.yml 和 /themes/next/_config.yml
 
 # CSDN sucks
 

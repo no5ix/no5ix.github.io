@@ -1,6 +1,6 @@
 # A optimized hexo-theme-next
 
-一个优化过的NexT主题. 
+**一个优化过的NexT主题.** 
 
 我修改了很多[NexT](https://github.com/iissnan/hexo-theme-next)的代码来对原版 NexT 做了优化, 如下 : 
 
@@ -24,25 +24,20 @@
 
 # Usage
 
-1\. Delete my `source` folder
-
+1\. Delete my `source` folder  
     删除我项目中的 `source` 文件夹
 
-2\. Create a new `source` folder , 
-
+2\. Create a new `source` folder  
     新建一个 `source` 文件夹
 
-3\. modify /_config.yml & /themes/next/_config.yml
+3\. Install [Hexo](https://hexo.io/docs/index.html)  
+    安装 [Hexo](https://hexo.io/zh-cn/docs/)
 
+4\. Learn [Hexo's base usage](https://hexo.io/docs/index.html) for Writing/Generating/Deployment  
+    学习[Hexo的基本操作](https://hexo.io/zh-cn/docs/index.html)来写作/生成/部署
+
+5\. Learn [NexT](http://theme-next.iissnan.com/getting-started.html)  
+    学习 [NexT](http://theme-next.iissnan.com/getting-started.html)
+
+6\. Modify /_config.yml & /themes/next/_config.yml  
     修改 /_config.yml 和 /themes/next/_config.yml
-
-# CSDN sucks
-
-* 实在是被CSDN的广告恶心到了
-* 最近CSDN的Markdown的无序列表每一列前面的小黑点都没有了
-* 手机网页版本的CSDN排版全无
-
-所有博客瞬间排版全部变成一坨, 实在是不能忍.
-
-所以才做了这个私人博客.
-

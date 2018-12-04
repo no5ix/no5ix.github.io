@@ -24,7 +24,7 @@ type: "about"
 
 - <i class="fa fa-fw fa-github fa-2x"></i>GitHub : https://github.com/no5ix
     - [realtinet](https://github.com/no5ix/realtinet) : 一个快速的双通道(可靠与非可靠)udp网络库, 基于 muduo + kcp .
-    - [kcpsess](https://github.com/no5ix/kcpsess) : 一个单头文件的kcp会话实现, 并附一个注释版kcp.
+    - [kcpp](https://github.com/no5ix/kcpp) : 一个单头文件的kcp会话实现(并实现了dynamic redundancy + reliable/unreliable channel), 另附一个注释版kcp.
     - [realtime-server](https://github.com/no5ix/realtime-server) : 一个实时的专用游戏服务器(FPS/MOBA).
     - [realtime-server-ue4-demo](https://github.com/no5ix/realtime-server-ue4-demo) : 为realtime-server而写的一个UE4状态同步demo.
     - [hexo-theme-next-enhanced](https://github.com/no5ix/hexo-theme-next-enhanced) : 一个增强版的NexT主题.

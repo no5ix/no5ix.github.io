@@ -39,5 +39,5 @@
 5\. Learn [NexT](http://theme-next.iissnan.com/getting-started.html)  
     学习 [NexT](http://theme-next.iissnan.com/getting-started.html)
 
-6\. Modify /_config.yml & /themes/next/_config.yml  
-    修改 /_config.yml 和 /themes/next/_config.yml
+6\. Modify ` /_config.yml ` & ` /themes/next/_config.yml `  
+    修改 ` /_config.yml ` 和 ` /themes/next/_config.yml `

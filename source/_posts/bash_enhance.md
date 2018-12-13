@@ -163,7 +163,7 @@ ulimit -c unlimited
 
     sudo find / -name inputrc
 
-来找到它, 然后在` .inputrc `文件末尾加上常用的Bash定制 :
+来找到它, 如果没找到就在自己的home目录下新建一个 ` .inputrc ` 文件, 然后在` .inputrc `文件末尾加上常用的Bash定制 :
 
     set completion-ignore-case on  
     

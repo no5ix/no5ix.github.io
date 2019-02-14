@@ -16,6 +16,8 @@ categories:
 - 使用方法: https://doub.io/ss-jc42/
 - 项目地址: https://github.com/ToyoDAdoubiBackup/shadowsocksr
 
+**. . .**<!-- more -->
+
 ## 脚本特点:
 目前网上的各个ShadowsocksR脚本基本都是只有 安装/启动/重启 等基础功能，对于小白来说还是不够简单方便。既然是一键脚本，那么就要尽可能地简单，小白更容易接受使用！
 

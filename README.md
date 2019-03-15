@@ -24,6 +24,9 @@
 
 # Usage
 
+0\. Unzip `node_modules.zip` to the current directory
+    解压 `node_modules.zip` 到当前目录
+
 1\. Delete my `source` folder  
     删除我项目中的 `source` 文件夹
 

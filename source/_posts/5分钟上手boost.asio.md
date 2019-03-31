@@ -20,6 +20,8 @@ linux下直接 : sudo apt-get install libboost-all-dev
 
 简单来说，Boost.Asio是一个跨平台的、主要用于网络和其他一些底层输入/输出编程的C++库。
 
+**. . .**<!-- more -->
+
 
 # 异步VS同步
 

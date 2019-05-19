@@ -26,7 +26,7 @@ CMake 是一个比上述几种 make 更高级的编译配置工具。一些使�
 
 # CMake一些有用的网站
 
-- [CMake官网](cmake.org)
+- [CMake官网](http://cmake.org)
 - [CMake入门实战](http://www.hahack.com/codes/cmake/#入门案例：单个源文件)
 - [进阶](http://blog.icodeten.com/cmake/2015/01/22/cmake-experience/)
 

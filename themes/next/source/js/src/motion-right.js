@@ -173,7 +173,7 @@ $(document).ready(function () {
       }
     };
     sidebarToggleMotion.init();
-  
+
     NexT.motion.integrator = {
       queue: [],
       cursor: -1,
@@ -190,38 +190,40 @@ $(document).ready(function () {
         this.next();
       }
     };
-  
+
     NexT.motion.middleWares =  {
 
       header: function (integrator) {
-  
+
         if (CONFIG.motion.async) {
           integrator.next();
         }
-  
-        $('.header').velocity('transition.slideDownIn', {
+
+        var $headerTransition = CONFIG.motion.transition.header;
+        $('.header').velocity('transition.' + $headerTransition, {
           display: null,
-          duration: 200,
+          duration: 350,
           complete: function () {
             integrator.next();
           }
         });
       },
-  
+
       logo: function (integrator) {
-  
+
         if (CONFIG.motion.async) {
           integrator.next();
         }
-  
-        $('.site-title ').velocity('transition.slideDownIn', {
+
+        var $logoTransition = CONFIG.motion.transition.logo;
+        $('.site-title ').velocity('transition.' + $logoTransition, {
           display: null,
-          duration: 200,
+          duration: 600,
           complete: function () {
             integrator.next();
           }
         });
-  
+
         /**
          * Check if $elements exist.
          * @param {jQuery|Array} $elements
@@ -234,14 +236,15 @@ $(document).ready(function () {
           });
         }
       },
-  
+
       menu: function (integrator) {
-  
+
         if (CONFIG.motion.async) {
           integrator.next();
         }
-  
-        $('.menu-item').velocity('transition.slideDownIn', {
+
+        var $menuTransition = CONFIG.motion.transition.menu;
+        $('.menu-item').velocity('transition.' + $menuTransition, {
           display: null,
           duration: 200,
           complete: function () {
@@ -263,13 +266,13 @@ $(document).ready(function () {
         var $sidebarAffix = $('.sidebar-inner');
         var $sidebarAffixTransition = CONFIG.motion.transition.sidebar;
         var hasPost = $('.post-block').size() > 0;
-  
+
         hasPost ? postMotion() : integrator.next();
-  
+
         if (CONFIG.motion.async) {
           integrator.next();
         }
-  
+
         function postMotion () {
           var postMotionOptions = window.postMotionOptions || {
             stagger: 100,
@@ -282,7 +285,7 @@ $(document).ready(function () {
             }
             integrator.next();
           };
-  
+
           //$post.velocity('transition.slideDownIn', postMotionOptions);
           if (CONFIG.motion.transition.post_block_else) {
             $postBlockElse.velocity('transition.' + $postBlockElseTransition, postMotionOptions);
@@ -302,7 +305,7 @@ $(document).ready(function () {
           }
         }
       },
-  
+
       sidebar: function (integrator) {
         if (CONFIG.sidebar.display === 'always') {
           NexT.utils.displaySidebar();
@@ -311,20 +314,28 @@ $(document).ready(function () {
       },
 
       footer: function (integrator) {
-  
+
         if (CONFIG.motion.async) {
           integrator.next();
         }
-  
+
         var $footerTransition = CONFIG.motion.transition.footer;
         $('.footer').velocity('transition.' + $footerTransition, {
           display: null,
           duration: 200,
           complete: function () {
             integrator.next();
+            
+            // 此处动画是为了防止有锚点的页面加载时候被 headroom 挡住的问题, 所以播了一个往上滚动170px的动画
+            if(window.location.hash) {
+              $('html,body').animate({
+                scrollTop: window.pageYOffset - 170
+              },
+              400);
+            }
           }
         });
       },
     };
-  
+
   });

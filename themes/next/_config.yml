@@ -598,15 +598,14 @@ motion:
     # slideUpIn | slideUpOut | slideDownIn | slideDownOut | slideLeftIn | slideLeftOut | slideRightIn | slideRightOut
     # slideUpBigIn | slideUpBigOut | slideDownBigIn | slideDownBigOut | slideLeftBigIn | slideLeftBigOut | slideRightBigIn | slideRightBigOut
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
-    header: slideDownIn
-    logo: slideDownIn
-    post_block_else: slideDownIn
-    # post_header: slideLeftIn
-    # post_body: slideRightIn
-    post_header: slideDownIn
-    post_body: slideDownIn
+    header: slideUpBigIn
+    menu: slideDownBigIn
+    logo: bounceUpIn
+    post_block_else: slideDownBigIn
+    post_header: slideDownBigIn
+    post_body: slideDownBigIn
     coll_header: slideDownBigIn
-    footer: swoopIn
+    footer: slideUpBigIn
 
 # Fancybox
 fancybox: true

@@ -25,7 +25,8 @@ this Plugin version can Run **2000+** fishes at the same time
 
 <i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
 
-<video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls">
+<!-- <video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls"> -->
+<video loop="loop" width="100%" controls="controls">
 <source src="/img/a_fish_flock_ai_plugin_for_ue4/Flock_AI_Fish_Unreal_VR_Video_Preview_640P.mp4" type="video/mp4" />
 </video>
 

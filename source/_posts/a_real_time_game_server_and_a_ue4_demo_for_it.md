@@ -25,7 +25,8 @@ A realtime dedicated game server.
 
 <i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
 
-<video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls">
+<!-- <video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls"> -->
+<video loop="loop" width="100%" controls="controls">
 <source src="/img/a_real_time_game_server_and_a_ue4_demo_for_it/ue4_demo_for_rs_1080p.mp4" type="video/mp4" />
 </video>
 

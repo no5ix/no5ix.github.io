@@ -540,8 +540,8 @@ local_search:
   trigger: auto
   # show top n results per article, show all results by setting to -1
   top_n_per_article: 1
-  # exclude articles that contain sensitive word.
-  sensitive_word: "encrypted"
+  # if contain sensitive word, don't show content 
+  # sensitive_word: "encrypted"
 
 # ---------------------------------------------------------------
 # Tags Settings

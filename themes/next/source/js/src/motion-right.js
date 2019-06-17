@@ -202,7 +202,7 @@ $(document).ready(function () {
         var $footerTransition = CONFIG.motion.transition.footer;
         $('.footer').velocity('transition.' + $footerTransition, {
           display: null,
-          duration: 200,
+          duration: 666,
           complete: function () {
             integrator.next();
             

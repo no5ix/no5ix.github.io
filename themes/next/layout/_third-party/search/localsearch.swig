@@ -122,6 +122,8 @@
             if (!data.title || data.title.trim() === '') {
               data.title = "Untitled";
             }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
             var orig_data_title = data.title.trim();
             var data_title = orig_data_title.toLowerCase();
             var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
@@ -134,7 +136,7 @@
             if (data_content !== '') {
               keywords.forEach(function (keyword, i) {
                 index_title = data_title.indexOf(keyword);
-                index_content = data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0 ? -1 : data_content.indexOf(keyword);
+                index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);
 
                 if (index_title < 0 && index_content < 0) {
                   isMatch = false;
@@ -156,7 +158,7 @@
               var content = orig_data_content;
               if (first_occur >= 0) {
                 var match_content = "";
-                if (content.indexOf(CONFIG.local_search.sensitive_word) < 0)
+                if (!is_sensitive && !is_encrypted)
                 {
                   // cut out 100 characters
                   var start = first_occur - 20;
@@ -261,7 +263,8 @@
             return {
               title: $("title", this).text(),
               content: $("content", this).text(),
-              url: $("url", this).text()
+              url: $("url", this).text(),
+              encrypted: $("encrypted", this).text(),
             };
           }).get();
 

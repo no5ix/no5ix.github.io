@@ -14,6 +14,8 @@ categories:
 - 堆化 MaxHeapify 
 - 建堆 BuildMaxHeap.
 
+**. . .**<!-- more -->
+
 # 堆化MaxHeapify
 
 具体过程如下图 : 

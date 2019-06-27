@@ -25,6 +25,8 @@ ready list中的成员是interest list的子集。
 对于由epoll检查的每一个文件描述符，我们可以指定一个位掩码来表示我们感兴趣的事
 件。这些位掩码同poll()所使用的位掩码有着紧密的关联。
 
+**. . .**<!-- more -->
+
 ## epoll概要
 
 需要包含epoll.h头文件, 即 : `#include <sys/epoll.h>`

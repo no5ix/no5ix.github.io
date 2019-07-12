@@ -4,7 +4,7 @@ date: 2019-07-10 23:11:26
 tags:
 - Etcd
 categories:
-- Misc
+- NP
 ---
 
 

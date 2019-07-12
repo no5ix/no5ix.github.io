@@ -2,9 +2,9 @@
 title: etcd的restful接口
 date: 2019-07-10 23:11:26
 tags:
-- Python
+- Etcd
 categories:
-- Script
+- Misc
 ---
 
 

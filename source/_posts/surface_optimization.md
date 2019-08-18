@@ -18,6 +18,8 @@ categories:
 2. 导航到HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000 或者 0001 的右边找到FeatureTestControl
 3. 双击键值，将9240更改为9250，重启即可。看不懂的，原文详细如下：
 
+**. . .**<!-- more -->
+
 	
 # 网速慢修复方法:
 

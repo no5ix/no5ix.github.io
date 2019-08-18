@@ -1,0 +1,253 @@
+---
+title: my_ahk
+date: 2019-08-19 00:23:26
+tags:
+- AutoHotKey
+categories:
+- Misc
+---
+
+
+**. . .**<!-- more -->
+
+
+``` ahk
+;;====================Feng Ruohang's AHK Script=====================;;
+;;==================================================================;;
+;;=========================CapsLock's Stuff=========================;;
+;;==================================================================;;
+;不用看注释, 懒得删, 代码重新写了, 所以注释都是错的
+SetCapsLockState, AlwaysOff
+CapsLock::Send, {RShift}                   ; Vimer's love	Capslock = {ESC}
+
+;=====================================================================o
+;                       CapsLock Switcher:                           ;|
+;---------------------------------o-----------------------------------o
+;                    CapsLock + ` | {CapsLock}                       ;|
+;---------------------------------o-----------------------------------o
+CapsLock & `::                                                       ;|
+GetKeyState, CapsLockState, CapsLock, T                              ;|
+if CapsLockState = D                                                 ;|
+    SetCapsLockState, AlwaysOff                                      ;|
+else                                                                 ;|
+    SetCapsLockState, AlwaysOn                                       ;|
+KeyWait, ``                                                          ;|
+return                                                               ;|
+;---------------------------------------------------------------------o
+ 
+
+;;=============================Navigator============================||
+;===========================;U = PageDown
+;===========================;H = Left
+CapsLock & h::
+if getkeystate("alt") = 0
+Send, {Left}
+else
+Send, +{Left}
+return
+;===========================;J = Down
+CapsLock & j::
+if getkeystate("alt") = 0
+Send, {Down}
+else
+Send, +{Down}
+return
+;===========================;K = UP
+CapsLock & k::
+if getkeystate("alt") = 0
+Send, {Up}
+else
+Send, +{Up}
+return
+;===========================;L = Right
+CapsLock & l::
+if getkeystate("alt") = 0
+Send, {Right}
+else
+Send, +{Right}
+return
+
+; CapsLock & m::
+; if getkeystate("alt") = 0
+; Send, {Home}
+; else
+; Send, +{Home}
+; return
+
+CapsLock & ,::
+if getkeystate("alt") = 0
+Send, {Home}
+else
+Send, +{Home}
+return
+
+;===========================;I = Home
+CapsLock & .::
+if getkeystate("alt") = 0
+Send, {End}
+else
+Send, +{End}
+return
+
+CapsLock & u::
+if getkeystate("alt") = 0
+Send, ^z
+else
+Send, ^y
+return
+
+; CapsLock & r::
+; ; if getkeystate("alt") = 0
+; ; Send, ^y
+; ; ; else
+; Send, {Ins}
+; return
+
+CapsLock & y::
+if getkeystate("alt") = 0
+Send, ^c
+; else
+; Send, 
+return
+
+CapsLock & p::
+if getkeystate("alt") = 0
+Send, ^v
+; else
+; Send, 
+return
+
+CapsLock & b::
+if getkeystate("alt") = 0
+Send, ^{Left}
+else
+Send, +^{Left}
+return
+
+CapsLock & w::
+if getkeystate("alt") = 0
+Send, ^{Right}
+else
+Send, +^{Right}
+return
+
+CapsLock & i::
+if getkeystate("alt") = 0
+Send, ^{Left}
+else
+Send, +^{Left}
+return
+
+CapsLock & o::
+if getkeystate("alt") = 0
+Send, ^{Right}
+else
+Send, +^{Right}
+return
+
+CapsLock & `;::
+if getkeystate("alt") = 0
+Send, _
+else
+Send, -
+return
+
+CapsLock & '::
+if getkeystate("alt") = 0
+Send, =
+else
+Send, +=
+return
+
+CapsLock & /::
+if getkeystate("alt") = 0
+Send, \
+else
+Send, +\
+return
+
+CapsLock & 9:: 
+if getkeystate("alt") = 0
+Send, [
+else
+Send, {{}
+return
+
+CapsLock & 0:: 
+if getkeystate("alt") = 0
+Send, ]
+else
+Send, {}}
+return
+
+CapsLock & n:: 
+; if getkeystate("alt") = 0
+; Send, [
+; else
+Send, {{}
+return
+
+CapsLock & m:: 
+; if getkeystate("alt") = 0
+; Send, ]
+; else
+Send, {}}
+return
+
+CapsLock & d:: 
+if getkeystate("alt") = 0
+Send, {Del}
+else
+Send, ^{Del}
+return
+
+;;=============================Deletor==============================||
+; CapsLock & p:: Send, {Del}              ; , = Del char after
+; CapsLock & .:: Send, ^{Del}             ; . = Del word after
+; CapsLock & /:: Send, +{End}{Del}        ; / = Del all  after
+
+; CapsLock & m:: Send, {BS}               ; m = Del char before; 
+; CapsLock & n:: Send, ^{BS}              ; n = Del word before; 			
+; CapsLock & b:: Send, +{Home}{Del}       ; b = Del all  before; 
+
+; ;;============================Special Char==========================||
+; CapsLock & ':: Send, =                  ; ' = =
+; CapsLock & `;:: Send, {Enter}           ; ; = Enter
+; CapsLock & {:: Send, +9                 ; { = ( 
+; CapsLock & }:: Send, +0;				; } = )
+; CapsLock & `:: Send, +``                ; Shift
+; CapsLock & 4:: Send, +4
+; CapsLock & 5:: Send, +5
+; CapsLock & 6:: Send, +6
+; CapsLock & 7:: Send, +7
+; CapsLock & 8:: Send, +8
+; CapsLock & 9:: Send, +9
+; CapsLock & 0:: Send, +0
+; CapsLock & -:: Send, +-
+; CapsLock & =:: Send, +=
+; CapsLock & \:: Send, +=
+; ;;============================Editor================================||
+; CapsLock & z:: Send, ^z                 ; Z = Cancel
+; CapsLock & x:: Send, ^x                 ; X = Cut
+; CapsLock & c:: Send, ^c                 ; C = Copy
+; CapsLock & v:: Send, ^v                 ; V = Paste
+; CapsLock & a:: Send, ^a					; A = Select All
+; CapsLock & y:: Send, ^y                	; Y = Redo
+; ;;===========================Controller=============================||
+; CapsLock & s:: Send, ^{Tab}             ; Switch Tag    S = {Ctr + Tab}
+; CapsLock & w:: Send, ^w                 ; Close Tag     W = {Ctr + W}
+; CapsLock & q:: Send, !{F4}              ; Close Window  Q = {Alt + F4}
+; CapsLock::Send, {ESC}                   ; Vimer's love	Capslock = {ESC}
+; ;;=========================Application==============================||
+; CapsLock & d:: Send, !d                 ; Dictionary 	D = {Alt + D}
+; CapsLock & f:: Send, !f              	; Everything 	F = {Alt + F}
+; CapsLock & g:: Send, !g              	; Reversed		G = {Alt + G}
+; CapsLock & e:: Run http://cn.bing.com/	; Run Explore 	E = {Explore}
+; CapsLock & r:: Run Powershell           ; Run Powersh	R = {Powershell}
+; CapsLock & t:: Run C:\Program Files (x86)\Notepad++\notepad++.exe
+					; Run Notepad++	T = {Text Editor}
+
+;;==================================================================;;
+;;=========================CapsLock's Stuff=========================;;
+;;==================================================================;;
+```

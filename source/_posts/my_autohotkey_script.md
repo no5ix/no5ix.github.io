@@ -12,11 +12,11 @@ categories:
 
 
 ``` ahk
-;;====================Feng Ruohang's AHK Script=====================;;
+;;====================no5ix's AHK Script=====================;;
 ;;==================================================================;;
 ;;=========================CapsLock's Stuff=========================;;
 ;;==================================================================;;
-;不用看注释, 懒得删, 代码重新写了, 所以注释都是错的
+;不用看注释, 代码重新写了, 所以注释都是错的
 SetCapsLockState, AlwaysOff
 CapsLock::Send, {RShift}                   ; Vimer's love	Capslock = {ESC}
 
@@ -181,17 +181,17 @@ Send, {}}
 return
 
 CapsLock & n:: 
-; if getkeystate("alt") = 0
-; Send, [
-; else
-Send, {{}
+if getkeystate("alt") = 0
+Send, ^{BS}
+else
+Send, +{Home}{Del}
 return
 
 CapsLock & m:: 
-; if getkeystate("alt") = 0
-; Send, ]
-; else
-Send, {}}
+if getkeystate("alt") = 0
+Send, ^{Del}
+else
+Send, +{End}{Del}
 return
 
 CapsLock & d:: 

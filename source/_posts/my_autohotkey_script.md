@@ -11,14 +11,13 @@ categories:
 **. . .**<!-- more -->
 
 
-``` ahk
-;;====================no5ix's AHK Script=====================;;
+``` ahk;;====================Feng Ruohang's AHK Script=====================;;
 ;;==================================================================;;
 ;;=========================CapsLock's Stuff=========================;;
 ;;==================================================================;;
-;不用看注释, 代码重新写了, 所以注释都是错的
+;不用看注释, 懒得删, 代码重新写了, 所以注释都是错的
 SetCapsLockState, AlwaysOff
-CapsLock::Send, {RShift}                   ; Vimer's love	Capslock = {ESC}
+CapsLock::Send, {ESC}                  ; Vimer's love	Capslock = {ESC}
 
 ;=====================================================================o
 ;                       CapsLock Switcher:                           ;|
@@ -201,7 +200,7 @@ else
 Send, ^{Del}
 return
 
-;;=============================Deletor==============================||
+; ;=============================Deletor==============================||
 ; CapsLock & p:: Send, {Del}              ; , = Del char after
 ; CapsLock & .:: Send, ^{Del}             ; . = Del word after
 ; CapsLock & /:: Send, +{End}{Del}        ; / = Del all  after

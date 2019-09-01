@@ -67,7 +67,7 @@ categories:
 <!-- [Format Time: 0.0007 seconds] -->
 <p></p>
 <p>我们通过协程分别获取三个网站的IP地址，由于打开远程地址会引起IO阻塞，所以gevent会自动调度不同的协程。另外，我们可以通过协程对象的&#8221;value&#8221;属性，来获取协程函数的返回值。</p>
-<h4>猴子补丁 Monkey patching</h4>
+<h4 id='monkey-patch'>猴子补丁 Monkey patching</h4>
 <p>细心的朋友们在运行上面例子时会发现，其实程序运行的时间同不用协程是一样的，是三个网站打开时间的总和。可是理论上协程是非阻塞的，那运行时间应该等于最长的那个网站打开时间呀？其实这是因为Python标准库里的socket是阻塞式的，DNS解析无法并发，包括像urllib库也一样，所以这种情况下用协程完全没意义。那怎么办？</p>
 <p>一种方法是使用gevent下的socket模块，我们可以通过&#8221;from gevent import socket&#8221;来导入。不过更常用的方法是使用猴子布丁（Monkey patching）:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
@@ -112,7 +112,7 @@ categories:
 
 		<div id="crayon-5d24ce1c01e09760840873" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
-			<div class="crayon-plain-wrap"></div>
+			<div class="cr协程状态yon-plain-wrap"></div>
 			<div class="crayon-main" style="">
 				<table class="crayon-table">
 					<tr class="crayon-row">

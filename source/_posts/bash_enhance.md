@@ -74,12 +74,46 @@ fi
 - 做好备份，有便捷的备份脚本
 - 做好定时备份，有个前辈搞定时脚本，每天定时自个执行，即使删错了也不会那么悲催
 
-首先，搞个回收站
 在~下 .bashrc或者.bash_profile加入
 
 ``` shell
+
+# the following lines if you want `ls' to be colorized:
+export LS_OPTIONS='--color=auto'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -alF'
+alias l='ls $LS_OPTIONS -lA'
+
+# Some more alias to avoid making mistakes:
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 alias ll='ls -alF'
 
+# mkdir and enter it
+alias mc=mkdircd
+mkdircd()
+{
+    mkdir -p "$1" && cd "$1"
+}
+
+# cd and ls -alF dir
+alias cd=cdll
+cdll()
+{
+        builtin cd "$@" && ll;
+}
+
+ulimit -c unlimited
+
+```
+
+## 建立一个简易回收站
+
+搞个回收站得在~下 .bashrc或者.bash_profile加入
+
+```  shell
 mkdir -p ~/.trash
 
 # original rm
@@ -125,24 +159,6 @@ emptytrash()
     read -p "clear sure?[n]" confirm
     [ $confirm == 'y' ] || [ $confirm == 'Y' ]  && or -rf ~/.trash/*
 }
-
-
-# mkdir and enter it
-alias mc=mkdircd
-mkdircd()
-{
-    mkdir -p "$1" && cd "$1"
-}
-
-# cd and ls -alF dir
-alias cd=cdll
-cdll()
-{
-        builtin cd "$@" && ll;
-}
-
-ulimit -c unlimited
-
 ```
 
 如果想清空回收站彻底删除所有, 用`er`就可以了.
@@ -215,7 +231,7 @@ bash有两种输入模式vi模式和emacs模式，其中emacs是默认模式，�
 
 ## 在命令历史中查找 
 
-PS : 其实如果使用了上述的[Bash定制](#Bash定制)中的 ` history-search-* ` 就不需要这个 ` ctrl + r ` 了
+**PS : 其实如果使用了上述的[Bash定制](#Bash定制)中的 ` history-search-* ` 就不需要这个 ` ctrl + r ` 了**
 
 使用 Ctrl+r， 这个键组合是反向增量查找消息历史。很好用。 比如你很久以前输入过某个命令如。 gcc -c -DKKT - Dnnn 等等，一长串， 用上下方向键来找比较困难，这时候可以Ctrl+r，然后输入gcc很快找到该命令，重复按Ctrl+r将查找更早的历史。
 

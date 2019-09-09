@@ -1,9 +1,10 @@
 ---
-title: VS Code开发Go的配置
+title: Golang的IDE搭建
 date: 2019-09-08 21:31:26
 tags:
 - Go
 - VSCode
+- GoLand
 categories:
 - Misc
 ---
@@ -27,17 +28,29 @@ Go 语言支持以下系统：
 
 Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，如go1.4.2.windows-amd64.msi)的安装包来安装。
 
-默认情况下 .msi 文件会安装在 c:\Go 目录下。你可以将 c:\Go\bin 目录添加到 Path 环境变量中。添加后你需要重启命令窗口才能生效。
+默认情况下 .msi 文件会安装在 c:\Go 目录下。你可以将 c:\Go\bin 目录添加到 Path 环境变量中(默认msi会帮你加入到PATH中)。添加后你需要重启命令窗口才能生效。
 
 
+# Go项目注意事项
 
-# 安装 vscode 扩展
+- **go项目最好放到GOPATH的src下, 可以免除很多奇奇怪怪的麻烦**
+- 如果是Win平台, 尽量用PowerShell编译, 也可以免除很多奇奇怪怪的麻烦
+
+
+# GoLand流(推荐)
+
+GoLand几乎不需要什么特别的配置, 不过有几点要注意:
+
+- 如果本身项目中的vendor或其他本地文件夹已经包含所有第三方抵赖了, 建议把Goland的 settings-Go-Go Modules(vgo)的enable的 √ 去掉, 不然goland不会直接引用本地的这些依赖, 不仅go build会出错, 而且goland还不能正确的函数跳转
+- [Go项目注意事项](#Go项目注意事项)
+
+
+# VSCode流
 
 在 vscode 扩展里面搜索 go(MicroSoft出品的那个)，然后下载安装扩展。
 
 
-
-# 安装 go 插件
+## 安装 go 插件
 
 1.  在`$GOPATH`目录下创建`bin`,`pkg`,`src`
 2.  切换到`$GOPATH/bin`目录下，打开终端输入以下命令，不需要翻墙：
@@ -84,7 +97,7 @@ Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，�
     
 
 
-# 第三方库依赖(可选项)
+## 第三方库依赖(可选项)
 
 1.  安装`net`库解决警告，切换到`x`目录，然后打开终端执行：
     
@@ -101,7 +114,7 @@ Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，�
 	然后重启 vscode 即可
     
 
-# 调试配置
+## 调试配置
 
 > 备注：go 的调试器是`dlv`
 
@@ -109,7 +122,7 @@ Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，�
 2.  回到`hello.go`文件, 按`F5`, 出现以下界面代表成功：
 
 
-# 用户设置
+## 用户设置
 
 如果设置了系统级别的`$GOPATH`可以在用户设置里面覆盖。
 ```

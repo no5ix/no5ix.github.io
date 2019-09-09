@@ -34,7 +34,8 @@ Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，�
 # Go项目注意事项
 
 - **go项目最好放到GOPATH的src下, 可以免除很多奇奇怪怪的麻烦**
-- 如果是Win平台, 尽量用PowerShell编译, 也可以免除很多奇奇怪怪的麻烦
+- 如果是Win平台, 尽量用PowerShell编译, 可以免除很多奇奇怪怪的麻烦, 不建议用GoLand的terminal, 谁也不知道他干了啥, 
+- 如果目录下有 `go.mod` 文件, `go build` 的时候默认是会从网上下载最新依赖库的, 所以如果想直接用vendor文件夹里的本地的依赖库编译可执行文件可以用命令 `go build -mod=vendor`,
 
 
 # GoLand流(推荐)

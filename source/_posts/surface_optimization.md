@@ -12,11 +12,14 @@ categories:
 
 # 亮度修复方法:
 
+去 MicroSoft Store 下载安装 英特尔显卡控制中心, 然后 打开之后, 系统-功率-显示器节能
+
+
 一劳永逸的办法注册表修改键值：
 
 1. win+R，输入regedit，回车
-2. 导航到HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000 或者 0001 的右边找到FeatureTestControl
-3. 双击键值，将9240更改为9250，重启即可。看不懂的，原文详细如下：
+2. 导航到 `计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0001` 或者 `0001` 的右边找到FeatureTestControl
+3. 双击键值，将9240更改为9250，重启即可。
 
 **. . .**<!-- more -->
 

@@ -261,4 +261,8 @@ return
 @echo off
 start C:\Users\b\Desktop\A.lnk
 ```
-4. 打开“运行”输入“shell:startup”然后回车，然后将“A.bat”剪切到打开的目录中
+4. 因为直接运行 A.bat 会有个窗口一闪而过, 所以新建个 A.vbs 来运行这个bat来避免这个窗口
+```
+createobject("wscript.shell").run "D:\A.bat",0
+```
+5. 打开“运行”输入“shell:startup”然后回车，然后将“A.vbs”剪切到打开的目录中

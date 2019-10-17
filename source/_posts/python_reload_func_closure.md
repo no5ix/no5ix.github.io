@@ -67,23 +67,37 @@ def make_actions():
 如类似下方的这段代码要怎么reload呢?
 
 ``` python
-def gg_make_actions():
-	acts = []
-	xxd_dict = {1: '1', 2: '2', 3: '3'}
-	for k, v in xxd_dict.iteritems():
-		lb = lambda l, val=int(v): val + l
-		acts.append(lambda x: lb(x))
-	return acts
+
+def log(func):
+	def _call_func(*args, **kw):
+		print 'call ' + func.__name__
+		return func(*args, **kw)
+	return _call_func
 
 
-bar = gg_make_actions()
-print(bar[0](2))
-print(bar[1](2))
-print(bar[2](2))
+def print_text(text):
+	def _wrap_log(func):
+		def _call_func(*args, **kwargs):
+			print text
+			return func(*args, **kwargs)
+		return _call_func
+	return _wrap_log
+
+
+@log
+@print_text('test_texttt')
+def test_log():
+	print "miao !"
+
+
+for cell in test_log.func_closure:
+	cc = cell.cell_contents
+test_log()
+
 ```
 
 debug断点查看一波, 发现func_closure里还有 function object
-![python_func_closure_3](/img/python_func_closure/python_func_closure_3.png)
+<!-- ![python_func_closure_3](/img/python_func_closure/python_func_closure_3.png) -->
 
 那reload需要对含有闭包的情况进行一些简单处理: 
 

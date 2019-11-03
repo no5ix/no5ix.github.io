@@ -34,3 +34,4 @@ node_modules/hexo-generator-index/lib/*
 .vscode/
 
 alice*.md
+tempCodeRunnerFile*.*

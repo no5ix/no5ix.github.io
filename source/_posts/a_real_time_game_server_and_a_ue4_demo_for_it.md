@@ -27,7 +27,7 @@ A realtime dedicated game server.
 
 <!-- <video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls"> -->
 <video loop="loop" width="100%" controls="controls">
-<source src="/img/a_real_time_game_server_and_a_ue4_demo_for_it/ue4_demo_for_rs_1080p.mp4" type="video/mp4" />
+<source src="/img/a_real_time_game_server_and_a_ue4_demo_for_it/ue4_demo_for_rs_720p.mp4" type="video/mp4" />
 </video>
 
 <!-- 

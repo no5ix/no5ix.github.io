@@ -1,5 +1,5 @@
 ---
-title: Golang的IDE搭建
+title: Golang的IDE搭建各种方式的比较与踩坑备忘
 date: 2019-09-08 21:31:26
 tags:
 - Go

@@ -1,5 +1,5 @@
 ---
-title: supervisor intro
+title: supervisor 备忘
 date: 2019-09-09 19:07:26
 tags:
 - Supervisor

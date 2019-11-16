@@ -11,12 +11,10 @@ categories:
 **. . .**<!-- more -->
 
 
-``` ahk
-;;====================Feng Ruohang's AHK Script=====================;;
-;;==================================================================;;
+``` ahk;;==================================================================;;
 ;;=========================CapsLock's Stuff=========================;;
 ;;==================================================================;;
-;请无视注释, 代码重写了, 但是保留了老的注释
+;; 请忽略注释, 代码重新写了, 注释是旧的
 SetCapsLockState, AlwaysOff
 CapsLock::Send, {ESC}                  ; Vimer's love	Capslock = {ESC}
 
@@ -25,7 +23,7 @@ CapsLock::Send, {ESC}                  ; Vimer's love	Capslock = {ESC}
 ;---------------------------------o-----------------------------------o
 ;                    CapsLock + ` | {CapsLock}                       ;|
 ;---------------------------------o-----------------------------------o
-CapsLock & `::                                                       ;|
+CapsLock & RShift::                                                       ;|
 GetKeyState, CapsLockState, CapsLock, T                              ;|
 if CapsLockState = D                                                 ;|
     SetCapsLockState, AlwaysOff                                      ;|
@@ -40,42 +38,42 @@ return                                                               ;|
 ;===========================;U = PageDown
 ;===========================;H = Left
 CapsLock & h::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {Left}
 else
 Send, +{Left}
 return
 ;===========================;J = Down
 CapsLock & j::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {Down}
 else
 Send, +{Down}
 return
 ;===========================;K = UP
 CapsLock & k::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {Up}
 else
 Send, +{Up}
 return
 ;===========================;L = Right
 CapsLock & l::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {Right}
 else
 Send, +{Right}
 return
 
 ; CapsLock & m::
-; if getkeystate("alt") = 0
+; if getkeystate("shift") = 0
 ; Send, {Home}
 ; else
 ; Send, +{Home}
 ; return
 
 CapsLock & ,::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {Home}
 else
 Send, +{Home}
@@ -83,119 +81,119 @@ return
 
 ;===========================;I = Home
 CapsLock & .::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {End}
 else
 Send, +{End}
 return
 
 CapsLock & u::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, ^z
 else
 Send, ^y
 return
 
 ; CapsLock & r::
-; ; if getkeystate("alt") = 0
+; ; if getkeystate("shift") = 0
 ; ; Send, ^y
 ; ; ; else
 ; Send, {Ins}
 ; return
 
-CapsLock & y::
-if getkeystate("alt") = 0
-Send, ^c
-; else
-; Send, 
-return
+; CapsLock & y::
+; if getkeystate("shift") = 0
+; Send, ^c
+; ; else
+; ; Send, 
+; return
 
 CapsLock & p::
-if getkeystate("alt") = 0
-Send, ^v
+if getkeystate("shift") = 0
+Send, +7
+else
+Send, +3
+return
+
+; CapsLock & b::
+; if getkeystate("shift") = 0
+; Send, ^{Left}
 ; else
-; Send, 
-return
+; Send, +^{Left}
+; return
 
-CapsLock & b::
-if getkeystate("alt") = 0
-Send, ^{Left}
-else
-Send, +^{Left}
-return
-
-CapsLock & w::
-if getkeystate("alt") = 0
-Send, ^{Right}
-else
-Send, +^{Right}
-return
+; CapsLock & w::
+; if getkeystate("shift") = 0
+; Send, ^{Right}
+; else
+; Send, +^{Right}
+; return
 
 CapsLock & i::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, ^{Left}
 else
 Send, +^{Left}
 return
 
 CapsLock & o::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, ^{Right}
 else
 Send, +^{Right}
 return
 
 CapsLock & `;::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, _
 else
 Send, -
 return
 
 CapsLock & '::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, =
 else
 Send, +=
 return
 
 CapsLock & /::
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, \
 else
 Send, +\
 return
 
 CapsLock & 9:: 
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, [
 else
 Send, {{}
 return
 
 CapsLock & 0:: 
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, ]
 else
 Send, {}}
 return
 
 CapsLock & n:: 
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, ^{BS}
 else
 Send, +{Home}{Del}
 return
 
 CapsLock & m:: 
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, ^{Del}
 else
 Send, +{End}{Del}
 return
 
 CapsLock & d:: 
-if getkeystate("alt") = 0
+if getkeystate("shift") = 0
 Send, {Del}
 else
 Send, ^{Del}

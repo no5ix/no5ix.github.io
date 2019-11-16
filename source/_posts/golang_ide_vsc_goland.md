@@ -42,8 +42,8 @@ Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，�
 
 GoLand几乎不需要什么特别的配置, 不过有几点要注意:
 
-- 如果本身项目中的vendor或其他本地文件夹已经包含所有第三方抵赖了, 建议把Goland的 settings-Go-Go Modules(vgo)的enable的 √ 去掉, 不然goland不会直接引用本地的这些依赖, 不仅go build会出错, 而且goland还不能正确的函数跳转
 - [Go项目注意事项](#Go项目注意事项)
+- 如果本身项目中的vendor或其他本地文件夹已经包含所有第三方抵赖了, 记得把Goland的 settings-Go-Go Modules(vgo)的enable的 √ 去掉, 不然goland不会直接引用本地的这些依赖, 不仅go build会出错, 而且goland还不能正确的函数跳转, 而且goland还有可能会疯狂提示要你登录相应的git仓库的账号密码啥的
 
 
 # VSCode流

@@ -6,8 +6,8 @@
 <script>
     (function(){
         if('{{ page.password }}'){
-          // alert('此文章并不公开, 输入原作者的生日方可阅读');
-          var password = prompt('此文章并不公开, 输入原作者的生日方可阅读');
+          // alert('此文章并不公开, 输入文章密码方可阅读');
+          var password = prompt('此文章并不公开, 输入文章密码方可阅读');
           if (password !== '{{ page.password }}'){
             if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
             {

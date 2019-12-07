@@ -10,10 +10,10 @@ categories:
 
 
 
-# 亮度修复方法:
+# 亮度忽明忽暗的修复方法:
 
-- (推荐)去 MicroSoft Store 下载安装 英特尔显卡控制中心, 然后 打开之后, 系统-功率-显示器节能
-- (每次更新系统都有可能又失效了)一劳永逸的办法注册表修改键值：
+- (这种方法会有个开机启动项)去 MicroSoft Store 下载安装 英特尔显卡控制中心, 然后 打开之后, 系统-功率-显示器节能
+- (这种方法每次更新系统都有可能又失效了)注册表修改键值：
 	1\. `win+R`，输入`regedit`，回车
 	2\. 导航到 `计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0001` 或者 `0001` 的右边找到`FeatureTestControl`
 	3\. 双击键值，将`9240`更改为`9250`，重启即可。
@@ -31,7 +31,7 @@ categories:
 link: https://www.windowscentral.com/surface-pro-4-slow-wi-fi-fix
 
 
-# 解决掉TF卡问题
+# 解决surface pro掉TF卡问题
 
 在解决之前搜了很多方法.包括什么高性能 更新驱动 改注册表 都不行
 

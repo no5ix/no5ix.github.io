@@ -32,8 +32,8 @@ categories:
 
 | 变量名 | 路径 |
 | --- | --- |
-| MSVC | C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023 |
-| WK10 | C:\Program Files (x86)\Windows Kits\10 |
+| MSVC | `C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023` |
+| WK10 | `C:\Program Files (x86)\Windows Kits\10` |
 
 此处路径仅作为参考。接下来配置 Path：在 Path 中添加
 

@@ -1,5 +1,5 @@
 ---
-title:  SSR
+title:  SSR server
 date: 2019-02-14 13:22:55
 tags:
 - VPS

@@ -1,5 +1,5 @@
 ---
-title: my_ahk
+title: my ahk
 date: 2019-08-19 00:23:26
 tags:
 - AutoHotKey

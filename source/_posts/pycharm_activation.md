@@ -10,7 +10,6 @@ password: '0622'
 
 
 
-PyCharm 永久激活
 
 **. . .**<!-- more -->
 

@@ -35,6 +35,9 @@ return                                                               ;|
 ;---------------------------------------------------------------------o
  
 
+;=====================================================================o
+;                       For Surface:                                 ;|
+;---------------------------------o-----------------------------------o
 ~Esc::
 If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
 {              
@@ -47,6 +50,28 @@ If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
         WinRestore,A
 }
 return
+
+Volume_Mute::F2
+Volume_Down::F3
+Volume_Up::F4
+Media_Play_Pause::F5
+PrintScreen::F8
+Home::F9
+End::F10
+PgUp::F11
+PgDn::F12
+Del::Ins
+
+F2::Volume_Mute
+F3::Volume_Down
+F4::Volume_Up
+F5::Media_Play_Pause
+F8::PrintScreen
+F9::Home
+F10::End
+F11::PgUp
+F12::PgDn
+;---------------------------------------------------------------------o
 
 
 ;;=============================Navigator============================||

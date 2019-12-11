@@ -24,7 +24,7 @@ CapsLock::Send, {ESC}                  ; Vimer's love	Capslock = {ESC}
 ;---------------------------------o-----------------------------------o
 ;                    CapsLock + ` | {CapsLock}                       ;|
 ;---------------------------------o-----------------------------------o
-CapsLock & RShift::                                                       ;|
+CapsLock & Tab::                                                       ;|
 GetKeyState, CapsLockState, CapsLock, T                              ;|
 if CapsLockState = D                                                 ;|
     SetCapsLockState, AlwaysOff                                      ;|
@@ -52,27 +52,48 @@ If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
 }
 return
 
-Volume_Mute::Send, {F2}
-Volume_Down::Send, {F3}
-Volume_Up::Send, {F4}
-Media_Play_Pause::Send, {F5}
-PrintScreen::Send, {F8}
-Home::Send, {F9}
-End::Send, {F10}
-PgUp::Send, {F11}
-PgDn::Send, {F12}
-Del::Send, {Ins}
+~RAlt::
+If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
+{              
+    Send, ^c
+}
+return
 
-F2::Send, {Volume_Mute}
-F3::Send, {Volume_Down}
-F4::Send, {Volume_Up}
-F5::Send, {Media_Play_Pause}
-F8::Send, {PrintScreen}
-F9::Send, {Home}
-F10::Send, {End}
-F11::Send, {PgUp}
-F12::Send, {PgDn}
-Ins::Send, {Del}
+~Ins::
+If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
+{              
+    Send, ^v
+}
+return
+
+~F2::
+If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
+{              
+    Send, {F5}
+}
+return
+
+; Volume_Mute::Send, {F2}
+; Volume_Down::Send, {F3}
+; Volume_Up::Send, {F4}
+; Media_Play_Pause::Send, {F5}
+; PrintScreen::Send, {F8}
+; Home::Send, {F9}
+; End::Send, {F10}
+; PgUp::Send, {F11}
+; PgDn::Send, {F12}
+; Del::Send, {Ins}
+
+; ~F2::Send, {Volume_Mute}
+; F3::Send, {Volume_Down}
+; ~F4::Send, {Volume_Up}
+; F5::Send, {Media_Play_Pause}
+; F8::Send, {PrintScreen}
+; F9::Send, {Home}
+; F10::Send, {End}
+; F11::Send, {PgUp}
+; F12::Send, {PgDn}
+; Ins::Send, {Del}
 
 ;---------------------------------------------------------------------o
 

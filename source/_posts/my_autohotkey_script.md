@@ -34,14 +34,48 @@ KeyWait, ``                                                          ;|
 return                                                               ;|
 ;---------------------------------------------------------------------o
  
-; for surface
-
 ;=====================================================================o
 ;                       For Surface:                                 ;|
 ;---------------------------------o-----------------------------------o
-~Esc::
-If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
-{              
+
+;~ 设置一个时钟，比如 400 毫秒，
+;~ 设置一个计数器，Ins_press_cnt，按击次数，每次响应时钟把计数器清 0 复位
+#Persistent
+~Ins::
+if Ins_press_cnt > 0 ; SetTimer 已经启动，所以我们记录按键。
+{
+    Ins_press_cnt += 1
+    return
+}
+
+; 否则，这是新一系列按键的首次按键。将计数设为 1 并启动定时器：
+Ins_press_cnt = 1
+SetTimer, KeyIns, 400 ; 在 400 毫秒内等待更多的按键。
+return
+
+KeyIns:
+SetTimer, KeyIns, off
+; if Ins_press_cnt = 1 ; 该键已按过一次。
+; {
+;     Gosub singleClick
+; }
+; else
+if Ins_press_cnt = 2 ; 该键已按过两次。
+{
+    Gosub doubleClick
+}
+else if Ins_press_cnt > 2
+{
+    Gosub trebleClick
+}
+; 不论上面哪个动作被触发，将计数复位以备下一系列的按键：
+Ins_press_cnt = 0
+return
+
+; singleClick:
+    ; return
+
+doubleClick:
     WinGet,S,MinMax,A
     if S=0
         WinMaximize,A
@@ -49,22 +83,25 @@ If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
         WinRestore,A
     else if S=-1
         WinRestore,A
-}
-return
+    return
 
-~RAlt::
-If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
-{              
-    Send, ^c
-}
-return
+trebleClick:
+    Send, !{F4}
+    return
 
-~Ins::
-If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
-{              
-    Send, ^v
-}
-return
+
+; ~Ins::
+; If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))
+; {              
+;     WinGet,S,MinMax,A
+;     if S=0
+;         WinMaximize,A
+;     else if S=1
+;         WinRestore,A
+;     else if S=-1
+;         WinRestore,A
+; }
+; return
 
 ~F2::
 If ((A_PriorHotkey = A_ThisHotkey) and  (A_TimeSincePriorHotkey < 300))

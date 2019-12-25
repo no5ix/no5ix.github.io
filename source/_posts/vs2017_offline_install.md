@@ -25,7 +25,7 @@ categories:
 
 ②下载完成后，打开下载文件所在文件夹，[Windows 8.1](http://win8.ithome.com/) 及以上版本用户点击资源管理器上的文件 - 打开命令提示符 - 以管理员身份打开命令提示符；[Windows7](http://www.win7china.com/) 用户可在该文件夹空白处按住 Shift 键的情况下点击鼠标右键选择 “在此处打开命令窗口”。
 
-![](https://img.ithome.com/newsuploadfiles/2017/3/20170310_111252_335.jpg)
+![](/img/vs2017_offline_install/20170310_111252_335.jpg)
 
 ③根据自己下载的 VS2017 版本，在打开的命令提示符窗口输入下面对应的命令并点击回车，等待程序启动即会开始下载（以下命令用于下载完整版离线包，包含全功能以及全语言包，其中红色部分为下载文件存放路径，根据自身情况用户可自行更改）
 
@@ -65,7 +65,7 @@ vs_community.exe --layoutc:\vs2017offline
 
 ⑤等待文件下载，不要关闭文件下载窗口，等所有文件下载完成后该窗口会自动关闭，下载过程中不要断电断网，也不要关闭窗口，当然，**如果断电断网或者关闭了下载窗口，没关系，输入命令重头来过，还是会继续下载的**。
 
-![](https://img.ithome.com/newsuploadfiles/2017/3/20170310_111308_663.jpg)
+![](/img/vs2017_offline_install/20170310_111308_663.jpg)
 
 **第二部分：离线安装**
 
@@ -75,7 +75,7 @@ vs_community.exe --layoutc:\vs2017offline
 
 ![](https://img.ithome.com/newsuploadfiles/2017/03/20170310111501_6735.jpg)
 
-![](https://img.ithome.com/newsuploadfiles/2017/3/20170310_111317_280.jpg)
+![](/img/vs2017_offline_install/20170310_111317_280.jpg)
 
 ②运行离线根目录下的安装程序，各版本位置如下：
 
@@ -87,9 +87,9 @@ vs_community.exe --layoutc:\vs2017offline
 
 ③安装程序运行后，选择自己需要的模块和功能，确认所需后点击安装即可。顺便吐槽一下，**社区版全工作负荷、全组件以及全语言包选择后需要空间 93.85GB**，所以大家还是选择自己需要的安装就行了…… 另外，需要 Python 扩展支持的朋友，可以自己下载 Python 安装，或者安装完成后自行到扩展添加，官方安装文件对 Python 扩展的包含据说要等下次更新……
 
-![](https://img.ithome.com/newsuploadfiles/2017/3/20170310_111325_421.jpg)
+![](/img/vs2017_offline_install/20170310_111325_421.jpg)
 
-![](https://img.ithome.com/newsuploadfiles/2017/3/20170310_111332_744.jpg)
+![](/img/vs2017_offline_install/20170310_111332_744.jpg)
 
 ④等待安装完成即可使用了。
 
@@ -127,7 +127,7 @@ vs_community.exe --layoutc:\vs2017offline
 
 这部分呢是附加的一部分，信息是完全下载（包含全功能全语言包）的社区版和企业版的详细文件信息，以及他们的差集文件夹信息；最大的是企业版，最小的是企业版和社区版文件夹差集的信息。最后就是，各版本离线包里面至少含以下关键字的文件夹中的内容是完全一模一样的，就是：SDK、.NET、Xamarin、Unity、Cocos、Unreal、Linux、Mac、iOS、[Android](http://android.ithome.com/)、emulator…… 包含这些关键词的文件夹，大小合计应该超过 16GB 了……
 
-![](https://img.ithome.com/newsuploadfiles/2017/3/20170310_111343_54.jpg)
+![](/img/vs2017_offline_install/20170310_111343_54.jpg)
 
 ![](https://img.ithome.com/newsuploadfiles/2017/03/20170310111502_3657.jpg)
 

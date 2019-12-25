@@ -165,7 +165,7 @@ categories:
 
 不过实际上也没什么好讲的，每个选项会执行什么操作、有什么效果，都在菜单中写的清清楚楚。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-1.jpg)
+![](/img/ssr_client/ShadowsocksR-1.jpg)
 
 ### 代理规则
 
@@ -195,7 +195,7 @@ categories:
 *   服务器连接统计  
     直接鼠标中键单机小飞机也可以打开这一窗口，会显示你目前 SSR 的所有服务器的统计信息。
     
-    ![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-2.jpg)
+    ![](/img/ssr_client/ShadowsocksR-2.jpg)
     
     在这一界面，双击某个条目的服务器可以直接切换至该服务器；  
     单击某一条目的 “连接” 可以断开当前条目的所有连接；  
@@ -335,11 +335,11 @@ categories:
 
 *   1 右击 SwitchyOmega 的图标 - 选项，进入设置界面，点击 “添加情景模式”，填入一个名称（随便写），下面要选中 “代理服务器”，然后点击 “创建”。  
     
-    ![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-3.jpg)
+    ![](/img/ssr_client/ShadowsocksR-3.jpg)
     
 *   2 然后在你新建的情景模式中，代理协议选择`SOCKS5`，代理服务器填写`127.0.0.1`（环回地址），代理端口填写 SSR [**选项设置**](#选项设置)中的**本地端口**，然后点击左下角的 “应用选项” 就可以保存配置了。
     
-    ![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-4.jpg)
+    ![](/img/ssr_client/ShadowsocksR-4.jpg)
     
     再次强调一下，本地端口务必要填 **SSR 选项设置**中的**本地端口**，而不是现在这个示例图中的 1088！
 *   3 点击 SwitchyOmega 的图标，选择你刚才添加并设置好的那个情景模式，这样你的浏览器的流量都会通过 SSR 了，接着你只需设置 SSR 的[系统代理模式](#系统代理模式)为**直连模式**（如果你想全局翻 *）或者绕过局域网及大陆等你需要的模式，然后就可以开始愉快的上网了。
@@ -368,7 +368,7 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 使用
 --
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-5.jpg)
+![](/img/ssr_client/ShadowsocksR-5.jpg)
 
 ### 添加代理
 
@@ -383,11 +383,11 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 *   通过 SS/SSR 链接批量添加（推荐）  
     十分懒人，复制链接进去一键添加。
     
-    ![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-6.jpg)
+    ![](/img/ssr_client/ShadowsocksR-6.jpg)
     
     SS/SSR 链接一般由你的 SS/SSR 商提供；或者你也可以直接在 SS/SSR 客户端中查看配置，然后复制配置中的 SS/SSR 链接。
     
-    ![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-7.jpg)
+    ![](/img/ssr_client/ShadowsocksR-7.jpg)
     
 *   通过 SS/SSR 订阅添加（强烈推荐）  
     详见[设置 - SSR 订阅](#SSR订阅)
@@ -396,7 +396,7 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 
 ### 模式
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-8.jpg)
+![](/img/ssr_client/ShadowsocksR-8.jpg)
 
 这是 SSTap 的一个核心功能之一。  
 内置了数种规则，以上图中的规则除了正在选中的那条是我自己加的以外都是内置含有的规则。
@@ -421,11 +421,11 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 
 右击 SSTap 的任务栏图标或者点击主界面右下方的齿轮图标即可出现程序菜单。  
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-9.jpg)
+![](/img/ssr_client/ShadowsocksR-9.jpg)
 
 ### 设置
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-10.jpg)
+![](/img/ssr_client/ShadowsocksR-10.jpg)
 
 此处可以设置关闭 UDP 转发，自定义 DNS 以及设置开机启动等。
 
@@ -437,17 +437,17 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 
 你可以分别设置国内域名使用哪个 DNS 来解析，国外的域名使用哪个 DNS 来解析以防止 DNS 污染，效果类似于 ChinaDNS。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-11.jpg)
+![](/img/ssr_client/ShadowsocksR-11.jpg)
 
 ### 事件管理
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-12.jpg)
+![](/img/ssr_client/ShadowsocksR-12.jpg)
 
 也不需要做什么说明了，一看就知道是做什么的了。
 
 ### 附加路由管理
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-13.jpg)
+![](/img/ssr_client/ShadowsocksR-13.jpg)
 
 可以设置指定 IP 的连接是直连还是走代理。  
 只能单个单个 IP 设置，不能使用 CIDR 格式。
@@ -456,7 +456,7 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 
 ### SSR 订阅
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-14.jpg)
+![](/img/ssr_client/ShadowsocksR-14.jpg)
 
 和 Windows 客户端的 SSR 订阅一个用法。
 
@@ -486,7 +486,7 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 
 打开程序以后，点击上方的 “shadowsocks R ▼” 字样即可进入配置管理界面。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-15.jpg)
+![](/img/ssr_client/ShadowsocksR-15.jpg)
 
 ### 添加配置
 
@@ -521,7 +521,7 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 
 点击右上角的小飞机图标即可开启代理。第一次连接会弹出一个请求 V*N 连接权限的窗口，允许即可。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-16.jpg)
+![](/img/ssr_client/ShadowsocksR-16.jpg)
 
 ### 服务器设置
 
@@ -623,7 +623,7 @@ SSTap 是一个为代理游戏而生的工具，能代理辣鸡 Profixier 代理
 主页
 --
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-17.jpg)
+![](/img/ssr_client/ShadowsocksR-17.jpg)
 
 ### 未连接
 
@@ -661,7 +661,7 @@ emmmmmm，这个开关应该不用讲吧……
 
 以下是目前（2018-06-12） Shadowrocket 支持的代理协议：
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-18.jpg)
+![](/img/ssr_client/ShadowsocksR-18.jpg)
 
 #### 通过订阅添加（推荐）
 
@@ -696,7 +696,7 @@ emmmmmm，这个开关应该不用讲吧……
 配置
 --
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-19.jpg)
+![](/img/ssr_client/ShadowsocksR-19.jpg)
 
 前三项没什么好说的。
 
@@ -710,7 +710,7 @@ emmmmmm，这个开关应该不用讲吧……
 默认会有`default.conf`配置文件，这个规则为 GFWList + 绕过大陆 + 常用广告域名屏蔽 + 绕过国内常见域名。  
 点击以后会弹出二级菜单：
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-20.jpg)
+![](/img/ssr_client/ShadowsocksR-20.jpg)
 
 下面只讲几个重要的：
 
@@ -732,11 +732,11 @@ emmmmmm，这个开关应该不用讲吧……
 
 Shadowrocket 的强大核心所在。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-21.jpg)
+![](/img/ssr_client/ShadowsocksR-21.jpg)
 
 ### 通用
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-22.jpg)
+![](/img/ssr_client/ShadowsocksR-22.jpg)
 
 一个配置的通用设置，一般情况下有可能需要改动的只有
 
@@ -747,17 +747,17 @@ Shadowrocket 的强大核心所在。
 
 ### 规则、添加规则
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-23.jpg)
+![](/img/ssr_client/ShadowsocksR-23.jpg)
 
 规则可以在上一页中点击 “添加规则” 来添加，点击后你将会看到以下界面：
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-24.jpg)
+![](/img/ssr_client/ShadowsocksR-24.jpg)
 
 #### 类型
 
 一共有 6 种类型：
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-25.jpg)
+![](/img/ssr_client/ShadowsocksR-25.jpg)
 
 *   DOMAIN-SUFFIX（域名后缀）  
     此时应在下面填入形如`abc.com`的域名后缀，则此规则会对所有以`abc.com`结尾的域名生效，即对`*.abc.com`以及`abc.com`（顶级域名）生效。
@@ -828,7 +828,7 @@ Shadowrocket 的强大核心所在。
 
 点击 “添加 URL 重写” 可以添加一条 URL 重写规则。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-26.jpg)
+![](/img/ssr_client/ShadowsocksR-26.jpg)
 
 #### URL
 
@@ -841,7 +841,7 @@ Shadowrocket 的强大核心所在。
 
 #### 类型
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-27.jpg)
+![](/img/ssr_client/ShadowsocksR-27.jpg)
 
 有五种类型：
 
@@ -858,7 +858,7 @@ Shadowrocket 的强大核心所在。
 
 ### HTTPS 解密
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-28.jpg)
+![](/img/ssr_client/ShadowsocksR-28.jpg)
 
 这个功能可以说是一个十分劲爆的功能了（我最早开始用 Shadowrocket 的时候还没有这个功能），Shadowrocket 会使用中间人攻击的方式来解密你所指定的域名的 HTTPS 流量。  
 这个功能应该是用在代理日志抓 HTTPS 包上的。  
@@ -878,7 +878,7 @@ Shadowrocket 的强大核心所在。
 这里的功能都是辅助性的功能。  
 只讲一些重点功能。
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-29.jpg)
+![](/img/ssr_client/ShadowsocksR-29.jpg)
 
 ### 统计
 
@@ -902,7 +902,7 @@ Shadowrocket 的强大核心所在。
 设置
 --
 
-![](https://cdn.jsdelivr.net/gh/Mark-1215/CDN/uploads/content/ShadowsocksR-30.jpg)
+![](/img/ssr_client/ShadowsocksR-30.jpg)
 
 ### 证书
 

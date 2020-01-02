@@ -9,6 +9,10 @@ categories:
 
 
 
+An alternative to Capslock+ and (Alfred or Wox).  
+源码已放到[<i class="fa fa-fw fa-github fa-2x"></i>ahk_gui_caplock_search](https://github.com/no5ix/ahk_gui_caplock_search)
+
+
 ### What it is
 This is a small GUI that allows you to run any normal AutoHotkey command or block of code by typing a name for the command you want to run. I wrote this script because I was creating more and more hotkeys for various things, but I ran out of keys on my keyboard to assign hotkeys to. It is designed to be as minimal as possible.
 

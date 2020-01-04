@@ -8,6 +8,22 @@ categories:
 ---
 
 
+# 打开高级电源计划调整选项
+
+The limited power configuration in Advanced Settings because of Connected Standby feature that enabled by default on every Surface devices. In order to create a new power plan with optimized advanced settings, we need to disable connected standby via Registry Editor.
+
+To turn off connected standby:
+
+1. press `Win + R`
+2. Type `regedit` to open Register Editor. 
+3. Now you need to go to 
+   ```
+   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power
+   ```
+4. Double click on CsEnabled and change Value data from 1 to 0, and click OK.
+5. Restart your computer to apply these changes to your system.
+6. After restarting your computer, now you can access the full list of power plans and individual advanced settings.
+
 
 # 触摸板某些三指或四指手势在某些app中无法使用
 

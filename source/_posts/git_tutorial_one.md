@@ -191,15 +191,15 @@ a -> b -> d
 	build/    # 忽略 build/ 目录下的所有文件
 	doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
 
-## gitignore不生效的问题
+## 忽略本地改动且删除已经存在于远端的文件的方式
 
-规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
+规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交
 
 	git rm -r --cached . && git add . && git commit -m 'update .gitignore'
 
-## 忽略本地改动但不删除已经存在于远端的文件
+## 忽略本地改动但不删除已经存在于远端的文件的方式
 
-这种时候 gitignore 搞不定, 需要执行指令 :
+这种情况 gitignore 搞不定, 需要执行指令 :
 
 	git update-index --assume-unchanged <file>
 

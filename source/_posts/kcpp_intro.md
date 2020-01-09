@@ -9,6 +9,9 @@ top: 1
 ---
 
 
+[<i class="fa fa-fw fa-github fa-2x"></i>kcpp](https://github.com/no5ix/kcpp) 
+
+
 # QQ群
 
 因为 KCP 官方群已经满了, 可以加群 496687140

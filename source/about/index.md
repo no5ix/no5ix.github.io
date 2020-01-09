@@ -29,6 +29,6 @@ type: "about"
     - [realtime-server-ue4-demo](https://github.com/no5ix/realtime-server-ue4-demo) : 为realtime-server而写的一个UE4状态同步demo.
     - [hexo-theme-next-enhanced](https://github.com/no5ix/hexo-theme-next-enhanced) : 一个增强版的NexT主题.
     - [flock-ai-ue4-plugin](https://github.com/no5ix/flock-ai-ue4-plugin) : 一个基于虚幻4的鱼群 AI 插件.
-    - [ahk_gui_caplock_search](https://github.com/no5ix/ahk_gui_caplock_search) : An alternative to Capslock+ and (Alfred or Wox)..
+    - [nox](https://github.com/no5ix/nox) : An alternative to Alfred/Wox/Listary/Capslock+ .
     - [2utf](https://github.com/no5ix/2utf) : 批量转码工具.
 <!-- - 网易云音乐 : https://music.163.com/#/user/home?id=47256866 -->

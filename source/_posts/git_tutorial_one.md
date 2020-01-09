@@ -199,8 +199,15 @@ a -> b -> d
 
 ## 忽略本地改动但不删除已经存在于远端的文件
 
-这种时候gitignore 搞不定, 需要执行指令
+这种时候 gitignore 搞不定, 需要执行指令 :
 
 	git update-index --assume-unchanged <file>
 
 In this case a file is being tracked in the remote origin repo.
+You can revert it with :
+
+	git update-index --no-assume-unchanged <file>
+	
+If you want to list them :
+
+	git ls-files -v | grep '^h'. 

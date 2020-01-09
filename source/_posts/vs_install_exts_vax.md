@@ -16,7 +16,8 @@ password: '0622'
 
 必装插件：
 
-![](/img/vs_install_exts_vax/vs2017_exts.jpg)
+![](/img/vs_install_exts_vax/vs2017_exts.png)
+备注: Match Margin这个插件是控制高亮颜色的, 颜色是在 `Tools-Options-Environment-Fonts And Colors-Match Color` 调节的
 
 vs2017的vax破解方法：
 

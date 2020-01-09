@@ -8,23 +8,6 @@ categories:
 ---
 
 
-# 打开高级电源计划调整选项
-
-The limited power configuration in Advanced Settings because of Connected Standby feature that enabled by default on every Surface devices. In order to create a new power plan with optimized advanced settings, we need to disable connected standby via Registry Editor.
-
-To turn off connected standby:
-
-1. press `Win + R`
-2. Type `regedit` to open Register Editor. 
-3. Now you need to go to 
-   ```
-   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power
-   ```
-4. Double click on CsEnabled and change Value data from 1 to 0, and click OK.
-5. Restart your computer to apply these changes to your system.
-6. After restarting your computer, now you can access the full list of power plans and individual advanced settings.
-
-
 # 触摸板某些三指或四指手势在某些app中无法使用
 
 原因是触摸板的手势无法在以管理员启动的app中使用, 因为没找到触摸板是哪个程序启动的, 所以解决办法是以管理员运行所有程序(这样就包括触摸板也以管理员启动了), 参考{% post_link windows_run_everything_as_admin %}
@@ -39,6 +22,25 @@ To turn off connected standby:
 	3\. 双击键值，将`9240`更改为`9250`，重启即可。
 
 **. . .**<!-- more -->
+
+
+# 打开高级电源计划调整选项
+
+不建议改, 用默认预装的电源计划即可, 自己配的有各种问题, 比如instant-on失效, 比如盒盖不能听歌, 等等等等...
+
+The limited power configuration in Advanced Settings because of Connected Standby feature that enabled by default on every Surface devices. In order to create a new power plan with optimized advanced settings, we need to disable connected standby via Registry Editor.
+
+To turn off connected standby:
+
+1. press `Win + R`
+2. Type `regedit` to open Register Editor. 
+3. Now you need to go to 
+   ```
+   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power
+   ```
+4. Double click on CsEnabled and change Value data from 1 to 0, and click OK.
+5. Restart your computer to apply these changes to your system.
+6. After restarting your computer, now you can access the full list of power plans and individual advanced settings.
 
 	
 # 网速慢修复方法:

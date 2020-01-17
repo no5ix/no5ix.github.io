@@ -17,7 +17,7 @@ categories:
 
 微软最近发布了正式版 Visual Studio 2017 并公开了其下载方式，不过由于 VS2017 采用了新的模块化安装方案，所以微软官方并未提供 ISO 镜像，但是官方提供了如何进行离线下载的方案给需要进行离线安装的用户，只不过都是英文。本文将对官方指南中的一部分进行翻译（这里说一句：翻译的部分就是最基础的离线下载和安装方案，另外，即使如以前微软提供了安装镜像，也仅会包含 Visual Studio 的基本核心组件和部分官方扩展，而微软、安卓和苹果等平台的 SDK、模拟器和第三方扩展功能等会在用户选择后联网下载。而 VS2017 的离线包是包含所有可选项的）。好了，接下来将会分为四部分来叙述，分别是离线下载安装文件、离线安装 VS2017、更新离线文件包以及如何通过已下载版本来减少下载其它版本下载量的方法。  
 
-**第一部分：离线下载安装文件**
+# 第一部分：离线下载安装文件
 
 这里描述是包括所有版本，截图以下载 VS2017 社区版为例：
 
@@ -67,7 +67,7 @@ vs_community.exe --layoutc:\vs2017offline
 
 ![](/img/vs2017_offline_install/20170310_111308_663.jpg)
 
-**第二部分：离线安装**
+# 第二部分：离线安装
 
 本部分以安装社区版为例，其他版本安装过程一样，只是**专业版和企业版需要激活授权**。
 
@@ -93,7 +93,7 @@ vs_community.exe --layoutc:\vs2017offline
 
 ④等待安装完成即可使用了。
 
-**第三部分：更新离线文件包**
+# 第三部分：更新离线文件包
 
 这部分比较简单，步骤如下：
 
@@ -103,7 +103,7 @@ vs_community.exe --layoutc:\vs2017offline
 
 ③更新完成后可再次执行离线文件夹根目录下的安装程序进行软件更新，或者 VS 中直接检查更新，更新新版本理论上无需重新导入证书除非有新证书被下载。
 
-**第四部分：通过已下载版本减少其他版本离线下载量**
+# 第四部分：通过已下载版本减少其他版本离线下载量
 
 这部分也很简单，原理就是社区版、专业版和企业版有大多数组件其实是相同，如果用户想离线下载所有版本，那么没有那个必要，企业版包含了其它所有版本的组件，所以理论上用户只用下载企业版即可，安装时是可选择安装社区版、专业版或者企业版的。当然目前前面所述只是理论，毕竟我没试验，当然以下方法可以百分百保证需要的用户用最少的下载量完成下载所有版本的 VS2017。
 
@@ -113,8 +113,6 @@ vs_community.exe --layoutc:\vs2017offline
 
 ②将已经下好的版本的所有文件都分别复制到这两个新文件夹中，并删除由之前下载程序下载在根目录下的六个文件。
 
-![](https://img.ithome.com/newsuploadfiles/2017/03/20170310111501_7502.jpg)
-
 ③下载另外两个版本的安装程序，接下来就是重复第一部分的步骤，但是**命令行命令—layout 后的路径参数根据版本分别设置为你刚刚新建的那两个文件夹。**
 
 ④回车执行命令，程序会扫描和检查已经下载的组件，并现在自己版本对应的缺少的以及匹配的组件，不过**这部分大小不会超过 1GB，准确来说可能只有几十兆左右……**
@@ -123,12 +121,96 @@ vs_community.exe --layoutc:\vs2017offline
 
 ⑥至于更新嘛，参见第三部分。
 
-**第五部分：附加**
+# 第五部分：附加
 
 这部分呢是附加的一部分，信息是完全下载（包含全功能全语言包）的社区版和企业版的详细文件信息，以及他们的差集文件夹信息；最大的是企业版，最小的是企业版和社区版文件夹差集的信息。最后就是，各版本离线包里面至少含以下关键字的文件夹中的内容是完全一模一样的，就是：SDK、.NET、Xamarin、Unity、Cocos、Unreal、Linux、Mac、iOS、[Android](http://android.ithome.com/)、emulator…… 包含这些关键词的文件夹，大小合计应该超过 16GB 了……
 
 ![](/img/vs2017_offline_install/20170310_111343_54.jpg)
 
-![](https://img.ithome.com/newsuploadfiles/2017/03/20170310111502_3657.jpg)
 
-![](https://img.ithome.com/newsuploadfiles/2017/03/20170310111502_0367.jpg)
+<!-- 
+
+先看一下最终效果
+
+![](/img/vs2017_offline_install/5c95d43168d8642c70dcf71aOrlePHm301.png)
+
+可以直接看到 python 层的栈.
+
+![](/img/vs2017_offline_install/5c95d4322dcade4f0e3779aeE3KGuRKT01.png)
+
+还可以直接在 python 代码里下断点
+
+这里只介绍在 vs2017 下的配置方法, 15 也是可以的, 但是不如 17 下方便.
+
+此外由于 vs2017 对 vs2015 的兼容性很好, 理论上来说之前在 15 下能 build 过的, 在 17 下就也可以.
+
+所以大家勇敢地升级到 17 吧![](http://km.netease.com/javascripts/ckeditor/plugins/smiley/images/6.gif).
+
+-->
+
+
+# Cpp/Py混合调试所需勾选
+
+
+1. Python 本机开发工具
+
+ ![](/img/vs2017_offline_install/5c95d43268d8642c70dcf71c7pWcbzR001.png)
+
+ ![](/img/vs2017_offline_install/5c95d43368d8642c70dcf71eryrAyv1I01.png)
+
+先勾上 Python 开发, 然后在右侧勾上 "Python 本机开发工具"
+
+2.ATL 库
+
+ ![](/img/vs2017_offline_install/5c95d43368d8642c70dcf71fNcg2mXoM01.png)
+
+ ![](/img/vs2017_offline_install/5c95d43468d8642c79ed38e4XdRkaEUk01.png)
+
+类似的, 也选中 ATL 库
+
+其他需要的东西应该默认都带着了.
+
+
+## 开启Cpp/Py混合调试模式
+
+首先, 你需要重新 cmake 一下引擎 (目标改为 vs 2017), 并重新 build 一下. 与 12 升 15 不同, 这一步应该不会碰到什么问题.
+
+然后右击 client 工程, 选属性.
+
+在调试页面中, 将 debugger 改为 "Python/Native Debugging"
+
+此外, 还需要将 Environment 设为游戏脚本的路径
+
+![](/img/vs2017_offline_install/5c95d43568d8642c70dcf7203zqyMZlx01.png)
+
+三. 配置符号文件
+
+1. Python27.pdb
+
+先看一下引擎 link 的是哪一个 Python27, 然后看看有没有对应的 pdb.
+
+比如我这里用的是 managed3rdparty\python\lib14\python27.lib, 并且这个目录下刚好有对应的 pdb.
+
+那么只需要在调试 - 选项 - 符号中, 添加这个目录即可
+
+ ![](/img/vs2017_offline_install/5c95d4352dcade4eec14f169MpPs3DsK01.png)
+
+如果找不到对应的 pdb, 那就自己 build 一下 python 吧, 然后也一样设置一下符号的位置.
+
+也可以在启动游戏后在模块窗口里手动加载:
+
+ ![](/img/vs2017_offline_install/5c95d43668d8642c79ed38e5N4FGlMio01.png)
+
+四. 验证
+
+启动游戏后, 如果在输出窗口能看到加载 python 脚本的 log, 就表示配置成功了.
+
+ ![](/img/vs2017_offline_install/5c95d43668d8642c70dcf723j2MH435e01.png)
+
+此时既可以调试 C++ 代码, 也可以调试 python 代码, 并且都能看到两边完整的栈.
+
+为了调试方便, 可以把 python 脚本目录作为工程添加进来
+
+ ![](/img/vs2017_offline_install/5c95d4372dcade4eec14f16afOPQVf1y01.png)
+
+要注意的是, 引擎里已经有个工程叫 "script" 了, 添加的时候需要改个名字, 不要重名了.

@@ -1,10 +1,11 @@
 ---
 title: An alternative to Alfred/Wox/Listary/Capslock+
-date: 2018-08-09 01:09:39
-tags: 
-- KCP
+date: 2020-01-09 22:09:39
+tags:
+- GitHub
+- AutoHotKey
 categories:
-- NP
+- GitHub
 top: 1
 ---
 

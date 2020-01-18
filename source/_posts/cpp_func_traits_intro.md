@@ -19,7 +19,6 @@ categories:
 
 大家好，我是光城，欢迎关注公众号：**guangcity**。在 STL 编程中，容器和算法是独立设计的，即数据结构和算法是独立设计的，连接容器和算法的桥梁就是迭代器了，迭代器使其独立设计成为可能。如下图所示：
 
-![](https://pic2.zhimg.com/v2-cf5ac8decba6fbce39c6caa04441b8c5_b.jpg)![](https://pic2.zhimg.com/v2-cf5ac8decba6fbce39c6caa04441b8c5_r.jpg)
 
 上图给出了 STL 的目标就是要把数据和算法分开，分别对其进行设计，之后通过一种名为 iterator 的东西，把这二者再粘接到一起。
 
@@ -222,7 +221,7 @@ const pointer version
 
 在 STL 中 Traits 是什么呢？看下图：
 
-![](https://pic4.zhimg.com/v2-2e54692df5c68a127925d07036bb0ff3_b.jpg)![](https://pic4.zhimg.com/v2-2e54692df5c68a127925d07036bb0ff3_r.jpg)
+
 
 利用一个中间层`iterator_traits`固定了`func`的形式，使得重复的代码大量减少，唯一要做的就是稍稍特化一下 iterator_tartis 使其支持 pointer 和 const pointer:)
 

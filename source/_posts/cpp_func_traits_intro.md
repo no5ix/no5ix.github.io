@@ -32,7 +32,7 @@ categories:
 
 而 Traits 在`bits/stl_iterator_base_types.h`中：
 
-```
+``` cpp
 template<class _Tp>
 struct iterator_traits<_Tp*>
 {
@@ -59,19 +59,17 @@ struct iterator_traits<_Tp*>
 
 如果 T 是某个指向特定对象的指针，那么在 func 中需要指针所指向对象的型别的时候，怎么办呢？这个还比较容易，模板的参数推导机制可以完成任务，
 
-```
+``` cpp
 template <class I>
 inline
 void func(I iter) {
     func_impl(iter, *iter); // 传入iter和iter所指的值，class自动推导
 }
-
-
 ```
 
 通过模板的推导机制，我们轻而易举的或得了指针所指向的对象的类型。
 
-```
+``` cpp
 template <class I, class T>
 void func_impl(I iter, T t) {
         T tmp; // 这里就是迭代器所指物的类别
@@ -82,7 +80,6 @@ int main() {
     int i;
     func(&i);
 }
-
 
 ```
 
@@ -95,7 +92,7 @@ int main() {
 
 尽管在 func_impl 中我们可以把 T 作为函数的返回值，但是问题是用户需要调用的是 func。
 
-```
+``` cpp
 template <class I, class T>
 T func_impl(I iter, T t) {
         T tmp; // 这里就是迭代器所指物的类别
@@ -109,15 +106,13 @@ int main() {
     int i  =10;
     cout<<func(&i)<<endl; // !!! Can’t pass compile
 }
-
-
 ```
 
 如果去编译上述代码，编译失败！
 
 这个问题解决起来也不难，声明内嵌型别似乎是个好主意，这样我们就可以直接获取。只要做一个 iterator，然后在定义的时候为其指向的对象类型制定一个别名，就好了，像下面这样：
 
-```
+``` cpp
 template <class T>
 struct MyIter {
     typedef T value_type; // 内嵌型别声明
@@ -137,17 +132,13 @@ int main() {
     MyIter<int> ite(new int(8));
     cout << func(ite);    // 输出8
 }
-
-
 ```
 
 很漂亮的解决方案，看上去一切都很完美。但是，实际上还是有问题，因为 func 如果是一个泛型算法，那么它也绝对要接受一个原生指针作为迭代器，但是显然，你无法让下面的代码编译通过：
 
-```
+``` cpp
 int *p = new int(5);
 cout<<func(p)<<endl; // error
-
-
 ```
 
 我们的 func 无法支持原生指针，这显然是不能接受的。此时，template partial specialization 就派上了用场。
@@ -165,7 +156,7 @@ cout<<func(p)<<endl; // error
 
 函数偏特化：
 
-```
+``` cpp
 template <class T>
 struct MyIter {
     typedef T value_type; // 内嵌型别声明
@@ -200,8 +191,6 @@ int main() {
     const int k = 3;
     cout<<func(&k)<<endl;
 }
-
-
 ```
 
 输出：
@@ -213,8 +202,6 @@ pointer version
 52
 const pointer version
 3
-
-
 ```
 
 **（2）加入中间层**
@@ -225,7 +212,7 @@ const pointer version
 
 利用一个中间层`iterator_traits`固定了`func`的形式，使得重复的代码大量减少，唯一要做的就是稍稍特化一下 iterator_tartis 使其支持 pointer 和 const pointer:)
 
-```
+``` cpp
 #include <iostream>
 
 template <class T>
@@ -267,8 +254,6 @@ int main() {
     const int k = 3;
     std::cout<<func(&k)<<std::endl;
 }
-
-
 ```
 
 上述的过程是首先询问`iterator_traits<I>::value_type`，如果传递的 I 为指针, 则进入特化版本,`iterator_traits`直接回答`T`; 如果传递进来的`I`为`class type`, 就去询问`T::value_type`.

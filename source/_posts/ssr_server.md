@@ -32,7 +32,9 @@ categories:
 
 ## 下载安装:
 
-` wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh && chmod +x ssr.sh && bash ssr.sh `
+```
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh && chmod +x ssr.sh && bash ssr.sh
+```
 
 <p>
 	<span style="font-size:14px;">　　安装ssr软件</span></p>

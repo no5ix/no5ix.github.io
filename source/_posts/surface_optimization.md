@@ -8,6 +8,18 @@ categories:
 ---
 
 
+# windows更新之后windows hello出问题
+
+比如报出以下问题:
+- 识别反应慢
+- 解锁之后摄像头的指示灯还在亮
+
+尝试回退或者重装以下驱动:
+- Biometric devices(Windows Hello Face Software Device或者类似的名字)
+- Cameras(Surface Camera Front / Surfa IR Camera Front 或者其他的名字)
+- Display adapters(你没看错, 显卡驱动也会影响windows hello...)
+
+
 # 触摸板某些三指或四指手势在某些app中无法使用
 
 原因是触摸板的手势无法在以管理员启动的app中使用, 因为没找到触摸板是哪个程序启动的, 所以解决办法是以管理员运行所有程序(这样就包括触摸板也以管理员启动了), 参考{% post_link windows_run_everything_as_admin %}

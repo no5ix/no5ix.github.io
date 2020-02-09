@@ -16,7 +16,9 @@ password: '0622'
 
 # pycharm 2019激活方法
 
-1.下载文件jetbrains-agent.jar（链接1, 测试pycharm2019.2通过: https://pan.baidu.com/s/1EtGPMKBPyWjWyqs4BjaOPw 提取码: esrr , 链接2, 测试pycharm2019.1.1通过: https://pan.baidu.com/s/10jraOk5krAa_feF4ljTh8A 提取码: vqs6)
+1.下载文件jetbrains-agent.jar :
+- 链接1, 适用于pycharm2019.2 : https://pan.baidu.com/s/1EtGPMKBPyWjWyqs4BjaOPw 提取码: esrr
+- 链接2, 适用于pycharm2019.1.1 : https://pan.baidu.com/s/10jraOk5krAa_feF4ljTh8A 提取码: vqs6
 
 2.打开软件，按照习惯操作，直到激活界面，选择试用：
 

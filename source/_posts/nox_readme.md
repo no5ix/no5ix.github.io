@@ -16,9 +16,13 @@ top: 1
 
 An alternative to **Alfred**/**Wox**/**Listary**/**Capslock+** .
 
-IMPORTANT : Please run as administrator.
-
 Inspired by Alfred/Wox/Listary/Public-AutoHotKey-Scripts/Capslock+/utools, thank u.
+
+
+# IMPORTANT
+  
+- Please run as administrator.
+- Please run in 32-bit mode.(Open with AutoHotKey Unicode 32-bit)
 
 
 # Features
@@ -31,9 +35,10 @@ Inspired by Alfred/Wox/Listary/Public-AutoHotKey-Scripts/Capslock+/utools, thank
 - **double click triggers** (include `Ctrl+8`/`right mouse`/`middle mouse`/`Capslock`/`Ctrl`/`Shift`) : see default_conf.ahk
 - **auto selection copy** : just like linux terminal
 - **custom theme.** : two default theme(dark/light), and u can add ur own theme
-- **hot key to replace string** : copy this line (`my email is @@ “”  ‘’`) to address bar, then Capslock+Shift+U
+- **hot key to replace string** : copy this line (`my email is @@ “”  ‘’`) to address bar, then Capslock+Shift+U, now u know, see user_conf.ahk
+- **screen capture** : `Capslock + C`
+- **game mode** : double Alt then input `game`
 
-**. . .**<!-- more -->
 
 # 设置开机以管理员权限启动
 
@@ -51,18 +56,19 @@ createobject("wscript.shell").run "D:\A.bat",0
 5. 打开“运行”输入“shell:startup”然后回车，然后将“A.vbs”剪切到打开的目录中
 
 
-# 设置everything始终以运行次数排序
+# 设置Everything始终以运行次数排序
 
-0. everything设置如下:  
-    [ ] 保存设置和数据到%APPDATA%\Everything目录  
+0. Everything设置如下:  
+    [x] 保存设置和数据到%APPDATA%\Everything目录  
     [x] 随系统自启动  
-    [x] 以管理员身份运行  
-    [x] Everything服务  
-1. 退出everything
+    [ ] 以管理员身份运行  
+    [x] Everything服务
+    显示窗口快捷键: `Ctrl+Shift+Alt+E`
+1. 退出Everything
 2. 找到其配置文件 Everything.ini , 并在其文件末尾添加
     ```
     sort=Run Count
     sort_ascending=0
     always_keep_sort=1
     ```
-3. 运行everything
+3. 运行Everything

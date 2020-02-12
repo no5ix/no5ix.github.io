@@ -19,6 +19,7 @@ categories:
 - Cameras(Surface Camera Front / Surfa IR Camera Front 或者其他的名字)
 - Display adapters(你没看错, 显卡驱动也会影响windows hello...)
 
+都没用的话只能去setting里尝试recovery了, 最好的办法是 {% post_link win10_home_disable_auto_update 屏蔽更新 %}
 
 # 触摸板某些三指或四指手势在某些app中无法使用
 

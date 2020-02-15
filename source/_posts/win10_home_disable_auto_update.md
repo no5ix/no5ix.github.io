@@ -1,5 +1,5 @@
 ---
-title: An alternative to Alfred/Wox/Listary/Capslock+
+title: Win10禁止自动更新踩坑
 date: 2020-01-09 22:09:39
 tags:
 - Windows

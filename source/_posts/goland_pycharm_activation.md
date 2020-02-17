@@ -1,5 +1,5 @@
 ---
-title: Pycharm 激活
+title: Pycharm & Goland 激活
 date: 2019-10-20 22:51:26
 tags:
 - Pycharm
@@ -14,20 +14,18 @@ password: '0622'
 **. . .**<!-- more -->
 
 
-# pycharm 2019激活方法
+# Pycharm/Goland 2019激活方法
 
-1.下载文件jetbrains-agent.jar :
-- 链接1, 适用于pycharm2019.2 : https://pan.baidu.com/s/1EtGPMKBPyWjWyqs4BjaOPw 提取码: esrr
-- 链接2, 适用于pycharm2019.1.1 : https://pan.baidu.com/s/10jraOk5krAa_feF4ljTh8A 提取码: vqs6
+**注: 本激活方法下文虽以Pycharm为例, 但对Goland也是适用的, 已测试证实通过**
 
-2.打开软件，按照习惯操作，直到激活界面，选择试用：
+0.下载文件jetbrains-agent.jar :
 
-3.在弹出的界面中点击下侧的Configure，选择Edit Custom VM Options，如图：
+  - 链接1, 适用于pycharm2019.2 : https://pan.baidu.com/s/1EtGPMKBPyWjWyqs4BjaOPw 提取码: esrr
+  - 链接2, 适用于pycharm2019.1.1 : https://pan.baidu.com/s/10jraOk5krAa_feF4ljTh8A 提取码: vqs6
 
+1.打开软件，按照习惯操作，直到激活界面，选择试用：
 
-在打开的文件最后一行添上内容：-javaagent:D:\JetBrains\jetbrains-agent.jar
-
-其中，D:\JetBrains\jetbrains-agent.jar为jetbrains-agent.jar的绝对路径，并非一定要放在软件安装目录下，只要不改动jetbrains-agent.jar的路径就行。
+2.在弹出的界面中点击下侧的Configure，选择Edit Custom VM Options,在打开的文件最后一行添上内容：`-javaagent:D:\JetBrains\jetbrains-agent.jar`, 其中，`D:\JetBrains\jetbrains-agent.jar为jetbrains-agent.jar`的绝对路径，并非一定要放在软件安装目录下，只要不改动jetbrains-agent.jar的路径就行。
 
 3.关闭软件
 
@@ -35,21 +33,15 @@ password: '0622'
 
 5.进入软件（随便建一个空项目）打开软件，选择Help—Register
 
-pycharm在建空项目时可能因为没有解释器（No Python interpreter）而不能建立项目，这时可以关闭软件，随便建一个后缀名为.py的文件（也可建一个文本文件，将其后缀改为.py），然后右键选择打开方式，使用PyCharm打开该文件。
+	pycharm在建空项目时可能因为没有解释器（No Python interpreter）而不能建立项目，这时可以关闭软件，随便建一个后缀名为.py的文件（也可建一个文本文件，将其后缀改为.py），然后右键选择打开方式，使用PyCharm打开该文件。
 
 6.选择License server后稍等几秒（不到半分钟），会自动填入http://jetbrains-license-server。若没有填入，则点击Discover Server，会有旋转等待的标记圈（不到半分钟），标记圈消失后，出现该地址，然后点击Activate。
 
-7.查看激活状态（若激活不成功，转到第8步）
-
-完成激活后，右下角会出现内容：
-
-点击Help-About可以看到内容：
-
-将上面图与下方图（来源于网络）对比可看到上面图中没有截止日期，因此是无期限。
+7.查看激活状态（若激活不成功，转到第8步）,完成激活后, 点击Help-About可以看到内容, 将上面图与下方图（来源于网络）对比可看到上面图中没有截止日期，因此是无期限。
 
 8.激活码方式激活（未测试，激活码来源于网络）
 
-若服务器方式无法激活，则选择Activation code方式激活，这种方式可离线，激活码为：
+**若服务器方式无法激活，则选择Activation code方式激活，这种方式可离线**，激活码为：
 
 ```
 520E5894E2-eyJsaWNlbnNlSWQiOiI1MjBFNTg5NEUyIiwibGljZW5zZWVOYW1lIjoicGlnNiIsImFzc2lnbmVlTmFtZSI6IiIsImFzc2lnbmVlRW1haWwiOiIiLCJsaWNlbnNlUmVzdHJpY3Rpb24iOiJVbmxpbWl0ZWQgbGljZW5zZSB0aWxsIGVuZCBvZiB0aGUgY2VudHVyeS4iLCJjaGVja0NvbmN1cnJlbnRVc2UiOmZhbHNlLCJwcm9kdWN0cyI6W3siY29kZSI6IklJIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In0seyJjb2RlIjoiUlMwIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In0seyJjb2RlIjoiV1MiLCJwYWlkVXBUbyI6IjIwODktMDctMDcifSx7ImNvZGUiOiJSRCIsInBhaWRVcFRvIjoiMjA4OS0wNy0wNyJ9LHsiY29kZSI6IlJDIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In0seyJjb2RlIjoiREMiLCJwYWlkVXBUbyI6IjIwODktMDctMDcifSx7ImNvZGUiOiJEQiIsInBhaWRVcFRvIjoiMjA4OS0wNy0wNyJ9LHsiY29kZSI6IlJNIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In0seyJjb2RlIjoiRE0iLCJwYWlkVXBUbyI6IjIwODktMDctMDcifSx7ImNvZGUiOiJBQyIsInBhaWRVcFRvIjoiMjA4OS0wNy0wNyJ9LHsiY29kZSI6IkRQTiIsInBhaWRVcFRvIjoiMjA4OS0wNy0wNyJ9LHsiY29kZSI6IkdPIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In0seyJjb2RlIjoiUFMiLCJwYWlkVXBUbyI6IjIwODktMDctMDcifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjA4OS0wNy0wNyJ9LHsiY29kZSI6IlBDIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In0seyJjb2RlIjoiUlNVIiwicGFpZFVwVG8iOiIyMDg5LTA3LTA3In1dLCJoYXNoIjoiODkwNzA3MC8wIiwiZ3JhY2VQZXJpb2REYXlzIjowLCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-DZ/oNHBfyho0XrrCJJvAOKg5Q1tLBgOdbCmzCKwkuM+Yryce0RoOi3OOmH6Ba/uTcCh/L37meyD0FJdJIprv59y4+n+k2kIeF/XKrKqg0dEsDUQRw0lUqqMt99ohqa+zmbJ44Yufdwwx/F1CtoRGvEQ2Mn0QjuqRoZJZ3wiT5Am22JiJW8MaNUl3wg9YPj+OPGARKKJUdUJ0NGUDQBcBAv5ds8LhbSbJSbPkbkwH/a1QMz4nEdn6lRDKI1aFIn43QhBSCFqvUq6TPJlbIJ0ZjE+PyZjHFBKCgkry0DHPXU2BbtIZPsksQnN3fx240a9K6sN7peZnLpEoMoq23FEz4g==-MIIElTCCAn2gAwIBAgIBCTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE4MTEwMTEyMjk0NloXDTIwMTEwMjEyMjk0NlowaDELMAkGA1UEBhMCQ1oxDjAMBgNVBAgMBU51c2xlMQ8wDQYDVQQHDAZQcmFndWUxGTAXBgNVBAoMEEpldEJyYWlucyBzLnIuby4xHTAbBgNVBAMMFHByb2QzeS1mcm9tLTIwMTgxMTAxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5ndaik1GD0nyTdqkZgURQZGW+RGxCdBITPXIwpjhhaD0SXGa4XSZBEBoiPdY6XV6pOfUJeyfi9dXsY4MmT0D+sKoST3rSw96xaf9FXPvOjn4prMTdj3Ji3CyQrGWeQU2nzYqFrp1QYNLAbaViHRKuJrYHI6GCvqCbJe0LQ8qqUiVMA9wG/PQwScpNmTF9Kp2Iej+Z5OUxF33zzm+vg/nYV31HLF7fJUAplI/1nM+ZG8K+AXWgYKChtknl3sW9PCQa3a3imPL9GVToUNxc0wcuTil8mqveWcSQCHYxsIaUajWLpFzoO2AhK4mfYBSStAqEjoXRTuj17mo8Q6M2SHOcwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQBonMu8oa3vmNAa4RQP8gPGlX3SQaA3WCRUAj6Zrlk8AesKV1YSkh5D2l+yUk6njysgzfr1bIR5xF8eup5xXc4/G7NtVYRSMvrd6rfQcHOyK5UFJLm+8utmyMIDrZOzLQuTsT8NxFpbCVCfV5wNRu4rChrCuArYVGaKbmp9ymkw1PU6+HoO5i2wU3ikTmRv8IRjrlSStyNzXpnPTwt7bja19ousk56r40SmlmC04GdDHErr0ei2UbjUua5kw71Qn9g02tL9fERI2sSRjQrvPbn9INwRWl5+k05mlKekbtbu2ev2woJFZK4WEXAd/GaAdeZZdumv8T2idDFL7cAirJwcrbfpawPeXr52oKTPnXfi0l5+g9Gnt/wfiXCrPElX6ycTR6iL3GC2VR4jTz6YatT4Ntz59/THOT7NJQhr6AyLkhhJCdkzE2cob/KouVp4ivV7Q3Fc6HX7eepHAAF/DpxwgOrg9smX6coXLgfp0b1RU2u/tUNID04rpNxTMueTtrT8WSskqvaJd3RH8r7cnRj6Y2hltkja82HlpDURDxDTRvv+krbwMr26SB/40BjpMUrDRCeKuiBahC0DCoU/4+ze1l94wVUhdkCfL0GpJrMSCDEK+XEurU18Hb7WT+ThXbkdl6VpFdHsRvqAnhR2g4b+Qzgidmuky5NUZVfEaZqV/g==
@@ -62,7 +54,7 @@ pycharm在建空项目时可能因为没有解释器（No Python interpreter）�
 1.下载pycharm
 2.下载补丁 链接: https://pan.baidu.com/s/1AOO359_TNRDEUl5mlgsCIA&shfl=shareset 提取码: k6ab 将 JetbrainsIdesCrack-3.4-release-enc.jar 放置到 pycharm安装目录的\bin目录下
 
-3.在 Pycharm安装目录的\bin目录下找到 pycharm.exe.vmoptions 和 pycharm64.exe.vmoptions；以文本格式打开并同时在两个文件最后追加 -javaagent:D:\JetBrains\PyCharm 2018.2.1\bin\JetbrainsIdesCrack-3.4-release-enc.jar，注意路径修改成你的pycharm安装路径，然后保存。
+3.在 Pycharm安装目录的\bin目录下找到 pycharm.exe.vmoptions 和 pycharm64.exe.vmoptions；以文本格式打开并同时在两个文件最后追加 `-javaagent:D:\JetBrains\PyCharm 2018.2.1\bin\JetbrainsIdesCrack-3.4-release-enc.jar`，注意路径修改成你的pycharm安装路径，然后保存。
 
 4.重启Pycharm ,选择激活码激活，输入如下内容激活:
 ```

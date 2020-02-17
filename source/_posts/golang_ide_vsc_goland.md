@@ -33,18 +33,22 @@ Windows 下可以使用 .msi 后缀(在下载列表中可以找到该文件，�
 
 # Go项目注意事项
 
-- **go项目最好放到GOPATH的src下, 可以免除很多奇奇怪怪的麻烦**
+当你遇到了一些奇怪的环境配置问题可以尝试下面的建议, 否则建议走 [GoLand流](#GoLand流(推荐))
+
+- **go项目最好放到GOPATH的`src`文件夹下, 可以免除很多奇奇怪怪的麻烦**
 - 如果是Win平台, 尽量用PowerShell编译, 可以免除很多奇奇怪怪的麻烦, 不建议用GoLand的terminal, 谁也不知道他干了啥, 
 - 如果目录下有 `go.mod` 文件, `go build` 的时候默认是会从网上下载最新依赖库的, 所以如果想直接用vendor文件夹里的本地的依赖库编译可执行文件可以用命令 `go build -mod=vendor`,
-
+- 如果目录下没有 `go.mod` 文件, 则直接 `go build`即可, 他会优先以vendor里的依赖库编译的
 
 # GoLand流(推荐)
 
+激活方法: {% post_link goland_pycharm_activation Pycharm & Goland 激活 %}
+
 GoLand几乎不需要什么特别的配置, 不过有几点要注意:
 
-- {% post_link goland_pycharm_activation Pycharm & Goland 激活 %}
-- [Go项目注意事项](#Go项目注意事项)
-- 如果本身项目中的vendor或其他本地文件夹已经包含所有第三方抵赖了, 记得把Goland的 settings-Go-Go Modules(vgo)的enable的 √ 去掉, 不然goland不会直接引用本地的这些依赖, 不仅go build会出错, 而且goland还不能正确的函数跳转, 而且goland还有可能会疯狂提示要你登录相应的git仓库的账号密码啥的
+- 如果当前项目没有放在GOPATH的src下, 则必须放在其他某个文件夹(比如是`example_folder`)的`src`文件夹下, 然后在goland的 `settings-GOPATH-Project GOPATH` 下加上 `example_folder`的路径, 并且编译时候使用goland的terminal来编译
+- 如果本身项目中的vendor或其他本地文件夹已经包含所有第三方抵赖了, 记得把Goland的 `settings-Go-Go Modules(vgo)`的enable的 √ 去掉, 不然goland不会直接引用本地的这些依赖, 不仅go build会出错, 而且goland还不能正确的函数跳转, 而且goland还有可能会疯狂提示要你登录相应的git仓库的账号密码啥的
+- 当出现了一些奇怪的无法编译或无法跳转问题, 则可参考[Go项目注意事项](Go项目注意事项)
 
 
 # VSCode流

@@ -3,6 +3,7 @@ title: Pycharm & Goland 激活
 date: 2019-10-20 22:51:26
 tags:
 - Pycharm
+- GoLand
 categories:
 - Misc
 password: '0622'

@@ -8,6 +8,11 @@ categories:
 ---
 
 
+# 其他设备投影不到surface上
+
+更新其他的设备的网卡驱动
+
+
 # windows更新之后windows hello出问题
 
 比如报出以下问题:

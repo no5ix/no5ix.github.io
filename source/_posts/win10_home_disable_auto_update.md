@@ -55,9 +55,8 @@ You can also create a stop and start script for Windows Update.
 
 Create a Notepad file with each of the following and save them with the .bat extension.
 
-stop-upadtes.bat:
 
-```stop-upadtes.bat
+``` bat stop-upadtes.bat
 sc config wuauserv start= disabled
 net stop wuauserv
 
@@ -70,8 +69,7 @@ net stop dosvc
 pause
 ```
 
-```start-updates.bat:
-
+``` bat start-updates.bat 
 sc config wuauserv start= auto
 net start wuauserv
 

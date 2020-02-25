@@ -61,7 +61,9 @@ Host github github.com
 Hostname github.com
 Port 22
 User git
-ProxyCommand connect -S 127.0.0.1:1080 %h %p
+# 这里的 -a none 是 NO-AUTH 模式，参见 https://bitbucket.org/gotoh/connect/wiki/Home 中的 More detail 一节
+# 之前写成ProxyCommand connect -S 127.0.0.1:1080 %h %p遇到过git bash不能clone项目的问题
+ProxyCommand connect -S 127.0.0.1:1080 -a none %h %p
 
 ```
 

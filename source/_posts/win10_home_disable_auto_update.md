@@ -8,6 +8,115 @@ categories:
 ---
 
 
+# 直接暴力删除(亲测有效)
+
+Click your Start Button, type services and hit Enter
+
+Scroll down to find Windows Update Service
+
+If it is Started, double click it and stop that service
+
+CLose the services App
+
+Click your Start Button, type cmd, right click Command Prompt and choose 'Run as Administrator'
+
+Run this command and hit Enter
+
+sc delete wuauserv
+
+Close Command Prompt
+
+Restart your PC
+
+
+If you also have the Update Assistant installed on your system:
+
+The Update Assistant in Windows 10 cannot be uninstalled, but you can get rid of it
+
+Click your Start Button, type Task Scheduler and hit enter
+In the left Pane, navigate to: Windows - Update Orchestrater
+Right Pane double click 'Update Assistant'
+Click on Triggers Tab
+On each of the triggers ( At login . . . etc.) double click and uncheck 'Enabled'
+
+Under 'Update Assistant, there is another event 'Update Assistant CalendarRun'
+Do the same for all triggers on that event
+
+Restart your system, that's It!
+
+When finished and after a system restart, open the services app and make sure the Windows Update Service is now gone .
+
+
+# 写个定时命令(已集成到nox)
+
+已经集成到[nox](https://github.com/no5ix/nox)中
+
+You can also create a stop and start script for Windows Update.
+
+Create a Notepad file with each of the following and save them with the .bat extension.
+
+stop-upadtes.bat:
+
+```stop-upadtes.bat
+sc config wuauserv start= disabled
+net stop wuauserv
+
+sc config bits start= disabled
+net stop bits
+
+sc config dosvc start= disabled
+net stop dosvc
+
+pause
+```
+
+```start-updates.bat:
+
+sc config wuauserv start= auto
+net start wuauserv
+
+sc config bits start= auto
+net start bits
+
+sc config dosvc start= auto
+net start dosvc
+
+pause
+```
+Just right click on stop-upadtes.bat and select “Run as Administrator”
+
+Source: http://sdbr.net/windows-10-update-failure/
+
+My sincere thanks to MVP, Greg Carmack for the help with finding this.
+
+
+# Other options to consider(亲测过都不够彻底)
+
+Please note, Microsoft's approach to updates is very different that earlier releases. They are basically mandatory because of Microsoft's past history with customers sometimes failing to install important updates.
+
+See options for managing how and when Windows Updates are installed.
+
+Option 1:
+
+Set your Internet connection as metered:
+https://www.groovypost.com/howto/manage-windows...
+
+Option 2:
+
+Use Active Hours and Restart options:
+https://www.groovypost.com/howto/managing-windo...
+
+Option 3:
+
+Use Show/Hide Updates tool to block the update:
+
+Is there an option or work around to block updates or hardware drivers that might cause problems?
+Yes, Microsoft has released a KB update (KB3073930) that will let users block or hide Windows or driver updates.
+
+You can download it at the following link:
+https://support.microsoft.com/en-us/kb/3073930
+
+
 最近被win10的更新给坑了, 好好一个电脑硬是瘫痪了, 不得已重置了, 所有东西重装一遍, 吃一堑长一智这回得禁止他更新了...
 
 我的电脑右键-管理-服务和应用程序-服务-windows Update：

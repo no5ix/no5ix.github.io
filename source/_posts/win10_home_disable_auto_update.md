@@ -8,48 +8,7 @@ categories:
 ---
 
 
-# 直接暴力删除(亲测有效但不建议)
-
-**不建议原因: 貌似会引起蓝屏以及删除了这个服务之后就不可能从Microsoft Store安装uwp了**
-
-Click your Start Button, type services and hit Enter
-
-Scroll down to find Windows Update Service
-
-If it is Started, double click it and stop that service
-
-CLose the services App
-
-Click your Start Button, type cmd, right click Command Prompt and choose 'Run as Administrator'
-
-Run this command and hit Enter
-
-sc delete wuauserv
-
-Close Command Prompt
-
-Restart your PC
-
-
-If you also have the Update Assistant installed on your system:
-
-The Update Assistant in Windows 10 cannot be uninstalled, but you can get rid of it
-
-Click your Start Button, type Task Scheduler and hit enter
-In the left Pane, navigate to: Windows - Update Orchestrater
-Right Pane double click 'Update Assistant'
-Click on Triggers Tab
-On each of the triggers ( At login . . . etc.) double click and uncheck 'Enabled'
-
-Under 'Update Assistant, there is another event 'Update Assistant CalendarRun'
-Do the same for all triggers on that event
-
-Restart your system, that's It!
-
-When finished and after a system restart, open the services app and make sure the Windows Update Service is now gone .
-
-
-# 写个定时命令(推荐且已集成到nox)
+# 写个定时命令(推荐此方法且已集成到nox)
 
 已经集成到[nox](https://github.com/no5ix/nox)中
 
@@ -88,6 +47,50 @@ Just right click on stop-upadtes.bat and select “Run as Administrator”
 Source: http://sdbr.net/windows-10-update-failure/
 
 My sincere thanks to MVP, Greg Carmack for the help with finding this.
+
+
+**. . .**<!-- more -->
+
+
+# 直接暴力删除(亲测有效但不建议)
+
+**不建议原因: 貌似会引起蓝屏以及删除了这个服务之后就不可能从Microsoft Store安装uwp了**
+
+Click your Start Button, type services and hit Enter
+
+Scroll down to find Windows Update Service
+
+If it is Started, double click it and stop that service
+
+CLose the services App
+
+Click your Start Button, type cmd, right click Command Prompt and choose 'Run as Administrator'
+
+Run this command and hit Enter
+
+`sc delete wuauserv`
+
+Close Command Prompt
+
+Restart your PC
+
+
+If you also have the Update Assistant installed on your system:
+
+The Update Assistant in Windows 10 cannot be uninstalled, but you can get rid of it
+
+Click your Start Button, type Task Scheduler and hit enter
+In the left Pane, navigate to: Windows - Update Orchestrater
+Right Pane double click 'Update Assistant'
+Click on Triggers Tab
+On each of the triggers ( At login . . . etc.) double click and uncheck 'Enabled'
+
+Under 'Update Assistant, there is another event 'Update Assistant CalendarRun'
+Do the same for all triggers on that event
+
+Restart your system, that's It!
+
+When finished and after a system restart, open the services app and make sure the Windows Update Service is now gone .
 
 
 # Other options to consider(亲测过都不够彻底)

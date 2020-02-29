@@ -1,5 +1,5 @@
 ---
-title: 排序算法二之谈一谈冒泡插入归并
+title: 排序算法二之谈一谈冒泡插入归并桶排序
 date: 2014-08-20 19:38:55
 tags:
 - Sort
@@ -229,3 +229,102 @@ int main()
 }
 ```
 
+
+# 桶排序
+
+桶排序 (Bucket sort) 是一种基于计数的排序算法，工作的原理是将数据分到有限数量的桶子里，然后每个桶再分别排序（有可能再使用别的排序算法或是以递回方式继续使用桶排序进行排序）。当要被排序的数据内的数值是均匀分配的时候，桶排序时间复杂度为Θ(n)。桶排序不同于快速排序，并不是比较排序，不受到时间复杂度 O(nlogn) 下限的影响。
+
+桶排序按下面 4 步进行：
+
+1. 设置固定数量的空桶。
+2. 把数据放到对应的桶中。
+3. 对每个不为空的桶中数据进行排序。
+4. 拼接从不为空的桶中数据，得到结果。
+
+桶排序，主要适用于小范围整数数据，且独立均匀分布，可以计算的数据量很大，而且符合线性期望时间。
+
+
+## 桶排序算法图解演示
+
+举例来说，现在有一组数据 [7, 36, 65, 56, 33, 60, 110, 42, 42, 94, 59, 22, 83, 84, 63, 77, 67, 101]，怎么对其按从小到大顺序排序呢？
+
+{% asset_img bucket_sort.png bucket_sort %}
+
+操作步骤说明：
+
+1. 设置桶的数量为 5 个空桶，找到最大值 110，最小值 7，每个桶的范围 20.8=(110-7+1)/5 。
+2. 遍历原始数据，以链表结构，放到对应的桶中。数字 7，桶索引值为 0，计算公式为 floor((7 – 7) / 20.8)， 数字 36，桶索引值为 1，计算公式 floor((36 – 7) / 20.8)。
+3. 当向同一个索引的桶，第二次插入数据时，判断桶中已存在的数字与新插入数字的大小，按照左到右，从小到大的顺序插入。如：索引为 2 的桶，在插入 63 时，桶中已存在 4 个数字 56，59，60，65，则数字 63，插入到 65 的左边。
+4. 合并非空的桶，按从左到右的顺序合并 0，1，2，3，4 桶。
+5. 得到桶排序的结构
+
+## 桶排序代码实现例子
+
+**假设数据分布在[0，100)之间，每个桶内部用链表表示，在数据入桶的同时插入排序。然后把各个桶中的数据合并。**
+
+``` cpp
+#include<iterator>
+#include<iostream>
+#include<vector>
+using namespace std;
+const int BUCKET_NUM = 10;
+
+struct ListNode{
+	explicit ListNode(int i=0):mData(i),mNext(NULL){}
+	ListNode* mNext;
+	int mData;
+};
+
+ListNode* insert(ListNode* head,int val){
+	ListNode dummyNode;
+	ListNode *newNode = new ListNode(val);
+	ListNode *pre,*curr;
+	dummyNode.mNext = head;
+	pre = &dummyNode;
+	curr = head;
+	while(NULL!=curr && curr->mData<=val){
+		pre = curr;
+		curr = curr->mNext;
+	}
+	newNode->mNext = curr;
+	pre->mNext = newNode;
+	return dummyNode.mNext;
+}
+
+
+ListNode* Merge(ListNode *head1,ListNode *head2){
+	ListNode dummyNode;
+	ListNode *dummy = &dummyNode;
+	while(NULL!=head1 && NULL!=head2){
+		if(head1->mData <= head2->mData){
+			dummy->mNext = head1;
+			head1 = head1->mNext;
+		}else{
+			dummy->mNext = head2;
+			head2 = head2->mNext;
+		}
+		dummy = dummy->mNext;
+	}
+	if(NULL!=head1) dummy->mNext = head1;
+	if(NULL!=head2) dummy->mNext = head2;
+	
+	return dummyNode.mNext;
+}
+
+void BucketSort(int n,int arr[]){
+	vector<ListNode*> buckets(BUCKET_NUM,(ListNode*)(0));
+	for(int i=0;i<n;++i){
+		int index = arr[i]/BUCKET_NUM;
+		ListNode *head = buckets.at(index);
+		buckets.at(index) = insert(head,arr[i]);
+	}
+	ListNode *head = buckets.at(0);
+	for(int i=1;i<BUCKET_NUM;++i){
+		head = Merge(head,buckets.at(i));
+	}
+	for(int i=0;i<n;++i){
+		arr[i] = head->mData;
+		head = head->mNext;
+	}
+}
+```

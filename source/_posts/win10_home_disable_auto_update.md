@@ -8,7 +8,7 @@ categories:
 ---
 
 
-# 直接暴力删除(亲测有效)
+# 直接暴力删除(亲测有效但不建议)
 
 Click your Start Button, type services and hit Enter
 
@@ -47,7 +47,7 @@ Restart your system, that's It!
 When finished and after a system restart, open the services app and make sure the Windows Update Service is now gone .
 
 
-# 写个定时命令(已集成到nox)
+# 写个定时命令(推荐且已集成到nox)
 
 已经集成到[nox](https://github.com/no5ix/nox)中
 

@@ -10,6 +10,8 @@ categories:
 
 # 直接暴力删除(亲测有效但不建议)
 
+**不建议原因: 貌似会引起蓝屏以及删除了这个服务之后就不可能从Microsoft Store安装uwp了**
+
 Click your Start Button, type services and hit Enter
 
 Scroll down to find Windows Update Service

@@ -6,14 +6,14 @@ categories:
 ---
 
 
-最近工作涉及到生产环境的日志系统, 小结一波, 标准实践为: 
+最近工作涉及到生产环境的日志系统, 小结一波, 其实践为: 
 
-- cpp高性能的异步日志系统模块提供给py使用
-- 此cpp模块另起线程
-- logger通过unix socket连接上address 为 “/dev/log”，那么输出到本机的 syslogd 程序
-- log先缓存在一个buffer中, 通过一个任务来把log存入syslog这一事件封装起来
-- 把这个任务加入一个线程间可保序输出的任务队列(常用asio的strand来实现)
-- 顺序输出到syslog, sa部门从中筛选提取数据, 并制作网站供各方查询日志
+1. cpp高性能的异步日志系统模块导出给py使用
+2. 此cpp模块另起线程
+3. logger通过unix socket连接上address 为 “/dev/log”，与 rsyslogd 程序通信
+4. log先缓存在一个buffer中, 通过一个任务来把log存入syslog这一事件封装起来
+5. 把这个任务加入一个线程间可保序输出的任务队列(常用asio的strand来实现), 即可返回了
+6. 之后会异步顺序输出到syslog,  然后/ etc/init.d/rsyslog 这个后台程序根据 / etc/rsyslog.conf 这个配置文件 将日志输出到不同的文件，包括网络文件，即其他服务器(分发到数据部门, 然后他们就可从中筛选提取数据, 并制作网站供各方查询日志了)
 
 
 **. . .**<!-- more --> 

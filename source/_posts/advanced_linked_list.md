@@ -4,13 +4,15 @@ date: 2014-12-22 23:19:21
 tags:
 - DataStructure
 - CPP
+- noodle
 categories:
 - CPP
 ---
 
+
 只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了
 
-这是一篇偏向单链表进阶的博客, 并不会讲单链表的建立/增加/删除等等, 而且这篇博客大多数只说思想不写代码(因为其实蛮简单的..)
+
 
 # 存储结构
 ```
@@ -23,7 +25,96 @@ typedef struct Node
 
 {% asset_img advanced_linked_list_1.png %}
 
+- 链表中第一个结点的存储位置叫做头指针
+- 头指针和头结点不同，头结点即第一个结点，头指针是指向第一个结点的指针。链表中可以没有头结点，但不能没有头指针。
+- 如果链表有头结点，那么头指针就是指向头结点数据域的指针。
+- 单链表也可以没有头结点
+
+**头结点的优点: **
+
+- 头结点是为了操作的统一与方便而设立的，放在第一个元素结点之前，其数据域一般无意义（当然有些情况下也可存放链表的长度、用做监视哨等等）。
+- 有了头结点后，对在第一个元素结点前插入结点和删除第一个结点，其操作与对其它结点的操作统一了。
+
+
+## 有头结点和无头结点的建立链表方法头插法 
+
+``` cpp
+include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct Link {
+    int  elem;
+    struct Link *next;
+}link;
+//无头结点链表的头插法实现函数
+link * creatLink(int * arc, int length) {
+    int i;
+    //最初状态下，头指针 H 没有任何结点，所以，插入第一个元素，就相当于是创建结点 H
+    link * H =(link*)malloc(sizeof(link));
+    H->elem = arc[0];
+    H->next = NULL;
+    //如果采用头插法插入超过 1 个元素，则可添加到第一个结点 H 之前
+    for (i = 1; i<length; i++) {
+        link * a = (link*)malloc(sizeof(link));
+        a->elem = arc[i];
+        //插入元素时，首先将插入位置后的链表链接到新结点上
+        a->next = H;
+        //然后再链接头指针 H
+        H = a;
+    }
+    return H;
+}
+//有头结点链表的头插法实现函数
+link * HcreatLink(int * arc, int length) {
+    int i;
+    //创建头结点 H，其链表的头指针也是 H
+    link * H = (link*)malloc(sizeof(link));
+    H->elem = 0;
+    H->next = NULL;
+    //采用头插法创建链表
+    for (i = 0; i<length; i++) {
+        link * a = (link*)malloc(sizeof(link));
+        a->elem = arc[i];
+        //首先将插入位置之后的链表链接到新结点 a 上
+        a->next = H->next;
+        //将新结点 a 插入到头结点之后的位置
+        H->next = a;
+    }
+    return H;
+}
+//链表的输出函数
+void display(link *p) {
+    while (p) {
+        printf("%d ", p->elem);
+        p = p->next;
+    }
+    printf("\n");
+}
+int main() {
+    int a[3] = { 1,2,3 };
+    //采用头插法创建无头结点链表
+    link * H = creatLink(a, 3);
+    display(H);
+    //采用头插法创建有头结点链表
+    link * head = HcreatLink(a, 3);
+    display(head);
+    //使用完毕后，释放即可
+    free(H);
+    free(head);
+    return 0;
+}
+```
+
+运行结果：
+```
+3 2 1
+0 3 2 1
+```
+提示：没有 0 的为无头结点的头插法输出结果，有 0 的为有头结点的头插法的输出结果
+
+
 **. . .**<!-- more -->
+
 
 # 在O(1)时间删除链表结点
 
@@ -66,17 +157,17 @@ typedef struct Node
 ## 反转链表解法
 
 比如一个链表:
-头指针->A->B->C->D->E
+头结点->A->B->C->D->E
 反转成为:
-头指针->E->D->C->B->A
+头结点->E->D->C->B->A
 
 ### 算法思想 : 
 
-第一轮 : 头指针->A->B->C->D->E
-第二轮 : 头指针->B->A->C->D->E
-第三轮 : 头指针->C->B->A->D->E
-第四轮 : 头指针->D->C->B->A->E
-第五轮 : 头指针->E->D->C->B->A
+第一轮 : 头结点->A->B->C->D->E
+第二轮 : 头结点->B->A->C->D->E
+第三轮 : 头结点->C->B->A->D->E
+第四轮 : 头结点->D->C->B->A->E
+第五轮 : 头结点->E->D->C->B->A
 
 ### 算法cpp实现：
 
@@ -186,7 +277,7 @@ void ReverseList(LPTLIST *ppstHead)
 		return;
 	}
 
-	// 我们只用上述算法思想中第二轮来说明一下此算法, 即为 "第二轮 : 头指针->B->A->C->D->E"
+	// 我们只用上述算法思想中第二轮来说明一下此算法, 即为 "第二轮 : 头结点->B->A->C->D->E"
 
 	// origin_first_elem_ptr指针一直指向着原来链表头指针后面的那个元素
 	//（即原第一个元素， 这个指针的指向一直都不会变， 一直都是指向A）
@@ -204,7 +295,7 @@ void ReverseList(LPTLIST *ppstHead)
 		// 让B指向A : B->A (第1步)
 		origin_first_elem_ptr->pNext->pNext = (*ppstHead)->pNext;
 
-		// 把目前第一个元素A替换为原第一个元素的后面那个元素B : 头指针->B (第2步)
+		// 把目前第一个元素A替换为原第一个元素的后面那个元素B : 头结点->B (第2步)
 		(*ppstHead)->pNext = origin_first_elem_ptr->pNext;
 
 		// 原第一个元素A的pnext指到它后面的后面那个元素C : A->C (第3步)

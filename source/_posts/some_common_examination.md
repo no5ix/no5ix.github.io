@@ -12,7 +12,7 @@ categories:
 # 求最大公约数
 
 求 a 和 b 的最大公约数
-![](/img/some_common_examination/greatest_common_divisor.png)
+![辗转相除法](/img/some_common_examination/greatest_common_divisor.png)
 
 ``` c++
 int measure(int a, int b)
@@ -40,7 +40,7 @@ int measure(int a, int b)
 
 # 棋盘/格子问题
 
-在如下8*6的矩阵中，请计算从A移动到B一共有多少走法？要求每次只能向上或向右移动一格，并且不能经过P。(答案为492)
+在如下7*5的棋盘中，请计算从A移动到B一共有多少走法？要求每次只能向上或向右移动一格，并且不能经过P。(答案为492)
 
 ![](/img/some_common_examination/SumWaysOfMoveOnChessBoard.jpg)
 
@@ -59,7 +59,10 @@ int measure(int a, int b)
 初始情况就为：f(0,0)=0, f(0,1)=1, f(1,0)=1，这个问题可以在时间O(n^2)，空间O(n^2)内求解，非递归解.   
 
 所以答案为 	492 = 	
-` SumWaysOfMoveOnChessBoard(7, 5) - SumWaysOfMoveOnChessBoard(3, 3) * SumWaysOfMoveOnChessBoard(7 - 3, 5 - 3) `
+
+``` cpp
+SumWaysOfMoveOnChessBoard(7, 5) - SumWaysOfMoveOnChessBoard(3, 3) * SumWaysOfMoveOnChessBoard(7 - 3, 5 - 3)
+```
 
 
 ## 递归解
@@ -71,7 +74,7 @@ int SumWaysOfMoveOnChessBoard_Recursion(int m, int n)
         return 0;
     if (m==0 || n==0)
         return 1;
-    return process(m, n - 1) + process(m - 1, n);
+    return SumWaysOfMoveOnChessBoard_Recursion(m, n - 1) + SumWaysOfMoveOnChessBoard_Recursion(m - 1, n);
 }
 ```
 

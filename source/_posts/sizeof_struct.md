@@ -3,6 +3,7 @@ title: 对象模型之内存对齐基础
 date: 2015-04-12 23:30:01
 tags:
 - ObjectModel
+- noodle
 categories:
 - CPP
 ---
@@ -150,8 +151,6 @@ public:
 };
 #pragma pack()
 ```
-整个类的大小是5字节，按照min(sizeof(short),4)字节对齐，也就是2字节对齐，结果是6
-所以sizeof(TestC)是6。
 
 整个类的大小是5字节，按照min(sizeof(short),4)字节对齐，也就是2字节对齐，结果是6，所以sizeof(TestC)是6。
 
@@ -174,12 +173,12 @@ public:
 下面举例说明：
 
 ```
-1 union U
-2 {
-3     char s[9];
-4     int n;
-5     double d;
-6 };
+union U
+{
+    char s[9];
+    int n;
+    double d;
+};
 ```
  
 s占9字节，n占4字节，d占8字节，因此其至少需9字节的空间。然而其实际大小并不是9，用运算符sizeof测试其大小为16.这是因为这里存在字节对齐的问题，9既不能被4整除，也不能被8整除。

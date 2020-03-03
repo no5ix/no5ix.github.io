@@ -74,6 +74,35 @@ int main(void)
 }  
 ```
 
+再测试一个复杂点的情况:
+
+``` cpp
+struct MyStructA{};
+struct MyStructB{ int value(); };
+struct MyStructC{ virtual ~MyStructC(); int x; };
+struct MyStructD{
+	virtual ~ MyStructD(); virtual void value(); 
+};
+struct MyStructE : public MyStructC{
+	virtual ~MyStructE(); 
+};
+struct MyStructF : public MyStructC, public MyStructD{
+	virtual ~MyStructF(); 
+};
+
+int main(int argc, char* argv[]){
+	{
+		std::cout << sizeof(MyStructA) << std::endl; // 1
+		std::cout << sizeof(MyStructB) << std::endl; // 1
+		std::cout << sizeof(MyStructC) << std::endl; // 8
+		std::cout << sizeof(MyStructD) << std::endl; // 4
+		std::cout << sizeof(MyStructE) << std::endl; // 8
+		std::cout << sizeof(MyStructF) << std::endl; // 12
+		getchar(); return 0;
+	}
+}
+```
+
 
 # 总结
 
@@ -83,10 +112,16 @@ int main(void)
 空类、单一继承的空类、多重继承的空类所占空间大小为：1（字节，下同）；
 一个类中，虚函数本身、成员函数（包括静态与非静态）和静态数据成员都是不占用类对象的存储空间的；因此一个对象的大小≥所有非静态成员大小的总和；
 
+**这是为什么呢?**
+实际上，这是类结构体实例化的原因，空的类或结构体同样可以被实例化，如果定义对空的类或者结构体取sizeof()的值为0，那么该空的类或结构体实例化出很多实例时，在内存地址上就不能区分该类实例化出的实例，，，所以，为了实现每个实例在内存中都有一个独一无二的地址，编译器往往会给一个空类隐含的加一个字节，这样空类在实例化后在内存得到了独一无二的地址，所以空类所占的内存大小是1个字节。
+
 **类对象的大小** = 
 各非静态数据成员（包括父类的非静态数据成员但都不包括所有的成员函数）的总和 + 
-vfptr指针(多继承下可能不止一个)+vbptr指针(多继承下可能不止一个) + 
+虚函数表指针(多继承有几个含有虚函数的父类就有几个虚函数表指针)+虚基表指针(多继承下可能不止一个, 不赘述了, 虚继承的对象的内存布局，在不同编译器实现有所区别) + 
 编译器因为要内存对齐而额外增加的字节。
+
+详情可参考: 陈皓的 [C++ 虚函数表解析](https://blog.csdn.net/haoel/article/details/1948051/)
+
 
 # 测试常用平台的不同
 
@@ -309,6 +344,8 @@ Base3's size is 32
 - 无继承+虚函数
 
 # 参考
+
+- 陈皓的 [C++ 虚函数表解析](https://blog.csdn.net/haoel/article/details/1948051/)
 
 - [C++对象模型之详述C++对象的内存布局](http://blog.csdn.net/ljianhui/article/details/46408645)
 

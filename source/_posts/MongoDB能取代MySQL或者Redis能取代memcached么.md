@@ -32,8 +32,9 @@ Redis相比memcached：
 - redis原生支持的数据类型更多，使用的想象空间更大。
 
 
+而monggodb:
 
-> mongodb 是文档数据库，用于方便懒人替代mysql等关系数据库的。
-> 不过mongodb在内存足够的情况下读写性能不错，大部分应用可以省去cache这一层了。
-
-> 根据业务场景, 懒人可以使用MongoDB来取代MySQL+memcached,.
+- mongodb 是文档数据库，用于方便懒人替代mysql等关系数据库的。MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。
+- MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。
+- 不过mongodb在内存足够的情况下读写性能不错，大部分应用可以省去cache这一层了。
+- 根据业务场景, 懒人可以使用MongoDB来取代MySQL+memcached,.

@@ -2,9 +2,10 @@
 title: SSL/TLS详解
 date: 2017-03-12 06:00:54
 tags:
-- Base64
+- HTTPS
+- noodle
 categories:
-- Misc
+- NP
 ---
 
 
@@ -12,6 +13,8 @@ categories:
 互联网的通信安全，建立在 SSL/TLS 协议之上。
 
 本文简要介绍 SSL/TLS 协议的运行机制。文章的重点是设计思想和运行过程，不涉及具体的实现细节。如果想了解这方面的内容，请参阅 [RFC 文档](http://tools.ietf.org/html/rfc5246)。
+
+**. . .**<!-- more -->
 
 
 # 作用

@@ -39,7 +39,7 @@ pip install msgpack-python
 
 3.1 简单的例子
 
-```
+``` python
 import datetime
 import msgpack
 import json
@@ -67,7 +67,7 @@ print stu_dict
 
 msgpack 提供了一个 Unpacker 方法，可以对数据流进行反序列化，下面的代码改自官网的例子
 
-```
+``` python
 import msgpack
 from io import BytesIO
 
@@ -86,7 +86,7 @@ for unpacked in unpacker:
 
 json 模块，数据经序列化以后，再反序列化，所得到的数据和序列化之前并不完全一致，如果某个数据之前的类型是 str，经过反序列化以后，类型就会变成 unicode,msgpack 提供了一种方法，可以改变这种现状
 
-```
+``` python
 import datetime
 import msgpack
 import json
@@ -117,7 +117,7 @@ print json.loads(json_str)
 
 msgpack 序列化函数提供了一个 default 参数，反序列化函数提供了一个 object_hook，其用法，与上一篇 json 中的 default 和 objec_thook 一样
 
-```
+``` python
 import datetime
 import msgpack
 import json
@@ -261,7 +261,7 @@ pip install protobuf
 
 新建一个 python 脚本，内容如下
 
-```
+``` python
 from person_pb2 import Person
 
 person = Person()

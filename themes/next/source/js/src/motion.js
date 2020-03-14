@@ -206,7 +206,7 @@ $(document).ready(function () {
       var $footerTransition = CONFIG.motion.transition.footer;
       $('.footer').velocity('transition.' + $footerTransition, {
         display: null,
-        duration: 666,
+        duration: 220,
         complete: function () {
           integrator.next();
           
@@ -230,7 +230,7 @@ $(document).ready(function () {
       var $headerTransition = CONFIG.motion.transition.header;
       $('.header').velocity('transition.' + $headerTransition, {
         display: null,
-        duration: 350,
+        duration: 220,
         complete: function () {
           integrator.next();
         }
@@ -246,7 +246,7 @@ $(document).ready(function () {
       var $logoTransition = CONFIG.motion.transition.logo;
       $('.site-title ').velocity('transition.' + $logoTransition, {
         display: null,
-        duration: 600,
+        duration: 220,
         complete: function () {
           integrator.next();
         }
@@ -274,7 +274,7 @@ $(document).ready(function () {
       var $menuTransition = CONFIG.motion.transition.menu;
       $('.menu-item').velocity('transition.' + $menuTransition, {
         display: null,
-        duration: 200,
+        duration: 220,
         complete: function () {
           integrator.next();
         }

@@ -185,6 +185,11 @@ sidebar:
   # Enable onmobile sidebar dimmer(only available if onmobile is true)
   dimmer: true
 
+  # body content padding threshhold(only padding if body height is lower than body_content_height)
+  body_content_height: 0
+
+  # toggle animation duration
+  display_duration: 150
 
 # Show the Back to top on mobile
 b2t_onmobile: false
@@ -590,6 +595,7 @@ tabs:
 motion:
   enable: true
   async: false
+  duration: 222
   transition:
     # Transition variants:
     # fadeIn | fadeOut | flipXIn | flipXOut | flipYIn | flipYOut | flipBounceXIn | flipBounceXOut | flipBounceYIn | flipBounceYOut

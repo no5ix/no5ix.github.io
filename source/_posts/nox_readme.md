@@ -19,6 +19,9 @@ An alternative to **Alfred**/**Wox**/**Listary**/**Capslock+** .
 Inspired by Alfred/Wox/Listary/Public-AutoHotKey-Scripts/Capslock+/utools, thank u.
 
 
+**. . .**<!-- more -->
+
+
 # IMPORTANT
   
 - Please run as administrator.

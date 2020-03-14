@@ -286,6 +286,14 @@
         CloseLocalSearch();
       });
 
+      $(document).keyup(function(event){
+        switch(event.keyCode) {
+          case 27:
+            // alert("ESC");
+            CloseLocalSearch();
+        }
+      });
+
       // $(document).on('blur', '#local-search-input', function(e) {
       //   // console.log(document.activeElement.getAttribute('class'));
         

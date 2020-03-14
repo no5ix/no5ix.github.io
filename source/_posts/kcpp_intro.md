@@ -12,11 +12,6 @@ top: 1
 [<i class="fa fa-fw fa-github fa-2x"></i>kcpp](https://github.com/no5ix/kcpp) 
 
 
-# QQ群
-
-因为 KCP 官方群已经满了, 可以加群 496687140
-
-
 # 轻量级的kcp会话实现-kcpp
 
 `kcpp`真正实现了只需要包含一个头文件再随意写几行代码就可以用上kcp, 而无需烦心如何组织代码来适配kcp
@@ -32,6 +27,10 @@ top: 1
 - two-channel
    - reliable
    - unreliable
+
+
+**. . .**<!-- more -->
+
 
 # kcpp Examples
 
@@ -145,3 +144,9 @@ Please read [TestKcppClient.cpp](https://github.com/no5ix/kcpp/blob/master/TestK
 在注释的过程中， 除了少量空格和换行以及一处有无符号比较的调整(为保证高警告级别可编译过)外 :    
 `if ((IUINT32)count >= IKCP_WND_RCV) return -2;`   
 没有对原始代码进行任何其他改动， 最大程度地保证了代码的“原汁原味”。
+
+
+# QQ群
+
+因为 KCP 官方群已经满了, 可以加群 496687140
+

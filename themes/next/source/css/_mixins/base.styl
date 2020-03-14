@@ -97,3 +97,12 @@ clearfix() {
   }
   &:after { clear: both; }
 }
+
+
+paddingForSidebar() {
+  if hexo-config('sidebar.position') == 'left' {
+    padding-left: $sidebar-desktop;
+  } else {
+    padding-right: $sidebar-desktop;
+  }
+}

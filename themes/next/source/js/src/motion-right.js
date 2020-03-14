@@ -78,7 +78,7 @@ $(document).ready(function () {
     sidebarToggleLines.push(sidebarToggleLine3rd);
   
     var SIDEBAR_WIDTH = '285px';
-    var SIDEBAR_DISPLAY_DURATION = 150;
+    var SIDEBAR_DISPLAY_DURATION = CONFIG.sidebar.display_duration;
   
     var sidebarToggleMotion = {
       toggleEl: $('.sidebar-toggle'),
@@ -96,7 +96,7 @@ $(document).ready(function () {
         $(document)
           .on('sidebar.isShowing', function () {
             NexT.utils.isDesktop() && $('body').velocity('stop').velocity(
-              document.body.scrollHeight < 20000 ? {paddingRight: SIDEBAR_WIDTH} : {paddingRight: 0},
+              document.body.scrollHeight < CONFIG.sidebar.body_content_height ? {paddingRight: SIDEBAR_WIDTH} : {paddingRight: 0},
               SIDEBAR_DISPLAY_DURATION
             );
           })
@@ -202,7 +202,7 @@ $(document).ready(function () {
         var $footerTransition = CONFIG.motion.transition.footer;
         $('.footer').velocity('transition.' + $footerTransition, {
           display: null,
-          duration: 220,
+          duration: CONFIG.motion.duration,
           complete: function () {
             integrator.next();
             
@@ -226,7 +226,7 @@ $(document).ready(function () {
         var $headerTransition = CONFIG.motion.transition.header;
         $('.header').velocity('transition.' + $headerTransition, {
           display: null,
-          duration: 220,
+          duration: CONFIG.motion.duration,
           complete: function () {
             integrator.next();
           }
@@ -242,7 +242,7 @@ $(document).ready(function () {
         var $logoTransition = CONFIG.motion.transition.logo;
         $('.site-title ').velocity('transition.' + $logoTransition, {
           display: null,
-          duration: 220,
+          duration: CONFIG.motion.duration,
           complete: function () {
             integrator.next();
           }
@@ -270,7 +270,7 @@ $(document).ready(function () {
         var $menuTransition = CONFIG.motion.transition.menu;
         $('.menu-item').velocity('transition.' + $menuTransition, {
           display: null,
-          duration: 220,
+          duration: CONFIG.motion.duration,
           complete: function () {
             integrator.next();
           }

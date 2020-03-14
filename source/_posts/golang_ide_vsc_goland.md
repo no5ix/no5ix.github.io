@@ -48,7 +48,7 @@ GoLand几乎不需要什么特别的配置, 不过有几点要注意:
 
 - 如果当前项目没有放在GOPATH的src下, 则必须放在其他某个文件夹(比如是`example_folder`)的`src`文件夹下, 然后在goland的 `settings-GOPATH-Project GOPATH` 下加上 `example_folder`的路径, 并且编译时候使用goland的terminal来编译
 - 如果本身项目中的vendor或其他本地文件夹已经包含所有第三方抵赖了, 记得把Goland的 `settings-Go-Go Modules(vgo)`的enable的 √ 去掉, 不然goland不会直接引用本地的这些依赖, 不仅go build会出错, 而且goland还不能正确的函数跳转, 而且goland还有可能会疯狂提示要你登录相应的git仓库的账号密码啥的
-- 当出现了一些奇怪的无法编译或无法跳转问题, 则可参考[Go项目注意事项](Go项目注意事项)
+- 当出现了一些奇怪的无法编译或无法跳转问题, 则可参考 [Go项目注意事项](#Go项目注意事项)
 
 
 # VSCode流

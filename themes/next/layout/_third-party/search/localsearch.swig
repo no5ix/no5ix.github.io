@@ -39,7 +39,8 @@
       // 是否为第一个字母被键入的标志位
       var first_char_flag = 0;
 
-      // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+      // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+      var last_page_x = 0;
       var last_page_y = 0;
 
       var local_search_tips = 
@@ -59,7 +60,9 @@
         
         if (isMobile())
         {
-          $('body').scrollTop(last_page_y);
+          // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+          scrollTo(last_page_x, last_page_y);
+
           $('#' + content_id).hide();
         }
         else
@@ -236,11 +239,14 @@
         // 要播放一个动画
         if (first_char_flag == 0)
         {
-        
+            // $('body').scrollTop(0);
           if (isMobile())
           {
+            last_page_x = window.pageXOffset;
             last_page_y = window.pageYOffset;
-            $('body').scrollTop(0);
+            // $('body').scrollTop(0);
+            scrollTo(0,0);
+
           }
           first_char_flag = 1;
           $('#' + content_id).removeAttr("headroom_special_attr");
@@ -307,31 +313,34 @@
     }
 
     function isMobile() {
-      var userAgent = window.navigator.userAgent;
+      console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
 
-      var isiPad = userAgent.match(/iPad/i) !== null;
-      var mobileUA = [
-        'iphone', 'android', 'phone', 'mobile',
-        'wap', 'netfront', 'x11', 'java', 'opera mobi',
-        'opera mini', 'ucweb', 'windows ce', 'symbian',
-        'symbianos', 'series', 'webos', 'sony',
-        'blackberry', 'dopod', 'nokia', 'samsung',
-        'palmsource', 'xda', 'pieplus', 'meizu',
-        'midp' ,'cldc' , 'motorola', 'foma',
-        'docomo', 'up.browser', 'up.link', 'blazer',
-        'helio', 'hosin', 'huawei', 'novarra',
-        'coolpad', 'webos', 'techfaith', 'palmsource',
-        'alcatel', 'amoi', 'ktouch', 'nexian',
-        'ericsson', 'philips', 'sagem', 'wellcom',
-        'bunjalloo', 'maui', 'smartphone', 'iemobile',
-        'spice', 'bird', 'zte-', 'longcos',
-        'pantech', 'gionee', 'portalmmm', 'jig browser',
-        'hiptop', 'benq', 'haier', '^lct',
-        '320x320', '240x320', '176x220'
-      ];
-      var pattern = new RegExp(mobileUA.join('|'), 'i');
+      // var userAgent = window.navigator.userAgent;
 
-      return !isiPad && userAgent.match(pattern);
+      // var isiPad = userAgent.match(/iPad/i) !== null;
+      // var mobileUA = [
+      //   'iphone', 'android', 'phone', 'mobile',
+      //   'wap', 'netfront', 'x11', 'java', 'opera mobi',
+      //   'opera mini', 'ucweb', 'windows ce', 'symbian',
+      //   'symbianos', 'series', 'webos', 'sony',
+      //   'blackberry', 'dopod', 'nokia', 'samsung',
+      //   'palmsource', 'xda', 'pieplus', 'meizu',
+      //   'midp' ,'cldc' , 'motorola', 'foma',
+      //   'docomo', 'up.browser', 'up.link', 'blazer',
+      //   'helio', 'hosin', 'huawei', 'novarra',
+      //   'coolpad', 'webos', 'techfaith', 'palmsource',
+      //   'alcatel', 'amoi', 'ktouch', 'nexian',
+      //   'ericsson', 'philips', 'sagem', 'wellcom',
+      //   'bunjalloo', 'maui', 'smartphone', 'iemobile',
+      //   'spice', 'bird', 'zte-', 'longcos',
+      //   'pantech', 'gionee', 'portalmmm', 'jig browser',
+      //   'hiptop', 'benq', 'haier', '^lct',
+      //   '320x320', '240x320', '176x220'
+      // ];
+      // var pattern = new RegExp(mobileUA.join('|'), 'i');
+
+      // return !isiPad && userAgent.match(pattern);
     }
 
     var getSearchFile = function(){

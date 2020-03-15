@@ -31,7 +31,9 @@ html, body { height: 100%; }
   padding-top: $footer-height + $gap-between-main-and-footer; 
   padding-bottom: $footer-height + $gap-between-main-and-footer; 
   
-  paddingForSidebar();
+  +desktop() {
+    paddingForSidebar();
+  }
 }
 .main-inner {
   margin: 0 auto;

@@ -27,7 +27,7 @@ categories:
 那为何要作如此假设呢?
 因为要跟建堆 BuildMaxHeap 配合来完成堆排序, 而建堆 BuildMaxHeap是从下至上的.
 
-```  c++
+``` c++
 void MaxHeapify(int arr[], int index, int length)
 {
 	if (!arr || index < 0 || length <= 0)
@@ -42,6 +42,8 @@ void MaxHeapify(int arr[], int index, int length)
 	int largestIndex = 0;
 	while (1)
 	{
+		// 下面的那句`arr[largestIndex] < arr[leftChildIndex]`则意味着要一直拿index的元素和
+		// 处于index*2 + 1 的元素比较, 这对cpu的cache极不友好, 这也是堆排序没快排快的原因之一
 		leftChildIndex = index * 2 + 1;
 		rightChildIndex = index * 2 + 2;
 

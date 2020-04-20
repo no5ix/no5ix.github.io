@@ -608,8 +608,8 @@ motion:
     menu: slideDownIn
     logo: slideDownIn
     post_block_else: slideDownIn
-    post_header: slideDownIn
-    post_body: slideDownIn
+    post_header: fadeIn
+    post_body: fadeIn
     coll_header: slideDownIn
     footer: slideDownIn
 

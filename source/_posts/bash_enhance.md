@@ -181,17 +181,19 @@ emptytrash()
 
 来找到它, 如果没找到就在自己的home目录下新建一个 ` .inputrc ` 文件, 然后在` .inputrc `文件末尾加上常用的Bash定制 :
 
-    set completion-ignore-case on  
-    
-    #For single press Tab results for when a partial or no completion is possible  
-    set show-all-if-ambiguous on  
-    
-    #For results when no completion is possible  
-    set show-all-if-unmodified on  
-    
-    #History completion bound to arrow keys (down, up)  
-    "\e[A": history-search-backward  
-    "\e[B": history-search-forward  
+``` shell
+set completion-ignore-case on  
+
+#For single press Tab results for when a partial or no completion is possible  
+set show-all-if-ambiguous on  
+
+#For results when no completion is possible  
+set show-all-if-unmodified on  
+
+#History completion bound to arrow keys (down, up)  
+"\e[A": history-search-backward  
+"\e[B": history-search-forward  
+```
 
 解释 :
 

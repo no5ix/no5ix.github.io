@@ -44,8 +44,8 @@
       var last_page_y = 0;
 
       var local_search_tips = 
-            "<span class='local-search-empty'>" + "玩命搜索中!! 研究表明, 人类能够忍受的最长等待时间为8秒..." + "</span>" +
-            "<span class='local-search-empty'>" + "但请相信我, 我绝对不可能那么旷日持久的..." + "</span>";
+            "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+            "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
 
       function CloseLocalSearch()
       {

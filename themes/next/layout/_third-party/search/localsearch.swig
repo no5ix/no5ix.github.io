@@ -313,7 +313,7 @@
     }
 
     function isMobile() {
-      console.log(document.body.clientWidth);
+      // console.log(document.body.clientWidth);
       return document.body.clientWidth < 768
 
       // var userAgent = window.navigator.userAgent;
@@ -348,6 +348,15 @@
       var local_search_result_name = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
       searchFunc(path, 'local-search-input', local_search_result_name);
     }
+
+    // preload search.xml
+    $.ajax({
+      url: "/search.xml",
+      dataType: "xml",
+      success: function (xmlResponse) {
+        console.log("load search.xml finished.");
+      }
+    });
 
   </script>
 {% endif %}

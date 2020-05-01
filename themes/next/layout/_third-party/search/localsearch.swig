@@ -108,6 +108,7 @@
           return;
         }
         $resultContent.innerHTML = "";
+        $('#local-search-close').show();
 
         // 0x04. perform local searching
         if (is_load_xml_finished == 0)
@@ -211,7 +212,6 @@
           });
 
           str += "</ul>";
-          $('#local-search-close').show();
           if (str.indexOf('<li>') === -1) {
             return $resultContent.innerHTML = 
               "<ul class='local-search-empty-ul'><span class='local-search-empty'>找不到, 换个搜索关键字试一哈.<span></ul>";

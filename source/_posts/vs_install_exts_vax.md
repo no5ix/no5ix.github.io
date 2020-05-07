@@ -26,19 +26,19 @@ vs2017的vax破解方法：
 
 ## google cpp代码风格linter配置
 
-由于谷歌风格的检查文件[cpplint.py](https://github.com/google/styleguide/blob/gh-pages/cpplint/cpplint.py)（上去复制下来保存为.py就好啦 ）是Python来运行的，所以首先我们需要一个python~
+由于谷歌风格的检查文件[cpplint.py](https://github.com/cpplint/cpplint/blob/master/cpplint.py)（上去复制下来保存为.py就好啦 ）是Python来运行的，所以首先我们需要一个python~
 安装的时候记得把路径改好并记下，不能有中文 ，不然就有可能出错。
 
 接下来就是主要步骤了。
 
-打开vs，选择工具->外部工具->添加, 然后
+打开vs，选择工具->外部工具->添加, 然后(下述路径根据自己情况修改哈)
 
 - 标题: 取个名字, 如 `Google Cpp Style Standard`
 - 命令: `C:\Python27\python.exe`
 - 参数: `C:\Users\hulinhong\Documents\github\cpplint\cpplint.py --output=vs7 --filter=-build/header_guard,-build/include,-readability/streams $(ItemPath)`
 - 初始目录: `$(ItemDir)`
 - 打勾 `使用输出窗口`
-- 记住此时`Google Cpp Style Standard`这个命令从上到下的顺序, 记为 n, 等下会用到
+- 记住此时`Google Cpp Style Standard`这个命令从上到下的顺序, 记为 `n`, 等下会用到
 
 设置完之后保存，就会看到`工具`菜单下面多了个`Google Cpp Style Standard`的菜单项。但是这时候 …… 没快捷键你逗我？
 快捷键就要这样设置：首先 ，还是我们的工具菜单->选项，弹出的选项对话框中选择环境 ->键盘,  

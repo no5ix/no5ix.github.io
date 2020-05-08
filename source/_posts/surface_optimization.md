@@ -19,7 +19,11 @@ categories:
 - 识别反应慢
 - 解锁之后摄像头的指示灯还在亮
 
-尝试回退或者重装以下驱动:
+
+先尝试 进入 设置-系统-电源/睡眠-网络连接, 设置为`睡眠不断开网络`或者`由windows管理`
+
+如果不行, 
+则尝试回退或者重装以下驱动:
 - Biometric devices(Windows Hello Face Software Device或者类似的名字)
 - Cameras(Surface Camera Front / Surfa IR Camera Front 或者其他的名字)
 - Display adapters(你没看错, 显卡驱动也会影响windows hello...)

@@ -20,7 +20,7 @@ categories:
 - 解锁之后摄像头的指示灯还在亮
 
 
-先尝试 进入 设置-系统-电源/睡眠-网络连接, 设置为`睡眠不断开网络`或者`由windows管理`
+先尝试 进入 设置-系统-电源/睡眠-网络连接, 设置为睡眠总是断开网络
 
 如果不行, 
 则尝试回退或者重装以下驱动:
@@ -28,7 +28,8 @@ categories:
 - Cameras(Surface Camera Front / Surfa IR Camera Front 或者其他的名字)
 - Display adapters(你没看错, 显卡驱动也会影响windows hello...)
 
-都没用的话只能去setting里尝试recovery了, 最好的办法是 {% post_link win10_home_disable_auto_update 屏蔽更新 %}
+都没用就去尝试还原系统, 
+还是没用的话只能去setting里尝试recovery了, 最好的办法是 {% post_link win10_home_disable_auto_update 屏蔽更新 %}
 
 # 触摸板某些三指或四指手势在某些app中无法使用
 

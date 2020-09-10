@@ -46,14 +46,14 @@ HTTP 协议考察 HTTP 协议的返回码、HTTP 的方法等。需要特别指�
 
 # 挖坑
 
-✓ 熟悉Python / 熟悉C++ / 会用Go 
-✓ 熟悉Linux  / 熟悉Redis / 掌握MySQL / 了解Nginx 
-✓ 分布式架构设计与开发经验 
-✓ 带队管理经验一年多 
-✓ 技术支持培训分享经验 
-✓ 性能分析与优化经验 
-✓ 多款上线项目的运营事务处理经验 
-✓ 前后端协同开发经验
+* ✓ 熟悉Python / 熟悉C++ / 会用Go 
+* ✓ 熟悉Linux  / 熟悉Redis / 掌握MySQL / 了解Nginx 
+* ✓ 分布式架构设计与开发经验 
+* ✓ 带队管理经验一年多 
+* ✓ 技术支持培训分享经验 
+* ✓ 性能分析与优化经验 
+* ✓ 多款上线项目的运营事务处理经验 
+* ✓ 前后端协同开发经验
 
 ◼ 网易-猎手之王游戏项目(2018.9-2020.9) 
 
@@ -83,7 +83,7 @@ HTTP 协议考察 HTTP 协议的返回码、HTTP 的方法等。需要特别指�
 
 详细的可参考: https://blog.csdn.net/yangxjsun/article/details/79681229
 
-![](img/linux/hard_link_soft_link.jpg)
+![](/img/linux/hard_link_soft_link.jpg)
 
 ### 硬链接
 
@@ -266,16 +266,16 @@ SIGCHLD信号,子进程结束时, 父进程会收到这个信号。如果父进�
 - 慢启动
 - 拥塞避免
 
-![](img/tcp/tcp_congestion_control.png)
+![](/img/tcp/tcp_congestion_control.png)
 
 
 ## tcp滑动窗口
 
-![](img/tcp/tcp_sliding_window1.png)
+![](/img/tcp/tcp_sliding_window1.png)
 
 每个TCP连接的两端都维护一组窗口：发送窗口结构（send window structure）和接收窗口结构（receive window structure）。TCP以字节为单位维护其窗口结构。TCP头部中的窗口大小字段相对ACK号有一个字节的偏移量。发送端计算其可用窗口，即它可以立即发送的数据量。可用窗口（允许发送但还未发送）计算值为提供窗口（即由接收端通告的窗口）大小减去在传（已发送但未得到确认）的数据量。图中P1、P2、P3分别记录了窗口的左边界、下次发送的序列号、右边界。
 
-![](img/tcp/tcp_sliding_window2.png)
+![](/img/tcp/tcp_sliding_window2.png)
 
 如上图所示， 随着发送端接收到返回的数据ACK，滑动窗口也随之右移。发送端根据接收端返回的ACK可以得到两个重要的信息：一是接收端期望收到的下一个字节序号；二是当前的窗口大小（再结合发送端已有的其他信息可以得出还能发送多少字节数据）。
 
@@ -481,7 +481,7 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
   5. InnoDB是聚集索引，使用B+Tree作为索引结构，数据文件是和（主键）索引绑在一起的（表数据文件本身就是按B+Tree组织的一个索引结构），必须要有主键，通过主键索引效率很高。MyISAM是非聚集索引，也是使用B+Tree作为索引结构，索引和数据文件是分离的，索引保存的是数据文件的指针。主键索引和辅助索引是独立的。
 
 - mysql 主从同步怎么搞的？分哪几个过程？如果有一台新机器要加到从机里，怎么个过程。
-  - ![](img/etcd/mysql/mysql_master_slave_sync.jpg)
+  - ![](/img/etcd/mysql/mysql_master_slave_sync.jpg)
   - 复制的基本过程如下：
     1. 从节点上的I/O 进程连接主节点，并请求从指定日志文件的指定位置（或者从最开始的日志）之后的日志内容；
     2. 主节点接收到来自从节点的I/O请求后，通过负责复制的I/O进程根据请求信息读取指定日志指定位置之后的日志信息，返回给从节点。返回信息中除了日志所包含的信息之外，还包括本次返回的信息的bin-log file 的以及bin-log position；从节点的I/O进程接收到内容后，将接收到的日志内容更新到本机的relay log中，并将读取到的binary log文件名和位置保存到master-info 文件中，以便在下一次读取的时候能够清楚的告诉Master“我需要从某个bin-log 的哪个位置开始往后的日志内容，请发给我”；
@@ -655,7 +655,7 @@ etcd 认为写入请求被 Leader 节点处理并分发给了多数节点后，�
 
 ## etcd 架构及解析2.1 架构图
 
-![](/img/etcd/etcd_%20architecture.jpeg)
+![](//img/etcd/etcd_%20architecture.jpeg)
 
 
 ### 架构解析

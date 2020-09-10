@@ -152,6 +152,24 @@ malloc是用户态使用的内存分配接口，最终还是向buddy申请内存
 
 HTTP 协议考察 HTTP 协议的返回码、HTTP 的方法等。需要特别指出的是 HTTPS 加密的详细过程要非常透彻，不然容易产生一种感觉好像都清楚了，但是一问就有点说不清楚。
 
+## https
+
+HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。
+
+那么SSL又是什么？
+
+SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研发，SSL 协议位于 TCP/IP 协议与各种应用层协议之间，为数据通讯提供安全支持。
+
+TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。
+
+## cookie和session的区别
+
+## token咋用
+
+## url编码百分号的玩意
+
+## 状态码
+
 
 # 分布式系统
 

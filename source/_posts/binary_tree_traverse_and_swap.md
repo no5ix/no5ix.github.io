@@ -111,6 +111,17 @@ void PostOrderTraverse_Recursion(BTNP btnp)
 
 ### 迭代式先序遍历代码实现
 
+用**栈(Stack)**的思路来处理问题。
+
+前序遍历的顺序为根-左-右，具体算法为：
+
+* 把根节点 push 到栈中
+* 循环检测栈是否为空，若不空，则取出栈顶元素，保存其值
+* 看其右子节点是否存在，若存在则 push 到栈中(因为前序遍历的顺序为根-左-右, 而stack是先进后出的, 所以要先push右子节点)
+* 看其左子节点，若存在，则 push 到栈中。
+
+
+这个cpp版本没有本文下面的[go版](#遍历测试代码go版)写得好, 那个更容易理解
 ``` c++
 void PreOrderTraverseNonRecursion( btnp bTreeNode )
 {
@@ -230,6 +241,9 @@ void PostOrderTraverseNonRecursion( btnp bTreeNode )
 
 而得到的**广度优先遍历**的序列为 : ABCDEFG
 
+
+#### 遍历测试代码CPP版
+
 参照上图构建如下二叉树 : 
 
 ``` c++
@@ -271,6 +285,91 @@ int main()
 	return 0;
 }
 ```
+
+
+#### 遍历测试代码GO版
+
+``` go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	testPreorderTraversal()
+}
+
+type TreeNode struct {
+	Left  *TreeNode
+	Right *TreeNode
+	Val   string
+}
+
+func preorderTraversal(root *TreeNode) []string {
+	if root == nil {
+		//当树为空树时，直接返回一个空list
+		return nil
+	}
+	result := make([]string, 0)
+	//非递归前序遍历，需要借助栈
+	stack := make([]*TreeNode, 0)
+
+	//第一步是将根节点压入栈中
+	stack = append(stack, root)
+	// 当栈不为空时，出栈的元素插入list尾部。
+	// 当它的孩子不为空时，将孩子压入栈，一定是先压右孩子再压左孩子
+	// 因为前序遍历的顺序为根-左-右, 而stack是先进后出的, 所以要先push右子节点
+	for len(stack) != 0 {
+		//此处的root只是一个变量的复用
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		result = append(result, root.Val)
+
+		if root.Right != nil {
+			stack = append(stack, root.Right)
+		}
+		if root.Left != nil {
+			stack = append(stack, root.Left)
+		}
+	}
+	return result
+}
+
+func testBinaryTreeTraversal() {
+	testbtA := new(TreeNode)
+	testbtA.Val = "A"
+	testbtB := new(TreeNode)
+	testbtB.Val = "B"
+	testbtC := new(TreeNode)
+	testbtC.Val = "C"
+	testbtD := new(TreeNode)
+	testbtD.Val = "D"
+	testbtE := new(TreeNode)
+	testbtE.Val = "E"
+	testbtF := new(TreeNode)
+	testbtF.Val = "F"
+	testbtG := new(TreeNode)
+	testbtG.Val = "G"
+
+	testbtA.Left = testbtB
+	testbtA.Left.Left = testbtC
+
+	testbtA.Left.Right = testbtD
+	testbtA.Left.Right.Left = testbtE
+	testbtA.Left.Right.Left.Right = testbtG
+	testbtA.Left.Right.Right = testbtF
+
+	// 标准答案:
+	// 	先(根)序遍历 ： ABCDEGF
+	// 中(根)序遍历 ： CBEGDFA
+	// 后(根)序遍历 ： CGEFDBA
+
+	fmt.Println(preorderTraversal(testbtA))
+}
+
+```
+
 
 ### 深度优先的迭代式遍历之总结
 

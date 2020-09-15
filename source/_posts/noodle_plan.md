@@ -5,26 +5,236 @@ tags:
 - noodle
 categories:
 - GitHub
-# password: '886'
 ---
 
 
-# C++
+# 网络安全pass
 
-pass
-- 编译过程
-- 内存泄漏的工具 vargrid..? 还有啥工具
-3. [x] cpp找找冰川, 大梦龙图的面试题，网上常用题
+最后就是网络安全，主要考察也是 WEB 安全，包括XSS，CSRF，SQL注入等。
+
+
+# C++pass
+
+* 编译过程
+* 内存泄漏的工具 vargrid..? 还有啥工具
+* cpp找找冰川, 大梦龙图的面试题，网上常用题
+* gdb怎么切换线程
+* C++ 的动态多态怎么实现的？
+* C++ 的构造函数可以是虚函数吗？
+
+- [ ] 桶排序/线段树/统计树/排序树
+- [x] 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
 
 # Go
 
 pass
 
 
+# 算法
+
+* 动态规划与贪心有什么区别
+* 如何判断一个图是否有环
+
+
 # Linux网络编程
 
-* muduo
-* epoll
+|   I/O模式   | 水平触发 | 边缘触发 |
+| :---------: | :------: | :------: |
+|    epoll    |    ✓     |    ✓     |
+| select/poll |    ✓     |          |
+|  信号驱动   |          |    ✓     |
+
+## select
+
+一个常见的select例子如下: 
+```c
+for ( ; ; ) {
+  rset = allset;		/* structure assignment */
+  nready = Select(maxfd+1, &rset, NULL, NULL, NULL);
+
+  if (FD_ISSET(listenfd, &rset)) {	/* new client connection */
+    clilen = sizeof(cliaddr);
+    connfd = Accept(listenfd, (SA *) &cliaddr, &clilen);
+#ifdef	NOTDEF
+    printf("new client: %s, port %d\n",
+        Inet_ntop(AF_INET, &cliaddr.sin_addr, 4, NULL),
+        ntohs(cliaddr.sin_port));
+#endif
+
+    for (i = 0; i < FD_SETSIZE; i++)
+      if (client[i] < 0) {
+        client[i] = connfd;	/* save descriptor */
+        break;
+      }
+    if (i == FD_SETSIZE)
+      err_quit("too many clients");
+
+    FD_SET(connfd, &allset);	/* add new descriptor to set */
+    if (connfd > maxfd)
+      maxfd = connfd;			/* for select */
+    if (i > maxi)
+      maxi = i;				/* max index in client[] array */
+
+    if (--nready <= 0)
+      continue;				/* no more readable descriptors */
+  }
+
+  for (i = 0; i <= maxi; i++) {	/* check all clients for data */
+    if ( (sockfd = client[i]) < 0)
+      continue;
+    if (FD_ISSET(sockfd, &rset)) {
+      if ( (n = Read(sockfd, buf, MAXLINE)) == 0) {
+          /*4connection closed by client */
+        Close(sockfd);
+        FD_CLR(sockfd, &allset);
+        client[i] = -1;
+      } else
+        Writen(sockfd, buf, n);
+
+      if (--nready <= 0)
+        break;				/* no more readable descriptors */
+    }
+  }
+}
+```
+
+参考[select poll epoll的区别](https://zhuanlan.zhihu.com/p/39970630)
+
+可以看出**select的缺点**如下: 
+
+* 单个进程能够监视的文件描述符的数量存在最大限制，通常是1024，当然可以更改数量，但由于select采用轮询的方式扫描文件描述符，文件描述符数量越多，性能越差；
+* (遍)select返回的是含有整个句柄的数组，应用程序需要遍历整个数组才能发现哪些句柄发生了事件；
+* (内)内核/用户空间内存拷贝问题，select需要复制大量的句柄数据结构，产生巨大的开销；
+* (数)单个进程能够监视的文件描述符的数量存在最大限制，通常是1024，当然可以更改数量，但由于select采用轮询的方式扫描文件描述符，文件描述符数量越多，性能越差；
+* select的触发方式是水平触发，应用程序如果没有完成对一个已经就绪的文件描述符进行IO，那么之后再次select调用还是会将这些文件描述符通知进程。
+* 相比于select模型，poll使用链表保存文件描述符，因此没有了监视文件数量的限制，但其他三个缺点依然存在。
+
+## epoll
+
+一个常见的epoll使用例子:
+```c
+/* Deal with returned list of events */
+for (j = 0; j < ready; j++) {
+    printf("  fd=%d; events: %s%s%s\n", evlist[j].data.fd,
+            (evlist[j].events & EPOLLIN)  ? "EPOLLIN "  : "",
+            (evlist[j].events & EPOLLHUP) ? "EPOLLHUP " : "",
+            (evlist[j].events & EPOLLERR) ? "EPOLLERR " : "");
+
+    if (evlist[j].events & EPOLLIN) {
+        s = read(evlist[j].data.fd, buf, MAX_BUF);
+        if (s == -1)
+            errExit("read");
+        printf("    read %d bytes: %.*s\n", s, s, buf);
+
+    } else if (evlist[j].events & (EPOLLHUP | EPOLLERR)) {
+
+        /* After the epoll_wait(), EPOLLIN and EPOLLHUP may both have
+            been set. But we'll only get here, and thus close the file
+            descriptor, if EPOLLIN was not set. This ensures that all
+            outstanding input (possibly more than MAX_BUF bytes) is
+            consumed (by further loop iterations) before the file
+            descriptor is closed. */
+
+        printf("    closing fd %d\n", evlist[j].data.fd);
+// 关闭一个文件描述符会自动的将其从所有的 epoll 实例的兴趣列表中移除
+        if (close(evlist[j].data.fd) == -1)
+            errExit("close");
+        numOpenFds--;
+    }
+}
+```
+
+**epoll的设计和实现select完全不同**。epoll通过在linux内核中申请一个简易的文件系统, 把原先的select/poll调用分成了3个部分：
+
+1. 调用epoll_create()建立一个epoll对象（在epoll文件系统中为这个句柄对象分配资源）
+2. 调用epoll_ctl向epoll对象中添加这100万个连接的套接字
+3. 调用epoll_wait收集发生的事件的连接
+
+epoll的高效就在于，当我们调用epoll_ctl往里塞入百万个句柄时，epoll_wait仍然可以飞快的返回，并有效的将发生事件的句柄给我们用户。这是由于我们在调用epoll_create时，内核除了帮我们在epoll文件系统里建了个file结点，在内核cache里建了个红黑树用于存储以后epoll_ctl传来的socket外，还会再建立一个list链表，用于存储准备就绪的事件，当epoll_wait调用时，仅仅观察这个list链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。所以，epoll_wait非常高效。
+
+而且，通常情况下即使我们要监控百万计的句柄，大多一次也只返回很少量的准备就绪句柄而已，所以，epoll_wait仅需要从内核态copy少量的句柄到用户态而已，如何能不高效？！
+
+那么，这个准备就绪list链表是怎么维护的呢？当我们执行epoll_ctl时，除了把socket放到epoll文件系统里file对象对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪list链表里。所以，当一个socket上有数据到了，内核在把网卡上的数据copy到内核中后就来把socket插入到准备就绪链表里了。
+
+如此，一颗红黑树，一张准备就绪句柄链表，少量的内核cache，就帮我们解决了大并发下的socket处理问题。执行epoll_create时，创建了红黑树和就绪链表，执行epoll_ctl时，如果增加socket句柄，则检查在红黑树中是否存在，存在立即返回，不存在则添加到树干上，然后向内核注册回调函数，用于当中断事件来临时向准备就绪链表中插入数据。执行epoll_wait时立刻返回准备就绪链表里的数据即可。
+
+最后看看epoll独有的两种模式LT和ET。无论是LT和ET模式，都适用于以上所说的流程。区别是，LT模式下，只要一个句柄上的事件一次没有处理完，会在以后调用epoll_wait时次次返回这个句柄，而ET模式仅在第一次返回。
+
+这件事怎么做到的呢？当一个socket句柄上有事件时，内核会把该句柄插入上面所说的准备就绪list链表，这时我们调用epoll_wait，会把准备就绪的socket拷贝到用户态内存，然后清空准备就绪list链表，最后，epoll_wait干了件事，就是检查这些socket，如果不是ET模式（就是LT模式的句柄了），并且这些socket上确实有未处理的事件时，又把该句柄放回到刚刚清空的准备就绪链表了。所以，非ET的句柄，只要它上面还有事件，epoll_wait每次都会返回。而ET模式的句柄，除非有新中断到，即使socket上的事件没有处理完，也是不会次次从epoll_wait返回的。
+
+
+### 水平触发与边缘触发的区别
+
+**默认情况下 epoll 提供的是水平触发通知**.要使用边缘触发通知，我们在调用epoll_ctl()时在ev．events字段中指定EPOLLET标志.
+
+例如 : 
+
+``` c
+struct epoll_event ev;
+ev.data.fd = fd;
+ev.events = EPOLLIN | EPOLLET;
+if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) == -1)
+    errExit("epoll_ctl");
+```
+
+我们通过一个例子来说明epoll的水平触发和边缘触发通知之间的区别。
+假设我们使用epoll来监视一个套接字上的输入（EPOLLIN），接下来会发生如下的事件。
+
+1．套接字上有输入到来。
+2．我们调用一次epoll_wait()。无论我们采用的是水平触发还是边缘触发通知，该调用
+都会告诉我们套接字已经处于就绪态了。
+3．再次调用epoll_wait()。
+
+如果我们采用的是水平触发通知，那么第二个epoll_wait()调用将告诉我们套接字处于就
+绪态。而如果我们采用边缘触发通知，那么第二个epoll_wait()调用将阻塞，因为自从上一次
+调用epoll_wait()以来并没有新的输入到来。
+
+边缘触发通知通常和非阻塞的文件描述符结合使用。因而，采用epoll的边缘触发通知机制的程序基本框架如下:
+
+1．让所有待监视的文件描述符都成为非阻塞的。
+2．通过epoll_ctl()构建epoll的兴趣列表。
+3．通过如下的循环处理I/O事件 : 
+(a)通过epoll_wait()取得处于就绪态的描述符列表。
+(b)针对每一个处于就绪态的文件描述符，不断进行I/O处理直到相关的系统调用( 例如read()、write()，recv()、send()或accept() )返回EAGAIN或EWOULDBLOCK错误。
+
+### 水平触发需要处理的问题
+
+使用linux epoll模型，水平触发模式（Level-Triggered）；当socket可写时，会不停的触发socket可写的事件，如何处理？
+
+- 第一种最普通的方式：  
+
+    当需要向socket写数据时，将该socket加入到epoll模型（epoll_ctl）；等待可写事件。
+    接收到socket可写事件后，调用write()或send()发送数据。。。
+    当数据全部写完后， 将socket描述符移出epoll模型。
+   
+    这种方式的缺点是：  即使发送很少的数据，也要将socket加入、移出epoll模型。有一定的操作代价。
+
+- 第二种方式，（是本人的改进方案， 叫做directly-write）
+
+    向socket写数据时，不将socket加入到epoll模型；而是直接调用send()发送；
+    只有当或send()返回错误码EAGAIN（系统缓存满），才将socket加入到epoll模型，等待可写事件后(表明系统缓冲区有空间可以写了)，再发送数据。
+    全部数据发送完毕，再移出epoll模型。
+
+    这种方案的优点：   当用户数据比较少时，不需要epool的事件处理。
+    在高压力的情况下，性能怎么样呢？   
+    对一次性直接写成功、失败的次数进行统计。如果成功次数远大于失败的次数， 说明性能良好。（如果失败次数远大于成功的次数，则关闭这种直接写的操作，改用第一种方案。同时在日志里记录警告）
+    在我自己的应用系统中，实验结果数据证明该方案的性能良好。
+
+    事实上，网络数据可分为两种到达/发送情况：
+    一是分散的数据包， 例如每间隔40ms左右，发送/接收3-5个 MTU（或更小，这样就没超过默认的8K系统缓存）。
+    二是连续的数据包， 例如每间隔1s左右，连续发送/接收 20个 MTU（或更多）。
+
+- 第三种方式：  使用Edge-Triggered（边沿触发），这样socket有可写事件，只会触发一次。
+
+    可以在应用层做好标记。以避免频繁的调用 epoll_ctl( EPOLL_CTL_ADD, EPOLL_CTL_MOD)。  这种方式是epoll 的 man 手册里推荐的方式， 性能最高。但如果处理不当容易出错，事件驱动停止。
+
+## select 和 epoll的区别
+
+select函数，必须得清楚select跟linux特有的epoll的区别， 有三点(遍内数)：
+
+* **遍**历 ： 每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大；当我们执行epoll_ctl时，除了把socket放到epoll文件系统里file对象对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪list链表里。所以，当一个socket上有数据到了，内核在把网卡上的数据copy到内核中后就来把socket插入到准备就绪链表里了。epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd, 每次只需要简单的从列表里取出就行了
+* **内**存拷贝 ： select，poll每次调用都要把fd集合从用户态往内核态拷贝一次; epoll的解决方案在epoll_ctl函数中。每次注册新的事件到epoll句柄中时（在epoll_ctl中指定EPOLL_CTL_ADD），会把所有的fd拷贝进内核，而不是在epoll_wait的时候重复拷贝。epoll保证了每个fd在整个过程中只会拷贝一次
+* **数**量限制 ： select默认只支持1024个；epoll并没有最大数目限制
 
 
 # Linux内存管理
@@ -157,10 +367,6 @@ fork函数的内存语义:
 * 写时复制(copy-on-write) : 内核会捕获所有父进程或子进程针对这些页面(即数据段/堆段/栈段的各页)的修改企图, 并为将要修改的页面创建拷贝, 将新的页面拷贝分配给遭内核捕获的进程, 从此父/子进程可以分别修改各自的页拷贝, 不再相互影响.
 
 虽然fork创建的子进程不需要拷贝父进程的物理内存空间, 但是会复制父进程的空间内存页表. 例如对于10GB的redis进程, 需要复制约20MB的内存页表, 因为此fork操作耗时跟进程总内存量息息相关
-
-# 网络安全pass
-
-最后就是网络安全，主要考察也是 WEB 安全，包括XSS，CSRF，SQL注入等。
 
 
 # HTTP与HTTPS
@@ -385,9 +591,15 @@ RFC3986文档规定，Url中只允许包含英文字母（a-zA-Z）、数字（0
 由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是暂时的，并且将在一段时间以后恢复。[62]如果能够预计延迟时间，那么响应中可以包含一个Retry-After头用以标明这个延迟时间。如果没有给出这个Retry-After信息，那么客户端应当以处理500响应的方式处理它。
 
 
-# 分布式系统
+# 分布式系统pass
 
 分布式系统的就准备CAP理论、BASE理论、限流、熔断、一致性选举算法、主从架构、集群架构、异地多活、负载均衡、分层架构、微服务等。
+
+* 负载均衡算法有哪些
+* 服务发现是怎么实现的
+* 熔断是怎么实现的
+* id生成器怎么实现的，如何实现全局递增
+* 负载均衡的加权轮询算法怎么实现
 
 
 ## 一致性的类别
@@ -770,7 +982,66 @@ rnote over A : CLOSED
 - https://chenjiabing666.github.io/2020/04/20/Mysql%E6%9C%80%E5%85%A8%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/
 - https://blog.csdn.net/qq_41011723/article/details/105953813
 - https://blog.csdn.net/qq_41011723/article/details/106028153
+- [MySQL、MongoDB、Redis 数据库之间的区别](https://www.jianshu.com/p/18bad43446d1)
 
+## mysql一条语句的执行过程
+
+``` puml
+cloud {
+  [客户端]
+}
+
+database "MySql" {
+  folder "Server层" {
+    [连接器]
+    [查询缓存]
+    [分析器]
+    [优化器]
+    [执行器]
+    [连接器]
+  }
+  folder "DB Engine层" {
+    [InnoDB]
+    [MyISAM]
+    [存储引擎x]
+  }
+}
+
+[客户端] --> [连接器]
+[连接器] --> [查询缓存]
+[连接器] --> [分析器]
+[分析器] --> [查询缓存]
+[分析器] --> [优化器]
+[优化器] --> [执行器]
+[执行器] --> [InnoDB]
+[执行器] --> [MyISAM]
+[执行器] --> [存储引擎x]
+
+
+note right of [连接器]
+  管理连接, 权限认证
+end note
+
+note right of [分析器]
+  词法分析, 语法分析
+end note
+
+note right of [查询缓存]
+  命中则直接返回结果
+end note
+
+note left of [优化器]
+  执行计划生成, 索引选择
+end note
+
+note left of [执行器]
+  操作引擎, 返回结果
+end note
+
+note left of [存储引擎x]
+  存取数据, 根据读写接口
+end note
+```
 
 ## redo log与binlog与undo log的区别
 
@@ -925,6 +1196,29 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
 
 - mysql 的索引模型:
   在MySQL中使用较多的索引有Hash索引，B+树索引等，而我们经常使用的InnoDB存储引擎的默认索引实现为：B+树索引。对于哈希索引来说，底层的数据结构就是哈希表，因此在绝大多数需求为单条记录查询的时候，可以选择哈希索引，查询性能最快；其余大部分场景，建议选择BTree索引。
+
+
+### 为什么说B+树比B树更适合数据库索引
+
+![](/img/noodle_plan/mysql/b_tree.png)
+
+![](/img/noodle_plan/mysql/b_plus_tree.png)
+
+参考: [为什么MySQL数据库索引选择使用B+树?](https://blog.csdn.net/xlgen157387/article/details/79450295)
+
+首先, 为什么B类树可以进行优化呢？我们可以根据B类树的特点，构造一个多阶的B类树，然后在尽量多的在结点上存储相关的信息，保证层数尽量的少，以便后面我们可以更快的找到信息，磁盘的I/O操作也少一些，而且B类树是平衡树，每个结点到叶子结点的高度都是相同，这也保证了每个查询是稳定的。
+
+总的来说，B/B+树是为了磁盘或其它存储设备而设计的一种平衡多路查找树(相对于二叉，B树每个内节点有多个分支)，与红黑树相比，在相同的的节点的情况下，一颗B/B+树的高度远远小于红黑树的高度(在下面B/B+树的性能分析中会提到)。B/B+树上操作的时间通常由存取磁盘的时间和CPU计算时间这两部分构成，而CPU的速度非常快，所以B树的操作效率取决于访问磁盘的次数，关键字总数相同的情况下B树的高度越小，磁盘I/O所花的时间越少。
+
+那, 为什么说B+树比B树更适合数据库索引?
+
+1. B+树的磁盘读写代价更低：B+树的内部节点并没有指向关键字具体信息的指针，因此其内部节点相对B树更小，如果把所有同一内部节点的关键字存放在同一盘块中，那么盘块所能容纳的关键字数量也越多，一次性读入内存的需要查找的关键字也就越多，相对IO读写次数就降低了。
+
+2. B+树的查询效率更加稳定：由于非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。
+
+3. 由于B+树的数据都存储在叶子结点中，分支结点均为索引，方便扫库，只需要扫一遍叶子结点即可，但是B树因为其分支结点同样存储着数据，我们要找到具体的数据，需要进行一次中序遍历按序来扫，所以B+树更加适合在区间查询的情况，所以通常B+树用于数据库索引。
+
+4. B树在提高了IO性能的同时并没有解决元素遍历的效率低下的问题，正是为了解决这个问题，B+树应用而生。B+树只需要去遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树不支持这样的操作或者说效率太低。
 
 
 ## mysql 有那些存储引擎，有哪些区别
@@ -1208,7 +1502,9 @@ Redis键的过期策略，是有定期删除+惰性删除两种。
 
 ### redis的lru算法说一下
 
-普通的lru算法一般是用哈希表+双向链表来实现的:
+**普通的lru算法**:
+
+一般是用哈希表+双向链表来实现的:
 
 基于 HashMap 和 双向链表实现 LRU 的整体的设计思路是，可以使用 HashMap 存储 key，这样可以做到 save 和 get key的时间都是 O(1)，而 HashMap 的 Value 指向双向链表实现的 LRU 的 Node 节点. 其核心操作的步骤是:
 
@@ -1510,8 +1806,6 @@ Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
 
 # 以下是废弃的不用看了
 
-pass
-
 
 # 实操工具类
 
@@ -1538,9 +1832,9 @@ pass
 <!-- - [ ] map insert 和中括号 -->
 - [ ] text blob
 <!-- - [ ] 虚拟内存, 页是啥意思 -->
-- [ ] 查脉脉2.3 3.1薪资
+<!-- - [ ] 查脉脉2.3 3.1薪资 -->
 <!-- - [ ] 为什么分代码段和数据段 -->
-- [ ] 热备冷备
+<!-- - [ ] 热备冷备 -->
 <!-- - [ ] 如何查看多个文件的同个字符串? grep -r -->
 <!-- - [ ] 容器删除要注意什么? 迭代器失效问题 -->
 - [ ] 共享内存, 如果core了会咋样
@@ -1598,21 +1892,21 @@ pass
 
 ## 数据库
 
-<!-- mongo是直接存在内存里的嘛? 怎么持久化的? -->
-<!-- mongo高可用? -->
-<!-- MongoDB的CRUD基本使用. （官方文档教程） -->
-<!-- 索引的使用及基本原理.  -->
+mongo是直接存在内存里的嘛? 怎么持久化的?
+mongo高可用?
+MongoDB的CRUD基本使用. （官方文档教程）
+索引的使用及基本原理. 
 MongoDB的sharding原理, shard key的类型及数值分布对其影响:
     MongoDB支持两种类型的shard key：
 
       - Hashed，数据库根据指定的字段值，算出一个哈希值，然后根据这个哈希值把数据写入相应的服务器中。它的好处是数据会分布的比较均匀，但是它只能把一个字段指定为shard key，另外对于范围的操作，它更多是一个广播的操作，没有精确地路由。
       - Ranged，按照指定字段的值的范围进行划分，支持复合shard key。这个就要求对字段值的范围有比较深入的了解，对未来也有一个相对清晰的把握。相对哈希，这种方式就可以有比较精确的路由。但是它也可能会带来数据分布不均匀，负载不能完全均衡的问题。
-<!-- redis基本使用. 常用数据结构的应用场合. -->
+redis基本使用. 常用数据结构的应用场合.
 
 
-<!-- - 看go, 写上登陆夫 -->
+- 看go, 写上登陆夫
 - [ ] 全球匹配怎么做?
-<!-- - [ ] gdb core怎么弄 -->
+- [ ] gdb core怎么弄
 - [ ] 全球同服怎么做?
 - [ ] 根据登入登出日志画出在线曲线?
 
@@ -1655,7 +1949,7 @@ MongoDB的sharding原理, shard key的类型及数值分布对其影响:
 
 # 阅读代码类
 
-<!-- 3. [  ] 时间轮, 最小堆定时器是啥? 看看muduo的定时器是啥样的, 跟最小堆实现有啥优势?最小堆是啥 -->
+3. [  ] 时间轮, 最小堆定时器是啥? 看看muduo的定时器是啥样的, 跟最小堆实现有啥优势?最小堆是啥
 6. [ ] 排队服务
 4. [ ] msgpack rpc, 模板复习
 
@@ -1693,8 +1987,8 @@ MongoDB的sharding原理, shard key的类型及数值分布对其影响:
 
 4. [ ] 项目中的全局搜索怎么做的?模糊搜索算法又是啥?
 
-<!-- 1. [ ] gate和gameManager和dbmanager有啥用 -->
-<!-- 4. [ ] #6937 服务端自主-战斗服、微服务 rolling restart设计 -->
+1. [ ] gate和gameManager和dbmanager有啥用
+4. [ ] #6937 服务端自主-战斗服、微服务 rolling restart设计
 5. [ ] 运营指令那一套是怎么撸的
 
 3. [x] 系统与功能 #21253 网络延迟稳定定位及优化
@@ -1724,5 +2018,5 @@ MongoDB的sharding原理, shard key的类型及数值分布对其影响:
 
 - [ ] #15252 反作弊机制 - 录像记录
 - [ ] #15262 反作弊机制 - 离线分析功能
-- [ ] #15804 反作弊机制 - 离线分析功能 - 离线播放功能预研
+- [ ] #15804 反作弊机制 - 离线分析功能 - 离线播放功能预研 -->
 

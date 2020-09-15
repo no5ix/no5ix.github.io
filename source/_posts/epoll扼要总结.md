@@ -60,39 +60,39 @@ epoll的事件注册函数，它不同于select()是在监听事件时告诉内�
 
 - 第一个参数是epoll_create()的返回值, 也就是新创建的 epoll 实例的文件描述符。
 - 第二个参数表示动作，用三个宏来表示：
-	- EPOLL_CTL_ADD：注册新的fd到epfd中的兴趣列表；
-	- EPOLL_CTL_MOD：修改已经注册的fd的设定事件；
-	- EPOLL_CTL_DEL：从epfd的兴趣列表中删除一个fd；
+    - EPOLL_CTL_ADD：注册新的fd到epfd中的兴趣列表；
+    - EPOLL_CTL_MOD：修改已经注册的fd的设定事件；
+    - EPOLL_CTL_DEL：从epfd的兴趣列表中删除一个fd；
 - 第三个参数指要修改兴趣列表中的哪一个文件描述符的设定。
 - 第四个参数是告诉内核需要监听什么事，参数ev是指向结构体epoll_event的指针, 
-	struct epoll_event结构如下：
-	``` c
-	struct epoll_event {  
-		__uint32_t events; /* Epoll events */  
-		epoll_data_t data; /* User data variable */  
-	}; 
-	```
-	结构体epoll_event中的data字段的类型为:
-	``` c
-	typedef union epoll_data {  
-		void *ptr;   /* Pointer to user-defined data */
-		int fd;  
-		__uint32_t u32;  
-		__uint64_t u64;  
-	} epoll_data_t;
-	```
-	- 结构体epoll_event中的events字段是一个位掩码, 他指定了我们为待检查的描述符fd上所感兴趣的事件集合.
-	可以是以下几个宏的集合：
+    struct epoll_event结构如下：
+    ``` c
+    struct epoll_event {  
+        __uint32_t events; /* Epoll events */  
+        epoll_data_t data; /* User data variable */  
+    }; 
+    ```
+    结构体epoll_event中的data字段的类型为:
+    ``` c
+    typedef union epoll_data {  
+        void *ptr;   /* Pointer to user-defined data */
+        int fd;  
+        __uint32_t u32;  
+        __uint64_t u64;  
+    } epoll_data_t;
+    ```
+    - 结构体epoll_event中的events字段是一个位掩码, 他指定了我们为待检查的描述符fd上所感兴趣的事件集合.
+    可以是以下几个宏的集合：
 
-		- EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
-		- EPOLLOUT：表示对应的文件描述符可以写；
-		- EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
-		- EPOLLERR：表示对应的文件描述符发生错误；
-		- EPOLLHUP：表示对应的文件描述符被挂断；
-		- EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。(后文会说水平触发和边缘触发的区别)
-		- EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+        - EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
+        - EPOLLOUT：表示对应的文件描述符可以写；
+        - EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
+        - EPOLLERR：表示对应的文件描述符发生错误；
+        - EPOLLHUP：表示对应的文件描述符被挂断；
+        - EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。(后文会说水平触发和边缘触发的区别)
+        - EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
 
-	- data 字段是一个联合体, 当描述符 fd 稍后成为就绪态时, 联合体的成员可用来指定传回给调用进程的信息
+    - data 字段是一个联合体, 当描述符 fd 稍后成为就绪态时, 联合体的成员可用来指定传回给调用进程的信息
 
 
 ## 使用 epoll_create() 和 epoll_ctl()的例子
@@ -105,12 +105,12 @@ struct epoll_event ev;
 
 epfd = epoll_create( 5 );
 if ( epfd == -1 )
-	errExit( "epoll_create" );
+    errExit( "epoll_create" );
 
 ev.data.fd = fd;
 ev.events = EPOLLIN;
 if ( epoll_ctl( epofd, EPOLL_CTL_ADD, fd, ev ) == -1 )
-	errExit( "epoll_ctl" );
+    errExit( "epoll_ctl" );
 ```
 
 ## epoll_wait
@@ -123,9 +123,9 @@ epoll_wait收集在epoll监控的事件中已经发送的事件。
 - 参数events是分配好的epoll_event结构体数组，epoll将会把发生的事件赋值到events数组中（events不可以是空指针，内核只负责把数据复制到这个events数组中，不会去帮助我们在用户态中分配内存）。
 - maxevents告之内核这个events有多大，这个 maxevents的值不能大于创建epoll_create()时的size，
 - 参数timeout是超时时间, 用来确定 epoll_wait() 的阻塞行为, 有如下几种 : 
-	- 如果 timeout 等于 -1, 调用将一直阻塞, 直到兴趣列表中的文件描述符有事件产生, 或者直到捕获到一个信号为止
-	- 如果 timeout 等于 0, 执行一次非阻塞的检查, 立即返回, 看兴趣列表中的文件描述符上产生了哪个事件
-	- 如果 timeout 大于 0, 调用将阻塞至多 timeout 毫秒, 知道文件描述符上有事件产生, 或者直到捕获到一个信号为止
+    - 如果 timeout 等于 -1, 调用将一直阻塞, 直到兴趣列表中的文件描述符有事件产生, 或者直到捕获到一个信号为止
+    - 如果 timeout 等于 0, 执行一次非阻塞的检查, 立即返回, 看兴趣列表中的文件描述符上产生了哪个事件
+    - 如果 timeout 大于 0, 调用将阻塞至多 timeout 毫秒, 知道文件描述符上有事件产生, 或者直到捕获到一个信号为止
 
 
 ## TLPI书上的例子
@@ -234,7 +234,7 @@ main(int argc, char *argv[])
                    descriptor is closed. */
 
                 printf("    closing fd %d\n", evlist[j].data.fd);
-				// 关闭一个文件描述符会自动的将其从所有的 epoll 实例的兴趣列表中移除
+                // 关闭一个文件描述符会自动的将其从所有的 epoll 实例的兴趣列表中移除
                 if (close(evlist[j].data.fd) == -1)
                     errExit("close");
                 numOpenFds--;
@@ -273,7 +273,7 @@ struct epoll_event ev;
 ev.data.fd = fd;
 ev.events = EPOLLIN | EPOLLET;
 if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) == -1)
-	errExit("epoll_ctl");
+    errExit("epoll_ctl");
 ```
 
 我们通过一个例子来说明epoll的水平触发和边缘触发通知之间的区别。
@@ -314,25 +314,25 @@ if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, ev) == -1)
     只有当或send()返回错误码EAGAIN（系统缓存满），才将socket加入到epoll模型，等待可写事件后(表明系统缓冲区有空间可以写了)，再发送数据。
     全部数据发送完毕，再移出epoll模型。
 
-     这种方案的优点：   当用户数据比较少时，不需要epool的事件处理。
-     在高压力的情况下，性能怎么样呢？   
-      对一次性直接写成功、失败的次数进行统计。如果成功次数远大于失败的次数， 说明性能良好。（如果失败次数远大于成功的次数，则关闭这种直接写的操作，改用第一种方案。同时在日志里记录警告）
-     在我自己的应用系统中，实验结果数据证明该方案的性能良好。
-     
+    这种方案的优点：   当用户数据比较少时，不需要epool的事件处理。
+    在高压力的情况下，性能怎么样呢？   
+    对一次性直接写成功、失败的次数进行统计。如果成功次数远大于失败的次数， 说明性能良好。（如果失败次数远大于成功的次数，则关闭这种直接写的操作，改用第一种方案。同时在日志里记录警告）
+    在我自己的应用系统中，实验结果数据证明该方案的性能良好。
+
     事实上，网络数据可分为两种到达/发送情况：
-     一是分散的数据包， 例如每间隔40ms左右，发送/接收3-5个 MTU（或更小，这样就没超过默认的8K系统缓存）。
-     二是连续的数据包， 例如每间隔1s左右，连续发送/接收 20个 MTU（或更多）。
+    一是分散的数据包， 例如每间隔40ms左右，发送/接收3-5个 MTU（或更小，这样就没超过默认的8K系统缓存）。
+    二是连续的数据包， 例如每间隔1s左右，连续发送/接收 20个 MTU（或更多）。
 
 
 - 第三种方式：  使用Edge-Triggered（边沿触发），这样socket有可写事件，只会触发一次。
 
-	可以在应用层做好标记。以避免频繁的调用 epoll_ctl( EPOLL_CTL_ADD, EPOLL_CTL_MOD)。  这种方式是epoll 的 man 手册里推荐的方式， 性能最高。但如果处理不当容易出错，事件驱动停止。
+    可以在应用层做好标记。以避免频繁的调用 epoll_ctl( EPOLL_CTL_ADD, EPOLL_CTL_MOD)。  这种方式是epoll 的 man 手册里推荐的方式， 性能最高。但如果处理不当容易出错，事件驱动停止。
 
 # epoll与select/poll的区别
 
-
 select函数，必须得清楚select跟linux特有的epoll的区别， 有三点(遍内树)：
-- 遍历 ： 每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大；epoll只在epoll_ctl时为每个fd指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的fd加入一个就绪链表）。epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd, 每次只需要简单的从列表里取出就行了
+
+- 遍历 ： 每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大；当我们执行epoll_ctl时，除了把socket放到epoll文件系统里file对象对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪list链表里。所以，当一个socket上有数据到了，内核在把网卡上的数据copy到内核中后就来把socket插入到准备就绪链表里了。epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd, 每次只需要简单的从列表里取出就行了
 - 内存拷贝 ： select，poll每次调用都要把fd集合从用户态往内核态拷贝一次; epoll的解决方案在epoll_ctl函数中。每次注册新的事件到epoll句柄中时（在epoll_ctl中指定EPOLL_CTL_ADD），会把所有的fd拷贝进内核，而不是在epoll_wait的时候重复拷贝。epoll保证了每个fd在整个过程中只会拷贝一次
 - 数量限制 ： select默认只支持1024个；epoll并没有最大数目限制
 
@@ -398,38 +398,38 @@ while(server running)
 ```
 for( ; ; )  
 {  
-	nfds = epoll_wait(epfd,events,20,500);  
-	for(i=0;i<nfds;++i)  
-	{  
-		if(events[i].data.fd==listenfd) //有新的连接  
-		{  
-			connfd = accept(listenfd,(sockaddr *)&clientaddr, &clilen); //accept这个连接  
-			ev.data.fd=connfd;  
-			ev.events=EPOLLIN|EPOLLET;  
-			epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev); //将新的fd添加到epoll的监听队列中  
-		}  
+    nfds = epoll_wait(epfd,events,20,500);  
+    for(i=0;i<nfds;++i)  
+    {  
+        if(events[i].data.fd==listenfd) //有新的连接  
+        {  
+            connfd = accept(listenfd,(sockaddr *)&clientaddr, &clilen); //accept这个连接  
+            ev.data.fd=connfd;  
+            ev.events=EPOLLIN|EPOLLET;  
+            epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev); //将新的fd添加到epoll的监听队列中  
+        }  
 
-		else if( events[i].events&EPOLLIN ) //接收到数据，读socket  
-		{  
-			n = read(sockfd, line, MAXLINE)) < 0    //读  
-			ev.data.ptr = md;     //md为自定义类型，添加数据  
-			ev.events=EPOLLOUT|EPOLLET;  
-			epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);//修改标识符，等待下一个循环时发送数据，异步处理的精髓  
-		}  
-		else if(events[i].events&EPOLLOUT) //有数据待发送，写socket  
-		{  
-			struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;    //取数据  
-			sockfd = md->fd;  
-			send( sockfd, md->ptr, strlen((char*)md->ptr), 0 );        //发送数据  
-			ev.data.fd=sockfd;  
-			ev.events=EPOLLIN|EPOLLET;  
-			epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev); //修改标识符，等待下一个循环时接收数据  
-		}  
-		else  
-		{  
-			//其他的处理  
-		}  
-	}  
+        else if( events[i].events&EPOLLIN ) //接收到数据，读socket  
+        {  
+            n = read(sockfd, line, MAXLINE)) < 0    //读  
+            ev.data.ptr = md;     //md为自定义类型，添加数据  
+            ev.events=EPOLLOUT|EPOLLET;  
+            epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);//修改标识符，等待下一个循环时发送数据，异步处理的精髓  
+        }  
+        else if(events[i].events&EPOLLOUT) //有数据待发送，写socket  
+        {  
+            struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;    //取数据  
+            sockfd = md->fd;  
+            send( sockfd, md->ptr, strlen((char*)md->ptr), 0 );        //发送数据  
+            ev.data.fd=sockfd;  
+            ev.events=EPOLLIN|EPOLLET;  
+            epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev); //修改标识符，等待下一个循环时接收数据  
+        }  
+        else  
+        {  
+            //其他的处理  
+        }  
+    }  
 }  
 ```
 
@@ -478,18 +478,18 @@ server启动时，创建一定数量的工作者线程加入线程池，如（20
 
 struct task
 {
-	int fd; //需要读写的文件描述符
+    int fd; //需要读写的文件描述符
 
-	struct task *next; //下一个任务
+    struct task *next; //下一个任务
 };
 
 //用于读写两个的两个方面传递参数
 
 struct user_data
 {
-	int fd;
-	unsigned int n_size;
-	char line[MAXLINE];
+    int fd;
+    unsigned int n_size;
+    char line[MAXLINE];
 };
 
 //线程的任务函数
@@ -507,138 +507,138 @@ struct task *readhead = NULL, *readtail = NULL, *writehead = NULL;
 
 void setnonblocking(int sock)
 {
-	int opts;
-	opts = fcntl(sock, F_GETFL);
-	if (opts < 0)
-	{
-		perror("fcntl(sock,GETFL)");
-		exit(1);
-	}
-	opts = opts | O_NONBLOCK;
-	if (fcntl(sock, F_SETFL, opts) < 0)
-	{
-		perror("fcntl(sock,SETFL,opts)");
-		exit(1);
-	}
+    int opts;
+    opts = fcntl(sock, F_GETFL);
+    if (opts < 0)
+    {
+        perror("fcntl(sock,GETFL)");
+        exit(1);
+    }
+    opts = opts | O_NONBLOCK;
+    if (fcntl(sock, F_SETFL, opts) < 0)
+    {
+        perror("fcntl(sock,SETFL,opts)");
+        exit(1);
+    }
 }
 
 int main()
 {
-	int i, maxi, listenfd, connfd, sockfd, nfds;
-	pthread_t tid1, tid2;
+    int i, maxi, listenfd, connfd, sockfd, nfds;
+    pthread_t tid1, tid2;
 
-	struct task *new_task = NULL;
-	struct user_data *rdata = NULL;
-	socklen_t clilen;
+    struct task *new_task = NULL;
+    struct user_data *rdata = NULL;
+    socklen_t clilen;
 
-	pthread_mutex_init(&mutex, NULL);
-	pthread_cond_init(&cond1, NULL);
+    pthread_mutex_init(&mutex, NULL);
+    pthread_cond_init(&cond1, NULL);
 
-	//初始化用于读线程池的线程
-	pthread_create(&tid1, NULL, readtask, NULL);
-	pthread_create(&tid2, NULL, readtask, NULL);
+    //初始化用于读线程池的线程
+    pthread_create(&tid1, NULL, readtask, NULL);
+    pthread_create(&tid2, NULL, readtask, NULL);
 
-	//生成用于处理accept的epoll专用的文件描述符
-	epfd = epoll_create(256);
+    //生成用于处理accept的epoll专用的文件描述符
+    epfd = epoll_create(256);
 
-	struct sockaddr_in clientaddr;
-	struct sockaddr_in serveraddr;
-	listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in clientaddr;
+    struct sockaddr_in serveraddr;
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
 
-	//把socket设置为非阻塞方式
-	setnonblocking(listenfd);
+    //把socket设置为非阻塞方式
+    setnonblocking(listenfd);
 
-	//设置与要处理的事件相关的文件描述符
-	ev.data.fd = listenfd;
+    //设置与要处理的事件相关的文件描述符
+    ev.data.fd = listenfd;
 
-	//设置要处理的事件类型
-	ev.events = EPOLLIN | EPOLLET;
+    //设置要处理的事件类型
+    ev.events = EPOLLIN | EPOLLET;
 
-	//注册epoll事件
-	epoll_ctl(epfd, EPOLL_CTL_ADD, listenfd, &ev);
+    //注册epoll事件
+    epoll_ctl(epfd, EPOLL_CTL_ADD, listenfd, &ev);
 
-	bzero(&serveraddr, sizeof(serveraddr));
-	serveraddr.sin_family = AF_INET;
-	serveraddr.sin_port = htons(SERV_PORT);
-	serveraddr.sin_addr.s_addr = INADDR_ANY;
-	bind(listenfd, (sockaddr *)&serveraddr, sizeof(serveraddr));
-	listen(listenfd, LISTENQ);
+    bzero(&serveraddr, sizeof(serveraddr));
+    serveraddr.sin_family = AF_INET;
+    serveraddr.sin_port = htons(SERV_PORT);
+    serveraddr.sin_addr.s_addr = INADDR_ANY;
+    bind(listenfd, (sockaddr *)&serveraddr, sizeof(serveraddr));
+    listen(listenfd, LISTENQ);
 
-	maxi = 0;
-	for (;;)
-	{
-		//等待epoll事件的发生
-		nfds = epoll_wait(epfd, events, 20, 500);
+    maxi = 0;
+    for (;;)
+    {
+        //等待epoll事件的发生
+        nfds = epoll_wait(epfd, events, 20, 500);
 
-		//处理所发生的所有事件
-		for (i = 0; i < nfds; ++i)
-		{
-			if (events[i].data.fd == listenfd)
-			{
+        //处理所发生的所有事件
+        for (i = 0; i < nfds; ++i)
+        {
+            if (events[i].data.fd == listenfd)
+            {
 
-				connfd = accept(listenfd, (sockaddr *)&clientaddr, &clilen);
-				if (connfd < 0)
-				{
-					perror("connfd<0");
-					exit(1);
-				}
-				setnonblocking(connfd);
+                connfd = accept(listenfd, (sockaddr *)&clientaddr, &clilen);
+                if (connfd < 0)
+                {
+                    perror("connfd<0");
+                    exit(1);
+                }
+                setnonblocking(connfd);
 
-				char *str = inet_ntoa(clientaddr.sin_addr);
-				//std::cout<<"connec_ from >>"<<str<<std::endl;
+                char *str = inet_ntoa(clientaddr.sin_addr);
+                //std::cout<<"connec_ from >>"<<str<<std::endl;
 
-				//设置用于读操作的文件描述符
-				ev.data.fd = connfd;
+                //设置用于读操作的文件描述符
+                ev.data.fd = connfd;
 
-				//设置用于注册的读操作事件
-				ev.events = EPOLLIN | EPOLLET;
+                //设置用于注册的读操作事件
+                ev.events = EPOLLIN | EPOLLET;
 
-				//注册ev
-				epoll_ctl(epfd, EPOLL_CTL_ADD, connfd, &ev);
-			}
-			else if (events[i].events & EPOLLIN) // 读请求
-			{
-				//printf("reading!/n");
+                //注册ev
+                epoll_ctl(epfd, EPOLL_CTL_ADD, connfd, &ev);
+            }
+            else if (events[i].events & EPOLLIN) // 读请求
+            {
+                //printf("reading!/n");
 
-				if ((sockfd = events[i].data.fd) < 0)
-					continue;
-				new_task = new task();
-				new_task->fd = sockfd;
-				new_task->next = NULL;
+                if ((sockfd = events[i].data.fd) < 0)
+                    continue;
+                new_task = new task();
+                new_task->fd = sockfd;
+                new_task->next = NULL;
 
-				//添加新的读任务
-				pthread_mutex_lock(&mutex);
-				if (readhead == NULL)
-				{
-					readhead = new_task;
-					readtail = new_task;
-				}
-				else
-				{
-					readtail->next = new_task;
-					readtail = new_task;
-				}
+                //添加新的读任务
+                pthread_mutex_lock(&mutex);
+                if (readhead == NULL)
+                {
+                    readhead = new_task;
+                    readtail = new_task;
+                }
+                else
+                {
+                    readtail->next = new_task;
+                    readtail = new_task;
+                }
 
-				//唤醒所有等待cond1条件的线程
-				pthread_cond_broadcast(&cond1);
-				pthread_mutex_unlock(&mutex);
-			}
-			else if (events[i].events & EPOLLOUT) // 写请求
-			{
-				
-				// rdata=(struct user_data *)events[i].data.ptr;
-				// sockfd = rdata->fd;
-				// write(sockfd, rdata->line, rdata->n_size);
-				// delete rdata;
-				// //设置用于读操作的文件描述符
-				// ev.data.fd=sockfd;
-				// //设置用于注测的读操作事件
-				// ev.events=EPOLLIN|EPOLLET;
-				// //修改sockfd上要处理的事件为EPOLIN
-				// epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);
-			}
-		}
-	}
+                //唤醒所有等待cond1条件的线程
+                pthread_cond_broadcast(&cond1);
+                pthread_mutex_unlock(&mutex);
+            }
+            else if (events[i].events & EPOLLOUT) // 写请求
+            {
+                
+                // rdata=(struct user_data *)events[i].data.ptr;
+                // sockfd = rdata->fd;
+                // write(sockfd, rdata->line, rdata->n_size);
+                // delete rdata;
+                // //设置用于读操作的文件描述符
+                // ev.data.fd=sockfd;
+                // //设置用于注测的读操作事件
+                // ev.events=EPOLLIN|EPOLLET;
+                // //修改sockfd上要处理的事件为EPOLIN
+                // epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);
+            }
+        }
+    }
 }
 
 static int count111 = 0;
@@ -646,92 +646,92 @@ static time_t oldtime = 0, nowtime = 0;
 void *readtask(void *args)
 {
 
-	int fd = -1;
-	unsigned int n;
-	//用于把读出来的数据传递出去
+    int fd = -1;
+    unsigned int n;
+    //用于把读出来的数据传递出去
 
-	struct user_data *data = NULL;
-	while (1)
-	{
+    struct user_data *data = NULL;
+    while (1)
+    {
 
-		pthread_mutex_lock(&mutex);
-		//等待到任务队列不为空
+        pthread_mutex_lock(&mutex);
+        //等待到任务队列不为空
 
-		while (readhead == NULL)
-			pthread_cond_wait(&cond1, &mutex);
+        while (readhead == NULL)
+            pthread_cond_wait(&cond1, &mutex);
 
-		fd = readhead->fd;
-		//从任务队列取出一个读任务
+        fd = readhead->fd;
+        //从任务队列取出一个读任务
 
-		struct task *tmp = readhead;
-		readhead = readhead->next;
-		delete tmp;
-		pthread_mutex_unlock(&mutex);
-		data = new user_data();
-		data->fd = fd;
+        struct task *tmp = readhead;
+        readhead = readhead->next;
+        delete tmp;
+        pthread_mutex_unlock(&mutex);
+        data = new user_data();
+        data->fd = fd;
 
-		char recvBuf[1024] = {0};
-		int ret = 999;
-		int rs = 1;
+        char recvBuf[1024] = {0};
+        int ret = 999;
+        int rs = 1;
 
-		while (rs)
-		{
-			ret = recv(fd, recvBuf, 1024, 0); // 接受客户端消息
+        while (rs)
+        {
+            ret = recv(fd, recvBuf, 1024, 0); // 接受客户端消息
 
-			if (ret < 0)
-			{
-				//由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可
-				//读在这里就当作是该次事件已处理过。
-				if (errno == EAGAIN)
-				{
-					printf("EAGAIN\n");
-					break;
-				}
-				else
-				{
-					printf("recv error!\n");
+            if (ret < 0)
+            {
+                //由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可
+                //读在这里就当作是该次事件已处理过。
+                if (errno == EAGAIN)
+                {
+                    printf("EAGAIN\n");
+                    break;
+                }
+                else
+                {
+                    printf("recv error!\n");
 
-					close(fd);
-					break;
-				}
-			}
-			else if (ret == 0)
-			{
-				// 这里表示对端的socket已正常关闭.
+                    close(fd);
+                    break;
+                }
+            }
+            else if (ret == 0)
+            {
+                // 这里表示对端的socket已正常关闭.
 
-				rs = 0;
-			}
-			if (ret == sizeof(recvBuf))
-				rs = 1; // 需要再次读取
+                rs = 0;
+            }
+            if (ret == sizeof(recvBuf))
+                rs = 1; // 需要再次读取
 
-			else
-				rs = 0;
-		}
-		if (ret > 0)
-		{
+            else
+                rs = 0;
+        }
+        if (ret > 0)
+        {
 
-			//-------------------------------------------------------------------------------
-			// 业务代码
-			data->n_size = n;
+            //-------------------------------------------------------------------------------
+            // 业务代码
+            data->n_size = n;
 
-			count111++;
+            count111++;
 
-			struct tm *today;
-			time_t ltime;
-			time(&nowtime);
+            struct tm *today;
+            time_t ltime;
+            time(&nowtime);
 
-			if (nowtime != oldtime)
-			{
-				printf("%d\n", count111);
-				oldtime = nowtime;
-				count111 = 0;
-			}
+            if (nowtime != oldtime)
+            {
+                printf("%d\n", count111);
+                oldtime = nowtime;
+                count111 = 0;
+            }
 
-			char buf[1000] = {0};
-			sprintf(buf, "HTTP/1.0 200 OK\r\nContent-type: text/plain\r\n\r\n%s", "Hello world!\n");
-			send(fd, buf, strlen(buf), 0);
-			close(fd);
-		}
-	}
+            char buf[1000] = {0};
+            sprintf(buf, "HTTP/1.0 200 OK\r\nContent-type: text/plain\r\n\r\n%s", "Hello world!\n");
+            send(fd, buf, strlen(buf), 0);
+            close(fd);
+        }
+    }
 }
 ```

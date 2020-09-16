@@ -867,8 +867,6 @@ A -> B : SYN=1, seq=x
 rnote over A : SYN_SENT
 rnote over B : SYN_RECV
 A <- B : SYN=1, ACK=x+1, seq=y
-rnote over A : SYN_SENT
-rnote over B : SYN_RECV
 A -> B : ACK=y+1
 rnote over A : ESTABLISHED
 rnote over B : ESTABLISHED
@@ -906,7 +904,6 @@ A -> B : FIN=1, seq=x
 rnote over A : FIN_WAIT1
 rnote over B : CLOSE_WAIT
 A <- B : ACK=x+1
-rnote over B : CLOSE_WAIT
 rnote over A : FIN_WAIT2
 A <- B : FIN=1, seq=y
 rnote over A : TIME_WAIT

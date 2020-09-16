@@ -46,10 +46,10 @@ sudo: required
 node_js: 
   - 8.12.0
 
-# # 指定缓存模块，可选。缓存可加快编译速度。
-# cache:
-#   directories:
-#     - node_modules
+# 指定缓存模块，可选。缓存可加快编译速度。
+cache:
+  directories:
+    - node_modules
 
 # 指定博客源码分支，因人而异。hexo博客源码托管在独立repo则不用设置此项
 branches:
@@ -66,7 +66,7 @@ install:
 
 # 执行清缓存，生成网页操作
 script:
-  - tar -zxvf my_node_modules.tar.gz
+  - tar -zxvf my_node_modules.tar.gz  # 貌似这一句跟上面的 cache 有冲突, 貌似是互斥的...出问题记得改这里
   - hexo clean
   - hexo generate
 

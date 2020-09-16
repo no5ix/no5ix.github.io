@@ -78,7 +78,10 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
 - type: git
-  repo: git@github.com:no5ix/no5ix.github.io.git,master
+  # repo: git@github.com:no5ix/no5ix.github.io.git,master
+  # 下方的gh_token会被.travis.yml中sed命令替换
+  repo: https://gh_token@github.com/no5ix/no5ix.github.io.git
+  branch: master
 # - type: git
   # repo: git@git.coding.net:no5ix/blog.git,master
 # - type: git

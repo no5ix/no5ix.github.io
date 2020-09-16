@@ -1,35 +1,76 @@
-language: node_js
-node_js: stable
+# language: node_js
+# node_js: stable
 
+# cache:
+#     apt: true
+#     directories:
+#         - node_modules
+
+# before_install:
+#     - npm install hexo-cli -g
+
+# install:
+#   - npm install
+#   - npm install hexo-deployer-git --save
+
+# script:
+#   - hexo clean
+#   - hexo g
+
+# after_script:
+#   - git clone ${GH_REF} hexo-public
+#   - cp -rf public/* hexo-public/
+#   - cd hexo-public
+#   - git config user.name "no5ix"
+#   - git config user.email "no5ix@foxmail.com"
+#   - git add .
+#   - git commit -am "Travis CI Auto Builder..."
+#   - git push origin master 
+
+# branches:
+#   only:
+#     - master
+# env:
+#  global:
+#    - GH_REF: https://no5ix:${github_token}@github.com/no5ix/no5ix.github.io.git 
+
+
+
+# 指定语言环境
+language: node_js
+# 指定需要sudo权限
+sudo: required
+# 指定node_js版本
+node_js: 
+  - 7.9.0
+# 指定缓存模块，可选。缓存可加快编译速度。
 cache:
-    apt: true
-    directories:
-        - node_modules
+  directories:
+    - node_modules
+
+# 指定博客源码分支，因人而异。hexo博客源码托管在独立repo则不用设置此项
+branches:
+  only:
+    - hexo 
 
 before_install:
-    - npm install hexo-cli -g
+  - npm install -g hexo-cli
 
+# Start: Build Lifecycle
 install:
   - npm install
   - npm install hexo-deployer-git --save
 
+# 执行清缓存，生成网页操作
 script:
   - hexo clean
-  - hexo g
+  - hexo generate
 
+# 设置git提交名，邮箱；替换真实token到_config.yml文件，最后depoy部署
 after_script:
-  - git clone ${GH_REF} hexo-public
-  - cp -rf public/* hexo-public/
-  - cd hexo-public
   - git config user.name "no5ix"
   - git config user.email "no5ix@foxmail.com"
-  - git add .
-  - git commit -am "Travis CI Auto Builder..."
-  - git push origin master 
-
-branches:
-  only:
-    - master
-env:
- global:
-   - GH_REF: https://no5ix:${github_token}@github.com/no5ix/no5ix.github.io.git 
+  # 替换同目录下的_config.yml文件中gh_token字符串为travis后台刚才配置的变量，注意此处sed命令用了双引号。单引号无效！
+  - sed -i "s/gh_token/${github_token}/g" ./_config.yml
+  - hexo deploy
+# End: Build LifeCycle

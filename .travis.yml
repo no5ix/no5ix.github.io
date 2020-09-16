@@ -38,13 +38,13 @@
 
 # 指定语言环境
 language: node_js
-node_js: stable
+# node_js: stable
 # 指定需要sudo权限
 sudo: required
 
-# # 指定node_js版本
-# node_js: 
-#   - 7.9.0
+# 指定node_js版本
+node_js: 
+  - 8.12.0
 
 # 指定缓存模块，可选。缓存可加快编译速度。
 cache:

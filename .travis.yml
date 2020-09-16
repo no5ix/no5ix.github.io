@@ -1,48 +1,51 @@
-# language: node_js
-# node_js: stable
+language: node_js
+node_js: stable
 
-# cache:
-#     apt: true
-#     directories:
-#         - node_modules
+cache:
+    apt: true
+    directories:
+        - node_modules
 
-# before_install:
-#     - npm install hexo-cli -g
+before_install:
+    - npm install hexo-cli -g
 
-# install:
-#   - npm install
-#   - npm install hexo-deployer-git --save
+install:
+  - npm install
+  - npm install hexo-deployer-git --save
 
-# script:
-#   - hexo clean
-#   - hexo g
+script:
+  - hexo clean
+  - hexo g
 
-# after_script:
-#   - git clone ${GH_REF} hexo-public
-#   - cp -rf public/* hexo-public/
-#   - cd hexo-public
-#   - git config user.name "no5ix"
-#   - git config user.email "no5ix@foxmail.com"
-#   - git add .
-#   - git commit -am "Travis CI Auto Builder..."
-#   - git push origin master 
+after_script:
+  - git clone ${GH_REF} hexo-public
+  - cp -rf public/* hexo-public/
+  - cd hexo-public
+  - git config user.name "no5ix"
+  - git config user.email "no5ix@foxmail.com"
+  - git add .
+  - git commit -am "Travis CI Auto Builder..."
+  - git push origin master 
 
-# branches:
-#   only:
-#     - master
-# env:
-#  global:
-#    - GH_REF: https://no5ix:${github_token}@github.com/no5ix/no5ix.github.io.git 
+branches:
+  only:
+    - master
+env:
+ global:
+   - GH_REF: https://no5ix:${github_token}@github.com/no5ix/no5ix.github.io.git 
 
 
 
 # 指定语言环境
 language: node_js
+node_js: stable
 # 指定需要sudo权限
 sudo: required
-# 指定node_js版本
-node_js: 
-  - 7.9.0
+
+# # 指定node_js版本
+# node_js: 
+#   - 7.9.0
+
 # 指定缓存模块，可选。缓存可加快编译速度。
 cache:
   directories:

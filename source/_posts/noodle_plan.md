@@ -1014,6 +1014,7 @@ database "MySql" {
 [执行器] --> [MyISAM]
 [执行器] --> [存储引擎x]
 
+
 note right of [连接器]
   管理连接, 权限认证
 end note

@@ -12,6 +12,7 @@ categories:
 
 最后就是网络安全，主要考察也是 WEB 安全，包括XSS，CSRF，SQL注入等。
 
+
 # 设计模式pass
 
 
@@ -22,8 +23,8 @@ categories:
 * gdb怎么切换线程
 * C++ 的动态多态怎么实现的？
 * C++ 的构造函数可以是虚函数吗？
+* 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
 
-- [x] 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
 
 # Go
 

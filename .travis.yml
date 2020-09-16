@@ -66,7 +66,7 @@ install:
 
 # 执行清缓存，生成网页操作
 script:
-  - tar -zxvf my_node_modules.tar.gz
+  # - tar -zxvf my_node_modules.tar.gz
   - hexo clean
   - hexo generate
 

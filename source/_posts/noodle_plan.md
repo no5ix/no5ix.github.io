@@ -8,18 +8,118 @@ categories:
 ---
 
 
-# pythonpass
+# python
 
-* 写个单例模式
-* `__new__` 与 `__del__` 与 `__init__`
-* 垃圾回收细节, 
-    * 标记清除咋弄的? 
-    * 分代回收呢? 对象存在时间越长，越可能不是垃圾，应该越少去收集。
-        这样的思想，可以减少标记-清除机制所带来的额外操作。分代就是将回收对象分成数个代，每个代就是一个链表（集合），代进行标记-清除的时间与代内对象
-    * 为啥标记清除回收无法回收重写了`__del__`方法的类对象?
 * mro问题
-* 怎么实现一个协程库?参考gevent, 协程池又是啥
+* 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
+
+
+## `__new__` 与 `__del__` 与 `__init__`
+
+先来看一个单例模式的实现
+``` python
+class Demo:
+    __isinstance = False
+    def __new__(cls, *args, **kwargs):
+        if not cls.__isinstance:  # 如果被实例化了
+            cls.__isinstance = object.__new__(cls)  # 否则实例化
+        return cls.__isinstance  # 返回实例化的对象
+
+    def __init__(self, name):
+        self.name = name
+        print('my name is %s'%(name))
+    
+    def __del__(self):
+        print('886, %s'%(self.name))
+
+
+d1 = Demo('Alice')
+d2 = Demo('Anew')
+print(d1)
+print(d2)
+```
+
+打印:  
+```my name is Alice
+my name is Anew
+<__main__.Demo object at 0x000001446604D3C8>
+<__main__.Demo object at 0x000001446604D3C8>
+886, Anew
+```
+
+`__new__` 是负责对当前类进行实例化，并将实例返回，并传给`__init__`方法，`__init__`方法中的self就是指代`__new__`传过来的对象，所以再次强调，`__init__`是实例化后调用的第一个方法。
+
+`__del__`在对象销毁时被调用，往往用于清除数据或还原环境等操作，比如在类中的其他普通方法中实现了插入数据库的语句，当对象被销毁时我们需要将数据还原，那么这时可以在`__del__`方法中实现还原数据库数据的功能。`__del__`被成为析构方法，同样和C++中的析构方法类似。
+
+
+## python垃圾回收
+
+总体来说，在Python中，主要通过引用计数进行垃圾回收；通过 “标记-清除” 解决容器对象可能产生的循环引用问题；通过 “分代回收” 以空间换时间的方法提高垃圾回收效率。
+
+* 引用计数
+* 标记清除(Mark and Sweep)
+* 分代回收
+
+
+### 标记清除咋弄的
+
+Python 采用了 **“标记 - 清除”(Mark and Sweep)** 算法，解决容器对象可能产生的循环引用问题。(注意，只有容器对象才会产生循环引用的情况，比如列表、字典、用户自定义类的对象、元组等。而像数字，字符串这类简单类型不会出现循环引用。作为一种优化策略，对于只包含简单类型的元组也不在标记清除算法的考虑之列)
+
+跟其名称一样，该算法在进行垃圾回收时分成了两步，分别是：
+
+*   A）标记阶段，遍历所有的对象，如果是可达的（reachable），也就是还有对象引用它，那么就标记该对象为可达；
+*   B）清除阶段，再次遍历对象，如果发现某个对象没有标记为可达，则就将其回收。
+
+如下图所示，在标记清除算法中，为了追踪容器对象，需要每个容器对象维护两个额外的指针，用来将容器对象组成一个双端链表，指针分别指向前后两个容器对象，方便插入和删除操作。python 解释器 (Cpython) 维护了两个这样的双端链表，一个链表存放着需要被扫描的容器对象，另一个链表存放着临时不可达对象。在图中，这两个链表分别被命名为”Object to Scan”和”Unreachable”。图中例子是这么一个情况：link1,link2,link3 组成了一个引用环，同时 link1 还被一个变量 A(其实这里称为名称 A 更好)引用。link4 自引用，也构成了一个引用环。从图中我们还可以看到，每一个节点除了有一个记录当前引用计数的变量 ref\_count 还有一个 gc\_ref 变量，这个 gc\_ref 是 ref\_count 的一个副本，所以初始值为 ref\_count 的大小。
+
+![](/img/noodle_plan/python/v2-0d5071093adaa02bc03fa3dfd91aa5bc_720w.jpg)
+
+gc 启动的时候，会逐个遍历”Object to Scan” 链表中的容器对象，并且将当前对象所引用的所有对象的 gc\_ref 减一。(扫描到 link1 的时候，由于 link1 引用了 link2, 所以会将 link2 的 gc\_ref 减一，接着扫描 link2, 由于 link2 引用了 link3, 所以会将 link3 的 gc\_ref 减一…..) 像这样将”Objects to Scan” 链表中的所有对象考察一遍之后，两个链表中的对象的 ref\_count 和 gc\_ref 的情况如下图所示。这一步操作就相当于解除了循环引用对引用计数的影响。
+
+![](https://pic3.zhimg.com/v2-d7314ead6b303f08a91687577c045585_b.jpg)
+
+接着，gc 会再次扫描所有的容器对象，如果对象的 gc\_ref 值为 0，那么这个对象就被标记为 GC\_TENTATIVELY\_UNREACHABLE，并且被移至”Unreachable” 链表中。下图中的 link3 和 link4 就是这样一种情况。
+
+![](https://pic1.zhimg.com/v2-d3c3f52615fb704c26bd53dbb178767c_b.jpg)
+
+如果对象的 gc\_ref 不为 0，那么这个对象就会被标记为 GC\_REACHABLE。同时当 gc 发现有一个节点是可达的，那么他会递归式的将从该节点出发可以到达的所有节点标记为 GC\_REACHABLE, 这就是下图中 link2 和 link3 所碰到的情形。
+
+![](https://pic1.zhimg.com/v2-510f4d2d37aabdbc8978d9e47630237d_b.jpg)
+
+除了将所有可达节点标记为 GC\_REACHABLE 之外，如果该节点当前在”Unreachable” 链表中的话，还需要将其移回到”Object to Scan” 链表中，下图就是 link3 移回之后的情形。
+
+![](/img/noodle_plan/python/v2-6fd40c055a6633c654acaf05f472c1b2_720w.jpg)
+
+第二次遍历的所有对象都遍历完成之后，存在于”Unreachable” 链表中的对象就是真正需要被释放的对象。如上图所示，此时 link4 存在于 Unreachable 链表中，gc 随即释放之。
+
+**上面描述的垃圾回收的阶段，会暂停整个应用程序，等待标记清除结束后才会恢复应用程序的运行。**
+
+
+#### 为啥标记清除回收无法回收重写了`__del__`方法的类对象
+
+> Circular references which are garbage are detected when the option cycle detector is enabled (it’s on by default), but can only be cleaned up if there are no Python-level `__del__`() methods involved.
+
+官方文档中表明启用周期检测器时会检测到垃圾的循环引用（默认情况下它是打开的)，但只有在没有涉及 Python `__del__()` 方法的情况下才能清除。Python 不知道破坏彼此保持循环引用的对象的安全顺序，因此它则不会为这些方法调用析构函数。简而言之，如果定义了 `__del__` 函数，那么在循环引用中Python解释器无法判断析构对象的顺序，因此就不做处理。
+
+
+### 分代回收
+
+在循环引用对象的回收中，整个应用程序会被暂停，为了减少应用程序暂停的时间，Python 通过“分代回收”(Generational Collection)以空间换时间的方法提高垃圾回收效率。
+
+分代回收是基于这样的一个统计事实，对于程序，存在一定比例的内存块的生存周期比较短；而剩下的内存块，生存周期会比较长，甚至会从程序开始一直持续到程序结束。生存期较短对象的比例通常在 80%～90% 之间，这种思想简单点说就是：对象存在时间越长，越可能不是垃圾，应该越少去收集。这样在执行标记-清除算法时可以有效减小遍历的对象数，从而提高垃圾回收的速度。
+
+python gc给对象定义了三种世代(0,1,2),每一个新生对象在generation zero中，如果它在一轮gc扫描中活了下来，那么它将被移至generation one,在那里他将较少的被扫描，如果它又活过了一轮gc,它又将被移至generation two，在那里它被扫描的次数将会更少。
+
+gc的扫描在什么时候会被触发呢?答案是当某一世代中被分配的对象与被释放的对象之差达到某一阈值的时候，就会触发gc对某一世代的扫描。值得注意的是当某一世代的扫描被触发的时候，比该世代年轻的世代也会被扫描。也就是说如果世代2的gc扫描被触发了，那么世代0,世代1也将被扫描，如果世代1的gc扫描被触发，世代0也会被扫描。
+
+该阈值可以通过下面两个函数查看和调整:
+
+``` python
+gc.get_threshold() # (threshold0, threshold1, threshold2).
+gc.set_threshold(threshold0[, threshold1[, threshold2]])
+```
+下面对set_threshold()中的三个参数threshold0, threshold1, threshold2进行介绍。gc会记录自从上次收集以来新分配的对象数量与释放的对象数量，当两者之差超过threshold0的值时，gc的扫描就会启动，初始的时候只有世代0被检查。如果自从世代1最近一次被检查以来，世代0被检查超过threshold1次，那么对世代1的检查将被触发。相同的，如果自从世代2最近一次被检查以来，世代1被检查超过threshold2次，那么对世代2的检查将被触发。get_threshold()是获取三者的值，默认值为(700,10,10).
 
 
 # 网络安全pass
@@ -38,13 +138,37 @@ categories:
 
 # C++pass
 
-* 编译过程
 * 内存泄漏的工具 vargrid..? 还有啥工具
 * cpp找找冰川, 大梦龙图的面试题，网上常用题
 * gdb怎么切换线程
 * C++ 的动态多态怎么实现的？
 * C++ 的构造函数可以是虚函数吗？
 * 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
+
+
+## 编译过程
+
+``` puml
+[*] --> hello.c
+[*] --> stdio.h
+hello.c -right-> 预处理
+stdio.h --> 预处理
+预处理 -right-> hello.i 
+hello.i -right-> 编译
+编译 -right-> hello.a
+hello.a -right-> 汇编
+汇编 -right-> hello.o
+hello.o --> 链接
+libc.a --> 链接
+链接 -right-> a.out
+```
+
+1. 预处理(Preprocessing): 做一些类似于将所有的`#define`删除，并且展开所有的宏定义的操作, 然后生成hello.i
+2. 编译(Compilation): 编译过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码。得到hello.a
+3. 汇编(Assembly): 汇编器是将汇编代码转变成机器可以执行的命令，每一个汇编语句几乎都对应一条机器指令。汇编相对于编译过程比较简单，根据汇编指令和机器指令的对照表一一翻译即可。得到hello.o
+4. 链接(Linking): 通过调用链接器ld来链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件
+   * 静态链接: 指在编译阶段直接把静态库加入到可执行文件中去，这样可执行文件会比较大
+   * 动态链接: 指链接阶段仅仅只加入一些描述信息，而程序执行时再从系统中把相应动态库加载到内存中去。
 
 
 # Go pass

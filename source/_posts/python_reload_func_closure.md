@@ -96,22 +96,35 @@ test_log()
 
 ```
 
-debug断点查看一波, 发现func_closure里还有 function object
+debug断点查看一波, **发现func_closure里还有 function object**
 <!-- ![python_func_closure_3](/img/python_func_closure/python_func_closure_3.png) -->
 
 那reload需要对含有闭包的情况进行一些简单处理: 
+python如果被更新的函数带 closure，新旧函数的 func_closure 个数不同的话，旧函数会被新函数直接替换。closure 内的函数对象也会跟着热更新，也就是说支持热更新被装饰器装饰的函数，默认值更新 2 层，有需要更多的层的项目可以改变 update_cell_depth 的值
 
 ``` python
-def replace_func(new_func, old_func, is_closure = False):
-    # 简单的closure的处理
-    re_attrs = ('func_doc', 'func_code', 'func_dict', 'func_defaults')
-    for attr_name in re_attrs:
-        setattr(old_func, attr_name, getattr(new_func, attr_name, None))
-    if not is_closure:
-        old_cell_nums = len(old_func.func_closure) if old_func.func_closure else 0
-        new_cell_nums = len(new_func.func_closure) if new_func.func_closure else 0
-        if new_cell_nums and new_cell_nums == old_cell_nums:
-            for idx, cell in enumerate(old_func.func_closure):
-                if inspect.isfunction(cell.cell_contents):
-                    do_replace_func(new_func.func_closure[idx].cell_contents, cell.cell_contents, True)
+def update_fun( old_fun, new_fun, update_cell_depth = 2 ):
+    old_cell_num = 0
+    if old_fun.func_closure:
+        old_cell_num = len( old_fun.func_closure )
+    new_cell_num = 0
+    if new_fun.func_closure:
+        new_cell_num = len( new_fun.func_closure )
+
+    if old_cell_num != new_cell_num:
+        return False
+
+    setattr(old_fun, 'func_code', new_fun.func_code )
+    setattr(old_fun, 'func_defaults', new_fun.func_defaults )
+    setattr(old_fun, 'func_doc', new_fun.func_doc )
+    setattr(old_fun, 'func_dict', new_fun.func_dict )
+
+    if not (update_cell_depth and old_cell_num ):
+        return True
+
+    for index, cell in enumerate(old_fun.func_closure):
+        if inspect.isfunction(cell.cell_contents):
+            update_fun(cell.cell_contents, new_fun.func_closure[index].cell_contents, update_cell_depth - 1)
+
+    return True
 ```

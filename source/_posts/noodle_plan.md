@@ -1696,21 +1696,58 @@ BASE 是
 
 * ⚫ 为公司开发的各种项目提供技术支持, 被公司广泛采用, 后期带队一年多, 负责设计开发系统模块与培训分享, 以及开发计划的制定与人员的管理 
 * ⚫ 支持TCP/UDP/可靠UDP的多线程网络库 
-    * 网络库用的什么网络模型? reactor, epoll多线程, 水平触发
+    * 网络库用的什么网络模型? 
+        * reactor, epoll多线程, 水平触发, ![](/img/server_model_summary/11.jpg)
+        * 这种方案的特点是one loop per thread，有一个main Reactor负责accept(2)连接，然后把连接挂在某个sub Reactor中（muduo采用round-robin的方式来选择sub Reactor），这样该连接的所有操作都在那个sub Reactor所处的线程中完成。多个连接可能被分派到多个线程中，以充分利用CPU。
+        * 非阻塞connect有啥用, 你们用了么?怎么用的?
+            * 用了, 调用非阻塞connect之后会立马返回EINPROCESS错误, 然后我们去epoll注册一个可写事件, 等待此套接字可写即为connect连上了
+        * 非阻塞accept有啥用, 为啥要用?
+            * 用了, 如果有连接就调用accept，这样如果在select检测到有连接请求，但在调用accept之前，这个请求断开了，然后调用accept的时候就会阻塞在哪里，除非这时有另外一个连接请求，如果没有，则一直被阻塞在accept调用上, 无法处理任何其他已就绪的描述符。
+        * reuseaddr的作用?
+            * 参考 https://zhuanlan.zhihu.com/p/35367402
+            * 主要是用于绑定TIME_WAIT状态的地址: 一个非常现实的问题是，假如一个systemd托管的service异常退出了，留下了TIME_WAIT状态的socket，那么systemd将会尝试重启这个service。但是因为端口被占用，会导致启动失败，造成两分钟的服务空档期，systemd也可能在这期间放弃重启服务。但是在设置了SO_REUSEADDR以后，处于TIME_WAIT状态的地址也可以被绑定，就杜绝了这个问题。因为TIME_WAIT其实本身就是半死状态，虽然这样重用TIME_WAIT可能会造成不可预料的副作用，但是在现实中问题很少发生，所以也忽略了它的副作用
+            <!-- * 还可以搞定0.0.0.0的哈: 只要地址不是正好(exactly)相同，那么多个Socket就能绑定到同一ip上。比如0.0.0.0和192.168.0.100，虽然逻辑意义上前者包含了后者，但是0.0.0.0泛指所有本地ip，而192.168.0.100特指某一ip，两者并不是完全相同，所以Socket B尝试绑定的时候，不会再报EADDRINUSE，而是绑定成功 -->
+        * reuseport有啥用?
+            * SO_REUSEPORT使用场景：linux kernel 3.9 引入了最新的SO_REUSEPORT选项，使得多进程或者多线程创建多个绑定同一个ip:port的监听socket，提高服务器的接收链接的并发能力,程序的扩展性更好；此时需要设置SO_REUSEPORT（注意所有进程都要设置才生效）。
+            ``` c
+            setsockopt(listenfd, SOL_SOCKET, SO_REUSEPORT,(const void *)&reuse , sizeof(int));
+            ```
+            目的：每一个进程有一个独立的监听socket，并且bind相同的ip:port，独立的listen()和accept()；提高接收连接的能力。（例如nginx多进程同时监听同一个ip:port）
+            解决的问题：
+            * （1）避免了应用层多线程或者进程监听同一ip:port的“惊群效应”。
+            * （2）内核层面实现负载均衡，保证每个进程或者线程接收均衡的连接数。
+            * （3）只有effective-user-id相同的服务器进程才能监听同一ip:port （安全性考虑）
+        * timewait太多咋办? 
+            * net.ipv4.tcp_tw_reuse = 1 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
+            * net.ipv4.tcp_tw_recycle = 1 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
+            * net.ipv4.tcp_fin_timeout这个时间可以减少在异常情况下服务器从FIN-WAIT-2转到TIME_WAIT的时间。 
+        * closewait太多咋办?
+            * 解决方案只有: 查代码. 因为如果一直保持在CLOSE_WAIT状态，那么只有一种情况，就是在对方关闭连接之后服务器程序自己没有进一步发出ack信号。换句话说，就是在对方连接关闭之后，程序里没有检测到，或者由于什么逻辑bug导致服务端没有主动发起close, 或者程序压根就忘记了这个时候需要关闭连接，于是这个资源就一直被程序占着。
+    * udp怎么和epoll配合?
+        * 参考 https://cloud.tencent.com/developer/article/1004555
+        * 服务器bind一个listen_fd然后放到epoll中监听可读事件
+        * epoll_wait返回时，如果epoll_wait返回的事件fd是listen_fd，调用recvfrom接收client第一个UDP包并根据recvfrom返回的client地址, 创建一个新的socket(new_fd)与之对应，设置new_fd为REUSEADDR和REUSEPORT、同时bind本地地址local_addr，然后connect上recvfrom返回的client地址, 将新创建的new_fd加入到epoll中并监听其可读等事件
+        *  client要使用固定的ip和端口和server端通信，也就是client需要bind本地local address。如果client没有bind本地local address，那么在发送UDP数据包的时候，可能是不同的Port了，这样如果server 端的new_fd connect的是client的Port_CA端口，那么当Client的Port_CB端口的UDP数据包来到server时，内核不会投递到new_fd，相反是投递到listen_fd。
 * ⚫ 提供RPC、二进制序列化协议传输、压缩协议包、加解密数据等功能 
-    * rpc的原理大概是先把各个函数名扫描出来, 然后通过msgpack打包发送, 通过python的反射找到相关函数执行
-    * 加密算法是 RC4(对称加密)，在通信开始会有确定rc4加密种子的过程，这个过程有点类似于https握手, 客户端存了一份服务器的非对称加密(rsa)的公钥用来协商加密种子, 协商好了之后, 开始用这个加密种子来走rc4加密通信。
-    * 压缩解压通过 zlib 完成，
+    * **rpc的原理**大概是先把各个函数名扫描出来, 然后通过msgpack打包发送, 通过python的反射找到相关函数执行
+    * **加密算法**是 RC4(对称加密)，在通信开始会有确定rc4加密种子的过程，这个过程有点类似于https握手, 客户端存了一份服务器的非对称加密(rsa)的公钥用来协商加密种子, 协商好了之后, 开始用这个加密种子来走rc4加密通信。
+    * **压缩解压通过** zlib 完成，
 * ⚫ 支持敏捷开发, 暴露接口到脚本层, 涉及到Python热更新、日志、定时器、数据持久化等方面
-    * python热更: 
-    * 日志: 
-    * 数据持久化: 
+    * **python热更**: 
+        * 通过中心控制进程GM进程来广播热更指令, 然后走替换func_code的路子, 如果有装饰器则注意递归替换func里的closure里的cell里的cell_content(因为用了装饰器的话, function object里的func_closure里还有 function object)
+        * 增量热更/全量热更: 增量热更通过记录改动了的文件来做热更, 但是容易产生from...import...的那些没有更到
+        * python原生`reload`函数的问题?
+            * python本身提供了reload函数来进行模块的热更，但是只会对reload之后创建的对象生效，旧对象所运行的依然是旧代码
+        * 定义回调接口: `after_reload`/`on_reload`等
+    * **日志**: 游戏主线程将日志数据保存在据缓存队列中，由专门的日志线程负责执行写入硬盘，保持主线程不阻塞玩法逻辑的执行。在游戏进程发生crash的时候，保存在内存中的数据可能来不及写入硬盘而丢失。 默认的 Linux 环境下日志会写往标准输出，由 SA 负责重定向到特定的日志文件，
+    * **数据持久化**: game、game manager 之类需要操作数据库的进程并不直接连接数据库，而是 db manager 提供数据库读写的服务，供其他进程调用。线上数据库出现机器故障、换主时，game 进程的代码无需做错误处理，db mangaer 会负责自动重试。
 
 ◼ 个人开源-realtime-server服务器框架 
 * ⚫ 目前在GitHub已有315个star 
 * ⚫ 为著名开源项目kcp快速可靠传输协议贡献了通用的单头文件的会话实现, 以及移动弱网的针对性改造, 达到了以20%流量换取代价换取35%的延迟降低效果 
 * ⚫ 为著名开源项目muduo网络库贡献了添加了UDP扩展支持 
     * muduo是使用epoll水平触发的
+
 
 # MySQL
 
@@ -2834,4 +2871,203 @@ Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
 -->
 
 
+演讲: https://www.bilibili.com/video/BV1Us411i7Ym?from=search&seid=119698512329459514
+
+[2]
+多态的实现原理: https://www.zhihu.com/question/58886592
+
+[3]
+C++11新特性: https://www.cnblogs.com/lidabo/p/7241381.html
+
+[4]
+memory-copy是什么: https://www.cnblogs.com/scut-linmaojiang/p/5283838.html
+
+[5]
+nagle算法: https://www.jianshu.com/p/f3840c0ca15e
+
+[6]
+time_wait过多怎么解决: https://coolshell.cn/articles/11564.html
+
+[7]
+close_wait过多怎么解决: https://blog.huoding.com/2016/01/19/488
+
+[8]
+拥塞算法: https://blog.csdn.net/liaoqianwen123/article/details/25429143
+
+[9]
+HTTPS执行过程: https://github.com/zhangyachen/zhangyachen.github.io/issues/31
+
+[10]
+TCP 状-态机: https://coolshell.cn/articles/11564.html
+
+[11]
+Dijkstra算法: https://www.jianshu.com/p/c9b27617502e
+
+[12]
+tcp no delay: https://blog.csdn.net/u014532901/article/details/78573261
+
+[13]
+HTTP2.0: https://www.zhihu.com/question/34074946
+
+[14]
+nocopy: https://medium.com/@bronzesword/what-does-nocopy-after-first-use-mean-in-golang-and-how-12396c31de47
+
+[15]
+mutex设计思想: https://zhuanlan.zhihu.com/p/75263302
+
+[16]
+mutex实现与演进: https://www.jianshu.com/p/ce1553cc5b4f
+
+[17]
+mutex详细源码注释: https://colobu.com/2018/12/18/dive-into-sync-mutex/
+
+[18]
+为什么锁不能复制: https://eli.thegreenplace.net/2018/beware-of-copying-mutexes-in-go/
+
+[19]
+结构体方法使用使用value和pointer: https://golang.org/doc/faq#methods_on_values_or_pointers
+
+[20]
+silce实现: https://halfrost.com/go_slice/
+
+[21]
+为什么计算机用2的补码: https://www.ruanyifeng.com/blog/2009/08/twos_complement.html
+
+[22]
+浮点数: https://github.com/zhangyachen/zhangyachen.github.io/issues/131
+
+[23]
+多核cpu和内存数据如何更新: https://juejin.im/post/5de795296fb9a016323d6466
+
+[24]
+自旋锁: https://zhuanlan.zhihu.com/p/40729293
+
+[25]
+epoll: https://zhuanlan.zhihu.com/p/115220699
+
+[26]
+cpu 伪共享: https://colobu.com/2019/01/24/cacheline-affects-performance-in-go/
+
+[27]
+线程同步: https://cloud.tencent.com/developer/article/1129585
+
+[28]
+进程同步: https://cloud.tencent.com/developer/article/1129585
+
+[29]
+CAS原理: https://zhuanlan.zhihu.com/p/34556594
+
+[30]
+内存屏障: https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C
+
+[31]
+伙伴系统: https://coolshell.cn/articles/10427.html
+
+[32]
+epoll: https://zhuanlan.zhihu.com/p/93609693
+
+[33]
+epoll 边沿触发和水平触发: https://zhuanlan.zhihu.com/p/93609693
+
+[34]
+cpu load average: http://www.ruanyifeng.com/blog/2011/07/linux_load_average_explained.html
+
+[35]
+I/O多路复用，这个复用指的是什么: https://zhuanlan.zhihu.com/p/115220699
+
+[36]
+LRU: https://juejin.im/post/5db79d13518825698010ee42
+
+[37]
+innodb lru: https://blog.csdn.net/u013164931/article/details/82423613
+
+[38]
+bloom filter: https://juejin.im/post/5dca5d37e51d45692b1fe2d9
+
+[39]
+cuckoo filter: https://coolshell.cn/articles/17225.html
+
+[40]
+排序算法: https://www.cnblogs.com/sunriseblogs/p/10009890.html
+
+[41]
+AVL树: https://blog.csdn.net/qq_25806863/article/details/74755131
+
+[42]
+快速排序: https://www.jianshu.com/p/a68f72278f8f
+
+[43]
+时间复杂度LOGN: https://juejin.im/entry/593f56528d6d810058a355f4
+
+[44]
+堆排序: https://www.cnblogs.com/chengxiao/p/6129630.html
+
+[45]
+大数排序 TOPN: https://blog.csdn.net/chikoucha6215/article/details/100855222
+
+[46]
+HashedWheelTimer: https://my.oschina.net/u/2457218/blog/3104605
+
+[47]
+geohash: https://blog.csdn.net/universe_ant/article/details/74785989
+
+[48]
+m*n棋盘，多少种走法: https://blog.nowcoder.net/n/b920bc564fdc41b1b7a7bfed2995d130
+
+[49]
+mark-sweep垃圾回收算法: https://blog.csdn.net/asd397325267/article/details/52668537
+
+[50]
+两个栈实现一个队列: https://www.cnblogs.com/wanghui9072229/archive/2011/11/22/2259391.html
+
+[51]
+单调栈: http://www.zhuoerhuobi.cn/single?id=45
+
+[52]
+trie树: https://blog.csdn.net/forever_dreams/article/details/81009580
+
+[53]
+单链表合并: https://www.cnblogs.com/guweiwei/p/6855626.html
+
+[54]
+合并二叉搜索树: https://blog.csdn.net/qq_33240946/article/details/82421882
+
+[55]
+找出无序数组的中位数: https://blog.csdn.net/u010325193/article/details/87594895
+
+[56]
+分布式事务: https://coolshell.cn/articles/10910.html
+
+[57]
+限流算法: https://blog.biezhi.me/2018/10/rate-limit-algorithm.html
+
+[58]
+一致性hash: https://github.com/zhangyachen/zhangyachen.github.io/issues/74
+
+[59]
+zookeeper: https://www.jianshu.com/p/c7e8a370117d
+
+[60]
+CAP: https://blog.csdn.net/qq_28165595/article/details/81211733
+
+[61]
+朋友圈设计: https://www.jianshu.com/p/3fb3652ff450
+
+[62]
+rehash: http://redisbook.com/preview/dict/incremental_rehashing.html
+
+[63]
+kedis codis: https://www.cnblogs.com/wuwuyong/p/11774679.html
+
+[64]
+跳跃表: https://juejin.im/post/57fa935b0e3dd90057c50fbc
+
+[65]
+ziplist: https://www.cnblogs.com/yuanfang0903/p/12165394.html
+
+[66]
+zset: https://www.cnblogs.com/yuanfang0903/p/12165394.html
+
+[67]
+如何保证数据不丢失 AOF RDB: https://www.cnblogs.com/chenliangcl/p/7240350.html
 

@@ -160,6 +160,7 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 
 # C++pass
 
+* 看之前一个哥们总结的c++要点: https://interview.huihut.com/
 * [ ] 定位new 
 * [ ] c++一个空类会生成什么 (默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) 
 * [ ] 
@@ -746,6 +747,30 @@ select函数，必须得清楚select跟linux特有的epoll的区别， 有三点
 
 
 # Linux内存管理
+
+
+## 主机字节序
+
+主机字节序又叫 CPU 字节序，其不是由操作系统决定的，而是由 CPU 指令集架构决定的。主机字节序分为两种：
+
+大端字节序（Big Endian）：高序字节存储在低位地址，低序字节存储在高位地址
+小端字节序（Little Endian）：高序字节存储在高位地址，低序字节存储在低位地址
+
+存储方式:   
+32 位整数 0x12345678 是从起始位置为 0x00 的地址开始存放，则：
+
+|内存地址|	0x00|	0x01|	0x02|	0x03|
+|:--:|:--:|:--:|:--:|:--:|
+|大端|	12|	34|	56|	78|
+|小端|	78|	56|	34|	12|
+
+
+## 网络字节序
+
+网络字节顺序是 TCP/IP 中规定好的一种数据表示格式，它与具体的 CPU 类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释。
+
+网络字节顺序采用：大端（Big Endian）排列方式。
+
 
 ## Linux虚拟地址空间如何分布
 
@@ -2169,6 +2194,23 @@ MySQL的隔离级别的作用就是让事务之间互相隔离，互不影响，
 * List: 元素比较少或者元素比较短的时候用`压缩表ziplist`, 其他时候就用`双端列表LinkedList`编码
 * ZSet: 元素比较少或者元素比较短的时候用`压缩表ziplist`(member1|score1|member2|score2|..., 按照score从小到大排列), 其他时候就用`跳跃表SkipList编码`(这个编码里包含一个字典结构和一个跳表结构, 字典用于快速查找member如`ZScore`指令的score和确定是否有这个member, 跳表用于`zrank`/`zrange`等)
 
+
+## 哈希表渐进式rehash
+
+以下是哈希表渐进式 rehash 的详细步骤：
+
+1. 为 ht[1] 分配空间， 让字典同时持有 ht[0] 和 ht[1] 两个哈希表。
+2. 在字典中维持一个索引计数器变量 rehashidx ， 并将它的值设置为 0 ， 表示 rehash 工作正式开始。
+3. 在 rehash 进行期间， 每次对字典执行添加、删除、查找或者更新操作时， 程序除了执行指定的操作以外， 还会顺带将 ht[0] 哈希表在 rehashidx 索引上的所有键值对 rehash 到 ht[1] ， 当 rehash 工作完成之后， 程序将 rehashidx 属性的值增一。
+4. 随着字典操作的不断执行， 最终在某个时间点上， ht[0] 的所有键值对都会被 rehash 至 ht[1] ， 这时程序将 rehashidx 属性的值设为 -1 ， 表示 rehash 操作已完成。
+
+渐进式 rehash 的好处在于它采取分而治之的方式， 将 rehash 键值对所需的计算工作均滩到对字典的每个添加、删除、查找和更新操作上， 从而避免了集中式 rehash 而带来的庞大计算量。
+
+因为在进行渐进式 rehash 的过程中， 字典会同时使用 ht[0] 和 ht[1] 两个哈希表， 所以在渐进式 rehash 进行期间， 字典的删除（delete）、查找（find）、更新（update）等操作会在两个哈希表上进行： 比如说， 要在字典里面查找一个键的话， 程序会先在 ht[0] 里面进行查找， 如果没找到的话， 就会继续到 ht[1] 里面进行查找， 诸如此类。
+
+另外， 在渐进式 rehash 执行期间， 新添加到字典的键值对一律会被保存到 ht[1] 里面， 而 ht[0] 则不再进行任何添加操作： 这一措施保证了 ht[0] 包含的键值对数量会只减不增， 并随着 rehash 操作的执行而最终变成空表。
+
+
 ## 延时队列用redis怎么做
 
 用zset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者轮询zset用zrangebyscore指令获取N秒之前的数据轮询进行处理。
@@ -2869,205 +2911,3 @@ Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
 
 
 -->
-
-
-演讲: https://www.bilibili.com/video/BV1Us411i7Ym?from=search&seid=119698512329459514
-
-[2]
-多态的实现原理: https://www.zhihu.com/question/58886592
-
-[3]
-C++11新特性: https://www.cnblogs.com/lidabo/p/7241381.html
-
-[4]
-memory-copy是什么: https://www.cnblogs.com/scut-linmaojiang/p/5283838.html
-
-[5]
-nagle算法: https://www.jianshu.com/p/f3840c0ca15e
-
-[6]
-time_wait过多怎么解决: https://coolshell.cn/articles/11564.html
-
-[7]
-close_wait过多怎么解决: https://blog.huoding.com/2016/01/19/488
-
-[8]
-拥塞算法: https://blog.csdn.net/liaoqianwen123/article/details/25429143
-
-[9]
-HTTPS执行过程: https://github.com/zhangyachen/zhangyachen.github.io/issues/31
-
-[10]
-TCP 状-态机: https://coolshell.cn/articles/11564.html
-
-[11]
-Dijkstra算法: https://www.jianshu.com/p/c9b27617502e
-
-[12]
-tcp no delay: https://blog.csdn.net/u014532901/article/details/78573261
-
-[13]
-HTTP2.0: https://www.zhihu.com/question/34074946
-
-[14]
-nocopy: https://medium.com/@bronzesword/what-does-nocopy-after-first-use-mean-in-golang-and-how-12396c31de47
-
-[15]
-mutex设计思想: https://zhuanlan.zhihu.com/p/75263302
-
-[16]
-mutex实现与演进: https://www.jianshu.com/p/ce1553cc5b4f
-
-[17]
-mutex详细源码注释: https://colobu.com/2018/12/18/dive-into-sync-mutex/
-
-[18]
-为什么锁不能复制: https://eli.thegreenplace.net/2018/beware-of-copying-mutexes-in-go/
-
-[19]
-结构体方法使用使用value和pointer: https://golang.org/doc/faq#methods_on_values_or_pointers
-
-[20]
-silce实现: https://halfrost.com/go_slice/
-
-[21]
-为什么计算机用2的补码: https://www.ruanyifeng.com/blog/2009/08/twos_complement.html
-
-[22]
-浮点数: https://github.com/zhangyachen/zhangyachen.github.io/issues/131
-
-[23]
-多核cpu和内存数据如何更新: https://juejin.im/post/5de795296fb9a016323d6466
-
-[24]
-自旋锁: https://zhuanlan.zhihu.com/p/40729293
-
-[25]
-epoll: https://zhuanlan.zhihu.com/p/115220699
-
-[26]
-cpu 伪共享: https://colobu.com/2019/01/24/cacheline-affects-performance-in-go/
-
-[27]
-线程同步: https://cloud.tencent.com/developer/article/1129585
-
-[28]
-进程同步: https://cloud.tencent.com/developer/article/1129585
-
-[29]
-CAS原理: https://zhuanlan.zhihu.com/p/34556594
-
-[30]
-内存屏障: https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C
-
-[31]
-伙伴系统: https://coolshell.cn/articles/10427.html
-
-[32]
-epoll: https://zhuanlan.zhihu.com/p/93609693
-
-[33]
-epoll 边沿触发和水平触发: https://zhuanlan.zhihu.com/p/93609693
-
-[34]
-cpu load average: http://www.ruanyifeng.com/blog/2011/07/linux_load_average_explained.html
-
-[35]
-I/O多路复用，这个复用指的是什么: https://zhuanlan.zhihu.com/p/115220699
-
-[36]
-LRU: https://juejin.im/post/5db79d13518825698010ee42
-
-[37]
-innodb lru: https://blog.csdn.net/u013164931/article/details/82423613
-
-[38]
-bloom filter: https://juejin.im/post/5dca5d37e51d45692b1fe2d9
-
-[39]
-cuckoo filter: https://coolshell.cn/articles/17225.html
-
-[40]
-排序算法: https://www.cnblogs.com/sunriseblogs/p/10009890.html
-
-[41]
-AVL树: https://blog.csdn.net/qq_25806863/article/details/74755131
-
-[42]
-快速排序: https://www.jianshu.com/p/a68f72278f8f
-
-[43]
-时间复杂度LOGN: https://juejin.im/entry/593f56528d6d810058a355f4
-
-[44]
-堆排序: https://www.cnblogs.com/chengxiao/p/6129630.html
-
-[45]
-大数排序 TOPN: https://blog.csdn.net/chikoucha6215/article/details/100855222
-
-[46]
-HashedWheelTimer: https://my.oschina.net/u/2457218/blog/3104605
-
-[47]
-geohash: https://blog.csdn.net/universe_ant/article/details/74785989
-
-[48]
-m*n棋盘，多少种走法: https://blog.nowcoder.net/n/b920bc564fdc41b1b7a7bfed2995d130
-
-[49]
-mark-sweep垃圾回收算法: https://blog.csdn.net/asd397325267/article/details/52668537
-
-[50]
-两个栈实现一个队列: https://www.cnblogs.com/wanghui9072229/archive/2011/11/22/2259391.html
-
-[51]
-单调栈: http://www.zhuoerhuobi.cn/single?id=45
-
-[52]
-trie树: https://blog.csdn.net/forever_dreams/article/details/81009580
-
-[53]
-单链表合并: https://www.cnblogs.com/guweiwei/p/6855626.html
-
-[54]
-合并二叉搜索树: https://blog.csdn.net/qq_33240946/article/details/82421882
-
-[55]
-找出无序数组的中位数: https://blog.csdn.net/u010325193/article/details/87594895
-
-[56]
-分布式事务: https://coolshell.cn/articles/10910.html
-
-[57]
-限流算法: https://blog.biezhi.me/2018/10/rate-limit-algorithm.html
-
-[58]
-一致性hash: https://github.com/zhangyachen/zhangyachen.github.io/issues/74
-
-[59]
-zookeeper: https://www.jianshu.com/p/c7e8a370117d
-
-[60]
-CAP: https://blog.csdn.net/qq_28165595/article/details/81211733
-
-[61]
-朋友圈设计: https://www.jianshu.com/p/3fb3652ff450
-
-[62]
-rehash: http://redisbook.com/preview/dict/incremental_rehashing.html
-
-[63]
-kedis codis: https://www.cnblogs.com/wuwuyong/p/11774679.html
-
-[64]
-跳跃表: https://juejin.im/post/57fa935b0e3dd90057c50fbc
-
-[65]
-ziplist: https://www.cnblogs.com/yuanfang0903/p/12165394.html
-
-[66]
-zset: https://www.cnblogs.com/yuanfang0903/p/12165394.html
-
-[67]
-如何保证数据不丢失 AOF RDB: https://www.cnblogs.com/chenliangcl/p/7240350.html
-

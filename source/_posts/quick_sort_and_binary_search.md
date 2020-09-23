@@ -3,10 +3,9 @@ title: 排序算法三之谈一谈快排优化和二分查找
 date: 2014-08-22 12:18:54
 tags:
 - Sort
-- CPP
-- noodle
+- Algo
 categories:
-- CPP
+- Algo
 ---
 
 

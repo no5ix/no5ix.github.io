@@ -9,7 +9,7 @@ categories:
 
 
 
-# misc
+# miscpass
 
 * hashmap 是怎样实现的？
 * 秒杀系统的实现?
@@ -18,6 +18,19 @@ categories:
 * fd大小可以改变吗
 * 10个1G数据, 内存200MB, 如何去重
 * dns用的什么协议
+    * DNS占用53号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？
+
+    DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。
+
+    DNS区域传输的时候使用TCP协议：
+
+    1.辅域名服务器会定时（一般3小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，会执行一次区域传送，进行数据同步。区域传送使用TCP而不是UDP，因为数据同步传送的数据量比一个请求应答的数据量要多得多。
+
+    2.TCP是一种可靠连接，保证了数据的准确性。
+
+    域名解析时使用UDP协议：
+
+    客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过三次握手，这样DNS服务器负载更低，响应更快。理论上说，客户端也可以指定向DNS服务器查询时用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。
 * 两数之和leetcode
 * 准备一个难忘的优化经历
 * `python -m`区别
@@ -53,9 +66,9 @@ categories:
 * 如何判断一个图是否有环
 * 桶排序/线段树/统计树/排序树
 
-* 二叉树前序遍历: pass记录一下
+* 二叉树前序遍历: 记录一下
 * 归并排序: https://www.cnblogs.com/shierlou-123/p/11310040.html
-* 插入排序: 
+* 插入排序: ok
 * 堆排序: 动画很好 https://www.bilibili.com/video/av18980178/
 * 链表反转: https://blog.csdn.net/songyunli1111/article/details/79416684
 
@@ -1889,8 +1902,27 @@ BASE 是
 * ⚫ 目前在GitHub已有315个star 
 * ⚫ 为著名开源项目kcp快速可靠传输协议贡献了通用的单头文件的会话实现, 以及移动弱网的针对性改造, 达到了以20%流量换取代价换取35%的延迟降低效果 
 * ⚫ 为著名开源项目muduo网络库贡献了添加了UDP扩展支持 
-    * muduo是使用epoll水平触发的
-    * muduo的buffer怎么做的, 看muduo书吧pass
+    * {% post_link muduo_qa muduo的难点详解 %}
+    * muduo为什么采用epoll水平触发?
+        * 与poll兼容
+      	* LT模式不会发生漏掉事件的BUG，但POLLOUT事件不能一开始就关注，否则会出现busy loop，而应该在write无法完全写入内核缓冲区的时候才关注，将未写入内核缓冲区的数据添加到应用层output buffer，直到应用层output buffer写完，停止关注POLLOUT事件。
+      	* 读写的时候不必等候EAGAIN，可以节省系统调用次数，降低延迟。（注：如果用ET模式，读的时候读到EAGAIN,写的时候直到output buffer写完或者EAGAIN）所以可见LT模式（可以尽可能多读减少系统调用）效率不一定比ET要低（多了一次系统调用，检测EAGAIN）
+    * muduo的buffer怎么做的, 看muduo书吧
+        * ``` cpp
+        /// A buffer class modeled after org.jboss.netty.buffer.ChannelBuffer
+        ///
+        /// @code
+        /// +-------------------+------------------+------------------+
+        /// | prependable bytes |  readable bytes  |  writable bytes  |
+        /// |                   |     (CONTENT)    |                  |
+        /// +-------------------+------------------+------------------+
+        /// |                   |                  |                  |
+        /// 0      <=      readerIndex   <=   writerIndex    <=     size
+        /// @endcode
+        ```
+        * 在非阻塞网络编程中，如何设计并使用缓冲区？
+        一方面希望减少系统调用，一次读取的数据越多越划算；另一方面希望减少内存的占用。这两方面似乎是矛盾的，假设C10K ，每个连接一建立就分配50KB 的内存的话，那么将占用1GB 内存，但是大多数的连接并不需要这么多内存。muduo 巧妙的使用了readv() 结合栈上空间巧妙的解决了这个问题。  
+        在栈上准备一个65535 字节的extrabuf , 然后利用readv() 来读取数据，iovec有两块，第一块是指向muduo Buffer （为每个连接准备1024字节的buf）中的writeable 字节，另一块是指向extrabuf。这样如果读入的数据不多，直接读到内置的buf；如果长度超过内置buf 的大小，就会读到栈上的extrabuf 中，然后程序再把extrabuf 里的数据append() 到 buf 中。
 
 
 # MySQL
@@ -3154,15 +3186,7 @@ def levelorder_traversal(root):
             _queue.append(root.left)
         if root.right:
             _queue.append(root.right)
-    
 
-# def merge(a_list, b_list):
-#     pass
-
-# def merge_sort(num_list):
-#     if len(num_list) <= 1:
-#         return num_list
-#     midlle = len(list)
 
 def merge(a, b):
     c = []

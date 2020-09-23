@@ -3,9 +3,9 @@ title: 内省排序
 date: 2020-03-23 01:24:14
 tags:
 - Sort
-- CPP
+- Algo
 categories:
-- CPP
+- Algo
 ---
 
 

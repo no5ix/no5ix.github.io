@@ -3,10 +3,9 @@ title: 排序算法二之谈一谈冒泡插入归并桶排序
 date: 2014-08-20 19:38:55
 tags:
 - Sort
-- CPP
-- noodle
+- Algo
 categories:
-- CPP
+- Algo
 ---
 
 **注：以下所有代码皆可以直接运行， 都已经测试过。**

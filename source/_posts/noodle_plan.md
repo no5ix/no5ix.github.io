@@ -12,14 +12,8 @@ categories:
 # miscpass
 
 * hashmap 是怎样实现的？
-* 秒杀系统的实现?
-* scan原理为啥一定能遍历完
-* cqq vec set map list
-* 准备一个难忘的优化经历
-* `python -m`区别
-* 10个1G数据, 内存200MB, 如何去重
-* muduo有worker线程没?
-
+* 秒杀系统的实现? 
+* 10个1G数据, 内存200MB, 如何去重 pass
 
 * fd数目大小可以改变吗
     * 可以, 去改一些系统参数即可, 参考 <a href="{% post_path 'fd_inode' %}#文件描述符限制">文件描述符限制</a>
@@ -60,14 +54,14 @@ categories:
 
 # 算法
 
-* 动态规划与贪心有什么区别pass
+* 动态规划与贪心有什么区别 pass
 * 如何判断一个图是否有环
 * 桶排序/线段树/统计树/排序树
 
 * 二叉树前序遍历: 记录一下
 * 归并排序: https://www.cnblogs.com/shierlou-123/p/11310040.html
 * 插入排序: ok
-* 堆排序: 动画很好 https://www.bilibili.com/video/av18980178/
+* 堆排序: pass 动画很好 https://www.bilibili.com/video/av18980178/
 * 链表反转: https://blog.csdn.net/songyunli1111/article/details/79416684
 
 
@@ -98,6 +92,82 @@ categories:
 * mro问题
 * 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
+
+
+## `python -m test_folder/test.py`与`python test_folder/test`有什么不同
+
+```
+hulinhong@GIH-D-14531 MINGW64 ~/Desktop
+$ python test_folder/test.py
+['C:\\Users\\hulinhong\\Desktop\\test_folder', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
+
+hulinhong@GIH-D-14531 MINGW64 ~/Desktop
+$ python -m test_folder.test
+['C:\\Users\\hulinhong\\Desktop', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
+```
+细心的同学会发现，区别就是在第一行。
+test.py文件所在的目录放到了sys.path属性中。
+模块启动是把你输入命令的目录（也就是当前路径），放到了sys.path属性中
+
+所以就会有下面的情况:
+
+目录结构如下
+```
+package/
+	__init__.py
+	mod1.py
+package2/
+	__init__.py
+	run.py  
+```
+run.py 内容如下
+``` python
+import sys
+from package import mod1
+print(sys.path)
+```
+如何才能启动run.py文件？
+
+* 直接启动（失败）
+    ```
+    ➜  test_import_project git:(master) ✗ python package2/run.py
+    Traceback (most recent call last):
+      File "package2/run.py", line 2, in <module>
+        from package import mod1
+    ImportError: No module named package
+    ```
+
+* 以模块方式启动（成功）
+    ```
+    ➜  test_import_project git:(master) ✗ python -m package2.run
+    ['C:\\Users\\hulinhong\\Desktop',
+    '/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python27.zip',
+    ...]
+    ```
+当需要启动的py文件引用了一个模块。你需要注意：在启动的时候需要考虑sys.path中有没有你import的模块的路径！
+这个时候，到底是使用直接启动，还是以模块的启动？目的就是把import的那个模块的路径放到sys.path中。你是不是明白了呢？
+
+> 官方文档参考： http://www.pythondoc.com/pythontutorial3/modules.html
+
+导入一个叫 mod1 的模块时，解释器先在当前目录中搜索名为 mod1.py 的文件。如果没有找到的话，接着会到 sys.path 变量中给出的目录列表中查找。 sys.path 变量的初始值来自如下：
+
+输入脚本的目录（当前目录）。
+* 环境变量 PYTHONPATH 表示的目录列表中搜索(这和 shell 变量 PATH 具有一样的语法，即一系列目录名的列表)。
+* Python 默认安装路径中搜索。
+* 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+
+
+## 在python程序中调用cpp的库创建的线程是否受制于GIL?
+
+首先要理解什么是GIL.
+
+Python 的多线程是真的多线程，只不过在任意时刻，它们中只有一个线程能够取得 GIL 从而被允许执行 Python 代码。其它线程要么等着，要么干别的和 Python 无关的事情（比如等待系统 I/O，或者算点什么东西）。
+
+那如果是通过CPP扩展创建出来的线程，可以摆脱这个限制么？
+
+很简单，不访问 Python 的数据和方法，就和 GIL 没任何关系。如果需要访问 Python，还是需要先取得 GIL
+
+GIL 是为了保护 Python 数据不被并发访问破坏，所以当你不访问 Python 的数据的时候自然就可以释放（或者不取得）GIL。反过来，如果需要访问 Python 的数据，就一定要取得 GIL 再访问。PyObject 等不是线程安全的。多线程访问任何非线程安全的数据都需要先取得对应的锁。Python 所有的 PyObject 什么的都共享一个锁，它就叫 GIL。
 
 
 ## `__new__` 与 `__del__` 与 `__init__`
@@ -212,10 +282,35 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 
 # C++
 
+* cqq vec set map list
 * 看之前一个哥们总结的c++要点: https://interview.huihut.com/
-* [ ] 定位new 
-* [ ] c++一个空类会生成什么 (默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) 
-* [ ] 
+* 定位new 
+    * ``` cpp
+    #include <iostream>
+    using namespace std;
+    int main() {
+        char buffer[512];   //chunk of memory内存池
+        int *p2, *p3;
+        //定位new:
+        p2 = new (buffer) int[10];
+        p2[0] = 99;
+        p2[1] = 88;
+        cout << "buffer = " <<(void *)buffer << endl; //内存池地址
+        cout << "p2 = " << p2 << endl;             //定位new指向的地址
+        cout << "p2[0] = " << p2[0] << endl;
+        p3 = new (buffer) int[2];
+        p3[0] = 1;
+        p3[1] = 2;
+        cout << "p3 = " << p3 << endl;
+        cout << "p2[0] = " << p2[0] << endl;
+        cout << "p2[1] = " << p2[1] << endl;
+        cout << "p2[2] = " << p2[2] << endl;
+        cout << "p2[3] = " << p2[3] << endl;
+        return 0;
+    }
+    ```
+    结果发现p3和p2还有buffer都是使用同样的内存地址，符合指定地址的内存块，而且p3在指定位置覆盖了p2的前两处的值。
+* c++一个空类会生成什么 (答: 默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) 
 * 内存泄漏的工具 vargrid..? 还有啥工具
 * 了解ASAN查找内存越界问题 
 * cpp找找冰川, 大梦龙图的面试题，网上常用题
@@ -1721,6 +1816,7 @@ BASE 是
 * ✓ 前后端协同开发经验
 
 <!-- ◼ 网易-猎手之王游戏项目(2018.9-2020.9)  -->
+## 猎德之手
 
 * ⚫ 苹果App Store首页多日重磅推荐, 2.5D即时多人战术竞技游戏, 主要负责核心模块的架构设计开发与优化 
 * ⚫ 服务器架构基于etcd的分布式改造, 解决全局单点问题, 重构广播框架, 整体承载提高80% 
@@ -1846,9 +1942,8 @@ BASE 是
     * 代码规范尽量自己解引用(`=None`即可)
     * 代码规范尽量用弱引用
 
-<!-- ◼ 冰川网络-FlyNet服务器引擎(2014.6-2018.9)  -->
+## FlyNet服务器引擎
 
-* ⚫ 为公司开发的各种项目提供技术支持, 被公司广泛采用, 后期带队一年多, 负责设计开发系统模块与培训分享, 以及开发计划的制定与人员的管理 
 * ⚫ 支持TCP/UDP/可靠UDP的多线程网络库 
     * 网络库用的什么网络模型? 
         * reactor, epoll多线程, 水平触发, ![](/img/server_model_summary/11.jpg)
@@ -1895,6 +1990,33 @@ BASE 是
         * 定义回调接口: `after_reload`/`on_reload`等
     * **日志**: 游戏主线程将日志数据保存在据缓存队列中，由专门的日志线程负责执行写入硬盘，保持主线程不阻塞玩法逻辑的执行。在游戏进程发生crash的时候，保存在内存中的数据可能来不及写入硬盘而丢失。 默认的 Linux 环境下日志会写往标准输出，由 SA 负责重定向到特定的日志文件，
     * **数据持久化**: game、game manager 之类需要操作数据库的进程并不直接连接数据库，而是 db manager 提供数据库读写的服务，供其他进程调用。线上数据库出现机器故障、换主时，game 进程的代码无需做错误处理，db mangaer 会负责自动重试。
+
+
+## 准备好一个难忘的优化
+
+建议从游戏卡顿说起:  
+
+前端优化:  
+* 状态缓冲器
+* 平滑插值
+* 预先计算技能move路线, 计算静态碰撞, 计算落点与曲线, 动态碰撞通过特效掩盖
+* 前端预表现, 加入前摇后摇机制, 技能先砍, 然后延迟补偿, 由服务器控制飘血
+
+后端卡顿优化:  
+* 高性能时间轮定时器也算是
+* py辣鸡回收卡顿优化
+* rudp优化, 动态冗余, 选择性重传, 不丢包退让, 精简包头并加入rdcLen
+
+
+## 有啥可以问他的
+
+技术:  
+* 技术栈
+* 团队成员数量与年龄组成
+
+人事:  
+* 职级体系/晋升通道
+* 公司架构体系, 有哪些事业部
 
 
 ##  个人开源-realtime-server服务器框架 
@@ -2377,6 +2499,37 @@ zset的跳表数据结构里存了一个span值, 它表示当前的指针跨越�
 因为在进行渐进式 rehash 的过程中， 字典会同时使用 ht[0] 和 ht[1] 两个哈希表， 所以在渐进式 rehash 进行期间， 字典的删除（delete）、查找（find）、更新（update）等操作会在两个哈希表上进行： 比如说， 要在字典里面查找一个键的话， 程序会先在 ht[0] 里面进行查找， 如果没找到的话， 就会继续到 ht[1] 里面进行查找， 诸如此类。
 
 另外， 在渐进式 rehash 执行期间， 新添加到字典的键值对一律会被保存到 ht[1] 里面， 而 ht[0] 则不再进行任何添加操作： 这一措施保证了 ht[0] 包含的键值对数量会只减不增， 并随着 rehash 操作的执行而最终变成空表。
+
+
+## scan原理为啥一定能遍历完
+
+### 先说为啥scan可能会重复
+
+总结: 主要是因为字典rehash的问题, 当size变的时候, 有一些数据在ht[0]有一些在ht[1], 导致游标对应的bucket变了
+
+字典rehash时会使用两个哈希表，首先为ht[1]分配空间，如果是扩展操作，ht[1]的大小为第一个大于等于2倍ht[0].used的2n，如果是收缩操作，ht[1]的大小为第一个大于等于ht[0].used的2n。然后将ht[0]的所有键值对rehash到ht[1]中，最后释放ht[0]，将ht[1]设置为ht[0]，新创建一个空白哈希表当做ht[1]。rehash不是一次完成的，而是分多次、渐进式地完成。
+
+举个例子，现在将一个size为4的哈希表ht[0](sizemask为11, index = hash & 0b11)rehash至一个size为8的哈希表ht[1](sizemask为111, index = hash & 0b111)。
+
+ht[0]中处于bucket0位置的key的哈希值低两位为00，那么rehash至ht[1]时index取低三位可能为000(0)和100(4)。也就是ht[0]中bucket0中的元素rehash之后分散于ht[1]的bucket0与bucket4，以此类推，对应关系为：
+```
+ht[0]  ->  ht[1]
+----------------
+  0    ->   0,4 
+  1    ->   1,5
+  2    ->   2,6
+  3    ->   3,7
+```
+如果SCAN命令采取0->1->2->3的顺序进行遍历，就会出现如下问题：
+
+* 扩展操作中，如果返回游标1时正在进行rehash，ht[0]中的bucket0中的部分数据可能已经rehash到ht[1]中的bucket[0]或者bucket[4]，在ht[1]中从bucket1开始遍历，遍历至bucket4时，其中的元素已经在ht[0]中的bucket0中遍历过，这就产生了重复问题。
+* 缩小操作中，当返回游标5，但缩小后哈希表的size只有4，如何重置游标？
+
+### 如何保证遍历完不遗漏
+
+参考:  
+* https://segmentfault.com/a/1190000018218584
+* https://www.cnblogs.com/linxiyue/p/11262969.html
 
 
 ## 延时队列用redis怎么做

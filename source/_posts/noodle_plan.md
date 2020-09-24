@@ -15,30 +15,28 @@ categories:
 * 秒杀系统的实现?
 * scan原理为啥一定能遍历完
 * cqq vec set map list
-* fd大小可以改变吗
-* 10个1G数据, 内存200MB, 如何去重
-* dns用的什么协议
-    * DNS占用53号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？
-
-    DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。
-
-    DNS区域传输的时候使用TCP协议：
-
-    1.辅域名服务器会定时（一般3小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，会执行一次区域传送，进行数据同步。区域传送使用TCP而不是UDP，因为数据同步传送的数据量比一个请求应答的数据量要多得多。
-
-    2.TCP是一种可靠连接，保证了数据的准确性。
-
-    域名解析时使用UDP协议：
-
-    客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过三次握手，这样DNS服务器负载更低，响应更快。理论上说，客户端也可以指定向DNS服务器查询时用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。
-* 两数之和leetcode
 * 准备一个难忘的优化经历
 * `python -m`区别
+* 10个1G数据, 内存200MB, 如何去重
+* muduo有worker线程没?
+
+
+* fd数目大小可以改变吗
+    * 可以, 去改一些系统参数即可, 参考 <a href="{% post_path 'fd_inode' %}#文件描述符限制">文件描述符限制</a>
+* dns用的什么协议
+    * DNS占用53号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？
+    DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。
+        * DNS区域传输的时候使用TCP协议:  
+            1.辅域名服务器会定时（一般3小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，会执行一次区域传送，进行数据同步。区域传送使用TCP而不是UDP，因为数据同步传送的数据量比一个请求应答的数据量要多得多。
+            2.TCP是一种可靠连接，保证了数据的准确性。
+        * 域名解析时使用UDP协议：
+        客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过三次握手，这样DNS服务器负载更低，响应更快。理论上说，客户端也可以指定向DNS服务器查询时用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。
+* 两数之和leetcode: 使用哈希表
 
 
 # 虾
 
-* lsm-tree
+* lsm-tree pass
 * muduo的buffer怎么做的, 看muduo书吧 [也可参考这里](#个人开源-realtime-server服务器框架)
 * 跳表增加数据的时候, 索引怎么变化?
     * 我们可以维护一个这样的索引：随机选 n/2 个元素做为一级索引、随机选 n/4 个元素做为二级索引、随机选 n/8 个元素做为三级索引，依次类推，一直到最顶层索引。这里每层索引的元素个数已经确定，且每层索引元素选取的足够随机，所以可以通过索引来提升跳表的查找效率。
@@ -308,6 +306,8 @@ M:N模型，内核空间开启M个内核线程，一个内核空间线程对应N
 # Linux文件系统
 
 
+详细的可以查看本博客的这篇文章哈{% post_link fd_inode 文件描述符FD与Inode %}
+
 ## inode
 
 硬盘的最小存储单位是扇区(Sector)，块(block)由多个扇区组成。文件数据存储在块中。块的最常见的大小是 4kb，约为 8 个连续的扇区组成（每个扇区存储 512 字节）。一个文件可能会占用多个 block，但是一个块只能存放一个文件。
@@ -332,7 +332,7 @@ M:N模型，内核空间开启M个内核线程，一个内核空间线程对应N
 ### 硬链接
 
 普通链接一般就是指硬链接, 硬链接是新的目录条目，其引用系统中的现有文件。文件系统中的每一文件默认具有一个硬链接。为节省空间，可以不复制文件，而创建引用同一文件的新硬链接。新硬链接如果在与现有硬链接相同的目录中创建，则需要有不同的文件名，否则需要在不同的目录中。指向同一文件的所有硬链接具有相同的权限、连接数、用户/组所有权、时间戳以及文件内容。指向同一文件内容的硬链接需要在相同的文件系统中。
-简单说，硬链接就是一个 inode 号对应多个文件。就是同一个文件使用了多个别名（上图中 hard link 就是 file 的一个别名，他们有共同的 inode）。
+简单说，硬链接就是一个 inode 号对应多个文件名。就是同一个文件使用了多个别名（上图中 hard link 就是 file 的一个别名，他们有共同的 inode）。
 
 由于硬链接是有着相同 inode 号仅文件名不同的文件，因此硬链接存在以下几点特性：
 
@@ -359,7 +359,6 @@ M:N模型，内核空间开启M个内核线程，一个内核空间线程对应N
 
 ## Linux 为什么多进程能够读写正在删除的文件
 
-
 参考[进程表_文件表_inode_vnode](https://www.cnblogs.com/zhaoyl/archive/2012/05/15/2502010.html)
 
 Linux中多进程环境下，打开同一个文件，当一个进程进行读写操作，如果另外一个进程删除了这个文件，那么读写该文件的进程会发生什么呢?
@@ -369,15 +368,16 @@ Linux中多进程环境下，打开同一个文件，当一个进程进行读写
 
 学操作系统原理的时候，我们知道，linux是通过link的数量来控制文件删除，只有当一个文件不存在任何link的时候，这个文件才会被删除。
 
-而每个文件都会有2个link计数器-- `i_count` 和 `i_nlink。``i_count`的意义是当前使用者的数量，也就是打开文件进程的个数。i_nlink的意义是介质连接的数量；或者可以理解为 `i_count`是内存引用计数器，i_nlink是硬盘引用计数器。再换句话说，当文件被某个进程引用时，`i_count` 就会增加；当创建文件的硬连接的时候，i_nlink 就会增加。
+而每个文件都会有2个link计数器-- `i_count` 和 `i_nlink`。`i_count`的意义是当前使用者的数量，也就是打开文件进程的个数。`i_nlink`的意义是介质连接的数量；或者可以理解为 `i_count`是内存引用计数器，`i_nlink`是硬盘引用计数器。再换句话说，当文件被某个进程引用时，`i_count` 就会增加；当创建文件的硬连接的时候，`i_nlink` 就会增加。
 
-对于 rm 而言，就是减少 `i_nlink。`这里就出现一个问题，如果一个文件正在被某个进程调用，而用户却执行 rm 操作把文件删除了，会出现什么结果呢？
+对于 rm 而言，就是减少 `i_nlink`。这里就出现一个问题，如果一个文件正在被某个进程调用，而用户却执行 rm 操作把文件删除了，会出现什么结果呢？
 
-当用户执行 rm 操作后，ls 或者其他文件管理命令不再能够找到这个文件，但是进程却依然在继续正常执行，依然能够从文件中正确的读取内容。这是因为，rm 操作只是将 i_nlink 置为 0 了；由于文件被进程引用的缘故，`i_count` 不为 0，所以系统没有真正删除这个文件。i_nlink 是文件删除的充分条件，而 `i_count` 才是文件删除的必要条件。
+当用户执行 rm 操作后，ls 或者其他文件管理命令不再能够找到这个文件，但是进程却依然在继续正常执行，依然能够从文件中正确的读取内容。这是因为，rm 操作只是将 `i_nlink` 置为 0 了；由于文件被进程引用的缘故，`i_count` 不为 0，所以系统没有真正删除这个文件。`i_nlink` 是文件删除的充分条件，而 `i_count` 才是文件删除的必要条件。
 
 基于以上只是，大家猜一下，如果在一个进程在打开文件写日志的时候，手动或者另外一个进程将这个日志删除，会发生什么情况？
 
 是的，数据库并没有停掉。虽然日志文件被删除了，但是有一个进程已经打开了那个文件，所以向那个文件中的写操作仍然会成功，数据仍然会提交。
+
 
 ### 习题
 
@@ -3111,271 +3111,3 @@ Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
 
 
 -->
-
-``` python
-#coding=utf-8
-
-import copy
-
-
-class treenode(object):
-
-    def __init__(self, v):
-        self.val = v
-        self.left = None
-        self.right = None
-
-
-def preorder_traversal(root):
-    _stack = []
-    if root is None:
-        return
-    _stack.append(root)
-
-    while _stack:
-        root = _stack.pop()
-        print(root.val)
-        if root.right is not None:
-            _stack.append(root.right)
-        if root.left is not None:
-            _stack.append(root.left)
-
-
-def inorder_traversal(root):
-    _stack = []
-    if root is None:
-        return
-    # _stack.append(root)
-    while (root is not None or _stack):
-        if root is not None:
-            _stack.append(root)
-            root = root.left
-        else:
-            root = _stack.pop()
-            print root.val
-            root = root.right
-
-
-def postorder_traversal(root):
-    _stack = []
-    if root is None:
-        return
-    _result = []
-    _stack.append(root)
-    while _stack:
-        root = _stack.pop()
-        # print root.val
-        _result.append(root.val)
-        if root.left:
-            _stack.append(root.left)
-        if root.right:
-            _stack.append(root.right)
-    _result.reverse()
-    print _result
-
-
-def levelorder_traversal(root):
-    _queue = []
-    if root is None:
-        return
-    _queue.append(root)
-    while _queue:
-        root = _queue.pop(0)
-        print root.val
-        if root.left:
-            _queue.append(root.left)
-        if root.right:
-            _queue.append(root.right)
-
-
-def merge(a, b):
-    c = []
-    h = j = 0
-    while j < len(a) and h < len(b):
-        if a[j] < b[h]:
-            c.append(a[j])
-            j += 1
-        else:
-            c.append(b[h])
-            h += 1
-
-    c.extend(a[j:])
-    c.extend(b[h:])
-
-    # if j == len(a):
-    #     for i in b[h:]:
-    #         c.append(i)
-    # else:
-    #     for i in a[j:]:
-    #         c.append(i)
-    # print c
-    return c
-
-
-def merge_sort(lists):
-    if len(lists) <= 1:
-        return lists
-    middle = len(lists)/2
-    left = merge_sort(lists[:middle])
-    right = merge_sort(lists[middle:])
-    return merge(left, right)
-
-
-def quick_sort(arr):
-    """快速排序"""
-    if len(arr) < 2:
-        return arr
-    # 选取基准，随便选哪个都可以，选中间的便于理解
-    mid = arr[len(arr) // 2]
-    # 定义基准值左右两个数列
-    left, right = [], []
-    # 从原始数组中移除基准值
-    arr.remove(mid)
-    for item in arr:
-        # 大于基准值放右边
-        if item >= mid:
-            right.append(item)
-        else:
-            # 小于基准值放左边
-            left.append(item)
-    # 使用迭代进行比较
-    
-    # print "mid: " + str(mid)
-    # print "left: " + str(left)
-    # print "right: " + str(right)
-    # print "---"
-
-    # ret_left = quick_sort(left)
-    # ret_right = quick_sort(right)
-    # ret_middile = [mid]
-    # # ret = quick_sort(left) + [mid] + quick_sort(right)
-    # ret = ret_left + ret_middile + ret_right
-
-    # # print "ret_left: " + str(ret_left)
-    # # print "ret_right: " + str(ret_right)
-    # # print "ret: " + str(ret)
-    # # print "---"
-
-    # return ret
-    return quick_sort(left) + [mid] + quick_sort(right)
-
-
-def insertion_sort(arr):
-    """插入排序"""
-    # 第一层for表示循环插入的遍数
-    for i in range(1, len(arr)):
-        # 设置当前需要插入的元素
-        current = arr[i]
-        # 与当前元素比较的比较元素
-        pre_index = i - 1
-        while pre_index >= 0 and arr[pre_index] > current:
-            # 当比较元素大于当前元素则把比较元素后移
-            arr[pre_index + 1] = arr[pre_index]
-            # 往前选择下一个比较元素
-            pre_index -= 1
-        # 当比较元素小于当前元素，则将当前元素插入在 其后面
-        arr[pre_index + 1] = current
-    return arr
-
-
-class ListNode(object):
-
-    def __init__(self, v):
-        self.val = v
-        self.next = None
-
-
-# url: https://blog.csdn.net/songyunli1111/article/details/79416684
-def reverse_list(pHead):
-    if not pHead or not pHead.next:
-        return pHead
-    last = None   #指向上一个节点
-    while pHead:
-        #先用tmp保存pHead的下一个节点的信息，
-        #保证单链表不会因为失去pHead节点的next而就此断裂
-        tmp = pHead.next   
-        #保存完next，就可以让pHead的next指向last了
-        pHead.next = last
-        #让last，pHead依次向后移动一个节点，继续下一次的指针反转
-        last = pHead
-        pHead = tmp
-    return last
-
-
-# url: https://blog.csdn.net/u010420283/article/details/84729567
-def minPathSum(grid):
-	"""
-	:type grid: List[List[int]]
-	:rtype: int
-	"""
-	n = len(grid)
-	m = len(grid[0])
-	for i in range(1,n):
-		grid[i][0] = grid[i-1][0] + grid[i][0]   #首先需要寻找左边界各点的路径总和
-
-	for j in range(1,m):
-		grid[0][j] = grid[0][j-1] + grid[0][j]  #寻找上边界各点的路径总和
-
-	for i in range(1,n):
-		for j in range(1,m):
-			grid[i][j] = min(grid[i-1][j] , grid[i][j-1]) + grid[i][j]  #以边界处为依据一步步推出内部个点的路径总和
-
-	return grid[n-1][m-1]
-
-
-if __name__ == "__main__":
-    _t_a = treenode('a')
-    _t_b = treenode('b')
-    _t_c = treenode('c')
-    _t_d = treenode('d')
-    _t_e = treenode('e')
-    _t_f = treenode('f')
-    _t_g = treenode('g')
-
-    _t_a.left = _t_b
-    _t_b.left = _t_c
-    _t_b.right = _t_d
-    _t_d.left = _t_e
-    _t_d.right = _t_f
-    _t_e.right = _t_g
-
-    preorder_traversal(_t_a)
-    print "=========="
-    inorder_traversal(_t_a)
-    print "=========="
-    postorder_traversal(_t_a)
-    print "=========="
-    levelorder_traversal(_t_a)
-
-    num_list_for_sort = [8, 4, 5, 7, 1, 3, 6, 2]
-    # print a[2:]
-    print "=======merge_sort---==="
-    print (merge_sort(num_list_for_sort))
-    print "=======quick_sort---==="
-    print (quick_sort(copy.deepcopy(num_list_for_sort)))
-    print "=======insertion_sort---==="
-    print (insertion_sort(num_list_for_sort))
-
-            
-    head=ListNode(1);    #测试代码
-    p1=ListNode(2);      #建立链表1->2->3->4->None;
-    p2=ListNode(3);
-    p3=ListNode(4);
-    head.next=p1;
-    p1.next=p2;
-    p2.next=p3;
-    p=reverse_list(head);   #输出链表 4->3->2->1->None
-    print "=======reverse_list---==="
-    while p:
-        print p.val;
-        p = p.next
-
-    print "_____minPathSum-----"    
-    grid_list = [
-        [1,3,1],
-        [1,5,1],
-        [4,2,1]
-    ]
-    print(minPathSum(grid_list))
-
-```

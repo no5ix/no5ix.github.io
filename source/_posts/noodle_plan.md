@@ -13,7 +13,6 @@ categories:
 
 * hashmap 是怎样实现的？
 * 秒杀系统的实现? 
-* 10个1G数据, 内存200MB, 如何去重 pass
 * next-key原理, 锁的实现? pass
 
 * fd数目大小可以改变吗
@@ -69,6 +68,12 @@ categories:
 * 插入排序: ok
 * 堆排序: pass 动画很好 https://www.bilibili.com/video/av18980178/
 * 链表反转: https://blog.csdn.net/songyunli1111/article/details/79416684
+
+
+**海量问题**: 可参考 https://juejin.im/entry/6844903519640616967
+
+
+* 10个1G数据, 内存200MB, 如何去重 pass
 
 
 ## 各种树的定义与用途

@@ -83,10 +83,9 @@ def postorder_traversal(root):
     _stack.append(root)
     while _stack:
         root = _stack.pop()
-        # print root.val
-        _result.insert(0, root.val)
+        _result.insert(0, root.val)  # 逆序添加结点值
         if root.left:
-            _stack.append(root.left)
+            _stack.append(root.left) # 和传统先序遍历不一样，先将左结点入栈
         if root.right:
             _stack.append(root.right)
     print _result
@@ -129,7 +128,7 @@ def merge(a, b):
     # print c
     return c
 
-# url: https://www.cnblogs.com/shierlou-123/p/11310040.html
+
 def merge_sort(lists):
     if len(lists) <= 1:
         return lists
@@ -196,11 +195,37 @@ def insertion_sort(arr):
     return arr
 
 
+def heapify(arr, cur_start_index, cur_end_index):
+    # 左右子节点的下标
+    left = cur_start_index * 2 + 1
+    right = cur_start_index * 2 + 2
+    largest_index = cur_start_index
+    if left <= cur_end_index and arr[left] > arr[cur_start_index]:
+        largest_index = left
+    if right <= cur_end_index and arr[right] > arr[largest_index]:
+        largest_index = right
+    # 通过上面跟左右节点比较后，得出三个元素之间较大的下标，
+    # 如果较大下表不是父节点的下标，说明交换后需要重新调整大顶堆
+    if largest_index != cur_start_index:
+        arr[cur_start_index], arr[largest_index] = arr[largest_index], arr[cur_start_index]
+        heapify(arr, largest_index, cur_end_index)
+
 def heap_sort(arr):
+    """
+    堆排序
+    url: https://www.bilibili.com/video/av18980178/
+    """
     # build heap
+    arr_len = len(arr)
+    # 构造大顶堆，从非叶子节点开始倒序遍历，因此是arr_len//2 -1 就是最后一个非叶子节点
+    for _index in range(arr_len//2-1, -1, -1):  # 第一个-1代表遍历到头, 后一个步长为-1也就是倒序
+        heapify(arr, _index, arr_len-1)
 
-    
-
+    # iter & heapify
+    # 上面的循环完成了大顶堆的构造，那么就开始把根节点跟末尾节点交换，然后重新调整大顶堆  
+    for _i in range(arr_len-1, -1, -1):
+        arr[0], arr[_i] = arr[_i], arr[0]
+        heapify(arr, 0, _i-1)
 
 
 class ListNode(object):
@@ -229,8 +254,9 @@ def reverse_list(pHead):
 
 def minPathSum(grid):
 	"""
-  url: https://blog.csdn.net/u010420283/article/details/84729567
-
+    url: https://blog.csdn.net/u010420283/article/details/84729567
+    思路分析: 当处于第一列时候(j=0)，dp[i][j]=grid[i-1][j]+grid[i][j]； 第一行时候（i=0），dp[i][j]=grid[i][j-1]+grid[i][j]。而在其它位置时候，dp[i][j]就等于它的上方或者左方格子数值最小的值加上grid当前格子的值，即：dp[i][j]=min(dp[i-1][j],dp[i][j-1])+grid[i][j]。
+    
 	:type grid: List[List[int]]
 	:rtype: int
 	"""
@@ -305,4 +331,8 @@ if __name__ == "__main__":
     ]
     print(minPathSum(grid_list))
 
+    print "------------heap_sort-------"
+    num_list_for_heap_sort = [8, 4, 5, 7, 1, 3, 6, 2]
+    heap_sort(num_list_for_heap_sort)
+    print num_list_for_heap_sort
 ```

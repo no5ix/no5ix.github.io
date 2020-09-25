@@ -54,7 +54,10 @@ categories:
 # 算法
 
 * 快排最好时间复杂度/最坏呢?为啥不稳定? 答: 最好logn, 当每次pivot都选到最大或者最小的时候最坏n2, 不稳定是因为交换嘛, 如果一个数num刚好跟pivot相等, 那partition完的时候, pivot要和partition index位置的数做交换, 如果这个数num刚好在partition index这个位置, 那这两个数就会发生交换, 然后肯定就不稳定了啊
-* 动态规划与贪心有什么区别 passi
+* 动态规划与贪心有什么区别:
+    * 贪心着眼现实当下，动规谨记历史进程。
+    * 动态规划希望复用子问题的解，最好被反复依赖。其本质还是穷举，所以当前并不知道哪个子问题的解会构成最终最优解。但知道这个子问题可能会被反复计算，所以把结果缓存起来。整个过程是树状的搜索过程。
+    * 贪心希望每次都能排除一堆子问题。它不需要复用子问题的解，当前最优解从子问题最优解即可得出。整个过程是线性的推导过程。
 * A星算法 pass
 * dijkstra算法 pass
 * 双栈队列 passi
@@ -66,7 +69,7 @@ categories:
 * 二叉树前序遍历: 记录一下
 * 归并排序: https://www.cnblogs.com/shierlou-123/p/11310040.html
 * 插入排序: ok
-* 堆排序: passi 动画很好 https://www.bilibili.com/video/av18980178/
+* 堆排序: 动画很好 https://www.bilibili.com/video/av18980178/
 * 链表反转: https://blog.csdn.net/songyunli1111/article/details/79416684
 
 
@@ -102,10 +105,73 @@ categories:
 * mro问题
 * 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
+* 元类
+
+
+## 装饰器
+
+``` python
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+```
+观察上面的log，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：
+``` python
+@log
+def now():
+    print('2015-3-25')
+```
+调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志：
+
+```
+>>> now()
+call now():
+2015-3-25
+```
+把@log放到now()函数的定义处，相当于执行了语句：
+`now = log(now)`
+由于log()是一个decorator，返回一个函数，所以，原来的now()函数仍然存在，只是现在同名的now变量指向了新的函数，于是调用now()将执行新函数，即在log()函数中返回的wrapper()函数。
+
+wrapper()函数的参数定义是(*args, **kw)，因此，wrapper()函数可以接受任意参数的调用。在wrapper()函数内，首先打印日志，再紧接着调用原始函数。
+
+如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本：
+``` python
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
+这个3层嵌套的decorator用法如下：
+``` python
+@log('execute')
+def now():
+    print('2015-3-25')
+```
+执行结果如下：
+```
+>>> now()
+execute now():
+2015-3-25
+```
+和两层嵌套的decorator相比，3层嵌套的效果是这样的：
+`now = log('execute')(now)`
+我们来剖析上面的语句，首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。
 
 
 ## `python -m test_folder/test.py`与`python test_folder/test`有什么不同
 
+桌面的test_folder文件夹下有个test.py
+``` python test.py
+import sys
+print(sys.path)
+```
+
+运行看看:   
 ```
 hulinhong@GIH-D-14531 MINGW64 ~/Desktop
 $ python test_folder/test.py
@@ -115,7 +181,7 @@ hulinhong@GIH-D-14531 MINGW64 ~/Desktop
 $ python -m test_folder.test
 ['C:\\Users\\hulinhong\\Desktop', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
 ```
-细心的同学会发现，区别就是在第一行。
+细心的同学会发现，区别就是在第一个路径。
 test.py文件所在的目录放到了sys.path属性中。
 模块启动是把你输入命令的目录（也就是当前路径），放到了sys.path属性中
 
@@ -802,34 +868,51 @@ for ( ; ; ) {
 ## epoll
 
 一个常见的epoll使用例子:
-```c
-/* Deal with returned list of events */
-for (j = 0; j < ready; j++) {
-    printf("  fd=%d; events: %s%s%s\n", evlist[j].data.fd,
-            (evlist[j].events & EPOLLIN)  ? "EPOLLIN "  : "",
-            (evlist[j].events & EPOLLHUP) ? "EPOLLHUP " : "",
-            (evlist[j].events & EPOLLERR) ? "EPOLLERR " : "");
+```c 
+while (numOpenFds > 0) {
+    /* Fetch up to MAX_EVENTS items from the ready list of the
+        epoll instance */
 
-    if (evlist[j].events & EPOLLIN) {
-        s = read(evlist[j].data.fd, buf, MAX_BUF);
-        if (s == -1)
-            errExit("read");
-        printf("    read %d bytes: %.*s\n", s, s, buf);
+    printf("About to epoll_wait()\n");
+    ready = epoll_wait(epfd, evlist, MAX_EVENTS, -1);
+    if (ready == -1) {
+        if (errno == EINTR)
+            continue;               /* Restart if interrupted by signal */
+        else
+            errExit("epoll_wait");
+    }
 
-    } else if (evlist[j].events & (EPOLLHUP | EPOLLERR)) {
+    printf("Ready: %d\n", ready);
 
-        /* After the epoll_wait(), EPOLLIN and EPOLLHUP may both have
-            been set. But we'll only get here, and thus close the file
-            descriptor, if EPOLLIN was not set. This ensures that all
-            outstanding input (possibly more than MAX_BUF bytes) is
-            consumed (by further loop iterations) before the file
-            descriptor is closed. */
+    /* Deal with returned list of events */
 
-        printf("    closing fd %d\n", evlist[j].data.fd);
-// 关闭一个文件描述符会自动的将其从所有的 epoll 实例的兴趣列表中移除
-        if (close(evlist[j].data.fd) == -1)
-            errExit("close");
-        numOpenFds--;
+    for (j = 0; j < ready; j++) {
+        printf("  fd=%d; events: %s%s%s\n", evlist[j].data.fd,
+                (evlist[j].events & EPOLLIN)  ? "EPOLLIN "  : "",
+                (evlist[j].events & EPOLLHUP) ? "EPOLLHUP " : "",
+                (evlist[j].events & EPOLLERR) ? "EPOLLERR " : "");
+
+        if (evlist[j].events & EPOLLIN) {
+            s = read(evlist[j].data.fd, buf, MAX_BUF);
+            if (s == -1)
+                errExit("read");
+            printf("    read %d bytes: %.*s\n", s, s, buf);
+
+        } else if (evlist[j].events & (EPOLLHUP | EPOLLERR)) {
+
+            /* After the epoll_wait(), EPOLLIN and EPOLLHUP may both have
+                been set. But we'll only get here, and thus close the file
+                descriptor, if EPOLLIN was not set. This ensures that all
+                outstanding input (possibly more than MAX_BUF bytes) is
+                consumed (by further loop iterations) before the file
+                descriptor is closed. */
+
+            printf("    closing fd %d\n", evlist[j].data.fd);
+            // 关闭一个文件描述符会自动的将其从所有的 epoll 实例的兴趣列表中移除
+            if (close(evlist[j].data.fd) == -1)
+                errExit("close");
+            numOpenFds--;
+        }
     }
 }
 ```
@@ -1888,6 +1971,9 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
 3. 由于B+树的数据都存储在叶子结点中，分支结点均为索引，方便扫库，只需要扫一遍叶子结点即可，但是B树因为其分支结点同样存储着数据，我们要找到具体的数据，需要进行一次中序遍历按序来扫，所以B+树更加适合在区间查询的情况，所以通常B+树用于数据库索引。
 
 4. B树在提高了IO性能的同时并没有解决元素遍历的效率低下的问题，正是为了解决这个问题，B+树应用而生。B+树只需要去遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树不支持这样的操作或者说效率太低。
+
+
+## mysql全文索引pass
 
 
 ## mysql 有那些存储引擎，有哪些区别

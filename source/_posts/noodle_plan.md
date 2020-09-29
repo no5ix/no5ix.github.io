@@ -13,6 +13,7 @@ categories:
 
 * hashmap 是怎样实现的？
 * 秒杀系统的实现? 
+* cgi是啥? pass
 
 * fd数目大小可以改变吗
     * 可以, 去改一些系统参数即可, 参考 <a href="{% post_path 'fd_inode' %}#文件描述符限制">文件描述符限制</a>
@@ -67,14 +68,50 @@ categories:
 * 同构问题, [leetcode](https://leetcode-cn.com/problems/isomorphic-strings/)
 
 
-# 网络安全pass
+# 网络安全
 
 最后就是网络安全，主要考察也是 WEB 安全，包括XSS，CSRF，SQL注入等。
+
+## XSS
+
+参考: https://tech.meituan.com/2018/09/27/fe-security.html
+
+什么是 XSS?  
+
+Cross-Site Scripting（跨站脚本攻击）简称 XSS，是**一种代码注入攻击**。攻击者通过在目标网站上注入恶意脚本，使之在用户的浏览器上运行。利用这些恶意脚本，攻击者可获取用户的敏感信息如 Cookie、SessionID 等，进而危害数据安全。
+
+为了和 CSS 区分，这里把攻击的第一个字母改成了 X，于是叫做 XSS。
+XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一起；浏览器无法分辨哪些脚本是可信的，导致恶意脚本被执行。
+而由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，或者利用这些信息冒充用户向网站发起攻击者定义的请求。
+在部分情况下，由于输入的限制，注入的恶意脚本比较短。但可以通过引入外部的脚本，并由浏览器执行，来完成比较复杂的攻击策略。
+
+
+### XSS是如何注入的
+
+这里有一个问题：用户是通过哪种方法“注入”恶意脚本的呢？
+不仅仅是业务上的“用户的 UGC 内容”可以进行注入，包括 URL 上的参数等都可以是攻击的来源。在处理输入时，以下内容都不可信： 
+* 来自用户的 UGC 信息
+* 来自第三方的链接
+* URL 参数
+* POST 参数
+* Referer （可能来自不可信的来源）
+* Cookie （可能来自其他子域注入）
+
+## 如何防范XSS
+
+虽然很难通过技术手段完全避免 XSS，但我们可以总结以下原则减少漏洞的产生：
+
+* 利用模板引擎 开启模板引擎自带的 HTML 转义功能。例如： 在 ejs 中，尽量使用 <%= data %> 而不是 <%- data %>； 在 doT.js 中，尽量使用 {{! data } 而不是 {{= data }； 在 FreeMarker 中，确保引擎版本高于 2.3.24，并且选择正确的 freemarker.core.OutputFormat。
+* 避免内联事件 尽量不要使用 onLoad="onload('{{data}}')"、onClick="go('{{action}}')" 这种拼接内联事件的写法。在 JavaScript 中通过 .addEventlistener() 事件绑定会更安全。
+* 避免拼接 HTML 前端采用拼接 HTML 的方法比较危险，如果框架允许，使用 createElement、setAttribute 之类的方法实现。或者采用比较成熟的渲染框架，如 Vue/React 等。
+* 时刻保持警惕 在插入位置为 DOM 属性、链接等位置时，要打起精神，严加防范。
+* 增加攻击难度，降低攻击后果 通过 CSP、输入长度配置、接口安全措施等方法，增加攻击的难度，降低攻击的后果。
+* 主动检测和发现 可使用 XSS 攻击字符串和自动扫描工具寻找潜在的 XSS 漏洞。
 
 
 # 算法
 
-推荐参考本博客总结的 {% post_link algo_newbie %}
+推荐参考**本博客总结**的 {% post_link algo_newbie %}
 
 * 快排最好时间复杂度/最坏呢?为啥不稳定? 答: 最好logn, 当每次pivot都选到最大或者最小的时候最坏n2, 不稳定是因为交换嘛, 如果一个数num刚好跟pivot相等, 那partition完的时候, pivot要和partition index位置的数做交换, 如果这个数num刚好在partition index这个位置, 那这两个数就会发生交换, 然后肯定就不稳定了啊
 * 动态规划与贪心有什么区别:
@@ -128,7 +165,9 @@ categories:
 * mro问题
 * 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
-* 元类
+
+
+## 元类 passi
 
 
 ## 装饰器

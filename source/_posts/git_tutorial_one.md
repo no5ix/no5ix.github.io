@@ -135,6 +135,7 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 - **把git commit撤销(抹除并覆盖)** `git revert` : 
 `git revert` 是生成一个新的提交来撤销(或者说是抹除并覆盖某次提交)，此次提交之前的commit都会被保留
 
+
 ## git revert和git reset的区别
 
 `git revert` 和 `git reset` 的区别看一个例子

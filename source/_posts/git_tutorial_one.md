@@ -212,3 +212,19 @@ You can revert it with :
 If you want to list them :
 
 	git ls-files -v | grep '^h'. 
+
+
+# rebase
+
+git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用方式,你会深深地喜欢上他,如果有时间我也许会细细地讲一下,现将git rebase的正确使用步骤总结如下, 假设Git目前只有一个分支master。开发人员的工作流程是:  
+
+* git clone master branch
+* 在自己本地checkout -b local创建一个本地开发分支
+* 在本地的开发分支上开发和测试
+* 阶段性开发完成后（包含功能代码和单元测试），可以准备提交代码
+    * 首先切换到master分支，git pull拉取最新的分支状态
+    * 然后切回local分支
+    * 通过git rebase -i 将本地的多次提交合并为一个，以简化提交历史。本地有多个提交时,如果不进行这一步,在git rebase master时会多次解决冲突(最坏情况下,每一个提交都会相应解决一个冲突)
+    * git rebase master 将master最新的分支同步到本地，这个过程可能需要手动解决冲突(如果进行了上一步的话,只用解决一次冲突)
+    * 然后切换到master分支，git merge将本地的local分支内容合并到master分支
+    * git push将master分支的提交上传

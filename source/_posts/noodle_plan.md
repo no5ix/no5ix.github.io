@@ -30,6 +30,9 @@ categories:
 * 两数之和leetcode: 使用哈希表
 
 
+**. . .**<!-- more -->
+
+
 # 虾
 
 ## two passi
@@ -38,7 +41,7 @@ categories:
 * git rebase原理/git reset是啥意思？原理
 * 十个并发请求写日志，传入的两个参数（参数1时间戳， 参数2内容）， 然后按照传入的参数1的时间戳排序写日志（提示：hbase就有这个特性，全局有序的存储？ 不用严格有序， 阶段有序
 * 分布式事务: [分布式事务](#分布式事务)
-* rpc框架原理， msgpack是啥， 出异常怎么办？被调用方除了问题， 调用方怎么办？
+* rpc框架原理,msgpack是啥,出异常怎么办？被调用方除了问题,调用方怎么办？
 * 分布式全局递增id: [id生成器如何实现全局递增](#id生成器如何实现全局递增)
 * 做登录的时候`OAuth2`么？`OAuth`是啥？
     * 参考: https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html
@@ -1401,6 +1404,8 @@ struct mem_control_block {
 
 
 ## vmalloc和kmalloc和malloc的区别 passi
+
+
 
 
 ## Buddy（伙伴）分配算法

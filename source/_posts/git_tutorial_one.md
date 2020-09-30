@@ -83,11 +83,10 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 `git branch test_branch`
 - 比如切换到分支test_branch : 
 `git checkout test_branch`
-- 比如把test_branch合并到主分支master上来 : 先切换到master上来git checkout  master 然后
+- 比如把test_branch合并到主分支master上来 : 先执行`git checkout  master`切换到master上来, 然后
 	- `git merge test_branch`
-	- `git rebase test_branch` : 
-		rebase 跟 merge 的区别你们可以理解成有两个书架，你需要把两个书架的书整理到一起去，第一种做法是 merge ，比较粗鲁暴力，就直接腾出一块地方把另一个书架的书全部放进去，虽然暴力，但是这种做法你可以知道哪些书是来自另一个书架的；第二种做法就是 rebase ，他会把两个书架的书先进行比较，按照购书的时间来给他重新排序，然后重新放置好，这样做的好处就是合并之后的书架看起来很有逻辑，但是你很难清晰的知道哪些书来自哪个书架的。各有好处的，不同的团队根据不同的需要以及不同的习惯来选择就好。 
-
+	- `git rebase test_branch`(一般不这么用) : 
+	- rebase 跟 merge 的区别你们可以理解成有两个书架，你需要把两个书架的书整理到一起去，第一种做法是 merge ，比较粗鲁暴力，就直接腾出一块地方把另一个书架的书全部放进去，虽然暴力，但是这种做法你可以知道哪些书是来自另一个书架的；第二种做法就是 rebase ，他会把两个书架的书先进行比较，按照购书的时间来给他重新排序，然后重新放置好，这样做的好处就是合并之后的书架看起来很有逻辑，但是你很难清晰的知道哪些书来自哪个书架的。各有好处的，不同的团队根据不同的需要以及不同的习惯来选择就好。 
 - 比如删除本地分支test_branch :
 有些时候可能会删除失败，比如如果a分支的代码还没有合并到master，你执行 git branch -d a 是删除不了的，它会智能的提示你a分支还有未合并的代码，但是如果你非要删除，那就执行 git branch -D a 就可以强制删除a分支。 
 	- `git branch -d test_branch`
@@ -126,10 +125,11 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 	- `git reset HEAD` : 把add了的都从**暂存区**中移出
 	- `git reset HEAD test_file` : 只把test_file从**暂存区**中移出
 
-- **把git commit回退(在公司很少用, 因为把之前的commit都弄没了)** `git reset` : 
+- **回退到某个版本(在公司很少用, 因为把之前的commit都弄没了)** `git reset` : 
 `git reset` 是回到某次提交A，提交A及之前的commit都会被保留，A之后的commit都没有了, A之后的修改都会被退回到暂存区
+	- git reset的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本
 	-  只是把commit回退并且把文件从*暂存区*中移出, 但保留已有的文件更改 : 
-	通用命令为 `git reset commit_id`, 这个commit_id用git log命令来查看, 比如要恢复到刚刚提交的上一次提交的版本, 就用git reset HEAD^(这句命令的意思是说: 恢复到commit id 为HEAD^的版本, HEAD是指向最新的提交，上一次提交是HEAD^,上上次是HEAD^^,也可以写成HEAD～2 ,依次类推. )
+	通用命令为 `git reset commit_id`, 这个commit_id用git log命令来查看, 比如要恢复到刚刚提交的上一次提交的版本, 就用`git reset HEAD^`(这句命令的意思是说: 恢复到commit id 为`HEAD^`的版本, HEAD是指向最新的提交，上一次提交是`HEAD^`,上上次是`HEAD^^`,也可以写成`HEAD～2` ,依次类推. )
 	- 把commit回退且不保留已有的文件更改(慎用) :   
 	`git reset --hard commit_id`
 - **把git commit撤销(抹除并覆盖)** `git revert` : 
@@ -140,11 +140,12 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 
 `git revert` 和 `git reset` 的区别看一个例子
 
-具体一个例子，假设有三个commit:
-commit3: add test3.c
-commit2: add test2.c
-commit1: add test1.c
+具体一个例子，假设有三个commit:  
+* commit3: add test3.c
+* commit2: add test2.c
+* commit1: add test1.c
 
+我们看看以下三种情况:  
 - 当执行`git revert HEAD~1`时， commit2被撤销了
 `git log`可以看到：
 	revert "commit2":this reverts commit 5fe21s2...
@@ -164,6 +165,7 @@ commit1: add test1.c
 	commit1: add test1.c
 运行`git status`， 没有任何变化
 
+
 ## git reset回退之后不能push的问题
 
 假设一开始你的本地和远程都是：
@@ -173,11 +175,11 @@ a -> b
 这个时候，如果没有远程库，你就接着怎么操作都行，比如：
 a -> b -> d
 但是在有远程库的情况下，你push会失败，因为远程库是 a->b->c，你的是 a->b->d
-两种方案：
-- push的时候用`--force`，强制把远程库变成a -> b -> d，大部分公司严禁这么干，会被别人揍一顿
-- 做一个反向操作，把自己本地变成a -> b -> c -> d，注意b和d文件快照内容一莫一样，但是commit id肯定不同，再push上去远程也会变成 a -> b -> c -> d
+<!-- 两种方案： -->
+此时, push的时候用`--force`，强制把远程库变成a -> b -> d，不过大部分公司严禁这么干，会被别人揍一顿
+<!-- - 做一个反向操作，把自己本地变成a -> b -> c -> d，注意b和d文件快照内容一莫一样，但是commit id肯定不同，再push上去远程也会变成 a -> b -> c -> d -->
 
-综上所述, 一个是撤销(抹除并覆盖), 一个是回退
+综上所述, 一个是撤销某个版本(抹除并覆盖), 一个是回退到某个版本
 
 # GitIgnore
 
@@ -216,6 +218,17 @@ If you want to list them :
 
 # rebase
 
+参考： https://www.codercto.com/a/45325.html
+
+rebase的原理?
+假设我们先从 master 分支切出一个 feature1 分支，进行开发, 当在 feature1 分支上执行 `git rebase master`时:  
+1. 首先， git 会把 feature1 分支里面的每个 commit 取消掉；
+2. 其次，把上面的操作临时保存成 patch 文件，存在 .git/rebase 目录下；
+3. 然后，把 feature1 分支更新到最新的 master 分支；
+4. 最后，把上面保存的 patch 文件应用到 feature1 分支上；
+
+## rebase的使用
+
 git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用方式,你会深深地喜欢上他,如果有时间我也许会细细地讲一下,现将git rebase的正确使用步骤总结如下, 假设Git目前只有一个分支master。开发人员的工作流程是:  
 
 * git clone master branch
@@ -226,5 +239,25 @@ git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用
     * 然后切回local分支
     * 通过git rebase -i 将本地的多次提交合并为一个，以简化提交历史。本地有多个提交时,如果不进行这一步,在git rebase master时会多次解决冲突(最坏情况下,每一个提交都会相应解决一个冲突)
     * git rebase master 将master最新的分支同步到本地，这个过程可能需要手动解决冲突(如果进行了上一步的话,只用解决一次冲突)
+    * .在 rebase 的过程中，也许会出现冲突 conflict 。在这种情况， git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。
+    * 注意，你无需执行 git-commit，只要执行 continue，`git rebase --continue`, 这样 git 会继续应用余下的 patch 补丁文件。
     * 然后切换到master分支，git merge将本地的local分支内容合并到master分支
     * git push将master分支的提交上传
+
+
+## 如何合并多次提交纪录
+
+每一次功能开发， 对多个 commit 进行合并处理。
+这时候就需要用到 `git rebase -i` 了。这个命令没有太难，不常用可能源于不熟悉，所以我们来通过示例学习一下:
+
+执行`git rebase -i`, 
+![](/img/git_tutorial/rebase_i1.png)
+
+我们设置第二个”pick 657a291 add 2.txt” 为” s 657a291 add 2.txt”这里的s就是squash命令的简写。
+跳出来了一个临时文件，最上面是两行commit message。我们修改下这个总体的commit message。
+![](/img/git_tutorial/rebase_i2.png)
+
+删除之前的两条message(ESC dd)，设置一总的message 然后保存退出。(ESC wq)
+我们查看下log。git log
+是不是没有了之前的两个commit。
+![](/img/git_tutorial/rebase_i3.png)

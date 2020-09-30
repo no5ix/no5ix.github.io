@@ -414,7 +414,17 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 
 # C++
 
-* `new` 和 `delete` 为什么要配对用
+* `new` 和 `delete` 为什么要配对用:
+    * ``` cpp
+        class A{
+        //...
+        };
+        A *pa = new A();
+        A *pas = new A[NUM]();
+      ```
+        * delete []pas; //详细流程: delete[] pas 用来释放pas指向的内存！！还逐一调用数组中每个对象的destructor！！
+        * delete []pa; //会发生什么, 答案是调用未知次数的A的析构函数. 因为delete[]会去通过pa+offset找一个基于pa的偏移量找一个内存里的数据, 他假定这个内存里放了要调用析构的次数n这个数据, 而这个内存里到底是多少是未知的.
+        * delete pas; //哪些指针会变成野指针, 答案是pas和A[0]中的指针会变成野指针. 因为只有这两个指针指向的内存被释放了, 也就是说, 仅释放了pas指针指向的这个数组的全部内存空间, 以及只调用了a[0]对象的析构函数
 * cqq vec set map list
     * {% post_link stl_vector_string %}
     * {% post_link stll_set_map_tutorial %}

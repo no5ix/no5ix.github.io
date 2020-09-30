@@ -34,14 +34,28 @@ categories:
 
 ## two passi
 
-* 登录session的实现
+* 登录session的实现, 登录微服务/排队微服务各种流程搞清楚， aid是干嘛的 
 * git rebase原理/git reset是啥意思？原理
-* 十个并发请求写日志，传入的两个参数（参数1时间戳， 参数2内容）， 然后按照传入的参数1的时间戳排序（提示：hbase就有这个特性，全局有序的存储？ 不用严格有序， 阶段有序
-* 分布式事务
-* 登录微服务/排队微服务各种流程搞清楚， aid是干嘛的 
-* 分布式全局递增id
+* 十个并发请求写日志，传入的两个参数（参数1时间戳， 参数2内容）， 然后按照传入的参数1的时间戳排序写日志（提示：hbase就有这个特性，全局有序的存储？ 不用严格有序， 阶段有序
+* 分布式事务: [分布式事务](#分布式事务)
 * rpc框架原理， msgpack是啥， 出异常怎么办？被调用方除了问题， 调用方怎么办？
+* 分布式全局递增id: [id生成器如何实现全局递增](#id生成器如何实现全局递增)
 * 做登录的时候`OAuth2`么？`OAuth`是啥？
+    * 参考: https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html
+    * 参考: http://www.ruanyifeng.com/blog/2019/04/github-oauth.html
+    * OAuth 2.0 规定了四种获得令牌的流程。你可以选择最适合自己的那一种，向第三方应用颁发令牌。下面就是这四种授权方式。
+        * 授权码（authorization-code）
+        * 隐藏式（implicit）
+        * 密码式（password）：
+        * 客户端凭证（client credentials）
+        注意，不管哪一种授权方式，第三方应用申请令牌之前，都必须先到系统备案，说明自己的身份，然后会拿到两个身份识别码：客户端 ID（client ID）和客户端密钥（client secret）。这是为了防止令牌被滥用，没有备案过的第三方应用，是不会拿到令牌的。
+    * 举个**OAuth授权码**方式的例子,授权码（authorization code）方式，指的是第三方应用先申请一个授权码，然后再用该码获取令牌。这种方式是最常用的流程，安全性也最高，它适用于那些有后端的 Web 应用。授权码通过前端传送，令牌则是储存在后端，而且所有与资源服务器的通信都在后端完成。这样的前后端分离，可以避免令牌泄漏。 流程如下:  
+        1\. A 网站让用户跳转到 GitHub。
+        2\. GitHub 要求用户登录，然后询问"A 网站要求获得 xx 权限，你是否同意？"
+        3\. 用户同意，GitHub 就会重定向回 A 网站，同时发回一个授权码。
+        4\. A 网站使用授权码，向 GitHub 请求令牌。
+        5\. GitHub 返回令牌.
+        6\. A 网站使用令牌，向 GitHub 请求用户数据。
 
 
 ## one
@@ -65,7 +79,12 @@ categories:
 
 # 网络安全
 
-最后就是网络安全，主要考察也是 WEB 安全，包括XSS，CSRF，SQL注入等。
+最后就是网络安全，主要考察也是 WEB 安全，包括
+* [XSS](#XSS)
+* [CSRF](#CSRF)
+* SQL注入
+* ...
+
 
 ## XSS
 
@@ -92,7 +111,25 @@ XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一�
 * Referer （可能来自不可信的来源）
 * Cookie （可能来自其他子域注入）
 
-## 如何防范XSS
+举个简单例子: 
+``` JavaScript
+function escape(s) {
+  return '<script>console.log("'+s+'");</script>';
+}
+```
+如果输入的`s` 为 `");alert(1);//` , 则将 return `<script>console.log("");alert(1);//");</script>` , 这就会弹出警告窗口`alert(1)` 这就是恶意脚本注入
+
+再举个真实的例子, **新浪微博名人堂反射型 XSS 漏洞**:
+
+攻击者发现 `http://weibo.com/pub/star/g/xyyyd` 这个 URL 的内容未经过滤直接输出到 HTML 中。
+于是攻击者构建出一个 URL，然后诱导用户去点击：
+`http://weibo.com/pub/star/g/xyyyd"><script src=//xxxx.cn/image/t.js></script>`
+用户点击这个 URL 时，服务端取出请求 URL，拼接到 HTML 响应中：
+`<li><a href="http://weibo.com/pub/star/g/xyyyd"><script src=//xxxx.cn/image/t.js></script>">按分类检索</a></li>`
+浏览器接收到响应后就会加载执行恶意脚本 `//xxxx.cn/image/t.js`，在恶意脚本中利用用户的登录状态进行关注、发微博、发私信等操作，发出的微博和私信可再带上攻击 URL，诱导更多人点击，不断放大攻击范围。这种窃用受害者身份发布恶意内容，层层放大攻击范围的方式，被称为 “XSS 蠕虫”。
+
+
+### 如何防范XSS
 
 虽然很难通过技术手段完全避免 XSS，但我们可以总结以下原则减少漏洞的产生：
 
@@ -101,6 +138,101 @@ XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一�
 * 时刻保持警惕 在插入位置为 DOM 属性、链接等位置时，要打起精神，严加防范。
 * 增加攻击难度，降低攻击后果 通过 CSP、输入长度配置、接口安全措施等方法，增加攻击的难度，降低攻击的后果。
 * 主动检测和发现 可使用 XSS 攻击字符串和自动扫描工具寻找潜在的 XSS 漏洞。
+
+举个例子:
+
+某天，公司需要一个搜索页面，根据 URL 参数决定关键词的内容。小明很快把页面写好并且上线。代码如下：
+``` html
+<input type="text" value="<%= getParameter("keyword") %>">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：<%= getParameter("keyword") %>
+</div>
+```
+然而，在上线后不久，小明就接到了安全组发来的一个神秘链接：
+`http://xxx/search?keyword="><script>alert('XSS');</script>`
+小明带着一种不祥的预感点开了这个链接 \[请勿模仿，确认安全的链接才能点开\]。果然，页面中弹出了写着”XSS” 的对话框。
+> 可恶，中招了！小明眉头一皱，发现了其中的奥秘：  
+
+当浏览器请求 `http://xxx/search?keyword="><script>alert('XSS');</script>` 时，服务端会解析出请求参数 `keyword`，得到 `"><script>alert('XSS');</script>`，拼接到 HTML 中返回给浏览器。形成了如下的 HTML：
+``` html
+<input type="text" value=""><script>alert('XSS');</script>">
+<button>搜索</button>
+<div>
+  您搜索的关键词是："><script>alert('XSS');</script>
+</div>
+```
+浏览器无法分辨出 `<script>alert('XSS');</script>` 是恶意代码，因而将其执行。
+这里不仅仅 div 的内容被注入了，而且 input 的 value 属性也被注入， alert 会弹出两次。
+面对这种情况，我们应该如何进行防范呢？
+其实，这只是浏览器把用户的输入当成了脚本进行了执行。那么只要告诉浏览器这段内容是文本就可以了。
+聪明的小明很快找到解决方法，把这个漏洞修复：
+
+``` html
+<input type="text" value="<%= escapeHTML(getParameter("keyword")) %>">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：<%= escapeHTML(getParameter("keyword")) %>
+</div>
+```
+
+`escapeHTML()` 按照如下规则进行转义：
+
+| 字符 | 转义后的字符 | |-|-| |`&`|`&amp;`| |`<`|`&lt;`| |`>`|`&gt;`| |`"`|`&quot;`| |`'`|`&#x27;`| |`/`|`&#x2F;`|
+
+经过了转义函数的处理后，最终浏览器接收到的响应为：
+
+``` html
+<input type="text" value="&quot;&gt;&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;&#x2F;script&gt;">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：&quot;&gt;&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;&#x2F;script&gt;
+</div>
+```
+恶意代码都被转义，不再被浏览器执行，而且搜索词能够完美的在页面显示出来。
+
+
+## CSRF
+
+参考: https://tech.meituan.com/2018/10/11/fe-security-csrf.html
+
+CSRF（Cross-site request forgery）跨站请求伪造：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
+
+一个典型的CSRF攻击有着如下的流程：
+
+1) 受害者登录a.com，并保留了登录凭证（Cookie）。
+2) 攻击者引诱受害者访问了b.com。
+3) b.com 向 a.com 发送了一个请求：a.com/act=xx。浏览器会默认携带a.com的Cookie。
+4) a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。
+5) a.com以受害者的名义执行了act=xx。
+6) 攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。
+
+
+### CSRF 的特点
+
+*   攻击一般发起在第三方网站，而不是被攻击的网站。被攻击的网站无法防止攻击发生。
+*   攻击利用受害者在被攻击网站的登录凭证，冒充受害者提交操作；而不是直接窃取数据。
+*   整个过程攻击者并不能获取到受害者的登录凭证，仅仅是 “冒用”。
+*   跨站请求可以用各种方式：图片 URL、超链接、CORS、Form 提交等等。部分请求方式可以直接嵌入在第三方论坛、文章中，难以进行追踪。
+
+CSRF 通常是跨域的，因为外域通常更容易被攻击者掌控。但是如果本域下有容易被利用的功能，比如可以发图和链接的论坛和评论区，攻击可以直接在本域下进行，而且这种攻击更加危险。
+
+
+### 防护策略
+
+CSRF 通常从第三方网站发起，被攻击的网站无法防止攻击发生，只能通过增强自己网站针对 CSRF 的防护能力来提升安全性。
+
+上文中讲了 CSRF 的两个特点：
+* CSRF（通常）发生在第三方域名。
+* CSRF 攻击者不能获取到 Cookie 等信息，只是使用。
+
+针对这两点，我们可以专门制定防护策略，如下：
+* 阻止不明外域的访问
+    * 同源检测
+    * Samesite Cookie
+* 提交时要求附加本域才能获取的信息
+    * CSRF Token
+    * 双重 Cookie 验证
 
 
 # 算法
@@ -161,8 +293,84 @@ XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一�
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
 
 
-## 元类 passi
+## 元类
 
+参考: https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072
+
+python元类的使用场景, 比如orm框架, ORM全称“Object Relational Mapping”，即对象-关系映射，就是把关系数据库的一行映射为一个对象，也就是一个类对应一个表，这样，写代码更简单，不用直接操作SQL语句。
+
+`type()`函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过`type()`函数创建出`Hello`类，而无需通过`class Hello(object)...`的定义：
+
+```
+\>>> def fn(self, name='world'): # 先定义函数
+...     print('Hello, %s.' % name)
+...
+>>> Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
+>>> h = Hello()
+>>> h.hello()
+Hello, world.
+>>> print(type(Hello))
+<class 'type'>
+>>> print(type(h))
+<class '__main__.Hello'>
+```
+
+要创建一个 class 对象，`type()`函数依次传入 3 个参数：
+
+1. class 的名称；
+2. 继承的父类集合，注意 Python 支持多重继承，如果只有一个父类，别忘了 tuple 的单元素写法；
+3. class 的方法名称与函数绑定，这里我们把函数`fn`绑定到方法名`hello`上。
+
+通过`type()`函数创建的类和直接写 class 是完全一样的，因为 Python 解释器遇到 class 定义时，仅仅是扫描一下 class 定义的语法，然后调用`type()`函数创建出 class。
+
+正常情况下，我们都用`class Xxx...`来定义类，但是，`type()`函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。
+
+### metaclass
+
+除了使用`type()`动态创建类以外，要控制类的创建行为，还可以使用 metaclass。
+metaclass，直译为元类，简单的解释就是：
+当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。
+但是如果我们想创建出类呢？那就必须根据 metaclass 创建出类，所以：先定义 metaclass，然后创建类。
+连接起来就是：先定义 metaclass，就可以创建类，最后创建实例。
+所以，metaclass 允许你创建类或者修改类。换句话说，你可以把类看成是 metaclass 创建出来的 “实例”。
+我们先看一个简单的例子，这个 metaclass 可以给我们自定义的 MyList 增加一个`add`方法：
+定义`ListMetaclass`，按照默认习惯，metaclass 的类名总是以 Metaclass 结尾，以便清楚地表示这是一个 metaclass：
+``` python
+class ListMetaclass(type):
+    def __new__(cls, name, bases, attrs):
+        attrs\['add'\] = lambda self, value: self.append(value)
+        return type.__new__(cls, name, bases, attrs)
+```
+有了 ListMetaclass，我们在定义类的时候还要指示使用 ListMetaclass 来定制类，传入关键字参数`metaclass`：
+``` python
+class MyList(list, metaclass=ListMetaclass):
+    pass
+```
+
+当我们传入关键字参数`metaclass`时，魔术就生效了，它指示 Python 解释器在创建`MyList`时，要通过`ListMetaclass.__new__()`来创建，在此，我们可以修改类的定义，比如，加上新的方法，然后，返回修改后的定义。
+
+`__new__()`方法接收到的参数依次是：
+
+1. 当前准备创建的类的对象；
+2. 类的名字；
+3. 类继承的父类集合；
+4. 类的方法集合。
+
+测试一下`MyList`是否可以调用`add()`方法：
+```
+\>>> L = MyList()
+>>> L.add(1)
+>> L
+\[1\]
+```
+而普通的`list`没有`add()`方法：
+```
+\>>> L2 = list()
+>>> L2.add(1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'add'
+```
 
 ## 装饰器
 
@@ -219,7 +427,12 @@ execute now():
 我们来剖析上面的语句，首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。
 
 
-## `python -m test_folder/test.py`与`python test_folder/test`有什么不同
+## python命令行参数
+
+* -u参数的使用：python命令加上-u（unbuffered）参数后会强制其标准输出也同标准错误一样不通过缓存直接打印到屏幕。
+* -c参数，支持执行单行命令/脚本。如: `python -c "import os;print('hello'),print('world')"`
+
+### `python -m test_folder/test.py`与`python test_folder/test`有什么不同
 
 桌面的test_folder文件夹下有个test.py
 ``` python test.py
@@ -414,6 +627,8 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 
 # C++
 
+参考: 看之前一个哥们总结的c++要点 https://interview.huihut.com/
+
 * `new` 和 `delete` 为什么要配对用:
     * ``` cpp
         class A{
@@ -430,7 +645,6 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
     * {% post_link stll_set_map_tutorial %}
 * 字节对齐
     * {% post_link sizeof_struct %}
-* 看之前一个哥们总结的c++要点: https://interview.huihut.com/
 * 定位new 
     * ``` cpp
     #include <iostream>
@@ -2771,7 +2985,7 @@ etcd 认为写入请求被 Leader 节点处理并分发给了多数节点后，�
 分布式系统的就准备CAP理论、BASE理论、限流、熔断、一致性选举算法、主从架构、集群架构、异地多活、负载均衡、分层架构、微服务等。
 
 
-## 分布式事务 passi
+## 分布式事务
 
 
 ## 负载均衡算法有哪些
@@ -2905,7 +3119,70 @@ circuitBreaker.errorThresholdPercentage
 三者都是为了通过一定的方式去保护流量过大时，保护系统的手段。
 
 
-## id生成器怎么实现的，如何实现全局递增pass
+## id生成器如何实现全局递增
+
+参考: https://tech.meituan.com/2017/04/21/mt-leaf.html
+
+介绍一下美团在用的工业级 **Leaf-snowflake 方案**。
+
+![](/img/noodle_plan/distributed/721ceeff.png)
+
+**Leaf-snowflake 方案**完全沿用 snowflake 方案的 bit 位设计，即是 “1+41+10+12” 的方式组装 ID 号。对于 workerID 的分配，当服务集群数量较小的情况下，完全可以手动配置。Leaf 服务规模较大，动手配置成本太高。所以使用 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID。Leaf-snowflake 是按照下面几个步骤启动的：
+
+1.  启动 Leaf-snowflake 服务，连接 Zookeeper，在 leaf_forever 父节点下检查自己是否已经注册过（是否有该顺序子节点）。
+2.  如果有注册过直接取回自己的 workerID（zk 顺序节点生成的 int 类型 ID 号），启动服务。
+3.  如果没有注册过，就在该父节点下面创建一个持久顺序节点，创建成功后取回顺序号当做自己的 workerID 号，启动服务。
+
+![](/img/noodle_plan/distributed/a3f985a8.png)
+
+### 弱依赖 ZooKeeper
+
+除了每次会去 ZK 拿数据以外，也会在本机文件系统上缓存一个 workerID 文件。当 ZooKeeper 出现问题，恰好机器出现问题需要重启时，能保证服务能够正常启动。这样做到了对三方组件的弱依赖。一定程度上提高了 SLA
+
+
+### 启动流程
+
+因为这种方案依赖时间，如果机器的时钟发生了回拨，那么就会有可能生成重复的 ID 号，需要解决时钟回退的问题。
+
+![](/img/noodle_plan/distributed/1453b4e9.png)
+
+参见上图整个启动流程图，服务启动时首先检查自己是否写过 ZooKeeper leaf_forever 节点：
+
+1.  若写过，则用自身系统时间与 `leaf_forever/${self}` 节点记录时间做比较，若小于 `leaf_forever/${self}` 时间则认为机器时间发生了大步长回拨，服务启动失败并报警。
+2.  若未写过，证明是新服务节点，直接创建持久节点 `leaf_forever/${self}`并写入自身系统时间，接下来综合对比其余 Leaf 节点的系统时间来判断自身系统时间是否准确，具体做法是取 leaf_temporary 下的所有临时节点 (所有运行中的 Leaf-snowflake 节点) 的服务 IP：Port，然后通过 RPC 请求得到所有节点的系统时间，计算 sum(time)/nodeSize。
+3.  若 abs(系统时间 - sum(time)/nodeSize ) < 阈值，认为当前系统时间准确，正常启动服务，同时写临时节点 leaf_temporary/${self} 维持租约。
+4.  否则认为本机系统时间发生大步长偏移，启动失败并报警。
+5.  每隔一段时间 (3s) 上报自身系统时间写入 `leaf_forever/${self}`。
+
+
+### 解决时钟问题
+
+由于强依赖时钟，对时间的要求比较敏感，在机器工作时 NTP 同步也会造成秒级别的回退，建议可以直接关闭 NTP 同步。要么在时钟回拨的时候直接不提供服务直接返回 ERROR_CODE，等时钟追上即可。**或者做一层重试，然后上报报警系统，更或者是发现有时钟回拨之后自动摘除本身节点并报警**，如下：
+``` java
+//发生了回拨，此刻时间小于上次发号时间
+if (timestamp < lastTimestamp) {
+    long offset = lastTimestamp - timestamp;
+    if (offset <= 5) {
+        try {
+          //时间偏差大小小于5ms，则等待两倍时间
+            wait(offset << 1);//wait
+            timestamp = timeGen();
+            if (timestamp < lastTimestamp) {
+                //还是小于，抛异常并上报
+                throwClockBackwardsEx(timestamp);
+              }    
+        } catch (InterruptedException e) {  
+            throw  e;
+        }
+    } else {
+        //throw
+        throwClockBackwardsEx(timestamp);
+    }
+}
+ //分配ID       
+```
+从上线情况来看，在 2017 年闰秒出现那一次出现过部分机器回拨，由于 Leaf-snowflake 的策略保证，成功避免了对业务造成的影响。
+Leaf 在美团点评公司内部服务包含金融、支付交易、餐饮、外卖、酒店旅游、猫眼电影等众多业务线。目前 Leaf 的性能在 4C8G 的机器上 QPS 能压测到近 5w/s，TP999 1ms，已经能够满足大部分的业务的需求。每天提供亿数量级的调用量，作为公司内部公共的基础技术设施，必须保证高 SLA 和高性能的服务，我们目前还仅仅达到了及格线，还有很多提高的空间。
 
 
 ## 一致性的类别

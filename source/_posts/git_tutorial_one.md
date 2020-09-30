@@ -132,11 +132,16 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 	通用命令为 `git reset commit_id`, 这个commit_id用git log命令来查看, 比如要恢复到刚刚提交的上一次提交的版本, 就用`git reset HEAD^`(这句命令的意思是说: 恢复到commit id 为`HEAD^`的版本, HEAD是指向最新的提交，上一次提交是`HEAD^`,上上次是`HEAD^^`,也可以写成`HEAD～2` ,依次类推. )
 	- 把commit回退且不保留已有的文件更改(慎用) :   
 	`git reset --hard commit_id`
-- **把git commit撤销(抹除并覆盖)** `git revert` : 
-`git revert` 是生成一个新的提交来撤销(或者说是抹除并覆盖某次提交)，此次提交之前的commit都会被保留
-
+- **把git commit撤销(抹除并覆盖, 此命令还算常用)** `git revert` : 
+`git revert` 是生成一个新的提交来撤销(或者说是抹除并覆盖某次提交)，此次提交之前的commit都会被保留, git revert命令有两个参数:
+	* `--no-edit`(默认参数)：执行时不打开默认编辑器，直接使用 Git 自动生成的提交信息。
+	* `--no-commit`(一般使用这个)：只抵消暂存区和工作区的文件变化，不产生新的提交。
 
 ## git revert和git reset的区别
+
+总结:   
+* `git reset`适用场景: 如果想恢复到之前某个提交的版本，且那个版本之后提交的版本我们都不要了，就可以用这种方法
+* `git rebase`适用场景: 如果我们想撤销之前的某一版本，但是又想保留该目标版本后面的版本，记录下这整个版本变动流程，就可以用这种方法。
 
 `git revert` 和 `git reset` 的区别看一个例子
 
@@ -175,9 +180,8 @@ a -> b
 这个时候，如果没有远程库，你就接着怎么操作都行，比如：
 a -> b -> d
 但是在有远程库的情况下，你push会失败，因为远程库是 a->b->c，你的是 a->b->d
-<!-- 两种方案： -->
 此时, push的时候用`--force`，强制把远程库变成a -> b -> d，不过大部分公司严禁这么干，会被别人揍一顿
-<!-- - 做一个反向操作，把自己本地变成a -> b -> c -> d，注意b和d文件快照内容一莫一样，但是commit id肯定不同，再push上去远程也会变成 a -> b -> c -> d -->
+
 综上所述, 一个是撤销某个版本(抹除并覆盖), 一个是回退到某个版本
 
 # GitIgnore
@@ -260,3 +264,12 @@ git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用
 我们查看下log。git log
 是不是没有了之前的两个commit。
 ![](/img/git_tutorial/rebase_i3.png)
+
+
+# 替换上一次提交
+
+提交以后，发现提交信息写错了，这时可以使用`git commit`命令的`--amend`参数，可以修改上一次的提交信息。
+
+`$ git commit --amend -m "Fixes bug #42"`
+
+它的原理是产生一个新的提交对象，替换掉上一次提交产生的提交对象.这时如果暂存区有发生变化的文件，会一起提交到仓库。所以，`--amend`不仅可以修改提交信息，还可以整个把上一次提交替换掉。

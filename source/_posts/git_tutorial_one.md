@@ -227,25 +227,27 @@ rebase的原理?
 假设我们先从 master 分支切出一个 feature1 分支，进行开发, 当在 feature1 分支上执行 `git rebase master`时:  
 1. 首先， git 会把 feature1 分支里面的每个 commit 取消掉；
 2. 其次，把上面的操作临时保存成 patch 文件，存在 .git/rebase 目录下；
-3. 然后，把 feature1 分支更新到最新的 master 分支；
+3. 然后，把 feature1 分支更新到最新的 master 分支, 这也是为什么叫做rebase(变基)的原因;
 4. 最后，把上面保存的 patch 文件应用到 feature1 分支上；
+
+以上就是rebase的原理
 
 ## rebase的使用
 
-git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用方式,你会深深地喜欢上他,如果有时间我也许会细细地讲一下,现将git rebase的正确使用步骤总结如下, 假设Git目前只有一个分支master。开发人员的工作流程是:  
+git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用方式,你会深深地喜欢上他,如果有时间我也许会细细地讲一下,现将git rebase的正确使用步骤总结如下, 假设Git目前只有一个分支master。那么开发人员的工作流程是:  
 
-* git clone master branch
-* 在自己本地checkout -b local创建一个本地开发分支
-* 在本地的开发分支上开发和测试
-* 阶段性开发完成后（包含功能代码和单元测试），可以准备提交代码
-    * 首先切换到master分支，git pull拉取最新的分支状态
-    * 然后切回local分支
-    * 通过git rebase -i 将本地的多次提交合并为一个，以简化提交历史。本地有多个提交时,如果不进行这一步,在git rebase master时会多次解决冲突(最坏情况下,每一个提交都会相应解决一个冲突)
-    * git rebase master 将master最新的分支同步到本地，这个过程可能需要手动解决冲突(如果进行了上一步的话,只用解决一次冲突)
-    * .在 rebase 的过程中，也许会出现冲突 conflict 。在这种情况， git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。
-    * 注意，你无需执行 git-commit，只要执行 continue，`git rebase --continue`, 这样 git 会继续应用余下的 patch 补丁文件。
-    * 然后切换到master分支，git merge将本地的local分支内容合并到master分支
-    * git push将master分支的提交上传
+1. `git clone master branch`
+2. 在自己本地`checkout -b local`创建一个本地开发分支
+3. 在本地的开发分支上开发和测试
+4. 阶段性开发完成后（包含功能代码和单元测试），可以准备提交代码
+    1. 首先切换到master分支，git pull拉取最新的分支状态
+    2. 然后切回local分支
+    3. 通过`git rebase -i` 将本地的多次提交合并为一个，以简化提交历史。本地有多个提交时,如果不进行这一步,在`git rebase master`时会多次解决冲突(最坏情况下,每一个提交都会相应解决一个冲突)
+    4. `git rebase master` 将master最新的分支同步到本地，这个过程可能需要手动解决冲突(如果进行了上一步的话,只用解决一次冲突)
+    5. .在 rebase 的过程中，也许会出现冲突 conflict 。在这种情况， git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。
+    6. 注意，你无需执行 git-commit，只要执行 continue，`git rebase --continue`, 这样 git 会继续应用余下的 patch 补丁文件。
+    7. 然后切换到master分支，git merge将本地的local分支内容合并到master分支
+    8. git push将master分支的提交上传
 
 
 ## 如何合并多次提交纪录
@@ -256,7 +258,7 @@ git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用
 执行`git rebase -i`, 
 ![](/img/git_tutorial/rebase_i1.png)
 
-我们设置第二个”pick 657a291 add 2.txt” 为” s 657a291 add 2.txt”这里的s就是squash命令的简写。
+我们设置第二个”pick 657a291 add 2.txt” 为” s 657a291 add 2.txt”这里的s就是squash命令的简写。squash的意思是说, 让`657a291 add 2.txt`这个提交压缩入前一个提交里面去(即`a7b18c4 add 1.txt`这个提交), 所以`git rebase -i`之后就把`add 2.txt`和`add 1.txt`这两个提交变成一个提交了.  
 跳出来了一个临时文件，最上面是两行commit message。我们修改下这个总体的commit message。
 ![](/img/git_tutorial/rebase_i2.png)
 

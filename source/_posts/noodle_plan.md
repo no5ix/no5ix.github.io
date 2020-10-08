@@ -1920,6 +1920,21 @@ Authorization: Bearer <token>
 这样子确实也可以解决 cookie 跨域(比如移动平台上对cookie支持不好)的问题，不过具体放在哪儿还是根据业务场景来定，并没有一定之规。
 
 
+#### jwt过期了如何刷新
+
+前面讲的 Token，都是 Access Token，也就是访问资源接口时所需要的 Token，还有另外一种 Token，Refresh Token，通常情况下，Refresh Token 的有效期会比较长，而 Access Token 的有效期比较短，当 Access Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Access Token，如果 Refresh Token 也失效了，用户就只能重新登录了。
+
+在 JWT 的实践中，引入 Refresh Token，将会话管理流程改进如下。
+
+1. 客户端使用用户名密码进行认证
+2. 服务端生成有效时间较短的 Access Token（例如 10 分钟），和有效时间较长的 Refresh Token（例如 7 天）
+3. 客户端访问需要认证的接口时，携带 Access Token
+4. 如果 Access Token 没有过期，服务端鉴权后返回给客户端需要的数据
+5. 如果携带 Access Token 访问需要认证的接口时鉴权失败（例如返回 401 错误），则客户端使用 Refresh Token 向刷新接口申请新的 Access Token
+6. 如果 Refresh Token 没有过期，服务端向客户端下发新的 Access Token
+7. 客户端使用新的 Access Token 访问需要认证的接口
+
+
 ## Connection: keep-alive是干嘛的?
 
 在早期的HTTP/1.0中，每次http请求都要创建一个连接，而创建连接的过程需要消耗资源和时间，为了减少资源消耗，缩短响应时间，就需要重用连接。在后来的HTTP/1.0中以及HTTP/1.1中，引入了重用连接的机制，就是在http请求头中加入Connection: keep-alive来告诉对方这个请求响应完成后不要关闭，下一次咱们还用这个请求继续交流。协议规定HTTP/1.0如果想要保持长连接，需要在请求头中加上Connection: keep-alive，而HTTP/1.1默认是支持长连接的，有没有这个请求头都行。
@@ -3031,14 +3046,69 @@ etcd 认为写入请求被 Leader 节点处理并分发给了多数节点后，�
 4. 加权轮询法
 　　不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端。加权轮询算法的结果，就是要生成一个服务器序列。每当有请求到来时，就依次从该序列中取出下一个服务器用于处理该请求。比如针对`c权重4, b权重2, a权重1`的例子，加权轮询算法会生成序列`{c, c, b, c, a, b, c}`也有可能是`{a, a, a, a, a, b, c}`, 有可能不均匀, 前五个请求都会分配给服务器a。在Nginx源码中，实现了一种叫做平滑的加权轮询（smooth weighted round-robin balancing）的算法，它生成的序列更加均匀。比如前面的例子，它生成的序列为{ a, a, b, a, c, a, a}，转发给后端a的5个请求现在分散开来，不再是连续的。这样，每收到7个客户端的请求，会把其中的1个转发给后端a，把其中的2个转发给后端b，把其中的4个转发给后端c。收到的第8个请求，重新从该序列的头部开始轮询。
     * 普通加权轮询法
-    * 平滑加权轮询法
+    * [平滑加权轮询法](#负载均衡的平滑加权轮询算法怎么实现)
 5. 加权随机法
      与加权轮询法一样，加权随机法也根据后端机器的配置，系统的负载分配不同的权重。不同的是，它是按照权重随机请求后端服务器，而非顺序。
 6. 最小连接数法
      最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器。
 
 
-### 负载均衡的平滑加权轮询算法怎么实现passi
+### 负载均衡的平滑加权轮询算法怎么实现
+
+当我们需要把一份数据发送到一个Set中的任意机器的时候，很容易想到的一个问题是，如何挑Set中的机器作为数据的接收方？显然算法需要符合以下要求：
+
+* 支持加权，以便在机器故障时可以降低其权重
+* 在加权的前提下，尽可能地把请求平摊到每台机器上
+
+第一点很好理解，而第二点的意思是，比如说我们现在有a, b, c三个选择，权重分别是5, 1, 1，我们希望输出的结果是类似于a, a, b, a, c, a, a，而不是a, a, a, a, a, b, c。
+
+从Github上面可以看到，Nginx以前也是使用和LVS类似的算法，并在某一次提交中修改为当前的算法，该算法大致思想如下：
+```
+Upstream: smooth weighted round-robin balancing.
+
+For edge case weights like { 5, 1, 1 } we now produce { a, a, b, a, c, a, a }
+sequence instead of { c, b, a, a, a, a, a } produced previously.
+
+Algorithm is as follows: on each peer selection we increase current_weight
+of each eligible peer by its weight, select peer with greatest current_weight
+and reduce its current_weight by total number of weight points distributed
+among peers.
+
+In case of { 5, 1, 1 } weights this gives the following sequence of
+current_weight's:
+
+     a  b  c
+     0  0  0  (initial state)
+
+     5  1  1  (a selected)
+    -2  1  1
+
+     3  2  2  (a selected)
+    -4  2  2
+
+     1  3  3  (b selected)
+     1 -4  3
+
+     6 -3  4  (a selected)
+    -1 -3  4
+
+     4 -2  5  (c selected)
+     4 -2 -2
+
+     9 -1 -1  (a selected)
+     2 -1 -1
+
+     7  0  0  (a selected)
+     0  0  0
+```
+该算法除了有权重weight，还引入了另一个变量current_weight，在每一次遍历中会把current_weight加上weight的值，并选择current_weight最大的元素，对于被选择的元素，再把current_weight减去所有权重之和。
+
+假设有 N 台服务器 S = {S0, S1, S2, …, Sn}，默认权重为 W = {W0, W1, W2, …, Wn}，当前权重为 CW = {CW0, CW1, CW2, …, CWn}。在该算法中有两个权重，默认权重表示服务器的原始权重，当前权重表示每次访问后重新计算的权重，当前权重的出初始值为默认权重值，当前权重值最大的服务器为 maxWeightServer，所有默认权重之和为 weightSum，服务器列表为 serverList，算法可以描述为：
+1. 找出当前权重值最大的服务器 maxWeightServer；
+2. 计算 {W0, W1, W2, …, Wn} 之和 weightSum；
+3. 将 maxWeightServer.CW = maxWeightServer.CW - weightSum；
+4. 重新计算 {S0, S1, S2, …, Sn} 的当前权重 CW，计算公式为 Sn.CW = Sn.CW + Sn.Wn
+5. 返回 maxWeightServer
 
 
 ## 服务发现是怎么实现的

@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     $(document)
       .on('affixed.bs.affix', function () {
-        updateTOCHeight(document.body.clientHeight - 100);
+        updateTOCHeight(document.body.clientHeight - 200);  // 为了防止toc sidebar底部有一些目录看不见
       });
   }
 
@@ -62,14 +62,14 @@ $(document).ready(function () {
       updateTOCHeightTimer && clearTimeout(updateTOCHeightTimer);
 
       updateTOCHeightTimer = setTimeout(function () {
-        var tocWrapperHeight = document.body.clientHeight - 100;
+        var tocWrapperHeight = document.body.clientHeight - 200;
 
         updateTOCHeight(tocWrapperHeight);
       }, 0);
     });
 
     // Initialize TOC Height.
-    updateTOCHeight(document.body.clientHeight - 100);
+    updateTOCHeight(document.body.clientHeight - 200);
 
     // Initialize TOC Width.
     var scrollbarWidth = NexT.utils.getScrollbarWidth();

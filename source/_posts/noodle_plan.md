@@ -51,7 +51,29 @@ categories:
 * 快排要用几个指针来做?
     * 双指针?
 * 二叉树
-    * 找最近公共父节点
+    * 找最近公共父节点: 
+        * 参考: https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-jian-j/
+        * 两个节点 p,q 分为两种情况：
+        1) p 和 q 在相同子树中
+        2) p 和 q 在不同子树中
+        从根节点遍历，递归向左右子树查询节点信息
+        递归终止条件：如果当前节点为空或等于 p 或 q，则返回当前节点
+        递归遍历左右子树，因为是递归，使用函数后可认为左右子树已经算出结果，这句话要记住，道出了递归的精髓,
+        如果左右子树查到节点都不为空，则表明 p 和 q 分别在左右子树中，因此，当前节点即为最近公共祖先；
+        如果左右子树其中一个不为空，则返回非空节点。
+        ``` cpp
+        class Solution {
+        public:
+            TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+                if (!root || root == p || root == q) return root;
+                TreeNode *left = lowestCommonAncestor(root->left, p, q);
+                TreeNode *right = lowestCommonAncestor(root->right, p, q);
+                if (left && right) return root;
+                return left ? left : right;
+            }
+        };
+        ```
+
     * 判断是否为一个二叉搜索树
 * redis集群
     * 怎么扩缩容

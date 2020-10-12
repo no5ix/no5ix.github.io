@@ -150,7 +150,7 @@ toc:
   wrap: true
 
   # If true, all sub header will be collapsed.
-  collapse_all: false
+  collapse_all: true
 
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/

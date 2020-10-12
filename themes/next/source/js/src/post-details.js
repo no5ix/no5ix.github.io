@@ -6,6 +6,104 @@ $(document).ready(function () {
   NexT.utils.needAffix() && initAffix();
   initTOCDimension();
 
+
+  
+
+  var $itemHasChild = $(".post-toc-content .nav-item:has(> .nav-child)");
+  var $titleHasChild = $itemHasChild.children(".nav-link");
+  // $itemHasChild.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
+
+  var $tocTitle = $(".sidebar-nav-toc");
+  $tocTitle.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
+
+  // var clickIcon = function(){
+  //     $(".post-toc-content .nav-item > i").click(function(){
+  //         $(this).siblings(".nav-child").slideToggle(100);
+  //         $(this).toggleClass("hide");
+  //         $(this).siblings("i").toggleClass("hide");
+  //     })
+  // }()
+
+  // var clickTitle = function(){
+  //     $titleHasChild.dblclick(function(){
+  //         $(this).siblings(".nav-child").hide(100);
+  //         // $(this).siblings("i").toggleClass("hide");
+  //     })
+  //     // After dblclick enent
+  //     $titleHasChild.click(function(){
+  //         var $curentTocChild = $(this).siblings(".nav-child");
+  //         if ($curentTocChild.is(":hidden")) {
+  //             $curentTocChild.show(100);
+  //             // $(this).siblings("i").toggleClass("hide");
+  //         }
+  //         // var $subToc = $titleHasChild.next(".nav-child");
+  //         // alert(1);
+  //         var $subToc = $(this).siblings(".nav-child").find(".nav-link").next(".nav-child");
+  //         // if ($(this).siblings(".nav-child").is(":hidden")) {
+  //         if ($subToc.is(":hidden")) {
+  //             // $curentTocChild.show(100);
+  //             $subToc.show(100);
+  //             // $(this).siblings("i").toggleClass("hide");
+  //         }
+  //     })
+  // }()
+
+
+  var clickTocTitle = function(){
+    var $iconToExpand = $(".sidebar-nav-toc > .fa-caret-right");
+    var $iconToFold = $(".sidebar-nav-toc > .fa-caret-down");
+    $iconToExpand.addClass("hide");
+
+    var $subToc = $titleHasChild.next(".nav-child");
+    
+    function showSubToc() {
+      $(this).toggleClass("hide");
+
+      $subToc.show(150, scrollToCenter);
+      $iconToExpand.removeClass("hide");
+      $iconToFold.addClass("hide");
+    }
+
+    if ($titleHasChild.length) {
+        $titleHasChild.click(showSubToc);
+
+        // $tocTitle.addClass("clickable");
+        $(".sidebar-nav-toc > i").click(function(){
+            if ($subToc.is(":hidden")) {
+                showSubToc();
+                // $(this).toggleClass("hide");
+
+                // $subToc.show(150, scrollToCenter);
+                // $iconToExpand.removeClass("hide");
+                // $iconToFold.addClass("hide");
+            } else {
+                $subToc.hide(100, scrollToCenter);
+                $iconToExpand.addClass("hide");
+                $iconToFold.removeClass("hide");
+            }
+        })
+        // // TOC on mobile
+        // if ($(".left-col").is(":hidden")) {
+        //     $("#container .toc-article .toc").css("padding-left", "1.4em");
+        //     $("#container .toc-article .toc-title").css("display", "initial");
+        // }
+    }
+  }()
+
+
+
+  function scrollToCenter() {
+    var tocSelector = '.post-toc';
+    var $tocElement = $(tocSelector);
+    // var activeCurrentSelector = '.active-current';
+    var $currentActiveElement = $(tocSelector + ' .active').last();
+    // removeCurrentActiveClass();
+    // $currentActiveElement.addClass('active-current');
+
+    // Scrolling to center active TOC element if TOC content is taller then viewport.
+    $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
+  }
+
   function initScrollSpy () {
     var tocSelector = '.post-toc';
     var $tocElement = $(tocSelector);
@@ -17,7 +115,16 @@ $(document).ready(function () {
 
         removeCurrentActiveClass();
         $currentActiveElement.addClass('active-current');
+        // console.log("$currentActiveElement.offset().top")
+        // console.log($currentActiveElement.offset().top)
+        // console.log("$tocElement.offset().top")
+        // console.log($tocElement.offset().top)
+        // console.log("$tocElement.scrollTop()")
+        // console.log($tocElement.scrollTop())
+        // console.log("$tocElement.height() / 2")
+        // console.log($tocElement.height() / 2)
 
+        // console.log($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
         // Scrolling to center active TOC element if TOC content is taller then viewport.
         $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
       })

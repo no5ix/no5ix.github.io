@@ -30,6 +30,28 @@ code {
 	show() if not hexo-config('toc.collapse_all');
 }
 
+/*toc目录标题的箭头小图标*/
+.sidebar-nav-toc i,
+.post-toc-content ol.nav li.nav-item i {
+    display: inline-block;
+    margin-left: -0.9em;
+    width: 1.6em;
+    color: #b3b3b3;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sidebar-nav-toc i:hover,
+.post-toc-content ol.nav li.nav-item i:hover {
+    color: #fff;
+}
+/*关联图标的 Class*/
+.sidebar-nav-toc i.hide,
+.post-toc-content ol.nav li.nav-item i.hide {
+    display: none;
+}
+
+
 .wobbleTransparentBK {
 	background-color: rgba(0,0,0,0) !important;
 }

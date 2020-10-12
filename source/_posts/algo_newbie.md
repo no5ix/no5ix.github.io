@@ -132,6 +132,10 @@ def merge(a, b):
 
 
 def merge_sort(lists):
+    """
+    归并排序
+    url: https://www.cnblogs.com/shierlou-123/p/11310040.html
+    """
     if len(lists) <= 1:
         return lists
     middle = len(lists)/2

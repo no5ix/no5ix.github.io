@@ -62,10 +62,25 @@
 @import "post-widgets" if (hexo-config('facebook_sdk.enable') and hexo-config('facebook_sdk.like_button')) or (hexo-config('vkontakte_api.enable') and hexo-config('vkontakte_api.like')) or hexo-config('rating.enable');
 @import "post-rtl";
 
-// 文章内链接文本样式
+// 文章内锚点样式
 .post-body table a,
 .post-body ul a,
 .post-body p a{
+  /* color: gray; */
+  border-bottom: none;
+  border-bottom: 1px solid gray;
+  &:hover {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    word-wrap: break-word;
+  }
+}
+
+// 文章内链接样式
+.post-body table a[target=_blank],
+.post-body ul a[target=_blank],
+.post-body p a[target=_blank]{
   color: #0593d3;
   border-bottom: none;
   border-bottom: 1px solid #0593d3;

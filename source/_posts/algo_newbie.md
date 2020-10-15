@@ -144,8 +144,34 @@ def merge_sort(lists):
     return merge(left, right)
 
 
-def quick_sort(arr):
-    """快速排序"""
+def partition(arr, start_index, end_index):
+    pivot_index = end_index
+    last_small_elem_index = start_index -1
+
+    for travase_index in range(start_index, end_index):
+        if arr[travase_index] <= arr[pivot_index]:
+            last_small_elem_index += 1
+            arr[travase_index], arr[last_small_elem_index] = arr[last_small_elem_index], arr[travase_index]
+    partition_index = last_small_elem_index + 1
+    arr[partition_index], arr[end_index] = arr[end_index], arr[partition_index]
+    return partition_index
+
+def quick_sort_normal(arr, start_index, end_index):
+    """
+    快排标准版, 原址的
+    url: https://hulinhong.com/2014/08/22/quick_sort_and_binary_search/
+    """
+    
+    if not arr:
+        return
+    if start_index < end_index:
+        partition_index = partition(arr, start_index, end_index)
+        quick_sort_normal(arr, start_index, partition_index-1)
+        quick_sort_normal(arr, partition_index+1, end_index)
+
+
+def quick_sort_simple(arr):
+    """快速排序好理解的版本, 但需要额外的数组空间"""
     if len(arr) < 2:
         return arr
     # 选取基准，随便选哪个都可以，选中间的便于理解
@@ -180,7 +206,7 @@ def quick_sort(arr):
     # # print "---"
 
     # return ret
-    return quick_sort(left) + [mid] + quick_sort(right)
+    return quick_sort_simple(left) + [mid] + quick_sort_simple(right)
 
 
 def insertion_sort(arr):
@@ -310,8 +336,12 @@ if __name__ == "__main__":
     # print a[2:]
     print "=======merge_sort---==="
     print (merge_sort(num_list_for_sort))
-    print "=======quick_sort---==="
-    print (quick_sort(copy.deepcopy(num_list_for_sort)))
+    print "=======quick_sort_normal---==="
+    temp_arr = copy.deepcopy(num_list_for_sort)
+    quick_sort_normal(temp_arr, 0, len(num_list_for_sort)-1)
+    print temp_arr
+    print "=======quick_sort_simple---==="
+    print (quick_sort_simple(copy.deepcopy(num_list_for_sort)))
     print "=======insertion_sort---==="
     print (insertion_sort(num_list_for_sort))
 

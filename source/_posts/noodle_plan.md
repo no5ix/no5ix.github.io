@@ -11,8 +11,13 @@ categories:
 
 # misc
 
+* etcd怎么选主的? pending_fini
+* 排队部分, 怎么判断afk? 谁来配置流速和限额? pending_fini
+* 异地多活 pending_fini
 * 阿里巴巴面试官手册 pending_fini
-* hashmap 是怎样实现的？
+* 消息队列原理, pending_fini
+
+* java的hashmap 是怎样实现的？
 * 秒杀系统的实现? 
 * cgi是啥? pending_fin
 * 分布式场景题

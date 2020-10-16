@@ -8,14 +8,26 @@ categories:
 ---
 
 
+# pending_fini
+
+* mysql语句 orderby/limit 
+* 严格递增的分布式id生成器怎么做 
+* 异地多活 
+* io线程和业务线程要分开吗?
+
 
 # misc
 
-* etcd怎么选主的? pending_fini
-* 排队部分, 怎么判断afk? 谁来配置流速和限额? pending_fini
-* 异地多活 pending_fini
-* 阿里巴巴面试官手册 pending_fini
-* 消息队列原理, pending_fini
+* etcd怎么选主的? [etcd的leader选举过程](#etcd扼要总结其他细节可以不用看了)
+* 阿里巴巴面试官手册
+    * 消息队列原理
+    * 秒杀
+    * 分布式事务
+    * 日志记录
+    * LRU缓存
+    * 分布式锁
+    * HR面试
+* 常见算法, 归并/堆排序啥的
 
 * java的hashmap 是怎样实现的？
 * 秒杀系统的实现? 
@@ -660,6 +672,19 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 * cqq vec set map list
     * {% post_link stl_vector_string %}
     * {% post_link stll_set_map_tutorial %}
+* map的`[]`和insert的区别?
+    * insert 含义是：如果key存在，则插入失败，如果key不存在，就创建这个key－value。实例: `map.insert((key, value))`
+    * 利用下标操作的含义是：如果这个key存在，就更新value；如果key不存在，就创建这个key－value对 实例：`map[key] = value`
+* vector的resize区别?
+    * resize既分配了空间，也创建了对象，可以通过下标访问。当resize的大小
+    * reserve只修改capacity大小，不修改size大小，resize既修改capacity大小，也修改size大小。
+    * resize: 重设容器大小以容纳 count 个元素。
+    若当前大小大于 count ，则减小容器为其首 count 个元素。
+    若当前大小小于 count ，
+        1) 则后附额外的默认插入的元素
+        2) 则后附额外的 value 的副本
+    * resize既分配了空间，也创建了对象，可以通过下标访问。当resize的大小
+    reserve只修改capacity大小，不修改size大小，resize既修改capacity大小，也修改size大小。
 * 字节对齐
     * {% post_link sizeof_struct %}
 * 定位new 
@@ -689,6 +714,23 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
     ```
     结果发现p3和p2还有buffer都是使用同样的内存地址，符合指定地址的内存块，而且p3在指定位置覆盖了p2的前两处的值。
 * c++一个空类会生成什么 (答: 默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) 
+* 虚函数（virtual）可以是内联函数（inline）吗？
+    * 虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。
+    * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
+    * inline virtual 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 Base::who()），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。
+    虚函数内联使用:
+    ``` cpp
+    // 此处的虚函数 who()，是通过类（Base）的具体对象（b）来调用的，编译期间就能确定了，所以它可以是内联的，但最终是否内联取决于编译器。 
+    Base b;
+    b.who();
+
+    // 此处的虚函数是通过指针调用的，呈现多态性，需要在运行时期间才能确定，所以不能为内联。  
+    Base *ptr = new Derived();
+    ptr->who();
+    ```
+* 虚函数指针、虚函数表
+    * 虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定。
+    * 虚函数表：在程序内存的`只读数据段`（.rodata section，见：[CPP目标文件内存布局](#CPP目标文件内存布局)），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建。
 * 内存泄漏的工具 vargrid..? 还有啥工具
 * 了解ASAN查找内存越界问题 
 * cpp找找冰川, 大梦龙图的面试题，网上常用题
@@ -721,6 +763,27 @@ libc.a --> 链接
 4. 链接(Linking): 通过调用链接器ld来链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件
    * 静态链接: 指在编译阶段直接把静态库加入到可执行文件中去，这样可执行文件会比较大
    * 动态链接: 指链接阶段仅仅只加入一些描述信息，而程序执行时再从系统中把相应动态库加载到内存中去。
+
+
+
+## 目标文件
+
+编译器编译源代码后生成的文件叫做目标文件。目标文件从结构上讲，它是已经编译后的可执行文件格式，只是还没有经过链接的过程，其中可能有些符号或有些地址还没有被调整。
+
+> 可执行文件（Windows 的 `.exe` 和 Linux 的 `ELF`）、动态链接库（Windows 的 `.dll` 和 Linux 的 `.so`）、静态链接库（Windows 的 `.lib` 和 Linux 的 `.a`）都是按照可执行文件格式存储（Windows 按照 PE-COFF，Linux 按照 ELF）
+
+目标文件格式:  
+*   Windows 的 PE（Portable Executable），或称为 PE-COFF，`.obj` 格式
+*   Linux 的 ELF（Executable Linkable Format），`.o` 格式
+*   Intel/Microsoft 的 OMF（Object Module Format）
+*   Unix 的 `a.out` 格式
+*   MS-DOS 的 `.COM` 格式
+
+> PE 和 ELF 都是 COFF（Common File Format）的变种
+
+### CPP目标文件内存布局
+
+<table><thead><tr><th>段</th><th>功能</th></tr></thead><tbody><tr><td>File Header</td><td>文件头，描述整个文件的文件属性（包括文件是否可执行、是静态链接或动态连接及入口地址、目标硬件、目标操作系统等）</td></tr><tr><td>.text section</td><td>代码段，执行语句编译成的机器代码</td></tr><tr><td>.data section</td><td>数据段，已初始化的全局变量和局部静态变量</td></tr><tr><td>.bss section</td><td>BSS 段（Block Started by Symbol），未初始化的全局变量和局部静态变量（因为默认值为 0，所以只是在此预留位置，不占空间）</td></tr><tr><td>.rodata section</td><td>只读数据段，存放只读数据，一般是程序里面的只读变量（如 const 修饰的变量）和字符串常量</td></tr><tr><td>.comment section</td><td>注释信息段，存放编译器版本信息</td></tr><tr><td>.note.GNU-stack section</td><td>堆栈提示段</td></tr></tbody></table>
 
 
 # Go pending_fin
@@ -3098,7 +3161,18 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 
 * etcd 是一个 Go 语言编写的分布式、高可用的**强一致性**键值存储系统，用于提供可靠的分布式键值(key-value)存储、配置共享和服务发现等功能。 etcd可以用于存储关键数据和实现分布式调度，它在现代化的集群运行中能够起到关键性的作用。
 
-* Raft是一种基于leader选举的算法，用于保证分布式数据的一致性。所有节点在三个角色（leader, follower和candidate）之中切换。选举阶段candidate向其他节点发送vote请求，但是只有包括所有最新数据的节点可以变为leader。在数据同步阶段，leader通过一些标记（commitIndex，term，prevTerm，prevIndex等等）与follower不断协商最终达成一致。当有新的数据产生时，采用二阶段（twp-phase）提交，先更新log，等大多数节点都做完之后再正式提交数据。
+* Raft是一种基于leader选举的算法，用于保证分布式数据的一致性。所有节点在三个角色（**leader**, **follower**和**candidate**）之中切换。选举阶段candidate向其他节点发送vote请求，但是只有包括所有最新数据的节点可以变为leader。在数据同步阶段，leader通过一些标记（commitIndex，term，prevTerm，prevIndex等等）与follower不断协商最终达成一致。
+
+
+## etcd扼要总结其他细节可以不用看了
+
+**注意, etcd只需要搞清楚下面这两个问题, 下面的长篇大论都不需要细看**: 
+* 数据提交的过程
+    * 当有新的数据产生时，采用二阶段（twp-phase）提交，先更新log，等大多数节点都做完之后再正式提交数据
+* 选主的过程
+    * 假设三个节点的集群，三个节点上均运行 Timer（每个 Timer 持续时间是随机的），Raft算法使用随机 Timer 来初始化 Leader 选举流程，第一个节点率先完成了 Timer，那它就要变成candidate，随后它就会向其他两个节点发送成为 Leader 的请求，其他follower节点接收到请求后会以投票回应然后第一个节点是否被选举为 Leader。(如果有都变成了candidate的多个节点，follower们采取哪个candidate先来先投票的策略。)如果超过半数的follower都认为他是合适做领导的，那么恭喜，新的leader产生了.
+
+    成为 Leader 后，该节点会以固定时间间隔向其他节点发送通知，确保自己仍是Leader。有些情况下当 Follower 们收不到 Leader 的通知后，比如说 Leader 节点宕机或者失去了连接，其他节点会重复之前选举过程选举出新的 Leader。
 
 
 ## etcd架构及解析
@@ -3115,22 +3189,6 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 Snapshot 是为了防止数据过多而进行的状态快照；Entry 表示存储的具体日志内容。
 
 通常，一个用户的请求发送过来，会经由 HTTP Server 转发给 Store 进行具体的事务处理，如果涉及到节点的修改，则交给 Raft 模块进行状态的变更、日志的记录，然后再同步给别的 etcd 节点以确认数据提交，最后进行数据的提交，再次同步。
-
-
-## etcd数据存储
-
-etcd 的存储分为内存存储和持久化（硬盘）存储两部分，内存中的存储除了顺序化的记录下所有用户对节点数据变更的记录外，还会对用户数据进行索引、建堆等方便查询的操作。而持久化则使用预写式日志（WAL：Write Ahead Log）进行记录存储。
-
-在 WAL 的体系中，所有的数据在提交之前都会进行日志记录。在 etcd 的持久化存储目录中，有两个子目录。一个是 WAL，存储着所有事务的变化记录；另一个则是 snapshot，用于存储某一个时刻 etcd 所有目录的数据。通过 WAL 和 snapshot 相结合的方式，etcd 可以有效的进行数据存储和节点故障恢复等操作。
-
-既然有了 WAL 实时存储了所有的变更，为什么还需要 snapshot 呢？随着使用量的增加，WAL 存储的数据会暴增，为了防止磁盘很快就爆满，etcd 默认每 10000 条记录做一次 snapshot，经过 snapshot 以后的 WAL 文件就可以删除。而通过 API 可以查询的历史 etcd 操作默认为 1000 条。
-
-### 预写式日志（WAL）
-
-WAL（Write Ahead Log）最大的作用是记录了整个数据变化的全部历程。在 etcd 中，所有数据的修改在提交前，都要先写入到 WAL 中。使用 WAL 进行数据的存储使得 etcd 拥有两个重要功能。
-
-故障快速恢复： 当你的数据遭到破坏时，就可以通过执行所有 WAL 中记录的修改操作，快速从最原始的数据恢复到数据损坏前的状态。
-数据回滚（undo）/ 重做（redo）：因为所有的修改操作都被记录在 WAL 中，需要回滚或重做，只需要方向或正向执行日志中的操作即可。
 
 
 ## etcd的使用场景
@@ -3158,6 +3216,22 @@ WAL（Write Ahead Log）最大的作用是记录了整个数据变化的全部�
 - Term： 某个节点成为Leader到下一次竞选时间，称为一个Term。
 - Index： 数据项编号。Raft中通过Term和Index来定位数据。
 - Entry: 表示存储的具体日志内容。
+
+
+## etcd数据存储
+
+etcd 的存储分为内存存储和持久化（硬盘）存储两部分，内存中的存储除了顺序化的记录下所有用户对节点数据变更的记录外，还会对用户数据进行索引、建堆等方便查询的操作。而持久化则使用预写式日志（WAL：Write Ahead Log）进行记录存储。
+
+在 WAL 的体系中，所有的数据在提交之前都会进行日志记录。在 etcd 的持久化存储目录中，有两个子目录。一个是 WAL，存储着所有事务的变化记录；另一个则是 snapshot，用于存储某一个时刻 etcd 所有目录的数据。通过 WAL 和 snapshot 相结合的方式，etcd 可以有效的进行数据存储和节点故障恢复等操作。
+
+既然有了 WAL 实时存储了所有的变更，为什么还需要 snapshot 呢？随着使用量的增加，WAL 存储的数据会暴增，为了防止磁盘很快就爆满，etcd 默认每 10000 条记录做一次 snapshot，经过 snapshot 以后的 WAL 文件就可以删除。而通过 API 可以查询的历史 etcd 操作默认为 1000 条。
+
+### 预写式日志（WAL）
+
+WAL（Write Ahead Log）最大的作用是记录了整个数据变化的全部历程。在 etcd 中，所有数据的修改在提交前，都要先写入到 WAL 中。使用 WAL 进行数据的存储使得 etcd 拥有两个重要功能。
+
+故障快速恢复： 当你的数据遭到破坏时，就可以通过执行所有 WAL 中记录的修改操作，快速从最原始的数据恢复到数据损坏前的状态。
+数据回滚（undo）/ 重做（redo）：因为所有的修改操作都被记录在 WAL 中，需要回滚或重做，只需要方向或正向执行日志中的操作即可。
 
 
 ## 数据读写如何保证一致性的
@@ -3198,13 +3272,6 @@ WAL（Write Ahead Log）最大的作用是记录了整个数据变化的全部�
 2. 确保 Leader 的有效性：Leader 需要向集群发送一次广播，如果能收到大多数节点的回应，说明 Leader 节点的身份是有效的(主要是防止本leader是已经隔离的了小集群里的leader)，这一过程是为了确保 Leader 节点的数据都是最新的。
 
 由于 ReadIndex 机制需要等待集群共识与状态机应用日志，尤其是共识过程会带来一定的网络开销，为了提升整体只读请求的性能，etcd 也提供了一种优化的一致性算法，称为 LeaseRead：Leader 会取一个比 ElectionTimeout 小的租期，因为在租期内不会发生选举，可以确保 Leader 的身份不会改变，所以可以跳过 ReadIndex 中的共识步骤，降低了网络开销带来的延时。LeaseRead 的正确性和时间的实现挂钩，由于不同主机的 CPU 时钟有误差，所以也有可能读取到过期的数据。
-
-
-## leader 选举
-
-假设三个节点的集群，三个节点上均运行 Timer（每个 Timer 持续时间是随机的），Raft算法使用随机 Timer 来初始化 Leader 选举流程，第一个节点率先完成了 Timer，随后它就会向其他两个节点发送成为 Leader 的请求，其他节点接收到请求后会以投票回应然后第一个节点被选举为 Leader。
-
-成为 Leader 后，该节点会以固定时间间隔向其他节点发送通知，确保自己仍是Leader。有些情况下当 Follower 们收不到 Leader 的通知后，比如说 Leader 节点宕机或者失去了连接，其他节点会重复之前选举过程选举出新的 Leader。
 
 
 ## 判断数据是否写入
@@ -3672,6 +3739,15 @@ circuitBreaker.errorThresholdPercentage
 介绍一下美团在用的工业级 **Leaf-snowflake 方案**。
 
 ![](/img/noodle_plan/distributed/721ceeff.png)
+
+41-bit的时间是毫秒级时间, 可以表示（1L<<41）/(1000L*3600*24*365)=69年的时间，10-bit机器可以分别表示1024台机器。如果我们对IDC划分有需求，还可以将10-bit分5-bit给IDC，分5-bit给工作机器。这样就可以表示32个IDC，每个IDC下可以有32台机器，可以根据自身需求定义。12个自增序列号可以表示2^12个ID，理论上snowflake方案的QPS约为409.6w/s，**这种分配方式可以保证在任何一个IDC的任何一台机器在任意毫秒内生成的ID都是不同的。**
+
+这种方式的优缺点是:
+* 优点：
+    * 毫秒数在高位，自增序列在低位，整个ID都是趋势递增的。
+    * 不依赖数据库等第三方系统，以服务的方式部署，稳定性更高，生成ID的性能也是非常高的。
+    * 可以根据自身业务特性分配bit位，非常灵活。
+* 缺点：强依赖机器时钟，如果机器上时钟回拨，会导致发号重复或者服务会处于不可用状态。
 
 **Leaf-snowflake 方案**完全沿用 snowflake 方案的 bit 位设计，即是 “1+41+10+12” 的方式组装 ID 号。对于 workerID 的分配，当服务集群数量较小的情况下，完全可以手动配置。Leaf 服务规模较大，动手配置成本太高。所以使用 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID。Leaf-snowflake 是按照下面几个步骤启动的：
 
@@ -4153,6 +4229,145 @@ Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
 <!-- ◼ 网易-猎手之王游戏项目(2018.9-2020.9)  -->
 ## 猎德之手
 
+
+### 客户端角度
+
+```puml
+actor game_player_client as c
+database S3
+
+rectangle gs [
+    <b>游戏服(gamesvr)
+    ....
+    Python with asiocore
+    ----
+    Avatar
+    部分Center, Stub
+]
+
+rectangle bs [
+    <b>战斗服(battlesvr)
+    ....
+    Python with asiocore
+    ----
+    Entity: Battle, PuppetBindEntity
+    LocalEntity: AvatarPuppet, Flyer, ...
+]
+
+rectangle ms [
+    <b>微服务(mssvr)
+    ....
+    Python with gevent
+    ----
+    AvatarService, MatchService, BattleService, ...
+]
+
+rectangle api [
+    <b>API Gateway
+    ....
+    网关
+    ----
+    外网用户访问https://g90agw.nie.netease.com
+    内网用户访问http://g90agw-in.nie.netease.com
+]
+
+rectangle api_service [
+    <b> API Service
+    ....
+    Golang HTTP Server in Symphony / ECS
+    ----
+    like, login, s3, ...
+]
+
+
+
+c <--> gs: TCP
+c <--> bs: KCP/TCP
+c <--> api: https
+c --> S3: http
+
+gs <--> ms
+bs <--> ms
+gs <--> bs
+gs --> api: http/https
+bs --> api: http/https
+api <--> api_service
+api_service --> S3
+```
+
+### 周边服务角度
+
+```puml
+database Ocean as mongo
+database redis [
+    Jetis
+    ....
+    ElastiCache
+]
+database S3
+database etcd
+
+rectangle gs [
+    <b>游戏服(gamesvr)
+    ....
+    Python with asiocore
+    ----
+    Avatar
+    部分Center, Stub
+    ----
+    gamemanager
+    dbmanager
+    gate
+    game
+]
+
+rectangle bs [
+    <b>战斗服(battlesvr)
+    ....
+    Python with asiocore
+    ----
+    Entity: Battle, PuppetBindEntity
+    LocalEntity: AvatarPuppet, Flyer, ...
+    ----
+    gamemanager
+    dbmanager
+    gate
+    battle
+]
+
+rectangle ms [
+    <b>微服务(mssvr)
+    ....
+    Python with gevent
+    ----
+    AvatarService, MatchService, BattleService, ...
+    ----
+    service_gate
+    service
+]
+
+rectangle api [
+    <b>API Service
+    ....
+    Golang HTTP Server in Symphony / ECS
+    ----
+    rank, login, s3, ...
+]
+
+
+api --> S3
+api --> mongo
+api --> redis
+
+gs --> mongo
+bs --> mongo
+ms --> mongo
+gs --> etcd
+bs --> etcd
+ms --> etcd
+ms --> redis
+```
+
 * ⚫ 苹果App Store首页多日重磅推荐, 2.5D即时多人战术竞技游戏, 主要负责核心模块的架构设计开发与优化 
 
 ![](/img/noodle_plan/g90/mobile_server/mobile_server.png)
@@ -4287,6 +4502,55 @@ AuthReply大致如下:
 }
 ```
 
+
+关系图如下:  
+```puml
+sprite $comp jar:archimate/component
+sprite $service jar:archimate/service
+sprite $server jar:archimate/device
+sprite $client jar:archimate/actor
+
+archimate #Physical Client as C <<actor>>
+archimate #Physical Server as S <<device>>
+
+archimate #Technology Ocean as DB <<service>>
+archimate #Technology S3 <<service>>
+archimate #Technology 计费 as pay <<service>>
+archimate #Technology "API Gateway" as GW <<service>>
+
+archimate #Application "g90/login-server" as SLogin <<component>>
+archimate #Application "g68/rank" as SRank <<component>>
+archimate #Application "g90/screen-bullet" as SBullet <<component>>
+archimate #Application "g90/s3" as SS3 <<component>>
+archimate #Application "g90/payment-server" as SPay <<component>>
+
+C -down-> GW: HTTPS
+GW -down-> SLogin: /auth
+GW -down-> SBullet: /send
+GW -down-> SRank: /get_rank
+
+SRank <-down- S: Update Rank
+SS3 <-down- S: Upload/List/Delete
+SPay -down-> S: call online avt
+SPay -down-> DB: insert doc into messages
+S <-right-> DB
+
+C --> S3: HTTP
+SS3 -up-> S3: Upload/List/Delete
+
+pay -down-> SPay: /ship
+
+legend left
+图例：
+<$comp>: API service
+<$service>: 外部服务
+<$server>: 游戏服务器
+<$client>: 客户端
+==
+注：服务器与API service之间的通信，同样走API Gateway
+endlegend
+```
+
 * ⚫ 内部开源的通用登录微服务核心开发者, 被较多项目接入使用, 提供登陆控制、排队、验证等功能 
     * session各种流程搞清楚， aid是干嘛的?是否可以用自己的sauth_reply加别人的auth_req来登陆别人的账号?
         * 根据上面的流程图, 因为客户端没有加密 sauth_reply的密钥, 所以办不到, 而且 AuthReply_Encrypted 是登录微服务生成的, 客户端无法生成.所以杜绝了登陆别人账号的风险.
@@ -4296,6 +4560,16 @@ AuthReply大致如下:
         * 黑白名单, GM名单可提前进入测试游戏
         * 特定渠道的人数控制
         * 激活码
+    * 游戏服和客户端怎么拿到登录微服务地址的?
+        * 不直接拿, 而是通过 api-gateway 这个网关, 这个api-gateway是sa负责维护的, 基于k8s的servic和ingress开发
+            * k8s的service介绍: 因为很多运行的容器存在动态、弹性的变化（容器的重启IP地址会变化），因此便产生了service，其资源为此类POD对象提供一个固定、统一的访问接口及负载均衡能力，并借助DNS系统的服务发现功能，解决客户端发现容器难得问题
+            * k8s的ingress介绍: 作为HTTP(S)负载均衡器
+        * [参考这里](#客户端角度)
+        * 外网用户访问 https://g90agw.nie.netease.com
+        * 内网用户访问 http://g90agw-in.nie.netease.com
+    * 排队部分, 怎么判断afk? 谁来配置流速和限额? 游戏服和排队微服务直连么?游戏服是怎么拿到排队微服务的IP的?
+        * 有一个叫active的redis哈希表, 会存上次玩家的 query_pos_info 的时间戳ts, 每隔一段时间就去这个哈希表hscan拿100个出来看看 `now_ts -ts`是不是已经大于afk阈值了
+        * 游戏服和排队微服务不直连, 是游戏服通过不断的检测redis中的当前在线人数来配置流速和限额的(比如配置的最大在线为8k人, 当前在线2k人, 那发送给排队服的限额就是6k), 游戏服通过api-gateway这个网关的后缀加上`/queue`来访问排队微服务
     * 排队怎么实现的?
         * 通过redis的zset来存储入队时间和用户id, 然后给玩家一个ticket, 然后按照配置好的出队速度以及名额来从队列中抽取玩家发放游戏服许可证
         * 玩家需要定时刷新ticket, 不然会被放入afk队列
@@ -4480,6 +4754,31 @@ AuthReply大致如下:
         * 在非阻塞网络编程中，如何设计并使用缓冲区？
         一方面希望减少系统调用，一次读取的数据越多越划算；另一方面希望减少内存的占用。这两方面似乎是矛盾的，假设C10K ，每个连接一建立就分配50KB 的内存的话，那么将占用1GB 内存，但是大多数的连接并不需要这么多内存。muduo 巧妙的使用了readv() 结合栈上空间巧妙的解决了这个问题。  
         在栈上准备一个65535 字节的extrabuf , 然后利用readv() 来读取数据，iovec有两块，第一块是指向muduo Buffer （为每个连接准备1024字节的buf）中的writeable 字节，另一块是指向extrabuf。这样如果读入的数据不多，直接读到内置的buf；如果长度超过内置buf 的大小，就会读到栈上的extrabuf 中，然后程序再把extrabuf 里的数据append() 到 buf 中。
+        * muduo每个连接都有一个buffer么?初始大小多大?缩扩容的时机是? 
+            * 是的, 每个连接都有一个send的buffer和read的buffer, 都是初始大小1024字节, 一般不缩容, 只扩容
+            ``` cpp
+            void makeSpace(size_t len)
+            {
+                if (writableBytes() + prependableBytes() < len + kCheapPrepend)
+                {
+                // FIXME: move readable data
+                buffer_.resize(writerIndex_+len);
+                }
+                else
+                {
+                // move readable data to the front, make space inside buffer
+                assert(kCheapPrepend < readerIndex_);
+                size_t readable = readableBytes();
+                std::copy(begin()+readerIndex_,
+                            begin()+writerIndex_,
+                            begin()+kCheapPrepend);
+                readerIndex_ = kCheapPrepend;
+                writerIndex_ = readerIndex_ + readable;
+                assert(readable == readableBytes());
+                }
+            }
+            ```
+
 
 
 ## 有啥可以问他的

@@ -63,10 +63,10 @@
 @import "post-rtl";
 
 // 文章内锚点样式
-.post-body table a,
-.post-body ul a,
-.post-body p a{
-  /* color: gray; */
+.post-body table a[href^="#"],
+.post-body ul a[href^="#"],
+.post-body p a[href^="#"]{
+  color: #555555;
   border-bottom: none;
   border-bottom: 1px solid gray;
   &:hover {
@@ -78,9 +78,9 @@
 }
 
 // 文章内链接样式
-.post-body table a[target=_blank],
-.post-body ul a[target=_blank],
-.post-body p a[target=_blank]{
+.post-body table a,
+.post-body ul a,
+.post-body p a{
   color: #0593d3;
   border-bottom: none;
   border-bottom: 1px solid #0593d3;

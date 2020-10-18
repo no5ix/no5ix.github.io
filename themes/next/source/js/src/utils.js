@@ -40,8 +40,8 @@ NexT.utils = NexT.$u = {
         //'zoom',
         'close'
       ],
-      animationEffect : "circular",
-      transitionEffect : "circular",
+      animationEffect : "zoom-in-out",
+      transitionEffect : "slide",
       mobile : {
         idleTime : false,
         margin   : 0,

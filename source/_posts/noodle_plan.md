@@ -50,7 +50,7 @@ categories:
 * 大数相加
 * 全排列
 * mysql语句 orderby/limit 
-* 严格递增的分布式id生成器怎么做 [美团这篇文章的"Leaf-segment数据库方案"](#https://tech.meituan.com/2017/04/21/mt-leaf.html)
+* 严格递增的分布式id生成器怎么做 [美团这篇文章的"Leaf-segment数据库方案"](https://tech.meituan.com/2017/04/21/mt-leaf.html)
 * 异地多活 
 * io线程和业务线程要分开吗? 是的
 * 合并字符串中的连续空格为一个如`" he    ll o  "` 得到 `" he ll o "`

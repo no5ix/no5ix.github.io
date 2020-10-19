@@ -84,6 +84,7 @@ deploy:
   branch: master
 # - type: git
   # repo: git@git.coding.net:no5ix/blog.git,master
+  # repo: git@e.coding.net:no5ix/blog.git,master
 # - type: git
   # repo: git@hulinhong.com:blog.git,master
 

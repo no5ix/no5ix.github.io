@@ -29,6 +29,28 @@ class treenode(object):
 
 def preorder_traversal(root):
     """
+    url: https://coding.imooc.com/class/chapter/82.html#Anchor
+    玩转算法面试 从真题到思维全面提升算法思维
+    章节6-3
+    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归前序遍历, 
+    所以可以很轻易的调节一下代码顺序就能模拟中序/后序遍历.
+    """
+    if not root:
+        return
+    stack = []
+    stack.append((root,'should_proc'))
+    while stack:
+        node, should_print = stack.pop()
+        if should_print == 'should_print':
+            print (node.val)
+        else:
+            if node.right:
+                stack.append((node.right, 'should_proc'))
+            if node.left:
+                stack.append((node.left, 'should_proc'))
+            stack.append((node, 'should_print'))
+
+    """
     url: https://github.com/MisterBooo/LeetCodeAnimation/blob/master/notes/LeetCode%E7%AC%AC144%E5%8F%B7%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86.md
     用**栈(Stack)**的思路来处理问题。
     前序遍历的顺序为根-左-右，具体算法为：
@@ -38,21 +60,43 @@ def preorder_traversal(root):
     3. 看其右子节点是否存在，若存在则 push 到栈中
     4. 看其左子节点，若存在，则 push 到栈中。
     """
-    _stack = []
-    if root is None:
-        return
-    _stack.append(root)
+    # _stack = []
+    # if root is None:
+    #     return
+    # _stack.append(root)
 
-    while _stack:
-        root = _stack.pop()
-        print(root.val)
-        if root.right is not None:
-            _stack.append(root.right)
-        if root.left is not None:
-            _stack.append(root.left)
+    # while _stack:
+    #     root = _stack.pop()
+    #     print(root.val)
+    #     if root.right is not None:
+    #         _stack.append(root.right)
+    #     if root.left is not None:
+    #         _stack.append(root.left)
 
 
 def inorder_traversal(root):
+    """
+    url: https://coding.imooc.com/class/chapter/82.html#Anchor
+    玩转算法面试 从真题到思维全面提升算法思维
+    章节6-3
+    利用循环实现树的统一形式的中序遍历, 因为更好更形象地模拟了系统栈的递归中序遍历, 
+    所以可以很轻易的调节一下代码顺序就能模拟前序/后序遍历.
+    """
+    if not root:
+        return
+    stack = []
+    stack.append((root,'should_proc'))
+    while stack:
+        node, should_print = stack.pop()
+        if should_print == 'should_print':
+            print (node.val)
+        else:
+            if node.right:
+                stack.append((node.right, 'should_proc'))
+            stack.append((node, 'should_print'))
+            if node.left:
+                stack.append((node.left, 'should_proc'))
+
     """
     url: https://github.com/MisterBooo/LeetCodeAnimation/blob/master/notes/LeetCode%E7%AC%AC94%E5%8F%B7%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.md
     用**栈(Stack)**的思路来处理问题。
@@ -63,34 +107,56 @@ def inorder_traversal(root):
     2. 然后再将其所有左子结点压入栈，取出栈顶节点，保存节点值
     3. 再将当前指针移到其右子节点上，若存在右子节点，则在下次循环时又可将其所有左子结点压入栈中
     """
-    _stack = []
-    if root is None:
-        return
-    # _stack.append(root)
-    while (root is not None or _stack):
-        if root is not None:
-            _stack.append(root)
-            root = root.left
-        else:
-            root = _stack.pop()
-            print root.val
-            root = root.right
+    # _stack = []
+    # if root is None:
+    #     return
+    # # _stack.append(root)
+    # while (root is not None or _stack):
+    #     if root is not None:
+    #         _stack.append(root)
+    #         root = root.left
+    #     else:
+    #         root = _stack.pop()
+    #         print root.val
+    #         root = root.right
 
 
 def postorder_traversal(root):
-    _stack = []
-    if root is None:
+    """
+    url: https://coding.imooc.com/class/chapter/82.html#Anchor
+    玩转算法面试 从真题到思维全面提升算法思维
+    章节6-3
+    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归后序遍历, 
+    所以可以很轻易的调节一下代码顺序就能模拟中序/前序遍历.
+    """
+    if not root:
         return
-    _result = []
-    _stack.append(root)
-    while _stack:
-        root = _stack.pop()
-        _result.insert(0, root.val)  # 逆序添加结点值
-        if root.left:
-            _stack.append(root.left) # 和传统先序遍历不一样，先将左结点入栈
-        if root.right:
-            _stack.append(root.right)
-    print _result
+    stack = []
+    stack.append((root,'should_proc'))
+    while stack:
+        node, should_print = stack.pop()
+        if should_print == 'should_print':
+            print (node.val)
+        else:
+            stack.append((node, 'should_print'))
+            if node.right:
+                stack.append((node.right, 'should_proc'))
+            if node.left:
+                stack.append((node.left, 'should_proc'))
+
+    # _stack = []
+    # if root is None:
+    #     return
+    # _result = []
+    # _stack.append(root)
+    # while _stack:
+    #     root = _stack.pop()
+    #     _result.insert(0, root.val)  # 逆序添加结点值
+    #     if root.left:
+    #         _stack.append(root.left) # 和传统先序遍历不一样，先将左结点入栈
+    #     if root.right:
+    #         _stack.append(root.right)
+    # print _result
 
 
 def levelorder_traversal(root):
@@ -157,11 +223,7 @@ def partition(arr, start_index, end_index):
     return partition_index
 
 def quick_sort_normal(arr, start_index, end_index):
-    """
-    快排标准版, 原址的
-    url: https://hulinhong.com/2014/08/22/quick_sort_and_binary_search/
-    """
-    
+    """快排标准版, 原址的"""
     if not arr:
         return
     if start_index < end_index:

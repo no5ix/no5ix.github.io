@@ -10,6 +10,9 @@ categories:
 
 # pending_fini
 
+* https://jishuin.proginn.com/p/763bfbd27fa0
+* 算法系统学习
+
 
 # misc
 
@@ -680,16 +683,16 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 * map的`[]`和insert的区别?
     * insert 含义是：如果key存在，则插入失败，如果key不存在，就创建这个key－value。实例: `map.insert((key, value))`
     * 利用下标操作的含义是：如果这个key存在，就更新value；如果key不存在，就创建这个key－value对 实例：`map[key] = value`
-* vector的resize区别?
-    * resize既分配了空间，也创建了对象，可以通过下标访问。当resize的大小
-    * reserve只修改capacity大小，不修改size大小，resize既修改capacity大小，也修改size大小。
+* vector的resize和reserve的区别?
+    * 总结: 
+        * resize既分配了空间，也创建了对象，可以通过下标访问。当new_size大于原size, 则resize既修改capacity大小，也修改size大小。否则只修改size大小.
+        * reserve只分配了空间, 也就是说它只修改capacity大小，不修改size大小, 若 new_cap 小于等于当前的 capacity(), 它啥也不干.
     * resize: 重设容器大小以容纳 count 个元素。
     若当前大小大于 count ，则减小容器为其首 count 个元素。
     若当前大小小于 count ，
         1) 则后附额外的默认插入的元素
         2) 则后附额外的 value 的副本
-    * resize既分配了空间，也创建了对象，可以通过下标访问。当resize的大小
-    reserve只修改capacity大小，不修改size大小，resize既修改capacity大小，也修改size大小。
+    * reserve: 增加 vector 的容量到大于或等于 new_cap 的值。若 new_cap 大于当前的 capacity() ，则分配新存储，**否则该方法不做任何事**。reserve() 不更改 vector 的 size 。若 new_cap 大于 capacity() ，则所有迭代器，包含尾后迭代器和所有到元素的引用都被非法化。否则，没有迭代器或引用被非法化。
 * 字节对齐
     * {% post_link sizeof_struct %}
 * 定位new 

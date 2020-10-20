@@ -32,22 +32,22 @@ def preorder_traversal(root):
     url: https://coding.imooc.com/class/chapter/82.html#Anchor
     玩转算法面试 从真题到思维全面提升算法思维
     章节6-3
-    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归前序遍历, 
+    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归前序遍历(每个结点先入栈, 然后才访问打印),
     所以可以很轻易的调节一下代码顺序就能模拟中序/后序遍历.
     """
     if not root:
         return
     stack = []
-    stack.append((root,'should_proc'))
+    stack.append((root,'should_push'))
     while stack:
         node, should_print = stack.pop()
         if should_print == 'should_print':
             print (node.val)
         else:
             if node.right:
-                stack.append((node.right, 'should_proc'))
+                stack.append((node.right, 'should_push'))
             if node.left:
-                stack.append((node.left, 'should_proc'))
+                stack.append((node.left, 'should_push'))
             stack.append((node, 'should_print'))
 
     """
@@ -79,23 +79,23 @@ def inorder_traversal(root):
     url: https://coding.imooc.com/class/chapter/82.html#Anchor
     玩转算法面试 从真题到思维全面提升算法思维
     章节6-3
-    利用循环实现树的统一形式的中序遍历, 因为更好更形象地模拟了系统栈的递归中序遍历, 
+    利用循环实现树的统一形式的中序遍历, 因为更好更形象地模拟了系统栈的递归中序遍历(每个结点先入栈, 然后才访问打印), 
     所以可以很轻易的调节一下代码顺序就能模拟前序/后序遍历.
     """
     if not root:
         return
     stack = []
-    stack.append((root,'should_proc'))
+    stack.append((root,'should_push'))
     while stack:
         node, should_print = stack.pop()
         if should_print == 'should_print':
             print (node.val)
         else:
             if node.right:
-                stack.append((node.right, 'should_proc'))
+                stack.append((node.right, 'should_push'))
             stack.append((node, 'should_print'))
             if node.left:
-                stack.append((node.left, 'should_proc'))
+                stack.append((node.left, 'should_push'))
 
     """
     url: https://github.com/MisterBooo/LeetCodeAnimation/blob/master/notes/LeetCode%E7%AC%AC94%E5%8F%B7%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.md
@@ -126,13 +126,13 @@ def postorder_traversal(root):
     url: https://coding.imooc.com/class/chapter/82.html#Anchor
     玩转算法面试 从真题到思维全面提升算法思维
     章节6-3
-    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归后序遍历, 
+    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归后序遍历(每个结点先入栈, 然后才访问打印), 
     所以可以很轻易的调节一下代码顺序就能模拟中序/前序遍历.
     """
     if not root:
         return
     stack = []
-    stack.append((root,'should_proc'))
+    stack.append((root,'should_push'))
     while stack:
         node, should_print = stack.pop()
         if should_print == 'should_print':
@@ -140,9 +140,9 @@ def postorder_traversal(root):
         else:
             stack.append((node, 'should_print'))
             if node.right:
-                stack.append((node.right, 'should_proc'))
+                stack.append((node.right, 'should_push'))
             if node.left:
-                stack.append((node.left, 'should_proc'))
+                stack.append((node.left, 'should_push'))
 
     # _stack = []
     # if root is None:

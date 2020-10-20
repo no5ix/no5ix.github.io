@@ -46,7 +46,10 @@ categories:
 | 变量名 | 路径 |
 | --- | --- |
 | LIB | `%WK10%\Lib\10.0.17763.0\ucrt\x64;%WK10%\Lib\10.0.17763.0\um\x64;%MSVC%\lib\x64` |
-| INCLUDE | `%WK10%\Include\10.0.17763.0\ucrt;%WK10%\Include\10.0.17763.0\um;` |
+| INCLUDE | `%WK10%\Include\10.0.17763.0\ucrt;%WK10%\Include\10.0.17763.0\um;%MSVC%\include;` |
+
+备注:  
+**如果编译不成功的话, 比如报错`include error`之类的, 应该检查一下环境变量是否错误, 是否真的包含了各种标准库文件啥的**
 
 
 # 在 VS code 内置命令行实现快捷编译
@@ -107,6 +110,8 @@ cl /nologo /EHsc /FeHelloWorld /std:c++latest Hello.cpp
 ```
 
 这样就会生成 HelloWorld.exe 文件而不是 Hello.exe。
+
+**如果编译不成功的话, 比如报错`include error`之类的, 应该检查一下环境变量是否错误, 是否真的包含了各种标准库文件啥的**
 
 
 # （备注）测试多文件编译

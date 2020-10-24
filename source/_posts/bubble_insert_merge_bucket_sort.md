@@ -48,8 +48,8 @@ void BubbleSort(int arr[], int startIndex, int endIndex)
 
 想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置
 
-{% asset_img sort_algo_1.png  %}
-{% asset_img sort_algo_2.png insert_sort %}
+![](/img/bubble_insert_merge_bucket_sort/sort_algo_1.png)
+![](/img/bubble_insert_merge_bucket_sort/sort_algo_2.png "insert sort")
 
 ``` c++
 void InsertSort( int arr[], int startIndex, int endIndex, int arrLen )
@@ -101,7 +101,8 @@ void InsertSort( int arr[], int startIndex, int endIndex, int arrLen )
 显露一张新牌）并牌面朝下地将该牌放置到输出堆。
 重复这个步骤，直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
 
-{% asset_img merge_sort_1.png merge_sort %}
+![](/img/bubble_insert_merge_bucket_sort/merge_sort_1..png "merge sort")
+
 
 ## 归并的算法实现
 

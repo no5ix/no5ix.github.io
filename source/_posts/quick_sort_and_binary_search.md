@@ -39,7 +39,9 @@ A也重复上述步骤递归。
 
 ## 算法导论的快排C++实现版本
 
-{% asset_img quick_sort_1.png quick_sort %}
+<!-- ![](/img/algo_newbie/quick_sort_1.png) -->
+![](/img/algo_newbie/quick_sort_partition_anim.gif "partition过程动画演示")
+
 
 **. . .**<!-- more -->
 

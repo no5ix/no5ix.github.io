@@ -2,10 +2,11 @@
 title: 排序算法四之谈一谈堆排序
 date: 2014-08-24 13:48:14
 tags:
+- Algo
 - Sort
 - CPP
 categories:
-- CPP
+- Algo
 ---
 
 此文用的是最大堆, 最大堆的堆排序之后的数组是升序, 最小堆反之.

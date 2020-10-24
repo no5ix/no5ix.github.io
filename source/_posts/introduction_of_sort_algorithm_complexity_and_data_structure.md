@@ -18,6 +18,7 @@ categories:
 - DataStructure
     - 链表
     - 二叉树
+        - 二叉搜索树
     - 栈
     - 队列
     - 散列表
@@ -70,5 +71,6 @@ categories:
 
 # 各类算法的复杂度汇总表
 
-{% asset_img 各类算法的复杂度.png 各类算法的复杂度汇总表 %}
+![](/img/introduction_of_sort_algorithm_complexity_and_data_structure/各类算法的复杂度.png "各类算法的复杂度")
+
 

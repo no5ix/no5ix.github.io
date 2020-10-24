@@ -4,9 +4,10 @@ date: 2014-12-22 23:19:21
 tags:
 - DataStructure
 - CPP
+- Algo
 - noodle
 categories:
-- CPP
+- Algo
 ---
 
 

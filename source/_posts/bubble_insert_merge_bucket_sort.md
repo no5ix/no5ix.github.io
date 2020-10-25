@@ -15,7 +15,8 @@ categories:
 
 想象这里有很多泡泡，最大的泡泡每次循环之后浮到数组的最后面
 
-{% asset_img sort_algo_3.png bubble_sort %}
+<!-- {% asset_img sort_algo_3.png bubble_sort %} -->
+![](/img/algo_newbie/bubble_sort.png)
 
 ``` c++
 
@@ -248,7 +249,8 @@ int main()
 
 举例来说，现在有一组数据 [7, 36, 65, 56, 33, 60, 110, 42, 42, 94, 59, 22, 83, 84, 63, 77, 67, 101]，怎么对其按从小到大顺序排序呢？
 
-{% asset_img bucket_sort.png bucket_sort %}
+<!-- {% asset_img bucket_sort.png bucket_sort %} -->
+![](/img/algo_newbie/bucket_sort.png)
 
 操作步骤说明：
 

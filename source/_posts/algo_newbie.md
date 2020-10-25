@@ -12,7 +12,7 @@ categories:
 
 # 排序算法
 
-![](/img/introduction_of_sort_algorithm_complexity_and_data_structure/各类算法的复杂度.png "各类算法的复杂度")
+![](/img/algo_newbie/sort_algo_complexity.png "各类排序算法的复杂度")
 
 - **实用的基础排序算法**有四种:
     - [**插入排序**](#插入排序) : 在小数据量或者数据都较为有序的时候比起归并和快速排序有更佳的时间效率, 插入排序在这种情况下，只需要从头到尾扫描一遍，交换、移动少数元素即可；时间复杂度近乎 o(N)))。 所以插入排序经常可以当作是其他排序算法的子过程, 下面代码会有体现
@@ -36,6 +36,12 @@ categories:
         堆排序是渐进最优的比较排序算法，达到了O(nlgn)这一下界，而快排有一定的可能性会产生最坏划分，时间复杂度可能为O(n^2)，那为什么快排在实际使用中通常优于堆排序？
         - 虽然quick_sort会n^2（其实有稳定的nlgn的版本），但这毕竟很少出现。heap_sort大多数情况下比较次数都多于quick_sort，尽管大家都是nlgn。那就让倒霉蛋倒霉好了，大多数情况下快才是硬道理。
         - 堆排比较的几乎都不是相邻元素，对cache极不友好，这才是很少被采用的原因。数学上的时间复杂度不代表实际运行时的情况.快排是分而治之，每次都在同一小段进行比较，最后越来约接近局部性。反观堆排，堆化过程中需要一直拿index的当前元素A和处于index*2 + 1 的子元素B比较, 两个元素距离较远。(局部性原理是指CPU访问存储器时，无论是存取指令还是存取数据，所访问的存储单元都趋于聚集在一个较小的连续区域中。)
+- 代码书写技巧:
+    - 归并和快排都是当`left_index >= right_index`时, 停止递归
+    - 堆排序, 如果其二叉堆数组index从0开始的话:
+        * 最后一个非叶子节点的index为`(length/2 - 1)`
+        * `left_child = 2*i + 1`
+        * `right_child = 2*i + 2`
 - 是否原址: 
     - 原址: 插入排序、堆排序、快速排序
     - 非原址: 归并排序
@@ -56,13 +62,13 @@ categories:
 
 想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置
 
-![](/img/algo_newbie/sort_algo_1.png)
+![](/img/algo_newbie/insert_sort/insert_sort_1.png)
 
 通过不断的与前面已经排好序的元素比较并交换, 
-![](/img/algo_newbie/sort_algo_2.png "insert sort")
+![](/img/algo_newbie/insert_sort/insert_sort_2.png "insert sort")
 
 动画演示如下:
-![](/img/algo_newbie/insert_sort_anim.gif)
+![](/img/algo_newbie/insert_sort/insert_sort_anim.gif)
 
 ```python
 def insert_sort(arr, left_index, right_index):
@@ -75,17 +81,13 @@ def insert_sort(arr, left_index, right_index):
                 arr[j-1], arr[j] = arr[j], arr[j-1]
             else:
                 break
-
-test_arr = [4, 3, 5, 1, 2]
-insert_sort(test_arr, 0, 4)
-print test_arr
 ```
 
 ### 插排优化
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
-![](/img/algo_newbie/insert_sort_optimize1.gif "insert_sort_optimize")
+![](/img/algo_newbie/insert_sort/insert_sort_optimize1.gif "insert_sort_optimize")
 
 ``` python
 def insert_sort_optimize(arr, left_index, right_index):
@@ -101,7 +103,6 @@ def insert_sort_optimize(arr, left_index, right_index):
             else:
                 break        
         arr[j] = temp_i_val  # 已经找到该插入的地方了, 直接赋值
-
 ```
 
 
@@ -122,15 +123,15 @@ def insert_sort_optimize(arr, left_index, right_index):
 显露一张新牌）并牌面朝下地将该牌放置到输出堆。
 重复这个步骤，直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
 
-![](/img/algo_newbie/merge_sort_2.png "归并排序分解图")
+![](/img/algo_newbie/merge_sort/merge_sort_2.png "归并排序分解图")
 
 动画演示:
-![](/img/algo_newbie/merge_sort_anim1.gif "归并排序动画总览")
+![](/img/algo_newbie/merge_sort/merge_sort_anim1.gif "归并排序动画总览")
 
 
 ### 归并排序的merge过程
 
-![](/img/algo_newbie/merge_sort_anim2.gif "归并排序的merge过程")
+![](/img/algo_newbie/merge_sort/merge_sort_anim2.gif "归并排序的merge过程")
 
 ``` python
 def _merge(arr, left_index, mid_index, right_index):
@@ -160,7 +161,6 @@ def _merge(arr, left_index, mid_index, right_index):
     # 把归并好的数组数据放到原数组left_index到right_index的位置上去
     for m in xrange(0, right_index-left_index+1):
         arr[left_index+m] = temp_arr[m]
-
 ```
 
 
@@ -179,10 +179,6 @@ def merge_sort(arr, left_index, right_index):
     merge_sort(arr, left_index, mid_index)
     merge_sort(arr, mid_index+1, right_index)
     _merge(arr, left_index, mid_index, right_index)
-
-test_arr = [4, 3, 5, 1, 2, 23, 409, -1, 77]
-merge_sort(test_arr, 0, len(test_arr)-1)
-print test_arr
 ```
 
 #### 归并自顶向下的优化实现
@@ -196,7 +192,7 @@ def merge_sort_optimize(arr, left_index, right_index):
         return
 
 +    # 优化1:
-+    # 数据量较小则使用插入排序
++    #   数据量较小则使用插入排序
 +    if (right_index - left_index) < 15:
 +        insert_sort_optimize(arr, left_index, right_index)
 +        return
@@ -208,10 +204,10 @@ def merge_sort_optimize(arr, left_index, right_index):
     merge_sort(arr, mid_index+1, right_index)
 
 +    # 优化2: 
-+    # 因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
-+    # 如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
-+    # 所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
-+    # 对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
++    #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
++    #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
++    #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
++    #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
 +    if arr[mid_index] > arr[mid_index+1]:
         _merge(arr, left_index, mid_index, right_index)
 ```
@@ -219,7 +215,7 @@ def merge_sort_optimize(arr, left_index, right_index):
 
 ### 归并自底向上的实现
 
-![](/img/algo_newbie/merge_sort_bottom_up.gif)
+![](/img/algo_newbie/merge_sort/merge_sort_bottom_up.gif)
 
 ``` python
 def merge_sort_bottom_up(arr, left_index, right_index):
@@ -254,7 +250,7 @@ def merge_sort_bottom_up_optimize(arr, left_index, right_index):
         return
 
 +    # 优化1:
-+    # 先以size为16为一组数据来逐个对每组插入排序一遍
++    #   先以size为16为一组数据来逐个对每组插入排序一遍
 +    size = 16
 +    cur_left_index = left_index
 +    while cur_left_index < right_index:
@@ -266,6 +262,10 @@ def merge_sort_bottom_up_optimize(arr, left_index, right_index):
     
     arr_len = right_index - left_index + 1
 -   size = 1
+    # 注意这里不是 `while size <= arr_len/2`,
+    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
+    # 那只有size为8, 这样2倍size才能把arr全部归并
+    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
     while size < arr_len:
         cur_left_index = left_index
         while cur_left_index <= right_index-size:
@@ -275,10 +275,10 @@ def merge_sort_bottom_up_optimize(arr, left_index, right_index):
             cur_right_index = min(possible_right_index, right_index)
             # 归并从i位置开始的两倍size的一组数据
 +           # 优化2: 
-+           # 因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
-+           # 如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
-+           # 所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
-+           # 对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
++           #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
++           #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
++           #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
++           #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
 +           if arr[cur_mid_index] > arr[cur_mid_index+1]:
                 _merge(arr, cur_left_index, cur_mid_index, cur_right_index)
             cur_left_index += size * 2  # 每次归并完一组数据就i移动size的两倍
@@ -304,15 +304,15 @@ A也重复上述步骤递归。
 
 递归结束之后， 左边的都比右边的小， 而且是有序的。
 
-![](/img/algo_newbie/quick_sort_2.png)
+![](/img/algo_newbie/quick_sort/quick_sort_2.png)
 
 动画演示:
-![](/img/algo_newbie/quick_sort_partition_anim.gif "partition过程动画演示")
+![](/img/algo_newbie/quick_sort/quick_sort_partition_anim.gif "partition过程动画演示")
 
 
 ### 快排效率很差的情况
 
-![](/img/algo_newbie/quick_sort_3.png)
+![](/img/algo_newbie/quick_sort/quick_sort_3.png)
 
 对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大。也就是说，基准的选择是很重要的。选择基准的方式决定了两个分割后两个子序列的长度，进而对整个算法的效率产生决定性影响
 所以当如果一个有序递增序列, 每次选基准都选最后一个, 那肯定效率很差了啊
@@ -382,8 +382,9 @@ def _partition_optimize(arr, left_index, right_index):
     # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
     pivot_index = left_index
 
-+   # 随机选一个元素和最左边的交换,
-+   # 配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
++   # 优化1:
++   #   随机选一个元素和最左边的交换,
++   #   配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
 +   rand_index = random.randint(left_index, right_index)
 +   arr[pivot_index], arr[rand_index] = arr[rand_index], arr[pivot_index]
 
@@ -411,6 +412,8 @@ def quick_sort_optimize(arr, left_index, right_index):
     # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
     if not arr or left_index >= right_index:
         return
++   # 优化2:
++   #   小数组用插排
 +   if (right_index - left_index) <= 15:
 +       insert_sort(arr, left_index, right_index)
 +       return
@@ -426,14 +429,14 @@ def quick_sort_optimize(arr, left_index, right_index):
 **对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大。**
 当数组中有大量相同元素的时候, 不管怎么选pivot都很容易变成下面这种情况导致分成子序列的不平衡, 这将极大的影响时间复杂度, 最差的情况会退化成O(N2)
 
-![](/img/algo_newbie/quick_sort_4.png)
+![](/img/algo_newbie/quick_sort/quick_sort_4.png)
 
 
 #### 双路快排-初步解决有大量相同元素的性能问题
 
 所以产生了双路快排的方式, 双路快速排序算法则不同，他使用两个索引值（i、j）用来遍历我们的序列，将小于等于v的元素放在索引i所指向位置的左边，而将大于等于v的元素放在索引j所指向位置的右边, 通过下图我们可以看到当等于v的情况也会发生交换, 这就基本可以保证等于v的元素也可以较为均匀的放到左右两边
 
-![](/img/algo_newbie/quick_sort_5.gif)
+![](/img/algo_newbie/quick_sort/quick_sort_5.gif)
 
 **待改进的地方**: 还是把等于v的元素加入到了待处理的数据中, 之后又去重复计算这些等于v的元素了, 为了排除这些已经等于v的元素, 所以产生了[**三路快排**](#三路快排-完全解决有大量相同元素的性能问题)
 
@@ -442,7 +445,7 @@ def quick_sort_optimize(arr, left_index, right_index):
 
 这是最经典的解决有大量重复元素的问题的快排方案, 被大多数系统所使用.
 
-![](/img/algo_newbie/quick_sort_6.gif)
+![](/img/algo_newbie/quick_sort/quick_sort_6.gif)
 
 **注意初始index的位置:** 
 ``` python
@@ -525,7 +528,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
 **注意**: 以下演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
 
-![](/img/algo_newbie/MaxHeapify.png "对某个元素执行堆化操作")
+![](/img/algo_newbie/heap_sort/MaxHeapify.png "对某个元素执行堆化操作")
 
 **注意** : 
 在调用MaxHeapify的时候, 我们假定索引为index的元素的左子树和右子树都是最大堆, 不然你如果注意看的话, 你会发现上图中index为10的那个元素其实是没有计算到的, 因为我们假定以index=5为根节点的二叉树都是最大堆了, 所以无需计算他. 
@@ -534,7 +537,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
 动画演示如下, 比如要对17这个元素为父元素的所有子元素进行堆化:
 
-![](/img/algo_newbie/heap_sort_heapify.gif "对17这个元素执行堆化")
+![](/img/algo_newbie/heap_sort/heap_sort_heapify.gif "对17这个元素执行堆化")
 
 用数组存储二叉堆, 首先得明确以下两个index的取得方法, **如果index从0开始的话**:
 * `left_child = 2*i + 1`, 
@@ -544,12 +547,16 @@ def quick_sort_3_ways(arr, left_index, right_index):
 * `right_child_index = left_child_index + 1`
 这两个index的取得方式在下方代码有体现.
 
-![](/img/algo_newbie/heap_sort_binary_heap_index.png)
+![](/img/algo_newbie/heap_sort/heap_sort_binary_heap_index.png)
 
+
+#### 堆化递归写法
+
+递归写法更容易理解一些:
 ``` python
-# 对 pending_heapify_index 元素执行堆化
-def _max_heapify(arr, pending_heapify_index, left_index, right_index):
-    if pending_heapify_index >= right_index:  # 当满足此条件, 应该结束`_max_heapify`递归了
+# 递归版, 对 pending_heapify_index 元素执行堆化
+def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
+    if pending_heapify_index >= right_index:  # 当满足此条件, 应该结束`_max_heapify_recursive`递归了
         return
     left_child_index = 2 * (pending_heapify_index-left_index) + 1
     right_child_index = left_child_index + 1
@@ -561,38 +568,69 @@ def _max_heapify(arr, pending_heapify_index, left_index, right_index):
         cur_max_index = left_child_index
     if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
         cur_max_index = right_child_index
-    arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
 
-    if cur_max_index != pending_heapify_index:  # 若当前已经是最大元素了, 则停止递归
-        _max_heapify(arr, cur_max_index, left_index, right_index)  # 继续 堆化 cur_max_index 的子元素
+    # 若当前已经是最大元素了, 则停止递归, 如果不是则执行交换与继续递归
+    if cur_max_index != pending_heapify_index:
+        arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
+        _max_heapify_recursive(arr, cur_max_index, left_index, right_index)  # 继续 堆化 cur_max_index 的子元素
 ```
+
+
+#### 堆化迭代写法
+
+
+``` python
+# 迭代版, 对 pending_heapify_index 元素执行堆化
+def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
+    left_child_index = 2 * (pending_heapify_index-left_index) + 1
+    while left_child_index <= right_index:
+        right_child_index = left_child_index + 1
+        # 选出 pending_heapify_index 的左右孩子中最大的元素,
+        # 并与 pending_heapify_index 元素交换
+        cur_max_index = pending_heapify_index
+        if left_child_index <= right_index and arr[cur_max_index] < arr[left_child_index]:
+            cur_max_index = left_child_index
+        if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
+            cur_max_index = right_child_index
+
+        # 若当前已经是最大元素了, 则直接break, 如果不是则执行交换与继续新一轮的堆化循环
+        if cur_max_index != pending_heapify_index:
+            arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
+            pending_heapify_index = cur_max_index
+            left_child_index = 2 * (pending_heapify_index-left_index) + 1
+        else:
+            break
+```
+
+迭代写法的话也可以使用赋值的方式取代不断的swap,
+该优化思想和我们之前对[插入排序进行优化](#插排优化)的思路是一致的, 此处这个优化代码就略了
 
 
 ### 建堆
 
-我们对每一个不是叶结点的元素(当index从root_index=0开始, 即为 index 小于等于 `root_index + (length/2 - 1)` 即`len/2 - 1`的元素 )自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
+我们对每一个不是叶结点的元素(当index从root_index=0开始, 即为 index 小于等于 `root_index + (length/2 - 1)` )自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
 
 **注意**: 以下动画演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
 
-![](/img/algo_newbie/heap_sort_build_heap.gif "建堆过程")
+![](/img/algo_newbie/heap_sort/heap_sort_build_heap.gif "建堆过程")
 
 ``` python
 def _build_max_heap(arr, left_index, right_index):
     # 建堆, 从最后一个非叶结点开始, 自底向上堆化就建好了一个最大堆
     root_index = left_index
     arr_len = right_index - left_index + 1
-    last_none_leaf_index = root_index + (2 * arr_len - 1)
+    last_none_leaf_index = root_index + (arr_len/2 - 1)
 
     i = last_none_leaf_index
     while i >= root_index:
-        _max_heapify(arr, i, left_index, right_index)
+        _max_heapify_recursive(arr, i, left_index, right_index)
         i -= 1
 ```
 
 
 ### 堆排序原址排序的具体实现
 
-![](/img/algo_newbie/heap_sort.gif "堆排序过程")
+![](/img/algo_newbie/heap_sort/heap_sort.gif "堆排序过程")
 
 堆排序分两步:
 1. 建堆
@@ -613,7 +651,7 @@ def heap_sort(arr, left_index , right_index):
     while cur_right_index >= root_index:
         arr[root_index], arr[cur_right_index] = arr[cur_right_index], arr[root_index]
         cur_right_index -= 1
-        _max_heapify(arr, root_index, left_index, cur_right_index)
+        _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
 ```
 
 
@@ -1294,4 +1332,405 @@ if __name__ == "__main__":
     num_list_for_heap_sort = [8, 4, 5, 7, 1, 3, 6, 2]
     heap_sort(num_list_for_heap_sort)
     print num_list_for_heap_sort
+```
+
+
+# 完整参考代码
+
+``` python
+# encoding=utf-8
+
+import random
+import copy
+
+
+def insert_sort(arr, left_index, right_index):
+    if not arr:
+        return
+    for i in xrange(left_index+1, right_index+1):  # 从left_index+1开始, 也就是从第二个开始
+        for j in xrange(i, left_index, -1):
+            if arr[j] < arr[j-1]:  # 注意保证j-1大于0
+                # 通过不断的与前面已经排好序的元素比较并交换, 
+                arr[j-1], arr[j] = arr[j], arr[j-1]
+            else:
+                break
+
+
+def insert_sort_optimize(arr, left_index, right_index):
+    if not arr:
+        return
+    for i in xrange(left_index+1, right_index+1):  # 从left_index+1开始, 也就是从第二个开始
+        temp_i_val = arr[i]
+        j = i
+        while j >= left_index+1:
+            if temp_i_val < arr[j-1]:  # 注意保证j-1大于0
+                arr[j] = arr[j-1]  # 通过不断的与前面已经排好序的元素比较并直接赋值
+                j -= 1
+            else:
+                break        
+        arr[j] = temp_i_val  # 已经找到该插入的地方了, 直接赋值
+
+
+def _merge(arr, left_index, mid_index, right_index):
+    """
+    归并的具体思路:  
+        回到我们玩扑克牌的例子，假设桌上有两堆牌面朝上的牌，每堆都已**排序**，最小的牌在顶上。
+        我们希望把这两堆牌合并成单一的排好序的输出堆，牌面朝下地放在桌上。
+        我们的基本步骤包括在牌面朝上的两堆牌的顶上两张牌中选取较小的一张，将该牌从其堆中移开（该堆的顶上将
+        显露一张新牌）并牌面朝下地将该牌放置到输出堆。
+        重复这个步骤，直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
+    """
+    # 注释掉下面这句是因为mid不一定等于(l+r)/2, 比如在`merge_sort_bottom_up()`就有可能
+    # mid_index = left_index + (right_index - left_index) / 2
+    temp_arr = []
+    i = left_index
+    j = mid_index + 1
+    while i <= mid_index and j <= right_index:
+        if arr[i] <= arr[j]:
+            temp_arr.append(arr[i])
+            i += 1
+        else:
+            temp_arr.append(arr[j])
+            j += 1
+    # 这一步是模拟: 直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
+    temp_arr.extend(arr[i:mid_index+1]) 
+    temp_arr.extend(arr[j:right_index+1])  # 注意右边界是小于等于right_index的
+    # 把归并好的数组数据放到原数组left_index到right_index的位置上去
+    for m in xrange(0, right_index-left_index+1):
+        arr[left_index+m] = temp_arr[m]
+        
+        
+def merge_sort(arr, left_index, right_index):
+    # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
+    # 说明left_index, right_index已经相邻了,
+    # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
+    if not arr or left_index >= right_index:
+        return
+    # 注意这里不能直接 `mid_index=(left_index+right_index)/2`,
+    # 防止当left_index和right_index很大的时候他们之和溢出
+    mid_index = left_index + (right_index - left_index) / 2
+    merge_sort(arr, left_index, mid_index)
+    merge_sort(arr, mid_index+1, right_index)
+    _merge(arr, left_index, mid_index, right_index)
+    
+
+def merge_sort_optimize(arr, left_index, right_index):
+    # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
+    # 说明left_index, right_index已经相邻了,
+    # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
+    if not arr or left_index >= right_index:
+        return
+
+    # 优化1:
+    #   数据量较小则使用插入排序
+    if (right_index - left_index) < 15:
+        insert_sort_optimize(arr, left_index, right_index)
+        return
+
+    # 注意这里不能直接 `mid_index=(left_index+right_index)/2`,
+    # 防止当left_index和right_index很大的时候他们之和溢出
+    mid_index = left_index + (right_index - left_index) / 2
+    merge_sort(arr, left_index, mid_index)
+    merge_sort(arr, mid_index+1, right_index)
+
+    # 优化2: 
+    #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
+    #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
+    #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
+    #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
+    if arr[mid_index] > arr[mid_index+1]:
+        _merge(arr, left_index, mid_index, right_index)
+
+
+def merge_sort_bottom_up(arr, left_index, right_index):
+    if not arr or left_index >= right_index:
+        return
+    arr_len = right_index - left_index + 1
+    size = 1
+    # 注意这里不是 `while size <= arr_len/2`,
+    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
+    # 那只有size为8, 这样2倍size才能把arr全部归并
+    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
+    while size < arr_len:
+        cur_left_index = left_index
+        while cur_left_index <= right_index-size:
+            cur_mid_index = cur_left_index + size -1
+            possible_right_index = cur_left_index + 2*size -1
+            # possible_right_index有可能已经大于right_index了, 所以要min一下
+            cur_right_index = min(possible_right_index, right_index)
+            # 归并从i位置开始的两倍size的一组数据
+            _merge(arr, cur_left_index, cur_mid_index, cur_right_index)
+            cur_left_index += size * 2  # 每次归并完一组数据就i移动size的两倍
+        # print "size: %d" % size
+        # print arr
+        size *= 2  # size从1开始每次增加两倍
+        
+
+def merge_sort_bottom_up_optimize(arr, left_index, right_index):
+    if not arr or left_index >= right_index:
+        return
+
+    # 优化1:
+    #   先以size为16为一组数据来逐个对每组插入排序一遍
+    size = 16
+    cur_left_index = left_index
+    while cur_left_index < right_index:
+        possible_right_index = cur_left_index + 2*size -1
+         # possible_right_index有可能已经大于right_index了, 所以要min一下
+        cur_right_index = min(possible_right_index, right_index)
+        insert_sort(arr, cur_left_index, cur_right_index)
+        cur_left_index += size  # 右移到下一个size大小开头位置
+    
+    arr_len = right_index - left_index + 1
+    # size = 1
+    
+    # 注意这里不是 `while size <= arr_len/2`,
+    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
+    # 那只有size为8, 这样2倍size才能把arr全部归并
+    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
+    while size < arr_len:
+        cur_left_index = left_index
+        while cur_left_index <= right_index-size:
+            cur_mid_index = cur_left_index + size -1
+            possible_right_index = cur_left_index + 2*size -1
+            # possible_right_index有可能已经大于right_index了, 所以要min一下
+            cur_right_index = min(possible_right_index, right_index)
+            # 归并从i位置开始的两倍size的一组数据
+            # 优化2: 
+            #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
+            #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
+            #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
+            #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
+            if arr[cur_mid_index] > arr[cur_mid_index+1]:
+                _merge(arr, cur_left_index, cur_mid_index, cur_right_index)
+            cur_left_index += size * 2  # 每次归并完一组数据就i移动size的两倍
+        # print "size: %d" % size
+        # print arr
+        size *= 2  # size从1开始每次增加两倍
+        
+
+def _partition(arr, left_index, right_index):
+    # 选一个元素作为枢轴量,
+    # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
+    pivot_index = left_index
+    pivot = arr[pivot_index]
+    # partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
+    # 在这里这种写法就是 `left_index`
+    # 这才符合partition_index的定义:
+    #       partition_indexy指向小于pivot的那些元素的最后一个元素,
+    #       即 less_than_pivots_last_elem_index
+    # 因为还没找到比pivot小的元素之前, 
+    # partition_index是不应该指向任何待遍历的元素的
+    partition_index = less_than_pivots_last_elem_index = left_index
+
+    i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
+    while i <= right_index:
+        if arr[i] < pivot:
+            arr[i], arr[partition_index+1] = arr[partition_index+1], arr[i]
+            partition_index += 1
+        i += 1
+    arr[pivot_index], arr[partition_index] = arr[partition_index], arr[pivot_index]
+    return partition_index
+
+
+def quick_sort(arr, left_index, right_index):
+    # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
+    if not arr or left_index >= right_index:
+        return
+    partition_index = _partition(arr, left_index, right_index)
+    # 把partition_index左边的数据再递归快排一遍
+    quick_sort(arr, left_index, partition_index-1)
+    quick_sort(arr, partition_index+1, right_index)
+
+
+def _partition_optimize(arr, left_index, right_index):
+    # 选一个元素作为枢轴量,
+    # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
+    pivot_index = left_index
+
+    # 优化1:
+    # 随机选一个元素和最左边的交换,
+    # 配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
+    rand_index = random.randint(left_index, right_index)
+    arr[pivot_index], arr[rand_index] = arr[rand_index], arr[pivot_index]
+
+    pivot = arr[pivot_index]
+    # partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
+    # 在这里这种写法就是 `left_index`
+    # 这才符合partition_index的定义:
+    #       partition_indexy指向小于pivot的那些元素的最后一个元素,
+    #       即 less_than_pivots_last_elem_index
+    # 因为还没找到比pivot小的元素之前, 
+    # partition_index是不应该指向任何待遍历的元素的
+    partition_index = less_than_pivots_last_elem_index = left_index
+
+    i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
+    while i <= right_index:
+        if arr[i] < pivot:
+            arr[i], arr[partition_index+1] = arr[partition_index+1], arr[i]
+            partition_index += 1
+        i += 1
+    arr[pivot_index], arr[partition_index] = arr[partition_index], arr[pivot_index]
+    return partition_index
+
+
+def quick_sort_optimize(arr, left_index, right_index):
+    # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
+    if not arr or left_index >= right_index:
+        return
+    # 优化2:
+    #   小数组用插排
+    if (right_index - left_index) <= 15:
+        insert_sort(arr, left_index, right_index)
+        return
+    partition_index = _partition(arr, left_index, right_index)
+    # 把partition_index左边的数据再递归快排一遍
+    quick_sort(arr, left_index, partition_index-1)
+    quick_sort(arr, partition_index+1, right_index)
+    
+
+def quick_sort_3_ways(arr, left_index, right_index):
+    # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
+    if not arr or left_index >= right_index:
+        return
+    if (right_index - left_index) <= 15:
+        insert_sort(arr, left_index, right_index)
+        return
+
+    # 选一个元素作为枢轴量,
+    # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
+    pivot_index = left_index
+    # 随机选一个元素和最左边的交换,
+    # 配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
+    rand_index = random.randint(left_index, right_index)
+    arr[pivot_index], arr[rand_index] = arr[rand_index], arr[pivot_index]
+    
+    pivot = arr[pivot_index]
+    # lt_index 指向小于pivot的那些元素的最右边的一个元素,
+    # lt_index 即 less_than_pivots_last_elem_index
+    # 因为还没找到比pivot小的元素之前, 
+    # lt_index 是不应该指向任何待遍历的元素的, 
+    # gt_index 同理, gt_index指向大于pivot的那些元素的最左边的一个元素,
+    lt_index = less_than_pivots_last_elem_index = left_index
+    gt_index = right_index + 1
+
+    i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
+    while i < gt_index:
+        if arr[i] < pivot:
+            arr[i], arr[lt_index+1] = arr[lt_index+1], arr[i]
+            lt_index += 1
+            i += 1
+        elif arr[i] > pivot:
+            arr[i], arr[gt_index-1] = arr[gt_index-1], arr[i]
+            gt_index -= 1
+        else:
+            i += 1
+    arr[pivot_index], arr[lt_index] = arr[lt_index], arr[pivot_index]
+
+    quick_sort_3_ways(arr, left_index, lt_index)
+    quick_sort_3_ways(arr, gt_index, right_index)
+    
+
+# 递归版, 对 pending_heapify_index 元素执行堆化
+def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
+    if pending_heapify_index >= right_index:  # 当满足此条件, 应该结束`_max_heapify_recursive`递归了
+        return
+    left_child_index = 2 * (pending_heapify_index-left_index) + 1
+    right_child_index = left_child_index + 1
+
+    # 选出 pending_heapify_index 的左右孩子中最大的元素,
+    # 并与 pending_heapify_index 元素交换
+    cur_max_index = pending_heapify_index
+    if left_child_index <= right_index and arr[cur_max_index] < arr[left_child_index]:
+        cur_max_index = left_child_index
+    if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
+        cur_max_index = right_child_index
+
+    # 若当前已经是最大元素了, 则停止递归, 如果不是则执行交换与继续递归
+    if cur_max_index != pending_heapify_index:
+        arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
+        _max_heapify_recursive(arr, cur_max_index, left_index, right_index)  # 继续 堆化 cur_max_index 的子元素
+
+
+# 对 迭代版, pending_heapify_index 元素执行堆化
+def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
+    left_child_index = 2 * (pending_heapify_index-left_index) + 1
+    while left_child_index <= right_index:
+        right_child_index = left_child_index + 1
+        # 选出 pending_heapify_index 的左右孩子中最大的元素,
+        # 并与 pending_heapify_index 元素交换
+        cur_max_index = pending_heapify_index
+        if left_child_index <= right_index and arr[cur_max_index] < arr[left_child_index]:
+            cur_max_index = left_child_index
+        if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
+            cur_max_index = right_child_index
+
+        # 若当前已经是最大元素了, 则直接break, 如果不是则执行交换与继续新一轮的堆化循环
+        if cur_max_index != pending_heapify_index:
+            arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
+            pending_heapify_index = cur_max_index
+            left_child_index = 2 * (pending_heapify_index-left_index) + 1
+        else:
+            break
+
+
+def _build_max_heap(arr, left_index, right_index):
+    # 建堆, 从最后一个非叶结点开始, 自底向上堆化就建好了一个最大堆
+    root_index = left_index
+    arr_len = right_index - left_index + 1
+    last_none_leaf_index = root_index + (arr_len/2 - 1)
+
+    i = last_none_leaf_index
+    while i >= root_index:
+        _max_heapify_recursive(arr, i, left_index, right_index)
+        i -= 1
+
+
+def heap_sort(arr, left_index , right_index):
+    if not arr or left_index >= right_index or right_index <= 0:
+        return
+    _build_max_heap(arr, left_index, right_index)
+    # 把数组中的第一个元素(即根节点)也就是当前堆的最大元素逐个和数组后面的元素交换
+    # 交换后根节点已经违背最大堆性质了, 但其他的元素还是符合最大堆性质的
+    # 所以然后要对根节点做一次堆化操作
+    cur_right_index = right_index
+    root_index = left_index
+    while cur_right_index >= root_index:
+        arr[root_index], arr[cur_right_index] = arr[cur_right_index], arr[root_index]
+        cur_right_index -= 1
+        _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
+
+
+sort_algo_func_list = [
+    insert_sort,
+    merge_sort, merge_sort_bottom_up, merge_sort_bottom_up_optimize, 
+    quick_sort, quick_sort_optimize, quick_sort_3_ways,
+    heap_sort,
+]
+test_arr_list = [
+    [4, 3, 5, 1, 88, 0, -7, 2, 66, -58],
+    [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+    [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
+    [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
+    [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58, 4, 3, 5, 1, 88],
+    [0, -7, 2, 66, -58, 4, 3, 5, 1, 884, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+    [-3, -7, 1, 2, 3, 4, 5, 6, 7, 8, 21, 42, 87, 99, 66, 32, 91, 19, 28],
+    [8, 7, 6, 5, 4, 3, 2, 1, 0, -1, 21, 42, 87, 99, 66, 32, 91, 19, 28],
+]
+for _sort_algo in sort_algo_func_list:
+    print _sort_algo.__name__
+    is_test_pass = True
+    for _test_arr in test_arr_list:
+        _copy_test_arr = copy.deepcopy(_test_arr)
+        _sort_algo(_copy_test_arr, 0, len(_copy_test_arr)-1)
+        # print _copy_test_arr
+        pre_elem = _copy_test_arr[0]
+        for _elem in _copy_test_arr:
+            if _elem < pre_elem:
+                print  "is not ordered: " + str(_test_arr)
+                is_test_pass = False
+                break
+    print "-------------test " + \
+        ("pass" if is_test_pass else "not pass") + \
+        "---------------\n"
 ```

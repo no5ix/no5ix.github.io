@@ -8,9 +8,8 @@ categories:
 - Algo
 ---
 
+
 因为之前的笔记和书籍相关知识都是零零散散的， 没有一个汇总， 所以写了这篇博客。有些算法很简单，复杂度一眼都能看得出来， 几乎不需要记忆 ， 但是有些算法或者数据结构的操作的复杂度就不是一眼可以看得出来， 推导也是很费时间的， 所谓常识就是应该熟记于心且被认可的知识。
-
-
 
 
 # 必须掌握的知识
@@ -68,9 +67,8 @@ categories:
 使用 {% post_link introsort 内省排序 %} , std的sort就是用的内省排序.
 
 
-
 # 各类算法的复杂度汇总表
 
-![](/img/introduction_of_sort_algorithm_complexity_and_data_structure/各类算法的复杂度.png "各类算法的复杂度")
+![](/img/algo_newbie/sort_algo_complexity.png "各类排序算法的复杂度")
 
 

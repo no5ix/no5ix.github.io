@@ -21,7 +21,8 @@ categories:
 
 具体过程如下图 : 
 
-{% asset_img MaxHeapify.png MaxHeapify %}
+<!-- {% asset_img MaxHeapify.png MaxHeapify %} -->
+![](/img/algo_newbie/MaxHeapify.png)
 
 **注意** : 
 在调用MaxHeapify的时候, 我们假定索引为index的元素的左子树和右子树都是最大堆, 不然你如果注意看的话, 你会发现上图中index为10的那个元素其实是没有计算到的, 因为我们假定以index=5为根节点的二叉树都是最大堆了, 所以无需计算他. 

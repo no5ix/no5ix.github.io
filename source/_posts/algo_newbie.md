@@ -227,6 +227,10 @@ def merge_sort_bottom_up(arr, left_index, right_index):
         return
     arr_len = right_index - left_index + 1
     size = 1
+    # 注意这里不是 `while size <= arr_len/2`,
+    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
+    # 那只有size为8, 这样2倍size才能把arr全部归并
+    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
     while size < arr_len:
         cur_left_index = left_index
         while cur_left_index <= right_index-size:
@@ -316,6 +320,19 @@ A也重复上述步骤递归。
 
 ### 普通快排
 
+**注意初始index的位置:** 
+``` python
+# partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
+# 在这里这种写法就是 `left_index`
+# 这才符合partition_index的定义:
+#       partition_indexy指向小于pivot的那些元素的最后一个元素,
+#       即 less_than_pivots_last_elem_index
+# 因为还没找到比pivot小的元素之前, 
+# partition_index是不应该指向任何待遍历的元素的
+partition_index = less_than_pivots_last_elem_index = left_index
+```
+
+下面是原代码:
 ``` python
 def _partition(arr, left_index, right_index):
     # 选一个元素作为枢轴量,
@@ -427,6 +444,19 @@ def quick_sort_optimize(arr, left_index, right_index):
 
 ![](/img/algo_newbie/quick_sort_6.gif)
 
+**注意初始index的位置:** 
+``` python
+pivot = arr[pivot_index]
+# lt_index 指向小于pivot的那些元素的最右边的一个元素,
+# lt_index 即 less_than_pivots_last_elem_index
+# 因为还没找到比pivot小的元素之前, 
+# lt_index 是不应该指向任何待遍历的元素的, 
+# gt_index 同理, gt_index指向大于pivot的那些元素的最左边的一个元素,
+lt_index = less_than_pivots_last_elem_index = left_index
+gt_index = right_index + 1
+```
+
+接下来是完整代码:
 ``` python
 def quick_sort_3_ways(arr, left_index, right_index):
     # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
@@ -471,12 +501,167 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
 ## 堆排序
 
+最大堆的堆排序之后的数组是升序, 最小堆反之.
+堆排序 HeapSort 由 以下两部分组成 :
+
+- [堆化 MaxHeapify](#堆化)
+- [建堆 BuildMaxHeap](#建堆)
+
+### 堆排序的复杂度
+
+* **时间复杂度** : 
+    * **MaxHeapify** : **O(logN)**.
+    * **BuildMaxHeap** : **O(N)**. 
+    看起来像是O(NlogN), 其实是O(N), 因为不同结点运行 MaxHeapify 的 时间和该结点的树高相关, 而大部分结点的高度都很小, <<算法导论>>中有相关证明
+    * **HeapSort** : **O(NlogN)**.
+        初始化堆 BuildMaxHeap 的时间复杂度为O(N); 之后因为每次交换结点然后从堆中去掉最后一个结点后都要重建堆 BuildMaxHeap 
+        *(上述 HeapSort 函数代码中的倒数第三行 `MaxHeapify(arr, 0, --length)` 其实就是个重建堆的过程)* , 
+        重建堆 BuildMaxHeap 的时间复杂度为O(N), 而 length - 1 次调用了 MaxHeapify, MaxHeapify 的时间复杂度为O(lgN). 所以为 O(N + NlogN), 即为O(Nlogn)
+* **空间复杂度** : 
+  * **O(1)**, 因为没有用辅助内存.
+
+
 ### 堆化
+
+**注意**: 以下演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
+
+![](/img/algo_newbie/MaxHeapify.png "对某个元素执行堆化操作")
+
+**注意** : 
+在调用MaxHeapify的时候, 我们假定索引为index的元素的左子树和右子树都是最大堆, 不然你如果注意看的话, 你会发现上图中index为10的那个元素其实是没有计算到的, 因为我们假定以index=5为根节点的二叉树都是最大堆了, 所以无需计算他. 
+那为何要作如此假设呢?
+因为要跟建堆 BuildMaxHeap 配合来完成堆排序, 而建堆 BuildMaxHeap是从下至上的.
+
+动画演示如下, 比如要对17这个元素为父元素的所有子元素进行堆化:
+
+![](/img/algo_newbie/heap_sort_heapify.gif "对17这个元素执行堆化")
+
+用数组存储二叉堆, 首先得明确以下两个index的取得方法, **如果index从0开始的话**:
+* `left_child = 2*i + 1`, 
+* `right_child = 2*i + 2`
+如果是对数组的`[left_index, right_index]`来排序, 且数组的首index为0的话, 则:
+* `left_child_index = 2 * (pending_heapify_index-left_index) + 1`
+* `right_child_index = left_child_index + 1`
+这两个index的取得方式在下方代码有体现.
+
+![](/img/algo_newbie/heap_sort_binary_heap_index.png)
+
+``` python
+# 对 pending_heapify_index 元素执行堆化
+def _max_heapify(arr, pending_heapify_index, left_index, right_index):
+    if pending_heapify_index >= right_index:  # 当满足此条件, 应该结束`_max_heapify`递归了
+        return
+    left_child_index = 2 * (pending_heapify_index-left_index) + 1
+    right_child_index = left_child_index + 1
+
+    # 选出 pending_heapify_index 的左右孩子中最大的元素,
+    # 并与 pending_heapify_index 元素交换
+    cur_max_index = pending_heapify_index
+    if left_child_index <= right_index and arr[cur_max_index] < arr[left_child_index]:
+        cur_max_index = left_child_index
+    if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
+        cur_max_index = right_child_index
+    arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
+
+    if cur_max_index != pending_heapify_index:  # 若当前已经是最大元素了, 则停止递归
+        _max_heapify(arr, cur_max_index, left_index, right_index)  # 继续 堆化 cur_max_index 的子元素
+```
+
+
+### 建堆
+
+我们对每一个不是叶结点的元素(当index从root_index=0开始, 即为 index 小于等于 `root_index + (length/2 - 1)` 即`len/2 - 1`的元素 )自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
+
+**注意**: 以下动画演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
+
+![](/img/algo_newbie/heap_sort_build_heap.gif "建堆过程")
+
+``` python
+def _build_max_heap(arr, left_index, right_index):
+    # 建堆, 从最后一个非叶结点开始, 自底向上堆化就建好了一个最大堆
+    root_index = left_index
+    arr_len = right_index - left_index + 1
+    last_none_leaf_index = root_index + (2 * arr_len - 1)
+
+    i = last_none_leaf_index
+    while i >= root_index:
+        _max_heapify(arr, i, left_index, right_index)
+        i -= 1
+```
+
+
+### 堆排序原址排序的具体实现
+
+![](/img/algo_newbie/heap_sort.gif "堆排序过程")
+
+堆排序分两步:
+1. 建堆
+2. 重复以下两个操作:
+   1. 把数组中的第一个元素(即根节点)也就是当前堆的最大元素逐个和数组后面的元素交换
+   2. 对根节点做一次堆化操作
+
+``` python
+def heap_sort(arr, left_index , right_index):
+    if not arr or left_index >= right_index or right_index <= 0:
+        return
+    _build_max_heap(arr, left_index, right_index)
+    # 把数组中的第一个元素(即根节点)也就是当前堆的最大元素逐个和数组后面的元素交换
+    # 交换后根节点已经违背最大堆性质了, 但其他的元素还是符合最大堆性质的
+    # 所以然后要对根节点做一次堆化操作
+    cur_right_index = right_index
+    root_index = left_index
+    while cur_right_index >= root_index:
+        arr[root_index], arr[cur_right_index] = arr[cur_right_index], arr[root_index]
+        cur_right_index -= 1
+        _max_heapify(arr, root_index, left_index, cur_right_index)
+```
 
 
 # 数据结构
 
+* 二叉树
+    * 二叉搜索树
+* 链表
+* 图
 
+
+## 二叉树
+
+* 遍历
+    * 深度优先遍历dfs
+        * 前序非递归
+        * 中序非递归
+        * 后序非递归
+    * 广度优先遍历bfs
+        * 层序遍历
+* 反转
+
+
+## 链表
+
+* 链表反转
+* 虚头节点方便处理问题的思想
+
+
+## 图论
+
+* 广度优先遍历dfs得到最短路径
+* 深度优先遍历bfs得到啥?
+
+
+# 算法思想
+
+基础:
+* 队列的使用
+* 栈的使用
+* 散列表的使用
+* 堆的使用
+
+高阶:
+* 递归
+* 回溯
+* 动态规划
+* 贪心算法
 
 
 # 算法与数据结构-综合提-C++版

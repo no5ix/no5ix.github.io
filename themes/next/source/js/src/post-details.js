@@ -14,7 +14,8 @@ $(document).ready(function () {
   // $itemHasChild.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
 
   var $tocTitle = $(".sidebar-nav-toc");
-  $tocTitle.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
+  // $tocTitle.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
+  $tocTitle.prepend("<i class='fa fa-minus-square'></i><i class='fa fa-plus-square'></i>");
 
   // var clickIcon = function(){
   //     $(".post-toc-content .nav-item > i").click(function(){
@@ -50,8 +51,10 @@ $(document).ready(function () {
 
 
   var clickTocTitle = function(){
-    var $iconToExpand = $(".sidebar-nav-toc > .fa-caret-right");
-    var $iconToFold = $(".sidebar-nav-toc > .fa-caret-down");
+    // var $iconToExpand = $(".sidebar-nav-toc > .fa-caret-right");
+    // var $iconToFold = $(".sidebar-nav-toc > .fa-caret-down");
+    var $iconToExpand = $(".sidebar-nav-toc > .fa-minus-square");
+    var $iconToFold = $(".sidebar-nav-toc > .fa-plus-square");
     $iconToExpand.addClass("hide");
 
     var $subToc = $titleHasChild.next(".nav-child");

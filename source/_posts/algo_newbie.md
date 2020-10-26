@@ -152,7 +152,7 @@ MaxLevel = 32
 
 二叉树的代码表示:
 ``` python
-class BinaryTreeNode:
+class BinaryTreeNode(object):
     def __init__(self, val):
         self.left = None
         self.right = None
@@ -306,7 +306,7 @@ def binary_tree_swap_iterative(root):
 
 链表的代码表示:
 ``` python
-class LinkList:
+class LinkList(object):
     def __init__(self, val):
         self.next = None
         self.val = val
@@ -350,28 +350,73 @@ def linklist_reverse(head):
 
 ### 图的表示
 
+邻接表适合表示稀疏图(Sparse Graph):
 ![](/img/algo_newbie/graph/graph3.png "邻接表表示无向图")
 ![](/img/algo_newbie/graph/graph4.png "邻接表表示有向图")
-邻接表适合表示稀疏图(Sparse Graph), 代码如下: 
-``` python
-class SparseGraph:
-    def __init_(self, point_count, is_directed):
-        self.adjacency_list = [[] for _ in xrange(point_count)]  # 邻接表
-        self.is_directed = is_directed  # 是否为有向图
-        self.edge_count = 0  # 边的数量
-    
-    def 
-```
 
+邻接矩阵适合表示稠密图(Dense Graph):
 ![](/img/algo_newbie/graph/graph1.png "邻接矩阵表示无向图")
 ![](/img/algo_newbie/graph/graph2.png "邻接矩阵表示有向图")
-邻接矩阵适合表示稠密图(Dense Graph), 代码如下:
+
+代码如下: 
 ``` python
-class DenseGraph:
+class GraphBase(object):
+    # 图的基类
+
     def __init__(self, point_count, is_directed):
-        self.adjacency_matrix = [ [ False for _ in xrange(point_count)] for _ in xrange(point_count) ]  # 邻接矩阵
+        self.adjacency_container = None
         self.is_directed = is_directed  # 是否为有向图
-        self.edge_count = 0  # 边的数量
+    
+    # 深度优先遍历
+    def graph_dfs(self):
+        visited_arr = []
+        for _cur_point_index in xrange(0, len(self.adjacency_container)):
+            if _cur_point_index not in visited_arr:
+                self._dfs_by_point(_cur_point_index, visited_arr)
+        return visited_arr
+
+    def _dfs_by_point(self, cur_point_index, visited_arr):
+        visited_arr.append(cur_point_index)
+        for _next_point_index in self._traversal_connected_point(cur_point_index):
+            if _next_point_index not in visited_arr:
+                self._dfs_by_point(_next_point_index, visited_arr)
+
+    def _traversal_connected_point(self, cur_point_index):
+        raise NotImplementedError        
+
+
+class SparseGraph(GraphBase):
+    # 稀疏图
+
+    def __init__(self, point_count, is_directed):
+        super(SparseGraph, self).__init__(point_count, is_directed)
+        self.adjacency_container = [ [] for _ in xrange(point_count) ]  # 邻接表
+
+    def set_adjacency_list(self, adjacency_list):
+        self.adjacency_container = adjacency_list
+
+    def _traversal_connected_point(self, cur_point_index):
+        for _connected_point_index in self.adjacency_container[cur_point_index]:
+            yield _connected_point_index
+
+
+class DenseGraph(GraphBase):
+    # 稠密图
+
+    def __init__(self, point_count, is_directed):
+        super(DenseGraph, self).__init__(point_count, is_directed)
+        self.adjacency_container = [
+            [ False for _ in xrange(point_count)] for _ in xrange(point_count) 
+        ]  # 邻接矩阵
+
+    def set_adjacency_matrix(self, adjacency_matrix):
+        self.adjacency_container = adjacency_matrix
+
+    def _traversal_connected_point(self, cur_point_index):
+        for _connected_point_index in self.adjacency_container[cur_point_index]:
+            if _connected_point_index is not False:
+                continue
+            yield _connected_point_index
 ```
 
 
@@ -379,9 +424,20 @@ class DenseGraph:
 
 ![](/img/algo_newbie/graph/graph_dfs.gif)
 
-``` python
-def graph_dfs(graph)
-```
+图的深度优先遍历（DFS）；
+1. 访问指定的起始顶点；
+2. 若当前访问的顶点的邻接顶点有未被访问的，则任选一个访问之；反之，退回到最近访问过的顶点；直到与起始顶点相通的全部顶点都访问完毕；
+3. 若此时图中尚有顶点未被访问，则再选其中一个顶点作为起始顶点并访问之，转 2； 反之，遍历结束
+
+[代码](#图的表示)在上方已经有了, 其代码中的 `graph_dfs` 就是.
+
+**图dfs用途**: 可以获得两点之间的一条路径
+
+
+### 图的广度优先遍历bfs
+
+
+
 
 # 算法
 

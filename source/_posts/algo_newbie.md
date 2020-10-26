@@ -359,6 +359,8 @@ class SparseGraph:
         self.adjacency_list = [[] for _ in xrange(point_count)]  # 邻接表
         self.is_directed = is_directed  # 是否为有向图
         self.edge_count = 0  # 边的数量
+    
+    def 
 ```
 
 ![](/img/algo_newbie/graph/graph1.png "邻接矩阵表示无向图")
@@ -375,10 +377,10 @@ class DenseGraph:
 
 ### 图的深度优先遍历dfs
 
-![](/img/algo_newbie/graph_dfs.gif)
+![](/img/algo_newbie/graph/graph_dfs.gif)
 
 ``` python
-
+def graph_dfs(graph)
 ```
 
 # 算法

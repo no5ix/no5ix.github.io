@@ -1,5 +1,5 @@
 ---
-title: 白话算法大总结
+title: 白话算法与数据结构大总结
 date: 2018-10-23 08:08:06
 tags:
 - noodle
@@ -10,11 +10,401 @@ categories:
 ---
 
 
-# 排序算法
+# 本文完整参考代码
+
+https://github.com/no5ix/nox/blob/master/algo/test_algo.py
+
+
+# 数据结构
+
+
+## 哈希表
+
+发生碰撞的时候有两种解决方案:  
+* 拉链表法
+* 开放寻址法
+    * 线性探查法（Linear Probing）：di = 1,2,3,…,m-1
+      简单地说，就是以当前冲突位置为起点，步长为1循环查找，直到找到一个空的位置，如果循环完了都占不到位置，就说明容器已经满了。举个栗子，就像你在饭点去街上吃饭，挨家去看是否有位置一样。
+    * 平方探测法（Quadratic Probing）：di = ±12, ±22，±32，…，±k2（k≤m/2）
+      相对于线性探查法，这就相当于的步长为di = i2来循环查找，直到找到空的位置。以上面那个例子来看，现在你不是挨家去看有没有位置了，而是拿手机算去第i2家店，然后去问这家店有没有位置。
+    * 伪随机探测法：di = 伪随机数序列, 这个就是取随机数来作为步长
+* 再哈希法
+    `Hi = RHi(key)`, 其中i=1,2,…,k  
+    RHi()函数是不同于H()的哈希函数，用于同义词发生地址冲突时，计算出另一个哈希函数地址，直到不发生冲突位置。这种方法不容易产生堆集，但是会增加计算时间。  
+    所以再哈希法的缺点是：增加了计算时间。  
+
+
+### 开放寻址法
+
+开放寻址法的核心思想是，如果出现了散列冲突，我们就重新探测一一个空闲位置，将其插入。比如，我们可以使用线性探测法。当我们往散列表中插入数据时，如果某个数据经过散列函数散列之后，存储位置已经被占用了，我们就从当前位置开始，依次往后查找，看是否有空闲位置，如果遍历到尾部都没有找到空闲的位置，那么我们就再从表头开始找，直到找到为止。
+
+![](/img/noodle_plan/algo/hash_table1.jpg)
+
+散列表中查找元素的时候，我们通过散列函数求出要查找元素的键值对应的散列值，然后比较数组中下标为散列值的元素和要查找的元素。如果相等，则说明就是我们要找的元素；否则就顺序往后依次查找。如果遍历到数组中的空闲位置还没有找到，就说明要查找的元素并没有在散列表中。
+
+对于删除操作稍微有些特别，不能单纯地把要删除的元素设置为空。因为在查找的时候，一旦我们通过线性探测方法，找到一个空闲位置，我们就可以认定散列表中不存在这个数据。但是，如果这个空闲位置是我们后来删除的，就会导致原来的查找算法失效。这里我们可以将删除的元素，特殊标记为 deleted。当线性探测查找的时候，遇到标记为 deleted 的空间，并不是停下来，而是继续往下探测。
+
+线性探测法存在很大问题。当散列表中插入的数据越来越多时，其散列冲突的可能性就越大，极端情况下甚至要探测整个散列表,因此最坏时间复杂度为O(N)。在开放寻址法中，除了线性探测法，我们还可以二次探测和双重散列等方式。
+
+
+### 负载因子与rehash
+
+在维基百科来描述加载因子：
+
+> **对于开放定址法，加载因子是特别重要因素**，应严格限制在0.7-0.8以下。超过0.8，查表时的CPU缓存不命中（cache missing）按照指数曲线上升。因此，一些采用开放定址法的hash库，如Java的系统库限制了加载因子为0.75，超过此值将resize散列表。
+
+我们可以使用装载因子来衡量散列表的“健康状况”。
+
+`散列表的负载因子 = 填入表中的元素个数/散列表的长度`
+
+**为什么java的HashMap(使用开放寻址法解决碰撞)加载因子一定是0.75？而不是0.8，0.6？**
+
+HashMap的底层其实也是哈希表（散列表），为了减少冲突发生的概率，当HashMap的数组长度到达一个临界值的时候，就会触发扩容，把所有元素rehash之后再放在扩容后的容器中，这是一个相当耗时的操作。
+
+而这个临界值就是由加载因子和当前容器的容量大小来确定的：  
+`临界值（threshold） = 负载因子（loadFactor） * 容量（capacity）`  
+其中负载因子表示一个数组可以达到的最大的满的程度。这个值不宜太大，也不宜太小。
+
+* loadFactor太大，比如等于1，那么就会有很高的哈希冲突的概率，会大大降低查询速度。
+* loadFactor太小，比如等于0.5，那么频繁扩容没，就会大大浪费空间。
+
+所以，这个值需要介于0.5和1之间。根据数学公式推算。这个值在log(2)的时候比较合理。
+
+另外，为了提升扩容效率，HashMap的容量（capacity）有一个固定的要求，**那就是一定是2的幂**。
+**所以，如果loadFactor是3/4也就是0.75的话，那么和capacity的乘积结果就可以是一个整数。**
+
+
+### 开放寻址法与链表法比较
+
+对于开放寻址法解决冲突的散列表，由于数据都存储在数组中，因此可以有效地利用 CPU 缓存加快查询速度(数组占用一块连续的空间)。但是删除数据的时候比较麻烦，需要特殊标记已经删除掉的数据。而且，在开放寻址法中，所有的数据都存储在一个数组中，比起链表法来说，冲突的代价更高。所以，使用开放寻址法解决冲突的散列表，负载因子的上限不能太大。这也导致这种方法比链表法更浪费内存空间。
+
+对于链表法解决冲突的散列表,对内存的利用率比开放寻址法要高。因为链表结点可以在需要的时候再创建，并不需要像开放寻址法那样事先申请好。链表法比起开放寻址法，对大装载因子的容忍度更高。开放寻址法只能适用装载因子小于1的情况。接近1时，就可能会有大量的散列冲突，性能会下降很多。但是对于链表法来说，只要散列函数的值随机均匀，即便装载因子变成10，也就是链表的长度变长了而已，虽然查找效率有所下降，但是比起顺序查找还是快很多。但是，链表因为要存储指针，所以对于比较小的对象的存储，是比较消耗内存的，而且链表中的结点是零散分布在内存中的，不是连续的，所以对CPU缓存是不友好的，这对于执行效率有一定的影响。
+
+
+## 跳表
+
+![跳表查找与插入](/img/noodle_plan/algo/skiplist1.jpg "跳表查找与插入")
+
+### 跳表增加数据时索引怎么变化
+
+![跳表插入具体过程](/img/noodle_plan/algo/skiplist_insert.jpg "跳表插入具体过程")
+
+从上面skiplist的创建和插入过程可以看出，每一个节点的层数（level）是随机出来的，而且新插入一个节点不会影响其它节点的层数。因此，插入操作只需要修改插入节点前后的指针，而不需要对很多节点都进行调整。这就降低了插入操作的复杂度。实际上，这是skiplist的一个很重要的特性，这让它在插入性能上明显优于平衡树的方案。这在后面我们还会提到。
+
+执行插入操作时计算随机数的过程，是一个很关键的过程，它对 skiplist 的统计特性有着很重要的影响。这并不是一个普通的服从均匀分布的随机数，它的计算过程如下：
+
+* 首先，每个节点肯定都有第 1 层指针（每个节点都在第 1 层链表里）。
+* 如果一个节点有第 i 层 (i>=1) 指针（即节点已经在第 1 层到第 i 层链表中），那么它有第 (i+1) 层指针的概率为 p。
+* 节点最大的层数不允许超过一个最大值，记为 MaxLevel。
+
+这个计算随机层数的伪码如下所示：
+
+``` golang
+randomLevel()
+    level := 1
+    // random()返回一个\[0...1)的随机数
+    while random() < p and level < MaxLevel do
+        level := level + 1
+    return level
+```
+
+randomLevel() 的伪码中包含两个参数，一个是 p，一个是 MaxLevel。在 Redis 的 skiplist 实现中，这两个参数的取值为：
+
+``` golang
+p = 1/4
+MaxLevel = 32
+```
+
+
+## 树
+
+* **二叉搜索树**: 记住一点, 其中序遍历是一个有序数组, 所以涉及到各种二叉搜索树(如AVL树/红黑树/B树/B+树)总是说要中序遍历扫描结点啥的
+    * 类似于 [给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) 这种题目就可以中序遍历之后得到一个有序数组然后遍历此数组求相邻元素的最小差值即可
+* **AVL树**: AVL树是带有平衡条件的二叉严格平衡查找树，一般是用平衡因子差值判断是否平衡并通过旋转来实现平衡，左右子树树高不超过1，和红黑树相比，它是严格的平衡二叉树，平衡条件必须满足（所有节点的左右子树高度差不超过1）。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道AVL树适合用于插入删除次数比较少，但查找多的情况。
+* **红黑树**: 一种二叉弱平衡查找树，但在每个节点增加一个存储位表示节点的颜色，可以是red或black。通过对任何一条从根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其它路径长出两倍。它是一种弱平衡二叉树(由于是若平衡，可以推出，相同的节点情况下，AVL树的高度低于红黑树)，相对于要求严格的AVL树来说，它的旋转次数变少，所以对于搜索、插入、删除操作多的情况下，我们就用红黑树。实际应用如下:
+    * 广泛用于C++的STL中，Map和Set都是用红黑树实现的；
+    * 著名的Linux进程调度Completely Fair Scheduler，用红黑树管理进程控制块，进程的虚拟内存区域都存储在一颗红黑树上，每个虚拟地址区域都对应红黑树的一个节点，左指针指向相邻的地址虚拟存储区域，右指针指向相邻的高地址虚拟地址空间；
+    * IO多路复用epoll的实现采用红黑树组织管理sockfd，以支持快速的增删改查；
+    * Nginx中用红黑树管理timer，因为红黑树是有序的，可以很快的得到距离当前最小的定时器；
+* **B树/B+树**: B/B+树是为了磁盘或其它存储设备而设计的一种平衡多路查找树(相对于二叉，B树每个内节点有多个分支)，与红黑树相比，在相同的的节点的情况下，一颗B/B+树的高度远远小于红黑树的高度, B/B+树上操作的时间通常由存取磁盘的时间和CPU计算时间这两部分构成，而CPU的速度非常快，所以B树的操作效率取决于访问磁盘的次数，关键字总数相同的情况下B树的高度越小，磁盘I/O所花的时间越少。(相关细节以及图片可以参考本文的[为什么说B+树比B树更适合数据库索引](#为什么说B类树更适合数据库索引))
+    * **B树**(也叫B-树, 这个`-`只是个符号...不是B减树哈)
+    * **B+树**: B+树是应文件系统所需而产生的一种B树的变形树（文件的目录一级一级索引，只有最底层的叶子节点（文件）保存数据）非叶子节点只保存索引，不保存实际的数据，数据都保存在叶子节点中，所有叶子节点都有一个链表指针把实际的数据用链表连在一起使得遍历整棵树只需要遍历叶子节点就行.
+
+
+### 二叉树
+
+* 遍历
+    * 深度优先遍历dfs
+        * 前序非递归
+        * 中序非递归
+        * 后序非递归
+    * 广度优先遍历bfs
+        * 层序遍历pending_fin
+* 非递归反转
+* 找两个结点的最近公共祖先, pending_fin
+* 二叉搜索树: 
+    * 它的左、右子树也分别为二叉排序树
+    * 其中序遍历是个从小到大的有序序列
+    * 找二叉搜索树的任意两个结点的最近公共祖先
+        * 在遍历过程中，遇到的第一个值介于n1和n2之间的节点n，也即n1 =< n <= n2, 就是n1和n2的LCA。
+        * 在遍历过程中，如果节点的值比n1和n2都大，那么LCA在节点的左子树。
+        * 在遍历过程中，如果节点的值比n1和n2都小，那么LCA在节点的右子树。
+
+二叉树的代码表示:
+``` python
+class BinaryTreeNode:
+    def __init__(self, val):
+        self.left = None
+        self.right = None
+        self.val = val
+```
+
+![](/img/algo_newbie/binary_tree/binary_tree_traverse_and_swap_1.png)
+
+如上图得到的相应的三种**深度优先遍历**的序列分别为 ： 
+
+ - **先(根)序遍历** ： ABCDEGF
+ - **中(根)序遍历** ： CBEGDFA
+ - **后(根)序遍历** ： CGEFDBA
+
+而得到的**广度优先遍历**的序列为 : ABCDEFG
+
+
+#### 统一形式的二叉树前中后序迭代遍历
+
+![](/img/algo_newbie/binary_tree/binary_tree_preorder_traversal.gif)
+
+``` python
+def binary_tree_preorder_traversal(root):
+    _result_arr = []
+    if not root:
+        return _result_arr
+    _temp_stack = []
+    _temp_stack.append(("go", root))
+    while _temp_stack:
+        _cmd, _cur_node = _temp_stack.pop(-1)
+        if _cmd == "print":
+            _result_arr.append(_cur_node.val)
+            continue
+        if _cur_node.right:
+            _temp_stack.append(("go", _cur_node.right))
+        if _cur_node.left:
+            _temp_stack.append(("go", _cur_node.left))
+        _temp_stack.append(("print", _cur_node))
+    return _result_arr
+
+
+def binary_tree_inorder_traversal(root):
+    _result_arr = []
+    if not root:
+        return _result_arr
+    _temp_stack = []
+    _temp_stack.append(("go", root))
+    while _temp_stack:
+        _cmd, _cur_node = _temp_stack.pop(-1)
+        if _cmd == "print":
+            _result_arr.append(_cur_node.val)
+            continue
+        if _cur_node.right:
+            _temp_stack.append(("go", _cur_node.right))
+        _temp_stack.append(("print", _cur_node))
+        if _cur_node.left:
+            _temp_stack.append(("go", _cur_node.left))
+    return _result_arr
+
+
+def binary_tree_postorder_traversal(root):
+    _result_arr = []
+    if not root:
+        return _result_arr
+    _temp_stack = []
+    _temp_stack.append(("go", root))
+    while _temp_stack:
+        _cmd, _cur_node = _temp_stack.pop(-1)
+        if _cmd == "print":
+            _result_arr.append(_cur_node.val)
+            continue
+        _temp_stack.append(("print", _cur_node))
+        if _cur_node.right:
+            _temp_stack.append(("go", _cur_node.right))
+        if _cur_node.left:
+            _temp_stack.append(("go", _cur_node.left))
+    return _result_arr
+```
+
+
+#### 二叉树层序遍历
+
+![](/img/algo_newbie/binary_tree/BreadthFirstTraverse1.png)
+
+注意看上图中的文字思路
+``` python
+def binary_tree_levelorder_traversal(root):
+    _result_arr = []
+    if not root:
+        return _result_arr
+    _temp_queue = []
+    _temp_queue.append(root)
+    while _temp_queue:
+        _cur_node = _temp_queue.pop(0)
+        _result_arr.append(_cur_node.val)
+        if _cur_node.left:
+            _temp_queue.append(_cur_node.left)
+        if _cur_node.right:
+            _temp_queue.append(_cur_node.right)
+    return _result_arr
+```
+
+
+#### 二叉树反转
+
+递归写法:
+``` python
+def binary_tree_swap_recursive(root):
+    if not root:
+        return
+    root.left, root.right = root.right, root.left
+    binary_tree_swap(root.left)
+    binary_tree_swap(root.right)
+```
+
+可以看到二叉树反转的递归写法跟前序遍历的递归写法很像,
+所以反转的迭代写法也可以对着前序遍历的迭代写法如法炮制:
+``` python
+def binary_tree_swap_iterative(root):
+    if not root:
+        return
+    _temp_stack = []
+    _temp_stack.append(("go", root))
+    while _temp_stack:
+        _cmd, _cur_node = _temp_stack.pop(-1)
+        if _cmd == "print":
+            # 参考前序遍历的迭代写法, 就只有这里改成了swap操作
+            _cur_node.left, _cur_node.right = _cur_node.right, _cur_node.left
+            continue
+        if _cur_node.right:
+            _temp_stack.append(("go", _cur_node.right))
+        _temp_stack.append(("print", _cur_node))
+        if _cur_node.left:
+            _temp_stack.append(("go", _cur_node.left))
+```
+
+
+## 链表
+
+* 可以使用虚头结点来处理问题
+* 链表反转
+* 虚头节点方便处理问题的思想
+* 双指针思想:
+    * 删除倒数第n个结点
+* 快慢指针的思想: 
+    * 判断链表中是否有环
+    * 找一个单链表的中间结点
+* 判断两个链表是否相交, 假设两个链表均不带环
+    * 最后一个元素必相同
+* 给定一个结点指针但不给头结点指针, 怎么删除该结点
+
+链表的代码表示:
+``` python
+class LinkList:
+    def __init__(self, val):
+        self.next = None
+        self.val = val
+```
+
+虚头结点的优点:
+* 虚头结点是为了操作的统一与方便而设立的，放在第一个元素结点之前，其数据域一般无意义（当然有些情况下也可存放链表的长度、用做监视哨等等）。
+* 有了虚头结点后，对在第一个元素结点前插入结点和删除第一个结点，其操作与对其它结点的操作统一了。
+
+
+### 链表反转
+
+![](/img/algo_newbie/link_list_reverse.gif)
+
+``` python
+def linklist_reverse(head):
+    if not head:
+        return
+    _pre = None
+    _cur = head
+    _temp_next = head.next
+    while _cur:
+        #先用_temp_next保存_cur的下一个节点的信息，
+        #保证单链表不会因为失去_cur节点的next而就此断裂
+        _temp_next = _cur.next
+        #保存完_temp_next，就可以让_cur的next指向_pre了
+        _cur.next = _pre
+        #让_pre，_cur依次向后移动一个节点，继续下一次的指针反转
+        _pre = _cur
+        _cur = _temp_next
+    return _pre
+```
+
+
+## 图论
+
+* 广度优先遍历dfs可以得到最短路径
+* 深度优先遍历bfs得到啥? pending_fin
+* 判断是否有环  pending_fin
+
+
+### 图的表示
+
+![](/img/algo_newbie/graph/graph3.png "邻接表表示无向图")
+![](/img/algo_newbie/graph/graph4.png "邻接表表示有向图")
+邻接表适合表示稀疏图(Sparse Graph), 代码如下: 
+``` python
+class SparseGraph:
+    def __init_(self, point_count, is_directed):
+        self.adjacency_list = [[] for _ in xrange(point_count)]  # 邻接表
+        self.is_directed = is_directed  # 是否为有向图
+        self.edge_count = 0  # 边的数量
+```
+
+![](/img/algo_newbie/graph/graph1.png "邻接矩阵表示无向图")
+![](/img/algo_newbie/graph/graph2.png "邻接矩阵表示有向图")
+邻接矩阵适合表示稠密图(Dense Graph), 代码如下:
+``` python
+class DenseGraph:
+    def __init__(self, point_count, is_directed):
+        self.adjacency_matrix = [ [ False for _ in xrange(point_count)] for _ in xrange(point_count) ]  # 邻接矩阵
+        self.is_directed = is_directed  # 是否为有向图
+        self.edge_count = 0  # 边的数量
+```
+
+
+### 图的深度优先遍历dfs
+
+![](/img/algo_newbie/graph_dfs.gif)
+
+``` python
+
+```
+
+# 算法
+
+基础:
+* 排序
+* 队列的使用
+* 栈的使用
+* 散列表的使用
+* 堆的使用
+
+高阶:
+* 递归
+* 回溯
+* 动态规划
+* 贪心算法
+
+
+### 排序算法
 
 ![](/img/algo_newbie/sort_algo_complexity.png "各类排序算法的复杂度")
 
-- **实用的基础排序算法**有四种:
+
+#### 排序算法要点总结
+
+- 实用的基础排序算法有四种:
     - [**插入排序**](#插入排序) : 在小数据量或者数据都较为有序的时候比起归并和快速排序有更佳的时间效率, 插入排序在这种情况下，只需要从头到尾扫描一遍，交换、移动少数元素即可；时间复杂度近乎 o(N)))。 所以插入排序经常可以当作是其他排序算法的子过程, 下面代码会有体现
     - [**快速排序**](#快速排序) : 时间复杂度依赖数据打乱的程度
         - 快排最差情形的时间复杂度是O(n2), 平均是O(nlogn)
@@ -36,9 +426,35 @@ categories:
         堆排序是渐进最优的比较排序算法，达到了O(nlgn)这一下界，而快排有一定的可能性会产生最坏划分，时间复杂度可能为O(n^2)，那为什么快排在实际使用中通常优于堆排序？
         - 虽然quick_sort会n^2（其实有稳定的nlgn的版本, 比如优化版的三路快排），但这毕竟很少出现。heap_sort大多数情况下比较次数都多于quick_sort，尽管大家都是nlgn。那就让倒霉蛋倒霉好了，大多数情况下快才是硬道理。
         - 堆排比较的几乎都不是相邻元素，对cache极不友好，这才是很少被采用的原因。数学上的时间复杂度不代表实际运行时的情况.快排是分而治之，每次都在同一小段进行比较，最后越来约接近局部性。反观堆排，堆化过程中需要一直拿index的当前元素A和处于`index*2 + 1` 的左子元素B以及处于`index*2 + 2` 的右子元素C比较, 两个元素距离较远。(局部性原理是指CPU访问存储器时，无论是存取指令还是存取数据，所访问的存储单元都趋于聚集在一个较小的连续区域中。)
-- 代码书写技巧:
+- **代码书写技巧**:
     - 归并和快排都是当`left_index >= right_index`时, 停止递归
-    - 堆排序, 如果其二叉堆数组index从0开始的话:
+    - 快排的partition过程分割index和遍历的初始index的选择:
+        - 普通快排:
+        ``` python
+        # partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
+        # 在这里这种写法就是 `left_index`
+        # 这才符合partition_index的定义:
+        #       partition_indexy指向小于pivot的那些元素的最后一个元素,
+        #       即 less_than_pivots_last_elem_index
+        # 因为还没找到比pivot小的元素之前, 
+        # partition_index是不应该指向任何待遍历的元素的
+        partition_index = less_than_pivots_last_elem_index = left_index
+
+        i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
+        ```
+        - 三路快排:
+        ``` python
+        # lt_index 指向小于pivot的那些元素的最右边的一个元素,
+        # lt_index 即 less_than_pivots_last_elem_index
+        # 因为还没找到比pivot小的元素之前, 
+        # lt_index 是不应该指向任何待遍历的元素的, 
+        # gt_index 同理, gt_index指向大于pivot的那些元素的最左边的一个元素,
+        lt_index = less_than_pivots_last_elem_index = left_index
+        gt_index = right_index + 1
+
+        i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
+        ```
+    - 堆排序, 如果其二叉堆数组index从0开始的话, 而且left_index也为0的话:
         * 最后一个非叶子节点的index为`(length/2 - 1)`
         * `left_child = 2*i + 1`
         * `right_child = 2*i + 2`
@@ -58,7 +474,7 @@ categories:
 **. . .**<!-- more -->
 
 
-## 插入排序
+#### 插入排序
 
 想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置
 
@@ -83,7 +499,7 @@ def insert_sort(arr, left_index, right_index):
                 break
 ```
 
-### 插排优化
+##### 插排优化
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
@@ -106,7 +522,7 @@ def insert_sort_optimize(arr, left_index, right_index):
 ```
 
 
-## 归并排序
+### 归并排序
 
 归并排序用了分治的思想，有很多算法在结构上是递归的：为了解决一个给定的问题，算法要一次或多次地递归调用其自身来解决相关的子问题。这些算法通常采用分治策略（divide-and-conquier）：将原问题划分成n个规模较小而结构与原问题相似的子问题；递归地解决这些子问题，然后再合并其结果，就得到原问题的解。
 
@@ -129,7 +545,7 @@ def insert_sort_optimize(arr, left_index, right_index):
 ![](/img/algo_newbie/merge_sort/merge_sort_anim1.gif "归并排序动画总览")
 
 
-### 归并排序的merge过程
+#### 归并排序的merge过程
 
 ![](/img/algo_newbie/merge_sort/merge_sort_anim2.gif "归并排序的merge过程")
 
@@ -164,7 +580,7 @@ def _merge(arr, left_index, mid_index, right_index):
 ```
 
 
-### 归并自顶向下的实现
+#### 归并自顶向下的实现
 
 ``` python
 def merge_sort(arr, left_index, right_index):
@@ -181,7 +597,7 @@ def merge_sort(arr, left_index, right_index):
     _merge(arr, left_index, mid_index, right_index)
 ```
 
-#### 归并自顶向下的优化实现
+##### 归并自顶向下的优化实现
 
 ``` diff
 def merge_sort_optimize(arr, left_index, right_index):
@@ -213,7 +629,7 @@ def merge_sort_optimize(arr, left_index, right_index):
 ```
 
 
-### 归并自底向上的实现
+#### 归并自底向上的实现
 
 ![](/img/algo_newbie/merge_sort/merge_sort_bottom_up.gif)
 
@@ -242,7 +658,7 @@ def merge_sort_bottom_up(arr, left_index, right_index):
         size *= 2  # size从1开始每次增加两倍
 ```
 
-#### 归并自底向上的优化实现
+##### 归并自底向上的优化实现
 
 ``` diff
 def merge_sort_bottom_up_optimize(arr, left_index, right_index):
@@ -288,7 +704,7 @@ def merge_sort_bottom_up_optimize(arr, left_index, right_index):
 ```
 
 
-## 快速排序
+### 快速排序
 
 与归并排序一样， 快排也是用了分治的思想。
 
@@ -310,7 +726,7 @@ A也重复上述步骤递归。
 ![](/img/algo_newbie/quick_sort/quick_sort_partition_anim.gif "partition过程动画演示")
 
 
-### 快排效率很差的情况
+#### 快排效率很差的情况
 
 ![](/img/algo_newbie/quick_sort/quick_sort_3.png)
 
@@ -318,7 +734,7 @@ A也重复上述步骤递归。
 所以当如果一个有序递增序列, 每次选基准都选最后一个, 那肯定效率很差了啊
 
 
-### 普通快排
+#### 普通快排
 
 **注意初始index的位置:** 
 ``` python
@@ -330,6 +746,8 @@ A也重复上述步骤递归。
 # 因为还没找到比pivot小的元素之前, 
 # partition_index是不应该指向任何待遍历的元素的
 partition_index = less_than_pivots_last_elem_index = left_index
+
+i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
 ```
 
 下面是原代码:
@@ -368,7 +786,7 @@ def quick_sort(arr, left_index, right_index):
     quick_sort(arr, partition_index+1, right_index)
 ```
 
-### 普通快排的优化
+#### 普通快排的优化
 
 通过[快排效率很差的情况](#快排效率很差的情况), 我们知道快排在面对已经比较有序数组的时候效率如果固定选择某个位置的pivot则性能较差, 所以我们加上两种优化方式:
 * 随机选pivot
@@ -424,7 +842,7 @@ def quick_sort_optimize(arr, left_index, right_index):
 ```
 
 
-### 解决普通快排有大量相同元素时的性能问题
+#### 解决普通快排有大量相同元素时的性能问题
 
 **对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大。**
 当数组中有大量相同元素的时候, 不管怎么选pivot都很容易变成下面这种情况导致分成子序列的不平衡, 这将极大的影响时间复杂度, 最差的情况会退化成O(N2)
@@ -432,7 +850,7 @@ def quick_sort_optimize(arr, left_index, right_index):
 ![](/img/algo_newbie/quick_sort/quick_sort_4.png)
 
 
-#### 双路快排-初步解决有大量相同元素的性能问题
+##### 双路快排-初步解决有大量相同元素的性能问题
 
 所以产生了双路快排的方式, 双路快速排序算法则不同，他使用两个索引值（i、j）用来遍历我们的序列，将小于等于v的元素放在索引i所指向位置的左边，而将大于等于v的元素放在索引j所指向位置的右边, 通过下图我们可以看到当等于v的情况也会发生交换, 这就基本可以保证等于v的元素也可以较为均匀的放到左右两边
 
@@ -441,7 +859,7 @@ def quick_sort_optimize(arr, left_index, right_index):
 **待改进的地方**: 还是把等于v的元素加入到了待处理的数据中, 之后又去重复计算这些等于v的元素了, 为了排除这些已经等于v的元素, 所以产生了[**三路快排**](#三路快排-完全解决有大量相同元素的性能问题)
 
 
-#### 三路快排-完全解决有大量相同元素的性能问题
+##### 三路快排-完全解决有大量相同元素的性能问题
 
 这是最经典的解决有大量重复元素的问题的快排方案, 被大多数系统所使用.
 
@@ -457,6 +875,8 @@ pivot = arr[pivot_index]
 # gt_index 同理, gt_index指向大于pivot的那些元素的最左边的一个元素,
 lt_index = less_than_pivots_last_elem_index = left_index
 gt_index = right_index + 1
+
+i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
 ```
 
 接下来是完整代码:
@@ -495,6 +915,8 @@ def quick_sort_3_ways(arr, left_index, right_index):
         elif arr[i] > pivot:
             arr[i], arr[gt_index-1] = arr[gt_index-1], arr[i]
             gt_index -= 1
+        else:
+            i += 1
     arr[pivot_index], arr[lt_index] = arr[lt_index], arr[pivot_index]
 
     quick_sort_3_ways(arr, left_index, lt_index)
@@ -502,7 +924,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 ```
 
 
-## 堆排序
+### 堆排序
 
 最大堆的堆排序之后的数组是升序, 最小堆反之.
 堆排序 HeapSort 由 以下两部分组成 :
@@ -510,7 +932,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 - [堆化 MaxHeapify](#堆化)
 - [建堆 BuildMaxHeap](#建堆)
 
-### 堆排序的复杂度
+#### 堆排序的复杂度
 
 * **时间复杂度** : 
     * **MaxHeapify** : **O(logN)**.
@@ -524,7 +946,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
   * **O(1)**, 因为没有用辅助内存.
 
 
-### 堆化
+#### 堆化
 
 **注意**: 以下演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
 
@@ -550,7 +972,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 ![](/img/algo_newbie/heap_sort/heap_sort_binary_heap_index.png)
 
 
-#### 堆化递归写法
+##### 堆化递归写法
 
 递归写法更容易理解一些:
 ``` python
@@ -576,7 +998,7 @@ def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
 ```
 
 
-#### 堆化迭代写法
+##### 堆化迭代写法
 
 
 ``` python
@@ -606,7 +1028,7 @@ def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
 该优化思想和我们之前对[插入排序进行优化](#插排优化)的思路是一致的, 此处这个优化代码就略了
 
 
-### 建堆
+#### 建堆
 
 我们对每一个不是叶结点的元素(当index从root_index=0开始, 即为 index 小于等于 `root_index + (length/2 - 1)` )自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
 
@@ -628,7 +1050,7 @@ def _build_max_heap(arr, left_index, right_index):
 ```
 
 
-### 堆排序原址排序的具体实现
+#### 堆排序原址排序的具体实现
 
 ![](/img/algo_newbie/heap_sort/heap_sort.gif "堆排序过程")
 
@@ -652,1085 +1074,4 @@ def heap_sort(arr, left_index , right_index):
         arr[root_index], arr[cur_right_index] = arr[cur_right_index], arr[root_index]
         cur_right_index -= 1
         _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
-```
-
-
-# 数据结构
-
-* 二叉树
-    * 二叉搜索树
-* 链表
-* 图
-
-
-## 二叉树
-
-* 遍历
-    * 深度优先遍历dfs
-        * 前序非递归
-        * 中序非递归
-        * 后序非递归
-    * 广度优先遍历bfs
-        * 层序遍历
-* 反转
-
-
-## 链表
-
-* 链表反转
-* 虚头节点方便处理问题的思想
-
-
-## 图论
-
-* 广度优先遍历dfs得到最短路径
-* 深度优先遍历bfs得到啥?
-
-
-# 算法思想
-
-基础:
-* 队列的使用
-* 栈的使用
-* 散列表的使用
-* 堆的使用
-
-高阶:
-* 递归
-* 回溯
-* 动态规划
-* 贪心算法
-
-
-# 算法与数据结构-综合提-C++版
-
-* [课程网址](https://coding.imooc.com/class/chapter/71.html#Anchor)
-* [GitHub代码仓库网址](https://github.com/liuyubobobo/Play-with-Algorithms)
-
-
-* 第一章：当我们在讨论算法的时候，我们在讨论什么？
-	1-1 我们究竟为什么要学习算法
-	1-2 课程介绍
-* 第二章：排序基础
-	2-1 选择排序法
-	2-2 使用模板（泛型）编写算法
-	2-3 随机生成算法测试用例
-	2-4 测试算法的性能
-	2-5 插入排序法
-	2-6 插入排序法的改进
-	2-7 更多关于O（n*2）排序算法的思考
-* 第三章：高级排序问题
-	3-1 归并排序法
-	3-2 归并排序法的实现
-	3-3 归并排序法的优化
-	3-4 自底向上的归并排序算法
-	3-5 快速排序法
-	3-6 随机化快速排序法
-	3-7 双路快速排序法
-	3-8 三路快速排序法
-	3-9 归并排序和快速排序的衍生问题
-* 第四章：堆和堆排序
-	4-1 为什么使用堆
-	4-2 堆的基本存储
-	4-3 Shift Up
-	4-4 Shift Down
-	4-5 基础堆排序和Heapify
-	4-6 优化的堆排序
-	4-7 排序算法总结
-	4-8 索引堆
-	4-9 索引堆的优化
-	4-10 和堆相关的其他问题
-* 第五章：二分搜索树
-	5-1 二分查找法
-	5-2 二分搜索树基础
-	5-3 二分搜索树的节点插入
-	5-4 二分搜索书的查找
-	5-5 二分搜索树的遍历（深度优先遍历）
-	5-6 层序遍历（广度优先遍历）
-	5-7 删除最大值，最小值
-	5-8 二分搜索树的删除
-	5-9 二分搜索树的顺序性
-	5-10 二分搜索树的局限性
-	5-11 树形问题和更多树。
-* 第六章：并查集
-	6-1 并查集基础
-	6-2 Qucik Find
-	6-3 Quick Union
-	6-4 基于size的优化
-	6-5 基于rank的优化
-	6-6 路径压缩
-* 第七章：图论
-	7-1 图论基础
-	7-2 图的表示
-	7-3 相邻点迭代器
-	7-4 图的算法框架
-	7-5 深度优先遍历和连通分量
-	7-6 寻路
-	7-7 广度优先遍历和最短路径
-	7-8 迷宫生成，ps抠图--更多无权图的应用
-* 第八章：最小生成树
-	8-1 有权图
-	8-2 最小生成树问题和切分定理
-	8-3 Prim算法的第一个实现
-	8-4 Prim算法的优化
-	8-5 优化后的Prim算法的实现
-	8-6 Krusk算法
-	8-7 最小生成树算法的思考
-* 第九章：最短路径
-	9-1 最短路径问题和松弛操作
-	9-2 Dijkstra算法的思想
-	9-3 实现Dijkstra算法
-	9-4 负权边和Bellman-Ford算法
-	9-5 实现Bellman-Ford算法
-	9-6 更多和最短路径相关的思考
-* 第十章：结束语
-	10-1 总结，算法思想，大家加油！
-
-
-# 玩转算法面试_从真题到思维全面提升算法思维
-
-* [课程网址](https://coding.imooc.com/class/chapter/82.html#Anchor)
-* [GitHub代码仓库网址](https://github.com/liuyubobobo/Play-with-Algorithm-Interview)
-
-
-* 第1章 算法面试到底是什么鬼?
-一提起算法面试，很多同学就会心有余悸。可其实，大多数企业的算法面试，并没有那么可怕。并不是一定要啃完整本《算法导论》，才能玩儿转算法面试；也并不是只有ACM参赛选手，才能笑傲算法面试。恰恰相反，大多数算法面试关注的算法思维，其实很基础。在这一章，和大家聊一聊，算法面试，到底是什么鬼？...
-
- 1-1 算法面试不仅仅是正确的回答问题试看
- 1-2 算法面试只是面试的一部分试看
- 1-3 如何准备算法面试试看
- 1-4 如何回答算法面试问题
-
-* 第2章 面试中的复杂度分析
-很多同学一提起复杂度分析就头疼，马上想起了《算法导论》中复杂的数学推导。但其实在一般的企业面试中，对复杂度的分析要求并没有那么高，但也是绕不过去的坎儿。在这一章，和大家介绍一下，面试中需要掌握的复杂度分析。...
-
- 2-1 究竟什么是大O（Big O）
- 2-2 对数据规模有一个概念
- 2-3 简单的复杂度分析
- 2-4 亲自试验自己算法的时间复杂度
- 2-5 递归算法的复杂度分析
- 2-6 均摊时间复杂度分析（Amortized Time Analysis）
- 2-7 避免复杂度的震荡
-
-* 第3章 数组中的问题其实最常见
-面试中的算法问题，有很多并不需要复杂的数据结构支撑。就是用数组，就能考察出很多东西了。其实，经典的排序问题，二分搜索等等问题，就是在数组这种最基础的结构中处理问题的。在这一章中，我们学习常见的数组中处理问题的方法。...
-
- 3-1 从二分查找法看如何写出正确的程序
- 3-2 改变变量定义，依然可以写出正确的算法
-
- 3-3 在LeetCode上解决第一个问题 Move Zeros
- 3-4 即使简单的问题，也有很多优化的思路
- 3-5 三路快排partition思路的应用 Sort Color
- 3-6 对撞指针 Two Sum II - Input Array is Sorted
- 3-7 滑动窗口 Minimum Size Subarray Sum
- 3-8 在滑动窗口中做记录 Longest Substring Without Repeating Characters
-
-* 第4章 查找表相关问题
-查找，是使用计算机处理问题时的一个最基本的任务，因此也是面试中非常常见的一类问题。很多算法问题的本质，就是要能够高效查找。学会使用系统库中的map和set，就已经成功了一半。
-
- 4-1 set的使用 Intersection of Two Arrays
- 4-2 map的使用 Intersection of Two Arrays II
- 4-3 set和map不同底层实现的区别
- 4-4 使用查找表的经典问题 Two Sum
- 4-5 灵活选择键值 4Sum II
- 4-6 灵活选择键值 Number of Boomerangs
- 4-7 查找表和滑动窗口 Contain Duplicate II
- 4-8 二分搜索树底层实现的顺序性 Contain Duplicate III
-
-* 第5章 在链表中穿针引线
-链表是一种特殊的线性结构，由于不能像数组一样进行随机的访问，所以和链表相关的问题有他自身的特点。我将之称为穿针引线。我们在这一章，就来看一看，如何在链表中穿针引线。
-
- 5-1 链表，在节点间穿针引线 Reverse Linked List
- 5-2 测试你的链表程序
- 5-3 设立链表的虚拟头结点 Remove Linked List Elements
- 5-4 复杂的穿针引线 Swap Nodes in Pairs
- 5-5 不仅仅是穿针引线 Delete Node in a Linked List
- 5-6 链表与双指针 Remove Nth Node Form End of List
-
-* 第6章 栈，队列，优先队列
-栈和队列虽然是简单的数据结构，但是使用这些简单的数据结构所解决的算法问题不一定简单。在这一章里，我们将来探索，和栈与队列相关的算法问题。
-
- 6-1 栈的基础应用 Valid Parentheses
- 6-2 栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal
- 6-3 运用栈模拟递归
- 6-4 队列的典型应用 Binary Tree Level Order Traversal
- 6-5 BFS和图的最短路径 Perfect Squares
- 6-6 优先队列
- 6-7 优先队列相关的算法问题 Top K Frequent Elements
-
-* 第7章 二叉树和递归
-递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。...
-
- 7-1 二叉树天然的递归结构, 104, 111, 100, 101, 222, 110
- 7-2 一个简单的二叉树问题引发的血案 Invert Binary Tree
- 7-3 注意递归的终止条件 Path Sum, 112, 111, 404
- 7-4 定义递归问题 Binary Tree Path, 257, 113, 129
- 7-5 稍复杂的递归逻辑 Path Sum III, 437
- 7-6 二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree, 235, 98, 450, 108, 230, 236
-
-* 第8章 递归和回溯法
-回溯法是解决很多算法问题的常见思想，甚至可以说是传统人工智能的基础方法。其本质依然是使用递归的方法在树形空间中寻找解。在这一章，我们来具体看一下将递归这种技术使用在非二叉树的结构中，从而认识回溯这一基础算法思想。...
-
- 8-1 树形问题 Letter Combinations of a Phone Number
- 8-2 什么是回溯, 93, 131
- 8-3 排列问题 Permutations, 47
- 8-4 组合问题 Combinations, 77, 39, 40, 216, 78, 90, 401
- 8-5 回溯法解决组合问题的优化
- 8-6 二维平面上的回溯法 Word Search, 79
- 8-7 floodfill算法，一类经典问题 Number of Islands-
- 8-8 回溯法是经典人工智能的基础 N Queens
-
-* 第9章 动态规划基础
-很多同学听到“动态规划”的名称可能会望而生畏，觉得动态规划的问题都很复杂。但其实，动态规划本质依然是递归算法，只不过是满足特定条件的递归算法。在这一章里，我们就来逐步解开动态规划的神秘面纱
-
- 9-1 什么是动态规划
-
- 9-2 第一个动态规划问题 Climbing Stairs, 70, 120, 64
- 9-3 发现重叠子问题 Integer Break, 343, 279, 91, 62, 63
- 9-4 状态的定义和状态转移 House Robber, 198, 213, 337, 309, 
- 9-5 0-1背包问题
- 9-6 0-1背包问题的优化和变种
- 9-7 面试中的0-1背包问题 Partition Equal Subset Sum, 416, 322, 377, 474, 139, 494
- 9-8 LIS问题 Longest Increasing Subsequence
- 9-9 LCS，最短路，求动态规划的具体解以及更多
-
-* 第10章 贪心算法
-通常同学们可能会认为贪心算法比较简单。确实，通常贪心算法的实现非常容易，但是，一个问题是否能够使用贪心算法，是一定要小心的。我们在这一章来看一看，贪心算法可能会有哪些坑。
-
- 10-1 贪心基础 Assign Cookies, 455, 392
- 10-2 贪心算法与动态规划的关系 Non-overlapping Intervals, 435
- 10-3 贪心选择性质的证明
-
-* 第11章 课程结语
-看完整个课程，我不能保证所有的同学都能百分百地对每一个算法面试问题应答自如，但认真学习的同学对大部分问题都应该已经有了一个合理的思维路径。在最后一章，我们再来简单地总结一下，并祝每一位同学都能找到自己喜欢的工作，大展宏图：）...
-
- 11-1 结语
-
-
-# 代码
-
-``` python
-#coding=utf-8
-
-import copy
-
-
-class treenode(object):
-
-    def __init__(self, v):
-        self.val = v
-        self.left = None
-        self.right = None
-
-
-def preorder_traversal(root):
-    """
-    url: https://coding.imooc.com/class/chapter/82.html#Anchor
-    玩转算法面试 从真题到思维全面提升算法思维
-    章节6-3
-    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归前序遍历(每个结点先入栈, 然后才访问打印),
-    所以可以很轻易的调节一下代码顺序就能模拟中序/后序遍历.
-    """
-    if not root:
-        return
-    stack = []
-    stack.append((root,'should_push'))
-    while stack:
-        node, should_print = stack.pop()
-        if should_print == 'should_print':
-            print (node.val)
-        else:
-            if node.right:
-                stack.append((node.right, 'should_push'))
-            if node.left:
-                stack.append((node.left, 'should_push'))
-            stack.append((node, 'should_print'))
-
-    """
-    url: https://github.com/MisterBooo/LeetCodeAnimation/blob/master/notes/LeetCode%E7%AC%AC144%E5%8F%B7%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86.md
-    用**栈(Stack)**的思路来处理问题。
-    前序遍历的顺序为根-左-右，具体算法为：
-
-    1. 把根节点 push 到栈中
-    2. 循环检测栈是否为空，若不空，则取出栈顶元素，保存其值
-    3. 看其右子节点是否存在，若存在则 push 到栈中
-    4. 看其左子节点，若存在，则 push 到栈中。
-    """
-    # _stack = []
-    # if root is None:
-    #     return
-    # _stack.append(root)
-
-    # while _stack:
-    #     root = _stack.pop()
-    #     print(root.val)
-    #     if root.right is not None:
-    #         _stack.append(root.right)
-    #     if root.left is not None:
-    #         _stack.append(root.left)
-
-
-def inorder_traversal(root):
-    """
-    url: https://coding.imooc.com/class/chapter/82.html#Anchor
-    玩转算法面试 从真题到思维全面提升算法思维
-    章节6-3
-    利用循环实现树的统一形式的中序遍历, 因为更好更形象地模拟了系统栈的递归中序遍历(每个结点先入栈, 然后才访问打印), 
-    所以可以很轻易的调节一下代码顺序就能模拟前序/后序遍历.
-    """
-    if not root:
-        return
-    stack = []
-    stack.append((root,'should_push'))
-    while stack:
-        node, should_print = stack.pop()
-        if should_print == 'should_print':
-            print (node.val)
-        else:
-            if node.right:
-                stack.append((node.right, 'should_push'))
-            stack.append((node, 'should_print'))
-            if node.left:
-                stack.append((node.left, 'should_push'))
-
-    """
-    url: https://github.com/MisterBooo/LeetCodeAnimation/blob/master/notes/LeetCode%E7%AC%AC94%E5%8F%B7%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.md
-    用**栈(Stack)**的思路来处理问题。
-
-    中序遍历的顺序为左-根-右，具体算法为：
-
-    1. 从根节点开始，先将根节点压入栈
-    2. 然后再将其所有左子结点压入栈，取出栈顶节点，保存节点值
-    3. 再将当前指针移到其右子节点上，若存在右子节点，则在下次循环时又可将其所有左子结点压入栈中
-    """
-    # _stack = []
-    # if root is None:
-    #     return
-    # # _stack.append(root)
-    # while (root is not None or _stack):
-    #     if root is not None:
-    #         _stack.append(root)
-    #         root = root.left
-    #     else:
-    #         root = _stack.pop()
-    #         print root.val
-    #         root = root.right
-
-
-def postorder_traversal(root):
-    """
-    url: https://coding.imooc.com/class/chapter/82.html#Anchor
-    玩转算法面试 从真题到思维全面提升算法思维
-    章节6-3
-    利用循环实现树的统一形式的前序遍历, 因为更好更形象地模拟了系统栈的递归后序遍历(每个结点先入栈, 然后才访问打印), 
-    所以可以很轻易的调节一下代码顺序就能模拟中序/前序遍历.
-    """
-    if not root:
-        return
-    stack = []
-    stack.append((root,'should_push'))
-    while stack:
-        node, should_print = stack.pop()
-        if should_print == 'should_print':
-            print (node.val)
-        else:
-            stack.append((node, 'should_print'))
-            if node.right:
-                stack.append((node.right, 'should_push'))
-            if node.left:
-                stack.append((node.left, 'should_push'))
-
-    # _stack = []
-    # if root is None:
-    #     return
-    # _result = []
-    # _stack.append(root)
-    # while _stack:
-    #     root = _stack.pop()
-    #     _result.insert(0, root.val)  # 逆序添加结点值
-    #     if root.left:
-    #         _stack.append(root.left) # 和传统先序遍历不一样，先将左结点入栈
-    #     if root.right:
-    #         _stack.append(root.right)
-    # print _result
-
-
-def levelorder_traversal(root):
-    _queue = []
-    if root is None:
-        return
-    _queue.append(root)
-    while _queue:
-        root = _queue.pop(0)
-        print root.val
-        if root.left:
-            _queue.append(root.left)
-        if root.right:
-            _queue.append(root.right)
-
-
-def merge(a, b):
-    c = []
-    h = j = 0
-    while j < len(a) and h < len(b):
-        if a[j] < b[h]:
-            c.append(a[j])
-            j += 1
-        else:
-            c.append(b[h])
-            h += 1
-
-    c.extend(a[j:])
-    c.extend(b[h:])
-
-    # if j == len(a):
-    #     for i in b[h:]:
-    #         c.append(i)
-    # else:
-    #     for i in a[j:]:
-    #         c.append(i)
-    # print c
-    return c
-
-
-def merge_sort(lists):
-    """
-    归并排序
-    url: https://www.cnblogs.com/shierlou-123/p/11310040.html
-    """
-    if len(lists) <= 1:
-        return lists
-    middle = len(lists)/2
-    left = merge_sort(lists[:middle])
-    right = merge_sort(lists[middle:])
-    return merge(left, right)
-
-
-def partition(arr, start_index, end_index):
-    pivot_index = end_index
-    last_small_elem_index = start_index -1
-
-    for travase_index in range(start_index, end_index):
-        if arr[travase_index] <= arr[pivot_index]:
-            last_small_elem_index += 1
-            arr[travase_index], arr[last_small_elem_index] = arr[last_small_elem_index], arr[travase_index]
-    partition_index = last_small_elem_index + 1
-    arr[partition_index], arr[end_index] = arr[end_index], arr[partition_index]
-    return partition_index
-
-def quick_sort_normal(arr, start_index, end_index):
-    """快排标准版, 原址的"""
-    if not arr:
-        return
-    if start_index < end_index:
-        partition_index = partition(arr, start_index, end_index)
-        quick_sort_normal(arr, start_index, partition_index-1)
-        quick_sort_normal(arr, partition_index+1, end_index)
-
-
-def quick_sort_simple(arr):
-    """快速排序好理解的版本, 但需要额外的数组空间"""
-    if len(arr) < 2:
-        return arr
-    # 选取基准，随便选哪个都可以，选中间的便于理解
-    mid = arr[len(arr) // 2]
-    # 定义基准值左右两个数列
-    left, right = [], []
-    # 从原始数组中移除基准值
-    arr.remove(mid)
-    for item in arr:
-        # 大于基准值放右边
-        if item >= mid:
-            right.append(item)
-        else:
-            # 小于基准值放左边
-            left.append(item)
-    # 使用迭代进行比较
-    
-    # print "mid: " + str(mid)
-    # print "left: " + str(left)
-    # print "right: " + str(right)
-    # print "---"
-
-    # ret_left = quick_sort(left)
-    # ret_right = quick_sort(right)
-    # ret_middile = [mid]
-    # # ret = quick_sort(left) + [mid] + quick_sort(right)
-    # ret = ret_left + ret_middile + ret_right
-
-    # # print "ret_left: " + str(ret_left)
-    # # print "ret_right: " + str(ret_right)
-    # # print "ret: " + str(ret)
-    # # print "---"
-
-    # return ret
-    return quick_sort_simple(left) + [mid] + quick_sort_simple(right)
-
-
-def insertion_sort(arr):
-    """插入排序"""
-    # 第一层for表示循环插入的遍数
-    for i in range(1, len(arr)):
-        # 设置当前需要插入的元素
-        current = arr[i]
-        # 与当前元素比较的比较元素
-        pre_index = i - 1
-        while pre_index >= 0 and arr[pre_index] > current:
-            # 当比较元素大于当前元素则把比较元素后移
-            arr[pre_index + 1] = arr[pre_index]
-            # 往前选择下一个比较元素
-            pre_index -= 1
-        # 当比较元素小于当前元素，则将当前元素插入在 其后面
-        arr[pre_index + 1] = current
-    return arr
-
-
-def heapify(arr, cur_start_index, cur_end_index):
-    # 左右子节点的下标
-    left = cur_start_index * 2 + 1
-    right = cur_start_index * 2 + 2
-    largest_index = cur_start_index
-    if left <= cur_end_index and arr[left] > arr[cur_start_index]:
-        largest_index = left
-    if right <= cur_end_index and arr[right] > arr[largest_index]:
-        largest_index = right
-    # 通过上面跟左右节点比较后，得出三个元素之间较大的下标，
-    # 如果较大下表不是父节点的下标，说明交换后需要重新调整大顶堆
-    if largest_index != cur_start_index:
-        arr[cur_start_index], arr[largest_index] = arr[largest_index], arr[cur_start_index]
-        heapify(arr, largest_index, cur_end_index)
-
-def heap_sort(arr):
-    """
-    堆排序
-    url: https://www.bilibili.com/video/av18980178/
-    """
-    # build heap
-    arr_len = len(arr)
-    # 构造大顶堆，从非叶子节点开始倒序遍历，因此是arr_len//2 -1 就是最后一个非叶子节点
-    for _index in range(arr_len//2-1, -1, -1):  # 第一个-1代表遍历到头, 后一个步长为-1也就是倒序
-        heapify(arr, _index, arr_len-1)
-
-    # iter & heapify
-    # 上面的循环完成了大顶堆的构造，那么就开始把根节点跟末尾节点交换，然后重新调整大顶堆  
-    for _i in range(arr_len-1, -1, -1):
-        arr[0], arr[_i] = arr[_i], arr[0]
-        heapify(arr, 0, _i-1)
-
-
-class ListNode(object):
-
-    def __init__(self, v):
-        self.val = v
-        self.next = None
-
-
-# url: https://blog.csdn.net/songyunli1111/article/details/79416684
-def reverse_list(pHead):
-    if not pHead or not pHead.next:
-        return pHead
-        
-    pre = None   #指向上一个节点
-    curr = pHead
-    tmp_next = curr.next   
-    while curr:
-        #先用tmp_next保存curr的下一个节点的信息，
-        #保证单链表不会因为失去curr节点的next而就此断裂
-        tmp_next = curr.next   
-        #保存完next，就可以让curr的next指向pre了
-        curr.next = pre
-        #让pre，curr依次向后移动一个节点，继续下一次的指针反转
-        pre = curr
-        curr = tmp_next
-    return pre
-
-
-def minPathSum(grid):
-	"""
-    url: https://blog.csdn.net/u010420283/article/details/84729567
-    思路分析: 当处于第一列时候(j=0)，dp[i][j]=grid[i-1][j]+grid[i][j]； 第一行时候（i=0），dp[i][j]=grid[i][j-1]+grid[i][j]。而在其它位置时候，dp[i][j]就等于它的上方或者左方格子数值最小的值加上grid当前格子的值，即：dp[i][j]=min(dp[i-1][j],dp[i][j-1])+grid[i][j]。
-    
-	:type grid: List[List[int]]
-	:rtype: int
-	"""
-	n = len(grid)
-	m = len(grid[0])
-	for i in range(1,n):
-		grid[i][0] = grid[i-1][0] + grid[i][0]   #首先需要寻找左边界各点的路径总和
-
-	for j in range(1,m):
-		grid[0][j] = grid[0][j-1] + grid[0][j]  #寻找上边界各点的路径总和
-
-	for i in range(1,n):
-		for j in range(1,m):
-			grid[i][j] = min(grid[i-1][j] , grid[i][j-1]) + grid[i][j]  #以边界处为依据一步步推出内部个点的路径总和
-
-	return grid[n-1][m-1]
-
-
-if __name__ == "__main__":
-    _t_a = treenode('a')
-    _t_b = treenode('b')
-    _t_c = treenode('c')
-    _t_d = treenode('d')
-    _t_e = treenode('e')
-    _t_f = treenode('f')
-    _t_g = treenode('g')
-
-    _t_a.left = _t_b
-    _t_b.left = _t_c
-    _t_b.right = _t_d
-    _t_d.left = _t_e
-    _t_d.right = _t_f
-    _t_e.right = _t_g
-
-    print "===preorder_traversal======="
-    preorder_traversal(_t_a)
-    print "====inorder_traversal======"
-    inorder_traversal(_t_a)
-    print "======postorder_traversal===="
-    postorder_traversal(_t_a)
-    print "====levelorder_traversal======"
-    levelorder_traversal(_t_a)
-
-    num_list_for_sort = [8, 4, 5, 7, 1, 3, 6, 2]
-    # print a[2:]
-    print "=======merge_sort---==="
-    print (merge_sort(num_list_for_sort))
-    print "=======quick_sort_normal---==="
-    temp_arr = copy.deepcopy(num_list_for_sort)
-    quick_sort_normal(temp_arr, 0, len(num_list_for_sort)-1)
-    print temp_arr
-    print "=======quick_sort_simple---==="
-    print (quick_sort_simple(copy.deepcopy(num_list_for_sort)))
-    print "=======insertion_sort---==="
-    print (insertion_sort(num_list_for_sort))
-
-            
-    head=ListNode(1);    #测试代码
-    p1=ListNode(2);      #建立链表1->2->3->4->None;
-    p2=ListNode(3);
-    p3=ListNode(4);
-    head.next=p1;
-    p1.next=p2;
-    p2.next=p3;
-    p=reverse_list(head);   #输出链表 4->3->2->1->None
-    print "=======reverse_list---==="
-    while p:
-        print p.val;
-        p = p.next
-
-    print "_____minPathSum-----"    
-    grid_list = [
-        [1,3,1],
-        [1,5,1],
-        [4,2,1]
-    ]
-    print(minPathSum(grid_list))
-
-    print "------------heap_sort-------"
-    num_list_for_heap_sort = [8, 4, 5, 7, 1, 3, 6, 2]
-    heap_sort(num_list_for_heap_sort)
-    print num_list_for_heap_sort
-```
-
-
-# 完整参考代码
-
-``` python
-# encoding=utf-8
-
-import random
-import copy
-
-
-def insert_sort(arr, left_index, right_index):
-    if not arr:
-        return
-    for i in xrange(left_index+1, right_index+1):  # 从left_index+1开始, 也就是从第二个开始
-        for j in xrange(i, left_index, -1):
-            if arr[j] < arr[j-1]:  # 注意保证j-1大于0
-                # 通过不断的与前面已经排好序的元素比较并交换, 
-                arr[j-1], arr[j] = arr[j], arr[j-1]
-            else:
-                break
-
-
-def insert_sort_optimize(arr, left_index, right_index):
-    if not arr:
-        return
-    for i in xrange(left_index+1, right_index+1):  # 从left_index+1开始, 也就是从第二个开始
-        temp_i_val = arr[i]
-        j = i
-        while j >= left_index+1:
-            if temp_i_val < arr[j-1]:  # 注意保证j-1大于0
-                arr[j] = arr[j-1]  # 通过不断的与前面已经排好序的元素比较并直接赋值
-                j -= 1
-            else:
-                break        
-        arr[j] = temp_i_val  # 已经找到该插入的地方了, 直接赋值
-
-
-def _merge(arr, left_index, mid_index, right_index):
-    """
-    归并的具体思路:  
-        回到我们玩扑克牌的例子，假设桌上有两堆牌面朝上的牌，每堆都已**排序**，最小的牌在顶上。
-        我们希望把这两堆牌合并成单一的排好序的输出堆，牌面朝下地放在桌上。
-        我们的基本步骤包括在牌面朝上的两堆牌的顶上两张牌中选取较小的一张，将该牌从其堆中移开（该堆的顶上将
-        显露一张新牌）并牌面朝下地将该牌放置到输出堆。
-        重复这个步骤，直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
-    """
-    # 注释掉下面这句是因为mid不一定等于(l+r)/2, 比如在`merge_sort_bottom_up()`就有可能
-    # mid_index = left_index + (right_index - left_index) / 2
-    temp_arr = []
-    i = left_index
-    j = mid_index + 1
-    while i <= mid_index and j <= right_index:
-        if arr[i] <= arr[j]:
-            temp_arr.append(arr[i])
-            i += 1
-        else:
-            temp_arr.append(arr[j])
-            j += 1
-    # 这一步是模拟: 直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
-    temp_arr.extend(arr[i:mid_index+1]) 
-    temp_arr.extend(arr[j:right_index+1])  # 注意右边界是小于等于right_index的
-    # 把归并好的数组数据放到原数组left_index到right_index的位置上去
-    for m in xrange(0, right_index-left_index+1):
-        arr[left_index+m] = temp_arr[m]
-        
-        
-def merge_sort(arr, left_index, right_index):
-    # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
-    # 说明left_index, right_index已经相邻了,
-    # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
-    if not arr or left_index >= right_index:
-        return
-    # 注意这里不能直接 `mid_index=(left_index+right_index)/2`,
-    # 防止当left_index和right_index很大的时候他们之和溢出
-    mid_index = left_index + (right_index - left_index) / 2
-    merge_sort(arr, left_index, mid_index)
-    merge_sort(arr, mid_index+1, right_index)
-    _merge(arr, left_index, mid_index, right_index)
-    
-
-def merge_sort_optimize(arr, left_index, right_index):
-    # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
-    # 说明left_index, right_index已经相邻了,
-    # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
-    if not arr or left_index >= right_index:
-        return
-
-    # 优化1:
-    #   数据量较小则使用插入排序
-    if (right_index - left_index) < 15:
-        insert_sort_optimize(arr, left_index, right_index)
-        return
-
-    # 注意这里不能直接 `mid_index=(left_index+right_index)/2`,
-    # 防止当left_index和right_index很大的时候他们之和溢出
-    mid_index = left_index + (right_index - left_index) / 2
-    merge_sort(arr, left_index, mid_index)
-    merge_sort(arr, mid_index+1, right_index)
-
-    # 优化2: 
-    #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
-    #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
-    #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
-    #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
-    if arr[mid_index] > arr[mid_index+1]:
-        _merge(arr, left_index, mid_index, right_index)
-
-
-def merge_sort_bottom_up(arr, left_index, right_index):
-    if not arr or left_index >= right_index:
-        return
-    arr_len = right_index - left_index + 1
-    size = 1
-    # 注意这里不是 `while size <= arr_len/2`,
-    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
-    # 那只有size为8, 这样2倍size才能把arr全部归并
-    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
-    while size < arr_len:
-        cur_left_index = left_index
-        while cur_left_index <= right_index-size:
-            cur_mid_index = cur_left_index + size -1
-            possible_right_index = cur_left_index + 2*size -1
-            # possible_right_index有可能已经大于right_index了, 所以要min一下
-            cur_right_index = min(possible_right_index, right_index)
-            # 归并从i位置开始的两倍size的一组数据
-            _merge(arr, cur_left_index, cur_mid_index, cur_right_index)
-            cur_left_index += size * 2  # 每次归并完一组数据就i移动size的两倍
-        # print "size: %d" % size
-        # print arr
-        size *= 2  # size从1开始每次增加两倍
-        
-
-def merge_sort_bottom_up_optimize(arr, left_index, right_index):
-    if not arr or left_index >= right_index:
-        return
-
-    # 优化1:
-    #   先以size为16为一组数据来逐个对每组插入排序一遍
-    size = 16
-    cur_left_index = left_index
-    while cur_left_index < right_index:
-        possible_right_index = cur_left_index + 2*size -1
-         # possible_right_index有可能已经大于right_index了, 所以要min一下
-        cur_right_index = min(possible_right_index, right_index)
-        insert_sort(arr, cur_left_index, cur_right_index)
-        cur_left_index += size  # 右移到下一个size大小开头位置
-    
-    arr_len = right_index - left_index + 1
-    # size = 1
-    
-    # 注意这里不是 `while size <= arr_len/2`,
-    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
-    # 那只有size为8, 这样2倍size才能把arr全部归并
-    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
-    while size < arr_len:
-        cur_left_index = left_index
-        while cur_left_index <= right_index-size:
-            cur_mid_index = cur_left_index + size -1
-            possible_right_index = cur_left_index + 2*size -1
-            # possible_right_index有可能已经大于right_index了, 所以要min一下
-            cur_right_index = min(possible_right_index, right_index)
-            # 归并从i位置开始的两倍size的一组数据
-            # 优化2: 
-            #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
-            #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
-            #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
-            #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
-            if arr[cur_mid_index] > arr[cur_mid_index+1]:
-                _merge(arr, cur_left_index, cur_mid_index, cur_right_index)
-            cur_left_index += size * 2  # 每次归并完一组数据就i移动size的两倍
-        # print "size: %d" % size
-        # print arr
-        size *= 2  # size从1开始每次增加两倍
-        
-
-def _partition(arr, left_index, right_index):
-    # 选一个元素作为枢轴量,
-    # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
-    pivot_index = left_index
-    pivot = arr[pivot_index]
-    # partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
-    # 在这里这种写法就是 `left_index`
-    # 这才符合partition_index的定义:
-    #       partition_indexy指向小于pivot的那些元素的最后一个元素,
-    #       即 less_than_pivots_last_elem_index
-    # 因为还没找到比pivot小的元素之前, 
-    # partition_index是不应该指向任何待遍历的元素的
-    partition_index = less_than_pivots_last_elem_index = left_index
-
-    i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
-    while i <= right_index:
-        if arr[i] < pivot:
-            arr[i], arr[partition_index+1] = arr[partition_index+1], arr[i]
-            partition_index += 1
-        i += 1
-    arr[pivot_index], arr[partition_index] = arr[partition_index], arr[pivot_index]
-    return partition_index
-
-
-def quick_sort(arr, left_index, right_index):
-    # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
-    if not arr or left_index >= right_index:
-        return
-    partition_index = _partition(arr, left_index, right_index)
-    # 把partition_index左边的数据再递归快排一遍
-    quick_sort(arr, left_index, partition_index-1)
-    quick_sort(arr, partition_index+1, right_index)
-
-
-def _partition_optimize(arr, left_index, right_index):
-    # 选一个元素作为枢轴量,
-    # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
-    pivot_index = left_index
-
-    # 优化1:
-    # 随机选一个元素和最左边的交换,
-    # 配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
-    rand_index = random.randint(left_index, right_index)
-    arr[pivot_index], arr[rand_index] = arr[rand_index], arr[pivot_index]
-
-    pivot = arr[pivot_index]
-    # partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
-    # 在这里这种写法就是 `left_index`
-    # 这才符合partition_index的定义:
-    #       partition_indexy指向小于pivot的那些元素的最后一个元素,
-    #       即 less_than_pivots_last_elem_index
-    # 因为还没找到比pivot小的元素之前, 
-    # partition_index是不应该指向任何待遍历的元素的
-    partition_index = less_than_pivots_last_elem_index = left_index
-
-    i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
-    while i <= right_index:
-        if arr[i] < pivot:
-            arr[i], arr[partition_index+1] = arr[partition_index+1], arr[i]
-            partition_index += 1
-        i += 1
-    arr[pivot_index], arr[partition_index] = arr[partition_index], arr[pivot_index]
-    return partition_index
-
-
-def quick_sort_optimize(arr, left_index, right_index):
-    # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
-    if not arr or left_index >= right_index:
-        return
-    # 优化2:
-    #   小数组用插排
-    if (right_index - left_index) <= 15:
-        insert_sort(arr, left_index, right_index)
-        return
-    partition_index = _partition(arr, left_index, right_index)
-    # 把partition_index左边的数据再递归快排一遍
-    quick_sort(arr, left_index, partition_index-1)
-    quick_sort(arr, partition_index+1, right_index)
-    
-
-def quick_sort_3_ways(arr, left_index, right_index):
-    # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
-    if not arr or left_index >= right_index:
-        return
-    if (right_index - left_index) <= 15:
-        insert_sort(arr, left_index, right_index)
-        return
-
-    # 选一个元素作为枢轴量,
-    # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
-    pivot_index = left_index
-    # 随机选一个元素和最左边的交换,
-    # 配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
-    rand_index = random.randint(left_index, right_index)
-    arr[pivot_index], arr[rand_index] = arr[rand_index], arr[pivot_index]
-    
-    pivot = arr[pivot_index]
-    # lt_index 指向小于pivot的那些元素的最右边的一个元素,
-    # lt_index 即 less_than_pivots_last_elem_index
-    # 因为还没找到比pivot小的元素之前, 
-    # lt_index 是不应该指向任何待遍历的元素的, 
-    # gt_index 同理, gt_index指向大于pivot的那些元素的最左边的一个元素,
-    lt_index = less_than_pivots_last_elem_index = left_index
-    gt_index = right_index + 1
-
-    i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
-    while i < gt_index:
-        if arr[i] < pivot:
-            arr[i], arr[lt_index+1] = arr[lt_index+1], arr[i]
-            lt_index += 1
-            i += 1
-        elif arr[i] > pivot:
-            arr[i], arr[gt_index-1] = arr[gt_index-1], arr[i]
-            gt_index -= 1
-        else:
-            i += 1
-    arr[pivot_index], arr[lt_index] = arr[lt_index], arr[pivot_index]
-
-    quick_sort_3_ways(arr, left_index, lt_index)
-    quick_sort_3_ways(arr, gt_index, right_index)
-    
-
-# 递归版, 对 pending_heapify_index 元素执行堆化
-def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
-    if pending_heapify_index >= right_index:  # 当满足此条件, 应该结束`_max_heapify_recursive`递归了
-        return
-    left_child_index = 2 * (pending_heapify_index-left_index) + 1
-    right_child_index = left_child_index + 1
-
-    # 选出 pending_heapify_index 的左右孩子中最大的元素,
-    # 并与 pending_heapify_index 元素交换
-    cur_max_index = pending_heapify_index
-    if left_child_index <= right_index and arr[cur_max_index] < arr[left_child_index]:
-        cur_max_index = left_child_index
-    if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
-        cur_max_index = right_child_index
-
-    # 若当前已经是最大元素了, 则停止递归, 如果不是则执行交换与继续递归
-    if cur_max_index != pending_heapify_index:
-        arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
-        _max_heapify_recursive(arr, cur_max_index, left_index, right_index)  # 继续 堆化 cur_max_index 的子元素
-
-
-# 对 迭代版, pending_heapify_index 元素执行堆化
-def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
-    left_child_index = 2 * (pending_heapify_index-left_index) + 1
-    while left_child_index <= right_index:
-        right_child_index = left_child_index + 1
-        # 选出 pending_heapify_index 的左右孩子中最大的元素,
-        # 并与 pending_heapify_index 元素交换
-        cur_max_index = pending_heapify_index
-        if left_child_index <= right_index and arr[cur_max_index] < arr[left_child_index]:
-            cur_max_index = left_child_index
-        if right_child_index <= right_index and arr[cur_max_index] < arr[right_child_index]:
-            cur_max_index = right_child_index
-
-        # 若当前已经是最大元素了, 则直接break, 如果不是则执行交换与继续新一轮的堆化循环
-        if cur_max_index != pending_heapify_index:
-            arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
-            pending_heapify_index = cur_max_index
-            left_child_index = 2 * (pending_heapify_index-left_index) + 1
-        else:
-            break
-
-
-def _build_max_heap(arr, left_index, right_index):
-    # 建堆, 从最后一个非叶结点开始, 自底向上堆化就建好了一个最大堆
-    root_index = left_index
-    arr_len = right_index - left_index + 1
-    last_none_leaf_index = root_index + (arr_len/2 - 1)
-
-    i = last_none_leaf_index
-    while i >= root_index:
-        _max_heapify_recursive(arr, i, left_index, right_index)
-        i -= 1
-
-
-def heap_sort(arr, left_index , right_index):
-    if not arr or left_index >= right_index or right_index <= 0:
-        return
-    _build_max_heap(arr, left_index, right_index)
-    # 把数组中的第一个元素(即根节点)也就是当前堆的最大元素逐个和数组后面的元素交换
-    # 交换后根节点已经违背最大堆性质了, 但其他的元素还是符合最大堆性质的
-    # 所以然后要对根节点做一次堆化操作
-    cur_right_index = right_index
-    root_index = left_index
-    while cur_right_index >= root_index:
-        arr[root_index], arr[cur_right_index] = arr[cur_right_index], arr[root_index]
-        cur_right_index -= 1
-        _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
-
-
-sort_algo_func_list = [
-    insert_sort,
-    merge_sort, merge_sort_bottom_up, merge_sort_bottom_up_optimize, 
-    quick_sort, quick_sort_optimize, quick_sort_3_ways,
-    heap_sort,
-]
-test_arr_list = [
-    [4, 3, 5, 1, 88, 0, -7, 2, 66, -58],
-    [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-    [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
-    [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
-    [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58, 4, 3, 5, 1, 88],
-    [0, -7, 2, 66, -58, 4, 3, 5, 1, 884, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-    [-3, -7, 1, 2, 3, 4, 5, 6, 7, 8, 21, 42, 87, 99, 66, 32, 91, 19, 28],
-    [8, 7, 6, 5, 4, 3, 2, 1, 0, -1, 21, 42, 87, 99, 66, 32, 91, 19, 28],
-]
-for _sort_algo in sort_algo_func_list:
-    print _sort_algo.__name__
-    is_test_pass = True
-    for _test_arr in test_arr_list:
-        _copy_test_arr = copy.deepcopy(_test_arr)
-        _sort_algo(_copy_test_arr, 0, len(_copy_test_arr)-1)
-        # print _copy_test_arr
-        pre_elem = _copy_test_arr[0]
-        for _elem in _copy_test_arr:
-            if _elem < pre_elem:
-                print  "is not ordered: " + str(_test_arr)
-                is_test_pass = False
-                break
-    print "-------------test " + \
-        ("pass" if is_test_pass else "not pass") + \
-        "---------------\n"
 ```

@@ -27,7 +27,7 @@ typedef struct BinTreeNode
 
 ## 二叉树的广度优先遍历
 
-{% asset_img BreadthFirstTraverse1.png BreadthFirstTraverse %}
+![](/img/algo_newbie/binary_tree/BreadthFirstTraverse1.png)
 
 ``` c++
 void BreadthFirstTraverse( btnp bTreeNode )
@@ -230,7 +230,8 @@ void PostOrderTraverseNonRecursion( btnp bTreeNode )
 ### 遍历测试代码
 
 
-{% asset_img binary_tree_traverse_and_swap_1.png %}
+![](/img/algo_newbie/binary_tree/binary_tree_traverse_and_swap_1.png)
+
 
 如上图得到的相应的三种**深度优先遍历**的序列分别为 ： 
 

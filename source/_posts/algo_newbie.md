@@ -344,11 +344,13 @@ def linklist_reverse(head):
 ## 图论
 
 * 广度优先遍历dfs可以得到最短路径
-* 深度优先遍历bfs得到啥? pending_fin
-* 判断是否有环  pending_fin
+* 深度优先遍历bfs有啥用? [图的深度优先遍历dfs](#图的深度优先遍历dfs)
 
 
 ### 图的表示
+
+下面这个图结构就有三个连通分量:
+![](/img/algo_newbie/graph/graph_connected_component.png)
 
 邻接表适合表示稀疏图(Sparse Graph):
 ![](/img/algo_newbie/graph/graph3.png "邻接表表示无向图")
@@ -366,6 +368,7 @@ class GraphBase(object):
     def __init__(self, point_count, is_directed):
         self.adjacency_container = None
         self.is_directed = is_directed  # 是否为有向图
+        self.connected_components_count = 0  # 连通分量个数
     
     # 深度优先遍历
     def graph_dfs(self):
@@ -373,6 +376,10 @@ class GraphBase(object):
         for _cur_point_index in xrange(0, len(self.adjacency_container)):
             if _cur_point_index not in visited_arr:
                 self._dfs_by_point(_cur_point_index, visited_arr)
+                # 运行到此处, 说明已经把所有和_cur_point_index 相连接的点都遍历完了,
+                # A-B-C 也算作 A和C相连接的,
+                # 其他的点肯定在另一个连接分量中
+                self.connected_components_count += 1
         return visited_arr
 
     def _dfs_by_point(self, cur_point_index, visited_arr):
@@ -424,19 +431,33 @@ class DenseGraph(GraphBase):
 
 ![](/img/algo_newbie/graph/graph_dfs.gif)
 
-图的深度优先遍历（DFS）；
-1. 访问指定的起始顶点；
-2. 若当前访问的顶点的邻接顶点有未被访问的，则任选一个访问之；反之，退回到最近访问过的顶点；直到与起始顶点相通的全部顶点都访问完毕；
-3. 若此时图中尚有顶点未被访问，则再选其中一个顶点作为起始顶点并访问之，转 2； 反之，遍历结束
+图的深度优先遍历（DFS）, 深度优先遍历尽可能优先往深层次进行搜索；
+1. 首先访问出发点v，并将其标记为已访问过；
+2. 然后依次从v出发搜索v的每个邻接点w。若w未曾访问过，则以w为新的出发点继续进行深度优先遍历，直至图中所有和源点v有路径相通的顶点均已被访问为止。
+3. 若此时图中仍有未访问的顶点，则另选一个尚未访问的顶点为新的源点重复上述过程，直至图中所有的顶点均已被访问为止。
 
 [代码](#图的表示)在上方已经有了, 其代码中的 `graph_dfs` 就是.
 
-**图dfs用途**: 可以获得两点之间的一条路径
+**图dfs用途**: 
+* 可以获得两点之间的一条路径
+* 判断图是否有环: 
+    * [leetcode原题201与题解](https://leetcode-cn.com/problems/course-schedule/solution/course-schedule-tuo-bu-pai-xu-bfsdfsliang-chong-fa/)
+    * 大致算法思想: 一条深度遍历路线中如果有结点被第二次访问到，那么有环。我们用一个变量来标记某结点的访问状态（未访问，访问过，其后结点都被访问过），然后判断每一个结点的深度遍历路线即可。
 
 
 ### 图的广度优先遍历bfs
 
+![](/img/algo_newbie/graph/graph_bfs.gif)
 
+也可以称为层序遍历, 广度优先遍历按层次优先搜索最近的结点，一层一层往外搜索:
+1. 首先访问出发点v，接着依次访问v的所有邻接点w1、w2......wt，
+2. 然后依次访问w1、w2......wt邻接的所有未曾访问过的顶点。
+3. 以此类推，直至图中所有和源点v有路径相通的顶点都已访问到为止。此时从v开始的搜索过程结束。
+
+图的bfs一般要用一个队列来实现, [代码](#图的表示)在上方已经有了, 其代码中的 `graph_bfs` 就是.
+
+**图bfs用途**: 
+* 可以获得两点之间的最短路径
 
 
 # 算法

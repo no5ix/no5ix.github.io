@@ -139,9 +139,9 @@ MaxLevel = 32
         * 中序非递归
         * 后序非递归
     * 广度优先遍历bfs
-        * 层序遍历pending_fin
+        * 层序遍历
 * 非递归反转
-* 找两个结点的最近公共祖先, pending_fin
+* 找普通二叉树的两个结点的最近公共祖先LCA问题
 * 二叉搜索树: 
     * 它的左、右子树也分别为二叉排序树
     * 其中序遍历是个从小到大的有序序列
@@ -366,12 +366,20 @@ class GraphBase(object):
     # 图的基类
 
     def __init__(self, point_count, is_directed):
+        # 因为稀疏图一般用邻接表来保存图的顶点数据,
+        # 而稠密图一般用邻接矩阵来表示, 所以他们的保存邻接点容器是不同的,
+        # 留给具体子类来指定, 此处用 `self.adjacency_container = None`表示即可
         self.adjacency_container = None
         self.is_directed = is_directed  # 是否为有向图
         self.connected_components_count = 0  # 连通分量个数
     
-    # 深度优先遍历
     def graph_dfs(self):
+        """
+        图的深度优先遍历（DFS）, 深度优先遍历尽可能优先往深层次进行搜索；
+        1. 首先访问出发点v，并将其标记为已访问过；
+        2. 然后依次从v出发搜索v的每个邻接点w。若w未曾访问过，则以w为新的出发点继续进行深度优先遍历，直至图中所有和源点v有路径相通的顶点均已被访问为止。
+        3. 若此时图中仍有未访问的顶点，则另选一个尚未访问的顶点为新的源点重复上述过程，直至图中所有的顶点均已被访问为止。
+        """
         visited_arr = []
         for _cur_point_index in xrange(0, len(self.adjacency_container)):
             if _cur_point_index not in visited_arr:
@@ -388,8 +396,14 @@ class GraphBase(object):
             if _next_point_index not in visited_arr:
                 self._dfs_by_point(_next_point_index, visited_arr)
 
-    # 广度优先遍历
     def graph_bfs(self):
+        """
+        图的广度优先遍历, 也可以称为图的层序遍历, 广度优先遍历按层次优先搜索最近的结点，一层一层往外搜索:
+        1. 首先访问出发点v，接着依次访问v的所有邻接点w1、w2......wt，
+        2. 然后依次访问w1、w2......wt邻接的所有未曾访问过的顶点。
+        3. 以此类推，直至图中所有和源点v有路径相通的顶点都已访问到为止。此时从v开始的搜索过程结束。
+        4. 若此时图中仍有未访问的顶点，则另选一个尚未访问的顶点为新的源点重复上述过程，直至图中所有的顶点均已被访问为止。
+        """
         result_arr = []
         visited_set = set()  # 用来记录某个顶点是否已经访问过
         _temp_queue = []
@@ -408,7 +422,12 @@ class GraphBase(object):
 
 
     def _iter_adjacent_points(self, cur_point_index):
-        raise NotImplementedError 
+        """
+        因为稀疏图一般用邻接表来保存图的顶点数据,
+        而稠密图一般用邻接矩阵来表示,
+        所以他们的遍历邻接点的方式是不同的, 留给具体的子类来实现.
+        """
+        raise NotImplementedError
 
 
 class SparseGraph(GraphBase):
@@ -529,26 +548,13 @@ test_dense_graph graph bfs:
 
 # 算法
 
-基础:
-* 排序
-* 队列的使用
-* 栈的使用
-* 散列表的使用
-* 堆的使用
 
-高阶:
-* 递归
-* 回溯
-* 动态规划
-* 贪心算法
-
-
-### 排序算法
+## 排序算法
 
 ![](/img/algo_newbie/sort_algo_complexity.png "各类排序算法的复杂度")
 
 
-#### 排序算法要点总结
+### 排序算法要点总结
 
 - 实用的基础排序算法有四种:
     - [**插入排序**](#插入排序) : 在小数据量或者数据都较为有序的时候比起归并和快速排序有更佳的时间效率, 插入排序在这种情况下，只需要从头到尾扫描一遍，交换、移动少数元素即可；时间复杂度近乎 o(N)))。 所以插入排序经常可以当作是其他排序算法的子过程, 下面代码会有体现
@@ -620,7 +626,7 @@ test_dense_graph graph bfs:
 **. . .**<!-- more -->
 
 
-#### 插入排序
+### 插入排序
 
 想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置
 
@@ -645,7 +651,7 @@ def insert_sort(arr, left_index, right_index):
                 break
 ```
 
-##### 插排优化
+#### 插排优化
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
@@ -1220,4 +1226,89 @@ def heap_sort(arr, left_index , right_index):
         arr[root_index], arr[cur_right_index] = arr[cur_right_index], arr[root_index]
         cur_right_index -= 1
         _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
+```
+
+
+## 二叉树与递归思想
+
+递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。
+
+
+### path_sum
+
+![](/img/algo_newbie/bt_recursion/path_sum.png "path_sum问题")
+
+**技巧**: 首先要明确此递归函数的定义: 查看root是否为叶子结点并且root的val是否等于sum_num, 然后才开始写代码
+
+``` python
+# 首先要明确此递归函数的定义: 查看root是否为叶子结点并且root的val是否等于sum_num,
+# 然后才开始写代码
+def has_path_sum(root, sum_num):
+	if not root:
+		return False
+    # 判断是否为叶子
+	if not root.left and not root.left and root.val == sum_num:
+		return True
+    # 通过递归, 继续查看左右孩子节点是否有 sum_num-root.val
+	if has_path_sum(root.left, sum_num-root.val):
+		return True
+	return has_path_sum(root.right, sum_num-root.val)
+```
+
+
+### binary_tree_paths
+
+![](/img/algo_newbie/bt_recursion/bt_paths.png "打印所有路径问题")
+![](/img/algo_newbie/bt_recursion/bt_paths_answer.png "递归过程")
+
+``` python
+def binary_tree_paths(root):
+    result_arr = []
+    if not root:
+        return result_arr
+    if not root.left and not root.right:
+        result_arr.append(str(root.val))
+        return result_arr
+    # 获取左孩子的路径
+    left_bt_path_arr = binary_tree_paths(root.left)
+    for _path in left_bt_path_arr:
+        result_arr.append(str(root.val) + "->" + _path)
+    # 获取右孩子的路径
+    right_bt_path_arr = binary_tree_paths(root.right)
+    for _path in right_bt_path_arr:
+        result_arr.append(str(root.val) + "->" + _path)
+    return result_arr
+```
+
+
+### path_sum_3
+
+![](/img/algo_newbie/bt_recursion/path_sum_3.png "path_sum_Ⅲ问题")
+![](/img/algo_newbie/bt_recursion/path_sum_3_1.png "当包括node时的递归情况")
+![](/img/algo_newbie/bt_recursion/path_sum_3_2.png "当不包括node时的递归情况")
+
+``` python
+def _get_path_sum_include_node(node, sum_num):
+    if not node:
+        return 0
+    _path_cnt = 0
+    if node.val == sum_num:  # node本身值等于sum_num也算一条路径
+        _path_cnt += 1
+    _path_cnt += _get_path_sum_include_node(node.left, sum_num-node.val)
+    _path_cnt += _get_path_sum_include_node(node.right, sum_num-node.val)
+    return _path_cnt
+
+
+def path_sum_3(root, sum_num):
+    if not root:
+        return 0
+    path_cnt = 0
+    # 先求包括node本身的情况, 此时这轮递归所说的node是代码中的root
+    # 这种情况可以用类似于 path_sum问题 的 `has_path_sum`来实现
+    path_cnt += _get_path_sum_include_node(root, sum_num)
+    # 再求不包括node本身的情况, 
+    # 直接计算左右孩子往下的路径中和为sum_num(注意不是sum_num-root.val)的路径数量
+    path_cnt += path_sum_3(root.left, sum_num)
+    path_cnt += path_sum_3(root.right, sum_num)
+    return path_cnt
 ```

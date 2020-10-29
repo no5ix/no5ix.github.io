@@ -655,10 +655,10 @@ def insert_sort(arr, left_index, right_index):
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
-![](/img/algo_newbie/insert_sort/insert_sort_optimize1.gif "insert_sort_optimize")
+![](/img/algo_newbie/insert_sort/insert_sort_optimized.gif "insert_sort_optimized")
 
 ``` python
-def insert_sort_optimize(arr, left_index, right_index):
+def insert_sort_optimized(arr, left_index, right_index):
     if not arr:
         return
     for i in xrange(left_index+1, right_index+1):  # 从left_index+1开始, 也就是从第二个开始
@@ -752,7 +752,7 @@ def merge_sort(arr, left_index, right_index):
 ##### 归并自顶向下的优化实现
 
 ``` diff
-def merge_sort_optimize(arr, left_index, right_index):
+def merge_sort_optimized(arr, left_index, right_index):
     # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
     # 说明left_index, right_index已经相邻了,
     # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
@@ -762,7 +762,7 @@ def merge_sort_optimize(arr, left_index, right_index):
 +    # 优化1:
 +    #   数据量较小则使用插入排序
 +    if (right_index - left_index) < 15:
-+        insert_sort_optimize(arr, left_index, right_index)
++        insert_sort_optimized(arr, left_index, right_index)
 +        return
 
     # 注意这里不能直接 `mid_index=(left_index+right_index)/2`,
@@ -813,7 +813,7 @@ def merge_sort_bottom_up(arr, left_index, right_index):
 ##### 归并自底向上的优化实现
 
 ``` diff
-def merge_sort_bottom_up_optimize(arr, left_index, right_index):
+def merge_sort_bottom_up_optimized(arr, left_index, right_index):
     if not arr or left_index >= right_index:
         return
 
@@ -947,7 +947,7 @@ def quick_sort(arr, left_index, right_index):
 ``` diff
 + import random
 
-def _partition_optimize(arr, left_index, right_index):
+def _partition_optimized(arr, left_index, right_index):
     # 选一个元素作为枢轴量,
     # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
     pivot_index = left_index
@@ -978,7 +978,7 @@ def _partition_optimize(arr, left_index, right_index):
     return partition_index
 
 
-def quick_sort_optimize(arr, left_index, right_index):
+def quick_sort_optimized(arr, left_index, right_index):
     # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
     if not arr or left_index >= right_index:
         return
@@ -1229,12 +1229,116 @@ def heap_sort(arr, left_index , right_index):
 ```
 
 
-## 二叉树与递归思想
+## 递归
+
+实际上，递归有两个显著的特征,终止条件和自身调用:
+
+* 自身调用：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，即都是调用自身的同一个函数。
+* 终止条件：递归必须有一个终止的条件，即不能无限循环地调用本身。
+
+
+### 递归解题思路
+
+解决递归问题一般就三步曲，这个递归解题三板斧理解起来有点抽象，我们拿阶乘递归例子来喵喵吧~
+三部曲分别是：
+1. **定义函数功能**
+    定义函数功能，就是说，你这个函数是干嘛的，做什么事情，换句话说，你要知道递归原问题是什么呀？比如你需要解决阶乘问题，定义的函数功能就是n的阶乘，如下：
+    ``` cpp
+    //n的阶乘（n为大于0的自然数）
+    int factorial (int n){
+
+    }
+    ```
+2. **寻找递归终止条件**
+    递归的一个典型特征就是必须有一个终止的条件，即不能无限循环地调用本身。所以，用递归思路去解决问题的时候，就需要寻找递归终止条件是什么。比如阶乘问题，当n=1的时候，不用再往下递归了，可以跳出循环啦，n=1就可以作为递归的终止条件，如下：
+    ``` cpp
+    //n的阶乘（n为大于0的自然数）
+    int factorial (int n){
+        if(n==1){
+        return 1;
+        }
+    }
+    ```
+3. **找出递归结构, 或者递推函数的等价关系式**
+    递归的「本义」，就是原问题可以拆为同类且更容易解决的子问题，即「原问题和子问题都可以用同一个函数关系表示。递推函数的等价关系式，这个步骤就等价于寻找原问题与子问题的关系，如何用一个公式把这个函数表达清楚」。阶乘的公式就可以表示为 f(n) = n * f(n-1), 因此，阶乘的递归程序代码就可以写成这样，如下：
+    ``` cpp
+    int factorial (int n){
+        if(n==1){
+        return 1;
+        }
+        return n * factorial(n-1);
+    }
+    ```
+
+「注意啦」，不是所有递推函数的等价关系都像阶乘这么简单，一下子就能推导出来。需要我们多接触，多积累，多思考，多练习递归题目滴~
+
+
+### 经典题青蛙跳台阶
+
+题目:  
+一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+
+思路:  
+首先如果只有1个台阶，那青蛙只有一种跳法；如果有两个台阶，青蛙有两种跳法：一个台阶一个台阶跳；一次跳两个台阶；如果有n（n > 2）个台阶，假设用函数f（n）表示总共跳的方法数，这时青蛙在第一次有两种选择：选择跳一个台阶，则剩下n-1个台阶故剩下的台阶有f（n-1）种跳法；选择跳两个台阶，则剩下n-2个台阶故剩下的台阶有f（n-2）种跳法。
+
+故`f（n）= f（n-1） + f（n-2）`；n=1时`f（n） = 1`；n = 2时`f（n）= 2`；于是可以看到这个题目是明显的递归。
+
+``` python
+def jump_step(step_sum):
+    if step_sum == 0:
+        return 0
+    if step_sum == 1:
+        return 1
+    if step_sum == 2:
+        return 2
+    return jump_step(step_sum-1) + jump_step(step_sum-2)
+```
+
+当step_sum很大的时候, 你会发现要执行很久, 是因为上述函数`jump_step`存在「大量重复计算」，比如f（8）被计算了两次，f（7）被重复计算了3次...所以这个递归算法低效的原因，就是存在大量的重复计算！
+
+既然存在大量重复计算，那么我们可以先把计算好的答案存下来，即造一个备忘录，等到下次需要的话，先去「备忘录」查一下，如果有，就直接取就好了，备忘录没有才再计算，那就可以省去重新重复计算的耗时啦！这就是「带备忘录的解法」
+
+``` python
+def jump_step_optimized(step_sum, temp_map=None):
+    if step_sum == 0:
+        return 0
+    if step_sum == 1:
+        return 1
+    if step_sum == 2:
+        return 2
+    if temp_map is None:
+        temp_map = {}
+    if step_sum in temp_map:  # 先判断有没计算过，即看看备忘录有没有
+        # 备忘录有，即计算过，直接返回
+        return temp_map[step_sum]
+    # 备忘录没有，即没有计算过，执行递归计算,并且把结果保存到备忘录map中
+    temp_map[step_sum] = \
+        jump_step_optimized(step_sum-1, temp_map) + \
+        jump_step_optimized(step_sum-2, temp_map)
+    return temp_map[step_sum]
+```
+
+拓展题目：  
+一只青蛙一次可以跳1级台阶，一次也可以跳2级台阶.......它也可以一次跳上n级台阶，此时青蛙跳上一个n级台阶总共有多少种跳法。
+
+思路：  
+首先还是假设：如果只有1个台阶，青蛙只有一种跳法。如果有2个台阶，青蛙有两种跳法：一个台阶一个台阶跳；一次跳两个台阶。如果有n个台阶：青蛙第一次选择跳一个台阶，剩下n-1个台阶有f(n-1)种跳法；青蛙第一次选择跳两个台阶，剩下n-2个台阶有f(n-2)种跳法；青蛙第一次选择3个台阶，剩下n-3个台阶有f(n-3）种跳法.......，青蛙第一次选择跳n-1个台阶，剩下1个台阶剩下一种跳法；青蛙第一次选择跳n个台阶，没有剩下台阶结束。在面对n-1个台阶时，青蛙还是像n个台阶那样跳的话。
+
+故：  
+f(0) = 0；
+f(1) = 1；
+f(2) = 2；
+f(n) = f(n-1) + f(n-2) +f(n-3) + .....+f(2) + f(1) + f(0)；（一式）
+f(n-1) = f(n-2) + f(n-3) + .... +f(2) + f(1) + f(0)；（二式）
+一式减去二式：f(n) = f(n-1) * 2；故又是明显的递归。代码略.
+
+
+### 二叉树与递归
 
 递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。
 
 
-### path_sum
+#### path-sum
 
 ![](/img/algo_newbie/bt_recursion/path_sum.png "path_sum问题")
 
@@ -1256,7 +1360,7 @@ def has_path_sum(root, sum_num):
 ```
 
 
-### binary_tree_paths
+#### binary-tree-paths
 
 ![](/img/algo_newbie/bt_recursion/bt_paths.png "打印所有路径问题")
 ![](/img/algo_newbie/bt_recursion/bt_paths_answer.png "递归过程")
@@ -1281,24 +1385,16 @@ def binary_tree_paths(root):
 ```
 
 
-### path_sum_3
+#### path-sum-3
 
-![](/img/algo_newbie/bt_recursion/path_sum_3.png "path_sum_Ⅲ问题")
+给出一颗二叉树以及一个数字sum, 判断在这棵二叉树上存在多少条路径, 其路径上的所有节点和为sum.
+* 其中路径不一定要起始于根节点, 终止于叶子节点
+* 路径可以从任意节点开始, 但是只能是向下走的
+
 ![](/img/algo_newbie/bt_recursion/path_sum_3_1.png "当包括node时的递归情况")
 ![](/img/algo_newbie/bt_recursion/path_sum_3_2.png "当不包括node时的递归情况")
 
 ``` python
-def _get_path_sum_include_node(node, sum_num):
-    if not node:
-        return 0
-    _path_cnt = 0
-    if node.val == sum_num:  # node本身值等于sum_num也算一条路径
-        _path_cnt += 1
-    _path_cnt += _get_path_sum_include_node(node.left, sum_num-node.val)
-    _path_cnt += _get_path_sum_include_node(node.right, sum_num-node.val)
-    return _path_cnt
-
-
 def path_sum_3(root, sum_num):
     if not root:
         return 0
@@ -1311,4 +1407,314 @@ def path_sum_3(root, sum_num):
     path_cnt += path_sum_3(root.left, sum_num)
     path_cnt += path_sum_3(root.right, sum_num)
     return path_cnt
+
+
+def _get_path_sum_include_node(node, sum_num):
+    if not node:
+        return 0
+    _path_cnt = 0
+    if node.val == sum_num:  # node本身值等于sum_num也算一条路径
+        _path_cnt += 1
+    _path_cnt += _get_path_sum_include_node(node.left, sum_num-node.val)
+    _path_cnt += _get_path_sum_include_node(node.right, sum_num-node.val)
+    return _path_cnt
 ```
+
+
+### 回溯与递归
+
+回溯法是解决很多算法问题的常见思想，甚至可以说是传统人工智能的基础方法。其本质依然是使用递归的方法在树形空间中寻找解。在这一章，我们来具体看一下将递归这种技术使用在非二叉树的结构中，从而认识回溯这一基础算法思想, 
+
+**其实上一节的[二叉树与递归](#二叉树与递归)也是回溯的思想, 不过我们通常把回溯这个名词用在表示递归查找解的问题上**
+
+**比如下面这个[树形问题电话号码字母组合](#树形问题电话号码字母组合), 如果n是一个固定的数比如为8, 其实我们可以使用8重循环来解决, 但是n是不固定了, 所以我们只能使用回溯法来解决, 回溯法是暴力解法的一个主要手段.**
+
+动态规划其实可以算是回溯法的基础上一种改进, 同时要发现一个递归结构, 以及其他的特点就可以用回溯法, 其实回溯法也可以剪枝来优化, 不用到达所有的叶子结点从而提升我们回溯法的运行效率.
+
+
+#### 经典排列问题Permutations
+
+leetcode46题:  
+给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
+如对于 `[1, 2, 3]`, 则返回 `[ [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1] ]`
+
+![](/img/algo_newbie/backtrack_recursion/permutations.png "排列树形图示")
+
+注意查看下方代码中的 `_generate_permutation`, 排列问题基本都是这种代码写法模板.
+
+``` python
+def permutations(num_arr):
+    result_permutation_arr = []
+    if not num_arr:
+        return result_permutation_arr
+    middle_state_container = []
+    used_num_set = set()
+    _generate_permutation(result_permutation_arr, used_num_set,
+        num_arr, index=0, middle_state_container=middle_state_container)
+    return result_permutation_arr
+
+def _generate_permutation(
+        result_arr, used_num_set,
+        pending_proc_num_arr, index, middle_state_container):
+    """
+    middle_state_container 中保存了一个有index-1个元素的排列。
+    向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
+    """
+    if index == len(pending_proc_num_arr):
+        # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
+        # 则当前的 中间状态保存器 middle_state_container 则为一个解
+        # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+        result_arr.append(copy.deepcopy(middle_state_container))
+        return
+    for _single_num in pending_proc_num_arr:
+        # 如果本轮递归 used_num_set 已经有_single_num 了, 
+        # 说明当前排列 middle_state_container 中已经有 _single_num 了
+        # 那不应该再加入到这个排列中了
+        if _single_num not in used_num_set:
+            used_num_set.add(_single_num)
+            middle_state_container.append(_single_num)
+            _generate_permutation(
+                result_arr, used_num_set, pending_proc_num_arr,
+                index+1, middle_state_container)
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 那我们自己额外记录的状态, 比如 used_num_set 和
+            # middle_state_container 的状态应该自己手动清除
+            used_num_set.remove(_single_num)
+            middle_state_container.pop(-1)
+```
+
+
+##### 树形问题电话号码字母组合
+
+![](/img/algo_newbie/backtrack_recursion/letter_combinations_of_a_phone_number.png "问题描述")
+![](/img/algo_newbie/backtrack_recursion/letter_combinations_of_a_phone_number1.png "解题思路之树形结构")
+
+递归关系式:
+* `digits` 是数字字符串
+* `s(digits)` 是 `digits` 所能代表的字母字符串
+* 则关系式如下:
+    ``` python
+    s(digits[0...n-1])
+        = letter(digits[0]) + s(digits[1...n-1])
+        = letter(digits[0]) + letter(digits[1]) + s(digits[2...n-1])
+        = ...
+    ```
+**这道题虽然叫字母组合问题, 但实际上是个排列问题.**  
+注意查看下方代码中的 `_get_letter_combination`, 排列问题基本都是这种代码写法模板.
+
+实现代码如下:
+``` python
+digits_map = {
+    "0": " ",
+    "1": "",
+    "2": "abc",
+    "3": "def",
+    "4": "ghi",
+    "5": "jkl",
+    "6": "mno",
+    "7": "pqrs",
+    "8": "tuv",
+    "9": "wxyz",
+}
+
+def letter_combinations_of_a_phone_number(digits_str):
+    result_str_arr = []
+    if not digits_str:
+        return result_str_arr
+    assert "1" not in digits_str, "we dont proc 1"
+    
+    middle_state_container = []
+    _get_letter_combination(result_str_arr, digits_str, index=0,
+        middle_state_container=middle_state_container)
+    return result_str_arr    
+
+def _get_letter_combination(
+        result_str_arr, pending_proc_digits_str, index, middle_state_container):
+    """
+    middle_state_container 中保存了
+    此时从 pending_proc_digits_str[0...index-1] 翻译得到的一个字母字符串
+    寻找和pending_proc_digits_str[index]匹配的字母,
+    获得pending_proc_digits_str[0...index]翻译得到的解
+    """
+    if index == len(pending_proc_digits_str):
+        # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
+        # 则当前的 中间状态保存器 middle_state_container 则为一个解
+        # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+        result_str_arr.append(copy.deepcopy(middle_state_container))
+        return 
+    # # 不处理1因为1对应的没字母
+    # while pending_proc_digits_str[index] == "1":
+    #     index += 1
+    #     if index >= len(pending_proc_digits_str):
+    #         return
+    _cur_letters_str = digits_map[pending_proc_digits_str[index]]
+    for _single_letter_str in _cur_letters_str:
+        middle_state_container.append(_single_letter_str)
+        _get_letter_combination(
+            result_str_arr, pending_proc_digits_str, index+1,
+            middle_state_container)
+        middle_state_container.pop(-1)
+```
+
+
+#### 经典组合问题Combinations
+
+leetcode77题  
+给出两个整数n和k, 求出1...n中k个数字的所有组合  
+如n=4, k=2, 则结果为`[ [1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4] ]`
+
+![](/img/algo_newbie/backtrack_recursion/combinations.png "组合问题解题思路图")
+
+``` python
+def combinations(n, k):
+    result_arr = []
+    if k <= 0 or k > n or n <= 0:
+        return result_arr
+    middle_state_container = []
+    _generate_combinations(result_arr, n, k, 1, middle_state_container)
+    return result_arr
+    
+def _generate_combinations(
+        result_arr,
+        pending_proc_n, pending_prco_k, start_index, middle_state_container):
+    """
+    求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
+    需要从start_index开始搜索新的元素
+    可以看出跟排列问题的代码模板很像, 
+    只有终止递归条件和for循环的start_index不太一样
+    """
+    if len(middle_state_container) == pending_prco_k:
+        result_arr.append(copy.deepcopy(middle_state_container))
+        return
+    # 每次递归从start_index开始直到 pending_proc_n
+    for _index in xrange(start_index, pending_proc_n+1):
+        middle_state_container.append(_index)
+        _generate_combinations(
+            result_arr, pending_proc_n, pending_prco_k,
+            _index+1, middle_state_container)
+        middle_state_container.pop(-1)
+```
+
+##### 组合问题解决优化
+
+从上面的 组合问题解题思路 中可以看出其实是没有必要计算 "取4" 的操作的, 
+所以我们利用剪枝的思想, 把这部分优化掉, 代码如下:
+``` diff
+def _generate_combinations_optimized(
+        result_arr,
+        pending_proc_n, pending_prco_k, start_index, middle_state_container):
+    """
+    求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
+    需要从start_index开始搜索新的元素
+    可以看出跟排列问题的代码模板很像, 
+    只有终止递归条件和for循环的start_index不太一样
+    """
+    if len(middle_state_container) == pending_prco_k:
+        result_arr.append(copy.deepcopy(middle_state_container))
+        return
+-   # 每次递归从start_index开始直到 pending_proc_n
+-   for _index in xrange(start_index, pending_proc_n+1):
++   # 剪枝的思想, 
++   # 还有k - middle_state_container.size()个空位,
++   # 所以, [i...n] 中至少要有 k - middle_state_container.size() 个元素
++   # i最多为 n - (k - middle_state_container.size()) + 1
++   _cur_stop_index = pending_proc_n - (
++       pending_prco_k - middle_state_container.size()) + 1
++   # 每次递归从start_index开始直到 _cur_stop_index
++   for _index in xrange(start_index, _cur_stop_index+1):
+        middle_state_container.append(_index)
+        _generate_combinations(
+            result_arr, pending_proc_n, pending_prco_k,
+            _index+1, middle_state_container)
+        middle_state_container.pop(-1)
+```
+
+
+#### 经典floodfill问题
+
+[leetcode200题](https://leetcode-cn.com/problems/number-of-islands/)  
+给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
+岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
+此外，你可以假设该网格的四条边均被水包围。
+
+示例 1：
+输入：grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+输出：1
+如下图则有1个岛屿:
+![](/img/algo_newbie/backtrack_recursion/number_of_islands1.png "只有1个岛屿")
+
+示例 2：
+输入：grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+输出：3
+如下图则有3个岛屿:
+![](/img/algo_newbie/backtrack_recursion/number_of_islands2.png "有3个岛屿")
+
+这一次我们代码用类似于leetcode的solution类的形式来实现, 如下:
+``` python
+class Solution_number_of_islands(object):
+
+    def __init__(self):
+        self._visited_pos_set = set()
+        # 方便搜索点的时候往上下左右搜
+        self._move_dir_arr = [(0, -1), (0, 1), (1, 0), [-1, 0]]
+
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid:
+            return 0
+        islands_cnt = 0
+        for x in xrange(0, len(grid)):
+            assert (type(grid[x]) is list), ("x = %d" % x)
+            for y in xrange(0, len(grid[x])):
+                if tuple([x, y]) in self._visited_pos_set:
+                    continue
+                if grid[x][y] != "1":
+                    continue
+                self._dfs_islands(grid, x, y)
+                islands_cnt += 1  # 一次搜索完成就算有一个岛屿了
+        return islands_cnt
+
+
+    def _dfs_islands(self, grid, x, y):  # x是纵坐标, y是横坐标
+        # print "x = %d" % x
+        # print "y = %d" % y
+        self._visited_pos_set.add(tuple([x, y]))
+        # 上下左右四个方向搜索
+        for _move_dir in self._move_dir_arr:
+            _new_x = x + _move_dir[0]
+            _new_y = y + _move_dir[1]
+            # 如果超出地图边界了, 注意 x是纵坐标, y是横坐标
+            if _new_x >= len(grid) or _new_x < 0 or \
+                    _new_y >= len(grid[0]) or _new_y < 0:
+                continue
+            # 如果已经访问过了
+            if tuple([_new_x, _new_y]) in self._visited_pos_set:
+                continue
+            if grid[_new_x][_new_y] != "1":
+                continue
+            self._dfs_islands(grid, _new_x, _new_y)
+```
+
+
+#### 经典N皇后问题
+
+... pending_fin
+
+
+
+## 动态规划
+

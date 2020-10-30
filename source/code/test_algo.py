@@ -662,64 +662,83 @@ def jump_step(step_sum):
     return jump_step(step_sum-1) + jump_step(step_sum-2)
 
 
-def jump_step_optimized(step_sum, temp_map=None):
+def jump_step_optimized(step_sum, memo=None):
     if step_sum == 0:
         return 0
     if step_sum == 1:
         return 1
     if step_sum == 2:
         return 2
-    if temp_map is None:
-        temp_map = {}
-    if step_sum in temp_map:  # 先判断有没计算过，即看看备忘录有没有
+    if memo is None:
+        memo = {}
+    if step_sum in memo:  # 先判断有没计算过，即看看备忘录有没有
         # 备忘录有，即计算过，直接返回
-        return temp_map[step_sum]
+        return memo[step_sum]
     # 备忘录没有，即没有计算过，执行递归计算,并且把结果保存到备忘录map中
-    temp_map[step_sum] = \
-        jump_step_optimized(step_sum-1, temp_map) + \
-        jump_step_optimized(step_sum-2, temp_map)
-    return temp_map[step_sum]
+    memo[step_sum] = \
+        jump_step_optimized(step_sum-1, memo) + \
+        jump_step_optimized(step_sum-2, memo)
+    return memo[step_sum]
 
 
-def permutations(num_arr):
-    result_permutation_arr = []
-    if not num_arr:
+def jump_step_dynamic_programming(step_sum):
+    dp = {}
+    dp[0] = 0
+    dp[1] = 1
+    dp[2] = 2
+    for i in xrange(3, step_sum+1):
+        # 根据递推公式直接写出
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[step_sum]
+
+
+class Solution_permutations(object):
+
+    def __init__(self):
+        self._used_num_set = set()
+
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result_permutation_arr = []
+        if not nums:
+            return result_permutation_arr
+        middle_state_container = []
+        self._generate_permutation(result_permutation_arr,
+            nums, index=0, middle_state_container=middle_state_container)
         return result_permutation_arr
-    middle_state_container = []
-    used_num_set = set()
-    _generate_permutation(result_permutation_arr, used_num_set,
-        num_arr, index=0, middle_state_container=middle_state_container)
-    return result_permutation_arr
 
-def _generate_permutation(
-        result_arr, used_num_set,
-        pending_proc_num_arr, index, middle_state_container):
-    """
-    middle_state_container 中保存了一个有index-1个元素的排列。
-    向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
-    """
-    if index == len(pending_proc_num_arr):
-        # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
-        # 则当前的 中间状态保存器 middle_state_container 则为一个解
-        # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
-        result_arr.append(copy.deepcopy(middle_state_container))
-        return
-    for _single_num in pending_proc_num_arr:
-        # 如果本轮递归 used_num_set 已经有_single_num 了, 
-        # 说明当前排列 middle_state_container 中已经有 _single_num 了
-        # 那不应该再加入到这个排列中了
-        if _single_num not in used_num_set:
-            used_num_set.add(_single_num)
-            middle_state_container.append(_single_num)
-            _generate_permutation(
-                result_arr, used_num_set, pending_proc_num_arr,
-                index+1, middle_state_container)
-            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
-            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
-            # 那我们自己额外记录的状态, 比如 used_num_set 和
-            # middle_state_container 的状态应该自己手动清除
-            used_num_set.remove(_single_num)
-            middle_state_container.pop(-1)
+    def _generate_permutation(
+            self, result_arr,
+            pending_proc_num_arr, index, middle_state_container):
+        """
+        middle_state_container 中保存了一个有index-1个元素的排列。
+        向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
+        """
+        if index == len(pending_proc_num_arr):
+            # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
+            # 则当前的 中间状态保存器 middle_state_container 则为一个解
+            # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+            result_arr.append(copy.deepcopy(middle_state_container))
+            return
+        for _single_num in pending_proc_num_arr:
+            # 如果本轮递归 used_num_set 已经有_single_num 了, 
+            # 说明当前排列 middle_state_container 中已经有 _single_num 了
+            # 那不应该再加入到这个排列中了
+            if _single_num not in self._used_num_set:
+                self._used_num_set.add(_single_num)
+                middle_state_container.append(_single_num)
+                self._generate_permutation(
+                    result_arr, pending_proc_num_arr,
+                    index+1, middle_state_container)
+                # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+                # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+                # 那我们自己额外记录的状态, 比如 self._used_num_set 和
+                # middle_state_container 的状态应该自己手动清除
+                self._used_num_set.remove(_single_num)
+                middle_state_container.pop(-1)
 
 
 digits_map = {
@@ -887,6 +906,219 @@ class Solution_number_of_islands(object):
             self._dfs_islands(grid, _new_x, _new_y)
 
 
+class Solution_integer_break(object):
+
+    def __init__(self):
+        self._memo = {}
+
+    # 将n进行分割(至少分割两部分), 可以获得的最大乘积
+    def integerBreak(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 1:
+            return 1
+        _res = -1
+        if n in self._memo:
+            return self._memo[n]
+        for i in xrange(1, n):
+            # 计算`i + (n-i)`
+            _res = max(
+                _res,
+                i * (n-i),  # 有可能自己本身`i*(n-i)`就是最大的
+                i * self.integerBreak(n-i))
+        self._memo[n] = _res
+        return _res
+        
+    def integer_break_dp(self, n):
+        # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
+        dp = [-1] * (n + 1)
+        dp[1] = 1
+        # 下面这种A思路是不行的:
+        # dp[i]等价于 f(i)，
+        # 那么上面针对 f(i) 写的递归公式对 dp[i] 也是适用的，我们拿来试试。
+        # 关键语句:
+        #  `res = max(res, i * (n - i), max(i * self.integerBreak(n - i)))``
+        # 翻译过来就是：`dp[i] = max(_res, i * (n-i), i * dp[n-i])`
+        # 则不难得出以下代码, 但因为 dp[n-i] 当前没求出来, 子问题没求出来,
+        # 所以原问题也就求不出来了, 所以下面这三行代码是不行的
+        # _res = -1
+        # for i in xrange(1, n):
+            # dp[i] = max(_res, i * (n-i), i * dp[n-i])
+        
+        # 此时我们得下面这种B思路才行:
+        # 我们用一层循环来生成上面这段A思路代码一系列的 n 值。
+        # 接着我们还要生成上面A思路代码中一系列的 i 值，
+        # 注意到 n - i 是要大于 0 的，
+        # 因此 i 只需要循环到 n - 1 即可。
+        # 由此不难翻译A思路得出以下代码(j代表n, k代表i):
+        for j in xrange(2, n+1):  # 循环到n
+            # 求解dp[j]
+            for k in xrange(1, j):  # 循环到j-1即可
+                dp[j] = max(dp[j], k * (j-k), k * dp[j-k])
+        return dp[n]
+
+
+class Solution_house_robber(object):
+
+    def __init__(self):
+        # memo[i] 表示考虑抢劫 nums[i...n-1] 所能获得的最大收益
+        self._memo = {}
+
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        return self._try_rob(nums, 0)
+
+    def _try_rob(self, nums_arr, index):
+        """
+        先套用写一波自顶而下的递归形式的解答,
+        然后用记忆化搜索的加个memo的方式优化一波.
+        写完此方法之后, 有了大概的思路就能
+        根据状态转移方程找出规律改写成自底向上的dp形式(见下方`_try_rob_dp`方法)
+        此`_try_rob`方法表示: 考虑抢劫nums[index...nums.size()-1]这个范围的所有房子所能得到的最大收益
+        """
+        if index in self._memo:
+            return self._memo[index]
+        if index >= len(nums_arr):
+            return 0
+        res = 0
+        for _i, _num in enumerate(nums_arr):
+            if _i < index:
+                continue
+            res = max(
+                res,
+                _num + self._try_rob(nums_arr, _i+2),
+            )
+        self._memo[index] = res
+        return res
+
+    def rob_dp_1(self, nums_arr):
+        if not nums_arr:
+            return 0
+        if len(nums_arr) == 1:
+            return nums_arr[0]
+        n = len(nums_arr)
+        # dp[index] 表示 抢劫nums[index...nums.size()-1]这个范围的所有房子所能得到的最大收益
+        dp = [0] * n
+        # 因为我们想求出dp[0], 所以我们从后面开始, 即从n-1开始
+        dp[n-1] = nums_arr[n-1]
+        dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
+        for i in xrange(n-3, -1, -1):
+            for j in xrange(i, n):
+                dp[i] = max(
+                    dp[i],
+                    (nums_arr[j] + (dp[j+2] if j + 2 < n else 0))
+                )
+        return dp[0]
+
+    def rob_dp_2(self, nums_arr):
+        if not nums_arr:
+            return 0
+        n = len(nums_arr)
+        dp = [0] * n
+        dp[0] = nums_arr[0]
+        dp[1] = max(nums_arr[0], nums_arr[1])
+        for i in xrange(2, n):
+            dp[i] = max(dp[i-1], nums_arr[i]+dp[i-2])
+        return dp[n-1]
+
+
+class Solution_knapsack(object):
+    
+    def __init__(self):
+        self._memo = None
+
+    def knapsack(self, capacity, weight_arr, value_arr):
+        if capacity == 0:
+            return 0
+        self._memo = [ [ -1 for j in xrange(capacity)] for i in xrange(len(weight_arr)) ]
+        return self._best_value(capacity, weight_arr, value_arr, 0)
+        
+    # 用 [0...index]的物品,填充容积为c的背包的最大价值
+    def _best_value(self, capacity, weight_arr, value_arr, index):
+        if index >= len(weight_arr) or capacity <= 0:
+            return 0
+        if self._memo[index][capacity-1] != -1:
+            return self._memo[index][capacity-1]
+        _res = self._best_value(capacity, weight_arr, value_arr, index + 1)
+        if capacity >= weight_arr[index]:
+            _res = max(
+                _res,
+                value_arr[index] + self._best_value(
+                    capacity-weight_arr[index], weight_arr, value_arr, index+1)
+            )
+        self._memo[index][capacity-1] = _res
+        return _res
+
+    def knapsack_dp(self, capacity, weight_arr, value_arr):
+        if capacity == 0:
+            return 0
+        assert(len(weight_arr) == len(value_arr))
+        n = len(weight_arr)
+        dp = [ [ 0 for _ in xrange(capacity+1)] for _ in xrange(n)]
+        # 动规是从底向上嘛, 先构建dp[0]的东西
+        for k in xrange(capacity+1):
+            dp[0][k] = value_arr[0] if k >= weight_arr[0] else 0
+
+        for i in xrange(1, n):
+            for c in xrange(capacity+1):
+                # 根据状态转移方程得出
+                dp[i][c] = max(
+                    dp[i-1][c],
+                    value_arr[i] + dp[i-1][c-weight_arr[i]] if c >= weight_arr[i] else 0
+                )
+        return dp[n-1][capacity]
+
+
+class Solution_partition_equal_subset_sum(object):
+
+    def __init__(self):
+        self._memo = None
+
+    def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        动规解法
+        """
+        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
+            return False
+        _bag_capcity = sum(nums) / 2
+        n = len(nums)
+        # 创建二维状态数组，行：物品索引，列：容量（包括 0）
+        dp = [ [False for _ in xrange(_bag_capcity+1)] for _ in xrange(n) ]
+        # 先填表格第 0 行，第 1 个数只能让容积为它自己的背包恰好装满
+        if nums[0] <= _bag_capcity:
+            dp[0][nums[0]] = True
+        for i in xrange(1, n):
+            for c in xrange(_bag_capcity+1):
+                dp[i][c] = dp[i-1][c] or (dp[i-1][c-nums[i]] if c >= nums[i] else False)
+        return dp[n-1][_bag_capcity]
+
+    def canPartition_recursion(self, nums):
+        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
+            return False
+        _sum_num = sum(nums) / 2
+        self._memo = [ [ None for _ in xrange(_sum_num+1) ] for _ in xrange(len(nums)) ]
+        return self._try_partition(nums, 0, _sum_num)
+
+    def _try_partition(self, nums, index, sum_num):
+        if index >= len(nums) or sum_num < 0:
+            return False
+        if self._memo[index][sum_num] is not None:
+            return self._memo[index][sum_num]
+        if sum_num == 0:
+            return True
+        _res = self._try_partition(nums, index+1, sum_num) or \
+            self._try_partition(nums, index+1, sum_num-nums[index])
+        self._memo[index][sum_num] = _res
+        return _res
 
 
 if __name__ == "__main__":
@@ -1072,6 +1304,9 @@ if __name__ == "__main__":
     print "jump_step_optimized(9): " + str(jump_step_optimized(9))
     print "jump_step(4): " + str(jump_step(4))
     print "jump_step(9): " + str(jump_step(9))
+    print "jump_step_dynamic_programming(4): " + str(jump_step_dynamic_programming(4))
+    print "jump_step_dynamic_programming(9): " + str(jump_step_dynamic_programming(9))
+    print "jump_step_dynamic_programming(55): " + str(jump_step_dynamic_programming(55))
 
     print ""
 
@@ -1091,11 +1326,11 @@ if __name__ == "__main__":
 
     print "permutations: --------------"
     print "permutations([1]):"
-    print str(permutations([1]))
+    print str(Solution_permutations().permute([1]))
     print "permutations([2, 3]):"
-    print str(permutations([2, 3]))
+    print str(Solution_permutations().permute([2, 3]))
     print "permutations([1, 4, 6]):"
-    print str(permutations([1, 4, 6]))
+    print str(Solution_permutations().permute([1, 4, 6]))
 
     print ""
 
@@ -1144,3 +1379,77 @@ if __name__ == "__main__":
         ]
     snoi2 = Solution_number_of_islands()
     print " Solution_number_of_islands.numIslands(grid):" + str(snoi2.numIslands(test_grid))
+
+    print ""
+
+    print "integer_break: --------------"
+    print "integer_break(2):"
+    print str(Solution_integer_break().integerBreak(2))
+    print "integer_break(10):"
+    print str(Solution_integer_break().integerBreak(10))
+    print "integer_break_dp(10):"
+    print str(Solution_integer_break().integer_break_dp(10))
+
+    print ""
+
+    print "house_robber: --------------"
+    print "house_robber([6,6,4,8,4,3,3,10]):"
+    print str(Solution_house_robber().rob([6,6,4,8,4,3,3,10]))
+    print "house_robber([183,2219,57,193,94,233,202,154,65,240,97]):"
+    print str(Solution_house_robber().rob([183,2219,57,193,94,233,202,154,65,240,97]))
+    print "house_robber([1, 2, 3, 1]):"
+    print str(Solution_house_robber().rob([1, 2, 3, 1]))
+    print "house_robber([2, 7, 9, 3, 1]):"
+    print str(Solution_house_robber().rob([2, 7, 9, 3, 1]))
+    print "house_robber_dp_1([6,6,4,8,4,3,3,10]):"
+    print str(Solution_house_robber().rob_dp_1([6,6,4,8,4,3,3,10]))
+    print "house_robber_dp_1([1, 2, 3, 1]):"
+    print str(Solution_house_robber().rob_dp_1([1, 2, 3, 1]))
+    print "house_robber_dp_1([2, 7, 9, 3, 1]):"
+    print str(Solution_house_robber().rob_dp_1([2, 7, 9, 3, 1]))
+    print "house_robber_dp_1([183,2219,57,193,94,233,202,154,65,240,97]):"
+    print str(Solution_house_robber().rob_dp_1([183,2219,57,193,94,233,202,154,65,240,97]))
+    print "house_robber_dp_2([6,6,4,8,4,3,3,10]):"
+    print str(Solution_house_robber().rob_dp_2([6,6,4,8,4,3,3,10]))
+    print "house_robber_dp_2([1, 2, 3, 1]):"
+    print str(Solution_house_robber().rob_dp_2([1, 2, 3, 1]))
+    print "house_robber_dp_2([2, 7, 9, 3, 1]):"
+    print str(Solution_house_robber().rob_dp_2([2, 7, 9, 3, 1]))
+    print "house_robber_dp_2([183,2219,57,193,94,233,202,154,65,240,97]):"
+    print str(Solution_house_robber().rob_dp_2([183,2219,57,193,94,233,202,154,65,240,97]))
+
+    print ""
+
+    print "knapsack: --------------"
+    print "knapsack(8, [7, 2, 4, 3], [9, 3, 2, 1]):"
+    print Solution_knapsack().knapsack(8, [7, 2, 4, 3], [9, 3, 2, 1])
+    print "knapsack(5, [1, 2, 3], [6, 10, 12]):"
+    print Solution_knapsack().knapsack(5, [1, 2, 3], [6, 10, 12])
+    print "knapsack_dp(8, [7, 2, 4, 3], [9, 3, 2, 1]):"
+    print Solution_knapsack().knapsack_dp(8, [7, 2, 4, 3], [9, 3, 2, 1])
+    print "knapsack_dp(5, [1, 2, 3], [6, 10, 12]):"
+    print Solution_knapsack().knapsack_dp(5, [1, 2, 3], [6, 10, 12])
+
+    print ""
+
+    print "partition_equal_subset_sum: --------------"
+    print "canPartition([9, 5]):"
+    print Solution_partition_equal_subset_sum().canPartition([9, 5])
+    print "canPartition([1, 2, 3, 6]):"
+    print Solution_partition_equal_subset_sum().canPartition([1, 2, 3, 6])
+    print "canPartition([1, 27, 35, 61]):"
+    print Solution_partition_equal_subset_sum().canPartition([1, 27, 35, 61])
+    print "canPartition([1, 8, 3, 6]):"
+    print Solution_partition_equal_subset_sum().canPartition([1, 8, 3, 6])
+    print "canPartition([1, 21, 3, 4, 7, 161]):"
+    print Solution_partition_equal_subset_sum().canPartition([1, 21, 3, 4, 7, 161])
+    print "canPartition_recursion([9, 5]):"
+    print Solution_partition_equal_subset_sum().canPartition_recursion([9, 5])
+    print "canPartition_recursion([1, 2, 3, 6]):"
+    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 2, 3, 6])
+    print "canPartition_recursion([1, 27, 35, 61]):"
+    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 27, 35, 61])
+    print "canPartition_recursion([1, 8, 3, 6]):"
+    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 8, 3, 6])
+    print "canPartition_recursion([1, 21, 3, 4, 7, 161]):"
+    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 21, 3, 4, 7, 161])

@@ -12,7 +12,7 @@ categories:
 
 # 本文完整参考代码
 
-https://github.com/no5ix/nox/blob/master/algo/test_algo.py
+https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo.py
 
 
 # 数据结构
@@ -1273,72 +1273,14 @@ def heap_sort(arr, left_index , right_index):
 「注意啦」，不是所有递推函数的等价关系都像阶乘这么简单，一下子就能推导出来。需要我们多接触，多积累，多思考，多练习递归题目滴~
 
 
-### 经典题青蛙跳台阶
-
-题目:  
-一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
-
-思路:  
-首先如果只有1个台阶，那青蛙只有一种跳法；如果有两个台阶，青蛙有两种跳法：一个台阶一个台阶跳；一次跳两个台阶；如果有n（n > 2）个台阶，假设用函数f（n）表示总共跳的方法数，这时青蛙在第一次有两种选择：选择跳一个台阶，则剩下n-1个台阶故剩下的台阶有f（n-1）种跳法；选择跳两个台阶，则剩下n-2个台阶故剩下的台阶有f（n-2）种跳法。
-
-故`f（n）= f（n-1） + f（n-2）`；n=1时`f（n） = 1`；n = 2时`f（n）= 2`；于是可以看到这个题目是明显的递归。
-
-``` python
-def jump_step(step_sum):
-    if step_sum == 0:
-        return 0
-    if step_sum == 1:
-        return 1
-    if step_sum == 2:
-        return 2
-    return jump_step(step_sum-1) + jump_step(step_sum-2)
-```
-
-当step_sum很大的时候, 你会发现要执行很久, 是因为上述函数`jump_step`存在「大量重复计算」，比如f（8）被计算了两次，f（7）被重复计算了3次...所以这个递归算法低效的原因，就是存在大量的重复计算！
-
-既然存在大量重复计算，那么我们可以先把计算好的答案存下来，即造一个备忘录，等到下次需要的话，先去「备忘录」查一下，如果有，就直接取就好了，备忘录没有才再计算，那就可以省去重新重复计算的耗时啦！这就是「带备忘录的解法」
-
-``` python
-def jump_step_optimized(step_sum, temp_map=None):
-    if step_sum == 0:
-        return 0
-    if step_sum == 1:
-        return 1
-    if step_sum == 2:
-        return 2
-    if temp_map is None:
-        temp_map = {}
-    if step_sum in temp_map:  # 先判断有没计算过，即看看备忘录有没有
-        # 备忘录有，即计算过，直接返回
-        return temp_map[step_sum]
-    # 备忘录没有，即没有计算过，执行递归计算,并且把结果保存到备忘录map中
-    temp_map[step_sum] = \
-        jump_step_optimized(step_sum-1, temp_map) + \
-        jump_step_optimized(step_sum-2, temp_map)
-    return temp_map[step_sum]
-```
-
-拓展题目：  
-一只青蛙一次可以跳1级台阶，一次也可以跳2级台阶.......它也可以一次跳上n级台阶，此时青蛙跳上一个n级台阶总共有多少种跳法。
-
-思路：  
-首先还是假设：如果只有1个台阶，青蛙只有一种跳法。如果有2个台阶，青蛙有两种跳法：一个台阶一个台阶跳；一次跳两个台阶。如果有n个台阶：青蛙第一次选择跳一个台阶，剩下n-1个台阶有f(n-1)种跳法；青蛙第一次选择跳两个台阶，剩下n-2个台阶有f(n-2)种跳法；青蛙第一次选择3个台阶，剩下n-3个台阶有f(n-3）种跳法.......，青蛙第一次选择跳n-1个台阶，剩下1个台阶剩下一种跳法；青蛙第一次选择跳n个台阶，没有剩下台阶结束。在面对n-1个台阶时，青蛙还是像n个台阶那样跳的话。
-
-故：  
-f(0) = 0；
-f(1) = 1；
-f(2) = 2；
-f(n) = f(n-1) + f(n-2) +f(n-3) + .....+f(2) + f(1) + f(0)；（一式）
-f(n-1) = f(n-2) + f(n-3) + .... +f(2) + f(1) + f(0)；（二式）
-一式减去二式：f(n) = f(n-1) * 2；故又是明显的递归。代码略.
-
-
 ### 二叉树与递归
 
 递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。
 
 
 #### path-sum
+
+[leetcode112题](https://leetcode-cn.com/problems/path-sum/)
 
 ![](/img/algo_newbie/bt_recursion/path_sum.png "path_sum问题")
 
@@ -1387,6 +1329,7 @@ def binary_tree_paths(root):
 
 #### path-sum-3
 
+[leetcode437题](https://leetcode-cn.com/problems/path-sum-iii/)  
 给出一颗二叉树以及一个数字sum, 判断在这棵二叉树上存在多少条路径, 其路径上的所有节点和为sum.
 * 其中路径不一定要起始于根节点, 终止于叶子节点
 * 路径可以从任意节点开始, 但是只能是向下走的
@@ -1423,6 +1366,12 @@ def _get_path_sum_include_node(node, sum_num):
 
 ### 回溯与递归
 
+参考: leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
+
+回溯法 采用试错的思想，它尝试分步的去解决一个问题。在分步解决问题的过程中，当它通过尝试发现现有的分步答案不能得到有效的正确的解答的时候，它将取消上一步甚至是上几步的计算，再通过其它的可能的分步解答再次尝试寻找问题的答案。回溯法通常用最简单的递归方法来实现，在反复重复上述的步骤后可能出现两种情况：
+* 找到一个可能存在的正确的答案；
+* 在尝试了所有可能的分步方法后宣告该问题没有答案。
+
 回溯法是解决很多算法问题的常见思想，甚至可以说是传统人工智能的基础方法。其本质依然是使用递归的方法在树形空间中寻找解。在这一章，我们来具体看一下将递归这种技术使用在非二叉树的结构中，从而认识回溯这一基础算法思想, 
 
 **其实上一节的[二叉树与递归](#二叉树与递归)也是回溯的思想, 不过我们通常把回溯这个名词用在表示递归查找解的问题上**
@@ -1432,7 +1381,34 @@ def _get_path_sum_include_node(node, sum_num):
 动态规划其实可以算是回溯法的基础上一种改进, 同时要发现一个递归结构, 以及其他的特点就可以用回溯法, 其实回溯法也可以剪枝来优化, 不用到达所有的叶子结点从而提升我们回溯法的运行效率.
 
 
-#### 经典排列问题Permutations
+#### 回溯算法框架
+
+参考: leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-xiang-jie-by-labuladong-2/
+
+废话不多说，直接上回溯算法框架。解决一个回溯问题，实际上就是一个决策树的遍历过程。你只需要思考 3 个问题：
+1. 路径: 也就是已经做出的选择。
+2. 选择列表: 供选择的列表
+3. 结束条件: 也就是到达决策树底层，无法再做选择的条件。
+
+如果你不理解这三个词语的解释，没关系，我们后面会用「全排列」和「N 皇后问题」这两个经典的回溯算法问题来帮你理解这些词语是什么意思，现在你先留着印象。
+
+代码方面，回溯算法的框架：
+```
+result = []
+def backtrack(供选择的列表, 选择的路径中间状态, 递归到第几层index):
+    if 满足结束条件:
+        result.add(选择的路径中间状态)
+        return
+    
+    for 选择 in 供选择的列表:
+        做选择
+        backtrack(选择的路径中间状态, 供选择的列表, index+1)
+        撤销选择
+```
+其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」，特别简单。
+
+
+#### 设计状态变量-经典排列问题
 
 leetcode46题:  
 给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
@@ -1440,48 +1416,64 @@ leetcode46题:
 
 ![](/img/algo_newbie/backtrack_recursion/permutations.png "排列树形图示")
 
+**设计状态变量**:  
+* 参考: //leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
+* 首先这棵树除了根结点和叶子结点以外，每一个结点做的事情其实是一样的，即：在已经选择了一些数的前提下，在剩下的还没有选择的数中，依次选择一个数，这显然是一个 递归 结构；
+* 递归的终止条件是： 一个排列中的数字已经选够了 ，因此我们需要一个变量来表示当前程序递归到第几层，我们把这个变量叫做 index ，表示当前要确定的是某个全排列中下标为 index 的那个数是多少；
+* 布尔数组 used，初始化的时候都为 false 表示这些数还没有被选择，当我们选定一个数的时候，就将这个数组的相应位置设置为 true ，这样在考虑下一个位置的时候，就能够以 O(1)O(1) 的时间复杂度判断这个数是否被选择过，这是一种「以空间换时间」的思想。
+这些变量称为「状态变量」，它们表示了在求解一个问题的时候所处的阶段。需要根据问题的场景设计合适的状态变量。
+
 注意查看下方代码中的 `_generate_permutation`, 排列问题基本都是这种代码写法模板.
 
 ``` python
-def permutations(num_arr):
-    result_permutation_arr = []
-    if not num_arr:
-        return result_permutation_arr
-    middle_state_container = []
-    used_num_set = set()
-    _generate_permutation(result_permutation_arr, used_num_set,
-        num_arr, index=0, middle_state_container=middle_state_container)
-    return result_permutation_arr
+class Solution_permutations(object):
 
-def _generate_permutation(
-        result_arr, used_num_set,
-        pending_proc_num_arr, index, middle_state_container):
-    """
-    middle_state_container 中保存了一个有index-1个元素的排列。
-    向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
-    """
-    if index == len(pending_proc_num_arr):
-        # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
-        # 则当前的 中间状态保存器 middle_state_container 则为一个解
-        # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
-        result_arr.append(copy.deepcopy(middle_state_container))
-        return
-    for _single_num in pending_proc_num_arr:
-        # 如果本轮递归 used_num_set 已经有_single_num 了, 
-        # 说明当前排列 middle_state_container 中已经有 _single_num 了
-        # 那不应该再加入到这个排列中了
-        if _single_num not in used_num_set:
-            used_num_set.add(_single_num)
-            middle_state_container.append(_single_num)
-            _generate_permutation(
-                result_arr, used_num_set, pending_proc_num_arr,
-                index+1, middle_state_container)
-            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
-            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
-            # 那我们自己额外记录的状态, 比如 used_num_set 和
-            # middle_state_container 的状态应该自己手动清除
-            used_num_set.remove(_single_num)
-            middle_state_container.pop(-1)
+    def __init__(self):
+        self._used_num_set = set()
+
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result_permutation_arr = []
+        if not nums:
+            return result_permutation_arr
+        middle_state_container = []
+        self._generate_permutation(result_permutation_arr,
+            nums, index=0, middle_state_container=middle_state_container)
+        return result_permutation_arr
+
+    def _generate_permutation(
+            self, result_arr,
+            pending_proc_num_arr, index, middle_state_container):
+        """
+        middle_state_container 中保存了一个有index-1个元素的排列。
+        向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
+        """
+        if index == len(pending_proc_num_arr):
+            # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
+            # 则当前的 中间状态保存器 middle_state_container 则为一个解
+            # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+            result_arr.append(copy.deepcopy(middle_state_container))
+            return
+        for _single_num in pending_proc_num_arr:
+            # 如果本轮递归 used_num_set 已经有_single_num 了, 
+            # 说明当前排列 middle_state_container 中已经有 _single_num 了
+            # 那不应该再加入到这个排列中了
+            if _single_num not in self._used_num_set:
+                self._used_num_set.add(_single_num)
+                middle_state_container.append(_single_num)
+                self._generate_permutation(
+                    result_arr, pending_proc_num_arr,
+                    index+1, middle_state_container)
+                # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+                # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+                # 那我们自己额外记录的状态, 比如 self._used_num_set 和
+                # middle_state_container 的状态应该自己手动清除
+                self._used_num_set.remove(_single_num)
+                middle_state_container.pop(-1)
+
 ```
 
 
@@ -1558,7 +1550,7 @@ def _get_letter_combination(
 ```
 
 
-#### 经典组合问题Combinations
+#### 经典组合问题
 
 leetcode77题  
 给出两个整数n和k, 求出1...n中k个数字的所有组合  
@@ -1718,3 +1710,461 @@ class Solution_number_of_islands(object):
 
 ## 动态规划
 
+动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。动态规划算法与分治法类似，其基本思想也是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解。与分治法不同的是，适合于用动态规划求解的问题，经分解得到子问题往往不是互相独立的。若用分治法来解这类问题，则分解得到的子问题数目太多，有些子问题被重复计算了很多次。如果我们能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，这样就可以避免大量的重复计算，节省时间。我们可以用一个表来记录所有已解的子问题的答案。不管该子问题以后是否被用到，只要它被计算过，就将其结果填入表中。这就是动态规划法的基本思路。
+
+![](/img/algo_newbie/dynamic_programming/dp_1.png)
+
+设计动态规划的三个步骤
+1. 将问题分解成最优子问题；
+2. 用递归的方式将问题表述成最优子问题的解；
+3. 自底向上的将递归转化成迭代；（递归是自顶向下）;
+
+
+### 递推公式讲解-经典题青蛙跳台阶
+
+我们以一个经典的跳台阶题目来讲解从**普通递归(自上向下)**->**记忆化搜索(自上向下)**->**动态规划(自下向上)**的演进
+
+题目:  
+一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+
+思路:  
+首先如果只有1个台阶，那青蛙只有一种跳法；如果有两个台阶，青蛙有两种跳法：一个台阶一个台阶跳；一次跳两个台阶；如果有n（n > 2）个台阶，假设用函数f（n）表示总共跳的方法数，这时青蛙在第一次有两种选择：选择跳一个台阶，则剩下n-1个台阶故剩下的台阶有f（n-1）种跳法；选择跳两个台阶，则剩下n-2个台阶故剩下的台阶有f（n-2）种跳法。
+
+故`f（n）= f（n-1） + f（n-2）`；n=1时`f（n） = 1`；n = 2时`f（n）= 2`；于是可以看到这个题目是明显的递归。
+
+``` python
+def jump_step(step_sum):
+    if step_sum == 0:
+        return 0
+    if step_sum == 1:
+        return 1
+    if step_sum == 2:
+        return 2
+    return jump_step(step_sum-1) + jump_step(step_sum-2)
+```
+
+#### 跳台阶记忆化搜索优化解法
+
+当step_sum很大的时候, 你会发现要执行很久, 是因为上述函数`jump_step`存在「大量重复计算」，比如f（8）被计算了两次，f（7）被重复计算了3次...所以这个递归算法低效的原因，就是存在大量的重复计算！
+
+既然存在大量重复计算，那么我们可以先把计算好的答案存下来，即造一个备忘录，等到下次需要的话，先去「备忘录」查一下，如果有，就直接取就好了，备忘录没有才再计算，那就可以省去重新重复计算的耗时啦！这就是带备忘录的解法「记忆化搜索」!
+
+``` python
+def jump_step_optimized(step_sum, memo=None):
+    if step_sum == 0:
+        return 0
+    if step_sum == 1:
+        return 1
+    if step_sum == 2:
+        return 2
+    if memo is None:
+        memo = {}
+    if step_sum in memo:  # 先判断有没计算过，即看看备忘录有没有
+        # 备忘录有，即计算过，直接返回
+        return memo[step_sum]
+    # 备忘录没有，即没有计算过，执行递归计算,并且把结果保存到备忘录map中
+    memo[step_sum] = \
+        jump_step_optimized(step_sum-1, memo) + \
+        jump_step_optimized(step_sum-2, memo)
+    return memo[step_sum]
+```
+
+
+#### 跳台阶动规解法
+
+既然我们也基本找出递推公式了, 其实我们也可以不走递归而直接走动规.
+``` python
+def jump_step_dynamic_programming(step_sum):
+    dp = {}
+    dp[0] = 0
+    dp[1] = 1
+    dp[2] = 2
+    for i in xrange(3, step_sum+1):
+        # 根据递推公式直接写出
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[step_sum]
+```
+
+拓展题目：  
+一只青蛙一次可以跳1级台阶，一次也可以跳2级台阶.......它也可以一次跳上n级台阶，此时青蛙跳上一个n级台阶总共有多少种跳法。
+
+思路：  
+首先还是假设：如果只有1个台阶，青蛙只有一种跳法。如果有2个台阶，青蛙有两种跳法：一个台阶一个台阶跳；一次跳两个台阶。如果有n个台阶：青蛙第一次选择跳一个台阶，剩下n-1个台阶有f(n-1)种跳法；青蛙第一次选择跳两个台阶，剩下n-2个台阶有f(n-2)种跳法；青蛙第一次选择3个台阶，剩下n-3个台阶有f(n-3）种跳法.......，青蛙第一次选择跳n-1个台阶，剩下1个台阶剩下一种跳法；青蛙第一次选择跳n个台阶，没有剩下台阶结束。在面对n-1个台阶时，青蛙还是像n个台阶那样跳的话。
+
+故：  
+f(0) = 0；
+f(1) = 1；
+f(2) = 2；
+f(n) = f(n-1) + f(n-2) +f(n-3) + .....+f(2) + f(1) + f(0)；（一式）
+f(n-1) = f(n-2) + f(n-3) + .... +f(2) + f(1) + f(0)；（二式）
+一式减去二式：f(n) = f(n-1) * 2；故又是明显的递归。代码略.
+
+
+### 最优子结构讲解-整数拆分
+
+这一小节, 我们开始讨论最优子结构: 通过求子问题的最优解, 可以获得原问题的最优解.
+
+[leetcode343题](https://leetcode-cn.com/problems/integer-break/)  
+给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
+说明: 你可以假设 n 不小于 2 且不大于 58。
+
+示例 1:  
+输入: 2
+输出: 1
+解释: 2 = 1 + 1, 1 × 1 = 1。
+
+示例 2:
+输入: 10
+输出: 36
+解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+
+![](/img/algo_newbie/dynamic_programming/integer_break_1.png)
+
+通过上图，我们很容易得到一个递归表达式：  
+`F(n) = max {i * F(n - i)}，i = 1，2，... ，n - 1`
+上述表达式是表明n - i需要继续分解的情况，但如果n - i比F(n - i)要大，显然就不用再继续分解了。故我们还需要比较i * (n - i)与i * F(n - i)的大小关系。所以完整的表达式应该为：  
+`F(n) = max { i * F(n - i), i * (n - i)} , i = 1, 2, ... , n - 1`
+基于此，就不难得到如下代码,  
+**而通过以下代码中的 `integer_break_dp` 方法中的注释, 可以很清晰的看出怎么从普通递归一点一点演进到动态规划的思路的!**
+思路分析参考:
+* https://leetcode-cn.com/problems/integer-break/solution/bao-li-sou-suo-ji-yi-hua-sou-suo-dong-tai-gui-hua-/
+* https://leetcode-cn.com/problems/integer-break/solution/ba-yi-ba-zhe-chong-ti-de-wai-tao-343-zheng-shu-cha/
+
+``` python
+class Solution_integer_break(object):
+
+    def __init__(self):
+        self._memo = {}
+
+    # 将n进行分割(至少分割两部分), 可以获得的最大乘积
+    def integerBreak(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 1:
+            return 1
+        _res = -1
+        if n in self._memo:
+            return self._memo[n]
+        for i in xrange(1, n):
+            # 计算`i + (n-i)`
+            _res = max(
+                _res,
+                i * (n-i),  # 有可能自己本身`i*(n-i)`就是最大的
+                i * self.integerBreak(n-i))
+        self._memo[n] = _res
+        return _res
+        
+    def integer_break_dp(self, n):
+        # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
+        dp = [-1] * (n + 1)
+        dp[1] = 1
+        # 下面这种A思路是不行的:
+        # dp[i]等价于 f(i)，
+        # 那么上面针对 f(i) 写的递归公式对 dp[i] 也是适用的，我们拿来试试。
+        # 关键语句:
+        #  `res = max(res, i * (n - i), max(i * self.integerBreak(n - i)))`
+        # 翻译过来就是：`dp[i] = max(_res, i * (n-i), i * dp[n-i])`
+        # 则不难得出以下代码, 但因为 dp[n-i] 当前没求出来, 子问题没求出来,
+        # 所以原问题也就求不出来了, 所以下面这三行代码是不行的
+        # _res = -1
+        # for i in xrange(1, n):
+            # dp[i] = max(_res, i * (n-i), i * dp[n-i])
+        
+        # 此时我们得下面这种B思路才行:
+        # 我们用一层循环来生成上面这段A思路代码一系列的 n 值。
+        # 接着我们还要生成上面A思路代码中一系列的 i 值，
+        # 注意到 n - i 是要大于 0 的，
+        # 因此 i 只需要循环到 n - 1 即可。
+        # 由此不难翻译A思路得出以下代码(j代表n, k代表i):
+        for j in xrange(2, n+1):  # 循环到n
+            # 求解dp[j]
+            for k in xrange(1, j):  # 循环到j-1即可
+                dp[j] = max(dp[j], k * (j-k), k * dp[j-k])
+        return dp[n]
+```
+
+
+### 状态转移方程讲解-打家劫舍
+
+[leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
+你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+
+给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。
+
+示例 1：
+输入：[1,2,3,1]
+输出：4
+解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+     偷窃到的最高金额 = 1 + 3 = 4 。
+
+示例 2：
+输入：[2,7,9,3,1]
+输出：12
+解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+     偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+
+#### 思路1
+
+![](/img/algo_newbie/dynamic_programming/house_robber_1.png)
+
+状态转移方程为: 
+![](/img/algo_newbie/dynamic_programming/house_robber_2.png)
+
+上图中v(0)即为第0个房子的价值, 
+根据上图同理: `f(1) = max{ v(1)+f(3), v(2)+f(4), ... }`,
+则得到下面代码:
+``` python
+class Solution_house_robber(object):
+
+    def __init__(self):
+        # memo[i] 表示考虑抢劫 nums[i...n-1] 所能获得的最大收益
+        self._memo = {}
+
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        return self._try_rob(nums, 0)
+
+    def _try_rob(self, nums_arr, index):
+        """
+        先套用写一波自顶而下的递归形式的解答,
+        然后用记忆化搜索的加个memo的方式优化一波.
+        写完此方法之后, 有了大概的思路就能
+        根据状态转移方程找出规律改写成自底向上的dp形式(见下方`_try_rob_dp`方法)
+        此`_try_rob`方法表示: 考虑抢劫nums[index...nums.size()-1]这个范围的所有房子所能得到的最大收益
+        """
+        if index in self._memo:
+            return self._memo[index]
+        if index >= len(nums_arr):
+            return 0
+        res = 0
+        for _i, _num in enumerate(nums_arr):
+            if _i < index:
+                continue
+            res = max(
+                res,
+                _num + self._try_rob(nums_arr, _i+2),
+            )
+        self._memo[index] = res
+        return res
+
+    def rob_dp_1(self, nums_arr):
+        if not nums_arr:
+            return 0
+        if len(nums_arr) == 1:
+            return nums_arr[0]
+        n = len(nums_arr)
+        # dp[index] 表示 抢劫nums[index...nums.size()-1]这个范围的所有房子所能得到的最大收益
+        dp = [0] * n
+        # 因为我们想求出dp[0], 所以我们从后面开始, 即从n-1开始
+        dp[n-1] = nums_arr[n-1]
+        dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
+        for i in xrange(n-3, -1, -1):
+            for j in xrange(i, n):
+                dp[i] = max(
+                    dp[i],
+                    (nums_arr[j] + (dp[j+2] if j + 2 < n else 0))
+                )
+        return dp[0]
+```
+
+
+#### 思路2
+
+参考: leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
+
+如果房屋数量大于两间，应该如何计算能够偷窃到的最高总金额呢？对于第 k~(k>2)k (k>2) 间房屋，有两个选项：
+* 偷窃第 k 间房屋，那么就不能偷窃第 k-1 间房屋，偷窃总金额为前 k-2 间房屋的最高总金额与第 k 间房屋的金额之和。
+* 不偷窃第 k 间房屋，偷窃总金额为前 k-1 间房屋的最高总金额。
+
+在两个选项中选择偷窃总金额较大的选项，该选项对应的偷窃总金额即为前 k 间房屋能偷窃到的最高总金额。
+用 dp[i] 表示前 i 间房屋能偷窃到的最高总金额，那么就有如下的状态转移方程：  
+`dp[i] = max( dp[i−2] + nums[i], dp[i−1] )`
+边界条件为：
+* `dp[0] = nums[0]` , 只有一间房屋，则偷窃该房屋 
+* `dp[1] = max( nums[0], nums[1] )` ,  只有两间房屋，选择其中金额较高的房屋进行偷窃
+
+最终的答案即为 `dp[n−1]`，其中 n 是数组的长度
+
+``` python
+def rob_dp_2(self, nums_arr):
+    if not nums_arr:
+        return 0
+    n = len(nums_arr)
+    dp = [0] * n
+    dp[0] = nums_arr[0]
+    dp[1] = max(nums_arr[0], nums_arr[1])
+    for i in xrange(2, n):
+        dp[i] = max(dp[i-1], nums_arr[i]+dp[i-2])
+    return dp[n-1]
+```
+
+
+#### 总结
+
+可以看到不同思路的可以得出不同的状态的定义, 则得到不同的状态转移方程, 则得到不同的代码的解法.  
+动态规划的的四个解题步骤是：
+1. 定义子问题
+2. 写出子问题的递推关系
+3. 确定 DP 数组的计算顺序
+4. 空间优化（可选）
+
+那第一步定义的不同, 则代码不同, 但都可以是正确的解法.
+**所以动态规划的关键就是, 找到一个合适的子问题的状态的表示!**
+
+
+### 0-1背包问题
+
+**「0-1 背包」问题是一类非常重要的动态规划问题**
+
+问题:  
+有一个背包, 它的容量为C, 现在有n种不同的物品, 编号为0...n-1, 其中每一件物品的重量为w(i), 价值为v(i). 问可以向这个背包中盛放哪些物品, 使得再不超过背包容量的基础上, 物品的总价值最大.
+
+因为约束变量为n和c, 我们可以定义`f(i, c)`为盛放第i个物品时能得到的最大价值. 有两个选项:
+* 往背包里放第i个物品: `v(i) + f( i-1, c-w(i) )`
+* 不往背包里放第i个物品: `f(i-1, c)`
+
+则我们可以得出, 状态转移方程为: `f(i, c) = max( v(i)+f(i-1, c-w(i)) , f(i-1, c) )`
+
+我们先写一版普通递归的代码:
+``` python
+class Solution_knapsack(object):
+    
+    def __init__(self):
+        self._memo = None
+
+    def knapsack(self, capacity, weight_arr, value_arr):
+        if capacity == 0:
+            return 0
+        self._memo = [ [ -1 for j in xrange(capacity)] for i in xrange(len(weight_arr)) ]
+        return self._best_value(capacity, weight_arr, value_arr, 0)
+
+    # 用 [0...index]的物品,填充容积为c的背包的最大价值
+    def _best_value(self, capacity, weight_arr, value_arr, index):
+        if index >= len(weight_arr) or capacity <= 0:
+            return 0
+        if self._memo[index][capacity-1] != -1:
+            return self._memo[capacity][index]
+        _res = self._best_value(capacity, weight_arr, value_arr, index + 1)
+        if capacity >= weight_arr[index]:
+            _res = max(
+                _res,
+                value_arr[index] + self._best_value(
+                    capacity-weight_arr[index], weight_arr, value_arr, index+1)
+            )
+        self._memo[index][capacity-1] = _res
+        return _res
+```
+
+![](/img/algo_newbie/dynamic_programming/knapsack_1.png "dp数组如图")
+
+根据状态转移方程得出以下动规代码, 而dp数组中的内容如上图.
+``` python
+    def knapsack_dp(self, capacity, weight_arr, value_arr):
+        if capacity == 0:
+            return 0
+        assert(len(weight_arr) == len(value_arr))
+        n = len(weight_arr)
+        dp = [ [ 0 for _ in xrange(capacity+1)] for _ in xrange(n)]
+        # 动规是从底向上嘛, 先构建dp[0]的东西
+        for k in xrange(capacity+1):
+            dp[0][k] = value_arr[0] if k >= weight_arr[0] else 0
+
+        for i in xrange(1, n):
+            for c in xrange(capacity+1):
+                # 根据状态转移方程得出
+                dp[i][c] = max(
+                    dp[i-1][c],
+                    value_arr[i] + dp[i-1][c-weight_arr[i]] if c >= weight_arr[i] else 0
+                )
+        return dp[n-1][capacity]
+```
+
+
+#### 分割等和子集
+
+[leetcode416题](https://leetcode-cn.com/problems/partition-equal-subset-sum)  
+给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
+
+示例 1:
+输入: [1, 5, 11, 5]
+输出: true
+解释: 数组可以分割成 [1, 5, 5] 和 [11].
+ 
+示例 2:
+输入: [1, 2, 3, 5]
+输出: false
+解释: 数组不能分割成两个元素和相等的子集.
+
+参考: https://leetcode-cn.com/problems/partition-equal-subset-sum/solution/0-1-bei-bao-wen-ti-xiang-jie-zhen-dui-ben-ti-de-yo/
+
+这其实是一个背包问题, 我们只要拿一定的数字填满所有数字和sum的一半, 剩余的数字一定等于sum/2, 则这个问题其实还是个背包问题, 只不过我们需要用一定的数字把这个背包填满, 对于第i个物品, 有两种情况:
+* 我们用i-1就填满了背包, 则第i个就不需要用了
+* 我们用了第i个才填满
+
+状态与状态转移方程:
+* 状态定义：dp[i][j]表示从数组的 [0, i] 这个子区间内挑选一些正整数，每个数只能用一次，使得这些数的和恰好等于 j。
+* 状态转移方程：很多时候，状态转移方程思考的角度是「分类讨论」，对于「0-1 背包问题」而言就是「当前考虑到的数字选与不选」。
+    * 不选择 nums[i]，如果在 [0, i - 1] 这个子区间内已经有一部分元素，使得它们的和为 j ，那么 dp[i][j] = true；
+    * 选择 nums[i]，如果在 [0, i - 1] 这个子区间内就得找到一部分元素，使得它们的和为 j - nums[i]。
+
+则状态转移方程：  
+`dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i]]`
+一般写出状态转移方程以后，就需要考虑初始化条件。
+* j - nums[i] 作为数组的下标，一定得保证大于等于 0 ，因此 nums[i] <= j；
+* 注意到一种非常特殊的情况：j 恰好等于 nums[i]，即单独 nums[j] 这个数恰好等于此时「背包的容积」 j，这也是符合题意的
+* 初始化：dp[0][0] = false，因为候选数 nums[0] 是正整数，凑不出和为 0；
+* 输出：dp[len - 1][target]，这里 len 表示数组的长度，target 是数组的元素之和（必须是偶数）的一半。
+
+
+则代码如下:
+``` python
+class Solution_partition_equal_subset_sum(object):
+
+    def __init__(self):
+        self._memo = None
+
+    def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        动规解法
+        """
+        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
+            return False
+        _bag_capcity = sum(nums) / 2
+        n = len(nums)
+        # 创建二维状态数组，行：物品索引，列：容量（包括 0）
+        dp = [ [False for _ in xrange(_bag_capcity+1)] for _ in xrange(n) ]
+        # 先填表格第 0 行，第 1 个数只能让容积为它自己的背包恰好装满
+        dp[0][nums[0]] = True
+        for i in xrange(1, n):
+            for c in xrange(_bag_capcity+1):
+                dp[i][c] = dp[i-1][c] or (dp[i-1][c-nums[i]] if c >= nums[i] else False)
+        return dp[n-1][_bag_capcity]
+
+    def canPartition_recursion(self, nums):
+        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
+            return False
+        _sum_num = sum(nums) / 2
+        self._memo = [ [ None for _ in xrange(_sum_num+1) ] for _ in xrange(len(nums)) ]
+        return self._try_partition(nums, 0, _sum_num)
+
+    def _try_partition(self, nums, index, sum_num):
+        if index >= len(nums) or sum_num < 0:
+            return False
+        if self._memo[index][sum_num] is not None:
+            return self._memo[index][sum_num]
+        if sum_num == 0:
+            return True
+        _res = self._try_partition(nums, index+1, sum_num) or \
+            self._try_partition(nums, index+1, sum_num-nums[index])
+        self._memo[index][sum_num] = _res
+        return _res
+```

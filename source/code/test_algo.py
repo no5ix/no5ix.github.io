@@ -1121,6 +1121,115 @@ class Solution_partition_equal_subset_sum(object):
         return _res
 
 
+class Solution_LIS(object):
+    def lengthOfLIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        n = len(nums)
+        # 我们定义 `dp[i]` 为选取到第i个数字的时候的最长上升子序列的长度,
+        # 注意这里的定义, 第i个数字是一定要选取的.
+        dp = [1] * n  # 因为自己本身就是一个长度为1的上升子序列
+        dp[0] = 1
+        for i in xrange(1, n):
+            for j in xrange(0, i):
+                # 则我们的状态转移方程为: 
+                # `dp[i] = max(dp[j]) + 1 , 其中 9 <= j < i 且 nums[j] < nums[i]`
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
+
+
+class Solution_LCS(object):
+    def lengthOfLCS(self, str_arr):
+        if not str_arr:
+            return 0
+        assert len(str_arr) == 2
+        str_a = str_arr[0]
+        str_b = str_arr[1]
+        m = len(str_a)
+        n = len(str_b)
+        if m < 1 or n < 1:
+            return 0
+        # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列的长度
+        dp = [ [ 0 for _ in xrange(n) ] for _ in xrange(m) ]
+        # 初始化最底层的基础数据
+        for k in xrange(n):
+            if str_a[0] == str_b[k]:
+                for h in xrange(k, n):  # k后面的也都要置为1
+                    dp[0][h] = 1
+        for k in xrange(m):
+            if str_a[k] == str_b[0]:
+                for h in xrange(k, m):  # k后面的也都要置为1
+                    dp[h][0] = 1
+
+        for i in xrange(1, m):
+            for j in xrange(1, n):
+                # 根据图中的状态转移方程得出, 有两种情况, 所以if一下
+                if str_a[i] == str_b[j]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        return dp[m-1][n-1]
+
+    def get_lcs_detail_seq(self, str_arr):
+        if not str_arr:
+            return ""
+        assert len(str_arr) == 2
+        str_a = str_arr[0]
+        str_b = str_arr[1]
+        m = len(str_a)
+        n = len(str_b)
+        if m < 1 or n < 1:
+            return ""
+        # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列的长度
+        dp = [ [ 0 for _ in xrange(n) ] for _ in xrange(m) ]
+        # 初始化最底层的基础数据
+        for k in xrange(n):
+            if str_a[0] == str_b[k]:
+                for h in xrange(k, n):  # k后面的也都要置为1
+                    dp[0][h] = 1
+        for k in xrange(m):
+            if str_a[k] == str_b[0]:
+                for h in xrange(k, m):  # k后面的也都要置为1
+                    dp[h][0] = 1
+
+        for i in xrange(1, m):
+            for j in xrange(1, n):
+                # 根据图中的状态转移方程得出, 有两种情况, 所以if一下
+                if str_a[i] == str_b[j]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+        # 不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 
+        # 我们的思路就是要用dp解法求出整个dp数组之后,
+        # 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
+        m = len(str_a) - 1;
+        n = len(str_b) - 1;
+        _lcs_detail_seq = "";
+        while(m >= 0 and n >= 0):
+            if( str_a[m] == str_b[n] ):
+                _lcs_detail_seq = str_a[m] + _lcs_detail_seq;
+                m -= 1;
+                n -= 1;
+            elif(m == 0):
+                n -= 1;
+            elif(n == 0):
+                m -= 1;
+            else:
+                if(dp[m-1][n] > dp[m][n-1]):
+                    m -= 1;
+                else:
+                    n -= 1;
+
+        return _lcs_detail_seq;
+
+
+
 if __name__ == "__main__":
         
     sort_algo_func_list = [
@@ -1453,3 +1562,21 @@ if __name__ == "__main__":
     print Solution_partition_equal_subset_sum().canPartition_recursion([1, 8, 3, 6])
     print "canPartition_recursion([1, 21, 3, 4, 7, 161]):"
     print Solution_partition_equal_subset_sum().canPartition_recursion([1, 21, 3, 4, 7, 161])
+
+    print ""
+
+    print "partition_equal_subset_sum: --------------"
+    print "LIS([0,8,4,12,2, 16]):"
+    print Solution_LIS().lengthOfLIS([0,8,4,12,2, 16])
+
+    print ""
+
+    print "partition_equal_subset_sum: --------------"
+    print "LCS(['ABCD', 'AEBD']):"
+    print Solution_LCS().lengthOfLCS(['ABCD', 'AEBD'])
+    print "LCS(['ABCDefscgiqh', 'efscgAEBDcesgh']):"
+    print Solution_LCS().lengthOfLCS(['ABCDefscgiqh', 'efscgAEBDcesgh'])
+    print "get_lcs_detail_seq(['ABCD', 'AEBD']):"
+    print Solution_LCS().get_lcs_detail_seq(['ABCD', 'AEBD'])
+    print "get_lcs_detail_seq(['ABCDefscgiqh', 'efscgAEBDcesgh']):"
+    print Solution_LCS().get_lcs_detail_seq(['ABCDefscgiqh', 'efscgAEBDcesgh'])

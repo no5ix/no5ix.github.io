@@ -1785,7 +1785,9 @@ def jump_step_dynamic_programming(step_sum):
     return dp[step_sum]
 ```
 
-拓展题目：  
+
+#### 进阶跳台阶题目
+
 一只青蛙一次可以跳1级台阶，一次也可以跳2级台阶.......它也可以一次跳上n级台阶，此时青蛙跳上一个n级台阶总共有多少种跳法。
 
 思路：  
@@ -1905,7 +1907,7 @@ class Solution_integer_break(object):
 解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
      偷窃到的最高金额 = 2 + 9 + 1 = 12 。
 
-#### 思路1
+#### rob思路1
 
 ![](/img/algo_newbie/dynamic_programming/house_robber_1.png)
 
@@ -1975,7 +1977,7 @@ class Solution_house_robber(object):
 ```
 
 
-#### 思路2
+#### rob思路2
 
 参考: leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
 
@@ -2006,7 +2008,7 @@ def rob_dp_2(self, nums_arr):
 ```
 
 
-#### 总结
+#### rob总结
 
 可以看到不同思路的可以得出不同的状态的定义, 则得到不同的状态转移方程, 则得到不同的代码的解法.  
 动态规划的的四个解题步骤是：
@@ -2167,4 +2169,118 @@ class Solution_partition_equal_subset_sum(object):
             self._try_partition(nums, index+1, sum_num-nums[index])
         self._memo[index][sum_num] = _res
         return _res
+```
+
+
+### LIS问题-最长上升子序列
+
+[leetcode300题](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+
+LIS即longest-increasing-subsequence  
+给定一个无序的整数数组，找到其中最长上升子序列的长度。
+
+示例:
+输入: [10,9,2,5,3,7,101,18]
+输出: 4 
+解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。
+
+说明:  
+可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。
+你算法的时间复杂度应该为 O(n2) 。
+
+进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?
+
+参考: https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-by-leetcode-soluti/
+
+我们定义 `dp[i]` 为选取到第i个数字的时候的最长上升子序列的长度, **注意这里的定义, 第i个数字是一定要选取的**
+则我们的状态转移方程为: `dp[i] = max(dp[j]) + 1 , 其中 0 <= j < i 且 nums[j] < nums[i]`
+
+即考虑往 dp[0…i−1] 中最长的上升子序列后面再加一个 nums[i]。由于 dp[j]dp[j] 代表 nums[0…j] 中以 nums[j] 结尾的最长上升子序列，所以如果能从 dp[j]dp[j] 这个状态转移过来，那么 nums[i] 必然要大于 nums[j]，才能将 nums[i] 放在 nums[j] 后面以形成更长的上升子序列。
+
+最后，整个数组的最长上升子序列即所有 dp[i]dp[i] 中的最大值。
+
+LIS =max(dp[i]), 其中 0 ≤ i < n
+
+下图显示了该方法：
+![](/img/algo_newbie/dynamic_programming/lis_1.png "一个例子")
+![](/img/algo_newbie/dynamic_programming/lis_2.png "另一个例子")
+
+翻译成代码就是:
+``` python
+class Solution_LIS(object):
+    def lengthOfLIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        n = len(nums)
+        # 我们定义 `dp[i]` 为选取到第i个数字的时候的最长上升子序列的长度,
+        # 注意这里的定义, 第i个数字是一定要选取的.
+        dp = [1] * n  # 因为自己本身就是一个长度为1的上升子序列
+        dp[0] = 1
+        for i in xrange(1, n):
+            for j in xrange(0, i):
+                # 则我们的状态转移方程为: 
+                # `dp[i] = max(dp[j]) + 1 , 其中 9 <= j < i 且 nums[j] < nums[i]`
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
+```
+
+
+### LCS问题-最长公共子序列问题
+
+LCS即Longest-Common-Sequence  
+
+给出两个字符串S1和S2, 求这两个字符串最长公共子序列的长度.  
+比如: 
+* S1 = ABCD
+* S2 = AEBD
+
+则最长公共子序列为ABD, 其长度为3
+
+![](/img/algo_newbie/dynamic_programming/lcs_1.png "LCS状态转移方程")
+![](/img/algo_newbie/dynamic_programming/lcs_2.png "LCS递归树")
+
+则代码如下:
+``` python
+class Solution_LCS(object):
+    def lengthOfLCS(self, str_arr):
+        if not str_arr:
+            return 0
+        assert len(str_arr) == 2
+        str_a = str_arr[0]
+        str_b = str_arr[1]
+        m = len(str_a)
+        n = len(str_b)
+        if m < 1 or n < 1:
+            return 0
+        # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列的长度
+        dp = [ [ 0 for _ in xrange(n) ] for _ in xrange(m) ]
+        # 初始化最底层的基础数据
+        for k in xrange(n):
+            dp[0][k] = 1 if str_a[0] == str_b[k] else 0
+        for h in xrange(m):
+            dp[h][0] = 1 if str_a[h] == str_b[0] else 0
+
+        for i in xrange(1, m):
+            for j in xrange(n):
+                # 根据图中的状态转移方程得出, 有两种情况, 所以if一下
+                if str_a[i] == str_b[j]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1] if j-1 >= 0 else 0)
+        return dp[m-1][n-1]
+```
+
+
+### 求LCS具体的是哪个子序列
+
+不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 我们的思路就是要用dp解法求出整个dp数组之后, 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
+
+对于LCS的具体解, 代码如下:
+``` python
+
 ```

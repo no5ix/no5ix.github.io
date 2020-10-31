@@ -1175,7 +1175,39 @@ class Solution_LCS(object):
                     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
         return dp[m-1][n-1]
 
-    def get_lcs_detail_seq(self, str_arr):
+    def get_lcs_detail_seq_1(self, str_arr):
+        if not str_arr:
+            return ""
+        assert len(str_arr) == 2
+        str_a = str_arr[0]
+        str_b = str_arr[1]
+        m = len(str_a)
+        n = len(str_b)
+        if m < 1 or n < 1:
+            return ""
+        # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列
+        dp = [ [ "" for _ in xrange(n) ] for _ in xrange(m) ]
+        # 初始化最底层的基础数据
+        for k in xrange(n):
+            if str_a[0] == str_b[k]:
+                for h in xrange(k, n):  # k后面的也都要置为1
+                    dp[0][h] = str_a[0]
+        for k in xrange(m):
+            if str_a[k] == str_b[0]:
+                for h in xrange(k, m):  # k后面的也都要置为1
+                    dp[h][0] = str_b[0]
+
+        for i in xrange(1, m):
+            for j in xrange(1, n):
+                # 根据图中的状态转移方程得出, 有两种情况, 所以if一下
+                if str_a[i] == str_b[j]:
+                    dp[i][j] = dp[i-1][j-1] + str_a[i]
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        return dp[m-1][n-1]
+
+
+    def get_lcs_detail_seq_2(self, str_arr):
         if not str_arr:
             return ""
         assert len(str_arr) == 2
@@ -1204,27 +1236,33 @@ class Solution_LCS(object):
                     dp[i][j] = dp[i-1][j-1] + 1
                 else:
                     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-
         # 不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 
         # 我们的思路就是要用dp解法求出整个dp数组之后,
         # 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
-        m = len(str_a) - 1;
-        n = len(str_b) - 1;
+        #
+        # 从之前求lcs的代码以及上图中都可以看出,
+        # 从dp数组的末尾后面反推回去,
+        # 上一个公共字符所在的i和j肯定在当前i和j的左上.
+        p = len(str_a) - 1;
+        q = len(str_b) - 1;
         _lcs_detail_seq = "";
-        while(m >= 0 and n >= 0):
-            if( str_a[m] == str_b[n] ):
-                _lcs_detail_seq = str_a[m] + _lcs_detail_seq;
-                m -= 1;
-                n -= 1;
-            elif(m == 0):
-                n -= 1;
-            elif(n == 0):
-                m -= 1;
+        while(p >= 0 and q >= 0):
+            if( str_a[p] == str_b[q] ):
+                _lcs_detail_seq = str_a[p] + _lcs_detail_seq;
+                p -= 1;
+                q -= 1;
+            elif(p == 0):
+                q -= 1;
+            elif(q == 0):
+                p -= 1;
             else:
-                if(dp[m-1][n] > dp[m][n-1]):
-                    m -= 1;
+                if(dp[p-1][q] > dp[p][q-1]):
+                    # 由dp数组图中可知, 
+                    # 谁大, 那index就往谁那边的左边移动,
+                    # 这样才能才能找到最大公共子串的上一个公共字符嘛
+                    p -= 1;
                 else:
-                    n -= 1;
+                    q -= 1;
 
         return _lcs_detail_seq;
 
@@ -1574,9 +1612,13 @@ if __name__ == "__main__":
     print "partition_equal_subset_sum: --------------"
     print "LCS(['ABCD', 'AEBD']):"
     print Solution_LCS().lengthOfLCS(['ABCD', 'AEBD'])
-    print "LCS(['ABCDefscgiqh', 'efscgAEBDcesgh']):"
-    print Solution_LCS().lengthOfLCS(['ABCDefscgiqh', 'efscgAEBDcesgh'])
-    print "get_lcs_detail_seq(['ABCD', 'AEBD']):"
-    print Solution_LCS().get_lcs_detail_seq(['ABCD', 'AEBD'])
-    print "get_lcs_detail_seq(['ABCDefscgiqh', 'efscgAEBDcesgh']):"
-    print Solution_LCS().get_lcs_detail_seq(['ABCDefscgiqh', 'efscgAEBDcesgh'])
+    print "LCS(['ABCDefscgiqh', 'ABEDeabgiyy4q.h']):"
+    print Solution_LCS().lengthOfLCS(['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
+    print "get_lcs_detail_seq_1(['ABCD', 'AEBD']):"
+    print Solution_LCS().get_lcs_detail_seq_1(['ABCD', 'AEBD'])
+    print "get_lcs_detail_seq_1(['ABCDefscgiqh', 'ABEDeabgiyy4q.h']):"
+    print Solution_LCS().get_lcs_detail_seq_1(['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
+    print "get_lcs_detail_seq_2(['ABCD', 'AEBD']):"
+    print Solution_LCS().get_lcs_detail_seq_2(['ABCD', 'AEBD'])
+    print "get_lcs_detail_seq_2(['ABCDefscgiqh', 'ABEDeabgiyy4q.h']):"
+    print Solution_LCS().get_lcs_detail_seq_2(['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])

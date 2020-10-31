@@ -2278,9 +2278,103 @@ class Solution_LCS(object):
 
 ### 求LCS具体的是哪个子序列
 
-不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 我们的思路就是要用dp解法求出整个dp数组之后, 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
+* **思路1**: 还是用动规来解
+    ``` python
+    def get_lcs_detail_seq_1(self, str_arr):
+        if not str_arr:
+            return ""
+        assert len(str_arr) == 2
+        str_a = str_arr[0]
+        str_b = str_arr[1]
+        m = len(str_a)
+        n = len(str_b)
+        if m < 1 or n < 1:
+            return ""
+        # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列
+        dp = [ [ "" for _ in xrange(n) ] for _ in xrange(m) ]
+        # 初始化最底层的基础数据
+        for k in xrange(n):
+            if str_a[0] == str_b[k]:
+                for h in xrange(k, n):  # k后面的也都要置为1
+                    dp[0][h] = str_a[0]
+        for k in xrange(m):
+            if str_a[k] == str_b[0]:
+                for h in xrange(k, m):  # k后面的也都要置为1
+                    dp[h][0] = str_b[0]
 
-对于LCS的具体解, 代码如下:
-``` python
+        for i in xrange(1, m):
+            for j in xrange(1, n):
+                # 根据图中的状态转移方程得出, 有两种情况, 所以if一下
+                if str_a[i] == str_b[j]:
+                    dp[i][j] = dp[i-1][j-1] + str_a[i]
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        return dp[m-1][n-1]
+    ```
 
-```
+* **思路2**:  
+    不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 我们的思路就是要用dp解法求出整个dp数组之后, 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
+
+    ![](/img/algo_newbie/dynamic_programming/lcs_3.png "LCS问题的dp数组图")
+    从之前求lcs的代码以及上图中都可以看出, 从dp数组的末尾后面反推回去, 上一个公共字符所在的i和j肯定在当前i和j的左上.
+    则对于LCS的具体解, 代码如下:
+    ``` python
+    def get_lcs_detail_seq_2(self, str_arr):
+        if not str_arr:
+            return ""
+        assert len(str_arr) == 2
+        str_a = str_arr[0]
+        str_b = str_arr[1]
+        m = len(str_a)
+        n = len(str_b)
+        if m < 1 or n < 1:
+            return ""
+        # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列的长度
+        dp = [ [ 0 for _ in xrange(n) ] for _ in xrange(m) ]
+        # 初始化最底层的基础数据
+        for k in xrange(n):
+            if str_a[0] == str_b[k]:
+                for h in xrange(k, n):  # k后面的也都要置为1
+                    dp[0][h] = 1
+        for k in xrange(m):
+            if str_a[k] == str_b[0]:
+                for h in xrange(k, m):  # k后面的也都要置为1
+                    dp[h][0] = 1
+
+        for i in xrange(1, m):
+            for j in xrange(1, n):
+                # 根据图中的状态转移方程得出, 有两种情况, 所以if一下
+                if str_a[i] == str_b[j]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        # 不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 
+        # 我们的思路就是要用dp解法求出整个dp数组之后,
+        # 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
+        #
+        # 从之前求lcs的代码以及上图中都可以看出,
+        # 从dp数组的末尾后面反推回去,
+        # 上一个公共字符所在的i和j肯定在当前i和j的左上.
+        p = len(str_a) - 1;
+        q = len(str_b) - 1;
+        _lcs_detail_seq = "";
+        while(p >= 0 and q >= 0):
+            if( str_a[p] == str_b[q] ):
+                _lcs_detail_seq = str_a[p] + _lcs_detail_seq;
+                p -= 1;
+                q -= 1;
+            elif(p == 0):
+                q -= 1;
+            elif(q == 0):
+                p -= 1;
+            else:
+                if(dp[p-1][q] > dp[p][q-1]):
+                    # 由dp数组图中可知, 
+                    # 谁大, 那index就往谁那边的左边移动,
+                    # 这样才能才能找到最大公共子串的上一个公共字符嘛
+                    p -= 1;
+                else:
+                    q -= 1;
+
+        return _lcs_detail_seq;
+    ```

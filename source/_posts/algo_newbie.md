@@ -2316,8 +2316,8 @@ class Solution_LCS(object):
     不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 我们的思路就是要用dp解法求出整个dp数组之后, 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.  
 
     ![](/img/algo_newbie/dynamic_programming/lcs_3.png "LCS问题的dp数组图")
-    从之前求lcs的代码以及上图中都可以看出, 从dp数组的末尾后面反推回去, 上一个公共字符所在的i和j肯定在当前i和j的左上.
-    则对于LCS的具体解, 代码如下:
+    从之前求lcs的代码以及上图中都可以看出, 从dp数组的末尾后面反推回去, 上一个公共字符所在的横纵index肯定在当前横纵index的左上.
+    那则对于LCS的具体解, 思路2的代码如下:
     ``` python
     def get_lcs_detail_seq_2(self, str_arr):
         if not str_arr:
@@ -2354,7 +2354,7 @@ class Solution_LCS(object):
         #
         # 从之前求lcs的代码以及上图中都可以看出,
         # 从dp数组的末尾后面反推回去,
-        # 上一个公共字符所在的i和j肯定在当前i和j的左上.
+        # 上一个公共字符所在的横纵index肯定在当前横纵index的左上.
         p = len(str_a) - 1;
         q = len(str_b) - 1;
         _lcs_detail_seq = "";
@@ -2368,13 +2368,15 @@ class Solution_LCS(object):
             elif(q == 0):
                 p -= 1;
             else:
+                # 由dp数组图中可知, 
+                # 上一个公共字符所在的横纵index肯定在当前横纵index的左上.
                 if(dp[p-1][q] > dp[p][q-1]):
-                    # 由dp数组图中可知, 
-                    # 谁大, 那index就往谁那边的左边移动,
+                    # dp[p-1][q] 大, 则往左移动, p减一
                     # 这样才能才能找到最大公共子串的上一个公共字符嘛
                     p -= 1;
                 else:
+                    # dp[p][q-1] 大, 则往上移动, q减一
+                    # 这样才能才能找到最大公共子串的上一个公共字符嘛
                     q -= 1;
-
         return _lcs_detail_seq;
     ```

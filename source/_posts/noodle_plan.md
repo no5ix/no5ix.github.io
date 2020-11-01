@@ -10,8 +10,10 @@ categories:
 
 # pending_fini
 
-* https://jishuin.proginn.com/p/763bfbd27fa0
-* 算法系统学习
+<!-- * http轮询 -->
+<!-- * websocket -->
+* [微信社招面经的面/笔试题](https://jishuin.proginn.com/p/763bfbd27fa0)
+* [字节跳动百度拼多多面笔试题](https://mp.weixin.qq.com/s?__biz=MzIwNTA4NzI1Mw==&mid=2247486096&idx=1&sn=ea19bfbecd6b0a27341cbd3fb7b2344d&scene=21#wechat_redirect)
 
 
 # misc
@@ -48,7 +50,9 @@ categories:
 
 **. . .**<!-- more -->
 
-# 比狗
+# 面筋
+
+## 比狗
 
 * 大数相加
 * 全排列
@@ -59,9 +63,9 @@ categories:
 * 合并字符串中的连续空格为一个如`" he    ll o  "` 得到 `" he ll o "`
 
 
-# 虾
+## 虾
 
-## toc_one
+### toc_one
 
 * python实现
     * 继承
@@ -114,7 +118,7 @@ categories:
     * send返回值意味着啥?意味着对方真的就收到了多少数据么?
 
 
-## infra_one
+### infra_one
 
 * lsm-tree pending_fin
 * muduo的buffer怎么做的, 看muduo书吧 [也可参考这里](#个人开源-realtime-server服务器框架)
@@ -132,7 +136,7 @@ categories:
 * 同构问题, [leetcode-isomorphic-strings](https://leetcode-cn.com/problems/isomorphic-strings/)
 
 
-## infra_two
+### infra_two
 
 * 十个并发请求写日志，传入的两个参数（参数1时间戳， 参数2内容）， 然后按照传入的参数1的时间戳排序写日志（提示：hbase就有这个特性，全局有序的存储？ 不用严格有序， 阶段有序 pending_fini
 
@@ -167,13 +171,12 @@ categories:
 
 # 算法与数据结构
 
-推荐参考**本博客总结**的 {% post_link algo_newbie %}
+* 推荐参考**本博客总结**的 {% post_link algo_newbie %}
+* 推荐参考**本博客总结**的 {% post_link algo_practice %}
 
 * A星算法 pending_fin
 * dijkstra算法 pending_fin
-* 双栈队列 pending_fini
-* 判断是否有一个数在有序数组中出现次数多于数组长度的一半 pending_fin
-* 两个单向链表，返回求和后的链表结构，例如2->3->1->5，和3->6，结果返回2->3->5->1 pending_fin
+* 双栈队列 pending_fin
 * 动态规划与贪心有什么区别:
     * 贪心着眼现实当下，动规谨记历史进程。
     * 动态规划希望复用子问题的解，最好被反复依赖。其本质还是穷举，所以当前并不知道哪个子问题的解会构成最终最优解。但知道这个子问题可能会被反复计算，所以把结果缓存起来。整个过程是树状的搜索过程。

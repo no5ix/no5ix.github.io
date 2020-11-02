@@ -361,7 +361,7 @@ def heap_sort(arr, left_index , right_index):
         _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
 
 
-class BinaryTreeNode(object):
+class TreeNode(object):
     
     def __init__(self, val):
         self.left = None
@@ -1269,6 +1269,75 @@ class Solution_LCS(object):
         return _lcs_detail_seq;
 
 
+class Solution_build_bt(object):
+	def buildTree(self, inorder, postorder):
+		"""
+		:type inorder: List[int]
+		:type postorder: List[int]
+		:rtype: TreeNode
+		"""
+		if not inorder or not postorder:
+			return None
+
+		def _proc_order_arr(
+				inorder_left_index, inorder_right_index, 
+				postorder_left_index, postorder_right_index):       
+			if inorder_left_index > inorder_right_index or \
+					postorder_left_index > postorder_right_index:
+				return None
+			# 在后序遍历序列中,最后一个元素为树的根节点
+			root_val = postorder[postorder_right_index] 
+			root_inorder_index = inorder.index(root_val)
+			_len_left_child = root_inorder_index-inorder_left_index
+			root_node = TreeNode(root_val)
+			
+			# 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
+			# 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
+			# 其他的除最后一个结点外都是右子树的结点
+			root_node.left = _proc_order_arr(
+				inorder_left_index,
+				root_inorder_index-1,
+				postorder_left_index,
+				postorder_left_index + (_len_left_child-1)
+			)
+			root_node.right = _proc_order_arr(
+				root_inorder_index+1,
+				inorder_right_index,
+				postorder_left_index+(_len_left_child),
+				postorder_right_index-1
+			)
+			return root_node
+			
+		return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
+
+
+class Solution_LCA(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if root == p or root == q:  # 找到p或q了, 则返回p或q
+            return root
+        # 没找到p或q, 而且已经找到底, 越过叶子节点了, 则返回None
+        if root is None:
+            return None
+        # 到 左子树 去找
+        left_child_find_res = self.lowestCommonAncestor(root.left, p, q)
+        # 到 右子树 去找
+        right_child_find_res = self.lowestCommonAncestor(root.right, p, q)
+        if not left_child_find_res:
+            # 当 left 为空 ，right 不为空 ：p,q 都不在 root 的左子树中，直接返回 right
+            return right_child_find_res
+        if not right_child_find_res:
+            return left_child_find_res
+        # 当 left 和 right 同时不为空 ：
+        # 说明 p,q 分列在 当前 root 的 异侧 （分别在 左 / 右子树），
+        # 因此 当前的root 为p/g最近公共祖先，返回 root ；
+        return root
+
 
 if __name__ == "__main__":
         
@@ -1307,13 +1376,13 @@ if __name__ == "__main__":
 
     print "\n"
 
-    _bt_a = BinaryTreeNode('a')
-    _bt_b = BinaryTreeNode('b')
-    _bt_c = BinaryTreeNode('c')
-    _bt_d = BinaryTreeNode('d')
-    _bt_e = BinaryTreeNode('e')
-    _bt_f = BinaryTreeNode('f')
-    _bt_g = BinaryTreeNode('g')
+    _bt_a = TreeNode('a')
+    _bt_b = TreeNode('b')
+    _bt_c = TreeNode('c')
+    _bt_d = TreeNode('d')
+    _bt_e = TreeNode('e')
+    _bt_f = TreeNode('f')
+    _bt_g = TreeNode('g')
     _bt_a.left = _bt_b
     _bt_b.left = _bt_c
     _bt_b.right = _bt_d
@@ -1401,15 +1470,15 @@ if __name__ == "__main__":
 
     print "\n"
 
-    bt_5 = BinaryTreeNode(5)
-    bt_4a = BinaryTreeNode(4)
-    bt_8 = BinaryTreeNode(8)
-    bt_11 = BinaryTreeNode(11)
-    bt_13 = BinaryTreeNode(13)
-    bt_4b = BinaryTreeNode(4)
-    bt_7 = BinaryTreeNode(7)
-    bt_2 = BinaryTreeNode(2)
-    bt_1 = BinaryTreeNode(1)
+    bt_5 = TreeNode(5)
+    bt_4a = TreeNode(4)
+    bt_8 = TreeNode(8)
+    bt_11 = TreeNode(11)
+    bt_13 = TreeNode(13)
+    bt_4b = TreeNode(4)
+    bt_7 = TreeNode(7)
+    bt_2 = TreeNode(2)
+    bt_1 = TreeNode(1)
 
     bt_5.left = bt_4a
     bt_5.right = bt_8
@@ -1624,3 +1693,36 @@ if __name__ == "__main__":
     print Solution_LCS().get_lcs_detail_seq_2(['ABCD', 'AEBD'])
     print "get_lcs_detail_seq_2(['ABCDefscgiqh', 'ABEDeabgiyy4q.h']):"
     print Solution_LCS().get_lcs_detail_seq_2(['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
+
+    print ""
+
+    print "----------Solution_build_bt-------"    
+    bt_root_node = Solution_build_bt().buildTree(
+        [9, 3, 15, 20, 7],
+        [9, 15, 7, 20, 3],
+    )
+    print bt_root_node.val
+    print bt_root_node.left.val
+    print bt_root_node.right.val
+
+    print ""
+
+    print "----------Solution_LCA-------"  
+    test_lca_bt = TreeNode(1)
+    test_lca_bt.left = TreeNode(2)
+    test_lca_bt.right = TreeNode(3)
+    test_lca_bt.left.left = TreeNode(4)
+    test_lca_bt.left.right = TreeNode(5)
+    test_lca_bt.left.right.left = TreeNode(51)
+    test_lca_bt.left.right.right = TreeNode(52)
+    test_lca_bt.right.left = TreeNode(6)
+    test_lca_bt.right.right = TreeNode(7)
+
+    print Solution_LCA().lowestCommonAncestor(
+        test_lca_bt, test_lca_bt.left.left, test_lca_bt.left.right).val
+    print Solution_LCA().lowestCommonAncestor(
+        test_lca_bt, test_lca_bt.left.right, test_lca_bt.right.left).val
+    print Solution_LCA().lowestCommonAncestor(
+        test_lca_bt, test_lca_bt.left.left, test_lca_bt.left.right.left).val
+
+    

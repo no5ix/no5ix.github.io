@@ -12,7 +12,7 @@ categories:
 
 # 本文完整参考代码
 
-https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo.py
+https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_newbie.py
 
 
 # 数据结构
@@ -152,7 +152,7 @@ MaxLevel = 32
 
 二叉树的代码表示:
 ``` python
-class BinaryTreeNode(object):
+class TreeNode(object):
     def __init__(self, val):
         self.left = None
         self.right = None
@@ -1278,7 +1278,137 @@ def heap_sort(arr, left_index , right_index):
 递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。
 
 
-#### path-sum
+#### lc236-LCA最近公共祖先问题
+
+[lc236](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/), 给出一棵二叉树的根节点，现在有这个二叉树的部分节点，要求这些节点最近的公共祖先
+
+
+##### 思路1-递归思路
+
+[参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
+
+若 root 是 p,q 的 最近公共祖先 ，则只可能为以下情况之一：
+* p 和 q 在 root 的子树中，且分列 root 的 异侧（即分别在左、右子树中）；
+* p=root ，且 q 在 root 的左或右子树中；
+* q=root ，且 p 在 root 的左或右子树中；
+
+![](/img/algo_newbie/bt_lca.gif "LCA递归流程图")
+考虑通过递归对二叉树进行后序遍历，当遇到节点 p 或 q 时返回。从底至顶回溯，当节点 p,q 在节点 root 的异侧时，节点 root 即为最近公共祖先，则向上返回 root 。
+
+递归解析：
+* 终止条件：
+    * 当越过叶节点，则直接返回 null ；
+    * 当 root 等于 p,q ，则直接返回 root ；
+* 递推工作：
+    * 开启递归左子节点，返回值记为 left ；
+    * 开启递归右子节点，返回值记为 right ；
+* 返回值： 根据 left 和 right ，可展开为四种情况；
+    * 1\. 当 left 和 right 同时为空 ：说明 root 的左 / 右子树中都不包含 p,q ，返回 null ；
+    * 2\. 当 left 和 right 同时不为空 ：说明 p,q 分列在 当前 root 的 异侧 （分别在 左 / 右子树），因此 当前的root 为p/g最近公共祖先，返回 root ；
+    * 3\. 当 left 为空 ，right 不为空 ：p,q 都不在 root 的左子树中，直接返回 right ,具体可分为两种情况：
+        * p,q 其中一个在 root 的 右子树 中，此时 right 指向 p（假设为 p ）
+        * p,q 两节点都在 root 的 右子树 中，此时的 right 指向 最近公共祖先节点
+    * 4\. 当 left 不为空 ， right 为空 ：与情况 3. 同理；
+
+思路2代码如下:
+``` python
+class Solution_LCA(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if root == p or root == q:  # 找到p或q了, 则返回p或q
+            return root
+        # 没找到p或q, 而且已经找到底, 越过叶子节点了, 则返回None
+        if root is None:
+            return None
+        # 到 左子树 去找
+        left_child_find_res = self.lowestCommonAncestor(root.left, p, q)
+        # 到 右子树 去找
+        right_child_find_res = self.lowestCommonAncestor(root.right, p, q)
+        if not left_child_find_res:
+            # 当 left 为空 ，right 不为空 ：p,q 都不在 root 的左子树中，直接返回 right
+            return right_child_find_res
+        if not right_child_find_res:
+            return left_child_find_res
+        # 当 left 和 right 同时不为空 ：
+        # 说明 p,q 分列在 当前 root 的 异侧 （分别在 左 / 右子树），
+        # 因此 当前的root 为p/g最近公共祖先，返回 root ；
+        return root
+```
+
+
+##### 思路2-存储父节点-代码略
+
+[参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/er-cha-shu-de-zui-jin-gong-gong-zu-xian-by-leetc-2/)
+
+我们可以用哈希表存储所有节点的父节点，然后我们就可以利用节点的父节点信息从 p 结点开始不断往上跳，并记录已经访问过的节点，再从 q 节点开始不断往上跳，如果碰到已经访问过的节点，那么这个节点就是我们要找的最近公共祖先。
+1. 从根节点开始遍历整棵二叉树，用哈希表记录每个节点的父节点指针。
+2. 从 p 节点开始不断往它的祖先移动，并用数据结构记录已经访问过的祖先节点。
+3. 同样，我们再从 q 节点开始不断往它的祖先移动，如果有祖先已经被访问过，即意味着这是 p 和 q 的深度最深的公共祖先，即 LCA 节点。
+
+
+#### lc106-后序中序求原二叉树
+
+* [leetcode106题后序中序求原二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+* 参考: https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/solution/
+	
+![](/img/algo_newbie/bt_recursion/lc_106.png)
+
+首先来看题目给出的两个已知条件 中序遍历序列 和 后序遍历序列 根据这两种遍历的特性我们可以得出三个结论
+* 在后序遍历序列中,最后一个元素为树的根节点
+* 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
+* 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 其他的除最后一个结点外都是右子树的结点
+
+则代码如下:
+``` python
+class Solution_build_bt(object):
+	def buildTree(self, inorder, postorder):
+		"""
+		:type inorder: List[int]
+		:type postorder: List[int]
+		:rtype: TreeNode
+		"""
+		if not inorder or not postorder:
+			return None
+
+		def _proc_order_arr(
+				inorder_left_index, inorder_right_index, 
+				postorder_left_index, postorder_right_index):       
+			if inorder_left_index > inorder_right_index or \
+					postorder_left_index > postorder_right_index:
+				return None
+			# 在后序遍历序列中,最后一个元素为树的根节点
+			root_val = postorder[postorder_right_index] 
+			root_inorder_index = inorder.index(root_val)
+			_len_left_child = root_inorder_index-inorder_left_index
+			root_node = TreeNode(root_val)
+			
+			# 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
+			# 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
+			# 其他的除最后一个结点外都是右子树的结点
+			root_node.left = _proc_order_arr(
+				inorder_left_index,
+				root_inorder_index-1,
+				postorder_left_index,
+				postorder_left_index + (_len_left_child-1)
+			)
+			root_node.right = _proc_order_arr(
+				root_inorder_index+1,
+				inorder_right_index,
+				postorder_left_index+(_len_left_child),
+				postorder_right_index-1
+			)
+			return root_node
+			
+		return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
+```
+
+
+#### lc112-path-sum
 
 [leetcode112题](https://leetcode-cn.com/problems/path-sum/)
 
@@ -1302,7 +1432,9 @@ def has_path_sum(root, sum_num):
 ```
 
 
-#### binary-tree-paths
+#### lc257-binary-tree-paths
+
+[lc257](https://leetcode-cn.com/problems/binary-tree-paths/)
 
 ![](/img/algo_newbie/bt_recursion/bt_paths.png "打印所有路径问题")
 ![](/img/algo_newbie/bt_recursion/bt_paths_answer.png "递归过程")
@@ -1327,7 +1459,7 @@ def binary_tree_paths(root):
 ```
 
 
-#### path-sum-3
+#### lc437-path-sum-3
 
 [leetcode437题](https://leetcode-cn.com/problems/path-sum-iii/)  
 给出一颗二叉树以及一个数字sum, 判断在这棵二叉树上存在多少条路径, 其路径上的所有节点和为sum.
@@ -1408,7 +1540,7 @@ def backtrack(供选择的列表, 选择的路径中间状态, 递归到第几�
 其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」，特别简单。
 
 
-#### 设计状态变量-经典排列问题
+#### lc46-设计状态变量-经典排列问题
 
 [leetcode46题](https://leetcode-cn.com/problems/permutations/solution/):  
 给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
@@ -1550,7 +1682,7 @@ def _get_letter_combination(
 ```
 
 
-#### 经典组合问题
+#### lc77-经典组合问题
 
 leetcode77题  
 给出两个整数n和k, 求出1...n中k个数字的所有组合  
@@ -1623,7 +1755,7 @@ def _generate_combinations_optimized(
 ```
 
 
-#### 经典floodfill问题
+#### lc200-经典floodfill问题
 
 [leetcode200题](https://leetcode-cn.com/problems/number-of-islands/)  
 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
@@ -1802,7 +1934,7 @@ f(n-1) = f(n-2) + f(n-3) + .... +f(2) + f(1) + f(0)；（二式）
 一式减去二式：f(n) = f(n-1) * 2；故又是明显的递归。代码略.
 
 
-### 最优子结构讲解-整数拆分
+### lc343-最优子结构讲解-整数拆分
 
 这一小节, 我们开始讨论最优子结构: 通过求子问题的最优解, 可以获得原问题的最优解.
 
@@ -1888,7 +2020,7 @@ class Solution_integer_break(object):
 ```
 
 
-### 状态转移方程讲解-打家劫舍
+### lc198-状态转移方程讲解-打家劫舍
 
 [leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
@@ -2116,7 +2248,7 @@ class Solution_knapsack(object):
 ```
 
 
-#### 分割等和子集
+#### lc416-分割等和子集
 
 [leetcode416题](https://leetcode-cn.com/problems/partition-equal-subset-sum)  
 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
@@ -2199,7 +2331,7 @@ class Solution_partition_equal_subset_sum(object):
 ```
 
 
-### LIS问题-最长上升子序列
+### lc300-LIS问题-最长上升子序列
 
 [leetcode300题](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
 

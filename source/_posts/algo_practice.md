@@ -30,15 +30,6 @@ https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_pract
 	iii. 如果取出的是两个异色的球，就再放入一个白球。
 	问：最后桶里面只剩下一个黑球的概率是多少？
 * 公司有内部 bbs，员工都会在上面发帖交流。据统计，有三个员工 ID 发帖很多，他们各自的发帖量都超过帖子总数 N 的 1/4。如果给到你所有帖子的发帖人 ID 列表，请写代码找出这三个 ID，要求时间复杂度 O（n），空间复杂度 O（1）。
-* 4 个数组，目标值 target，每个数组各找一个数，使得 4 个数和为 target，数组没有顺序，找到所有不重复的组合，要求时间复杂度 O(n^2)
-* 1 个有序的数组，里面包含了 N 个数字，分割成 M 段（M<=N），然后进行乱序排列，如何快速恢复其顺序
-	``` cpp
-	// 45 123 79
-	// 45 67 123 89
-	void resort(int[] arr, int N, int M) {
-	}
-	```
-	主要思路是这样的，先遍历一遍，然后得到最基本的分割情况，根据分割大小，与 M 进行判断和比较，如果比 M 小，再进行判断是否存在大块需要分割，再进行两两比较，分割完成，标记好分割点，最后进行重组
 
 
 # finished
@@ -99,14 +90,6 @@ https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_pract
 
 
 ## misc
-
-### 比狗-线程全排列
-
-![](/img/algo_practice/bigo_1.jpg)
-不用管第一题, 我们做第二题:
-``` python
-
-```
 
 ### 寻找第K大
 

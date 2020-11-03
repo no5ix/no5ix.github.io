@@ -1515,7 +1515,7 @@ def _get_path_sum_include_node(node, sum_num):
 
 #### 回溯算法框架
 
-参考: leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-xiang-jie-by-labuladong-2/
+[参考](https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-xiang-jie-by-labuladong-2/)
 
 废话不多说，直接上回溯算法框架。解决一个回溯问题，实际上就是一个决策树的遍历过程。你只需要思考 3 个问题：
 1. 路径: 也就是已经做出的选择。
@@ -1527,85 +1527,212 @@ def _get_path_sum_include_node(node, sum_num):
 代码方面，回溯算法的框架：
 ```
 result = []
-def backtrack(供选择的列表, 选择的路径中间状态, 递归到第几层index):
+def backtrack(供选择的列表, 选择的路径中间状态):
     if 满足结束条件:
         result.add(选择的路径中间状态)
         return
     
     for 选择 in 供选择的列表:
         做选择
-        backtrack(选择的路径中间状态, 供选择的列表, index+1)
+        backtrack(选择的路径中间状态, 供选择的列表)
         撤销选择
 ```
 其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」，特别简单。
 
 
-#### lc46-经典排列问题-设计状态变量讲解
+#### 排列问题-设计状态变量讲解
+
+##### lc46-全排列
 
 [leetcode46题](https://leetcode-cn.com/problems/permutations/solution/):  
 给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
 如对于 `[1, 2, 3]`, 则返回 `[ [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1] ]`
 
-![](/img/algo_newbie/backtrack_recursion/permutations.png "排列树形图示")
+![](/img/algo_newbie/backtrack_recursion/permutations_1.png "排列树形图示")
 
 **设计状态变量**:  
-* 参考: //leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
+* [参考](https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/)
 * 首先这棵树除了根结点和叶子结点以外，每一个结点做的事情其实是一样的，即：在已经选择了一些数的前提下，在剩下的还没有选择的数中，依次选择一个数，这显然是一个 递归 结构；
-* 递归的终止条件是： 一个排列中的数字已经选够了 ，因此我们需要一个变量来表示当前程序递归到第几层，我们把这个变量叫做 index ，表示当前要确定的是某个全排列中下标为 index 的那个数是多少；
+* 递归的终止条件是： 一个排列中的数字已经选够了 ，因此我们需要一个变量来表示当前程序递归到第几层，我们把这个变量叫做 cnt ，每次往`middle_state_container`里添加元素cnt就加1, 当cnt等于全排列长度则递归终止. **当然也可以不用cnt, 每次直接`if len(middle_state_container) == len(pending_proc_num_arr)`也是可以的, 只是这样性能不高**
 * 布尔数组 used，初始化的时候都为 false 表示这些数还没有被选择，当我们选定一个数的时候，就将这个数组的相应位置设置为 true ，这样在考虑下一个位置的时候，就能够以 O(1)O(1) 的时间复杂度判断这个数是否被选择过，这是一种「以空间换时间」的思想。
 这些变量称为「状态变量」，它们表示了在求解一个问题的时候所处的阶段。需要根据问题的场景设计合适的状态变量。
 
 注意查看下方代码中的 `_generate_permutation`, 排列问题基本都是这种代码写法模板.
 
 ``` python
-class Solution_permutations(object):
-
+class Solution_lc46(object):
+    # [lc46](https://leetcode-cn.com/problems/permutations/)
     def __init__(self):
-        self._used_num_set = set()
+        self._used = []
 
     def permute(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        result_permutation_arr = []
-        if not nums:
-            return result_permutation_arr
-        middle_state_container = []
-        self._generate_permutation(result_permutation_arr,
-            nums, index=0, middle_state_container=middle_state_container)
-        return result_permutation_arr
+        middle_arr = []
+        res_arr = []
+        self._used = [ False for _ in range(len(nums)) ]
+        self._generate_permutation(nums, 0, res_arr, middle_arr)
+        return res_arr
 
     def _generate_permutation(
-            self, result_arr,
-            pending_proc_num_arr, index, middle_state_container):
-        """
-        middle_state_container 中保存了一个有index-1个元素的排列。
-        向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
-        """
-        if index == len(pending_proc_num_arr):
-            # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
+            self, nums, cnt, res_arr, middle_arr):
+        if cnt == len(nums):
+            # 当cnt等于数字字符串长度的时候说明一轮已经递归到底了,
             # 则当前的 中间状态保存器 middle_state_container 则为一个解
             # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
-            result_arr.append(copy.deepcopy(middle_state_container))
+            res_arr.append(copy.deepcopy(middle_arr))
             return
-        for _single_num in pending_proc_num_arr:
-            # 如果本轮递归 used_num_set 已经有_single_num 了, 
-            # 说明当前排列 middle_state_container 中已经有 _single_num 了
-            # 那不应该再加入到这个排列中了
-            if _single_num not in self._used_num_set:
-                self._used_num_set.add(_single_num)
-                middle_state_container.append(_single_num)
-                self._generate_permutation(
-                    result_arr, pending_proc_num_arr,
-                    index+1, middle_state_container)
-                # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
-                # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
-                # 那我们自己额外记录的状态, 比如 self._used_num_set 和
-                # middle_state_container 的状态应该自己手动清除
-                self._used_num_set.remove(_single_num)
-                middle_state_container.pop(-1)
+        for i in range(len(nums)):
+            if self._used[i]:
+                # 如果本轮递归 used_num_set 已经有_single_num 了, 
+                # 说明当前排列 middle_state_container 中已经有 _single_num 了
+                # 那不应该再加入到这个排列中了
+                continue
+            self._used[i] = True
+            middle_arr.append(nums[i])
+            self._generate_permutation(
+                nums,
+                cnt+1,
+                res_arr, middle_arr)
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 那我们自己额外记录的状态, 比如 self._used_num_set 和
+            # middle_state_container 的状态应该自己手动清除
+            middle_arr.pop(-1)
+            self._used[i] = False
 
+```
+
+##### 进阶-lc47-全排列2
+
+[lc47](https://leetcode-cn.com/problems/permutations-ii)
+给定一个可包含重复数字的序列，返回所有不重复的全排列。
+示例:
+输入: [1,1,2]
+输出:
+```
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+]
+```
+[参考链接](https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/)
+我们先对数组排序, 然后就方便做剪枝了
+![](/img/algo_newbie/backtrack_recursion/lc47_1.png "排序之后做剪枝")
+
+相较lc46, 代码diff如下:
+``` diff
+class Solution_lc47(object):
+    # [lc47](https://leetcode-cn.com/problems/permutations-ii)
+    def __init__(self):
+        self._used = []
+
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        middle_arr = []
+        res_arr = []
++       nums.sort()
+        self._used = [ False for _ in range(len(nums)) ]
+        self._generate_permutation(nums, 0, res_arr, middle_arr)
+        return res_arr
+
+    def _generate_permutation(
+            self, nums, cnt, res_arr, middle_arr):
+        if cnt == len(nums):
+            # 当cnt等于数字字符串长度的时候说明一轮已经递归到底了,
+            # 则当前的 中间状态保存器 middle_state_container 则为一个解
+            # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+            res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for i in range(len(nums)):
+            if self._used[i]:
+                # 如果本轮递归 used_num_set 已经有_single_num 了, 
+                # 说明当前排列 middle_state_container 中已经有 _single_num 了
+                # 那不应该再加入到这个排列中了
+                continue
++           # 剪枝条件：i > 0 是为了保证 nums[i - 1] 有意义
++           # 因为我们上对nums数组排序了, 
++           # 所以可以写 `self._used[i-1] == False` 是因为 nums[i - 1] 在深度优先遍历的过程中刚刚被撤销选择
++           if self._used[i-1] == False and (i > 0 and nums[i] == nums[i-1]):
++              continue
+            self._used[i] = True
+            middle_arr.append(nums[i])
+            self._generate_permutation(
+                nums,
+                cnt+1,
+                res_arr, middle_arr)
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 那我们自己额外记录的状态, 比如 self._used_num_set 和
+            # middle_state_container 的状态应该自己手动清除
+            middle_arr.pop(-1)
+            self._used[i] = False
+```
+
+
+##### 比狗-多数组且元素间有顺序要求的全排列
+
+![](/img/algo_practice/bigo_1.jpg)
+不用管第一题, 我们做第二题, 
+**思路**: 这类问题我们先把多个数组合并且保留各个元素对应原数组的index信息, 然后用合并后的数组做全排列并剪枝剪掉那些不符合顺序性要求的枝即可. 
+代码如下:
+``` python
+class Solution_bigo_thread_permute(object):
+    def __init__(self):
+        self._used = None
+        self._thread_str_arr = [["A", "B", "C", "D"], ["E", "F", "G", "H"]]
+        # self._thread_str_arr = [["A", "B"], ["E"]]
+
+    def bigo_thread_permute(self):
+        middle_arr = []
+        res_arr = []
+        # 方便精准的查询每个字母是否被使用以及
+        # 方便保证abcd和efgh各自的顺序性时剪枝
+        self._used = [
+            [False for _ in range(len(self._thread_str_arr[i])) ]
+            for i in range(len(self._thread_str_arr))
+        ]
+        _str_2_index_map = {}
+        for i, _sub_arr in enumerate(self._thread_str_arr):
+            for j, _str in enumerate(_sub_arr):
+                # 存好str和他们的数组的index的对应关系
+                _str_2_index_map[_str] = [i, j]
+        self._generate_permute(_str_2_index_map, 0, res_arr, middle_arr)
+        return res_arr
+
+    def _generate_permute(self, str_2_index_map, cnt, res_arr, middle_arr):
+        if cnt == len(str_2_index_map):
+            res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for _str, _index_list in str_2_index_map.iteritems():
+            i = _index_list[0]
+            j = _index_list[1]
+            # 剪枝: 为了保证abcd和efgh各自的顺序性, 
+            # 拿当前的j和used多维数组里i数组里的已经use的最大的max_j来作比较
+            # 如果小于等于则剪枝, 
+            # j大于max_j才能保证添加到middle_arr里的abcd和efgh各自的顺序性
+            if j <= self._get_used_max_index_j(i):
+                continue
+            if self._used[i][j]:
+                continue
+            self._used[i][j] = True
+            middle_arr.append(_str)
+            self._generate_permute(str_2_index_map, cnt+1, res_arr, middle_arr)
+            middle_arr.pop(-1)
+            self._used[i][j] = False
+
+    def _get_used_max_index_j(self, i):
+        _max_index_j = -1
+        for _cur_index_j, _is_used in enumerate(self._used[i]):
+            if _is_used:
+                _max_index_j = _cur_index_j
+        return _max_index_j
 ```
 
 
@@ -1682,7 +1809,9 @@ def _get_letter_combination(
 ```
 
 
-#### lc77-经典组合问题
+#### 组合问题合集
+
+##### lc77-经典组合问题
 
 [leetcode77题](https://leetcode-cn.com/problems/combinations/)  
 给出两个整数n和k, 求出1...n中k个数字的所有组合  
@@ -1726,10 +1855,10 @@ class Solution_lc77(object):
             middle_state_container.pop(-1)
 ```
 
-##### 组合问题解决优化
+###### 组合问题解决优化-剪枝
 
 从上面的 组合问题解题思路 中可以看出其实是没有必要计算 "取4" 的操作的, 
-所以我们利用剪枝的思想, 把这部分优化掉, 代码如下:
+所以我们利用**剪枝**的思想, 把这部分优化掉, 代码如下:
 ``` diff
 def _generate_combinations_optimized(
         self, result_arr,
@@ -1792,8 +1921,8 @@ def _generate_combinations_optimized(
 
 ![](/img/algo_newbie/backtrack_recursion/lc39_1.png)
 
-[参考](leetcode-cn.com/problems/combination-sum/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-2/)  
-
+[参考](https://leetcode-cn.com/problems/combination-sum/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-2/)  
+以输入：candidates = [2, 3, 6, 7], target = 7 为例
 这棵树有 44 个叶子结点的值 00，对应的路径列表是 [[2, 2, 3], [2, 3, 2], [3, 2, 2], [7]]，而示例中给出的输出只有 [[7], [2, 2, 3]]。即：题目中要求每一个符合要求的解是 不计算顺序 的。下面我们分析为什么会产生重复。
 
 **针对具体例子分析重复路径产生的原因（难点）**
@@ -1833,10 +1962,80 @@ class Solution_lc39(object):
             middle_state_arr.append(candidates_arr[cur_index])
             cur_target_num -= candidates_arr[cur_index]
             self._generate_combinations(
-                candidates_arr, cur_target_num, cur_index, res_arr, middle_state_arr)
+                candidates_arr, cur_target_num,
+                cur_index,
+                res_arr, middle_state_arr)
             cur_target_num += candidates_arr[cur_index]
             middle_state_arr.pop(-1)
 ```
+
+###### 进阶-lc40-组合总和2
+
+[lc40](https://leetcode-cn.com/problems/combination-sum-ii) 如果candidates 中的每个数字在每个组合中只能使用一次呢?
+那应该改成: 
+``` diff
+for cur_index in range(start_index, len(candidates_arr)):
+    middle_state_arr.append(candidates_arr[cur_index])
+    cur_target_num -= candidates_arr[cur_index]
+    self._generate_combinations(
+        candidates_arr, cur_target_num,
+-       cur_index,
++       cur_index+1,
+        res_arr, middle_state_arr)
+    cur_target_num += candidates_arr[cur_index]
+    middle_state_arr.pop(-1)
+```
+
+
+##### 多个数组抽个数总和
+
+题目: 4 个数组，目标值 target，每个数组各找一个数，使得 4 个数和为 target，数组没有顺序，找到所有不重复的组合，要求时间复杂度 O(n^2)
+
+``` python
+class Solution_multi_arr_sum(object):
+    # 题目: 4 个数组，目标值 target，每个数组各找一个数，使得 4 个数和为 target，
+    # 数组没有顺序，找到所有不重复的组合，
+    # 要求时间复杂度 O(n^2)
+    def multi_arr_sum(self, nums_arrs, target_sum_num):
+        if not nums_arrs:
+            return []
+        middle_arr = []
+        res_arr = []
+        self._generate_result(
+            nums_arrs, target_sum_num, 0, res_arr, middle_arr)
+        return res_arr
+        
+    def _generate_result(
+            self, nums_arrs, target_sum_num,
+            start_i_index,
+            res_arr, middle_arr):
+        if target_sum_num < 0:
+            return
+        if len(middle_arr) == len(nums_arrs):
+            if target_sum_num == 0:
+                res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for i in range(start_i_index, len(nums_arrs)):
+            for j in range(0, len(nums_arrs[i])):
+                middle_arr.append(nums_arrs[i][j])
+                self._generate_result(
+                    nums_arrs, target_sum_num-nums_arrs[i][j],
+                    i+1,
+                    res_arr, middle_arr
+                )
+                middle_arr.pop(-1)
+
+print "----------multi_arr_sum-------"  
+print 'Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) :'
+print Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18)
+```
+打印结果: 
+```
+----------multi_arr_sum-------
+Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) :
+[[1, 3, 6, 8], [1, 4, 5, 8], [1, 4, 6, 7], [2, 3, 5, 8], [2, 3, 6, 7], [2, 4, 5, 7]]
+```
+
 
 
 #### lc200-经典floodfill问题

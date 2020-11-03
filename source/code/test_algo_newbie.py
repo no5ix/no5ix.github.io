@@ -692,55 +692,6 @@ def jump_step_dynamic_programming(step_sum):
     return dp[step_sum]
 
 
-class Solution_permutations(object):
-
-    def __init__(self):
-        self._used_num_set = set()
-
-    def permute(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        result_permutation_arr = []
-        if not nums:
-            return result_permutation_arr
-        middle_state_container = []
-        self._generate_permutation(result_permutation_arr,
-            nums, index=0, middle_state_container=middle_state_container)
-        return result_permutation_arr
-
-    def _generate_permutation(
-            self, result_arr,
-            pending_proc_num_arr, index, middle_state_container):
-        """
-        middle_state_container 中保存了一个有index-1个元素的排列。
-        向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
-        """
-        if index == len(pending_proc_num_arr):
-            # 当index等于数字字符串长度的时候说明一轮已经递归到底了,
-            # 则当前的 中间状态保存器 middle_state_container 则为一个解
-            # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
-            result_arr.append(copy.deepcopy(middle_state_container))
-            return
-        for _single_num in pending_proc_num_arr:
-            # 如果本轮递归 used_num_set 已经有_single_num 了, 
-            # 说明当前排列 middle_state_container 中已经有 _single_num 了
-            # 那不应该再加入到这个排列中了
-            if _single_num not in self._used_num_set:
-                self._used_num_set.add(_single_num)
-                middle_state_container.append(_single_num)
-                self._generate_permutation(
-                    result_arr, pending_proc_num_arr,
-                    index+1, middle_state_container)
-                # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
-                # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
-                # 那我们自己额外记录的状态, 比如 self._used_num_set 和
-                # middle_state_container 的状态应该自己手动清除
-                self._used_num_set.remove(_single_num)
-                middle_state_container.pop(-1)
-
-
 digits_map = {
     "0": " ",
     "1": "",
@@ -1345,6 +1296,251 @@ class Solution_LCA(object):
         return root
 
 
+class Solution_lc39(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        if not candidates:
+            return []
+        res_arr = []
+        middle_state_arr = []
+        self._generate_combinations(candidates, target, 0, res_arr, middle_state_arr)
+        return res_arr
+
+    def _generate_combinations(
+            self, candidates_arr, cur_target_num, start_index, res_arr, middle_state_arr):
+        if cur_target_num < 0:
+            return
+        if cur_target_num == 0:
+            res_arr.append(copy.deepcopy(middle_state_arr))
+            return
+        # 这个cur_index是用来去重的
+        for cur_index in range(start_index, len(candidates_arr)):
+            middle_state_arr.append(candidates_arr[cur_index])
+            cur_target_num -= candidates_arr[cur_index]
+            self._generate_combinations(
+                candidates_arr, cur_target_num, cur_index, res_arr, middle_state_arr)
+            cur_target_num += candidates_arr[cur_index]
+            middle_state_arr.pop(-1)
+
+
+class Solution_lc40(object):
+    # [lc40](https://leetcode-cn.com/problems/combination-sum-ii)  
+    def combinationSum2(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        if not candidates:
+            return []
+        res_arr = []
+        middle_state_arr = []
+        self._generate_combinations(candidates, target, 0, res_arr, middle_state_arr)
+        return res_arr
+
+    def _generate_combinations(
+            self, candidates_arr, cur_target_num, start_index, res_arr, middle_state_arr):
+        if cur_target_num < 0:
+            return
+        if cur_target_num == 0:
+            res_arr.append(copy.deepcopy(middle_state_arr))
+            return
+        # 这个cur_index是用来去重的
+        for cur_index in range(start_index, len(candidates_arr)):
+            middle_state_arr.append(candidates_arr[cur_index])
+            cur_target_num -= candidates_arr[cur_index]
+            self._generate_combinations(
+                candidates_arr, cur_target_num,
+                cur_index+1,
+                res_arr, middle_state_arr)
+            cur_target_num += candidates_arr[cur_index]
+            middle_state_arr.pop(-1)
+
+
+class Solution_lc47(object):
+    # [lc47](https://leetcode-cn.com/problems/permutations-ii)
+    def __init__(self):
+        self._used = []
+
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        middle_arr = []
+        res_arr = []
+        nums.sort()
+        self._used = [ False for _ in range(len(nums)) ]
+        self._generate_permutation(nums, 0, res_arr, middle_arr)
+        return res_arr
+
+    def _generate_permutation(
+            self, nums, cnt, res_arr, middle_arr):
+        if cnt == len(nums):
+            # 当cnt等于数字字符串长度的时候说明一轮已经递归到底了,
+            # 则当前的 中间状态保存器 middle_state_container 则为一个解
+            # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+            res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for i in range(len(nums)):
+            if self._used[i]:
+                # 如果本轮递归 used_num_set 已经有_single_num 了, 
+                # 说明当前排列 middle_state_container 中已经有 _single_num 了
+                # 那不应该再加入到这个排列中了
+                continue
+            if self._used[i-1] == False and (i > 0 and nums[i] == nums[i-1]):
+                continue
+            self._used[i] = True
+            middle_arr.append(nums[i])
+            self._generate_permutation(
+                nums,
+                cnt+1,
+                res_arr, middle_arr)
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 那我们自己额外记录的状态, 比如 self._used_num_set 和
+            # middle_state_container 的状态应该自己手动清除
+            middle_arr.pop(-1)
+            self._used[i] = False
+
+
+
+class Solution_lc46(object):
+    # [lc46](https://leetcode-cn.com/problems/permutations/)
+    def __init__(self):
+        self._used = []
+
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        middle_arr = []
+        res_arr = []
+        self._used = [ False for _ in range(len(nums)) ]
+        self._generate_permutation(nums, 0, res_arr, middle_arr)
+        return res_arr
+
+    def _generate_permutation(
+            self, nums, cnt, res_arr, middle_arr):
+        if cnt == len(nums):
+            # 当cnt等于数字字符串长度的时候说明一轮已经递归到底了,
+            # 则当前的 中间状态保存器 middle_state_container 则为一个解
+            # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
+            res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for i in range(len(nums)):
+            if self._used[i]:
+                # 如果本轮递归 used_num_set 已经有_single_num 了, 
+                # 说明当前排列 middle_state_container 中已经有 _single_num 了
+                # 那不应该再加入到这个排列中了
+                continue
+            self._used[i] = True
+            middle_arr.append(nums[i])
+            self._generate_permutation(
+                nums,
+                cnt+1,
+                res_arr, middle_arr)
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 那我们自己额外记录的状态, 比如 self._used_num_set 和
+            # middle_state_container 的状态应该自己手动清除
+            middle_arr.pop(-1)
+            self._used[i] = False
+
+
+class Solution_multi_arr_sum(object):
+    # 题目: 4 个数组，目标值 target，每个数组各找一个数，使得 4 个数和为 target，
+    # 数组没有顺序，找到所有不重复的组合，
+    # 要求时间复杂度 O(n^2)
+    def multi_arr_sum(self, nums_arrs, target_sum_num):
+        if not nums_arrs:
+            return []
+        middle_arr = []
+        res_arr = []
+        self._generate_result(
+            nums_arrs, target_sum_num, 0, res_arr, middle_arr)
+        return res_arr
+        
+    def _generate_result(
+            self, nums_arrs, target_sum_num,
+            start_i_index,
+            res_arr, middle_arr):
+        if target_sum_num < 0:
+            return
+        if len(middle_arr) == len(nums_arrs):
+            if target_sum_num == 0:
+                res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for i in range(start_i_index, len(nums_arrs)):
+            for j in range(0, len(nums_arrs[i])):
+                middle_arr.append(nums_arrs[i][j])
+                self._generate_result(
+                    nums_arrs, target_sum_num-nums_arrs[i][j],
+                    i+1,
+                    res_arr, middle_arr
+                )
+                middle_arr.pop(-1)
+
+
+
+class Solution_bigo_thread_permute(object):
+    def __init__(self):
+        self._used = None
+        self._thread_str_arr = [["A", "B", "C", "D"], ["E", "F", "G", "H"]]
+        # self._thread_str_arr = [["A", "B"], ["E"]]
+
+    def bigo_thread_permute(self):
+        middle_arr = []
+        res_arr = []
+        # 方便精准的查询每个字母是否被使用以及
+        # 方便保证abcd和efgh各自的顺序性时剪枝
+        self._used = [
+            [False for _ in range(len(self._thread_str_arr[i])) ]
+            for i in range(len(self._thread_str_arr))
+        ]
+        _str_2_index_map = {}
+        for i, _sub_arr in enumerate(self._thread_str_arr):
+            for j, _str in enumerate(_sub_arr):
+                # 存好str和他们的数组的index的对应关系
+                _str_2_index_map[_str] = [i, j]
+        self._generate_permute(_str_2_index_map, 0, res_arr, middle_arr)
+        return res_arr
+
+    def _generate_permute(self, str_2_index_map, cnt, res_arr, middle_arr):
+        if cnt == len(str_2_index_map):
+            res_arr.append(copy.deepcopy(middle_arr))
+            return
+        for _str, _index_list in str_2_index_map.iteritems():
+            i = _index_list[0]
+            j = _index_list[1]
+            # 剪枝: 为了保证abcd和efgh各自的顺序性, 
+            # 拿当前的j和used多维数组里i数组里的已经use的最大的max_j来作比较
+            # 如果小于等于则剪枝, 
+            # j大于max_j才能保证添加到middle_arr里的abcd和efgh各自的顺序性
+            if j <= self._get_used_max_index_j(i):
+                continue
+            if self._used[i][j]:
+                continue
+            self._used[i][j] = True
+            middle_arr.append(_str)
+            self._generate_permute(str_2_index_map, cnt+1, res_arr, middle_arr)
+            middle_arr.pop(-1)
+            self._used[i][j] = False
+
+    def _get_used_max_index_j(self, i):
+        _max_index_j = -1
+        for _cur_index_j, _is_used in enumerate(self._used[i]):
+            if _is_used:
+                _max_index_j = _cur_index_j
+        return _max_index_j
+
+
+
 if __name__ == "__main__":
         
     sort_algo_func_list = [
@@ -1548,16 +1744,6 @@ if __name__ == "__main__":
 
     print ""
 
-    print "permutations: --------------"
-    print "permutations([1]):"
-    print str(Solution_permutations().permute([1]))
-    print "permutations([2, 3]):"
-    print str(Solution_permutations().permute([2, 3]))
-    print "permutations([1, 4, 6]):"
-    print str(Solution_permutations().permute([1, 4, 6]))
-
-    print ""
-
     print "combinations: --------------"
     print "Solution_lc77().combine(2, 1):"
     print str(Solution_lc77().combine(2, 1))
@@ -1731,4 +1917,50 @@ if __name__ == "__main__":
     print Solution_LCA().lowestCommonAncestor(
         test_lca_bt, test_lca_bt.left.left, test_lca_bt.left.right.left).val
 
-    
+    print ""
+
+    print "----------combinationSum-------"  
+    print 'Solution_lc39().combinationSum([2, 3, 6, 7], 7) :'
+    print Solution_lc39().combinationSum([2, 3, 6, 7], 7)
+    print 'Solution_lc39().combinationSum([2, 3, 6, 7, 1], 7) :'
+    print Solution_lc39().combinationSum([2, 3, 6, 7, 1], 7)
+    print 'Solution_lc39().combinationSum([2, 3, 6, 7, 1, 1], 7) :'
+    print Solution_lc39().combinationSum([2, 3, 6, 7, 1, 1], 7)
+
+    print ""
+
+    print "----------combinationSum2-------"  
+    print 'Solution_lc40().combinationSum2([2, 3, 6, 7], 7) :'
+    print Solution_lc40().combinationSum2([2, 3, 6, 7], 7)
+    print 'Solution_lc40().combinationSum2([2, 3, 6, 7, 1], 7) :'
+    print Solution_lc40().combinationSum2([2, 3, 6, 7, 1], 7)
+    print 'Solution_lc40().combinationSum2([2, 3, 6, 7, 1, 1], 7) :'
+    print Solution_lc40().combinationSum2([2, 3, 6, 7, 1, 1], 7)
+
+    print ""
+
+    print "permutations: --------------"
+    print "permutations([1]):"
+    print str(Solution_lc46().permute([1]))
+    print "permutations([2, 3]):"
+    print str(Solution_lc46().permute([2, 3]))
+    print "permutations([1, 4, 6]):"
+    print str(Solution_lc46().permute([1, 4, 6]))
+
+    print ""
+
+    print "----------permuteUnique-------"  
+    print 'Solution_lc47().permuteUnique([1, 1, 2]) :'
+    print Solution_lc47().permuteUnique([1, 1, 2])
+
+    print ""
+
+    print "----------multi_arr_sum-------"  
+    print 'Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) :'
+    print Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18)
+
+    print ""
+
+    print "----------bigo_thread_permute()-------"  
+    print 'Solution_bigo_thread_permute().bigo_thread_permute() :'
+    print Solution_bigo_thread_permute().bigo_thread_permute()

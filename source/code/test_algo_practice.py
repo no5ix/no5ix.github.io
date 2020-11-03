@@ -81,6 +81,36 @@ class Solution_find_top_k_num(object):
         return _partition_index
 
 
+class Solution_lc39(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        if not candidates:
+            return []
+        res_arr = []
+        middle_state_arr = []
+        self._generate_combinations(candidates, target, 0, res_arr, middle_state_arr)
+        return res_arr
+
+    def _generate_combinations(
+            self, candidates_arr, cur_target_num, start_index, res_arr, middle_state_arr):
+        if cur_target_num < 0:
+            return
+        if cur_target_num == 0:
+            res_arr.append(copy.deepcopy(middle_state_arr))
+            return
+        # 这个cur_index是用来去重的
+        for cur_index in range(start_index, len(candidates_arr)):
+            middle_state_arr.append(candidates_arr[cur_index])
+            cur_target_num -= candidates_arr[cur_index]
+            self._generate_combinations(
+                candidates_arr, cur_target_num, cur_index, res_arr, middle_state_arr)
+            cur_target_num += candidates_arr[cur_index]
+            middle_state_arr.pop(-1)
+
 
 
 if __name__ == "__main__":
@@ -102,3 +132,9 @@ if __name__ == "__main__":
     print Solution_find_top_k_num().find_top_k_num([3, 1, 6, 9, 2], 5, 4)
     print 'Solution_find_top_k_num().find_top_k_num([3, 1, 16, 9, 22], 5, 2) :'
     print Solution_find_top_k_num().find_top_k_num([3, 1, 16, 9, 22], 5, 2)
+
+    print ""
+
+    print "----------combinationSum-------"  
+    print 'Solution_lc39().combinationSum([2, 3, 6, 7], 7) :'
+    print Solution_lc39().combinationSum([2, 3, 6, 7], 7)

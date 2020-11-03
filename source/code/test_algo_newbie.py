@@ -793,70 +793,76 @@ def _get_letter_combination(
         middle_state_container.pop(-1)
 
 
-def combinations(n, k):
-    result_arr = []
-    if k <= 0 or k > n or n <= 0:
+class Solution_lc77(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        result_arr = []
+        if k <= 0 or k > n or n <= 0:
+            return result_arr
+        middle_state_container = []
+        self._generate_combinations(result_arr, n, k, 1, middle_state_container)
         return result_arr
-    middle_state_container = []
-    _generate_combinations(result_arr, n, k, 1, middle_state_container)
-    return result_arr
-    
-def _generate_combinations(
-        result_arr,
-        pending_proc_n, pending_prco_k, start_index, middle_state_container):
-    """
-    求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
-    需要从start_index开始搜索新的元素
-    可以看出跟排列问题的代码模板很像, 
-    只有终止递归条件和for循环的start_index不太一样
-    """
-    if len(middle_state_container) == pending_prco_k:
-        result_arr.append(copy.deepcopy(middle_state_container))
-        return
-    # 每次递归从start_index开始直到 pending_proc_n
-    for _index in xrange(start_index, pending_proc_n+1):
-        middle_state_container.append(_index)
-        _generate_combinations(
-            result_arr, pending_proc_n, pending_prco_k,
-            _index+1, middle_state_container)
-        middle_state_container.pop(-1)
+        
+    def _generate_combinations(
+            self, result_arr,
+            pending_proc_n, pending_prco_k, start_num, middle_state_container):
+        """
+        求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
+        需要从start_num开始搜索新的元素
+        可以看出跟排列问题的代码模板很像, 
+        只有终止递归条件和for循环的start_num不太一样
+        """
+        if len(middle_state_container) == pending_prco_k:
+            result_arr.append(copy.deepcopy(middle_state_container))
+            return
+        # 每次递归从start_num开始直到 pending_proc_n
+        for _cur_num in xrange(start_num, pending_proc_n+1):
+            middle_state_container.append(_cur_num)
+            self._generate_combinations(
+                result_arr, pending_proc_n, pending_prco_k,
+                _cur_num+1, middle_state_container)
+            middle_state_container.pop(-1)
 
 
-def combinations_optimized(n, k):
-    result_arr = []
-    if k <= 0 or k > n or n <= 0:
+    def combinations_optimized(self, n, k):
+        result_arr = []
+        if k <= 0 or k > n or n <= 0:
+            return result_arr
+        middle_state_container = []
+        self._generate_combinations(result_arr, n, k, 1, middle_state_container)
         return result_arr
-    middle_state_container = []
-    _generate_combinations(result_arr, n, k, 1, middle_state_container)
-    return result_arr
 
-def _generate_combinations_optimized(
-        result_arr,
-        pending_proc_n, pending_prco_k, start_index, middle_state_container):
-    """
-    求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
-    需要从start_index开始搜索新的元素
-    可以看出跟排列问题的代码模板很像, 
-    只有终止递归条件和for循环的start_index不太一样
-    """
-    if len(middle_state_container) == pending_prco_k:
-        result_arr.append(copy.deepcopy(middle_state_container))
-        return
-    # # 每次递归从start_index开始直到 pending_proc_n
-    # for _index in xrange(start_index, pending_proc_n+1):
-    # 剪枝的思想, 
-    # 还有k - middle_state_container.size()个空位,
-    # 所以, [i...n] 中至少要有 k - middle_state_container.size() 个元素
-    # i最多为 n - (k - middle_state_container.size()) + 1
-    _cur_stop_index = pending_proc_n - (
-        pending_prco_k - middle_state_container.size()) + 1
-    # 每次递归从start_index开始直到 _cur_stop_index
-    for _index in xrange(start_index, _cur_stop_index+1):
-        middle_state_container.append(_index)
-        _generate_combinations(
-            result_arr, pending_proc_n, pending_prco_k,
-            _index+1, middle_state_container)
-        middle_state_container.pop(-1)
+    def _generate_combinations_optimized(
+            self, result_arr,
+            pending_proc_n, pending_prco_k, start_num, middle_state_container):
+        """
+        求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
+        需要从start_num开始搜索新的元素
+        可以看出跟排列问题的代码模板很像, 
+        只有终止递归条件和for循环的start_num不太一样
+        """
+        if len(middle_state_container) == pending_prco_k:
+            result_arr.append(copy.deepcopy(middle_state_container))
+            return
+        # # 每次递归从start_num开始直到 pending_proc_n
+        # for _cur_num in xrange(start_num, pending_proc_n+1):
+        # 剪枝的思想, 
+        # 还有k - middle_state_container.size()个空位,
+        # 所以, [i...n] 中至少要有 k - middle_state_container.size() 个元素
+        # i最多为 n - (k - middle_state_container.size()) + 1
+        _cur_stop_num = pending_proc_n - (
+            pending_prco_k - middle_state_container.size()) + 1
+        # 每次递归从start_num开始直到 _cur_stop_num
+        for _cur_num in xrange(start_num, _cur_stop_num+1):
+            middle_state_container.append(_cur_num)
+            self._generate_combinations(
+                result_arr, pending_proc_n, pending_prco_k,
+                _cur_num+1, middle_state_container)
+            middle_state_container.pop(-1)
 
 
 class Solution_number_of_islands(object):
@@ -1553,14 +1559,14 @@ if __name__ == "__main__":
     print ""
 
     print "combinations: --------------"
-    print "combinations(2, 1):"
-    print str(combinations(2, 1))
-    print "combinations(4, 2):"
-    print str(combinations(4, 2))
-    print "combinations_optimized(2, 1):"
-    print str(combinations_optimized(2, 1))
-    print "combinations_optimized(4, 2):"
-    print str(combinations_optimized(4, 2))
+    print "Solution_lc77().combine(2, 1):"
+    print str(Solution_lc77().combine(2, 1))
+    print "Solution_lc77().combine(4, 2):"
+    print str(Solution_lc77().combine(4, 2))
+    print "Solution_lc77().combinations_optimized(2, 1):"
+    print str(Solution_lc77().combinations_optimized(2, 1))
+    print "Solution_lc77().combinations_optimized(4, 2):"
+    print str(Solution_lc77().combinations_optimized(4, 2))
 
     print ""
 

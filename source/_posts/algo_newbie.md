@@ -1540,7 +1540,7 @@ def backtrack(供选择的列表, 选择的路径中间状态, 递归到第几�
 其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」，特别简单。
 
 
-#### lc46-设计状态变量-经典排列问题
+#### lc46-经典排列问题-设计状态变量讲解
 
 [leetcode46题](https://leetcode-cn.com/problems/permutations/solution/):  
 给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
@@ -1684,40 +1684,46 @@ def _get_letter_combination(
 
 #### lc77-经典组合问题
 
-leetcode77题  
+[leetcode77题](https://leetcode-cn.com/problems/combinations/)  
 给出两个整数n和k, 求出1...n中k个数字的所有组合  
 如n=4, k=2, 则结果为`[ [1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4] ]`
 
 ![](/img/algo_newbie/backtrack_recursion/combinations.png "组合问题解题思路图")
 
 ``` python
-def combinations(n, k):
-    result_arr = []
-    if k <= 0 or k > n or n <= 0:
+class Solution_lc77(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        result_arr = []
+        if k <= 0 or k > n or n <= 0:
+            return result_arr
+        middle_state_container = []
+        self._generate_combinations(result_arr, n, k, 1, middle_state_container)
         return result_arr
-    middle_state_container = []
-    _generate_combinations(result_arr, n, k, 1, middle_state_container)
-    return result_arr
-    
-def _generate_combinations(
-        result_arr,
-        pending_proc_n, pending_prco_k, start_index, middle_state_container):
-    """
-    求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
-    需要从start_index开始搜索新的元素
-    可以看出跟排列问题的代码模板很像, 
-    只有终止递归条件和for循环的start_index不太一样
-    """
-    if len(middle_state_container) == pending_prco_k:
-        result_arr.append(copy.deepcopy(middle_state_container))
-        return
-    # 每次递归从start_index开始直到 pending_proc_n
-    for _index in xrange(start_index, pending_proc_n+1):
-        middle_state_container.append(_index)
-        _generate_combinations(
-            result_arr, pending_proc_n, pending_prco_k,
-            _index+1, middle_state_container)
-        middle_state_container.pop(-1)
+        
+    def _generate_combinations(
+            self, result_arr,
+            pending_proc_n, pending_prco_k, start_num, middle_state_container):
+        """
+        求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
+        需要从start_num开始搜索新的元素
+        可以看出跟排列问题的代码模板很像, 
+        只有终止递归条件和for循环的start_num不太一样
+        """
+        if len(middle_state_container) == pending_prco_k:
+            result_arr.append(copy.deepcopy(middle_state_container))
+            return
+        # 每次递归从start_num开始直到 pending_proc_n
+        for _index in xrange(start_num, pending_proc_n+1):
+            middle_state_container.append(_index)
+            self._generate_combinations(
+                result_arr, pending_proc_n, pending_prco_k,
+                _index+1, middle_state_container)
+            middle_state_container.pop(-1)
 ```
 
 ##### 组合问题解决优化
@@ -1726,32 +1732,110 @@ def _generate_combinations(
 所以我们利用剪枝的思想, 把这部分优化掉, 代码如下:
 ``` diff
 def _generate_combinations_optimized(
-        result_arr,
-        pending_proc_n, pending_prco_k, start_index, middle_state_container):
+        self, result_arr,
+        pending_proc_n, pending_prco_k, start_num, middle_state_container):
     """
     求解C(n,k), 当前已经找到的组合存储在 middle_state_container 中,
-    需要从start_index开始搜索新的元素
+    需要从start_num开始搜索新的元素
     可以看出跟排列问题的代码模板很像, 
-    只有终止递归条件和for循环的start_index不太一样
+    只有终止递归条件和for循环的start_num不太一样
     """
     if len(middle_state_container) == pending_prco_k:
         result_arr.append(copy.deepcopy(middle_state_container))
         return
--   # 每次递归从start_index开始直到 pending_proc_n
--   for _index in xrange(start_index, pending_proc_n+1):
+-   # 每次递归从start_num开始直到 pending_proc_n
+-   for _cur_num in xrange(start_num, pending_proc_n+1):
 +   # 剪枝的思想, 
 +   # 还有k - middle_state_container.size()个空位,
 +   # 所以, [i...n] 中至少要有 k - middle_state_container.size() 个元素
 +   # i最多为 n - (k - middle_state_container.size()) + 1
-+   _cur_stop_index = pending_proc_n - (
++   _cur_stop_num = pending_proc_n - (
 +       pending_prco_k - middle_state_container.size()) + 1
-+   # 每次递归从start_index开始直到 _cur_stop_index
-+   for _index in xrange(start_index, _cur_stop_index+1):
-        middle_state_container.append(_index)
-        _generate_combinations(
++   # 每次递归从start_num开始直到 _cur_stop_num
++   for _cur_num in xrange(start_num, _cur_stop_num+1):
+        middle_state_container.append(_cur_num)
+        self._generate_combinations(
             result_arr, pending_proc_n, pending_prco_k,
-            _index+1, middle_state_container)
+            _cur_num+1, middle_state_container)
         middle_state_container.pop(-1)
+```
+
+
+##### lc39-组合总和
+
+[lc39](https://leetcode-cn.com/problems/combination-sum/)
+
+给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：
+* 所有数字（包括 target）都是正整数。
+* 解集不能包含重复的组合。 
+
+示例 1：
+输入：candidates = [2,3,6,7], target = 7,
+所求解集为：
+```
+[
+  [7],
+  [2,2,3]
+]
+```
+
+示例 2：
+输入：candidates = [2,3,5], target = 8,
+所求解集为：
+```
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]
+```
+
+![](/img/algo_newbie/backtrack_recursion/lc39_1.png)
+
+[参考](leetcode-cn.com/problems/combination-sum/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-2/)  
+
+这棵树有 44 个叶子结点的值 00，对应的路径列表是 [[2, 2, 3], [2, 3, 2], [3, 2, 2], [7]]，而示例中给出的输出只有 [[7], [2, 2, 3]]。即：题目中要求每一个符合要求的解是 不计算顺序 的。下面我们分析为什么会产生重复。
+
+**针对具体例子分析重复路径产生的原因（难点）**
+友情提示：这一部分我的描述是晦涩难懂的，建议大家先自己观察出现重复的原因，进而思考如何解决。
+产生重复的原因是：在每一个结点，做减法，展开分支的时候，由于题目中说 每一个元素可以重复使用，我们考虑了 所有的 候选数，因此出现了重复的列表。  
+一种简单的去重方案是借助哈希表的天然去重的功能，但实际操作一下，就会发现并没有那么容易。
+可不可以在搜索的时候就去重呢？答案是可以的。遇到这一类相同元素不计算顺序的问题，我们在搜索的时候就需要 按某种顺序搜索。具体的做法是：每一次搜索的时候设置 下一轮搜索的起点 `start_index`, 请看下图。
+
+![](/img/algo_newbie/backtrack_recursion/lc39_2.png)
+
+即：从每一层的第 22 个结点开始，都不能再搜索产生同一层结点已经使用过的 candidate 里的元素
+
+``` python
+class Solution_lc39(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        if not candidates:
+            return []
+        res_arr = []
+        middle_state_arr = []
+        self._generate_combinations(candidates, target, 0, res_arr, middle_state_arr)
+        return res_arr
+
+    def _generate_combinations(
+            self, candidates_arr, cur_target_num, start_index, res_arr, middle_state_arr):
+        if cur_target_num < 0:
+            return
+        if cur_target_num == 0:
+            res_arr.append(copy.deepcopy(middle_state_arr))
+            return
+        # 这个cur_index是用来去重的
+        for cur_index in range(start_index, len(candidates_arr)):
+            middle_state_arr.append(candidates_arr[cur_index])
+            cur_target_num -= candidates_arr[cur_index]
+            self._generate_combinations(
+                candidates_arr, cur_target_num, cur_index, res_arr, middle_state_arr)
+            cur_target_num += candidates_arr[cur_index]
+            middle_state_arr.pop(-1)
 ```
 
 

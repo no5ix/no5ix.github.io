@@ -1539,6 +1539,40 @@ class Solution_bigo_thread_permute(object):
                 _max_index_j = _cur_index_j
         return _max_index_j
 
+    
+class Solution_sum_paths(object):
+    def sum_paths(self, root, sum):
+        if not root:
+            return []
+        path_arr = []
+        # 先求包括node本身的情况, 此时这轮递归所说的node是代码中的root
+        # 再求不包括node本身的情况, 左右孩子的情况, 
+        # 这样也就达到了把每个结点都当做是root然后向下寻找路径的目的
+        path_arr.extend(self._get_sum_paths(root, sum))
+        path_arr.extend(self.sum_paths(root.left, sum))
+        path_arr.extend(self.sum_paths(root.right, sum))
+        return path_arr
+
+    def _get_sum_paths(self, cur_root, sum_num):
+        if not cur_root:
+            return []
+        path_str_arr = []
+        # if sum_num == 0: 
+        #     pass  # 不能这么写, 这么写的话, 拿不到之前的那个 cur_root 了
+        if sum_num - cur_root.val == 0:  # 此时就已经找到了一个解
+            path_str_arr.append(str(cur_root.val))
+            return path_str_arr
+
+        left_path_str_arr = self._get_sum_paths(cur_root.left, sum_num-cur_root.val)
+        for _cur_path_str in left_path_str_arr:
+            path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
+
+        right_path_str_arr = self._get_sum_paths(cur_root.right, sum_num-cur_root.val)
+        for _cur_path_str in right_path_str_arr:
+            path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
+
+        return path_str_arr
+
 
 
 if __name__ == "__main__":
@@ -1964,3 +1998,26 @@ if __name__ == "__main__":
     print "----------bigo_thread_permute()-------"  
     print 'Solution_bigo_thread_permute().bigo_thread_permute() :'
     print Solution_bigo_thread_permute().bigo_thread_permute()
+
+    print ""
+
+    print "----------sum_paths()-------"  
+    """
+               1
+             /  \
+            2     3
+           /\    / \
+          8  6   5  7
+    """
+    bt = TreeNode(1)
+    bt.left = TreeNode(2)
+    bt.right = TreeNode(3)
+    bt.left.left = TreeNode(8)
+    bt.left.right = TreeNode(6)
+    bt.right.right = TreeNode(7)
+    bt.right.left = TreeNode(5)
+
+    print Solution_sum_paths().sum_paths(bt, 9)
+    print Solution_sum_paths().sum_paths(bt, 10)
+    print Solution_sum_paths().sum_paths(bt, 11)
+    print Solution_sum_paths().sum_paths(bt, 8)

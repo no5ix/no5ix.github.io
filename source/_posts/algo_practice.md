@@ -10,6 +10,11 @@ categories:
 ---
 
 
+# 算法白话总结
+
+推荐参考**本博客总结**的 {% post_link algo_newbie %}
+
+
 # 本文完整参考代码
 
 https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_practice.py

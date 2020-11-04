@@ -10,6 +10,11 @@ categories:
 ---
 
 
+# 实战练习
+
+推荐参考**本博客总结**的 {% post_link algo_practice %}
+
+
 # 本文完整参考代码
 
 https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_newbie.py
@@ -116,22 +121,26 @@ MaxLevel = 32
 ```
 
 
-## 树
+## AVL树
 
-* **二叉搜索树**: 记住一点, 其中序遍历是一个有序数组, 所以涉及到各种二叉搜索树(如AVL树/红黑树/B树/B+树)总是说要中序遍历扫描结点啥的
-    * 类似于 [给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) 这种题目就可以中序遍历之后得到一个有序数组然后遍历此数组求相邻元素的最小差值即可
-* **AVL树**: AVL树是带有平衡条件的二叉严格平衡查找树，一般是用平衡因子差值判断是否平衡并通过旋转来实现平衡，左右子树树高不超过1，和红黑树相比，它是严格的平衡二叉树，平衡条件必须满足（所有节点的左右子树高度差不超过1）。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道AVL树适合用于插入删除次数比较少，但查找多的情况。
-* **红黑树**: 一种二叉弱平衡查找树，但在每个节点增加一个存储位表示节点的颜色，可以是red或black。通过对任何一条从根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其它路径长出两倍。它是一种弱平衡二叉树(由于是若平衡，可以推出，相同的节点情况下，AVL树的高度低于红黑树)，相对于要求严格的AVL树来说，它的旋转次数变少，所以对于搜索、插入、删除操作多的情况下，我们就用红黑树。实际应用如下:
+AVL树是带有平衡条件的二叉严格平衡查找树，一般是用平衡因子差值判断是否平衡并通过旋转来实现平衡，左右子树树高不超过1，和红黑树相比，它是严格的平衡二叉树，平衡条件必须满足（所有节点的左右子树高度差不超过1）。不管我们是执行插入还是删除操作，只要不满足上面的条件，就要通过旋转来保持平衡，而旋转是非常耗时的，由此我们可以知道AVL树适合用于插入删除次数比较少，但查找多的情况。
+
+## 红黑树
+
+一种二叉弱平衡查找树，但在每个节点增加一个存储位表示节点的颜色，可以是red或black。通过对任何一条从根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其它路径长出两倍。它是一种弱平衡二叉树(由于是若平衡，可以推出，相同的节点情况下，AVL树的高度低于红黑树)，相对于要求严格的AVL树来说，它的旋转次数变少，所以对于搜索、插入、删除操作多的情况下，我们就用红黑树。实际应用如下:
     * 广泛用于C++的STL中，Map和Set都是用红黑树实现的；
     * 著名的Linux进程调度Completely Fair Scheduler，用红黑树管理进程控制块，进程的虚拟内存区域都存储在一颗红黑树上，每个虚拟地址区域都对应红黑树的一个节点，左指针指向相邻的地址虚拟存储区域，右指针指向相邻的高地址虚拟地址空间；
     * IO多路复用epoll的实现采用红黑树组织管理sockfd，以支持快速的增删改查；
     * Nginx中用红黑树管理timer，因为红黑树是有序的，可以很快的得到距离当前最小的定时器；
-* **B树/B+树**: B/B+树是为了磁盘或其它存储设备而设计的一种平衡多路查找树(相对于二叉，B树每个内节点有多个分支)，与红黑树相比，在相同的的节点的情况下，一颗B/B+树的高度远远小于红黑树的高度, B/B+树上操作的时间通常由存取磁盘的时间和CPU计算时间这两部分构成，而CPU的速度非常快，所以B树的操作效率取决于访问磁盘的次数，关键字总数相同的情况下B树的高度越小，磁盘I/O所花的时间越少。(相关细节以及图片可以参考本文的[为什么说B+树比B树更适合数据库索引](#为什么说B类树更适合数据库索引))
+
+## B树和B+树
+
+B/B+树是为了磁盘或其它存储设备而设计的一种平衡多路查找树(相对于二叉，B树每个内节点有多个分支)，与红黑树相比，在相同的的节点的情况下，一颗B/B+树的高度远远小于红黑树的高度, B/B+树上操作的时间通常由存取磁盘的时间和CPU计算时间这两部分构成，而CPU的速度非常快，所以B树的操作效率取决于访问磁盘的次数，关键字总数相同的情况下B树的高度越小，磁盘I/O所花的时间越少。(相关细节以及图片可以参考本文的[为什么说B+树比B树更适合数据库索引](#为什么说B类树更适合数据库索引))
     * **B树**(也叫B-树, 这个`-`只是个符号...不是B减树哈)
     * **B+树**: B+树是应文件系统所需而产生的一种B树的变形树（文件的目录一级一级索引，只有最底层的叶子节点（文件）保存数据）非叶子节点只保存索引，不保存实际的数据，数据都保存在叶子节点中，所有叶子节点都有一个链表指针把实际的数据用链表连在一起使得遍历整棵树只需要遍历叶子节点就行.
 
 
-### 二叉树
+## 二叉树
 
 * 遍历
     * 深度优先遍历dfs
@@ -149,6 +158,9 @@ MaxLevel = 32
         * 在遍历过程中，遇到的第一个值介于n1和n2之间的节点n，也即n1 =< n <= n2, 就是n1和n2的LCA。
         * 在遍历过程中，如果节点的值比n1和n2都大，那么LCA在节点的左子树。
         * 在遍历过程中，如果节点的值比n1和n2都小，那么LCA在节点的右子树。
+    * 记住一点, 其中序遍历是一个有序数组, 所以涉及到各种二叉搜索树(如AVL树/红黑树/B树/B+树)总是说要中序遍历扫描结点啥的
+        * 类似于 [给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) 这种题目就可以中序遍历之后得到一个有序数组然后遍历此数组求相邻元素的最小差值即可
+
 
 二叉树的代码表示:
 ``` python
@@ -170,7 +182,7 @@ class TreeNode(object):
 而得到的**广度优先遍历**的序列为 : ABCDEFG
 
 
-#### 统一形式的二叉树前中后序迭代遍历
+### 统一形式的二叉树前中后序迭代遍历
 
 ![](/img/algo_newbie/binary_tree/binary_tree_preorder_traversal.gif)
 
@@ -233,7 +245,7 @@ def binary_tree_postorder_traversal(root):
 ```
 
 
-#### 二叉树层序遍历
+### 二叉树层序遍历
 
 ![](/img/algo_newbie/binary_tree/BreadthFirstTraverse1.png)
 
@@ -256,7 +268,7 @@ def binary_tree_levelorder_traversal(root):
 ```
 
 
-#### 二叉树反转
+### 二叉树反转
 
 递归写法:
 ``` python
@@ -546,15 +558,13 @@ test_dense_graph graph bfs:
 * 可以获得两点之间的最短路径
 
 
-# 算法
 
-
-## 排序算法
+# 排序算法
 
 ![](/img/algo_newbie/sort_algo_complexity.png "各类排序算法的复杂度")
 
 
-### 排序算法要点总结
+## 排序算法要点总结
 
 - 实用的基础排序算法有四种:
     - [**插入排序**](#插入排序) : 在小数据量或者数据都较为有序的时候比起归并和快速排序有更佳的时间效率, 插入排序在这种情况下，只需要从头到尾扫描一遍，交换、移动少数元素即可；时间复杂度近乎 o(N)))。 所以插入排序经常可以当作是其他排序算法的子过程, 下面代码会有体现
@@ -626,7 +636,7 @@ test_dense_graph graph bfs:
 **. . .**<!-- more -->
 
 
-### 插入排序
+## 插入排序
 
 想象手上有几张牌， 现在你抽了一张牌， 然后需要从手上最右边的牌开始比较，然后插入到相应位置
 
@@ -651,7 +661,7 @@ def insert_sort(arr, left_index, right_index):
                 break
 ```
 
-#### 插排优化
+### 插排优化
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
@@ -674,7 +684,7 @@ def insert_sort_optimized(arr, left_index, right_index):
 ```
 
 
-### 归并排序
+## 归并排序
 
 归并排序用了分治的思想，有很多算法在结构上是递归的：为了解决一个给定的问题，算法要一次或多次地递归调用其自身来解决相关的子问题。这些算法通常采用分治策略（divide-and-conquier）：将原问题划分成n个规模较小而结构与原问题相似的子问题；递归地解决这些子问题，然后再合并其结果，就得到原问题的解。
 
@@ -697,7 +707,7 @@ def insert_sort_optimized(arr, left_index, right_index):
 ![](/img/algo_newbie/merge_sort/merge_sort_anim1.gif "归并排序动画总览")
 
 
-#### 归并排序的merge过程
+### 归并排序的merge过程
 
 ![](/img/algo_newbie/merge_sort/merge_sort_anim2.gif "归并排序的merge过程")
 
@@ -732,7 +742,7 @@ def _merge(arr, left_index, mid_index, right_index):
 ```
 
 
-#### 归并自顶向下的实现
+### 归并自顶向下的实现
 
 ``` python
 def merge_sort(arr, left_index, right_index):
@@ -749,7 +759,7 @@ def merge_sort(arr, left_index, right_index):
     _merge(arr, left_index, mid_index, right_index)
 ```
 
-##### 归并自顶向下的优化实现
+#### 归并自顶向下的优化实现
 
 ``` diff
 def merge_sort_optimized(arr, left_index, right_index):
@@ -781,7 +791,7 @@ def merge_sort_optimized(arr, left_index, right_index):
 ```
 
 
-#### 归并自底向上的实现
+### 归并自底向上的实现
 
 ![](/img/algo_newbie/merge_sort/merge_sort_bottom_up.gif)
 
@@ -810,7 +820,7 @@ def merge_sort_bottom_up(arr, left_index, right_index):
         size *= 2  # size从1开始每次增加两倍
 ```
 
-##### 归并自底向上的优化实现
+#### 归并自底向上的优化实现
 
 ``` diff
 def merge_sort_bottom_up_optimized(arr, left_index, right_index):
@@ -856,7 +866,7 @@ def merge_sort_bottom_up_optimized(arr, left_index, right_index):
 ```
 
 
-### 快速排序
+## 快速排序
 
 与归并排序一样， 快排也是用了分治的思想。
 
@@ -878,7 +888,7 @@ A也重复上述步骤递归。
 ![](/img/algo_newbie/quick_sort/quick_sort_partition_anim.gif "partition过程动画演示")
 
 
-#### 快排效率很差的情况
+### 快排效率很差的情况
 
 ![](/img/algo_newbie/quick_sort/quick_sort_3.png)
 
@@ -886,7 +896,7 @@ A也重复上述步骤递归。
 所以当如果一个有序递增序列, 每次选基准都选最后一个, 那肯定效率很差了啊
 
 
-#### 普通快排
+### 普通快排
 
 **注意初始index的位置:** 
 ``` python
@@ -938,7 +948,7 @@ def quick_sort(arr, left_index, right_index):
     quick_sort(arr, partition_index+1, right_index)
 ```
 
-#### 普通快排的优化
+### 普通快排的优化
 
 通过[快排效率很差的情况](#快排效率很差的情况), 我们知道快排在面对已经比较有序数组的时候效率如果固定选择某个位置的pivot则性能较差, 所以我们加上两种优化方式:
 * 随机选pivot
@@ -994,7 +1004,7 @@ def quick_sort_optimized(arr, left_index, right_index):
 ```
 
 
-#### 解决普通快排有大量相同元素时的性能问题
+### 解决普通快排有大量相同元素时的性能问题
 
 **对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大。**
 当数组中有大量相同元素的时候, 不管怎么选pivot都很容易变成下面这种情况导致分成子序列的不平衡, 这将极大的影响时间复杂度, 最差的情况会退化成O(N2)
@@ -1002,7 +1012,7 @@ def quick_sort_optimized(arr, left_index, right_index):
 ![](/img/algo_newbie/quick_sort/quick_sort_4.png)
 
 
-##### 双路快排-初步解决有大量相同元素的性能问题
+#### 双路快排-初步解决有大量相同元素的性能问题
 
 所以产生了双路快排的方式, 双路快速排序算法则不同，他使用两个索引值（i、j）用来遍历我们的序列，将小于等于v的元素放在索引i所指向位置的左边，而将大于等于v的元素放在索引j所指向位置的右边, 通过下图我们可以看到当等于v的情况也会发生交换, 这就基本可以保证等于v的元素也可以较为均匀的放到左右两边
 
@@ -1011,7 +1021,7 @@ def quick_sort_optimized(arr, left_index, right_index):
 **待改进的地方**: 还是把等于v的元素加入到了待处理的数据中, 之后又去重复计算这些等于v的元素了, 为了排除这些已经等于v的元素, 所以产生了[**三路快排**](#三路快排-完全解决有大量相同元素的性能问题)
 
 
-##### 三路快排-完全解决有大量相同元素的性能问题
+#### 三路快排-完全解决有大量相同元素的性能问题
 
 这是最经典的解决有大量重复元素的问题的快排方案, 被大多数系统所使用.
 
@@ -1076,7 +1086,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 ```
 
 
-### 堆排序
+## 堆排序
 
 最大堆的堆排序之后的数组是升序, 最小堆反之.
 堆排序 HeapSort 由 以下两部分组成 :
@@ -1084,7 +1094,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 - [堆化 MaxHeapify](#堆化)
 - [建堆 BuildMaxHeap](#建堆)
 
-#### 堆排序的复杂度
+### 堆排序的复杂度
 
 * **时间复杂度** : 
     * **MaxHeapify** : **O(logN)**.
@@ -1098,7 +1108,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
   * **O(1)**, 因为没有用辅助内存.
 
 
-#### 堆化
+### 堆化
 
 **注意**: 以下演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
 
@@ -1124,7 +1134,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 ![](/img/algo_newbie/heap_sort/heap_sort_binary_heap_index.png)
 
 
-##### 堆化递归写法
+#### 堆化递归写法
 
 递归写法更容易理解一些:
 ``` python
@@ -1150,7 +1160,7 @@ def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
 ```
 
 
-##### 堆化迭代写法
+#### 堆化迭代写法
 
 
 ``` python
@@ -1180,7 +1190,7 @@ def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
 该优化思想和我们之前对[插入排序进行优化](#插排优化)的思路是一致的, 此处这个优化代码就略了
 
 
-#### 建堆
+### 建堆
 
 我们对每一个不是叶结点的元素(当index从root_index=0开始, 即为 index 小于等于 `root_index + (length/2 - 1)` )自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
 
@@ -1202,7 +1212,7 @@ def _build_max_heap(arr, left_index, right_index):
 ```
 
 
-#### 堆排序原址排序的具体实现
+### 堆排序原址排序的具体实现
 
 ![](/img/algo_newbie/heap_sort/heap_sort.gif "堆排序过程")
 
@@ -1229,15 +1239,13 @@ def heap_sort(arr, left_index , right_index):
 ```
 
 
-## 递归
+# 递归解题思路
 
+PS：递归调用可理解为入栈操作，而返回则为出栈操作。  
 实际上，递归有两个显著的特征,终止条件和自身调用:
 
 * 自身调用：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，即都是调用自身的同一个函数。
 * 终止条件：递归必须有一个终止的条件，即不能无限循环地调用本身。
-
-
-### 递归解题思路
 
 解决递归问题一般就三步曲，这个递归解题三板斧理解起来有点抽象，我们拿阶乘递归例子来喵喵吧~
 三部曲分别是：
@@ -1273,17 +1281,17 @@ def heap_sort(arr, left_index , right_index):
 「注意啦」，不是所有递推函数的等价关系都像阶乘这么简单，一下子就能推导出来。需要我们多接触，多积累，多思考，多练习递归题目滴~
 
 
-### 二叉树与递归
+# 递归与二叉树
 
 递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。
 
 
-#### lc236-LCA最近公共祖先问题
+## lc236-LCA最近公共祖先问题
 
 [lc236](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/), 给出一棵二叉树的根节点，现在有这个二叉树的部分节点，要求这些节点最近的公共祖先
 
 
-##### 思路1-递归思路
+### 思路1-递归思路
 
 [参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
 
@@ -1341,7 +1349,7 @@ class Solution_LCA(object):
 ```
 
 
-##### 思路2-存储父节点-代码略
+### 思路2-存储父节点-代码略
 
 [参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/er-cha-shu-de-zui-jin-gong-gong-zu-xian-by-leetc-2/)
 
@@ -1351,7 +1359,7 @@ class Solution_LCA(object):
 3. 同样，我们再从 q 节点开始不断往它的祖先移动，如果有祖先已经被访问过，即意味着这是 p 和 q 的深度最深的公共祖先，即 LCA 节点。
 
 
-#### lc106-后序中序求原二叉树
+## lc106-后序中序求原二叉树
 
 * [leetcode106题后序中序求原二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
 * 参考: https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/solution/
@@ -1408,7 +1416,7 @@ class Solution_build_bt(object):
 ```
 
 
-#### lc112-path-sum
+## lc112-path-sum
 
 [leetcode112题](https://leetcode-cn.com/problems/path-sum/)
 
@@ -1432,7 +1440,7 @@ def has_path_sum(root, sum_num):
 ```
 
 
-#### lc257-binary-tree-paths
+## lc257-binary-tree-paths
 
 [lc257](https://leetcode-cn.com/problems/binary-tree-paths/)
 
@@ -1459,7 +1467,7 @@ def binary_tree_paths(root):
 ```
 
 
-#### lc437-path-sum-3
+## lc437-path-sum-3
 
 [leetcode437题](https://leetcode-cn.com/problems/path-sum-iii/)  
 给出一颗二叉树以及一个数字sum, 判断在这棵二叉树上存在多少条路径, 其路径上的所有节点和为sum.
@@ -1496,9 +1504,53 @@ def _get_path_sum_include_node(node, sum_num):
 ```
 
 
-### 回溯与递归
+### 进阶-求path-sum-3的所有路径
 
-参考: leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
+[leetcode437题](https://leetcode-cn.com/problems/path-sum-iii/)改一下, 改成:
+给出一颗二叉树以及一个数字sum, 请给出在这棵二叉树上的所有路径, 其路径上的所有节点和为sum.
+* 其中路径不一定要起始于根节点, 终止于叶子节点
+* 路径可以从任意节点开始, 但是只能是向下走的
+
+根据[本文lc437-path-sum-3](#lc437-path-sum-3)的思路我们可以得到代码, 注意查看下方代码中的注释.
+```python
+class Solution_sum_paths(object):
+    def sum_paths(self, root, sum):
+        if not root:
+            return []
+        path_arr = []
+        # 先求包括node本身的情况, 此时这轮递归所说的node是代码中的root
+        # 再求不包括node本身的情况, 左右孩子的情况, 
+        # 这样也就达到了把每个结点都当做是root然后向下寻找路径的目的
+        path_arr.extend(self._get_sum_paths(root, sum))
+        path_arr.extend(self.sum_paths(root.left, sum))
+        path_arr.extend(self.sum_paths(root.right, sum))
+        return path_arr
+
+    def _get_sum_paths(self, cur_root, sum_num):
+        if not cur_root:
+            return []
+        path_str_arr = []
+        # if sum_num == 0: 
+        #     pass  # 不能这么写, 这么写的话, 拿不到之前的那个 cur_root 了
+        if sum_num - cur_root.val == 0:  # 此时就已经找到了一个解
+            path_str_arr.append(str(cur_root.val))
+            return path_str_arr
+
+        left_path_str_arr = self._get_sum_paths(cur_root.left, sum_num-cur_root.val)
+        for _cur_path_str in left_path_str_arr:
+            path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
+
+        right_path_str_arr = self._get_sum_paths(cur_root.right, sum_num-cur_root.val)
+        for _cur_path_str in right_path_str_arr:
+            path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
+
+        return path_str_arr
+```
+
+
+# 递归与回溯
+
+参考: https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
 
 回溯法 采用试错的思想，它尝试分步的去解决一个问题。在分步解决问题的过程中，当它通过尝试发现现有的分步答案不能得到有效的正确的解答的时候，它将取消上一步甚至是上几步的计算，再通过其它的可能的分步解答再次尝试寻找问题的答案。回溯法通常用最简单的递归方法来实现，在反复重复上述的步骤后可能出现两种情况：
 * 找到一个可能存在的正确的答案；
@@ -1513,7 +1565,7 @@ def _get_path_sum_include_node(node, sum_num):
 动态规划其实可以算是回溯法的基础上一种改进, 同时要发现一个递归结构, 以及其他的特点就可以用回溯法, 其实回溯法也可以剪枝来优化, 不用到达所有的叶子结点从而提升我们回溯法的运行效率.
 
 
-#### 回溯算法框架
+## 回溯算法框架
 
 [参考](https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-xiang-jie-by-labuladong-2/)
 
@@ -1540,9 +1592,9 @@ def backtrack(供选择的列表, 选择的路径中间状态):
 其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」，特别简单。
 
 
-#### 排列问题-设计状态变量讲解
+## 排列问题合集-设计状态变量讲解
 
-##### lc46-全排列
+### lc46-全排列
 
 [leetcode46题](https://leetcode-cn.com/problems/permutations/solution/):  
 给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
@@ -1605,7 +1657,7 @@ class Solution_lc46(object):
 
 ```
 
-##### 进阶-lc47-全排列2
+### 进阶-lc47-全排列2
 
 [lc47](https://leetcode-cn.com/problems/permutations-ii)
 给定一个可包含重复数字的序列，返回所有不重复的全排列。
@@ -1676,7 +1728,7 @@ class Solution_lc47(object):
 ```
 
 
-##### 比狗-多数组且元素间有顺序要求的全排列
+### 比狗-多数组且元素间有顺序要求的全排列
 
 ![](/img/algo_practice/bigo_1.jpg)
 不用管第一题, 我们做第二题, 
@@ -1736,7 +1788,7 @@ class Solution_bigo_thread_permute(object):
 ```
 
 
-##### 树形问题电话号码字母组合
+### 树形问题电话号码字母组合
 
 ![](/img/algo_newbie/backtrack_recursion/letter_combinations_of_a_phone_number.png "问题描述")
 ![](/img/algo_newbie/backtrack_recursion/letter_combinations_of_a_phone_number1.png "解题思路之树形结构")
@@ -1809,9 +1861,9 @@ def _get_letter_combination(
 ```
 
 
-#### 组合问题合集
+## 组合问题合集
 
-##### lc77-经典组合问题
+### lc77-经典组合问题
 
 [leetcode77题](https://leetcode-cn.com/problems/combinations/)  
 给出两个整数n和k, 求出1...n中k个数字的所有组合  
@@ -1855,7 +1907,7 @@ class Solution_lc77(object):
             middle_state_container.pop(-1)
 ```
 
-###### 组合问题解决优化-剪枝
+### 组合问题解决优化-剪枝
 
 从上面的 组合问题解题思路 中可以看出其实是没有必要计算 "取4" 的操作的, 
 所以我们利用**剪枝**的思想, 把这部分优化掉, 代码如下:
@@ -1890,7 +1942,7 @@ def _generate_combinations_optimized(
 ```
 
 
-##### lc39-组合总和
+### lc39-组合总和
 
 [lc39](https://leetcode-cn.com/problems/combination-sum/)
 
@@ -1969,7 +2021,7 @@ class Solution_lc39(object):
             middle_state_arr.pop(-1)
 ```
 
-###### 进阶-lc40-组合总和2
+### 进阶-lc40-组合总和2
 
 [lc40](https://leetcode-cn.com/problems/combination-sum-ii) 如果candidates 中的每个数字在每个组合中只能使用一次呢?
 那应该改成: 
@@ -1987,7 +2039,7 @@ for cur_index in range(start_index, len(candidates_arr)):
 ```
 
 
-##### 多个数组抽个数总和
+### 多个数组抽个数总和
 
 题目: 4 个数组，目标值 target，每个数组各找一个数，使得 4 个数和为 target，数组没有顺序，找到所有不重复的组合，要求时间复杂度 O(n^2)
 
@@ -2038,7 +2090,7 @@ Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) 
 
 
 
-#### lc200-经典floodfill问题
+## lc200-经典floodfill问题
 
 [leetcode200题](https://leetcode-cn.com/problems/number-of-islands/)  
 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
@@ -2117,25 +2169,99 @@ class Solution_number_of_islands(object):
 ```
 
 
-#### 经典N皇后问题
+## 经典N皇后问题
 
 ... pending_fin
 
 
+# 动态规划解题思路
 
-## 动态规划
-
-动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。动态规划算法与分治法类似，其基本思想也是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解。与分治法不同的是，适合于用动态规划求解的问题，经分解得到子问题往往不是互相独立的。若用分治法来解这类问题，则分解得到的子问题数目太多，有些子问题被重复计算了很多次。如果我们能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，这样就可以避免大量的重复计算，节省时间。我们可以用一个表来记录所有已解的子问题的答案。不管该子问题以后是否被用到，只要它被计算过，就将其结果填入表中。这就是动态规划法的基本思路。
+动态规划算法通常**用于求解具有某种最优性质的问题**。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。  
+动态规划算法与分治法类似，其基本思想也是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解。与分治法不同的是，适合于用动态规划求解的问题，经分解得到子问题往往不是互相独立的。  
+* 分治法: 若用分治法来解这类问题，则分解得到的子问题数目太多，有些子问题被重复计算了很多次。
+* 动态规划: 如果我们能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，这样就可以避免大量的重复计算，节省时间。我们可以用一个表来记录所有已解的子问题的答案。不管该子问题以后是否被用到，只要它被计算过，就将其结果填入表中。这就是动态规划法的基本思路。
 
 ![](/img/algo_newbie/dynamic_programming/dp_1.png)
 
-设计动态规划的三个步骤
-1. 将问题分解成最优子问题；
-2. 用递归的方式将问题表述成最优子问题的解；
-3. 自底向上的将递归转化成迭代；（递归是自顶向下）;
+动态规划算法就是将待求解问题分解成若干子问题，先求解子问题并保存子问题的答案避免重复计算，然后从这些子问题的解得到原问题的解。而如何断定一个问题**是否可以用动态规划来解决**，就需要掌握动态规划的两个基本要素:
+* 重叠子问题性质
+* 最优子结构性质
 
 
-### 递推公式讲解-经典题青蛙跳台阶
+## 重叠子问题性质
+
+在用递归算法自顶向下解决一个问题时，每次产生的子问题并不总是新问题，有些子问题被反复计算多次。动态规划正是利用了这种子问题的重叠性质，对每个子问题只解一次，而后将其解保存到一个表格中，当再次需要解此子问题时，只是简单地用常数时间查看一下结果。  
+保存重叠子问题的解（也就是 fib(3)）有以下两种方式：
+* DP table（自底向上）
+* 备忘录memo方法又称记忆化搜索（自顶向下）
+
+
+## 最优子结构性质
+
+设计动态规划算法的第一步通常是要刻画最优解的结构。**当问题的最优解包含了其子问题的最优解时，称该问题具有最优子结构性质** 。问题的最优子结构性质提供了该问题可用动态规划求解的重要线索。
+
+例如，最短路径问题有如下的最优子结构：
+![](/img/algo_newbie/dynamic_programming/dp_2.png)
+
+结点 x 是从源结点 u 到目标结点 v 的最短路径上的结点，则源结点 u 到目标结点 v 的最短路径 7 就等于从源结点 u 到结点 x 的最短路径 5 加上从结点 x 到目标结点 v 的最短路径 2 的和。源结点 u 到目标结点 v 的最短路径就是要求解的最优解，源结点 u 到结点 x 的最短路径和从结点 x 到目标结点 v 的最短路径均为子问题的最优解，而问题的最优解包含了其子问题的最优解，则该问题具有最优子结构性质。  
+
+弗洛伊德算法（ Floyd–Warshall Algorithm）和贝尔曼 - 福特算法（Bellman - Ford algorithm）都是解决单源点最短路径的经典动态规划算法，以后有机会定会给大家分享。
+
+但是最长路径问题就不具有最优子结构性质，注意这里的最长路径指的是两个结点间的最长简单路径（即不存在环的路径）。盗用算法导论中的一张无权无向图就可以说明。
+![](/img/algo_newbie/dynamic_programming/dp_3.png)
+
+从结点 u 到结点 v 有两条最长路径，分别为 **u → s → v** 和 **u → t → v** ，但是与最短路径问题不同，这些最长路径不具有最优子结构性质。比如，从结点 u 到结点 v 有两条最长路径 **u → s → v** 并不等于从 u 到 s 的最长路径  **u → t → v → s** 与从 s 到 v 的最长路径 **s → u → t → v** 的加和。（更多最优子结构的例子，请持续关注景禹，笔芯）。
+![](/img/algo_newbie/dynamic_programming/dp_4.png)
+
+
+## 解决动态规划问题步骤
+
+动态规划（**D**ynamic **P**rogramming，DP）是在多项式时间解决特定类型问题的一套方法论，且远远快于指数级别的蛮力法.
+解决动态规划问题四步法：
+1.  **辨别是不是一个动态规划问题**；
+2.  **定义状态**
+3.  **建立状态之间的关系, 构造状态转移方程**
+4.  **两种方式选其一**:
+     * **为状态添加备忘录memo自顶向下用记忆化搜索的递归方式来写**
+     * **用DP Table的动规方式来写**
+    
+
+### 第一步-断定是否为动规问题
+
+一般情况下，需要求最优解的问题（最短路径问题，最长公共子序列，最大字段和等等，出现 **最** 字你就留意），在一定条件下对排列进行计数的计数问题（丑数问题）或某些概率问题都可以考虑用动态规划来解决。
+
+所有的动态规划问题都满足重叠子问题性质，大多数经典的动态规划问题还满足最优子结构性质，当我们从一个给定的问题中发现了这些特性，就可以确定其可以用动态规划解决。
+
+### 第二步-定义状态
+
+DP 问题最重要的就是确定所有的状态和状态与状态之间的转移方程。确定状态转移方程是动态规划最难的部分，但也是最基础的，必须非常谨慎地选择状态，因为状态转移方程的确定取决于你对问题状态定义的选择。那么，状态到底是个什么鬼呢？
+**「状态」** 可以视为一组可以唯一标识给定问题中某个子问题解的参数，这组参数应尽可能的小，以减少状态空间的大小。
+* 比如斐波那契数中，0 , 1, ..., n 就可以视为参数，而通过这些参数定义出的 DP\[0\]，DP\[1\]，DP\[2\]，...，DP\[n\] 就是状态，而状态与状态之间的转移方程就是 DP(n) = DP(n-1) + DP(n-2) 。
+* 再比如，经典的背包问题（Knapsack problem）中，状态通过 **index** 和 **weight** 两个参数来定义，即 **`DP[index][weight]`** 。`DP[index][weight]`  则表示当前从 0 到 index 的物品装入背包中可以获得的最大重量。因此，参数 index 和 weight 可以唯一确定背包问题的一个子问题的解。
+
+所以，当确定给定的问题之后，首当其冲的就是确定问题的状态。动态规划算法就是将待求解问题分解成若干子问题，先求解子问题并保存子问题的答案避免重复计算，然后从这些子问题的解得到原问题的解。既然确定了一个一个的子问题的状态，接下来就是确定前一个状态到当前状态的转移关系式，也称状态转移方程。
+
+### 第三步-构造状态转移方程
+
+构造状态转移方程是 DP 问题**最难的部分**，需要足够敏锐的直觉和观察力，而这两者都是要通过**大量的练习**来获得。我们用一个简单的问题来理解这个步骤: [跳台阶](#理解动态规划-讲解跳台阶)
+
+### 第四步-为状态添加备忘录或者DP表
+
+这个可以说是动态规划最简单的部分，我们仅需要存储子状态的解，以便下次使用子状态时直接查表从内存中获得。代码书写方式以下二者选其一:
+* 为状态添加备忘录memo自顶向下用记忆化搜索的递归方式来写
+* 用DP Table的动规方式来写.
+
+**备忘录memo** VS **DP表**:
+* 状态：DP Table 状态转移关系较难确定，备忘录状态转移关系较易确定。你可以理解为自顶向下推导较为容易，自底向上推导较难。比如 DP[n] = DP[n - 1] + DP[n - 3] + DP[n-5] 的确定。
+* 代码：当约束条件较多的情况下，DP Table 较为复杂；备忘录代码相对容易实现和简单，仅需对递归代码进行改造。
+* 效率：动态规划（DP Table）较快，我们可以直接从表中获取子状态的解；备忘录由于大量的递归调用和返回状态操作，速度较慢。
+* 子问题的解：当所有的子问题的解都至少要被解一遍，自底向上的动态规划算法通常比自顶向下的备忘录方法快常数量级；当求解的问题的子问题空间中的部分子问题不需要计算，仅需求解部分子问题就可以解决原问题，此时备忘录方法要优于动态规划，因为备忘录自顶向下仅存储与原问题求解相关的子问题的解。
+* 表空间：DP Table 依次填充所有子状态的解；而备忘录不必填充所有子问题的解，而是按需填充。
+
+至于两个该如何选择，我想你的心中也有数了，建议按照解动态规划的四步骤依次求解，至于第四步，你个人喜欢用 DP Table 就用 DP Table ，喜欢备忘录就用备忘录。
+
+
+## 理解动态规划-讲解跳台阶
 
 我们以一个经典的跳台阶题目来讲解从**普通递归(自上向下)**->**记忆化搜索(自上向下)**->**动态规划(自下向上)**的演进
 
@@ -2158,7 +2284,7 @@ def jump_step(step_sum):
     return jump_step(step_sum-1) + jump_step(step_sum-2)
 ```
 
-#### 跳台阶记忆化搜索优化解法
+### 跳台阶记忆化搜索备忘录优化解法
 
 当step_sum很大的时候, 你会发现要执行很久, 是因为上述函数`jump_step`存在「大量重复计算」，比如f（8）被计算了两次，f（7）被重复计算了3次...所以这个递归算法低效的原因，就是存在大量的重复计算！
 
@@ -2185,7 +2311,7 @@ def jump_step_optimized(step_sum, memo=None):
 ```
 
 
-#### 跳台阶动规解法
+### 跳台阶动规解法
 
 既然我们也基本找出递推公式了, 其实我们也可以不走递归而直接走动规.
 ``` python
@@ -2201,7 +2327,7 @@ def jump_step_dynamic_programming(step_sum):
 ```
 
 
-#### 进阶跳台阶题目
+### 进阶跳台阶题目
 
 一只青蛙一次可以跳1级台阶，一次也可以跳2级台阶.......它也可以一次跳上n级台阶，此时青蛙跳上一个n级台阶总共有多少种跳法。
 
@@ -2217,7 +2343,9 @@ f(n-1) = f(n-2) + f(n-3) + .... +f(2) + f(1) + f(0)；（二式）
 一式减去二式：f(n) = f(n-1) * 2；故又是明显的递归。代码略.
 
 
-### lc343-最优子结构讲解-整数拆分
+# 动态规划各种题型
+
+## lc343-整数拆分
 
 这一小节, 我们开始讨论最优子结构: 通过求子问题的最优解, 可以获得原问题的最优解.
 
@@ -2303,7 +2431,7 @@ class Solution_integer_break(object):
 ```
 
 
-### lc198-状态转移方程讲解-打家劫舍
+## lc198-打家劫舍
 
 [leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
@@ -2323,9 +2451,9 @@ class Solution_integer_break(object):
      偷窃到的最高金额 = 2 + 9 + 1 = 12 。
 
 
-#### rob思路2-最优解
+### rob思路2-最优解
 
-参考: leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
+参考: https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
 
 如果房屋数量大于两间，应该如何计算能够偷窃到的最高总金额呢？对于第 k~(k>2)k (k>2) 间房屋，有两个选项：
 * 偷窃第 k 间房屋，那么就不能偷窃第 k-1 间房屋，偷窃总金额为前 k-2 间房屋的最高总金额与第 k 间房屋的金额之和。
@@ -2354,7 +2482,7 @@ def rob_dp_2(self, nums_arr):
 ```
 
 
-#### rob思路1-仅提供思路对比
+### rob思路1-仅提供思路对比
 
 ![](/img/algo_newbie/dynamic_programming/house_robber_1.png)
 
@@ -2424,7 +2552,7 @@ class Solution_house_robber(object):
 ```
 
 
-#### 进阶-求出具体偷哪些房子的子序列
+### 进阶-求出具体偷哪些房子的子序列
 
 还是用动规思路
 ```python
@@ -2450,7 +2578,7 @@ def house_rob_detail_seq(nums_arr):
 ```
 
 
-#### rob总结
+### rob总结
 
 可以看到不同思路的可以得出不同的状态的定义, 则得到不同的状态转移方程, 则得到不同的代码的解法.  
 动态规划的的四个解题步骤是：
@@ -2463,7 +2591,7 @@ def house_rob_detail_seq(nums_arr):
 **所以动态规划的关键就是, 找到一个合适的子问题的状态的表示!**
 
 
-### 0-1背包问题
+## 0-1背包问题
 
 **「0-1 背包」问题是一类非常重要的动态规划问题**
 
@@ -2531,7 +2659,7 @@ class Solution_knapsack(object):
 ```
 
 
-#### lc416-分割等和子集
+### lc416-分割等和子集
 
 [leetcode416题](https://leetcode-cn.com/problems/partition-equal-subset-sum)  
 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
@@ -2614,7 +2742,7 @@ class Solution_partition_equal_subset_sum(object):
 ```
 
 
-### lc300-LIS问题-最长上升子序列
+## lc300-LIS问题-最长上升子序列
 
 [leetcode300题](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
 
@@ -2672,7 +2800,7 @@ class Solution_LIS(object):
 ```
 
 
-### LCS问题-最长公共子序列问题
+## LCS问题-最长公共子序列问题
 
 LCS即Longest-Common-Sequence  
 
@@ -2718,7 +2846,7 @@ class Solution_LCS(object):
 ```
 
 
-### 求LCS具体的是哪个子序列
+## 求LCS具体的是哪个子序列
 
 * **思路1**: 还是用动规来解
     ``` python
@@ -2822,8 +2950,3 @@ class Solution_LCS(object):
                     q -= 1;
         return _lcs_detail_seq;
     ```
-
-
-# 实战练习
-
-推荐参考**本博客总结**的 {% post_link algo_practice %}

@@ -1574,6 +1574,27 @@ class Solution_sum_paths(object):
         return path_str_arr
 
 
+class Solution_jzo15(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # 我们采取用1每次左移一位然后与n做位与运算即可
+        i = 1
+        cnt = 0
+        move_cnt = 0
+        while i:
+            if n & i:
+                cnt += 1
+            i = i << 1
+            move_cnt += 1
+            if move_cnt >= 64:
+                # 因为python的int型是无限长度的...
+                # 所以要用64次限制一下..
+                break
+        return cnt 
+
 
 if __name__ == "__main__":
         
@@ -2021,3 +2042,9 @@ if __name__ == "__main__":
     print Solution_sum_paths().sum_paths(bt, 10)
     print Solution_sum_paths().sum_paths(bt, 11)
     print Solution_sum_paths().sum_paths(bt, 8)
+
+    print ""
+
+    print Solution_jzo15().hammingWeight(5)
+    print Solution_jzo15().hammingWeight(0b0111)
+    print Solution_jzo15().hammingWeight(-2)

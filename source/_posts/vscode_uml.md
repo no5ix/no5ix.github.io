@@ -31,7 +31,7 @@ categories:
 *   [graphviz]r在 [http://graphviz.org/](http://graphviz.org/)下载之后安装， 然后配置环境变量
 *   plantuml.jar在 [http://plantuml.com/](http://plantuml.com/) 下载 **plantuml.jar**， 然后配置环境变量
 
-配完之后类似如下图：
+配完之后类似如下图, **注意去除环境变量路径首尾多余的空格, 特别是path的最前方, 否则无法正确识别.**
 ![](/img/vscode_uml/vsc_uml_path.png)
 
 备注：Graphviz 是开源图形可视化软件。图形可视化是将结构信息表示为抽象图形和网络的图表的一种方式。它在网络，生物信息学，软件工程，数据库和网页设计，机器学习以及其他技术领域的可视化界面中有重要的应用。

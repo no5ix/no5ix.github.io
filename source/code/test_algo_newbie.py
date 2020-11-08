@@ -1227,45 +1227,45 @@ class Solution_LCS(object):
 
 
 class Solution_build_bt(object):
-	def buildTree(self, inorder, postorder):
-		"""
-		:type inorder: List[int]
-		:type postorder: List[int]
-		:rtype: TreeNode
-		"""
-		if not inorder or not postorder:
-			return None
+    def buildTree(self, inorder, postorder):
+        """
+        :type inorder: List[int]
+        :type postorder: List[int]
+        :rtype: TreeNode
+        """
+        if not inorder or not postorder:
+            return None
 
-		def _proc_order_arr(
-				inorder_left_index, inorder_right_index, 
-				postorder_left_index, postorder_right_index):       
-			if inorder_left_index > inorder_right_index or \
-					postorder_left_index > postorder_right_index:
-				return None
-			# 在后序遍历序列中,最后一个元素为树的根节点
-			root_val = postorder[postorder_right_index] 
-			root_inorder_index = inorder.index(root_val)
-			_len_left_child = root_inorder_index-inorder_left_index
-			root_node = TreeNode(root_val)
-			
-			# 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
-			# 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
-			# 其他的除最后一个结点外都是右子树的结点
-			root_node.left = _proc_order_arr(
-				inorder_left_index,
-				root_inorder_index-1,
-				postorder_left_index,
-				postorder_left_index + (_len_left_child-1)
-			)
-			root_node.right = _proc_order_arr(
-				root_inorder_index+1,
-				inorder_right_index,
-				postorder_left_index+(_len_left_child),
-				postorder_right_index-1
-			)
-			return root_node
-			
-		return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
+        def _proc_order_arr(
+                inorder_left_index, inorder_right_index, 
+                postorder_left_index, postorder_right_index):       
+            if inorder_left_index > inorder_right_index or \
+                    postorder_left_index > postorder_right_index:
+                return None
+            # 在后序遍历序列中,最后一个元素为树的根节点
+            root_val = postorder[postorder_right_index] 
+            root_inorder_index = inorder.index(root_val)
+            _len_left_child = root_inorder_index-inorder_left_index
+            root_node = TreeNode(root_val)
+            
+            # 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
+            # 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
+            # 其他的除最后一个结点外都是右子树的结点
+            root_node.left = _proc_order_arr(
+                inorder_left_index,
+                root_inorder_index-1,
+                postorder_left_index,
+                postorder_left_index + (_len_left_child-1)
+            )
+            root_node.right = _proc_order_arr(
+                root_inorder_index+1,
+                inorder_right_index,
+                postorder_left_index+(_len_left_child),
+                postorder_right_index-1
+            )
+            return root_node
+            
+        return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
 
 
 class Solution_LCA(object):
@@ -1594,6 +1594,83 @@ class Solution_jzo15(object):
                 # 所以要用64次限制一下..
                 break
         return cnt 
+
+
+class Solution_lc887(object):
+    # [lc887](https://leetcode-cn.com/problems/super-egg-drop/)  
+    # `N`层的楼，然后给你`K`个鸡蛋（`K`至少为 1）
+    def superEggDrop2(self, K, N):
+        """
+        :type K: int
+        :type N: int
+        :rtype: int
+        * 鸡蛋掉落，鹰蛋（Leetcode 887）：（经典dp）
+        * 有 K 个鸡蛋，有 N 层楼，用最少的操作次数 F 检查出鸡蛋的质量。
+        *
+        * 思路：
+        * 本题应该逆向思维，若你有 K 个鸡蛋，你最多操作 F 次，求 N 最大值。
+        *
+        * dp[k][f] = dp[k][f-1] + dp[k-1][f-1] + 1;
+        * 解释：
+        * 0.dp[k][f]：如果你还剩 k 个蛋，且只能操作 f 次了，所能确定的楼层。
+        * 1.dp[k][f-1]：蛋没碎，因此该部分决定了所操作楼层的上面所能容纳的楼层最大值
+        * 2.dp[k-1][f-1]：蛋碎了，因此该部分决定了所操作楼层的下面所能容纳的楼层最大值
+        * 又因为第 f 次操作结果只和第 f-1 次操作结果相关，因此可以只用一维数组。
+        *
+        * 时复：O(K*根号(N))
+        """ 
+        dp = [ [ 0 for _ in range(K+1) ] for _ in range(N+1) ]
+        i = 0
+        while dp[i][K] < N:
+            i += 1
+            for j in range(1, K+1):
+                dp[i][j] = dp[i-1][j-1] + dp[i-1][j] + 1
+        return i
+
+    def superEggDrop(self, K, N):
+        memo = dict()
+        def dp(K, N):
+            # base case
+            if K == 1: return N
+            if N == 0: return 0
+            # 避免重复计算
+            if (K, N) in memo:
+                return memo[(K, N)]
+
+            res = float('INF')
+            # 穷举所有可能的选择
+            for i in range(1, N + 1):
+                res = min(res, 
+                          max(
+                                dp(K, N - i), 
+                                dp(K - 1, i - 1)
+                             ) + 1
+                      )
+            # 记入备忘录
+            memo[(K, N)] = res
+            return res
+        return dp(K, N)
+
+    def superEggDrop_dp(self, K, N):
+        """
+        :type K: int
+        :type N: int
+        :rtype: int
+        """ 
+        # dp[k][n]: 表示为当前状态为 k 个鸡蛋，面对 n 层楼的
+        # 这个状态下最坏的情况的最少的扔鸡蛋的次数
+        dp = [ [ p for p in range(N+1) ] for _ in range(K+1) ]
+        for t in range(2, K+1):
+            for q in range(1, N+1):
+                for m in range(1, q):
+                    dp[t][q] = min(
+                        dp[t][q],
+                        max(
+                            dp[t-1][m-1],  # 碎了
+                            dp[t][q-m],  # 没碎
+                        ) + 1
+                    )
+        return dp[K][N]
 
 
 if __name__ == "__main__":
@@ -2048,3 +2125,8 @@ if __name__ == "__main__":
     print Solution_jzo15().hammingWeight(5)
     print Solution_jzo15().hammingWeight(0b0111)
     print Solution_jzo15().hammingWeight(-2)
+
+    print ""
+
+    print "Solution_lc887().superEggDrop(2, 100) : "
+    print Solution_lc887().superEggDrop(2, 100)

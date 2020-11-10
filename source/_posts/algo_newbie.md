@@ -270,7 +270,8 @@ def binary_tree_levelorder_traversal(root):
 
 ### 二叉树反转
 
-递归写法:
+值得一提的是，如果把交换左右子节点的代码放在后序遍历的位置也是可以的，但是放在中序遍历的位置是不行的，请你想一想为什么？
+因为中序遍历换节点 根据左根右的遍历顺序 相当于左侧节点交换了两次 右侧节点没换  因为遍历根的时候交换了左右节点 遍历右侧的时候还是之前那个左节点, 所以右子树没有被翻转, 以下是递归写法:
 ``` python
 def binary_tree_swap_recursive(root):
     if not root:
@@ -1297,9 +1298,9 @@ def heap_sort(arr, left_index , right_index):
 
 # 递归解题思路
 
-PS：递归调用可理解为入栈操作，而返回则为出栈操作。  
-实际上，递归有两个显著的特征,终止条件和自身调用:
+**递归调用可理解为入栈操作，而返回则为出栈操作。写递归算法的关键是要明确函数的「定义」是什么，然后相信这个定义，利用这个定义推导最终结果，绝不要试图跳入递归。我们千万不要跳进递归的细节里，你的脑袋才能压几个栈呀。**
 
+实际上，递归有两个显著的特征,终止条件和自身调用:
 * 自身调用：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，即都是调用自身的同一个函数。
 * 终止条件：递归必须有一个终止的条件，即不能无限循环地调用本身。
 
@@ -1340,6 +1341,12 @@ PS：递归调用可理解为入栈操作，而返回则为出栈操作。
 # 递归与二叉树
 
 递归，是使用计算机解决问题的一种重要的思考方式。而二叉树由于其天然的递归结构，使得基于二叉树的算法，均拥有着递归性质。使用二叉树，是研究学习递归算法的最佳入门方式。在这一章里，我们就来看一看二叉树中的递归算法。
+
+## 二叉树递归技巧
+
+* 如果采用前序遍历的递归形式解题, 则其实是从二叉树的顶部到底部来操作的, 脑海中得有这么一个想象, 从上到下访问每个结点之前做事
+* 如果采用后序遍历的递归形式解题, 则其实是从二叉树的底部到顶部来操作的, 从下到上访问每个结点之后做事
+* 一般很少用中序形式解题
 
 
 ## lc236-LCA最近公共祖先问题
@@ -1601,6 +1608,71 @@ class Solution_sum_paths(object):
             path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
 
         return path_str_arr
+```
+
+
+## lc114-二叉树展开为链表
+
+[lc114](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)  
+给定一个二叉树，原地将它展开为一个单链表。
+例如，给定二叉树
+```
+    1
+   / \
+  2   5
+ / \   \
+3   4   6
+```
+将其展开为：
+```
+1
+ \
+  2
+   \
+    3
+     \
+      4
+       \
+        5
+         \
+          6
+```
+
+我们尝试给出这个函数的定义：  
+给flatten函数输入一个节点root，那么以root为根的二叉树就会被拉平为一条链表。
+我们再梳理一下，如何按题目要求把一棵树拉平成一条链表？很简单，以下流程：
+1. 将root的左子树和右子树**拉平**。
+2. 将root的右子树**连接**到左子树下方，然后将整个左子树作为右子树。
+
+![](/img/algo_newbie/bt_recursion/flatten_1.png "二叉树拉平示意图")
+
+你看，这就是递归的魅力，你说flatten函数是怎么把左右子树拉平的？不容易说清楚，但是只要知道flatten的定义如此，相信这个定义，让root做它该做的事情，然后flatten函数就会按照定义工作。  
+另外注意递归框架是后序遍历，因为我们要从底到顶的来做**拉平**/**连接**操作。
+``` python
+class Solution_lc114(object):
+    # [lc114](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
+    def flatten(self, root):
+        """
+        :type root: TreeNode
+        :rtype: None Do not return anything, modify root in-place instead.
+        """ 
+        if not root:
+            return
+        self.flatten(root.left)
+        self.flatten(root.right)
+        temp_left = root.left
+        temp_right = root.right
+
+        # 将左子树作为右子树
+        root.left = None
+        root.right = temp_left
+
+        root_r = root
+        # 将左子树作为右子树
+        while (root_r.right):
+            root_r = root_r.right
+        root_r.right = temp_right
+
 ```
 
 
@@ -2332,8 +2404,9 @@ DP 问题最重要的就是确定所有的状态和状态与状态之间的转�
 至于两个该如何选择，我想你的心中也有数了，建议按照解动态规划的四步骤依次求解，至于第四步，你个人喜欢用 DP Table 就用 DP Table ，喜欢备忘录就用备忘录。
 
 
-## 理解动态规划-讲解凑零钱问题
+## 理解动态规划-讲解凑零钱1
 
+[lc322](https://leetcode-cn.com/problems/coin-change/)  
 先看下题目：给你 `k` 种面值的硬币，面值分别为 `c1, c2 ... ck`，每种硬币的数量无限，再给一个总金额 `amount`，问你**最少**需要几枚硬币凑出这个金额，如果不可能凑出，算法返回 -1 。算法的函数签名如下：
 
 ```
@@ -2345,7 +2418,7 @@ int coinChange(int[] coins, int amount);
 
 首先，这个问题是动态规划问题，因为它具有「最优子结构」的。
 
-为什么说它符合最优子结构呢？比如你想求 `amount = 11` 时的最少硬币数（原问题），如果你知道凑出 `amount = 10` 的最少硬币数（子问题），你只需要把子问题的答案加一（再选一枚面值为 1 的硬币）就是原问题的答案。因为硬币的数量是没有限制的，所以子问题之间没有相互制，是互相独立的。
+为什么说它符合最优子结构呢？比如你想求 `amount = 11` 时的最少硬币数（原问题），如果你知道凑出 `amount = 10` 的最少硬币数（子问题），你只需要把子问题的答案加一（再选一枚面值为 1 的硬币）就是原问题的答案。因为硬币的数量是没有限制的，所以子问题之间没有相互制约，是互相独立的。
 
 
 ### 分析状态转移
@@ -2385,7 +2458,8 @@ def coinChange(coins: List[int], amount: int):
         res = float('INF')
         for coin in coins:
             subproblem = dp(n - coin)
-            if subproblem == -1: continue
+            if subproblem == -1:
+                continue
             res = min(res, 1 + subproblem)
         return res if res != float('INF') else -1
     return dp(amount)
@@ -2407,18 +2481,20 @@ dp[n] = -1, 当n < 0;
 ### 带备忘录的递归
 
 只需要稍加修改，就可以通过备忘录消除子问题：
-```
+``` python
 def coinChange(coins: List[int], amount: int):
     memo = dict()
 
     def dp(n):
-        if n in memo: return memo[n]
+        if n in memo:
+            return memo[n]
         if n == 0: return 0
         if n < 0: return -1
         res = float('INF')
         for coin in coins:
             subproblem = dp(n - coin)
-            if subproblem == -1: continue
+            if subproblem == -1:
+                continue
             res = min(res, 1 + subproblem)
         memo[n] = res if res != float('INF') else -1
         return memo[n]
@@ -2430,118 +2506,271 @@ def coinChange(coins: List[int], amount: int):
 
 ### dp数组的迭代解法
 
-当然，我们也可以自底向上使用 dp table 来消除重叠子问题，关于「状态」「选择」和 base case 与之前没有区别，`dp` 数组的定义和刚才 `dp` 函数类似，也是把「状态」，也就是目标金额作为变量。不过 `dp` 函数体现在函数参数，而 `dp` 数组体现在数组索引：
+[参考](https://leetcode-cn.com/problems/coin-change/solution/322-ling-qian-dui-huan-by-leetcode-solution/)
 
-**`dp`** **数组的定义：当目标金额为** **`i`** **时，至少需要** **`dp[i]`** **枚硬币凑出**。
+**其实这个题还可以看成是一个恰好装满的完全背包问题**, 见本文的[这题的背包解法](#lc322-凑金币1-恰好装满的完全背包问题)  
+我们采用自下而上的方式进行思考。仍定义 F(i) 为组成金额 i 所需最少的硬币数量，假设在计算 F(i) 之前，我们已经计算出 F(0)−F(i−1) 的答案。 则 F(i) 对应的转移方程应为  
+`F(i) = min(F(i-Cj)) + 1`  ​	
+其中代表Cj的是第 j 枚硬币的面值，即我们枚举最后一枚硬币面额是 `Cj`，那么需要从 `i-Cj`这个金额的状态 `F(i-Cj)`转移过来，再算上枚举的这枚硬币数量 1 的贡献，由于要硬币数量最少，所以 F(i) 为前面能转移过来的状态的最小值加上枚举的硬币数量 1 。
+
+举个例子：假设 `coins = [1, 2, 5], amount = 11`  
+则，当 i==0 时无法用硬币组成，为 0 。当 i<0 时，忽略 F(i)
+
+|F(i)	|最小硬币数量|
+|-------|-----------|
+|F(0)	|   0 //金额为0不能由硬币组成                    |
+|F(1)   |	1 //F(1)=min(F(1-1),F(1-2),F(1-5))+1=1     |
+|F(2)   |	1 //F(2)=min(F(2-1),F(2-2),F(2-5))+1=1     |
+|F(3)   |	2 //F(3)=min(F(3-1),F(3-2),F(3-5))+1=2     |
+|F(4)   |	2 //F(4)=min(F(4-1),F(4-2),F(4-5))+1=2     |
+|...	|   ...                                        |
+|F(11)  |	3 //F(11)=min(F(11-1),F(11-2),F(11-5))+1=3 |
+我们可以看到问题的答案是通过子问题的最优解得到的。
+ 
+自底向上使用 dp table 来消除重叠子问题，关于「状态」「选择」和 base case 与之前没有区别，`dp` 数组的定义和刚才 `dp` 函数类似，也是把「状态」，也就是目标金额作为变量。不过 `dp` 函数体现在函数参数，而 `dp` 数组体现在数组索引：
+
+**`dp`数组的定义：当目标金额为`i`时，至少需要`dp[i]`枚硬币凑出**。
 
 根据我们文章开头给出的动态规划代码框架可以写出如下解法：
 ``` python
-int coinChange(vector<int>& coins, int amount) {
-    vector<int> dp(amount + 1, amount + 1);
-    dp[0] = 0;
-    for (int i = 0; i < dp.size(); i++) {
-        for (int coin : coins) {
-            if (i - coin < 0) continue;
-            dp[i] = min(dp[i], 1 + dp[i - coin]);
-        }
-    }
-    return (dp[amount] == amount + 1) ? -1 : dp[amount];
-}
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [float('inf')] * (amount + 1)
+        dp[0] = 0
+        
+        for coin in coins:
+            for x in range(coin, amount + 1):
+                dp[x] = min(dp[x], dp[x - coin] + 1)
+        return dp[amount] if dp[amount] != float('inf') else -1 
 ```
-
-
-PS：为啥 `dp` 数组初始化为 `amount + 1` 呢，因为凑成 `amount` 金额的硬币数最多只可能等于 `amount`（全用 1 元面值的硬币），所以初始化为 `amount + 1` 就相当于初始化为正无穷，便于后续取最小值。
 
 
 # 动态规划各种题型
 
-## lc343-整数拆分
 
-这一小节, 我们开始讨论最优子结构: 通过求子问题的最优解, 可以获得原问题的最优解.
+## 股票利润最大系列
 
-[leetcode343题](https://leetcode-cn.com/problems/integer-break/)  
-给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
-说明: 你可以假设 n 不小于 2 且不大于 58。
+第一题是只进行一次交易，相当于 k = 1；第二题是不限交易次数，相当于 k = +infinity（正无穷）；第三题是只进行 2 次交易，相当于 k = 2；剩下两道也是不限交易次数，但是加了交易「冷冻期」和「手续费」的额外条件，其实就是第二题的变种，都很容易处理。
 
-示例 1:  
-输入: 2
-输出: 1
-解释: 2 = 1 + 1, 1 × 1 = 1。
+### stock4-最通用的股票题
 
-示例 2:
-输入: 10
-输出: 36
-解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+[lc188](链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv), 我们先看股票的第4个题, 这个题最后代表性, 答案也最通用.
 
-![](/img/algo_newbie/dynamic_programming/integer_break_1.png)
+给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。**题中交易的含意是买入和卖出一支股票一次, 才称为一次交易**
+示例 1：
+输入：k = 2, prices = [2,4,1]
+输出：2
+解释：在第 1 天 (股票价格 = 2) 的时候买入，在第 2 天 (股票价格 = 4) 的时候卖出，这笔交易所能获得利润 = 4-2 = 2 。
+示例 2：
+输入：k = 2, prices = [3,2,6,5,0,3]
+输出：7
+解释：在第 2 天 (股票价格 = 2) 的时候买入，在第 3 天 (股票价格 = 6) 的时候卖出, 这笔交易所能获得利润 = 6-2 = 4 。
+     随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。
 
-通过上图，我们很容易得到一个递归表达式：  
-`F(n) = max {i * F(n - i)}，i = 1，2，... ，n - 1`
-上述表达式是表明n - i需要继续分解的情况，但如果n - i比F(n - i)要大，显然就不用再继续分解了。故我们还需要比较i * (n - i)与i * F(n - i)的大小关系。所以完整的表达式应该为：  
-`F(n) = max { i * F(n - i), i * (n - i)} , i = 1, 2, ... , n - 1`
-基于此，就不难得到如下代码,  
-**而通过以下代码中的 `integer_break_dp` 方法中的注释, 可以很清晰的看出怎么从普通递归一点一点演进到动态规划的思路的!**
-思路分析参考:
-* https://leetcode-cn.com/problems/integer-break/solution/bao-li-sou-suo-ji-yi-hua-sou-suo-dong-tai-gui-hua-/
-* https://leetcode-cn.com/problems/integer-break/solution/ba-yi-ba-zhe-chong-ti-de-wai-tao-343-zheng-shu-cha/
+* [参考1](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv-el1s-by-e/)
+* [参考2](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484508&idx=1&sn=42cae6e7c5ccab1f156a83ea65b00b78&chksm=9bd7fa54aca07342d12ae149dac3dfa76dc42bcdd55df2c71e78f92dedbbcbdb36dec56ac13b&scene=21#wechat_redirect)
 
+注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
+但我们解题的时候可以把买入就当成一次交易会容易写代码一些,
+当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且初始化状态难弄一些,
+* dp[i][k][0]为前i天最多可以完成k次交易时手中 无股票时 的最大利润
+* dp[i][k][1]为前i天最多可以完成k次交易时手中 有股票时 的最大利润
+
+我们定义dp买入就算一次交易, 则:  
 ``` python
-class Solution_integer_break(object):
+# 前i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][t][1] = max(
+    dp[i-1][t][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-1][t-1][0] - prices[i-1]
+)
+# 前i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][t][0] = max(
+    dp[i-1][t][0],
+    dp[i-1][t][1] + prices[i-1]
+)
+```
 
-    def __init__(self):
-        self._memo = {}
+* dp[0][t][0] 前0天(即还没开始之意)t次交易，手上不持有：可能的 0
+* dp[0][t][1] 前0天(即还没开始之意)t次交易，手上持有：不可能（前0天(即还没开始之意)没有股票，所以无法买入持有;持有说明至少进行了一次买入，买入就交易，因此这里不可能【不可能意思就是不能从这里转移】
+* dp[i][0][0] 前i天0次交易，手上不持有：0
+* dp[i][0][1] 前i天0次交易，手上持有：不可能（不交易手上不可能持有）
 
-    # 将n进行分割(至少分割两部分), 可以获得的最大乘积
-    def integerBreak(self, n):
+注意看下方代码的注释:  
+``` python
+class Solution_stock(object):
+    def stock4_maxProfit(self, k, prices):
         """
-        :type n: int
+        :type k: int
+        :type prices: List[int]
         :rtype: int
         """
-        if n == 1:
-            return 1
-        _res = -1
-        if n in self._memo:
-            return self._memo[n]
-        for i in xrange(1, n):
-            # 计算`i + (n-i)`
-            _res = max(
-                _res,
-                i * (n-i),  # 有可能自己本身`i*(n-i)`就是最大的
-                i * self.integerBreak(n-i))
-        self._memo[n] = _res
-        return _res
+        if not prices or not k:
+            return 0
+        n = len(prices)
+        # 注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
+        # 但我们解题的时候可以把买入就当成一次交易会容易写代码一些,
+        # 当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且
+        # 初始化状态难弄一些
+        # dp[i][k][0]为前i天最多可以完成k次交易时手中 无股票时 的最大利润
+        # dp[i][k][1]为前i天最多可以完成k次交易时手中 有股票时 的最大利润
+        # 为什么下方要初始化为`n+1`呢? 因为我们要求的是第n天最多可以完成k次交易时手中无股票时的最大利润,
+        # 而不是第n-1天, 注意我们下方说的第0天并不是数组意义的第1天.
+        # 读者可能问为什么不是 dp[n - 1][K][1]？
+        # 因为 [1] 代表手上还持有股票，[0] 表示手上的股票已经卖出去了，
+        # 很显然后者得到的利润一定大于前者。
+        dp = [ [ [ 0 for _ in range(2) ]  for _ in range(k+1) ] for _ in range(n+1) ]
         
-    def integer_break_dp(self, n):
-        # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
-        dp = [-1] * (n + 1)
-        dp[1] = 1
-        # 下面这种A思路是不行的:
-        # dp[i]等价于 f(i)，
-        # 那么上面针对 f(i) 写的递归公式对 dp[i] 也是适用的，我们拿来试试。
-        # 关键语句:
-        #  `res = max(res, i * (n - i), max(i * self.integerBreak(n - i)))`
-        # 翻译过来就是：`dp[i] = max(_res, i * (n-i), i * dp[n-i])`
-        # 则不难得出以下代码, 但因为 dp[n-i] 当前没求出来, 子问题没求出来,
-        # 所以原问题也就求不出来了, 所以下面这三行代码是不行的
-        # _res = -1
-        # for i in xrange(1, n):
-            # dp[i] = max(_res, i * (n-i), i * dp[n-i])
-        
-        # 此时我们得下面这种B思路才行:
-        # 我们用一层循环来生成上面这段A思路代码一系列的 n 值。
-        # 接着我们还要生成上面A思路代码中一系列的 i 值，
-        # 注意到 n - i 是要大于 0 的，
-        # 因此 i 只需要循环到 n - 1 即可。
-        # 由此不难翻译A思路得出以下代码(j代表n, k代表i):
-        for j in xrange(2, n+1):  # 循环到n
-            # 求解dp[j]
-            for k in xrange(1, j):  # 循环到j-1即可
-                dp[j] = max(dp[j], k * (j-k), k * dp[j-k])
-        return dp[n]
+        for j in range(n+1):
+            dp[j][0][0] = 0  # 前j天0次交易，手上不持有, 故为0
+            # 前j天0次交易，手上持有股票, 这是不可能的, 
+            # 我们dp对交易的定义是买入就算, 0次交易都没买入股票, 不可能持有股票
+            # 所以我们用负无穷来表示, 因为之后我们用max来取值,
+            # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
+            # max它会取这个0,而不会去取那些负值
+            dp[j][0][1] = float("-inf")
+            for t in range(k+1):
+                # 前0天t次交易，手上持有股票, 这里所说的前0天不是数组的第1天,
+                # 前0天是一个不存在的日子, 所以这是不可能的, 
+                # 所以我们用负无穷来表示, 因为之后我们用max来取值,
+                # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
+                # max它会取这个0,而不会去取那些负值
+                dp[0][t][1] = float("-inf")
+                dp[0][t][0] = 0
+        for i in range(1, n+1):
+            for t in range(1, k+1):
+                # i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+                dp[i][t][1] = max(
+                    dp[i-1][t][1],
+                    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+                    # 根据我们的dp定义, 
+                    # 实际上第i=1天对应的是数组中的prices[0]的价格
+                    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+                    # 所以我们这里才`t-1`, 好理解一些
+                    dp[i-1][t-1][0] - prices[i-1]
+                )
+                # i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+                dp[i][t][0] = max(
+                    dp[i-1][t][0],
+                    dp[i-1][t][1] + prices[i-1]
+                )
+
+        return dp[n][k][0]
 ```
 
 
-## lc198-打家劫舍
+### stock1
+
+[lc121](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock)  
+k=1
+
+**解法**: 直接调用[stock4](#stock4)的代码, 把k设置为1即可
+
+### stock2
+
+[lc122](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)  
+k=无穷大
+
+**解法**: 如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
+**忽略下方注释中的t**, 则:  
+``` python
+# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][1] = max(
+    dp[i-1][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-1][0] - prices[i-1]
+)
+# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][0] = max(
+    dp[i-1][0],
+    dp[i-1][1] + prices[i-1]
+)
+```
+
+### stock3
+
+[lc123](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
+k=2  
+
+**解法**: 直接调用[stock4](#stock4)的代码, 把k设置为2即可
+
+
+### stock5
+
+[lc714](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown)  
+
+给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。​
+设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
+* 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+* 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+示例:
+输入: [1,2,3,0,2]
+输出: 3 
+解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
+
+题目特点:  
+* 可无限次交易, 则k还是无穷大, 那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
+* 因为冷冻期的存在, 第i天如果手上有股票而且选择了要买股票的时候应该是从第i-2天开始状态转移, 注意下方代码中的`dp[i-2][0] - prices[i-1]`
+
+则dp状态转移方程得改改(**忽略下方注释中的t**), 如下:
+``` python
+# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][1] = max(
+    dp[i-1][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-2][0] - prices[i-1]
+)
+# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][0] = max(
+    dp[i-1][0],
+    dp[i-1][1] + prices[i-1]
+)
+```
+
+### stock6
+
+[lc714](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)  
+你可以无限次地完成交易，但是你每笔交易都需要付手续费。
+
+题目特点:  
+* 可无限次交易, 则k还是无穷大, 那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
+* 手续费的存在, 根据我们dp的定义, 我们定义购买即为一次交易, 那我们就在每次购买的时候加上这个手续费, 则第i天如果手上有股票而且选择了要买股票的时候应该加上手续费, 注意下方代码中的`dp[i-1][0] - prices[i-1] - fee`
+
+则dp状态转移方程得改改(**忽略下方注释中的t**), 如下:
+``` python
+# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][1] = max(
+    dp[i-1][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-1][0] - prices[i-1] - fee
+)
+# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][0] = max(
+    dp[i-1][0],
+    dp[i-1][1] + prices[i-1]
+)
+```
+
+
+## 打家劫舍系列
+
+### lc198-rob1
 
 [leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
@@ -2560,284 +2789,477 @@ class Solution_integer_break(object):
 解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
      偷窃到的最高金额 = 2 + 9 + 1 = 12 。
 
-
-### rob思路2-最优解
-
 参考: https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
+题目很容易理解，而且动态规划的特征很明显。我们前文 动态规划详解 做过总结，解决动态规划问题就是找「状态」和「选择」，仅此而已。
+假想你就是这个专业强盗，从左到右走过这一排房子，在每间房子前都有两种选择：抢或者不抢。
+* 如果你抢了这间房子，那么你肯定不能抢相邻的下一间房子了，只能从下下间房子开始做选择。
+* 如果你不抢这间房子，那么你可以走到下一间房子前，继续做选择。
 
-如果房屋数量大于两间，应该如何计算能够偷窃到的最高总金额呢？对于第 k~(k>2)k (k>2) 间房屋，有两个选项：
-* 偷窃第 k 间房屋，那么就不能偷窃第 k-1 间房屋，偷窃总金额为前 k-2 间房屋的最高总金额与第 k 间房屋的金额之和。
-* 不偷窃第 k 间房屋，偷窃总金额为前 k-1 间房屋的最高总金额。
-
-在两个选项中选择偷窃总金额较大的选项，该选项对应的偷窃总金额即为前 k 间房屋能偷窃到的最高总金额。
-用 dp[i] 表示前 i 间房屋能偷窃到的最高总金额，那么就有如下的状态转移方程：  
-`dp[i] = max( dp[i−2] + nums[i], dp[i−1] )`
+当你走过了最后一间房子后，你就没得抢了，能抢到的钱显然是 0（base case）。
+以上的逻辑很简单吧，其实已经明确了「状态」和「选择」：你面前房子的索引就是状态，抢和不抢就是选择。  
+在两个选项中选择偷窃总金额较大的选项，该选项对应的偷窃总金额即为从index开始偷到最后的房子能偷到的最高总金额.
+用 dp[i] 表示从index开始偷到最后的房子能偷到的最高总金额，那么就有如下的状态转移方程：  
+`dp[i] = max( dp[i+2] + nums[i], dp[i+1] )`
 边界条件为：
-* `dp[0] = nums[0]` , 只有一间房屋，则偷窃该房屋 
-* `dp[1] = max( nums[0], nums[1] )` ,  只有两间房屋，选择其中金额较高的房屋进行偷窃
+* `dp[n-1] = nums[n-1]` , 最后一间房屋，则偷窃该房屋 
+* `dp[n-2] = max( nums[n-1], nums[n-2] )` ,  最后两间房屋，选择其中金额较高的房屋进行偷窃
 
 最终的答案即为 `dp[n−1]`，其中 n 是数组的长度
-
+递归memo写法:   
 ``` python
-def rob_dp_2(self, nums_arr):
+def rob1_dp_memo(self, nums_arr):
+    return self._do_rob1_dp_memo(nums_arr, 0)
+
+def _do_rob1_dp_memo(self, nums_arr, index):
+    # 我们定义此函数为从index开始偷到最后的房子能偷到的最高总金额
+    if index >= len(nums_arr):
+        return 0
+    if index in self._memo:
+        return self._memo[index]
+    res = max(
+        nums_arr[index] + self._do_rob1_dp_memo(nums_arr, index+2),
+        self._do_rob1_dp_memo(nums_arr, index+1),
+    )
+    self._memo[index] = res
+    return res
+```
+迭代写法:     
+``` python
+def rob1_dp(self, nums_arr):
     if not nums_arr:
         return 0
     n = len(nums_arr)
     dp = [0] * n
-    dp[0] = nums_arr[0]
-    dp[1] = max(nums_arr[0], nums_arr[1])
-    for i in xrange(2, n):
-        dp[i] = max(dp[i-1], nums_arr[i]+dp[i-2])
-    return dp[n-1]
+    dp[n-1] = nums_arr[n-1]
+    dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
+    for i in range(n-3, -1, -1):
+        dp[i] = max(dp[i+1], nums_arr[i]+dp[i+2])
+    return dp[0]
 ```
 
 
-### rob思路1-仅提供思路对比
-
-![](/img/algo_newbie/dynamic_programming/house_robber_1.png)
-
-状态转移方程为: 
-![](/img/algo_newbie/dynamic_programming/house_robber_2.png)
-
-上图中v(0)即为第0个房子的价值, 
-根据上图同理: `f(1) = max{ v(1)+f(3), v(2)+f(4), ... }`,
-则得到下面代码:
-``` python
-class Solution_house_robber(object):
-
-    def __init__(self):
-        # memo[i] 表示考虑抢劫 nums[i...n-1] 所能获得的最大收益
-        self._memo = {}
-
-    def rob(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        if not nums:
-            return 0
-        return self._try_rob(nums, 0)
-
-    def _try_rob(self, nums_arr, index):
-        """
-        先套用写一波自顶而下的递归形式的解答,
-        然后用记忆化搜索的加个memo的方式优化一波.
-        写完此方法之后, 有了大概的思路就能
-        根据状态转移方程找出规律改写成自底向上的dp形式(见下方`_try_rob_dp`方法)
-        此`_try_rob`方法表示: 考虑抢劫nums[index...nums.size()-1]这个范围的所有房子所能得到的最大收益
-        """
-        if index in self._memo:
-            return self._memo[index]
-        if index >= len(nums_arr):
-            return 0
-        res = 0
-        for _i, _num in enumerate(nums_arr):
-            if _i < index:
-                continue
-            res = max(
-                res,
-                _num + self._try_rob(nums_arr, _i+2),
-            )
-        self._memo[index] = res
-        return res
-
-    def rob_dp_1(self, nums_arr):
-        if not nums_arr:
-            return 0
-        if len(nums_arr) == 1:
-            return nums_arr[0]
-        n = len(nums_arr)
-        # dp[index] 表示 抢劫nums[index...nums.size()-1]这个范围的所有房子所能得到的最大收益
-        dp = [0] * n
-        # 因为我们想求出dp[0], 所以我们从后面开始, 即从n-1开始
-        dp[n-1] = nums_arr[n-1]
-        dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
-        for i in xrange(n-3, -1, -1):
-            for j in xrange(i, n):
-                dp[i] = max(
-                    dp[i],
-                    (nums_arr[j] + (dp[j+2] if j + 2 < n else 0))
-                )
-        return dp[0]
-```
-
-
-### 进阶-求出具体偷哪些房子的子序列
+### rob1进阶-求出具体偷哪些房子的子序列
 
 还是用动规思路
 ```python
-def house_rob_detail_seq(nums_arr):
+def house_rob_detail_seq(self, nums_arr):
     if not nums_arr:
-        return []
-    if len(nums_arr) == 1:
-        return [nums_arr[0]]
-    if len(nums_arr) == 2:
-        return [max(nums_arr[0], nums_arr[1])]
+        return 0
     n = len(nums_arr)
-    # 根据思路2, 我们用 dp[i] 表示前 i 间房屋能偷窃到的最
+    # 根据上述思路, 我们用 dp[i] 表示从第 i 间房屋偷到最后一间能偷窃到的最
     # 高总金额的房子数组子序列
     dp = [ [] for _ in xrange(n) ]
-    dp[0] = [nums_arr[0]]
-    dp[1] = [max(nums_arr[0], nums_arr[1])]
-    for i in xrange(2, n):
-        if (sum(dp[i-2]) + nums_arr[i]) > sum(dp[i-1]):
-            dp[i] = dp[i-2] + [nums_arr[i]]
+    dp[n-1] = [nums_arr[n-1]]
+    dp[n-2] = [max(nums_arr[n-1], nums_arr[n-2])]
+    for i in range(n-3, -1, -1):
+        if (nums_arr[i] + sum(dp[i+2])) > sum(dp[i+1]):
+            dp[i] = [nums_arr[i]] + dp[i+2]
         else:
-            dp[i] = dp[i-1]
-    return dp[n-1]
+            dp[i] = dp[i+1]
+    return dp[0]
 ```
 
 
-## 0-1背包问题
+### rob2
+
+[lc213](https://leetcode-cn.com/problems/house-robber-ii/)  
+这道题目和第一道描述基本一样，强盗依然不能抢劫相邻的房子，输入依然是一个数组，但是告诉你这些房子不是一排，而是围成了一个圈。
+
+也就是说，现在第一间房子和最后一间房子也相当于是相邻的，不能同时抢。比如说输入数组nums=[2,3,2]，算法返回的结果应该是 3 而不是 4，因为开头和结尾不能同时被抢。
+![](/img/algo_newbie/dynamic_programming/rob2_1.png)
+
+那就简单了啊，这三种情况，哪种的结果最大，就是最终答案呗！不过，其实我们不需要比较三种情况，只要比较情况二和情况三就行了，因为这两种情况对于房子的选择余地比情况一大呀，房子里的钱数都是非负数，所以选择余地大，最优决策结果肯定不会小。  
+所以只需对之前的解法调用一下求个max值即可：  
+``` python
+def rob2_dp(nums_arr):
+    n = len(nums_arr)
+    max(rob1_dp(nums_arr[0:n-1]), rob1_dp(nums_arr[1:n])
+```
+
+### rob3
+
+[lc337](https://leetcode-cn.com/problems/house-robber-iii/)  
+第三题的房子在二叉树的节点上，相连的两个房子不能同时被抢劫：
+示例 1:
+输入: [3,2,3,null,3,null,1]
+```
+     3
+    / \
+   2   3
+    \   \ 
+     3   1
+```
+输出: 7 
+解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
+示例 2:
+输入: [3,4,5,1,3,null,1]
+```
+     3
+    / \
+   4   5
+  / \   \ 
+ 1   3   1
+```
+输出: 9
+解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
+
+整体的思路完全没变，还是做抢或者不抢的选择，取收益较大的选择。甚至我们可以直接按这个套路写出递归式的dp代码：  
+``` python
+def rob3_dp(self, bt):
+    # 此函数求出bt为根节点的最大价值
+    if not bt:
+        return 0
+    if bt in memo:
+        return memo[bt]
+    # 抢, 然后去下下家
+    do_it = bt.val + \
+        (rob3_dp(bt.left.left) + rob3_dp(bt.left.right) if bt.left else 0) + \
+        (rob3_dp(bt.right.left) + rob3_dp(bt.right.left) if bt.right else 0)
+    # 不抢, 然后去下家
+    not_do_it = rob3_dp(bt.left) + rob3_dp(bt.right)
+    res = max(do_it, not_do_it)
+    memo[bt] = res
+    return res
+```
+
+
+## 背包问题系列
+
+### 0-1背包问题
 
 **「0-1 背包」问题是一类非常重要的动态规划问题**
+这个题目中的物品不可以分割，要么装进包里，要么不装，不能说切成两块装一半。这也许就是 0-1 背包这个名词的来历。
 
-问题:  
-有一个背包, 它的容量为C, 现在有n种不同的物品, 编号为0...n-1, 其中每一件物品的重量为w(i), 价值为v(i). 问可以向这个背包中盛放哪些物品, 使得再不超过背包容量的基础上, 物品的总价值最大.
+最基本的背包问题就是 01 背包问题（01 knapsack problem）：一共有 N 件物品，第 i（i 从 1 开始）件物品的重量为 w[i]，价值为 v[i]。在总重量不超过背包承载上限 W 的情况下，能够装入背包的最大价值是多少？
 
-因为约束变量为n和c, 我们可以定义`f(i, c)`为盛放第i个物品时能得到的最大价值. 有两个选项:
-* 往背包里放第i个物品: `v(i) + f( i-1, c-w(i) )`
-* 不往背包里放第i个物品: `f(i-1, c)`
-
-则我们可以得出, 状态转移方程为: `f(i, c) = max( v(i)+f(i-1, c-w(i)) , f(i-1, c) )`
-
-我们先写一版普通递归的代码:
+如果采用暴力穷举的方式，每件物品都存在装入和不装入两种情况，所以总的时间复杂度是 O(2^N)，这是不可接受的。而使用动态规划可以将复杂度降至 O(NW)。我们的目标是书包内物品的总价值，而变量是物品和书包的限重，所以我们可定义状态 dp:
 ``` python
-class Solution_knapsack(object):
-    
-    def __init__(self):
-        self._memo = None
-
-    def knapsack(self, capacity, weight_arr, value_arr):
-        if capacity == 0:
-            return 0
-        self._memo = [ [ -1 for j in xrange(capacity)] for i in xrange(len(weight_arr)) ]
-        return self._best_value(capacity, weight_arr, value_arr, 0)
-
-    # 用 [0...index]的物品,填充容积为c的背包的最大价值
-    def _best_value(self, capacity, weight_arr, value_arr, index):
-        if index >= len(weight_arr) or capacity <= 0:
-            return 0
-        if self._memo[index][capacity-1] != -1:
-            return self._memo[capacity][index]
-        _res = self._best_value(capacity, weight_arr, value_arr, index + 1)
-        if capacity >= weight_arr[index]:
-            _res = max(
-                _res,
-                value_arr[index] + self._best_value(
-                    capacity-weight_arr[index], weight_arr, value_arr, index+1)
-            )
-        self._memo[index][capacity-1] = _res
-        return _res
+dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 0<=i<=N, 0<=j<=W
 ```
+那么我们可以将 dp[0][0...W] 初始化为 0，表示将前 0 个物品（即没有物品）装入书包的最大价值为 0。那么当 i > 0 时`dp[i][j]`有两种情况：
+1.  不装入第 i 件物品，即`dp[i−1][j]`；
+2.  装入第 i 件物品（前提是能装下），即`dp[i−1][j−w[i-1]] + v[i-1]`
 
-![](/img/algo_newbie/dynamic_programming/knapsack_1.png "dp数组如图")
+#### 为什么是i-1
 
-根据状态转移方程得出以下动规代码, 而dp数组中的内容如上图.
+**注意上方的`w[i-1]`和`v[i-1]`, 为什么是i-1呢?**
+因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 则i=0其实表示的是0个物品并不是第0个物品, 所以实际对应weight数组和value数组的index应该为`i-1`
+
+即状态转移方程为
 ``` python
-    def knapsack_dp(self, capacity, weight_arr, value_arr):
-        if capacity == 0:
-            return 0
-        assert(len(weight_arr) == len(value_arr))
-        n = len(weight_arr)
-        dp = [ [ 0 for _ in xrange(capacity+1)] for _ in xrange(n)]
-        # 动规是从底向上嘛, 先构建dp[0]的东西
-        for k in xrange(capacity+1):
-            dp[0][k] = value_arr[0] if k >= weight_arr[0] else 0
+dp[i][j] = max(
+    dp[i−1][j],
+    dp[i−1][j−w[i-1]+v[i-1])  # j >= w[i-1]
+```
+所求的结果为`dp[n][capacity]`
 
-        for i in xrange(1, n):
-            for c in xrange(capacity+1):
-                # 根据状态转移方程得出
-                dp[i][c] = max(
-                    dp[i-1][c],
-                    value_arr[i] + dp[i-1][c-weight_arr[i]] if c >= weight_arr[i] else 0
+根据状态转移方程得出以下动规代码:
+``` python
+def knapsack_dp(self, capacity, weight_arr, value_arr):
+    if capacity == 0:
+        return 0
+    assert(len(weight_arr) == len(value_arr))
+    n = len(weight_arr)
+    # dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 0<=i<=N, 0<=j<=W
+    # 那么我们可以将dp[0][0...W]初始化为0，
+    # 表示将前0个物品（即没有物品）装入书包的最大价值为0。
+    # 那么当 i > 0 时dp[i][j]有两种情况：
+    # - 不装入第i件物品，即dp[i−1][j]；
+    # - 装入第i件物品（前提是能装下），即dp[i−1][j−w[i-1]] + v[i-1]。
+    # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值
+    # 则i=0其实表示的是0个物品,
+    # 所以实际对应weight数组和value数组的index应该为i-1
+    #
+    # 即状态转移方程为
+    # dp[i][j] = max(dp[i−1][j], dp[i−1][j−w[i-1]]+v[i-1]) // j >= w[i-1]
+    # 所求为dp[n][capacity]
+    dp = [[0 for _ in xrange(capacity+1)] for _ in xrange(n+1)]
+    # 动规是从底向上嘛, 先构建dp[0]的东西
+    for k in xrange(capacity+1):
+        # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值
+        # 则i=0其实表示的是0个物品, 所以 = 0
+        dp[0][k] = 0
+
+    for i in xrange(1, n+1):
+        for j in xrange(capacity+1):
+            # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值
+            # 则i=0其实表示的是0个物品,
+            # 所以实际对应weight数组和value数组的index应该为i-1
+            pack_args_index = i - 1
+            if j - weight_arr[pack_args_index] < 0:
+                dp[i][j] = dp[i-1][j]
+            else:
+                dp[i][j] = max(
+                    dp[i-1][j],
+                    value_arr[pack_args_index] + dp[i-1][j-weight_arr[pack_args_index]]
                 )
-        return dp[n-1][capacity]
+    return dp[n][capacity]
 ```
 
 
-### lc416-分割等和子集
+### 完全背包问题
+
+完全背包（unbounded knapsack problem）与 01 背包不同就是每种物品可以有无限多个：一共有 N 种物品，每种物品有无限多个，第 i（i 从 1 开始）种物品的重量为 w[i]，价值为 v[i]。在总重量不超过背包承载上限 W 的情况下，能够装入背包的最大价值是多少？
+
+我们的目标和变量和 01 背包没有区别，所以我们可定义与 01 背包问题几乎完全相同的状态 dp:
+``` python
+dp[i][j]表示将前i种物品装进限重为j的背包可以获得的最大价值, 0<=i<=N, 0<=j<=W
+```
+
+#### 为什么完全背包是i而不是i-1
+
+**我们注意!!!!!完全背包问题的i指的是前i种, 而不是前i个, 这一点跟0-1背包是不同的, 0-1背包的i指的是前i个**  
+初始状态也是一样的，我们将 dp[0][0...W] 初始化为 0，表示将前 0 种物品（即没有物品）装入书包的最大价值为 0。那么当 i > 0 时, 准备要放入**第i种的某一个物品**`item_i_1`时(注意, 是第i种的某一个, 第i种还可以有其他同种物品`item_i_2`, `item_i_3`...), 也有两种情况：  
+* 不装入第 i 种的当前这个物品`item_i_1`时，那只会有前`i-1`种商品了, 即`dp[i−1][j]`
+* 装入第 i 种物品当前这个物品`item_i_1`时，**此时和 0-1 背包不太一样**，因为每种物品有无限个（但注意书包限重是有限的），所以此时不应该转移到`dp[i−1][j−w[i-1]]`而应该转移到`dp[i][j−w[i-1]]`，因为`item_i_1`是第i种物品的某一个物品, 所以应该放到`dp[i]`里, 即装入`item_i_1`了之后还可以装入`item_i_2`, `item_i_3`...所以此时为: `dp[i][j−w[i-1]] + v[i-1]`
+
+[为什么是i-1](#为什么是i-1)
+
+所以状态转移方程为
+``` python
+dp[i][j] = max(
+    dp[i−1][j],
+    dp[i][j−w[i-1]]+v[i-1])  # j >= w[i-1]
+```
+可以看出这个状态转移方程与 0-1 背包问题唯一不同就是 max 第二项不是 `dp[i-1]` 而是 `dp[i]`。
+
+
+### 背包问题的其他形式
+
+* **恰好装满**
+    实战题目:  
+    * [lc416-分割等和子集-恰好装满0-1背包问题](#lc416-分割等和子集-恰好装满0-1背包问题)
+    * [lc322-凑金币1-恰好装满的完全背包问题](#lc322-凑金币1-恰好装满的完全背包问题)
+* **求方案总数**
+    除了在给定每个物品的价值后求可得到的最大价值外，还有一类问题是问装满背包或将背包装至某一指定容量的方案总数。对于这类问题，需要将状态转移方程中的 max 改成 sum ，大体思路是不变的。例如若每件物品均是**完全背包中的**物品，转移方程即为
+    ``` python
+    dp[i][j] = sum(dp[i−1][j], dp[i][j−w[i-1]])  # j >= w[i-1]
+    ```
+    [为什么是i-1](#为什么是i-1)
+    [为什么完全背包是i而不是i-1](#为什么完全背包是i而不是i-1)
+* **二维背包**
+    前面讨论的背包容量都是一个量：重量。二维背包问题是指每个背包有两个限制条件（比如重量和体积限制），选择物品必须要满足这两个条件。此类问题的解法和一维背包问题不同就是dp数组要多开一维，其他和一维背包完全一样
+    实战题目:
+    * [lc474-一和零-二维0-1背包](#lc474-一和零-二维0-1背包)
+
+
+### 背包问题实战
+
+#### lc416-分割等和子集-恰好装满0-1背包问题
 
 [leetcode416题](https://leetcode-cn.com/problems/partition-equal-subset-sum)  
 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
-
 示例 1:
 输入: [1, 5, 11, 5]
 输出: true
 解释: 数组可以分割成 [1, 5, 5] 和 [11].
- 
 示例 2:
 输入: [1, 2, 3, 5]
 输出: false
 解释: 数组不能分割成两个元素和相等的子集.
 
-参考: https://leetcode-cn.com/problems/partition-equal-subset-sum/solution/0-1-bei-bao-wen-ti-xiang-jie-zhen-dui-ben-ti-de-yo/
-
-这其实是一个背包问题, 我们只要拿一定的数字填满所有数字和sum的一半, 剩余的数字一定等于sum/2, 则这个问题其实还是个背包问题, 只不过我们需要用一定的数字把这个背包填满, 对于第i个物品, 有两种情况:
+[参考](https://leetcode-cn.com/problems/partition-equal-subset-sum/solution/0-1-bei-bao-wen-ti-xiang-jie-zhen-dui-ben-ti-de-yo/)  
+**这其实是一个恰好装满0-1背包问题**, 我们只要拿一定的数字填满所有数字和sum的一半, 剩余的数字一定等于sum/2, 则这个问题其实还是个背包问题, 只不过我们需要用一定的数字把这个背包填满, 对于第i个物品, 有两种情况:
 * 我们用i-1就填满了背包, 则第i个就不需要用了
 * 我们用了第i个才填满
 
-状态与状态转移方程:
-* 状态定义：dp[i][j]表示从数组的 [0, i] 这个子区间内挑选一些正整数，每个数只能用一次，使得这些数的和恰好等于 j。
-* 状态转移方程：很多时候，状态转移方程思考的角度是「分类讨论」，对于「0-1 背包问题」而言就是「当前考虑到的数字选与不选」。
-    * 不选择 nums[i]，如果在 [0, i - 1] 这个子区间内已经有一部分元素，使得它们的和为 j ，那么 dp[i][j] = true；
-    * 选择 nums[i]，如果在 [0, i - 1] 这个子区间内就得找到一部分元素，使得它们的和为 j - nums[i]。
+状态定义：  
+dp[i][j]表示对于容量为 j 的背包，若只是用前 i 个物品(前0个则表示没有物品)，每个数只能用一次，使得这些数的和恰好等于 j  .
+(比如说，如果dp[4][9] = true，其含义为：对于容量为 9 的背包，若只是用前 4 个物品，可以有一种方法把背包恰好装满。)。
 
+状态转移方程：很多时候，状态转移方程思考的角度是「分类讨论」，对于「0-1 背包问题」而言就是「当前考虑到的数字选与不选」。
+- 不选择 nums[i]，则看前i-1个元素的是否能能和为j, 即 `dp[i-1][j]`
+- 选择 nums[i]，看前i-1个元素的是否能能和为`j-nums[i-1]`, 即`dp[i-1][j- nums[i-1]`
+
+[为什么是i-1](#为什么是i-1)  
 则状态转移方程：  
-`dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i]]`
-一般写出状态转移方程以后，就需要考虑初始化条件。
-* j - nums[i] 作为数组的下标，一定得保证大于等于 0 ，因此 nums[i] <= j；
-* 注意到一种非常特殊的情况：j 恰好等于 nums[i]，即单独 nums[j] 这个数恰好等于此时「背包的容积」 j，这也是符合题意的
-* 初始化：dp[0][0] = false，因为候选数 nums[0] 是正整数，凑不出和为 0；
-* 输出：dp[len - 1][target]，这里 len 表示数组的长度，target 是数组的元素之和（必须是偶数）的一半。
+`dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i-1]]  // j >= nums[i-1]`
 
+一般写出状态转移方程以后，就需要考虑初始化条件。
+* 初始化：
+    * `dp[0][0] = True  # 前0个则表示没有物品, 可以充满容量为0的背包`
+    * `dp[0][c] = False # 前0个则表示没有物品, 是不可能充满容量c大于0的背包的`
+* 输出：`dp[len][target]`，这里 len 表示nums数组的长度，target 是数组的元素之和（必须是偶数）的一半。
 
 则代码如下:
 ``` python
-class Solution_partition_equal_subset_sum(object):
+def canPartition(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: bool
+    动规解法
+    """
+    # 特判：如果是奇数，就不符合要求
+    if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
+        return False
+    _bag_capcity = sum(nums) / 2
+    n = len(nums)
+    # 状态定义：
+    # dp[i][j]表示对于容量为 j 的背包，若只是用前 i 个物品(前0个则表示没有物品)，
+    # 每个数只能用一次，使得这些数的和恰好等于 j  .
+    # (比如说，如果dp[4][9] = true，其含义为：对于容量为 9 的背包，若只是用前 4 个物品，可以有一种方法把背包恰好装满。)。
+    # 状态转移方程：很多时候，状态转移方程思考的角度是「分类讨论」，对于「0-1 背包问题」而言就是「当前考虑到的数字选与不选」。
+    # - 不选择 nums[i]，则看前i-1个元素的是否能能和为j, 即 `dp[i-1][j]`
+    # - 选择 nums[i]，看前i-1个元素的是否能能和为`j-nums[i-1]`, 即`dp[i-1][j- nums[i-1]`
+    # **注意上方的`nums[i-1]`, 为什么是i-1呢?**
+    # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 则i=0其实表示的是0个物品,
+    # 所以实际对应nums数组的index应该为`i-1`
+    # 则状态转移方程：
+    # dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i-1]]  // j >= nums[i-1]
+    dp = [[False for _ in range(_bag_capcity+1)] for _ in range(n+1)]
 
-    def __init__(self):
-        self._memo = None
-
-    def canPartition(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        动规解法
-        """
-        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
-            return False
-        _bag_capcity = sum(nums) / 2
-        n = len(nums)
-        # 创建二维状态数组，行：物品索引，列：容量（包括 0）
-        dp = [ [False for _ in xrange(_bag_capcity+1)] for _ in xrange(n) ]
-        # 先填表格第 0 行，第 1 个数只能让容积为它自己的背包恰好装满
-        dp[0][nums[0]] = True
-        for i in xrange(1, n):
-            for c in xrange(_bag_capcity+1):
-                dp[i][c] = dp[i-1][c] or (dp[i-1][c-nums[i]] if c >= nums[i] else False)
-        return dp[n-1][_bag_capcity]
-
-    def canPartition_recursion(self, nums):
-        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
-            return False
-        _sum_num = sum(nums) / 2
-        self._memo = [ [ None for _ in xrange(_sum_num+1) ] for _ in xrange(len(nums)) ]
-        return self._try_partition(nums, 0, _sum_num)
-
-    def _try_partition(self, nums, index, sum_num):
-        if index >= len(nums) or sum_num < 0:
-            return False
-        if self._memo[index][sum_num] is not None:
-            return self._memo[index][sum_num]
-        if sum_num == 0:
-            return True
-        _res = self._try_partition(nums, index+1, sum_num) or \
-            self._try_partition(nums, index+1, sum_num-nums[index])
-        self._memo[index][sum_num] = _res
-        return _res
+    dp[0][0] = True  # 前0个则表示没有物品, 可以充满容量为0的背包
+    for c in range(1, _bag_capcity+1):
+        dp[0][c] = False # 前0个则表示没有物品, 是不可能充满容量大于0的背包的
+        
+    for i in range(1, n+1):
+        for j in range(_bag_capcity+1):
+            if j - nums[i-1] < 0:
+                dp[i][j] = dp[i-1][j]
+            else:
+                dp[i][j] = dp[i-1][j] or dp[i-1][j-nums[i-1]]
+    return dp[n][_bag_capcity]
 ```
 
+
+#### lc322-凑金币1-恰好装满的完全背包问题
+
+[lc322](https://leetcode-cn.com/problems/coin-change/)  
+先看下题目：给你 `k` 种面值的硬币，面值分别为 `c1, c2 ... ck`，每种硬币的数量无限，再给一个总金额 `amount`，问你**最少**需要几枚硬币凑出这个金额，如果不可能凑出，算法返回 -1 。算法的函数签名如下：
+```
+int coinChange(int[] coins, int amount);
+```
+比如说 `k = 3`，面值分别为 1，2，5，总金额 `amount = 11`。那么最少需要 3 枚硬币凑出，即 11 = 5 + 5 + 1。
+
+如果我们将每种硬币看作是每种物品，面值金额看成是物品的重量，总金额是背包的总容量, 因为硬币无限, 这样此题就是是一个恰好装满的完全背包问题.了。不过这里不是求最多装入多少价值而是求最少装满背包的数目，所以我们只需要将[完全背包](#完全背包问题)的转态转移方程中稍微改改即可:  
+* dp[i][j]定义为: 用前i种硬币可以抽一些硬币出来装满容量为j的背包的最少硬币数量
+* 状态转移方程为: `d[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]])`
+
+[为什么是i-1](#为什么是i-1)  
+[为什么完全背包是i而不是i-1](#为什么完全背包是i而不是i-1)  
+
+``` python
+def coinChange(self, coins, amount):
+    """
+    :type coins: List[int]
+    :type amount: int
+    :rtype: int
+    """
+    assert(coins)
+    # 用背包的思路
+    if amount == 0:
+        return 0
+    n = len(coins)
+    # 如果我们将每种硬币看作是每种物品，面值金额看成是物品的重量，总金额是背包的总容量, 因为硬币无限, 这样此题就是是一个恰好装满的完全背包问题.了。不过这里不是求最多装入多少价值而是求最少装满背包的数目，所以我们只需要将[完全背包](#完全背包问题)的转态转移方程中稍微改改即可:  
+    # - dp[i][j]定义为: 用前i种硬币可以抽一些硬币出来装满容量为j的背包的最少硬币数量
+    # - 状态转移方程为: `d[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]])`
+
+    # 因为之后要取min操作, 所以这里初始化为无穷大`float("inf")`
+    dp = [ [ float("inf") for _ in range(amount+1) ] for _ in range(n+1) ]
+    for k in range(n+1):
+        dp[k][0] = 0  # 充满容量为0的背包, 最少的硬币个数为0
+    for i in range(n+1):
+        for j in range(amount+1):
+            if j - coins[i-1] < 0:
+                dp[i][j] = dp[i-1][j]
+            else:
+                dp[i][j] = min(
+                    dp[i-1][j],
+                    dp[i][j-coins[i-1]] + 1
+                )
+    return dp[n][amount] if dp[n][amount] != float("inf") else -1
+```
+
+
+#### lc518-凑零钱2-恰好装满完全背包问题
+
+[lc518](https://leetcode-cn.com/problems/coin-change-2)  
+给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。 
+示例 1:
+输入: amount = 5, coins = [1, 2, 5]
+输出: 4
+解释: 有四种方式可以凑成总金额:
+5=5
+5=2+2+1
+5=2+1+1+1
+5=1+1+1+1+1
+示例 2:
+输入: amount = 3, coins = [2]
+输出: 0
+解释: 只用面额2的硬币不能凑成总金额3。
+示例 3:
+输入: amount = 10, coins = [10] 
+输出: 1
+
+我们可以把这个问题转化为背包问题的描述形式：
+有一个背包，最大容量为amount，有一系列物品coins，每种物品的重量为coins[i]，每种物品的数量无限。请问有多少种方法，能够把背包恰好装满？
+这个问题和我们前面讲过的两个0-1背包问题，有一个最大的区别就是，每种物品的数量是无限的，这也就是传说中的「完全背包问题」，没啥高大上的，无非就是状态转移方程有一点变化而已。**这是一个恰好装满完全背包问题**
+
+1. **第一步要明确两点，「状态」和「选择」**。  
+    这部分都是背包问题的老套路了，我还是啰嗦一下吧：状态有两个，就是「背包的容量」和「可选择的物品」，选择就是「装进背包」或者「不装进背包」。  明白了状态和选择，动态规划问题基本上就解决了
+
+2. **第二步要明确****`dp`数组的定义**。  
+    首先看看刚才找到的「状态」，有两个，也就是说我们需要一个二维`dp`数组。
+    `dp[i][j]`的定义如下：  
+    **从前`i`种物品里选取若干件物品，当背包容量为`j`时，有`dp[i][j]`种方法可以装满背包。**
+    换句话说，翻译回我们题目的意思就是：  
+    **若使用`coins`中的前`i`种硬币的面值，若想凑出金额`j`，有`dp[i][j]`种凑法**。
+    经过以上的定义，可以得到：
+    base case 为
+    * `dp[0][..] = 0` 因为如果不使用任何一种硬币，就无法凑出任何金额
+    * `dp[..][0] = 1` 如果凑出的目标金额为 0，那么 “无为而治” (不用任何硬币)就是唯一的一种凑法。
+
+    我们最终想得到的答案就是`dp[N][amount]`，其中`N`为`coins`数组的大小。
+
+3. **第三步，根据「选择」，思考状态转移的逻辑**。
+    * **如果你不把这第`i`种的某个物品装入背包**，也就是说你不使用`coins[i]`这种面值的硬币，那么凑出面额`j`的方法数`dp[i][j]`应该等于`dp[i-1][j]`，继承之前的结果。
+    * **如果你把这第`i`种某个物品装入了背包**，也就是说你使用`coins[i]`这种面值的硬币，那么`dp[i][j]`应该等于`dp[i][j-coins[i-1]]`。
+
+    首先由于`i`是从 1 开始的，所以`coins`的索引是`i-1`时表示第`i`种硬币的面值。
+    `dp[i][j-coins[i-1]]`也不难理解，如果你决定使用这种面值的硬币，那么就应该关注如何凑出金额`j - coins[i-1]`。
+    比如说，你想用面值为 2 的硬币凑出金额 5，那么如果你知道了凑出金额 3 的方法，再加上一枚面额为 2 的硬币，不就可以凑出 5 了嘛。
+    **综上就是两种选择，而我们想求的`dp[i][j]`是「共有多少种凑法」，所以`dp[i][j]`的值应该是以上两种选择的结果之和**
+    则状态转移方程为: `dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]`
+
+``` python
+def change(self, amount, coins):
+    """
+    :type amount: int
+    :type coins: List[int]
+    :rtype: int
+    """ 
+    n = len(coins)
+    # dp[i][j]`的定义如下：  
+    # 从前`i`种物品里选取若干件物品，当背包容量为`j`时，有`dp[i][j]`种方法可以装满背包。
+    dp = [ [ 0 for _ in range(amount+1) ] for _ in range(n+1) ]
+    for k in range(n+1):
+        # 如果凑出的目标金额为 0，那么 “无为而治” (不用任何硬币)就是唯一的一种凑法。
+        dp[k][0] = 1
+    for i in range(1, n+1):
+        for j in range(1, amount+1):
+            if j - coins[i-1] < 0:
+                dp[i][j] = dp[i-1][j]
+            else:
+                dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]
+    return dp[n][amount]
+```
+
+
+#### lc474-一和零-二维0-1背包
+
+[lc474](https://leetcode-cn.com/problems/ones-and-zeroes/)  
+给你一个二进制字符串数组 strs 和两个整数 m 和 n 。
+请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。
+如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。
+示例 1：
+输入：strs = ["10", "0001", "111001", "1", "0"], m = 5, n = 3
+输出：4
+解释：最多有 5 个 0 和 3 个 1 的最大子集是 {"10","0001","1","0"} ，因此答案是 4 。
+其他满足题意但较小的子集包括 {"0001","1"} 和 {"10","1","0"} 。{"111001"} 不满足题意，因为它含 4 个 1 ，大于 n 的值 3 。
+示例 2：
+输入：strs = ["10", "0", "1"], m = 1, n = 1
+输出：2
+解释：最大的子集是 {"0", "1"} ，所以答案是 2 。
 
 ## lc300-LIS问题-最长上升子序列
 
@@ -3202,3 +3624,90 @@ def superEggDrop2(self, K, N):
             dp[i][j] = dp[i-1][j-1] + dp[i-1][j] + 1
     return i
 ```
+
+
+## lc343-整数拆分
+
+这一小节, 我们开始讨论最优子结构: 通过求子问题的最优解, 可以获得原问题的最优解.
+
+[leetcode343题](https://leetcode-cn.com/problems/integer-break/)  
+给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
+说明: 你可以假设 n 不小于 2 且不大于 58。
+
+示例 1:  
+输入: 2
+输出: 1
+解释: 2 = 1 + 1, 1 × 1 = 1。
+
+示例 2:
+输入: 10
+输出: 36
+解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+
+![](/img/algo_newbie/dynamic_programming/integer_break_1.png)
+
+通过上图，我们很容易得到一个递归表达式：  
+`F(n) = max {i * F(n - i)}，i = 1，2，... ，n - 1`
+上述表达式是表明n - i需要继续分解的情况，但如果n - i比F(n - i)要大，显然就不用再继续分解了。故我们还需要比较i * (n - i)与i * F(n - i)的大小关系。所以完整的表达式应该为：  
+`F(n) = max { i * F(n - i), i * (n - i)} , i = 1, 2, ... , n - 1`
+基于此，就不难得到如下代码,  
+**而通过以下代码中的 `integer_break_dp` 方法中的注释, 可以很清晰的看出怎么从普通递归一点一点演进到动态规划的思路的!**
+思路分析参考:
+* https://leetcode-cn.com/problems/integer-break/solution/bao-li-sou-suo-ji-yi-hua-sou-suo-dong-tai-gui-hua-/
+* https://leetcode-cn.com/problems/integer-break/solution/ba-yi-ba-zhe-chong-ti-de-wai-tao-343-zheng-shu-cha/
+
+``` python
+class Solution_integer_break(object):
+
+    def __init__(self):
+        self._memo = {}
+
+    # 将n进行分割(至少分割两部分), 可以获得的最大乘积
+    def integerBreak(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 1:
+            return 1
+        _res = -1
+        if n in self._memo:
+            return self._memo[n]
+        for i in xrange(1, n):
+            # 计算`i + (n-i)`
+            _res = max(
+                _res,
+                i * (n-i),  # 有可能自己本身`i*(n-i)`就是最大的
+                i * self.integerBreak(n-i))
+        self._memo[n] = _res
+        return _res
+        
+    def integer_break_dp(self, n):
+        # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
+        dp = [-1] * (n + 1)
+        dp[1] = 1
+        # 下面这种A思路是不行的:
+        # dp[i]等价于 f(i)，
+        # 那么上面针对 f(i) 写的递归公式对 dp[i] 也是适用的，我们拿来试试。
+        # 关键语句:
+        #  `res = max(res, i * (n - i), max(i * self.integerBreak(n - i)))`
+        # 翻译过来就是：`dp[i] = max(_res, i * (n-i), i * dp[n-i])`
+        # 则不难得出以下代码, 但因为 dp[n-i] 当前没求出来, 子问题没求出来,
+        # 所以原问题也就求不出来了, 所以下面这三行代码是不行的
+        # _res = -1
+        # for i in xrange(1, n):
+            # dp[i] = max(_res, i * (n-i), i * dp[n-i])
+        
+        # 此时我们得下面这种B思路才行:
+        # 我们用一层循环来生成上面这段A思路代码一系列的 n 值。
+        # 接着我们还要生成上面A思路代码中一系列的 i 值，
+        # 注意到 n - i 是要大于 0 的，
+        # 因此 i 只需要循环到 n - 1 即可。
+        # 由此不难翻译A思路得出以下代码(j代表n, k代表i):
+        for j in xrange(2, n+1):  # 循环到n
+            # 求解dp[j]
+            for k in xrange(1, j):  # 循环到j-1即可
+                dp[j] = max(dp[j], k * (j-k), k * dp[j-k])
+        return dp[n]
+```
+

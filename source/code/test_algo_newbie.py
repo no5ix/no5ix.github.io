@@ -10,7 +10,7 @@ def insert_sort(arr, left_index, right_index):
     for i in xrange(left_index+1, right_index+1):  # 从left_index+1开始, 也就是从第二个开始
         for j in xrange(i, left_index, -1):
             if arr[j] < arr[j-1]:  # 注意保证j-1大于0
-                # 通过不断的与前面已经排好序的元素比较并交换, 
+                # 通过不断的与前面已经排好序的元素比较并交换,
                 arr[j-1], arr[j] = arr[j], arr[j-1]
             else:
                 break
@@ -27,7 +27,7 @@ def insert_sort_optimized(arr, left_index, right_index):
                 arr[j] = arr[j-1]  # 通过不断的与前面已经排好序的元素比较并直接赋值
                 j -= 1
             else:
-                break        
+                break
         arr[j] = temp_i_val  # 已经找到该插入的地方了, 直接赋值
 
 
@@ -53,15 +53,15 @@ def _merge(arr, left_index, mid_index, right_index):
             temp_arr.append(arr[j])
             j += 1
     # 这一步是模拟: 直到一个输入堆为空，这时，我们只是拿起剩余的输入堆并牌面朝下地将该堆放置到输出堆。
-    temp_arr.extend(arr[i:mid_index+1]) 
+    temp_arr.extend(arr[i:mid_index+1])
     temp_arr.extend(arr[j:right_index+1])  # 注意右边界是小于等于right_index的
     # 把归并好的数组数据放到原数组left_index到right_index的位置上去
     for m in xrange(0, right_index-left_index+1):
         arr[left_index+m] = temp_arr[m]
-        
-        
+
+
 def merge_sort(arr, left_index, right_index):
-    # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
+    # 当 `merge_sort()` 递归到left_index等于right_index的时候,
     # 说明left_index, right_index已经相邻了,
     # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
     if not arr or left_index >= right_index:
@@ -72,10 +72,10 @@ def merge_sort(arr, left_index, right_index):
     merge_sort(arr, left_index, mid_index)
     merge_sort(arr, mid_index+1, right_index)
     _merge(arr, left_index, mid_index, right_index)
-    
+
 
 def merge_sort_optimized(arr, left_index, right_index):
-    # 当 `merge_sort()` 递归到left_index等于right_index的时候, 
+    # 当 `merge_sort()` 递归到left_index等于right_index的时候,
     # 说明left_index, right_index已经相邻了,
     # 说明已经分解到底了, 左右都只剩下一个元素了, 所以此时应该return然后执行 `_merge()` 了
     if not arr or left_index >= right_index:
@@ -93,10 +93,10 @@ def merge_sort_optimized(arr, left_index, right_index):
     merge_sort(arr, left_index, mid_index)
     merge_sort(arr, mid_index+1, right_index)
 
-    # 优化2: 
+    # 优化2:
     #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
     #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
-    #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
+    #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge,
     #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
     if arr[mid_index] > arr[mid_index+1]:
         _merge(arr, left_index, mid_index, right_index)
@@ -114,8 +114,8 @@ def merge_sort_bottom_up(arr, left_index, right_index):
     while size < arr_len:
         cur_left_index = left_index
         while cur_left_index <= right_index-size:
-            cur_mid_index = cur_left_index + size -1
-            possible_right_index = cur_left_index + 2*size -1
+            cur_mid_index = cur_left_index + size - 1
+            possible_right_index = cur_left_index + 2*size - 1
             # possible_right_index有可能已经大于right_index了, 所以要min一下
             cur_right_index = min(possible_right_index, right_index)
             # 归并从i位置开始的两倍size的一组数据
@@ -124,7 +124,7 @@ def merge_sort_bottom_up(arr, left_index, right_index):
         # print "size: %d" % size
         # print arr
         size *= 2  # size从1开始每次增加两倍
-        
+
 
 def merge_sort_bottom_up_optimized(arr, left_index, right_index):
     if not arr or left_index >= right_index:
@@ -135,15 +135,15 @@ def merge_sort_bottom_up_optimized(arr, left_index, right_index):
     size = 16
     cur_left_index = left_index
     while cur_left_index < right_index:
-        possible_right_index = cur_left_index + 2*size -1
-         # possible_right_index有可能已经大于right_index了, 所以要min一下
+        possible_right_index = cur_left_index + 2*size - 1
+        # possible_right_index有可能已经大于right_index了, 所以要min一下
         cur_right_index = min(possible_right_index, right_index)
         insert_sort(arr, cur_left_index, cur_right_index)
         cur_left_index += size  # 右移到下一个size大小开头位置
-    
+
     arr_len = right_index - left_index + 1
     # size = 1
-    
+
     # 注意这里不是 `while size <= arr_len/2`,
     # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
     # 那只有size为8, 这样2倍size才能把arr全部归并
@@ -151,15 +151,15 @@ def merge_sort_bottom_up_optimized(arr, left_index, right_index):
     while size < arr_len:
         cur_left_index = left_index
         while cur_left_index <= right_index-size:
-            cur_mid_index = cur_left_index + size -1
-            possible_right_index = cur_left_index + 2*size -1
+            cur_mid_index = cur_left_index + size - 1
+            possible_right_index = cur_left_index + 2*size - 1
             # possible_right_index有可能已经大于right_index了, 所以要min一下
             cur_right_index = min(possible_right_index, right_index)
             # 归并从i位置开始的两倍size的一组数据
-            # 优化2: 
+            # 优化2:
             #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
             #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
-            #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
+            #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge,
             #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
             if arr[cur_mid_index] > arr[cur_mid_index+1]:
                 _merge(arr, cur_left_index, cur_mid_index, cur_right_index)
@@ -167,7 +167,7 @@ def merge_sort_bottom_up_optimized(arr, left_index, right_index):
         # print "size: %d" % size
         # print arr
         size *= 2  # size从1开始每次增加两倍
-        
+
 
 def _partition(arr, left_index, right_index):
     # 选一个元素作为枢轴量,
@@ -179,7 +179,7 @@ def _partition(arr, left_index, right_index):
     # 这才符合partition_index的定义:
     #       partition_indexy指向小于pivot的那些元素的最后一个元素,
     #       即 less_than_pivots_last_elem_index
-    # 因为还没找到比pivot小的元素之前, 
+    # 因为还没找到比pivot小的元素之前,
     # partition_index是不应该指向任何待遍历的元素的
     partition_index = less_than_pivots_last_elem_index = left_index
 
@@ -220,7 +220,7 @@ def _partition_optimized(arr, left_index, right_index):
     # 这才符合partition_index的定义:
     #       partition_indexy指向小于pivot的那些元素的最后一个元素,
     #       即 less_than_pivots_last_elem_index
-    # 因为还没找到比pivot小的元素之前, 
+    # 因为还没找到比pivot小的元素之前,
     # partition_index是不应该指向任何待遍历的元素的
     partition_index = less_than_pivots_last_elem_index = left_index
 
@@ -247,7 +247,7 @@ def quick_sort_optimized(arr, left_index, right_index):
     # 把partition_index左边的数据再递归快排一遍
     quick_sort(arr, left_index, partition_index-1)
     quick_sort(arr, partition_index+1, right_index)
-    
+
 
 def quick_sort_3_ways(arr, left_index, right_index):
     # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
@@ -264,12 +264,12 @@ def quick_sort_3_ways(arr, left_index, right_index):
     # 配合下方的`pivot = arr[left_index]`就达到了随机选一个元素当pivot的效果
     rand_index = random.randint(left_index, right_index)
     arr[pivot_index], arr[rand_index] = arr[rand_index], arr[pivot_index]
-    
+
     pivot = arr[pivot_index]
     # lt_index 指向小于pivot的那些元素的最右边的一个元素,
     # lt_index 即 less_than_pivots_last_elem_index
-    # 因为还没找到比pivot小的元素之前, 
-    # lt_index 是不应该指向任何待遍历的元素的, 
+    # 因为还没找到比pivot小的元素之前,
+    # lt_index 是不应该指向任何待遍历的元素的,
     # gt_index 同理, gt_index指向大于pivot的那些元素的最左边的一个元素,
     lt_index = less_than_pivots_last_elem_index = left_index
     gt_index = right_index + 1
@@ -289,7 +289,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
     quick_sort_3_ways(arr, left_index, lt_index)
     quick_sort_3_ways(arr, gt_index, right_index)
-    
+
 
 # 递归版, 对 pending_heapify_index 元素执行堆化
 def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
@@ -309,7 +309,8 @@ def _max_heapify_recursive(arr, pending_heapify_index, left_index, right_index):
     # 若当前已经是最大元素了, 则停止递归, 如果不是则执行交换与继续递归
     if cur_max_index != pending_heapify_index:
         arr[pending_heapify_index], arr[cur_max_index] = arr[cur_max_index], arr[pending_heapify_index]
-        _max_heapify_recursive(arr, cur_max_index, left_index, right_index)  # 继续 堆化 cur_max_index 的子元素
+        # 继续 堆化 cur_max_index 的子元素
+        _max_heapify_recursive(arr, cur_max_index, left_index, right_index)
 
 
 # 对 迭代版, pending_heapify_index 元素执行堆化
@@ -346,7 +347,7 @@ def _build_max_heap(arr, left_index, right_index):
         i -= 1
 
 
-def heap_sort(arr, left_index , right_index):
+def heap_sort(arr, left_index, right_index):
     if not arr or left_index >= right_index or right_index <= 0:
         return
     _build_max_heap(arr, left_index, right_index)
@@ -362,7 +363,7 @@ def heap_sort(arr, left_index , right_index):
 
 
 class TreeNode(object):
-    
+
     def __init__(self, val):
         self.left = None
         self.right = None
@@ -482,12 +483,12 @@ def linklist_reverse(head):
     _cur = head
     _temp_next = head.next
     while _cur:
-        #先用_temp_next保存_cur的下一个节点的信息，
-        #保证单链表不会因为失去_cur节点的next而就此断裂
+        # 先用_temp_next保存_cur的下一个节点的信息，
+        # 保证单链表不会因为失去_cur节点的next而就此断裂
         _temp_next = _cur.next
-        #保存完_temp_next，就可以让_cur的next指向_pre了
+        # 保存完_temp_next，就可以让_cur的next指向_pre了
         _cur.next = _pre
-        #让_pre，_cur依次向后移动一个节点，继续下一次的指针反转
+        # 让_pre，_cur依次向后移动一个节点，继续下一次的指针反转
         _pre = _cur
         _cur = _temp_next
     return _pre
@@ -503,7 +504,7 @@ class GraphBase(object):
         self.adjacency_container = None
         self.is_directed = is_directed  # 是否为有向图
         self.connected_components_count = 0  # 连通分量个数
-    
+
     def graph_dfs(self):
         """
         图的深度优先遍历（DFS）, 深度优先遍历尽可能优先往深层次进行搜索；
@@ -551,7 +552,6 @@ class GraphBase(object):
                         visited_set.add(_next_pt_index)
         return result_arr
 
-
     def _iter_adjacent_points(self, cur_point_index):
         """
         因为稀疏图一般用邻接表来保存图的顶点数据,
@@ -566,7 +566,7 @@ class SparseGraph(GraphBase):
 
     def __init__(self, point_count, is_directed):
         super(SparseGraph, self).__init__(point_count, is_directed)
-        self.adjacency_container = [ [] for _ in xrange(point_count) ]  # 邻接表
+        self.adjacency_container = [[] for _ in xrange(point_count)]  # 邻接表
 
     def set_adjacency_list(self, adjacency_list):
         self.adjacency_container = adjacency_list
@@ -582,7 +582,7 @@ class DenseGraph(GraphBase):
     def __init__(self, point_count, is_directed):
         super(DenseGraph, self).__init__(point_count, is_directed)
         self.adjacency_container = [
-            [ 0 for _ in xrange(point_count)] for _ in xrange(point_count) 
+            [0 for _ in xrange(point_count)] for _ in xrange(point_count)
         ]  # 邻接矩阵
 
     def set_adjacency_matrix(self, adjacency_matrix):
@@ -634,7 +634,7 @@ def path_sum_3(root, sum_num):
     # 先求包括node本身的情况, 此时这轮递归所说的node是代码中的root
     # 这种情况可以用类似于 path_sum问题 的 `has_path_sum`来实现
     path_cnt += _get_path_sum_include_node(root, sum_num)
-    # 再求不包括node本身的情况, 
+    # 再求不包括node本身的情况,
     # 直接计算左右孩子往下的路径中和为sum_num(注意不是sum_num-root.val)的路径数量
     path_cnt += path_sum_3(root.left, sum_num)
     path_cnt += path_sum_3(root.right, sum_num)
@@ -705,16 +705,18 @@ digits_map = {
     "9": "wxyz",
 }
 
+
 def letter_combinations_of_a_phone_number(digits_str):
     result_str_arr = []
     if not digits_str:
         return result_str_arr
     assert "1" not in digits_str, "we dont proc 1"
-    
+
     middle_state_container = []
     _get_letter_combination(result_str_arr, digits_str, index=0,
-        middle_state_container=middle_state_container)
-    return result_str_arr    
+                            middle_state_container=middle_state_container)
+    return result_str_arr
+
 
 def _get_letter_combination(
         result_str_arr, pending_proc_digits_str, index, middle_state_container):
@@ -729,7 +731,7 @@ def _get_letter_combination(
         # 则当前的 中间状态保存器 middle_state_container 则为一个解
         # 此处需要深拷贝一下, 因为下方代码有个 `middle_state_container.pop(-1)`
         result_str_arr.append(copy.deepcopy(middle_state_container))
-        return 
+        return
     # # 不处理1因为1对应的没字母
     # while pending_proc_digits_str[index] == "1":
     #     index += 1
@@ -755,9 +757,10 @@ class Solution_lc77(object):
         if k <= 0 or k > n or n <= 0:
             return result_arr
         middle_state_container = []
-        self._generate_combinations(result_arr, n, k, 1, middle_state_container)
+        self._generate_combinations(
+            result_arr, n, k, 1, middle_state_container)
         return result_arr
-        
+
     def _generate_combinations(
             self, result_arr,
             pending_proc_n, pending_prco_k, start_num, middle_state_container):
@@ -778,13 +781,13 @@ class Solution_lc77(object):
                 _cur_num+1, middle_state_container)
             middle_state_container.pop(-1)
 
-
     def combinations_optimized(self, n, k):
         result_arr = []
         if k <= 0 or k > n or n <= 0:
             return result_arr
         middle_state_container = []
-        self._generate_combinations(result_arr, n, k, 1, middle_state_container)
+        self._generate_combinations(
+            result_arr, n, k, 1, middle_state_container)
         return result_arr
 
     def _generate_combinations_optimized(
@@ -801,7 +804,7 @@ class Solution_lc77(object):
             return
         # # 每次递归从start_num开始直到 pending_proc_n
         # for _cur_num in xrange(start_num, pending_proc_n+1):
-        # 剪枝的思想, 
+        # 剪枝的思想,
         # 还有k - middle_state_container.size()个空位,
         # 所以, [i...n] 中至少要有 k - middle_state_container.size() 个元素
         # i最多为 n - (k - middle_state_container.size()) + 1
@@ -841,7 +844,6 @@ class Solution_number_of_islands(object):
                 self._dfs_islands(grid, x, y)
                 islands_cnt += 1  # 一次搜索完成就算有一个岛屿了
         return islands_cnt
-
 
     def _dfs_islands(self, grid, x, y):  # x是纵坐标, y是横坐标
         # print "x = %d" % x
@@ -887,7 +889,7 @@ class Solution_integer_break(object):
                 i * self.integerBreak(n-i))
         self._memo[n] = _res
         return _res
-        
+
     def integer_break_dp(self, n):
         # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
         dp = [-1] * (n + 1)
@@ -902,8 +904,8 @@ class Solution_integer_break(object):
         # 所以原问题也就求不出来了, 所以下面这三行代码是不行的
         # _res = -1
         # for i in xrange(1, n):
-            # dp[i] = max(_res, i * (n-i), i * dp[n-i])
-        
+        # dp[i] = max(_res, i * (n-i), i * dp[n-i])
+
         # 此时我们得下面这种B思路才行:
         # 我们用一层循环来生成上面这段A思路代码一系列的 n 值。
         # 接着我们还要生成上面A思路代码中一系列的 i 值，
@@ -915,6 +917,121 @@ class Solution_integer_break(object):
             for k in xrange(1, j):  # 循环到j-1即可
                 dp[j] = max(dp[j], k * (j-k), k * dp[j-k])
         return dp[n]
+
+
+class Solution_stock(object):
+    def stock4_maxProfit(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices or not k:
+            return 0
+        n = len(prices)
+        # 注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
+        # 但我们解题的时候可以把买入就当成一次交易会容易写代码一些,
+        # 当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且
+        # 初始化状态难弄一些
+        # dp[i][k][0]为第i天最多可以完成k次交易时手中 无股票时 的最大利润
+        # dp[i][k][1]为第i天最多可以完成k次交易时手中 有股票时 的最大利润
+        # 为什么下方要初始化为`n+1`呢? 因为我们要求的是第n天最多可以完成k次交易时手中无股票时的最大利润,
+        # 而不是第n-1天, 注意我们下方说的第0天并不是数组意义的第1天.
+        # 读者可能问为什么不是 dp[n - 1][K][1]？
+        # 因为 [1] 代表手上还持有股票，[0] 表示手上的股票已经卖出去了，
+        # 很显然后者得到的利润一定大于前者。
+        dp = [ [ [ 0 for _ in range(2) ]  for _ in range(k+1) ] for _ in range(n+1) ]
+        
+        for j in range(n+1):
+            dp[j][0][0] = 0  # 第j天0次交易，手上不持有, 故为0
+            # 第j天0次交易，手上持有股票, 这是不可能的, 
+            # 我们dp对交易的定义是买入就算, 0次交易都没买入股票, 不可能持有股票
+            # 所以我们用负无穷来表示, 因为之后我们用max来取值,
+            # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
+            # max它会取这个0,而不会去取那些负值
+            dp[j][0][1] = float("-inf")
+            for t in range(k+1):
+                # 第0天t次交易，手上持有股票, 这里所说的第0天不是数组的第1天,
+                # 第0天是一个不存在的日子, 所以这是不可能的, 
+                # 所以我们用负无穷来表示, 因为之后我们用max来取值,
+                # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
+                # max它会取这个0,而不会去取那些负值
+                dp[0][t][1] = float("-inf")
+                dp[0][t][0] = 0
+        for i in range(1, n+1):
+            for t in range(1, k+1):
+                # i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+                dp[i][t][1] = max(
+                    dp[i-1][t][1],
+                    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+                    # 根据我们的dp定义, 
+                    # 实际上第i=1天对应的是数组中的prices[0]的价格
+                    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+                    # 所以我们这里才`t-1`, 好理解一些
+                    dp[i-1][t-1][0] - prices[i-1]
+                )
+                # i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+                dp[i][t][0] = max(
+                    dp[i-1][t][0],
+                    dp[i-1][t][1] + prices[i-1]
+                )
+
+        return dp[n][k][0]
+        
+
+class Solution_coin1(object):
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+        assert(coins)
+        # 用背包的思路
+        if amount == 0:
+            return 0
+        n = len(coins)
+        # 如果我们将每种硬币看作是每种物品，面值金额看成是物品的重量，总金额是背包的总容量, 因为硬币无限, 这样此题就是是一个恰好装满的完全背包问题.了。不过这里不是求最多装入多少价值而是求最少装满背包的数目，所以我们只需要将[完全背包](#完全背包问题)的转态转移方程中稍微改改即可:  
+        # - dp[i][j]定义为: 用前i种硬币可以抽一些硬币出来装满容量为j的背包的最少硬币数量
+        # - 状态转移方程为: `d[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]])`
+
+        # 因为之后要取min操作, 所以这里初始化为无穷大`float("inf")`
+        dp = [ [ float("inf") for _ in range(amount+1) ] for _ in range(n+1) ]
+        for k in range(n+1):
+            dp[k][0] = 0  # 充满容量为0的背包, 最少的硬币个数为0
+        for i in range(n+1):
+            for j in range(amount+1):
+                if j - coins[i-1] < 0:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = min(
+                        dp[i-1][j],
+                        dp[i][j-coins[i-1]] + 1
+                    )
+        return dp[n][amount] if dp[n][amount] != float("inf") else -1
+
+
+class Solution_coin2(object):
+    def change(self, amount, coins):
+        """
+        :type amount: int
+        :type coins: List[int]
+        :rtype: int
+        """ 
+        n = len(coins)
+        # dp[i][j]`的定义如下：  
+        # 从前`i`种物品里选取若干件物品，当背包容量为`j`时，有`dp[i][j]`种方法可以装满背包。
+        dp = [ [ 0 for _ in range(amount+1) ] for _ in range(n+1) ]
+        for k in range(n+1):
+            # 如果凑出的目标金额为 0，那么 “无为而治” (不用任何硬币)就是唯一的一种凑法。
+            dp[k][0] = 1
+        for i in range(1, n+1):
+            for j in range(1, amount+1):
+                if j - coins[i-1] < 0:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]
+        return dp[n][amount]
 
 
 class Solution_house_robber(object):
@@ -955,7 +1072,7 @@ class Solution_house_robber(object):
         self._memo[index] = res
         return res
 
-    def rob_dp_1(self, nums_arr):
+    def rob_dp_1_other(self, nums_arr):
         if not nums_arr:
             return 0
         if len(nums_arr) == 1:
@@ -974,29 +1091,79 @@ class Solution_house_robber(object):
                 )
         return dp[0]
 
-    def rob_dp_2(self, nums_arr):
+    def rob1_dp(self, nums_arr):
         if not nums_arr:
             return 0
         n = len(nums_arr)
         dp = [0] * n
-        dp[0] = nums_arr[0]
-        dp[1] = max(nums_arr[0], nums_arr[1])
-        for i in xrange(2, n):
-            dp[i] = max(dp[i-1], nums_arr[i]+dp[i-2])
-        return dp[n-1]
+        dp[n-1] = nums_arr[n-1]
+        dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
+        for i in range(n-3, -1, -1):
+            dp[i] = max(dp[i+1], nums_arr[i]+dp[i+2])
+        return dp[0]
+
+    def rob1_dp_memo(self, nums_arr):
+        return self._do_rob1_dp_memo(nums_arr, 0)
+
+    def _do_rob1_dp_memo(self, nums_arr, index):
+        # 我们定义此函数为从index开始偷到最后的房子能偷到的最高总金额
+        if index >= len(nums_arr):
+            return 0
+        if index in self._memo:
+            return self._memo[index]
+        res = max(
+            nums_arr[index] + self._do_rob1_dp_memo(nums_arr, index+2),
+            self._do_rob1_dp_memo(nums_arr, index+1),
+        )
+        self._memo[index] = res
+        return res
+
+    def house_rob_detail_seq(self, nums_arr):
+        if not nums_arr:
+            return 0
+        n = len(nums_arr)
+        # 根据上述思路, 我们用 dp[i] 表示从第 i 间房屋偷到最后一间能偷窃到的最
+        # 高总金额的房子数组子序列
+        dp = [ [] for _ in xrange(n) ]
+        dp[n-1] = [nums_arr[n-1]]
+        dp[n-2] = [max(nums_arr[n-1], nums_arr[n-2])]
+        for i in range(n-3, -1, -1):
+            if (sum(dp[i+2]) + nums_arr[i]) > sum(dp[i+1]):
+                dp[i] = [nums_arr[i]] + dp[i+2]
+            else:
+                dp[i] = dp[i+1]
+        return dp[0]
+
+
+    def rob3_dp(self, bt):
+        # 此函数求出bt为根节点的最大价值
+        if not bt:
+            return 0
+        if bt in memo:
+            return memo[bt]
+        # 抢, 然后去下下家
+        do_it = bt.val + \
+            (rob3_dp(bt.left.left) + rob3_dp(bt.left.right) if bt.left else 0) + \
+            (rob3_dp(bt.right.left) + rob3_dp(bt.right.left) if bt.right else 0)
+        # 不抢, 然后去下家
+        not_do_it = rob3_dp(bt.left) + rob3_dp(bt.right)
+        res = max(do_it, not_do_it)
+        memo[bt] = res
+        return res
 
 
 class Solution_knapsack(object):
-    
+
     def __init__(self):
         self._memo = None
 
     def knapsack(self, capacity, weight_arr, value_arr):
         if capacity == 0:
             return 0
-        self._memo = [ [ -1 for j in xrange(capacity)] for i in xrange(len(weight_arr)) ]
+        self._memo = [[-1 for j in xrange(capacity)]
+                      for i in xrange(len(weight_arr))]
         return self._best_value(capacity, weight_arr, value_arr, 0)
-        
+
     # 用 [0...index]的物品,填充容积为c的背包的最大价值
     def _best_value(self, capacity, weight_arr, value_arr, index):
         if index >= len(weight_arr) or capacity <= 0:
@@ -1013,12 +1180,12 @@ class Solution_knapsack(object):
         self._memo[index][capacity-1] = _res
         return _res
 
-    def knapsack_dp(self, capacity, weight_arr, value_arr):
+    def knapsack_dp_del(self, capacity, weight_arr, value_arr):
         if capacity == 0:
             return 0
         assert(len(weight_arr) == len(value_arr))
         n = len(weight_arr)
-        dp = [ [ 0 for _ in xrange(capacity+1)] for _ in xrange(n)]
+        dp = [[0 for _ in xrange(capacity+1)] for _ in xrange(n)]
         # 动规是从底向上嘛, 先构建dp[0]的东西
         for k in xrange(capacity+1):
             dp[0][k] = value_arr[0] if k >= weight_arr[0] else 0
@@ -1028,9 +1195,50 @@ class Solution_knapsack(object):
                 # 根据状态转移方程得出
                 dp[i][c] = max(
                     dp[i-1][c],
-                    value_arr[i] + dp[i-1][c-weight_arr[i]] if c >= weight_arr[i] else 0
+                    value_arr[i] + dp[i-1][c-weight_arr[i]
+                                           ] if c >= weight_arr[i] else 0
                 )
         return dp[n-1][capacity]
+
+    def knapsack_dp(self, capacity, weight_arr, value_arr):
+        if capacity == 0:
+            return 0
+        assert(len(weight_arr) == len(value_arr))
+        n = len(weight_arr)
+        # dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 0<=i<=N, 0<=j<=W
+        # 那么我们可以将dp[0][0...W]初始化为0，
+        # 表示将前0个物品（即没有物品）装入书包的最大价值为0。
+        # 那么当 i > 0 时dp[i][j]有两种情况：
+        # - 不装入第i件物品，即dp[i−1][j]；
+        # - 装入第i件物品（前提是能装下），即dp[i−1][j−w[i-1]] + v[i-1]。
+        # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值
+        # 则i=0其实表示的是0个物品,
+        # 所以实际对应weight数组和value数组的index应该为i-1
+        #
+        # 即状态转移方程为
+        # dp[i][j] = max(dp[i−1][j], dp[i−1][j−w[i-1]]+v[i-1]) // j >= w[i-1]
+        # 所求为dp[n][capacity]
+        dp = [[0 for _ in xrange(capacity+1)] for _ in xrange(n+1)]
+        # 动规是从底向上嘛, 先构建dp[0]的东西
+        for k in xrange(capacity+1):
+            # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值
+            # 则i=0其实表示的是0个物品, 所以 = 0
+            dp[0][k] = 0
+
+        for i in xrange(1, n+1):
+            for j in xrange(capacity+1):
+                # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值
+                # 则i=0其实表示的是0个物品,
+                # 所以实际对应weight数组和value数组的index应该为i-1
+                pack_args_index = i - 1
+                if j - weight_arr[pack_args_index] < 0:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = max(
+                        dp[i-1][j],
+                        value_arr[pack_args_index] + dp[i-1][j-weight_arr[pack_args_index]]
+                    )
+        return dp[n][capacity]
 
 
 class Solution_partition_equal_subset_sum(object):
@@ -1038,7 +1246,7 @@ class Solution_partition_equal_subset_sum(object):
     def __init__(self):
         self._memo = None
 
-    def canPartition(self, nums):
+    def canPartition_del(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
@@ -1049,20 +1257,59 @@ class Solution_partition_equal_subset_sum(object):
         _bag_capcity = sum(nums) / 2
         n = len(nums)
         # 创建二维状态数组，行：物品索引，列：容量（包括 0）
-        dp = [ [False for _ in xrange(_bag_capcity+1)] for _ in xrange(n) ]
+        dp = [[False for _ in xrange(_bag_capcity+1)] for _ in xrange(n)]
         # 先填表格第 0 行，第 1 个数只能让容积为它自己的背包恰好装满
         if nums[0] <= _bag_capcity:
             dp[0][nums[0]] = True
         for i in xrange(1, n):
             for c in xrange(_bag_capcity+1):
-                dp[i][c] = dp[i-1][c] or (dp[i-1][c-nums[i]] if c >= nums[i] else False)
+                dp[i][c] = dp[i-1][c] or (dp[i-1][c-nums[i]]
+                                          if c >= nums[i] else False)
         return dp[n-1][_bag_capcity]
+
+    def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        动规解法
+        """
+        # 特判：如果是奇数，就不符合要求
+        if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
+            return False
+        _bag_capcity = sum(nums) / 2
+        n = len(nums)
+        # 状态定义：
+        # dp[i][j]表示对于容量为 j 的背包，若只是用前 i 个物品(前0个则表示没有物品)，
+        # 每个数只能用一次，使得这些数的和恰好等于 j  .
+        # (比如说，如果dp[4][9] = true，其含义为：对于容量为 9 的背包，若只是用前 4 个物品，可以有一种方法把背包恰好装满。)。
+        # 状态转移方程：很多时候，状态转移方程思考的角度是「分类讨论」，对于「0-1 背包问题」而言就是「当前考虑到的数字选与不选」。
+        # - 不选择 nums[i]，则看前i-1个元素的是否能能和为j, 即 `dp[i-1][j]`
+        # - 选择 nums[i]，看前i-1个元素的是否能能和为`j-nums[i-1]`, 即`dp[i-1][j- nums[i-1]`
+        # **注意上方的`nums[i-1]`, 为什么是i-1呢?**
+        # 因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 则i=0其实表示的是0个物品,
+        # 所以实际对应nums数组的index应该为`i-1`
+        # 则状态转移方程：
+        # dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i-1]]  // j >= nums[i-1]
+        dp = [[False for _ in range(_bag_capcity+1)] for _ in range(n+1)]
+
+        dp[0][0] = True  # 前0个则表示没有物品, 可以充满容量为0的背包
+        for c in range(1, _bag_capcity+1):
+            dp[0][c] = False # 前0个则表示没有物品, 是不可能充满容量大于0的背包的
+
+        for i in range(1, n+1):
+            for j in range(_bag_capcity+1):
+                if j - nums[i-1] < 0:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = dp[i-1][j] or dp[i-1][j-nums[i-1]]
+        return dp[n][_bag_capcity]
 
     def canPartition_recursion(self, nums):
         if not nums or len(nums) < 2 or sum(nums) % 2 != 0:
             return False
         _sum_num = sum(nums) / 2
-        self._memo = [ [ None for _ in xrange(_sum_num+1) ] for _ in xrange(len(nums)) ]
+        self._memo = [[None for _ in xrange(_sum_num+1)]
+                      for _ in xrange(len(nums))]
         return self._try_partition(nums, 0, _sum_num)
 
     def _try_partition(self, nums, index, sum_num):
@@ -1093,7 +1340,7 @@ class Solution_LIS(object):
         dp[0] = 1
         for i in xrange(1, n):
             for j in xrange(0, i):
-                # 则我们的状态转移方程为: 
+                # 则我们的状态转移方程为:
                 # `dp[i] = max(dp[j]) + 1 , 其中 9 <= j < i 且 nums[j] < nums[i]`
                 if nums[j] < nums[i]:
                     dp[i] = max(dp[i], dp[j] + 1)
@@ -1112,7 +1359,7 @@ class Solution_LCS(object):
         if m < 1 or n < 1:
             return 0
         # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列的长度
-        dp = [ [ 0 for _ in xrange(n) ] for _ in xrange(m) ]
+        dp = [[0 for _ in xrange(n)] for _ in xrange(m)]
         # 初始化最底层的基础数据
         for k in xrange(n):
             if str_a[0] == str_b[k]:
@@ -1143,7 +1390,7 @@ class Solution_LCS(object):
         if m < 1 or n < 1:
             return ""
         # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列
-        dp = [ [ "" for _ in xrange(n) ] for _ in xrange(m) ]
+        dp = [["" for _ in xrange(n)] for _ in xrange(m)]
         # 初始化最底层的基础数据
         for k in xrange(n):
             if str_a[0] == str_b[k]:
@@ -1163,7 +1410,6 @@ class Solution_LCS(object):
                     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
         return dp[m-1][n-1]
 
-
     def get_lcs_detail_seq_2(self, str_arr):
         if not str_arr:
             return ""
@@ -1175,7 +1421,7 @@ class Solution_LCS(object):
         if m < 1 or n < 1:
             return ""
         # 我们定义dp[i][j] 为 str_a[0...i] 和str_b[0...j]的最长子序列的长度
-        dp = [ [ 0 for _ in xrange(n) ] for _ in xrange(m) ]
+        dp = [[0 for _ in xrange(n)] for _ in xrange(m)]
         # 初始化最底层的基础数据
         for k in xrange(n):
             if str_a[0] == str_b[k]:
@@ -1193,37 +1439,37 @@ class Solution_LCS(object):
                     dp[i][j] = dp[i-1][j-1] + 1
                 else:
                     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-        # 不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种, 
+        # 不管是LCS/LIS/0-1背包问题如果要求最优解的具体情况是哪种,
         # 我们的思路就是要用dp解法求出整个dp数组之后,
-        # 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.   
+        # 然后根据dp的状态定义, 以及dp数组里具体存储了的信息反推回去.
         #
         # 从之前求lcs的代码以及上图中都可以看出,
         # 从dp数组的末尾后面反推回去,
         # 上一个公共字符所在的横纵index肯定在当前横纵index的左上.
-        p = len(str_a) - 1;
-        q = len(str_b) - 1;
-        _lcs_detail_seq = "";
+        p = len(str_a) - 1
+        q = len(str_b) - 1
+        _lcs_detail_seq = ""
         while(p >= 0 and q >= 0):
-            if( str_a[p] == str_b[q] ):
-                _lcs_detail_seq = str_a[p] + _lcs_detail_seq;
-                p -= 1;
-                q -= 1;
+            if(str_a[p] == str_b[q]):
+                _lcs_detail_seq = str_a[p] + _lcs_detail_seq
+                p -= 1
+                q -= 1
             elif(p == 0):
-                q -= 1;
+                q -= 1
             elif(q == 0):
-                p -= 1;
+                p -= 1
             else:
-                # 由dp数组图中可知, 
+                # 由dp数组图中可知,
                 # 上一个公共字符所在的横纵index肯定在当前横纵index的左上.
                 if(dp[p-1][q] > dp[p][q-1]):
                     # dp[p-1][q] 大, 则往左移动, p减一
                     # 这样才能才能找到最大公共子串的上一个公共字符嘛
-                    p -= 1;
+                    p -= 1
                 else:
                     # dp[p][q-1] 大, 则往上移动, q减一
                     # 这样才能才能找到最大公共子串的上一个公共字符嘛
-                    q -= 1;
-        return _lcs_detail_seq;
+                    q -= 1
+        return _lcs_detail_seq
 
 
 class Solution_build_bt(object):
@@ -1237,19 +1483,19 @@ class Solution_build_bt(object):
             return None
 
         def _proc_order_arr(
-                inorder_left_index, inorder_right_index, 
-                postorder_left_index, postorder_right_index):       
+                inorder_left_index, inorder_right_index,
+                postorder_left_index, postorder_right_index):
             if inorder_left_index > inorder_right_index or \
                     postorder_left_index > postorder_right_index:
                 return None
             # 在后序遍历序列中,最后一个元素为树的根节点
-            root_val = postorder[postorder_right_index] 
+            root_val = postorder[postorder_right_index]
             root_inorder_index = inorder.index(root_val)
             _len_left_child = root_inorder_index-inorder_left_index
             root_node = TreeNode(root_val)
-            
+
             # 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
-            # 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
+            # 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点,
             # 其他的除最后一个结点外都是右子树的结点
             root_node.left = _proc_order_arr(
                 inorder_left_index,
@@ -1264,7 +1510,7 @@ class Solution_build_bt(object):
                 postorder_right_index-1
             )
             return root_node
-            
+
         return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
 
 
@@ -1307,7 +1553,8 @@ class Solution_lc39(object):
             return []
         res_arr = []
         middle_state_arr = []
-        self._generate_combinations(candidates, target, 0, res_arr, middle_state_arr)
+        self._generate_combinations(
+            candidates, target, 0, res_arr, middle_state_arr)
         return res_arr
 
     def _generate_combinations(
@@ -1328,7 +1575,7 @@ class Solution_lc39(object):
 
 
 class Solution_lc40(object):
-    # [lc40](https://leetcode-cn.com/problems/combination-sum-ii)  
+    # [lc40](https://leetcode-cn.com/problems/combination-sum-ii)
     def combinationSum2(self, candidates, target):
         """
         :type candidates: List[int]
@@ -1339,7 +1586,8 @@ class Solution_lc40(object):
             return []
         res_arr = []
         middle_state_arr = []
-        self._generate_combinations(candidates, target, 0, res_arr, middle_state_arr)
+        self._generate_combinations(
+            candidates, target, 0, res_arr, middle_state_arr)
         return res_arr
 
     def _generate_combinations(
@@ -1374,7 +1622,7 @@ class Solution_lc47(object):
         middle_arr = []
         res_arr = []
         nums.sort()
-        self._used = [ False for _ in range(len(nums)) ]
+        self._used = [False for _ in range(len(nums))]
         self._generate_permutation(nums, 0, res_arr, middle_arr)
         return res_arr
 
@@ -1388,7 +1636,7 @@ class Solution_lc47(object):
             return
         for i in range(len(nums)):
             if self._used[i]:
-                # 如果本轮递归 used_num_set 已经有_single_num 了, 
+                # 如果本轮递归 used_num_set 已经有_single_num 了,
                 # 说明当前排列 middle_state_container 中已经有 _single_num 了
                 # 那不应该再加入到这个排列中了
                 continue
@@ -1400,13 +1648,12 @@ class Solution_lc47(object):
                 nums,
                 cnt+1,
                 res_arr, middle_arr)
-            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
-            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯,
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态,
             # 那我们自己额外记录的状态, 比如 self._used_num_set 和
             # middle_state_container 的状态应该自己手动清除
             middle_arr.pop(-1)
             self._used[i] = False
-
 
 
 class Solution_lc46(object):
@@ -1421,7 +1668,7 @@ class Solution_lc46(object):
         """
         middle_arr = []
         res_arr = []
-        self._used = [ False for _ in range(len(nums)) ]
+        self._used = [False for _ in range(len(nums))]
         self._generate_permutation(nums, 0, res_arr, middle_arr)
         return res_arr
 
@@ -1435,7 +1682,7 @@ class Solution_lc46(object):
             return
         for i in range(len(nums)):
             if self._used[i]:
-                # 如果本轮递归 used_num_set 已经有_single_num 了, 
+                # 如果本轮递归 used_num_set 已经有_single_num 了,
                 # 说明当前排列 middle_state_container 中已经有 _single_num 了
                 # 那不应该再加入到这个排列中了
                 continue
@@ -1445,8 +1692,8 @@ class Solution_lc46(object):
                 nums,
                 cnt+1,
                 res_arr, middle_arr)
-            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯, 
-            # 递归本身会记录一些状态当退出的时候他会自动清除状态, 
+            # 本轮递归完毕后要清空相应记录的状态, 这就是回溯,
+            # 递归本身会记录一些状态当退出的时候他会自动清除状态,
             # 那我们自己额外记录的状态, 比如 self._used_num_set 和
             # middle_state_container 的状态应该自己手动清除
             middle_arr.pop(-1)
@@ -1465,7 +1712,7 @@ class Solution_multi_arr_sum(object):
         self._generate_result(
             nums_arrs, target_sum_num, 0, res_arr, middle_arr)
         return res_arr
-        
+
     def _generate_result(
             self, nums_arrs, target_sum_num,
             start_i_index,
@@ -1487,7 +1734,6 @@ class Solution_multi_arr_sum(object):
                 middle_arr.pop(-1)
 
 
-
 class Solution_bigo_thread_permute(object):
     def __init__(self):
         self._used = None
@@ -1500,7 +1746,7 @@ class Solution_bigo_thread_permute(object):
         # 方便精准的查询每个字母是否被使用以及
         # 方便保证abcd和efgh各自的顺序性时剪枝
         self._used = [
-            [False for _ in range(len(self._thread_str_arr[i])) ]
+            [False for _ in range(len(self._thread_str_arr[i]))]
             for i in range(len(self._thread_str_arr))
         ]
         _str_2_index_map = {}
@@ -1518,9 +1764,9 @@ class Solution_bigo_thread_permute(object):
         for _str, _index_list in str_2_index_map.iteritems():
             i = _index_list[0]
             j = _index_list[1]
-            # 剪枝: 为了保证abcd和efgh各自的顺序性, 
+            # 剪枝: 为了保证abcd和efgh各自的顺序性,
             # 拿当前的j和used多维数组里i数组里的已经use的最大的max_j来作比较
-            # 如果小于等于则剪枝, 
+            # 如果小于等于则剪枝,
             # j大于max_j才能保证添加到middle_arr里的abcd和efgh各自的顺序性
             if j <= self._get_used_max_index_j(i):
                 continue
@@ -1539,14 +1785,14 @@ class Solution_bigo_thread_permute(object):
                 _max_index_j = _cur_index_j
         return _max_index_j
 
-    
+
 class Solution_sum_paths(object):
     def sum_paths(self, root, sum):
         if not root:
             return []
         path_arr = []
         # 先求包括node本身的情况, 此时这轮递归所说的node是代码中的root
-        # 再求不包括node本身的情况, 左右孩子的情况, 
+        # 再求不包括node本身的情况, 左右孩子的情况,
         # 这样也就达到了把每个结点都当做是root然后向下寻找路径的目的
         path_arr.extend(self._get_sum_paths(root, sum))
         path_arr.extend(self.sum_paths(root.left, sum))
@@ -1557,17 +1803,19 @@ class Solution_sum_paths(object):
         if not cur_root:
             return []
         path_str_arr = []
-        # if sum_num == 0: 
+        # if sum_num == 0:
         #     pass  # 不能这么写, 这么写的话, 拿不到之前的那个 cur_root 了
         if sum_num - cur_root.val == 0:  # 此时就已经找到了一个解
             path_str_arr.append(str(cur_root.val))
             return path_str_arr
 
-        left_path_str_arr = self._get_sum_paths(cur_root.left, sum_num-cur_root.val)
+        left_path_str_arr = self._get_sum_paths(
+            cur_root.left, sum_num-cur_root.val)
         for _cur_path_str in left_path_str_arr:
             path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
 
-        right_path_str_arr = self._get_sum_paths(cur_root.right, sum_num-cur_root.val)
+        right_path_str_arr = self._get_sum_paths(
+            cur_root.right, sum_num-cur_root.val)
         for _cur_path_str in right_path_str_arr:
             path_str_arr.append(str(cur_root.val) + "->" + _cur_path_str)
 
@@ -1593,11 +1841,11 @@ class Solution_jzo15(object):
                 # 因为python的int型是无限长度的...
                 # 所以要用64次限制一下..
                 break
-        return cnt 
+        return cnt
 
 
 class Solution_lc887(object):
-    # [lc887](https://leetcode-cn.com/problems/super-egg-drop/)  
+    # [lc887](https://leetcode-cn.com/problems/super-egg-drop/)
     # `N`层的楼，然后给你`K`个鸡蛋（`K`至少为 1）
     def superEggDrop2(self, K, N):
         """
@@ -1618,8 +1866,8 @@ class Solution_lc887(object):
         * 又因为第 f 次操作结果只和第 f-1 次操作结果相关，因此可以只用一维数组。
         *
         * 时复：O(K*根号(N))
-        """ 
-        dp = [ [ 0 for _ in range(K+1) ] for _ in range(N+1) ]
+        """
+        dp = [[0 for _ in range(K+1)] for _ in range(N+1)]
         i = 0
         while dp[i][K] < N:
             i += 1
@@ -1629,10 +1877,13 @@ class Solution_lc887(object):
 
     def superEggDrop(self, K, N):
         memo = dict()
+
         def dp(K, N):
             # base case
-            if K == 1: return N
-            if N == 0: return 0
+            if K == 1:
+                return N
+            if N == 0:
+                return 0
             # 避免重复计算
             if (K, N) in memo:
                 return memo[(K, N)]
@@ -1640,12 +1891,12 @@ class Solution_lc887(object):
             res = float('INF')
             # 穷举所有可能的选择
             for i in range(1, N + 1):
-                res = min(res, 
+                res = min(res,
                           max(
-                                dp(K, N - i), 
-                                dp(K - 1, i - 1)
-                             ) + 1
-                      )
+                              dp(K, N - i),
+                              dp(K - 1, i - 1)
+                          ) + 1
+                          )
             # 记入备忘录
             memo[(K, N)] = res
             return res
@@ -1656,10 +1907,10 @@ class Solution_lc887(object):
         :type K: int
         :type N: int
         :rtype: int
-        """ 
+        """
         # dp[k][n]: 表示为当前状态为 k 个鸡蛋，面对 n 层楼的
         # 这个状态下最坏的情况的最少的扔鸡蛋的次数
-        dp = [ [ p for p in range(N+1) ] for _ in range(K+1) ]
+        dp = [[p for p in range(N+1)] for _ in range(K+1)]
         for t in range(2, K+1):
             for q in range(1, N+1):
                 for m in range(1, q):
@@ -1673,21 +1924,50 @@ class Solution_lc887(object):
         return dp[K][N]
 
 
+class Solution_lc114(object):
+    # [lc114](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
+    def flatten(self, root):
+        """
+        :type root: TreeNode
+        :rtype: None Do not return anything, modify root in-place instead.
+        """ 
+        if not root:
+            return
+        self.flatten(root.left)
+        self.flatten(root.right)
+        temp_left = root.left
+        temp_right = root.right
+
+        root.left = None
+        root.right = temp_left
+
+        root_r = root
+        while (root_r.right):
+            root_r = root_r.right
+        root_r.right = temp_right
+
+
+
 if __name__ == "__main__":
-        
+
     sort_algo_func_list = [
         insert_sort,
-        merge_sort, merge_sort_bottom_up, merge_sort_bottom_up_optimized, 
+        merge_sort, merge_sort_bottom_up, merge_sort_bottom_up_optimized,
         quick_sort, quick_sort_optimized, quick_sort_3_ways,
         heap_sort,
     ]
     test_sort_arr_list = [
         [4, 3, 5, 1, 88, 0, -7, 2, 66, -58],
-        [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-        [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
-        [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
-        [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58, 4, 3, 5, 1, 88],
-        [0, -7, 2, 66, -58, 4, 3, 5, 1, 884, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
+        [4, 3, 5, 1, 88, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 0, -7, 2, 66, -58],
+        [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 0, -7, 2, 66, -58, 4, 3, 5, 1, 88],
+        [0, -7, 2, 66, -58, 4, 3, 5, 1, 884, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
         [-3, -7, 1, 2, 3, 4, 5, 6, 7, 8, 21, 42, 87, 99, 66, 32, 91, 19, 28],
         [8, 7, 6, 5, 4, 3, 2, 1, 0, -1, 21, 42, 87, 99, 66, 32, 91, 19, 28],
     ]
@@ -1701,7 +1981,7 @@ if __name__ == "__main__":
             pre_elem = _copy_test_arr[0]
             for _elem in _copy_test_arr:
                 if _elem < pre_elem:
-                    print  "is not ordered: " + str(_test_arr)
+                    print "is not ordered: " + str(_test_arr)
                     is_test_pass = False
                     break
         print "-------------test " + \
@@ -1749,7 +2029,7 @@ if __name__ == "__main__":
     print binary_tree_levelorder_traversal(_copy_bt_a)
 
     print "\n"
-    
+
     _ll_a = LinkList('a')
     _ll_b = LinkList('b')
     _ll_c = LinkList('c')
@@ -1778,7 +2058,8 @@ if __name__ == "__main__":
         [0, 3, 4],
         [0, 4],
     ]
-    test_sparse_graph = SparseGraph(point_count=len(temp_adjacency_list), is_directed=False)
+    test_sparse_graph = SparseGraph(point_count=len(
+        temp_adjacency_list), is_directed=False)
     test_sparse_graph.set_adjacency_list(temp_adjacency_list)
     print "test_sparse_graph graph dfs: --------------"
     print test_sparse_graph.graph_dfs()
@@ -1795,7 +2076,8 @@ if __name__ == "__main__":
         [1, 0, 0, 1, 1, 0, 0],
         [1, 0, 0, 0, 1, 0, 0],
     ]
-    test_dense_graph = DenseGraph(point_count=len(temp_adjacency_matrix), is_directed=False)
+    test_dense_graph = DenseGraph(point_count=len(
+        temp_adjacency_matrix), is_directed=False)
     test_dense_graph.set_adjacency_matrix(temp_adjacency_matrix)
     print "test_dense_graph graph dfs: --------------"
     print test_dense_graph.graph_dfs()
@@ -1856,9 +2138,12 @@ if __name__ == "__main__":
     print "jump_step_optimized(9): " + str(jump_step_optimized(9))
     print "jump_step(4): " + str(jump_step(4))
     print "jump_step(9): " + str(jump_step(9))
-    print "jump_step_dynamic_programming(4): " + str(jump_step_dynamic_programming(4))
-    print "jump_step_dynamic_programming(9): " + str(jump_step_dynamic_programming(9))
-    print "jump_step_dynamic_programming(55): " + str(jump_step_dynamic_programming(55))
+    print "jump_step_dynamic_programming(4): " + \
+        str(jump_step_dynamic_programming(4))
+    print "jump_step_dynamic_programming(9): " + \
+        str(jump_step_dynamic_programming(9))
+    print "jump_step_dynamic_programming(55): " + \
+        str(jump_step_dynamic_programming(55))
 
     print ""
 
@@ -1898,13 +2183,14 @@ if __name__ == "__main__":
         ] 
     """
     test_grid = [
-            ["1","1","1","1","0"],
-            ["1","1","0","1","0"],
-            ["1","1","0","0","0"],
-            ["0","0","0","0","0"]
-        ]
+        ["1", "1", "1", "1", "0"],
+        ["1", "1", "0", "1", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "0", "0", "0"]
+    ]
     snoi1 = Solution_number_of_islands()
-    print " Solution_number_of_islands.numIslands(grid):" + str(snoi1.numIslands(test_grid))
+    print " Solution_number_of_islands.numIslands(grid):" + str(
+        snoi1.numIslands(test_grid))
     print """ 
         grid =  [
             ["1","1","0","0","0"],
@@ -1914,13 +2200,14 @@ if __name__ == "__main__":
         ]
     """
     test_grid = [
-            ["1","1","0","0","0"],
-            ["1","1","0","0","0"],
-            ["0","0","1","0","0"],
-            ["0","0","0","1","1"]
-        ]
+        ["1", "1", "0", "0", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "1", "0", "0"],
+        ["0", "0", "0", "1", "1"]
+    ]
     snoi2 = Solution_number_of_islands()
-    print " Solution_number_of_islands.numIslands(grid):" + str(snoi2.numIslands(test_grid))
+    print " Solution_number_of_islands.numIslands(grid):" + str(
+        snoi2.numIslands(test_grid))
 
     print ""
 
@@ -1936,29 +2223,45 @@ if __name__ == "__main__":
 
     print "house_robber: --------------"
     print "house_robber([6,6,4,8,4,3,3,10]):"
-    print str(Solution_house_robber().rob([6,6,4,8,4,3,3,10]))
+    print str(Solution_house_robber().rob([6, 6, 4, 8, 4, 3, 3, 10]))
     print "house_robber([183,2219,57,193,94,233,202,154,65,240,97]):"
-    print str(Solution_house_robber().rob([183,2219,57,193,94,233,202,154,65,240,97]))
+    print str(Solution_house_robber().rob(
+        [183, 2219, 57, 193, 94, 233, 202, 154, 65, 240, 97]))
     print "house_robber([1, 2, 3, 1]):"
     print str(Solution_house_robber().rob([1, 2, 3, 1]))
     print "house_robber([2, 7, 9, 3, 1]):"
     print str(Solution_house_robber().rob([2, 7, 9, 3, 1]))
     print "house_robber_dp_1([6,6,4,8,4,3,3,10]):"
-    print str(Solution_house_robber().rob_dp_1([6,6,4,8,4,3,3,10]))
-    print "house_robber_dp_1([1, 2, 3, 1]):"
-    print str(Solution_house_robber().rob_dp_1([1, 2, 3, 1]))
-    print "house_robber_dp_1([2, 7, 9, 3, 1]):"
-    print str(Solution_house_robber().rob_dp_1([2, 7, 9, 3, 1]))
-    print "house_robber_dp_1([183,2219,57,193,94,233,202,154,65,240,97]):"
-    print str(Solution_house_robber().rob_dp_1([183,2219,57,193,94,233,202,154,65,240,97]))
-    print "house_robber_dp_2([6,6,4,8,4,3,3,10]):"
-    print str(Solution_house_robber().rob_dp_2([6,6,4,8,4,3,3,10]))
-    print "house_robber_dp_2([1, 2, 3, 1]):"
-    print str(Solution_house_robber().rob_dp_2([1, 2, 3, 1]))
-    print "house_robber_dp_2([2, 7, 9, 3, 1]):"
-    print str(Solution_house_robber().rob_dp_2([2, 7, 9, 3, 1]))
-    print "house_robber_dp_2([183,2219,57,193,94,233,202,154,65,240,97]):"
-    print str(Solution_house_robber().rob_dp_2([183,2219,57,193,94,233,202,154,65,240,97]))
+    # print str(Solution_house_robber().rob_dp_1([6, 6, 4, 8, 4, 3, 3, 10]))
+    # print "house_robber_dp_1([1, 2, 3, 1]):"
+    # print str(Solution_house_robber().rob_dp_1([1, 2, 3, 1]))
+    # print "house_robber_dp_1([2, 7, 9, 3, 1]):"
+    # print str(Solution_house_robber().rob_dp_1([2, 7, 9, 3, 1]))
+    # print "house_robber_dp_1([183,2219,57,193,94,233,202,154,65,240,97]):"
+    # print str(Solution_house_robber().rob_dp_1(
+    #     [183, 2219, 57, 193, 94, 233, 202, 154, 65, 240, 97]))
+    print "house_robber_rob1_dp([6,6,4,8,4,3,3,10]):"
+    print str(Solution_house_robber().rob1_dp([6, 6, 4, 8, 4, 3, 3, 10]))
+    print "house_robber_rob1_dp([1, 2, 3, 1]):"
+    print str(Solution_house_robber().rob1_dp([1, 2, 3, 1]))
+    print "house_robber_rob1_dp([2, 7, 9, 3, 1]):"
+    print str(Solution_house_robber().rob1_dp([2, 7, 9, 3, 1]))
+    print "house_robber_rob1_dp([183,2219,57,193,94,233,202,154,65,240,97]):"
+    print str(Solution_house_robber().rob1_dp(
+        [183, 2219, 57, 193, 94, 233, 202, 154, 65, 240, 97]))
+    print "house_robber_rob1_dp_memo([6,6,4,8,4,3,3,10]):"
+    print str(Solution_house_robber().rob1_dp_memo([6, 6, 4, 8, 4, 3, 3, 10]))
+    print "house_robber_rob1_dp_memo([1, 2, 3, 1]):"
+    print str(Solution_house_robber().rob1_dp_memo([1, 2, 3, 1]))
+    print "house_robber_rob1_dp_memo([2, 7, 9, 3, 1]):"
+    print str(Solution_house_robber().rob1_dp_memo([2, 7, 9, 3, 1]))
+    print "house_robber_rob1_dp_memo([183,2219,57,193,94,233,202,154,65,240,97]):"
+    print str(Solution_house_robber().rob1_dp_memo(
+        [183, 2219, 57, 193, 94, 233, 202, 154, 65, 240, 97]))
+    
+    print "house_robber_house_rob_detail_seq([1, 2, 3, 1]):"
+    print str(Solution_house_robber().house_rob_detail_seq([1, 2, 3, 1])) 
+
 
     print ""
 
@@ -1984,23 +2287,28 @@ if __name__ == "__main__":
     print "canPartition([1, 8, 3, 6]):"
     print Solution_partition_equal_subset_sum().canPartition([1, 8, 3, 6])
     print "canPartition([1, 21, 3, 4, 7, 161]):"
-    print Solution_partition_equal_subset_sum().canPartition([1, 21, 3, 4, 7, 161])
+    print Solution_partition_equal_subset_sum(
+    ).canPartition([1, 21, 3, 4, 7, 161])
     print "canPartition_recursion([9, 5]):"
     print Solution_partition_equal_subset_sum().canPartition_recursion([9, 5])
     print "canPartition_recursion([1, 2, 3, 6]):"
-    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 2, 3, 6])
+    print Solution_partition_equal_subset_sum(
+    ).canPartition_recursion([1, 2, 3, 6])
     print "canPartition_recursion([1, 27, 35, 61]):"
-    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 27, 35, 61])
+    print Solution_partition_equal_subset_sum(
+    ).canPartition_recursion([1, 27, 35, 61])
     print "canPartition_recursion([1, 8, 3, 6]):"
-    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 8, 3, 6])
+    print Solution_partition_equal_subset_sum(
+    ).canPartition_recursion([1, 8, 3, 6])
     print "canPartition_recursion([1, 21, 3, 4, 7, 161]):"
-    print Solution_partition_equal_subset_sum().canPartition_recursion([1, 21, 3, 4, 7, 161])
+    print Solution_partition_equal_subset_sum(
+    ).canPartition_recursion([1, 21, 3, 4, 7, 161])
 
     print ""
 
     print "partition_equal_subset_sum: --------------"
     print "LIS([0,8,4,12,2, 16]):"
-    print Solution_LIS().lengthOfLIS([0,8,4,12,2, 16])
+    print Solution_LIS().lengthOfLIS([0, 8, 4, 12, 2, 16])
 
     print ""
 
@@ -2012,15 +2320,17 @@ if __name__ == "__main__":
     print "get_lcs_detail_seq_1(['ABCD', 'AEBD']):"
     print Solution_LCS().get_lcs_detail_seq_1(['ABCD', 'AEBD'])
     print "get_lcs_detail_seq_1(['ABCDefscgiqh', 'ABEDeabgiyy4q.h']):"
-    print Solution_LCS().get_lcs_detail_seq_1(['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
+    print Solution_LCS().get_lcs_detail_seq_1(
+        ['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
     print "get_lcs_detail_seq_2(['ABCD', 'AEBD']):"
     print Solution_LCS().get_lcs_detail_seq_2(['ABCD', 'AEBD'])
     print "get_lcs_detail_seq_2(['ABCDefscgiqh', 'ABEDeabgiyy4q.h']):"
-    print Solution_LCS().get_lcs_detail_seq_2(['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
+    print Solution_LCS().get_lcs_detail_seq_2(
+        ['ABCDefscgiqh', 'ABEDeabgiyy4q.h'])
 
     print ""
 
-    print "----------Solution_build_bt-------"    
+    print "----------Solution_build_bt-------"
     bt_root_node = Solution_build_bt().buildTree(
         [9, 3, 15, 20, 7],
         [9, 15, 7, 20, 3],
@@ -2031,7 +2341,7 @@ if __name__ == "__main__":
 
     print ""
 
-    print "----------Solution_LCA-------"  
+    print "----------Solution_LCA-------"
     test_lca_bt = TreeNode(1)
     test_lca_bt.left = TreeNode(2)
     test_lca_bt.right = TreeNode(3)
@@ -2051,7 +2361,7 @@ if __name__ == "__main__":
 
     print ""
 
-    print "----------combinationSum-------"  
+    print "----------combinationSum-------"
     print 'Solution_lc39().combinationSum([2, 3, 6, 7], 7) :'
     print Solution_lc39().combinationSum([2, 3, 6, 7], 7)
     print 'Solution_lc39().combinationSum([2, 3, 6, 7, 1], 7) :'
@@ -2061,7 +2371,7 @@ if __name__ == "__main__":
 
     print ""
 
-    print "----------combinationSum2-------"  
+    print "----------combinationSum2-------"
     print 'Solution_lc40().combinationSum2([2, 3, 6, 7], 7) :'
     print Solution_lc40().combinationSum2([2, 3, 6, 7], 7)
     print 'Solution_lc40().combinationSum2([2, 3, 6, 7, 1], 7) :'
@@ -2081,25 +2391,26 @@ if __name__ == "__main__":
 
     print ""
 
-    print "----------permuteUnique-------"  
+    print "----------permuteUnique-------"
     print 'Solution_lc47().permuteUnique([1, 1, 2]) :'
     print Solution_lc47().permuteUnique([1, 1, 2])
 
     print ""
 
-    print "----------multi_arr_sum-------"  
+    print "----------multi_arr_sum-------"
     print 'Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) :'
-    print Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18)
+    print Solution_multi_arr_sum().multi_arr_sum(
+        [[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18)
 
     print ""
 
-    print "----------bigo_thread_permute()-------"  
+    print "----------bigo_thread_permute()-------"
     print 'Solution_bigo_thread_permute().bigo_thread_permute() :'
     print Solution_bigo_thread_permute().bigo_thread_permute()
 
     print ""
 
-    print "----------sum_paths()-------"  
+    print "----------sum_paths()-------"
     """
                1
              /  \
@@ -2115,10 +2426,11 @@ if __name__ == "__main__":
     bt.right.right = TreeNode(7)
     bt.right.left = TreeNode(5)
 
-    print Solution_sum_paths().sum_paths(bt, 9)
-    print Solution_sum_paths().sum_paths(bt, 10)
-    print Solution_sum_paths().sum_paths(bt, 11)
-    print Solution_sum_paths().sum_paths(bt, 8)
+    cp_bt = copy.deepcopy(bt)
+    print Solution_sum_paths().sum_paths(cp_bt, 9)
+    print Solution_sum_paths().sum_paths(cp_bt, 10)
+    print Solution_sum_paths().sum_paths(cp_bt, 11)
+    print Solution_sum_paths().sum_paths(cp_bt, 8)
 
     print ""
 
@@ -2130,3 +2442,9 @@ if __name__ == "__main__":
 
     print "Solution_lc887().superEggDrop(2, 100) : "
     print Solution_lc887().superEggDrop(2, 100)
+
+    print ""
+
+    print "Solution_lc114().flatten() : "
+    cp_bt = copy.deepcopy(bt)
+    Solution_lc114().flatten(cp_bt)

@@ -3133,7 +3133,7 @@ int coinChange(int[] coins, int amount);
 
 如果我们将每种硬币看作是每种物品，面值金额看成是物品的重量，总金额是背包的总容量, 因为硬币无限, 这样此题就是是一个恰好装满的完全背包问题.了。不过这里不是求最多装入多少价值而是求最少装满背包的数目，所以我们只需要将[完全背包](#完全背包问题)的转态转移方程中稍微改改即可:  
 * dp[i][j]定义为: 用前i种硬币可以抽一些硬币出来装满容量为j的背包的最少硬币数量
-* 状态转移方程为: `d[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]])`
+* 状态转移方程为: `d[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]]+1)`
 
 [为什么是i-1](#为什么是i-1)  
 [为什么完全背包是i而不是i-1](#为什么完全背包是i而不是i-1)  
@@ -3261,35 +3261,28 @@ def change(self, amount, coins):
 输出：2
 解释：最大的子集是 {"0", "1"} ，所以答案是 2 。
 
+
 ## lc300-LIS问题-最长上升子序列
 
-[leetcode300题](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
-
+[leetcode300题](https://leetcode-cn.com/problems/longest-increasing-subsequence/)  
 LIS即longest-increasing-subsequence  
 给定一个无序的整数数组，找到其中最长上升子序列的长度。
-
 示例:
 输入: [10,9,2,5,3,7,101,18]
 输出: 4 
 解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。
-
 说明:  
 可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。
 你算法的时间复杂度应该为 O(n2) 。
-
 进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?
 
-参考: https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-by-leetcode-soluti/
-
+[参考](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-by-leetcode-soluti/)  
 我们定义 `dp[i]` 为选取到第i个数字的时候的最长上升子序列的长度, **注意这里的定义, 第i个数字是一定要选取的**
 则我们的状态转移方程为: `dp[i] = max(dp[j]) + 1 , 其中 0 <= j < i 且 nums[j] < nums[i]`
 
 即考虑往 dp[0…i−1] 中最长的上升子序列后面再加一个 nums[i]。由于 dp[j]dp[j] 代表 nums[0…j] 中以 nums[j] 结尾的最长上升子序列，所以如果能从 dp[j]dp[j] 这个状态转移过来，那么 nums[i] 必然要大于 nums[j]，才能将 nums[i] 放在 nums[j] 后面以形成更长的上升子序列。
-
 最后，整个数组的最长上升子序列即所有 dp[i]dp[i] 中的最大值。
-
 LIS =max(dp[i]), 其中 0 ≤ i < n
-
 下图显示了该方法：
 ![](/img/algo_newbie/dynamic_programming/lis_1.png "一个例子")
 ![](/img/algo_newbie/dynamic_programming/lis_2.png "另一个例子")
@@ -3312,7 +3305,7 @@ class Solution_LIS(object):
         for i in xrange(1, n):
             for j in xrange(0, i):
                 # 则我们的状态转移方程为: 
-                # `dp[i] = max(dp[j]) + 1 , 其中 9 <= j < i 且 nums[j] < nums[i]`
+                # `dp[i] = max(dp[j]) + 1 , 其中 0 <= j < i 且 nums[j] < nums[i]`
                 if nums[j] < nums[i]:
                     dp[i] = max(dp[i], dp[j] + 1)
         return max(dp)
@@ -3321,18 +3314,16 @@ class Solution_LIS(object):
 
 ## LCS问题-最长公共子序列问题
 
+[lc1143](https://leetcode-cn.com/problems/longest-common-subsequence/)
 LCS即Longest-Common-Sequence  
-
 给出两个字符串S1和S2, 求这两个字符串最长公共子序列的长度.  
-比如: 
+比如:  
 * S1 = ABCD
 * S2 = AEBD
 
 则最长公共子序列为ABD, 其长度为3
-
 ![](/img/algo_newbie/dynamic_programming/lcs_1.png "LCS状态转移方程")
 ![](/img/algo_newbie/dynamic_programming/lcs_2.png "LCS递归树")
-
 则代码如下:
 ``` python
 class Solution_LCS(object):
@@ -3365,7 +3356,7 @@ class Solution_LCS(object):
 ```
 
 
-## 求LCS具体的是哪个子序列
+### 求LCS具体的是哪个子序列
 
 * **思路1**: 还是用动规来解
     ``` python

@@ -891,31 +891,34 @@ class Solution_integer_break(object):
         return _res
 
     def integer_break_dp(self, n):
-        # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
-        dp = [-1] * (n + 1)
-        dp[1] = 1
         # 下面这种A思路是不行的:
         # dp[i]等价于 f(i)，
         # 那么上面针对 f(i) 写的递归公式对 dp[i] 也是适用的，我们拿来试试。
         # 关键语句:
-        #  `res = max(res, i * (n - i), max(i * self.integerBreak(n - i)))``
+        #  `res = max(res, i * (n - i), max(i * self.integerBreak(n - i)))`
         # 翻译过来就是：`dp[i] = max(_res, i * (n-i), i * dp[n-i])`
         # 则不难得出以下代码, 但因为 dp[n-i] 当前没求出来, 子问题没求出来,
         # 所以原问题也就求不出来了, 所以下面这三行代码是不行的
         # _res = -1
         # for i in xrange(1, n):
-        # dp[i] = max(_res, i * (n-i), i * dp[n-i])
-
+            # dp[i] = max(_res, i * (n-i), i * dp[n-i])
+        
         # 此时我们得下面这种B思路才行:
         # 我们用一层循环来生成上面这段A思路代码一系列的 n 值。
         # 接着我们还要生成上面A思路代码中一系列的 i 值，
         # 注意到 n - i 是要大于 0 的，
         # 因此 i 只需要循环到 n - 1 即可。
         # 由此不难翻译A思路得出以下代码(j代表n, k代表i):
-        for j in xrange(2, n+1):  # 循环到n
-            # 求解dp[j]
+        # dp[i] = max(dp[i], (i-j)*j, j* dp[i-j])  # j=1...i
+
+        # dp[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
+        dp = [ float("-inf") for _ in range(n+1) ]
+        dp[0] = float("-inf")
+        dp[1] = float("-inf")
+        dp[2] = 1
+        for j in xrange(3, n+1):  # 循环到n
             for k in xrange(1, j):  # 循环到j-1即可
-                dp[j] = max(dp[j], k * (j-k), k * dp[j-k])
+                dp[j] = max(dp[j], k*(j-k), k*dp[j-k])
         return dp[n]
 
 
@@ -1345,6 +1348,43 @@ class Solution_LIS(object):
                 if nums[j] < nums[i]:
                     dp[i] = max(dp[i], dp[j] + 1)
         return max(dp)
+
+
+class Solution_lc137(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        counts = [ 0 for _ in range(32) ]
+        # 建立一个长度为 32 的数组 counts ，通过以上方法可记录所有数字的各二进制位的 1 的出现次数。
+        for cur_num in nums:
+            _flag = 1
+            for j in range(32):
+                if cur_num & _flag:
+                    counts[j] += 1
+                _flag = _flag << 1
+        res = 0
+        m = 3
+        # 将 counts 各元素对 3 求余，则结果为 “只出现一次的数字” 的各二进制位。
+        # 利用 左移操作 和 或运算 ，可将 counts 数组中各二进位的值恢复到数字 res 上
+        # 最终返回 res 即可。
+        # 实际上，只需要修改求余数值 m ，即可实现解决 除了一个数字以外，
+        # 其余数字都出现 m 次 的通用问题.
+        for i in range(32):
+            res <<= 1
+            res |= counts[31-i] % m
+		# 那如果想从一个负数的补码还原成python的负数, 
+		# 比如把`-3`的补码`0xfffffffd`还原成python的负数,
+		#  因为py的整形数字可以视为是以一个无限长的位存储方式来实现的,
+		#   所以直接`print 0xfffffffd`他会打印`4294967293`,
+		#    因为python把`0xfffffffd`当成了`0x000000000fffffffd`, 
+		#    符号位在最前面为0, 当成正数了, 所以我们得对它的后32位之前的所有0都取反变为1,
+		#     这样符号位为1才是python存储`-1`的真正补码形式,
+		# 	 所以对于一个负数`res`来说, 得这么还原: `~(res ^ 0xffffffff)`, 
+		# 	 要先将 末尾32 位取反（即 res ^ 0xffffffff ），再将所有位取反（即 ~ ).
+		# 	  两个组合操作实质上是将数字 末尾32 以前的位取反， 末尾32 位不变。
+        return res if (counts[31] % m) == 0 else ~(res ^ 0xffffffff)
 
 
 class Solution_LCS(object):

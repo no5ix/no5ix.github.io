@@ -27,7 +27,6 @@ categories:
     * LRU缓存
     * 分布式锁
     * HR面试
-
 * java的hashmap 是怎样实现的？
 * 秒杀系统的实现? 
 * cgi是啥? pending_fin
@@ -65,7 +64,7 @@ categories:
 * 严格递增的分布式id生成器怎么做 [美团这篇文章的"Leaf-segment数据库方案"](https://tech.meituan.com/2017/04/21/mt-leaf.html)
 * 异地多活 
 * io线程和业务线程要分开吗? 是的
-* 合并字符串中的连续空格为一个如`" he    ll o  "` 得到 `" he ll o "`
+* 合并字符串中的连续空格为一个如`"^he^^^^ll^o^^"` 得到 `"^he^ll^o^"`
 
 
 ## 虾

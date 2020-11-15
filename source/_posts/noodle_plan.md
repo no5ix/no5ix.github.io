@@ -16,714 +16,8 @@ categories:
 * [字节跳动百度拼多多面笔试题](https://mp.weixin.qq.com/s?__biz=MzIwNTA4NzI1Mw==&mid=2247486096&idx=1&sn=ea19bfbecd6b0a27341cbd3fb7b2344d&scene=21#wechat_redirect)
 
 
-# misc
-
-* etcd怎么选主的? [etcd的leader选举过程](#etcd扼要总结其他细节可以不用看了)
-* 阿里巴巴面试官手册
-    * 消息队列原理
-    * 秒杀
-    * 分布式事务
-    * 日志记录
-    * LRU缓存
-    * 分布式锁
-    * HR面试
-* java的hashmap 是怎样实现的？
-* 秒杀系统的实现? 
-* cgi是啥? pending_fin
-* 研究一下卡夫卡的热点面试题 pending_fin
-* dns用的什么协议
-    * DNS占用53号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？
-    DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。
-        * DNS区域传输的时候使用TCP协议:  
-            * 辅域名服务器会定时（一般3小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，会执行一次区域传送，进行数据同步。区域传送使用TCP而不是UDP，因为数据同步传送的数据量比一个请求应答的数据量要多得多。
-            * TCP是一种可靠连接，保证了数据的准确性。
-        * 域名解析时使用UDP协议：
-        客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过三次握手，这样DNS服务器负载更低，响应更快。理论上说，客户端也可以指定向DNS服务器查询时用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。
-* 为什么计算机用补码表示负数?
-    * [参考](https://www.ruanyifeng.com/blog/2009/08/twos_complement.html)
-    * 什么是补码？ 也就是我们常说的取反加1
-    它是一种数值的转换方法，要分二步完成：
-    第一步，每一个二进制位都取相反值，0变成1，1变成0。比如，00001000的相反值就是11110111。
-    第二步，将上一步得到的值加1。11110111就变成11111000。
-    所以，00001000的2的补码就是11111000。也就是说，-8在计算机（8位机）中就是用11111000表示。
-    * 补码的好处?
-        * 在正常的加法规则下，可以利用2的补码得到正数与负数相加的正确结果。换言之，计算机只要部署加法电路和补码电路，就可以完成所有整数的加法。
-        * 如果不用补码, 在这种情况下，正常的加法规则不适用于正数与负数的加法，因此必须制定两套运算规则，一套用于正数加正数，还有一套用于正数加负数。从电路上说，就是必须为加法运算做两种电路。
-
 
 **. . .**<!-- more -->
-
-
-# 面筋
-
-## 比狗
-
-* 大数相加
-* 全排列
-* mysql语句 orderby/limit 
-* 严格递增的分布式id生成器怎么做 [美团这篇文章的"Leaf-segment数据库方案"](https://tech.meituan.com/2017/04/21/mt-leaf.html)
-* 异地多活 
-* io线程和业务线程要分开吗? 是的
-* 合并字符串中的连续空格为一个如`"^he^^^^ll^o^^"` 得到 `"^he^ll^o^"`
-
-
-## 虾
-
-### toc_one
-
-* python实现
-    * 继承
-    * 字典
-* linux
-    * 内存布局(文初堆栈)[Linux虚拟地址空间如何分布](#Linux虚拟地址空间如何分布)
-        * 动态库放在哪儿
-    * 通过进程找他正在读写的文件
-        * 可能是 `/proc`? [proc里有个fd](#proc文件夹)
-    * 通过文件找进程
-        * lsof什么参数 {% post_link linux_command_netstat_lsof %}
-    * [内核态和用户态区别](#内核态与用户态的区别)
-* 快排原址排序的话要用几个index来做?
-    * 参考: {% post_link quick_sort_and_binary_search %}
-    * 两个, 一个index指向最后一个比pivot小的元素, 初始化为-1, 一个指向将要遍历的元素
-* 二叉树
-    * 找最近公共父节点: 
-        * 参考: https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-jian-j/
-        * 两个节点 p,q 分为两种情况：
-        1) p 和 q 在相同子树中
-        2) p 和 q 在不同子树中
-        从根节点遍历，递归向左右子树查询节点信息
-        递归终止条件：如果当前节点为空或等于 p 或 q，则返回当前节点
-        递归遍历左右子树，因为是递归，使用函数后可认为左右子树已经算出结果，这句话要记住，道出了递归的精髓,
-        如果左右子树查到节点都不为空，则表明 p 和 q 分别在左右子树中，因此，当前节点即为最近公共祖先；
-        如果左右子树其中一个不为空，则返回非空节点。
-        ``` cpp
-        class Solution {
-        public:
-            TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-                if (!root || root == p || root == q) return root;
-                TreeNode *left = lowestCommonAncestor(root->left, p, q);
-                TreeNode *right = lowestCommonAncestor(root->right, p, q);
-                if (left && right) return root;
-                return left ? left : right;
-            }
-        };
-        ```
-    * 判断是否为一个二叉搜索树
-        * 记住一点, 其中序遍历是一个有序数组
-        * 判断一棵树是不是BST树方法：使用中序遍历
-            1) 对树进行中序遍历，将结果保存在temp数组中。
-            2) 检测temp数组中元素是否为升序排列。如果是，则这棵树为BST.
-* [redis集群](#redis集群)
-    * 怎么扩缩容
-    * [客户端怎么找到某个键所在的节点](#HashSlot算法)
-    * 持久化有哪些
-        * rewrite_aof怎么替换原来的aof文件的?[AOF重写的实现](#AOF重写的实现)
-* send和sendto是阻塞的么?阻塞到底意味着什么?[阻塞和非阻塞的send和recv和sendto和recvfrom](#阻塞和非阻塞的send和recv和sendto和recvfrom)
-    * send返回值意味着啥?意味着对方真的就收到了多少数据么?
-
-
-### infra_one
-
-* lsm-tree pending_fin
-* muduo的buffer怎么做的, 看muduo书吧 [也可参考这里](#个人开源-realtime-server服务器框架)
-* 跳表增加数据的时候, 索引怎么变化?
-    * <a href="{% post_path 'algo_newbie' %}#跳表增加数据时索引怎么变化">跳表增加数据时索引怎么变化</a>
-* zset为什么不用红黑树, 用跳表? 答: [为什么zset用跳表不用红黑树](#为什么zset用跳表不用红黑树)
-* cas的aba问题: 给数据加版本号
-* 乐观锁怎么实现:
-    * 加版本号
-    * cas
-* cap的c是哪种一致性? 线性一致性是啥?
-    * c是强一致性
-    * 线性一致性就是强一致性也称为为原子一致性
-    * 线性一致性是怎么做到的? raft协议怎么做到? 答: [etcd线性一致性读](#etcd线性一致性读)
-* 同构问题, [leetcode-isomorphic-strings](https://leetcode-cn.com/problems/isomorphic-strings/)
-
-
-### infra_two
-
-* 十个并发请求写日志，传入的两个参数（参数1时间戳， 参数2内容）， 然后按照传入的参数1的时间戳排序写日志（提示：hbase就有这个特性，全局有序的存储？ 不用严格有序， 阶段有序 pending_fini
-
-* rpc框架原理,msgpack是啥,出异常怎么办？被调用方出了问题,调用方怎么办？
-    * http://www.voycn.com/article/fenbushifuwurpcfenbushixiaoxiduiliemqmianshitijingxuan
-
-* 分布式事务: [分布式事务](#分布式事务)
-* 登录session的实现, 登录微服务/排队微服务各种流程搞清楚， aid是干嘛的 
-    * [登录微服务和排队微服务](#登录微服务和排队微服务)
-* git rebase原理/git reset是啥意思？原理
-    * git rebase: <a href="{% post_path 'git_tutorial_one' %}#rebase">rebase</a>
-    * git reset: <a href="{% post_path 'git_tutorial_one' %}#撤销与回退">reset</a>
-* 分布式全局递增id: [id生成器如何实现全局递增](#id生成器如何实现全局递增)
-* 做登录的时候`OAuth2`么？`OAuth`是啥？
-    * 参考: https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html
-    * 参考: http://www.ruanyifeng.com/blog/2019/04/github-oauth.html
-    * OAuth 2.0 规定了四种获得令牌的流程。你可以选择最适合自己的那一种，向第三方应用颁发令牌。下面就是这四种授权方式。
-        * 授权码（authorization-code）
-        * 隐藏式（implicit）
-        * 密码式（password）：
-        * 客户端凭证（client credentials）
-        注意，不管哪一种授权方式，第三方应用申请令牌之前，都必须先到系统备案，说明自己的身份，然后会拿到两个身份识别码：客户端 ID（client ID）和客户端密钥（client secret）。这是为了防止令牌被滥用，没有备案过的第三方应用，是不会拿到令牌的。
-    * 举个**OAuth授权码**方式的例子,授权码（authorization code）方式，指的是第三方应用先申请一个授权码，然后再用该码获取令牌。这种方式是最常用的流程，安全性也最高，它适用于那些有后端的 Web 应用。授权码通过前端传送，令牌则是储存在后端，而且所有与资源服务器的通信都在后端完成。这样的前后端分离，可以避免令牌泄漏。 流程如下:  
-        1\. A 网站让用户跳转到 GitHub。
-        2\. GitHub 要求用户登录，然后询问"A 网站要求获得 xx 权限，你是否同意？"
-        3\. 用户同意，GitHub 就会重定向回 A 网站，同时发回一个授权码。
-        4\. A 网站使用授权码，向 GitHub 请求令牌。
-        5\. GitHub 返回令牌.
-        6\. A 网站使用令牌，向 GitHub 请求用户数据。
-
-
-
-# 算法与数据结构
-
-* 推荐参考**本博客总结**的 {% post_link algo_newbie %}
-* 推荐参考**本博客总结**的 {% post_link algo_practice %}
-
-* A星算法 pending_fin
-* dijkstra算法 pending_fin
-* 动态规划与贪心有什么区别:
-    * 贪心着眼现实当下，动规谨记历史进程。
-    * 动态规划希望复用子问题的解，最好被反复依赖。其本质还是穷举，所以当前并不知道哪个子问题的解会构成最终最优解。但知道这个子问题可能会被反复计算，所以把结果缓存起来。整个过程是树状的搜索过程。
-    * 贪心希望每次都能排除一堆子问题。它不需要复用子问题的解，当前最优解从子问题最优解即可得出。整个过程是线性的推导过程。
-* 如何判断一个图是否有环
-* 桶排序/线段树/统计树/排序树
-
-
-**海量问题**: 可参考 https://juejin.im/entry/6844903519640616967
-
-* 10个1G数据, 内存200MB, 如何去重 pending_fin
-
-
-# 设计模式
-
-* 单例模式
-* 适配器模式: 将一个类的接口转换成客户希望的另外一个接口。适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。主要解决的问题：主要解决在软件系统中，常常要将一些"现存的对象"放到新的环境中，而新环境要求的接口是现对象不能满足的。
-* 工厂模式
-* 观察者模式
-* 享元模式: 池的思想
-
-
-# python
-
-* mro问题
-* 怎么实现一个协程库?
-* mock是啥: https://zhuanlan.zhihu.com/p/30380243
-
-
-## 元类
-
-参考: https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072
-
-python元类的使用场景, 比如orm框架, ORM全称“Object Relational Mapping”，即对象-关系映射，就是把关系数据库的一行映射为一个对象，也就是一个类对应一个表，这样，写代码更简单，不用直接操作SQL语句。
-
-`type()`函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过`type()`函数创建出`Hello`类，而无需通过`class Hello(object)...`的定义：
-
-```
-\>>> def fn(self, name='world'): # 先定义函数
-...     print('Hello, %s.' % name)
-...
->>> Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
->>> h = Hello()
->>> h.hello()
-Hello, world.
->>> print(type(Hello))
-<class 'type'>
->>> print(type(h))
-<class '__main__.Hello'>
-```
-
-要创建一个 class 对象，`type()`函数依次传入 3 个参数：
-
-1. class 的名称；
-2. 继承的父类集合，注意 Python 支持多重继承，如果只有一个父类，别忘了 tuple 的单元素写法；
-3. class 的方法名称与函数绑定，这里我们把函数`fn`绑定到方法名`hello`上。
-
-**通过`type()`函数创建的类和直接写 class 是完全一样的，因为 Python 解释器遇到 class 定义时，仅仅是扫描一下 class 定义的语法，然后调用`type()`函数创建出 class**。
-
-正常情况下，我们都用`class Xxx...`来定义类，但是，`type()`函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。
-
-### metaclass
-
-除了使用`type()`动态创建类以外，要控制类的创建行为，还可以使用 metaclass。
-metaclass，直译为元类，简单的解释就是：
-当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。
-但是如果我们想创建出类呢？那就必须根据 metaclass 创建出类，所以：先定义 metaclass，然后创建类。
-连接起来就是：先定义 metaclass，就可以创建类，最后创建实例。
-所以，metaclass 允许你创建类或者修改类。换句话说，你可以把类看成是 metaclass 创建出来的 “实例”。
-我们先看一个简单的例子，这个 metaclass 可以给我们自定义的 MyList 增加一个`add`方法：
-定义`ListMetaclass`，按照默认习惯，metaclass 的类名总是以 Metaclass 结尾，以便清楚地表示这是一个 metaclass：
-``` python
-class ListMetaclass(type):
-    def __new__(cls, name, bases, attrs):
-        attrs\['add'\] = lambda self, value: self.append(value)
-        return type.__new__(cls, name, bases, attrs)
-```
-有了 ListMetaclass，我们在定义类的时候还要指示使用 ListMetaclass 来定制类，传入关键字参数`metaclass`：
-``` python
-class MyList(list, metaclass=ListMetaclass):
-    pass
-```
-
-当我们传入关键字参数`metaclass`时，魔术就生效了，它指示 Python 解释器在创建`MyList`时，要通过`ListMetaclass.__new__()`来创建，在此，我们可以修改类的定义，比如，加上新的方法，然后，返回修改后的定义。
-
-`__new__()`方法接收到的参数依次是：
-
-1. 当前准备创建的类的对象；
-2. 类的名字；
-3. 类继承的父类集合；
-4. 类的方法集合。
-
-测试一下`MyList`是否可以调用`add()`方法：
-```
-\>>> L = MyList()
->>> L.add(1)
->> L
-\[1\]
-```
-而普通的`list`没有`add()`方法：
-```
-\>>> L2 = list()
->>> L2.add(1)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-AttributeError: 'list' object has no attribute 'add'
-```
-
-## 装饰器
-
-``` python
-def log(func):
-    def wrapper(*args, **kw):
-        print('call %s():' % func.__name__)
-        return func(*args, **kw)
-    return wrapper
-```
-观察上面的log，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：
-``` python
-@log
-def now():
-    print('2015-3-25')
-```
-调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志：
-
-```
->>> now()
-call now():
-2015-3-25
-```
-把@log放到now()函数的定义处，相当于执行了语句：
-`now = log(now)`
-由于log()是一个decorator，返回一个函数，所以，原来的now()函数仍然存在，只是现在同名的now变量指向了新的函数，于是调用now()将执行新函数，即在log()函数中返回的wrapper()函数。
-
-wrapper()函数的参数定义是(*args, **kw)，因此，wrapper()函数可以接受任意参数的调用。在wrapper()函数内，首先打印日志，再紧接着调用原始函数。
-
-如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本：
-``` python
-def log(text):
-    def decorator(func):
-        def wrapper(*args, **kw):
-            print('%s %s():' % (text, func.__name__))
-            return func(*args, **kw)
-        return wrapper
-    return decorator
-```
-这个3层嵌套的decorator用法如下：
-``` python
-@log('execute')
-def now():
-    print('2015-3-25')
-```
-执行结果如下：
-```
->>> now()
-execute now():
-2015-3-25
-```
-和两层嵌套的decorator相比，3层嵌套的效果是这样的：
-`now = log('execute')(now)`
-我们来剖析上面的语句，首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。
-
-
-## python命令行参数
-
-* -u参数的使用：python命令加上-u（unbuffered）参数后会强制其标准输出也同标准错误一样不通过缓存直接打印到屏幕。
-* -c参数，支持执行单行命令/脚本。如: `python -c "import os;print('hello'),print('world')"`
-
-### `python -m test_folder/test.py`与`python test_folder/test`有什么不同
-
-桌面的test_folder文件夹下有个test.py
-``` python test.py
-import sys
-print(sys.path)
-```
-
-运行看看:   
-```
-hulinhong@GIH-D-14531 MINGW64 ~/Desktop
-$ python test_folder/test.py
-['C:\\Users\\hulinhong\\Desktop\\test_folder', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
-
-hulinhong@GIH-D-14531 MINGW64 ~/Desktop
-$ python -m test_folder.test
-['C:\\Users\\hulinhong\\Desktop', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
-```
-细心的同学会发现，区别就是在第一个路径。
-python直接启动是把test.py文件所在的目录放到了sys.path属性中。
-模块启动是把你输入命令的目录（也就是当前路径），放到了sys.path属性中
-
-所以就会有下面的情况:
-
-目录结构如下
-```
-package/
-	__init__.py
-	mod1.py
-package2/
-	__init__.py
-	run.py  
-```
-run.py 内容如下
-``` python
-import sys
-from package import mod1
-print(sys.path)
-```
-如何才能启动run.py文件？
-
-* 直接启动（失败）
-    ```
-    ➜  test_import_project git:(master) ✗ python package2/run.py
-    Traceback (most recent call last):
-      File "package2/run.py", line 2, in <module>
-        from package import mod1
-    ImportError: No module named package
-    ```
-
-* 以模块方式启动（成功）
-    ```
-    ➜  test_import_project git:(master) ✗ python -m package2.run
-    ['C:\\Users\\hulinhong\\Desktop',
-    '/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python27.zip',
-    ...]
-    ```
-当需要启动的py文件引用了一个模块。你需要注意：在启动的时候需要考虑sys.path中有没有你import的模块的路径！
-这个时候，到底是使用直接启动，还是以模块的启动？目的就是把import的那个模块的路径放到sys.path中。你是不是明白了呢？
-
-> 官方文档参考： http://www.pythondoc.com/pythontutorial3/modules.html
-
-导入一个叫 mod1 的模块时，解释器先在当前目录中搜索名为 mod1.py 的文件。如果没有找到的话，接着会到 sys.path 变量中给出的目录列表中查找。 sys.path 变量的初始值来自如下：
-
-输入脚本的目录（当前目录）。
-* 环境变量 PYTHONPATH 表示的目录列表中搜索(这和 shell 变量 PATH 具有一样的语法，即一系列目录名的列表)。
-* Python 默认安装路径中搜索。
-* 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
-
-
-## 在python程序中调用cpp的库创建的线程是否受制于GIL?
-
-首先要理解什么是GIL.
-
-Python 的多线程是真的多线程，只不过在任意时刻，它们中只有一个线程能够取得 GIL 从而被允许执行 Python 代码。其它线程要么等着，要么干别的和 Python 无关的事情（比如等待系统 I/O，或者算点什么东西）。
-
-那如果是通过CPP扩展创建出来的线程，可以摆脱这个限制么？
-
-很简单，不访问 Python 的数据和方法，就和 GIL 没任何关系。如果需要访问 Python，还是需要先取得 GIL
-
-GIL 是为了保护 Python 数据不被并发访问破坏，所以当你不访问 Python 的数据的时候自然就可以释放（或者不取得）GIL。反过来，如果需要访问 Python 的数据，就一定要取得 GIL 再访问。PyObject 等不是线程安全的。多线程访问任何非线程安全的数据都需要先取得对应的锁。Python 所有的 PyObject 什么的都共享一个锁，它就叫 GIL。
-
-
-## `__new__` 与 `__del__` 与 `__init__`
-
-先来看一个单例模式的实现
-``` python
-class Demo:
-    __isinstance = False
-    def __new__(cls, *args, **kwargs):
-        if not cls.__isinstance:  # 如果被实例化了
-            cls.__isinstance = object.__new__(cls)  # 否则实例化
-        return cls.__isinstance  # 返回实例化的对象
-
-    def __init__(self, name):
-        self.name = name
-        print('my name is %s'%(name))
-    
-    def __del__(self):
-        print('886, %s'%(self.name))
-
-
-d1 = Demo('Alice')
-d2 = Demo('Anew')
-print(d1)
-print(d2)
-```
-
-打印:  
-```
-my name is Alice
-my name is Anew
-<__main__.Demo object at 0x000001446604D3C8>
-<__main__.Demo object at 0x000001446604D3C8>
-886, Anew
-```
-
-`__new__` 是负责对当前类进行实例化，并将实例返回，并传给`__init__`方法，`__init__`方法中的self就是指代`__new__`传过来的对象，所以再次强调，`__init__`是实例化后调用的第一个方法。
-
-`__del__`在对象销毁时被调用，往往用于清除数据或还原环境等操作，比如在类中的其他普通方法中实现了插入数据库的语句，当对象被销毁时我们需要将数据还原，那么这时可以在`__del__`方法中实现还原数据库数据的功能。`__del__`被成为析构方法，同样和C++中的析构方法类似。
-
-
-## python垃圾回收
-
-总体来说，在Python中，主要通过引用计数进行垃圾回收；通过 “标记-清除” 解决容器对象可能产生的循环引用问题；通过 “分代回收” 以空间换时间的方法提高垃圾回收效率。
-
-* 引用计数
-* 标记清除(Mark and Sweep)
-* 分代回收
-
-
-### 标记清除咋弄的
-
-参考: https://zhuanlan.zhihu.com/p/83251959
-
-Python 采用了 **“标记-清除”(Mark and Sweep)** 算法，解决容器对象可能产生的循环引用问题。(注意，只有容器对象才会产生循环引用的情况，比如列表、字典、用户自定义类的对象、元组等。而像数字，字符串这类简单类型不会出现循环引用。作为一种优化策略，对于只包含简单类型的元组也不在标记清除算法的考虑之列)
-
-跟其名称一样，该算法在进行垃圾回收时分成了两步，分别是：
-
-* A）标记阶段，遍历所有的对象，如果是可达的（reachable），也就是还有对象引用它，那么就标记该对象为可达；
-* B）清除阶段，再次遍历对象，如果发现某个对象没有标记为可达，则就将其回收。
-
-如下图所示，在标记清除算法中，为了追踪容器对象，需要每个容器对象维护两个额外的指针，用来将容器对象组成一个双端链表，指针分别指向前后两个容器对象，方便插入和删除操作。python 解释器 (Cpython) 维护了两个这样的双端链表，一个链表存放着需要被扫描的容器对象，另一个链表存放着临时不可达对象。在图中，这两个链表分别被命名为”Object to Scan”和”Unreachable”。图中例子是这么一个情况：link1,link2,link3 组成了一个引用环，同时 link1 还被一个变量 A(其实这里称为名称 A 更好)引用。link4 自引用，也构成了一个引用环。从图中我们还可以看到，每一个节点除了有一个记录当前引用计数的变量 ref\_count 还有一个 gc\_ref 变量，这个 gc\_ref 是 ref\_count 的一个副本，所以初始值为 ref\_count 的大小。
-
-![](/img/noodle_plan/python/v2-0d5071093adaa02bc03fa3dfd91aa5bc_720w.jpg)
-
-gc 启动的时候，会逐个遍历”Object to Scan” 链表中的容器对象，并且将当前对象所引用的所有对象的 gc\_ref 减一。(扫描到 link1 的时候，由于 link1 引用了 link2, 所以会将 link2 的 gc\_ref 减一，接着扫描 link2, 由于 link2 引用了 link3, 所以会将 link3 的 gc\_ref 减一…..) 像这样将”Objects to Scan” 链表中的所有对象考察一遍之后，两个链表中的对象的 ref\_count 和 gc\_ref 的情况如下图所示。这一步操作就相当于解除了循环引用对引用计数的影响。
-
-![](https://pic3.zhimg.com/v2-d7314ead6b303f08a91687577c045585_b.jpg)
-
-接着，gc 会再次扫描所有的容器对象，如果对象的 gc\_ref 值为 0，那么这个对象就被标记为 GC\_TENTATIVELY\_UNREACHABLE，并且被移至”Unreachable” 链表中。下图中的 link3 和 link4 就是这样一种情况。
-
-![](https://pic1.zhimg.com/v2-d3c3f52615fb704c26bd53dbb178767c_b.jpg)
-
-如果对象的 gc\_ref 不为 0，那么这个对象就会被标记为 GC\_REACHABLE。同时当 gc 发现有一个节点是可达的，那么他会递归式的将从该节点出发可以到达的所有节点标记为 GC\_REACHABLE, 这就是下图中 link2 和 link3 所碰到的情形。
-
-![](https://pic1.zhimg.com/v2-510f4d2d37aabdbc8978d9e47630237d_b.jpg)
-
-除了将所有可达节点标记为 GC\_REACHABLE 之外，如果该节点当前在”Unreachable” 链表中的话，还需要将其移回到”Object to Scan” 链表中，下图就是 link3 移回之后的情形。
-
-![](/img/noodle_plan/python/v2-6fd40c055a6633c654acaf05f472c1b2_720w.jpg)
-
-第二次遍历的所有对象都遍历完成之后，存在于”Unreachable” 链表中的对象就是真正需要被释放的对象。如上图所示，此时 link4 存在于 Unreachable 链表中，gc 随即释放之。
-
-**上面描述的垃圾回收的阶段，会暂停整个应用程序，等待标记清除结束后才会恢复应用程序的运行。**
-
-
-#### 为啥标记清除回收无法回收重写了`__del__`方法的类对象
-
-> Circular references which are garbage are detected when the option cycle detector is enabled (it’s on by default), but can only be cleaned up if there are no Python-level `__del__`() methods involved.
-
-官方文档中表明启用周期检测器时会检测到垃圾的循环引用（默认情况下它是打开的)，但只有在没有涉及 Python `__del__()` 方法的情况下才能清除。Python 不知道破坏彼此保持循环引用的对象的安全顺序，因此它则不会为这些方法调用析构函数。简而言之，如果定义了 `__del__` 函数，那么在循环引用中Python解释器无法判断析构对象的顺序，因此就不做处理。
-
-
-### 分代回收
-
-在循环引用对象的回收中，整个应用程序会被暂停，为了减少应用程序暂停的时间，Python 通过“分代回收”(Generational Collection)以空间换时间的方法提高垃圾回收效率。
-
-分代回收是基于这样的一个统计事实，对于程序，存在一定比例的内存块的生存周期比较短；而剩下的内存块，生存周期会比较长，甚至会从程序开始一直持续到程序结束。生存期较短对象的比例通常在 80%～90% 之间，这种思想简单点说就是：对象存在时间越长，越可能不是垃圾，应该越少去收集。这样在执行标记-清除算法时可以有效减小遍历的对象数，从而提高垃圾回收的速度。
-
-python gc给对象定义了三种世代(0,1,2),每一个新生对象在generation zero中，如果它在一轮gc扫描中活了下来，那么它将被移至generation one,在那里他将较少的被扫描，如果它又活过了一轮gc,它又将被移至generation two，在那里它被扫描的次数将会更少。
-
-gc的扫描在什么时候会被触发呢?答案是当某一世代中被分配的对象与被释放的对象之差达到某一阈值的时候，就会触发gc对某一世代的扫描。值得注意的是当某一世代的扫描被触发的时候，比该世代年轻的世代也会被扫描。也就是说如果世代2的gc扫描被触发了，那么世代0,世代1也将被扫描，如果世代1的gc扫描被触发，世代0也会被扫描。
-
-该阈值可以通过下面两个函数查看和调整:
-
-``` python
-gc.get_threshold() # (threshold0, threshold1, threshold2).
-gc.set_threshold(threshold0[, threshold1[, threshold2]])
-```
-下面对set_threshold()中的三个参数threshold0, threshold1, threshold2进行介绍。gc会记录自从上次收集以来新分配的对象数量与释放的对象数量，当两者之差超过threshold0的值时，gc的扫描就会启动，初始的时候只有世代0被检查。如果自从世代1最近一次被检查以来，世代0被检查超过threshold1次，那么对世代1的检查将被触发。相同的，如果自从世代2最近一次被检查以来，世代1被检查超过threshold2次，那么对世代2的检查将被触发。get_threshold()是获取三者的值，默认值为(700,10,10).
-
-
-# C++
-
-参考: 看之前一个哥们总结的c++要点 https://interview.huihut.com/
-
-* `new` 和 `delete` 为什么要配对用:
-    * ``` cpp
-        class A{
-        //...
-        };
-        A *pa = new A();
-        A *pas = new A[NUM]();
-      ```
-        * delete []pas; //详细流程: delete[] pas 用来释放pas指向的内存！！还逐一调用数组中每个对象的destructor！！
-        * delete []pa; //会发生什么, 答案是调用未知次数的A的析构函数. 因为delete[]会去通过pa+offset找一个基于pa的偏移量找一个内存里的数据, 他假定这个内存里放了要调用析构的次数n这个数据, 而这个内存里到底是多少是未知的.
-        * delete pas; //哪些指针会变成野指针, 答案是pas和A[0]中的指针会变成野指针. 因为只有这两个指针指向的内存被释放了, 也就是说, 仅释放了pas指针指向的这个数组的全部内存空间, 以及只调用了a[0]对象的析构函数
-* cqq vec set map list
-    * {% post_link stl_vector_string %}
-    * {% post_link stll_set_map_tutorial %}
-* map的`[]`和insert的区别?
-    * insert 含义是：如果key存在，则插入失败，如果key不存在，就创建这个key－value。实例: `map.insert((key, value))`
-    * 利用下标操作的含义是：如果这个key存在，就更新value；如果key不存在，就创建这个key－value对 实例：`map[key] = value`
-* vector的resize和reserve的区别?
-    * 总结: 
-        * resize既分配了空间，也创建了对象，可以通过下标访问。当new_size大于原size, 则resize既修改capacity大小，也修改size大小。否则只修改size大小.
-        * reserve只分配了空间, 也就是说它只修改capacity大小，不修改size大小, 若 new_cap 小于等于当前的 capacity(), 它啥也不干.
-    * resize: 重设容器大小以容纳 count 个元素。
-    若当前大小大于 count ，则减小容器为其首 count 个元素。
-    若当前大小小于 count ，
-        1) 则后附额外的默认插入的元素
-        2) 则后附额外的 value 的副本
-    * reserve: 增加 vector 的容量到大于或等于 new_cap 的值。若 new_cap 大于当前的 capacity() ，则分配新存储，**否则该方法不做任何事**。reserve() 不更改 vector 的 size 。若 new_cap 大于 capacity() ，则所有迭代器，包含尾后迭代器和所有到元素的引用都被非法化。否则，没有迭代器或引用被非法化。
-* 字节对齐
-    * {% post_link sizeof_struct %}
-* 定位new 
-    * ``` cpp
-    #include <iostream>
-    using namespace std;
-    int main() {
-        char buffer[512];   //chunk of memory内存池
-        int *p2, *p3;
-        //定位new:
-        p2 = new (buffer) int[10];
-        p2[0] = 99;
-        p2[1] = 88;
-        cout << "buffer = " <<(void *)buffer << endl; //内存池地址
-        cout << "p2 = " << p2 << endl;             //定位new指向的地址
-        cout << "p2[0] = " << p2[0] << endl;
-        p3 = new (buffer) int[2];
-        p3[0] = 1;
-        p3[1] = 2;
-        cout << "p3 = " << p3 << endl;
-        cout << "p2[0] = " << p2[0] << endl;
-        cout << "p2[1] = " << p2[1] << endl;
-        cout << "p2[2] = " << p2[2] << endl;
-        cout << "p2[3] = " << p2[3] << endl;
-        return 0;
-    }
-    ```
-    结果发现p3和p2还有buffer都是使用同样的内存地址，符合指定地址的内存块，而且p3在指定位置覆盖了p2的前两处的值。
-* c++一个空类会生成什么 (答: 默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) 
-* 虚函数（virtual）可以是内联函数（inline）吗？
-    * 虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。
-    * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
-    * inline virtual 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 Base::who()），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。
-    虚函数内联使用:
-    ``` cpp
-    // 此处的虚函数 who()，是通过类（Base）的具体对象（b）来调用的，编译期间就能确定了，所以它可以是内联的，但最终是否内联取决于编译器。 
-    Base b;
-    b.who();
-
-    // 此处的虚函数是通过指针调用的，呈现多态性，需要在运行时期间才能确定，所以不能为内联。  
-    Base *ptr = new Derived();
-    ptr->who();
-    ```
-* 虚函数指针、虚函数表
-    * 虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定。
-    * 虚函数表：在程序内存的`只读数据段`（.rodata section，见：[CPP目标文件内存布局](#CPP目标文件内存布局)），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建。
-* 内存泄漏的工具 vargrid..? 还有啥工具
-* 了解ASAN查找内存越界问题 
-* cpp找找冰川, 大梦龙图的面试题，网上常用题
-* gdb怎么切换线程
-* C++ 的动态多态怎么实现的？
-* C++ 的构造函数可以是虚函数吗？
-* 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
-
-
-## 编译过程
-
-``` puml
-[*] --> hello.c
-[*] --> stdio.h
-hello.c -right-> 预处理
-stdio.h --> 预处理
-预处理 -right-> hello.i 
-hello.i -right-> 编译
-编译 -right-> hello.a
-hello.a -right-> 汇编
-汇编 -right-> hello.o
-hello.o --> 链接
-libc.a --> 链接
-链接 -right-> a.out
-```
-
-1. 预处理(Preprocessing): 做一些类似于将所有的`#define`删除，并且展开所有的宏定义的操作, 然后生成hello.i
-2. 编译(Compilation): 编译过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码。得到hello.a
-3. 汇编(Assembly): 汇编器是将汇编代码转变成机器可以执行的命令，每一个汇编语句几乎都对应一条机器指令。汇编相对于编译过程比较简单，根据汇编指令和机器指令的对照表一一翻译即可。得到hello.o
-4. 链接(Linking): 通过调用链接器ld来链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件
-   * 静态链接: 指在编译阶段直接把静态库加入到可执行文件中去，这样可执行文件会比较大
-   * 动态链接: 指链接阶段仅仅只加入一些描述信息，而程序执行时再从系统中把相应动态库加载到内存中去。
-
-
-
-## 目标文件
-
-编译器编译源代码后生成的文件叫做目标文件。目标文件从结构上讲，它是已经编译后的可执行文件格式，只是还没有经过链接的过程，其中可能有些符号或有些地址还没有被调整。
-
-> 可执行文件（Windows 的 `.exe` 和 Linux 的 `ELF`）、动态链接库（Windows 的 `.dll` 和 Linux 的 `.so`）、静态链接库（Windows 的 `.lib` 和 Linux 的 `.a`）都是按照可执行文件格式存储（Windows 按照 PE-COFF，Linux 按照 ELF）
-
-目标文件格式:  
-*   Windows 的 PE（Portable Executable），或称为 PE-COFF，`.obj` 格式
-*   Linux 的 ELF（Executable Linkable Format），`.o` 格式
-*   Intel/Microsoft 的 OMF（Object Module Format）
-*   Unix 的 `a.out` 格式
-*   MS-DOS 的 `.COM` 格式
-
-> PE 和 ELF 都是 COFF（Common File Format）的变种
-
-### CPP目标文件内存布局
-
-<table><thead><tr><th>段</th><th>功能</th></tr></thead><tbody><tr><td>File Header</td><td>文件头，描述整个文件的文件属性（包括文件是否可执行、是静态链接或动态连接及入口地址、目标硬件、目标操作系统等）</td></tr><tr><td>.text section</td><td>代码段，执行语句编译成的机器代码</td></tr><tr><td>.data section</td><td>数据段，已初始化的全局变量和局部静态变量</td></tr><tr><td>.bss section</td><td>BSS 段（Block Started by Symbol），未初始化的全局变量和局部静态变量（因为默认值为 0，所以只是在此预留位置，不占空间）</td></tr><tr><td>.rodata section</td><td>只读数据段，存放只读数据，一般是程序里面的只读变量（如 const 修饰的变量）和字符串常量</td></tr><tr><td>.comment section</td><td>注释信息段，存放编译器版本信息</td></tr><tr><td>.note.GNU-stack section</td><td>堆栈提示段</td></tr></tbody></table>
-
-
-# Go pending_fin
-
-* defer: 推迟执行, 一般用于做一些收尾工作
-* sync库
-    * sync.Map: Go 语言原生 map 并不是线程安全的，对它进行并发读写操作的时候，需要加锁。而sync.Map是线程安全的，读取，插入，删除也都保持着常数级的时间复杂度。具体实现可参考:
-        * https://juejin.im/post/6844903895227957262
-        * https://www.cnblogs.com/qcrao-2018/p/12833787.html
-      * sync.Pool: 临时对象池, 提供put/get方法, 临时对象池 sync.Pool 非常适用于在并发编程中用作临时对象缓存，实现对象的重复使用，优化 GC，提升系统性能，但是由于不能设置对象池大小，而且放进对象池的临时对象每次 GC 运行时会被清除，所以只能用作简单的临时对象池，不能用作持久化的长连接池，比如数据库连接池、Redis 连接池。
-    * sync.Mutex: 互斥锁
-    * sync.RWMutex: 读写锁
-    * sync.Once: 类似pthread_once
-    * sync.Atomic: 原子数
-* select: pending_fin
-* context: pending_fin
-    * 比如有一个网络请求Request，每个Request都需要开启一个goroutine做一些事情，这些goroutine又可能会开启其他的goroutine。这样的话， 我们就可以通过Context，来跟踪这些goroutine，并且通过Context来控制他们的目的，这就是Go语言为我们提供的Context，中文可以称之为“上下文”。
-    另外一个实际例子是，在Go服务器程序中，每个请求都会有一个goroutine去处理。然而，处理程序往往还需要创建额外的goroutine去访问后端资源，比如数据库、RPC服务等。由于这些goroutine都是在处理同一个请求，所以它们往往需要访问一些共享的资源，比如用户身份信息、认证token、请求截止时间等。而且如果请求超时或者被取消后，所有的goroutine都应该马上退出并且释放相关的资源。这种情况也需要用Context来为我们取消掉所有goroutine
-
-
-## goroutine协程调度
-
-参考:
-* https://studygolang.com/articles/26795
-* https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/#65-%E8%B0%83%E5%BA%A6%E5%99%A8
-
-Golang 则引入了 G/P/M 模型来实现调度，那么 Golang 的运行时（runtime）如何实现对 goroutine 的调度从而合理分配 CPU 资源呢？
-
-![](/img/noodle_plan/go/golang-routine-scheduler.png)
-
-M:N模型，内核空间开启M个内核线程，一个内核空间线程对应N个用户空间线程。效率非常高，但是管理复杂。
-
-本质上goroutine就是协程，但是完全运行在用户态，借鉴了M:N模型.
-相比其他语言，golang采用了MPG模型管理协程，更加高效，但是管理非常复杂。
-* M：内核级线程
-* G：代表一个goroutine
-* P：Processor，处理器，用来管理和执行goroutine的。
-
-**G-M-P三者的关系与特点**：
-* P的个数取决于设置的GOMAXPROCS，go新版本默认使用最大内核数，比如你有8核处理器，那么P的数量就是8
-* M的数量和P不一定匹配，可以设置很多M，M和P绑定后才可运行，多余的M处于休眠状态。
-* P包含一个LRQ（Local Run Queue）本地运行队列，这里面保存着P需要执行的协程G的队列
-* 除了每个P自身保存的G的队列外，调度器还拥有一个全局的G队列GRQ（Global Run Queue），这个队列存储的是所有未分配的协程G。
-
-**设计策略**:   
-* 复用线程：避免频繁的创建、销毁线程，而是对线程的复用。
-* work stealing机制: 当本线程无可运行的G时，尝试从其他线程绑定的P偷取G，而不是销毁线程。
-* hand off机制: 当本线程因为G进行系统调用阻塞时，线程释放绑定的P，把P转移给其他空闲的线程执行。
-* 利用并行：GOMAXPROCS设置P的数量，最多有GOMAXPROCS个线程分布在多个CPU上同时运行。GOMAXPROCS也限制了并发的程度，比如GOMAXPROCS = 核数/2，则最多利用了一半的CPU核进行并行。
-* 抢占：在coroutine中要等待一个协程主动让出CPU才执行下一个协程，在Go中，一个goroutine最多占用CPU 10ms，防止其他goroutine被饿死，这就是goroutine不同于coroutine的一个地方。
-* 全局G队列：在新的调度器中依然有全局G队列，但功能已经被弱化了，当M执行work stealing从其他P偷不到G时，它可以从全局G队列获取G。
-
-![调度流程图](/img/noodle_plan/go/golang-routine-scheduler_flow_diagram.png)
 
 
 # Linux文件系统
@@ -731,7 +25,7 @@ M:N模型，内核空间开启M个内核线程，一个内核空间线程对应N
 
 详细的可以查看本博客的这篇文章哈{% post_link fd_inode 文件描述符FD与Inode %}
 
-* fd数目大小可以改变吗
+* fd数目大小的限制可以改变吗
     * 可以, 去改一些系统参数即可, 参考 <a href="{% post_path 'fd_inode' %}#文件描述符限制">文件描述符限制</a>
 
 ## inode
@@ -794,7 +88,11 @@ Linux中多进程环境下，打开同一个文件，当一个进程进行读写
 
 学操作系统原理的时候，我们知道，linux是通过link的数量来控制文件删除，只有当一个文件不存在任何link的时候，这个文件才会被删除。
 
-**而每个文件都会有2个link计数器-- `i_count` 和 `i_nlink`。`i_count`的意义是当前使用者的数量，也就是打开文件进程的个数。**`i_nlink`的意义是介质连接的数量；或者可以理解为 `i_count`是内存引用计数器，`i_nlink`是硬盘引用计数器。再换句话说，当文件被某个进程引用时，`i_count` 就会增加；当创建文件的硬连接的时候，`i_nlink` 就会增加。
+**而每个文件都会有2个link计数器:**
+* `i_count`: `i_count`的意义是当前使用者的数量，也就是打开文件进程的个数。
+* `i_nlink`: `i_nlink`的意义是介质连接的数量.
+
+或者可以理解为 `i_count`是内存引用计数器，`i_nlink`是硬盘引用计数器。再换句话说，当文件被某个进程引用时，`i_count` 就会增加；当创建文件的硬连接的时候，`i_nlink` 就会增加。
 
 对于 rm 而言，就是减少 `i_nlink`。这里就出现一个问题，如果一个文件正在被某个进程调用，而用户却执行 rm 操作把文件删除了，会出现什么结果呢？
 
@@ -805,9 +103,9 @@ Linux中多进程环境下，打开同一个文件，当一个进程进行读写
 是的，数据库并没有停掉。虽然日志文件被删除了，但是有一个进程已经打开了那个文件，所以向那个文件中的写操作仍然会成功，数据仍然会提交。
 
 
-## 文件操作偏移lseek啥的
+## 文件操作偏移lseek
 
- lseek的函数用于设置文件偏移量。 
+lseek的函数用于设置文件偏移量。 
 
 每个打开的文件都有一个与其相关联的“当前文件偏移量”（当前文件偏移量）。它通常是一个非负整数，用以度量从文件开始处计算的字节数。通常，读写操作都从当前文件偏移量处开始，并使偏移量增加所读写的字节数。按系统默认的情况，当打开一个文件时，除非制定O_APPEND选项，否则该偏移量被设置为0。
 
@@ -1042,7 +340,7 @@ int clone(int (*fn)(void *), void *child_stack, int flags, void *arg, ...);
 ``` c 
 clone(CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND, 0);
 ```
-这个clone系统调用的行为类似于fork，不过新创建出来的进程，它的内存地址、文件系统资源、打开的文件描述符和信号处理器，都是共享父进程的。换句话说，这个新创建出来的进程，也被叫做Linux Thread。从这个例子中，也可以看出Linux中，线程其实是进程实现资源共享的一种方式。
+**这个clone系统调用的行为类似于fork，不过新创建出来的进程，它的内存地址、文件系统资源、打开的文件描述符和信号处理器，都是共享父进程的。换句话说，这个新创建出来的进程，也被叫做Linux Thread**。从这个例子中，也可以看出**Linux中，线程其实是进程实现资源共享的一种方式。**
 
 在内核中，clone调用经过参数传递和解释后会调用do_fork，这个核内函数同时也是fork、vfork系统调用的最终实现：
 ``` c
@@ -1062,9 +360,12 @@ int do_fork(unsigned long clone_flags, unsigned long stack_start, struct pt_regs
 尽管linux支持轻量级进程，但并不能说它就支持内核线程，因为linux的"线程"和"进程"实际上处于一个调度层次，共享一个进程标识符空间，这种限制使得不可能在linux上实现完全意义上的POSIX线程机制，因此众多的linux线程库实现尝试都只能尽可能实现POSIX的绝大部分语义，并在功能上尽可能逼近。
 
 
-## 多核CPU 是否能同时执行多个进程？
+## 多核CPU是否能同时执行多个进程？
 
-多核的作用就是每个CPU可以调度不同的任务“并行”执行。注意，这里说的是“并行”，而不是“并发”，所以第一个问题的回答是“能”。第二个问题，“同时最多执行几个进程“，这里你想描述的“同时”的意思，是某一个特定时刻吗？如果是，很明显，在某一特定时刻，每个核只能调度一个任务执行，所以有多少个核最多就可以调度多少个进程（或者说成线程比较准确些）。但在一段时间之内，每个核可以“并发”调度多个任务执行。如何“并发”，这就是由不同操作系统的进程调度策略规定的了，比如常见Linux的CFS调度算法和Windows的抢占式调度算法。
+多核的作用就是每个CPU可以调度不同的任务“并行”执行。注意，这里说的是“并行”，而不是“并发”，所以问题的回答是“能”。
+
+第二个问题，“同时最多执行几个进程“?
+这里你想描述的“同时”的意思，是某一个特定时刻吗？如果是，很明显，在某一特定时刻，每个核只能调度一个任务执行，所以有多少个核最多就可以调度多少个进程（或者说成线程比较准确些）。但在一段时间之内，每个核可以“并发”调度多个任务执行。如何“并发”，这就是由不同操作系统的进程调度策略规定的了，比如常见Linux的CFS调度算法和Windows的抢占式调度算法。
 
 
 ## 创建守护进程的步骤
@@ -1153,7 +454,7 @@ SIGCHLD信号,子进程结束时, 父进程会收到这个信号。如果父进�
 
 从用户态到内核态切换可以通过三种方式：
 
-* 系统调用，这个上面已经讲解过了，在我公众号之前的文章也有讲解过。其实系统调用本身就是中断，但是软件中断，跟硬中断不同。
+* 系统调用: 其实系统调用本身就是中断，但是软件中断，跟硬中断不同。
 * 异常：如果当前进程运行在用户态，如果这个时候发生了异常事件，就会触发切换。例如：缺页异常。
 * 外设中断：当外设完成用户的请求时，会向CPU发送中断信号。
 
@@ -1170,47 +471,47 @@ SIGCHLD信号,子进程结束时, 父进程会收到这个信号。如果父进�
 
 一个常见的select例子如下: 
 ```c
-#include	"unp.h"
+#include "unp.h"
 
 void
 str_cli(FILE *fp, int sockfd)
 {
-	int			maxfdp1, stdineof;
-	fd_set		rset;
-	char		buf[MAXLINE];
-	int		n;
+    int maxfdp1, stdineof;
+    fd_set rset;
+    char buf[MAXLINE];
+    int n;
 
-	stdineof = 0;
-	FD_ZERO(&rset);
-	for ( ; ; ) {
-		if (stdineof == 0)
-			FD_SET(fileno(fp), &rset);
-		FD_SET(sockfd, &rset);
-		maxfdp1 = max(fileno(fp), sockfd) + 1;
-		Select(maxfdp1, &rset, NULL, NULL, NULL);
+    stdineof = 0;
+    FD_ZERO(&rset);
+    for ( ; ; ) {
+        if (stdineof == 0)
+            FD_SET(fileno(fp), &rset);
+        FD_SET(sockfd, &rset);
+        maxfdp1 = max(fileno(fp), sockfd) + 1;
+        Select(maxfdp1, &rset, NULL, NULL, NULL);
 
-		if (FD_ISSET(sockfd, &rset)) {	/* socket is readable */
-			if ( (n = Read(sockfd, buf, MAXLINE)) == 0) {
-				if (stdineof == 1)
-					return;		/* normal termination */
-				else
-					err_quit("str_cli: server terminated prematurely");
-			}
+        if (FD_ISSET(sockfd, &rset)) { /* socket is readable */
+            if ( (n = Read(sockfd, buf, MAXLINE)) == 0) {
+                if (stdineof == 1)
+                    return; /* normal termination */
+                else
+                    err_quit("str_cli: server terminated prematurely");
+            }
 
-			Write(fileno(stdout), buf, n);
-		}
+            Write(fileno(stdout), buf, n);
+        }
 
-		if (FD_ISSET(fileno(fp), &rset)) {  /* input is readable */
-			if ( (n = Read(fileno(fp), buf, MAXLINE)) == 0) {
-				stdineof = 1;
-				Shutdown(sockfd, SHUT_WR);	/* send FIN */
-				FD_CLR(fileno(fp), &rset);
-				continue;
-			}
+        if (FD_ISSET(fileno(fp), &rset)) {  /* input is readable */
+            if ( (n = Read(fileno(fp), buf, MAXLINE)) == 0) {
+                stdineof = 1;
+                Shutdown(sockfd, SHUT_WR); /* send FIN */
+                FD_CLR(fileno(fp), &rset);
+                continue;
+            }
 
-			Writen(sockfd, buf, n);
-		}
-	}
+            Writen(sockfd, buf, n);
+        }
+    }
 }
 
 ```
@@ -1384,23 +685,23 @@ select函数，必须得清楚select跟linux特有的epoll的区别， 有三点
 
 * **发送**, 我们发送选用send（这里特指TCP）以及sendto（这里特指UDP）来描述
     * 阻塞
-        * 在阻塞模式下send操作将会等待所有数据均被拷贝到发送缓冲区后才会返回。
+        * 在阻塞模式下**send**操作将会等待所有数据均被拷贝到发送缓冲区后才会返回。
         如果当前发送缓冲总大小为8192，已经拷贝到缓冲的数据为8000，那剩余的大小为192，现在需要发送2000字节数据，那阻塞发送就会等待缓冲区足够把所有2000字节数据拷贝进去，如第一次拷贝进192字节，当缓冲区成功发送出1808字节后，再把应用缓冲区剩余的1808字节拷贝到内核缓冲，而后send操作返回成功发送字节数。
         从上面的过程不难看出，阻塞的send操作返回的发送大小，必然是你参数中的发送长度的大小。
-        * 在阻塞模式下的sendto操作不会阻塞。
+        * 在阻塞模式下的**sendto**操作不会阻塞。
         关于这一点的原因在于：UDP并没有真正的发送缓冲区，它所做的只是将应用缓冲区拷贝给下层协议栈，在此过程中加上UDP头，IP头，所以实际不存在阻塞。
     * 非阻塞
-        * 在非阻塞模式下send操作调用会立即返回。  
+        * 在非阻塞模式下**send**操作调用会立即返回。  
         关于立即返回大家都不会有异议。还是拿阻塞send的那个例子来看，当缓冲区只有192字节，但是却需要发送2000字节时，此时调用立即返回，并得到返回值为192。从中可以看到，非阻塞send仅仅是尽自己的能力向缓冲区拷贝尽可能多的数据，因此在非阻塞下send才有可能返回比你参数中的发送长度小的值。  
         如果缓冲区没有任何空间时呢？这时肯定也是立即返回，但是你会得到WSAEWOULDBLOCK/E WOULDBLOCK 的错误，此时表示你无法拷贝任何数据到缓冲区，你最好休息一下再尝试发送。  
-        * 在非阻塞模式下sendto操作 不会阻塞（与阻塞一致，不作说明）。 
+        * 在非阻塞模式下**sendto**操作 不会阻塞（与阻塞一致，不作说明）。 
 * **接收**, 接收选用recv（这里特指TCP）以及recvfrom（这里特指UDP）来描述
     * 阻塞
         * 在阻塞模式下recv，recvfrom操作将会阻塞 到缓冲区里有至少一个字节（TCP）或者一个完整UDP数据报才返回。
         * 在没有数据到来时，对它们的调用都将处于睡眠状态，不会返回。
     * 非阻塞
         * 在非阻塞模式下recv，recvfrom操作将会立即返回。
-        * 如果缓冲区有任何一个字节数据（TCP）或者一个完整UDP数据报，它们将会返回接收到的数据大小。而如果没有任何数据则返回错误 WSAEWOULDBLOCK/E WOULDBLOCK。
+        * 如果缓冲区有任何一个字节数据（TCP）或者一个完整UDP数据报，它们将会返回接收到的数据大小。而如果没有任何数据则返回错误 `WSAEWOULDBLOCK`/`EWOULDBLOCK`。
 
 
 ## reuseaddr和reuseport
@@ -1416,19 +717,9 @@ select函数，必须得清楚select跟linux特有的epoll的区别， 有三点
     ```
     目的：每一个进程有一个独立的监听socket，并且bind相同的ip:port，独立的listen()和accept()；提高接收连接的能力。（例如nginx多进程同时监听同一个ip:port）
     解决的问题：
-    * （1）避免了应用层多线程或者进程监听同一ip:port的“惊群效应”。
-    * （2）内核层面实现负载均衡，保证每个进程或者线程接收均衡的连接数。
-    * （3）只有effective-user-id相同的服务器进程才能监听同一ip:port （安全性考虑）
-
-
-## timewait和closewait太多咋办
-
-* timewait太多咋办? 
-    * net.ipv4.tcp_tw_reuse = 1 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
-    * net.ipv4.tcp_tw_recycle = 1 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
-    * net.ipv4.tcp_fin_timeout这个时间可以减少在异常情况下服务器从FIN-WAIT-2转到TIME_WAIT的时间。 
-* closewait太多咋办?
-    * 解决方案只有: 查代码. 因为如果一直保持在CLOSE_WAIT状态，那么只有一种情况，就是在对方关闭连接之后服务器程序自己没有进一步发出ack信号。换句话说，就是在对方连接关闭之后，程序里没有检测到，或者由于什么逻辑bug导致服务端没有主动发起close, 或者程序压根就忘记了这个时候需要关闭连接，于是这个资源就一直被程序占着。
+        * 避免了应用层多线程或者进程监听同一ip:port的“惊群效应”。
+        * 内核层面实现负载均衡，保证每个进程或者线程接收均衡的连接数。
+        * 只有effective-user-id相同的服务器进程才能监听同一ip:port （安全性考虑）
 
 
 # Linux内存管理
@@ -1444,10 +735,10 @@ select函数，必须得清楚select跟linux特有的epoll的区别， 有三点
 存储方式:   
 32 位整数 0x12345678 是从起始位置为 0x00 的地址开始存放，则：
 
-|内存地址|	0x00|	0x01|	0x02|	0x03|
+|内存地址| 0x00| 0x01| 0x02| 0x03|
 |:--:|:--:|:--:|:--:|:--:|
-|大端|	12|	34|	56|	78|
-|小端|	78|	56|	34|	12|
+|大端| 12| 34| 56| 78|
+|小端| 78| 56| 34| 12|
 
 
 ## 网络字节序
@@ -1470,7 +761,8 @@ Linux 使用虚拟地址空间，大大增加了进程的寻址空间，由低�
 * 栈：用于维护函数调用的上下文空间，一般为 8M ，可通过 ulimit –s 查看。
 * 内核虚拟空间：用户代码不可见的内存区域，由内核管理(页表就存放在内核虚拟空间)。上图是 32 位系统典型的虚拟地址空间分布(来自《深入理解计算机系统》)。
 
-## 内存分配的原理
+
+## brk函数
 
 先了解：brk()和sbrk()函数
 ``` c
@@ -1480,28 +772,58 @@ void* sbrk ( intptr_t incr );
 
 这两个函数的作用主要是扩展heap的上界brk。第一个函数的参数为设置的新的brk上界地址，如果成功返回0，失败返回-1。第二个函数的参数为需要申请的内存的大小，然后返回heap新的上界brk地址。如果sbrk的参数为0，则返回的为原来的brk地址。
 
-然后来了解：[mmap](#mmap)
 
-mmap函数第一种用法是映射磁盘文件到内存中；而malloc使用的mmap函数的第二种用法，即匿名映射，匿名映射不映射磁盘文件，而是向映射区申请一块内存。munmap函数是用于释放内存，第一个参数为内存首地址，第二个参数为内存的长度。接下来看下mmap函数的参数。
+## mmap
+
+虚拟内存系统通过将虚拟内存分割为称作虚拟页 (Virtual Page，VP) 大小固定的块，一般情况下，每个虚拟页的大小默认是 4096 字节。同样的，物理内存也被分割为物理页(Physical Page，PP)，也为 4096 字节。
+
+在 LINUX 中我们可以使用 mmap 用来在进程虚拟内存地址空间中分配地址空间，创建和物理内存的映射关系。
+
+![映射关系](/img/noodle_plan/linux/mmap.jpg)
+
+**映射关系可以分为两种**  
+1. 文件映射  
+    磁盘文件映射进程的虚拟地址空间，使用文件内容初始化物理内存。  
+2. 匿名映射  
+    初始化全为 0 的内存空间。
+
+**而对于映射关系是否共享又分为**  
+1. 私有映射 (MAP\_PRIVATE)  
+    多进程间数据共享，修改不反应到磁盘实际文件，是一个 copy-on-write（写时复制）的映射方式。  
+2. 共享映射 (MAP\_SHARED)  
+    多进程间数据共享，修改反应到磁盘实际文件中。
+
+**因此总结起来有 4 种组合**  
+1. 私有文件映射  
+    多个进程使用同样的物理内存页进行初始化，但是各个进程对内存文件的修改不会共享，也不会反应到物理文件中
+2. 私有匿名映射  
+    mmap 会创建一个新的映射，各个进程不共享，这种使用主要用于分配内存 (malloc 分配大内存会调用 mmap)。  
+    例如开辟新进程时，会为每个进程分配虚拟的地址空间，这些虚拟地址映射的物理内存空间各个进程间读的时候共享，写的时候会 copy-on-write。
+3. 共享文件映射  
+    多个进程通过虚拟内存技术共享同样的物理内存空间，对内存文件 的修改会反应到实际物理文件中，他也是进程间通信 (IPC) 的一种机制。
+4. 共享匿名映射  
+    这种机制在进行 fork 的时候不会采用写时复制，父子进程完全共享同样的物理内存页，这也就实现了父子进程通信 (IPC).
+
+**这里值得注意的是，mmap 只是在虚拟内存分配了地址空间，只有在第一次访问虚拟内存的时候才分配物理内存。**  
+在 mmap 之后，并没有在将文件内容加载到物理页上，只上在虚拟内存中分配了地址空间。当进程在访问这段地址时，通过查找页表，发现虚拟内存对应的页没有在物理内存中缓存，则产生 "缺页"，由内核的缺页异常处理程序处理，将文件对应内容，以页为单位 (4096) 加载到物理内存，注意是只加载缺页，但也会受操作系统一些调度策略影响，加载的比所需的多。
 
 ``` c
 void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
 int munmap(void *addr, size_t length);
 ```
-
 这里要注意的是fd参数，fd为映射的文件描述符，如果是匿名映射，可以设为-1；
-
-当申请小内存的时，malloc使用sbrk分配内存；当申请大内存时，使用mmap函数申请内存；但是这只是分配了虚拟内存，还没有映射到物理内存，当访问申请的内存时，才会因为缺页异常，内核分配物理内存。
-
-然后接着深入：
+* mmap函数第一种用法是映射磁盘文件到内存中；而malloc使用的是mmap函数的第二种用法，即匿名映射，匿名映射不映射磁盘文件，而是向映射区申请一块内存。
+* munmap函数是用于释放内存，第一个参数为内存首地址，第二个参数为内存的长度。接下来看下mmap函数的参数。
 
 由于brk/sbrk/mmap属于系统调用，如果每次申请内存，都调用这三个函数中的一个，那么每次都要产生系统调用开销（即cpu从用户态切换到内核态的上下文切换，这里要保存用户态数据，等会还要切换回用户态），这是非常影响性能的；其次，这样申请的内存容易产生碎片，因为堆是从低地址到高地址，如果低地址的内存没有被释放，高地址的内存就不能被回收。
 
 
-### malloc和free原理
+## malloc和free原理
 
 malloc: 
-
+* **当申请小内存的时，malloc使用sbrk分配内存**
+* **当申请大内存时，使用mmap函数申请内存**
+* **但是这只是分配了虚拟内存，还没有映射到物理内存，当访问申请的内存时，才会因为缺页异常，内核分配物理内存。**
 * 将所有空闲内存块连成链表，每个节点记录空闲内存块的地址、大小等信息
 * 分配内存时，找到大小合适的块，切成两份，一分给用户，一份放回空闲链表
 * free时，直接把内存块返回链表
@@ -1527,12 +849,10 @@ struct mem_control_block {
 现在，您可能会认为当程序调用 malloc 时这会引发问题 —— 它们如何知道这个结构？答案是它们不必知道；在返回指针之前，我们会将其移动到这个结构之后，把它隐藏起来。这使得返回的指针指向没有用于任何其他用途的内存。那样，从调用程序的角度来看，它们所得到的全部是空闲的、开放的内存。然后，当通过 free() 将该指针传递回来时，我们只需要倒退几个内存字节就可以再次找到这个结构。
 
 **关于 malloc 获得虚存空间的实现，与 glibc 的版本有关，但大体逻辑是：**
-
-若分配内存小于 128k ，调用 sbrk() ，将堆顶指针向高地址移动，获得新的虚存空间。
-若分配内存大于 128k ，调用 mmap() ，在文件映射区域中分配匿名虚存空间。
+* 若分配内存小于 128k ，调用 sbrk() ，将堆顶指针向高地址移动，获得新的虚存空间。
+* 若分配内存大于 128k ，调用 mmap() ，在文件映射区域中分配匿名虚存空间。
 
 接着： VSZ为虚拟内存 RSS为物理内存
-
 * VSZ 并不是每次 malloc 后都增长，是与上一节说的堆顶没发生变化有关，因为可重用堆顶内剩余的空间，这样的 malloc 是很轻量快速的。
 * 但如果 VSZ 发生变化，基本与分配内存量相当，因为 VSZ 是计算虚拟地址空间总大小。
 * RSS 的增量很少，是因为 malloc 分配的内存并不就马上分配实际存储空间，只有第一次使用，如第一次 memset 后才会分配。
@@ -1616,50 +936,11 @@ malloc是用户态使用的内存分配接口，最终还是向buddy申请内存
 虽然fork创建的子进程不需要拷贝父进程的物理内存空间, 但是会复制父进程的空间内存页表. 例如对于10GB的redis进程, 需要复制约20MB的内存页表, 因为此fork操作耗时跟进程总内存量息息相关
 
 
-## mmap
-
-虚拟内存系统通过将虚拟内存分割为称作虚拟页 (Virtual Page，VP) 大小固定的块，一般情况下，每个虚拟页的大小默认是 4096 字节。同样的，物理内存也被分割为物理页(Physical Page，PP)，也为 4096 字节。
-
-在 LINUX 中我们可以使用 mmap 用来在进程虚拟内存地址空间中分配地址空间，创建和物理内存的映射关系。
-
-![映射关系](/img/noodle_plan/linux/mmap.jpg)
-
-**映射关系可以分为两种**  
-1. 文件映射  
-磁盘文件映射进程的虚拟地址空间，使用文件内容初始化物理内存。  
-2. 匿名映射  
-初始化全为 0 的内存空间。
-
-**而对于映射关系是否共享又分为**  
-1. 私有映射 (MAP\_PRIVATE)  
-多进程间数据共享，修改不反应到磁盘实际文件，是一个 copy-on-write（写时复制）的映射方式。  
-2. 共享映射 (MAP\_SHARED)  
-多进程间数据共享，修改反应到磁盘实际文件中。
-
-**因此总结起来有 4 种组合**  
-1. 私有文件映射  
-多个进程使用同样的物理内存页进行初始化，但是各个进程对内存文件的修改不会共享，也不会反应到物理文件中
-
-2. 私有匿名映射  
-mmap 会创建一个新的映射，各个进程不共享，这种使用主要用于分配内存 (malloc 分配大内存会调用 mmap)。  
-例如开辟新进程时，会为每个进程分配虚拟的地址空间，这些虚拟地址映射的物理内存空间各个进程间读的时候共享，写的时候会 copy-on-write。
-
-3. 共享文件映射  
-多个进程通过虚拟内存技术共享同样的物理内存空间，对内存文件 的修改会反应到实际物理文件中，他也是进程间通信 (IPC) 的一种机制。
-
-4. 共享匿名映射  
-这种机制在进行 fork 的时候不会采用写时复制，父子进程完全共享同样的物理内存页，这也就实现了父子进程通信 (IPC).
-
-**这里值得注意的是，mmap 只是在虚拟内存分配了地址空间，只有在第一次访问虚拟内存的时候才分配物理内存。**  
-在 mmap 之后，并没有在将文件内容加载到物理页上，只上在虚拟内存中分配了地址空间。当进程在访问这段地址时，通过查找页表，发现虚拟内存对应的页没有在物理内存中缓存，则产生 "缺页"，由内核的缺页异常处理程序处理，将文件对应内容，以页为单位 (4096) 加载到物理内存，注意是只加载缺页，但也会受操作系统一些调度策略影响，加载的比所需的多。
-
-
 ## 零拷贝
 
 参考 https://juejin.im/post/6844903949359644680
 
 "先从简单开始，实现下这个场景：从一个文件中读出数据并将数据传到另一台服务器上？"
-
 大概伪代码如下:  
 ``` c
 File.read(file, buf, len);
@@ -1668,9 +949,7 @@ Socket.send(socket, buf, len);
 可以看出, 这样效率是很低的. 
 
 下图分别对应传统 I/O 操作的数据读写流程，整个过程涉及 2 次 CPU 拷贝、2 次 DMA 拷贝总共 4 次拷贝，以及 4 次上下文切换，下面简单地阐述一下相关的概念。
-
 ![](/img/noodle_plan/linux/traditional_io.jpg)
-
 * 上下文切换：当用户程序向内核发起系统调用时，CPU 将用户进程从用户态切换到内核态；当系统调用返回时，CPU 将用户进程从内核态切换回用户态。
 * CPU拷贝：由 CPU 直接处理数据的传送，数据拷贝时会一直占用 CPU 的资源。
 * DMA拷贝：由 CPU 向DMA磁盘控制器下达指令，让 DMA 控制器来处理数据的传送，数据传送完毕再把信息反馈给 CPU，从而减轻了 CPU 资源的占有率。
@@ -1779,13 +1058,13 @@ rnote over B : ESTABLISHED
 * 服务端处于SYN-RCVD，此时如果接收到正常的ACK 报文，那么很好，连接恢复，继续传输数据；如果接收到写入数据等请求呢？注意了，此时写入数据等请求也是带着ACK 报文的，实际上也能恢复连接，使服务器恢复到ESTABLISHED状态，继续传输数据。
 
 
-### 知道SYN攻击吗？如何防范？
+### SYN-Flood与SYN-Cookie
 
-所谓SYN 洪泛攻击，就是利用SYNACK 报文的时候，服务器会为客户端请求分配缓存，那么黑客（攻击者），就可以使用一批虚假的ip向服务器大量地发建立TCP 连接的请求，服务器为这些虚假ip分配了缓存后，处在SYN_RCVD状态，存放在半连接队列中；另外，服务器发送的请求又不可能得到回复（ip都是假的，能回复就有鬼了），只能不断地重发请求，直到达到设定的时间/次数后，才会关闭。
+所谓SYN-Flood(SYN 洪泛攻击)，就是利用SYNACK 报文的时候，服务器会为客户端请求分配缓存，那么黑客（攻击者），就可以使用一批虚假的ip向服务器大量地发建立TCP 连接的请求，服务器为这些虚假ip分配了缓存后，处在SYN_RCVD状态，存放在半连接队列中；另外，服务器发送的请求又不可能得到回复（ip都是假的，能回复就有鬼了），只能不断地重发请求，直到达到设定的时间/次数后，才会关闭。
 
 服务器不断为这些半开连接分配资源，导致服务器的连接资源被消耗殆尽，不过所幸，我们可以使用SYN Cookie进行稍微的防御一下。
 
-所谓的SYN Cookie防御系统，与前面接收到SYN 报文就分配缓存不同，此时暂不分配资源；同时利用SYN 报文的源和目的地IP和端口，以及服务器存储的一个秘密数，使用它们进行散列，得到server_isn，然后附着在SYNACK 报文中发送给客户端，接下来就是对ACK 报文进行判断，如果其返回的ack字段正好等于server_isn + 1，说明这是一个合法的ACK，那么服务器才会为其生成一个具有套接字的全开的连接。(有点类似于[JWT](#JWT)那一套机制哈)
+所谓的**SYN Cookie防御系统**，与前面接收到SYN 报文就分配缓存不同，此时暂不分配资源；同时利用SYN 报文的源和目的地IP和端口，以及服务器存储的一个秘密数，使用它们进行散列，得到server_isn作为服务端的初始 TCP 序号，也就是所谓的SYN cookie, 然后将SYNACK 报文中发送给客户端，接下来就是对ACK 报文进行判断，如果其返回的ack里的确认号正好等于server_isn + 1，说明这是一个合法的ACK，那么服务器才会为其生成一个具有套接字的全开的连接。(有点类似于[JWT](#JWT)那一套机制哈)
 
 缺点: 
 * 增加了密码学运算, 增大了cpu消耗
@@ -1817,16 +1096,25 @@ rnote over A : CLOSED
 - 如果b没收到最后一个ack, b就会重发fin, a如果不维护一个timewait却收到了一个fin会感觉莫名其妙然后响应一个rst, 然后b就会解释为一个错误
 
 
+## timewait和closewait太多咋办
+
+* timewait太多咋办? 
+    * net.ipv4.tcp_tw_reuse = 1 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
+    * net.ipv4.tcp_tw_recycle = 1 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
+    * net.ipv4.tcp_fin_timeout这个时间可以减少在异常情况下服务器从FIN-WAIT-2转到TIME_WAIT的时间。 
+* closewait太多咋办?
+    * 解决方案只有: 查代码. 因为如果一直保持在CLOSE_WAIT状态，那么只有一种情况，就是在对方关闭连接之后服务器程序自己没有进一步发出ack信号。换句话说，就是在对方连接关闭之后，程序里没有检测到，或者由于什么逻辑bug导致服务端没有主动发起close, 或者程序压根就忘记了这个时候需要关闭连接，于是这个资源就一直被程序占着。
+
+
 ## tcp拥塞控制
+
+![](/img/noodle_plan/tcp/tcp_congestion_control.png)
 
 - 快速重传: 
     报文段1成功接收并被确认ACK 2，接收端的期待序号为2，当报文段2丢失，报文段3失序到来，与接收端的期望不匹配，接收端重复发送冗余ACK 2。这样，如果在超时重传定时器溢出之前，接收到连续的三个重复冗余ACK（其实是收到4个同样的ACK，第一个是正常的，后三个才是冗余的），发送端便知晓哪个报文段在传输过程中丢失了，于是重发该报文段，不需要等待超时重传定时器溢出，大大提高了效率。这便是快速重传机制。
-
 - 快速恢复
 - 慢启动
 - 拥塞避免
-
-![](/img/noodle_plan/tcp/tcp_congestion_control.png)
 
 
 ## tcp滑动窗口
@@ -1852,22 +1140,21 @@ Zero Window
 
 上图，我们可以看到一个处理缓慢的Server（接收端）是怎么把Client（发送端）的TCP Sliding Window给降成0的。此时，你一定会问，如果Window变成0了，TCP会怎么样？是不是发送端就不发数据了？是的，发送端就不发数据了，你可以想像成“Window Closed”，那你一定还会问，如果发送端不发数据了，接收方一会儿Window size 可用了，怎么通知发送端呢？
 
-解决这个问题，TCP使用了Zero Window Probe技术，缩写为ZWP，也就是说，发送端在窗口变成0后，会发ZWP的包给接收方，让接收方来ack他的Window尺寸，一般这个值会设置成3次，第次大约30-60秒（不同的实现可能会不一样）。如果3次过后还是0的话，有的TCP实现就会发RST把链接断了。
+解决这个问题，TCP使用了**Zero Window Probe技术**，缩写为ZWP，也就是说，发送端在窗口变成0后，会发ZWP的包给接收方，让接收方来ack他的Window尺寸，一般这个值会设置成3次，第次大约30-60秒（不同的实现可能会不一样）。如果3次过后还是0的话，有的TCP实现就会发RST把链接断了。
 
 
 ## ACK延迟确认机制
 
 接收方在收到数据后，并不会立即回复ACK,而是延迟一定时间。一般ACK延迟发送的时间为200ms，但这个200ms并非收到数据后需要延迟的时间。系统有一个固定的定时器每隔200ms会来检查是否需要发送ACK包。这样做有两个目的。
-1. 这样做的目的是ACK是可以合并的，也就是指如果连续收到两个TCP包，并不一定需要ACK两次，只要回复最终的ACK就可以了，可以降低网络流量。
-2. 如果接收方有数据要发送，那么就会在发送数据的TCP数据包里，带上ACK信息。这样做，可以避免大量的ACK以一个单独的TCP包发送，减少了网络流量。
+* 这样做的目的是ACK是可以合并的，也就是指如果连续收到两个TCP包，并不一定需要ACK两次，只要回复最终的ACK就可以了，可以降低网络流量。
+* 如果接收方有数据要发送，那么就会在发送数据的TCP数据包里，带上ACK信息。这样做，可以避免大量的ACK以一个单独的TCP包发送，减少了网络流量。
 
 
 # HTTP与HTTPS
 
 HTTP 协议考察 HTTP 协议的返回码、HTTP 的方法等。需要特别指出的是 HTTPS 加密的详细过程要非常透彻，不然容易产生一种感觉好像都清楚了，但是一问就有点说不清楚。
 
-下面实例是一点典型的使用GET来传递数据的实例：
-
+下面实例是一点典型的使用GET来传递数据的实例,  
 客户端请求：
 ```
 GET /hello.txt HTTP/1.1
@@ -1910,7 +1197,7 @@ HTTP响应也由四个部分组成，分别是:
 * 状态行
 * 消息报头
 * 空行
-* 和响应正文
+* 响应正文
 
 ![](/img/noodle_plan/http/server_response_header.jpg)
 
@@ -1919,28 +1206,22 @@ HTTP响应也由四个部分组成，分别是:
 
 HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。
 
-那么SSL又是什么？
-
-SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研发，SSL 协议位于 TCP/IP 协议与各种应用层协议之间，为数据通讯提供安全支持。
-
-TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。
+那么SSL/TLS又是什么？
+* SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研发，SSL 协议位于 TCP/IP 协议与各种应用层协议之间，为数据通讯提供安全支持。
+* TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。
 
 https 不是一种新的协议，只是 http 的通信接口部分使用了 ssl 和 tsl 协议替代，加入了加密、证书、完整性保护的功能，下面解释一下加密和证书，如下图所示
-
 ![](/img/noodle_plan/http/https_ssl.png)
 
 
-### 共享密钥加密
+### 对称加密
 
-也叫对称加密, 加密和解密公用一套秘钥，这样就会产生问题，已共享秘钥加密方式必须将秘钥传送给对方，但如果通信被监听，那么秘钥可能会被泄漏产生危险。
-
+也叫**共享密钥加密**, 加密和解密公用一套秘钥，这样就会产生问题，已共享秘钥加密方式必须将秘钥传送给对方，但如果通信被监听，那么秘钥可能会被泄漏产生危险。  
 常见对称加密算法有des, aes
 
+### 非对称加密
 
-### 公开秘钥加密
-
-公开秘钥加密使用一种非对称加密的算法，使用一对非对称的秘钥，一把叫做共有秘钥，一把叫做私有秘钥，在加密的时候，通信的一方使用共有秘钥进行加密，通信的另一方使用私有秘钥进行解密，利用这种方式不需要发送私有秘钥，也就不存在泄漏的风险了。
-
+也叫**公开秘钥加密**, 使用一种非对称加密的算法，使用一对非对称的秘钥，一把叫做共有秘钥，一把叫做私有秘钥，在加密的时候，通信的一方使用共有秘钥进行加密，通信的另一方使用私有秘钥进行解密，利用这种方式不需要发送私有秘钥，也就不存在泄漏的风险了。  
 常见非对称加密算法有rsa
 
 
@@ -1961,13 +1242,15 @@ https 不是一种新的协议，只是 http 的通信接口部分使用了 ssl 
 
 
 解释一下上图的步骤：  
-1\. 服务器将自己的公开秘钥传到数字证书认证机构  
-2\. 数字证书认证机构使用自己的秘钥来对传来的服务器公钥进行加密，，并颁发数字证书  
-3\. 服务器将传回的公钥证书发送给客户端，客户端使用数字机构颁发的公开秘钥来验证证书的有效性，以及公开秘钥的真实性(首先证书是CA颁发的。证书签名是先将证书信息（证书机构名称、有效期、拥有者、拥有者公钥）进行hash，再用CA的私有密钥对hash值加密而生成的。所以拦截者虽然可以拦截并篡改证书信息（主要是拥有者和拥有者的公钥），但是由于拦截者没有CA的私钥，所以无法生成正确的签名，从而导致客户端拿到签名后，用CA公有密钥对证书签名解密后值与用证书计算出来的实际hash值不一样，从而得不到客户端信任。其实这个ca公钥和私钥也就是非对称加密的思想了)  
-4\. 客户端使用服务器的公开秘钥进行消息加密，后发送给服务器。  
-5\. 服务器使用私有秘钥进行解密。
+1. 服务器将自己的公开秘钥传到数字证书认证机构  
+2. 数字证书认证机构使用自己的秘钥来对传来的服务器公钥进行加密，，并颁发数字证书  
+3. 服务器将传回的公钥证书发送给客户端，客户端使用数字机构颁发的公开秘钥来验证证书的有效性，以及公开秘钥的真实性
+    * 证书签名是先将证书信息（证书机构名称、有效期、拥有者、拥有者公钥）进行hash，再用CA的私有密钥对hash值加密而生成的。
+    * 所以拦截者虽然可以拦截并篡改证书信息（主要是拥有者和拥有者的公钥），但是由于拦截者没有CA的私钥，所以无法生成正确的签名，从而导致客户端拿到签名后，用CA公有密钥对证书签名解密后值与用证书计算出来的实际hash值不一样，从而得不到客户端信任。(其实这个ca公钥和私钥也就是非对称加密的思想了)
+4. 客户端使用服务器的公开秘钥进行消息加密，后发送给服务器。  
+5. 服务器使用私有秘钥进行解密。
 
-浏览器在安装的时候会内置可信的数字证书机构的共有秘钥，如下图所示。
+浏览器在安装的时候会内置可信的数字证书机构的公开秘钥，如下图所示。
 
 ![](/img/noodle_plan/http/https_browser_ca.png)
 
@@ -1979,14 +1262,16 @@ https 不是一种新的协议，只是 http 的通信接口部分使用了 ssl 
 ![](/img/noodle_plan/http/https_hand_shake2.png)
 
 
-## cookie和session以及token的区别
+## cookie和session和token的区别
 
 ![](/img/noodle_plan/http/cookie_session.png)
 
-* 由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。
-* 思考一下服务端如何识别特定的客户？这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。
-* Cookie其实还可以用在一些方便用户的场景下，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。所以，总结一下：Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
-* 为什么需要token来替代session机制? 因为session的存储对服务器说是一个巨大的开销 ， 严重的限制了服务器扩展能力， 比如说我用两个机器组成了一个集群， 小 F 通过机器 A 登录了系统， 那 session id 会保存在机器 A 上， 假设小 F 的下一次请求被转发到机器 B 怎么办？ 机器 B 可没有小 F 的 session id 啊。有时候会采用一点小伎俩： session sticky ， 就是让小 F 的请求一直粘连在机器 A 上， 但是这也不管用， 要是机器 A 挂掉了， 还得转到机器 B 去。接下来我们介绍事实上的token标准[JWT](#JWT)
+* **由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session**.典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。
+* **思考一下服务端如何识别特定的客户？这个时候Cookie就登场了**。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。
+* **Cookie其实还可以用在一些方便用户的场景下**，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。所以，总结一下：Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
+* **为什么需要token来替代session机制? 因为session的存储对服务器说是一个巨大的开销**， 严重的限制了服务器扩展能力， 比如说我用两个机器组成了一个集群， 小 F 通过机器 A 登录了系统， 那 session id 会保存在机器 A 上， 假设小 F 的下一次请求被转发到机器 B 怎么办？ 机器 B 可没有小 F 的 session id 啊。有时候会采用一点小伎俩： session sticky ， 就是让小 F 的请求一直粘连在机器 A 上， 但是这也不管用， 要是机器 A 挂掉了， 还得转到机器 B 去。 
+ 
+接下来我们介绍事实上的token标准[JWT](#JWT)
 
 
 ### JWT
@@ -1995,16 +1280,11 @@ sessionId 的方式本质是把用户状态信息维护在 server 端，token �
 
 备注: 对于数据校验，专门的消息认证码生成算法, HMAC - 一种使用单向散列函数构造消息认证码的方法，其过程是不可逆的、唯一确定的，并且使用密钥来生成认证码，其目的是防止数据在传输过程中被篡改或伪造。将原始数据与认证码一起传输，数据接收端将原始数据使用相同密钥和相同算法再次生成认证码，与原有认证码进行比对，校验数据的合法性。
 
-
 所以跟第一种登录方式最本质的区别是：通过解析 token 的计算时间换取了 session 的存储空间
 
 业界通用的加密方式是 jwt, jwt 的具体格式如图：  
-
 ![](/img/noodle_plan/http/jwt1.png)
-
-
 简单的介绍一下 jwt，它主要由 3 部分组成：
-
 ```
 header 头部
 {
@@ -2029,39 +1309,32 @@ signature 签名
 ```
 
 * header  
-header 里面描述加密算法和 token 的类型，类型一般都是 JWT；
-
+    header 里面描述加密算法和 token 的类型，类型一般都是 JWT；
 * payload
-里面放的是用户的信息，也就是第一种登录方式中需要维护在服务器端 session 中的信息；
-
+    里面放的是用户的信息，也就是第一种登录方式中需要维护在服务器端 session 中的信息；
 * signature
-是对前两部分的签名，也可以理解为加密；实现需要一个密钥（secret），这个 secret 只有服务器才知道，然后使用 header 里面的算法按照如下方法来加密：
-``` python
-HMACSHA256(
-  base64UrlEncode(header) + "." +
-  base64UrlEncode(payload),
-  secret)
-```
+    是对前两部分的签名，也可以理解为加密；实现需要一个密钥（secret），这个 secret 只有服务器才知道，然后使用 header 里面的算法按照如下方法来加密：
+    ``` python
+    HMACSHA256(
+    base64UrlEncode(header) + "." +
+    base64UrlEncode(payload),
+    secret)
+    ```
 
-总之，最后的 `jwt = base64url(header) + "." + base64url(payload) + "." + signature`
-
-jwt 可以放在 response 中返回，也可以放在 cookie 中返回，这都是具体的返回方式，并不重要。
-
+总之，最后的 `jwt = base64url(header) + "." + base64url(payload) + "." + signature`  
+jwt 可以放在 response 中返回，也可以放在 cookie 中返回，这都是具体的返回方式，并不重要。  
 客户端发起请求时，官方推荐放在 HTTP header 中：
-
 ```
 Authorization: Bearer <token>
 ```
-
 这样子确实也可以解决 cookie 跨域(比如移动平台上对cookie支持不好)的问题，不过具体放在哪儿还是根据业务场景来定，并没有一定之规。
 
 
 #### jwt过期了如何刷新
 
-前面讲的 Token，都是 Access Token，也就是访问资源接口时所需要的 Token，还有另外一种 Token，Refresh Token，通常情况下，Refresh Token 的有效期会比较长，而 Access Token 的有效期比较短，当 Access Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Access Token，如果 Refresh Token 也失效了，用户就只能重新登录了。
+**前面讲的 Token，都是 Access Token，也就是访问资源接口时所需要的 Token，还有另外一种 Token，Refresh Token，**通常情况下，Refresh Token 的有效期会比较长，而 Access Token 的有效期比较短，当 Access Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Access Token，如果 Refresh Token 也失效了，用户就只能重新登录了。
 
-在 JWT 的实践中，引入 Refresh Token，将会话管理流程改进如下。
-
+在 JWT 的实践中，引入 Refresh Token，将会话管理流程改进如下:
 1. 客户端使用用户名密码进行认证
 2. 服务端生成有效时间较短的 Access Token（例如 10 分钟），和有效时间较长的 Refresh Token（例如 7 天）
 3. 客户端访问需要认证的接口时，携带 Access Token
@@ -2069,48 +1342,6 @@ Authorization: Bearer <token>
 5. 如果携带 Access Token 访问需要认证的接口时鉴权失败（例如返回 401 错误），则客户端使用 Refresh Token 向刷新接口申请新的 Access Token
 6. 如果 Refresh Token 没有过期，服务端向客户端下发新的 Access Token
 7. 客户端使用新的 Access Token 访问需要认证的接口
-
-
-## Connection: keep-alive是干嘛的?
-
-在早期的HTTP/1.0中，每次http请求都要创建一个连接，而创建连接的过程需要消耗资源和时间，为了减少资源消耗，缩短响应时间，就需要重用连接。在后来的HTTP/1.0中以及HTTP/1.1中，引入了重用连接的机制，就是在http请求头中加入Connection: keep-alive来告诉对方这个请求响应完成后不要关闭，下一次咱们还用这个请求继续交流。协议规定HTTP/1.0如果想要保持长连接，需要在请求头中加上Connection: keep-alive，而HTTP/1.1默认是支持长连接的，有没有这个请求头都行。
-
-要实现长连接很简单，只要客户端和服务端都保持这个http长连接即可。但问题的关键在于保持长连接后，浏览器如何知道服务器已经响应完成？在使用短连接的时候，服务器完成响应后即关闭http连接，这样浏览器就能知道已接收到全部的响应，同时也关闭连接（TCP连接是双向的）。在使用长连接的时候，响应完成后服务器是不能关闭连接的，那么它就要在响应头中加上特殊标志告诉浏览器已响应完成。
-
-一般情况下这个特殊标志就是Content-Length，来指明响应体的数据大小，比如Content-Length: 120表示响应体内容有120个字节，这样浏览器接收到120个字节的响应体后就知道了已经响应完成。
-
-由于Content-Length字段必须真实反映响应体长度，但实际应用中，有些时候响应体长度并没那么好获得，例如响应体来自于网络文件，或者由动态语言生成。这时候要想准确获取长度，只能先开一个足够大的内存空间，等内容全部生成好再计算。但这样做一方面需要更大的内存开销，另一方面也会让客户端等更久。这时候Transfer-Encoding: chunked响应头就派上用场了，该响应头表示响应体内容用的是分块传输，此时服务器可以将数据一块一块地分块响应给浏览器而不必一次性全部响应，待浏览器接收到全部分块后就表示响应结束。
-
-以分块传输一段文本内容：“人的一生总是在追求自由的一生 So easy”来说明分块传输的过程，如下图所示:
-
-[](/img/noodle_plan/http/http_alive.png)
-
-
-## get和post的本质区别。
-
-从设计初衷上来说，GET 用来实现从服务端取数据，POST 用来实现向服务端提出请求对数据做某些修改，也因此如果你向nginx用post请求静态文件，nginx会直接返回 405 not allowed，但是服务端毕竟是人实现的，你可以让 POST 做 GET 相同的事情
-
-get请求的参数一般放在url中，但是浏览器和服务器程序对url长度还是有限制的。
-post请求的参数一般放在body，你硬要放到url中也可以。
-
-在RESTful风格中，get用于从服务器获获取数据，而post用于创建数据
-
-
-## url编码urlencode是什么
-
-RFC3986文档规定，Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符。
-
-那如何对Url中的非法字符进行编码呢?
-  
-  Url编码通常也被称为百分号编码（Url Encoding，also known as percent-encoding），是因为它的编码方式非常简单，使用%百分号加上两位的字符——0123456789ABCDEF——代表一个字节的十六进制形式。Url编码默认使用的字符集是US-ASCII。例如a在US-ASCII码中对应的字节是0x61，那么Url编码之后得到的就是%61，我们在地址栏上输入http://g.cn/search?q=%61%62%63，
-
-实际上就等同于在google上搜索abc了。又如@符号在ASCII字符集中对应的字节为0x40，经过Url编码之后得到的是%40。
-  
-  对于非ASCII字符，需要使用ASCII字符集的超集进行编码得到相应的字节，然后对每个字节执行百分号编码。对于Unicode字符，RFC文档建议使用utf-8对其进行编码得到相应的字节，然后对每个字节执行百分号编码。如"中文"使用UTF-8字符集得到的字节为0xE4 0xB8 0xAD 0xE6 0x96 0x87，经过Url编码之后得到"%E4%B8%AD%E6%96%87"。
-  
-  如果某个字节对应着ASCII字符集中的某个非保留字符，则此字节无需使用百分号表示。例如"Url编码"，使用UTF-8编码得到的字节是0x55 0x72 0x6C 0xE7 0xBC 0x96 0xE7 0xA0 0x81，由于前三个字节对应着ASCII中的非保留字符"Url"，因此这三个字节可以用非保留字符"Url"表示。最终的Url编码可以简化成"Url%E7%BC%96%E7%A0%81" ，当然，如果你用"%55%72%6C%E7%BC%96%E7%A0%81"也是可以的。
-
-很多HTTP监视工具或者浏览器地址栏等在显示Url的时候会自动将Url进行一次解码（使用UTF-8字符集），这就是为什么当你在Firefox中访问Google搜索中文的时候，地址栏显示的Url包含中文的缘故。但实际上发送给服务端的原始Url还是经过编码的。
 
 
 ## 常见的HTTP相应状态码
@@ -2150,18 +1381,47 @@ RFC3986文档规定，Url中只允许包含英文字母（a-zA-Z）、数字（0
 由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是暂时的，并且将在一段时间以后恢复。[62]如果能够预计延迟时间，那么响应中可以包含一个Retry-After头用以标明这个延迟时间。如果没有给出这个Retry-After信息，那么客户端应当以处理500响应的方式处理它。
 
 
+## get和post的本质区别
+
+从设计初衷上来说，GET 用来实现从服务端取数据，POST 用来实现向服务端提出请求对数据做某些修改，也因此如果你向nginx用post请求静态文件，nginx会直接返回 405 not allowed，但是服务端毕竟是人实现的，你可以让 POST 做 GET 相同的事情
+
+get请求的参数一般放在url中，但是浏览器和服务器程序对url长度还是有限制的。
+post请求的参数一般放在body，你硬要放到url中也可以。
+
+在RESTful风格中，get用于从服务器获获取数据，而post用于创建数据
+
+
+## Connection: keep-alive
+
+在早期的HTTP/1.0中，每次http请求都要创建一个连接，而创建连接的过程需要消耗资源和时间，为了减少资源消耗，缩短响应时间，就需要重用连接。在后来的HTTP/1.0中以及HTTP/1.1中，引入了重用连接的机制，就是在http请求头中加入Connection: keep-alive来告诉对方这个请求响应完成后不要关闭，下一次咱们还用这个请求继续交流。协议规定HTTP/1.0如果想要保持长连接，需要在请求头中加上Connection: keep-alive，而HTTP/1.1默认是支持长连接的，有没有这个请求头都行。
+
+要实现长连接很简单，只要客户端和服务端都保持这个http长连接即可。但问题的关键在于保持长连接后，浏览器如何知道服务器已经响应完成？在使用短连接的时候，服务器完成响应后即关闭http连接，这样浏览器就能知道已接收到全部的响应，同时也关闭连接（TCP连接是双向的）。
+
+在使用长连接的时候，响应完成后服务器是不能关闭连接的，那么它就要在响应头中加上特殊标志告诉浏览器已响应完成。一般情况下这个特殊标志就是Content-Length，来指明响应体的数据大小，比如Content-Length: 120表示响应体内容有120个字节，这样浏览器接收到120个字节的响应体后就知道了已经响应完成。
+
+由于Content-Length字段必须真实反映响应体长度，但实际应用中，有些时候响应体长度并没那么好获得，例如响应体来自于网络文件，或者由动态语言生成。这时候要想准确获取长度，只能先开一个足够大的内存空间，等内容全部生成好再计算。但这样做一方面需要更大的内存开销，另一方面也会让客户端等更久。这时候Transfer-Encoding: chunked响应头就派上用场了，该响应头表示响应体内容用的是分块传输，此时服务器可以将数据一块一块地分块响应给浏览器而不必一次性全部响应，待浏览器接收到全部分块后就表示响应结束。
+
+以分块传输一段文本内容：“人的一生总是在追求自由的一生 So easy”来说明分块传输的过程，如下图所示:
+![](/img/noodle_plan/http/http_alive.png)
+
+
+## url编码urlencode是什么
+
+RFC3986文档规定，Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符。  
+那如何对Url中的非法字符进行编码呢? 
+  
+**Url编码通常也被称为百分号编码（Url Encoding，also known as percent-encoding），是因为它的编码方式非常简单，使用%百分号加上两位的字符——0123456789ABCDEF——代表一个字节的十六进制形式**。Url编码默认使用的字符集是US-ASCII。例如a在US-ASCII码中对应的字节是0x61，那么Url编码之后得到的就是%61，我们在地址栏上输入http://g.cn/search?q=%61%62%63，
+
+实际上就等同于在google上搜索abc了。又如@符号在ASCII字符集中对应的字节为0x40，经过Url编码之后得到的是%40。
+  
+  对于非ASCII字符，需要使用ASCII字符集的超集进行编码得到相应的字节，然后对每个字节执行百分号编码。对于Unicode字符，RFC文档建议使用utf-8对其进行编码得到相应的字节，然后对每个字节执行百分号编码。如"中文"使用UTF-8字符集得到的字节为0xE4 0xB8 0xAD 0xE6 0x96 0x87，经过Url编码之后得到"%E4%B8%AD%E6%96%87"。
+  
+  如果某个字节对应着ASCII字符集中的某个非保留字符，则此字节无需使用百分号表示。例如"Url编码"，使用UTF-8编码得到的字节是0x55 0x72 0x6C 0xE7 0xBC 0x96 0xE7 0xA0 0x81，由于前三个字节对应着ASCII中的非保留字符"Url"，因此这三个字节可以用非保留字符"Url"表示。最终的Url编码可以简化成"Url%E7%BC%96%E7%A0%81" ，当然，如果你用"%55%72%6C%E7%BC%96%E7%A0%81"也是可以的。
+
+很多HTTP监视工具或者浏览器地址栏等在显示Url的时候会自动将Url进行一次解码（使用UTF-8字符集），这就是为什么当你在Firefox中访问Google搜索中文的时候，地址栏显示的Url包含中文的缘故。但实际上发送给服务端的原始Url还是经过编码的。
+
+
 # MySQL
-
-
-## 重点参考博客截图
-
-- [通过面试题学MySQL基础篇](html_screen_shot/mysql/通过面试题学MySQL基础篇.png)
-- [通过面试题学MySQL进阶篇](html_screen_shot/mysql/通过面试题学MySQL进阶篇.png)
-- [后端程序员必备：索引失效的十大杂症](html_screen_shot/mysql/后端程序员必备：索引失效的十大杂症.png)
-- [MySQL_InnoDB_ MVCC机制的原理及实现](html_screen_shot/mysql/MySQL_InnoDB_MVCC机制的原理及实现.png)
-- [MySQL的redo log、undo log、binlog](html_screen_shot/mysql/MySQL的redo%20log、undo%20log、binlog.png)
-- [MySQL的redo log、undo log、binlog_简书](html_screen_shot/mysql/MySQL的redo%20log、undo%20log、binlog_简书.png)
-
 
 ## 参考网址
 
@@ -2244,55 +1504,36 @@ end note
 
 ## redo log与binlog与undo log的区别
 
-参考 https://www.cnblogs.com/Java3y/p/12453755.html , 写的非常好
-
+参考 https://www.cnblogs.com/Java3y/p/12453755.html , 写的非常好  
 也可参考 https://www.jianshu.com/p/68d5557c65be
-
 
 ### redo log
 
-redo log 存在于InnoDB 引擎中，InnoDB引擎是以插件形式引入Mysql的，redo log的引入主要是为了实现Mysql的crash-safe能力。
-
-实际上Mysql的基本存储结构是页(记录都存在页里边)，所以MySQL是先把这条记录所在的页找到，然后把该页加载到内存中，将对应记录进行修改。
-
+redo log 存在于InnoDB 引擎中，InnoDB引擎是以插件形式引入Mysql的，redo log的引入主要是为了实现Mysql的crash-safe能力。  
+实际上Mysql的基本存储结构是页(记录都存在页里边)，所以MySQL是先把这条记录所在的页找到，然后把该页加载到内存中，将对应记录进行修改。  
 现在就可能存在一个问题：如果在内存中把数据改了，还没来得及落磁盘，而此时的数据库挂了怎么办？显然这次更改就丢了。
 
 如果每个请求都需要将数据立马落磁盘之后，那速度会很慢，MySQL可能也顶不住。所以MySQL是怎么做的呢？
-MySQL引入了redo log，内存写完了，然后会写一份redo log，这份redo log记载着这次在某个页上做了什么修改。
-其实写redo log的时候，也会有buffer，是先写buffer，再真正落到磁盘中的。至于从buffer什么时候落磁盘，会有配置供我们配置。
+MySQL引入了redo log，**内存写完了，然后会写一份redo log，这份redo log记载着这次在某个页上做了什么修改.其实写redo log的时候，也会有buffer，是先写buffer，再真正落到磁盘中的。**至于从buffer什么时候落磁盘，会有配置供我们配置。
 
 写redo log也是需要写磁盘的，但它的好处就是顺序IO（我们都知道顺序IO比随机IO快非常多）。
 
-所以，redo log的存在为了：当我们修改的时候，写完内存了，但数据还没真正写到磁盘的时候。此时我们的数据库挂了，我们可以根据redo log来对数据进行恢复。因为redo log是顺序IO，所以写入的速度很快，并且redo log记载的是物理变化（xxxx页做了xxx修改），文件的体积很小，恢复速度很快
+所以，**redo log的存在为了：当我们修改的时候，写完内存了，但数据还没真正写到磁盘的时候。此时我们的数据库挂了，我们可以根据redo log来对数据进行恢复**。因为redo log是顺序IO，所以写入的速度很快，并且redo log记载的是物理变化（xxxx页做了xxx修改），文件的体积很小，恢复速度很快
 
 
 ### binlog
 
 binlog记录了数据库表结构和表数据变更，比如update/delete/insert/truncate/create。它不会记录select（因为这没有对表没有进行变更）
-
-binlog长什么样？
-
-binlog我们可以简单理解为：存储着每条变更的SQL语句
-
-而redo log 保证的是数据库的 crash-safe 能力。采用的策略就是常说的“两阶段提交”。
-
-一条update的SQL语句是按照这样的流程来执行的：
-
-将数据页加载到内存 → 修改数据 → 更新数据 → 写redo log（状态为prepare） → 写binlog → 提交事务（数据写入成功后将redo log状态改为commit）
-
-只有当两个日志都提交成功（刷入磁盘），事务才算真正的完成。
-
-一旦发生系统故障（不管是宕机、断电、重启等等），都可以配套使用 redo log 与 binlog 做数据修复。
+**binlog我们可以简单理解为：存储着每条变更的SQL语句**  
 
 
 ### undo log
 
-undo log有什么用？
+undo log主要有两个作用：
+* 回滚
+* 多版本控制(MVCC)
 
-undo log主要有两个作用：回滚和多版本控制(MVCC)
-
-在数据修改的时候，不仅记录了redo log，还记录undo log，如果因为某些原因导致事务失败或回滚了，可以用undo log进行回滚
-
+在数据修改的时候，不仅记录了redo log，还记录undo log，如果因为某些原因导致事务失败或回滚了，可以用undo log进行回滚  
 undo log主要存储的也是逻辑日志，比如我们要insert一条数据了，那undo log会记录的一条对应的delete日志。我们要update一条记录时，它会记录一条对应相反的update记录。
 
 这也应该容易理解，毕竟回滚嘛，跟需要修改的操作相反就好，这样就能达到回滚的目的。因为支持回滚操作，所以我们就能保证：“一个事务包含多个操作，这些操作要么全部执行，要么全都不执行”。【原子性】
@@ -2302,115 +1543,55 @@ undo log主要存储的也是逻辑日志，比如我们要insert一条数据了
 
 ### undolog和binlog和redolog不同之处总结
 
-  - 参考 https://www.jianshu.com/p/68d5557c65be
-  - redo log
-     物理格式的日志，记录的是物理数据页面的修改的信息（数据库中每个页的修改），面向的是表空间、数据文件、数据页、偏移量等。
-  - undo log
-     逻辑格式的日志，在执行undo的时候，仅仅是将数据从逻辑上恢复至事务之前的状态，而不是从物理页面上操作实现的，与redo log不同。
-  - binlog
-     逻辑格式的日志，可以简单认为就是执行过的事务中的sql语句。
-     但又不完全是sql语句这么简单，而是包括了执行的sql语句（增删改）反向的信息。比如delete操作的话，就对应着delete本身和其反向的insert；update操作的话，就对应着update执行前后的版本的信息；insert操作则对应着delete和insert本身的信息。
-     因此可以基于binlog做到闪回功能。
-  - binlog可以作为恢复数据使用，主从复制搭建，redo log作为异常宕机或者介质故障后的数据恢复使用。
-  - redo log是在InnoDB存储引擎层产生，而binlog是MySQL数据库的上层产生的，并且binlog日志不仅仅针对INNODB存储引擎，MySQL数据库中的任何存储引擎对于数据库的更改都会产生binlog日志。
-  - 两种日志记录的内容形式不同。MySQL的binlog是逻辑日志，可以简单认为记录的就是sql语句。而innodb存储引擎层面的redo日志是物理日志, 是数据页面的修改之后的物理记录。
-  - 关于事务提交时，redo log和binlog的写入顺序，为了保证主从复制时候的主从一致（当然也包括使用binlog进行基于时间点还原的情况），是要严格一致的，MySQL通过两阶段提交过程来完成事务的一致性的，也即redo log和binlog的一致性的，理论上是先写redo log，再写binlog，两个日志都提交成功（刷入磁盘），事务才算真正的完成。因此redo日志的写盘，并不一定是随着事务的提交才写入redo日志文件的，而是随着事务的开始，逐步开始的。那么当我执行一条 update 语句时，redo log 和 binlog 是在什么时候被写入的呢？这就有了我们常说的「两阶段提交」：
+- 参考 https://www.jianshu.com/p/68d5557c65be
+- redo log: 只存在于innodb引擎中
+   物理格式的日志，记录的是物理数据页面的修改的信息（数据库中每个页的修改），面向的是表空间、数据文件、数据页、偏移量等。
+- undo log
+   逻辑格式的日志，在执行undo的时候，仅仅是将数据从逻辑上恢复至事务之前的状态，而不是从物理页面上操作实现的，与redo log不同。
+- binlog
+     * 逻辑格式的日志，可以简单认为就是执行过的事务中的sql语句。
+     * 但又不完全是sql语句这么简单，而是包括了执行的sql语句（增删改）反向的信息。比如delete操作的话，就对应着delete本身和其反向的insert/update操作的话，就对应着update执行前后的版本的信息；insert操作则对应着delete和insert本身的信息。
+     * 因此可以基于binlog做到闪回功能。
+- binlog可以作为恢复数据使用，主从复制搭建，redo log作为异常宕机或者介质故障后的数据恢复使用。
+- redo log是在InnoDB存储引擎层产生，而binlog是MySQL数据库的上层产生的，并且binlog日志不仅仅针对INNODB存储引擎，MySQL数据库中的任何存储引擎对于数据库的更改都会产生binlog日志。
+- 两种日志记录的内容形式不同。MySQL的binlog是逻辑日志，可以简单认为记录的就是sql语句。而innodb存储引擎层面的redo日志是物理日志, 是数据页面的修改之后的物理记录。
+- 关于事务提交时，redo log和binlog的写入顺序，为了保证主从复制时候的主从一致（当然也包括使用binlog进行基于时间点还原的情况），是要严格一致的，MySQL通过两阶段提交过程来完成事务的一致性的，也即redo log和binlog的一致性的，理论上是先写redo log，再写binlog，两个日志都提交成功（刷入磁盘），事务才算真正的完成。因此redo日志的写盘，并不一定是随着事务的提交才写入redo日志文件的，而是随着事务的开始，逐步开始的。那么当我执行一条 update 语句时，redo log 和 binlog 是在什么时候被写入的呢？这就有了我们常说的「两阶段提交」：
     - 写入：redo log（prepare）
     - 写入：binlog
     - 写入：redo log（commit）
-  - 两种日志与记录写入磁盘的时间点不同，binlog日志只在事务提交完成后进行一次写入。而innodb存储引擎的redo日志在事务进行中不断地被写入，并日志不是随事务提交的顺序进行写入的。
-  - binlog日志仅在事务提交时记录，并且对于每一个事务，仅在事务提交时记录，并且对于每一个事务，仅包含对应事务的一个日志。而对于innodb存储引擎的redo日志，由于其记录是物理操作日志，因此每个事务对应多个日志条目，并且事务的redo日志写入是并发的，并非在事务提交时写入，其在文件中记录的顺序并非是事务开始的顺序。
-  - binlog不是循环使用，在写满或者重启之后，会生成新的binlog文件，redo log是循环使用。
-- binlog 日志是 master 推的还是 salve 来拉的？
-  slave来拉的, 因为每一个slave都是完全独立的个体，所以slave完全依据自己的节奏去处理同步，
-
-
-## 主从同步延迟与同步数据丢失问题
-
-主库将变更写binlog日志，然后从库连接到主库之后，从库有一个IO线程，将主库的binlog日志拷贝到自己本地，写入一个中继日志中。接着从库中有一个SQL线程会从中继日志读取binlog，然后执行binlog日志中的内容，也就是在自己本地再次执行一遍SQL，这样就可以保证自己跟主库的数据是一样的。
-
-这里有一个非常重要的一点，就是从库同步主库数据的过程是串行化的，也就是说主库上并行的操作，在从库上会串行执行。所以这就是一个非常重要的点了，由于从库从主库拷贝日志以及串行执行SQL的特点，在高并发场景下，从库的数据一定会比主库慢一些，是有延时的。所以经常出现，刚写入主库的数据可能是读不到的，要过几十毫秒，甚至几百毫秒才能读取到。
-
-而且这里还有另外一个问题，就是如果主库突然宕机，然后恰好数据还没同步到从库，那么有些数据可能在从库上是没有的，有些数据可能就丢失了。
-
-所以mysql实际上在这一块有两个机制，一个是半同步复制，用来解决主库数据丢失问题；一个是并行复制，用来解决主从同步延时问题(实在解决不了只能强制读主库)。
-
-
-### 半同步复制（Semisynchronous replication）
-
-1、逻辑上
-
-是介于全同步复制与全异步复制之间的一种，主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈。同时，这里只是一个收到的反馈，而不是已经完全完成并且提交的反馈，如此，节省了很多时间。
-
-2、技术上
-
-介于异步复制和全同步复制之间，主库在执行完客户端提交的事务后不是立刻返回给客户端，而是等待至少一个从库接收到并写到relay log中才返回给客户端。相对于异步复制，半同步复制提高了数据的安全性，同时它也造成了一定程度的延迟，这个延迟最少是一个TCP/IP往返的时间。所以，半同步复制最好在低延时的网络中使用。
-
-
-## 并行复制
-
-所谓并行复制，指的是从库开启多个线程，并行读取relay log中不同库的日志，然后并行重放不同库的日志，这是库级别的并行。
-
-这里虽然说的是Mysql数据库，但对应其他数据库，原理没有什么差异。只是在具体实现和配置上不同。
-
-
-### 异步复制（Asynchronous replication）
-
-1、逻辑上
-
-MySQL默认的复制即是异步的，主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，这样就会有一个问题，主如果crash掉了，此时主上已经提交的事务可能并没有传到从库上，如果此时，强行将从提升为主，可能导致新主上的数据不完整。
-
-2、技术上
-
-主库将事务 Binlog 事件写入到 Binlog 文件中，此时主库只会通知一下 Dump 线程发送这些新的 Binlog，然后主库就会继续处理提交操作，而此时不会保证这些 Binlog 传到任何一个从库节点上。
-
-
-### 全同步复制（Fully synchronous replication）
-
-1、逻辑上
-
-指当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响。
-
-2、技术上
-
-当主库提交事务之后，所有的从库节点必须收到、APPLY并且提交这些事务，然后主库线程才能继续做后续操作。但缺点是，主库完成一个事务的时间会被拉长，性能降低。
+- 两种日志与记录写入磁盘的时间点不同，binlog日志只在事务提交完成后进行一次写入。而innodb存储引擎的redo日志在事务进行中不断地被写入，并日志不是随事务提交的顺序进行写入的。
+- binlog日志仅在事务提交时记录，并且对于每一个事务，仅在事务提交时记录，并且对于每一个事务，仅包含对应事务的一个日志。而对于innodb存储引擎的redo日志，由于其记录是物理操作日志，因此每个事务对应多个日志条目，并且事务的redo日志写入是并发的，并非在事务提交时写入，其在文件中记录的顺序并非是事务开始的顺序。
+- binlog不是循环使用，在写满或者重启之后，会生成新的binlog文件，redo log是循环使用。
+- binlog 日志是 master 推的还是 salve 来拉的？slave来拉的, 因为每一个slave都是完全独立的个体，所以slave完全依据自己的节奏去处理同步，
 
 
 ## 二阶段提交
 
- redo log 保证的是数据库的 crash-safe 能力。采用的策略就是常说的“两阶段提交”。
+redo log 保证的是数据库的 crash-safe 能力。采用的策略就是常说的“两阶段提交”。
 
- 一条update的SQL语句是按照这样的流程来执行的：
+一条update的SQL语句是按照这样的流程来执行的：
+**将数据页加载到内存 → 修改数据 → 更新数据 → 写redo log（状态为prepare） → 写binlog → 提交事务(数据写入成功后将redo log状态改为commit)**
 
- 将数据页加载到内存 → 修改数据 → 更新数据 → 写redo log（状态为prepare） → 写binlog → 提交事务（数据写入成功后将redo log状态改为commit）
-
- 只有当两个日志都提交成功（刷入磁盘），事务才算真正的完成。
-
- 一旦发生系统故障（不管是宕机、断电、重启等等），都可以配套使用 redo log 与 binlog 做数据修复。
+只有当两个日志都提交成功（刷入磁盘），事务才算真正的完成。一旦发生系统故障（不管是宕机、断电、重启等等），都可以配套使用 redo log 与 binlog 做数据修复。
 
 ### 两阶段提交机制的必要性
 
-binlog 存在于Mysql Server层中，主要用于数据恢复；当数据被误删时，可以通过上一次的全量备份数据加上某段时间的binlog将数据恢复到指定的某个时间点的数据。
-redo log 存在于InnoDB 引擎中，InnoDB引擎是以插件形式引入Mysql的，redo log的引入主要是为了实现Mysql的crash-safe能力。
+* binlog 存在于Mysql Server层中，主要用于数据恢复；当数据被误删时，可以通过上一次的全量备份数据加上某段时间的binlog将数据恢复到指定的某个时间点的数据。  
+* redo log 存在于InnoDB 引擎中，InnoDB引擎是以插件形式引入Mysql的，redo log的引入主要是为了实现Mysql的crash-safe能力。
 
 假设redo log和binlog分别提交，可能会造成用日志恢复出来的数据和原来数据不一致的情况。
-
-1）假设先写redo log再写binlog，即redo log没有prepare阶段，写完直接置为commit状态，然后再写binlog。那么如果写完redo log后Mysql宕机了，重启后系统自动用redo log 恢复出来的数据就会比
-binlog记录的数据多出一些数据，这就会造成磁盘上数据库数据页和binlog的不一致，下次需要用到
-binlog恢复误删的数据时，就会发现恢复后的数据和原来的数据不一致。
-2）假设先写binlog再写redolog。如果写完binlog后Mysql宕机了，那么binlog上的记录就会比磁盘上数据页的记录多出一些数据出来，下次用binlog恢复数据，就会发现恢复后的数据和原来的数据不一致。
+* 假设先写redo log再写binlog，即redo log没有prepare阶段，写完直接置为commit状态，然后再写binlog。那么如果写完redo log后Mysql宕机了，重启后系统自动用redo log 恢复出来的数据就会比binlog记录的数据多出一些数据，这就会造成磁盘上数据库数据页和binlog的不一致，下次需要用到binlog恢复误删的数据时，就会发现恢复后的数据和原来的数据不一致。
+* 假设先写binlog再写redolog。如果写完binlog后Mysql宕机了，那么binlog上的记录就会比磁盘上数据页的记录多出一些数据出来，下次用binlog恢复数据，就会发现恢复后的数据和原来的数据不一致。
 
 由此可见，redo log和binlog的两阶段提交是非常必要的。
 
 
 ## 索引
 
-- 聚集索引是啥
+- 聚集索引(也叫聚簇索引)是啥
   - 聚簇索引：将数据存储与索引放到了一块，找到索引也就找到了数据
   - 非聚簇索引：将数据存储于索引分开结构，索引结构的叶子节点指向了数据的对应行，myisam通过key_buffer把索引先缓存到内存中，当需要访问数据时（通过索引访问数据），在内存中直接搜索索引，然后通过索引找到磁盘相应数据，这也就是为什么索引不在key buffer命中时，速度慢的原因。
-  
 - 外键是啥: 比如在students表中，通过class_id的字段，可以把数据与另一张表关联起来，这种列称为外键(一般不用外键, 因为会降低数据库性能)
-
 - mysql 索引在什么情况下会失效
   - https://database.51cto.com/art/201912/607742.htm
   - 查询条件包含or，可能导致索引失效
@@ -2423,7 +1604,6 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
   - 索引字段上使用is null， is not null，可能导致索引失效。
   - 左连接查询或者右连接查询查询关联的字段编码格式不一样，可能导致索引失效。
   - mysql估计使用全表扫描要比使用索引快,则不使用索引。
-
 - mysql 的索引模型:
   在MySQL中使用较多的索引有Hash索引，B+树索引等，而我们经常使用的InnoDB存储引擎的默认索引实现为：B+树索引。对于哈希索引来说，底层的数据结构就是哈希表，因此在绝大多数需求为单条记录查询的时候，可以选择哈希索引，查询性能最快；其余大部分场景，建议选择BTree索引。
 
@@ -2436,19 +1616,15 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
 
 参考: [为什么MySQL数据库索引选择使用B+树?](https://blog.csdn.net/xlgen157387/article/details/79450295)
 
-首先, 为什么B类树可以进行优化呢？我们可以根据B类树的特点，构造一个多阶的B类树，然后在尽量多的在结点上存储相关的信息，保证层数尽量的少，以便后面我们可以更快的找到信息，磁盘的I/O操作也少一些，而且B类树是平衡树，每个结点到叶子结点的高度都是相同，这也保证了每个查询是稳定的。
+首先, 为什么B类树可以进行优化呢？我们可以根据B类树的特点，构造一个多阶的B类树，然后**在尽量多的在结点上存储相关的信息，保证层数尽量的少，以便后面我们可以更快的找到信息，磁盘的I/O操作也少一些**，而且B类树是平衡树，每个结点到叶子结点的高度都是相同，这也保证了每个查询是稳定的。
 
-总的来说，B/B+树是为了磁盘或其它存储设备而设计的一种平衡多路查找树(相对于二叉，B树每个内节点有多个分支)，与红黑树相比，在相同的的节点的情况下，一颗B/B+树的高度远远小于红黑树的高度(在下面B/B+树的性能分析中会提到)。B/B+树上操作的时间通常由存取磁盘的时间和CPU计算时间这两部分构成，而CPU的速度非常快，所以B树的操作效率取决于访问磁盘的次数，关键字总数相同的情况下B树的高度越小，磁盘I/O所花的时间越少。
+总的来说，B/B+树是为了磁盘或其它存储设备而设计的一种**平衡多路查找树**(相对于二叉，B树每个内节点有多个分支)，与红黑树相比，在相同的的节点的情况下，一颗B/B+树的高度远远小于红黑树的高度(在下面B/B+树的性能分析中会提到)。B/B+树上操作的时间通常由存取磁盘的时间和CPU计算时间这两部分构成，而CPU的速度非常快，所以B树的操作效率取决于访问磁盘的次数，**关键字总数相同的情况下B树的高度越小，磁盘I/O所花的时间越少**。
 
 那, 为什么说B+树比B树更适合数据库索引?
-
-1. B+树的磁盘读写代价更低：B+树的内部节点并没有指向关键字具体信息的指针，因此其内部节点相对B树更小，如果把所有同一内部节点的关键字存放在同一盘块中，那么盘块所能容纳的关键字数量也越多，一次性读入内存的需要查找的关键字也就越多，相对IO读写次数就降低了。
-
-2. B+树的查询效率更加稳定：由于非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。
-
-3. 由于B+树的数据都存储在叶子结点中，分支结点均为索引，方便扫库，只需要扫一遍叶子结点即可，但是B树因为其分支结点同样存储着数据，我们要找到具体的数据，需要进行一次中序遍历按序来扫，所以B+树更加适合在区间查询的情况，所以通常B+树用于数据库索引。
-
-4. B树在提高了IO性能的同时并没有解决元素遍历的效率低下的问题，正是为了解决这个问题，B+树应用而生。B+树只需要去遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树不支持这样的操作或者说效率太低。
+* B+树的磁盘读写代价更低：B+树的内部节点并没有指向关键字具体信息的指针，因此**其内部节点相对B树更小**，如果把所有同一内部节点的关键字存放在同一盘块中，那么盘块所能容纳的关键字数量也越多，一次性读入内存的需要查找的关键字也就越多，相对IO读写次数就降低了。
+* B+树的查询效率更加稳定：由于b+树非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。
+* 由于B+树的数据都存储在叶子结点中，分支结点均为索引，方便扫库，只需要扫一遍叶子结点即可，但是B树因为其分支结点同样存储着数据，我们要找到具体的数据，需要对b树进行一次中序遍历按序来扫，所以B+树更加适合在区间查询的情况，所以通常B+树用于数据库索引。
+* B树在提高了IO性能的同时并没有解决元素遍历的效率低下的问题，正是为了解决这个问题，B+树应用而生。B+树只需要去遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树不支持这样的操作或者说效率太低。
 
 
 ## mysql全文索引 pending_fin
@@ -2456,38 +1632,63 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
 
 ## mysql 有那些存储引擎，有哪些区别
 
-**综下所述, 如果表的读操作远远多于写操作时，并且不需要事务的支持的，可以将 MyIASM 作为数据库引擎的首选**
+* MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。
+* MyISAM类型的表强调的是性能，其执行速度比InnoDB类型更快，但是不提供事务支持，而InnoDB提供事务支持以及外部键等高级数据库功能。
+* 现在一般都是选用InnoDB了，InnoDB支持行锁, 而MyISAM的全表锁，myisam的读写串行问题，并发效率锁表，效率低，MyISAM对于读写密集型应用一般是不会去选用的
+* memory引擎一般用于临时表, 使用表级锁，没有事务机制, 虽然内存访问快，但如果频繁的读写，表级锁会成为瓶颈, 且内存昂贵..满了就亏了
+* InnoDB是聚集索引，使用B+Tree作为索引结构，数据文件是和（主键）索引绑在一起的（表数据文件本身就是按B+Tree组织的一个索引结构），必须要有主键，通过主键索引效率很高。MyISAM是非聚集索引，也是使用B+Tree作为索引结构，索引和数据文件是分离的，索引保存的是数据文件的指针。主键索引和辅助索引是独立的。
 
-1. MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。
-2. MyISAM类型的表强调的是性能，其执行速度比InnoDB类型更快，但是不提供事务支持，而InnoDB提供事务支持以及外部键等高级数据库功能。
-3. 现在一般都是选用InnoDB了，InnoDB支持行锁, 而MyISAM的全表锁，myisam的读写串行问题，并发效率锁表，效率低，MyISAM对于读写密集型应用一般是不会去选用的
-4. memory引擎一般用于临时表, 使用表级锁，没有事务机制, 虽然内存访问快，但如果频繁的读写，表级锁会成为瓶颈, 且内存昂贵..满了就亏了
-5. InnoDB是聚集索引，使用B+Tree作为索引结构，数据文件是和（主键）索引绑在一起的（表数据文件本身就是按B+Tree组织的一个索引结构），必须要有主键，通过主键索引效率很高。MyISAM是非聚集索引，也是使用B+Tree作为索引结构，索引和数据文件是分离的，索引保存的是数据文件的指针。主键索引和辅助索引是独立的。
+综上所述, **如果表的读操作远远多于写操作时，并且不需要事务的支持的，可以将 MyIASM 作为数据库引擎的首选**
 
 
 ## mysql 主从同步分哪几个过程
 
-- ![](/img/noodle_plan/mysql/mysql_master_slave_sync.jpg)
-- 复制的基本过程如下：
- 1. 从节点上的I/O 线程连接主节点，并请求从指定日志文件的指定位置（或者从最开始的日志）之后的日志内容；
- 2. 主节点接收到来自从节点的I/O请求后，通过负责复制的I/O线程根据请求信息读取指定日志指定位置之后的日志信息，返回给从节点。返回信息中除了日志所包含的信息之外，还包括本次返回的信息的bin-log file 的以及bin-log position；从节点的I/O线程接收到内容后，将接收到的日志内容更新到本机的relay log中，并将读取到的binary log文件名和位置保存到master-info 文件中，以便在下一次读取的时候能够清楚的告诉Master“我需要从某个bin-log 的哪个位置开始往后的日志内容，请发给我”；
- 3. Slave 的 SQL线程检测到relay-log 中新增加了内容后，会将relay-log的内容解析成在主节点上实际执行过的操作，并在本数据库中执行。
+![](/img/noodle_plan/mysql/mysql_master_slave_sync.jpg)
+复制的基本过程如下：
+1. 从节点上的I/O 线程连接主节点，并请求从指定日志文件的指定位置（或者从最开始的日志）之后的日志内容；
+2. 主节点接收到来自从节点的I/O请求后，通过负责复制的I/O线程根据请求信息读取指定日志指定位置之后的日志信息，返回给从节点。返回信息中除了日志所包含的信息之外，还包括本次返回的信息的bin-log file 的以及bin-log position；从节点的I/O线程接收到内容后，将接收到的日志内容更新到本机的relay log中，并将读取到的binary log文件名和位置保存到master-info 文件中，以便在下一次读取的时候能够清楚的告诉Master“我需要从某个bin-log 的哪个位置开始往后的日志内容，请发给我”；
+3. Slave 的 SQL线程检测到relay-log 中新增加了内容后，会将relay-log的内容解析成在主节点上实际执行过的操作，并在本数据库中执行。
+
+
+## 主从同步延迟与同步数据丢失问题
+
+主库将变更写binlog日志，然后从库连接到主库之后，从库有一个IO线程，将主库的binlog日志拷贝到自己本地，写入一个中继日志中。接着从库中有一个SQL线程会从中继日志读取binlog，然后执行binlog日志中的内容，也就是在自己本地再次执行一遍SQL，这样就可以保证自己跟主库的数据是一样的。
+
+这里有一个非常重要的一点，就是从库同步主库数据的过程是串行化的，也就是说主库上并行的操作，在从库上会串行执行。所以这就是一个非常重要的点了，由于从库从主库拷贝日志以及串行执行SQL的特点，在高并发场景下，从库的数据一定会比主库慢一些，是有延时的。所以经常出现，刚写入主库的数据可能是读不到的，要过几十毫秒，甚至几百毫秒才能读取到。
+
+而且这里还有另外一个问题，就是如果主库突然宕机，然后恰好数据还没同步到从库，那么有些数据可能在从库上是没有的，有些数据可能就丢失了。
+所以mysql实际上在这一块有两个机制:
+* 一个是半同步复制，用来解决主库数据丢失问题
+* 一个是并行复制，用来解决主从同步延时问题(实在解决不了只能强制读主库)。
+
+### 半同步复制（Semisynchronous replication）
+
+* **逻辑上**: 是介于全同步复制与全异步复制之间的一种，主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈。同时，这里只是一个收到的反馈，而不是已经完全完成并且提交的反馈，如此，节省了很多时间。
+* **技术上**: 介于异步复制和全同步复制之间，**主库在执行完客户端提交的事务后不是立刻返回给客户端，而是等待至少一个从库接收到并写到relay log中才返回给客户端**。相对于异步复制，半同步复制提高了数据的安全性，同时它也造成了一定程度的延迟，这个延迟最少是一个TCP/IP往返的时间。所以，半同步复制最好在低延时的网络中使用。
+
+### 并行复制
+
+所谓并行复制，指的是从库开启多个线程，并行读取relay log中不同库的日志，然后并行重放不同库的日志，这是库级别的并行。
+
+### 异步复制（Asynchronous replication）
+
+* **逻辑上**: MySQL默认的复制即是异步的，主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，这样就会有一个问题，主如果crash掉了，此时主上已经提交的事务可能并没有传到从库上，如果此时，强行将从提升为主，可能导致新主上的数据不完整。
+* **技术上**: 主库将事务 Binlog 事件写入到 Binlog 文件中，此时主库只会通知一下 Dump 线程发送这些新的 Binlog，然后主库就会继续处理提交操作，而此时不会保证这些 Binlog 传到任何一个从库节点上。
+
+### 全同步复制（Fully synchronous replication）
+
+* **逻辑上**: 指当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响。
+* **技术上**: **当主库提交事务之后，所有的从库节点必须收到、APPLY并且提交这些事务，然后主库线程才能继续做后续操作**。但缺点是，主库完成一个事务的时间会被拉长，性能降低。
+
 
 ## 乐观锁与悲观锁的区别？
 
-- 悲观锁：认为数据随时会被修改，因此每次读取数据之前都会上锁，防止其它事务读取或修改数据；应用于数据更新比较频繁的场景；
-- 乐观锁：操作数据时不会上锁，但是更新时会判断在此期间有没有别的事务更新这个数据，若被更新过，则失败重试；适用于读多写少的场景。
+* 悲观锁：认为数据随时会被修改，因此每次读取数据之前都会上锁，防止其它事务读取或修改数据；应用于数据更新比较频繁的场景；
+* 乐观锁：操作数据时不会上锁，但是更新时会判断在此期间有没有别的事务更新这个数据，若被更新过，则失败重试；适用于读多写少的场景。
 
 乐观锁怎么实现:  
 * 加版本号
 * cas
-
-## mvcc是啥
-
-* mvcc必看文章: [mysql mvcc实现原理](https://www.jianshu.com/p/f692d4f8a53e)
-* MVCC (Multiversion Concurrency Control) 中文全程叫多版本并发控制，是现代数据库（包括 MySQL、Oracle、PostgreSQL 等）引擎实现中常用的处理读写冲突的手段，目的在于提高数据库高并发场景下的吞吐性能。
-* 如此一来不同的事务在并发过程中，SELECT 操作可以不加锁而是通过 MVCC 机制读取指定的版本历史记录，并通过一些手段保证保证读取的记录值符合事务所处的隔离级别，从而解决并发场景下的读写冲突。
-* https://chenjiayang.me/2019/06/22/mysql-innodb-mvcc/
 
 
 ## 实现事务采取了哪些技术以及思想？
@@ -2500,126 +1701,97 @@ binlog恢复误删的数据时，就会发现恢复后的数据和原来的数�
 
 ## mysql四个事务隔离级别
 
-MySQL 的事务隔离是在 MySQL. ini 配置文件里添加的，在文件的最后添加：
-```
-transaction-isolation = REPEATABLE-READ
-```
-可用的配置值：READ-UNCOMMITTED、READ-COMMITTED、REPEATABLE-READ、SERIALIZABLE。
-
-四个隔离级别的区别以及每个级别可能产生的问题以及实现原理: https://developer.aliyun.com/article/743691
+[四个隔离级别的区别以及每个级别可能产生的问题以及实现原理](https://developer.aliyun.com/article/743691)  
+MySQL 的事务隔离是在 MySQL. ini 配置文件里添加的，在文件的最后添加：`transaction-isolation = REPEATABLE-READ`
+可用的配置值：`READ-UNCOMMITTED`、`READ-COMMITTED`、`REPEATABLE-READ`、`SERIALIZABLE`。
 
 MySQL的事务隔离级别一共有四个，分别是
-
 * 读未提交
 * 读已提交
 * 可重复读
-* 可串行化。
+* 可串行化
 
 MySQL的隔离级别的作用就是让事务之间互相隔离，互不影响，这样可以保证事务的一致性。
-
-隔离级别比较：可串行化>可重复读>读已提交>读未提交
-
-隔离级别对性能的影响比较：可串行化>可重复读>读已提交>读未提交
+* 隔离级别比较：可串行化>可重复读>读已提交>读未提交
+* 隔离级别对性能的影响比较：可串行化>可重复读>读已提交>读未提交
 
 由此看出，隔离级别越高，所需要消耗的MySQL性能越大（如事务并发严重性），为了平衡二者，一般建议设置的隔离级别为可重复读，MySQL默认的隔离级别也是可重复读。
 
 ### 事务并发可能出现的情况
 
 * 脏读（Dirty Read）
-  一个事务读到了另一个未提交事务修改过的数据
-
-  从根上理解MySQL事务的隔离级别
-
-  会话B开启一个事务，把id=1的name为武汉市修改成温州市，此时另外一个会话A也开启一个事务，读取id=1的name，此时的查询结果为温州市，会话B的事务最后回滚了刚才修改的记录，这样会话A读到的数据是不存在的，这个现象就是脏读。（脏读只在读未提交隔离级别才会出现）
-
+    * 一个事务读到了另一个未提交事务修改过的数据
+    * 会话B开启一个事务，把id=1的name为武汉市修改成温州市，此时另外一个会话A也开启一个事务，读取id=1的name，此时的查询结果为温州市，会话B的事务最后回滚了刚才修改的记录，这样会话A读到的数据是不存在的，这个现象就是脏读。（脏读只在读未提交隔离级别才会出现）
 * 不可重复读（Non-Repeatable Read）
-  一个事务只能读到另一个已经提交的事务修改过的数据，并且其他事务每对该数据进行一次修改并提交后，该事务都能查询得到最新值。（不可重复读在读未提交和读已提交隔离级别都可能会出现）
-
-  从根上理解 MySQL 事务的隔离级别
-
-  会话A开启一个事务，查询id=1的结果，此时查询的结果name为武汉市。接着会话B把id=1的name修改为温州市（隐式事务，因为此时的autocommit为1，每条SQL语句执行完自动提交），此时会话A的事务再一次查询id=1的结果，读取的结果name为温州市。会话B再此修改id=1的name为杭州市，会话A的事务再次查询id=1，结果name的值为杭州市，这种现象就是不可重复读。
-
+    * 一个事务只能读到另一个已经提交的事务修改过的数据，并且其他事务每对该数据进行一次修改并提交后，该事务都能查询得到最新值。（不可重复读在读未提交和读已提交隔离级别都可能会出现）
+    * 会话A开启一个事务，查询id=1的结果，此时查询的结果name为武汉市。接着会话B把id=1的name修改为温州市（隐式事务，因为此时的autocommit为1，每条SQL语句执行完自动提交），此时会话A的事务再一次查询id=1的结果，读取的结果name为温州市。会话B再此修改id=1的name为杭州市，会话A的事务再次查询id=1，结果name的值为杭州市，这种现象就是不可重复读。
 * 幻读（Phantom）
-  一个事务先根据某些条件查询出一些记录，之后另一个事务又向表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另一个事务插入的记录也读出来。（幻读在读未提交、读已提交、可重复读隔离级别都可能会出现）
-
-  从根上理解 MySQL 事务的隔离级别
-
-  会话A开启一个事务，查询id>0的记录，此时会查到name=武汉市的记录。接着会话B插入一条name=温州市的数据（隐式事务，因为此时的autocommit为1，每条SQL语句执行完自动提交），这时会话A的事务再以刚才的查询条件（id>0）再一次查询，此时会出现两条记录（name为武汉市和温州市的记录），这种现象就是幻读。
+    * 一个事务先根据某些条件查询出一些记录，之后另一个事务又向表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另一个事务插入的记录也读出来。（幻读在读未提交、读已提交、可重复读隔离级别都可能会出现）
+    * 会话A开启一个事务，查询id>0的记录，此时会查到name=武汉市的记录。接着会话B插入一条name=温州市的数据（隐式事务，因为此时的autocommit为1，每条SQL语句执行完自动提交），这时会话A的事务再以刚才的查询条件（id>0）再一次查询，此时会出现两条记录（name为武汉市和温州市的记录），这种现象就是幻读。
 
 
 ### 各个隔离级别的详细说明
 
-* 读未提交（READ UNCOMMITTED）
-  在读未提交隔离级别下，事务A可以读取到事务B修改过但未提交的数据。
-
-  可能发生脏读、不可重复读和幻读问题，一般很少使用此隔离级别。
-
-* 读已提交（READ COMMITTED）
-  在读已提交隔离级别下，事务B只能在事务A修改过并且已提交后才能读取到事务B修改的数据。
-
-  读已提交隔离级别解决了脏读的问题，但可能发生不可重复读和幻读问题，一般很少使用此隔离级别。
-
-* 可重复读（REPEATABLE READ）
-  在可重复读隔离级别下，事务B只能在事务A修改过数据并提交后，自己也提交事务后，才能读取到事务B修改的数据。
-
-  可重复读隔离级别解决了脏读和不可重复读的问题，但可能发生幻读问题。
-
-  提问：为什么上了写锁（写操作），别的事务还可以读操作？
-
-  因为InnoDB有MVCC机制（多版本并发控制），可以使用快照读，而不会被阻塞。
-
-* 可串行化（SERIALIZABLE）
-  各种问题（脏读、不可重复读、幻读）都不会发生，通过加锁实现（读锁和写锁）。
++ 读未提交（READ UNCOMMITTED）
+  - 在读未提交隔离级别下，事务A可以读取到事务B修改过但未提交的数据。
+  - 可能发生脏读、不可重复读和幻读问题，一般很少使用此隔离级别。
++ 读已提交（READ COMMITTED）
+  - 在读已提交隔离级别下，事务B只能在事务A修改过并且已提交后才能读取到事务B修改的数据。
+  - 读已提交隔离级别解决了脏读的问题，但可能发生不可重复读和幻读问题，一般很少使用此隔离级别。
++ 可重复读（REPEATABLE READ）
+  - 在可重复读隔离级别下，事务B只能在事务A修改过数据并提交后，自己也提交事务后，才能读取到事务B修改的数据。
+  - 可重复读隔离级别解决了脏读和不可重复读的问题，但可能发生幻读问题。
+  - 提问：为什么上了写锁（写操作），别的事务还可以读操作？因为InnoDB有MVCC机制（多版本并发控制），可以使用快照读，而不会被阻塞。
++ 可串行化（SERIALIZABLE）
+  - 各种问题（脏读、不可重复读、幻读）都不会发生，通过加锁实现（读锁和写锁）。
 
 
-### 隔离级别的实现原理
+## mvcc是啥
 
-使用MySQL的默认隔离级别（可重复读）来进行说明。
+mvcc必看文章: 
+* [mysql mvcc实现原理](https://www.jianshu.com/p/f692d4f8a53e)  
+* https://chenjiayang.me/2019/06/22/mysql-innodb-mvcc/
+
+MVCC (Multiversion Concurrency Control) 中文全程叫**多版本并发控制**，是现代数据库（包括 MySQL、Oracle、PostgreSQL 等）引擎实现中常用的处理读写冲突的手段，目的在于提高数据库高并发场景下的吞吐性能。
 
 每条记录在更新的时候都会同时记录一条回滚操作（回滚操作日志undo log）。同一条记录在系统中可以存在多个版本，这就是数据库的多版本并发控制（MVCC）。即通过回滚（rollback操作），可以回到前一个状态的值。InnoDB 为了解决这个问题，设计了 ReadView（可读视图）的概念.
 
+如此一来不同的事务在并发过程中，SELECT 操作可以不加锁而是通过 MVCC 机制读取指定的版本历史记录，并通过一些手段保证保证读取的记录值符合事务所处的隔离级别，从而解决并发场景下的读写冲突。
 
-## mysql在可重复读RR的隔离级别下如何避免幻读的
-
-**知识点**:  
-1. Record Lock：单个行记录上的锁。
-2. Gap Lock：间隙锁，锁定一个范围，但不包括记录本身。GAP锁的目的，是为了防止同一事务的两次当前读，出现幻读的情况。
-3. `Next-Key Lock` = `Record Lock` + `Gap Lock` ， 锁定一个范围，并且锁定记录本身。对于行的查询，都是采用该方法，主要目的是解决幻读的问题。
-
-默认情况下，InnoDB工作在可重复读隔离级别下，并且会以Next-Key Lock的方式对数据行进行加锁，这样可以有效防止幻读的发生。Next-Key Lock是行锁和间隙锁的组合，当InnoDB扫描索引记录的时候，会首先对索引记录加上行锁（Record Lock），再对索引记录两边的间隙加上间隙锁（Gap Lock）。加上间隙锁之后，其他事务就不能在这个间隙修改或者插入记录。
-
-参考:  
-* record lock行锁
-* gap锁 
-* next-key锁: [mysql 排它锁之行锁、间隙锁、后码锁](https://juejin.im/post/6844903997090824200)
-* mvcc: 
-    * [mysql mvcc实现原理](https://www.jianshu.com/p/f692d4f8a53e)
-    * https://blog.csdn.net/DILIGENT203/article/details/100751755
-
-**mysql如何实现避免幻读**:  
-1. 在快照读读情况下，mysql通过mvcc来避免幻读。
-2. 在当前读读情况下，mysql通过next-key来避免幻读。
-
-**什么是MVCC:**  
-mvcc全称是multi version concurrent control（多版本并发控制）。mysql把每个操作都定义成一个事务，每开启一个事务，系统的事务版本号自动递增。每行记录都有两个隐藏列：创建版本号和删除版本号
-
+mysql把每个操作都定义成一个事务，每开启一个事务，系统的事务版本号自动递增。每行记录都有两个隐藏列：创建版本号和删除版本号
 * select：事务每次只能读到创建版本号小于等于此次系统版本号的记录，同时行的删除版本号不存在或者大于当前事务的版本号。
 * update：插入一条新记录，并把当前系统版本号作为行记录的版本号，同时保存当前系统版本号到原有的行作为删除版本号。
 * delete：把当前系统版本号作为行记录的删除版本号
 * insert：把当前系统版本号作为行记录的版本号
 
-**什么是next-key锁**:  
-`行锁`+`GAP间隙锁`
 
-**什么是快照读和当前读:**  
-* 快照读：简单的select操作，属于快照读，不加锁。(当然，也有例外，下面会分析)
+## mysql在可重复读RR的隔离级别下如何避免幻读的
+
+参考:  
+* next-key锁: [mysql 排它锁之行锁、间隙锁、后码锁](https://juejin.im/post/6844903997090824200)
+* mvcc: 
+    * [mysql mvcc实现原理](https://www.jianshu.com/p/f692d4f8a53e)
+    * https://blog.csdn.net/DILIGENT203/article/details/100751755
+
+知识点:
+* `Record Lock`：单个行记录上的锁。也叫行锁
+* `Gap Lock`：间隙锁，锁定一个范围，但不包括记录本身。GAP锁的目的，是为了防止同一事务的两次当前读，出现幻读的情况。
+* `Next-Key Lock` = `Record Lock` + `Gap Lock` ， 锁定一个范围，并且锁定记录本身。对于行的查询，都是采用该方法，主要目的是解决幻读的问题。
+
+默认情况下，InnoDB工作在可重复读隔离级别下，并且会以`Next-Key Lock`的方式对数据行进行加锁，这样可以有效防止幻读的发生。`Next-Key Lock`是行锁和间隙锁的组合，当InnoDB扫描索引记录的时候，会首先对索引记录加上行锁（Record Lock），再对索引记录两边的间隙加上间隙锁（Gap Lock）。加上间隙锁之后，其他事务就不能在这个间隙修改或者插入记录。
+
+* **快照读**：简单的select操作，属于快照读，不加锁。(当然，也有例外，下面会分析)
     `select * from table where ?;`
-* 当前读：特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。
-    * select * from table where ? lock in share mode;
-    * select * from table where ? for update;
-    * insert into table values (…);
-    * update table set ? where ?;
-    * delete from table where ?;
+* **当前读**：特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。
+    * `select * from table where ? lock in share mode;`
+    * `select * from table where ? for update;`
+    * `insert into table values (…);`
+    * `update table set ? where ?;`
+    * `delete from table where ?;`
+
+**mysql如何实现避免幻读**:  
+1. 在快照读读情况下，mysql通过mvcc来避免幻读。
+2. 在当前读读情况下，mysql通过`next-key lock`来避免幻读。
 
 
 ### 正确理解InnoDB引擎RR隔离级别解决了幻读这件事
@@ -2630,127 +1802,37 @@ Mysql官方给出的幻读解释是：只要在一个事务中，第二次select
 a事务先select，b事务insert确实会加一个gap锁，但是如果b事务commit，这个gap锁就会释放（释放后a事务可以随意dml操作），a事务再select出来的结果在MVCC下还和第一次select一样，接着a事务不加条件地update，这个update会作用在所有行上（包括b事务新加的），a事务再次select就会出现b事务中的新行，并且这个新行已经被update修改了，实测在RR级别下确实如此。
 
 **如果这样理解的话，Mysql的RR级别确实防不住幻读, 但是我们不能向上面这样理解, 我们得如下理解:**
-
-在快照读读情况下，mysql通过mvcc来避免幻读。
-在当前读读情况下，mysql通过next-key来避免幻读。
-select * from t where a=1;属于快照读
-select * from t where a=1 lock in share mode;属于当前读
-不能把快照读和当前读得到的结果不一样这种情况认为是幻读，这是两种不同的使用。所以mysql的rr级别是解决了幻读的。
-
-先说结论，MySQL 存储引擎 InnoDB 隔离级别 RR 解决了幻读问题。
-
-如上面问题所说，T1 select 之后 update，会将 T2 中 insert 的数据一起更新，那么认为多出来一行，所以防不住幻读。看着说法无懈可击，但是其实是错误的，InnoDB 中设置了快照读和当前读两种模式，如果只有快照读，那么自然没有幻读问题，但是如果将语句提升到当前读，那么 T1 在 select 的时候需要用如下语法： select * from t for update (lock in share mode) 进入当前读，那么自然没有 T2 可以插入数据这一回事儿了。
+* `select * from t where a=1;`属于快照读
+* `select * from t where a=1 lock in share mode;`属于当前读
+* 不能把快照读和当前读得到的结果不一样这种情况认为是幻读，这是两种不同的使用。所以mysql的rr级别是解决了幻读的。
+* 如上面问题所说，T1 select 之后 update，会将 T2 中 insert 的数据一起更新，那么认为多出来一行，所以防不住幻读。看着说法无懈可击，但是其实是错误的，InnoDB 中设置了快照读和当前读两种模式，如果只有快照读，那么自然没有幻读问题，但是如果将语句提升到当前读，那么 T1 在 select 的时候需要用如下语法： select * from t for update (lock in share mode) 进入当前读，那么自然没有 T2 可以插入数据这一回事儿了。
 
 
 # Redis
 
-## 重点参考博客截图
-
-- [通过面试题学Redis--基础篇](html_screen_shot/redis/通过面试题学Redis--基础篇.png)
-- [通过面试题学Redis--进阶篇](html_screen_shot/redis/通过面试题学Redis--进阶篇.png)
-- [压缩列表](html_screen_shot/redis/压缩列表.png)
-- [有序集zset](html_screen_shot/redis/有序集zset.png)
-- [zset](html_screen_shot/redis/zset.png)
-
-
 ## redis 数据结构有哪些？分别怎么实现的？
 
-* String: 全是整数的时候用`整数编码int`, 当有字符串的时候用`简单动态字符串sds`编码
-* HashTable: 元素比较少或者元素比较短的时候用`压缩表ziplist`(key1|val1|key2|val2|...这样存储), 其他时候就用`字典ht`
-* Set: 元素全是整数的时候用`整数集合`编码(一种特殊的编码, 会使用各种规则来利用位空间, 来节省内存), 其他时候用`字典ht`编码(键为Set的元素, 值都为Null)
-* List: 元素比较少或者元素比较短的时候用`压缩表ziplist`, 其他时候就用`双端列表LinkedList`编码
-* ZSet: 元素比较少或者元素比较短的时候用`压缩表ziplist`(member1|score1|member2|score2|..., 按照score从小到大排列), 其他时候就用`跳跃表SkipList编码`(这个编码里包含一个字典结构和一个跳表结构, 字典用于快速查找member如`ZScore`指令的score和确定是否有这个member, 跳表用于`zrank`/`zrange`等)
+* String: 
+    * 全是整数的时候用`整数编码int`
+    * 当有字符串的时候用`简单动态字符串sds`编码
+* HashTable: 
+    * 元素比较少或者元素比较短的时候用`压缩表ziplist`(key1|val1|key2|val2|...这样存储), 
+    * 其他时候就用`字典ht`
+* Set: 
+    * 元素全是整数的时候用`整数集合`编码(一种特殊的编码, 会使用各种规则来利用位空间, 来节省内存), 
+    * 其他时候用`字典ht`编码(键为Set的元素, 值都为Null)
+* List: 
+    * 元素比较少或者元素比较短的时候用`压缩表ziplist`,
+    *  其他时候就用`双端列表LinkedList`编码
+* ZSet: 
+    * 元素比较少或者元素比较短的时候用`压缩表ziplist`(member1|score1|member2|score2|..., 按照score从小到大排列), 
+    * 其他时候就用`跳跃表SkipList编码`, 这个编码里包含一个字典结构和一个跳表结构:
+        * 字典用于快速查找member如`ZScore`指令的score和确定是否有这个member, 
+        * 跳表用于`zrank`/`zrange`等
 
-## 为什么zset用跳表不用红黑树
+## zset各种问题
 
-现在我们看看，对于这个问题，Redis的作者 @antirez 是怎么说的：
-
-There are a few reasons:
-* They are not very memory intensive. It's up to you basically. Changing parameters about the probability of a node to have a given number of levels will make then less memory intensive than btrees.
-* A sorted set is often target of many ZRANGE or ZREVRANGE operations, that is, traversing the skip list as a linked list. With this operation the cache locality of skip lists is at least as good as with other kind of balanced trees.
-* They are simpler to implement, debug, and so forth. For instance thanks to the skip list simplicity I received a patch (already in Redis master) with augmented skip lists implementing ZRANK in O(log(N)). It required little changes to the code.
-
-
-可参考:  <a href="{% post_path 'algo_newbie' %}#跳表">跳表</a>
-总结:  
-<!-- * 在做范围查找的时候，平衡树比skiplist操作要复杂。在平衡树上，我们找到指定范围的小值之后，还需要以中序遍历的顺序继续寻找其它不超过大值的节点。如果不对平衡树进行一定的改造，这里的中序遍历并不容易实现。而在skiplist上进行范围查找就非常简单，只需要在找到小值之后，对第1层链表进行若干步的遍历就可以实现。 -->
-* 平衡树的插入和删除操作可能引发子树的调整，逻辑复杂，而skiplist的插入和删除只需要修改相邻节点的指针，操作简单又快速。
-* 从内存占用上来说，skiplist比平衡树更灵活一些。一般来说，平衡树每个节点包含2个指针（分别指向左右子树），而skiplist每个节点包含的指针数目平均为1/(1-p)，具体取决于参数p的大小。如果像Redis里的实现一样，取p=1/4，那么平均每个节点包含1.33个指针，比平衡树更有优势。
-* 从算法实现难度上来比较，skiplist比平衡树要简单得多。
-
-
-## redis的zset是怎么支持查询排名的
-
-zset的跳表数据结构里存了一个**span值**, 它表示当前的指针跨越了多少个节点。
-
-![](/img/noodle_plan/redis/skiplist_rank.jpg)
-
-注意：图中前向指针上面括号中的数字，表示对应的span的值。即当前指针跨越了多少个节点，这个计数不包括指针的起点节点，但包括指针的终点节点。
-假设我们在这个skiplist中查找score=89.0的元素（即Bob的成绩数据），在查找路径中，我们会跨域图中标红的指针，这些指针上面的span值累加起来，就得到了Bob的排名(2+2+1)-1=4（减1是因为rank值以0起始）。需要注意这里算的是从小到大的排名，而如果要算从大到小的排名，只需要用skiplist长度减去查找路径上的span累加值，即6-(2+2+1)=1。
-可见，在查找skiplist的过程中，通过累加span值的方式，我们就能很容易算出排名。相反，如果指定排名来查找数据（类似zrange和zrevrange那样），也可以不断累加span并时刻保持累加值不超过指定的排名，通过这种方式就能得到一条O(log n)的查找路径。
-
-
-## 哈希表渐进式rehash
-
-以下是哈希表渐进式 rehash 的详细步骤：
-
-1. 为 `ht[1]` 分配空间， 让字典同时持有 `ht[0]` 和 `ht[1]` 两个哈希表。
-2. 在字典中维持一个索引计数器变量 rehashidx ， 并将它的值设置为 0 ， 表示 rehash 工作正式开始。
-3. 在 rehash 进行期间， 每次对字典执行添加、删除、查找或者更新操作时， 程序除了执行指定的操作以外， 还会顺带将 `ht[0]` 哈希表在 rehashidx 索引上的所有键值对 rehash 到 `ht[1]` ， 当 rehash 工作完成之后， 程序将 rehashidx 属性的值增一。
-4. 随着字典操作的不断执行， 最终在某个时间点上， `ht[0]` 的所有键值对都会被 rehash 至 `ht[1]` ， 这时程序将 rehashidx 属性的值设为 -1 ， 表示 rehash 操作已完成。
-
-渐进式 rehash 的好处在于它采取分而治之的方式， 将 rehash 键值对所需的计算工作均滩到对字典的每个添加、删除、查找和更新操作上， 从而避免了集中式 rehash 而带来的庞大计算量。
-
-因为在进行渐进式 rehash 的过程中， 字典会同时使用 `ht[0]` 和 `ht[1]` 两个哈希表， 所以在渐进式 rehash 进行期间， 字典的删除（delete）、查找（find）、更新（update）等操作会在两个哈希表上进行： 比如说， 要在字典里面查找一个键的话， 程序会先在 `ht[0]` 里面进行查找， 如果没找到的话， 就会继续到 `ht[1]` 里面进行查找， 诸如此类。
-
-另外， 在渐进式 rehash 执行期间， 新添加到字典的键值对一律会被保存到 `ht[1]` 里面， 而 `ht[0]` 则不再进行任何添加操作： 这一措施保证了 `ht[0]` 包含的键值对数量会只减不增， 并随着 rehash 操作的执行而最终变成空表。
-
-
-## scan原理为啥一定能遍历完
-
-### 先说为啥scan可能会重复
-
-总结: 主要是因为字典rehash的问题, 当size变的时候, 有一些数据在`ht[0]`有一些在`ht[1]`, 导致游标对应的bucket变了
-
-字典rehash时会使用两个哈希表，首先为`ht[1]`分配空间，如果是扩展操作，`ht[1]`的大小为第一个大于等于2倍`ht[0]`.used的2n，如果是收缩操作，`ht[1]`的大小为第一个大于等于`ht[0]`.used的2n。然后将`ht[0]`的所有键值对rehash到`ht[1]`中，最后释放`ht[0]`，将`ht[1]`设置为`ht[0]`，新创建一个空白哈希表当做`ht[1]`。rehash不是一次完成的，而是分多次、渐进式地完成。
-
-举个例子，现在将一个size为4的哈希表`ht[0]`(sizemask为11, index = hash & 0b11)rehash至一个size为8的哈希表`ht[1]`(sizemask为111, index = hash & 0b111)。
-
-`ht[0]`中处于bucket0位置的key的哈希值低两位为00，那么rehash至`ht[1]`时index取低三位可能为000(0)和100(4)。也就是`ht[0]`中bucket0中的元素rehash之后分散于`ht[1]`的bucket0与bucket4，以此类推，对应关系为：
-```
-`ht[0]`  ->  `ht[1]`
-----------------
-  0    ->   0,4 
-  1    ->   1,5
-  2    ->   2,6
-  3    ->   3,7
-```
-如果SCAN命令采取0->1->2->3的顺序进行遍历，就会出现如下问题：
-
-* 扩展操作中，如果返回游标1时正在进行rehash，`ht[0]`中的bucket0中的部分数据可能已经rehash到`ht[1]`中的bucket[0]或者bucket[4]，在`ht[1]`中从bucket1开始遍历，遍历至bucket4时，其中的元素已经在`ht[0]`中的bucket0中遍历过，这就产生了重复问题。
-* 缩小操作中，当返回游标5，但缩小后哈希表的size只有4，如何重置游标？
-
-### 如何保证遍历完不遗漏
-
-总结: 
-* redis 使用了一种叫做 reverse binary iteration 的方法.
-* redis 里边 rehash 从小到大时，scan 系列命令不会重复也不会遗漏. 而从大到小时, 有可能会造成重复但不会遗漏.
-
-参考:  
-* https://segmentfault.com/a/1190000018218584
-* https://www.cnblogs.com/linxiyue/p/11262969.html
-
-
-## 延时队列用redis怎么做
-
-用zset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者轮询zset用zrangebyscore指令获取N秒之前的数据轮询进行处理。
-
-## Redis 的 ZSET 做排行榜时，如果要实现分数相同时按时间顺序排序怎么实现
-
-说了一个将 score 拆成高 32 位和低 32 位，高 32 位存分数，低 32 位存时间的方法。问还有没有其他方法，想不出了
-
-
-## 有序集合的实现
+### 有序集合的实现
 
   - 参考 http://redisbook.com/preview/object/sorted_set.html
   - 参考 https://redisbook.readthedocs.io/en/latest/datatype/sorted_set.html
@@ -2779,13 +1861,67 @@ zset的跳表数据结构里存了一个**span值**, 它表示当前的指针跨
       - 范围性查找和处理操作，这是（高效地）实现 ZRANGE 、 ZRANK 和 ZINTERSTORE 等命令的关键。
     - 所以通过同时使用字典和跳跃表， 有序集可以高效地实现按成员查找和按顺序查找两种操作。
 
+
+### 为什么zset用跳表不用红黑树
+
+现在我们看看，对于这个问题，Redis的作者 @antirez 是怎么说的：
+
+There are a few reasons:
+* They are not very memory intensive. It's up to you basically. Changing parameters about the probability of a node to have a given number of levels will make then less memory intensive than btrees.
+* A sorted set is often target of many ZRANGE or ZREVRANGE operations, that is, traversing the skip list as a linked list. With this operation the cache locality of skip lists is at least as good as with other kind of balanced trees.
+* They are simpler to implement, debug, and so forth. For instance thanks to the skip list simplicity I received a patch (already in Redis master) with augmented skip lists implementing ZRANK in O(log(N)). It required little changes to the code.
+
+可参考:  本博客文章<a href="{% post_path 'algo_newbie' %}#跳表">跳表</a>
+总结:  
+<!-- * 在做范围查找的时候，平衡树比skiplist操作要复杂。在平衡树上，我们找到指定范围的小值之后，还需要以中序遍历的顺序继续寻找其它不超过大值的节点。如果不对平衡树进行一定的改造，这里的中序遍历并不容易实现。而在skiplist上进行范围查找就非常简单，只需要在找到小值之后，对第1层链表进行若干步的遍历就可以实现。 -->
+* 平衡树的插入和删除操作可能引发子树的调整，逻辑复杂，而skiplist的插入和删除只需要修改相邻节点的指针，操作简单又快速。
+* 从内存占用上来说，skiplist比平衡树更灵活一些。一般来说，平衡树每个节点包含2个指针（分别指向左右子树），而skiplist每个节点包含的指针数目平均为1/(1-p)，具体取决于参数p的大小。如果像Redis里的实现一样，取p=1/4，那么平均每个节点包含1.33个指针，比平衡树更有优势。
+* 从算法实现难度上来比较，skiplist比平衡树要简单得多。
+
+
+### zset是怎么支持查询排名的
+
+zset的跳表数据结构里存了一个**span值**, 它表示当前的指针跨越了多少个节点。
+
+![](/img/noodle_plan/redis/skiplist_rank.jpg)
+
+注意：图中前向指针上面括号中的数字，表示对应的span的值。即当前指针跨越了多少个节点，这个计数不包括指针的起点节点，但包括指针的终点节点。
+假设我们在这个skiplist中查找score=89.0的元素（即Bob的成绩数据），在查找路径中，我们会跨域图中标红的指针，这些指针上面的span值累加起来，就得到了Bob的排名(2+2+1)-1=4（减1是因为rank值以0起始）。需要注意这里算的是从小到大的排名，而如果要算从大到小的排名，只需要用skiplist长度减去查找路径上的span累加值，即6-(2+2+1)=1。
+可见，在查找skiplist的过程中，通过累加span值的方式，我们就能很容易算出排名。相反，如果指定排名来查找数据（类似zrange和zrevrange那样），也可以不断累加span并时刻保持累加值不超过指定的排名，通过这种方式就能得到一条O(log n)的查找路径。
+
+
+### 延时队列用redis怎么做
+
+用zset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者轮询zset用zrangebyscore指令获取N秒之前的数据轮询进行处理。
+
+### ZSET 做排行榜时，如果要实现分数相同时按时间顺序排序怎么实现
+
+说了一个将 score 拆成高 32 位和低 32 位，高 32 位存分数，低 32 位存时间的方法。
+
+
+## 哈希表渐进式rehash
+
+以下是哈希表渐进式 rehash 的详细步骤：
+
+1. 为 `ht[1]` 分配空间， 让字典同时持有 `ht[0]` 和 `ht[1]` 两个哈希表。
+2. 在字典中维持一个索引计数器变量 rehashidx ， 并将它的值设置为 0 ， 表示 rehash 工作正式开始。
+3. 在 rehash 进行期间， 每次对字典执行添加、删除、查找或者更新操作时， 程序除了执行指定的操作以外， 还会顺带将 `ht[0]` 哈希表在 rehashidx 索引上的所有键值对 rehash 到 `ht[1]` ， 当 rehash 工作完成之后， 程序将 rehashidx 属性的值增一。
+4. 随着字典操作的不断执行， 最终在某个时间点上， `ht[0]` 的所有键值对都会被 rehash 至 `ht[1]` ， 这时程序将 rehashidx 属性的值设为 -1 ， 表示 rehash 操作已完成。
+
+渐进式 rehash 的好处在于它采取分而治之的方式， 将 rehash 键值对所需的计算工作均滩到对字典的每个添加、删除、查找和更新操作上， 从而避免了集中式 rehash 而带来的庞大计算量。
+
+因为在进行渐进式 rehash 的过程中， 字典会同时使用 `ht[0]` 和 `ht[1]` 两个哈希表， 所以在渐进式 rehash 进行期间， 字典的删除（delete）、查找（find）、更新（update）等操作会在两个哈希表上进行： 比如说， 要在字典里面查找一个键的话， 程序会先在 `ht[0]` 里面进行查找， 如果没找到的话， 就会继续到 `ht[1]` 里面进行查找， 诸如此类。
+
+另外， 在渐进式 rehash 执行期间， 新添加到字典的键值对一律会被保存到 `ht[1]` 里面， 而 `ht[0]` 则不再进行任何添加操作： 这一措施保证了 `ht[0]` 包含的键值对数量会只减不增， 并随着 rehash 操作的执行而最终变成空表。
+
+
+
 ## redis 持久化有哪几种方式，怎么选？
 
 - 混合持久化
-  重启 Redis 时，我们很少使用 rdb 来恢复内存状态，因为会丢失大量数据。
-  如果使用 AOF 日志重放，性能则相对 rdb 来说要慢很多，这样在 Redis 实例很大的情况下，启动的时候需要花费很长的时间。
-  Redis 4.0 为了解决这个问题，带来了一个新的持久化选项——混合持久化。
-  混合持久化同样也是通过bgrewriteaof完成的，不同的是当开启混合持久化时，fork出的子进程先将共享的内存副本全量的以RDB方式写入aof文件，然后在将aof_rewrite_buf重写缓冲区的增量命令以AOF方式写入到文件，写入完成后通知主进程更新统计信息，并将新的含有RDB格式和AOF格式的AOF文件替换旧的的AOF文件。简单的说：新的AOF文件前半段是RDB格式的全量数据后半段是AOF格式的增量数据，
+  * 原因: 重启 Redis 时，我们很少使用 rdb 来恢复内存状态，因为会丢失大量数据。如果使用 AOF 日志重放，性能则相对 rdb 来说要慢很多，这样在 Redis 实例很大的情况下，启动的时候需要花费很长的时间。
+  * 原理: 混合持久化同样也是通过bgrewriteaof完成的，不同的是当开启混合持久化时，fork出的子进程先将共享的内存副本全量的以RDB方式写入aof文件，然后在将aof_rewrite_buf重写缓冲区的增量命令以AOF方式写入到文件，写入完成后通知主进程更新统计信息，并将新的含有RDB格式和AOF格式的AOF文件替换旧的的AOF文件。
+  * 简单的说：新的AOF文件前半段是RDB格式的全量数据后半段是AOF格式的增量数据，
 - rdb
   - 优势: 
     - RDB文件紧凑，全量备份，非常适合用于进行备份和灾难恢复。
@@ -2808,7 +1944,7 @@ zset的跳表数据结构里存了一个**span值**, 它表示当前的指针跨
 
 ![](/img/noodle_plan/redis/bgsave.png)
 
-子进程创建RDB文件, 根据父进程内存生成临时快照文件, 完成后对原有RDB文件进行源自替换. 然后子进程发送信号给父进程表示完成
+子进程创建RDB文件, 根据父进程内存生成临时快照文件, 完成后对原有RDB文件进行[原子替换](#如何做rdb和aof的原子替换的). 然后子进程发送信号给父进程表示完成
 
 
 ### aof流程说一下以及aof追加阻塞是啥
@@ -2822,25 +1958,31 @@ AOF可以更好的保护数据不丢失，一般AOF会每隔1秒，通过一个�
 
 ### AOF重写的实现
 
-**所谓的“重写”其实是一个有歧义的词语， 实际上， AOF 重写并不需要对原有的 AOF 文件进行任何写入和读取， 它针对的是数据库中键的当前值。**
-
-* AOF重写并不需要对原有AOF文件进行任何的读取，写入，分析等操作，这个功能是通过读取服务器当前的数据库状态来实现的。
+* **所谓的“重写”其实是一个有歧义的词语, AOF重写并不需要对原有AOF文件进行任何的读取，写入，分析等操作，这个功能是通过读取服务器当前的数据库状态来实现的。**
 * 如当前列表键list在数据库中的值就为`["C", "D", "E", "F", "G"]`。要使用尽量少的命令来记录list键的状态，最简单的方式不是去读取和分析现有AOF文件的内容，，而是直接读取list键在数据库中的当前值，然后用一条`RPUSH list "C" "D" "E" "F" "G"`代替前面的6条命令
 
 AOF 重写程序可以很好地完成创建一个新 AOF 文件的任务， 但是， 在执行这个程序的时候， 调用者线程会被阻塞。很明显， 作为一种辅佐性的维护手段， Redis 不希望 AOF 重写造成服务器无法处理请求， 所以 Redis 决定将 AOF 重写程序放到（后台）子进程里执行， 这样处理的最大好处是：  
 * 子进程进行 AOF 重写期间，主进程可以继续处理命令请求。
 * 子进程带有主进程的数据副本，使用子进程而不是线程，可以在避免锁的情况下，保证数据的安全性。
 
-不过， 使用子进程也有一个问题需要解决： 因为子进程在进行 AOF 重写期间， 主进程还需要继续处理命令， 而新的命令可能对现有的数据进行修改， 这会让当前数据库的数据和重写后的 AOF 文件中的数据不一致。为了解决这个问题， **Redis 增加了一个 AOF 重写缓存， 这个缓存在 fork 出子进程之后开始启用， Redis 主进程在接到新的写命令之后， 除了会将这个写命令的协议内容追加到现有的 AOF 文件之外， 还会追加到这个缓存中**, 换言之， 当子进程在执行 AOF 重写时， 主进程需要执行以下三个工作：  
+不过， 使用子进程也有一个问题需要解决： 因为子进程在进行 AOF 重写期间， 主进程还需要继续处理命令， 而新的命令可能对现有的数据进行修改， 这会让当前数据库的数据和重写后的 AOF 文件中的数据不一致。为了解决这个问题， **Redis 增加了一个 AOF 重写缓存， 这个缓存在 fork 出子进程之后开始启用， Redis 主进程在接到新的写命令之后， 除了会将这个写命令的协议内容追加到现有的 AOF 文件之外， 还会追加到这个重写缓存中**, 换言之， 当子进程在执行 AOF 重写时， 主进程需要执行以下三个工作：  
 1. 处理命令请求。
 2. 将写命令追加到现有的 AOF 文件中。
 3. 将写命令追加到 AOF 重写缓存中。
 
 当子进程完成 AOF 重写之后， 它会向父进程发送一个完成信号， 父进程在接到完成信号之后， 会调用一个信号处理函数， 并完成以下工作：  
 1. 将 AOF 重写缓存中的内容全部写入到新 AOF 文件中。
-2. 对新的 AOF 文件进行改名，覆盖原有的 AOF 文件。
+2. 对新的 AOF 文件进行改名，覆盖原有的 AOF 文件。这就是aof的[原子替换](#如何做rdb和aof的原子替换的).
 
 在整个 AOF 后台重写过程中， 只有最后的写入缓存和改名操作会造成主进程阻塞， 在其他时候， AOF 后台重写都不会对主进程造成阻塞， 这将 AOF 重写对性能造成的影响降到了最低。以上就是 AOF 后台重写， 也即是 BGREWRITEAOF 命令的工作原理。
+
+
+### 如何做rdb和aof的原子替换的
+
+比如想要将temp文件原子替换origin文件, 则直接rename tmp文件到origin文件即可实现.  
+rename通过来说, 直接修改 file system metadata, 如inode信息. 在posix里, rename一定是原子的, 即:
+* rename成功, 原文件名 指向 temp 文件; 原文件内容被删除.
+* rename失败, 原文件名 仍指向原来的文件内容.
 
 
 ## redis 主从同步是怎样的过程？
@@ -2851,10 +1993,8 @@ AOF 重写程序可以很好地完成创建一个新 AOF 文件的任务， 但�
 4. 把`cmd`发送给从redis
 5. 从服务器完成对快照的载入，开始接收命令请求，并执行来自主服务器缓冲区的写命令
 
-**总结:**
-
+总结:  
 主从刚刚连接的时候，进行全量同步；全量同步结束后，进行增量同步。当然，如果有需要，slave 在任何时候都可以发起全量同步。redis 策略是，无论如何，首先会尝试进行增量同步，如不成功，要求从机进行全量同步。
-
 
 
 ## redis key 的过期策略
@@ -2876,7 +2016,7 @@ Redis键的过期策略，是有定期删除+惰性删除两种。
 ### redis的LRU算法说一下
 
 * **普通的LRU算法**:
-    一般是用哈希表+双向链表来实现的:
+    **一般是用哈希表+双向链表来实现的**:
     基于 HashMap 和 双向链表实现 LRU 的整体的设计思路是，可以使用 HashMap 存储 key，这样可以做到 save 和 get key的时间都是 O(1)，而 HashMap 的 Value 指向双向链表实现的 LRU 的 Node 节点. 其核心操作的步骤是:  
     * save(key, value):
     首先在 HashMap 找到 Key 对应的节点，如果节点存在，更新节点的值，并把这个节点移动队头。如果不存在，需要构造新的节点，并且尝试把节点塞到队头，如果LRU空间不足，则通过 tail 淘汰掉队尾的节点，同时在 HashMap 中移除 Key。
@@ -2889,28 +2029,26 @@ Redis键的过期策略，是有定期删除+惰性删除两种。
 
 ## redis哨兵
 
-1. Redis Sentinel是Redis的高可用实现方案：故障发现、故障自动转移、配置中心 客户端通知。 
-2. Redis Sentinel从Redis 2.8版本开始才正式生产可用，之前版本生产不可用。 
-3. 尽可能在不同物理机上部署Redis Sentinel所有节点。 
-4. **Redis Sentinel中的Sentinel节点个数应该为大于等于3且最好为奇数。**
-5. Redis Sentinel中的数据节点与普通数据节点没有区别。
-6. **哨兵是一个配置提供者，而不是代理。在引入哨兵之后，客户端会先连接哨兵，再获取到主节点之后，客户端会和主节点直接通信。如果发生了故障转移，哨兵会通知到客户端。所以这也需要客户端的实现对哨兵的显式支持。** 
-7. Redis Sentinel通过三个定时任务实现了Sentinel节点对于主节点、从节点、其余 Sentinel节点的监控。
-8. **Redis Sentinel在对节点做失败判定时分为主观下线和客观下线。**
-9. Redis Sentinel实现读写分离高可用可以依赖Sentinel节点的消息通知，获取Redis 数据节点的状态变化。 
+* Redis Sentinel是Redis的高可用实现方案：故障发现、故障自动转移、配置中心 客户端通知。 
+* Redis Sentinel从Redis 2.8版本开始才正式生产可用，之前版本生产不可用。 
+* 尽可能在不同物理机上部署Redis Sentinel所有节点。 
+* **Redis Sentinel中的Sentinel节点个数应该为大于等于3且最好为奇数。**
+* Redis Sentinel中的数据节点与普通数据节点没有区别。
+* **哨兵是一个配置提供者，而不是代理。在引入哨兵之后，客户端会先连接哨兵，再获取到主节点之后，客户端会和主节点直接通信。如果发生了故障转移，哨兵会通知到客户端。所以这也需要客户端的实现对哨兵的显式支持。** 
+* Redis Sentinel通过三个定时任务实现了Sentinel节点对于主节点、从节点、其余 Sentinel节点的监控。
+* **Redis Sentinel在对节点做失败判定时分为主观下线和客观下线。**
+* Redis Sentinel实现读写分离高可用可以依赖Sentinel节点的消息通知，获取Redis 数据节点的状态变化。 
 
-用文字描述一下故障切换（failover）的过程。假设主服务器宕机，哨兵1先检测到这个结果，系统并不会马上进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象成为**主观下线**。
-
-当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，就对这个主节点故障达成一致, 这个过程称为**客观下线**。
-
-这样对于客户端而言，一切都是透明的。然后通过**raft算法**从哨兵中选出一个哨兵来执行**故障转移**
+用文字描述一下故障切换（failover）的过程:
+* 假设主服务器宕机，哨兵1先检测到这个结果，系统并不会马上进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象成为**主观下线**。
+* 当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，就对这个主节点故障达成一致, 这个过程称为**客观下线**。
+* 这样对于客户端而言，一切都是透明的。然后通过**raft算法**从哨兵中选出一个哨兵来执行**故障转移**
 
 
 ## redis集群
 
 redis集群是一个由多个主从节点群组成的分布式服务器群，它具有复制、高可用和分片特性。Redis集群不需要sentinel哨兵也能完成节点移除和故障转移的功能。需要将每个节点设置成集群模式，这种集群模式没有中心节点，可水平扩展，据官方文档称可以线性扩展到上万个节点(官方推荐不超过1000个节点)。redis集群的性能和高可用性均优于之前版本的哨兵模式，且集群配置非常简单。
 集群模式有以下几个特点：
-
 * 由多个Redis服务器组成的分布式网络服务集群；
 * 集群之中有多个Master主节点，每一个主节点都可读可写；
 * 节点之间会互相通信，两两相连, 采用gossip协议来通信；
@@ -2950,8 +2088,8 @@ Redis采用的是Hash Slot
 
 计算方式：hash(key)%N
 缺点：如果增加一个redis，映射公式变成了 hash(key)%(N+1)
-​	    如果一个redis宕机了，映射公式变成了 hash(key)%(N-1)
-​	    在以上两种情况下，几乎所有的缓存都失效了。
+​     如果一个redis宕机了，映射公式变成了 hash(key)%(N-1)
+​     在以上两种情况下，几乎所有的缓存都失效了。
 
 #### 一致性哈希算法
 
@@ -3042,6 +2180,41 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 
 * key永不过期, 比如开个单独线程去定时更新缓存
 * 互斥锁, 在key失效的瞬间, 只允许一个查询操作的线程A去查询数据库并重建缓存并上互斥锁, 其他的查询操作线程全部等待线程A操作完了再从缓存里取数据
+
+
+## scan原理为啥一定能遍历完
+
+### 先说为啥scan可能会重复
+
+总结: 主要是因为字典rehash的问题, 当size变的时候, 有一些数据在`ht[0]`有一些在`ht[1]`, 导致游标对应的bucket变了
+
+字典rehash时会使用两个哈希表，首先为`ht[1]`分配空间，如果是扩展操作，`ht[1]`的大小为第一个大于等于2倍`ht[0]`.used的2n，如果是收缩操作，`ht[1]`的大小为第一个大于等于`ht[0]`.used的2n。然后将`ht[0]`的所有键值对rehash到`ht[1]`中，最后释放`ht[0]`，将`ht[1]`设置为`ht[0]`，新创建一个空白哈希表当做`ht[1]`。rehash不是一次完成的，而是分多次、渐进式地完成。
+
+举个例子，现在将一个size为4的哈希表`ht[0]`(sizemask为11, index = hash & 0b11)rehash至一个size为8的哈希表`ht[1]`(sizemask为111, index = hash & 0b111)。
+
+`ht[0]`中处于bucket0位置的key的哈希值低两位为00，那么rehash至`ht[1]`时index取低三位可能为000(0)和100(4)。也就是`ht[0]`中bucket0中的元素rehash之后分散于`ht[1]`的bucket0与bucket4，以此类推，对应关系为：
+```
+`ht[0]`  ->  `ht[1]`
+----------------
+  0    ->   0,4 
+  1    ->   1,5
+  2    ->   2,6
+  3    ->   3,7
+```
+如果SCAN命令采取0->1->2->3的顺序进行遍历，就会出现如下问题：
+
+* 扩展操作中，如果返回游标1时正在进行rehash，`ht[0]`中的bucket0中的部分数据可能已经rehash到`ht[1]`中的bucket[0]或者bucket[4]，在`ht[1]`中从bucket1开始遍历，遍历至bucket4时，其中的元素已经在`ht[0]`中的bucket0中遍历过，这就产生了重复问题。
+* 缩小操作中，当返回游标5，但缩小后哈希表的size只有4，如何重置游标？
+
+### 如何保证遍历完不遗漏
+
+总结: 
+* redis 使用了一种叫做 reverse binary iteration 的方法.
+* redis 里边 rehash 从小到大时，scan 系列命令不会重复也不会遗漏. 而从大到小时, 有可能会造成重复但不会遗漏.
+
+参考:  
+* https://segmentfault.com/a/1190000018218584
+* https://www.cnblogs.com/linxiyue/p/11262969.html
 
 
 # etcd
@@ -3838,256 +3011,6 @@ BASE 是
 总的来说，BASE 理论面向的是大型高可用可扩展的分布式系统，和传统的事物 ACID 特性是相反的，它完全不同于 ACID 的强一致性模型，而是通过牺牲强一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。但同时，在实际的分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，因此在具体的分布式系统架构设计过程中，ACID 特性和 BASE 理论往往又会结合在一起。
 
 
-# 网络安全
-
-最后就是网络安全，主要考察也是 WEB 安全，包括
-* [XSS](#XSS)
-* [CSRF](#CSRF)
-* SQL注入
-* ...
-
-
-## XSS
-
-参考: https://tech.meituan.com/2018/09/27/fe-security.html
-
-什么是 XSS?  
-
-Cross-Site Scripting（跨站脚本攻击）简称 XSS，是**一种代码注入攻击**。攻击者通过在目标网站上注入恶意脚本，使之在用户的浏览器上运行。利用这些恶意脚本，攻击者可获取用户的敏感信息如 Cookie、SessionID 等，进而危害数据安全。
-
-为了和 CSS 区分，这里把攻击的第一个字母改成了 X，于是叫做 XSS。
-XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一起；浏览器无法分辨哪些脚本是可信的，导致恶意脚本被执行。
-而由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，或者利用这些信息冒充用户向网站发起攻击者定义的请求。
-在部分情况下，由于输入的限制，注入的恶意脚本比较短。但可以通过引入外部的脚本，并由浏览器执行，来完成比较复杂的攻击策略。
-
-
-### XSS是如何注入的
-
-这里有一个问题：用户是通过哪种方法“注入”恶意脚本的呢？
-不仅仅是业务上的“用户的 UGC 内容”可以进行注入，包括 URL 上的参数等都可以是攻击的来源。在处理输入时，以下内容都不可信： 
-* 来自用户的 UGC 信息
-* 来自第三方的链接
-* URL 参数
-* POST 参数
-* Referer （可能来自不可信的来源）
-* Cookie （可能来自其他子域注入）
-
-举个简单例子: 
-``` JavaScript
-function escape(s) {
-  return '<script>console.log("'+s+'");</script>';
-}
-```
-如果输入的`s` 为 `");alert(1);//` , 则将 return `<script>console.log("");alert(1);//");</script>` , 这就会弹出警告窗口`alert(1)` 这就是恶意脚本注入
-
-再举个真实的例子, **新浪微博名人堂反射型 XSS 漏洞**:
-
-攻击者发现 `http://weibo.com/pub/star/g/xyyyd` 这个 URL 的内容未经过滤直接输出到 HTML 中。
-于是攻击者构建出一个 URL，然后诱导用户去点击：
-`http://weibo.com/pub/star/g/xyyyd"><script src=//xxxx.cn/image/t.js></script>`
-用户点击这个 URL 时，服务端取出请求 URL，拼接到 HTML 响应中：
-`<li><a href="http://weibo.com/pub/star/g/xyyyd"><script src=//xxxx.cn/image/t.js></script>">按分类检索</a></li>`
-浏览器接收到响应后就会加载执行恶意脚本 `//xxxx.cn/image/t.js`，在恶意脚本中利用用户的登录状态进行关注、发微博、发私信等操作，发出的微博和私信可再带上攻击 URL，诱导更多人点击，不断放大攻击范围。这种窃用受害者身份发布恶意内容，层层放大攻击范围的方式，被称为 “XSS 蠕虫”。
-
-
-### 如何防范XSS
-
-虽然很难通过技术手段完全避免 XSS，但我们可以总结以下原则减少漏洞的产生：
-
-* 利用模板引擎 开启模板引擎自带的 HTML 转义功能。
-* 避免拼接 HTML 前端采用拼接 HTML 的方法比较危险，如果框架允许，使用 createElement、setAttribute 之类的方法实现。或者采用比较成熟的渲染框架，如 `Vue`/`React` 等。
-* 时刻保持警惕 在插入位置为 DOM 属性、链接等位置时，要打起精神，严加防范。
-* 增加攻击难度，降低攻击后果 通过 CSP、输入长度配置、接口安全措施等方法，增加攻击的难度，降低攻击的后果。
-* 主动检测和发现 可使用 XSS 攻击字符串和自动扫描工具寻找潜在的 XSS 漏洞。
-
-举个例子:
-
-某天，公司需要一个搜索页面，根据 URL 参数决定关键词的内容。小明很快把页面写好并且上线。代码如下：
-``` html
-<input type="text" value="<%= getParameter("keyword") %>">
-<button>搜索</button>
-<div>
-  您搜索的关键词是：<%= getParameter("keyword") %>
-</div>
-```
-然而，在上线后不久，小明就接到了安全组发来的一个神秘链接：
-`http://xxx/search?keyword="><script>alert('XSS');</script>`
-小明带着一种不祥的预感点开了这个链接 \[请勿模仿，确认安全的链接才能点开\]。果然，页面中弹出了写着”XSS” 的对话框。
-> 可恶，中招了！小明眉头一皱，发现了其中的奥秘：  
-
-当浏览器请求 `http://xxx/search?keyword="><script>alert('XSS');</script>` 时，服务端会解析出请求参数 `keyword`，得到 `"><script>alert('XSS');</script>`，拼接到 HTML 中返回给浏览器。形成了如下的 HTML：
-``` html
-<input type="text" value=""><script>alert('XSS');</script>">
-<button>搜索</button>
-<div>
-  您搜索的关键词是："><script>alert('XSS');</script>
-</div>
-```
-浏览器无法分辨出 `<script>alert('XSS');</script>` 是恶意代码，因而将其执行。
-这里不仅仅 div 的内容被注入了，而且 input 的 value 属性也被注入， alert 会弹出两次。
-面对这种情况，我们应该如何进行防范呢？
-其实，这只是浏览器把用户的输入当成了脚本进行了执行。那么只要告诉浏览器这段内容是文本就可以了。
-聪明的小明很快找到解决方法，把这个漏洞修复：
-
-``` html
-<input type="text" value="<%= escapeHTML(getParameter("keyword")) %>">
-<button>搜索</button>
-<div>
-  您搜索的关键词是：<%= escapeHTML(getParameter("keyword")) %>
-</div>
-```
-
-`escapeHTML()` 按照如下规则进行转义：
-
-| 字符 | 转义后的字符 | |-|-| |`&`|`&amp;`| |`<`|`&lt;`| |`>`|`&gt;`| |`"`|`&quot;`| |`'`|`&#x27;`| |`/`|`&#x2F;`|
-
-经过了转义函数的处理后，最终浏览器接收到的响应为：
-
-``` html
-<input type="text" value="&quot;&gt;&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;&#x2F;script&gt;">
-<button>搜索</button>
-<div>
-  您搜索的关键词是：&quot;&gt;&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;&#x2F;script&gt;
-</div>
-```
-恶意代码都被转义，不再被浏览器执行，而且搜索词能够完美的在页面显示出来。
-
-
-## CSRF
-
-参考: https://tech.meituan.com/2018/10/11/fe-security-csrf.html
-
-CSRF（Cross-site request forgery）跨站请求伪造：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
-
-一个典型的CSRF攻击有着如下的流程：
-
-1) 受害者登录a.com，并保留了登录凭证（Cookie）。
-2) 攻击者引诱受害者访问了b.com。
-3) b.com 向 a.com 发送了一个请求：a.com/act=xx。浏览器会默认携带a.com的Cookie。
-4) a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。
-5) a.com以受害者的名义执行了act=xx。
-6) 攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。
-
-
-### CSRF 的特点
-
-* 攻击一般发起在第三方网站，而不是被攻击的网站。被攻击的网站无法防止攻击发生。
-* 攻击利用受害者在被攻击网站的登录凭证，冒充受害者提交操作；而不是直接窃取数据。
-* 整个过程攻击者并不能获取到受害者的登录凭证，仅仅是 “冒用”。
-* 跨站请求可以用各种方式：图片 URL、超链接、CORS、Form 提交等等。部分请求方式可以直接嵌入在第三方论坛、文章中，难以进行追踪。
-
-CSRF 通常是跨域的，因为外域通常更容易被攻击者掌控。但是如果本域下有容易被利用的功能，比如可以发图和链接的论坛和评论区，攻击可以直接在本域下进行，而且这种攻击更加危险。
-
-
-### 防护策略
-
-CSRF 通常从第三方网站发起，被攻击的网站无法防止攻击发生，只能通过增强自己网站针对 CSRF 的防护能力来提升安全性。
-
-上文中讲了 CSRF 的两个特点：
-* CSRF（通常）发生在第三方域名。
-* CSRF 攻击者不能获取到 Cookie 等信息，只是使用。
-
-针对这两点，我们可以专门制定防护策略，如下：
-* 阻止不明外域的访问
-    * 同源检测
-    * Samesite Cookie
-* 提交时要求附加本域才能获取的信息
-    * CSRF Token
-    * 双重 Cookie 验证
-
-
-# 编码知识
-
-
-## Base64 的原理？编码后比编码前是大了还是小了。
-
-结论:
-
-大了. 因为Base64 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。也就是说, 每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。
-
-
-### base64的原理
-
-Base64 编码之所以称为 Base64，是因为其使用 64 个字符来对任意数据进行编码，同理有 Base32、Base16 编码。标准 Base64 编码使用的 64 个字符为：
-
-![](/img/noodle_plan/http/XHFMRvxfez4OVtr.jpg)
-
-这 64 个字符是各种字符编码（比如 ASCII 编码）所使用字符的子集，基本，并且可打印。唯一有点特殊的是最后两个字符，因对最后两个字符的选择不同，Base64 编码又有很多变种，比如 Base64 URL 编码。
-
-Base64 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。
-
-假设我们要对 `Hello!` 进行 Base64 编码，按照 ASCII 表，其转换过程如下图所示：
-
-![](/img/noodle_plan/http/tJnClQsjc4WMGhB.jpg)
-
-可知 `Hello!` 的 Base64 编码结果为 `SGVsbG8h` ，原始字符串长度为 6 个字符，编码后长度为 8 个字符，每 3 个原始字符经 Base64 编码成 4 个字符，编码前后长度比 4/3，这个长度比很重要 - 比原始字符串长度短，则需要使用更大的编码字符集，这并不我们想要的；长度比越大，则需要传输越多的字符，传输时间越长。Base64 应用广泛的原因是在字符集大小与长度比之间取得一个较好的平衡，适用于各种场景。
-
-是不是觉得 Base64 编码原理很简单？
-
-但这里需要注意一个点：Base64 编码是每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。
-
-以 `Hello!!` 为例，其转换过程为：
-
-![](/img/noodle_plan/http/5URB8nVis9ljwYe.jpg)
-
-_注：图表中蓝色背景的二进制 0 值是额外补充的。_
-
-`Hello!!` Base64 编码的结果为 `SGVsbG8hIQAA` 。最后 2 个零值只是为了 Base64 编码而补充的，在原始字符中并没有对应的字符，那么 Base64 编码结果中的最后两个字符 `AA` 实际不带有效信息，所以需要特殊处理，以免解码错误。
-
-标准 Base64 编码通常用 `=` 字符来替换最后的 `A`，即编码结果为 `SGVsbG8hIQ==`。因为 `=` 字符并不在 Base64 编码索引表中，其意义在于结束符号，在 Base64 解码时遇到 `=` 时即可知道一个 Base64 编码字符串结束。
-
-如果 Base64 编码字符串不会相互拼接再传输，那么最后的 `=` 也可以省略，解码时如果发现 Base64 编码字符串长度不能被 4 整除，则先补充 `=` 字符，再解码即可。
-
-解码是对编码的逆向操作，但注意一点：**对于最后的两个 `=` 字符，转换成两个 `A` 字符，再转成对应的两个 6 比特二进制 0 值，接着转成原始字符之前，需要将最后的两个 6 比特二进制 0 值丢弃，因为它们实际上不携带有效信息**。
-
-
-## utf8编码和unicode字符集
-
-总结:  
-* unicode是个字符集, 只是一个符号对应表, 它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储
-* utf8是unicode符号具体的编码方式, 规定了该怎么存储
-
-说到utf8，就不得不说一下unicode了。  Unicode是一个很大的集合，每一个unicode对应一个符号，不管是中文的汉字，英文字符，日文，韩文等等。现在的规模可以容纳100多万个符号。每个符号的编码都不一样，比如，U+0639表示阿拉伯字母 Ain，U+0041表示英语的大写字母A，U+4E25表示汉字“严”。具体的符号对应表，可以查询unicode.org，或者专门的汉字对应表。
-
-**需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。**
-
-比如，汉字“严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。
-
-这里就有两个严重的问题，第一个问题是：如何才能区别unicode和ascii？计算机怎么知道三个字节表示一个符号，而不是分别表示三个符号呢？第二个问题是：我们已经知道，英文字母只用一个字节表示就够了，如果unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有二到三个字节是0，这对于存储来说是极大的浪费，文本文件的大小会因此大出二三倍，这是无法接受的。
-
-它们造成的结果是：
-
-1）出现了unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示unicode。
-
-2）unicode在很长一段时间内无法推广，直到互联网的出现。
-
-### UTF-8
-
-互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种unicode的实现方式。其他实现方式还包括UTF-16和UTF-32，不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。
-
-UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。
-
-UTF-8的编码规则很简单，只有二条：
-
-* 1）对于单字节的符号，字节的第一位（字节的最高位）设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。
-
-* 2）对于n字节的符号（n>1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。
-
-下表总结了编码规则，字母x表示可用编码的位。
-
-Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
-```
-—————+———————————————————————
-0000 0000-0000 007F | 0xxxxxxx
-0000 0080-0000 07FF | 110xxxxx 10xxxxxx
-0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
-0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-```
-下面，还是以汉字“严”为例，演示如何实现UTF-8编码：
-已知“严”的unicode是4E25（100111000100101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是“11100100 10111000 10100101”，转换成十六进制就是E4B8A5。
-
-
-
 # 挖坑
 
 * ✓ 熟悉Python / 熟悉C++ / 会用Go 
@@ -4343,18 +3266,18 @@ sauth_json信息大致如下:
 ``` golang
 // AuthReq is sauth json struct
 type AuthReq struct {
-	GameID       string `json:"gameid"`
-	LoginChannel string `json:"login_channel"`
-	AppChannel   string `json:"app_channel"`
-	Platform     string `json:"platform"`
-	SdkUID       string `json:"sdkuid"`
-	Udid         string `json:"udid"`
-	SessionID    string `json:"sessionid"`
-	SdkVersion   string `json:"sdk_version"`
-	DeviceID     string `json:"deviceid"`
-	Step         string `json:"step"`
-	HostID       int    `json:"hostid"`
-	Raw          []byte
+    GameID       string `json:"gameid"`
+    LoginChannel string `json:"login_channel"`
+    AppChannel   string `json:"app_channel"`
+    Platform     string `json:"platform"`
+    SdkUID       string `json:"sdkuid"`
+    Udid         string `json:"udid"`
+    SessionID    string `json:"sessionid"`
+    SdkVersion   string `json:"sdk_version"`
+    DeviceID     string `json:"deviceid"`
+    Step         string `json:"step"`
+    HostID       int    `json:"hostid"`
+    Raw          []byte
 }
 ```
 
@@ -4634,8 +3557,8 @@ endlegend
     * {% post_link muduo_qa muduo的难点详解 %}
     * muduo为什么采用epoll水平触发?
         * 与poll兼容
-      	* LT模式不会发生漏掉事件的BUG，但POLLOUT事件不能一开始就关注，否则会出现busy loop，而应该在write无法完全写入内核缓冲区的时候才关注，将未写入内核缓冲区的数据添加到应用层output buffer，直到应用层output buffer写完，停止关注POLLOUT事件。
-      	* 读写的时候不必等候EAGAIN，可以节省系统调用次数，降低延迟。（注：如果用ET模式，读的时候读到EAGAIN,写的时候直到output buffer写完或者EAGAIN）所以可见LT模式（可以尽可能多读减少系统调用）效率不一定比ET要低（多了一次系统调用，检测EAGAIN）
+          * LT模式不会发生漏掉事件的BUG，但POLLOUT事件不能一开始就关注，否则会出现busy loop，而应该在write无法完全写入内核缓冲区的时候才关注，将未写入内核缓冲区的数据添加到应用层output buffer，直到应用层output buffer写完，停止关注POLLOUT事件。
+          * 读写的时候不必等候EAGAIN，可以节省系统调用次数，降低延迟。（注：如果用ET模式，读的时候读到EAGAIN,写的时候直到output buffer写完或者EAGAIN）所以可见LT模式（可以尽可能多读减少系统调用）效率不一定比ET要低（多了一次系统调用，检测EAGAIN）
     * muduo的buffer怎么做的, 看muduo书吧
         * ``` cpp
         /// A buffer class modeled after org.jboss.netty.buffer.ChannelBuffer
@@ -4695,6 +3618,961 @@ endlegend
 * **尽量把熟悉的东西说多一点， 背下来， 说全一点， 填满整个面试时间， 他就没有那么多问题要问， 问了越多， 言多必失**
 * **不要说自己之前的工作内容跟他们目前的工作内容不相关， 不要找借口啥的， 反而会加深他岗位不匹配的印象**
 * **不要问面得怎么样， 他不会告诉你的**
+
+
+# 面筋
+
+## 比狗
+
+* 大数相加
+* 全排列
+* mysql语句 orderby/limit 
+* 严格递增的分布式id生成器怎么做 [美团这篇文章的"Leaf-segment数据库方案"](https://tech.meituan.com/2017/04/21/mt-leaf.html)
+* 异地多活 
+* io线程和业务线程要分开吗? 是的
+* 合并字符串中的连续空格为一个如`"^he^^^^ll^o^^"` 得到 `"^he^ll^o^"`
+
+
+## 虾
+
+### toc_one
+
+* python实现
+    * 继承
+    * 字典
+* linux
+    * 内存布局(文初堆栈)[Linux虚拟地址空间如何分布](#Linux虚拟地址空间如何分布)
+        * 动态库放在哪儿
+    * 通过进程找他正在读写的文件
+        * 可能是 `/proc`? [proc里有个fd](#proc文件夹)
+    * 通过文件找进程
+        * lsof什么参数 {% post_link linux_command_netstat_lsof %}
+    * [内核态和用户态区别](#内核态与用户态的区别)
+* 快排原址排序的话要用几个index来做?
+    * 参考: {% post_link quick_sort_and_binary_search %}
+    * 两个, 一个index指向最后一个比pivot小的元素, 初始化为-1, 一个指向将要遍历的元素
+* 二叉树
+    * 找最近公共父节点: 
+        * 参考: https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-jian-j/
+        * 两个节点 p,q 分为两种情况：
+        1) p 和 q 在相同子树中
+        2) p 和 q 在不同子树中
+        从根节点遍历，递归向左右子树查询节点信息
+        递归终止条件：如果当前节点为空或等于 p 或 q，则返回当前节点
+        递归遍历左右子树，因为是递归，使用函数后可认为左右子树已经算出结果，这句话要记住，道出了递归的精髓,
+        如果左右子树查到节点都不为空，则表明 p 和 q 分别在左右子树中，因此，当前节点即为最近公共祖先；
+        如果左右子树其中一个不为空，则返回非空节点。
+        ``` cpp
+        class Solution {
+        public:
+            TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+                if (!root || root == p || root == q) return root;
+                TreeNode *left = lowestCommonAncestor(root->left, p, q);
+                TreeNode *right = lowestCommonAncestor(root->right, p, q);
+                if (left && right) return root;
+                return left ? left : right;
+            }
+        };
+        ```
+    * 判断是否为一个二叉搜索树
+        * 记住一点, 其中序遍历是一个有序数组
+        * 判断一棵树是不是BST树方法：使用中序遍历
+            1) 对树进行中序遍历，将结果保存在temp数组中。
+            2) 检测temp数组中元素是否为升序排列。如果是，则这棵树为BST.
+* [redis集群](#redis集群)
+    * 怎么扩缩容
+    * [客户端怎么找到某个键所在的节点](#HashSlot算法)
+    * 持久化有哪些
+        * rewrite_aof怎么替换原来的aof文件的?[AOF重写的实现](#AOF重写的实现)
+* send和sendto是阻塞的么?阻塞到底意味着什么?[阻塞和非阻塞的send和recv和sendto和recvfrom](#阻塞和非阻塞的send和recv和sendto和recvfrom)
+    * send返回值意味着啥?意味着对方真的就收到了多少数据么?
+
+
+### infra_one
+
+* lsm-tree pending_fin
+* muduo的buffer怎么做的, 看muduo书吧 [也可参考这里](#个人开源-realtime-server服务器框架)
+* 跳表增加数据的时候, 索引怎么变化?
+    * <a href="{% post_path 'algo_newbie' %}#跳表增加数据时索引怎么变化">跳表增加数据时索引怎么变化</a>
+* zset为什么不用红黑树, 用跳表? 答: [为什么zset用跳表不用红黑树](#为什么zset用跳表不用红黑树)
+* cas的aba问题: 给数据加版本号
+* 乐观锁怎么实现:
+    * 加版本号
+    * cas
+* cap的c是哪种一致性? 线性一致性是啥?
+    * c是强一致性
+    * 线性一致性就是强一致性也称为为原子一致性
+    * 线性一致性是怎么做到的? raft协议怎么做到? 答: [etcd线性一致性读](#etcd线性一致性读)
+* 同构问题, [leetcode-isomorphic-strings](https://leetcode-cn.com/problems/isomorphic-strings/)
+
+
+### infra_two
+
+* 十个并发请求写日志，传入的两个参数（参数1时间戳， 参数2内容）， 然后按照传入的参数1的时间戳排序写日志（提示：hbase就有这个特性，全局有序的存储？ 不用严格有序， 阶段有序 pending_fini
+* rpc框架原理,msgpack是啥,出异常怎么办？被调用方出了问题,调用方怎么办？
+    * http://www.voycn.com/article/fenbushifuwurpcfenbushixiaoxiduiliemqmianshitijingxuan
+* 分布式事务: [分布式事务](#分布式事务)
+* 登录session的实现, 登录微服务/排队微服务各种流程搞清楚， aid是干嘛的 
+    * [登录微服务和排队微服务](#登录微服务和排队微服务)
+* git rebase原理/git reset是啥意思？原理
+    * git rebase: <a href="{% post_path 'git_tutorial_one' %}#rebase">rebase</a>
+    * git reset: <a href="{% post_path 'git_tutorial_one' %}#撤销与回退">reset</a>
+* 分布式全局递增id: [id生成器如何实现全局递增](#id生成器如何实现全局递增)
+* 做登录的时候`OAuth2`么？`OAuth`是啥？
+    * 参考: https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html
+    * 参考: http://www.ruanyifeng.com/blog/2019/04/github-oauth.html
+    * OAuth 2.0 规定了四种获得令牌的流程。你可以选择最适合自己的那一种，向第三方应用颁发令牌。下面就是这四种授权方式。
+        * 授权码（authorization-code）
+        * 隐藏式（implicit）
+        * 密码式（password）：
+        * 客户端凭证（client credentials）
+        注意，不管哪一种授权方式，第三方应用申请令牌之前，都必须先到系统备案，说明自己的身份，然后会拿到两个身份识别码：客户端 ID（client ID）和客户端密钥（client secret）。这是为了防止令牌被滥用，没有备案过的第三方应用，是不会拿到令牌的。
+    * 举个**OAuth授权码**方式的例子,授权码（authorization code）方式，指的是第三方应用先申请一个授权码，然后再用该码获取令牌。这种方式是最常用的流程，安全性也最高，它适用于那些有后端的 Web 应用。授权码通过前端传送，令牌则是储存在后端，而且所有与资源服务器的通信都在后端完成。这样的前后端分离，可以避免令牌泄漏。 流程如下:  
+        1\. A 网站让用户跳转到 GitHub。
+        2\. GitHub 要求用户登录，然后询问"A 网站要求获得 xx 权限，你是否同意？"
+        3\. 用户同意，GitHub 就会重定向回 A 网站，同时发回一个授权码。
+        4\. A 网站使用授权码，向 GitHub 请求令牌。
+        5\. GitHub 返回令牌.
+        6\. A 网站使用令牌，向 GitHub 请求用户数据。
+
+
+
+# 算法与数据结构
+
+* 推荐参考**本博客总结**的 {% post_link algo_newbie %}
+* 推荐参考**本博客总结**的 {% post_link algo_practice %}
+
+* A星算法 pending_fin
+* dijkstra算法 pending_fin
+* 动态规划与贪心有什么区别:
+    * 贪心着眼现实当下，动规谨记历史进程。
+    * 动态规划希望复用子问题的解，最好被反复依赖。其本质还是穷举，所以当前并不知道哪个子问题的解会构成最终最优解。但知道这个子问题可能会被反复计算，所以把结果缓存起来。整个过程是树状的搜索过程。
+    * 贪心希望每次都能排除一堆子问题。它不需要复用子问题的解，当前最优解从子问题最优解即可得出。整个过程是线性的推导过程。
+* 如何判断一个图是否有环
+* 桶排序/线段树/统计树/排序树
+
+
+**海量问题**: 可参考 https://juejin.im/entry/6844903519640616967
+
+* 10个1G数据, 内存200MB, 如何去重 pending_fin
+
+
+# 设计模式
+
+* 单例模式
+* 适配器模式: 将一个类的接口转换成客户希望的另外一个接口。适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。主要解决的问题：主要解决在软件系统中，常常要将一些"现存的对象"放到新的环境中，而新环境要求的接口是现对象不能满足的。
+* 工厂模式
+* 观察者模式
+* 享元模式: 池的思想
+
+
+# python
+
+* mro问题
+* 怎么实现一个协程库?
+* mock是啥: https://zhuanlan.zhihu.com/p/30380243
+
+
+## 元类
+
+参考: https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072
+
+python元类的使用场景, 比如orm框架, ORM全称“Object Relational Mapping”，即对象-关系映射，就是把关系数据库的一行映射为一个对象，也就是一个类对应一个表，这样，写代码更简单，不用直接操作SQL语句。
+
+`type()`函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过`type()`函数创建出`Hello`类，而无需通过`class Hello(object)...`的定义：
+
+```
+\>>> def fn(self, name='world'): # 先定义函数
+...     print('Hello, %s.' % name)
+...
+>>> Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
+>>> h = Hello()
+>>> h.hello()
+Hello, world.
+>>> print(type(Hello))
+<class 'type'>
+>>> print(type(h))
+<class '__main__.Hello'>
+```
+
+要创建一个 class 对象，`type()`函数依次传入 3 个参数：
+
+1. class 的名称；
+2. 继承的父类集合，注意 Python 支持多重继承，如果只有一个父类，别忘了 tuple 的单元素写法；
+3. class 的方法名称与函数绑定，这里我们把函数`fn`绑定到方法名`hello`上。
+
+**通过`type()`函数创建的类和直接写 class 是完全一样的，因为 Python 解释器遇到 class 定义时，仅仅是扫描一下 class 定义的语法，然后调用`type()`函数创建出 class**。
+
+正常情况下，我们都用`class Xxx...`来定义类，但是，`type()`函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。
+
+### metaclass
+
+除了使用`type()`动态创建类以外，要控制类的创建行为，还可以使用 metaclass。
+metaclass，直译为元类，简单的解释就是：
+当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。
+但是如果我们想创建出类呢？那就必须根据 metaclass 创建出类，所以：先定义 metaclass，然后创建类。
+连接起来就是：**先定义 metaclass，就可以创建类，最后创建实例。**
+所以，metaclass 允许你创建类或者修改类。换句话说，你可以把类看成是 metaclass 创建出来的 “实例”。
+我们先看一个简单的例子，这个 metaclass 可以给我们自定义的 MyList 增加一个`add`方法：
+定义`ListMetaclass`，按照默认习惯，metaclass 的类名总是以 Metaclass 结尾，以便清楚地表示这是一个 metaclass：
+``` python
+class ListMetaclass(type):
+    def __new__(cls, name, bases, attrs):
+        attrs\['add'\] = lambda self, value: self.append(value)
+        return type.__new__(cls, name, bases, attrs)
+```
+有了 ListMetaclass，我们在定义类的时候还要指示使用 ListMetaclass 来定制类，传入关键字参数`metaclass`：
+``` python
+class MyList(list, metaclass=ListMetaclass):
+    pass
+```
+
+当我们传入关键字参数`metaclass`时，魔术就生效了，它指示 Python 解释器在创建`MyList`时，要通过`ListMetaclass.__new__()`来创建，在此，我们可以修改类的定义，比如，加上新的方法，然后，返回修改后的定义。
+
+`__new__()`方法接收到的参数依次是：
+
+1. 当前准备创建的类的对象；
+2. 类的名字；
+3. 类继承的父类集合；
+4. 类的方法集合。
+
+测试一下`MyList`是否可以调用`add()`方法：
+```
+\>>> L = MyList()
+>>> L.add(1)
+>> L
+\[1\]
+```
+而普通的`list`没有`add()`方法：
+```
+\>>> L2 = list()
+>>> L2.add(1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'add'
+```
+
+## 装饰器
+
+``` python
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+```
+观察上面的log，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：
+``` python
+@log
+def now():
+    print('2015-3-25')
+```
+调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志：
+
+```
+>>> now()
+call now():
+2015-3-25
+```
+把@log放到now()函数的定义处，相当于执行了语句：
+`now = log(now)`
+由于log()是一个decorator，返回一个函数，所以，原来的now()函数仍然存在，只是现在同名的now变量指向了新的函数，于是调用now()将执行新函数，即在log()函数中返回的wrapper()函数。
+
+wrapper()函数的参数定义是(*args, **kw)，因此，wrapper()函数可以接受任意参数的调用。在wrapper()函数内，首先打印日志，再紧接着调用原始函数。
+
+如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本：
+``` python
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
+这个3层嵌套的decorator用法如下：
+``` python
+@log('execute')
+def now():
+    print('2015-3-25')
+```
+执行结果如下：
+```
+>>> now()
+execute now():
+2015-3-25
+```
+和两层嵌套的decorator相比，3层嵌套的效果是这样的：
+`now = log('execute')(now)`
+我们来剖析上面的语句，首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。
+
+
+## python命令行参数
+
+* -u参数的使用：python命令加上-u（unbuffered）参数后会强制其标准输出也同标准错误一样不通过缓存直接打印到屏幕。
+* -c参数，支持执行单行命令/脚本。如: `python -c "import os;print('hello'),print('world')"`
+
+### `python -m test_folder/test.py`与`python test_folder/test`有什么不同
+
+桌面的test_folder文件夹下有个test.py
+``` python test.py
+import sys
+print(sys.path)
+```
+
+运行看看:   
+```
+hulinhong@GIH-D-14531 MINGW64 ~/Desktop
+$ python test_folder/test.py
+['C:\\Users\\hulinhong\\Desktop\\test_folder', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
+
+hulinhong@GIH-D-14531 MINGW64 ~/Desktop
+$ python -m test_folder.test
+['C:\\Users\\hulinhong\\Desktop', 'C:\\Program Files\\Python37\\python37.zip', 'C:\\Program Files\\Python37\\DLLs', 'C:\\Program Files\\Python37\\lib', 'C:\\Program Files\\Python37', 'C:\\Program Files\\Python37\\lib\\site-packages', 'C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg']
+```
+细心的同学会发现，区别就是在第一个路径。
+python直接启动是把test.py文件所在的目录放到了sys.path属性中。
+模块启动是把你输入命令的目录（也就是当前路径），放到了sys.path属性中
+
+所以就会有下面的情况:
+
+目录结构如下
+```
+package/
+    __init__.py
+    mod1.py
+package2/
+    __init__.py
+    run.py  
+```
+run.py 内容如下
+``` python
+import sys
+from package import mod1
+print(sys.path)
+```
+如何才能启动run.py文件？
+
+* 直接启动（失败）
+    ```
+    ➜  test_import_project git:(master) ✗ python package2/run.py
+    Traceback (most recent call last):
+      File "package2/run.py", line 2, in <module>
+        from package import mod1
+    ImportError: No module named package
+    ```
+
+* 以模块方式启动（成功）
+    ```
+    ➜  test_import_project git:(master) ✗ python -m package2.run
+    ['C:\\Users\\hulinhong\\Desktop',
+    '/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python27.zip',
+    ...]
+    ```
+当需要启动的py文件引用了一个模块。你需要注意：在启动的时候需要考虑sys.path中有没有你import的模块的路径！
+这个时候，到底是使用直接启动，还是以模块的启动？目的就是把import的那个模块的路径放到sys.path中。你是不是明白了呢？
+
+> 官方文档参考： http://www.pythondoc.com/pythontutorial3/modules.html
+
+导入一个叫 mod1 的模块时，解释器先在当前目录中搜索名为 mod1.py 的文件。如果没有找到的话，接着会到 sys.path 变量中给出的目录列表中查找。 sys.path 变量的初始值来自如下：
+
+输入脚本的目录（当前目录）。
+* 环境变量 PYTHONPATH 表示的目录列表中搜索(这和 shell 变量 PATH 具有一样的语法，即一系列目录名的列表)。
+* Python 默认安装路径中搜索。
+* 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+
+
+## 在python程序中调用cpp的库创建的线程是否受制于GIL?
+
+首先要理解什么是GIL.
+Python 的多线程是真的多线程，只不过在任意时刻，它们中只有一个线程能够取得 GIL 从而被允许执行 Python 代码。其它线程要么等着，要么干别的和 Python 无关的事情（比如等待系统 I/O，或者算点什么东西）。
+
+那如果是通过CPP扩展创建出来的线程，可以摆脱这个限制么？
+很简单，不访问 Python 的数据和方法，就和 GIL 没任何关系。如果需要访问 Python，还是需要先取得 GIL.
+
+GIL 是为了保护 Python 数据不被并发访问破坏，所以当你不访问 Python 的数据的时候自然就可以释放（或者不取得）GIL。反过来，如果需要访问 Python 的数据，就一定要取得 GIL 再访问。PyObject 等不是线程安全的。多线程访问任何非线程安全的数据都需要先取得对应的锁。Python 所有的 PyObject 什么的都共享一个锁，它就叫 GIL。
+
+
+## `__new__` 与 `__del__` 与 `__init__`
+
+先来看一个单例模式的实现
+``` python
+class Demo:
+    __isinstance = False
+    def __new__(cls, *args, **kwargs):
+        if not cls.__isinstance:  # 如果被实例化了
+            cls.__isinstance = object.__new__(cls)  # 否则实例化
+        return cls.__isinstance  # 返回实例化的对象
+
+    def __init__(self, name):
+        self.name = name
+        print('my name is %s'%(name))
+    
+    def __del__(self):
+        print('886, %s'%(self.name))
+
+
+d1 = Demo('Alice')
+d2 = Demo('Anew')
+print(d1)
+print(d2)
+```
+
+打印:  
+```
+my name is Alice
+my name is Anew
+<__main__.Demo object at 0x000001446604D3C8>
+<__main__.Demo object at 0x000001446604D3C8>
+886, Anew
+```
+
+`__new__` 是负责对当前类进行实例化，并将实例返回，并传给`__init__`方法，`__init__`方法中的self就是指代`__new__`传过来的对象，所以再次强调，`__init__`是实例化后调用的第一个方法。
+
+`__del__`在对象销毁时被调用，往往用于清除数据或还原环境等操作，比如在类中的其他普通方法中实现了插入数据库的语句，当对象被销毁时我们需要将数据还原，那么这时可以在`__del__`方法中实现还原数据库数据的功能。`__del__`被成为析构方法，同样和C++中的析构方法类似。
+
+
+## python垃圾回收
+
+总体来说，在Python中，主要通过引用计数进行垃圾回收；通过 “标记-清除” 解决容器对象可能产生的循环引用问题；通过 “分代回收” 以空间换时间的方法提高垃圾回收效率。
+
+* 引用计数
+* 标记清除(Mark and Sweep)
+* 分代回收
+
+
+### 标记清除咋弄的
+
+参考: https://zhuanlan.zhihu.com/p/83251959
+
+Python 采用了 **“标记-清除”(Mark and Sweep)** 算法，解决容器对象可能产生的循环引用问题。(注意，只有容器对象才会产生循环引用的情况，比如列表、字典、用户自定义类的对象、元组等。而像数字，字符串这类简单类型不会出现循环引用。作为一种优化策略，对于只包含简单类型的元组也不在标记清除算法的考虑之列)
+
+跟其名称一样，该算法在进行垃圾回收时分成了两步，分别是：
+
+* A）标记阶段，遍历所有的对象，如果是可达的（reachable），也就是还有对象引用它，那么就标记该对象为可达；
+* B）清除阶段，再次遍历对象，如果发现某个对象没有标记为可达，则就将其回收。
+
+如下图所示，在标记清除算法中，为了追踪容器对象，需要每个容器对象维护两个额外的指针，用来将容器对象组成一个双端链表，指针分别指向前后两个容器对象，方便插入和删除操作。python 解释器 (Cpython) 维护了两个这样的双端链表，一个链表存放着需要被扫描的容器对象，另一个链表存放着临时不可达对象。在图中，这两个链表分别被命名为”Object to Scan”和”Unreachable”。图中例子是这么一个情况：link1,link2,link3 组成了一个引用环，同时 link1 还被一个变量 A(其实这里称为名称 A 更好)引用。link4 自引用，也构成了一个引用环。从图中我们还可以看到，每一个节点除了有一个记录当前引用计数的变量 ref\_count 还有一个 gc\_ref 变量，这个 gc\_ref 是 ref\_count 的一个副本，所以初始值为 ref\_count 的大小。
+
+![](/img/noodle_plan/python/v2-0d5071093adaa02bc03fa3dfd91aa5bc_720w.jpg)
+
+gc 启动的时候，会逐个遍历”Object to Scan” 链表中的容器对象，并且将当前对象所引用的所有对象的 gc\_ref 减一。(扫描到 link1 的时候，由于 link1 引用了 link2, 所以会将 link2 的 gc\_ref 减一，接着扫描 link2, 由于 link2 引用了 link3, 所以会将 link3 的 gc\_ref 减一…..) 像这样将”Objects to Scan” 链表中的所有对象考察一遍之后，两个链表中的对象的 ref\_count 和 gc\_ref 的情况如下图所示。这一步操作就相当于解除了循环引用对引用计数的影响。
+
+![](https://pic3.zhimg.com/v2-d7314ead6b303f08a91687577c045585_b.jpg)
+
+接着，gc 会再次扫描所有的容器对象，如果对象的 gc\_ref 值为 0，那么这个对象就被标记为 GC\_TENTATIVELY\_UNREACHABLE，并且被移至”Unreachable” 链表中。下图中的 link3 和 link4 就是这样一种情况。
+
+![](https://pic1.zhimg.com/v2-d3c3f52615fb704c26bd53dbb178767c_b.jpg)
+
+如果对象的 gc\_ref 不为 0，那么这个对象就会被标记为 GC\_REACHABLE。同时当 gc 发现有一个节点是可达的，那么他会递归式的将从该节点出发可以到达的所有节点标记为 GC\_REACHABLE, 这就是下图中 link2 和 link3 所碰到的情形。
+
+![](https://pic1.zhimg.com/v2-510f4d2d37aabdbc8978d9e47630237d_b.jpg)
+
+除了将所有可达节点标记为 GC\_REACHABLE 之外，如果该节点当前在”Unreachable” 链表中的话，还需要将其移回到”Object to Scan” 链表中，下图就是 link3 移回之后的情形。
+
+![](/img/noodle_plan/python/v2-6fd40c055a6633c654acaf05f472c1b2_720w.jpg)
+
+第二次遍历的所有对象都遍历完成之后，存在于”Unreachable” 链表中的对象就是真正需要被释放的对象。如上图所示，此时 link4 存在于 Unreachable 链表中，gc 随即释放之。
+
+**上面描述的垃圾回收的阶段，会暂停整个应用程序，等待标记清除结束后才会恢复应用程序的运行。**
+
+
+#### 为啥标记清除回收无法回收重写了`__del__`方法的类对象
+
+> Circular references which are garbage are detected when the option cycle detector is enabled (it’s on by default), but can only be cleaned up if there are no Python-level `__del__`() methods involved.
+
+官方文档中表明启用周期检测器时会检测到垃圾的循环引用（默认情况下它是打开的)，但只有在没有涉及 Python `__del__()` 方法的情况下才能清除。Python 不知道破坏彼此保持循环引用的对象的安全顺序，因此它则不会为这些方法调用析构函数。简而言之，如果定义了 `__del__` 函数，那么在循环引用中Python解释器无法判断析构对象的顺序，因此就不做处理。
+
+
+### 分代回收
+
+在循环引用对象的回收中，整个应用程序会被暂停，为了减少应用程序暂停的时间，Python 通过“分代回收”(Generational Collection)以空间换时间的方法提高垃圾回收效率。
+
+分代回收是基于这样的一个统计事实，对于程序，存在一定比例的内存块的生存周期比较短；而剩下的内存块，生存周期会比较长，甚至会从程序开始一直持续到程序结束。生存期较短对象的比例通常在 80%～90% 之间，这种思想简单点说就是：对象存在时间越长，越可能不是垃圾，应该越少去收集。这样在执行标记-清除算法时可以有效减小遍历的对象数，从而提高垃圾回收的速度。
+
+python gc给对象定义了三种世代(0,1,2),每一个新生对象在generation zero中，如果它在一轮gc扫描中活了下来，那么它将被移至generation one,在那里他将较少的被扫描，如果它又活过了一轮gc,它又将被移至generation two，在那里它被扫描的次数将会更少。
+
+gc的扫描在什么时候会被触发呢?答案是当某一世代中被分配的对象与被释放的对象之差达到某一阈值的时候，就会触发gc对某一世代的扫描。值得注意的是当某一世代的扫描被触发的时候，比该世代年轻的世代也会被扫描。也就是说如果世代2的gc扫描被触发了，那么世代0,世代1也将被扫描，如果世代1的gc扫描被触发，世代0也会被扫描。
+
+该阈值可以通过下面两个函数查看和调整:
+
+``` python
+gc.get_threshold() # (threshold0, threshold1, threshold2).
+gc.set_threshold(threshold0[, threshold1[, threshold2]])
+```
+下面对set_threshold()中的三个参数threshold0, threshold1, threshold2进行介绍。gc会记录自从上次收集以来新分配的对象数量与释放的对象数量，当两者之差超过threshold0的值时，gc的扫描就会启动，初始的时候只有世代0被检查。如果自从世代1最近一次被检查以来，世代0被检查超过threshold1次，那么对世代1的检查将被触发。相同的，如果自从世代2最近一次被检查以来，世代1被检查超过threshold2次，那么对世代2的检查将被触发。get_threshold()是获取三者的值，默认值为(700,10,10).
+
+
+# C++
+
+参考: 看之前一个哥们总结的c++要点 https://interview.huihut.com/
+
+* `new` 和 `delete` 为什么要配对用:
+    * ``` cpp
+        class A{
+        //...
+        };
+        A *pa = new A();
+        A *pas = new A[NUM]();
+      ```
+    * delete []pas; //详细流程: delete[] pas 用来释放pas指向的内存！！还逐一调用数组中每个对象的destructor！！
+    * delete []pa; //会发生什么, 答案是调用未知次数的A的析构函数. 因为delete[]会去通过pa+offset找一个基于pa的偏移量找一个内存里的数据, 他假定这个内存里放了要调用析构的次数n这个数据, 而这个内存里到底是多少是未知的.
+    * delete pas; //哪些指针会变成野指针, 答案是pas和A[0]中的指针会变成野指针. 因为只有这两个指针指向的内存被释放了, 也就是说, 仅释放了pas指针指向的这个数组的全部内存空间, 以及只调用了a[0]对象的析构函数
+* cqq vec set map list
+    * {% post_link stl_vector_string %}
+    * {% post_link stll_set_map_tutorial %}
+* map的`[]`和insert的区别?
+    * insert 含义是：如果key存在，则插入失败，如果key不存在，就创建这个key－value。实例: `map.insert((key, value))`
+    * 利用下标操作的含义是：如果这个key存在，就更新value；如果key不存在，就创建这个key－value对 实例：`map[key] = value`
+* vector的resize和reserve的区别?
+    * 总结: 
+        * resize既分配了空间，也创建了对象，可以通过下标访问。当new_size大于原size, 则resize既修改capacity大小，也修改size大小。否则只修改size大小.
+        * reserve只分配了空间, 也就是说它只修改capacity大小，不修改size大小, 若 new_cap 小于等于当前的 capacity(), 它啥也不干.
+    * resize: 重设容器大小以容纳 count 个元素。
+        若当前大小大于 count ，则减小容器为其首 count 个元素。
+        若当前大小小于 count:
+        * 则后附额外的默认插入的元素
+        * 则后附额外的 value 的副本
+    * reserve: 增加 vector 的容量到大于或等于 new_cap 的值。若 new_cap 大于当前的 capacity() ，则分配新存储，**否则该方法不做任何事**。reserve() 不更改 vector 的 size 。若 new_cap 大于 capacity() ，则所有迭代器，包含尾后迭代器和所有到元素的引用都被非法化。否则，没有迭代器或引用被非法化。
+* 字节对齐
+    * {% post_link sizeof_struct %}
+* 定位new 
+    * ``` cpp
+    #include <iostream>
+    using namespace std;
+    int main() {
+        char buffer[512];   //chunk of memory内存池
+        int *p2, *p3;
+        //定位new:
+        p2 = new (buffer) int[10];
+        p2[0] = 99;
+        p2[1] = 88;
+        cout << "buffer = " <<(void *)buffer << endl; //内存池地址
+        cout << "p2 = " << p2 << endl;             //定位new指向的地址
+        cout << "p2[0] = " << p2[0] << endl;
+        p3 = new (buffer) int[2];
+        p3[0] = 1;
+        p3[1] = 2;
+        cout << "p3 = " << p3 << endl;
+        cout << "p2[0] = " << p2[0] << endl;
+        cout << "p2[1] = " << p2[1] << endl;
+        cout << "p2[2] = " << p2[2] << endl;
+        cout << "p2[3] = " << p2[3] << endl;
+        return 0;
+    }
+    ```
+    结果发现p3和p2还有buffer都是使用同样的内存地址，符合指定地址的内存块，而且p3在指定位置覆盖了p2的前两处的值。
+* c++一个空类会生成什么 (答: 默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) 
+* 虚函数（virtual）可以是内联函数（inline）吗？
+    * 虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。
+    * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
+    * inline virtual 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 Base::who()），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。
+    虚函数内联使用:
+    ``` cpp
+    // 此处的虚函数 who()，是通过类（Base）的具体对象（b）来调用的，
+    // 编译期间就能确定了，所以它可以是内联的，
+    // 但最终是否内联取决于编译器。 
+    Base b;
+    b.who();
+
+    // 此处的虚函数是通过指针调用的，呈现多态性，
+    // 需要在运行时期间才能确定，所以不能为内联。  
+    Base *ptr = new Derived();
+    ptr->who();
+    ```
+* 虚函数指针、虚函数表
+    * 虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定。
+    * 虚函数表：在程序内存的`只读数据段`（.rodata section，见：[CPP目标文件内存布局](#CPP目标文件内存布局)），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建。
+* 内存泄漏的工具 vargrid..? 还有啥工具
+* 了解ASAN查找内存越界问题 
+* cpp找找冰川, 大梦龙图的面试题，网上常用题
+* gdb怎么切换线程
+* C++ 的动态多态怎么实现的？
+* C++ 的构造函数可以是虚函数吗？
+* 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
+
+
+## 编译过程
+
+``` puml
+[*] --> hello.c
+[*] --> stdio.h
+hello.c -right-> 预处理
+stdio.h --> 预处理
+预处理 -right-> hello.i 
+hello.i -right-> 编译
+编译 -right-> hello.a
+hello.a -right-> 汇编
+汇编 -right-> hello.o
+hello.o --> 链接
+libc.a --> 链接
+链接 -right-> a.out
+```
+
+1. 预处理(Preprocessing): 做一些类似于将所有的`#define`删除，并且展开所有的宏定义的操作, 然后生成hello.i
+2. 编译(Compilation): 编译过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码。得到hello.a
+3. 汇编(Assembly): 汇编器是将汇编代码转变成机器可以执行的命令，每一个汇编语句几乎都对应一条机器指令。汇编相对于编译过程比较简单，根据汇编指令和机器指令的对照表一一翻译即可。得到hello.o
+4. 链接(Linking): 通过调用链接器ld来链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件
+   * 静态链接: 指在编译阶段直接把静态库加入到可执行文件中去，这样可执行文件会比较大
+   * 动态链接: 指链接阶段仅仅只加入一些描述信息，而程序执行时再从系统中把相应动态库加载到内存中去。
+
+
+
+## 目标文件
+
+编译器编译源代码后生成的文件叫做目标文件。目标文件从结构上讲，它是已经编译后的可执行文件格式，只是还没有经过链接的过程，其中可能有些符号或有些地址还没有被调整。
+
+> 可执行文件（Windows 的 `.exe` 和 Linux 的 `ELF`）、动态链接库（Windows 的 `.dll` 和 Linux 的 `.so`）、静态链接库（Windows 的 `.lib` 和 Linux 的 `.a`）都是按照可执行文件格式存储（Windows 按照 PE-COFF，Linux 按照 ELF）
+
+目标文件格式:  
+*   Windows 的 PE（Portable Executable），或称为 PE-COFF，`.obj` 格式
+*   Linux 的 ELF（Executable Linkable Format），`.o` 格式
+*   Intel/Microsoft 的 OMF（Object Module Format）
+*   Unix 的 `a.out` 格式
+*   MS-DOS 的 `.COM` 格式
+
+> PE 和 ELF 都是 COFF（Common File Format）的变种
+
+### CPP目标文件内存布局
+
+<table><thead><tr><th>段</th><th>功能</th></tr></thead><tbody><tr><td>File Header</td><td>文件头，描述整个文件的文件属性（包括文件是否可执行、是静态链接或动态连接及入口地址、目标硬件、目标操作系统等）</td></tr><tr><td>.text section</td><td>代码段，执行语句编译成的机器代码</td></tr><tr><td>.data section</td><td>数据段，已初始化的全局变量和局部静态变量</td></tr><tr><td>.bss section</td><td>BSS 段（Block Started by Symbol），未初始化的全局变量和局部静态变量（因为默认值为 0，所以只是在此预留位置，不占空间）</td></tr><tr><td>.rodata section</td><td>只读数据段，存放只读数据，一般是程序里面的只读变量（如 const 修饰的变量）和字符串常量</td></tr><tr><td>.comment section</td><td>注释信息段，存放编译器版本信息</td></tr><tr><td>.note.GNU-stack section</td><td>堆栈提示段</td></tr></tbody></table>
+
+
+# Go pending_fin
+
+* defer: 推迟执行, 一般用于做一些收尾工作
+* sync库
+    * sync.Map: Go 语言原生 map 并不是线程安全的，对它进行并发读写操作的时候，需要加锁。而sync.Map是线程安全的，读取，插入，删除也都保持着常数级的时间复杂度。具体实现可参考:
+        * https://juejin.im/post/6844903895227957262
+        * https://www.cnblogs.com/qcrao-2018/p/12833787.html
+      * sync.Pool: 临时对象池, 提供put/get方法, 临时对象池 sync.Pool 非常适用于在并发编程中用作临时对象缓存，实现对象的重复使用，优化 GC，提升系统性能，但是由于不能设置对象池大小，而且放进对象池的临时对象每次 GC 运行时会被清除，所以只能用作简单的临时对象池，不能用作持久化的长连接池，比如数据库连接池、Redis 连接池。
+    * sync.Mutex: 互斥锁
+    * sync.RWMutex: 读写锁
+    * sync.Once: 类似pthread_once
+    * sync.Atomic: 原子数
+* select: pending_fin
+* context: pending_fin
+    * 比如有一个网络请求Request，每个Request都需要开启一个goroutine做一些事情，这些goroutine又可能会开启其他的goroutine。这样的话， 我们就可以通过Context，来跟踪这些goroutine，并且通过Context来控制他们的目的，这就是Go语言为我们提供的Context，中文可以称之为“上下文”。
+    另外一个实际例子是，在Go服务器程序中，每个请求都会有一个goroutine去处理。然而，处理程序往往还需要创建额外的goroutine去访问后端资源，比如数据库、RPC服务等。由于这些goroutine都是在处理同一个请求，所以它们往往需要访问一些共享的资源，比如用户身份信息、认证token、请求截止时间等。而且如果请求超时或者被取消后，所有的goroutine都应该马上退出并且释放相关的资源。这种情况也需要用Context来为我们取消掉所有goroutine
+
+
+## goroutine协程调度
+
+参考:
+* https://studygolang.com/articles/26795
+* https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/#65-%E8%B0%83%E5%BA%A6%E5%99%A8
+
+Golang 则引入了 G/P/M 模型来实现调度，那么 Golang 的运行时（runtime）如何实现对 goroutine 的调度从而合理分配 CPU 资源呢？
+
+![](/img/noodle_plan/go/golang-routine-scheduler.png)
+
+M:N模型，内核空间开启M个内核线程，一个内核空间线程对应N个用户空间线程。效率非常高，但是管理复杂。
+
+本质上goroutine就是协程，但是完全运行在用户态，借鉴了M:N模型.
+相比其他语言，golang采用了MPG模型管理协程，更加高效，但是管理非常复杂。
+* M：内核级线程
+* G：代表一个goroutine
+* P：Processor，处理器，用来管理和执行goroutine的。
+
+**G-M-P三者的关系与特点**：
+* P的个数取决于设置的GOMAXPROCS，go新版本默认使用最大内核数，比如你有8核处理器，那么P的数量就是8
+* M的数量和P不一定匹配，可以设置很多M，M和P绑定后才可运行，多余的M处于休眠状态。
+* P包含一个LRQ（Local Run Queue）本地运行队列，这里面保存着P需要执行的协程G的队列
+* 除了每个P自身保存的G的队列外，调度器还拥有一个全局的G队列GRQ（Global Run Queue），这个队列存储的是所有未分配的协程G。
+
+**设计策略**:   
+* 复用线程：避免频繁的创建、销毁线程，而是对线程的复用。
+* work stealing机制: 当本线程无可运行的G时，尝试从其他线程绑定的P偷取G，而不是销毁线程。
+* hand off机制: 当本线程因为G进行系统调用阻塞时，线程释放绑定的P，把P转移给其他空闲的线程执行。
+* 利用并行：GOMAXPROCS设置P的数量，最多有GOMAXPROCS个线程分布在多个CPU上同时运行。GOMAXPROCS也限制了并发的程度，比如GOMAXPROCS = 核数/2，则最多利用了一半的CPU核进行并行。
+* 抢占：在coroutine中要等待一个协程主动让出CPU才执行下一个协程，在Go中，一个goroutine最多占用CPU 10ms，防止其他goroutine被饿死，这就是goroutine不同于coroutine的一个地方。
+* 全局G队列：在新的调度器中依然有全局G队列，但功能已经被弱化了，当M执行work stealing从其他P偷不到G时，它可以从全局G队列获取G。
+
+![调度流程图](/img/noodle_plan/go/golang-routine-scheduler_flow_diagram.png)
+
+
+# 网络安全
+
+最后就是网络安全，主要考察也是 WEB 安全，包括
+* [XSS](#XSS)
+* [CSRF](#CSRF)
+* SQL注入
+* ...
+
+
+## XSS
+
+参考: https://tech.meituan.com/2018/09/27/fe-security.html
+
+什么是 XSS?  
+
+Cross-Site Scripting（跨站脚本攻击）简称 XSS，是**一种代码注入攻击**。攻击者通过在目标网站上注入恶意脚本，使之在用户的浏览器上运行。利用这些恶意脚本，攻击者可获取用户的敏感信息如 Cookie、SessionID 等，进而危害数据安全。
+
+为了和 CSS 区分，这里把攻击的第一个字母改成了 X，于是叫做 XSS。
+XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一起；浏览器无法分辨哪些脚本是可信的，导致恶意脚本被执行。
+而由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，或者利用这些信息冒充用户向网站发起攻击者定义的请求。
+在部分情况下，由于输入的限制，注入的恶意脚本比较短。但可以通过引入外部的脚本，并由浏览器执行，来完成比较复杂的攻击策略。
+
+
+### XSS是如何注入的
+
+这里有一个问题：用户是通过哪种方法“注入”恶意脚本的呢？
+不仅仅是业务上的“用户的 UGC 内容”可以进行注入，包括 URL 上的参数等都可以是攻击的来源。在处理输入时，以下内容都不可信： 
+* 来自用户的 UGC 信息
+* 来自第三方的链接
+* URL 参数
+* POST 参数
+* Referer （可能来自不可信的来源）
+* Cookie （可能来自其他子域注入）
+
+举个简单例子: 
+``` JavaScript
+function escape(s) {
+  return '<script>console.log("'+s+'");</script>';
+}
+```
+如果输入的`s` 为 `");alert(1);//` , 则将 return `<script>console.log("");alert(1);//");</script>` , 这就会弹出警告窗口`alert(1)` 这就是恶意脚本注入
+
+再举个真实的例子, **新浪微博名人堂反射型 XSS 漏洞**:
+
+攻击者发现 `http://weibo.com/pub/star/g/xyyyd` 这个 URL 的内容未经过滤直接输出到 HTML 中。
+于是攻击者构建出一个 URL，然后诱导用户去点击：
+`http://weibo.com/pub/star/g/xyyyd"><script src=//xxxx.cn/image/t.js></script>`
+用户点击这个 URL 时，服务端取出请求 URL，拼接到 HTML 响应中：
+`<li><a href="http://weibo.com/pub/star/g/xyyyd"><script src=//xxxx.cn/image/t.js></script>">按分类检索</a></li>`
+浏览器接收到响应后就会加载执行恶意脚本 `//xxxx.cn/image/t.js`，在恶意脚本中利用用户的登录状态进行关注、发微博、发私信等操作，发出的微博和私信可再带上攻击 URL，诱导更多人点击，不断放大攻击范围。这种窃用受害者身份发布恶意内容，层层放大攻击范围的方式，被称为 “XSS 蠕虫”。
+
+
+### 如何防范XSS
+
+虽然很难通过技术手段完全避免 XSS，但我们可以总结以下原则减少漏洞的产生：
+
+* 利用模板引擎 开启模板引擎自带的 HTML 转义功能。
+* 避免拼接 HTML 前端采用拼接 HTML 的方法比较危险，如果框架允许，使用 createElement、setAttribute 之类的方法实现。或者采用比较成熟的渲染框架，如 `Vue`/`React` 等。
+* 时刻保持警惕 在插入位置为 DOM 属性、链接等位置时，要打起精神，严加防范。
+* 增加攻击难度，降低攻击后果 通过 CSP、输入长度配置、接口安全措施等方法，增加攻击的难度，降低攻击的后果。
+* 主动检测和发现 可使用 XSS 攻击字符串和自动扫描工具寻找潜在的 XSS 漏洞。
+
+举个例子:
+
+某天，公司需要一个搜索页面，根据 URL 参数决定关键词的内容。小明很快把页面写好并且上线。代码如下：
+``` html
+<input type="text" value="<%= getParameter("keyword") %>">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：<%= getParameter("keyword") %>
+</div>
+```
+然而，在上线后不久，小明就接到了安全组发来的一个神秘链接：
+`http://xxx/search?keyword="><script>alert('XSS');</script>`
+小明带着一种不祥的预感点开了这个链接 \[请勿模仿，确认安全的链接才能点开\]。果然，页面中弹出了写着”XSS” 的对话框。
+> 可恶，中招了！小明眉头一皱，发现了其中的奥秘：  
+
+当浏览器请求 `http://xxx/search?keyword="><script>alert('XSS');</script>` 时，服务端会解析出请求参数 `keyword`，得到 `"><script>alert('XSS');</script>`，拼接到 HTML 中返回给浏览器。形成了如下的 HTML：
+``` html
+<input type="text" value=""><script>alert('XSS');</script>">
+<button>搜索</button>
+<div>
+  您搜索的关键词是："><script>alert('XSS');</script>
+</div>
+```
+浏览器无法分辨出 `<script>alert('XSS');</script>` 是恶意代码，因而将其执行。
+这里不仅仅 div 的内容被注入了，而且 input 的 value 属性也被注入， alert 会弹出两次。
+面对这种情况，我们应该如何进行防范呢？
+其实，这只是浏览器把用户的输入当成了脚本进行了执行。那么只要告诉浏览器这段内容是文本就可以了。
+聪明的小明很快找到解决方法，把这个漏洞修复：
+
+``` html
+<input type="text" value="<%= escapeHTML(getParameter("keyword")) %>">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：<%= escapeHTML(getParameter("keyword")) %>
+</div>
+```
+
+`escapeHTML()` 按照如下规则进行转义：
+
+| 字符 | 转义后的字符 | |-|-| |`&`|`&amp;`| |`<`|`&lt;`| |`>`|`&gt;`| |`"`|`&quot;`| |`'`|`&#x27;`| |`/`|`&#x2F;`|
+
+经过了转义函数的处理后，最终浏览器接收到的响应为：
+
+``` html
+<input type="text" value="&quot;&gt;&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;&#x2F;script&gt;">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：&quot;&gt;&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;&#x2F;script&gt;
+</div>
+```
+恶意代码都被转义，不再被浏览器执行，而且搜索词能够完美的在页面显示出来。
+
+
+## CSRF
+
+参考: https://tech.meituan.com/2018/10/11/fe-security-csrf.html
+
+CSRF（Cross-site request forgery）跨站请求伪造：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
+
+一个典型的CSRF攻击有着如下的流程：
+
+1) 受害者登录a.com，并保留了登录凭证（Cookie）。
+2) 攻击者引诱受害者访问了b.com。
+3) b.com 向 a.com 发送了一个请求：a.com/act=xx。浏览器会默认携带a.com的Cookie。
+4) a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。
+5) a.com以受害者的名义执行了act=xx。
+6) 攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。
+
+
+### CSRF 的特点
+
+* 攻击一般发起在第三方网站，而不是被攻击的网站。被攻击的网站无法防止攻击发生。
+* 攻击利用受害者在被攻击网站的登录凭证，冒充受害者提交操作；而不是直接窃取数据。
+* 整个过程攻击者并不能获取到受害者的登录凭证，仅仅是 “冒用”。
+* 跨站请求可以用各种方式：图片 URL、超链接、CORS、Form 提交等等。部分请求方式可以直接嵌入在第三方论坛、文章中，难以进行追踪。
+
+CSRF 通常是跨域的，因为外域通常更容易被攻击者掌控。但是如果本域下有容易被利用的功能，比如可以发图和链接的论坛和评论区，攻击可以直接在本域下进行，而且这种攻击更加危险。
+
+
+### 防护策略
+
+CSRF 通常从第三方网站发起，被攻击的网站无法防止攻击发生，只能通过增强自己网站针对 CSRF 的防护能力来提升安全性。
+
+上文中讲了 CSRF 的两个特点：
+* CSRF（通常）发生在第三方域名。
+* CSRF 攻击者不能获取到 Cookie 等信息，只是使用。
+
+针对这两点，我们可以专门制定防护策略，如下：
+* 阻止不明外域的访问
+    * 同源检测
+    * Samesite Cookie
+* 提交时要求附加本域才能获取的信息
+    * CSRF Token
+    * 双重 Cookie 验证
+
+
+# 编码知识
+
+
+## Base64 的原理？编码后比编码前是大了还是小了。
+
+结论:
+
+大了. 因为Base64 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。也就是说, 每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。
+
+
+### base64的原理
+
+Base64 编码之所以称为 Base64，是因为其使用 64 个字符来对任意数据进行编码，同理有 Base32、Base16 编码。标准 Base64 编码使用的 64 个字符为：
+
+![](/img/noodle_plan/http/XHFMRvxfez4OVtr.jpg)
+
+这 64 个字符是各种字符编码（比如 ASCII 编码）所使用字符的子集，基本，并且可打印。唯一有点特殊的是最后两个字符，因对最后两个字符的选择不同，Base64 编码又有很多变种，比如 Base64 URL 编码。
+
+Base64 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。
+
+假设我们要对 `Hello!` 进行 Base64 编码，按照 ASCII 表，其转换过程如下图所示：
+
+![](/img/noodle_plan/http/tJnClQsjc4WMGhB.jpg)
+
+可知 `Hello!` 的 Base64 编码结果为 `SGVsbG8h` ，原始字符串长度为 6 个字符，编码后长度为 8 个字符，每 3 个原始字符经 Base64 编码成 4 个字符，编码前后长度比 4/3，这个长度比很重要 - 比原始字符串长度短，则需要使用更大的编码字符集，这并不我们想要的；长度比越大，则需要传输越多的字符，传输时间越长。Base64 应用广泛的原因是在字符集大小与长度比之间取得一个较好的平衡，适用于各种场景。
+
+是不是觉得 Base64 编码原理很简单？
+
+但这里需要注意一个点：Base64 编码是每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。
+
+以 `Hello!!` 为例，其转换过程为：
+
+![](/img/noodle_plan/http/5URB8nVis9ljwYe.jpg)
+
+_注：图表中蓝色背景的二进制 0 值是额外补充的。_
+
+`Hello!!` Base64 编码的结果为 `SGVsbG8hIQAA` 。最后 2 个零值只是为了 Base64 编码而补充的，在原始字符中并没有对应的字符，那么 Base64 编码结果中的最后两个字符 `AA` 实际不带有效信息，所以需要特殊处理，以免解码错误。
+
+标准 Base64 编码通常用 `=` 字符来替换最后的 `A`，即编码结果为 `SGVsbG8hIQ==`。因为 `=` 字符并不在 Base64 编码索引表中，其意义在于结束符号，在 Base64 解码时遇到 `=` 时即可知道一个 Base64 编码字符串结束。
+
+如果 Base64 编码字符串不会相互拼接再传输，那么最后的 `=` 也可以省略，解码时如果发现 Base64 编码字符串长度不能被 4 整除，则先补充 `=` 字符，再解码即可。
+
+解码是对编码的逆向操作，但注意一点：**对于最后的两个 `=` 字符，转换成两个 `A` 字符，再转成对应的两个 6 比特二进制 0 值，接着转成原始字符之前，需要将最后的两个 6 比特二进制 0 值丢弃，因为它们实际上不携带有效信息**。
+
+
+## utf8编码和unicode字符集
+
+总结:  
+* unicode是个字符集, 只是一个符号对应表, 它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储
+* utf8是unicode符号具体的编码方式, 规定了该怎么存储
+
+说到utf8，就不得不说一下unicode了。  Unicode是一个很大的集合，每一个unicode对应一个符号，不管是中文的汉字，英文字符，日文，韩文等等。现在的规模可以容纳100多万个符号。每个符号的编码都不一样，比如，U+0639表示阿拉伯字母 Ain，U+0041表示英语的大写字母A，U+4E25表示汉字“严”。具体的符号对应表，可以查询unicode.org，或者专门的汉字对应表。
+
+**需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。**
+
+比如，汉字“严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。
+
+这里就有两个严重的问题，第一个问题是：如何才能区别unicode和ascii？计算机怎么知道三个字节表示一个符号，而不是分别表示三个符号呢？第二个问题是：我们已经知道，英文字母只用一个字节表示就够了，如果unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有二到三个字节是0，这对于存储来说是极大的浪费，文本文件的大小会因此大出二三倍，这是无法接受的。
+
+它们造成的结果是：
+
+1）出现了unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示unicode。
+
+2）unicode在很长一段时间内无法推广，直到互联网的出现。
+
+### UTF-8
+
+互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种unicode的实现方式。其他实现方式还包括UTF-16和UTF-32，不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。
+
+UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。
+
+UTF-8的编码规则很简单，只有二条：
+
+* 1）对于单字节的符号，字节的第一位（字节的最高位）设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。
+
+* 2）对于n字节的符号（n>1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。
+
+下表总结了编码规则，字母x表示可用编码的位。
+
+Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
+```
+—————+———————————————————————
+0000 0000-0000 007F | 0xxxxxxx
+0000 0080-0000 07FF | 110xxxxx 10xxxxxx
+0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+```
+下面，还是以汉字“严”为例，演示如何实现UTF-8编码：
+已知“严”的unicode是4E25（100111000100101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是“11100100 10111000 10100101”，转换成十六进制就是E4B8A5。
+
+
+# misc
+
+* etcd怎么选主的? [etcd的leader选举过程](#etcd扼要总结其他细节可以不用看了)
+* 阿里巴巴面试官手册
+    * 消息队列原理
+    * 秒杀
+    * 分布式事务
+    * 日志记录
+    * LRU缓存
+    * 分布式锁
+    * HR面试
+* java的hashmap 是怎样实现的？
+* 秒杀系统的实现? 
+* cgi是啥? pending_fin
+* 研究一下卡夫卡的热点面试题 pending_fin
+* dns用的什么协议
+    * DNS占用53号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？
+    DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。
+        * DNS区域传输的时候使用TCP协议:  
+            * 辅域名服务器会定时（一般3小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，会执行一次区域传送，进行数据同步。区域传送使用TCP而不是UDP，因为数据同步传送的数据量比一个请求应答的数据量要多得多。
+            * TCP是一种可靠连接，保证了数据的准确性。
+        * 域名解析时使用UDP协议：
+        客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过三次握手，这样DNS服务器负载更低，响应更快。理论上说，客户端也可以指定向DNS服务器查询时用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。
+* 为什么计算机用补码表示负数?
+    * [参考](https://www.ruanyifeng.com/blog/2009/08/twos_complement.html)
+    * 什么是补码？ 也就是我们常说的取反加1
+    它是一种数值的转换方法，要分二步完成：
+    第一步，每一个二进制位都取相反值，0变成1，1变成0。比如，00001000的相反值就是11110111。
+    第二步，将上一步得到的值加1。11110111就变成11111000。
+    所以，00001000的2的补码就是11111000。也就是说，-8在计算机（8位机）中就是用11111000表示。
+    * 补码的好处?
+        * 在正常的加法规则下，可以利用2的补码得到正数与负数相加的正确结果。换言之，计算机只要部署加法电路和补码电路，就可以完成所有整数的加法。
+        * 如果不用补码, 在这种情况下，正常的加法规则不适用于正数与负数的加法，因此必须制定两套运算规则，一套用于正数加正数，还有一套用于正数加负数。从电路上说，就是必须为加法运算做两种电路。
 
 
 

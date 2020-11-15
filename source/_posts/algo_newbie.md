@@ -564,6 +564,86 @@ test_dense_graph graph bfs:
 * 可以获得两点之间的最短路径
 
 
+## 单调栈
+
+[参考](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/)  
+
+定义：栈内元素保持有序的状态的栈称为单调栈，如下图所示：
+![](/img/algo_newbie/monotone_stack/mono_stack_1.png)
+单调栈是一个定义简单但应用起来比较复杂的数据结构，其根本应用可以概括为：在一个一维数组中，帮助我们找到某个元素的左侧或右侧第一个大于或小于该元素的数。具体来说，我们会维护一个单调栈（递增或递减视要求而定），这个栈在满足一定情况时会将栈顶元素出栈，(pop)，一旦这种情况发生，那么一定是遇到了我们要找的大于（或小于）该栈顶元素的数，相应的，我们应该在此时进行一系列的操作，得到我们想要的结果。核心在于如何正确理解出栈的含义。
+
+下面我们通过几个例子来理解下单调栈的应用。
+
+### 队列中数帽子问题
+
+现有一条排好的队伍，从队首到队尾，队员们都戴着帽子，身高是无序的。假设每个人能看到队伍中在他前面的比他个子矮的人的帽子，（如果出现一个比这个人个子高的人挡住视线，那么此人不能看到高个子前面的任何人的帽子。）现在请计算出这个队伍中一共可以看到多少个帽子？例如给定数组为：[2,1,5,6,2,3]（顺序为从队尾到队首）。
+![](/img/algo_newbie/monotone_stack/mono_stack_2.png)
+
+如图示，答案为3。从暴力角度尝试去解这道题，显然可以做到。对于数组中每个元素，向右去找所有比它小的元素（找第第一个比它大的元素），这样总的时间复杂度为O(n^2)，最坏情况是这是一个单调递减数组，每次都要向右找到数组的最末尾。显然这不是理想的解法，我们可以应用单调栈来解决这个问题。其代码如下：
+``` cpp
+int countHats(vector<int>& heights) {
+    heights.push_back(INT_MAX);
+    stack<int> stk;
+    int sum = 0;
+    for(int i=0; i<heights.size(); i++) {
+        while( !stk.empty() && heights[i] > heights[stk.top()]) ) {
+            int top = stk.top();
+            stk.pop();
+            sum += i – top – 1;
+        }
+        stk.push(i);
+    }
+    return sum;
+}
+```
+在以上代码中，我们维护了一个单调递减栈，在栈中的元素都是单调递减的，这表明栈内的元素还可能看到比它更小的元素（帽子）。当遇到一个比栈顶元素大的元素时，说明栈顶元素不可能看到比它更小的元素了（因为遮挡作用），这时将栈顶元素pop出来，同时更新sum的值，sum += i – top – 1，表示栈顶元素与这个新元素间的距离，也就是栈顶元素能看到的最多的帽子数。在for循环中，每个元素都会入栈和出栈，在出栈过程中总会计算出栈顶元素能看到的最多的帽子数，并更新sum值，当整个队列循环结束后，得到的sum值就是最后队伍中能看到的帽子总数。注意为了使所有元素都能出栈，（糟糕情况是单调递减数列，这时似乎一次出栈都没有发生，原因是最后一个元素后面不可能有新的元素出现了，但单调栈还在期待新的元素出现，为了反映元素不再出现这一事实，我们假设最后一个元素后面出现了一个无穷大的元素），即heights.push_back(INT_MAX)。
+
+### 寻找第一个比自己大的数
+
+给一个数组，返回一个大小相同的数组。返回的数组的第i个位置的值应当是，对于原数组中的第i个元素，至少往右走多少步，才能遇到一个比自己大的元素（如果之后没有比自己大的元素，或者已经是最后一个元素，则在返回数组的对应位置放上-1）。
+例如给定数组为：`[2,1,5,6,2,3]`  
+返回数组应该为：`[2,1,1,-1,1,-1]`  
+其实这个问题本质上和数帽子问题是一样的，本质都是找到元素右边第一个比它大的数，代码稍作改动即可。
+``` cpp
+int countSteps(vector<int>& heights) {
+    stack<int> stk;
+    vector<int> results(heights.size(), -1);
+    for(int i=0; i<heights.size(); i++) {
+        while( !stk.empty() && heights[i] > heights[stk.top()]) ) {
+            results[stk.top()] = i – stk.top();
+            stk.pop();
+        }
+        stk.push(i);
+    }
+    return results;
+}
+```
+
+### 柱状图中最大矩形问题
+
+[lc84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)  
+给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。求在该柱状图中，能够勾勒出来的矩形的最大面积。
+![](/img/algo_newbie/monotone_stack/mono_stack_3.png)
+如上图，矩形最大面积为10。这个问题同样可以借助单调栈来解决。在这之前，需要理解如何找到这个最大面积矩形，这个矩形的限制条件有两个，一个是高度（也即组成矩形的最短的那根柱子高度），一个是宽度，（也即组成矩形的柱子个数）。为了找到这个全局最大值，我们遍历所有局部最优情况。那么什么是局部最优解呢，我们将每个柱子的高度作为包含它的矩形的高度，也即这个柱子一定是这个矩形中最低的一个柱子，那么我们下一步是求解这个矩形的宽度，显然我们只需找到这个柱子左边，右边第一个比它低的柱子，就可以求出宽度。这显然让我们想到使用单调栈的数据结构。代码如下：
+``` cpp
+int largestRectangleArea(vector<int> heights) {
+    int maxArea = 0;
+    heights.push_back(0);
+    stack<int> stk; //monotone stack(ascending)
+    for(int i=0; i<heights.size(); i++) {
+        while(!stk.empty() && heights[i] < heights[stk.top()]) {
+            int top = stk.top();
+            stk.pop(); //find the smaller element to the left of the current element
+            maxArea = max(maxArea,heights[top]*(stk.empty() ? i : (i - stk.top()-1)));
+        }
+        stk.push(i);    
+    }
+    return maxArea;
+}
+```
+我们维护一个单调递增栈，当遇到一个新元素小于栈顶元素时，发生出栈行为，表示栈顶元素向右遇到了第一个小于它的元素，同时在栈内的栈顶元素的下面一个元素即是栈顶元素向左寻找时第一个小于它的元素。（这一点的原因值得仔细思考，其实是因为栈顶元素与其下面的元素间在原数组中或许存在很多的元素，但它们必然是比栈顶元素大且比栈顶元素下面的元素小的，它们都在之前被弹出了栈。）在出栈行为发生后，我们需要计算以栈顶元素的高度值作为矩形高度时的矩形面积，而矩形宽度已经可以计算了，因为我们找到了栈顶元素左右两侧小于它的第一个元素，于是局部最优解得到计算。在整个循环中，所有元素进栈一次，出栈一次，时间复杂度为O(n)。
+
+
 # 位运算
 
 ## 位运算的套路技巧
@@ -788,16 +868,16 @@ class Solution_lc137(object):
         for i in range(32):
             res <<= 1
             res |= counts[31-i] % m
-		# 那如果想从一个负数的补码还原成python的负数, 
-		# 比如把`-3`的补码`0xfffffffd`还原成python的负数,
-		#  因为py的整形数字可以视为是以一个无限长的位存储方式来实现的,
-		#   所以直接`print 0xfffffffd`他会打印`4294967293`,
-		#    因为python把`0xfffffffd`当成了`0x000000000fffffffd`, 
-		#    符号位在最前面为0, 当成正数了, 所以我们得对它的后32位之前的所有0都取反变为1,
-		#     这样符号位为1才是python存储`-1`的真正补码形式,
-		# 	 所以对于一个负数`res`来说, 得这么还原: `~(res ^ 0xffffffff)`, 
-		# 	 要先将 末尾32 位取反（即 res ^ 0xffffffff ），再将所有位取反（即 ~ ).
-		# 	  两个组合操作实质上是将数字 末尾32 以前的位取反， 末尾32 位不变。
+        # 那如果想从一个负数的补码还原成python的负数, 
+        # 比如把`-3`的补码`0xfffffffd`还原成python的负数,
+        #  因为py的整形数字可以视为是以一个无限长的位存储方式来实现的,
+        #   所以直接`print 0xfffffffd`他会打印`4294967293`,
+        #    因为python把`0xfffffffd`当成了`0x000000000fffffffd`, 
+        #    符号位在最前面为0, 当成正数了, 所以我们得对它的后32位之前的所有0都取反变为1,
+        #     这样符号位为1才是python存储`-1`的真正补码形式,
+        # 	 所以对于一个负数`res`来说, 得这么还原: `~(res ^ 0xffffffff)`, 
+        # 	 要先将 末尾32 位取反（即 res ^ 0xffffffff ），再将所有位取反（即 ~ ).
+        # 	  两个组合操作实质上是将数字 末尾32 以前的位取反， 末尾32 位不变。
         return res if (counts[31] % m) == 0 else ~(res ^ 0xffffffff)
 ```
 
@@ -1788,7 +1868,7 @@ class Solution_LCA(object):
 
 * [leetcode106题后序中序求原二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
 * 参考: https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/solution/
-	
+    
 ![](/img/algo_newbie/bt_recursion/lc_106.png)
 
 首先来看题目给出的两个已知条件 中序遍历序列 和 后序遍历序列 根据这两种遍历的特性我们可以得出三个结论
@@ -1799,45 +1879,45 @@ class Solution_LCA(object):
 则代码如下:
 ``` python
 class Solution_build_bt(object):
-	def buildTree(self, inorder, postorder):
-		"""
-		:type inorder: List[int]
-		:type postorder: List[int]
-		:rtype: TreeNode
-		"""
-		if not inorder or not postorder:
-			return None
+    def buildTree(self, inorder, postorder):
+        """
+        :type inorder: List[int]
+        :type postorder: List[int]
+        :rtype: TreeNode
+        """
+        if not inorder or not postorder:
+            return None
 
-		def _proc_order_arr(
-				inorder_left_index, inorder_right_index, 
-				postorder_left_index, postorder_right_index):       
-			if inorder_left_index > inorder_right_index or \
-					postorder_left_index > postorder_right_index:
-				return None
-			# 在后序遍历序列中,最后一个元素为树的根节点
-			root_val = postorder[postorder_right_index] 
-			root_inorder_index = inorder.index(root_val)
-			_len_left_child = root_inorder_index-inorder_left_index
-			root_node = TreeNode(root_val)
-			
-			# 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
-			# 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
-			# 其他的除最后一个结点外都是右子树的结点
-			root_node.left = _proc_order_arr(
-				inorder_left_index,
-				root_inorder_index-1,
-				postorder_left_index,
-				postorder_left_index + (_len_left_child-1)
-			)
-			root_node.right = _proc_order_arr(
-				root_inorder_index+1,
-				inorder_right_index,
-				postorder_left_index+(_len_left_child),
-				postorder_right_index-1
-			)
-			return root_node
-			
-		return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
+        def _proc_order_arr(
+                inorder_left_index, inorder_right_index, 
+                postorder_left_index, postorder_right_index):       
+            if inorder_left_index > inorder_right_index or \
+                    postorder_left_index > postorder_right_index:
+                return None
+            # 在后序遍历序列中,最后一个元素为树的根节点
+            root_val = postorder[postorder_right_index] 
+            root_inorder_index = inorder.index(root_val)
+            _len_left_child = root_inorder_index-inorder_left_index
+            root_node = TreeNode(root_val)
+            
+            # 在中序遍历序列中,根节点的左边为左子树(设其长度为len_left), 根节点的右边为右子树
+            # 当前后序遍历序列中`[postorder_left_index...len_left-1]`为左子树的结点, 
+            # 其他的除最后一个结点外都是右子树的结点
+            root_node.left = _proc_order_arr(
+                inorder_left_index,
+                root_inorder_index-1,
+                postorder_left_index,
+                postorder_left_index + (_len_left_child-1)
+            )
+            root_node.right = _proc_order_arr(
+                root_inorder_index+1,
+                inorder_right_index,
+                postorder_left_index+(_len_left_child),
+                postorder_right_index-1
+            )
+            return root_node
+            
+        return _proc_order_arr(0, len(inorder)-1, 0, len(postorder)-1)
 ```
 
 
@@ -1853,15 +1933,15 @@ class Solution_build_bt(object):
 # 首先要明确此递归函数的定义: 查看root是否为叶子结点并且root的val是否等于sum_num,
 # 然后才开始写代码
 def has_path_sum(root, sum_num):
-	if not root:
-		return False
+    if not root:
+        return False
     # 判断是否为叶子
-	if not root.left and not root.left and root.val == sum_num:
-		return True
+    if not root.left and not root.left and root.val == sum_num:
+        return True
     # 通过递归, 继续查看左右孩子节点是否有 sum_num-root.val
-	if has_path_sum(root.left, sum_num-root.val):
-		return True
-	return has_path_sum(root.right, sum_num-root.val)
+    if has_path_sum(root.left, sum_num-root.val):
+        return True
+    return has_path_sum(root.right, sum_num-root.val)
 ```
 
 

@@ -464,9 +464,9 @@ def binary_tree_swap_iterative(root):
             continue
         if _cur_node.right:
             _temp_stack.append(("go", _cur_node.right))
-        _temp_stack.append(("print", _cur_node))
         if _cur_node.left:
             _temp_stack.append(("go", _cur_node.left))
+        _temp_stack.append(("print", _cur_node))
 
 
 class LinkList(object):

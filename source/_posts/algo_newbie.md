@@ -280,7 +280,7 @@ def binary_tree_levelorder_traversal(root):
 ### 二叉树反转
 
 值得一提的是，如果把交换左右子节点的代码放在后序遍历的位置也是可以的，但是放在中序遍历的位置是不行的，请你想一想为什么？
-因为中序遍历换节点 根据左根右的遍历顺序 相当于左侧节点交换了两次 右侧节点没换  因为遍历根的时候交换了左右节点 遍历右侧的时候还是之前那个左节点, 所以右子树没有被翻转, 以下是递归写法:
+因为中序遍历换节点 根据左根右的遍历顺序 相当于左侧节点交换了两次 右侧节点没换  因为遍历根的时候交换了左右节点 遍历右侧的时候还是之前那个左节点, 所以右子树没有被翻转, 以下是**递归写法**:
 ``` python
 def binary_tree_swap_recursive(root):
     if not root:
@@ -291,7 +291,7 @@ def binary_tree_swap_recursive(root):
 ```
 
 可以看到二叉树反转的递归写法跟前序遍历的递归写法很像,
-所以反转的迭代写法也可以对着前序遍历的迭代写法如法炮制:
+所以**反转的迭代写法**也可以对着前序遍历的迭代写法如法炮制:
 ``` python
 def binary_tree_swap_iterative(root):
     if not root:
@@ -306,9 +306,9 @@ def binary_tree_swap_iterative(root):
             continue
         if _cur_node.right:
             _temp_stack.append(("go", _cur_node.right))
-        _temp_stack.append(("print", _cur_node))
         if _cur_node.left:
             _temp_stack.append(("go", _cur_node.left))
+        _temp_stack.append(("print", _cur_node))
 ```
 
 
@@ -342,6 +342,7 @@ class LinkList(object):
 * 给定一个头结点h和结点指针p, 怎么删除该结点
     * 判断是否只有一个结点, 即判断`if h == p and not h.next`
     * 判断是否为末尾结点, 即判断`if not p.next`, 是的话还是得从头遍历找到p的前一个结点
+    * 如果都不是, 则直接删除p后面的节点b, 并把b的内容复制到p上即可
 
 
 ### 链表反转

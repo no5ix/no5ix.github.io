@@ -985,10 +985,8 @@ def singleNumber(self, nums: List[int]) -> List[int]:
 首先在未排序序列中找到最小（大）元素，然后**选择它**存放到排序序列的起始位置。
 再从剩余未排序元素中继续寻找最小（大）元素，然后**选择它**放到已排序序列的末尾。
 重复第二步，直到所有元素均排序完毕。
+![](/img/algo_newbie/uncommon_sort_algo/selection_sort.gif)
 
-<video loop="loop" width="100%" controls="controls">
-<source src="/img/algo_newbie/uncommon_sort_algo/selection_sort.mp4" type="video/mp4" />
-</video>
 
 ### 希尔排序
 
@@ -1185,7 +1183,9 @@ def insert_sort(arr, left_index, right_index):
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
-![](/img/algo_newbie/insert_sort/insert_sort_optimized.gif "insert_sort_optimized")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/insert_sort/insert_sort_optimized.mp4" type="video/mp4" />
+</video>
 
 ``` python
 def insert_sort_optimized(arr, left_index, right_index):
@@ -1224,12 +1224,16 @@ def insert_sort_optimized(arr, left_index, right_index):
 ![](/img/algo_newbie/merge_sort/merge_sort_2.png "归并排序分解图")
 
 动画演示:
-![](/img/algo_newbie/merge_sort/merge_sort_anim1.gif "归并排序动画总览")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/merge_sort/merge_sort_anim1.mp4" type="video/mp4" />
+</video>
 
 
 ### 归并排序的merge过程
 
-![](/img/algo_newbie/merge_sort/merge_sort_anim2.gif "归并排序的merge过程")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/merge_sort/merge_sort_anim2.mp4" type="video/mp4" />
+</video>
 
 ``` python
 def _merge(arr, left_index, mid_index, right_index):
@@ -1407,7 +1411,9 @@ A也重复上述步骤递归。
 ![](/img/algo_newbie/quick_sort/quick_sort_2.png)
 
 动画演示:
-![](/img/algo_newbie/quick_sort/quick_sort_partition_anim.gif "partition过程动画演示")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/quick_sort/quick_sort_partition_anim.mp4" type="video/mp4" />
+</video>
 
 
 ### 快排效率很差的情况
@@ -1647,7 +1653,9 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
 动画演示如下, 比如要对17这个元素为父元素的所有子元素进行堆化:
 
-![](/img/algo_newbie/heap_sort/heap_sort_heapify.gif "对17这个元素执行堆化")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/heap_sort/heap_sort_heapify.mp4" type="video/mp4" />
+</video>
 
 用数组存储二叉堆, 首先得明确以下两个index的取得方法, **如果index从0开始的话**:
 * `left_child = 2*i + 1`, 
@@ -1722,7 +1730,9 @@ def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
 
 **注意**: 以下动画演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
 
-![](/img/algo_newbie/heap_sort/heap_sort_build_heap.gif "建堆过程")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/heap_sort/heap_sort_build_heap.mp4" type="video/mp4" />
+</video>
 
 ``` python
 def _build_max_heap(arr, left_index, right_index):
@@ -1740,7 +1750,9 @@ def _build_max_heap(arr, left_index, right_index):
 
 ### 堆排序原址排序的具体实现
 
-![](/img/algo_newbie/heap_sort/heap_sort.gif "堆排序过程")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/heap_sort/heap_sort.mp4" type="video/mp4" />
+</video>
 
 堆排序分两步:
 1. 建堆
@@ -1832,7 +1844,9 @@ def heap_sort(arr, left_index , right_index):
 * p=root ，且 q 在 root 的左或右子树中；
 * q=root ，且 p 在 root 的左或右子树中；
 
-![](/img/algo_newbie/bt_recursion/bt_lca.gif "LCA递归流程图")
+<video loop="loop" width="100%" controls="controls">
+<source src="/img/algo_newbie/bt_recursion/bt_lca.mp4" type="video/mp4" />
+</video>
 考虑通过递归对二叉树进行后序遍历，当遇到节点 p 或 q 时返回。从底至顶回溯，当节点 p,q 在节点 root 的异侧时，节点 root 即为最近公共祖先，则向上返回 root 。
 
 递归解析：

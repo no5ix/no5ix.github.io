@@ -245,7 +245,7 @@ git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用
     3. 通过`git rebase -i` 将本地的多次提交合并为一个，以简化提交历史。本地有多个提交时,如果不进行这一步,在`git rebase master`时会多次解决冲突(最坏情况下,每一个提交都会相应解决一个冲突)
     4. `git rebase master` 将master最新的分支同步到本地，这个过程可能需要手动解决冲突(如果进行了上一步的话,只用解决一次冲突)
     5. .在 rebase 的过程中，也许会出现冲突 conflict 。在这种情况， git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。
-    6. 注意，你无需执行 git-commit，只要执行 continue，`git rebase --continue`, 这样 git 会继续应用余下的 patch 补丁文件。
+    6. 注意，你无需执行 `git commit`，只要执行 `git rebase --continue`, 这样 git 会继续应用余下的 patch 补丁文件。
     7. 然后切换到master分支，git merge将本地的local分支内容合并到master分支
     8. git push将master分支的提交上传
 
@@ -263,7 +263,7 @@ git rebase相对来说是比较复杂的一个命令了,但只要掌握了使用
 ![](/img/git_tutorial/rebase_i2.png)
 
 删除之前的两条message(ESC dd)，设置一总的message 然后保存退出。(ESC wq)
-我们查看下log。git log
+我们查看下log, `git log`
 是不是没有了之前的两个commit。
 ![](/img/git_tutorial/rebase_i3.png)
 

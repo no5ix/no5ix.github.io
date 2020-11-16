@@ -20,7 +20,7 @@ categories:
 如果，cache hit，则直接返回数据  
 如果，cache miss，则访问 db，并将数据 set 回缓存
 
-![](/img/cache_db_consistency/cache_db_consistency_1.png)
+![](/img/cache_db_consistency/cache_db_consistency_9.png)
 
 （1）先从 cache 中尝试 get 数据，结果 miss 了  
 （2）再从 db 中读取数据，从库，读写分离  
@@ -29,7 +29,7 @@ categories:
 ## _对于写请求_  
 
 先操作数据库，再淘汰缓存（淘汰缓存，而不是更新缓存）  
-![](/img/cache_db_consistency/cache_db_consistency_2.png)
+![](/img/cache_db_consistency/cache_db_consistency_1.png)
 
 如上图：  
 （1）第一步要操作数据库，第二步操作缓存  
@@ -38,7 +38,7 @@ categories:
 ## Cache Aside Pattern 为什么建议淘汰缓存，而不是更新缓存
 
 答：如果更新缓存，在并发写时，可能出现数据不一致。  
-![](/img/cache_db_consistency/cache_db_consistency_3.png)
+![](/img/cache_db_consistency/cache_db_consistency_2.png)
 
 如上图所示，如果采用 set 缓存。
 
@@ -50,7 +50,7 @@ categories:
 
 ## Cache Aside Pattern 为什么建议先操作数据库，再操作缓存？
 答：如果先操作缓存，在读写并发时，可能出现数据不一致。  
-![](/img/cache_db_consistency/cache_db_consistency_4.png)
+![](/img/cache_db_consistency/cache_db_consistency_3.png)
 
 如上图所示，如果先操作缓存。
 
@@ -72,13 +72,13 @@ categories:
 （2）淘汰缓存失败了  
 导致，数据库与缓存的数据不一致。
 
-个人见解：这里个人觉得可以使用重试的方法，在淘汰缓存的时候，如果失败，则重试一定的次数。如果失败一定次数还不行，那就是其他原因了。比如说 redis 故障、内网出了问题。
+个人见解：**这里个人觉得可以使用重试的方法，在淘汰缓存的时候，如果失败，则重试一定的次数。如果失败一定次数还不行，那就是其他原因了。比如说 redis 故障、内网出了问题。**
 
 关于这个问题，沈老师的解决方案是，_使用先操作缓存（delete），再操作数据库_。假如删除缓存成功，更新数据库失败了。缓存里没有数据，数据库里是之前的数据，数据没有不一致，对业务无影响。只是下一次读取，会多一次 cache miss。这里我觉得沈老师可能忽略了并发的问题，比如说以下情况：  
 一个写请求过来，删除了缓存，准备更新数据库（还没更新完成）。  
 然后一个读请求过来，缓存未命中，从数据库读取旧数据，再次放到缓存中，这时候，数据库更新完成了。此时的情况是，缓存中是旧数据，数据库里面是新数据，同样存在数据不一致的问题。  
 如图：  
-![](/img/cache_db_consistency/cache_db_consistency_5.png)
+![](/img/cache_db_consistency/cache_db_consistency_4.png)
 
 
 ## 主从同步延迟导致的缓存和数据不一致问题
@@ -87,7 +87,7 @@ categories:
 
 **数据库主从不一致**  
 先回顾下，无缓存时，数据库主从不一致问题。  
-![](/img/cache_db_consistency/cache_db_consistency_6.png)
+![](/img/cache_db_consistency/cache_db_consistency_5.png)
 
 如上图，发生的场景是，写后立刻读：  
 （1）主库一个写请求（主从没同步完成）  
@@ -99,7 +99,7 @@ categories:
 
 **缓存与数据库不一致**  
 再看，引入缓存后，缓存和数据库不一致问题。  
-![](/img/cache_db_consistency/cache_db_consistency_7.png)
+![](/img/cache_db_consistency/cache_db_consistency_6.png)
 
 如上图，发生的场景也是，写后立刻读：  
 （1+2）先一个写请求，淘汰缓存，写数据库
@@ -124,14 +124,14 @@ categories:
 _选择性读主_  
 
 可以利用一个缓存记录必须读主的数据。  
-![](/img/cache_db_consistency/cache_db_consistency_8.png)
+![](/img/cache_db_consistency/cache_db_consistency_7.png)
 
 如上图，当写请求发生时：  
 （1）写主库  
 （2）将哪个库，哪个表，哪个主键三个信息拼装一个 key 设置到 cache 里，这条记录的超时时间，设置为 “主从同步时延”  
 PS：key 的格式为 “db:table:PK”，假设主从延时为 1s，这个 key 的 cache 超时时间也为 1s。
 
-![](/img/cache_db_consistency/cache_db_consistency_9.png)
+![](/img/cache_db_consistency/cache_db_consistency_8.png)
 
 如上图，当读请求发生时：  
 这是要读哪个库，哪个表，哪个主键的数据呢，也将这三个信息拼装一个 key，到 cache 里去查询，如果，  

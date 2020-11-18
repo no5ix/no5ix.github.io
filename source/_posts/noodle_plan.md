@@ -3323,7 +3323,7 @@ type AuthReq struct {
             * `UNA`: 包头中的`UNA`表示此编号前所有包已收到
             * CMD为ack类型的cmd时:
                 * 普通ack机制
-                    * `IKCP_CMD_ACK`: sn为收到了的包的序号,(注意, 这一点和tcp是不同的, tcp包头有专门的`ack_sn`, 当ack标志位为1时`ack_sn`就生效.) 每个ack包只表示收到了某个编号的包, 会遍历`acklist`然后其中的每个ack都对应发一个ack包
+                    * `IKCP_CMD_ACK`: 每个ack包只表示收到了某个编号的包, 会遍历`acklist`然后其中的每个ack都对应发一个ack包. `sn`为收到了的包的序号,(注意, 这一点和tcp是不同的, tcp包头有专门的`ack_sn`, 当ack标志位为1时`ack_sn`就生效.) 
                 * dupack机制
                     * `IKCP_CMD_DUPACK`: 当`acklist`数组里需要发送的ack小于等于3时, 用包头中的len/rdc_len/sn来表示收到了的包的序号
                     * `IKCP_CMD_DUPACKS`(可以理解为冗余ack机制): 当`acklist`数组里需要发送的ack大于3时, body里会包含合并`acklist`的所有ack以及之前发过的ack, 直到包大小到达mss.

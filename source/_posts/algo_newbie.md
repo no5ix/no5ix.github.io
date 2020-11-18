@@ -1927,10 +1927,15 @@ def heap_sort(arr, left_index , right_index):
 
 [lc236](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/), 给出一棵二叉树的根节点，现在有这个二叉树的部分节点，要求这些节点最近的公共祖先
 
+* [参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
+* [参考](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-di-g-2/)
 
-### 思路1-递归思路
+这道题目刷过的同学未必真正了解这里面回溯的过程，以及结果是如何一层一层传上去的。那么我给大家归纳如下三点：  
+* 求最小公共祖先，需要从底向上遍历，那么二叉树，只能通过后序遍历（即：回溯）实现从低向上的遍历方式。
+* 在回溯的过程中，必然要遍历整颗二叉树，即使已经找到结果了，依然要把其他节点遍历完，因为要使用递归函数的返回值（也就是代码中的left和right）做逻辑判断。
+* 要理解如果返回值left为空，right不为空为什么要返回right，为什么可以用返回right传给上一层结果。
 
-[参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
+可以说这里每一步，都是有难度的，都需要对二叉树，递归和回溯有一定的理解。
 
 若 root 是 p,q 的 最近公共祖先 ，则只可能为以下情况之一：
 * p 和 q 在 root 的子树中，且分列 root 的 异侧（即分别在左、右子树中）；
@@ -1956,7 +1961,7 @@ def heap_sort(arr, left_index , right_index):
         * p,q 两节点都在 root 的 右子树 中，此时的 right 指向 最近公共祖先节点
     * 4\. 当 left 不为空 ， right 为空 ：与情况 3. 同理；
 
-思路2代码如下:
+代码如下:
 ``` python
 class Solution_LCA(object):
     def lowestCommonAncestor(self, root, p, q):
@@ -1985,16 +1990,6 @@ class Solution_LCA(object):
         # 因此 当前的root 为p/g最近公共祖先，返回 root ；
         return root
 ```
-
-
-### 思路2-存储父节点-代码略
-
-[参考此处](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/er-cha-shu-de-zui-jin-gong-gong-zu-xian-by-leetc-2/)
-
-我们可以用哈希表存储所有节点的父节点，然后我们就可以利用节点的父节点信息从 p 结点开始不断往上跳，并记录已经访问过的节点，再从 q 节点开始不断往上跳，如果碰到已经访问过的节点，那么这个节点就是我们要找的最近公共祖先。
-1. 从根节点开始遍历整棵二叉树，用哈希表记录每个节点的父节点指针。
-2. 从 p 节点开始不断往它的祖先移动，并用数据结构记录已经访问过的祖先节点。
-3. 同样，我们再从 q 节点开始不断往它的祖先移动，如果有祖先已经被访问过，即意味着这是 p 和 q 的深度最深的公共祖先，即 LCA 节点。
 
 
 ## lc106-后序中序求原二叉树
@@ -2296,9 +2291,14 @@ def backtrack(供选择的列表, 选择的路径中间状态):
 写 backtrack 函数时，需要维护走过的「路径」和当前可以做的「选择列表」，当触发「结束条件」时，将「路径」记入结果集。
 
 
-## 排列问题合集-设计状态变量讲解
+## 排列问题合集
 
-### lc46-全排列
+### 排列问题代码模板
+
+和本文的[lc46-经典全排列](#lc46-经典全排列)基本一致.
+
+
+### lc46-经典全排列
 
 [leetcode46题](https://leetcode-cn.com/problems/permutations/solution/):  
 给定一个整型数组, 其中的元素各不相同, 求返回这些元素的所有排列.  
@@ -2414,7 +2414,8 @@ class Solution_lc47(object):
                 continue
 +           # 剪枝条件：i > 0 是为了保证 nums[i - 1] 有意义
 +           # 因为我们上对nums数组排序了, 
-+           # 所以可以写 `self._used[i-1] == False` 是因为 nums[i - 1] 在深度优先遍历的过程中刚刚被撤销选择
++           # 所以可以写 `self._used[i-1] == False` 是因为
++           # nums[i - 1] 在深度优先遍历的过程中刚刚被撤销选择
 +           if self._used[i-1] == False and (i > 0 and nums[i] == nums[i-1]):
 +              continue
             self._used[i] = True
@@ -2566,6 +2567,11 @@ def _get_letter_combination(
 
 
 ## 组合问题合集
+
+### 组合问题代码模板
+
+和本文的[lc77-经典组合问题](#lc77-经典组合问题)基本一致.
+
 
 ### lc77-经典组合问题
 
@@ -2890,7 +2896,7 @@ class Solution_number_of_islands(object):
 
 以上提到的重叠子问题、最优子结构、状态转移方程就是动态规划三要素。具体什么意思等会会举例详解，但是在实际的算法问题中，**写出状态转移方程是最困难的**.
 
-动态规划算法就是将待求解问题分解成若干子问题，先求解子问题并保存子问题的答案避免重复计算，然后从这些子问题的解得到原问题的解。而如何断定一个问题**是否可以用动态规划来解决**，就需要掌握动态规划的两个基本要素:
+动态规划算法就是将待求解问题分解成若干子问题，先求解子问题并保存子问题的答案避免重复计算，然后从这些子问题的解得到原问题的解。而如何断定一个问题**是否可以用动态规划来解决**，就需要掌握动态规划的两个基本要素:  
 * 重叠子问题性质
 * 最优子结构性质
 
@@ -3050,7 +3056,7 @@ dp[n] = -1, 当n < 0;
 
 **递归算法的时间复杂度分析：子问题总数 x 每个子问题的时间**。
 
-子问题总数为递归树节点个数，这个比较难看出来，是 O(n^k)，总之是指数级别的。每个子问题中含有一个 for 循环，复��度为 O(k)。所以总时间复杂度为 O(k \* n^k)，指数级别。
+子问题总数为递归树节点个数，这个比较难看出来，是 O(n^k)，总之是指数级别的。每个子问题中含有一个 for 循环，复杂度为 O(k)。所以总时间复杂度为 O(k \* n^k)，指数级别。
 
 
 ### 带备忘录的递归
@@ -3123,402 +3129,27 @@ class Solution:
 # 动态规划各种题型
 
 
-## 股票利润最大系列
-
-第一题是只进行一次交易，相当于 k = 1；第二题是不限交易次数，相当于 k = +infinity（正无穷）；第三题是只进行 2 次交易，相当于 k = 2；剩下两道也是不限交易次数，但是加了交易「冷冻期」和「手续费」的额外条件，其实就是第二题的变种，都很容易处理。
-
-### stock4-最通用的股票题
-
-[lc188](链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv), 我们先看股票的第4个题, 这个题最后代表性, 答案也最通用.
-
-给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。**题中交易的含意是买入和卖出一支股票一次, 才称为一次交易**
-示例 1：
-输入：k = 2, prices = [2,4,1]
-输出：2
-解释：在第 1 天 (股票价格 = 2) 的时候买入，在第 2 天 (股票价格 = 4) 的时候卖出，这笔交易所能获得利润 = 4-2 = 2 。
-示例 2：
-输入：k = 2, prices = [3,2,6,5,0,3]
-输出：7
-解释：在第 2 天 (股票价格 = 2) 的时候买入，在第 3 天 (股票价格 = 6) 的时候卖出, 这笔交易所能获得利润 = 6-2 = 4 。
-     随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。
-
-* [参考1](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv-el1s-by-e/)
-* [参考2](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484508&idx=1&sn=42cae6e7c5ccab1f156a83ea65b00b78&chksm=9bd7fa54aca07342d12ae149dac3dfa76dc42bcdd55df2c71e78f92dedbbcbdb36dec56ac13b&scene=21#wechat_redirect)
-
-注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
-但我们解题的时候可以把买入就当成一次交易会容易写代码一些,
-当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且初始化状态难弄一些,
-* dp[i][k][0]为前i天最多可以完成k次交易时手中 无股票时 的最大利润
-* dp[i][k][1]为前i天最多可以完成k次交易时手中 有股票时 的最大利润
-
-我们定义dp买入就算一次交易, 则:  
-``` python
-# 前i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
-dp[i][t][1] = max(
-    dp[i-1][t][1],
-    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
-    # 根据我们的dp定义, 
-    # 实际上第i=1天对应的是数组中的prices[0]的价格
-    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
-    # 所以我们这里才`t-1`, 好理解一些
-    dp[i-1][t-1][0] - prices[i-1]
-)
-# 前i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
-dp[i][t][0] = max(
-    dp[i-1][t][0],
-    dp[i-1][t][1] + prices[i-1]
-)
-```
-
-* dp[0][t][0] 前0天(即还没开始之意)t次交易，手上不持有：可能的 0
-* dp[0][t][1] 前0天(即还没开始之意)t次交易，手上持有：不可能（前0天(即还没开始之意)没有股票，所以无法买入持有;持有说明至少进行了一次买入，买入就交易，因此这里不可能【不可能意思就是不能从这里转移】
-* dp[i][0][0] 前i天0次交易，手上不持有：0
-* dp[i][0][1] 前i天0次交易，手上持有：不可能（不交易手上不可能持有）
-
-注意看下方代码的注释:  
-``` python
-class Solution_stock(object):
-    def stock4_maxProfit(self, k, prices):
-        """
-        :type k: int
-        :type prices: List[int]
-        :rtype: int
-        """
-        if not prices or not k:
-            return 0
-        n = len(prices)
-        # 注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
-        # 但我们解题的时候可以把买入就当成一次交易会容易写代码一些,
-        # 当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且
-        # 初始化状态难弄一些
-        # dp[i][k][0]为前i天最多可以完成k次交易时手中 无股票时 的最大利润
-        # dp[i][k][1]为前i天最多可以完成k次交易时手中 有股票时 的最大利润
-        # 为什么下方要初始化为`n+1`呢? 因为我们要求的是第n天最多可以完成k次交易时手中无股票时的最大利润,
-        # 而不是第n-1天, 注意我们下方说的第0天并不是数组意义的第1天.
-        # 读者可能问为什么不是 dp[n - 1][K][1]？
-        # 因为 [1] 代表手上还持有股票，[0] 表示手上的股票已经卖出去了，
-        # 很显然后者得到的利润一定大于前者。
-        dp = [ [ [ 0 for _ in range(2) ]  for _ in range(k+1) ] for _ in range(n+1) ]
-        
-        for j in range(n+1):
-            dp[j][0][0] = 0  # 前j天0次交易，手上不持有, 故为0
-            # 前j天0次交易，手上持有股票, 这是不可能的, 
-            # 我们dp对交易的定义是买入就算, 0次交易都没买入股票, 不可能持有股票
-            # 所以我们用负无穷来表示, 因为之后我们用max来取值,
-            # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
-            # max它会取这个0,而不会去取那些负值
-            dp[j][0][1] = float("-inf")
-            for t in range(k+1):
-                # 前0天t次交易，手上持有股票, 这里所说的前0天不是数组的第1天,
-                # 前0天是一个不存在的日子, 所以这是不可能的, 
-                # 所以我们用负无穷来表示, 因为之后我们用max来取值,
-                # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
-                # max它会取这个0,而不会去取那些负值
-                dp[0][t][1] = float("-inf")
-                dp[0][t][0] = 0
-        for i in range(1, n+1):
-            for t in range(1, k+1):
-                # i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
-                dp[i][t][1] = max(
-                    dp[i-1][t][1],
-                    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
-                    # 根据我们的dp定义, 
-                    # 实际上第i=1天对应的是数组中的prices[0]的价格
-                    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
-                    # 所以我们这里才`t-1`, 好理解一些
-                    dp[i-1][t-1][0] - prices[i-1]
-                )
-                # i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
-                dp[i][t][0] = max(
-                    dp[i-1][t][0],
-                    dp[i-1][t][1] + prices[i-1]
-                )
-
-        return dp[n][k][0]
-```
-
-
-### stock1
-
-[lc121](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock)  
-k=1
-
-**解法**: 直接调用[stock4](#stock4)的代码, 把k设置为1即可
-
-### stock2
-
-[lc122](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)  
-k=无穷大
-
-**解法**: 如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
-**忽略下方注释中的t**, 则:  
-``` python
-# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
-dp[i][1] = max(
-    dp[i-1][1],
-    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
-    # 根据我们的dp定义, 
-    # 实际上第i=1天对应的是数组中的prices[0]的价格
-    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
-    # 所以我们这里才`t-1`, 好理解一些
-    dp[i-1][0] - prices[i-1]
-)
-# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
-dp[i][0] = max(
-    dp[i-1][0],
-    dp[i-1][1] + prices[i-1]
-)
-```
-
-### stock3
-
-[lc123](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
-k=2  
-
-**解法**: 直接调用[stock4](#stock4)的代码, 把k设置为2即可
-
-
-### stock5
-
-[lc714](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown)  
-
-给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。​
-设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
-* 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-* 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
-示例:
-输入: [1,2,3,0,2]
-输出: 3 
-解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
-
-题目特点:  
-* 可无限次交易, 则k还是无穷大, 那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
-* 因为冷冻期的存在, 第i天如果手上有股票而且选择了要买股票的时候应该是从第i-2天开始状态转移, 注意下方代码中的`dp[i-2][0] - prices[i-1]`
-
-则dp状态转移方程得改改(**忽略下方注释中的t**), 如下:
-``` python
-# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
-dp[i][1] = max(
-    dp[i-1][1],
-    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
-    # 根据我们的dp定义, 
-    # 实际上第i=1天对应的是数组中的prices[0]的价格
-    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
-    # 所以我们这里才`t-1`, 好理解一些
-    dp[i-2][0] - prices[i-1]
-)
-# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
-dp[i][0] = max(
-    dp[i-1][0],
-    dp[i-1][1] + prices[i-1]
-)
-```
-
-### stock6
-
-[lc714](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)  
-你可以无限次地完成交易，但是你每笔交易都需要付手续费。
-
-题目特点:  
-* 可无限次交易, 则k还是无穷大, 那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
-* 手续费的存在, 根据我们dp的定义, 我们定义购买即为一次交易, 那我们就在每次购买的时候加上这个手续费, 则第i天如果手上有股票而且选择了要买股票的时候应该加上手续费, 注意下方代码中的`dp[i-1][0] - prices[i-1] - fee`
-
-则dp状态转移方程得改改(**忽略下方注释中的t**), 如下:
-``` python
-# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
-dp[i][1] = max(
-    dp[i-1][1],
-    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
-    # 根据我们的dp定义, 
-    # 实际上第i=1天对应的是数组中的prices[0]的价格
-    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
-    # 所以我们这里才`t-1`, 好理解一些
-    dp[i-1][0] - prices[i-1] - fee
-)
-# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
-dp[i][0] = max(
-    dp[i-1][0],
-    dp[i-1][1] + prices[i-1]
-)
-```
-
-
-## 打家劫舍系列
-
-### lc198-rob1
-
-[leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
-你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
-
-给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。
-
-示例 1：
-输入：[1,2,3,1]
-输出：4
-解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
-     偷窃到的最高金额 = 1 + 3 = 4 。
-
-示例 2：
-输入：[2,7,9,3,1]
-输出：12
-解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
-     偷窃到的最高金额 = 2 + 9 + 1 = 12 。
-
-参考: https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
-题目很容易理解，而且动态规划的特征很明显。我们前文 动态规划详解 做过总结，解决动态规划问题就是找「状态」和「选择」，仅此而已。
-假想你就是这个专业强盗，从左到右走过这一排房子，在每间房子前都有两种选择：抢或者不抢。
-* 如果你抢了这间房子，那么你肯定不能抢相邻的下一间房子了，只能从下下间房子开始做选择。
-* 如果你不抢这间房子，那么你可以走到下一间房子前，继续做选择。
-
-当你走过了最后一间房子后，你就没得抢了，能抢到的钱显然是 0（base case）。
-以上的逻辑很简单吧，其实已经明确了「状态」和「选择」：你面前房子的索引就是状态，抢和不抢就是选择。  
-在两个选项中选择偷窃总金额较大的选项，该选项对应的偷窃总金额即为从index开始偷到最后的房子能偷到的最高总金额.
-用 dp[i] 表示从index开始偷到最后的房子能偷到的最高总金额，那么就有如下的状态转移方程：  
-`dp[i] = max( dp[i+2] + nums[i], dp[i+1] )`
-边界条件为：
-* `dp[n-1] = nums[n-1]` , 最后一间房屋，则偷窃该房屋 
-* `dp[n-2] = max( nums[n-1], nums[n-2] )` ,  最后两间房屋，选择其中金额较高的房屋进行偷窃
-
-最终的答案即为 `dp[n−1]`，其中 n 是数组的长度
-递归memo写法:   
-``` python
-def rob1_dp_memo(self, nums_arr):
-    return self._do_rob1_dp_memo(nums_arr, 0)
-
-def _do_rob1_dp_memo(self, nums_arr, index):
-    # 我们定义此函数为从index开始偷到最后的房子能偷到的最高总金额
-    if index >= len(nums_arr):
-        return 0
-    if index in self._memo:
-        return self._memo[index]
-    res = max(
-        nums_arr[index] + self._do_rob1_dp_memo(nums_arr, index+2),
-        self._do_rob1_dp_memo(nums_arr, index+1),
-    )
-    self._memo[index] = res
-    return res
-```
-迭代写法:     
-``` python
-def rob1_dp(self, nums_arr):
-    if not nums_arr:
-        return 0
-    n = len(nums_arr)
-    dp = [0] * n
-    dp[n-1] = nums_arr[n-1]
-    dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
-    for i in range(n-3, -1, -1):
-        dp[i] = max(dp[i+1], nums_arr[i]+dp[i+2])
-    return dp[0]
-```
-
-
-### rob1进阶-求出具体偷哪些房子的子序列
-
-还是用动规思路
-```python
-def house_rob_detail_seq(self, nums_arr):
-    if not nums_arr:
-        return 0
-    n = len(nums_arr)
-    # 根据上述思路, 我们用 dp[i] 表示从第 i 间房屋偷到最后一间能偷窃到的最
-    # 高总金额的房子数组子序列
-    dp = [ [] for _ in xrange(n) ]
-    dp[n-1] = [nums_arr[n-1]]
-    dp[n-2] = [max(nums_arr[n-1], nums_arr[n-2])]
-    for i in range(n-3, -1, -1):
-        if (nums_arr[i] + sum(dp[i+2])) > sum(dp[i+1]):
-            dp[i] = [nums_arr[i]] + dp[i+2]
-        else:
-            dp[i] = dp[i+1]
-    return dp[0]
-```
-
-
-### rob2
-
-[lc213](https://leetcode-cn.com/problems/house-robber-ii/)  
-这道题目和第一道描述基本一样，强盗依然不能抢劫相邻的房子，输入依然是一个数组，但是告诉你这些房子不是一排，而是围成了一个圈。
-
-也就是说，现在第一间房子和最后一间房子也相当于是相邻的，不能同时抢。比如说输入数组nums=[2,3,2]，算法返回的结果应该是 3 而不是 4，因为开头和结尾不能同时被抢。
-![](/img/algo_newbie/dynamic_programming/rob2_1.png)
-
-那就简单了啊，这三种情况，哪种的结果最大，就是最终答案呗！不过，其实我们不需要比较三种情况，只要比较情况二和情况三就行了，因为这两种情况对于房子的选择余地比情况一大呀，房子里的钱数都是非负数，所以选择余地大，最优决策结果肯定不会小。  
-所以只需对之前的解法调用一下求个max值即可：  
-``` python
-def rob2_dp(nums_arr):
-    n = len(nums_arr)
-    max(rob1_dp(nums_arr[0:n-1]), rob1_dp(nums_arr[1:n])
-```
-
-### rob3
-
-[lc337](https://leetcode-cn.com/problems/house-robber-iii/)  
-第三题的房子在二叉树的节点上，相连的两个房子不能同时被抢劫：
-示例 1:
-输入: [3,2,3,null,3,null,1]
-```
-     3
-    / \
-   2   3
-    \   \ 
-     3   1
-```
-输出: 7 
-解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
-示例 2:
-输入: [3,4,5,1,3,null,1]
-```
-     3
-    / \
-   4   5
-  / \   \ 
- 1   3   1
-```
-输出: 9
-解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
-
-整体的思路完全没变，还是做抢或者不抢的选择，取收益较大的选择。甚至我们可以直接按这个套路写出递归式的dp代码：  
-``` python
-def rob3_dp(self, bt):
-    # 此函数求出bt为根节点的最大价值
-    if not bt:
-        return 0
-    if bt in memo:
-        return memo[bt]
-    # 抢, 然后去下下家
-    do_it = bt.val + \
-        (rob3_dp(bt.left.left) + rob3_dp(bt.left.right) if bt.left else 0) + \
-        (rob3_dp(bt.right.left) + rob3_dp(bt.right.left) if bt.right else 0)
-    # 不抢, 然后去下家
-    not_do_it = rob3_dp(bt.left) + rob3_dp(bt.right)
-    res = max(do_it, not_do_it)
-    memo[bt] = res
-    return res
-```
-
-
 ## 背包问题系列
 
 ### 0-1背包问题
 
-**「0-1 背包」问题是一类非常重要的动态规划问题**
+注意: **「0-1 背包」问题是一类非常重要的动态规划问题**  
 这个题目中的物品不可以分割，要么装进包里，要么不装，不能说切成两块装一半。这也许就是 0-1 背包这个名词的来历。
 
-最基本的背包问题就是 01 背包问题（01 knapsack problem）：一共有 N 件物品，第 i（i 从 1 开始）件物品的重量为 w[i]，价值为 v[i]。在总重量不超过背包承载上限 W 的情况下，能够装入背包的最大价值是多少？
+最基本的背包问题就是 01 背包问题（01 knapsack problem）：一共有 N 件物品，第 i（i 从 1 开始）件物品的重量为 `w[i]`，价值为 `v[i]`。在总重量不超过背包承载上限 W 的情况下，能够装入背包的最大价值是多少？
 
-如果采用暴力穷举的方式，每件物品都存在装入和不装入两种情况，所以总的时间复杂度是 O(2^N)，这是不可接受的。而使用动态规划可以将复杂度降至 O(NW)。我们的目标是书包内物品的总价值，而变量是物品和书包的限重，所以我们可定义状态 dp:
+如果采用暴力穷举的方式，每件物品都存在装入和不装入两种情况，**所以总的时间复杂度是 O(2^N)，这是不可接受的。而使用动态规划可以将复杂度降至 O(NW)**。我们的目标是书包内物品的总价值，而变量是物品和书包的限重，所以我们可定义状态 dp:
 ``` python
 dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 0<=i<=N, 0<=j<=W
 ```
-那么我们可以将 dp[0][0...W] 初始化为 0，表示将前 0 个物品（即没有物品）装入书包的最大价值为 0。那么当 i > 0 时`dp[i][j]`有两种情况：
-1.  不装入第 i 件物品，即`dp[i−1][j]`；
-2.  装入第 i 件物品（前提是能装下），即`dp[i−1][j−w[i-1]] + v[i-1]`
+那么我们可以将 dp[0][0...W] 初始化为 0，表示将前 0 个物品（即没有物品）装入书包的最大价值为 0。那么当 i > 0 时`dp[i][j]`有两种情况： 
+* 不装入第 i 件物品，即`dp[i−1][j]`；
+* 装入第 i 件物品（前提是能装下），即`dp[i−1][j−w[i-1]] + v[i-1]`
 
 #### 为什么是i-1
 
-**注意上方的`w[i-1]`和`v[i-1]`, 为什么是i-1呢?**
-因为我们对dp[i][j]表示将前i件物品装进限重为j的背包可以获得的最大价值, 则i=0其实表示的是0个物品并不是第0个物品, 所以实际对应weight数组和value数组的index应该为`i-1`
+注意上方的`w[i-1]`和`v[i-1]`, 为什么是`i-1`呢?  
+因为我们对`dp[i][j]`表示将**前i件**物品装进限重为j的背包可以获得的最大价值, 则`i=0`其实表示的是前0个物品并不是第0个物品, 所以实际对应weight数组和value数组的index应该为`i-1`
 
 即状态转移方程为
 ``` python
@@ -3583,7 +3214,7 @@ dp[i][j]表示将前i种物品装进限重为j的背包可以获得的最大价�
 
 #### 为什么完全背包是i而不是i-1
 
-**我们注意!!!!!完全背包问题的i指的是前i种, 而不是前i个, 这一点跟0-1背包是不同的, 0-1背包的i指的是前i个**  
+我们注意!!!!! **完全背包问题的i指的是前i种, 而不是前i个, 这一点跟0-1背包是不同的, 0-1背包的i指的是前i个**  
 初始状态也是一样的，我们将 dp[0][0...W] 初始化为 0，表示将前 0 种物品（即没有物品）装入书包的最大价值为 0。那么当 i > 0 时, 准备要放入**第i种的某一个物品**`item_i_1`时(注意, 是第i种的某一个, 第i种还可以有其他同种物品`item_i_2`, `item_i_3`...), 也有两种情况：  
 * 不装入第 i 种的当前这个物品`item_i_1`时，那只会有前`i-1`种商品了, 即`dp[i−1][j]`
 * 装入第 i 种物品当前这个物品`item_i_1`时，**此时和 0-1 背包不太一样**，因为每种物品有无限个（但注意书包限重是有限的），所以此时不应该转移到`dp[i−1][j−w[i-1]]`而应该转移到`dp[i][j−w[i-1]]`，因为`item_i_1`是第i种物品的某一个物品, 所以应该放到`dp[i]`这个第i种物品的坑位里, 即装入`item_i_1`了之后还可以装入`item_i_2`, `item_i_3`...所以此时为: `dp[i][j−w[i-1]] + v[i-1]`
@@ -3610,6 +3241,7 @@ dp[i][j] = max(
     ``` python
     dp[i][j] = sum(dp[i−1][j], dp[i][j−w[i-1]])  # j >= w[i-1]
     ```
+    实战题目: [lc518-凑零钱2-恰好装满完全背包问题](#lc518-凑零钱2-恰好装满完全背包问题)  
     [为什么是i-1](#为什么是i-1)
     [为什么完全背包是i而不是i-1](#为什么完全背包是i而不是i-1)
 * **二维背包**
@@ -3773,7 +3405,7 @@ def coinChange(self, coins, amount):
 1. **第一步要明确两点，「状态」和「选择」**。  
     这部分都是背包问题的老套路了，我还是啰嗦一下吧：状态有两个，就是「背包的容量」和「可选择的物品」，选择就是「装进背包」或者「不装进背包」。  明白了状态和选择，动态规划问题基本上就解决了
 
-2. **第二步要明确****`dp`数组的定义**。  
+2. **第二步要明确`dp`数组的定义**。  
     首先看看刚才找到的「状态」，有两个，也就是说我们需要一个二维`dp`数组。
     `dp[i][j]`的定义如下：  
     **从前`i`种物品里选取若干件物品，当背包容量为`j`时，有`dp[i][j]`种方法可以装满背包。**
@@ -3836,6 +3468,390 @@ def change(self, amount, coins):
 输出：2
 解释：最大的子集是 {"0", "1"} ，所以答案是 2 。
 
+pending_fini
+
+
+## 股票利润最大系列
+
+### stock总结
+
+我们先解决第四题, 然后:  
+* 第一题是只进行一次交易，相当于 k = 1；
+* 第二题是不限交易次数，相当于 k = +infinity（正无穷）；
+* 第三题是只进行 2 次交易，相当于 k = 2；
+* 剩下两道也是不限交易次数，但是加了交易「冷冻期」和「手续费」的额外条件，其实就是第二题的变种，都很容易处理。
+
+
+### stock4-最通用的股票题
+
+[lc188](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv), 我们先看股票的第4个题, 这个题最后代表性, 答案也最通用.
+
+给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。**题中交易的含意是买入和卖出一支股票一次, 才称为一次交易**
+示例 1：
+输入：k = 2, prices = [2,4,1]
+输出：2
+解释：在第 1 天 (股票价格 = 2) 的时候买入，在第 2 天 (股票价格 = 4) 的时候卖出，这笔交易所能获得利润 = 4-2 = 2 。
+示例 2：
+输入：k = 2, prices = [3,2,6,5,0,3]
+输出：7
+解释：在第 2 天 (股票价格 = 2) 的时候买入，在第 3 天 (股票价格 = 6) 的时候卖出, 这笔交易所能获得利润 = 6-2 = 4 。
+     随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。
+
+* [参考1](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/188-mai-mai-gu-piao-de-zui-jia-shi-ji-iv-el1s-by-e/)
+* [参考2](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484508&idx=1&sn=42cae6e7c5ccab1f156a83ea65b00b78&chksm=9bd7fa54aca07342d12ae149dac3dfa76dc42bcdd55df2c71e78f92dedbbcbdb36dec56ac13b&scene=21#wechat_redirect)
+
+注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
+**但我们解题的时候可以把买入就当成一次交易会容易写代码一些,**
+当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且初始化状态难弄一些,
+* dp[i][k][0]为前i天最多可以完成k次交易时手中 无股票时 的最大利润
+* dp[i][k][1]为前i天最多可以完成k次交易时手中 有股票时 的最大利润
+
+我们定义dp买入就算一次交易, 则:  
+``` python
+# 前i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][t][1] = max(
+    dp[i-1][t][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-1][t-1][0] - prices[i-1]
+)
+# 前i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][t][0] = max(
+    dp[i-1][t][0],
+    dp[i-1][t][1] + prices[i-1]
+)
+```
+
+* dp[0][t][0] 前0天(即还没开始之意)t次交易，手上不持有：可能的 0
+* dp[0][t][1] 前0天(即还没开始之意)t次交易，手上持有：不可能（前0天(即还没开始之意)没有股票，所以无法买入持有;持有说明至少进行了一次买入，买入就交易，因此这里不可能【不可能意思就是不能从这里转移】
+* dp[i][0][0] 前i天0次交易，手上不持有：0
+* dp[i][0][1] 前i天0次交易，手上持有：不可能（不交易手上不可能持有）
+
+注意看下方代码的注释:  
+``` python
+class Solution_stock(object):
+    def stock4_maxProfit(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices or not k:
+            return 0
+        n = len(prices)
+        # 注意: 题中交易的含意是买入和卖出一支股票一次, 才称为一次交易
+        # 但我们解题的时候可以把买入就当成一次交易会容易写代码一些,
+        # 当然也可以定义dp为买了再卖才算一次交易, 只是代码难写一些, 而且
+        # 初始化状态难弄一些
+        # dp[i][k][0]为前i天最多可以完成k次交易时手中 无股票时 的最大利润
+        # dp[i][k][1]为前i天最多可以完成k次交易时手中 有股票时 的最大利润
+        # 为什么下方要初始化为`n+1`呢? 因为我们要求的是第n天最多可以完成k次交易时手中无股票时的最大利润,
+        # 而不是第n-1天, 注意我们下方说的第0天并不是数组意义的第1天.
+        # 读者可能问为什么不是 dp[n - 1][K][1]？
+        # 因为 [1] 代表手上还持有股票，[0] 表示手上的股票已经卖出去了，
+        # 很显然后者得到的利润一定大于前者。
+        dp = [ [ [ 0 for _ in range(2) ]  for _ in range(k+1) ] for _ in range(n+1) ]
+        
+        for j in range(n+1):
+            dp[j][0][0] = 0  # 前j天0次交易，手上不持有, 故为0
+            # 前j天0次交易，手上持有股票, 这是不可能的, 
+            # 我们dp对交易的定义是买入就算, 0次交易都没买入股票, 不可能持有股票
+            # 所以我们用负无穷来表示, 因为之后我们用max来取值,
+            # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
+            # max它会取这个0,而不会去取那些负值
+            dp[j][0][1] = float("-inf")
+            for t in range(k+1):
+                # 前0天t次交易，手上持有股票, 这里所说的前0天不是数组的第1天,
+                # 前0天是一个不存在的日子, 所以这是不可能的, 
+                # 所以我们用负无穷来表示, 因为之后我们用max来取值,
+                # 如果这里不这样初始化，而是初始化为0，那么我t次交易的无法去做max,
+                # max它会取这个0,而不会去取那些负值
+                dp[0][t][1] = float("-inf")
+                dp[0][t][0] = 0
+        for i in range(1, n+1):
+            for t in range(1, k+1):
+                # i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+                dp[i][t][1] = max(
+                    dp[i-1][t][1],
+                    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+                    # 根据我们的dp定义, 
+                    # 实际上第i=1天对应的是数组中的prices[0]的价格
+                    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+                    # 所以我们这里才`t-1`, 好理解一些
+                    dp[i-1][t-1][0] - prices[i-1]
+                )
+                # i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+                dp[i][t][0] = max(
+                    dp[i-1][t][0],
+                    dp[i-1][t][1] + prices[i-1]
+                )
+
+        return dp[n][k][0]
+```
+
+
+### stock1
+
+[lc121](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock)  
+k=1
+
+**解法**: 直接调用[stock4](#stock4)的代码, 把k设置为1即可
+
+### stock2
+
+[lc122](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)  
+k=无穷大
+
+**解法**: 如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
+**忽略下方注释中的t**, 则:  
+``` python
+# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][1] = max(
+    dp[i-1][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-1][0] - prices[i-1]
+)
+# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][0] = max(
+    dp[i-1][0],
+    dp[i-1][1] + prices[i-1]
+)
+```
+
+### stock3
+
+[lc123](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
+k=2  
+
+**解法**: 直接调用[stock4](#stock4)的代码, 把k设置为2即可
+
+
+### stock5
+
+[lc714](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown)  
+
+给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。​
+设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
+* 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+* 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+示例:
+输入: [1,2,3,0,2]
+输出: 3 
+解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
+
+题目特点:  
+* 可无限次交易, 则k还是无穷大, 那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
+* 因为冷冻期的存在, 第i天如果手上有股票而且选择了要买股票的时候应该是从第i-2天开始状态转移, 注意下方代码中的`dp[i-2][0] - prices[i-1]`
+
+则dp状态转移方程得改改(**忽略下方注释中的t**), 如下:
+``` python
+# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-2天t-1次交易手上不持有 - i天买入价格)
+dp[i][1] = max(
+    dp[i-1][1],
+    # 为什么是`prices[i-2]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入第i天的一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-2][0] - prices[i-1]
+)
+# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][0] = max(
+    dp[i-1][0],
+    dp[i-1][1] + prices[i-1]
+)
+```
+
+### stock6
+
+[lc714](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)  
+你可以无限次地完成交易，但是你每笔交易都需要付手续费。
+
+题目特点:  
+* 可无限次交易, 则k还是无穷大, 那么就可以认为 k 和 k - 1 是一样的, k的约束已经没有作用了。所以dp数组可以去掉k这个维度.
+* 手续费的存在, 根据我们dp的定义, 我们定义购买即为一次交易, 那我们就在每次购买的时候加上这个手续费, 则第i天如果手上有股票而且选择了要买股票的时候应该加上手续费, 注意下方代码中的`dp[i-1][0] - prices[i-1] - fee`
+
+则dp状态转移方程得改改(**忽略下方注释中的t**), 如下:
+``` python
+# i天t次交易现在手上持有 = max(i-1天t次交易手上持有，i-1天t-1次交易手上不持有 - i天买入价格)
+dp[i][1] = max(
+    dp[i-1][1],
+    # 为什么是`prices[i-1]`呢? 因为这里的i是第i天,
+    # 根据我们的dp定义, 
+    # 实际上第i=1天对应的是数组中的prices[0]的价格
+    # 我们dp对交易的定义是买入就算, 这里买入一张股票, 得减去`prices[i-1]`
+    # 所以我们这里才`t-1`, 好理解一些
+    dp[i-1][0] - prices[i-1] - fee
+)
+# i天t次交易现在手上不持有 = max(i-1天t次交易手上不持有，i-1天t次交易手上持有 + i天卖出价格prices)
+dp[i][0] = max(
+    dp[i-1][0],
+    dp[i-1][1] + prices[i-1]
+)
+```
+
+
+## 打家劫舍系列
+
+### lc198-rob1
+
+[leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
+你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+
+给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。
+
+示例 1：
+输入：[1,2,3,1]
+输出：4
+解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+     偷窃到的最高金额 = 1 + 3 = 4 。
+
+示例 2：
+输入：[2,7,9,3,1]
+输出：12
+解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+     偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+
+[参考](https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/)  
+题目很容易理解，而且动态规划的特征很明显。我们前文 动态规划详解 做过总结，解决动态规划问题就是找「状态」和「选择」，仅此而已。
+假想你就是这个专业强盗，从左到右走过这一排房子，在每间房子前都有两种选择：抢或者不抢。
+* 如果你抢了这间房子，那么你肯定不能抢相邻的下一间房子了，只能从下下间房子开始做选择。
+* 如果你不抢这间房子，那么你可以走到下一间房子前，继续做选择。
+
+当你走过了最后一间房子后，你就没得抢了，能抢到的钱显然是 0（base case）。
+以上的逻辑很简单吧，其实已经明确了「状态」和「选择」：你面前房子的索引就是状态，抢和不抢就是选择。  
+在两个选项中选择偷窃总金额较大的选项，该选项对应的偷窃总金额即为从index开始偷到最后的房子能偷到的最高总金额.
+**用 `dp[i]` 表示从index开始偷到最后的房子能偷到的最高总金额**，那么就有如下的状态转移方程：  
+`dp[i] = max( dp[i+2] + nums[i], dp[i+1] )`
+边界条件为：
+* `dp[n-1] = nums[n-1]` , 最后一间房屋，则偷窃该房屋 
+* `dp[n-2] = max( nums[n-1], nums[n-2] )` ,  最后两间房屋，选择其中金额较高的房屋进行偷窃
+
+最终的答案即为 `dp[n−1]`，其中 n 是数组的长度
+递归memo写法:   
+``` python
+def rob1_dp_memo(self, nums_arr):
+    return self._do_rob1_dp_memo(nums_arr, 0)
+
+def _do_rob1_dp_memo(self, nums_arr, index):
+    # 我们定义此函数为从index开始偷到最后的房子能偷到的最高总金额
+    if index >= len(nums_arr):
+        return 0
+    if index in self._memo:
+        return self._memo[index]
+    res = max(
+        nums_arr[index] + self._do_rob1_dp_memo(nums_arr, index+2),
+        self._do_rob1_dp_memo(nums_arr, index+1),
+    )
+    self._memo[index] = res
+    return res
+```
+迭代写法:     
+``` python
+def rob1_dp(self, nums_arr):
+    if not nums_arr:
+        return 0
+    n = len(nums_arr)
+    dp = [0] * n
+    dp[n-1] = nums_arr[n-1]
+    dp[n-2] = max(nums_arr[n-1], nums_arr[n-2])
+    for i in range(n-3, -1, -1):
+        dp[i] = max(dp[i+1], nums_arr[i]+dp[i+2])
+    return dp[0]
+```
+
+
+### rob1进阶-求出具体偷哪些房子的子序列
+
+还是用动规思路
+```python
+def house_rob_detail_seq(self, nums_arr):
+    if not nums_arr:
+        return 0
+    n = len(nums_arr)
+    # 根据上述思路, 我们用 dp[i] 表示从第 i 间房屋偷到最后一间能偷窃到的最
+    # 高总金额的房子数组子序列
+    dp = [ [] for _ in xrange(n) ]
+    dp[n-1] = [nums_arr[n-1]]
+    dp[n-2] = [max(nums_arr[n-1], nums_arr[n-2])]
+    for i in range(n-3, -1, -1):
+        if (nums_arr[i] + sum(dp[i+2])) > sum(dp[i+1]):
+            dp[i] = [nums_arr[i]] + dp[i+2]
+        else:
+            dp[i] = dp[i+1]
+    return dp[0]
+```
+
+
+### rob2
+
+[lc213](https://leetcode-cn.com/problems/house-robber-ii/)  
+这道题目和第一道描述基本一样，强盗依然不能抢劫相邻的房子，输入依然是一个数组，但是告诉你这些房子不是一排，而是围成了一个圈。
+
+也就是说，现在第一间房子和最后一间房子也相当于是相邻的，不能同时抢。比如说输入数组nums=[2,3,2]，算法返回的结果应该是 3 而不是 4，因为开头和结尾不能同时被抢。
+![](/img/algo_newbie/dynamic_programming/rob2_1.png)
+
+那就简单了啊，这三种情况，哪种的结果最大，就是最终答案呗！不过，其实我们不需要比较三种情况，只要比较情况二和情况三就行了，因为这两种情况对于房子的选择余地比情况一大呀，房子里的钱数都是非负数，所以选择余地大，最优决策结果肯定不会小。  
+所以只需对之前的解法调用一下求个max值即可：  
+``` python
+def rob2_dp(nums_arr):
+    n = len(nums_arr)
+    max(rob1_dp(nums_arr[0:n-1]), rob1_dp(nums_arr[1:n])
+```
+
+### rob3
+
+[lc337](https://leetcode-cn.com/problems/house-robber-iii/)  
+第三题的房子在二叉树的节点上，相连的两个房子不能同时被抢劫：
+示例 1:
+输入: [3,2,3,null,3,null,1]
+```
+     3
+    / \
+   2   3
+    \   \ 
+     3   1
+```
+输出: 7 
+解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
+示例 2:
+输入: [3,4,5,1,3,null,1]
+```
+     3
+    / \
+   4   5
+  / \   \ 
+ 1   3   1
+```
+输出: 9
+解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
+
+整体的思路完全没变，还是做抢或者不抢的选择，取收益较大的选择。甚至我们可以直接按这个套路写出递归式的dp代码：  
+``` python
+def rob3_dp(self, bt):
+    # 此函数求出bt为根节点的最大价值
+    if not bt:
+        return 0
+    if bt in memo:
+        return memo[bt]
+    # 抢, 然后去下下家
+    do_it = bt.val + \
+        (rob3_dp(bt.left.left) + rob3_dp(bt.left.right) if bt.left else 0) + \
+        (rob3_dp(bt.right.left) + rob3_dp(bt.right.left) if bt.right else 0)
+    # 不抢, 然后去下家
+    not_do_it = rob3_dp(bt.left) + rob3_dp(bt.right)
+    res = max(do_it, not_do_it)
+    memo[bt] = res
+    return res
+```
+
 
 ## lc300-LIS问题-最长上升子序列
 
@@ -3884,6 +3900,86 @@ class Solution_LIS(object):
                 if nums[j] < nums[i]:
                     dp[i] = max(dp[i], dp[j] + 1)
         return max(dp)
+```
+
+
+## LIP问题-字跳一面-真正理解递推
+
+[lc329, hard](https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix)  
+给定一个整数矩阵，找出最长递增路径的长度。对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。  
+示例 1:
+输入: nums = 
+[
+  [9,9,4],
+  [6,6,8],
+  [2,1,1]
+] 
+输出: 4 
+解释: 最长递增路径为 [1, 2, 6, 9]。
+示例 2:
+输入: nums = 
+[
+  [3,4,5],
+  [3,2,6],
+  [2,2,1]
+] 
+输出: 4 
+解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。
+
+由[lc300-lis问题-最长上升子序列](#lc300-lis问题-最长上升子序列), 我们很容易得出
+* 状态定义`dp[i][j]` 为选中 `matrix[i][j]` 的最长递增路径的长度, 注意这里的 `matrix[i][j]`是一定要选中的
+* `dp[i][j] = 1`, 都初始化为1, 因为根据状态定义, 即使相邻结点都小于自己, 那也至少为1
+* 根据当前的元素和相邻上下左右的元素比较, 选出最大值再加1, 则为当前的dp, 故状态转移方程为:
+    ``` python
+    dp[i][j] = 1 + max(
+        dp[i-1][j] if i and matrix[i-1][j] < matrix[i][j] else 0,
+        dp[i][j-1] if j and matrix[i][j-1] < matrix[i][j] else 0, 
+        dp[i+1][j] if i != x-1 and matrix[i+1][j] < matrix[i][j] else 0, 
+        dp[i][j+1] if j != y-1 and matrix[i][j+1] < matrix[i][j] else 0
+    )
+    ```
+
+这个题目**如果没有真正理解递推, 很容易写错: 写成直接拿着matrix就两重for循环遍历就完了.**  
+这样写是不对的, **我们得先根据matrix中每个元素值的大小按照从小到大排序**,   
+然后从值小的元素开始遍历一步一步递推到最后一个点,  
+这样才算是考虑完全了, 这样才是从最小信息量的状态一点一点转移递推到大的状态的动态规划的过程.
+
+代码如下:  
+``` python
+def longestIncreasingPath(self, matrix):
+    """
+    :type matrix: List[List[int]]
+    :rtype: int
+    """
+    if not matrix:
+        return 0
+    m = len(matrix)
+    n = len(matrix[0])
+    # * 状态定义`dp[i][j]` 为选中 `matrix[i][j]` 的最长递增路径的长度, 注意这里的 `matrix[i][j]`是一定要选中的
+    # * `dp[i][j] = 1`, 都初始化为1, 因为根据状态定义, 即使相邻结点都小于自己, 那也至少为1
+    dp = [ [ 1 for _ in range(n) ] for _ in range(m) ]
+    points_list = []
+    for i in range(m):
+        for j in range(n):
+            points_list.append([ matrix[i][j], i, j ])
+    # 这个题目**如果没有真正理解递推, 很容易写错: 写成直接拿着matrix就两重for循环遍历就完了.**  
+    # 这样写是不对的, **我们得先根据matrix中每个元素值的大小按照从小到大排序**,   
+    # 然后从值小的元素开始遍历一步一步递推到最后一个点,  
+    # 这样才算是考虑完全了, 这样才是从最小信息量的状态一点一点转移递推到大的状态的动态规划的过程.
+    sorted_points_list = sorted(points_list, key=lambda x: x[0])
+    for val, i, j in sorted_points_list:
+        dp[i][j] = 1 + max(
+            dp[i-1][j] if i-1 >= 0 and matrix[i-1][j] < matrix[i][j] else 0,
+            dp[i][j-1] if j-1 >= 0 and matrix[i][j-1] < matrix[i][j] else 0, 
+            dp[i+1][j] if i+1 <= m-1 and matrix[i+1][j] < matrix[i][j] else 0, 
+            dp[i][j+1] if j+1 <= n-1 and matrix[i][j+1] < matrix[i][j] else 0
+        )
+    max_path_len = 0
+    for i in range(m):
+        for j in range(n):
+            if dp[i][j] > max_path_len:
+                max_path_len = dp[i][j]
+    return max_path_len
 ```
 
 

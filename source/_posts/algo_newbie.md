@@ -20,8 +20,10 @@ categories:
 <https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_newbie.py>
 
 
-# 数据结构
+**. . .**<!-- more -->
 
+
+# 数据结构
 
 ## 哈希表
 
@@ -402,7 +404,8 @@ class GraphBase(object):
         self.adjacency_container = None
         self.is_directed = is_directed  # 是否为有向图
         self.connected_components_count = 0  # 连通分量个数
-    
+        self.point_count = point_count
+
     def graph_dfs(self):
         """
         图的深度优先遍历（DFS）, 深度优先遍历尽可能优先往深层次进行搜索；
@@ -450,7 +453,6 @@ class GraphBase(object):
                         visited_set.add(_next_pt_index)
         return result_arr
 
-
     def _iter_adjacent_points(self, cur_point_index):
         """
         因为稀疏图一般用邻接表来保存图的顶点数据,
@@ -459,13 +461,17 @@ class GraphBase(object):
         """
         raise NotImplementedError
 
+    def add_edge(self, start_point_index, end_point_index):
+        raise NotImplementedError
+
 
 class SparseGraph(GraphBase):
     # 稀疏图
 
     def __init__(self, point_count, is_directed):
         super(SparseGraph, self).__init__(point_count, is_directed)
-        self.adjacency_container = [ [] for _ in xrange(point_count) ]  # 邻接表
+        self.adjacency_container = [[] for _ in xrange(point_count)]  # 邻接表
+        self.indegree_list = [ 0 for _ in range(point_count) ]  # 每个顶点的入度, 初始化为0
 
     def set_adjacency_list(self, adjacency_list):
         self.adjacency_container = adjacency_list
@@ -474,6 +480,31 @@ class SparseGraph(GraphBase):
         for _adjacent_point_index in self.adjacency_container[cur_point_index]:
             yield _adjacent_point_index
 
+    def add_edge(self, start_point_index, end_point_index):
+        self.adjacency_container[start_point_index].append(end_point_index)
+        self.indegree_list[end_point_index] += 1
+        if not self.is_directed:
+            self.adjacency_container[end_point_index].append(start_point_index)
+
+    def topologic_sort(self):
+        result_arr = []
+        zero_indegree_list = []
+        for point_index, cur_indegree in enumerate(self.indegree_list):
+            if cur_indegree == 0:
+                zero_indegree_list.append(point_index)  # 将所有入度为0的顶点加入列表
+        while zero_indegree_list:
+            cur_point_index = zero_indegree_list.pop()  # 从列表中取出一个顶点
+            result_arr.append(cur_point_index)
+            # 将所有v指向的顶点的入度减1，并将入度减为0的顶点加入列表
+            for j in self.adjacency_container[cur_point_index]:
+                self.indegree_list[j] -= 1
+                if self.indegree_list[j] == 0:
+                    zero_indegree_list.append(j)  # 若入度为0，则加入列表
+        if len(result_arr) != self.point_count:
+            return False, result_arr  # 没有输出全部顶点，说明有向图中有回路
+        else:
+            return True, result_arr
+            
 
 class DenseGraph(GraphBase):
     # 稠密图
@@ -481,7 +512,7 @@ class DenseGraph(GraphBase):
     def __init__(self, point_count, is_directed):
         super(DenseGraph, self).__init__(point_count, is_directed)
         self.adjacency_container = [
-            [ 0 for _ in xrange(point_count)] for _ in xrange(point_count) 
+            [0 for _ in xrange(point_count)] for _ in xrange(point_count)
         ]  # 邻接矩阵
 
     def set_adjacency_matrix(self, adjacency_matrix):
@@ -492,6 +523,14 @@ class DenseGraph(GraphBase):
             if not _is_point_adjacent:
                 continue
             yield _adjacent_point_index
+
+    def add_edge(self, start_point_index, end_point_index):
+        self.adjacency_container[start_point_index][end_point_index] = 1
+        if not self.is_directed:
+            self.adjacency_container[end_point_index][start_point_index] = 1
+
+    def topologic_sort(self):
+        pass  # TODO
 
 
 if __name__ == "__main__":
@@ -510,6 +549,15 @@ if __name__ == "__main__":
     print test_sparse_graph.graph_dfs()
     print "test_sparse_graph graph bfs:"
     print test_sparse_graph.graph_bfs()
+    test_sparse_graph = SparseGraph(point_count=6, is_directed=True)
+    test_sparse_graph.add_edge(5, 2)
+    test_sparse_graph.add_edge(5, 0)
+    test_sparse_graph.add_edge(4, 0)
+    test_sparse_graph.add_edge(4, 1)
+    test_sparse_graph.add_edge(2, 3)
+    test_sparse_graph.add_edge(3, 1)
+    print "test_sparse_graph topologic_sort: --------------"
+    print test_sparse_graph.topologic_sort()
 
     # 这个邻接矩阵表示的和上面那个邻接表 temp_adjacency_list 是同一个图
     temp_adjacency_matrix = [
@@ -535,6 +583,8 @@ test_sparse_graph graph dfs:
 [0, 1, 2, 5, 3, 4, 6]
 test_sparse_graph graph bfs:
 [0, 1, 2, 5, 6, 3, 4]
+test_sparse_graph topologic_sort: --------------
+(True, [4, 5, 2, 0, 3, 1])
 test_dense_graph graph dfs:
 [0, 1, 2, 5, 3, 4, 6]
 test_dense_graph graph bfs:
@@ -574,10 +624,43 @@ test_dense_graph graph bfs:
 3. 以此类推，直至图中所有和源点v有路径相通的顶点都已访问到为止。此时从v开始的搜索过程结束。
 4. 若此时图中仍有未访问的顶点，则另选一个尚未访问的顶点为新的源点重复上述过程，直至图中所有的顶点均已被访问为止。
 
-图的bfs一般要用一个队列来实现, [代码](#图的表示)在上方已经有了, 其代码中的 `graph_bfs` 就是.
+**图的bfs一般要用一个队列来实现**, [代码](#图的表示)在上方已经有了, 其代码中的 `graph_bfs` 就是.
 
 **图bfs用途**: 
 * 可以获得两点之间的最短路径
+
+
+### 拓扑排序
+
+[参考](https://www.jianshu.com/p/b59db381561a)  
+**拓扑排序通常用来 “排序” 具有依赖关系的任务.**  
+比如，如果用一个 DAG 图来表示一个工程，其中每个顶点表示工程中的一个任务，用有向边 表示在做任务 B 之前必须先完成任务 A。故在这个工程中，任意两个任务要么具有确定的先后关系，要么是没有关系，绝对不存在互相矛盾的关系（即环路）。
+
+在图论中，**拓扑排序（Topological Sorting**）是一个有向无环图（DAG, Directed Acyclic Graph）的所有顶点的线性序列。且该序列必须满足下面两个条件：  
+* 每个顶点出现且只出现一次。
+* 若存在一条从顶点 A 到顶点 B 的路径，那么在序列中顶点 A 出现在顶点 B 的前面。
+
+**有向无环图（DAG）才有拓扑排序，非 DAG 图没有拓扑排序一说**。例如，下面这个图：  
+![](/img/algo_newbie/graph/topological_sorting_1.jpg)
+
+它是一个 DAG 图，那么如何写出它的拓扑排序呢？这里说一种比较常用的方法：  
+1.  从 DAG 图中选择一个 没有前驱（即入度为 0）的顶点并输出。
+2.  从图中删除该顶点和所有以它为起点的有向边。
+3.  重复 1 和 2 直到当前的 DAG 图为空或当前图中不存在无前驱的顶点为止。后一种情况说明有向图中必然存在环。
+
+![](/img/algo_newbie/graph/topological_sorting_2.jpg)
+
+于是，得到拓扑排序后的结果是 {1, 2, 4, 3, 5}。通常，一个有向无环图可以有一个或多个拓扑排序序列。
+
+根据上面讲的方法，我们关键是要维护一个入度为 0 的顶点的列表。  
+1. 每次在入度为0的列表中取顶点, 取出一个顶点v, 便输出v
+2. 然后将所有v指向的顶点的入度减1，并将入度减为0的顶点加入列表
+3. 重复步骤1和2
+
+取顶点的顺序不同会得到不同的拓扑排序序列，当然前提是该图存在多个拓扑排序序列。[代码](#图的表示)在上面有了, 其中的`topologic_sort`便是, 我们尝试用此代码来测试了如下DAG图：  
+![](/img/algo_newbie/graph/topological_sorting_3.jpg)
+
+输出结果是 `4, 5, 2, 0, 3, 1`。这是该图的拓扑排序序列之一。
 
 
 ## 单调栈
@@ -586,9 +669,26 @@ test_dense_graph graph bfs:
 
 定义：栈内元素保持有序的状态的栈称为单调栈，如下图所示：
 ![](/img/algo_newbie/monotone_stack/mono_stack_1.png)
-单调栈是一个定义简单但应用起来比较复杂的数据结构，其根本应用可以概括为：在一个一维数组中，帮助我们找到某个元素的左侧或右侧第一个大于或小于该元素的数。具体来说，我们会维护一个单调栈（递增或递减视要求而定），这个栈在满足一定情况时会将栈顶元素出栈，(pop)，一旦这种情况发生，那么一定是遇到了我们要找的大于（或小于）该栈顶元素的数，相应的，我们应该在此时进行一系列的操作，得到我们想要的结果。核心在于如何正确理解出栈的含义。
 
-下面我们通过几个例子来理解下单调栈的应用。
+**单调栈主要应用**：在一个一维数组中，帮助我们找到某个元素的左侧或右侧第一个大于或小于该元素的数。
+
+而所谓 单调栈 则是在栈的 先进后出 基础之上额外添加一个特性：从栈顶到栈底的元素是严格递增（or递减）。具体进栈过程如下：
+* 对于单调递减栈，若当前进栈元素为 e，从栈顶开始遍历元素，把小于 e 或者等于 e 的元素弹出栈，直接遇到一个大于 e 的元素或者栈为空为止，然后再把 e 压入栈中。
+* 对于单调递增栈，则每次弹出的是大于 e 或者等于 e 的元素。
+
+以 单调递减栈 为例进行说明, 现在有一组数 `3，4，2，6，4，5，2，3`, 让它们从左到右依次入栈。具体过程如下：
+
+|第i步|操作|结果(栈底->栈顶)|
+|----|----|---------------|
+|1|3进|3|
+|2|3出, 4进|4|
+|3|2进|4 2|
+|4|4 2出, 6进|6|
+|5|4进|6 4|
+|6|4出, 5进|6 5|
+|7|2进|6 5 2|
+|8|2出, 3进|6 5 3|
+
 
 ### 队列中数帽子问题
 
@@ -774,13 +874,10 @@ class Solution_jzo15(object):
 各位置上的数字分别相加先不管进位的问题则：`1100 + 1111 = 0011`
 **得到临时不管进位的二进制结果**`temp`: `0011`(十进制位3), 那不用加法如何模拟? 可以用异或模拟  
 `1100 ^ 1111 = 0011`  
-
 计算进位的数字, 得到进位结果: `11000`(十进制为24), 进位计算如何不用加法模拟? 
 **相与，左移一位则可得到进位结果**`carry`:  
 `(1100 & 1111) << 1 = 11000`  
-
 然后`temp + carry` 则为 十进制的`3+24=27`, 用上述的方法再算一次`temp + carry`
-
 则cpp代码如下:  
 ``` cpp
 class Solution {
@@ -854,7 +951,7 @@ class Solution:
 输出: 99
 
 [参考](https://leetcode-cn.com/problems/single-number-ii/solution/single-number-ii-mo-ni-san-jin-zhi-fa-by-jin407891/)  
-建立一个长度为 32 的数组 counts ，通过以上方法可记录所有数字的各二进制位的 1 的出现次数。
+建立一个长度为 32 的数组 counts ，通过以下方法可记录所有数字的各二进制位的 1 的出现次数。
 将 counts 各元素对 3 求余，则结果为 “只出现一次的数字” 的各二进制位。
 利用 左移操作 和 或运算 ，可将 counts 数组中各二进位的值恢复到数字 res 上
 最终返回 res 即可。
@@ -950,6 +1047,8 @@ def singleNumber(self, nums: List[int]) -> List[int]:
 
 # 排序算法
 
+## 各类排序总览
+
 ![](/img/algo_newbie/sort_algo_complexity.png "各类排序算法的复杂度")
 
 * 比较交换类排序:
@@ -969,8 +1068,7 @@ def singleNumber(self, nums: List[int]) -> List[int]:
 
 ### 冒泡排序
 
-每一轮循环都会有一个最大的数慢慢移动到最后, 很像是冒出一个泡泡, 因而得名.
-
+每一轮循环都会有一个最大的数慢慢移动到最后, 很像是冒出一个泡泡, 因而得名.  
 算法步骤:  
 1. 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
 2. 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。
@@ -1103,7 +1201,7 @@ print('最后的结果是:', a)
         - 还有一种空间复杂度为O(1)的归并排序的自底向上的实现, [下文会讲](#归并自底向上的实现)
     - [**堆排序**](#堆排序): 为什么在平均情况下快速排序比堆排序要优秀? 
         堆排序是渐进最优的比较排序算法，达到了O(nlgn)这一下界，而快排有一定的可能性会产生最坏划分，时间复杂度可能为O(n^2)，那为什么快排在实际使用中通常优于堆排序？
-        - 虽然quick_sort会n^2（其实有稳定的nlgn的版本, 比如优化版的三路快排），但这毕竟很少出现。heap_sort大多数情况下比较次数都多于quick_sort，尽管大家都是nlgn。那就让倒霉蛋倒霉好了，大多数情况下快才是硬道理。
+        - 虽然quick_sort会n^2（其实有稳定的nlgn的版本, 比如优化版的三路快排），但这毕竟很少出现。heap_sort大多数情况下比较次数都多于quick_sort，尽管大家都是nlogn。那就让倒霉蛋倒霉好了，大多数情况下快才是硬道理。
         - 堆排比较的几乎都不是相邻元素，对cache极不友好，这才是很少被采用的原因。数学上的时间复杂度不代表实际运行时的情况.快排是分而治之，每次都在同一小段进行比较，最后越来约接近局部性。反观堆排，堆化过程中需要一直拿index的当前元素A和处于`index*2 + 1` 的左子元素B以及处于`index*2 + 2` 的右子元素C比较, 两个元素距离较远。(局部性原理是指CPU访问存储器时，无论是存取指令还是存取数据，所访问的存储单元都趋于聚集在一个较小的连续区域中。)
 - **代码书写技巧**:
     - 归并和快排都是当`left_index >= right_index`时, 停止递归
@@ -1133,24 +1231,21 @@ print('最后的结果是:', a)
 
         i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+1开始遍历
         ```
-    - 堆排序, 如果其二叉堆数组index从0开始的话, 而且left_index也为0的话:
-        * 最后一个非叶子节点的index为`(length/2 - 1)`
-        * `left_child = 2*i + 1`
-        * `right_child = 2*i + 2`
+    - 堆排序:
+        如果是对数组的`[left_index, right_index]`来排序, 且数组的首index为0的话, 则:
+        * 最后一个非叶子节点的index为`left_index + (length/2 - 1)`
+        * `left_child_index = 2 * (pending_heapify_index-left_index) + 1`
+        * `right_child_index = left_child_index + 1`
 - 是否原址: 
     - 原址: 插入排序、堆排序、快速排序
     - 非原址: 归并排序
 - 稳定性: 
     - 稳定: 插入排序、归并排序
     - 不稳定: 堆排序、快速排序
-- **{% post_link introsort 内省排序: %}** std的sort就是用的内省排序. 此算法首先从快速排序开始，当递归深度超过一定深度（深度为排序元素数量的对数值即logN, 快速排序在理想状态下，应当递归约 log n 次。因此，我们可以说，如果递归深度明显大于 log n，快速排序就掉进陷阱了。于是，我们可以将该阈值设置为 log n 的某一倍数，比如 2log n；一旦递归深度超过 2log n，就从快速排序切换到堆排序。）后转为堆排序。采用这个方法，内省排序既能在常规数据集上实现快速排序的高性能，又能在最坏情况下仍保持O(NlogN)的时间复杂度。
-    - 不难归纳，这样的内省式排序，策略应该如下：
-        1\. 在数据量足够大的情况使用快速排序；
-        2\. 在快速排序掉入陷阱时，主动切换到堆排序；
-        3\. 在快速排序和堆排序已经做到基本有序的情况下，或者数据量较小的情况下，主动切换到插入排序。
-
-
-**. . .**<!-- more -->
+- **{% post_link introsort 内省排序: %}** std的sort就是用的内省排序. 此算法首先从快速排序开始，当递归深度超过一定深度（深度为排序元素数量的对数值即logN, 快速排序在理想状态下，应当递归约 log n 次。因此，我们可以说，如果递归深度明显大于 log n，快速排序就掉进陷阱了。于是，我们可以将该阈值设置为 log n 的某一倍数，比如 2log n；一旦递归深度超过 2log n，就从快速排序切换到堆排序。）后转为堆排序。采用这个方法，内省排序既能在常规数据集上实现快速排序的高性能，又能在最坏情况下仍保持O(NlogN)的时间复杂度。不难归纳，这样的内省式排序，策略应该如下：
+    1\. 在数据量足够大的情况使用快速排序；
+    2\. 在快速排序掉入陷阱时，主动切换到堆排序；
+    3\. 在快速排序和堆排序已经做到基本有序的情况下，或者数据量较小的情况下，主动切换到插入排序。
 
 
 ## 插入排序
@@ -1329,9 +1424,9 @@ def merge_sort_bottom_up(arr, left_index, right_index):
     arr_len = right_index - left_index + 1
     size = 1
     # 注意这里不是 `while size <= arr_len/2`,
-    # 比如arr_len=12, size为4的话, 只能把[0, 7]和[8, 11]的两个子数组归并成有序
-    # 那只有size为8, 这样2倍size才能把arr全部归并
-    # 但size=8的话, 大于arr_len/2了, 所以应该`while size < arr_len`
+    # 否则比如arr_len=12, size为4的话, 只能把[0...7]和[8..11]的这两个区间的元素归并成有序,
+    # size=8的话, 大于arr_len/2了,
+    # 但只有size为8, 这样2倍size才能把arr全部归并, 所以应该`while size < arr_len`
     while size < arr_len:
         cur_left_index = left_index
         while cur_left_index <= right_index-size:
@@ -1535,21 +1630,20 @@ def quick_sort_optimized(arr, left_index, right_index):
 
 ### 解决普通快排有大量相同元素时的性能问题
 
-**对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大。**
-当数组中有大量相同元素的时候, 不管怎么选pivot都很容易变成下面这种情况导致分成子序列的不平衡, 这将极大的影响时间复杂度, 最差的情况会退化成O(N2)
-
+对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大.
+当数组中有大量相同元素的时候, 不管怎么选pivot都很容易变成下面这种情况导致分成子序列的不平衡, 这将极大的影响时间复杂度, 最差的情况会退化成O(N2)  
 ![](/img/algo_newbie/quick_sort/quick_sort_4.png)
 
 
 #### 双路快排-初步解决有大量相同元素的性能问题
 
-所以产生了双路快排的方式, 双路快速排序算法则不同，他使用两个索引值（i、j）用来遍历我们的序列，将小于等于v的元素放在索引i所指向位置的左边，而将大于等于v的元素放在索引j所指向位置的右边, 通过下图我们可以看到当等于v的情况也会发生交换, 这就基本可以保证等于v的元素也可以较为均匀的放到左右两边
+所以产生了双路快排的方式, 他使用两个索引值（i、j）用来遍历我们的序列，将小于等于v的元素放在索引i所指向位置的左边，而将大于等于v的元素放在索引j所指向位置的右边, 通过下图我们可以看到当等于v的情况也会发生交换, 这就基本可以保证等于v的元素也可以较为均匀的放到左右两边
 
 <video loop="loop" width="100%" controls="controls">
 <source src="/img/algo_newbie/quick_sort/quick_sort_5.mp4" type="video/mp4" />
 </video>
 
-**待改进的地方**: 还是把等于v的元素加入到了待处理的数据中, 之后又去重复计算这些等于v的元素了, 为了排除这些已经等于v的元素, 所以产生了[**��路快排**](#三路快排-完全解决有大量相同元素的性能问题)
+**待改进的地方**: 还是把等于v的元素加入到了待处理的数据中, 之后又去重复计算这些等于v的元素了, 为了排除这些已经等于v的元素, 所以产生了三路快排
 
 
 #### 三路快排-完全解决有大量相同元素的性能问题
@@ -1658,10 +1752,8 @@ def quick_sort_3_ways(arr, left_index, right_index):
 <source src="/img/algo_newbie/heap_sort/heap_sort_heapify.mp4" type="video/mp4" />
 </video>
 
-用数组存储二叉堆, 首先得明确以下两个index的取得方法, **如果index从0开始的话**:
-* `left_child = 2*i + 1`, 
-* `right_child = 2*i + 2`
 如果是对数组的`[left_index, right_index]`来排序, 且数组的首index为0的话, 则:
+* 最后一个非叶子节点的index为`left_index + (length/2 - 1)`
 * `left_child_index = 2 * (pending_heapify_index-left_index) + 1`
 * `right_child_index = left_child_index + 1`
 这两个index的取得方式在下方代码有体现.
@@ -1727,9 +1819,9 @@ def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
 
 ### 建堆
 
-我们对每一个不是叶结点的元素(当index从root_index=0开始, 即为 index 小于等于 `root_index + (length/2 - 1)` )自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
+如果是对数组的`[left_index, right_index]`来排序, 且数组的首index为0的话, 则最后一个非叶子节点的index为`left_index + (length/2 - 1)`, 我们对每一个不是叶结点的元素自底向上调用一次 Max_Heapify 就可以把一个大小为 length 的数组转换为最大堆.
 
-**注意**: 以下动画演示图中的index是从1开始的, 方便我们看动图理解堆化过程, 我们下方代码的数组的index是从0开始的
+**注意**: 为了方便我们看动图理解堆化过程, 以下动画演示图中的index是从1开始的, 而我们下方代码的数组的index是从0开始的
 
 <video loop="loop" width="100%" controls="controls">
 <source src="/img/algo_newbie/heap_sort/heap_sort_build_heap.mp4" type="video/mp4" />
@@ -1780,11 +1872,11 @@ def heap_sort(arr, left_index , right_index):
 
 # 递归解题思路
 
-**递归调用可理解为入栈操作，而返回则为出栈操作。写递归算法的关键是要明确函数的「定义」是什么，然后相信这个定义，利用这个定义推导最终结果，绝不要试图跳入递归。我们千万不要跳进递归的细节里，你的脑袋才能压几个栈呀。**
-
 实际上，递归有两个显著的特征,终止条件和自身调用:
 * 自身调用：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，即都是调用自身的同一个函数。
 * 终止条件：递归必须有一个终止的条件，即不能无限循环地调用本身。
+
+**递归调用可理解为入栈操作，而返回则为出栈操作。写递归算法的关键是要明确函数的「定义」是什么，然后相信这个定义，利用这个定义推导最终结果，绝不要试图跳入递归。我们千万不要跳进递归的细节里，你的脑袋才能压几个栈呀。**
 
 解决递归问题一般就三步曲，这个递归解题三板斧理解起来有点抽象，我们拿阶乘递归例子来喵喵吧~
 三部曲分别是：
@@ -1845,9 +1937,8 @@ def heap_sort(arr, left_index , right_index):
 * p=root ，且 q 在 root 的左或右子树中；
 * q=root ，且 p 在 root 的左或右子树中；
 
-<video loop="loop" width="100%" controls="controls">
-<source src="/img/algo_newbie/bt_recursion/bt_lca.mp4" type="video/mp4" />
-</video>
+![](/img/algo_newbie/bt_recursion/bt_lca.gif)
+
 考虑通过递归对二叉树进行后序遍历，当遇到节点 p 或 q 时返回。从底至顶回溯，当节点 p,q 在节点 root 的异侧时，节点 root 即为最近公共祖先，则向上返回 root 。
 
 递归解析：

@@ -504,6 +504,7 @@ class GraphBase(object):
         self.adjacency_container = None
         self.is_directed = is_directed  # 是否为有向图
         self.connected_components_count = 0  # 连通分量个数
+        self.point_count = point_count
 
     def graph_dfs(self):
         """
@@ -560,6 +561,9 @@ class GraphBase(object):
         """
         raise NotImplementedError
 
+    def add_edge(self, start_point_index, end_point_index):
+        raise NotImplementedError
+
 
 class SparseGraph(GraphBase):
     # 稀疏图
@@ -567,6 +571,7 @@ class SparseGraph(GraphBase):
     def __init__(self, point_count, is_directed):
         super(SparseGraph, self).__init__(point_count, is_directed)
         self.adjacency_container = [[] for _ in xrange(point_count)]  # 邻接表
+        self.indegree_list = [ 0 for _ in range(point_count) ]  # 每个顶点的入度, 初始化为0
 
     def set_adjacency_list(self, adjacency_list):
         self.adjacency_container = adjacency_list
@@ -575,6 +580,31 @@ class SparseGraph(GraphBase):
         for _adjacent_point_index in self.adjacency_container[cur_point_index]:
             yield _adjacent_point_index
 
+    def add_edge(self, start_point_index, end_point_index):
+        self.adjacency_container[start_point_index].append(end_point_index)
+        self.indegree_list[end_point_index] += 1
+        if not self.is_directed:
+            self.adjacency_container[end_point_index].append(start_point_index)
+
+    def topologic_sort(self):
+        result_arr = []
+        zero_indegree_list = []
+        for point_index, cur_indegree in enumerate(self.indegree_list):
+            if cur_indegree == 0:
+                zero_indegree_list.append(point_index)  # 将所有入度为0的顶点加入列表
+        while zero_indegree_list:
+            cur_point_index = zero_indegree_list.pop()  # 从列表中取出一个顶点
+            result_arr.append(cur_point_index)
+            # 将所有v指向的顶点的入度减1，并将入度减为0的顶点加入列表
+            for j in self.adjacency_container[cur_point_index]:
+                self.indegree_list[j] -= 1
+                if self.indegree_list[j] == 0:
+                    zero_indegree_list.append(j)  # 若入度为0，则加入列表
+        if len(result_arr) != self.point_count:
+            return False, result_arr  # 没有输出全部顶点，说明有向图中有回路
+        else:
+            return True, result_arr
+            
 
 class DenseGraph(GraphBase):
     # 稠密图
@@ -593,6 +623,14 @@ class DenseGraph(GraphBase):
             if not _is_point_adjacent:
                 continue
             yield _adjacent_point_index
+
+    def add_edge(self, start_point_index, end_point_index):
+        self.adjacency_container[start_point_index][end_point_index] = 1
+        if not self.is_directed:
+            self.adjacency_container[end_point_index][start_point_index] = 1
+
+    def topologic_sort(self):
+        pass  # TODO
 
 
 # 首先要明确此递归函数的定义: 查看root是否为叶子结点并且root的val是否等于sum_num,
@@ -2105,6 +2143,15 @@ if __name__ == "__main__":
     print test_sparse_graph.graph_dfs()
     print "test_sparse_graph graph bfs: --------------"
     print test_sparse_graph.graph_bfs()
+    test_sparse_graph = SparseGraph(point_count=6, is_directed=True)
+    test_sparse_graph.add_edge(5, 2)
+    test_sparse_graph.add_edge(5, 0)
+    test_sparse_graph.add_edge(4, 0)
+    test_sparse_graph.add_edge(4, 1)
+    test_sparse_graph.add_edge(2, 3)
+    test_sparse_graph.add_edge(3, 1)
+    print "test_sparse_graph topologic_sort: --------------"
+    print test_sparse_graph.topologic_sort()
 
     # 这个邻接矩阵表示的和上面那个邻接表 temp_adjacency_list 是同一个图
     temp_adjacency_matrix = [

@@ -17,6 +17,10 @@ $(document).ready(function () {
   // $tocTitle.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
   $tocTitle.prepend("<i class='fa fa-minus-square'></i><i class='fa fa-plus-square'></i>");
 
+  var $iconToFold = $(".sidebar-nav-toc > .fa-minus-square");
+  var $iconToExpand = $(".sidebar-nav-toc > .fa-plus-square");
+  $iconToFold.addClass("hide");
+  
   // var clickIcon = function(){
   //     $(".post-toc-content .nav-item > i").click(function(){
   //         $(this).siblings(".nav-child").slideToggle(100);
@@ -54,9 +58,6 @@ $(document).ready(function () {
   var clickTocTitle = function(){
     // var $iconToExpand = $(".sidebar-nav-toc > .fa-caret-right");
     // var $iconToFold = $(".sidebar-nav-toc > .fa-caret-down");
-    var $iconToExpand = $(".sidebar-nav-toc > .fa-minus-square");
-    var $iconToFold = $(".sidebar-nav-toc > .fa-plus-square");
-    $iconToExpand.addClass("hide");
 
     var $subToc = $titleHasChild.next(".nav-child");
     
@@ -64,8 +65,8 @@ $(document).ready(function () {
       $(this).toggleClass("hide");
 
       $subToc.show(150, scrollToCenter);
-      $iconToExpand.removeClass("hide");
-      $iconToFold.addClass("hide");
+      $iconToFold.removeClass("hide");
+      $iconToExpand.addClass("hide");
     }
 
     if ($titleHasChild.length) {
@@ -73,7 +74,7 @@ $(document).ready(function () {
 
         // $tocTitle.addClass("clickable");
         $(".sidebar-nav-toc > i").click(function(){
-            if ($subToc.is(":hidden")) {
+            if ($iconToFold.is(":hidden")) {
                 showSubToc();
                 // $(this).toggleClass("hide");
 
@@ -82,8 +83,8 @@ $(document).ready(function () {
                 // $iconToFold.addClass("hide");
             } else {
                 $subToc.hide(100, scrollToCenter);
-                $iconToExpand.addClass("hide");
-                $iconToFold.removeClass("hide");
+                $iconToFold.addClass("hide");
+                $iconToExpand.removeClass("hide");
             }
         })
         // // TOC on mobile

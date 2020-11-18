@@ -3908,23 +3908,29 @@ class Solution_LIS(object):
 [lc329, hard](https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix)  
 给定一个整数矩阵，找出最长递增路径的长度。对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。  
 示例 1:
-输入: nums = 
+输入: 
+```
+nums = 
 [
   [9,9,4],
   [6,6,8],
   [2,1,1]
 ] 
+```
 输出: 4 
-解释: 最长递增路径为 [1, 2, 6, 9]。
+解释: 最长递增路径为 `[1, 2, 6, 9]`。
 示例 2:
-输入: nums = 
+输入:
+```
+nums = 
 [
   [3,4,5],
   [3,2,6],
   [2,2,1]
 ] 
+```
 输出: 4 
-解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。
+解释: 最长递增路径是 `[3, 4, 5, 6]`。注意不允许在对角线方向上移动。
 
 由[lc300-lis问题-最长上升子序列](#lc300-lis问题-最长上升子序列), 我们很容易得出
 * 状态定义`dp[i][j]` 为选中 `matrix[i][j]` 的最长递增路径的长度, 注意这里的 `matrix[i][j]`是一定要选中的
@@ -3932,16 +3938,16 @@ class Solution_LIS(object):
 * 根据当前的元素和相邻上下左右的元素比较, 选出最大值再加1, 则为当前的dp, 故状态转移方程为:
     ``` python
     dp[i][j] = 1 + max(
-        dp[i-1][j] if i and matrix[i-1][j] < matrix[i][j] else 0,
-        dp[i][j-1] if j and matrix[i][j-1] < matrix[i][j] else 0, 
-        dp[i+1][j] if i != x-1 and matrix[i+1][j] < matrix[i][j] else 0, 
-        dp[i][j+1] if j != y-1 and matrix[i][j+1] < matrix[i][j] else 0
+        dp[i-1][j] if i-1 >= 0 and matrix[i-1][j] < matrix[i][j] else 0,  # 上
+        dp[i][j-1] if j-1 >= 0 and matrix[i][j-1] < matrix[i][j] else 0,  # 左
+        dp[i+1][j] if i+1 <= m-1 and matrix[i+1][j] < matrix[i][j] else 0,  # 下
+        dp[i][j+1] if j+1 <= n-1 and matrix[i][j+1] < matrix[i][j] else 0  # 右
     )
     ```
 
-这个题目**如果没有真正理解递推, 很容易写错: 写成直接拿着matrix就两重for循环遍历就完了.**  
-这样写是不对的, **我们得先根据matrix中每个元素值的大小按照从小到大排序**,   
-然后从值小的元素开始遍历一步一步递推到最后一个点,  
+这个题目**如果没有真正理解递推, 很容易写错: 以为直接拿着matrix就两重for循环遍历就完了.**  
+**这样写是不对的, 因为要求的是递增路径, 所以我们得先根据matrix中每个元素值的大小按照从小到大排序**,   
+然后从最小值的元素开始遍历一步步由小到大递推到最大一个点,  
 这样才算是考虑完全了, 这样才是从最小信息量的状态一点一点转移递推到大的状态的动态规划的过程.
 
 代码如下:  
@@ -3962,17 +3968,17 @@ def longestIncreasingPath(self, matrix):
     for i in range(m):
         for j in range(n):
             points_list.append([ matrix[i][j], i, j ])
-    # 这个题目**如果没有真正理解递推, 很容易写错: 写成直接拿着matrix就两重for循环遍历就完了.**  
-    # 这样写是不对的, **我们得先根据matrix中每个元素值的大小按照从小到大排序**,   
-    # 然后从值小的元素开始遍历一步一步递推到最后一个点,  
+    # 这个题目**如果没有真正理解递推, 很容易写错: 以为直接拿着matrix就两重for循环遍历就完了.**  
+    # **这样写是不对的, 因为要求的是递增路径, 所以我们得先根据matrix中每个元素值的大小按照从小到大排序**,   
+    # 然后从最小值的元素开始遍历一步步由小到大递推到最大一个点,  
     # 这样才算是考虑完全了, 这样才是从最小信息量的状态一点一点转移递推到大的状态的动态规划的过程.
     sorted_points_list = sorted(points_list, key=lambda x: x[0])
     for val, i, j in sorted_points_list:
         dp[i][j] = 1 + max(
-            dp[i-1][j] if i-1 >= 0 and matrix[i-1][j] < matrix[i][j] else 0,
-            dp[i][j-1] if j-1 >= 0 and matrix[i][j-1] < matrix[i][j] else 0, 
-            dp[i+1][j] if i+1 <= m-1 and matrix[i+1][j] < matrix[i][j] else 0, 
-            dp[i][j+1] if j+1 <= n-1 and matrix[i][j+1] < matrix[i][j] else 0
+            dp[i-1][j] if i-1 >= 0 and matrix[i-1][j] < matrix[i][j] else 0,  # 上
+            dp[i][j-1] if j-1 >= 0 and matrix[i][j-1] < matrix[i][j] else 0,  # 左
+            dp[i+1][j] if i+1 <= m-1 and matrix[i+1][j] < matrix[i][j] else 0,  # 下
+            dp[i][j+1] if j+1 <= n-1 and matrix[i][j+1] < matrix[i][j] else 0  # 右
         )
     max_path_len = 0
     for i in range(m):

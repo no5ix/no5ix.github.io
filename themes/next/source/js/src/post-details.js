@@ -25,29 +25,30 @@ $(document).ready(function () {
   //     })
   // }()
 
-  // var clickTitle = function(){
-  //     $titleHasChild.dblclick(function(){
-  //         $(this).siblings(".nav-child").hide(100);
-  //         // $(this).siblings("i").toggleClass("hide");
-  //     })
-  //     // After dblclick enent
-  //     $titleHasChild.click(function(){
-  //         var $curentTocChild = $(this).siblings(".nav-child");
-  //         if ($curentTocChild.is(":hidden")) {
-  //             $curentTocChild.show(100);
-  //             // $(this).siblings("i").toggleClass("hide");
-  //         }
-  //         // var $subToc = $titleHasChild.next(".nav-child");
-  //         // alert(1);
-  //         var $subToc = $(this).siblings(".nav-child").find(".nav-link").next(".nav-child");
-  //         // if ($(this).siblings(".nav-child").is(":hidden")) {
-  //         if ($subToc.is(":hidden")) {
-  //             // $curentTocChild.show(100);
-  //             $subToc.show(100);
-  //             // $(this).siblings("i").toggleClass("hide");
-  //         }
-  //     })
-  // }()
+  var clickTitle = function(){
+      // $titleHasChild.dblclick(function(){
+      //     $(this).siblings(".nav-child").hide(100);
+      //     // $(this).siblings("i").toggleClass("hide");
+      // })
+      // After dblclick enent
+      $titleHasChild.click(function(){
+
+          var $curentTocChild = $(this).siblings(".nav-child");
+          if ($curentTocChild.is(":hidden")) {
+              $curentTocChild.show(100);
+              // $(this).siblings("i").toggleClass("hide");
+          }
+          // var $subToc = $titleHasChild.next(".nav-child");
+          // alert(1);
+          var $currentSubToc = $(this).siblings(".nav-child").find(".nav-link").next(".nav-child");
+          // if ($(this).siblings(".nav-child").is(":hidden")) {
+          if ($currentSubToc.is(":hidden")) {
+              // $curentTocChild.show(100);
+              $currentSubToc.show(100);
+              // $(this).siblings("i").toggleClass("hide");
+          }
+      })
+  }()
 
 
   var clickTocTitle = function(){
@@ -68,7 +69,7 @@ $(document).ready(function () {
     }
 
     if ($titleHasChild.length) {
-        $titleHasChild.click(showSubToc);
+        // $titleHasChild.click(showSubToc);
 
         // $tocTitle.addClass("clickable");
         $(".sidebar-nav-toc > i").click(function(){
@@ -102,8 +103,10 @@ $(document).ready(function () {
     var $currentActiveElement = $(tocSelector + ' .active').last();
     // removeCurrentActiveClass();
     // $currentActiveElement.addClass('active-current');
-
     // Scrolling to center active TOC element if TOC content is taller then viewport.
+    if ($currentActiveElement.offset() == undefined) {
+      return;
+    }
     $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
   }
 

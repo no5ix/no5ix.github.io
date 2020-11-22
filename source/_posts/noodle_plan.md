@@ -3086,6 +3086,12 @@ ms --> redis
         * 与etcd的交互使用的是其V2版本的HTTP API，如上图，为了保证每一步骤的可靠性，都做了异常的重试。关于数据变动更新，结合了增量更新与全局更新的两种方式：
             * 增量更新：etcd的watch基于longpoll的机制，请求到达etcd服务器之后，如果没有任何变动，etcd会挂起该请求，直到有变动数据之后立刻将变动数据返回，本地可以根据收到的变动数据情况对本地缓存做增量的更新即可，待数据更新完再向etcd发起watch请求即可，这样可以减少与etcd的交互次数，降低其负担。
             * 全量更新：正常情况下增量更新就可以满足数据同步的需求了，但是其会有惊群的风险，假如集群中有2000个节点，在很短的时间内有200个节点的数据有更新，如果所有节点都使用增量更新，**因为每次watch请求只能获取到一个更改情况**，所以整个集群就需要2000*200次请求，短时间内就会对etcd服务造成很大的压力，对节点进程本身也有不小的开销。这种情况下，每个进程就可以采取延迟一定时间之后再一次性更新全量数据即可。
+    * 为啥选etcd不选zookeeper?
+        * 两个应用实现的目的不同。etcd的目的是一个高可用的 Key/Value 存储系统，主要用于分享配置和服务发现；zookeeper的目的是高有效和可靠的协同工作系统。
+        * 接口调用方式不同。etcd是基于HTTP+JSON的API，直接使用curl就可以轻松使用，方便集群中每一个主机访问；zookeeper基于TCP，需要专门的客户端支持。
+        * 功能就比较相似了。etcd和zookeeper都是提供了key，value存储服务，集群队列同步服务，观察一个key的数值变化。
+        * 部署方式也是差不多：采用集群的方式，可以达到上千节点。只是etcd是go写的，直接编译好二进制文件部署安装即可；zookeeper是java写的，需要依赖于jdk，需要先部署jdk。
+        * 实现语言： go 拥有几乎不输于C的效率，特别是go语言本身就是面向多线程，进程通信的语言。在小规模集群中性能非常突出；java，实现代码量要多于go，在小规模集群中性能一般，但是在大规模情况下，使用对多线程的优化后，也和go相差不大。
     * 啥单点问题?
         * MobileServer现有的结构，GameManager进程维护了整个系统的元数据以及一些逻辑层的entity注册等动态数据管理，它的可靠性非常重要，但是偏偏它又是一个单点，随着规模的扩大，风险也越来越大。     
     * 广播框架怎么重构的?
@@ -3097,6 +3103,129 @@ ms --> redis
           * 障眼法: 保证自己的在线好友与工会队员能即时看到即可
           * gm那边也准备一个定长队列, 以平稳的缓慢的频率发送给各个gate即可
     * 原来承载多少人? 六千多吧, 现在一万多
+
+
+### 如何进入战斗的
+
+申请战斗流程:  
+```puml
+participant "RoomService\nMatchService" as s
+participant BattleService as b
+database Redis as r
+
+s -> b: apply_battle(...)
+b -> r: BattleRequest.save(...)写战斗请求
+b -> r: context.lpush(BATTLE_QUEUE_KEY, battle_id)
+```
+
+匹配战斗流程:  
+```puml
+package "service_n" {
+    [MatchService] as mn
+}
+
+package "service_m" {
+    [MatchService] as mm
+}
+
+package "service_p" {
+    [BattleService] as bs
+}
+
+database Redis as r
+
+Avatar --> mm: **A-1** cancel_match
+mm --> r: **A-2** delete
+
+Avatar --> mn: **B-1** request_match
+mn --> r: **B-2** insert
+
+mm -> mm: 匹配tick
+mn -> mn: **C-1** 匹配tick
+
+mn --> r: **C-2** lock_teams\n(delete)
+mn --> bs: **C-3** apply_battle
+```
+
+上报`puppet_dict`流程:  
+```puml
+actor Avatar as a
+participant BattleService as b
+database Redis as r
+
+a -> b: report_puppet_dict(...)
+b -> r: PuppetInfo.save(...)
+```
+
+分配战斗流程图1:  
+```puml
+participant BattleAllocatorCenter as bs
+participant BattleService as b
+database Redis as r
+
+loop allocate_battle_tick
+    b -> r: context.rpop(BATTLE_QUEUE_KEY)
+    r -> b: battle_id
+
+    alt battle_id存在
+        group _process_battle
+            b -> r: BattleRequest.load(...)
+            r -> b: battle_request
+            r -> b: pull puppet_dict
+            b -> b: 超时等待puppet_dict上报
+            b -> b: 选择负载最低的战斗服
+            b -> bs: create_remote_battle
+            bs -> b: Response
+        end
+        b -> b: sleep 0.01
+    else battle_id is None
+        b -> b: sleep 0.5
+    end
+end
+```
+
+分配战斗流程图2:  
+```puml
+package "battle_0" {
+    [BattleAllocatorCenter] as bac
+    [BattleAllocatorStub]
+}
+
+package "battle_x" {
+    [BattleAllocatorStub] as bas
+}
+
+package "service_m" {
+    [BattleService] as bsm
+}
+
+package "service_n" {
+    [BattleService] as bsn
+}
+
+database Redis
+
+外部系统 --> bsm: apply_battle_lock\nlock_in_battle\nunlock_in_battle\nreport_puppet_dict\n...
+外部系统 --> bsm: **1** apply_battle
+bsm -> Redis: **2** lpush
+
+Redis -> bsn: **3** rpop
+Redis -> bsn: **4** 获取所有\npuppet_dict
+bsn --> bac: **5** 选择负载最低的battlesvr\ncreate_remote_battle
+
+bac --> bas: **6** 选择负载最低的Stub\ncreate_remote_battle
+```
+
+
+### 如何战斗重连
+
+在上述分配战斗流程图中:  
+1. 当 BattleAllocatorCenter 通知 BattleAllocatorStub 分配战斗 `create_remote_battle` 成功后
+2. 调用BattleAllocatorCenter的`create_battle_success`
+3. 调用BattleAllocatorCenter的`notify_avt_battle_create`
+4. BattleAllocatorCenter的`notify_avt_battle_create`就会通知大厅服的avt记录`last_battle_info`包括ip/端口/hostnum啥的, 并且`last_battle_info`会存盘
+
+当玩家重连的时候玩家把这个`last_battle_info`信息load出来去相应的战斗服查询是否还有战斗然后重连即可
 
 
 ### 登录微服务和排队微服务

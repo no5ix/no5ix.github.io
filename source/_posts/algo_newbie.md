@@ -4367,7 +4367,7 @@ def superEggDrop_dp(self, K, N):
 所以算法的总时间复杂度是 O(K\*N^2), 空间复杂度为子问题个数，即 O(KN)。
 
 
-### 扔鸡蛋逆向思路2
+### 扔鸡蛋逆向思路2-推荐
 
 [参考](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484690&idx=1&sn=eea075701a5d96dd5c6e3dc6a993cac5&chksm=9bd7fb1aaca0720c58c9d9e02a8b9211a289bcea359633a95886d7808d2846898d489ce98078&scene=21#wechat_redirect)  
 dp[2][3]表示：
@@ -4387,20 +4387,25 @@ def superEggDrop2(self, K, N):
     *
     * dp[i][j] = dp[i][j-1] + dp[i-1][j-1] + 1;
     * 解释：
-    * 0.dp[i][j]：如果你还剩 i 个蛋，且只能操作 j 次了，所能确定的楼层。
+    * 0.dp[i][j]：如果你还剩 i 个蛋，且最多只能操作 j 次了，所能确定的最高楼层。
     * 1.dp[i][j-1]：蛋没碎，因此该部分决定了所操作楼层的上面所能容纳的楼层最大值
     * 2.dp[i-1][j-1]：蛋碎了，因此该部分决定了所操作楼层的下面所能容纳的楼层最大值
-    * 又因为第 j 次操作结果只和第 j-1 次操作结果相关，因此可以只用一维数组。
+    * 又因为第 j 次操作结果只和第 j-1 次操作结果相关，因此可以只用一维数组。此处略.
     *
     * 时复：O(K*根号(N))
     """ 
-    dp = [ [ 0 for _ in range(K+1) ] for _ in range(N+1) ]
-    i = 0
-    while dp[i][K] < N:
-        i += 1
-        for j in range(1, K+1):
-            dp[i][j] = dp[i-1][j-1] + dp[i-1][j] + 1
-    return i
+
+    # j 最多不会超过 N 次（线性扫描）
+    # base case:
+    # dp[0][..] = 0
+    # dp[..][0] = 0
+    dp = [ [ 0 for _ in range(N+1) ] for _ in range(K+1) ]
+    j = 0
+    while dp[K][j] < N:  # 也就是给你K个鸡蛋，允许测试j次，最坏情况下最多能测试N层楼
+        j += 1  # 这个j为什么要减一而不是加一？之前定义得很清楚，这个j是一个允许的次数上界，而不是扔了几次。
+        for i in range(1, K+1):
+            dp[i][j] = dp[i][j-1] + dp[i-1][j-1] + 1
+    return j
 ```
 
 

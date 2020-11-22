@@ -23,6 +23,51 @@ categories:
 **. . .**<!-- more -->
 
 
+# python解题常用标准库模块与函数
+
+* `sorted`函数, 用来排序 
+    * 基本操作: `num1 = [2, 1, 3]; sorted_num1 = sorted(num1)`
+    * 按key排序:  
+    ``` python
+    nums = [ [3,4,5], [3,2,6], [2,2,1] ] 
+    sorted_nums = sorted(nums, key=lambda x: x[0])
+    # out: [[2, 2, 1], [3, 4, 5], [3, 2, 6]]
+    ```
+* `heapq`模块, 最小堆
+    * heapq有两种方式创建堆，
+        *  一种是使用一个空列表，然后使用heapq.heappush()函数把值加入堆中，
+        *  另外一种就是使用heap.heapify(list)转换列表成为堆结构
+    ``` python
+    import heapq
+
+    # 第一种
+    """
+    函数定义：
+    heapq.heappush(heap, item)
+        - Push the value item onto the heap, maintaining the heap invariant.
+    heapq.heappop(heap)
+        - Pop and return the smallest item from the heap, maintaining the heap invariant.
+        If the heap is empty, IndexError is raised. To access the smallest item without popping it, use heap[0].
+    """
+    nums = [2, 3, 5, 1, 54, 23, 132]
+    heap = []
+    for num in nums:
+        heapq.heappush(heap, num)  # 加入堆
+
+    print(heap[0])  # 如果只是想获取最小值而不是弹出，使用heap[0]
+    print([heapq.heappop(heap) for _ in range(len(nums))])  # 堆排序结果
+    # out: [1, 2, 3, 5, 23, 54, 132]
+
+
+    # 第二种
+    nums = [2, 3, 5, 1, 54, 23, 132]
+    heapq.heapify(nums)
+    print([heapq.heappop(nums) for _ in range(len(nums))])  # 堆排序结果
+    # out: [1, 2, 3, 5, 23, 54, 132]
+    ```
+
+
+
 # 数据结构
 
 ## 哈希表
@@ -47,12 +92,13 @@ categories:
 
 ### 负载因子与rehash
 
-比如说当前的容器初始容量`initCapacity`是16，负载因子是0.75, 根据  
+负载因子计算公式为: `负载因子 = 哈希表已保存节点数量 / 哈希表大小`  
+比如说当前的容器初始容量`initCapacity`是16，负载因子是0.75(这个负载因子是口语中的负载因子, 实际上指的是该扩容了的负载因子临界值), 根据  
 `元素数量的扩容临界值（threshold） = 负载因子（loadFactor） * 初始容量(initCapacity)`  
 则16*0.75=12，也就是说，当容器中元素数量达到了12的时候就会进行扩容操作。
 他的作用很简单，相当于是一个扩容机制的阈值。当超过了这个阈值，就会触发扩容机制。
 
-为什么java的HashMap(使用开放寻址法解决碰撞)加载因子一定是0.75？而不是0.8，0.6？
+为什么java的HashMap(使用开放寻址法解决碰撞)负载因子一定是0.75？而不是0.8，0.6？
 * loadFactor太大，比如等于1，也就意味着，只有当容器全部填充了，才会发生扩容。那么就会有很高的哈希冲突的概率，会大大降低查询速度。
 * loadFactor太小，比如等于0.5，那么频繁扩容没，就会大大浪费空间。
 
@@ -193,7 +239,7 @@ class TreeNode(object):
 
 ### 统一形式的二叉树前中后序迭代遍历
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/binary_tree/binary_tree_preorder_traversal.mp4" type="video/mp4" />
 </video>
 
@@ -349,7 +395,7 @@ class LinkList(object):
 
 ### 链表反转
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/link_list_reverse.mp4" type="video/mp4" />
 </video>
 
@@ -594,7 +640,7 @@ test_dense_graph graph bfs:
 
 ### 图的深度优先遍历dfs
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/graph/graph_dfs.mp4" type="video/mp4" />
 </video>
 
@@ -614,7 +660,7 @@ test_dense_graph graph bfs:
 
 ### 图的广度优先遍历bfs
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/graph/graph_bfs.mp4" type="video/mp4" />
 </video>
 
@@ -734,6 +780,67 @@ int countSteps(vector<int>& heights) {
     return results;
 }
 ```
+
+
+### 接雨水-经典单调栈题
+
+[lc42, hard](https://leetcode-cn.com/problems/trapping-rain-water)  
+给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。  
+示例 1：
+![](/img/algo_newbie/monotone_stack/mono_stack_4.png)
+输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+输出：6
+解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 
+示例 2：
+输入：height = [4,2,0,3,2,5]
+输出：9
+
+[参考](https://leetcode-cn.com/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/)
+理解题目，参考图解，注意题目的性质，当后面的柱子高度比前面的低时，是无法接雨水的  
+当找到一根比前面高的柱子，就可以计算接到的雨水, 所以使用单调递减栈
+
+对更低的柱子入栈:  
+* 更低的柱子以为这后面如果能找到高柱子，这里就能接到雨水，所以入栈把它保存起来
+* 平地相当于高度 0 的柱子，没有什么特别影响
+
+当出现高于栈顶的柱子时:  
+* 说明可以对前面的柱子结算了
+* 计算已经到手的雨水，然后出栈前面更低的柱子
+
+计算雨水的时候需要注意的是:  
+* 雨水区域的右边 r 指的自然是当前索引 i
+* 底部是栈顶 st.top() ，因为遇到了更高的右边，所以它即将出栈，使用 cur 来记录它，并让它出栈
+* 左边 l 就是新的栈顶 st.top()
+* 雨水的区域全部确定了，水坑的高度就是左右两边更低的一边减去底部，宽度是在左右中间
+* 使用乘法即可计算面积
+
+<video width="100%" controls="controls">
+<source src="/img/algo_newbie/monotone_stack/monotone_stack_5.webm" type="video/webm" />
+</video>
+
+``` python
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        rain_sum = 0
+        _monotone_stack = []
+        for i in range(len(height)):
+            while _monotone_stack and height[i] > height[_monotone_stack[-1]]:
+                cur = _monotone_stack.pop(-1)
+                if not _monotone_stack:
+                    break
+                r = i
+                l = _monotone_stack[-1]
+                w = r - l - 1
+                h = min(height[l], height[r]) - height[cur]
+                rain_sum += w * h
+            _monotone_stack.append(i)
+        return rain_sum
+```
+
 
 ### 柱状图中最大矩形问题
 
@@ -1075,7 +1182,7 @@ def singleNumber(self, nums: List[int]) -> List[int]:
 3. 针对所有的元素重复以上的步骤，除了最后一个。
 4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/uncommon_sort_algo/bubble_sort.mp4" type="video/mp4" />
 </video>
 
@@ -1258,7 +1365,7 @@ print('最后的结果是:', a)
 ![](/img/algo_newbie/insert_sort/insert_sort_2.png "insert sort")
 
 动画演示如下:
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/insert_sort/insert_sort_anim.mp4" type="video/mp4" />
 </video>
 
@@ -1279,7 +1386,7 @@ def insert_sort(arr, left_index, right_index):
 
 因为基本的插入排序有太多交换操作了, 我们可以用直接赋值来优化
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/insert_sort/insert_sort_optimized.mp4" type="video/mp4" />
 </video>
 
@@ -1320,14 +1427,14 @@ def insert_sort_optimized(arr, left_index, right_index):
 ![](/img/algo_newbie/merge_sort/merge_sort_2.png "归并排序分解图")
 
 动画演示:
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/merge_sort/merge_sort_anim1.mp4" type="video/mp4" />
 </video>
 
 
 ### 归并排序的merge过程
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/merge_sort/merge_sort_anim2.mp4" type="video/mp4" />
 </video>
 
@@ -1413,7 +1520,7 @@ def merge_sort_optimized(arr, left_index, right_index):
 
 ### 归并自底向上的实现
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/merge_sort/merge_sort_bottom_up.mp4" type="video/mp4" />
 </video>
 
@@ -1507,7 +1614,7 @@ A也重复上述步骤递归。
 ![](/img/algo_newbie/quick_sort/quick_sort_2.png)
 
 动画演示:
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/quick_sort/quick_sort_partition_anim.mp4" type="video/mp4" />
 </video>
 
@@ -1639,7 +1746,7 @@ def quick_sort_optimized(arr, left_index, right_index):
 
 所以产生了双路快排的方式, 他使用两个索引值（i、j）用来遍历我们的序列，将小于等于v的元素放在索引i所指向位置的左边，而将大于等于v的元素放在索引j所指向位置的右边, 通过下图我们可以看到当等于v的情况也会发生交换, 这就基本可以保证等于v的元素也可以较为均匀的放到左右两边
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/quick_sort/quick_sort_5.mp4" type="video/mp4" />
 </video>
 
@@ -1650,7 +1757,7 @@ def quick_sort_optimized(arr, left_index, right_index):
 
 这是最经典的解决有大量重复元素的问题的快排方案, 被大多数系统所使用.
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/quick_sort/quick_sort_6.mp4" type="video/mp4" />
 </video>
 
@@ -1748,7 +1855,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
 动画演示如下, 比如要对17这个元素为父元素的所有子元素进行堆化:
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/heap_sort/heap_sort_heapify.mp4" type="video/mp4" />
 </video>
 
@@ -1823,7 +1930,7 @@ def _max_heapify_iterative(arr, pending_heapify_index, left_index, right_index):
 
 **注意**: 为了方便我们看动图理解堆化过程, 以下动画演示图中的index是从1开始的, 而我们下方代码的数组的index是从0开始的
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/heap_sort/heap_sort_build_heap.mp4" type="video/mp4" />
 </video>
 
@@ -1843,7 +1950,7 @@ def _build_max_heap(arr, left_index, right_index):
 
 ### 堆排序原址排序的具体实现
 
-<video loop="loop" width="100%" controls="controls">
+<video width="100%" controls="controls">
 <source src="/img/algo_newbie/heap_sort/heap_sort.mp4" type="video/mp4" />
 </video>
 
@@ -2800,9 +2907,9 @@ Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) 
 
 
 
-## lc200-经典floodfill问题
+## 岛屿数量-经典floodfill问题
 
-[leetcode200题](https://leetcode-cn.com/problems/number-of-islands/)  
+[lc200](https://leetcode-cn.com/problems/number-of-islands/)  
 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
 此外，你可以假设该网格的四条边均被水包围。
@@ -2829,7 +2936,7 @@ Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) 
 如下图则有3个岛屿:
 ![](/img/algo_newbie/backtrack_recursion/number_of_islands2.png "有3个岛屿")
 
-这一次我们代码用类似于leetcode的solution类的形式来实现, 如下:
+代码如下:  
 ``` python
 class Solution_number_of_islands(object):
 

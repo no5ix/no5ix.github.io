@@ -3076,6 +3076,7 @@ ms --> redis
 
 ![](/img/noodle_plan/g90/mobile_server/mobile_server.png "mobile_server集群示意图")
 
+
 ### 服务器架构基于etcd的分布式改造
 
 * ⚫ 服务器架构基于etcd的分布式改造, 解决全局单点问题, 重构广播框架, 整体承载提高80% 
@@ -3365,15 +3366,30 @@ type AuthReq struct {
 ### timer
 
 * ⚫ 开发定时器库替换网易服务器引擎自带的定时器库, 并暴露给Python调用, 性能提升40% 
+    * 用python的原生官方Python API（应用程序编程接口）来做, 因为从火焰图看到boost.python和pybind11本身也有消耗
     * 当时拿到的引擎版本的定时器库是基于最小堆的
     * 多级时间轮, 插入/删除/execute复杂度都是o(1)
     * 算法思想: 
         * 有好几个bucket, 其中一个bucket叫near是差不多要触发的定时器比如[0, 0x100), 和几个定时时长比较久的bucket, 比如[0x100, 0x4000)以及[0x4000, 0x100000)以及[0x100000, 0x4000000)
-        * tick/execute:
+        * tick:
            每次tick都检查是否已经又经过一轮 TVR_MASK(255) 了, 经过了一轮index就又等于0, 然后就去后面的bucket里找是否有需要调整到near的定时器, 就跟水表一样, 小表转一圈需要调整中表, 中表转一圈则要调整大表
         * 插入: 有好几个bucket, 然后用类似于取模哈希的思想放入相应的桶里即可
+        * excute: 
+            `near_` 里面的定时器因为都已经在 `addTimerNode` 根据`expire`哈希安插好了, 所以这里 `jiffies_ & TVR_MASK` 出来的index是几, 那就直接从`near_`里取出来执行就完事了,见下方代码
     * 核心代码类似如下
         ``` cpp
+        void WheelTimer::addTimerNode(TimerNode* node)
+        {
+            int64_t expires = node->expire;
+            uint64_t idx = (uint64_t)(expires - jiffies_);
+            TimerList* list = nullptr;
+            if (idx < TVR_SIZE) // [0, 0x100)
+            {
+                int i = expires & TVR_MASK;  // 因为只关心后8位(即TVR_BITS=8)
+                list = &near_[i];
+            }
+            ...
+        }
         // cascades all vectors and executes all expired timer
         int WheelTimer::tick(){
           int fired = 0;
@@ -3393,6 +3409,29 @@ type AuthReq struct {
           fired += execute(index);
           return fired;
         }
+
+        int WheelTimer::execute()
+        {
+            int fired = 0;
+            // near 里面的定时器因为都已经在 addTimerNode 根据expire里哈希安插好了,
+            // 所以这里 jiffies_ & TVR_MASK 出来的index是几, 那就直接从near_里取出来执行就完事了
+            int index = jiffies_ & TVR_MASK;
+            TimerList expired;
+            near_[index].swap(expired); // swap list
+            for (auto node : expired)
+            {
+                if (!node->canceled && node->cb)
+                {
+                    //printf("wheel node %d triggered at %lld of jiffies %lld\n", node->id, current_, jiffies_);
+                    node->cb();
+                    size_--;
+                    fired++;
+                }
+
+                ref_.erase(node->id);
+                freeNode(node);
+            }
+            return fired;
         ```
     * pybind11
 
@@ -3520,10 +3559,24 @@ type AuthReq struct {
     * **压缩解压通过** zlib 完成，
 * ⚫ 支持敏捷开发, 暴露接口到脚本层, 涉及到Python热更新、日志、定时器、数据持久化等方面
     * **python热更**: 
-        * 通过中心控制进程GM进程来广播热更指令, 然后走替换func_code的路子, 如果有装饰器则注意递归替换func里的closure里的cell里的cell_content(因为用了装饰器的话, function object里的func_closure里还有 function object)
-        * 增量热更/全量热更: 增量热更通过记录改动了的文件来做热更, 但是容易产生from...import...的那些没有更到
         * python原生`reload`函数的问题?
             * python本身提供了reload函数来进行模块的热更，但是只会对reload之后创建的对象生效，旧对象所运行的依然是旧代码
+        * 热更流程: 
+            1) 准备新的代码文件，直接替换进程集群的原有代码文件（外网环境一般通过 luna 完成）
+            2) 执行 AdminClient.py 让 GameManager 通知集群内所有 game 进程载入新代码，执行热更新流程
+                - `python  -m %MOBILENAME%.tools.AdminClient --configfile %CONFIG% --runscript %SCRIPT% --script_args AvatarCenter`
+            3) 所有的 game 进程收到热更新命令之后，执行 reload.py 
+        * 热更的具体实现: 
+            1) 协议在 PEP320 中被提出，有两个主要的组成概念：finder 和 loader 。finder 的任务是确定能否根据已知的策略找到该名称的模块。同时实现了 finder 和 loader 接口的对象叫做 importer
+            2) 我们根据此协议实现一个 包含 finder 和 loader 的 importer 模块, 我们在这个模块中主要是在finder中实现对func与property的替换, 走的是替换func_code的路子
+            3) 往 sys.meta_path 添加这个 finder 注册 meta_hook(import hook的一种, 你可以在这里重载对 sys.path、frozen module 甚至内置 module 的处理)
+            4) 从`sys.modules`中把想要热更的module先pop出去
+            5) 执行`__import__(wanna_reload_module_name)` 来导入相应想reload的模块
+        * 替换func_code的路子:
+            * 如果是property类的attr, 则直接替换
+            * 如果是func/method类型的, 则替换func_code
+            * 如果有装饰器则注意递归替换func里的closure里的cell里的cell_content(因为用了装饰器的话, function object里的func_closure里还有 function object)
+        * 增量热更/全量热更: 增量热更通过记录改动了的文件来做热更, 但是容易产生from...import...的那些没有更到
         * 定义回调接口: `after_reload`/`on_reload`等
     * **日志**: 
         * 游戏主线程将日志数据保存在据缓存队列中，由专门的日志线程负责执行写入硬盘，保持主线程不阻塞玩法逻辑的执行。在游戏进程发生crash的时候，保存在内存中的数据可能来不及写入硬盘而丢失。 默认的 Linux 环境下日志会写往标准输出，由 SA 负责重定向到特定的日志文件
@@ -3770,6 +3823,33 @@ type AuthReq struct {
 * mro问题
 * 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
+
+
+## import流程
+
+* 当Python的解释器遇到import语句或者其他上述导入语句时,它会先去查看sys.modules中是否已经有同名模块被导入了,
+* 如果有就直接取来用;没有就去查阅sys.path里面所有已经储存的目录.
+* 这个列表初始化的时候,通常包含一些来自外部的库(external libraries)或者是来自操作系统的一些库,当然也会有一些类似于dist-package的标准库在里面.这些目录通常是被按照顺序或者是直接去搜索想要的--如果说他们当中的一个包含有期望的package或者是module,这个package或者是module将会在整个过程结束的时候被直接提取出来保存在sys.modules中(sys.modules是一个模块名:模块对象的字典结构).
+* 当在这些个地址中实在是找不着时,它就会抛出一个ModuleNotFoundError错误.
+* 当我们要导入一个模块（比如 foo ）时，解释器首先会根据命名查找内置模块，如果没有找到，它就会去查找 sys.path 列表中的目录，看目录中是否有 foo.py 。sys.path 的初始值来自于：  
+    * 运行脚本所在的目录（如果打开的是交互式解释器则是当前目录）
+    * PYTHONPATH 环境变量（类似于 PATH 变量，也是一组目录名组成）
+    * Python 安装时的默认设置
+* 当然，这个 sys.path 是可以修改的（正如上文提到的一种解决办法）。值得注意的是，如果当前目录包含有和标准库同名的模块，会直接使用当前目录的模块而不是标准模块。
+
+
+## 为啥字符串join比加号连接快
+
+字符串是不可变对象，当用操作符`+`连接字符串的时候，每执行一次`+`都会申请一块新的内存，然后复制上一个`+`操作的结果和本次操作的右操作符到这块内存空间，因此用`+`连接字符串的时候会涉及好几次内存申请和复制。而`join`在连接字符串的时候，会先计算需要多大的内存存放结果，然后一次性申请所需内存并将字符串复制过去，这是为什么`join`的性能优于`+`的原因。所以在连接字符串数组的时候，我们应考虑优先使用`join`。
+
+
+## is和==的区别
+
+官方文档中说 is 表示的是对象标示符（object identity），而 == 表示的是相等（equality）。is 的作用是用来检查对象的标示符是否一致，也就是比较两个对象在内存中的地址是否一样，而 == 是用来检查两个对象是否相等。
+
+我们在检查 a is b 的时候，其实相当于检查 id(a) == id(b)。而检查 a == b 的时候，实际是调用了对象 a 的 __eq()__ 方法，a == b 相当于 a.__eq__(b)。
+
+一般情况下，如果 a is b 返回True的话，即 a 和 b 指向同一块内存地址的话，a == b 也返回True，即 a 和 b 的值也相等。
 
 
 ## 元类

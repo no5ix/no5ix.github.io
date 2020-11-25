@@ -3500,10 +3500,13 @@ type AuthReq struct {
     * 当时拿到的引擎版本的定时器库是基于最小堆的
     * 多级时间轮, 插入/删除/execute复杂度都是o(1)
     * 算法思想: 
-        * 有好几个bucket, 其中一个bucket叫near是差不多要触发的定时器比如[0, 0x100), 和几个定时时长比较久的bucket, 比如[0x100, 0x4000)以及[0x4000, 0x100000)以及[0x100000, 0x4000000)
+        * 把定时器分为 5 个桶，每桶的粒度分别表示为：`1 jiffies，256 jiffies，256*64 jiffies，256*64*64 jiffies，256*64*64*64 jiffies`，每桶bucket中的slot的数量分别为：`256，64，64，64，64`，能表示的范围为 `2^32` 
+        * 这好几个bucket, 其中一个bucket叫near是差不多要触发的定时器范围是`[0, 0x100)`, 和几个定时时长比较久的bucket: `[0x100, 0x4000)以及[0x4000, 0x100000)以及[0x100000, 0x4000000)`
         * tick:
-           每次tick都检查是否已经又经过一轮 TVR_MASK(255) 了, 经过了一轮index就又等于0, 然后就去后面的bucket里找是否有需要调整到near的定时器, 就跟水表一样, 小表转一圈需要调整中表, 中表转一圈则要调整大表
-        * 插入: 有好几个bucket, 然后用类似于取模哈希的思想放入相应的桶里即可
+            * 每次tick都检查`jiffies`是否已经又经过一轮 `TVR_MASK(255)` 了, 经过了一轮index就又等于0, 然后就去后面的`bucket[0][INDEX(0)]`里去拿定时器迁移到near里(这个`INDEX(0)宏其实是拿到jiffies_的第9到14位的值`), 如果`INDEX(0)`也等于0, 则说明`bucket[0]`也轮转迁移了一圈了, 接着就需要去`bucket[1]`里拿定时器迁移到`bucket[0]`里, 后面`INDEX(1)`和`INDEX(2)`对应的bucket调整都以此类推, 这就跟水表一样, 小表转一圈需要调整中表, 中表转一圈则要调整大表差不多
+            * 为啥可以直接把这个`bucket[0][INDEX(0)]`里的定时器直接迁移到near里呢? 因为在插入的时候就是这么哈希的, 举个比较简单的不准确但是可以说明原理的例子, 假如 near里是存最近60秒过期的定时器, `bucket[0][0]`存的是60到120过期的, `bucket[0][1]`的是120到180过期的, 则jiffies等于60的时候就要把`bucket[0][0]`迁移到near里, jiffies等于120的时候`bucket[0][1]`迁移到near里...
+            * 类似于linux的时间轮实现: 假设curr_time=0x12345678，那么下一个检查的时刻为0x12345679。如果`tv1.bucket[0x79]`上链表非空，则下一个检查时刻`tv1.bucket[0x79]`上的定时器节点超时。如果curr_time到了0x12345700，低8位为空，说明有进位产生，这时移出9～14位对应的定时器链表(即正好对应着tv2轮)，把`tv2.bucket[此时9-14位的值]`所对应的timer链表迁移到tv1来，这就完成了一次进位迁移操作。同样地，当curr_time的第9-14位为0时，这表明tv2轮对tv3轮有进位发生，将curr_time第14-19位的值作为下标，移出tv3中对应的定时器链表，然后将它们迁移到tv2去。tv4,tv5依次类推。之所以能够根据curr_time来检查超时链，是因为tv1~tv5轮的度量范围正好依次覆盖了整型的32位：tv1(1-8位)，tv2(9-14位)，tv3(15-20位)，tv4(21-26位)，tv5(27-32位)；而curr_time计数的递增中，低位向高位的进位正是低级时间轮转圈带动高级时间轮走动的过程。
+        * 插入: 有好几个bucket, 然后用类似于取模哈希的思想先判断还有多久过期的区间, 然后根据过期时间expire取他相应的位放入相应的桶里即可, 参考下方代码
         * excute: 
             `near_` 里面的定时器因为都已经在 `addTimerNode` 根据`expire`哈希安插好了, 所以这里 `jiffies_ & TVR_MASK` 出来的index是几, 那就直接从`near_`里取出来执行就完事了,见下方代码
     * 核心代码类似如下
@@ -3517,9 +3520,20 @@ type AuthReq struct {
             {
                 int i = expires & TVR_MASK;  // 因为只关心后8位(即TVR_BITS=8)
                 list = &near_[i];
-            }
+            } else if(idx < (1 << (TVR_BITS + TVN_BITS))) // [0x100, 0x4000)
+            {
+                // 因为不关心后8位(即TVR_BITS=8)的数, 所以直接 expires >> TVR_BITS 了
+                // 又因为 TimerList buckets_[WHEEL_BUCKETS][TVN_SIZE] 的第二维为 TVN_SIZE, 所以要 & TVN_MASK
+                int i = (expires >> TVR_BITS) & TVN_MASK;
+                list = &buckets_[0][i];
+            } else if(idx < (1 << (TVR_BITS + 2 * TVN_BITS))) // [0x4000, 0x100000)
+            {
             ...
         }
+
+        // #define INDEX(N) (   ( jiffies_ >> (8 +  (N) * 6)  )        & 1111 11)
+        #define INDEX(N) ((jiffies_ >> (TVR_BITS + (N) * TVN_BITS)) & TVN_MASK)
+
         // cascades all vectors and executes all expired timer
         int WheelTimer::tick(){
           int fired = 0;
@@ -3562,8 +3576,26 @@ type AuthReq struct {
                 freeNode(node);
             }
             return fired;
+
+            // cascade all the timers at bucket of index up one level
+            bool WheelTimer::cascade(int bucket, int index){
+                // swap list
+                TimerList list;
+                buckets_[bucket][index].swap(list);
+
+                for(auto& node : list){
+                    if(node->id > 0){
+                        addTimerNode(node);  // 把各个定时器往前推, 比如条件达成就挪到this->near_里去
+                    }
+                }
+                // 如INDEX(N), 当N=0, 因为进入本函数之前, jiffies_ & TVR_MASK 是为 0 的,
+                // 说明 jiffies_ 8位以前的高位绝对有不为0的位,
+                // jiffies右移8位然后跟TVN_MASK(即63, 即二进制111111, 六位)做且操作之后的结果 index == 0 ,
+                // 则说明jiffies大于N=0的这个bucket区间了, 还需要调整下一个区间(即 N+1 这个bucket区间),
+                // 就跟水表一样, 小表转一圈需要调整中表, 中表转一圈则要调整大表
+                return index == 0;
+            }
         ```
-    * pybind11
 
 
 ### 网络优化

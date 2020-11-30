@@ -30,10 +30,10 @@ $(document).ready(function () {
   // }()
 
   var clickTitle = function(){
-      // $titleHasChild.dblclick(function(){
-      //     $(this).siblings(".nav-child").hide(100);
-      //     // $(this).siblings("i").toggleClass("hide");
-      // })
+      $titleHasChild.dblclick(function(){
+          $(this).siblings(".nav-child").hide(100);
+          // $(this).siblings("i").toggleClass("hide");
+      })
       // After dblclick enent
       $titleHasChild.click(function(){
 

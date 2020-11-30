@@ -2524,12 +2524,12 @@ consensus 准确的翻译是共识，即多个提议者达成共识的过程，�
 * 系统中的所有进程，看到的操作顺序，都与全局时钟下的顺序一致。
 
 以下图讨论,  
-![](../img/cache_db_consistency/cache_db_consistency_3.png)  
+![](/img/cache_db_consistency/cache_db_consistency_3.png)  
 
 B1 看到 x 的新值，C1 反而看到的是旧值。即对用户来说，x 的值发生了回跳。
 
 在线性一致的系统中，如果 B1 看到的 x 值为 1，则 C1 看到的值也一定为 1。任何操作在该系统生效的时刻都对应时间轴上的一个点。如果我们把这些时刻连接起来，如下图中紫线所示，则这条线会一直沿时间轴向前，不会反向回跳。所以任何操作都需要互相比较决定，谁发生在前，谁发生在后。例如 B1 发生在 A0 前，C1 发生在 A0 后。而在前面顺序一致性模型中，我们无法比较诸如 B1 和 A0 的先后关系。
-![](../img/cache_db_consistency/cache_db_consistency_4.png)  
+![](/img/cache_db_consistency/cache_db_consistency_4.png)  
 
 
 ### 顺序一致性
@@ -2581,7 +2581,7 @@ D:                 -R(x,1)-      --R(x,2)--
 
 #### 举例说明3
 
-![](../img/cache_db_consistency/cache_db_consistency_3.png)  
+![](/img/cache_db_consistency/cache_db_consistency_3.png)  
 这也是顺序一致的, 但是可能不满足产品经理要求.  
 
 从时间轴上可以看到，B0 发生在 A0 之前，读取到的 x 值为 0。B2 发生在 A0 之后，读取到的 x 值为 1。而读操作 B1，C0，C1 与写操作 A0 在时间轴上有重叠，因此他们可能读取到旧的值 0，也可能读取到新的值 1。注意，C1 发生在 B1 之后（二者在时间轴上没有重叠），但是 B1 看到 x 的新值，C1 反而看到的是旧值。即对用户来说，x 的值发生了回跳。

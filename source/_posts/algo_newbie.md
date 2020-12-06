@@ -25,7 +25,7 @@ categories:
 
 # python解题常用标准库模块与函数
 
-* `sorted`函数, 用来排序 
+* `sorted`函数, 用来排序, **注意sorted不会更改原有数组, 返回的才是排序好的数组**
     * 基本操作: `num1 = [2, 1, 3]; sorted_num1 = sorted(num1)`
     * 按key排序:  
     ``` python
@@ -35,8 +35,8 @@ categories:
     ```
 * `heapq`模块, 最小堆
     * heapq有两种方式创建堆，
-        *  一种是使用一个空列表，然后使用heapq.heappush()函数把值加入堆中，
-        *  另外一种就是使用heap.heapify(list)转换列表成为堆结构
+        *  一种是使用一个空列表，然后使用`heapq.heappush()`函数把值加入堆中，
+        *  另外一种就是使用`heap.heapify(test_list)` 转换列表成为堆结构
     ``` python
     import heapq
 
@@ -738,7 +738,7 @@ test_dense_graph graph bfs:
 
 ### 队列中数帽子问题
 
-现有一条排好的队伍，从队首到队尾，队员们都戴着帽子，身高是无序的。假设每个人能看到队伍中在他前面的比他个子矮的人的帽子，（如果出现一个比这个人个子高的人挡住视线，那么此人不能看到高个子前面的任何人的帽子。）现在请计算出这个队伍中一共可以看到多少个帽子？例如给定数组为：[2,1,5,6,2,3]（顺序为从队尾到队首）。
+现有一条排好的队伍，从队首到队尾，队员们都戴着帽子，身高是无序的。假设每个人能看到队伍中在他前面的比他个子矮的人的帽子，（如果出现一个比这个人个子高的人挡住视线，那么此人不能看到高个子前面的任何人的帽子。）现在请计算出这个队伍中一共可以看到多少个帽子？例如给定数组为：`[2,1,5,6,2,3]`（顺序为从队尾到队首）。
 ![](/img/algo_newbie/monotone_stack/mono_stack_2.png)
 
 如图示，答案为3。从暴力角度尝试去解这道题，显然可以做到。对于数组中每个元素，向右去找所有比它小的元素（找第第一个比它大的元素），这样总的时间复杂度为O(n^2)，最坏情况是这是一个单调递减数组，每次都要向右找到数组的最末尾。显然这不是理想的解法，我们可以应用单调栈来解决这个问题。其代码如下：
@@ -758,7 +758,7 @@ int countHats(vector<int>& heights) {
     return sum;
 }
 ```
-在以上代码中，我们维护了一个单调递减栈，在栈中的元素都是单调递减的，这表明栈内的元素还可能看到比它更小的元素（帽子）。当遇到一个比栈顶元素大的元素时，说明栈顶元素不可能看到比它更小的元素了（因为遮挡作用），这时将栈顶元素pop出来，同时更新sum的值，sum += i – top – 1，表示栈顶元素与这个新元素间的距离，也就是栈顶元素能看到的最多的帽子数。在for循环中，每个元素都会入栈和出栈，在出栈过程中总会计算出栈顶元素能看到的最多的帽子数，并更新sum值，当整个队列循环结束后，得到的sum值就是最后队伍中能看到的帽子总数。注意为了使所有元素都能出栈，（糟糕情况是单调递减数列，这时似乎一次出栈都没有发生，原因是最后一个元素后面不可能有新的元素出现了，但单调栈还在期待新的元素出现，为了反映元素不再出现这一事实，我们假设最后一个元素后面出现了一个无穷大的元素），即heights.push_back(INT_MAX)。
+在以上代码中，我们维护了一个单调递减栈，在栈中的元素都是单调递减的，这表明栈内的元素还可能看到比它更小的元素（帽子）。当遇到一个比栈顶元素大的元素时，说明栈顶元素不可能看到比它更小的元素了（因为遮挡作用），这时将栈顶元素pop出来，同时更新sum的值，`sum += i – top – 1`，表示栈顶元素与这个新元素间的距离，也就是栈顶元素能看到的最多的帽子数。在for循环中，每个元素都会入栈和出栈，在出栈过程中总会计算出栈顶元素能看到的最多的帽子数，并更新sum值，当整个队列循环结束后，得到的sum值就是最后队伍中能看到的帽子总数。注意为了使所有元素都能出栈，（糟糕情况是单调递减数列，这时似乎一次出栈都没有发生，原因是最后一个元素后面不可能有新的元素出现了，但单调栈还在期待新的元素出现，为了反映元素不再出现这一事实，我们假设最后一个元素后面出现了一个无穷大的元素），即heights.push_back(INT_MAX)。
 
 ### 寻找第一个比自己大的数
 
@@ -902,31 +902,29 @@ py的整形数字可以视为是以一个无限长的位存储方式来实现的
 但是python:  
 * Python 中 bin 一个负数（十进制表示），打印输出的却是它的原码的二进制表示加上个负号，方便查看（方便个鬼啊）
 * 所以想看python负数的补码得用她和0xffffffff进行与操作, 可以理解为超过32位的东西就不进行考虑了，直接来查看后32位
-* **重点**: 那如果想从一个负数的补码还原成python的负数, 比如把`-3`的补码`0xfffffffd`还原成python的负数, 因为py的整形数字可以视为是以一个无限长的位存储方式来实现的, 所以直接`print 0xfffffffd`他会打印`4294967293`, 因为python把`0xfffffffd`当成了`0x000000000fffffffd`, 符号位在最前面为0, 当成正数了, 所以我们得对它的后32位之前的所有0都取反变为1, 这样符号位为1才是python存储`-1`的真正补码形式, 所以对于一个负数`res`来说, 得这么还原: `~(res ^ 0xffffffff)`, 要先将 末尾32 位取反（即 res ^ 0xffffffff ），再将所有位取反（即 ~ ). 两个组合操作实质上是将数字 末尾32 以前的位取反， 末尾32 位不变。
+* **重点**: 那如果想从一个负数的补码还原成python的负数, 比如把`-3`的补码`0xfffffffd`还原成python的负数, 因为py的整形数字可以视为是以一个无限长的位存储方式来实现的, 所以直接`print 0xfffffffd`他会打印`4294967293`, 因为python把`0xfffffffd`当成了`0x000000000fffffffd`, 符号位在最前面为0, 当成正数了, 所以我们得对它的后32位之前的所有0都取反变为1, 这样符号位为1才是python存储`-1`的真正补码形式, 所以对于一个负数`res`来说, 得这么还原: `~(res ^ 0xffffffff)`, 要先将 末尾32 位取反（即 `res ^ 0xffffffff` ），再将所有位取反（即 ~ ). 两个组合操作实质上是将数字 末尾32 以前的位取反， 末尾32 位不变。
 
 ``` python
 a = bin(3)
 print(a)
+# out: 0b11
 
 # Python 中 bin 一个负数（十进制表示），
 # 打印输出的却是它的原码的二进制表示加上个负号，方便查看（方便个鬼啊）
 a = bin(-3)
 print(a)
+# out: -0b11
  
 # 所以想看python负数的补码得用她和0xffffffff进行与操作,
 # 可以理解为超过32位的东西就不进行考虑了，直接来查看后32位
 b = bin(-3 & 0xffffffff)
 print(b)
+# out: 0b11111111111111111111111111111101
 
 b = 0xfffffffd
 b = ~(b ^ 0xffffffff)
 print(b)
-
-# 输出:  
-# 0b11
-# -0b11
-# 0b11111111111111111111111111111101
-# -3
+# out: -3
 ```
 
 
@@ -1031,7 +1029,7 @@ class Solution(object):
 
 ### 只出现一次的数字系列1
 
-[lc136](https://leetcode-cn.com/problems/single-number/):  
+[lc136](https://leetcode-cn.com/problems/single-number/)  
 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
 ``` python
 class Solution:
@@ -1046,7 +1044,7 @@ class Solution:
 
 ### 只出现一次的数字系列2
 
-[lc136](https://leetcode-cn.com/problems/single-number-ii)  
+[lc137](https://leetcode-cn.com/problems/single-number-ii)  
 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现了三次。找出那个只出现了一次的元素。
 说明：
 你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
@@ -1299,7 +1297,7 @@ print('最后的结果是:', a)
             - 最优的情况下空间复杂度为：O(logn) ；每一次都平分数组的情况
             - 最差的情况下空间复杂度为：O( n ) ；退化为冒泡排序的情况
         - 选择基准的方式决定了两个分割后两个子序列的长度，进而对整个算法的效率产生决定性影响, 比如当如果一个有序递增序列, 每次选基准都选最后一个, 那肯定效率 很差了啊, 此时最差情形的时间复杂度是O(n2)
-        - 不稳定是因为交换嘛, 如果一个数num刚好跟pivot相等, 那partition完的时候, pivot要和partition index位置的数做交换, 如果这个数num刚好在partition index这个位置, 那这两个数就会发生交换, 然后肯定就不稳定了啊
+        - 不稳定是因为等于pivot的num和pivot交换: 如果一个数num刚好跟pivot相等, 那partition完的时候, pivot要和partition index位置的数做交换, 如果这个数num刚好在partition index这个位置, 那这两个数就会发生交换, 然后肯定就不稳定了啊
             - 举个例子：
             待排序数组: `int a[] ={1, 2, 2, 3, 4, 5, 6};`
             在快速排序的随机选择比较子(即pivot)阶段：
@@ -2829,7 +2827,7 @@ class Solution_lc39(object):
         if cur_target_num == 0:
             res_arr.append(copy.deepcopy(middle_state_arr))
             return
-        # 这个cur_index是用来去重的
+        # 这个cur_index是用来去除重复组合的
         for cur_index in range(start_index, len(candidates_arr)):
             middle_state_arr.append(candidates_arr[cur_index])
             cur_target_num -= candidates_arr[cur_index]
@@ -2907,6 +2905,17 @@ print Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]]
 Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) :
 [[1, 3, 6, 8], [1, 4, 5, 8], [1, 4, 6, 7], [2, 3, 5, 8], [2, 3, 6, 7], [2, 4, 5, 7]]
 ```
+
+
+## 排序组合总结
+
+什么时候使用 used 数组，什么时候使用 begin 变量
+有些朋友可能会疑惑什么时候使用 used 数组，什么时候使用 begin 变量。这里为大家简单总结一下：
+
+* 排列问题，讲究顺序（即 [2, 2, 3] 与 [2, 3, 2] 视为不同列表时），需要记录哪些数字已经使用过，此时用 used 数组；
+* 组合问题，不讲究顺序（即 [2, 2, 3] 与 [2, 3, 2] 视为相同列表时），需要按照某种顺序搜索，此时使用 begin 变量。
+
+注意：具体问题应该具体分析， 理解算法的设计思想 是至关重要的，请不要死记硬背。
 
 
 
@@ -3337,7 +3346,7 @@ dp[i][j] = max(
     dp[i−1][j],
     dp[i][j−w[i-1]]+v[i-1])  # j >= w[i-1]
 ```
-可以看出这个状态转移方程与 0-1 背包问题唯一不同就是 max 第二项不是 `dp[i-1]` 而是 `dp[i]`。
+可以看出这个状态转移方程与 0-1 背包问题唯一不同就是i的含义不同导致的 max 第二项不是 `dp[i-1]` 而是 `dp[i]`。
 
 
 ### 背包问题的其他形式
@@ -3362,7 +3371,7 @@ dp[i][j] = max(
 
 ### 背包问题实战
 
-#### lc416-分割等和子集-恰好装满0-1背包问题
+#### 分割等和子集-恰好装满0-1背包问题
 
 [leetcode416题](https://leetcode-cn.com/problems/partition-equal-subset-sum)  
 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
@@ -3381,7 +3390,7 @@ dp[i][j] = max(
 * 我们用了第i个才填满
 
 状态定义：  
-dp[i][j]表示对于容量为 j 的背包，若只是用前 i 个物品(前0个则表示没有物品)，每个数只能用一次，使得这些数的和恰好等于 j  .
+`dp[i][j]`表示对于容量为 j 的背包，若只是用前 i 个物品(前0个则表示没有物品)，每个数只能用一次，使得这些数的和恰好等于 j  .
 (比如说，如果dp[4][9] = true，其含义为：对于容量为 9 的背包，若只是用前 4 个物品，可以有一种方法把背包恰好装满。)。
 
 状态转移方程：很多时候，状态转移方程思考的角度是「分类讨论」，对于「0-1 背包问题」而言就是「当前考虑到的数字选与不选」。
@@ -3439,7 +3448,7 @@ def canPartition(self, nums):
 ```
 
 
-#### lc322-凑金币1-恰好装满的完全背包问题
+#### 凑金币1-恰好装满的完全背包问题
 
 [lc322](https://leetcode-cn.com/problems/coin-change/)  
 先看下题目：给你 `k` 种面值的硬币，面值分别为 `c1, c2 ... ck`，每种硬币的数量无限，再给一个总金额 `amount`，问你**最少**需要几枚硬币凑出这个金额，如果不可能凑出，算法返回 -1 。算法的函数签名如下：
@@ -3448,7 +3457,7 @@ int coinChange(int[] coins, int amount);
 ```
 比如说 `k = 3`，面值分别为 1，2，5，总金额 `amount = 11`。那么最少需要 3 枚硬币凑出，即 11 = 5 + 5 + 1。
 
-如果我们将每种硬币看作是每种物品，面值金额看成是物品的重量，总金额是背包的总容量, 因为硬币无限, 这样此题就是是一个恰好装满的完全背包问题.了。不过这里不是求最多装入多少价值而是求最少装满背包的数目，所以我们只需要将[完全背包](#完全背包问题)的转态转移方程中稍微改改即可:  
+如果我们将每种硬币看作是每种物品，面值金额看成是物品的重量，总金额是背包的总容量, 因为硬币无限, 这样此题就是是一个恰好装满的完全背包问题了。不过这里不是求最多装入多少价值而是求最少装满背包的数目，所以我们只需要将[完全背包](#完全背包问题)的转态转移方程中稍微改改即可:  
 * dp[i][j]定义为: 用前i种硬币可以抽一些硬币出来装满容量为j的背包的最少硬币数量
 * 状态转移方程为: `d[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]]+1)`
 
@@ -3488,7 +3497,7 @@ def coinChange(self, coins, amount):
 ```
 
 
-#### lc518-凑零钱2-恰好装满完全背包问题
+#### 凑零钱2-恰好装满完全背包问题
 
 [lc518](https://leetcode-cn.com/problems/coin-change-2)  
 给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。 
@@ -3562,7 +3571,7 @@ def change(self, amount, coins):
 ```
 
 
-#### lc474-一和零-二维0-1背包
+#### 一和零-二维0-1背包
 
 [lc474](https://leetcode-cn.com/problems/ones-and-zeroes/)  
 给你一个二进制字符串数组 strs 和两个整数 m 和 n 。
@@ -3810,7 +3819,7 @@ dp[i][0] = max(
 
 ## 打家劫舍系列
 
-### lc198-rob1
+### rob1
 
 [leetcode198题](https://leetcode-cn.com/problems/path-sum-iii/)  
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
@@ -3963,7 +3972,7 @@ def rob3_dp(self, bt):
 ```
 
 
-## lc300-LIS问题-最长上升子序列
+## LIS问题-最长上升子序列
 
 [leetcode300题](https://leetcode-cn.com/problems/longest-increasing-subsequence/)  
 LIS即longest-increasing-subsequence  
@@ -4412,7 +4421,7 @@ def superEggDrop2(self, K, N):
 ```
 
 
-## lc343-整数拆分
+## 整数拆分
 
 这一小节, 我们开始讨论最优子结构: 通过求子问题的最优解, 可以获得原问题的最优解.
 
@@ -4498,5 +4507,99 @@ class Solution_integer_break(object):
             for k in xrange(1, j):  # 循环到j-1即可
                 dp[j] = max(dp[j], k*(j-k), k*dp[j-k])
         return dp[n]
+```
+
+
+# 双指针题型
+
+## n数之和问题
+
+[参考](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247485789&idx=1&sn=efc1167b85011c019e05d2c3db1039e6&chksm=9bd7f755aca07e43405baeac62c76b44d8438fe8a69ae77e87cbb5121e71b6ee46f4c626eb98&scene=21#wechat_redirect)  
+
+### 两数之和
+
+先讨论两数之和, 解决思路就是先排序然后用两个指针从首尾两端逼近
+![](/img/algo_newbie/two_pointer/n_sum_1.jpg)
+为了防止结果重复, 指针应该向上图这样移动
+``` cpp
+vector<vector<int>> twoSum(vector<int>& nums, int target) {
+    // nums 数组必须有序
+    sort(nums.begin(), nums.end());
+    int lo = 0, hi = nums.size() - 1;
+    vector<vector<int>> res;
+    while (lo < hi) {
+        int sum = nums[lo] + nums[hi];
+        int left = nums[lo], right = nums[hi];
+        if (sum < target) {
+            while (lo < hi && nums[lo] == left) lo++;
+        } else if (sum > target) {
+            while (lo < hi && nums[hi] == right) hi--;
+        } else {
+            res.push_back({left, right});
+            // 跳过所有重复的元素
+            while (lo < hi && nums[lo] == left) lo++;
+            while (lo < hi && nums[hi] == right) hi--;
+        }
+    }
+    return res;
+}
+```
+
+### 三数之和
+
+确定了第一个数字之后，剩下的两个数字可以是什么呢？其实就是和为 `target - nums[i]`的两个数字呗, 此时`threeSum`函数的实现思路就出来了:  
+先对数组排序, 然后遍历数组, 确定好第一个数字, 后面两个数字这两个数字用`twoSum`的双指针思路来求
+
+### 四数之和
+
+先对数组排序, 然后遍历数组, 确定好第一个数字, 后面三个数字这两个数字用`threeSum`函数来求
+
+### n数之和
+
+以下代码看起来很长，实际上就是把之前的题目解法合并起来了，n == 2 时是 twoSum 的双指针解法，n > 2 时就是穷举第一个数字，然后递归调用计算 (n-1)Sum，组装答案。
+
+需要注意的是，调用这个 nSum 函数之前一定要先给 nums 数组排序，因为 nSum 是一个递归函数，如果在 nSum 函数里调用排序函数，那么每次递归都会进行没有必要的排序，效率会非常低。
+
+``` cpp
+/* 注意：调用这个函数之前一定要先给 nums 排序 */
+vector<vector<int>> nSumTarget(
+    vector<int>& nums, int n, int start, int target) {
+
+    int sz = nums.size();
+    vector<vector<int>> res;
+    // 至少是 2Sum，且数组大小不应该小于 n
+    if (n < 2 || sz < n) return res;
+    // 2Sum 是 base case
+    if (n == 2) {
+        // 双指针那一套操作
+        int lo = start, hi = sz - 1;
+        while (lo < hi) {
+            int sum = nums[lo] + nums[hi];
+            int left = nums[lo], right = nums[hi];
+            if (sum < target) {
+                while (lo < hi && nums[lo] == left) lo++;
+            } else if (sum > target) {
+                while (lo < hi && nums[hi] == right) hi--;
+            } else {
+                res.push_back({left, right});
+                while (lo < hi && nums[lo] == left) lo++;
+                while (lo < hi && nums[hi] == right) hi--;
+            }
+        }
+    } else {
+        // n > 2 时，递归计算 (n-1)Sum 的结果
+        for (int i = start; i < sz; i++) {
+            vector<vector<int>> 
+                sub = nSumTarget(nums, n - 1, i + 1, target - nums[i]);
+            for (vector<int>& arr : sub) {
+                // (n-1)Sum 加上 nums[i] 就是 nSum
+                arr.push_back(nums[i]);
+                res.push_back(arr);
+            }
+            while (i < sz - 1 && nums[i] == nums[i + 1]) i++;
+        }
+    }
+    return res;
+}
 ```
 

@@ -10,14 +10,15 @@ categories:
 
 # pending_fini
 
-* 虚拟文件系统（VFS）是如何抽象的
 * 看看其他内存库的优化实现,,如tcmalloc啥的
 * 算法类
     * 线段树 字典树 lc高频 热门
     * 滑动窗口
+    * 并查集
     * kmp
     * lc 174 地下城游戏问题
     * 矩阵相关的算法题
+    * lfu
 
 
 <!-- * http轮询 -->
@@ -2366,6 +2367,7 @@ Redis键的过期策略，是有定期删除+惰性删除两种。
 
 * **普通的LRU算法**:
     **一般是用哈希表+双向链表来实现的**:
+    ![](/img/noodle_plan/redis/lru_cache_algo.jpg)  
     基于 HashMap 和 双向链表实现 LRU 的整体的设计思路是，可以使用 HashMap 存储 key，这样可以做到 save 和 get key的时间都是 O(1)，而 HashMap 的 Value 指向双向链表实现的 LRU 的 Node 节点. 其核心操作的步骤是:  
     * save(key, value):
     首先在 HashMap 找到 Key 对应的节点，如果节点存在，更新节点的值，并把这个节点移动队头。如果不存在，需要构造新的节点，并且尝试把节点塞到队头，如果LRU空间不足，则通过 tail 淘汰掉队尾的节点，同时在 HashMap 中移除 Key。

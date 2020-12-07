@@ -3598,6 +3598,9 @@ ms --> redis
 
 ![](/img/noodle_plan/g90/mobile_server/mobile_server.png "mobile_server集群示意图")
 
+一般的，在延迟不敏感的情况下，客户端通过连接 gate 来访问 MobileServer。gate 负责代理转发客户端与 game 之间的网络通信数据。由 gate 负责完成对通信数据加密解析、压缩解压操作。
+
+新版本的 gate 基于 TCP 或 KCP 的 mobilerpc 协议对外提供服务。gate 启动后会从 etcd 获取所有集群内所有进程信息，主动连接所有的 game、game manger。
 
 ### 事件驱动模型是咋样的
 
@@ -3757,7 +3760,17 @@ bac --> bas: **6** 选择负载最低的Stub\ncreate_remote_battle
 ```
 
 
-### 如何战斗重连
+### 战斗中杀进程掉线重连还要排队么
+
+不需要
+
+* 玩家在登上游戏服的时候会给namecard微服务(以下简称nc)记录一个在线状态
+* 玩家主动下线的时候也会让游戏服给nc记录一个下线状态, 
+* 如果玩家是杀进程的话
+    * 因为客户端跟游戏服有在线心跳, 所以游戏服知道玩家掉线了, 但是这种情况会为玩家保持5分钟的avatar状态, 5分钟过了, 玩家还没有重连则通知nc玩家下线了
+    * 如果玩家5分钟内重新打开游戏, 此时先会先去渠道拿到token, 然后连接登陆微服务(loginService, 以下简称ls), ls这边去认证服认证之后拿到aid, 然后先去nc里查询他是否处于在线状态, 因为还在5分钟内, 所以nc会返回玩家还在线, 此时玩家不需要走排队流程, 登陆服直接给aid以及随机一个gate地址给客户端, 然后客户端就去连gate连游戏服了, 
+        * 可能并不会连到原来的游戏服进程, 此时当走到avatarservice里面的时候，会通知原来的游戏服进程让原来的avatar先下线，然后再在当前连上的游戏服上面创建avatar
+        * 为啥不做成一定会连回原来的游戏服呢? 因为玩家与游戏服之间还有个gate, gate是无状态的(只负责转发/压缩解压/加解密), 就算nc里记录了原来连的gate的addr也无法连回原来的gs了
 
 在上述分配战斗流程图中:  
 1. 当 BattleAllocatorCenter 通知 BattleAllocatorStub 分配战斗 `create_remote_battle` 成功后
@@ -3765,7 +3778,7 @@ bac --> bas: **6** 选择负载最低的Stub\ncreate_remote_battle
 3. 调用BattleAllocatorCenter的`notify_avt_battle_create`
 4. BattleAllocatorCenter的`notify_avt_battle_create`就会通知大厅服的avt记录`last_battle_info`包括ip/端口/hostnum啥的, 并且`last_battle_info`会存盘
 
-当玩家重连的时候玩家把这个`last_battle_info`信息load出来去相应的战斗服查询是否还有战斗然后重连即可
+当玩家重连的时候玩家把这个`last_battle_info`信息load出来去相应的战斗服查询是否还有战斗然后重连或者退回大厅即可
 
 
 ### 登录微服务和排队微服务
@@ -3808,6 +3821,7 @@ group 排队相关
 登录微服务 -[#blue]> 排队微服务 : query_curr_status(wait_id)
 ...客户端根据当前位置设置定时器持续询问排队信息...
 登录微服务 <[#blue]- 排队微服务 : 排队完成, 返回 AuthReply_Encrypted
+客户端 <[#red]- 登录微服务 : 排队完成, 返回 AuthReply_Encrypted
 end
 
 客户端 -[#red]> 游戏大厅服 : AuthReply_Encrypted
@@ -3892,8 +3906,7 @@ type AuthReq struct {
             * k8s的service介绍: 因为很多运行的容器存在动态、弹性的变化（容器的重启IP地址会变化），因此便产生了service，其资源为此类POD对象提供一个固定、统一的访问接口及负载均衡能力，并借助DNS系统的服务发现功能，解决客户端发现容器难得问题
             * k8s的ingress介绍: 作为HTTP(S)负载均衡器
         * [参考这里](#客户端角度)
-        * 外网用户访问 https://g90agw.nie.netease.com
-        * 内网用户访问 http://g90agw-in.nie.netease.com
+        * 外网和内网用户访问的api-gateway地址不同
     * 排队部分, 怎么判断afk? 谁来配置流速和限额? 游戏服和排队微服务直连么?游戏服是怎么拿到排队微服务的IP的?
         * 有一个叫active的redis哈希表, 会存上次玩家的 query_pos_info 的时间戳ts, 每隔一段时间就去这个哈希表hscan拿100个出来看看 `now_ts -ts`是不是已经大于afk阈值了
         * 游戏服和排队微服务不直连, 是游戏服通过不断的检测redis中的当前在线人数来配置流速和限额的(比如配置的最大在线为8k人, 当前在线2k人, 那发送给排队服的限额就是6k), 游戏服通过api-gateway这个网关的后缀加上`/queue`来访问排队微服务

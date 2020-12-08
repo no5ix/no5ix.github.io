@@ -867,6 +867,316 @@ int largestRectangleArea(vector<int> heights) {
 我们维护一个单调递增栈，当遇到一个新元素小于栈顶元素时，发生出栈行为，表示栈顶元素向右遇到了第一个小于它的元素，同时在栈内的栈顶元素的下面一个元素即是栈顶元素向左寻找时第一个小于它的元素。（这一点的原因值得仔细思考，其实是因为栈顶元素与其下面的元素间在原数组中或许存在很多的元素，但它们必然是比栈顶元素大且比栈顶元素下面的元素小的，它们都在之前被弹出了栈。）在出栈行为发生后，我们需要计算以栈顶元素的高度值作为矩形高度时的矩形面积，而矩形宽度已经可以计算了，因为我们找到了栈顶元素左右两侧小于它的第一个元素，于是局部最优解得到计算。在整个循环中，所有元素进栈一次，出栈一次，时间复杂度为O(n)。
 
 
+## 并查集
+
+[参考](https://blog.csdn.net/qq_38975553/article/details/108154673)  
+
+假设有 n 个村庄，有些村庄之间有连接的路，有些村庄之间并没有连接的路
+
+![](/img/algo_newbie/union_find/union_find_1.jpg)
+
+设计一个数据结构，能够快速执行 2 个操作:  
+* 查询 2 个村庄之间是否有连接的路
+* 连接 2 个村庄 
+
+使用数组、链表、平衡二叉树、集合 (Set), 查询、连接的时间复杂度都是: O(n), 但是:  
+* 并查集能够办到查询、连接的均摊时间复杂度都是 O(α(n)), α(n) < 5  
+* **并查集非常适合解决这类 “连接” 相关的问题**
+
+并查集有2个核心操作:  
+* 查找(Find): 查找元素所在的集合(这里的集合并不是特指Set这种数据结构, 是指广义的数据集合)
+* 合并(Union): 将两个元素所在的集合合并为一个集合
+
+假设并查集处理的数据都是整型，那么可以用整型数组来存储数据, 每个数组坐标index表示某个node, 而每个数组元素的值表示node的parent.  
+
+初始化时，每个元素各自属于一个单元素集合, 父节点parent都是自己:  
+![](/img/algo_newbie/union_find/union_find_11.jpg)
+
+举个普通例子, 如果有下图这种情况:  
+![](/img/algo_newbie/union_find/union_find_2.jpg "并查集例子图1")
+
+则, 从上图中不难看出:   
+* 0、1、3 属于同一集合, 这三个node的根节点都是1
+* 2 单独属于一个集合, 其根节点是自己也就是2
+* 4、5、6、7 属于同一集合, 这四个node的根节点都是6
+
+因此，并查集是可以用数组实现的树形结构 (二叉堆、优先级队列也是可以用数组实现的树形结构)
+
+### Find操作
+
+并查集的find查找操作指的是: 通过parent链条不断地向上找，直到找到根节点.  
+如并查集例子图1, 则
+* find(0) == 1
+* find(1) == 1
+* find(3) == 1
+* find(2) == 2
+* find(5) == 6
+* find(4) == 6
+* find(7) == 6
+
+### Union操作
+
+Quick Union 的 union(v1, v2)：让 v1 的根节点指向 v2 的根节点
+
+![](/img/algo_newbie/union_find/union_find_3.jpg)
+
+在Union的过程中，可能会出现树不平衡的情况，甚至退化成链表
+
+![](/img/algo_newbie/union_find/union_find_5.jpg)
+
+所以一般都会基于rank(也翻译为秩, 其实就是这棵树的层数)的优化, 即层数少的连到层数多的根节点去, 比如下图:  
+
+![](/img/algo_newbie/union_find/union_find_6.jpg)
+
+### 并查集优化-路径压缩
+
+路径减半（Path Halving）：使路径上每隔一个节点就指向其祖父节点(parent的parent), 这是靠在find的时候顺便压缩的
+
+![](/img/algo_newbie/union_find/union_find_4.jpg)
+
+### 并查集代码实现
+
+``` python
+class UnionFind:
+    def __init__(self, node_count):
+        # 初始化时，每个元素各自属于一个单元素集合, 父节点parent都是自己
+        self.parent_list = [ i for i in range(node_count) ]
+        # 秩都初始化为1, 因为只有自己一个节点的时候, 层数为1
+        self.rank_list = [1 for _ in range(node_count) ]
+        # 连通分量个数初始化为node个数, 等做union合并操作的时候再减少
+        self.connected_component_count = node_count
+
+    # 找到val的根节点
+    def find(self, val):
+        while(val != self.parent_list[val]):
+            # 这一步就是路径压缩了, 路径减半
+            self.parent_list[val] = self.parent_list[self.parent_list[val]]
+            val = self.parent_list[val]
+        return val
+
+    # 把val1所属的集合val2所属的集合合并, 也就是把val1的根节点指向val2的根节点(或者反之)
+    def unite(self, val1, val2):
+        # 先找到val1和val2的根节点
+        parent1 = self.find(val1)
+        parent2 = self.find(val2)
+        if parent1 == parent2:
+            return
+        if self.rank_list[parent1] < self.rank_list[parent2]:
+            self.parent_list[parent1] = parent2
+        elif self.rank_list[parent1] > self.rank_list[parent2]:
+            self.parent_list[parent2] = parent1
+        else:  # parent1和parent2的秩相等
+            # 这里反过来`self.parent_list[parent1] = parent2`也行
+            self.parent_list[parent2] = parent1
+            # parent2指向parent1了, 则显而易见的parent2的秩要加1
+            self.rank_list[parent2] += 1
+        self.connected_component_count -= 1
+
+    def is_connected(self, val1, val2):
+        return self.find(val1) == self.find(val2)
+```
+
+### 并查集实战
+
+#### 岛屿数量和朋友圈数量问题
+
+* [朋友圈问题, lc547, medium](https://leetcode-cn.com/problems/friend-circles/) 
+* [岛屿数量问题, lc200, medium](https://leetcode-cn.com/problems/number-of-islands/)  
+
+这两题虽然表述不一样但是其实是同一个问题...好奇leetcode为啥没标注为一样
+[参考](https://leetcode-cn.com/problems/number-of-islands/solution/dao-yu-shu-liang-dfs-by-wang-xiao-shuai-ve/)  
+
+解决本题的思路可以用dfs思路(见本文[岛屿数量-经典floodfill问题](#岛屿数量-经典floodfill问题)),   
+也可以用并查集, 新建一个并查集类 包括parent母结点数组，rank秩数组(优化用)和 count 数量  
+构造初始化时 需要全图遍历一次 把parent对应的有陆地的标号置为和parent数组下标一样的值。海洋都是-1
+比如:
+```
+1 1 1 0
+0 0 1 1
+```
+则 `parent = [0,1,2,-1,-1,-1,6,7]`
+rank为秩 默认为0 若数有2个结点 则秩为1
+比如前两个陆地 1 1 合并后 变为 `parent = [1,1,2,-1,-1,-1,6,7]` 第一块秩为1
+count 初始化 遇到陆地就+1 比如 之前的`count = 5`
+正式求解时 再遍历全图 每个点向上下左右四个方向合并 合并一块`count--`
+之前的 会合并4次 count减去4次 就变成1了 只剩1块岛屿
+具体见下方cpp代码, 注释写的很详细了
+
+``` cpp
+// 定义并查集
+class Djset {
+private:
+    // 数目
+    int count;
+    // 母结点集合
+    vector<int> parent;
+    // 秩（优化用）
+    vector<int> rank;
+public:
+	// 初始构造函数 主要初始化3个私有成员
+	// 默认parent数值为-1 一维，大小 是grid矩阵行数*列数
+	// 默认rank 秩为 0 一维，大小 是grid矩阵行数*列数
+	// 默认count数量为0
+    Djset(vector<vector<char>>& grid):
+        count(0), parent(vector<int>((grid.size()) * (grid[0].size()),-1)),
+        rank(vector<int>((grid.size()) * (grid[0].size()), 0))
+    {
+        int row = grid.size();
+        int col = grid[0].size();
+        for(int i=0; i<row; ++i){
+            for(int j=0; j<col; ++j){
+                if(grid[i][j]=='1'){
+// 初始化 若有陆地块 则母结点等于自己 否则是默认值-1
+// 因为是二维 所以映射到一维数组需要转换一下关系
+// : 行号*行数 + 列号                    
+                    parent[i*col+j] = i*col+j;
+
+// 遇到一块陆地就+1 后面根据连通分量再删
+// 这个count 不是最终答案                    
+                    count++;
+                }
+            }
+        }
+    }
+	// 查 (找结点所在树的根节点) 如1->2->3->5  find(1) 得到 5
+    int find(int x){
+        // if(x!=parent[x]){
+        // （1）路径压缩 优化
+        // 所有子结点全部指向根节点 减少树的深度 但开销较大 不推荐
+        //     parent[x] = find(parent[x]);
+        // }
+        // return parent[x];
+
+        // （2）路径减半 优化
+		// 使路径上每隔一个节点就指向其祖父节点(parent的parent)
+		// 以 1->2->3->4->5 为例  若find(1) 路径查找优化为
+		// 1->3->5 路径减半 减少树的深度 
+        while(x!=parent[x]){
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    }
+	// 并 (一个结点树并到另一个结点树上)
+    void unite(int x1, int x2){
+		// 使用秩优化 按秩合并 避免合成后变成单链表 O(n)复杂度
+		// 找到 x1 和 x2两个树的根结点
+        int f1 = find(x1);
+        int f2 = find(x2);
+		// 不相等才合并 相等就不需要合并了 证明在一棵树上
+        if(f1!=f2){
+		    // 秩f1>f2 f1长一些 把f2的树并在f1上 秩不增加 树总深度不变深
+            if(rank[f1]>rank[f2]){
+                parent[f2] = f1;  // 理解为 f2->f1
+            }else{
+		        // 秩f1<=f2 把f1的树并在f2上
+                parent[f1] = f2;  // f1->f2
+		        // 若 秩f1=f2 合并后秩会+1
+		        // 例： f1:1->2  f2:3<-4   合： 1->2->3<-4 
+                if(rank[f1]==rank[f2]){
+                    rank[f2]++ ;
+                }
+            }
+		    // 两块陆地合并成一块 减去一个数量 很重要！
+            count--;
+        }
+    }
+    int get_count() const{
+        return count;
+    }
+};
+
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int row = grid.size();
+        if(!row){return 0;}
+        int col = grid[0].size();
+        // 初始化并查集对象
+        Djset djs(grid);
+        // 全图遍历
+        for(int i=0; i<row; ++i){
+            for(int j=0; j<col; ++j){
+                // 当前块为陆地
+                if(grid[i][j]=='1'){
+                    // 遍历过 避免重复
+                    grid[i][j]='2';
+                    // 向四个方向合并 有合并就会减去陆地数目得到最终的数目
+                    // 向上
+                    if(i-1>=0 && grid[i-1][j]=='1'){
+                        djs.unite(i*col+j, (i-1)*col + j);
+                    }
+                    // 向左
+                    if(j-1>=0 && grid[i][j-1]=='1'){
+                        djs.unite(i*col+j, (i)*col + j-1);
+                    }
+                    // 向下
+                    if(i+1<row && grid[i+1][j]=='1'){
+                        djs.unite(i*col+j, (i+1)*col + j);
+                    }
+                    // 向右
+                    if(j+1<col && grid[i][j+1]=='1'){
+                        djs.unite(i*col+j, (i)*col + j+1);
+                    }
+                }
+            }
+        }
+        // 得到最终数量
+        return djs.get_count();       
+    }
+};
+```
+
+#### 等式方程的可满足性
+
+[lc990, medium](https://leetcode-cn.com/problems/satisfiability-of-equality-equations)  
+给定一个由表示变量之间关系的字符串方程组成的数组，每个字符串方程 equations[i] 的长度为 4，并采用两种不同的形式之一："a==b" 或 "a!=b"。在这里，a 和 b 是小写字母（不一定不同），表示单字母变量名。  
+只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。 
+示例 1：
+输入：["a==b","b!=a"]
+输出：false
+解释：如果我们指定，a = 1 且 b = 1，那么可以满足第一个方程，但无法满足第二个方程。没有办法分配变量同时满足这两个方程。
+示例 2：
+输入：["b==a","a==b"]
+输出：true
+解释：我们可以指定 a = 1 且 b = 1 以满足满足这两个方程。
+示例 3：
+输入：["a==b","b==c","a==c"]
+输出：true
+示例 4：
+输入：["a==b","b!=c","c==a"]
+输出：false
+示例 5：
+输入：["c==c","b==d","x!=z"]
+输出：true
+
+![](/img/algo_newbie/union_find/990_fig1.gif)  
+
+核心思想是，将 equations 中的算式根据 == 和 != 分成两部分，先处理 == 算式，使得他们通过相等关系各自勾结成门派；然后处理 != 算式，检查不等关系是否破坏了相等关系的连通性。
+
+``` python
+# 26 个英文字母
+unionFind = UnionFind(26)
+# 先让相等的字母形成连通分量
+for equation in equations:
+    if equation[1] == '=':
+        # ord() 函数它以一个字符作为参数，返回对应的 ASCII 数值
+        index1 = ord(equation[0]) - ord('a')
+        index2 = ord(equation[3]) - ord('a')
+        unionFind.union(index1, index2)
+
+# 检查不等关系是否打破相等关系的连通性
+for equation in equations:
+    if equation[1] == '!':
+        index1 = ord(equation[0]) - ord('a')
+        index2 = ord(equation[3]) - ord('a')
+        if (unionFind.is_connected(index1, index2)):
+            # 如果相等关系成立，就是逻辑冲突
+            return False
+return True
+```
+
+
 # 位运算
 
 ## 位运算的套路技巧
@@ -2948,7 +3258,8 @@ Solution_multi_arr_sum().multi_arr_sum([[1, 2], [3, 4], [5, 6, 9], [7, 8]], 18) 
 如下图则有3个岛屿:
 ![](/img/algo_newbie/backtrack_recursion/number_of_islands2.png "有3个岛屿")
 
-代码如下:  
+此题也可以用并查集来解, 见本文的[岛屿数量-并查集实战](#岛屿数量-并查集实战)  
+用dfs的解法代码如下:  
 ``` python
 class Solution_number_of_islands(object):
 
@@ -4512,13 +4823,121 @@ class Solution_integer_break(object):
 
 # 双指针题型
 
-## n数之和问题
+## 最小覆盖子串-滑动窗口典型题目
+
+[lc76, hard](https://leetcode-cn.com/problems/minimum-window-substring/)  
+[参考](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247485141&idx=1&sn=0e4583ad935e76e9a3f6793792e60734&chksm=9bd7f8ddaca071cbb7570b2433290e5e2628d20473022a5517271de6d6e50783961bebc3dd3b&scene=21#wechat_redirect)  
+这里有一套滑动窗口算法的代码框架，我连在哪里做输出 debug 都给你写好了，以后遇到相关的问题，你就默写出来如下框架然后改三个地方就行，还不会出边界问题：
+``` cpp
+/* 滑动窗口算法框架 */
+void slidingWindow(string s, string t) {
+    unordered_map<char, int> need, window;
+    for (char c : t) need[c]++;
+
+    int left = 0, right = 0;
+    int valid = 0; 
+    while (right < s.size()) {
+        // c 是将移入窗口的字符
+        char c = s[right];
+        // 右移窗口
+        right++;
+        // 进行窗口内数据的一系列更新
+        ...
+
+        /*** debug 输出的位置 ***/
+        printf("window: [%d, %d)\n", left, right);
+        /********************/
+
+        // 判断左侧窗口是否要收缩
+        while (window needs shrink) {
+            // d 是将移出窗口的字符
+            char d = s[left];
+            // 左移窗口
+            left++;
+            // 进行窗口内数据的一系列更新
+            ...
+        }
+    }
+}
+```
+其中两处...表示的更新窗口数据的地方，到时候你直接往里面填就行了。而且，这两个...处的操作分别是右移和左移窗口更新操作，等会你会发现它们操作是完全对称的。
+
+我们继续就本题来谈滑动窗口算法的思路是这样：  
+1. 我们在字符串`S`中使用双指针中的左右指针技巧，初始化`left = right = 0`，**把索引左闭右开区间`[left, right)`称为一个「窗口」**。
+2. 我们先不断地增加`right`指针扩大窗口`[left, right)`，直到窗口中的字符串符合要求（包含了`T`中的所有字符）。
+3. 此时，我们停止增加`right`，转而不断增加`left`指针缩小窗口`[left, right)`，直到窗口中的字符串不再符合要求（不包含`T`中的所有字符了）。同时，每次增加`left`，我们都要更新一轮结果。
+4. 重复第 2 和第 3 步，直到`right`到达字符串`S`的尽头。
+
+这个思路其实也不难，**第 2 步相当于在寻找一个「可行解」，然后第 3 步在优化这个「可行解」，最终找到最优解，**也就是最短的覆盖子串。左右指针轮流前进，窗口大小增增减减，窗口不断向右滑动，这就是「滑动窗口」这个名字的来历。
+
+下面画图理解一下，`needs`和`window`相当于计数器，分别记录`T`中字符出现次数和「窗口」中的相应字符的出现次数。
+初始状态：
+![](/img/algo_newbie/slide_window/lc76_1.jpg)
+
+增加`right`，直到窗口`[left, right)`包含了`T`中所有字符：
+![](/img/algo_newbie/slide_window/lc76_2.jpg)
+
+现在开始增加`left`，缩小窗口`[left, right)`。
+![](/img/algo_newbie/slide_window/lc76_3.jpg)
+
+直到窗口中的字符串不再符合要求，`left`不再继续移动。
+![](/img/algo_newbie/slide_window/lc76_4.jpg)
+
+之后重复上述过程，先移动`right`，再移动`left`…… 直到`right`指针到达字符串`S`的末端，算法结束。  
+如果一个字符进入窗口，应该增加window计数器；如果一个字符将移出窗口的时候，应该减少window计数器；当valid满足need时应该收缩窗口；应该在收缩窗口的时候更新最终结果。  
+下面是完整代码：
+``` cpp
+string minWindow(string s, string t) {
+    unordered_map<char, int> need, window;
+    for (char c : t) need[c]++;
+
+    int left = 0, right = 0;
+    int valid = 0;
+    // 记录最小覆盖子串的起始索引及长度
+    int start = 0, len = INT_MAX;
+    while (right < s.size()) {
+        // c 是将移入窗口的字符
+        char c = s[right];
+        // 右移窗口
+        right++;
+        // 进行窗口内数据的一系列更新
+        if (need.count(c)) {
+            window[c]++;
+            if (window[c] == need[c])
+                valid++;
+        }
+        // 判断左侧窗口是否要收缩
+        while (valid == need.size()) {
+            // 在这里更新最小覆盖子串
+            if (right - left < len) {
+                start = left;
+                len = right - left;
+            }
+            // d 是将移出窗口的字符
+            char d = s[left];
+            // 左移窗口
+            left++;
+            // 进行窗口内数据的一系列更新
+            if (need.count(d)) {
+                if (window[d] == need[d])
+                    valid--;
+                window[d]--;
+            }                    
+        }
+    }
+    // 返回最小覆盖子串
+    return len == INT_MAX ?
+        "" : s.substr(start, len);
+}
+```
+
+## n数之和问题-双指针从两端逼近
 
 [参考](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247485789&idx=1&sn=efc1167b85011c019e05d2c3db1039e6&chksm=9bd7f755aca07e43405baeac62c76b44d8438fe8a69ae77e87cbb5121e71b6ee46f4c626eb98&scene=21#wechat_redirect)  
 
 ### 两数之和
 
-先讨论两数之和, 解决思路就是先排序然后用两个指针从首尾两端逼近
+先讨论两数之和, 解决思路就是**先排序**然后用两个指针从首尾两端逼近
 ![](/img/algo_newbie/two_pointer/n_sum_1.jpg)
 为了防止结果重复, 指针应该向上图这样移动
 ``` cpp

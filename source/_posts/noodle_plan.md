@@ -2552,6 +2552,10 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 
 ## Raft选主过程
 
+<video width="100%" controls="controls">
+<source src="/img/noodle_plan/etcd/leader_election.webm" type="video/mp4" />
+</video>
+
 [动画演示Raft选主](http://thesecretlivesofdata.com/raft/#election)  
 前提知识:  
 * Election timeout选举周期: The election timeout is the amount of time a follower waits until becoming a candidate.
@@ -2575,6 +2579,10 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 
 
 ## 数据读写流程如何保证一致性的
+
+<video width="100%" controls="controls">
+<source src="/img/noodle_plan/etcd/log_replication.webm" type="video/mp4" />
+</video>
 
 [Raft的log entry的复制流程动画](http://thesecretlivesofdata.com/raft/#replication)
 

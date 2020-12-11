@@ -30,29 +30,34 @@ $(document).ready(function () {
   // }()
 
   var clickTitle = function(){
-      $titleHasChild.dblclick(function(){
+    var temp_timer = null;
+    $titleHasChild.dblclick(function(){
+          clearTimeout(temp_timer);
           $(this).siblings(".nav-child").hide(100);
           // $(this).siblings("i").toggleClass("hide");
-      })
-      // After dblclick enent
-      $titleHasChild.click(function(){
-
-          var $curentTocChild = $(this).siblings(".nav-child");
-          if ($curentTocChild.is(":hidden")) {
-              $curentTocChild.show(100);
-              // $(this).siblings("i").toggleClass("hide");
-          }
-          // var $subToc = $titleHasChild.next(".nav-child");
-          // alert(1);
-          var $currentSubToc = $(this).siblings(".nav-child").find(".nav-link").next(".nav-child");
-          // if ($(this).siblings(".nav-child").is(":hidden")) {
-          if ($currentSubToc.is(":hidden")) {
-              // $curentTocChild.show(100);
-              $currentSubToc.show(100);
-              // $(this).siblings("i").toggleClass("hide");
-          }
-      })
-  }()
+    })
+    // After dblclick enent
+    $titleHasChild.click(function(){
+        clearTimeout(temp_timer);
+        var that = this
+        temp_timer = setTimeout(function() {
+            var $curentTocChild = $(that).siblings(".nav-child");
+            if ($curentTocChild.is(":hidden")) {
+                $curentTocChild.show(100);
+                // $(that).siblings("i").toggleClass("hide");
+            }
+            // var $subToc = $titleHasChild.next(".nav-child");
+            // alert(1);
+            var $currentSubToc = $(that).siblings(".nav-child").find(".nav-link").next(".nav-child");
+            // if ($(that).siblings(".nav-child").is(":hidden")) {
+            if ($currentSubToc.is(":hidden")) {
+                // $curentTocChild.show(100);
+                $currentSubToc.show(100);
+                // $(that).siblings("i").toggleClass("hide");
+            }
+        }, 250);
+    })
+}()
 
 
   var clickTocTitle = function(){

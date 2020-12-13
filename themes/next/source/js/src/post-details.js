@@ -2,6 +2,9 @@
 
 $(document).ready(function () {
 
+  var html = $('html');
+  var hasVelocity = $.isFunction(html.velocity);
+
   initScrollSpy();
   NexT.utils.needAffix() && initAffix();
   initTOCDimension();
@@ -29,18 +32,23 @@ $(document).ready(function () {
   //     })
   // }()
 
+  var temp_timer = null;
+  var temp_timer2 = null;
+
   var clickTitle = function(){
-    var temp_timer = null;
     $titleHasChild.dblclick(function(){
           clearTimeout(temp_timer);
+          clearTimeout(temp_timer2);
           $(this).siblings(".nav-child").hide(100);
           // $(this).siblings("i").toggleClass("hide");
     })
     // After dblclick enent
     $titleHasChild.click(function(){
         clearTimeout(temp_timer);
-        var that = this
+        var that = this;
         temp_timer = setTimeout(function() {
+
+            // 展开当前toc下的所有toc
             var $curentTocChild = $(that).siblings(".nav-child");
             if ($curentTocChild.is(":hidden")) {
                 $curentTocChild.show(100);
@@ -57,7 +65,43 @@ $(document).ready(function () {
             }
         }, 250);
     })
-}()
+  }()
+
+  
+  // TOC item animation navigate & prevent #item selector in adress bar.
+  // $('.post-toc a').on('click', function (e) {
+  // 上面两行的注释已无效, 下面这段代码用于实现锚点链接的平滑滚动, 且在浏览器URL处不显示锚点(即#之后的内容), 即URL地址不会发生变化
+  // $('a[href^=#],area[href^=#]') 表示 href开头为#的元素
+  // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
+  $('a[href^=#],area[href^=#]').on('click', function (e) {
+    e.preventDefault();  // 取消事件的默认动作。注释这一行则可以在浏览器URL处显示锚点(即#之后的内容)
+    
+    clearTimeout(temp_timer2);
+    var that = this;
+    temp_timer2 = setTimeout(function() {
+        var cur_href = that.getAttribute('href');
+        if (window.history){ 
+          // 如果支持History API 
+          // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+          // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
+          var state = {title:'',url:cur_href.split("#")[0]};
+          history.pushState(state, '', "#" + cur_href.split("#")[1]);
+          //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+        } 
+        // 处理滚动动画
+        var targetSelector = NexT.utils.escapeSelector(cur_href);
+        var offset = $(targetSelector).offset().top - 170; // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题
+        hasVelocity ?
+          html.velocity('stop').velocity('scroll', {
+            offset: offset  + 'px',
+            mobileHA: false
+          }) :
+          $('html, body').stop().animate({
+            scrollTop: offset
+          }, 500);
+    }, 250);
+
+  });
 
 
   var clickTocTitle = function(){
@@ -239,26 +283,6 @@ $(document).ready(function () {
 
     item.siblings().removeClass(activeTabClassName);
     item.addClass(activeTabClassName);
-  });
-
-  // TOC item animation navigate & prevent #item selector in adress bar.
-  // $('.post-toc a').on('click', function (e) {
-  // 上面两行的注释已无效, 下面这段代码用于实现锚点链接的平滑滚动, 且在浏览器URL处不显示锚点(即#之后的内容), 即URL地址不会发生变化
-  // $('a[href^=#],area[href^=#]') 表示 href开头为#的元素
-  // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
-  $('a[href^=#],area[href^=#]').on('click', function (e) {
-    // e.preventDefault();  // 取消事件的默认动作。注释这一行则可以在浏览器URL处显示锚点(即#之后的内容)
-    var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-    var offset = $(targetSelector).offset().top - 170; // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题
-
-    hasVelocity ?
-      html.velocity('stop').velocity('scroll', {
-        offset: offset  + 'px',
-        mobileHA: false
-      }) :
-      $('html, body').stop().animate({
-        scrollTop: offset
-      }, 500);
   });
 
   // Expand sidebar on post detail page by default, when post has a toc.

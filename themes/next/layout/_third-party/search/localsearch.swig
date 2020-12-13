@@ -1,14 +1,15 @@
 {% if theme.local_search.enable %}
   <script type="text/javascript">
 
+    var is_load_xml_finished = 0;
+
     var searchFunc = function (path, search_id, content_id) {
       // 0x00. environment initialization
       'use strict';
 
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      var datas = [];
-      var is_load_xml_finished = 0;
+      // var datas = [];
 
       /* loading css1 : Dot Css Loader*/
       var DotLoader = "<div class='loader'>Loading...</div>";
@@ -120,7 +121,12 @@
         }
         else
         {
-          datas.forEach(function (data) {
+          // Retrieve the object from storage
+          var retrievedObject = localStorage.getItem('local_search_xml_data');
+          var xml_resp = JSON.parse(retrievedObject)
+
+          xml_resp.forEach(function (data) {
+          // datas.forEach(function (data) {
             var isMatch = true;
             var content_index = [];
             if (!data.title || data.title.trim() === '') {
@@ -200,11 +206,7 @@
                     orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
                   });
                 }
-
-                
-                
                 str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
-
                 str += "<p class=\"search-result\">" + match_content + "...</p>"
               }
               str += "</li>";
@@ -221,8 +223,6 @@
       }
 
       $input.addEventListener('input', function () {
-        
-
         // 0x03. parse query to keywords list
         str = '<ul class=\"search-result-list\">';
         temp_keyword = this.value.trim();
@@ -255,38 +255,32 @@
 
           $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 1000);
         }
-
       });
 
 
-      $.ajax({
-        // 0x01. load xml file
-        url: path,
-        dataType: "xml",
-        success: function (xmlResponse) {
-          // 0x02. parse xml file
-          datas = $("entry", xmlResponse).map(function () {
-            return {
-              title: $("title", this).text(),
-              content: $("content", this).text(),
-              url: $("url", this).text(),
-              encrypted: $("encrypted", this).text(),
-            };
-          }).get();
+      var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+      if (!local_search_xml_data) {
+        $.ajax({
+          // 0x01. load xml file
+          url: path,
+          dataType: "xml",
+          success: function (xmlResponse) {
+            store_search_xml(xmlResponse);
 
-          // setTimeout(function(){
-          //   is_load_xml_finished = 1;
+            // setTimeout(function(){
+            //   is_load_xml_finished = 1;
 
-          //   handleSearch();
-          //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
-          // }, 2000);
-          
-          is_load_xml_finished = 1;
+            //   handleSearch();
+            //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+            // }, 2000);
+            
+            // is_load_xml_finished = 1;
 
-          handleSearch();
-          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
-        }
-      });
+            handleSearch();
+            $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+          }
+        });
+      }
 
       $(document).on('click', '#local-search-close', function() {
         CloseLocalSearch();
@@ -308,8 +302,6 @@
       //     CloseLocalSearch();
       //   }
       // });
-      
-      
     }
 
     function isMobile() {
@@ -343,20 +335,53 @@
       // return !isiPad && userAgent.match(pattern);
     }
 
+    function store_search_xml(xmlResponse) {
+        datas = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(datas));
+        is_load_xml_finished = 1;
+
+        console.log("store search.xml finished.");
+    }
+
+    function ajax_store_search_xml() {
+      $.ajax({
+        url: "/search.xml",
+        dataType: "xml",
+        success: function (xmlResponse) {
+            store_search_xml(xmlResponse);
+        }
+      });
+    }
+
     var getSearchFile = function(){
       var path = "/search.xml";
       var local_search_result_name = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
       searchFunc(path, 'local-search-input', local_search_result_name);
     }
 
-    // preload search.xml
-    $.ajax({
-      url: "/search.xml",
-      dataType: "xml",
-      success: function (xmlResponse) {
-        console.log("load search.xml finished.");
-      }
-    });
+    var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    if (local_search_xml_data) {
+      is_load_xml_finished = 1
+    }
+    var last_use_local_search_date = localStorage.getItem('last_use_local_search_date');
+    var curDate = new Date();
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_use_local_search_date != curDate.getDate() || !local_search_xml_data) {
+      // preload search.xml
+      ajax_store_search_xml();
+    }
+
+    localStorage.setItem('last_use_local_search_date', curDate.getDate());
+    
 
   </script>
 {% endif %}

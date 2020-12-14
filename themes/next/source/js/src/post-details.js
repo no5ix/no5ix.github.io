@@ -183,8 +183,32 @@ $(document).ready(function () {
         // console.log($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
         // Scrolling to center active TOC element if TOC content is taller then viewport.
         $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
+
+
+        // var $itemHasChild = $(".post-toc-content .nav-item:has(> .nav-child)");
+        var that = $(tocSelector + ' .active').first().children(".nav-link");
+        // 展开当前toc下的所有toc
+        var $curentTocChild = $(that).siblings(".nav-child");
+        if ($curentTocChild.is(":hidden")) {
+            $curentTocChild.show(100);
+            // $(that).siblings("i").toggleClass("hide");
+        }
+        // var $subToc = $titleHasChild.next(".nav-child");
+        // alert(1);
+        var $currentSubToc = $(that).siblings(".nav-child").find(".nav-link").next(".nav-child");
+        // if ($(that).siblings(".nav-child").is(":hidden")) {
+        if ($currentSubToc.is(":hidden")) {
+            // $curentTocChild.show(100);
+            $currentSubToc.show(100);
+            // $(that).siblings("i").toggleClass("hide");
+        }
+
       })
-      .on('clear.bs.scrollspy', removeCurrentActiveClass);
+      // .on('clear.bs.scrollspy', removeCurrentActiveClass);
+      .on('clear.bs.scrollspy', function() {
+        // $(tocSelector + ' .active').first().children(".nav-link").siblings(".nav-child").hide(100);
+        removeCurrentActiveClass();
+      });
 
     $('body').scrollspy({ target: tocSelector });
 

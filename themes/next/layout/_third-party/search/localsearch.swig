@@ -121,9 +121,8 @@
         }
         else
         {
-          // Retrieve the object from storage
-          var retrievedObject = localStorage.getItem('local_search_xml_data');
-          var xml_resp = JSON.parse(retrievedObject)
+          // Retrieve the object from local storage
+          var xml_resp = retrieve_search_xml()
 
           xml_resp.forEach(function (data) {
           // datas.forEach(function (data) {
@@ -359,6 +358,13 @@
             store_search_xml(xmlResponse);
         }
       });
+    }
+
+    function retrieve_search_xml() {
+        // Retrieve the object from local storage
+        var retrievedObject = localStorage.getItem('local_search_xml_data');
+        var xml_resp = JSON.parse(retrievedObject)
+        return xml_resp
     }
 
     var getSearchFile = function(){

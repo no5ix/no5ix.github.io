@@ -377,7 +377,6 @@
     if (local_search_xml_data) {
       is_load_xml_finished = 1;
       console.log("load search.xml finished.");
-
     }
     var last_use_local_search_date = localStorage.getItem('last_use_local_search_date');
     var curDate = new Date();

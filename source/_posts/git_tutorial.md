@@ -142,8 +142,10 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 
 # 撤销与回退
 
-- 比如只是撤销某个文件test_file的修改(还未被add的) : 
-`git checkout -- test_file`
+- 比如只是撤销某个文件test_file的修改或者某个目录一下的所有文件的修改(都是指还未被add的) : 
+	* `git checkout -- test_file`
+	* `git checkout -- .`
+	* `git checkout -- temp_folder/`
 - 撤销刚刚的git add : 
 	- `git reset HEAD` : 把add了的都从**暂存区**中移出
 	- `git reset HEAD test_file` : 只把test_file从**暂存区**中移出

@@ -48,6 +48,9 @@ Inspired by Alfred/Wox/Listary/Capslock+/utools, thank u.
 <!-- * **game mode** : double Alt then input `game` -->
 
 
+**. . .**<!-- more -->
+
+
 # CMDs
 
 * `nox` : nox official site

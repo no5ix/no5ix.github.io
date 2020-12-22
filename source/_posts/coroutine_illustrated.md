@@ -165,7 +165,7 @@ int swapcontext(ucontext_t *oucp, ucontext_t *ucp);
 实现用户线程的过程是：
 
 1.  我们首先调用 getcontext 获得当前上下文
-2.  修改当前上下文 ucontext_t 来指定新的上下文，如指定栈空间极其大小，设置用户线程执行完后返回的后继上下文（即主函数的上下文）等
+2.  修改当前上下文 ucontext_t 来指定新的上下文，如指定栈空间及其大小，设置用户线程执行完后返回的后继上下文（即主函数的上下文）等
 3.  调用 makecontext 创建上下文，并指定用户线程中要执行的函数
 4.  切换到用户线程上下文去执行用户线程（如果设置的后继上下文为主函数，则用户线程执行完后会自动返回主函数）。
 
@@ -221,6 +221,10 @@ g++ example-switch.cpp -o example-switch
 
 ```
 cxy@ubuntu:~$ ./example-switch
+1
+11
+111
+1111
 main
 cxy@ubuntu:~$
 ```
@@ -242,6 +246,10 @@ child.uc_link = NULL;
 
 ```
 cxy@ubuntu:~$ ./example-switch
+1
+11
+111
+1111
 cxy@ubuntu:~$
 ```
 
@@ -428,6 +436,14 @@ g++ example-uthread.cpp -o example-uthread
 
 ```
 cxy@ubuntu:~/mythread$./example-uthread
+22
+22
+3333
+3333
+22
+22
+3333
+3333
 main over
 cxy@ubuntu:~/mythread$
 ```

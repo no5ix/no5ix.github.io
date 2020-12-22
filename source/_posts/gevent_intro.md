@@ -9,261 +9,273 @@ categories:
 ---
 
 
-
 **. . .**<!-- more -->
 
-<div class="entry-content">
-		<p>gevent的协程是基于greenlet的，并基于libev实现快速事件循环（Linux上是epoll，FreeBSD上是kqueue，Mac OS X上是select）。有了gevent，协程的使用将无比简单，你根本无须像greenlet一样显式的切换，每当一个协程阻塞时，程序将自动调度，gevent处理了所有的底层细节。让我们看个例子来感受下吧。</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+gevent，它是一个并发网络库。它的协程是基于 [greenlet](http://www.bjhee.com/greenlet.html) 的，并基于 libev 实现快速事件循环（Linux 上是 epoll，FreeBSD 上是 kqueue，Mac OS X 上是 select）。有了 gevent，协程的使用将无比简单，你根本无须像 greenlet 一样显式的切换，每当一个协程阻塞时，程序将自动调度，gevent 处理了所有的底层细节。让我们看个例子来感受下吧。
 
-		<div id="crayon-5d24ce1c01df9805388809" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-14">14</div><div class="crayon-num" data-line="crayon-5d24ce1c01df9805388809-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01df9805388809-16">16</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-2">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-3"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">test1</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-cn">12</span></div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-cn">34</span></div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-8"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">test2</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-cn">56</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-cn">78</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-12">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-13"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">test1</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5d24ce1c01df9805388809-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">test2</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01df9805388809-16"><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0007 seconds] -->
-<p></p>
-<p>解释下，&#8221;gevent.spawn()&#8221;方法会创建一个新的greenlet协程对象，并运行它。&#8221;gevent.joinall()&#8221;方法会等待所有传入的greenlet协程运行结束后再退出，这个方法可以接受一个&#8221;timeout&#8221;参数来设置超时时间，单位是秒。运行上面的程序，执行顺序如下：</p>
-<ol style="margin-left:1em">
-<li>先进入协程test1，打印12</li>
-<li>遇到&#8221;gevent.sleep(0)&#8221;时，test1被阻塞，自动切换到协程test2，打印56</li>
-<li>之后test2被阻塞，这时test1阻塞已结束，自动切换回test1，打印34</li>
-<li>当test1运行完毕返回后，此时test2阻塞已结束，再自动切换回test2，打印78</li>
-<li>所有协程执行完毕，程序退出</li>
-</ol>
-<p>所以，程序运行下来的输出就是：</p>
-<pre>
+``` python
+import gevent
+
+def test1():
+    print 12
+    gevent.sleep(0)
+    print 34
+
+def test2():
+    print 56
+    gevent.sleep(0)
+    print 78
+
+gevent.joinall([
+    gevent.spawn(test1),
+    gevent.spawn(test2),
+])
+```
+
+解释下，`gevent.spawn()`方法会创建一个新的 greenlet 协程对象，并运行它。`gevent.joinall()`方法会等待所有传入的 greenlet 协程运行结束后再退出，这个方法可以接受一个`timeout`参数来设置超时时间，单位是秒。运行上面的程序，执行顺序如下：
+
+1.  先进入协程 test1，打印 12
+2.  遇到`gevent.sleep(0)`时，test1 被阻塞，自动切换到协程 test2，打印 56
+3.  之后 test2 被阻塞，这时 test1 阻塞已结束，自动切换回 test1，打印 34
+4.  当 test1 运行完毕返回后，此时 test2 阻塞已结束，再自动切换回 test2，打印 78
+5.  所有协程执行完毕，程序退出
+
+所以，程序运行下来的输出就是：
+
+```
 12
 56
 34
 78
-</pre>
-<p>注意，这里与<a href="/greenlet.html">上一篇greenlet</a>中第一个例子运行的结果不一样，greenlet一个协程运行完后，必须显式切换，不然会返回其父协程。而在gevent中，一个协程运行完后，它会自动调度那些未完成的协程。</p>
-<p>我们换一个更有意义的例子：</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+```
 
-		<div id="crayon-5d24ce1c01e05798046415" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e05798046415-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e05798046415-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e05798046415-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e05798046415-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e05798046415-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e05798046415-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e05798046415-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e05798046415-8">8</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e05798046415-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e05798046415-2"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">socket</span></div><div class="crayon-line" id="crayon-5d24ce1c01e05798046415-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e05798046415-4"><span class="crayon-v">urls</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'www.baidu.com'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'www.gevent.org'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'www.python.org'</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5d24ce1c01e05798046415-5"><span class="crayon-v">jobs</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-k ">socket</span><span class="crayon-sy">.</span><span class="crayon-v">gethostbyname</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">url</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">url </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">urls</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e05798046415-6"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-v">jobs</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">timeout</span><span class="crayon-o">=</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e05798046415-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e05798046415-8"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">job</span><span class="crayon-sy">.</span><span class="crayon-e">value </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">job </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">jobs</span><span class="crayon-sy">]</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0007 seconds] -->
-<p></p>
-<p>我们通过协程分别获取三个网站的IP地址，由于打开远程地址会引起IO阻塞，所以gevent会自动调度不同的协程。另外，我们可以通过协程对象的&#8221;value&#8221;属性，来获取协程函数的返回值。</p>
-<h4 id='monkey-patch'>猴子补丁 Monkey patching</h4>
-<p>细心的朋友们在运行上面例子时会发现，其实程序运行的时间同不用协程是一样的，是三个网站打开时间的总和。可是理论上协程是非阻塞的，那运行时间应该等于最长的那个网站打开时间呀？其实这是因为Python标准库里的socket是阻塞式的，DNS解析无法并发，包括像urllib库也一样，所以这种情况下用协程完全没意义。那怎么办？</p>
-<p>一种方法是使用gevent下的socket模块，我们可以通过&#8221;from gevent import socket&#8221;来导入。不过更常用的方法是使用猴子布丁（Monkey patching）:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+注意，这里与[上一篇 greenlet](http://www.bjhee.com/greenlet.html) 中第一个例子运行的结果不一样，greenlet 一个协程运行完后，必须显式切换，不然会返回其父协程。而在 gevent 中，一个协程运行完后，它会自动调度那些未完成的协程。
 
-		<div id="crayon-5d24ce1c01e07499796964" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e07499796964-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e07499796964-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e07499796964-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e07499796964-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e07499796964-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e07499796964-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e07499796964-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e07499796964-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e07499796964-9">9</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e07499796964-1"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-e">gevent </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-v">monkey</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">monkey</span><span class="crayon-sy">.</span><span class="crayon-e">patch_socket</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e07499796964-2"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line" id="crayon-5d24ce1c01e07499796964-3"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">socket</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e07499796964-4">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e07499796964-5"><span class="crayon-v">urls</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'www.baidu.com'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'www.gevent.org'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'www.python.org'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e07499796964-6"><span class="crayon-v">jobs</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-k ">socket</span><span class="crayon-sy">.</span><span class="crayon-v">gethostbyname</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">url</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">url </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">urls</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5d24ce1c01e07499796964-7"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-v">jobs</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">timeout</span><span class="crayon-o">=</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e07499796964-8">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e07499796964-9"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">job</span><span class="crayon-sy">.</span><span class="crayon-e">value </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">job </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">jobs</span><span class="crayon-sy">]</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0006 seconds] -->
-<p></p>
-<p>上述代码的第一行就是对socket标准库打上猴子补丁，此后socket标准库中的类和方法都会被替换成非阻塞式的，所有其他的代码都不用修改，这样协程的效率就真正体现出来了。Python中其它标准库也存在阻塞的情况，gevent提供了&#8221;monkey.patch_all()&#8221;方法将所有标准库都替换。</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+我们换一个更有意义的例子：
 
-		<div id="crayon-5d24ce1c01e08835494690" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e08835494690-1">1</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e08835494690-1"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-e">gevent </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-v">monkey</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">monkey</span><span class="crayon-sy">.</span><span class="crayon-e">patch_all</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0002 seconds] -->
-<p>使用猴子补丁褒贬不一，但是官网上还是建议使用&#8221;patch_all()&#8221;，而且在程序的第一行就执行。</p>
-<h4>获取协程状态</h4>
-<p>协程状态有已启动和已停止，分别可以用协程对象的&#8221;started&#8221;属性和&#8221;ready()&#8221;方法来判断。对于已停止的协程，可以用&#8221;successful()&#8221;方法来判断其是否成功运行且没抛异常。如果协程执行完有返回值，可以通过&#8221;value&#8221;属性来获取。另外，greenlet协程运行过程中发生的异常是不会被抛出到协程外的，因此需要用协程对象的&#8221;exception&#8221;属性来获取协程中的异常。下面的例子很好的演示了各种方法和属性的使用。</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+``` python
+import gevent
+import socket
 
-		<div id="crayon-5d24ce1c01e09760840873" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="cr协程状态yon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-14">14</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-16">16</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-18">18</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-20">20</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-22">22</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-24">24</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-26">26</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-28">28</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-30">30</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-32">32</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e09760840873-34">34</div><div class="crayon-num" data-line="crayon-5d24ce1c01e09760840873-35">35</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-1"><span class="crayon-c">#coding:utf8</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-2"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-4"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">win</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-s">'You win!'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-6">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-7"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">fail</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">raise</span><span class="crayon-h"> </span><span class="crayon-k ">Exception</span><span class="crayon-sy">(</span><span class="crayon-s">'You failed!'</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-10"><span class="crayon-v">winner</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">win</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-11"><span class="crayon-v">loser</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">fail</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-12">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-13"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">winner</span><span class="crayon-sy">.</span><span class="crayon-v">started</span><span class="crayon-h"> </span><span class="crayon-c"># True</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-14"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">loser</span><span class="crayon-sy">.</span><span class="crayon-v">started</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># True</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-15">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-16"><span class="crayon-c"># 在Greenlet中发生的异常，不会被抛到Greenlet外面。</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-17"><span class="crayon-c"># 控制台会打出Stacktrace，但程序不会停止</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-18"><span class="crayon-st">try</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-v">winner</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">loser</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-20"><span class="crayon-st">except</span><span class="crayon-h"> </span><span class="crayon-k ">Exception</span><span class="crayon-h"> </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">e</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c"># 这段永远不会被执行</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'This will never be reached'</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-23">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-24"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">winner</span><span class="crayon-sy">.</span><span class="crayon-e">ready</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># True</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-25"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">loser</span><span class="crayon-sy">.</span><span class="crayon-e">ready</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># True</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-26">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-27"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">winner</span><span class="crayon-sy">.</span><span class="crayon-v">value</span><span class="crayon-h"> </span><span class="crayon-c"># 'You win!'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-28"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">loser</span><span class="crayon-sy">.</span><span class="crayon-v">value</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># None</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-29">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-30"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">winner</span><span class="crayon-sy">.</span><span class="crayon-e">successful</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># True</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-31"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">loser</span><span class="crayon-sy">.</span><span class="crayon-e">successful</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># False</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-32">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-33"><span class="crayon-c"># 这里可以通过raise loser.exception 或 loser.get()</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e09760840873-34"><span class="crayon-c"># 来将协程中的异常抛出</span></div><div class="crayon-line" id="crayon-5d24ce1c01e09760840873-35"><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">loser</span><span class="crayon-sy">.</span><span class="crayon-k ">exception</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0012 seconds] -->
-<p></p>
-<h4>协程运行超时</h4>
-<p>之前我们讲过在&#8221;gevent.joinall()&#8221;方法中可以传入timeout参数来设置超时，我们也可以在全局范围内设置超时时间：</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+urls = ['www.baidu.com', 'www.gevent.org', 'www.python.org']
+jobs = [gevent.spawn(socket.gethostbyname, url) for url in urls]
+gevent.joinall(jobs, timeout=5)
 
-		<div id="crayon-5d24ce1c01e0a365079033" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0a365079033-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0a365079033-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0a365079033-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0a365079033-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0a365079033-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0a365079033-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0a365079033-13">13</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0a365079033-2"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-e">gevent </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">Timeout</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0a365079033-4"><span class="crayon-v">timeout</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">Timeout</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 2 seconds</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-5"><span class="crayon-v">timeout</span><span class="crayon-sy">.</span><span class="crayon-e">start</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0a365079033-6">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-7"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">wait</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0a365079033-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0a365079033-10"><span class="crayon-st">try</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">wait</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">join</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0a365079033-12"><span class="crayon-st">except</span><span class="crayon-h"> </span><span class="crayon-v">Timeout</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0a365079033-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-s">'Could not complete'</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0003 seconds] -->
-<p></p>
-<p>上例中，我们将超时设为2秒，此后所有协程的运行，如果超过两秒就会抛出&#8221;Timeout&#8221;异常。我们也可以将超时设置在with语句内，这样该设置只在with语句块中有效：</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+print [job.value for job in jobs]
+```
 
-		<div id="crayon-5d24ce1c01e0c355039458" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e0c355039458-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0c355039458-2">2</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e0c355039458-1"><span class="crayon-st">with</span><span class="crayon-h"> </span><span class="crayon-e">Timeout</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0c355039458-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0001 seconds] -->
-<p></p>
-<p>此外，我们可以指定超时所抛出的异常，来替换默认的&#8221;Timeout&#8221;异常。比如下例中超时就会抛出我们自定义的&#8221;TooLong&#8221;异常。</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+我们通过协程分别获取三个网站的 IP 地址，由于打开远程地址会引起 IO 阻塞，所以 gevent 会自动调度不同的协程。另外，我们可以通过协程对象的”value” 属性，来获取协程函数的返回值。
 
-		<div id="crayon-5d24ce1c01e0d244222216" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e0d244222216-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0d244222216-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0d244222216-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0d244222216-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0d244222216-5">5</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e0d244222216-1"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">TooLong</span><span class="crayon-sy">(</span><span class="crayon-k ">Exception</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0d244222216-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">pass</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0d244222216-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0d244222216-4"><span class="crayon-st">with</span><span class="crayon-h"> </span><span class="crayon-e">Timeout</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">TooLong</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0d244222216-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0001 seconds] -->
-<p></p>
-<h4>协程间通讯</h4>
-<p>greenlet协程间的异步通讯可以使用事件（Event）对象。该对象的&#8221;wait()&#8221;方法可以阻塞当前协程，而&#8221;set()&#8221;方法可以唤醒之前阻塞的协程。在下面的例子中，5个waiter协程都会等待事件evt，当setter协程在3秒后设置evt事件，所有的waiter协程即被唤醒。</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+# 猴子补丁MonkeyPatching
 
-		<div id="crayon-5d24ce1c01e0e766453087" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-14">14</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-16">16</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-18">18</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-20">20</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-22">22</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0e766453087-24">24</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0e766453087-25">25</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-1"><span class="crayon-c">#coding:utf8</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-2"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-3"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">event </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">Event</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-4">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-5"><span class="crayon-v">evt</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">Event</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-6">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-7"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">setter</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'Wait for me'</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 3秒后唤醒所有在evt上等待的协程</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">"Ok, I'm done"</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">evt</span><span class="crayon-sy">.</span><span class="crayon-k ">set</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 唤醒</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-12">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-13"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">waiter</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">"I'll wait for you"</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">evt</span><span class="crayon-sy">.</span><span class="crayon-e">wait</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 等待</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'Finish waiting'</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-17">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-18"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">setter</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">waiter</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">waiter</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">waiter</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">waiter</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0e766453087-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">waiter</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0e766453087-25"><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0005 seconds] -->
-<p></p>
-<p>除了Event事件外，gevent还提供了AsyncResult事件，它可以在唤醒时传递消息。让我们将上例中的setter和waiter作如下改动:</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+细心的朋友们在运行上面例子时会发现，其实程序运行的时间同不用协程是一样的，是三个网站打开时间的总和。可是理论上协程是非阻塞的，那运行时间应该等于最长的那个网站打开时间呀？其实这是因为 Python 标准库里的 socket 是阻塞式的，DNS 解析无法并发，包括像 urllib 库也一样，所以这种情况下用协程完全没意义。那怎么办？
 
-		<div id="crayon-5d24ce1c01e0f710879315" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0f710879315-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0f710879315-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0f710879315-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0f710879315-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0f710879315-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e0f710879315-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e0f710879315-13">13</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-1"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">event </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">AsyncResult</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0f710879315-2"><span class="crayon-v">aevt</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">AsyncResult</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0f710879315-4"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">setter</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'Wait for me'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0f710879315-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 3秒后唤醒所有在evt上等待的协程</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">"Ok, I'm done"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0f710879315-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">aevt</span><span class="crayon-sy">.</span><span class="crayon-k ">set</span><span class="crayon-sy">(</span><span class="crayon-s">'Hello!'</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 唤醒，并传递消息</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0f710879315-10"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">waiter</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-s">"I'll wait for you"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e0f710879315-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">message</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">aevt</span><span class="crayon-sy">.</span><span class="crayon-e">get</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 等待，并在唤醒时获取消息</span></div><div class="crayon-line" id="crayon-5d24ce1c01e0f710879315-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'Got wake up message: %s'</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-v">message</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0005 seconds] -->
-<p></p>
-<h4>队列 Queue </h4>
-<p>队列Queue的概念相信大家都知道，我们可以用它的put和get方法来存取队列中的元素。gevent的队列对象可以让greenlet协程之间安全的访问。运行下面的程序，你会看到3个消费者会分别消费队列中的产品，且消费过的产品不会被另一个消费者再取到：</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+一种方法是使用 gevent 下的 socket 模块，我们可以通过`from gevent import socket`来导入。不过更常用的方法是使用猴子布丁（Monkey patching）:
 
-		<div id="crayon-5d24ce1c01e10976740165" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-14">14</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-16">16</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-18">18</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-20">20</div><div class="crayon-num" data-line="crayon-5d24ce1c01e10976740165-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e10976740165-22">22</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-2"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-k ">queue</span><span class="crayon-h"> </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">Queue</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-4"><span class="crayon-v">products</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">Queue</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-6"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">consumer</span><span class="crayon-sy">(</span><span class="crayon-v">name</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">while</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">products</span><span class="crayon-sy">.</span><span class="crayon-e">empty</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'%s got product %s'</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">name</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">products</span><span class="crayon-sy">.</span><span class="crayon-e">get</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-10">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'%s Quit'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-12">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-13"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">producer</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-k ">xrange</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">products</span><span class="crayon-sy">.</span><span class="crayon-e">put</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-16">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-17"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">producer</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">consumer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'steve'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">consumer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'john'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5d24ce1c01e10976740165-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">consumer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'nancy'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e10976740165-22"><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0005 seconds] -->
-<p></p>
-<p>put和get方法都是阻塞式的，它们都有非阻塞的版本：put_nowait和get_nowait。如果调用get方法时队列为空，则抛出&#8221;gevent.queue.Empty&#8221;异常。</p>
-<h4>信号量</h4>
-<p>信号量可以用来限制协程并发的个数。它有两个方法，acquire和release。顾名思义，acquire就是获取信号量，而release就是释放。当所有信号量都已被获取，那剩余的协程就只能等待任一协程释放信号量后才能得以运行：</p>
-<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+``` python
+from gevent import monkey; monkey.patch_socket()
+import gevent
+import socket
 
-		<div id="crayon-5d24ce1c01e11837954961" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e11837954961-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e11837954961-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e11837954961-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e11837954961-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e11837954961-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e11837954961-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e11837954961-13">13</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e11837954961-2"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">coros </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">BoundedSemaphore</span></div><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e11837954961-4"><span class="crayon-v">sem</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">BoundedSemaphore</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e11837954961-6"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">worker</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">sem</span><span class="crayon-sy">.</span><span class="crayon-e">acquire</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e11837954961-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-s">'Worker %i acquired semaphore'</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-v">n</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e11837954961-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">sem</span><span class="crayon-sy">.</span><span class="crayon-e">release</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-s">'Worker %i released semaphore'</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-v">n</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e11837954961-12">&nbsp;</div><div class="crayon-line" id="crayon-5d24ce1c01e11837954961-13"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">worker</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-k ">xrange</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0004 seconds] -->
-<p></p>
-<p>上面的例子中，我们初始化了&#8221;BoundedSemaphore&#8221;信号量，并将其个数定为2。所以同一个时间，只能有两个worker协程被调度。程序运行后的结果如下：</p>
-<pre>
+urls = ['www.baidu.com', 'www.gevent.org', 'www.python.org']
+jobs = [gevent.spawn(socket.gethostbyname, url) for url in urls]
+gevent.joinall(jobs, timeout=5)
+
+print [job.value for job in jobs]
+```
+
+上述代码的第一行就是对 socket 标准库打上猴子补丁，此后 socket 标准库中的类和方法都会被替换成非阻塞式的，所有其他的代码都不用修改，这样协程的效率就真正体现出来了。Python 中其它标准库也存在阻塞的情况，gevent 提供了`monkey.patch_all()`方法将所有标准库都替换。
+
+``` python
+from gevent import monkey; monkey.patch_all()
+```
+
+使用猴子补丁褒贬不一，但是官网上还是建议使用`patch_all()`，而且在程序的第一行就执行。
+
+
+# gevent原理
+
+
+
+
+# 获取协程状态
+
+协程状态有已启动和已停止，分别可以用协程对象的`started`属性和`ready()`方法来判断。对于已停止的协程，可以用`successful()`方法来判断其是否成功运行且没抛异常。如果协程执行完有返回值，可以通过`value`属性来获取。另外，greenlet 协程运行过程中发生的异常是不会被抛出到协程外的，因此需要用协程对象的`exception`属性来获取协程中的异常。下面的例子很好的演示了各种方法和属性的使用。
+
+``` python
+import gevent
+
+def win():
+    return 'You win!'
+
+def fail():
+    raise Exception('You failed!')
+
+winner = gevent.spawn(win)
+loser = gevent.spawn(fail)
+
+print winner.started 
+print loser.started  
+
+
+
+try:
+    gevent.joinall([winner, loser])
+except Exception as e:
+    
+    print 'This will never be reached'
+
+print winner.ready() 
+print loser.ready()  
+
+print winner.value 
+print loser.value  
+
+print winner.successful() 
+print loser.successful()  
+
+print loser.exception
+```
+
+# 协程运行超时
+
+之前我们讲过在`gevent.joinall()`方法中可以传入`timeout`参数来设置超时，我们也可以在全局范围内设置超时时间：
+
+``` python
+import gevent
+from gevent import Timeout
+
+timeout = Timeout(2)  
+timeout.start()
+
+def wait():
+    gevent.sleep(10)
+try:
+    gevent.spawn(wait).join()
+except Timeout:
+    print('Could not complete')
+```
+
+上例中，我们将超时设为 2 秒，此后所有协程的运行，如果超过两秒就会抛出`Timeout`异常。我们也可以将超时设置在 with 语句内，这样该设置只在 with 语句块中有效：
+
+``` python
+with Timeout(1):
+    gevent.sleep(10)
+```
+
+此外，我们可以指定超时所抛出的异常，来替换默认的`Timeout`异常。比如下例中超时就会抛出我们自定义的`TooLong`异常。
+
+``` python
+class TooLong(Exception):
+    pass
+
+with Timeout(1, TooLong):
+    gevent.sleep(10)
+```
+
+# 协程间通讯
+
+greenlet 协程间的异步通讯可以使用事件（Event）对象。该对象的`wait()`方法可以阻塞当前协程，而`set()`方法可以唤醒之前阻塞的协程。在下面的例子中，5 个 waiter 协程都会等待事件 evt，当 setter 协程在 3 秒后设置 evt 事件，所有的 waiter 协程即被唤醒。
+
+``` python
+import gevent
+from gevent.event import Event
+
+evt = Event()
+
+def setter():
+    print 'Wait for me'
+    gevent.sleep(3)  
+    print "Ok, I'm done"
+    evt.set()  
+
+def waiter():
+    print "I'll wait for you"
+    evt.wait()  
+    print 'Finish waiting'
+
+gevent.joinall([
+    gevent.spawn(setter),
+    gevent.spawn(waiter),
+    gevent.spawn(waiter),
+    gevent.spawn(waiter),
+    gevent.spawn(waiter),
+    gevent.spawn(waiter)
+])
+```
+
+除了 Event 事件外，gevent 还提供了`AsyncResult`事件，它可以在唤醒时传递消息。让我们将上例中的`setter`和`waiter`作如下改动:
+
+``` python
+from gevent.event import AsyncResult
+
+aevt = AsyncResult()
+
+def setter():
+    print 'Wait for me'
+    gevent.sleep(3)  
+    print "Ok, I'm done"
+    aevt.set('Hello!')  
+
+def waiter():
+    print("I'll wait for you")
+    message = aevt.get()  
+    print 'Got wake up message: %s' % message
+```
+
+# 队列Queue
+
+队列 Queue 的概念相信大家都知道，我们可以用它的`put`和`get`方法来存取队列中的元素。gevent 的队列对象可以让 greenlet 协程之间安全的访问。运行下面的程序，你会看到 3 个消费者会分别消费队列中的产品，且消费过的产品不会被另一个消费者再取到：
+
+``` python
+import gevent
+from gevent.queue import Queue
+
+products = Queue()
+
+def consumer(name):
+    while not products.empty():
+        print '%s got product %s' % (name, products.get())
+        gevent.sleep(0)
+    print '%s Quit'
+
+def producer():
+    for i in xrange(1, 10):
+        products.put(i)
+
+gevent.joinall([
+    gevent.spawn(producer),
+    gevent.spawn(consumer, 'steve'),
+    gevent.spawn(consumer, 'john'),
+    gevent.spawn(consumer, 'nancy'),
+])
+```
+
+`put`和`get`方法都是阻塞式的，它们都有非阻塞的版本：`put_nowait`和`get_nowait`。如果调用`get`方法时队列为空，则抛出`gevent.queue.Empty`异常。
+
+# 信号量
+
+信号量可以用来限制协程并发的个数。它有两个方法，`acquire`和`release`。顾名思义，`acquire`就是获取信号量，而`release`就是释放。当所有信号量都已被获取，那剩余的协程就只能等待任一协程释放信号量后才能得以运行：
+
+``` python
+import gevent
+from gevent.coros import BoundedSemaphore
+
+sem = BoundedSemaphore(2)
+
+def worker(n):
+    sem.acquire()
+    print('Worker %i acquired semaphore' % n)
+    gevent.sleep(0)
+    sem.release()
+    print('Worker %i released semaphore' % n)
+
+gevent.joinall([gevent.spawn(worker, i) for i in xrange(0, 6)])
+```
+
+上面的例子中，我们初始化了`BoundedSemaphore`信号量，并将其个数定为`2`。所以同一个时间，只能有两个 worker 协程被调度。程序运行后的结果如下：
+
+```
 Worker 0 acquired semaphore
 Worker 1 acquired semaphore
 Worker 0 released semaphore
@@ -276,33 +288,47 @@ Worker 4 acquired semaphore
 Worker 4 released semaphore
 Worker 5 acquired semaphore
 Worker 5 released semaphore
-</pre>
-<p>如果信号量个数为1，那就等同于同步锁。</p>
-<h4>协程本地变量</h4>
-<p>同线程类似，协程也有本地变量，也就是只在当前协程内可被访问的变量：</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+```
 
-		<div id="crayon-5d24ce1c01e12559646902" class="crayon-syntax crayon-theme-eclipse crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-plain-wrap"></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-2">2</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-4">4</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-6">6</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-8">8</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-10">10</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-12">12</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-14">14</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-16">16</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5d24ce1c01e12559646902-18">18</div><div class="crayon-num" data-line="crayon-5d24ce1c01e12559646902-19">19</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">gevent</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-2"><span class="crayon-st">from</span><span class="crayon-h"> </span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">local </span><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-e">local</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-4"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">local</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-6"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">f1</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-i">x</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-10"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">f2</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-i">x</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">except</span><span class="crayon-h"> </span><span class="crayon-k ">AttributeError</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-h"> </span><span class="crayon-s">'x is not visible'</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-15">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-16"><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">joinall</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">f1</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5d24ce1c01e12559646902-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">gevent</span><span class="crayon-sy">.</span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-v">f2</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5d24ce1c01e12559646902-19"><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0004 seconds] -->
-<p>通过将变量存放在local对象中，即可将其的作用域限制在当前协程内，当其他协程要访问该变量时，就会抛出异常。不同协程间可以有重名的本地变量，而且互相不影响。因为协程本地变量的实现，就是将其存放在以的&#8221;greenlet.getcurrent()&#8221;的返回为键值的私有的命名空间内。</p>
+如果信号量个数为 1，那就等同于同步锁。
 
-<h4>更多参考资料</h4>
-<p><a href="http://www.gevent.org/contents.html">gevent的官方文档</a><br />
-<a href="http://sdiehl.github.io/gevent-tutorial/">gevent社区提供的教程</a></p>
-<!-- <p>本文中的示例代码可以在<a href="/downloads/201611/gevent.tar.gz">这里下载</a>。</p> -->
+# 协程本地变量
 
-</div><!-- .entry-content -->
+同线程类似，协程也有本地变量，也就是只在当前协程内可被访问的变量：
+
+``` python
+import gevent
+from gevent.local import local
+
+data = local()
+
+def f1():
+    data.x = 1
+    print data.x
+
+def f2():
+    try:
+        print data.x
+    except AttributeError:
+        print 'x is not visible'
+
+gevent.joinall([
+    gevent.spawn(f1),
+    gevent.spawn(f2)
+])
+```
+
+通过将变量存放在`local`对象中，即可将其的作用域限制在当前协程内，当其他协程要访问该变量时，就会抛出异常。不同协程间可以有重名的本地变量，而且互相不影响。因为协程本地变量的实现，就是将其存放在以的`greenlet.getcurrent()`的返回为键值的私有的命名空间内。
+
+# 实际应用
+
+讲到这里，大家肯定很想看一个 gevent 的实际应用吧，[这里有一个简单的聊天室程序](https://github.com/sdiehl/minichat)，基于 Flask 实现，大家可以参考下。
+
+
+
+# 更多参考资料
+
+[gevent 的官方文档](http://www.gevent.org/contents.html)  
+[gevent 社区提供的教程](http://sdiehl.github.io/gevent-tutorial/)
 
 转自: http://www.bjhee.com/gevent.html

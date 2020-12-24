@@ -59,6 +59,8 @@ Linux 2.6.16之前，内核只支持低精度时钟，内核定时器的**工作
 * **excute**: 
     `near_` 里面的定时器因为都已经在 `addTimerNode` 根据`expire`哈希安插好了, 所以这里 `jiffies_ & TVR_MASK` 出来的index是几, 那就直接从`near_`里取出来执行就完事了,见下方代码
     * 删除: 因为插入的时候还专门另外有个哈希表来保存定时器id和定时器的映射关系, 所有删除的时候就直接根据传入的定时器id来找到定时器本身然后把他标记为已删除, 然后在excute的时候会找到`near_[index]`这个定时器链表TimerList移除
+* **删除**:
+    惰性删除, 只是标记相关node为被canceled, 然后excute的时候再freeNode 
 * **tickless**:
     不嫌麻烦还可以每次从 timer 集合里面选择最先要超时的事件，计算还有多长时间就会超时，作为 select wait 的值，每次都不一样，每次都基本精确，同时不会占用多余 cpu，这叫 tickless，Linux 的 3.x以上版本也支持 tickless 的模式来驱动各种系统级时钟，号称更省电更精确，不过需要你手动打开，FreeBSD 9 以后也引入了 tickless。
 
@@ -179,7 +181,7 @@ int WheelTimer::execute()
 
 Linux 2.6.16 ，内核支持了高精度的时钟，内核采用新的定时器hrtimer，其实现逻辑和Linux 2.6.16 之前定时器逻辑区别：  
 * hrtimer采用红黑树进行高精度定时器的管理，而不是时间轮；
-* 高精度时钟定时器**不在依赖系统的tick中断，而是基于事件触发**。
+* 高精度时钟定时器**不在依赖系统的tick中断，而是基于时钟硬件的事件触发**。
 * 旧内核的定时器实现依赖于系统定时器硬件定期的tick，基于该tick，内核会扫描timer wheel处理超时事件，会更新jiffies，wall time(墙上时间，现实时间)，process的使用时间等等工作。
 * 新的内核不再会直接支持周期性的tick，新内核定时器框架采用了基于高精度时钟硬件的下次中断触发，而不是以前的周期性触发。新内核实现了hrtimer(high resolution timer)于事件触发。
 

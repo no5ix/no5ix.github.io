@@ -38,7 +38,7 @@ Quic 相比现在广泛应用的 http2+tcp+tls 协议有如下优势 [2]：
 4.  连接迁移。
 5.  前向冗余纠错。
 
-# 为什么需要 QUIC
+# TCP的缺陷
 
 从上个世纪 90 年代互联网开始兴起一直到现在，大部分的互联网流量传输只使用了几个网络协议。使用 IPv4 进行路由，使用 TCP 进行连接层面的流量控制，使用 SSL/TLS 协议实现传输安全，使用 DNS 进行域名解析，使用 HTTP 进行应用数据的传输。
 
@@ -95,18 +95,76 @@ TCP 是由操作系统在内核西方栈层面实现的，应用程序只能使�
 
 所以 QUIC 协议选择了 UDP，因为 UDP 本身没有连接的概念，不需要三次握手，优化了连接建立的握手延迟，同时在应用程序层面实现了 TCP 的可靠性，TLS 的安全性和 HTTP2 的并发性，只需要用户端和服务端的应用程序支持 QUIC 协议，完全避开了操作系统和中间设备的限制。
 
-# QUIC 核心特性连接建立延时低
+# 0RTT建立连接
 
-0RTT 建连可以说是 QUIC 相比 HTTP2 最大的性能优势。那什么是 0RTT 建连呢？这里面有两层含义。
+现如今，高速且安全的网络接入服务已经成为人们的必须。传统 TCP+TLS 构建的安全互联服务，升级与补丁更新时有提出（如 TCP Fastopen，新的 TLS 1.3），但是由于基础设施僵化，升级与应用困难。为解决这个问题，Google 另辟蹊径在 UDP 的基础上实现了带加密的更好的 TCP--QUIC（Quick UDP Internet Connection), 一种基于 UDP 的低时延的互联网传输层协议。近期成立了 Working Group 也将 QUIC 作为制定 HTTP 3.0 的标准的基础, 说明 QUIC 的应用前景美好。本文单独就网络传输的建连问题展开了分析, 浅析了建连时间对传输的影响, 以及 QUIC 的 0-RTT 建连是如何解决建连耗时长的问题的。在此基础上, 结合 QUIC 的源码, 浅析了 QUIC 的基本实现, 并描述一种可供参考的分布式环境下的 0-RTT 的落地实践方案。
 
-1.  传输层 0RTT 就能建立连接。
-2.  加密层 0RTT 就能建立加密连接。
+以一次简单的 HTTPS 请求（example.com）为例（假设访问 example.com 时返回的内容较小，server 端可以在一个数据包里返回响应），为获取请求资源。需要经过以下 4 个步骤：
 
+1.  DNS 查询 example.com 获取 IP。DNS 服务一般默认是由你的 ISP 提供，ISP 通常都会有缓存的，这部分时间能适当减少；
+2.  TCP 握手，我们熟悉的 TCP 三次握手需要需要 1 个 RTT；
+3.  TLS 握手，以目前应用最广泛的 TLS 1.2 而言，需要 2 个 RTT。对于非首次建连, 可以选择启用会话重用 (Session Resumption)，则可缩小握手时间到 1 个 RTT；
+4.  HTTP 业务数据交互，假设 example.com 的数据在一次交互就能取回来。那么业务数据的交互需要 1 个 RTT； 经过上面的过程分析可知，要完成一次简短的 HTTPS 业务数据交互，需要经历：
+
+*   新连接：4RTT + DNS。
+*   会话重用：3RTT + DNS
+
+尤其对于小数据量的交互而言，抛开 DNS 查询时间, 建连时间占剩下的总时间的 2/3 至 3/4 不等，影响不可小觑。加之如果用户网络不好，RTT 延时大的话，建连时间可能耗费数百毫秒至数秒不等，这将极大的影响用户体验。究其原因一方面是 TCP 和 TLS 分层设计导致的：分层的设计需要每个逻辑层次分别建立自己的连接状态。另一方面是 TLS 的握手阶段复杂的密钥协商机制导致的。要降低建连耗时，需要从这两方面着手。
+
+针对 TLS 的握手阶段复杂的密钥协商机问题, TLS 1.3 精简了握手交互过程, 实现了 1-RTT 握手。在会话重用类似的理念的基础上, 对非首次握手会话, 可以进一步实现 0-RTT 握手 (在刚开始 TLS 密钥协商的时候，就能附送一部分经过加密的数据传递给对方)。由于 TLS 是建立在 TCP 之上的, 0-RTT 没有计算 TCP 层的握手开销, 因而对用户来说, 发送数据之前还是要经历 TCP 层的 1RTT 握手, 因而不是真正的 0-RTT 握手。
+
+> TLS 1.3 为实现 0-RTT，需要双方在刚开始建立连接的时候就已经持有一个对称密钥，这个密钥在 TLS 1.3 中称为 PSK（Pre-Shared-Key）。PSK 是 TLS 1.2 中的会话重用 (Session Resumption) 机制的一个升级，TLS 1.3 握手结束后，服务器可以发送一个 NST（New-Session-Ticket）的报文给客户端，该报文中记录 PSK 的值、名字和有效期等信息，双方下一次建立连接可以使用该 PSK 值作为初始密钥材料。因为 PSK 是从以前建立的安全信道中获得的，只要证明了双方都持有相同的 PSK，不再需要证书认证，就可以证明双方的身份(因此 PSK 也是一种身份认证机制)。TLS 1.3 新加了 Early Data 类型的报文, 用于在 0-RTT 的握手阶段传递应用层数据, 实现了握手的同时就能附带加密的应用层数据从而实现 0-RTT。
+> 
+> TLS 1.3 的 0-RTT 特性不能防止重放攻击, 需要业务在使用时评估是否有重放攻击风险。如有相关风险的话, 可能需要酌情考虑禁用 0-RTT 特性。
+
+下图对比了 TLS 各版本与场景下的延时对比:
 ![](/img/quic_intro/quic_intro_1.jpg)
 
-比如上图左边是 HTTPS 的一次完全握手的建连过程，需要 3 个 RTT。就算是 Session Resumption[14]，也需要至少 2 个 RTT。
+TLS 各版本与场景下的耗时
 
-而 QUIC 呢？由于建立在 UDP 的基础上，同时又实现了 0RTT 的安全握手，所以在大部分情况下，只需要 0 个 RTT 就能实现数据发送，在实现前向加密 [15] 的基础上，并且 0RTT 的成功率相比 TLS 的 Sesison Ticket[13] 要高很多。
+从对比我们可以看到, 即使用上了 TLS 1.3, 精简了握手过程, 最快能做到 0-RTT 握手 (首次是 1-RTT), 但是对用户感知而言, 还要加上 1RTT 的 TCP 握手开销。 Google 有提出 Fastopen 的方案来使得 TCP 非首次握手就能附带用户数据, 但是由于 TCP 实现僵化, 无法升级应用, 相关 RFC 到现今都是 experimental 状态。这种分层设计带来的延时, 有没有办法进一步降低呢? QUIC 通过合并加密与连接管理解决了这个问题, 我们来看看其是如何实现真正意义上的 0-RTT 的握手, 让与 server 进行第一个数据包的交互就能带上用户数据。
+
+QUIC 为规避 TCP 协议僵化的问题，将 QUIC 协议建立在了 UDP 之上。考虑到安全性是网络的必备选项，加密在 QUIC 里强制的。传输方面参考 TCP 并充分优化了 TCP 多年发现的缺陷和不足, 实现了一套端到端的可靠加密传输。通过将加密和连接管理两层合二为一，消除了当前 TCP+TLS 的分层设计传输引入的时延。
+
+同 TLS 的握手一样, QUIC 的加密握手的核心在于协商出一个加密会话数据的对称密钥。QUIC 的握手使用了 DH 密钥协商算法来协商一个对称密钥。DH 密钥协商算法简单来讲, 需要通信双方各自生成自己的非对称公私钥对, 双发各自保留自己的私钥, 将公钥发给对方, 利用对方的公钥和自己的私钥可以运算出同一个对称密钥。详细的原理这里不展开叙述, 有专业的[密码学书籍](https://book.douban.com/subject/19986936/)对其原理有详细的论述, 网上也有很多好的教程对其由深入浅出的总结, 如[这一篇](https://labuladong.gitbook.io/algo/di-wu-zhang-ji-suan-ji-ji-shu/mi-ma-ji-shu)。
+
+如上所述, DH 密钥协商需要通行双方各自生成自己的非对称公私钥对。server 端与客户端的关系是 1 对 N 的关系, 明显 server 端生成一份公私钥对, 让 N 个客户端公用, 能明显减少生成开销, 降低管理的成本。server 端的这份公私钥对就是专门用于握手使用的, 客户端一经获取, 就可以缓存下来后续建连时继续使用, 这个就是达成 0-RTT 握手的关键, 因此 server 生成的这份公钥称为 0-RTT 握手公钥。真正的握手过程是这样 (简化了实现细节):
+
+1.  server 端在握手开始前，server 端需要首先生成 (或加载使用上次保存下来的) 握手公私钥对, 该份公私钥对是所有客户端共享的。
+2.  client 端首次握手时, client 对 server 一无所知, 需要 1 个 RTT 来询问 server 端的握手公钥 (实际的握手交互还会发送诸如版本等其他数据) 并缓存下来。本步骤只在首次建连时发生(0-RTT 握手公钥的过期也会导致需要重走这一步), 但这种情况很少发生, 影响很小(也没办法避免)。
+3.  client 收到 server 端返回这份握手公钥后，生成自己的临时公私钥对后, 计算出共享的对称密钥后, 加密好数据, 并连同 client 的公钥一并发给 server 端。照 DH 密钥协商的原理, 此处已经可以协商出每条会话不一样的会话密钥了 (因为每个 client 生成的公私钥是不同的), 是不是拿这个来加密会话数据就行了呢? 真实的情况不是这样的!
+4.  server 端会再次生成一份临时的公私钥对，使用这份临时的私钥与客户端的公钥运算出最终的会话对称密钥。接下来 server 会拿这个最终的会话密钥加密应用层数据, 连同这份临时的 server 端公钥一并发给 client 端, client 端收到后可以按照 DH 的原理依瓢画葫会恢复出最终的会话对称密钥。后续所有的数据都是用最终的会话对称密钥进行加密。server 侧这个动作是不是多此一举呢? 不是的, 这么做的目的是为了获取所谓的前向安全特性: 因为 server 端的后面生成的这份公私钥是临时生成的, 不会保存下来，也就杜绝了密钥泄漏导致会话数据被恶意收集后的被解密掉的风险。
+
+首次握手要多一个 RTT 询问 server 端的 0-RTT 握手公钥, 此询问过程不携带任何应用层数据, 因此是 1-RTT 握手。在首次握手完成后, client 端可以缓存下第一次询问获知的 server 端的公钥信息, 后续的连接过程可以跳过询问，直接使用缓存的 server 端的公钥。公钥信息在 QUIC 的实现里是保存在握手数据包里的 SCFG 中的 (Server Config), 获取 0-RTT 握手公钥就是要获取 SCFG, 后续均以获取 SCFG 代替。详细的握手过程, 可以参见 [dog250](https://blog.csdn.net/dog250/article/details/80935534) 博客文章的详细叙述。
+
+> 从上面的分析可知，0-RTT 握手的首次交互，server 端使用的是保存下来的握手密钥，因而没有无法做到前向安全，不能防止重放攻击, 需要业务在使用时评估是否有重放攻击风险。
+
+![](/img/quic_intro/quic_intro_1_2.jpg)
+
+QUIC 0-RTT 握手
+
+上文简述了 QUIC 握手的密钥协商过程，首次需要询问一次 Server 以获取 SCFG, 从而获取存储于其中的 0-RTT 握手公钥。这一交互过程中 client 和 server 在 QUIC 的握手协议发送的报文中分别叫 Inchoate Client hello message (inchoate CHLO) 和 Rejection message (REJ)。因而包含 server 端的握手公钥的 SCFG 是在 REJ 报文中发给客户端的。有了 SCFG，接下来就能发起 0-RTT 握手。这一过程中 client 和 server 端在 QUIC 的握手协议发送的报文中分别叫 Full Client Hello message (full CHLO) 和 Server Hello message (SHLO)。下图摘自 Google QUIC 握手协议的官方文档，详细叙述了握手过程 client 侧的处理流程：
+
+QUIC 握手客户端侧处理流程
+![](/img/quic_intro/quic_intro_1_3.jpg)
+
+
+## 0RTT的重放攻击风险
+
+0-RTT连接恢复并非那么简单，它会带来许多意外风险及警告，这正是为什么有些默认程序不启用0-RTT连接恢复的原因。用户必须提前考虑所涉及的风险，并做出决定是否使用此功能。可以在应用程序层面使用预防措施来减轻这种情况。
+
+首先，0-RTT连接恢复是不提供forwardsecrecy的，针对连接的secret parameters的妥协将微不足道地允许恢复新连接0-RTT阶段期间，发送applicationdata 进行特定的妥协。
+
+在0-RTT阶段之后、或握手之后发送的数据，仍然是安全的。这是因为TLS1.3 (及QUIC)还是会对handshakecompletion之后发送的数据执行normal key exchange algorithm (这是forwardsecret) 。
+
+值得注意的是，在0-RTT期间发送的applicationdata 可以被路径上的on-path attacker 捕获，然后多次重播到同一个服务器。这个在大部分情况下也许不是问题，因为attacker无法解密数据，0-RTT连接恢复还是非常有用的。在其他的情况下，这可能会引起出乎意料的风险。
+
+举个比例，假设一家银行允许authenticated user (e.g using HTTPcookie, 或其他HTTP身份验证机制)通过specificAPI endpoint发出HTTP请求将资金从其账户发送到另一个用户。
+
+如果attacker能够在使用0-RTT连接恢复时捕获该请求，他们将无法看到plaintext并且获取用户的凭据，原因是因为他们不知道用于加密数据的secretkey；但是他们仍然有可能一直散发重复性地请求，耗尽该用户的银行账户里的钱。
+
+![](/img/quic_intro/quic_intro_1_4.jpg)
+
 
 # 改进的拥塞控制
 
@@ -132,7 +190,7 @@ TCP 为了保证可靠性，使用了基于字节序号的 Sequence Number 及 A
 
 QUIC 同样是一个可靠的协议，它使用 Packet Number 代替了 TCP 的 sequence number，并且每个 Packet Number 都严格递增，也就是说就算 Packet N 丢失了，重传的 Packet N 的 Packet Number 已经不是 N，而是一个比 N 大的值。而 TCP 呢，重传 segment 的 sequence number 和原始的 segment 的 Sequence Number 保持不变，也正是由于这个特性，引入了 Tcp 重传的歧义问题。
 
-![](/img/quic_intro/quic_intro_1.jpg)
+![](/img/quic_intro/quic_intro_2.jpg)
 
 如上图所示，超时事件 RTO 发生后，客户端发起重传，然后接收到了 Ack 数据。由于序列号一样，这个 Ack 数据到底是原始请求的响应还是重传请求的响应呢？不好判断。
 
@@ -140,7 +198,7 @@ QUIC 同样是一个可靠的协议，它使用 Packet Number 代替了 TCP 的 
 
 由于 Quic 重传的 Packet 和原始 Packet 的 Pakcet Number 是严格递增的，所以很容易就解决了这个问题。
 
-![](/img/quic_intro/quic_intro_1.jpg)
+![](/img/quic_intro/quic_intro_3.jpg)
 
 如上图所示，RTO 发生后，根据重传的 Packet Number 就能确定精确的 RTT 计算。如果 Ack 的 Packet Number 是 N+M，就根据重传请求计算采样 RTT。如果 Ack 的 Pakcet Number 是 N，就根据原始请求的时间计算采样 RTT，没有歧义性。
 
@@ -150,7 +208,7 @@ QUIC 同样是一个可靠的协议，它使用 Packet Number 代替了 TCP 的 
 
 假设 Packet N 丢失了，发起重传，重传的 Packet Number 是 N+2，但是它的 Stream 的 Offset 依然是 x，这样就算 Packet N + 2 是后到的，依然可以将 Stream x 和 Stream x+y 按照顺序组织起来，交给应用程序处理。
 
-![](/img/quic_intro/quic_intro_1.jpg)
+![](/img/quic_intro/quic_intro_4.jpg)
 
 # 不允许 Reneging
 
@@ -176,19 +234,19 @@ Tcp 的 Timestamp 选项存在一个问题 [25]，它只是回显了发送方的
 
 这样就会导致 RTT 计算误差。如下图：
 
-![](/img/quic_intro/quic_intro_1.jpg)
+![](/img/quic_intro/quic_intro_5.jpg)
 
-可以认为 TCP 的 RTT 计算：
-
-![](/img/quic_intro/quic_intro_2.jpg)
-
-而 Quic 计算如下：
+* 可以认为 TCP 的 RTT 计算：`RTT = timestamp2 - timestamp1`
+* 而 Quic 计算如下：`RTT = timestamp2 - timestamp1 - AckDelay`
 
 ![](/img/quic_intro/quic_intro_3.jpg)
 
-当然 RTT 的具体计算没有这么简单，需要采样，参考历史数值进行平滑计算，参考如下公式 [9]。
+当然 RTT 的具体计算没有这么简单，需要采样，参考历史数值进行平滑计算，参考如下公式
+```
+SRTT = SRTT + α(RTT - SRTT)
+RTO = μ * SRTT + δ*DevRTT
+```
 
-![](/img/quic_intro/quic_intro_4.jpg)
 
 # 基于 stream 和 connecton 级别的流量控制
 
@@ -207,15 +265,10 @@ QUIC 的流量控制和 TCP 有点区别，TCP 为了保证可靠性，窗口左
 
 但 QUIC 不同，就算此前有些 packet 没有接收到，它的滑动只取决于接收到的最大偏移字节数。
 
-![](/img/quic_intro/quic_intro_5.jpg)
-
-针对 Stream：
-
 ![](/img/quic_intro/quic_intro_6.jpg)
 
-针对 Connection：
-
-![](/img/quic_intro/quic_intro_7.jpg)
+* 针对 Stream：`可用窗口 = 最大窗口数 - 接收到的最大偏移数`
+* 针对 Connection：`可用窗口 = stream1可用窗口 + stream2可用窗口 + ... + streamN可用窗口`
 
 同样地，STGW 也在连接和 Stream 级别设置了不同的窗口数。
 
@@ -231,13 +284,13 @@ QUIC 一个连接上的多个 stream 之间没有依赖。这样假如 stream2 �
 
 多路复用是 HTTP2 最强大的特性 [7]，能够将多条请求在一条 TCP 连接上同时发出去。但也恶化了 TCP 的一个问题，队头阻塞 [11]，如下图示：
 
-![](/img/quic_intro/quic_intro_8.jpg)
+![](/img/quic_intro/quic_intro_7.jpg)
 
 HTTP2 在一个 TCP 连接上同时发送 4 个 Stream。其中 Stream1 已经正确到达，并被应用层读取。但是 Stream2 的第三个 tcp segment 丢失了，TCP 为了保证数据的可靠性，需要发送端重传第 3 个 segment 才能通知应用层读取接下去的数据，虽然这个时候 Stream3 和 Stream4 的全部数据已经到达了接收端，但都被阻塞住了。
 
 不仅如此，由于 HTTP2 强制使用 TLS，还存在一个 TLS 协议层面的队头阻塞 [12]。
 
-![](/img/quic_intro/quic_intro_9.jpg)
+![](/img/quic_intro/quic_intro_8.jpg)
 
 Record 是 TLS 协议处理的最小单位，最大不能超过 16K，一些服务器比如 Nginx 默认的大小就是 16K。由于一个 record 必须经过数据一致性校验才能进行加解密，所以一个 16K 的 record，就算丢了一个字节，也会导致已经接收到的 15.99K 数据无法处理，因为它不完整。
 
@@ -246,7 +299,7 @@ Record 是 TLS 协议处理的最小单位，最大不能超过 16K，一些服�
 1.  QUIC 最基本的传输单元是 Packet，不会超过 MTU 的大小，整个加密和认证过程都是基于 Packet 的，不会跨越多个 Packet。这样就能避免 TLS 协议存在的队头阻塞。
 2.  Stream 之间相互独立，比如 Stream2 丢了一个 Pakcet，不会影响 Stream3 和 Stream4。不存在 TCP 队头阻塞。
 
-![](/img/quic_intro/quic_intro_10.jpg)
+![](/img/quic_intro/quic_intro_9.jpg)
 
 当然，并不是所有的 QUIC 数据都不会受到队头阻塞的影响，比如 QUIC 当前也是使用 Hpack 压缩算法 [10]，由于算法的限制，丢失一个头部数据时，可能遇到队头阻塞。
 
@@ -262,7 +315,7 @@ TCP 协议头部没有经过任何加密和认证，所以在传输过程中很�
 
 如下图所示，红色部分是 Stream Frame 的报文头部，有认证。绿色部分是报文内容，全部经过加密。
 
-![](/img/quic_intro/quic_intro_1.jpg)
+![](/img/quic_intro/quic_intro_10.jpg)
 
 # 连接迁移
 

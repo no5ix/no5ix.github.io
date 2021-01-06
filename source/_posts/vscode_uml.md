@@ -62,6 +62,28 @@ categories:
     ^^^
 ```
 
+就可以得到下图的效果:  
+``` puml
+class xxd {
+  - mm4
+  - mm3
+  - mm2
+  + mm1()
+}
+
+class dfa {
+  + con()
+  + con2()
+  + con33()
+}
+
+object halo_ui {
+  + get()
+}
+
+halo_ui <.. xxd: calc aoi tag && monitor info
+```
+
 
 # 扩展学习画图语法
 

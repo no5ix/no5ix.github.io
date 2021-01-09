@@ -1,5 +1,5 @@
 ---
-title: 白话算法与数据结构大总结
+title: algo_newbie
 date: 2018-10-23 08:08:06
 tags:
 - noodle
@@ -7,6 +7,7 @@ tags:
 - LeetCode
 categories:
 - Algo
+password: '0622'
 ---
 
 

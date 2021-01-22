@@ -27,9 +27,10 @@ categories:
 # 需要下载的软件
 
 
-*   java : 因为oracle下载jdk-8需要登陆了, 很麻烦, 所以建议在百度直接搜索jdk-8然后去类似于中关村下载站这种网站去下一个, 然后按照下图配置环境变量
-*   graphviz : 在 [http://graphviz.org/](http://graphviz.org/)下载之后安装， 然后配置环境变量
-*   plantuml.jar : 在 [http://plantuml.com/](http://plantuml.com/) 下载 **plantuml.jar**， 然后配置环境变量
+1. java : 因为oracle下载jdk-8需要登陆了, 很麻烦, 所以建议在百度直接搜索jdk-8然后去类似于中关村下载站这种网站去下一个, 然后按照下图配置环境变量
+2. graphviz : 在 [http://graphviz.org/](http://graphviz.org/)下载之后安装， 然后配置环境变量
+3. plantuml.jar : 在 [http://plantuml.com/](http://plantuml.com/) 下载 **plantuml.jar**， 然后配置环境变量
+4. 重启电脑
 
 配完之后类似如下图, **注意去除环境变量路径首尾多余的空格, 特别是path的最前方, 否则无法正确识别.**
 ![](/img/vscode_uml/vsc_uml_path.png)

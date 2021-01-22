@@ -27,14 +27,15 @@ categories:
 # 需要下载的软件
 
 
-*   java，参考此 [java安装教学](https://www.runoob.com/java/java-environment-setup.html)链接中的说明， 安装好后并配置好环境变量
-*   [graphviz]r在 [http://graphviz.org/](http://graphviz.org/)下载之后安装， 然后配置环境变量
-*   plantuml.jar在 [http://plantuml.com/](http://plantuml.com/) 下载 **plantuml.jar**， 然后配置环境变量
+*   java : 因为oracle下载jdk-8需要登陆了, 很麻烦, 所以建议在百度直接搜索jdk-8然后去类似于中关村下载站这种网站去下一个, 然后按照下图配置环境变量
+*   graphviz : 在 [http://graphviz.org/](http://graphviz.org/)下载之后安装， 然后配置环境变量
+*   plantuml.jar : 在 [http://plantuml.com/](http://plantuml.com/) 下载 **plantuml.jar**， 然后配置环境变量
 
 配完之后类似如下图, **注意去除环境变量路径首尾多余的空格, 特别是path的最前方, 否则无法正确识别.**
 ![](/img/vscode_uml/vsc_uml_path.png)
 
 备注：Graphviz 是开源图形可视化软件。图形可视化是将结构信息表示为抽象图形和网络的图表的一种方式。它在网络，生物信息学，软件工程，数据库和网页设计，机器学习以及其他技术领域的可视化界面中有重要的应用。
+
 
 # 测试一波
 

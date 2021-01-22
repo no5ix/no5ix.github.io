@@ -10,38 +10,38 @@ node_modules/*
 
 # ignore node_modules but not tagcloud.js & toc.js
 
-!node_modules/hexo/
-node_modules/hexo/*
-!node_modules/hexo/lib/
-node_modules/hexo/lib/*
-!node_modules/hexo/lib/plugins/
-node_modules/hexo/lib/plugins/*
-!node_modules/hexo/lib/plugins/helper/
-node_modules/hexo/lib/plugins/helper/*
-!node_modules/hexo/lib/plugins/helper/tagcloud.js
-!node_modules/hexo/lib/plugins/helper/toc.js
+# !node_modules/hexo/
+# node_modules/hexo/*
+# !node_modules/hexo/lib/
+# node_modules/hexo/lib/*
+# !node_modules/hexo/lib/plugins/
+# node_modules/hexo/lib/plugins/*
+# !node_modules/hexo/lib/plugins/helper/
+# node_modules/hexo/lib/plugins/helper/*
+# !node_modules/hexo/lib/plugins/helper/tagcloud.js
+# !node_modules/hexo/lib/plugins/helper/toc.js
 
 
-# ignore node_modules but not generator.js
+# # ignore node_modules but not generator.js
 
-!node_modules/hexo-generator-index/
-node_modules/hexo-generator-index/*
-!node_modules/hexo-generator-index/lib/
-node_modules/hexo-generator-index/lib/*
-!node_modules/hexo-generator-index/lib/generator.js
+# !node_modules/hexo-generator-index/
+# node_modules/hexo-generator-index/*
+# !node_modules/hexo-generator-index/lib/
+# node_modules/hexo-generator-index/lib/*
+# !node_modules/hexo-generator-index/lib/generator.js
 
 
-# ignore node_modules but not xml.ejs
+# # ignore node_modules but not xml.ejs
 
-!node_modules/hexo-generator-searchdb/
-node_modules/hexo-generator-searchdb/*
-!node_modules/hexo-generator-searchdb/templates/
-node_modules/hexo-generator-searchdb/templates/*
-!node_modules/hexo-generator-searchdb/templates/xml.ejs
+# !node_modules/hexo-generator-searchdb/
+# node_modules/hexo-generator-searchdb/*
+# !node_modules/hexo-generator-searchdb/templates/
+# node_modules/hexo-generator-searchdb/templates/*
+# !node_modules/hexo-generator-searchdb/templates/xml.ejs
 
 
 .history/
 .vscode/
 
-# alice*.md
+alice*.md
 tempCodeRunnerFile*.*

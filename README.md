@@ -24,14 +24,16 @@
 
 # Usage
 
-0\. Install [Hexo](https://hexo.io/docs/index.html)  
-    安装 [Hexo](https://hexo.io/zh-cn/docs/)
+<!-- 0\. Install [Hexo](https://hexo.io/docs/index.html)  
+    安装 [Hexo](https://hexo.io/zh-cn/docs/) -->
 
 1\. Delete my `source` folder  
     删除我项目中的 `source` 文件夹
 
 2\. Create a new `source` folder  
     新建一个 `source` 文件夹
+    
+2.5\. `npm install --force`
     
 3\. Unzip `node_modules.zip` to the current directory  
     解压 `node_modules.zip` 到当前目录(确保这一步在安装了hexo之后)

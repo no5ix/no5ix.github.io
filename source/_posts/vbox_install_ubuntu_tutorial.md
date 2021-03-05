@@ -7,7 +7,23 @@ categories:
 - Linux
 ---
 
+
 最近因某些原因重装了Win10, 虚拟机也需要重装, 记录一下过程, 供以后查阅, 以免走更多弯路
+
+
+# 一些常用命令
+
+- `scp` : 
+    - 比如把自己windows上的某个文件test.py**上传**到某台linux上, 则在windows上用git bash到达这个文件所在的目录然后输入命令`scp test.py hlh@192.168.80.8:/home/test_dir`
+    - **下载**则把命令顺序反过来: 
+- `make && make install` 之前用`configure`的时候记得用`--prefix`指定安装目录, 这样就只会安装到这个目录不会分散到各处, 卸载的时候就很方便, 比如编译安装python3.8的时候就会有类似如这样的命令:
+    ```
+    $ ./configure --prefix=/usr/local/python3 --enable-optimizations
+    $ make
+    $ make install
+    ```
+
+
 
 # 需准备的工具和材料
 
@@ -23,6 +39,7 @@ categories:
 
 # 网络设置
 
+<!-- 
 **在安装ubuntu-server之前需知** : 
 
 你的那个虚拟机里的网络设置里只留两张网卡, 注意这两张网卡的顺序最好别颠倒, 免得麻烦
@@ -35,11 +52,16 @@ categories:
 
 **安装完毕之后** : 
 
-使用ifconfig命令查看会发现只有一个网卡工作，因为第二块网卡还没有进行配置。
+使用ifconfig命令查看会发现只有一个网卡工作，因为第二块网卡还没有进行配置。 -->
 
-使用vim编辑`/etc/network/interfaces`，添加第二块网卡的网络配置，宿主机需要长期连接虚拟机，需要为Host-Only网络配置静态IP，IP需要和宿主机的Host-Only网段一致, 到windows的控制面板的网络适配器页面查看`VirtualBox Host-Only`这个网络适配器的网段, 比如我的是`192.168.80.1` , 
-则 : 
+<!-- 使用vim编辑`/etc/network/interfaces`，添加第二块网卡的网络配置，宿主机需要长期连接虚拟机，需要为Host-Only网络配置静态IP，IP需要和宿主机的Host-Only网段一致, 到windows的控制面板的网络适配器页面查看`VirtualBox Host-Only`这个网络适配器的网段, 比如我的是`192.168.80.1` , 
+则 :  -->
 
+
+直接桥接网卡即可, 然后给虚拟服务器设置静态IP, 操作如下:
+
+1. 先`ifconfig`查看自己当前的ip, 
+2. 使用vim编辑`/etc/network/interfaces`, 然后将自己的当前ip填入, 比如是`192.168.80.8`, 则
     auto enp0s8
     iface enp0s8 inet static
     address 192.168.80.8

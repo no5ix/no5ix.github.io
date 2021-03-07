@@ -83,6 +83,7 @@ categories:
     ```
 3. 重启网络(`service networking restart`)或者系统
 4. `ping baidu.com` 看看是否通了
+5. 设置全局代理, 比如宿主机的vray的http代理为`http://127.0.0.1:10809`则在vbox里的ubuntu的`~/.bashrc` 最后加上 ` export ALL_PROXY="http://192.168.1.4:10809" `, 然后`source ~/.bashrc`即可
 
 
 说明：

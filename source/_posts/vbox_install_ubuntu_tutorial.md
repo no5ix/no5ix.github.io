@@ -61,13 +61,37 @@ categories:
 直接桥接网卡即可, 然后给虚拟服务器设置静态IP, 操作如下:
 
 1. 先`ifconfig`查看自己当前的ip, 
-2. 使用vim编辑`/etc/network/interfaces`, 然后将自己的当前ip填入, 比如是`192.168.80.8`, 则
-    auto enp0s8
-    iface enp0s8 inet static
-    address 192.168.80.8
+2. 使用vim编辑`/etc/network/interfaces`, 然后将自己的当前ip填入, 比如是`192.168.1.14`, 则改为
+    ```
+    # This file describes the network interfaces available on your system
+    # and how to activate them. For more information, see interfaces(5).
 
-重启网络(`service networking restart`)或者系统。
+    source /etc/network/interfaces.d/*
 
+    # The loopback network interface
+    auto lo
+    iface lo inet loopback
+
+    # The primary network interface
+    auto enp0s3
+    # iface enp0s3 inet dhcp
+    iface enp0s3 inet static
+    address 192.168.1.14
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 114.114.114.114 8.8.8.8
+    ```
+3. 重启网络(`service networking restart`)或者系统
+4. `ping baidu.com` 看看是否通了
+
+
+说明：
+1. auto 后为 ifconfig 查出来的虚拟机网卡
+2. iface enp0s3 inet 后的 dhcp 改为 static
+3. address 虚拟机 ip 设置为当前自动分配的 ip 即可，配置好后面重启就一直保持这个 ip
+4. netmask 子网掩码与宿主机一致
+5. gateway 默认网关与宿主机一致
+6. dns-nameserver DNS 服务器
 
 
 # 更换源

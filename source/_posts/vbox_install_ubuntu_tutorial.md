@@ -36,6 +36,27 @@ categories:
 **. . .**<!-- more -->
 
 
+# 设置root密码与sudo免密码权限
+
+设置root密码: `sudo passwd root`
+打开sudo免密码权限, 则`sudo vi /etc/sudoers`, 然后编辑`%sudo ALL=(ALL) NOPASSWD:ALL`
+
+
+# 设置ssh的公钥登陆
+
+在自己的home目录下
+1. `mkdir .ssh`
+2. `chmod 700 .ssh`
+3. `cd .ssh`
+4. `vi authorized_keys`然后编辑加入自己的公钥
+5. `chmod 644 authorized_keys
+
+SSH 证书登陆配置:   
+1. `sudo vi /etc/ssh/sshd_config`
+2. 取消注释 : `#AuthorizedKeysFile .ssh/authorized_keys`
+3. 修改yes->no : `PasswordAuthentication no`
+4. `sudo service ssh restart`
+
 
 # 网络设置
 

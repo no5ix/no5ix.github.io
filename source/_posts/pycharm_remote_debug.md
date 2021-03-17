@@ -59,7 +59,7 @@ password: '0622'
 1. ![](/img/pycharm_remote_debug_img/pycharm_add_interpreter1.png)
 2. ![](/img/pycharm_remote_debug_img/pycharm_add_interpreter2.png)
 3. ![](/img/pycharm_remote_debug_img/pycharm_add_interpreter3.png)
-4. ![]/img(pycharm_remote_debug_img/pycharm_remote_debug2.png)
+4. ![](/img/pycharm_remote_debug_img/pycharm_remote_debug2.png)
 5. 修改backend目录下的`manage.py`, 在最底部加入以下代码
    ``` python
    if __name__ == '__main__':

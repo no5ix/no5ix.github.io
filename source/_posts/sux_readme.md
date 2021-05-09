@@ -223,9 +223,9 @@ hot-corner:
 捐赠! 让作者更有动力给sux加新功能! ^_^
 
 - 微信
-  - ![微信](//img/sux/donate_wechat.png)
+  - ![微信](/img/sux/donate_wechat.png)
 - 支付宝
-  - ![支付宝](//img/sux/donate_alipay.png)
+  - ![支付宝](/img/sux/donate_alipay.png)
 
 
 # TODO List

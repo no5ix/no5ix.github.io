@@ -1,5 +1,5 @@
 ---
-title: 一个只有800k大小的全能效率工具sux
+title: 一个只有800k大小的强大效率工具sux
 date: 2020-01-09 22:09:39
 tags:
 - GitHub
@@ -24,7 +24,7 @@ Inspired by Alfred/Wox/Listary/Capslock+/utools, thank u.
 
 ![sux](https://github.com/no5ix/no5ix.github.io/blob/source/source/img/sux/sux.svg)
 
-`sux` 是一个只有800k大小的短小精悍的效率工具同时拥有
+`sux` 是一个只有800k大小的强大效率工具同时拥有
 - [翻译](#翻译)
 - [历史剪切板](#历史剪切板clipboard-plus)
 - [截图 & 贴图](#截图和贴图)

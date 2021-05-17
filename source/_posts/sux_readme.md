@@ -143,8 +143,11 @@ sux的这个功能就彻底解决了这个问题, 不再烦恼.
 
 ![](https://github.com/no5ix/no5ix.github.io/blob/source/source/img/sux/clipboard_plus.gif)
 
-这个历史粘贴板目前是不支持图片和其他的二进制文件, 支持一键粘贴所有历史剪切板记录和清空所有,   
-有时候需要去各种地方去一次性复制很多东西, 然后一次性粘贴, 那这时就可以先清空历史然后一键粘贴所有了
+这个历史粘贴板支持:  
+
+- 图片内容(在sux剪切板里会以`sux-clipboard-img`标识, sux支持从浏览器或者任何地方直接复制的图片)
+- 支持其他的二进制文件, 如图片文件, txt文件, 文件夹等等, 会以 `sux-clipboard-file`标识
+- 支持一键粘贴所有历史剪切板记录和清空所有,  有时候需要去各种地方去一次性复制很多东西, 然后一次性粘贴, 那这时就可以先清空历史然后一键粘贴所有了
 
 
 # 截图和贴图
@@ -446,6 +449,8 @@ sux的这个功能就彻底解决了这个问题, 不再烦恼.
 <!-- - caps+f一键搜索并弹出菜单可选yd/gg等 -->
 <!-- - 删除记录, 把多条复制记录一次性粘贴到目标窗口 -->
 - smart selection 双引号, 括号内, 单引号内
+<!-- - clip_plus support img, 考虑把路径变成文件, 把其他more_click menu也完善 -->
+- copy file path shortcut
 <!-- - 清空clipboard有bug -->
 <!-- - 单显示器 window mover 的menu没有disable -->
 <!-- - conf 排列组合, 如 `["https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm", "Win"]` 或者 `["ctrl_9", "sleep", "ctrl_8"]` , 或者自动加上sleep -->
@@ -457,7 +462,7 @@ sux的这个功能就彻底解决了这个问题, 不再烦恼.
 <!-- - msgbox 标题改成sux -->
 <!-- - add newbie tutorial -->
 <!-- - hot corner/edge/capslock switcher to tray menu -->
-- update chinese readme, add some gif/mp4
+<!-- - update chinese readme, add some gif/mp4 -->
 - add more action
 <!-- - 出现在和鼠标同一个屏幕做成选项 -->
 <!-- - 报一个bug，caps+q，q，用百度查询时，弹窗出现在另一个屏幕，因为我有2个显示器，建议设置一下默认的弹窗。
@@ -477,7 +482,6 @@ sux的这个功能就彻底解决了这个问题, 不再烦恼.
 <!-- - 截图后弹出贴图菜单 -->
 <!-- - bug:截图后保存则再也无法贴图 -->
 - trans gui change color to gray/ dpi / voice audio / soundmark encoding
-- clip_plus support img
 <!-- - 翻译如果没选, 则弹出提示没选 -->
 <!-- - 弄个build看看拿得到ver么 -->
 <!-- - 中文翻译 -->

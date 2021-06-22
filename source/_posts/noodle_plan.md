@@ -5036,11 +5036,20 @@ CSRF 通常从第三方网站发起，被攻击的网站无法防止攻击发生
 
 针对这两点，我们可以专门制定防护策略，如下：
 * 阻止不明外域的访问
-    * 同源检测
-    * Samesite Cookie
+    * *同源检测, 检查Referer字段* :
+        HTTP头中有一个Referer字段，这个字段用以标明请求来源于哪个地址。在处理敏感数据请求时，通常来说，Referer字段应和请求的地址位于同一域名下。以上文银行操作为例，Referer字段地址通常应该是转账按钮所在的网页地址，应该也位于www.examplebank.com之下。而如果是CSRF攻击传来的请求，Referer字段会是包含恶意网址的地址，不会位于www.examplebank.com之下，这时候服务器就能识别出恶意的访问。
+        这种办法简单易行，工作量低，仅需要在关键访问处增加一步校验。但这种办法也有其局限性，因其完全依赖浏览器发送正确的Referer字段。虽然http协议对此字段的内容有明确的规定，但并无法保证来访的浏览器的具体实现，亦无法保证浏览器没有安全漏洞影响到此字段。并且也存在攻击者攻击某些浏览器，篡改其Referer字段的可能。CSRF大多数情况下来自第三方域名，但并不能排除本域发起。如果攻击者有权限在本域发布评论（含链接、图片等，统称UGC），那么它可以直接在本域发起攻击，这种情况下同源策略无法达到防护的作用。
+    * *Samesite Cookie* : 
+        Chrome 51开始，浏览器的Cookie新增加了一个SameSite属性，用来防止CSRF攻击和用户追踪。Samesite有三个可选值，分别为Strict、Lax、None。
+        * Strict：最严格模式，完全禁止第三方Cookie，跨站点访问时，任何情况下都不会发送Cookie。换言之，只有当前网页的 URL与请求目标一致，才会带上Cookie。此方式虽然安全，但是存在严重的易用性问题，用户从第三方页面访问一个已登录的系统时，由于未携带Cookie，总是需要重新登录。
+        * Lax：Chrome默认模式，对于从第三方站点以link标签，a标签，GET形式的Form提交这三种方式访问目标系统时，会带上目标系统的Cookie，对于其他方式，如 POST形式的Form提交、AJAX形式的GET、img的src访问目标系统时，不到Cookie。
+        * None：原始方式，任何情况都提交目标系统的Cookie。由于Samesite是Google提出来的，其他浏览器目前并未普及，存在兼容性问题，目前不推荐使用。
 * 提交时要求附加本域才能获取的信息
-    * CSRF Token
-    * 双重 Cookie 验证
+    * *CSRF Token* : 用 jwt 弄一套 `access token` / `refresh token` 机制就行
+    * *双重 Cookie 验证* : 
+        1\. 在用户访问网站页面时，向请求域名注入一个Cookie，内容为随机字符串（例如csrfcookie=v8g9e4ksfhw）。
+        2\. 在前端向后端发起请求时，取出Cookie，并添加到URL的参数中（接上例POST https://www.a.com/comment?csrfcookie=v8g9e4ksfhw）。
+        3\. 后端接口验证Cookie中的字段与URL参数中的字段是否一致，不一致则拒绝。
 
 
 # 编码知识

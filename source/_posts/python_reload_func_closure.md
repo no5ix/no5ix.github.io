@@ -1,6 +1,6 @@
 ---
-title: python的reload对于func_closure的处理
-date: 2019-07-08 17:55:26
+title: python的reload对于func_closure的处理踩坑
+date: 2021-05-08 17:55:26
 tags:
 - Python
 categories:

@@ -1,6 +1,6 @@
 ---
-title: QUIC intro
-date: 2019-12-26 18:08:06
+title: QUIC原理与KCP会话握手借鉴
+date: 2021-02-26 18:08:06
 tags:
 - QUIC
 categories:

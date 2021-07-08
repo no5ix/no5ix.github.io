@@ -4335,6 +4335,57 @@ type AuthReq struct {
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
 
 
+# asyncio协程原理
+
+有一个任务调度器event loop，我们可以把需要执行的coroutine打包成task加入到event loop的调度列表里面（以Handle形式）。
+
+    在event loop的每个[帧](#asyncio协程栈帧)里面，它会检查需要执行那些task，然后运行这些task，可能拿到最终结果，也可能执行一半继续await别的任务，任务之间互相wait，通过回调来把任务串联起来
+
+    任务可能会依赖别的IO消息，在每一[帧](#asyncio协程栈帧)，event loop都会用selector(这个select就是类似某种多路复用机制，比如select，epoll和iocp)处理相应的消息，执行相应的callback函数。
+
+我们当前的介绍里，只有一个event loop，这个event loop跑在主线程里面。当然，event loop还可以开线程池处理别的任务，或者，多个线程里执行多个event loop，他们之间还有交互，我们这里不在介绍。   
+
+    单个event loop跑在单个线程有个好处，只要自己不主动await，就会一直占有主线程，换句话说，同步函数一定没有数据冲突（data racing）。对比多线程方案，如果需要处理数据冲突，就需要加锁了，这在很多情况下会降低程序的性能。所以协程这种设计思路，非常适合有多个用户、但是每个用户之间没有共享数据的场景。如果需要实现并行，多开几个进程就行了
+
+
+## asyncio协程栈帧
+
+python 中的上下文，被封装成了一个叫做 PyFrameObject 的结构，又称之为栈帧，看一下他的源码。
+``` cpp
+typedef struct _frame {
+    PyObject_VAR_HEAD
+    struct _frame *f_back;      /* previous frame, or NULL  上一个栈帧*/
+    PyCodeObject *f_code;       /* code segment 代码段*/
+    PyObject *f_builtins;       /* builtin symbol table (PyDictObject) 内建变量表*/
+    PyObject *f_globals;        /* global symbol table (PyDictObject)  全局变量表*/
+    PyObject *f_locals;         /* local symbol table (any mapping)  局部变量表*/
+    PyObject **f_valuestack;    /* points after the last local  栈底*/
+    /* Next free slot in f_valuestack.  Frame creation sets to f_valuestack.
+       Frame evaluation usually NULLs it, but a frame that yields sets it
+       to the current stack top. */
+    PyObject **f_stacktop;    /*  栈顶 */
+    PyObject *f_trace;          /* Trace function */
+    char f_trace_lines;         /* Emit per-line trace events? */
+    char f_trace_opcodes;       /* Emit per-opcode trace events? */
+
+    /* Borrowed reference to a generator, or NULL  专为生成器设计的指针*/
+    PyObject *f_gen;
+
+    int f_lasti;                /* Last instruction if called   运行的上一个字节码位置*/
+    /* Call PyFrame_GetLineNumber() instead of reading this field
+       directly.  As of 2.3 f_lineno is only valid when tracing is
+       active (i.e. when f_trace is set).  At other times we use
+       PyCode_Addr2Line to calculate the line from the current
+       bytecode index. */
+    int f_lineno;               /* Current line number   运行字节码对应的python源代码的行数*/
+    int f_iblock;               /* index in f_blockstack */
+    char f_executing;           /* whether the frame is still executing */
+    PyTryBlock f_blockstack[CO_MAXBLOCKS]; /* for try and loop blocks */
+    PyObject *f_localsplus[1];  /* locals+stack, dynamically sized */
+} PyFrameObject;
+```
+
+
 ## import流程
 
 * 当Python的解释器遇到import语句或者其他上述导入语句时,它会先去查看sys.modules中是否已经有同名模块被导入了,

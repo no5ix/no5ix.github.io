@@ -1,5 +1,5 @@
 ---
-title: 一个实时的专用游戏服务器
+title: 一个轻量级的游戏服务器引擎
 date: 2018-05-02 17:56:12
 tags:
 - GitHub
@@ -16,7 +16,6 @@ top: 5
 # GitHub
 
 [<i class="fa fa-fw fa-github fa-2x"></i>realtime-server](https://github.com/no5ix/realtime-server) 
-
 
 <!-- 
 

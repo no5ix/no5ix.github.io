@@ -246,7 +246,72 @@ class TreeNode(object):
 <source src="/img/algo_newbie/binary_tree/binary_tree_preorder_traversal.mp4" type="video/mp4" />
 </video>
 
-``` python
+```cpp cpp版本
+class TreeNode{
+public:
+  TreeNode(int _val): val(_val), left(nullptr), right(nullptr) {}
+  char val;
+  TreeNode *left, *right;
+};
+
+
+void swap_tree(TreeNode *tn){
+//   if(tn == nullptr)
+//     return;
+//   std::cout << tn->val << std::endl;
+//   pre_order_traverse(tn->left);
+//   pre_order_traverse(tn->right);
+
+//   std::stack<std::pair<const char*, TreeNode*>> st = stack<std::pair<const char*, TreeNode*>>();
+  auto st = std::stack<std::tuple<const char*, TreeNode*>>();
+  st.push(make_tuple("go", tn));  // todo std::tuple
+// //   st.push(make_pair("go", tn));
+// 
+  while(!st.empty()){
+//     auto [cmd, tree_node] = st.top();
+//     const char *cmd;
+//     TreeNode* tree_node;
+//     std::tie(cmd, tree_node) = st.top();
+    auto poped_elem = st.top();
+    st.pop();
+    auto elem = std::get<1>(poped_elem);
+    if(strcmp(std::get<0>(poped_elem), "print") == 0){
+//       std::cout << std::get<1>(poped_elem)->val << std::endl;
+      auto temp = elem->left;
+      elem->left = elem->right;
+      elem->right = temp;
+      continue;
+    }
+    if(elem->right)
+      st.push(make_pair("go", elem->right));
+    if(elem->left)
+      st.push(make_pair("go", elem->left));
+    st.push(make_pair("print", elem));
+  }
+
+}
+
+
+void bfs(TreeNode* tn){
+  auto qu = std::queue<TreeNode*>();
+  qu.push(tn);
+
+  while (!qu.empty())
+  {
+    auto front_elem = qu.front();
+    qu.pop();
+    std::cout << front_elem->val << std::endl;
+    if(front_elem->left)
+      qu.push(front_elem->left);
+    if (front_elem->right)
+    {
+      qu.push(front_elem->right);
+    }
+  }
+}
+```
+
+```python python版本
 def binary_tree_preorder_traversal(root):
     _result_arr = []
     if not root:
@@ -401,6 +466,12 @@ class LinkList(object):
 <video width="100%" controls="controls">
 <source src="/img/algo_newbie/link_list_reverse.mp4" type="video/mp4" />
 </video>
+
+思路:
+1. 先设置一个虚头节点 `pre`, 
+2. 先暂存好cur的next为`temp_next`
+3. 然后开始用`cur`去连接他即`cur.next = pre`, 
+4. 把暂存好的 `temp_next` 赋值给 `cur`, 继续下一轮 `while cur:` 循环
 
 ``` python
 def linklist_reverse(head):
@@ -1756,7 +1827,7 @@ def insert_sort_optimized(arr, left_index, right_index):
 <source src="/img/algo_newbie/merge_sort/merge_sort_anim2.mp4" type="video/mp4" />
 </video>
 
-``` python
+``` python python版本
 def _merge(arr, left_index, mid_index, right_index):
     """
     归并的具体思路:  
@@ -1784,6 +1855,41 @@ def _merge(arr, left_index, mid_index, right_index):
     # 把归并好的数组数据放到原数组left_index到right_index的位置上去
     for m in xrange(0, right_index-left_index+1):
         arr[left_index+m] = temp_arr[m]
+```
+
+与
+
+``` cpp cpp版本
+void merge(int arr[], int left_i, int mid_i, int right_i){
+  std::vector<int> temp_vec = std::vector<int>();
+  int i = left_i, j = mid_i + 1;
+  while(i <= mid_i && j <= right_i){
+    if(arr[i] < arr[j]){
+      temp_vec.push_back(arr[i]);
+      ++i;
+    } else{
+      temp_vec.push_back(arr[j]);
+      ++j;
+    }
+  }
+  for(; i <= mid_i; ++i)
+    temp_vec.push_back(arr[i]);
+  for(; j <= right_i; ++j)
+    temp_vec.push_back(arr[j]);
+  for(int k = left_i; k <= right_i; ++k)
+    arr[k] = temp_vec[k-left_i];
+}
+
+void merge_sort(int* arr, int left_index, int right_index){
+  if(left_index >= right_index){
+    return;
+  }
+  auto mid = left_index + (right_index - left_index) / 2;
+  merge_sort(arr, left_index, mid);
+  merge_sort(arr, mid+1, right_index);
+  if (arr[mid] > arr[mid+1])
+    merge(arr, left_index, mid, right_index);
+}
 ```
 
 
@@ -1827,7 +1933,7 @@ def merge_sort_optimized(arr, left_index, right_index):
     merge_sort(arr, mid_index+1, right_index)
 
 +    # 优化2: 
-+    #   因为此时arr[mid_index]左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
++    #   因为此时arr[mid_index]是左边的数组里最大的, 而arr[mid_index+1]是右边最小的,
 +    #   如果arr[mid_index] <= arr[mid_index+1]则说明这一轮递归的arr的left到right已经是从小到大有序的了
 +    #   所以只在对于arr[mid_index] > arr[mid_index+1]的情况,进行merge, 
 +    #   对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失(因为多了这行代码判断大小)
@@ -1952,7 +2058,7 @@ A也重复上述步骤递归。
 # partition_index 在还没开始遍历之前时应该指向待遍历元素的最左边的那个元素的前一个位置
 # 在这里这种写法就是 `left_index`
 # 这才符合partition_index的定义:
-#       partition_indexy指向小于pivot的那些元素的最后一个元素,
+#       partition_index指向小于pivot的那些元素的最后一个元素,
 #       即 less_than_pivots_last_elem_index
 # 因为还没找到比pivot小的元素之前, 
 # partition_index是不应该指向任何待遍历的元素的
@@ -2094,7 +2200,49 @@ i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+
 ```
 
 接下来是完整代码:
-``` python
+```  cpp cpp版本
+int* partition_3_ways(int arr[], int left_index, int right_index){
+  int p_index = left_index;
+  auto left_end = left_index;
+  auto right_start = right_index + 1;
+  for(int i=left_index + 1; i < right_start;){
+    if(arr[i] < arr[p_index]){
+      swap_elem(arr, i, left_end + 1);
+      left_end += 1;
+      ++i;
+    }
+    else if(arr[i] > arr[p_index]){
+      swap_elem(arr, i, right_start - 1);
+      right_start -= 1;
+      // 注意!! 这个情况是不 `++i` 的 !
+    }
+    else{
+      ++i;
+    }
+  }
+  swap_elem(arr, left_end, p_index);
+  int* ret_arr = new int[2];
+  ret_arr[0] = left_end;
+  ret_arr[1] = right_start;
+  return ret_arr;
+}
+
+
+void quick_sort_3_ways(int* arr, int left_index, int right_index){
+  if(!arr || left_index >= right_index)
+    return;
+  auto ret_arr = partition_3_ways(arr, left_index, right_index);
+  auto left_end = ret_arr[0];
+  auto right_start = ret_arr[1];
+  delete[] ret_arr;
+  quick_sort_3_ways(arr, left_index, left_end);
+  quick_sort_3_ways(arr, right_start, right_index);
+}
+```
+
+以及:  
+
+```  python python版本
 def quick_sort_3_ways(arr, left_index, right_index):
     # 如果left等于right则说明已经partition到只有一个元素了, 可以直接return了
     if not arr or left_index >= right_index:
@@ -2126,7 +2274,7 @@ def quick_sort_3_ways(arr, left_index, right_index):
             arr[i], arr[lt_index+1] = arr[lt_index+1], arr[i]
             lt_index += 1
             i += 1
-        elif arr[i] > pivot:
+        elif arr[i] > pivot:  # 注意!! 这个情况是不 `i += 1` 的 !
             arr[i], arr[gt_index-1] = arr[gt_index-1], arr[i]
             gt_index -= 1
         else:
@@ -2278,7 +2426,7 @@ def _build_max_heap(arr, left_index, right_index):
    1. 把数组中的第一个元素(即根节点)也就是当前堆的最大元素逐个和数组后面的元素交换
    2. 对根节点做一次堆化操作
 
-``` python
+``` python python版本
 def heap_sort(arr, left_index , right_index):
     if not arr or left_index >= right_index or right_index <= 0:
         return
@@ -2294,6 +2442,50 @@ def heap_sort(arr, left_index , right_index):
         _max_heapify_recursive(arr, root_index, left_index, cur_right_index)
 ```
 
+与
+
+``` cpp cpp版本
+void heapify(int arr[], int p_i, int left_i, int right_i){
+  if(p_i > right_i)
+    return;
+
+  auto left_child_i = (p_i-left_i)*2 + 1;
+  auto right_child_i = left_child_i + 1;
+
+  auto max_child_i = p_i;
+  if(left_child_i <= right_i && arr[left_child_i] > arr[max_child_i])
+    max_child_i = left_child_i;
+  if(right_child_i <= right_i && arr[right_child_i] > arr[max_child_i])
+    max_child_i = right_child_i;
+
+  if(max_child_i != p_i){
+    swap_elem(arr, max_child_i, p_i);
+    heapify(arr, max_child_i, left_i, right_i);
+  }
+}
+
+void build_max_heap(int arr[], int left_i, int right_i){
+  auto arr_len = right_i - left_i + 1;
+  auto last_none_leaf_i = left_i + (arr_len / 2) - 1;
+
+  while(last_none_leaf_i >= left_i){
+    heapify(arr, last_none_leaf_i, left_i, right_i);
+    --last_none_leaf_i;
+  }
+}
+
+void heap_sort(int* arr, int left_index, int right_index){
+  if(!arr)
+    return;
+  build_max_heap(arr, left_index, right_index);
+  auto cur_right_i = right_index;
+  while (cur_right_i >= left_index){
+    swap_elem(arr, left_index, cur_right_i);
+    --cur_right_i;
+    heapify(arr, left_index, left_index, cur_right_i);
+  }
+}
+```
 
 # 递归解题思路
 
@@ -5165,7 +5357,8 @@ class Solution extends SolBase {
     }
 }
 ```
-这样的一个问题是，我们的函数会得到 1～491～49 之间的数，而我们只想得到 1～101～10 之间的数，这一部分占的比例太少了，简而言之，这样效率太低，太慢，可能要 whilewhile 循环很多次，那么解决思路就是舍弃一部分数，舍弃 41～4941～49，因为是独立事件，我们生成的 1～401～40 之间的数它是等概率的，我们最后完全可以利用 1～401～40 之间的数来得到 1～101～10 之间的数。所以，我们的代码可以改成下面这样
+
+这样的一个问题是，我们的函数会得到 `1～49 `之间的数，而我们只想得到 `1～10` 之间的数，这一部分占的比例太少了，简而言之，这样效率太低，太慢，可能要 `while` 循环很多次，那么解决思路就是舍弃一部分数，舍弃 `41～49`，因为是独立事件，我们生成的 `1～40` 之间的数它是等概率的，我们最后完全可以利用 `1～40` 之间的数来得到 `1～10` 之间的数。所以，我们的代码可以改成下面这样
 ``` java
 class Solution extends SolBase {
     public int rand10() {

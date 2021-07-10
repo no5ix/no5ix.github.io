@@ -18,12 +18,14 @@ top: 5
 [<i class="fa fa-fw fa-github fa-2x"></i>realtime-server](https://github.com/no5ix/realtime-server) 
 
 
-<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
+<!-- 
 
-<!-- <video preload="auto" autoplay="autoplay" loop="loop" width="100%" controls="controls"> -->
+<i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
 <video loop="loop" width="100%" controls="controls">
 <source src="/img/a_real_time_game_server_and_a_ue4_demo_for_it/ue4_demo_for_rs_720p.mp4" type="video/mp4" />
 </video>
+
+-->
 
 
 # 要点
@@ -59,5 +61,5 @@ top: 5
 
 本架构图根据 PlantUML 自动生成
 
-![](https://github.com/no5ix/realtime-server/blob/dev/img/img_1.png))
+![](https://raw.githubusercontent.com/no5ix/realtime-server/dev/img/img_1.png)
 

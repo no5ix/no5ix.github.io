@@ -167,7 +167,7 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 总结:   
 * git reset 是把HEAD向后移动了一下，而git revert是HEAD继续前进，只是新的commit的内容和要revert的内容正好相反，能够抵消要被revert的内容。
 * `git reset`适用场景: 如果想恢复到之前某个提交的版本，且那个版本之后提交的版本我们都不要了，就可以用这种方法
-* `git rebase`适用场景: 如果我们想撤销之前的某一版本，但是又想保留该目标版本后面的版本，记录下这整个版本变动流程，就可以用这种方法。
+* `git revert`适用场景: 如果我们想撤销之前的某一版本，但是又想保留该目标版本后面的版本，记录下这整个版本变动流程，就可以用这种方法。
 
 `git revert` 和 `git reset` 的区别看一个例子
 

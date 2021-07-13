@@ -2352,7 +2352,7 @@ MVCC 维护了一个 ReadView 结构，主要包含了当前系统未提交的�
     * `update table set ? where ?;`
     * `delete from table where ?;`
 
-在MySQL中select称为快照读，不需要锁，而insert、update、delete、select for update则称为当前读，需要给数据加锁，**幻读中的“读”即是针对当前读**。  
+在MySQL中普通的select称为快照读，不需要锁，而insert、update、delete、select for update则称为当前读，需要给数据加锁，**幻读中的“读”即是针对当前读**。  
 RR事务隔离级别允许存在幻读，但InnoDB RR级别却通过Gap锁避免了幻读
 
 **mysql如何实现避免幻读**:  
@@ -2592,6 +2592,7 @@ redis集群是一个由多个主从节点群组成的分布式服务器群，它
 * 节点之间会互相通信，两两相连, 采用gossip协议来通信；
 * Redis集群无中心节点。
 * 集群的伸缩本质是: 槽数据在节点中的移动
+    * ![](/img/noodle_plan/redis/slot_move.png)
 
 ### 优点
 
@@ -2639,7 +2640,9 @@ Redis采用的是Hash Slot
 先构造出一个长度为2^32整数环，根据节点名称的hash值（分布在[0,2^32-1]）放到这个环上。现在要存放资源，根据资源的Key的Hash值（也是分布在[0,2^32-1]），在环上顺时针的找到离它最近的一个节点，就建立了资源和节点的映射关系。
 
 * 优点：一个节点宕机时，上面的数据转移到顺时针的下一个节点中，新增一个节点时，也只需要将部分数据迁移到这个节点中，对其他节点的影响很小
-* 缺点：由于数据在环上分布不均，可能存在某个节点存储的数据比较多，那么当他宕机的时候，会导致大量数据涌入下一个节点中，把另一个节点打挂了，然后所有节点都挂了
+* 缺点：
+    * 由于数据在环上分布不均，可能存在某个节点存储的数据比较多，那么当他宕机的时候，会导致大量数据涌入下一个节点中，把另一个节点打挂了，然后所有节点都挂了
+    * 在增减节点时需要增加一倍或减去一半节点才能保证数据和负载的均衡
 * 改进：引进了虚拟节点的概念，想象在这个环上有很多“虚拟节点”，数据的存储是沿着环的顺时针方向找一个虚拟节点，每个虚拟节点都会关联到一个真实节点
 
 #### HashSlot算法
@@ -2649,11 +2652,12 @@ Redis采用的是Hash Slot分片算法，用来计算key存储位置的。集群
 
 **那为什么是16384个槽呢?**
 
-ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值。换句话说，值是分布在0~65535之间。那作者在做mod运算的时候，为什么不mod65536，而选择mod16384？[作者解答](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fantirez%2Fredis%2Fissues%2F2576)
+![](/img/noodle_plan/redis/redis_slot_hash.jpg)
 
-在redis节点发送心跳包时需要把所有的槽放到这个心跳包里，以便让节点知道当前集群信息，16384=16k，在发送心跳包时使用char进行bitmap压缩后是`2k（2 * 8 (8 bit) * 1024(1k) = 2K）`，也就是说使用2k的空间创建了16k的槽数。
+ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值。换句话说，值是分布在0~65535之间。那作者在做mod运算的时候，为什么不mod65536，而选择mod16384？[作者解答](https://github.com/redis/redis/issues/2576)
 
-虽然使用CRC16算法最多可以分配65535（2^16-1）个槽位，65535=65k，压缩后就是`8k（8 * 8 (8 bit) * 1024(1k) = 8K）`，也就是说需要需要8k的心跳包，作者认为这样做不太值得；并且一般情况下一个redis集群不会有超过1000个master节点，所以16k的槽位是个比较合适的选择。
+* 在redis节点发送心跳包时需要把所有的槽放到这个心跳包里，以便让节点知道当前集群信息，16384=16k，在发送心跳包时使用char进行bitmap压缩后是`16384÷8÷1024=2kb`，也就是说使用2k的空间创建了16k的槽数。
+* 虽然使用CRC16算法最多可以分配65535（2^16-1）个槽位，65535=65k，当槽位为65536时，这块的大小是: `65536÷8÷1024=8kb`，也就是说需要需要8k的心跳包，作者认为这样做不太值得；
 
 
 ## Cache和DB如何一致
@@ -2712,7 +2716,12 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 处理方案:
 
 * 缓存穿透我会在接口层增加校验，比如用户鉴权校验，参数做校验，不合法的参数直接代码Return，比如：id 做基础校验，id <=0的直接拦截等。
-* 布隆过滤器, 把存在的key提前存放好在布隆过滤器中, 当查询的时候快速判断出你这个Key是否在数据库中存在, 不存在则直接return
+* 布隆过滤器, 把存在的key提前存放好在布隆过滤器中, 当查询的时候快速判断出你这个Key是否在数据库中**不存在或可能存在**, 不存在则直接return. 原理如下:
+    * 如果我们要映射一个值到布隆过滤器中，我们需要使用多个不同的哈希函数生成多个哈希值，并对每个生成的哈希值指向的 bit 位置 1，例如针对值 “baidu” 和三个不同的哈希函数分别生成了哈希值 1、4、7，则有
+    * ![](/img/noodle_plan/redis/bloom_filter_1.jpg)
+    * Ok，我们现在再存一个值 “tencent”，如果哈希函数返回 3、4、8 的话，图继续变为：
+    * ![](/img/noodle_plan/redis/bloom_filter_2.jpg)
+    * 值得注意的是，4 这个 bit 位由于两个值的哈希函数都返回了这个 bit 位，因此它被覆盖了。现在我们如果想查询 “dianping” 这个值是否存在，哈希函数返回了 1、5、8三个值，结果我们发现 5 这个 bit 位上的值为 0，说明没有任何一个值映射到这个 bit 位上，因此我们可以很确定地说 “dianping” 这个值不存在。而当我们需要查询 “baidu” 这个值是否存在的话，那么哈希函数必然会返回 1、4、7，然后我们检查发现这三个 bit 位上的值均为 1，那么我们可以说 “baidu” 存在了么？答案是不可以，只能是 “baidu” 这个值可能存在。
 
 
 ## 缓存击穿是啥?咋处理?
@@ -2746,8 +2755,8 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
 
 [动画演示Raft选主](http://thesecretlivesofdata.com/raft/#election)  
 前提知识:  
-* Election timeout选举周期: The election timeout is the amount of time a follower waits until becoming a candidate.
-* heartbeat timeout心跳时间间隔
+* `Election timeout`选举周期: The election timeout is the amount of time a follower waits until becoming a candidate.
+* `heartbeat timeout`心跳时间间隔
 
 选主的具体流程如下:  
 1. 假设三个节点的集群，三个节点上均运行 一个随机选举周期timer（每个 Timer 持续时间是随机的, 一般是150~300ms），Raft算法使用随机 Timer 来初始化 Leader 选举流程，第一个节点率先完成了 Timer，那它就要变成candidate，然后带着自身的数据版本信息发起vote
@@ -2758,7 +2767,7 @@ ps:CRC16算法产生的hash值有16bit，该算法可以产生2^16-=65536个值�
     * 如果有都变成了candidate的多个节点，follower们采取哪个candidate先来先投票的策略。
     * 在一个任期内，一个节点只能投一票
     * 如果超过半数的follower都认为他是合适做领导的，那么恭喜，新的leader产生了.
-3. 成为 Leader 后，该节点会以固定心跳时间间隔heartbeat timeout向其他节点发送通知确保自己仍是Leader，follower收到了心跳则会重置一下选举周期timer, 重新计时。
+3. 成为 Leader 后，该节点会以固定心跳时间间隔`heartbeat timeout`向其他节点发送通知确保自己仍是Leader，follower收到了心跳则会重置一下选举周期timer, 重新计时。
 4. 有些情况下当 Follower 们收不到 Leader 的通知后，比如说 Leader 节点宕机或者失去了连接，则其他节点当选举周期timer到期后就会会重复之前选举过程选举出新的 Leader。
 5. 如果多个candidate同时发起了选举:  
     * 只有follower能投票且只能投一次(投了a就不能投b了), candidate B 是不能给candidate A 投票的
@@ -2806,9 +2815,9 @@ etcd 两种方案来保证线性一致性读:
             * Follower 先向 Leader 询问 readIndex，Leader 收到 Follower 的请求后依然要通过 上述的第2步骤广播心跳确认自己 Leader 的身份，然后返回当前的 commitIndex 作为 readIndex，Follower 拿到 readIndex 后，等待本地的 applyIndex 大于等于 readIndex 后，即可读取状态机中的数据返回。
 * LeaseRead 方案
     * etcd-raft不推荐采用此方案
-    * 基本的思路是 Leader 取一个比 Election Timeout选举周期 小的租期，在租期不会发生选举，确保 Leader 不会变，所以可以跳过 ReadIndex 的第二步，也就降低了延时。 
+    * 基本的思路是 Leader 取一个比 `Election Timeout`选举周期小的租期，在租期不会发生选举，确保 Leader 不会变，所以可以跳过 ReadIndex 的第二步，也就降低了延时。 
     * LeaseRead 与 ReadIndex 类似，但更进一步，不仅省去了 Log，还省去了网络交互。它可以大幅提升读的吞吐也能显著降低延时。
-    * 缺陷: LeaseRead 的正确性和时间挂钩，因此时间的实现至关重要，如果漂移严重，这套机制就会有问题。LeaseRead 的正确性和时间的实现挂钩，由于不同主机的 CPU 时钟有误差，所以也有可能读取到过期的数据。
+    * 缺陷: LeaseRead 的正确性和时间挂钩，因此时间的实现至关重要，如果漂移严重，这套机制就会有问题。LeaseRead 的正确性和时间的实现挂钩，由于不同主机的 CPU 时钟有误差，所以也有可能读取到过期的数据。再次强调，这依赖于机器的时钟飘移速率，换言之，若各机器之间的时钟差别过大，则此种基于lease的机制就可能出现问题
 
 
 ## etcd存在脑裂情况吗
@@ -2818,11 +2827,13 @@ etcd不存在脑裂情况.
 众所周知 etcd 使用 Raft 协议来解决数据一致性问题。一个 Raft Group 只能有一个 Leader 存在，如果一旦发生网络分区，Leader 只会在多数派一边被选举出来，而少数派则全部处于 Follower 或 Candidate 状态，所以一个长期运行的集群是不存在脑裂问题的。etcd 官方文档也明确了这一点：  
 > The majority side becomes the available cluster and the minority side is unavailable; there is no “split-brain” in etcd.
 
-但是有一种特殊情况，假如旧的 Leader 和集群其他节点出现了网络分区，其他节点选出了新的 Leader，但是旧 Leader 并没有感知到新的 Leader，那么此时集群可能会出现一个短暂的「双 Leader」状态。这种情况并不能称之为脑裂，原因如下：  
+但是有一种特殊情况，假如旧的 Leader 和集群其他节点出现了网络分区，其他节点选出了新的 Leader，但是旧 Leader 并没有感知到新的 Leader，那么此时集群可能会出现一个短暂的「双 Leader」状态。这种情况并不能称之为脑裂，原因如下：  这种情况并不能称之为脑裂，原因有二：
+
+* 这不是一个长期运行状态，维持时间不会超过一个投票周期
 * etcd网络分区时
     * 如果leader在少数派
         * 此时多数派会有follower选举周期timer触发则任期term增加, 并且会选出多数派新leader, 
-        * 此时少数派leader会检查法定人数是否大于节点数量一半, 检查确认后则少数派集群进入是不可用状态，不支持raft请求，只支持非一致性读请求。一旦网络分区清除，少数派因为任期term较小, 则这边会自动承认来自多数这边的 leader 并同步多数派的数据状态。
+        * 此时少数派leader会检查法定人数是否大于节点数量一半, 检查确认后则少数派集群进入是不可用状态，全部变为 Follower 或 Candidate 状态, 不支持raft请求，只支持非一致性读请求。一旦网络分区清除，少数派因为任期term较小, 则这边会自动承认来自多数这边的 leader 并同步多数派的数据状态。
     * 如果在leader在多数派, 则一切照旧
 * 网络分区时 etcd 也有 ReadIndex、LeaseRead 机制来解决这种状态下的数据一致性问题
 
@@ -2842,6 +2853,16 @@ etcd不存在脑裂情况.
 可以, 但非常不建议.  
 
 偶数个节点的集群非但不能提升容错能力，反而会带来资源的浪费并可能使选举的时间变长。同时在奇数个集群的情况下，即使产生网络分区也能保证始终有一方占据大多数的节点，进而选举出新的 Leader 来保证集群的可用。而偶数个节点则可能会出现对半分的场景，这样任意一方都无法选举出 Leader，导致集群的不可用。
+
+
+## 不能直接read返回吗
+
+疑问：为什么 read 请求到达 leader 之后需要获取最新的 commit index，然后再等到 applied index >= commit index 之后再 read 数据返回 ？不能直接 read 返回吗 ？
+
+答案：不可以，因为那样不满足 linearizable read，因为要想满足 linearizable read 那么必须保证，已经被 read 到的数据，那么后面的 read （非并发的 read） 都应该能 read 到，也就是不会出现 read 到旧数据。我们已 commit index 为依据去 read，可以保证 read request 到达 leader 越晚，其 commit index 必然越大，也就是 r1 arrive time <= r2 arrive time，那么 r1 commit index <= r2 commit index，那么 r2 read 到的数据就至少和 r1 一样新，从而保证了 linearizable read。
+
+相反，直接 read 返回，相当于是记录下当前 applied index，但是 applied index 并不是严格的单调的往上增加的，例如集群 {A，B，C}开始 A 为 leader，这个时候 applied index 为 a1，然后 A 挂了，B 重新选举为了 leader，这个时候 B 的 applied index 为 a2，那么我们并不能保证 a2 >= a1，因为很有可能，B 由于日志复制延迟导致日志虽然复制过去了（保证拥有最新的日志，能选为 leader），但是还没来得及 apply，那么如果一个 read 来到 B，可能就会 read 到旧数据，出现 read 的新旧数据反转，从而不满足线性一致性。
+
 
 
 ## etcd架构及解析
@@ -3827,7 +3848,7 @@ ms --> redis
 
 * 地图: 750*350
 * 游戏大厅服承载: 4万人左右
-* 战斗服承载: 40个进程, 每个进程2场战斗, 每场战斗60人, 则40*2*60 = 5k人左右
+* 战斗服承载: 40个进程, 每个进程2场战斗, 每场战斗60人, 则`40*2*60 = 5k`人左右
 
 ### 服务器架构基于etcd的分布式改造
 
@@ -4112,7 +4133,7 @@ type AuthReq struct {
         * 特定渠道的人数控制
         * 激活码
     * 游戏服和客户端怎么拿到登录微服务地址的?
-        * 不直接拿, 而是通过 api-gateway 这个网关, 这个api-gateway是sa负责维护的, 基于k8s的servic和ingress开发
+        * 不直接拿, 而是通过 api-gateway 这个网关, 这个api-gateway是sa负责维护的, 基于k8s的service和ingress开发
             * k8s的service介绍: 因为很多运行的容器存在动态、弹性的变化（容器的重启IP地址会变化），因此便产生了service，其资源为此类POD对象提供一个固定、统一的访问接口及负载均衡能力，并借助DNS系统的服务发现功能，解决客户端发现容器难得问题
             * k8s的ingress介绍: 作为HTTP(S)负载均衡器
         * [参考这里](#客户端角度)
@@ -4134,6 +4155,8 @@ type AuthReq struct {
 
 ### 网络优化
 
+![](/img/noodle_plan/g90/kcp_latency.png)
+
 ![](/img/noodle_plan/g90/kcp_header.png)
 
 * ⚫ 网络优化, 平均降低延迟50%, 增强其抗网络抖动能力, 使其在70ms的RTT延迟30%丢包率的环境下依旧可以流畅运行且正常操作
@@ -4142,6 +4165,7 @@ type AuthReq struct {
             * 在原有rudp基础上加入冗余包, 
             * 并且根据一段时间内检测的srtt与丢包率来动态冗余(100ms以下本身表现较好不用冗余了), 
             * ![](/img/noodle_plan/g90/kcp_rdc.png)
+            * head部分指的是除了len与rdc_len之外的所有包头内容，len指的是body的长度，rdc_len指的是rdc_body的长度。其中rdc_body是由一个个rdc_data组成的，每个rdc_data又包含了rdc_sn，data_len与data三个部分。这样设计下，可以动态的调节携带冗余的数量。
             * 如何设计成动态冗余的呢? 
                 * 改造包头加入`rdc_len`和`rdc_body`, `rdc_len`指的是`rdc_body`的长度。
                 * 其中 `rdc_body` 是由一个个`rdc_data`组成的, 而每个`rdc_data`又包含了三个部分:  
@@ -4165,7 +4189,7 @@ type AuthReq struct {
                         * data_n
             * 为什么要设置冗余次数？因为当一个包被当做冗余携带N次都丢失的话，证明游戏已经到了一个比较卡的程度, 可以通过限制冗余次数来减少无谓的流量消耗, 且KCP本身有快速重传的机制，
         * 精简包头(32位改16位), 并合批数据且压缩(方便冗余更多)
-            * 降低25%的包头消耗(24字节->18)。最终达到以20%的流量代价换取弱网络环境30%~40%的体验改善。
+            * 降低25%的包头消耗(24字节->18)
         * ack机制优化
             * `UNA`: 包头中的`UNA`表示此编号前所有包已收到
             * CMD为ack类型的cmd时:
@@ -5282,7 +5306,10 @@ CSRF 通常从第三方网站发起，被攻击的网站无法防止攻击发生
         * Lax：Chrome默认模式，对于从第三方站点以link标签，a标签，GET形式的Form提交这三种方式访问目标系统时，会带上目标系统的Cookie，对于其他方式，如 POST形式的Form提交、AJAX形式的GET、img的src访问目标系统时，不到Cookie。
         * None：原始方式，任何情况都提交目标系统的Cookie。由于Samesite是Google提出来的，其他浏览器目前并未普及，存在兼容性问题，目前不推荐使用。
 * 提交时要求附加本域才能获取的信息
-    * *CSRF Token* : 用 jwt 弄一套 `access token` / `refresh token` 机制就行
+    * *CSRF Token* : 而CSRF攻击之所以能够成功，是因为服务器误把攻击者发送的请求当成了用户自己的请求。那么我们可以要求所有的用户请求都携带一个CSRF攻击者无法获取到的Token。服务器通过校验请求是否携带正确的Token，来把正常的请求和攻击的请求区分开，也可以防范CSRF的攻击。
+        1\. 将CSRF Token输出到页面中(这个token不存在session中, 用jwt来做这个token即可)
+        2\. 页面提交的请求携带这个Token
+        3\. 服务器验证Token是否正确
     * *双重 Cookie 验证* : 
         1\. 在用户访问网站页面时，向请求域名注入一个Cookie，内容为随机字符串（例如csrfcookie=v8g9e4ksfhw）。
         2\. 在前端向后端发起请求时，取出Cookie，并添加到URL的参数中（接上例POST https://www.a.com/comment?csrfcookie=v8g9e4ksfhw）。

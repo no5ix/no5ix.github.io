@@ -5047,6 +5047,65 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 * 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
 
 
+## 关于enable_shared_from_this
+
+如果一个T类型的对象t，是被std::shared_ptr管理的，且类型T继承自std::enable_shared_from_this，那么T就有个shared_from_this的成员函数，这个函数返回一个新的std::shared_ptr的对象，也指向对象t。
+
+那么这个特性的应用场景是什么呢？一个主要的场景是保证异步回调函数中操作的对象仍然有效。比如有这样一个类：
+``` cpp
+class Foo {
+public:
+    void Bar(std::function<void(Foo*)> p_fnCallback) {
+        // async call p_fnCallback with this
+    }
+}
+```
+
+Foo::Bar接受一个函数对象，这个对象需要一个Foo*指针，其实要的就是Foo::Bar的this指针，但是这个回调是异步的，也就是说可能在调用这个回调函数时，this指向的Foo对象已经提前析构了。
+
+首先肯定不能那样写`shared_ptr< A > ( this ) `，这会调用shared_ptr智能指针的构造函数，对this指针指向的对象，又建立了一份引用计数对象，已经对这个A对象建立的引用计数对象，又成了两个引用计数对象，对同一个资源都记录了引用计数，为1，最终两次析构对象释放内存，错误！
+
+这时候，std::enable_shared_from_this就派上用场了。修改后如下：
+``` diff
+class Foo {
+public:
+-    void Bar(std::function<void(Foo*)> p_fnCallback) {
++    void Bar(std::function<void(std::shared_ptr<Foo>)> p_fnCallback) {
++    std::shared_ptr<Foo> _foo = shared_from_this();
+        // async call p_fnCallback with this
+    }
+}
+```
+
+这样就可以保证异步回调时，Foo对象仍然有效。
+
+注意到cppreference中说道，必须要是std::shared_ptr管理的对象，调用shared_from_this才是有效的，为什么呢？这个就需要看看std::enable_shared_from_this的实现原理了：
+
+一个类继承enable_shared_from_this会怎么样？看看enable_shared_from_this基类的成员变量有什么，如下：
+``` cpp
+template<class _Ty>
+	class enable_shared_from_this
+	{	// provide member functions that create shared_ptr to this
+public:
+	using _Esft_type = enable_shared_from_this;
+
+	_NODISCARD shared_ptr<_Ty> shared_from_this()
+		{	// return shared_ptr
+		return (shared_ptr<_Ty>(_Wptr));
+		}
+	// 成员变量是一个指向资源的弱智能指针
+	mutable weak_ptr<_Ty> _Wptr;
+};
+```
+
+也就是说，如果一个类继承了enable_shared_from_this，那么它产生的对象就会从基类enable_shared_from_this继承一个成员变量_Wptr，当定义第一个智能指针对象的时候shared_ptr< A > ptr1(new A())，调用shared_ptr的普通构造函数，就会初始化A对象的成员变量_Wptr，作为观察A对象资源的一个弱智能指针观察者（在shared_ptr的构造函数中实现，有兴趣可以自己调试跟踪源码实现）。
+
+综上所说，所有过程都没有再使用shared_ptr的普通构造函数，没有在产生额外的引用计数对象，不会存在把一个内存资源，进行多次计数的过程；
+关键的是, weak_ptr到shared_ptr的提升, 通过判断资源的引用计数是否还在，判定对象的存活状态，  
+* 对象存活，提升成功；
+* 对象析构，提升失败！
+
+
 ## 编译过程
 
 ``` puml
@@ -5402,6 +5461,51 @@ Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）
 ```
 下面，还是以汉字“严”为例，演示如何实现UTF-8编码：
 已知“严”的unicode是4E25（100111000100101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是“11100100 10111000 10100101”，转换成十六进制就是E4B8A5。
+
+
+# QUIC
+
+QUIC的通讯过程在初次没有建立过连接时使用1-RTT的握手机制，同时保证连接的建立和达到安全的保障。以下是QUIC的1-RTT的握手过程：
+
+1. Server端会持有0-RTT公私钥对，并且生成SCFG（服务端的配置信息对象），把公钥放入SCFG中；
+2. 客户端初次请求时，需要向服务端获取0-RTT公钥，这个需要消耗一个RTT，这也QUIC的1-RTT的所在；
+3. 客户端在收到0-RTT公钥以后会缓存起来，同时生成自己的临时公私钥对，经过前面的一个RTT后客户端把自己的临时私钥与服务端发过来的0-RTT的公钥根据DH算法生成一个加密密钥K1，同时使用K1加密数据同时附送自己的临时公钥一起发送服务端，此时已有用户数据发送；
+4. 在服务端收到用户使用K1加密的用户数据和客户端发来的临时公钥以后，会做如下几件事：
+5. 使用0-RTT私钥与客户端发来的临时公钥通过DH算法生成K1解密用户数据并递交到应用；
+6. 生成服务端临时公私钥对，使用临时公私钥对的私钥，与客户端发来的客户端临时公钥，生成K2加密服务端要传输的数据
+7. 把服务端的临时公钥和使用K2加密的应用数据发送到客户端
+8. 客户端收到服务端发送的服务端临时公钥和使用K2加密的应用数据后会再次使用DH算法把服务端的临时公钥和客户端原来的临时私钥重新生成K2解密数据，并且从此以后使用K2进行数据层的加解密
+   
+备注：这里服务端为什么要重新再生成临时公私钥对再使用DH算法来生成加密密钥K2呢？
+
+其核心考虑到的是安全性，如果没有服务端的临时公私钥和K2，那么在通讯过程中使用的K1是不安全的，因为服务端的SCFG中的0-RTT公私钥是对所有客户端，并且长期保持直到过期，而且这个过期时间一般会比较长。一旦服务端的0-RTT私钥泄露则所有客户端的通讯都无法确保前向安全性了。攻击者只需要把包抓下来，获取到0-RTT私钥即可破解所有通讯数据。
+
+## QUIC握手流程图
+
+QUIC的0-RTT握手效率极大提升
+0-RTT是QUIC一个很关键的属性，能够在连接的第一个数据报文就可以携带用户数据。但是我们也可以看到如果客户端和服务端从来没有通讯过，那么是不存在0-RTT的，需要一个完成的RTT之后才能承载用户数据。
+
+![](/img/noodle_plan/quic/quic_1.jpg)
+
+这个是QUIC的1-RTT过程，那么他的0-RTT又是怎么做的呢？其实很明显，客户端把0-RTT的握手公钥和相关信息保存起来，后续再建连接的时候就可以直接使用之前保存的数据了，只要这个数据没有过期，服务端都会承认的。因此可以避免掉公钥发送的这一个RTT，直接生成K1加密用户数据传输。
+
+![](/img/noodle_plan/quic/quic_2.jpg)
+
+
+## QUIC如何防止中间人攻击
+
+从前面的分析，我们可以看到SCFG的重要性非常关键，在0-RTT的场景完全依靠这个数据来获得0-RTT握手公钥，而且需要在客户端和服务端传输流转。那么它的安全可信就非常重要，QUIC是如何保障呢，如何防止中间人攻击呢，是否会带来其他安全风险？
+
+* 在QUIC中给这个数据增加了一个签名机制，签名是通过公有证书的私钥来签的，在客户端需要对证书进行认证，这样可以确保无法实现中间人攻击, 类似HTTPS
+* 同时也设置了过期时间来保障安全性。SCFG的过期时间也可以很大程度上缓解SCFG被恶意收集。
+
+
+## QUIC的重放攻击问题
+
+![](/img/noodle_plan/quic/quic_3.jpg)
+
+
+对于安全性要求比较高的业务操作，例如具备有POST或者PUT操作时为了确保安全性通常会把0-RTT关闭，包括像facebook或者cloudflare也都是在一些关键操作上禁用0-RTT功能，只有幂等操作（如GET、HEAD等）才使用0-RTT。
 
 
 # misc

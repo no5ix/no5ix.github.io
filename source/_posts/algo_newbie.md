@@ -5022,6 +5022,82 @@ class Solution_integer_break(object):
 
 # 双指针题型
 
+
+## 两个无序数组的公共元素集合
+
+思路: 两个集合求交集
+
+``` cpp
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> set1, set2;
+        for (auto& num : nums1) {
+            set1.insert(num);
+        }
+        for (auto& num : nums2) {
+            set2.insert(num);
+        }
+        return getIntersection(set1, set2);
+    }
+
+    vector<int> getIntersection(unordered_set<int>& set1, unordered_set<int>& set2) {
+        if (set1.size() > set2.size()) {
+            return getIntersection(set2, set1);
+        }
+        vector<int> intersection;
+        for (auto& num : set1) {
+            if (set2.count(num)) {
+                intersection.push_back(num);
+            }
+        }
+        return intersection;
+    }
+};
+```
+
+## 两个有序数组的公共元素集合
+
+[lc349, easy](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
+
+关键是怎么用上**有序**这个定语
+
+* 如果两个数组是有序的，则可以使用双指针的方法得到两个数组的交集。
+
+* 首先对两个数组进行排序，然后使用两个指针遍历两个数组。可以预见的是加入答案的数组的元素一定是递增的，为了保证加入元素的唯一性，我们需要额外记录变量 `pre` 表示上一次加入答案数组的元素。初始时，两个指针分别指向两个数组的头部。每次比较两个指针指向的两个数组中的数字，如果两个数字不相等，则将指向较小数字的指针右移一位，如果两个数字相等，且该数字不等于 `pre` ，将该数字添加到答案并更新 `pre` 变量，同时将两个指针都右移一位。当至少有一个指针超出数组范围时，遍历结束
+
+[参考](https://leetcode-cn.com/problems/intersection-of-two-arrays/solution/liang-ge-shu-zu-de-jiao-ji-by-leetcode-solution/)
+
+``` cpp
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+        int length1 = nums1.size(), length2 = nums2.size();
+        int index1 = 0, index2 = 0;
+        vector<int> intersection;
+        while (index1 < length1 && index2 < length2) {
+            int num1 = nums1[index1], num2 = nums2[index2];
+            if (num1 == num2) {
+                // 保证加入元素的唯一性
+                if (!intersection.size() || num1 != intersection.back()) {
+                    intersection.push_back(num1);
+                }
+                index1++;
+                index2++;
+            } else if (num1 < num2) {
+                index1++;
+            } else {
+                index2++;
+            }
+        }
+        return intersection;
+    }
+};
+```
+
+
 ## 最小覆盖子串-滑动窗口典型题目
 
 [lc76, hard](https://leetcode-cn.com/problems/minimum-window-substring/)  

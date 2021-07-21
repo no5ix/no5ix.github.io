@@ -375,7 +375,29 @@ def binary_tree_postorder_traversal(root):
 ![](/img/algo_newbie/binary_tree/BreadthFirstTraverse1.png)
 
 注意看上图中的文字思路
-``` python
+``` cpp cpp版本
+void bfs(TreeNode* tn){
+  auto qu = std::queue<TreeNode*>();
+  qu.push(tn);
+
+  while (!qu.empty())
+  {
+    auto front_elem = qu.front();
+    qu.pop();
+    std::cout << front_elem->val << std::endl;
+    if(front_elem->left)
+      qu.push(front_elem->left);
+    if (front_elem->right)
+    {
+      qu.push(front_elem->right);
+    }
+  }
+}
+```
+
+与
+
+``` python python版本
 def binary_tree_levelorder_traversal(root):
     _result_arr = []
     if not root:
@@ -473,7 +495,35 @@ class LinkList(object):
 3. 然后开始用`cur`去连接他即`cur.next = pre`, 
 4. 把暂存好的 `temp_next` 赋值给 `cur`, 继续下一轮 `while cur:` 循环
 
-``` python
+``` cpp cpp版本
+struct LinkedList;
+typedef shared_ptr<LinkedList> llp;
+
+typedef struct LinkedList{
+  LinkedList(char _val): val(_val), next(nullptr) {}
+  char val;
+  llp next;
+} ll;
+
+llp reverse_linked_list(llp test_ll){
+  if(test_ll == nullptr)
+    return test_ll;
+
+  llp head = nullptr;
+  auto cur = test_ll;
+  while(cur){
+    auto temp_next = cur->next;
+    cur->next = head;
+    head = cur;
+    cur = temp_next;
+  }
+  return head;
+}
+```
+
+与
+
+``` python python版本
 def linklist_reverse(head):
     if not head:
         return
@@ -1572,12 +1622,42 @@ def singleNumber(self, nums: List[int]) -> List[int]:
 <source src="/img/algo_newbie/uncommon_sort_algo/bubble_sort.mp4" type="video/mp4" />
 </video>
 
+``` cpp
+void bubble_sort(int* arr, int arr_len){
+  for(int i = 0; i < arr_len; ++i){
+    for(int j = i+1; j < arr_len; ++j){
+      if(arr[i] > arr[j]){
+        auto temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+  }
+}
+```
+
 ### 选择排序
 
 首先在未排序序列中找到最小（大）元素，然后**选择它**存放到排序序列的起始位置。
 再从剩余未排序元素中继续寻找最小（大）元素，然后**选择它**放到已排序序列的末尾。
 重复第二步，直到所有元素均排序完毕。
 ![](/img/algo_newbie/uncommon_sort_algo/selection_sort.gif)
+
+``` cpp
+void select_sort(int arr[], int arr_len){
+  for(int i = 0; i < arr_len; ++i){
+    auto cur_min_index = i;
+    for(int j = i + 1; j < arr_len; ++j){
+      if(arr[cur_min_index] > arr[j]){
+        cur_min_index = j;
+      }
+    }
+    auto temp = arr[i];
+    arr[i] = arr[cur_min_index];
+    arr[cur_min_index] = temp;
+  }
+}
+```
 
 
 ### 希尔排序
@@ -1758,7 +1838,7 @@ print('最后的结果是:', a)
 <source src="/img/algo_newbie/insert_sort/insert_sort_anim.mp4" type="video/mp4" />
 </video>
 
-```python
+```python python版本
 def insert_sort(arr, left_index, right_index):
     if not arr:
         return
@@ -1769,6 +1849,23 @@ def insert_sort(arr, left_index, right_index):
                 arr[j-1], arr[j] = arr[j], arr[j-1]
             else:
                 break
+```
+
+与
+
+``` cpp cpp版本
+void insert_sort(int* arr, int arr_len){
+  for(int i = 1; i < arr_len; ++i){
+    for(int j = i; j >= 0; --j){
+      if(arr[j] < arr[j-1]){
+        swap_elem(arr, j-1, j);
+      }
+      else{
+        break;
+      }
+    }
+  }
+}
 ```
 
 ### 插排优化
@@ -2068,7 +2165,7 @@ i = left_index + 1  # 因为pivot_index取left_index了, 则我们从left_index+
 ```
 
 下面是原代码:
-``` python
+``` python python版本
 def _partition(arr, left_index, right_index):
     # 选一个元素作为枢轴量,
     # 为了模拟上面这个动画演示, 这里我们选取最左边的元素
@@ -2101,6 +2198,37 @@ def quick_sort(arr, left_index, right_index):
     # 把partition_index左边的数据再递归快排一遍
     quick_sort(arr, left_index, partition_index-1)
     quick_sort(arr, partition_index+1, right_index)
+```
+
+与 
+
+``` cpp cpp版本
+void swap_elem(int* arr, int index_a, int index_b){
+  auto temp = arr[index_a];
+  arr[index_a] = arr[index_b];
+  arr[index_b] = temp;
+}
+
+int partition(int arr[], int left_index, int right_index){
+  int p_index = left_index;
+  int left_end = p_index;
+  for(int i = left_index+1; i <= right_index; ++i){
+    if(arr[i] < arr[p_index]){
+      swap_elem(arr, i, left_end+1);
+      left_end += 1;
+    }
+  }
+  swap_elem(arr, left_end, p_index);
+  return left_end;
+}
+
+void quick_sort(int* arr, int left_index, int right_index){
+  if(!arr || left_index >= right_index)
+    return;
+  auto p_index = partition(arr, left_index, right_index);
+  quick_sort(arr, left_index, p_index-1);
+  quick_sort(arr, p_index+1, right_index);
+}
 ```
 
 ### 普通快排的优化
@@ -2293,6 +2421,17 @@ def quick_sort_3_ways(arr, left_index, right_index):
 
 - [堆化 MaxHeapify](#堆化)
 - [建堆 BuildMaxHeap](#建堆)
+
+### TopK问题
+
+求一堆数组的最大的k个数
+ 
+如果是求最大的k个数则用最小堆, 反之则用最大堆
+
+算法的复杂度分析:  
+由于使用了一个大小为 k 的堆，空间复杂度为 `O(k)`
+入堆和出堆操作的时间复杂度均为 `O(logk)`，每个元素都需要进行一次入堆操作，故算法的时间复杂度为 `O(nlogk)`
+
 
 ### 堆排序的复杂度
 

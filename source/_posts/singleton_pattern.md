@@ -139,7 +139,7 @@ int main()
 这个方法适合 C++11，C++11保证静态局部变量的初始化是线程安全的。
 如果是 C++98 就不能用这个方法。
 
-```c++
+```c++ 非摸板版本
 class S
 {
     public:
@@ -154,6 +154,29 @@ class S
         void operator=(S const&); // Don't implement
  };
 ```
+
+或者
+``` cpp 模板版本
+template<typename T>
+class Singleton
+{
+public:
+    static T& GetInstance()
+    {
+        static T instance;
+        return instance;
+    }
+
+    Singleton(T&&) = delete;
+    Singleton(const T&) = delete;
+    void operator= (const T&) = delete;
+
+protected:
+    Singleton() = default;
+    virtual ~Singleton() = default;
+};
+```
+
 
 ### 加锁
 

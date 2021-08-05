@@ -4376,45 +4376,11 @@ KCP 定义 `MSS` 的默认大小为 1400 bytes， `MSS` (maximum segment size) �
     * **数据持久化**: game、game manager 之类需要操作数据库的进程并不直接连接数据库，而是 db manager 提供数据库读写的服务，供其他进程调用。线上数据库出现机器故障、换主时，game 进程的代码无需做错误处理，db mangaer 会负责自动重试。
 
 
-## 准备一个线上运维事故处理
+## 准备好一个线上事故的处理事例
 
-
-对一个服务 (room_status_server) 进行了一些优化，并顺便修改了部分配置文件，重启后用`top命令`观察，发现该程序`cpu几乎占到了100%`。  
-
-发现这个问题后，想到前两天还上线了该服务，立马去线上看了看，还好线上是正常的。那么问题肯定是刚才的修改导致的！  
-把线上的版本拿过来运行，还是`cpu几乎占到了100%`，那很大可能是配置文件哪里改错了（后面验证表明我的猜测是对的）。
-
-想到这是一个好的学习的机会，我想还是从运行的程序来看看到底出了什么事。
-
-思路：
-1.  程序占用 100% 的 cpu，程序即进程，也就是说进程占了 100% 的 cpu（一个核）
-2.  一个进程有多个线程，究竟是哪一个线程占了 100% 的 cpu？
-3.  这个线程在干什么？
-
-### 查看程序的进程号
-
-命令：`top -c`。 输入`大写P`，top 的输出会按使用 cpu 多少排序。  
-
-`PID`就是进程号，我程序的进程号是`4918`。
-
-### 查看耗 CPU 的线程号
-
-命令：`top -Hp 进程号`。 同样输入`大写P`，top 的输出会按使用 cpu 多少排序。
-
-输入`top -Hp 4918`，展示内容如图：  
-可以看出 PID 是`4927`的线程占到了 100% 的 cpu，我的业务日志是打印线程号的，打开日志，哦~~ 原来是这个原因（先卖个关子不说）。
-
-### 查看耗 CPU 的任务
-
-上面找到了耗 CPU 的线程，那这个线程在做什么呢？  
-看线程在干什么，可以看线程的堆栈，命令是`pstack 进程号`，会输出所有线程的堆栈信息。
-
-输入`pstack 4918`，并搜索`线程4927`的堆栈，展示内容如图：  
-![](/img/noodle_plan/g90/pstack_info.png)
-
-从堆栈信息看，程序在执行 boost 创建 socket 监听等任务，为什么一直执行这个呢？因为，我的端口号重复使用了。
-
-其实从堆栈信息定位问题还是有些抽象的，但是大概可以看出线程在做什么，至少给排查问题指明了方向。
+* [](#使用strace和pstack查询线上cpu的100问题)
+* [](#如何解决python进程cpu的100问题)
+* [](#用ASAN处理内存泄漏与越界等问题)
 
 
 ## 准备好一个难忘的优化
@@ -4654,6 +4620,257 @@ KCP 定义 `MSS` 的默认大小为 1400 bytes， `MSS` (maximum segment size) �
 * mro问题
 * 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
+
+
+## 使用objgraph解决内存泄漏问题
+
+对于 python 这种支持垃圾回收的语言来说，怎么还会有内存泄露？ 概括来说，有以下三种原因：
+
+所用到的用 C 语言开发的底层模块中出现了内存泄露。
+代码中用到了全局的 list、 dict 或其它容器，不停的往这些容器中插入对象，而忘记了在使用完之后进行删除回收
+代码中有“引用循环”，并且被循环引用的对象定义了__del__方法，就会发生内存泄露。
+ 
+**为什么循环引用的对象定义了__del__方法后collect就不起作用了呢？**
+
+gc模块最常使用的方法就是gc.collect()方法，使用collect方法对循环引用的对象进行垃圾回收。
+如果我们在类中重载了__del__方法。__del__方法定义了在用del语句删除对象时除了释放内存空间以外的操作。
+一般而言，在使用了del语句的时候解释器首先会看要删除对象的引用计数，如果为0，那么就释放内存并执行del方法。
+在这里，首先del语句出现时本身引用计数就不为0（因为有循环引用的存在），所以解释器不释放内存；
+再者，执行collect方法时应该会清除循环引用所产生的无效引用计数从而达到del的目的，对于这两个循环引用对象而言，
+python无法判断调用它们的del方法时会不会要用到对方那个对象，比如在进行b.del()时可能会用到b._a也就是a，如果在那之前a已经被释放，那么就彻底GG了。
+为了避免这种情况，collect方法默认不对重载了del方法的循环引用对象进行回收，而它们俩的状态也会从unreachable转变为uncollectable。由于是uncollectable的，自然就不会被collect处理，所以就进入了garbage列表。
+ 
+
+### 内存泄露的诊断思路
+
+无论是哪种方式的内存泄露，最终表现的形式都是某些 python 对象在不停的增长；因此，首先是要找到这些异常的对象。
+
+诊断步骤:
+用到的工具： gc 模块和 objgraph 模块
+
+gc模块 是Python的垃圾收集器模块，gc使用标记清除算法回收垃圾
+
+objgraph 是一个用于诊断内存问题的工具
+
+objgraph的实现调用了gc的这几个函数：gc.get_objects(), gc.get_referents(), gc.get_referers()，然后构造出对象之间的引用关系。objgraph的代码和文档都写得比较好，建议一读。
+
+下面先介绍几个十分实用的API
+``` cpp
+def count(typename)
+```
+返回该类型对象的数目，其实就是通过gc.get_objects()拿到所用的对象，然后统计指定类型的数目。
+``` cpp
+def by_type(typename)
+```
+
+返回该类型的对象列表。线上项目，可以用这个函数很方便找到一个单例对象
+``` cpp
+def show_most_common_types(limits = 10)
+```
+
+打印实例最多的前N（limits）个对象，这个函数非常有用。在《Python内存优化》一文中也提到，该函数能发现可以用slots进行内存优化的对象
+``` cpp
+def show_growth()
+```
+
+统计自上次调用以来增加得最多的对象，这个函数非常有利于发现潜在的内存泄露。函数内部调用了gc.collect()，因此即使有循环引用也不会对判断造成影响。
+
+步骤:  
+1、 在服务程序的循环逻辑中，选择出一个诊断点
+2、 在诊断点，插入如下诊断语句 　
+
+例如:  
+``` python
+import gc
+import objgraph
+
+### 强制进行垃圾回收  
+gc.collect()  
+
+### 打印出对象数目最多的 50 个类型信息  
+objgraph.show_most_common_types(limit=50)  
+```
+
+
+## 如何解决python进程cpu的100%问题
+
+
+监控系统报警某服务进程出现 CPU 100% 情况，该业务进程不响应任何请求，无日志输出，进程 IO 和内存占用都正常。
+
+但经过一番排查，原来是代码 BUG 导致了死循环。
+
+具体查证过程如下：
+
+### top 查看 CPU 和内存占用
+
+```
+# top -bn1p 6325
+Tasks: 608 total,   9 running, 596 sleeping,   0 stopped,   3 zombie
+%Cpu(s): 20.5 us,  6.3 sy,  0.0 ni, 72.3 id,  0.5 wa,  0.0 hi,  0.5 si,  0.0 st
+KiB Mem:  65983744 total, 65372892 used,   610852 free,   574684 buffers
+KiB Swap:  4194300 total,        0 used,  4194300 free. 42109148 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 6325 cc        20   0 4840544 628972  69656 R 100.0  1.0 927:41.47 python2.7
+```
+
+显示进程 CPU 100%，内存占用正常。
+
+### strace 查看系统调用
+
+```
+# strace -p 6325
+
+
+```
+
+结果一直卡住，无任何输出，说明进程没有进行任何系统调用。
+
+
+### ltrace 查看库函数调用
+
+```
+# ltrace -cp 6325
+^C% time     seconds  usecs/call     calls      function
+------ ----------- ----------- --------- --------------------
+ 71.84   10.207067          81    124827 memset
+ 23.87    3.392006          81     41608 strchr
+  2.15    0.304948          82      3708 sem_wait
+  2.14    0.303884          81      3708 sem_post
+------ ----------- ----------- --------- --------------------
+100.00   14.207905                173851 total
+# ltrace -p 6325
+[pid 6325] memset(0x7f44e98309a8, '\0', 8)                                = 0x7f44e98309a8
+[pid 6325] strchr("O|O:enumerate", ':')                                   = ":enumerate"
+[pid 6325] memset(0x7f44e98309a8, '\0', 8)                                = 0x7f44e98309a8
+[pid 6325] strchr("O|O:enumerate", ':')                                   = ":enumerate"
+...
+
+
+```
+
+结果显示进程一直在调用`memset`和`strchr`，极有可能是遇到死循环了，而且死循环里面重复执行`enumerate`函数。
+
+
+### gcore生成coredump文件
+
+为了避免`gdb attach`进程造成的其他影响（比如可能出现进程异常退出，死锁突然恢复，影响线上服务等），最好将进程生成一个 coredump 文件，然后再慢慢分析。
+
+```
+# gcore 6325
+# ls -lsh core.6325
+2.7G -rw-r--r-- 1 root root 2.7G 4月  14 00:56 core.6325
+```
+
+生成完 coredump 文件，如果出问题进程无法从线上摘除，则可以直接停掉该进程了。
+
+### gdb 分析 coredump 文件
+
+```
+# gdb python core.6325
+GNU gdb (Debian 7.7.1+dfsg-5) 7.7.1
+...
+Reading symbols from python...Reading symbols from /usr/lib/debug/usr/bin/python2.7...done.
+done.
+...
+Core was generated by `/xxx/service_xx/venv/bin/python2.7'.
+```
+
+可以继续分析：
+
+```
+(gdb) info threads
+  Id   Target Id         Frame 
+  25   Thread 0x7f8361666700 (LWP 6325) _PyCode_CheckLineNumber (bounds=<optimized out>, lasti=<optimized out>, co=<optimized out>) at ../Objects/codeobject.c:565
+  24   Thread 0x7f82f056a700 (LWP 7439) pthread_cond_timedwait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_timedwait.S:238
+  ...(省略)...
+  3    Thread 0x7f83161d4700 (LWP 6411) sem_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/sem_wait.S:85
+  2    Thread 0x7f83159d3700 (LWP 6410) sem_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/sem_wait.S:85
+* 1    Thread 0x7f83151d2700 (LWP 6405) sem_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/sem_wait.S:85
+```
+
+使用`info threads`查看当前进程的线程列表，发现大部分都在`wait`信号，只有 25 号线程在做其他事情，切换到 25 号线程，分析调用栈：
+
+```
+(gdb) thread 25
+[Switching to thread 25 (Thread 0x7f8361666700 (LWP 6325))]
+#0  _PyCode_CheckLineNumber (bounds=<optimized out>, lasti=<optimized out>, co=<optimized out>) at ../Objects/codeobject.c:565
+565     ../Objects/codeobject.c: 没有那个文件或目录.
+
+(gdb) py-bt
+Python Exception <class 'gdb.MemoryError'> Cannot access memory at address 0x58: 
+Error occurred in Python command: Cannot access memory at address 0x58
+```
+
+使用`py-bt`报内存访问错误，只能用原始`bt`来分析了（添加`full`参数可以看更详细的内容）：
+
+```
+(gdb) bt full
+#0  _PyCode_CheckLineNumber (bounds=<optimized out>, ...) at ../Objects/codeobject.c:565
+        size = 46
+        p = 0x7f82acb60f3c "\006\001\006\001\r\001\006\001..."
+#1  maybe_call_line_trace (instr_prev=<optimized out>, ...) at ../Python/ceval.c:3743        line = 79
+#2  PyEval_EvalFrameEx () at ../Python/ceval.c:1050
+        opcode = 6
+#3  0x00000000004c7a59 in PyEval_EvalCodeEx () at ../Python/ceval.c:3265
+        f = <unknown at remote 0x849d0c8>
+        retval = <code at remote 0x7f835a1b5db0>
+        fastlocals = 0x2e
+        tstate = 0xa2c0a0
+        u = <unknown at remote 0xf2>
+#4  0x00000000004cad3b in fast_function (nk=<optimized out>, ...) at ../Python/ceval.c:4129
+        co = 0x563c10 <trace_trampoline>
+        globals = <unknown at remote 0xf2>
+        argdefs = <unknown at remote 0xf2>
+#5  call_function (oparg=<optimized out>, pp_stack=<optimized out>) at ../Python/ceval.c:4054
+        func = <function at remote 0x7f835a1dbb90>
+        w = <function at remote 0x7f835a1dbb90>
+        nk = 682340552
+        n = 4
+        pfunc = 0x3276ea8
+#6  PyEval_EvalFrameEx () at ../Python/ceval.c:2679
+        sp = 0x3276ec8
+        opcode = 2
+#7  0x00000000004c996a in fast_function (nk=<optimized out>, ...) at ../Python/ceval.c:4119
+        f = Frame 0x3276cd0, for file ./service/recall/newuser.py, line 49, in get_gametype_anchor_by_sn (...(truncated)
+        tstate = 0xa2c0a0
+        stack = 0xf2
+        co = 0x563c10 <trace_trampoline>
+        globals = <unknown at remote 0xf2>
+        argdefs = <unknown at remote 0xf2>
+#8  call_function (oparg=<optimized out>, pp_stack=<optimized out>) at ../Python/ceval.c:4054
+        func = <function at remote 0x7f835a1dbaa0>
+        w = <function at remote 0x7f835a1dbaa0>
+        nk = 682340552
+        n = 7
+        pfunc = 0x5b971d8
+...(省略)...
+#43 0x00007f83243691b0 in ?? ()
+No symbol table info available.
+#44 0x0000000000000000 in ?? ()
+No symbol table info available.
+```
+
+分析`Frame # 7`发现当前线程正在执行`./service/recall/newuser.py, line 49, in get_gametype_anchor_by_sn`方法。
+
+找到对应的源代码：
+
+```
+def get_predict_gametype_anchor(self, gt_scores, limit):
+        ...
+        while pool_can_use and curr_sample_cnt < sample_cnt:
+            for idx, ent in enumerate(gt_pool):
+                   ...
+```
+
+果然，这里有一个`while`循环嵌套了`enumerate`调用。通过仔细分析代码，发现在某种情况下确实会出现死循环情况，至此问题解决。
+
+### 总结
+
+1. 遇到线上问题时，优先使用 `gcore PID` 来保存现场
+2. 再 [使用 strace、ltrace](http://rdcqii.hundsun.com/portal/article/597.html) 和 `gdb` 分析
+3. 如果没有什么线索，可以尝试 [pyrasite-shell](https://pyrasite.readthedocs.io/en/latest/Shell.html) 或 [lptrace](https://github.com/khamidou/lptrace)
+4. `gdb` 调试 `Python` 进程的时候，运行进程的 `Python` 版本和 python-dbg 一定要匹配
 
 
 ## asyncio协程原理
@@ -5066,6 +5283,7 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 
 # C++
 
+
 参考: 看之前一个哥们总结的c++要点 https://interview.huihut.com/
 
 * `new` 和 `delete` 为什么要配对用:
@@ -5158,6 +5376,118 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 * 无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)
 
 
+
+## gcc 命令的常用选项
+
+<table><tbody><tr><th>选项</th><th>解释</th></tr><tr><td>-ansi</td><td>只支持 ANSI 标准的 C 语法。这一选项将禁止 GNU C 的某些特色， 例如 asm 或 typeof 关键词。</td></tr><tr><td>-c</td><td>只编译并生成目标文件。</td></tr><tr><td>-DMACRO</td><td>以字符串 "1" 定义 MACRO 宏。</td></tr><tr><td>-DMACRO=DEFN</td><td>以字符串 "DEFN" 定义 MACRO 宏。</td></tr><tr><td>-E</td><td>只运行 C 预编译器。</td></tr><tr><td>-g</td><td>生成调试信息。GNU 调试器可利用该信息。</td></tr><tr><td>-IDIRECTORY</td><td>指定额外的头文件搜索路径 DIRECTORY。</td></tr><tr><td>-LDIRECTORY</td><td>指定额外的函数库搜索路径 DIRECTORY。</td></tr><tr><td>-lLIBRARY</td><td>连接时搜索指定的函数库 LIBRARY。</td></tr><tr><td>-m486</td><td>针对 486 进行代码优化。</td></tr><tr><td>-o FILE</td><td>生成指定的输出文件。用在生成可执行文件时。</td></tr><tr><td>-O0</td><td>不进行优化处理。</td></tr><tr><td>-O 或 -O1</td><td>优化生成代码。</td></tr><tr><td>-O2</td><td>进一步优化。</td></tr><tr><td>-O3</td><td>比 -O2 更进一步优化，包括 inline 函数。</td></tr><tr><td>-shared</td><td>生成共享目标文件。通常用在建立共享库时。</td></tr><tr><td>-static</td><td>禁止使用共享连接。</td></tr><tr><td>-UMACRO</td><td>取消对 MACRO 宏的定义。</td></tr><tr><td>-w</td><td>不生成任何警告信息。</td></tr><tr><td>-Wall</td><td>生成所有警告信息。</td></tr></tbody></table>
+
+
+## 使用gcore或strace和pstack查询线上CPU的100%问题
+
+```
+# top -bn1p 6325
+Tasks: 608 total,   9 running, 596 sleeping,   0 stopped,   3 zombie
+%Cpu(s): 20.5 us,  6.3 sy,  0.0 ni, 72.3 id,  0.5 wa,  0.0 hi,  0.5 si,  0.0 st
+KiB Mem:  65983744 total, 65372892 used,   610852 free,   574684 buffers
+KiB Swap:  4194300 total,        0 used,  4194300 free. 42109148 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 6325 cc        20   0 4840544 628972  69656 R 100.0  1.0 927:41.47 python2.7
+```
+
+### 先用strace查看系统调用
+
+```
+strace -p 6325
+```
+结果一直卡住，无任何输出，说明进程没有进行任何系统调用。
+
+
+### 用pstack查看当前调用堆栈
+
+对一个服务 (room_status_server) 进行了一些优化，并顺便修改了部分配置文件，重启后用`top命令`观察，发现该程序`cpu几乎占到了100%`。  
+
+发现这个问题后，想到前两天还上线了该服务，立马去线上看了看，还好线上是正常的。那么问题肯定是刚才的修改导致的！  
+把线上的版本拿过来运行，还是`cpu几乎占到了100%`，那很大可能是配置文件哪里改错了（后面验证表明我的猜测是对的）。
+
+想到这是一个好的学习的机会，我想还是从运行的程序来看看到底出了什么事。
+
+思路：
+1.  程序占用 100% 的 cpu，程序即进程，也就是说进程占了 100% 的 cpu（一个核）
+2.  一个进程有多个线程，究竟是哪一个线程占了 100% 的 cpu？
+3.  这个线程在干什么？
+
+#### 查看程序的进程号
+
+命令：`top -c`。 输入`大写P`，top 的输出会按使用 cpu 多少排序。  
+
+`PID`就是进程号，我程序的进程号是`4918`。
+
+#### 查看耗 CPU 的线程号
+
+命令：`top -Hp 进程号`。 同样输入`大写P`，top 的输出会按使用 cpu 多少排序。
+
+输入`top -Hp 4918`，展示内容如图：  
+可以看出 PID 是`4927`的线程占到了 100% 的 cpu，我的业务日志是打印线程号的，打开日志，哦~~ 原来是这个原因（先卖个关子不说）。
+
+#### 查看耗 CPU 的任务
+
+上面找到了耗 CPU 的线程，那这个线程在做什么呢？  
+看线程在干什么，可以看线程的堆栈，命令是`pstack 进程号`，会输出所有线程的堆栈信息。
+
+输入`pstack 4918`，并搜索`线程4927`的堆栈，展示内容如图：  
+![](/img/noodle_plan/g90/pstack_info.png)
+
+从堆栈信息看，程序在执行 boost 创建 socket 监听等任务，为什么一直执行这个呢？因为，我的端口号重复使用了。
+
+其实从堆栈信息定位问题还是有些抽象的，但是大概可以看出线程在做什么，至少给排查问题指明了方向。
+
+
+### 使用gcore来处理
+
+[](#gcore生成coredump文件)
+
+大致流程总结:  
+1. 为了避免gdb attach对线上进程造成影戏,
+2. 先使用gcore生成coredump文件, 
+3. 然后再使用gdb分析coredump文件, 
+4. 然后在gdb内`info thread`查看线程状态
+5. 然后`thread 线程号`切换线程, 
+6. 然后`bt`查调用堆栈可以查到了
+
+
+## 用ASAN处理内存泄漏与越界等问题
+
+用`-fsanitize=address`选项编译和链接你的程序;
+用`-fno-omit-frame-pointer`编译，以在错误消息中添加更好的堆栈跟踪。
+增加`-O1`以获得更好的性能。
+下面以简单的测试代码leaktest.c为例
+``` cpp
+// leaktest.c
+char leaktest() {
+    char *x = (char*)malloc(10 * sizeof(char*));
+    return x[5];
+}
+
+int main() {
+    leaktest();
+    return 0;
+}
+```
+在终端中输入以下命令编译leaktest.c
+```
+gcc -fsanitize=address -fno-omit-frame-pointer -O1 -g leaktest.c -o leaktest
+```
+ 
+运行leaktest，会打印下面的错误信息：
+
+![](/img/noodle_plan/cpp/asan_intro.jpg)
+
+第一部分（ERROR），指出错误类型detected memory leaks；
+第二部分给出详细的错误信息：Direct leak of 80 byte(s) in 1 object(s)，以及发生错误的对象名/源文件位置/行数；
+第三部分是以上信息的一个总结（SUMMARY）。
+
+
 ## 左值右值通用引用
 
 * 左值持久
@@ -5176,6 +5506,8 @@ int &&rr2 = rr1; // 错误: 表达式 rr1 是左值
 
 ### 通用引用
 
+**注意**：只有当发生自动类型推断时（如函数模板的类型自动推导，或auto关键字），&&才是一个universal references。
+
 当右值引用和模板结合的时候，就复杂了。T&&并不一定表示右值引用，它可能是个左值引用又可能是个右值引用。例如：
 ``` cpp
 template<typename T>
@@ -5188,7 +5520,6 @@ f(x); //x是左值
 ```
 如果上面的函数模板表示的是右值引用的话，肯定是不能传递左值的，但是事实却是可以。这里的&&是一个未定义的引用类型，称为universal references，它必须被初始化，它是左值引用还是右值引用却决于它的初始化，如果它被一个左值初始化，它就是一个左值引用；如果被一个右值初始化，它就是一个右值引用。
 
-注意：只有当发生自动类型推断时（如函数模板的类型自动推导，或auto关键字），&&才是一个universal references。
 
 
 ### 完美转发

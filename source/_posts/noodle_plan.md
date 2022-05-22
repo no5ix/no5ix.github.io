@@ -4615,11 +4615,67 @@ KCP 定义 `MSS` 的默认大小为 1400 bytes， `MSS` (maximum segment size) �
 * 享元模式: 池的思想
 
 
-# python
+# 各个语言之间的BENCHMARK对比
+
+结论: luajit比lua快10倍 ...比cpython快60倍, 和c慢一点也差不太多
+
+https://github.com/DNS/benchmark-language
+
+| 语言 | 耗时 |
+| :---------: | :------: | 
+| LUA 5.3.4 | 6.87s total | 
+| LUAC 5.3.4 | 6.84s total | 
+| LuaJIT 2.0.5 | 0.67s total | 
+| C (MSVC 18, VS 2013) | 0.56s total | 
+| C (GCC 7.2.0) | 0.67s total | 
+| C (CLANG LLVM 6.0.0) | 0.56s total | 
+| C (CYGWIN GCC 10.2.0) | 0.68s total | 
+| C (CYGWIN CLANG 8.0.1) | 0.59s total | 
+| C (MINGW GCC 10.2.0) | 0.67s total | 
+| C (MINGW CLANG 8.0.1) | 0.58s total | 
+| C (Embarcadero C++ 6.60 for Win32) | 1.01s total | 
+| Java JRE 1.8.0_20 | 0.65s total | 
+| Perl 5.26.1 | 26.89s total | 
+| Javascript (Node.js 4.4.6) | 2.49s total | 
+| Python 3.7.1 | 40.17s total | 
+| C# .NET CLR (CSC 12) | 0.67s total | 
+| C# Mono 5.18.0 | 1.06s total | 
+| C# Mono 5.18.0 (Interpreter) | 26.38s total | 
+| Ruby 2.5.1 | 12.97s total | 
+| R 3.5.1 | 15.56s total | 
+
+
+# Python
 
 * mro问题
 * 怎么实现一个协程库?
 * mock是啥: https://zhuanlan.zhihu.com/p/30380243
+
+
+## 有GIL那py的多线程还有用吗?
+
+在python2.x里，**GIL的释放逻辑**是当前线程遇见IO操作或者ticks计数达到100（ticks可以看作是python自身的一个计数器，专门做用于GIL，每次释放后归零，这个计数可以通过 sys.setcheckinterval 来调整），进行释放。
+
+而每次释放GIL锁，线程进行锁竞争、切换线程，会消耗资源。并且由于GIL锁存在，python里一个进程永远只能同时执行一个线程(拿到GIL的线程才能执行)，这就是为什么在多核CPU上，python的多线程效率并不高。
+
+那么是不是**python的多线程就完全没用了呢**？
+
+在这里我们进行分类讨论：
+
+* CPU密集型代码(各种循环处理、计数等等)，在这种情况下，ticks计数很快就会达到阈值，然后触发GIL的释放与再竞争（多个线程来回切换当然是需要消耗资源的），所以python下的多线程对CPU密集型代码并不友好。(而在python3.x中，GIL不使用ticks计数，改为使用计时器（执行时间达到阈值后，当前线程释放GIL），这样对CPU密集型程序更加友好，但依然没有解决GIL导致的同一时间只能执行一个线程的问题，所以效率依然不尽如人意。)
+
+* IO密集型代码(文件处理、网络爬虫等)，多线程能够有效提升效率(单线程下有IO操作会进行IO等待，造成不必要的时间浪费，而开启多线程能在线程A等待时，自动切换到线程B，可以不浪费CPU的资源，从而能提升程序执行效率)。所以python的多线程对IO密集型代码比较友好。
+
+
+## 在python程序中调用cpp的库创建的线程是否受制于GIL?
+
+首先要理解什么是GIL.
+Python 的多线程是真的多线程，只不过在任意时刻，它们中只有一个线程能够取得 GIL 从而被允许执行 Python 代码。其它线程要么等着，要么干别的和 Python 无关的事情（比如等待系统 I/O，或者算点什么东西）。
+
+那如果是通过CPP扩展创建出来的线程，可以摆脱这个限制么？
+很简单，不访问 Python 的数据和方法，就和 GIL 没任何关系。如果需要访问 Python，还是需要先取得 GIL.
+
+GIL 是为了保护 Python 数据不被并发访问破坏，所以当你不访问 Python 的数据的时候自然就可以释放（或者不取得）GIL。反过来，如果需要访问 Python 的数据，就一定要取得 GIL 再访问。PyObject 等不是线程安全的。多线程访问任何非线程安全的数据都需要先取得对应的锁。Python 所有的 PyObject 什么的都共享一个锁，它就叫 GIL。
 
 
 ## 使用objgraph解决内存泄漏问题
@@ -5160,17 +5216,6 @@ print(sys.path)
 * 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
 
 
-## 在python程序中调用cpp的库创建的线程是否受制于GIL?
-
-首先要理解什么是GIL.
-Python 的多线程是真的多线程，只不过在任意时刻，它们中只有一个线程能够取得 GIL 从而被允许执行 Python 代码。其它线程要么等着，要么干别的和 Python 无关的事情（比如等待系统 I/O，或者算点什么东西）。
-
-那如果是通过CPP扩展创建出来的线程，可以摆脱这个限制么？
-很简单，不访问 Python 的数据和方法，就和 GIL 没任何关系。如果需要访问 Python，还是需要先取得 GIL.
-
-GIL 是为了保护 Python 数据不被并发访问破坏，所以当你不访问 Python 的数据的时候自然就可以释放（或者不取得）GIL。反过来，如果需要访问 Python 的数据，就一定要取得 GIL 再访问。PyObject 等不是线程安全的。多线程访问任何非线程安全的数据都需要先取得对应的锁。Python 所有的 PyObject 什么的都共享一个锁，它就叫 GIL。
-
-
 ## `__new__` 与 `__del__` 与 `__init__`
 
 先来看一个单例模式的实现
@@ -5281,7 +5326,7 @@ gc.set_threshold(threshold0[, threshold1[, threshold2]])
 下面对set_threshold()中的三个参数threshold0, threshold1, threshold2进行介绍。gc会记录自从上次收集以来新分配的对象数量与释放的对象数量，当两者之差超过threshold0的值时，gc的扫描就会启动，初始的时候只有世代0被检查。如果自从世代1最近一次被检查以来，世代0被检查超过threshold1次，那么对世代1的检查将被触发。相同的，如果自从世代2最近一次被检查以来，世代1被检查超过threshold2次，那么对世代2的检查将被触发。get_threshold()是获取三者的值，默认值为(700,10,10).
 
 
-# C++
+# CPP
 
 
 参考: 看之前一个哥们总结的c++要点 https://interview.huihut.com/

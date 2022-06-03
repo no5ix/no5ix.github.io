@@ -5543,9 +5543,77 @@ gcc -fsanitize=address -fno-omit-frame-pointer -O1 -g leaktest.c -o leaktest
     * 该对象没有其他用户
     * 使用右值引用的代码可以自由地接管所引用的对象的资源
 * `std::move` 可以显式地将一个左值转换为对应的右值引用类型
+
 ``` cpp
-int &&rr1 = 42; // 正确: 字面常量是右值
-int &&rr2 = rr1; // 错误: 表达式 rr1 是左值
+// 形参是个右值引用
+void change(int&& right_value) {
+    right_value = 8;
+}
+ 
+int main() {
+    int a = 5; // a是个左值
+    int &ref_a_left = a; // ref_a_left是个左值引用
+    int &&ref_a_right = std::move(a); // ref_a_right是个右值引用
+ 
+    change(a); // 编译不过，a是左值，change参数要求右值
+    change(ref_a_left); // 编译不过，左值引用ref_a_left本身也是个左值
+    change(ref_a_right); // 编译不过，右值引用ref_a_right本身也是个左值
+     
+    change(std::move(a)); // 编译通过
+    change(std::move(ref_a_right)); // 编译通过
+    change(std::move(ref_a_left)); // 编译通过
+ 
+    change(5); // 当然可以直接接右值，编译通过
+     
+    cout << &a << ' ';
+    cout << &ref_a_left << ' ';
+    cout << &ref_a_right;
+    // 打印这三个左值的地址，都是一样的
+}
+```
+
+### std::move应用场景
+
+按上文分析，std::move只是类型转换工具，不会对性能有好处；右值引用在作为函数形参时更具灵活性，看上去还是挺鸡肋的。他们有什么实际应用场景吗？
+
+在实际场景中，右值引用和std::move被广泛用于在STL和自定义类中实现移动语义，避免拷贝，从而提升程序性能。
+该类的拷贝构造函数、赋值运算符重载函数已经通过使用左值引用传参来避免一次多余拷贝了，但是内部实现要深拷贝，无法避免。
+
+这时，有人提出一个想法：是不是可以提供一个移动构造函数，把被拷贝者的数据移动过来，被拷贝者后边就不要了，这样就可以避免深拷贝了，如：
+``` cpp
+class Array {
+public:
+    // 移动构造函数，可以浅拷贝
+    Array(const Array& temp_array, bool move) {
+        data_ = temp_array.data_;
+        size_ = temp_array.size_;
+        // 为防止temp_array析构时delete data，提前置空其data_      
+        temp_array.data_ = nullptr;
+    }
+};
+```
+这么做有2个问题：
+* 不优雅，表示移动语义还需要一个额外的参数(或者其他方式)。
+* 无法实现！temp_array是个const左值引用，无法被修改，所以temp_array.data_ = nullptr;这行会编译不过。当然函数参数可以改成非const：Array(Array& temp_array, bool move){...}，这样也有问题，由于左值引用不能接右值，Array a = Array(Array(), true);这种调用方式就没法用了。
+
+可以发现左值引用真是用的很不爽，右值引用的出现解决了这个问题，在STL的很多容器中，都实现了以右值引用为参数的移动构造函数和移动赋值重载函数，或者其他函数，最常见的如std::vector的push_back和emplace_back。参数为左值引用意味着拷贝，为右值引用意味着移动。
+``` cpp
+class Array {
+public:
+    // 优雅
+    Array(Array&& temp_array) {
+        data_ = temp_array.data_;
+        size_ = temp_array.size_;
+        // 为防止temp_array析构时delete data，提前置空其data_      
+        temp_array.data_ = nullptr;
+    }
+}
+
+int main(){
+    Array a;
+    // 左值a，用std::move转化为右值
+    Array b(std::move(a));
+}
 ```
 
 
@@ -5565,6 +5633,44 @@ f(x); //x是左值
 ```
 如果上面的函数模板表示的是右值引用的话，肯定是不能传递左值的，但是事实却是可以。这里的&&是一个未定义的引用类型，称为universal references，它必须被初始化，它是左值引用还是右值引用却决于它的初始化，如果它被一个左值初始化，它就是一个左值引用；如果被一个右值初始化，它就是一个右值引用。
 
+
+
+### std::forward
+
+和std::move一样，它的兄弟std::forward也充满了迷惑性，虽然名字含义是转发，但他并不会做转发，同样也是做类型转换.
+
+与move相比，forward更强大，move只能转出来右值，forward都可以。
+
+std::forward<T>(u)有两个参数：T与 u。 a. 当T为左值引用类型时，u将被转换为T类型的左值； b. 否则u将被转换为T类型右值。
+举个例子，有main，A，B三个函数，调用关系为：main->A->B，建议先看懂2.3节对左右值引用本身是左值还是右值的讨论再看这里：
+
+``` cpp
+void change2(int&& ref_r) {
+    ref_r = 1;
+}
+ 
+void change3(int& ref_l) {
+    ref_l = 1;
+}
+ 
+// change的入参是右值引用
+// 有名字的右值引用是 左值，因此ref_r是左值
+void change(int&& ref_r) {
+    change2(ref_r);  // 错误，change2的入参是右值引用，需要接右值，ref_r是左值，编译失败
+     
+    change2(std::move(ref_r)); // ok，std::move把左值转为右值，编译通过
+    change2(std::forward<int &&>(ref_r));  // ok，std::forward的T是右值引用类型(int &&)，符合条件b，因此u(ref_r)会被转换为右值，编译通过
+     
+    change3(ref_r); // ok，change3的入参是左值引用，需要接左值，ref_r是左值，编译通过
+    change3(std::forward<int &>(ref_r)); // ok，std::forward的T是左值引用类型(int &)，符合条件a，因此u(ref_r)会被转换为左值，编译通过
+    // 可见，forward可以把值转换为左值或者右值
+}
+ 
+int main() {
+    int a = 5;
+    change(std::move(a));
+}
+```
 
 
 ### 完美转发
@@ -5639,7 +5745,7 @@ class Foo {
 public:
 -    void Bar(std::function<void(Foo*)> p_fnCallback) {
 +    void Bar(std::function<void(std::shared_ptr<Foo>)> p_fnCallback) {
-+    std::shared_ptr<Foo> _foo = shared_from_this();
++       std::shared_ptr<Foo> _foo = shared_from_this();
         // async call p_fnCallback with this
     }
 }
@@ -5651,22 +5757,61 @@ public:
 
 一个类继承enable_shared_from_this会怎么样？看看enable_shared_from_this基类的成员变量有什么，如下：
 ``` cpp
-template<class _Ty>
-	class enable_shared_from_this
-	{	// provide member functions that create shared_ptr to this
+template<class T> class enable_shared_from_this
+{
 public:
-	using _Esft_type = enable_shared_from_this;
 
-	_NODISCARD shared_ptr<_Ty> shared_from_this()
-		{	// return shared_ptr
-		return (shared_ptr<_Ty>(_Wptr));
-		}
-	// 成员变量是一个指向资源的弱智能指针
-	mutable weak_ptr<_Ty> _Wptr;
+    shared_ptr<T> shared_from_this()
+    {
+        shared_ptr<T> p( weak_this_ );  // 从原来的弱智能指针里变成强智能指针, 则是在原来的强智能指针上面引用计数+1
+        BOOST_ASSERT( p.get() == this );
+        return p;
+    }
+public: // actually private, but avoids compiler template friendship issues
+
+    // Note: invoked automatically by shared_ptr; do not call
+    template<class X, class Y> void _internal_accept_owner( shared_ptr<X> const * ppx, Y * py ) const
+    {
+        if( weak_this_.expired() )
+        {
+            weak_this_ = shared_ptr<T>( *ppx, py );
+        }
+    }
+
+private:
+    mutable weak_ptr<T> weak_this_;
 };
 ```
 
-也就是说，如果一个类继承了enable_shared_from_this，那么它产生的对象就会从基类enable_shared_from_this继承一个成员变量_Wptr，当定义第一个智能指针对象的时候shared_ptr< A > ptr1(new A())，调用shared_ptr的普通构造函数，就会初始化A对象的成员变量_Wptr，作为观察A对象资源的一个弱智能指针观察者（在shared_ptr的构造函数中实现，有兴趣可以自己调试跟踪源码实现）。
+也就是说，如果一个类继承了enable_shared_from_this，那么它产生的对象就会从基类enable_shared_from_this继承一个成员变量_Wptr，当定义第一个智能指针对象的时候shared_ptr< A > ptr1(new A())，调用shared_ptr的普通构造函数，就会初始化A对象的成员变量_Wptr，作为观察A对象资源的一个弱智能指针观察者（在shared_ptr的构造函数中实现，如下代码片段, 有兴趣可以自己调试跟踪源码实现）。
+``` cpp
+template<class T> class shared_ptr
+{
+    template<class Y>
+    explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete
+    {
+        boost::detail::sp_pointer_construct( this, p, pn );
+    }
+};
+
+template< class T, class Y > inline void sp_pointer_construct( boost::shared_ptr< T > * ppx, Y * p, boost::detail::shared_count & pn )
+{
+    boost::detail::shared_count( p ).swap( pn );
+    boost::detail::sp_enable_shared_from_this( ppx, p, p );
+}
+
+template< class X, class Y, class T > inline void sp_enable_shared_from_this( boost::shared_ptr<X> const * ppx, Y const * py, boost::enable_shared_from_this< T > const * pe )
+{
+    if( pe != 0 )
+    {
+        pe->_internal_accept_owner( ppx, const_cast< Y* >( py ) );
+    }
+}
+
+inline void sp_enable_shared_from_this( ... )
+{
+}
+```
 
 综上所说，所有过程都没有再使用shared_ptr的普通构造函数，没有在产生额外的引用计数对象，不会存在把一个内存资源，进行多次计数的过程；
 关键的是, weak_ptr到shared_ptr的提升, 通过判断资源的引用计数是否还在，判定对象的存活状态，  

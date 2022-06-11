@@ -30,6 +30,10 @@ categories:
 * Election timeout选举周期: The election timeout is the amount of time a follower waits until becoming a candidate.
 * heartbeat timeout心跳时间间隔
 
+
+**. . .**<!-- more -->
+
+
 选主的具体流程如下:  
 1. 假设三个节点的集群，三个节点上均运行 一个随机选举周期timer（每个 Timer 持续时间是随机的, 一般是150~300ms），Raft算法使用随机 Timer 来初始化 Leader 选举流程，第一个节点率先完成了 Timer，那它就要变成candidate，然后带着自身的数据版本信息发起vote
 2. 随后它就会向其他两个节点发送成为 Leader 的请求，其他follower节点接收到请求后会以投票回应然后第一个节点是否被选举为 Leader。

@@ -41,9 +41,13 @@ password: '0806'
 
 1. 单人说话的时候没有铺满
 2. 做视频封面
-3. 双时间线如何同时转场?
-4. 有何办法能一次性批量把简体字幕全部改为繁体?
-5. 得找找有啥办法能把我变小鲨鱼
+3. 双时间线如何同时转场? 答疑: https://discussionschinese.apple.com/thread/253823415?login=true
+4. 多条时间线的操作技巧 答疑: 
+   1. https://www.bilibili.com/video/BV1nt4y1Q7Me/?vd_source=8a83b38420b65ac33aa101b7754630f6
+   2. https://www.bilibili.com/video/BV1Qa4y1j7ch/?vd_source=8a83b38420b65ac33aa101b7754630f6
+5. 有何办法能一次性批量把简体字幕全部改为繁体?
+6. 得找找有啥办法能把我变小鲨鱼
+7. 学习略微夸张的独立风格的演技来做反应
 
 
 # Bug

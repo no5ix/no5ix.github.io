@@ -11,7 +11,9 @@
 {% block content %}
   <section id="posts" class="posts-expand">
     {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
+      {% if post.password !== '' %}
+        {{ post_template.render(post, true) }}
+      {% endif %}
     {% endfor %}
   </section>
 

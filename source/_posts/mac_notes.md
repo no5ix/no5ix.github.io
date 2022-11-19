@@ -27,6 +27,8 @@ categories:
 科学上网软件： ClashX    
 下载地址: https://itlanyan.com/trojan-clients-download/
 
+**. . .**<!--more -->
+
 步骤:  
 1. 去 just my socks 拷贝那些服务节点的配置然后去google搜“ss配置转clash配置”的网站(但是似乎很有可能会泄露相关 ss 密码之类的)，比如 https://subconverter.speedupvpn.com ， 然后在线转换为clash的配置然后点击 ClashX 的菜单栏的图标， 然后 `Config`-`Remote Config`-`Manage`-`Add`
 2. 如果发现上不了网的话, 点击 ClashX 的图标, 然后 `Config`-`Open Config Folder` 查看生成的 config 文件是否和 本 github 项目的 `clashx`里的类似

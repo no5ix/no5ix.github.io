@@ -12,8 +12,9 @@
   <section id="posts" class="posts-expand">
     {% for post in page.posts %}
       {% if post.password !== '' %}
-        {{ post_template.render(post, true) }}
+        {% continue %}
       {% endif %}
+      {{ post_template.render(post, true) }}
     {% endfor %}
   </section>
 

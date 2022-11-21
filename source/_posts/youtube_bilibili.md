@@ -50,10 +50,11 @@ password: '0806'
 6. done, 多条时间线的操作技巧 答疑: 
     - https://www.bilibili.com/video/BV1nt4y1Q7Me/?vd_source=8a83b38420b65ac33aa101b7754630f6
     - https://www.bilibili.com/video/BV1Qa4y1j7ch/?vd_source=8a83b38420b65ac33aa101b7754630f6
-7. 有何办法能一次性批量把简体字幕全部改为繁体?
-8. 得找找有啥办法能把我变小鲨鱼
-9. 学习略微夸张的独立风格的演技来做反应
-10. 自动对话字幕如何做? 答疑: https://www.youtube.com/watch?v=G6AXFkbNEkM
+7. b站和油管怎么能用他网站本身的字幕生成?
+8. 有何办法能一次性批量把简体字幕全部改为繁体?
+9. 得找找有啥办法能把我变小鲨鱼
+10. 学习略微夸张的独立风格的演技来做反应
+11. 自动对话字幕如何做? 答疑: https://www.youtube.com/watch?v=G6AXFkbNEkM
 
 
 # Bug

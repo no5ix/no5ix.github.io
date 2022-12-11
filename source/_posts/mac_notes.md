@@ -9,6 +9,7 @@ categories:
 
 
 
+这是一份 mac 折腾精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac.
 
 
 # 改键Karabiner
@@ -22,12 +23,13 @@ categories:
 - https://github.com/realliyifei/mac-karabiner-chinese-punctuations-to-halfwidth-forms
 
 
+**. . .**<!--more -->
+
+
 # 科学上网
 
 科学上网软件： ClashX    
 下载地址: https://itlanyan.com/trojan-clients-download/
-
-**. . .**<!--more -->
 
 步骤:  
 1. 去 just my socks 拷贝那些服务节点的配置然后去google搜“ss配置转clash配置”的网站(但是似乎很有可能会泄露相关 ss 密码之类的)，比如 https://subconverter.speedupvpn.com ， 然后在线转换为clash的配置然后点击 ClashX 的菜单栏的图标， 然后 `Config`-`Remote Config`-`Manage`-`Add`

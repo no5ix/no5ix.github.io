@@ -7,11 +7,14 @@ categories:
 - Misc
 ---
 
+
 之前有一份私人git笔记老长老长了, 今天得空, 把它浓缩成5分钟版本.
 感觉纯基础性的东西整理成博客差也差不多了, 还有很多凌乱的工作笔记慢慢在一点一点整理放上来吧, 
 估计下面几篇博客就开始游戏服务器的开发心得之类的了.
 
-本篇博客因为要5分钟撸完git, 所以语言尽量精简, 只说新人必须知道的, 如果要git进阶的, 后面再另写博客说明, 不该说的废话就不说了
+
+**. . .**<!-- more -->
+
 
 # 安装
 
@@ -40,6 +43,7 @@ Now try editing a file (try the README) and then do:
 - `git add -A`
 - `git commit -am "my update msg"`
 - `git push`
+
 
 # Git概念图
 
@@ -75,7 +79,6 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 ```
 标记为*的那个就是当前分支, 也就是old_demo分支
 
-**. . .**<!-- more -->
 
 # 克隆
 

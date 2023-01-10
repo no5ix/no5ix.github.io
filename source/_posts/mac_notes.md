@@ -12,6 +12,9 @@ categories:
 这是一份 mac 折腾配置以及各种改造的精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac.
 
 
+**. . .**<!--more -->
+
+
 # 改键Karabiner
 
 改键软件 Karabiner-Elements 的配置得直接覆盖他的配置文件 `karabiner.json` (它的配置文件路径在 app 里的 misc 里有)
@@ -23,9 +26,6 @@ categories:
 - https://github.com/realliyifei/mac-karabiner-chinese-punctuations-to-halfwidth-forms
 
 
-**. . .**<!--more -->
-
-
 # 科学上网
 
 科学上网软件： ClashX    
@@ -34,6 +34,13 @@ categories:
 步骤:  
 1. 去 just my socks 拷贝那些服务节点的配置然后去google搜“ss配置转clash配置”的网站(但是似乎很有可能会泄露相关 ss 密码之类的)，比如 https://subconverter.speedupvpn.com ， 然后在线转换为clash的配置然后点击 ClashX 的菜单栏的图标， 然后 `Config`-`Remote Config`-`Manage`-`Add`
 2. 如果发现上不了网的话, 点击 ClashX 的图标, 然后 `Config`-`Open Config Folder` 查看生成的 config 文件是否和 本 github 项目的 `clashx`里的类似
+3. 请不要打开 clashx 的"设置为系统代理", 否则剪映等一些软件无法联网, 
+   1. 但此时 safari 也会翻不了墙 (以下教程参考 https://www.youtube.com/watch?v=pAY8pNou9Gk)
+      1. 此时需要先把 `safari_proxy` 文件夹中的 `proxy.pac`(这个是由 edge 的 SwitchyOmega插件里的配置生成的) 放到 `/Library/WebServer/Documents` 里
+      2. 然后在`设置`-`网络`-`高级`-`代理`的`Automatic proxy configuration` 里输入 `http://127.0.0.1/proxy.pac`, 然后点击 右下角的 `ok`, 点击完`ok`之后会退回上一层菜单, 然后再点击 `Apply`
+      3. 然后在 terminal 里输入命令 `sudo apachectl start`
+      4. 去 safari 的地址栏输入`http://127.0.0.1/proxy.pac` 测试一下是否能访问这个, 有内容说明成功了, 此时再看看是否能谷歌/油管
+   2. 此时还有个问题就是:可能会因为其它软件给关掉，如 ClashX 设置为系统代理的时候会把这个 pac 给清除掉, 所以我们需要检查一下 `hammerspoon` 里的 `init.lua`是否有 `networksetup -setautoproxyurl ` 相关的代码, 有的话就会自动在激活 safari 的时候自动设置一下 pac 设置(相关代码其实是参考了 https://nowtime.cc/macos/1753.html , `networksetup -setautoproxyurl "Wi-Fi" "http://127.0.0.1/proxy.pac"` , 这个 "Wi-Fi" 是通过命令 `networksetup -listallnetworkservices` 拿到的)
 
 
 # 触摸板增强

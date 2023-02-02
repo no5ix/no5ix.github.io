@@ -1,3 +1,5 @@
+# 参考 https://zhangshier.vip/posts/8779/#4-3-方案三
+
 name: Deploy # 部署
 
 on: # 触发条件

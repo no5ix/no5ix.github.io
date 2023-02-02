@@ -25,7 +25,6 @@ jobs:
       - name: 3. 安装 Hexo # Install Hexo
         run: |
           npm install hexo-cli -g
-          npm install hexo-deployer-git --save
 
       - name: 4. 缓存 Node 插件 # Cache Modules
         uses: actions/cache@v1
@@ -50,23 +49,27 @@ jobs:
           hexo clean
           hexo generate
 
-      # - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志 其中clean-exclude为hexo-seo-autopush插件配置，如果没安装则按需删除
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     token: ${{ secrets.GITHUBTOKEN }}
-      #     repository-name: ${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io
-      #     branch: source
-      #     folder: public
-      #     clean-exclude: |
-      #       public/.github/
-      #     commit-message: "${{ github.event.head_commit.message }} Updated By Github Actions"
+      - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志 其中clean-exclude为hexo-seo-autopush插件配置，如果没安装则按需删除
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository-name: no5ix/no5ix.github.io
+          branch: source
+          folder: public
+          clean-exclude: |
+            public/.github/
+          commit-message: "${{ github.event.head_commit.message }} Updated By Github Actions"
 
-      - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新, 替换同目录下的_config.yml文件中gh_token字符串为travis后台刚才配置的变量GH_TOKEN, 注意此处sed命令用了双引号。单引号无效！然后使用 hexo deploy 来部署
-        run: |
-          git config user.name "no5ix"
-          git config user.email "no5ix@foxmail.com"
-          sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
-          hexo deploy
+      # - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
+      #   run: |
+      #     cd ./public
+      #     git init
+      #     git config user.name "no5ix"
+      #     git config user.email "no5ix@foxmail.com"
+      #     git add .
+      #     git commit -m "${{ github.event.head_commit.message }} $(date +"%Z %Y-%m-%d %A %H:%M:%S") Updated By Github Actions"
+      #     git push --force --quiet "https://${{ secrets.GITHUBUSERNAME }}:${{ secrets.GITHUBTOKEN }}@github.com/${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io.git" master:main
+      #     git push --force --quiet "https://github.com/no5ix/no5ix.github.io.git" master:main
 
       # - name: 8. 推送到服务器私有仓库
       #   uses: easingthemes/ssh-deploy@main

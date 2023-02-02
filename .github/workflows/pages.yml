@@ -49,12 +49,12 @@ jobs:
           hexo clean
           hexo generate
 
-      - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志 其中clean-exclude为hexo-seo-autopush插件配置，如果没安装则按需删除
+      - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志, 其中clean-exclude为hexo-seo-autopush插件配置，如果没安装则按需删除, 在每个工作流程运行开始时，GitHub 会自动创建唯一的 GITHUB_TOKEN 机密以在工作流程中使用。 可以使用 GITHUB_TOKEN 在工作流程运行中进行身份验证。可以使用标准语法引用密钥以使用 GITHUB_TOKEN：${{ secrets.GITHUB_TOKEN }}。 GITHUB_TOKEN 的使用示例包括将令牌作为某个操作的输入来传递，或使用它来发出经验证的 GitHub API 请求。
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository-name: no5ix/no5ix.github.io
-          branch: source
+          branch: master
           folder: public
           clean-exclude: |
             public/.github/

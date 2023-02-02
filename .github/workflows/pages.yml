@@ -45,29 +45,30 @@ jobs:
 
       - name: 6. 生成静态文件 # Generate，其中hexo algolia为algolia搜索，hexo gulp为全站压缩，如果没安装则按需删除
         run: |
+          tar -zxvf my_node_modules.tar.gz
           hexo clean
           hexo generate
 
-      - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志 其中clean-exclude为hexo-seo-autopush插件配置，如果没安装则按需删除
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUBTOKEN }}
-          repository-name: ${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io
-          branch: source
-          folder: public
-          clean-exclude: |
-            public/.github/
-          commit-message: "${{ github.event.head_commit.message }} Updated By Github Actions"
+      # - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志 其中clean-exclude为hexo-seo-autopush插件配置，如果没安装则按需删除
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     token: ${{ secrets.GITHUBTOKEN }}
+      #     repository-name: ${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io
+      #     branch: source
+      #     folder: public
+      #     clean-exclude: |
+      #       public/.github/
+      #     commit-message: "${{ github.event.head_commit.message }} Updated By Github Actions"
 
-#      - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
-#        run: |
-#          cd ./public
-#          git init
-#          git config --global user.name '${{ secrets.GITHUBUSERNAME }}'
-#          git config --global user.email '${{ secrets.GITHUBEMAIL }}'
-#          git add .
-#          git commit -m "${{ github.event.head_commit.message }} $(date +"%Z %Y-%m-%d %A %H:%M:%S") Updated By Github Actions"
-#          git push --force --quiet "https://${{ secrets.GITHUBUSERNAME }}:${{ secrets.GITHUBTOKEN }}@github.com/${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io.git" master:main
+     - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
+       run: |
+         cd ./public
+         git init
+         git config --global user.name '${{ secrets.GITHUBUSERNAME }}'
+         git config --global user.email '${{ secrets.GITHUBEMAIL }}'
+         git add .
+         git commit -m "${{ github.event.head_commit.message }} $(date +"%Z %Y-%m-%d %A %H:%M:%S") Updated By Github Actions"
+         git push --force --quiet "https://${{ secrets.GITHUBUSERNAME }}:${{ secrets.GITHUBTOKEN }}@github.com/${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io.git" master:main
 
       # - name: 8. 推送到服务器私有仓库
       #   uses: easingthemes/ssh-deploy@main

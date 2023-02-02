@@ -25,6 +25,7 @@ jobs:
       - name: 3. 安装 Hexo # Install Hexo
         run: |
           npm install hexo-cli -g
+          npm install hexo-deployer-git --save
 
       - name: 4. 缓存 Node 插件 # Cache Modules
         uses: actions/cache@v1

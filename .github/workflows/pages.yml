@@ -147,8 +147,8 @@ jobs:
       #     git push --force --quiet "https://${{ secrets.GITHUB_TOKEN }}@github.com/no5ix/no5ix.github.io.git" master:master
       - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
         run: |          
-          git config user.name "no5ix"
-          git config user.email "no5ix@foxmail.com"
+          git config --global user.name "no5ix"
+          git config --global user.email "no5ix@foxmail.com"
           sed -i "s/gh_token/${{ secrets.GITHUB_TOKEN }}/g" ./_config.yml
           hexo deploy
       # - name: Build

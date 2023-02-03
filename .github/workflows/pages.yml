@@ -111,27 +111,28 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: 1. 检出仓库 # Checkout
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
-      - name: Use Node.js 10.13.0
+      - name: 2. 安装 Node.js # Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "10.13.0"
-      - name: Cache NPM dependencies
+      - name: 3. 缓存 Node 插件
         uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.OS }}-npm-cache
           restore-keys: |
             ${{ runner.OS }}-npm-cache
-      - name: Install Dependencies
+      - name: 4. 安装hexo和依赖
         run: |
           npm install -g hexo-cli
           npm install --force
-      - name: 6. 生成静态文件 # Generate，其中hexo algolia为algolia搜索，hexo gulp为全站压缩，如果没安装则按需删除
+      - name: 5. 生成静态文件
         run: |
           tar -zxvf my_node_modules.tar.gz
           hexo clean
@@ -153,7 +154,7 @@ jobs:
       #     hexo deploy
       # - name: Build
       #   run: npm run build
-      - name: Deploy
+      - name: 6. 部署到 github page # Deploy：github.io仓库中保存每次提交日志, 在每个工作流程运行开始时，GitHub 会自动创建唯一的 GITHUB_TOKEN 机密以在工作流程中使用。 可以使用 GITHUB_TOKEN 在工作流程运行中进行身份验证。可以使用标准语法引用密钥以使用 GITHUB_TOKEN：${{ secrets.GITHUB_TOKEN }}。 GITHUB_TOKEN 的使用示例包括将令牌作为某个操作的输入来传递，或使用它来发出经验证的 GitHub API 请求。
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

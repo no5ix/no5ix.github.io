@@ -11,7 +11,7 @@ categories:
 
 这是一份 mac 折腾配置以及各种改造的精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac. 
 
-在Windows端配合sux可以统一 win & mac 的使用体验.
+在Windows端配合[<i class="fa fa-fw fa-github fa-2x"></i>sux](https://github.com/no5ix/sux) 可以统一 win & mac 的使用体验.
 
 
 **. . .**<!--more -->

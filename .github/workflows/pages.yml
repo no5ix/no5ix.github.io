@@ -116,10 +116,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
-      - name: Use Node.js 16.x
+      - name: Use Node.js 8.x
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "8.x"
       - name: Cache NPM dependencies
         uses: actions/cache@v2
         with:

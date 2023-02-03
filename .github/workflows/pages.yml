@@ -128,7 +128,10 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
-        run: npm install --force
+        run: |
+          npm install -g hexo-cli
+          npm install
+          npm install hexo-deployer-git --save
       - name: 6. 生成静态文件 # Generate，其中hexo algolia为algolia搜索，hexo gulp为全站压缩，如果没安装则按需删除
         run: |
           tar -zxvf my_node_modules.tar.gz

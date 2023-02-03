@@ -21,7 +21,7 @@ Inspired by Alfred/Wox/Listary/Capslock+/utools, thank u.
 <source src="/img/sux/sux_intro.mp4" type="video/mp4" />
 </video> -->
 
-![sux](https://github.com/no5ix/no5ix.github.io/blob/source/source/img/sux/sux.svg)
+![sux](https://raw.githubusercontent.com/no5ix/no5ix.github.io/71f651a204bdf460b4b4330de8ac185794ee7b59/source/img/sux/sux.svg)
 
 [<i class="fa fa-fw fa-github fa-2x"></i>sux](https://github.com/no5ix/sux) 
 

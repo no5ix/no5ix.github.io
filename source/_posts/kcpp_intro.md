@@ -29,9 +29,6 @@ top: 1
    - unreliable
 
 
-**. . .**<!-- more -->
-
-
 # kcpp Examples
 
 - [realtime-server](https://github.com/no5ix/realtime-server) : A realtime dedicated game server ( FPS / MOBA ). 一个实时的专用游戏服务器.

@@ -35,8 +35,8 @@
     
 2.5\. `npm install --force`
     
-3\. Unzip `node_modules.zip` to the current directory  
-    解压 `node_modules.zip` 到当前目录(确保这一步在安装了hexo之后)
+3\. Unzip `my_node_modules.tar.gz` to the current directory: `tar -zxvf my_node_modules.tar.gz`
+    解压 `my_node_modules.tar.gz` 到当前目录(确保这一步在安装了hexo之后): `tar -zxvf my_node_modules.tar.gz`
 
 4\. Learn [Hexo's base usage](https://hexo.io/docs/index.html) for Writing/Generating/Deployment  
     学习[Hexo的基本操作](https://hexo.io/zh-cn/docs/index.html)来写作/生成/部署
@@ -46,3 +46,9 @@
 
 6\. Modify ` /_config.yml ` & ` /themes/next/_config.yml `  
     修改 ` /_config.yml ` 和 ` /themes/next/_config.yml `
+
+7\. hexo clean
+
+8\. hexo generate
+
+9\. hexo server

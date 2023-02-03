@@ -89,7 +89,6 @@ Tickrate 66
 <dl>
 <dd><i>All source code for lag compensation and view interpolation is available in the Source SDK. See 
 
-{% post_link CS游戏协议中延迟补偿的设计和优化方法 %}
 
  for implementation details.</i>
 </dd>

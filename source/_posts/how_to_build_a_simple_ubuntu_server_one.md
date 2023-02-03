@@ -7,9 +7,6 @@ categories:
 - Linux
 ---
 
-# VirtualBox安装Ubuntu以及分区
-
-请参考后来写的文章 {% post_link VirtualBox安装Ubuntu以及分区 VirtualBox安装Ubuntu以及分区  %}
 
 
 # 创建dev用户

@@ -77,8 +77,6 @@ Please read [TestKcppClient.cpp](https://github.com/no5ix/kcpp/blob/master/TestK
 
 本项目还附了一个注释版的kcp源码 `ikcp.h` 和 `ikcp.c`， 算是另一种的 kcp详解, 方便自己学习也为大家更快的上手, 原始代码来自： https://github.com/skywind3000/kcp , 感谢 skywind3000 带来
 
-**. . .**<!-- more -->
-
 这么短小精悍的好项目
 
 注 : 项目中使用 tab 缩进且设置了tab = 2 space

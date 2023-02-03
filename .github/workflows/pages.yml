@@ -100,6 +100,17 @@
 #       #     # 注意替换为你的 Gitee 目标仓库地址
 #       #     destination-repo: git@gitee.com:gc-zhang/blog-backups.git
 
+
+
+
+
+
+
+##########################################################
+
+
+
+# 参考了 https://hexo.io/zh-cn/docs/github-pages
 name: Pages
 
 on:
@@ -117,7 +128,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
-      - name: 2. 安装 Node.js # Setup Node
+      - name: 2. 安装 Node.js # Setup Node, 这个node版本很关键, 不要乱改
         uses: actions/setup-node@v3
         with:
           node-version: "10.13.0"
@@ -152,9 +163,9 @@ jobs:
       #     git config --global user.email "no5ix@foxmail.com"
       #     sed -i "s/gh_token/${{ secrets.GITHUB_TOKEN }}/g" ./_config.yml
       #     hexo deploy
-      # - name: Build
+      # - name: Build # 运行package.json里的script里的build命令
       #   run: npm run build
-      - name: 6. 部署到 github page # Deploy：github.io仓库中保存每次提交日志, 在每个工作流程运行开始时，GitHub 会自动创建唯一的 GITHUB_TOKEN 机密以在工作流程中使用。 可以使用 GITHUB_TOKEN 在工作流程运行中进行身份验证。可以使用标准语法引用密钥以使用 GITHUB_TOKEN：${{ secrets.GITHUB_TOKEN }}。 GITHUB_TOKEN 的使用示例包括将令牌作为某个操作的输入来传递，或使用它来发出经验证的 GitHub API 请求。
+      - name: 6. 部署到 github page # Deploy：github.io仓库中保存每次提交日志, 在每个工作流程运行开始时，GitHub 会自动创建唯一的 GITHUB_TOKEN 机密以在工作流程中使用。 可以使用 GITHUB_TOKEN 在工作流程运行中进行身份验证。可以使用标准语法引用密钥以使用 GITHUB_TOKEN：${{ secrets.GITHUB_TOKEN }}。 GITHUB_TOKEN 的使用示例包括将令牌作为某个操作的输入来传递，或使用它来发出经验证的 GitHub API 请求。actions-gh-pages会把部署作业完成后，产生的页面会放在储存库中的 gh-pages 分支。在储存库中前往 Settings > Pages > Source，并将 branch 改为 gh-pages。
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

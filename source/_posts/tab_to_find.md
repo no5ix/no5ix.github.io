@@ -1,6 +1,6 @@
 ---
 title: Tab一下交互式搜一切文件且动态补全任何路径的shell插件
-date: 2018-08-25 22:48:12
+date: 2022-08-22 22:48:12
 tags:
 - GitHub
 categories:

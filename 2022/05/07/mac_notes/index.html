@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+          // alert('此文章并不公开, 输入文章密码方可阅读');
+          var password = prompt('此文章并不公开, 输入文章密码方可阅读');
+          if (password !== ''){
+            if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+            {
+              alert('Error!');
+            }
+            if (history.length > 1)
+            {
+              history.back();
+            }
+            else
+            {
+              window.location.href = "about:blank";
+            }
+          }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/dist/jquery.fancybox.css?v=3.2.10" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Mac,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="这是一份 mac 折腾配置以及各种改造的精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac. 并且统一 win &amp;amp; mac 的使用体验. . . .">
+<meta name="keywords" content="Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac笔记">
+<meta property="og:url" content="https://hulinhong.com/2022/05/07/mac_notes/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="这是一份 mac 折腾配置以及各种改造的精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac. 并且统一 win &amp;amp; mac 的使用体验. . . .">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-02-03T07:49:19.579Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac笔记">
+<meta name="twitter:description" content="这是一份 mac 折腾配置以及各种改造的精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac. 并且统一 win &amp;amp; mac 的使用体验. . . .">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>mac笔记 | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <form class="site-search-form">
+    <span class="search-icon fa fa-search"></span>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </form>
+
+
+<script type="text/javascript" id="local.search.active">
+var inputArea       = document.querySelector("#local-search-input");
+inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2022/05/07/mac_notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mac笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-07T03:02:22+00:00">
+                2022-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/Mac/" rel="tag"><i class="fa fa-tag"></i> Mac</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/05/02/auto_toc/" rel="next" title="一个自动生成网站目录大纲的油猴脚本">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  一个自动生成网站目录大纲的油猴脚本
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/11/16/youtube_bilibili/" rel="prev" title="油管比利">
+              <p class="post-nav-pre-next-title">
+                  油管比利
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <p>这是一份 mac 折腾配置以及各种改造的精华笔记, 可以帮你从头到尾打造一个极为顺手的 mac. 并且统一 win &amp; mac 的使用体验.</p>
+<p><strong>. . .</strong><a id="more"></a></p>
+<h1 id="改键Karabiner"><a href="#改键Karabiner" class="headerlink" title="改键Karabiner"></a>改键Karabiner</h1><p>改键软件 Karabiner-Elements 的配置得直接覆盖他的配置文件 <code>karabiner.json</code> (它的配置文件路径在 app 里的 misc 里有)</p>
+<p>参考: </p>
+<ul>
+<li><a href="https://github.com/pqrs-org/Karabiner-Elements/issues/2711" target="_blank" rel="noopener">https://github.com/pqrs-org/Karabiner-Elements/issues/2711</a></li>
+<li><a href="https://github.com/pqrs-org/Karabiner-Elements/issues/2949" target="_blank" rel="noopener">https://github.com/pqrs-org/Karabiner-Elements/issues/2949</a></li>
+<li><a href="https://github.com/pqrs-org/KE-complex_modifications/issues/697#issuecomment-678677912" target="_blank" rel="noopener">https://github.com/pqrs-org/KE-complex_modifications/issues/697#issuecomment-678677912</a></li>
+<li><a href="https://github.com/realliyifei/mac-karabiner-chinese-punctuations-to-halfwidth-forms" target="_blank" rel="noopener">https://github.com/realliyifei/mac-karabiner-chinese-punctuations-to-halfwidth-forms</a></li>
+</ul>
+<h1 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h1><p>科学上网软件： ClashX<br>下载地址: <a href="https://itlanyan.com/trojan-clients-download/" target="_blank" rel="noopener">https://itlanyan.com/trojan-clients-download/</a></p>
+<p>步骤:  </p>
+<ol>
+<li>去 just my socks 拷贝那些服务节点的配置然后去google搜“ss配置转clash配置”的网站(但是似乎很有可能会泄露相关 ss 密码之类的)，比如 <a href="https://subconverter.speedupvpn.com" target="_blank" rel="noopener">https://subconverter.speedupvpn.com</a> ， 然后在线转换为clash的配置然后点击 ClashX 的菜单栏的图标， 然后 <code>Config</code>-<code>Remote Config</code>-<code>Manage</code>-<code>Add</code></li>
+<li>如果发现上不了网的话, 点击 ClashX 的图标, 然后 <code>Config</code>-<code>Open Config Folder</code> 查看生成的 config 文件是否和 本 github 项目的 <code>clashx</code>里的类似</li>
+<li>请不要打开 clashx 的”设置为系统代理”, 否则剪映等一些软件无法联网, <ol>
+<li>但此时 safari 也会翻不了墙 (以下教程参考 <a href="https://www.youtube.com/watch?v=pAY8pNou9Gk" target="_blank" rel="noopener">https://www.youtube.com/watch?v=pAY8pNou9Gk</a>)<ol>
+<li>此时需要先把 <code>safari_proxy</code> 文件夹中的 <code>proxy.pac</code>(这个是由 edge 的 SwitchyOmega插件里的配置生成的) 放到 <code>/Library/WebServer/Documents</code> 里</li>
+<li>然后在<code>设置</code>-<code>网络</code>-<code>高级</code>-<code>代理</code>的<code>Automatic proxy configuration</code> 里输入 <code>http://127.0.0.1/proxy.pac</code>, 然后点击 右下角的 <code>ok</code>, 点击完<code>ok</code>之后会退回上一层菜单, 然后再点击 <code>Apply</code></li>
+<li>然后在 terminal 里输入命令 <code>sudo apachectl start</code></li>
+<li>去 safari 的地址栏输入<code>http://127.0.0.1/proxy.pac</code> 测试一下是否能访问这个, 有内容说明成功了, 此时再看看是否能谷歌/油管</li>
+</ol>
+</li>
+<li>此时还有个问题就是:可能会因为其它软件给关掉，如 ClashX 设置为系统代理的时候会把这个 pac 给清除掉, 所以我们需要检查一下 <code>hammerspoon</code> 里的 <code>init.lua</code>是否有 <code>networksetup -setautoproxyurl</code> 相关的代码, 有的话就会自动在激活 safari 的时候自动设置一下 pac 设置(相关代码其实是参考了 <a href="https://nowtime.cc/macos/1753.html" target="_blank" rel="noopener">https://nowtime.cc/macos/1753.html</a> , <code>networksetup -setautoproxyurl &quot;Wi-Fi&quot; &quot;http://127.0.0.1/proxy.pac&quot;</code> , 这个 “Wi-Fi” 是通过命令 <code>networksetup -listallnetworkservices</code> 拿到的)</li>
+</ol>
+</li>
+</ol>
+<h1 id="触摸板增强"><a href="#触摸板增强" class="headerlink" title="触摸板增强"></a>触摸板增强</h1><p>软件： betterTouchTool<br>破解版的得把下面这几句加到clashx当前所用的config文件的rules里来屏蔽下面这些地址<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,folivora.ai,REJECT</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,www.folivora.ai,REJECT</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,updates.boastr.net,REJECT</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">DOMAIN-KEYWORD,updates.folivora.ai,REJECT</span></span><br></pre></td></tr></table></figure></p>
+<p>加完之后去浏览器测试一下是否能打开这几个网址， 打不开则为屏蔽成功，<br>然后再打开betterTouchTool。</p>
+<h1 id="jetbrain-crack"><a href="#jetbrain-crack" class="headerlink" title="jetbrain-crack"></a>jetbrain-crack</h1><p>用jetbrain_crack 文件夹里 的 ja-netfilter, 然后参考下方链接来破解即可, 适用于 jb2022.1 的全家桶</p>
+<ul>
+<li><a href="https://learnku.com/articles/67432" target="_blank" rel="noopener">https://learnku.com/articles/67432</a></li>
+<li><a href="https://segmentfault.com/a/1190000041769901" target="_blank" rel="noopener">https://segmentfault.com/a/1190000041769901</a></li>
+</ul>
+<p>clion使用的时候切记: 要把项目目录以及各种觉得要mark的目录右键<code>Mark directory as</code>一下, 然后再项目根目录<code>Reload Cmake Project</code></p>
+<h1 id="搜狗输入法皮肤"><a href="#搜狗输入法皮肤" class="headerlink" title="搜狗输入法皮肤"></a>搜狗输入法皮肤</h1><p>自己做了仨, 黑白灰</p>
+<p>另外的好东西高仿 mac风格: Rime 鼠须管输入法皮肤效果 <a href="https://ssnhd.com/2022/01/11/rime-skin/" target="_blank" rel="noopener">https://ssnhd.com/2022/01/11/rime-skin/</a></p>
+<h1 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h1><ul>
+<li>配置: 把 <code>Alfred.alfredpreferences</code> 直接复制到 Alfred的配置文件夹(即 <code>Advance</code>-<code>Reveal in Finder</code> 出来的文件夹) 里覆盖即可</li>
+<li>皮肤: 自己做了俩, 对应黑夜白天</li>
+<li>配置中的 workflow 相关网址: <ul>
+<li><a href="https://github.com/zqzten/alfred-web-search-suggest" target="_blank" rel="noopener">https://github.com/zqzten/alfred-web-search-suggest</a></li>
+<li><a href="https://github.com/iamstevendao/alfred-open-with-vscode" target="_blank" rel="noopener">https://github.com/iamstevendao/alfred-open-with-vscode</a></li>
+<li><a href="https://github.com/LeEnno/alfred-terminalfinder" target="_blank" rel="noopener">https://github.com/LeEnno/alfred-terminalfinder</a></li>
+<li><a href="https://github.com/wensonsmith/YoudaoTranslator" target="_blank" rel="noopener">https://github.com/wensonsmith/YoudaoTranslator</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="hammerspoon"><a href="#hammerspoon" class="headerlink" title="hammerspoon"></a>hammerspoon</h1><p>装好 hammerspoon 之后, 把<code>~</code>下的<code>.hammerspoon</code>文件夹里的删除, 然后将本项目中的 hammerspoon 文件夹的内容放到 <code>~</code>下的<code>.hammerspoon</code>文件夹里</p>
+<h1 id="禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行"><a href="#禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行" class="headerlink" title="禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行"></a>禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行</h1><p>问题：虽然CleanMyMacX软件被吹嘘的很厉害，在用起来感觉也可以帮助更好的清理电脑，但是它一直后台运行，还终止不了，一直监控Mac的信息情况，个人觉得很是鸡肋，在使用的时候打开用就行了，平常没必要一直常驻，对于内存紧张的朋友来说太吃内存了。</p>
+<p>经过试验，可以修改权限解决，不需要删除文件，也不会出现system.log中的异常日志。</p>
+<p>解决办法：</p>
+<ol>
+<li>打开终端输入以下<ul>
+<li><code>chmod 400 &quot;/Applications/CleanMyMac X.app/Contents/Library/LoginItems/CleanMyMac X Menu.app/Contents/Library/LoginItems/CleanMyMac X HealthMonitor.app/Contents/MacOS/CleanMyMac X HealthMonitor&quot;</code></li>
+<li><code>chmod 400 &quot;/Applications/CleanMyMac X.app/Contents/Library/LoginItems/CleanMyMac X Menu.app/Contents/Library/LaunchServices/com.macpaw.CleanMyMac4.Agent&quot;</code></li>
+<li><code>chmod 400 &quot;/Applications/CleanMyMac X.app/Contents/Library/LaunchServices/com.macpaw.CleanMyMac4.Agent&quot;</code></li>
+</ul>
+</li>
+<li>然后去活动监视器终止CleanMyMacX所有进程即可。</li>
+</ol>
+<h1 id="启动台行列"><a href="#启动台行列" class="headerlink" title="启动台行列"></a>启动台行列</h1><p>【终端】输入或粘贴以下命令，修改后面的数字更改行列数。</p>
+<ul>
+<li>行数 <code>defaults write com.apple.dock springboard-rows -int 9</code></li>
+<li>列数 <code>defaults write com.apple.dock springboard-columns -int 10</code></li>
+</ul>
+<p>最后输入以下命令 <code>killall Dock</code></p>
+<h1 id="程序坞降低显示延迟"><a href="#程序坞降低显示延迟" class="headerlink" title="程序坞降低显示延迟"></a>程序坞降低显示延迟</h1><p>如果你习惯隐藏程序坞，鼠标放在屏幕底部，默认显示程序坞非常慢，你可以在【终端】输入或粘贴下面命令，将数值改为 0，这样，显示程序坞会变的很快。</p>
+<p><code>defaults write com.apple.dock autohide-delay -int 0</code></p>
+<p>最后输入以下命令 <code>killall Dock</code></p>
+<h1 id="允许任何来源"><a href="#允许任何来源" class="headerlink" title="允许任何来源"></a>允许任何来源</h1><p>安装非 App Store 里应用，可能会出现无法安装的情况，需要打开任何来源。【终端】输入或粘贴以下命令，按回车键。</p>
+<p><code>sudo spctl --master-disable</code></p>
+<h1 id="密码位数"><a href="#密码位数" class="headerlink" title="密码位数"></a>密码位数</h1><p>管理员默认密码至少为 4 位，【终端】输入或粘贴以下命令支持将密码改为 1 位。</p>
+<p><code>pwpolicy -clearaccountpolicies</code></p>
+<h1 id="深色主题显示浅色窗口"><a href="#深色主题显示浅色窗口" class="headerlink" title="深色主题显示浅色窗口"></a>深色主题显示浅色窗口</h1><p>程序坞和菜单栏深色，窗口是浅色。</p>
+<p>【终端】输入或粘贴以下命令，按回车键, 注销并重新登录 Mac, 系统偏好设置 - 通用 - 深色。<code>defaults write -g NSRequiresAquaSystemAppearance -bool Yes</code></p>
+<p>恢复原样: <code>defaults delete -g NSRequiresAquaSystemAppearance</code></p>
+<h1 id="Mac-删除原生-ABC-英文输入法"><a href="#Mac-删除原生-ABC-英文输入法" class="headerlink" title="Mac 删除原生 ABC 英文输入法"></a>Mac 删除原生 ABC 英文输入法</h1><p>删除系统英文 ABC，只保留一个输入法，这样搜狗输入法只需按 Shift 即可切换中英文。</p>
+<ol>
+<li>(这一步可以不做, 因为 sip 关闭之后 iOS 程序在 mac 就不能运行了, 所以先不做等发现删不掉 abc再来做吧, 关闭 sip 之后删除 abc 输入法再打开sip也可以 )先关闭 <code>系统完整性保护SIP</code>, 参考 <a href="#系统完整性保护SIP">系统完整性保护SIP</a></li>
+<li>前往自己home 目录下的 <code>~/Library/Preferences/</code> 文件夹，找到 <code>com.apple.HIToolbox.plist</code> 文件, 先备份 <code>cp com.apple.HIToolbox.plist com.apple.HIToolbox.plist.bak</code></li>
+<li><p>删除 <code>AppleEnabledInputSources</code> 下的</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>InputSourceKind<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>Keyboard Layout<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>KeyboardLayout ID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">integer</span>&gt;</span>252<span class="tag">&lt;/<span class="name">integer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>KeyboardLayout Name<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>ABC<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后保存</p>
+</li>
+<li>重启 Mac。</li>
+</ol>
+<p>恢复原样: 不必担心此操作给电脑带来异常，一切正常。还原打开系统偏好设置 → 键盘 → 输入法 → 添加 ABC 即可。</p>
+<h1 id="terminal相关"><a href="#terminal相关" class="headerlink" title="terminal相关"></a>terminal相关</h1><h2 id="autojump安装和tab不自动补全的办法"><a href="#autojump安装和tab不自动补全的办法" class="headerlink" title="autojump安装和tab不自动补全的办法"></a>autojump安装和tab不自动补全的办法</h2><p>安装: <code>brew install autojump</code><br>安装完之后在 <code>.zshrc</code> 最后加上一行:<br><code>[ -f /opt/homebrew/etc/profile.d/autojump.sh ] &amp;&amp; . /opt/homebrew/etc/profile.d/autojump.sh</code></p>
+<p>tab不自动补全的办法: 在 <code>.zshrc</code> 最后加上一行 <code>autoload -U compinit &amp;&amp; compinit</code></p>
+<h2 id="安装zsh-autosuggestions"><a href="#安装zsh-autosuggestions" class="headerlink" title="安装zsh-autosuggestions"></a>安装zsh-autosuggestions</h2><p>安装: <code>brew install zsh-autosuggestions</code><br>安装完之后在 <code>.zshrc</code> 最后加上一行:<br><code>source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh</code></p>
+<h2 id="命令行语法高亮"><a href="#命令行语法高亮" class="headerlink" title="命令行语法高亮"></a>命令行语法高亮</h2><p>如果已经装好了 oh my zsh则按照下面的方法来安装: </p>
+<p>Clone this repository in oh-my-zsh’s plugins directory:</p>
+<p><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></p>
+<p>Activate the plugin in ~/.zshrc:</p>
+<p><code>plugins=( [plugins...] zsh-syntax-highlighting)</code> 比如原来是 <code>plugins=(git)</code> 则改为 <code>plugins=(git zsh-syntax-highlighting)</code> </p>
+<p>Restart zsh (such as by opening a new instance of your terminal emulator).</p>
+<h2 id="powerlevel10k主题的路径颜色改色改成紫色"><a href="#powerlevel10k主题的路径颜色改色改成紫色" class="headerlink" title="powerlevel10k主题的路径颜色改色改成紫色"></a>powerlevel10k主题的路径颜色改色改成紫色</h2><p>原因: 不改色的话, 默认是蓝色太亮看不清又伤眼</p>
+<ol>
+<li><code>vim ~/.p10k.zsh</code></li>
+<li>找到 <code>POWERLEVEL9K_DIR_BACKGROUND</code> 然后改成 <code>typeset -g POWERLEVEL9K_DIR_BACKGROUND=128</code></li>
+<li>保存</li>
+<li><code>source ~/.p10k.zsh</code></li>
+</ol>
+<h2 id="fzf安装与配置"><a href="#fzf安装与配置" class="headerlink" title="fzf安装与配置"></a>fzf安装与配置</h2><ol>
+<li>确认已经安装好了 <code>fd</code></li>
+<li>用 brew 安装: <code>brew install fzf</code>, 安装完了之后他会提示你安装他的快捷键绑定的命令, 复制他的这个命令安装好他的快捷键绑定</li>
+<li><p><code>vim ~/.zshrc</code> </p>
+<ul>
+<li><p>如果只是希望 fzf 每次搜索指搜当前目录下的文件和目录则在最后添加</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export FZF_DEFAULT_COMMAND=&apos;fd -HI --exclude &quot;.git&quot;&apos;</span><br><span class="line">122 export FZF_CTRL_T_COMMAND=&apos;fd -HI --exclude &quot;.git&quot;&apos;</span><br><span class="line">123 export FZF_ALT_C_COMMAND=&quot;fd -HI --exclude &quot;.git&quot; -t d . &quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果希望 fzf 每次搜索指搜所有的文件和目录则在最后添加</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export FZF_DEFAULT_COMMAND=&apos;fd -HI --exclude &quot;.git&quot; . / &apos;</span><br><span class="line">export FZF_CTRL_T_COMMAND=&apos;fd -HI --exclude &quot;.git&quot; . / &apos;</span><br><span class="line">export FZF_ALT_C_COMMAND=&apos;fd -HI --exclude &quot;.git&quot; -t d . &apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>source ~/.zshrc</code></p>
+</li>
+<li>用 <code>fd</code> 找到 fzf 的 <code>key-bindings.zsh</code> (上次安装的时候是在<code>/opt/homebrew/Cellar/fzf/0.32.1/shell/key-bindings.zsh</code>), 然后在 68 行左右添加 <code>bindkey &#39;^F&#39; fzf-file-widget</code></li>
+<li>让他生效: <code>source /opt/homebrew/Cellar/fzf/0.32.1/shell/key-bindings.zsh</code></li>
+<li>现在可以先输入 cd 然后 敲击 ctrl+f 找到想要进入的目录然后回车进入目录了</li>
+<li>也可以先输入 vim 然后 敲击 ctrl+f 找到想要进入的文件然后回车进入编辑了</li>
+</ol>
+<h2 id="tab-any-path安装与配置"><a href="#tab-any-path安装与配置" class="headerlink" title="tab-any-path安装与配置"></a>tab-any-path安装与配置</h2><p><a href="https://github.com/no5ix/tab-any-path" target="_blank" rel="noopener">tab-any-path</a></p>
+<h1 id="safari-相关"><a href="#safari-相关" class="headerlink" title="safari 相关"></a>safari 相关</h1><h2 id="Safari调整标签页在哪儿打开的设置"><a href="#Safari调整标签页在哪儿打开的设置" class="headerlink" title="Safari调整标签页在哪儿打开的设置"></a>Safari调整标签页在哪儿打开的设置</h2><p>terminal 输入命令: <code>defaults write com.apple.Safari IncludeInternalDebugMenu 1</code></p>
+<p>重启 Safari 之后可以看到顶部菜单栏多出一个 <code>Debug</code> 菜单里有 <code>Tab Ordering</code> 的子菜单项</p>
+<h2 id="safari和edge书签双向同步"><a href="#safari和edge书签双向同步" class="headerlink" title="safari和edge书签双向同步"></a>safari和edge书签双向同步</h2><ol>
+<li>在 windows 的 store 里下载iCloud应用并登录自己的Apple ID</li>
+<li><p>新建TXT文件，填入内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe]</span><br><span class="line">@=&quot;C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe&quot;</span><br><span class="line">&quot;Path&quot;=&quot;C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改txt文件名为.reg格式，双击导入注册表</p>
+</li>
+<li>打开桌面版iCloud应用，勾选书签-&gt;Chrome, </li>
+<li>在Edge浏览器内安装 Apple 出品的“iCloud书签”插件</li>
+<li>在iCloud应用中打开书签同步选项, 记得点击“应用”！如果说要合并书签那就合并</li>
+<li>如果电脑上已经装了有chrome可能会弹出来要你安装iCloud插件, 不用管, 此时因为已经点击了”应用”了, 相关设置已经保存好, 直接重启一下电脑，会自动完成同步</li>
+</ol>
+<h2 id="safari实现类似edge的smart-toc插件"><a href="#safari实现类似edge的smart-toc插件" class="headerlink" title="safari实现类似edge的smart-toc插件"></a>safari实现类似edge的smart-toc插件</h2><p>先装上 <code>Macaque</code> 插件(类似油猴插件, 只是这个插件更加强大可以同时支持油猴脚本和 UserScript 脚本, 可以绕过网站 CSP, 把脚本注入到开了 CSP 的网站里, 如知乎/GitHub 等), 然后再把 <code>safari_userscript</code> 文件夹里的 <code>ex_smart_toc.js</code> 油猴脚本加入到这个插件里, 然后刷新页面即可</p>
+<ul>
+<li>参考: <a href="https://github.com/FallenMax/smart-toc" target="_blank" rel="noopener">Edge的smart-toc插件开源地址</a></li>
+</ul>
+<h1 id="系统完整性保护SIP"><a href="#系统完整性保护SIP" class="headerlink" title="系统完整性保护SIP"></a>系统完整性保护SIP</h1><p><strong>注意</strong>: sip 关闭之后 iOS 程序在 mac 就不能运行了</p>
+<p><strong>查看 SIP 状态:</strong>  【终端】输入 <code>csrutil status</code>，按回车键。</p>
+<p><strong>ARM M1 处理器关闭 SIP 步骤</strong>:  </p>
+<ol>
+<li>关机</li>
+<li>按住开机键不松手直到出现下图的画面，然后点击选项</li>
+<li>点击继续</li>
+<li>点击菜单栏的实用工具，再点击终端</li>
+<li>输入csrutil disable，然后按下回车也就是 return 键</li>
+<li>输入y，然后按下回车也就是 return 键</li>
+<li>输入您的电脑密码，然后按下回车也就是 return 键</li>
+<li>等待执行结果……</li>
+<li>出现 System Integrity Protection is off. 证明 SIP 已成功关闭。</li>
+<li>输入 reboot 然后按下回车也就是 return 键重启电脑即可。</li>
+<li>如果后期想再开启 SIP，只需要将上面第 5 步的 csrutil disable 换成 csrutil enable 即可。</li>
+</ol>
+<p><strong>开启 SIP</strong>: 同上，然后【终端】输入下面命令 <code>csrutil enable</code></p>
+<h1 id="各个软件单独控制音量"><a href="#各个软件单独控制音量" class="headerlink" title="各个软件单独控制音量"></a>各个软件单独控制音量</h1><p>可以看看开源项目 <code>background-music</code> , 不过经测试目前(2022.08.10)还不支持最新系统 <code>Monterey 12.5</code>, 可以 github 搜一下它看看最新版本他支持了没</p>
+<h1 id="lua-相关"><a href="#lua-相关" class="headerlink" title="lua 相关"></a>lua 相关</h1><h2 id="luajit在MacOS编译与安装"><a href="#luajit在MacOS编译与安装" class="headerlink" title="luajit在MacOS编译与安装"></a>luajit在MacOS编译与安装</h2><ol>
+<li>openresty-luajit 的 github官网下载他的 release,</li>
+<li>然后解压直接 <code>make</code>, </li>
+<li>如果报错说要设置 <code>export MACOSX_DEPLOYMENT_TARGET=xx.yy</code> 的话, 那就设置一下, 比如我的 macOs 系统是 <code>12.5</code>, 那就 <code>export MACOSX_DEPLOYMENT_TARGET=12.5</code>, </li>
+<li>然后再 <code>make</code>, 再 <code>make install</code> (make install 很重要, 不然之后的东西能编译过, 但是会提示找不到 <code>dyld[56827]: Library not loaded: &#39;/usr/local/lib/libluajit-5.1.2.dylib&#39;</code>)</li>
+</ol>
+<h2 id="不建议安装了-luajit-openresty安装后设置成默认lua"><a href="#不建议安装了-luajit-openresty安装后设置成默认lua" class="headerlink" title="(不建议安装了)luajit-openresty安装后设置成默认lua"></a>(不建议安装了)luajit-openresty安装后设置成默认lua</h2><p>先安装: <code>brew install luajit-openresty</code><br>然后:</p>
+<ol>
+<li><code>cd /opt/homebrew/opt/luajit-openresty/bin</code></li>
+<li><code>ln -s luajit-blabla lua</code> (这里的 <code>luajit-blabla</code> 替换成当前文件夹的那个 luajit 执行文件的名字)</li>
+<li><code>echo &#39;export PATH=&quot;/opt/homebrew/opt/luajit-openresty/bin:$PATH&quot;&#39; &gt;&gt; ~/.zshrc</code></li>
+<li><code>sourch ~/.zshrc</code></li>
+</ol>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Mac/" rel="tag"><i class="fa fa-tag"></i> Mac</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2022/05/02/auto_toc/" rel="next" title="一个自动生成网站目录大纲的油猴脚本">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    一个自动生成网站目录大纲的油猴脚本
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2022/11/16/youtube_bilibili/" rel="prev" title="油管比利">
+                <p class="post-nav-pre-next-title">
+                    油管比利
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="no5ix">
+          </a>
+          <p class="site-author-name" itemprop="name">no5ix</p>
+           
+              <p class="site-description motion-element" itemprop="description">推荐使用Chrome/Firefox/Safari阅读本博客. 以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">235</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">关于</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://119.23.17.57" title="ksun的博客" target="_blank">ksun的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect" title="你有图么我有故事" target="_blank">你有图么我有故事</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#改键Karabiner"><span class="nav-number">1.</span> <span class="nav-text">改键Karabiner</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#科学上网"><span class="nav-number">2.</span> <span class="nav-text">科学上网</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#触摸板增强"><span class="nav-number">3.</span> <span class="nav-text">触摸板增强</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jetbrain-crack"><span class="nav-number">4.</span> <span class="nav-text">jetbrain-crack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搜狗输入法皮肤"><span class="nav-number">5.</span> <span class="nav-text">搜狗输入法皮肤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alfred"><span class="nav-number">6.</span> <span class="nav-text">Alfred</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hammerspoon"><span class="nav-number">7.</span> <span class="nav-text">hammerspoon</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行"><span class="nav-number">8.</span> <span class="nav-text">禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动台行列"><span class="nav-number">9.</span> <span class="nav-text">启动台行列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序坞降低显示延迟"><span class="nav-number">10.</span> <span class="nav-text">程序坞降低显示延迟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#允许任何来源"><span class="nav-number">11.</span> <span class="nav-text">允许任何来源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密码位数"><span class="nav-number">12.</span> <span class="nav-text">密码位数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深色主题显示浅色窗口"><span class="nav-number">13.</span> <span class="nav-text">深色主题显示浅色窗口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-删除原生-ABC-英文输入法"><span class="nav-number">14.</span> <span class="nav-text">Mac 删除原生 ABC 英文输入法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#terminal相关"><span class="nav-number">15.</span> <span class="nav-text">terminal相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#autojump安装和tab不自动补全的办法"><span class="nav-number">15.1.</span> <span class="nav-text">autojump安装和tab不自动补全的办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装zsh-autosuggestions"><span class="nav-number">15.2.</span> <span class="nav-text">安装zsh-autosuggestions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行语法高亮"><span class="nav-number">15.3.</span> <span class="nav-text">命令行语法高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#powerlevel10k主题的路径颜色改色改成紫色"><span class="nav-number">15.4.</span> <span class="nav-text">powerlevel10k主题的路径颜色改色改成紫色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fzf安装与配置"><span class="nav-number">15.5.</span> <span class="nav-text">fzf安装与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tab-any-path安装与配置"><span class="nav-number">15.6.</span> <span class="nav-text">tab-any-path安装与配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#safari-相关"><span class="nav-number">16.</span> <span class="nav-text">safari 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Safari调整标签页在哪儿打开的设置"><span class="nav-number">16.1.</span> <span class="nav-text">Safari调整标签页在哪儿打开的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#safari和edge书签双向同步"><span class="nav-number">16.2.</span> <span class="nav-text">safari和edge书签双向同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#safari实现类似edge的smart-toc插件"><span class="nav-number">16.3.</span> <span class="nav-text">safari实现类似edge的smart-toc插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统完整性保护SIP"><span class="nav-number">17.</span> <span class="nav-text">系统完整性保护SIP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#各个软件单独控制音量"><span class="nav-number">18.</span> <span class="nav-text">各个软件单独控制音量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lua-相关"><span class="nav-number">19.</span> <span class="nav-text">lua 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#luajit在MacOS编译与安装"><span class="nav-number">19.1.</span> <span class="nav-text">luajit在MacOS编译与安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不建议安装了-luajit-openresty安装后设置成默认lua"><span class="nav-number">19.2.</span> <span class="nav-text">(不建议安装了)luajit-openresty安装后设置成默认lua</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">no5ix</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/dist/jquery.fancybox.js?v=3.2.10"></script>
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+
+    var is_load_xml_finished = 0;
+
+    var searchFunc = function (path, search_id, content_id) {
+      // 0x00. environment initialization
+      'use strict';
+
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      // var datas = [];
+
+      /* loading css1 : Dot Css Loader*/
+      var DotLoader = "<div class='loader'>Loading...</div>";
+
+      /* loading css2 : Pure Css Loader - Square */
+      var SquareLoader = 
+        "<div class='loader'>" +
+          "<div class='square' ></div>" +
+          "<div class='square'></div>" +
+          "<div class='square last'></div>" +
+          "<div class='square clear'></div>" +
+          "<div class='square'></div>" +
+          "<div class='square last'></div>" +
+          "<div class='square clear'></div>" +
+          "<div class='square '></div>" +
+          "<div class='square last'></div>" +
+        "</div>";
+
+      var ProgressBar = 
+          "<div class='progress-bar'>" +
+            "<div class='progress-bar-charge'></div>" +
+          "</div>";
+
+      var str = "";
+      var keywords = [];
+      var temp_keyword = "";
+
+      // 是否为第一个字母被键入的标志位
+      var first_char_flag = 0;
+
+      // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+      var last_page_x = 0;
+      var last_page_y = 0;
+
+      var local_search_tips = 
+            "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+            "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+
+      function CloseLocalSearch()
+      {
+        first_char_flag = 0;
+
+        $('#local-search-input').val('');
+        $('#local-search-close').hide();
+
+        // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+
+        $('#' + content_id).attr("headroom_special_attr","true"); 
+        
+        if (isMobile())
+        {
+          // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+          scrollTo(last_page_x, last_page_y);
+
+          $('#' + content_id).hide();
+        }
+        else
+        {
+          $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 200 );
+        }
+
+        // $('#' + content_id).velocity('stop').velocity( isMobile() ? 'transition.fadeOut' : 'transition.bounceUpOut', {
+        //   // delay: isMobile() ? 50 : 0,
+        //   duration: isMobile() ? 500 : 200,
+        //   // begin: function() { 
+        //   //   if (isMobile())
+        //   //   {
+        //   //     $('body').scrollTop(last_page_y);
+        //   //   } 
+        //   // }
+        //   complete: function () {
+        //     if (isMobile())
+        //     {
+        //       if (last_page_y < 20000)
+        //       {
+        //         $('body').velocity('scroll', { offset: last_page_y+"px", duration: last_page_y < 10000 ? 1000 : 2000 });
+        //       }
+        //       else
+        //       {
+        //         $('body').scrollTop(last_page_y);
+        //       }
+        //       // $('body').velocity('scroll');
+
+        //       // $('html,body').animate({
+        //       //   scrollTop: last_page_y
+        //       // },400);
+        //       // $('body').velocity('transition.slideDownIn', 1000);
+        //       // $('body').velocity('scroll', { offset: last_page_y+"px", duration: document.body.scrollHeight < 20000 ? 1500 : 3000 });
+        //     }
+        //   }
+        // });
+      }
+
+      function handleSearch()
+      {
+        if (keywords.length <= 0) {
+          return;
+        }
+        $resultContent.innerHTML = "";
+        $('#local-search-close').show();
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+          $resultContent.innerHTML = 
+            "<ul class='local-search-empty-ul'>" + 
+            local_search_tips +
+            ProgressBar;
+        }
+        else
+        {
+          // Retrieve the object from local storage
+          var xml_resp = retrieve_search_xml()
+
+          xml_resp.forEach(function (data) {
+          // datas.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+              data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+              keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);
+
+                if (index_title < 0 && index_content < 0) {
+                  isMatch = false;
+                } else {
+                  if (index_content < 0) {
+                    index_content = 0;
+                  }
+                  if (i == 0) {
+                    first_occur = index_content;
+                  }
+                  // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+              });
+            } else {
+              isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+              var content = orig_data_content;
+              if (first_occur >= 0) {
+                var match_content = "";
+                if (!is_sensitive && !is_encrypted)
+                {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  match_content = content.substr(start, end);
+                }
+
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                else
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+              }
+              str += "</li>";
+            }
+          });
+
+          str += "</ul>";
+          if (str.indexOf('<li>') === -1) {
+            return $resultContent.innerHTML = 
+              "<ul class='local-search-empty-ul'><span class='local-search-empty'>找不到, 换个搜索关键字试一哈.<span></ul>";
+          }
+          $resultContent.innerHTML = str;
+        }
+      }
+
+      $input.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+          CloseLocalSearch();
+          return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+          if (isMobile())
+          {
+            last_page_x = window.pageXOffset;
+            last_page_y = window.pageYOffset;
+            // $('body').scrollTop(0);
+            scrollTo(0,0);
+
+          }
+          first_char_flag = 1;
+          $('#' + content_id).removeAttr("headroom_special_attr");
+          
+          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', 300);
+
+          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 1000);
+        }
+      });
+
+
+      var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+      if (!local_search_xml_data) {
+        $.ajax({
+          // 0x01. load xml file
+          url: path,
+          dataType: "xml",
+          success: function (xmlResponse) {
+            store_search_xml(xmlResponse);
+
+            // setTimeout(function(){
+            //   is_load_xml_finished = 1;
+
+            //   handleSearch();
+            //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+            // }, 2000);
+            
+            // is_load_xml_finished = 1;
+
+            handleSearch();
+            $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+          }
+        });
+      }
+
+      $(document).on('click', '#local-search-close', function() {
+        CloseLocalSearch();
+      });
+
+      $(document).keyup(function(event){
+        switch(event.keyCode) {
+          case 27:
+            // alert("ESC");
+            CloseLocalSearch();
+        }
+      });
+
+      // $(document).on('blur', '#local-search-input', function(e) {
+      //   // console.log(document.activeElement.getAttribute('class'));
+        
+      //   if (isMobile() == false)
+      //   {
+      //     CloseLocalSearch();
+      //   }
+      // });
+    }
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+
+      // var userAgent = window.navigator.userAgent;
+
+      // var isiPad = userAgent.match(/iPad/i) !== null;
+      // var mobileUA = [
+      //   'iphone', 'android', 'phone', 'mobile',
+      //   'wap', 'netfront', 'x11', 'java', 'opera mobi',
+      //   'opera mini', 'ucweb', 'windows ce', 'symbian',
+      //   'symbianos', 'series', 'webos', 'sony',
+      //   'blackberry', 'dopod', 'nokia', 'samsung',
+      //   'palmsource', 'xda', 'pieplus', 'meizu',
+      //   'midp' ,'cldc' , 'motorola', 'foma',
+      //   'docomo', 'up.browser', 'up.link', 'blazer',
+      //   'helio', 'hosin', 'huawei', 'novarra',
+      //   'coolpad', 'webos', 'techfaith', 'palmsource',
+      //   'alcatel', 'amoi', 'ktouch', 'nexian',
+      //   'ericsson', 'philips', 'sagem', 'wellcom',
+      //   'bunjalloo', 'maui', 'smartphone', 'iemobile',
+      //   'spice', 'bird', 'zte-', 'longcos',
+      //   'pantech', 'gionee', 'portalmmm', 'jig browser',
+      //   'hiptop', 'benq', 'haier', '^lct',
+      //   '320x320', '240x320', '176x220'
+      // ];
+      // var pattern = new RegExp(mobileUA.join('|'), 'i');
+
+      // return !isiPad && userAgent.match(pattern);
+    }
+
+    function store_search_xml(xmlResponse) {
+        datas = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(datas));
+        is_load_xml_finished = 1;
+
+        console.log("store search.xml finished.");
+    }
+
+    function ajax_store_search_xml() {
+      $.ajax({
+        url: "/search.xml",
+        dataType: "xml",
+        success: function (xmlResponse) {
+            store_search_xml(xmlResponse);
+        }
+      });
+    }
+
+    function retrieve_search_xml() {
+        // Retrieve the object from local storage
+        var retrievedObject = localStorage.getItem('local_search_xml_data');
+        var xml_resp = JSON.parse(retrievedObject)
+        return xml_resp
+    }
+
+    var getSearchFile = function(){
+      var path = "/search.xml";
+      var local_search_result_name = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+      searchFunc(path, 'local-search-input', local_search_result_name);
+    }
+
+    var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    if (local_search_xml_data) {
+      is_load_xml_finished = 1;
+      console.log("load search.xml finished.");
+    }
+    var last_use_local_search_date = localStorage.getItem('last_use_local_search_date');
+    var curDate = new Date();
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_use_local_search_date != curDate.getDate() || !local_search_xml_data) {
+      // preload search.xml
+      ajax_store_search_xml();
+    }
+
+    localStorage.setItem('last_use_local_search_date', curDate.getDate());
+    
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

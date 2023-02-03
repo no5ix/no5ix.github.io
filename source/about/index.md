@@ -32,5 +32,4 @@ type: "about"
     - [realtime-server-ue4-demo](https://github.com/no5ix/realtime-server-ue4-demo) : 为realtime-server而写的一个UE4状态同步demo.
     - [realtinet](https://github.com/no5ix/realtinet) : 一个快速的双通道(可靠与非可靠)udp网络库, 基于 muduo + kcp .
     - [flock-ai-ue4-plugin](https://github.com/no5ix/flock-ai-ue4-plugin) : 一个基于虚幻4的鱼群 AI 插件.
-    - [hexo-theme-next-enhanced](https://github.com/no5ix/hexo-theme-next-enhanced) : 一个增强版的NexT主题.
 <!-- - 网易云音乐 : https://music.163.com/#/user/home?id=47256866 -->

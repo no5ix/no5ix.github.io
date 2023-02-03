@@ -1,102 +1,138 @@
-# 参考 https://zhangshier.vip/posts/8779/#4-3-方案三
+# # 参考 https://zhangshier.vip/posts/8779/#4-3-方案三
 
-name: Deploy # 部署
+# name: Deploy # 部署
 
-on: # 触发条件
+# on: # 触发条件
+#   push:
+#     branches:
+#       - source # 推送到 source 分支（这里的分支名很重要，不要弄错了
+
+#   workflow_dispatch: # 手动触发
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: 1. 检出仓库 # Checkout
+#         uses: actions/checkout@v3
+#         with:
+#           ref: source
+
+#       - name: 2. 安装 Node.js # Setup Node
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "16.x"
+
+#       - name: 3. 安装 Hexo # Install Hexo
+#         run: |
+#           npm install hexo-cli -g
+
+#       - name: 4. 缓存 Node 插件 # Cache Modules
+#         uses: actions/cache@v1
+#         id: cache-modules
+#         with:
+#           path: node_modules
+#           key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+
+# #      - name: 安装主题
+# #        run: |
+# #          git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
+# #          npm install hexo-renderer-pug hexo-renderer-stylus --save
+
+#       - name: 5. 安装依赖 # Install Dependencies 如果没有缓存或 插件有更新，则安装插件
+#         if: steps.cache-modules.outputs.cache-hit != 'true'
+#         run: | # **如果仓库里没有 package-lock.json，上传一下，npm ci 必须要有 package-lock.json**
+#           npm ci
+
+#       - name: 6. 生成静态文件 # Generate，其中hexo algolia为algolia搜索，hexo gulp为全站压缩，如果没安装则按需删除
+#         run: |
+#           tar -zxvf my_node_modules.tar.gz
+#           hexo clean
+#           hexo generate
+
+#       - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志, 在每个工作流程运行开始时，GitHub 会自动创建唯一的 GITHUB_TOKEN 机密以在工作流程中使用。 可以使用 GITHUB_TOKEN 在工作流程运行中进行身份验证。可以使用标准语法引用密钥以使用 GITHUB_TOKEN：${{ secrets.GITHUB_TOKEN }}。 GITHUB_TOKEN 的使用示例包括将令牌作为某个操作的输入来传递，或使用它来发出经验证的 GitHub API 请求。
+#         uses: JamesIves/github-pages-deploy-action@v4
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           repository-name: no5ix/no5ix.github.io
+#           branch: master
+#           folder: public
+#           commit-message: "${{ github.event.head_commit.message }} Updated By Github Actions"
+
+#       # - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
+#       #   run: |
+#       #     cd ./public
+#       #     git init
+#       #     git config user.name "no5ix"
+#       #     git config user.email "no5ix@foxmail.com"
+#       #     git add .
+#       #     git commit -m "${{ github.event.head_commit.message }} $(date +"%Z %Y-%m-%d %A %H:%M:%S") Updated By Github Actions"
+#       #     git push --force --quiet "https://${{ secrets.GITHUBUSERNAME }}:${{ secrets.GITHUBTOKEN }}@github.com/${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io.git" master:main
+#       #     git push --force --quiet "https://github.com/no5ix/no5ix.github.io.git" master:main
+
+#       # - name: 8. 推送到服务器私有仓库
+#       #   uses: easingthemes/ssh-deploy@main
+#       #   env:
+#       #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器生成的私钥，例如 -----BEGIN RSA PRIVATE KEY-----xxxx-----END RSA PRIVATE KEY-----
+#       #     ARGS: "-avz --delete" # rsync参数
+#       #     SOURCE: "public/"
+#       #     REMOTE_HOST: ${{ secrets.SERVER_HOST }} # 服务器ip地址，例如 1.2.3.4
+#       #     REMOTE_USER: ${{ secrets.SERVER_USER }} # 登录用户，例如 ubuntu 注意应拥有该文件夹的权限，可以在root下为用户赋权 chown -R ubuntu:755 /www/wwwroot/hexo
+#       #     TARGET: ${{ secrets.SERVER_PATH }}    # 服务器目录，例如 /www/wwwroot/hexo
+#       #     EXCLUDE: ".git/,.user.ini"            # 排除源路径中.git/ 目标路径中.user.ini 这俩不做同步操作
+
+#       # - name: 9. 刷新CDN
+#       #   run: |
+#       #     pip install --upgrade pip
+#       #     pip install tencentcloud-sdk-python
+#       #     pip install tencentcloud-sdk-python-cdn
+#       #     python3 cdn.py
+
+#       # - name: 10. 备份Gitee  # Sync to Gitee
+#       #   uses: wearerequired/git-mirror-action@master
+#       #   env:
+#       #     # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
+#       #     SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+#       #   with:
+#       #     # 注意替换为你的 GitHub 源仓库地址
+#       #     source-repo: git@github.com:GC-ZF/Blog-Backups.git
+#       #     # 注意替换为你的 Gitee 目标仓库地址
+#       #     destination-repo: git@gitee.com:gc-zhang/blog-backups.git
+
+name: Pages
+
+on:
   push:
     branches:
-      - source # 推送到 source 分支（这里的分支名很重要，不要弄错了
-
-  workflow_dispatch: # 手动触发
+      - source  # default branch
 
 jobs:
-  build:
+  pages:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 1. 检出仓库 # Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          ref: source
-
-      - name: 2. 安装 Node.js # Setup Node
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # If your repository depends on submodule, please see: https://github.com/actions/checkout
+          submodules: recursive
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-
-      - name: 3. 安装 Hexo # Install Hexo
-        run: |
-          npm install hexo-cli -g
-
-      - name: 4. 缓存 Node 插件 # Cache Modules
-        uses: actions/cache@v1
-        id: cache-modules
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
-
-#      - name: 安装主题
-#        run: |
-#          git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
-#          npm install hexo-renderer-pug hexo-renderer-stylus --save
-
-      - name: 5. 安装依赖 # Install Dependencies 如果没有缓存或 插件有更新，则安装插件
-        if: steps.cache-modules.outputs.cache-hit != 'true'
-        run: | # **如果仓库里没有 package-lock.json，上传一下，npm ci 必须要有 package-lock.json**
-          npm ci
-
-      - name: 6. 生成静态文件 # Generate，其中hexo algolia为algolia搜索，hexo gulp为全站压缩，如果没安装则按需删除
-        run: |
-          tar -zxvf my_node_modules.tar.gz
-          hexo clean
-          hexo generate
-
-      - name: 7. 部署到 github page # Deploy：github.io仓库中保存每次提交日志, 在每个工作流程运行开始时，GitHub 会自动创建唯一的 GITHUB_TOKEN 机密以在工作流程中使用。 可以使用 GITHUB_TOKEN 在工作流程运行中进行身份验证。可以使用标准语法引用密钥以使用 GITHUB_TOKEN：${{ secrets.GITHUB_TOKEN }}。 GITHUB_TOKEN 的使用示例包括将令牌作为某个操作的输入来传递，或使用它来发出经验证的 GitHub API 请求。
-        uses: JamesIves/github-pages-deploy-action@v4
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository-name: no5ix/no5ix.github.io
-          branch: master
-          folder: public
-          commit-message: "${{ github.event.head_commit.message }} Updated By Github Actions"
-
-      # - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
-      #   run: |
-      #     cd ./public
-      #     git init
-      #     git config user.name "no5ix"
-      #     git config user.email "no5ix@foxmail.com"
-      #     git add .
-      #     git commit -m "${{ github.event.head_commit.message }} $(date +"%Z %Y-%m-%d %A %H:%M:%S") Updated By Github Actions"
-      #     git push --force --quiet "https://${{ secrets.GITHUBUSERNAME }}:${{ secrets.GITHUBTOKEN }}@github.com/${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io.git" master:main
-      #     git push --force --quiet "https://github.com/no5ix/no5ix.github.io.git" master:main
-
-      # - name: 8. 推送到服务器私有仓库
-      #   uses: easingthemes/ssh-deploy@main
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器生成的私钥，例如 -----BEGIN RSA PRIVATE KEY-----xxxx-----END RSA PRIVATE KEY-----
-      #     ARGS: "-avz --delete" # rsync参数
-      #     SOURCE: "public/"
-      #     REMOTE_HOST: ${{ secrets.SERVER_HOST }} # 服务器ip地址，例如 1.2.3.4
-      #     REMOTE_USER: ${{ secrets.SERVER_USER }} # 登录用户，例如 ubuntu 注意应拥有该文件夹的权限，可以在root下为用户赋权 chown -R ubuntu:755 /www/wwwroot/hexo
-      #     TARGET: ${{ secrets.SERVER_PATH }}    # 服务器目录，例如 /www/wwwroot/hexo
-      #     EXCLUDE: ".git/,.user.ini"            # 排除源路径中.git/ 目标路径中.user.ini 这俩不做同步操作
-
-      # - name: 9. 刷新CDN
-      #   run: |
-      #     pip install --upgrade pip
-      #     pip install tencentcloud-sdk-python
-      #     pip install tencentcloud-sdk-python-cdn
-      #     python3 cdn.py
-
-      # - name: 10. 备份Gitee  # Sync to Gitee
-      #   uses: wearerequired/git-mirror-action@master
-      #   env:
-      #     # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
-      #     SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
-      #   with:
-      #     # 注意替换为你的 GitHub 源仓库地址
-      #     source-repo: git@github.com:GC-ZF/Blog-Backups.git
-      #     # 注意替换为你的 Gitee 目标仓库地址
-      #     destination-repo: git@gitee.com:gc-zhang/blog-backups.git
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

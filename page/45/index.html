@@ -304,6 +304,184 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/12/13/SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/13/SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别/" itemprop="url">SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-13T10:12:15+00:00">
+                2014-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用SVN在管理代码的时候免不了进行代码的合并和还原，特别是当前版本的修改发现有重大问题的时候，还原是避免不了的，那么究竟应该怎样操作呢？</p>
+<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><p>使用SVN查看文件或目录的日志的时候，右键单击日志记录会弹出下面这个界面，今天我们来着重了解一下被红圈标记的三个选项——“Update item to this version”，“Revert to this version”，“Revert changes from this version”，这三个选项对于刚接触SVN的人确实不太好区分，一开始我也搞不懂，直到亲自试验一下才搞清楚这三个选项的用法。</p>
+<img src="/2014/12/13/SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别/svn_1.jpg" title="svn">
+<p>在讲解这三个选项的作用之前，我们还是先来假定一个使用情景，假设我们的项目文件一共有8个版本，它版本号分别是1，2，3，4，5，6，7，8。</p>
+<h1 id="Update-item-to-this-version"><a href="#Update-item-to-this-version" class="headerlink" title="Update item to this version"></a>Update item to this version</h1><p>这个选项的作用是将文件版本更新到对应所选的版本（当然内容也修改到了相应的版本）。如果我们是在版本4这里点击“Update item to this version”，表示5~8版本所作的修改全部作废，这个文件的历史回退到了版本4那个时代，但是需要注意的是，此时文件的版本是4，并不是最新的。我们知道SVN工具中如果文件不是最新版本就无法上传，所以说这个功能只是用来暂时还原一下版本，来查询某个问题的，不能将还原后的文件上传。</p>
+<h1 id="Revert-to-this-version"><a href="#Revert-to-this-version" class="headerlink" title="Revert to this version"></a>Revert to this version</h1><p>这个选项的作用是将文件的内容更新到对应的版本，版本号没有发生变化。如果我们是在版本4这里点击“Revert to this version”，表示5~8版本所作的修改全部被还原，文件和版本4的文件一模一样，但需要注意的是这项操作相当于我们把版本4这个文件拷贝了一份赋值给了当前目录下的文件，此时的文件版本还是8，并且是可以提交的，提交以后文件的版本变成了9，增加了一个新的版本，虽然这个版本和版本4的内容是一样的。</p>
+<h1 id="Revert-changes-from-this-version"><a href="#Revert-changes-from-this-version" class="headerlink" title="Revert changes from this version"></a>Revert changes from this version</h1><p>这个选项的作用是将对应版本的修改还原，文件的版本号不发生变化，相当于在当前本版本上剔除某些版本所作的改变。如果我们是在版本4这里点击“Revert changes from this version”，表示版本4所作的修改被抹杀了，只剩下除版本4以外的7个修改了，但是此时文件是可以上传的，并且会生成新的版本9，只是版本9只包括除版本4以外的7次修改。这个选项是可以选择多个版本的，如果我们选择4,5,6,7这四个版本点击“Revert changes from this revision”，那么这几次修改都会被抹杀。如果我们选择5,6,7,8这四个版本点击“Revert changes from this revision”，表示取消这几个版本的修改，实际上和在版本4这里点击“Revert to this version”的作用是一样的。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><p>Update item to this version：<br>回退文件的内容和版本到指定的版本A，文件内容与版本A一致，此时文件的版本也为A，但是无法上传文件。</p>
+</li>
+<li><p>Revert to this version：<br>只是回退文件的内容到指定版本A，文件版本还是最新版本，此时文件会提示有所更改，可以上传，并且会在最新的版本号上加1，形成新的版本。</p>
+</li>
+<li><p>Revert changes from this version：<br>还原对应版本所作的改变，会将所指定的版本所作的修改直接抹杀，可以对多个版本操作，注意很可能会出现冲突，需要手动解决。</p>
+</li>
+</ul>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/29/some_common_examination/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1037,177 +1215,6 @@ X[i] != Y[j]，dp[i][j] = 0
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/22/binary_tree_create_and_destroy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/22/binary_tree_create_and_destroy/" itemprop="url">数据结构一之二叉树的创建和销毁</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-22T19:11:22+00:00">
-                2014-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algo/" itemprop="url" rel="index">
-                    <span itemprop="name">Algo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <p>接着上一篇， 上一篇主要说了各种排序算法， 但对几个常用的数据结构还未提及，所以这一篇主要讲二叉树, 二叉树已经包括很多链表的知识了。所有代码都是测试过的, 可以直接撸.</p>
-<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a><strong>二叉树</strong></h1><p>这里不举太多数字方面的东西， 我们直接看图， 直观感性的认识满二叉树和完全二叉树：</p>
-<img src="/2014/09/22/binary_tree_create_and_destroy/binary_tree_create_and_destroy_1.png">
-<p><strong>有一点性质需要牢记：具有n个结点的完全二叉树的最大高度为log2n+1</strong></p>
-<h2 id="二叉树的二叉链式存储"><a href="#二叉树的二叉链式存储" class="headerlink" title="二叉树的二叉链式存储"></a>二叉树的二叉链式存储</h2><p>二叉树的二叉链式存储方案的代码表示：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BinaryTreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">void</span> *data;</span><br><span class="line">	BinaryTreeNode *LeftNode;</span><br><span class="line">	BinaryTreeNode *RightNode;</span><br><span class="line">&#125;BTN, *BTNP;</span><br></pre></td></tr></table></figure>
-<img src="/2014/09/22/binary_tree_create_and_destroy/binary_tree_create_and_destroy_2.png">
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1278,7 +1285,7 @@ X[i] != Y[j]，dp[i][j] = 0
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">236</span>
+                <span class="site-state-item-count">237</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

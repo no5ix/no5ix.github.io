@@ -304,6 +304,204 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2018/09/25/cache_db_consistency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/25/cache_db_consistency/" itemprop="url">Cache和DB一致性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T00:49:06+00:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="Cache-Aside-Pattern"><a href="#Cache-Aside-Pattern" class="headerlink" title="Cache Aside Pattern"></a>Cache Aside Pattern</h1><p><strong>什么是 “Cache Aside Pattern”？</strong><br>答：旁路缓存方案的经验实践，这个实践又分读实践，写实践。</p>
+<h2 id="对于读请求"><a href="#对于读请求" class="headerlink" title="对于读请求"></a><em>对于读请求</em></h2><p>先读 cache，再读 db<br>如果，cache hit，则直接返回数据<br>如果，cache miss，则访问 db，并将数据 set 回缓存</p>
+<p><img src="/img/cache_db_consistency/cache_db_consistency_9.png" alt></p>
+<p>（1）先从 cache 中尝试 get 数据，结果 miss 了<br>（2）再从 db 中读取数据，从库，读写分离<br>（3）最后把数据 set 回 cache，方便下次读命中</p>
+<h2 id="对于写请求"><a href="#对于写请求" class="headerlink" title="对于写请求"></a><em>对于写请求</em></h2><p>先操作数据库，再淘汰缓存（淘汰缓存，而不是更新缓存）<br><img src="/img/cache_db_consistency/cache_db_consistency_1.png" alt></p>
+<p>如上图：<br>（1）第一步要操作数据库，第二步操作缓存<br>（2）缓存，采用 delete 淘汰，而不是 set 更新</p>
+<h2 id="Cache-Aside-Pattern-为什么建议淘汰缓存，而不是更新缓存"><a href="#Cache-Aside-Pattern-为什么建议淘汰缓存，而不是更新缓存" class="headerlink" title="Cache Aside Pattern 为什么建议淘汰缓存，而不是更新缓存"></a>Cache Aside Pattern 为什么建议淘汰缓存，而不是更新缓存</h2><p>答：如果更新缓存，在并发写时，可能出现数据不一致。<br><img src="/img/cache_db_consistency/cache_db_consistency_2.png" alt></p>
+<p>如上图所示，如果采用 set 缓存。</p>
+<p>在 1 和 2 两个并发写发生时，由于无法保证时序，此时不管先操作缓存还是先操作数据库，都可能出现：<br>（1）请求 1 先操作数据库，请求 2 后操作数据库<br>（2）请求 2 先 set 了缓存，请求 1 后 set 了缓存<br>导致，数据库与缓存之间的数据不一致。<br>所以，Cache Aside Pattern 建议，delete 缓存，而不是 set 缓存。</p>
+<h2 id="Cache-Aside-Pattern-为什么建议先操作数据库，再操作缓存？"><a href="#Cache-Aside-Pattern-为什么建议先操作数据库，再操作缓存？" class="headerlink" title="Cache Aside Pattern 为什么建议先操作数据库，再操作缓存？"></a>Cache Aside Pattern 为什么建议先操作数据库，再操作缓存？</h2><p>答：如果先操作缓存，在读写并发时，可能出现数据不一致。<br><img src="/img/cache_db_consistency/cache_db_consistency_3.png" alt></p>
+<p>如上图所示，如果先操作缓存。</p>
+<p>在 1 和 2 并发读写发生时，由于无法保证时序，可能出现：<br>（1）写请求淘汰了缓存<br>（2）写请求操作了数据库（主从同步没有完成）<br>（3）读请求读了缓存（cache miss）<br>（4）读请求读了从库（读了一个旧数据）<br>（5）读请求 set 回缓存（set 了一个旧数据）<br>（6）数据库主从同步完成<br>导致，数据库与缓存的数据不一致。</p>
+<p>所以，Cache Aside Pattern 建议，先操作数据库，再操作缓存。</p>
+<h2 id="Cache-Aside-Pattern-方案存在什么问题？"><a href="#Cache-Aside-Pattern-方案存在什么问题？" class="headerlink" title="Cache Aside Pattern 方案存在什么问题？"></a>Cache Aside Pattern 方案存在什么问题？</h2><p>答：如果先操作数据库，再淘汰缓存，在原子性被破坏时：<br>（1）修改数据库成功了<br>（2）淘汰缓存失败了<br>导致，数据库与缓存的数据不一致。</p>
+<p>个人见解：<strong>这里个人觉得可以使用重试的方法，在淘汰缓存的时候，如果失败，则重试一定的次数。如果失败一定次数还不行，那就是其他原因了。比如说 redis 故障、内网出了问题。</strong></p>
+<p>关于这个问题，沈老师的解决方案是，<em>使用先操作缓存（delete），再操作数据库</em>。假如删除缓存成功，更新数据库失败了。缓存里没有数据，数据库里是之前的数据，数据没有不一致，对业务无影响。只是下一次读取，会多一次 cache miss。这里我觉得沈老师可能忽略了并发的问题，比如说以下情况：<br>一个写请求过来，删除了缓存，准备更新数据库（还没更新完成）。<br>然后一个读请求过来，缓存未命中，从数据库读取旧数据，再次放到缓存中，这时候，数据库更新完成了。此时的情况是，缓存中是旧数据，数据库里面是新数据，同样存在数据不一致的问题。<br>如图：<br><img src="/img/cache_db_consistency/cache_db_consistency_4.png" alt></p>
+<h2 id="主从同步延迟导致的缓存和数据不一致问题"><a href="#主从同步延迟导致的缓存和数据不一致问题" class="headerlink" title="主从同步延迟导致的缓存和数据不一致问题"></a>主从同步延迟导致的缓存和数据不一致问题</h2><p>答：发生写请求后（不管是先操作 DB，还是先淘汰 Cache），在主从数据库同步完成之前，如果有读请求，都可能发生读 Cache Miss，读从库把旧数据存入缓存的情况。此时怎么办呢？</p>
+<p><strong>数据库主从不一致</strong><br>先回顾下，无缓存时，数据库主从不一致问题。<br><img src="/img/cache_db_consistency/cache_db_consistency_5.png" alt></p>
+<p>如上图，发生的场景是，写后立刻读：<br>（1）主库一个写请求（主从没同步完成）<br>（2）从库接着一个读请求，读到了旧数据<br>（3）最后，主从同步完成<br>导致的结果是：主动同步完成之前，会读取到旧数据。</p>
+<p>可以看到，主从不一致的影响时间很短，在主从同步完成后，就会读到新数据。</p>
+<p><strong>缓存与数据库不一致</strong><br>再看，引入缓存后，缓存和数据库不一致问题。<br><img src="/img/cache_db_consistency/cache_db_consistency_6.png" alt></p>
+<p>如上图，发生的场景也是，写后立刻读：<br>（1+2）先一个写请求，淘汰缓存，写数据库</p>
+<p>（3+4+5）接着立刻一个读请求，读缓存，cache miss，读从库，写缓存放入数据，以便后续的读能够 cache hit（主从同步没有完成，缓存中放入了旧数据）</p>
+<p>（6）最后，主从同步完成</p>
+<p>导致的结果是：旧数据放入缓存，即使主从同步完成，后续仍然会从缓存一直读取到旧数据。</p>
+<p>可以看到，加入缓存后，导致的不一致影响时间会很长，并且最终也不会达到一致。</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>可以看到，这里提到的缓存与数据库数据不一致，根本上是由数据库主从不一致引起的。当主库上发生写操作之后，从库 binlog 同步的时间间隔内，读请求，可能导致有旧数据入缓存。</p>
+<p>思路：那能不能写操作记录下来，在主从时延的时间段内，读取修改过的数据的话，强制读主，并且更新缓存，这样子缓存内的数据就是最新。在主从时延过后，这部分数据继续读从库，从而继续利用从库提高读取能力。</p>
+<h3 id="不一致解决方案"><a href="#不一致解决方案" class="headerlink" title="不一致解决方案"></a>不一致解决方案</h3><p><em>选择性读主</em>  </p>
+<p>可以利用一个缓存记录必须读主的数据。<br><img src="/img/cache_db_consistency/cache_db_consistency_7.png" alt></p>
+<p>如上图，当写请求发生时：<br>（1）写主库<br>（2）将哪个库，哪个表，哪个主键三个信息拼装一个 key 设置到 cache 里，这条记录的超时时间，设置为 “主从同步时延”<br>PS：key 的格式为 “db:table:PK”，假设主从延时为 1s，这个 key 的 cache 超时时间也为 1s。</p>
+<p><img src="/img/cache_db_consistency/cache_db_consistency_8.png" alt></p>
+<p>如上图，当读请求发生时：<br>这是要读哪个库，哪个表，哪个主键的数据呢，也将这三个信息拼装一个 key，到 cache 里去查询，如果，<br>（1）cache 里有这个 key，说明 1s 内刚发生过写请求，数据库主从同步可能还没有完成，此时就应该去主库查询。并且把主库的数据 set 到缓存中，防止下一次 cahce miss。<br>（2）cache 里没有这个 key，说明最近没有发生过写请求，此时就可以去从库查询</p>
+<p>以此，保证读到的一定不是不一致的脏数据。</p>
+<p>PS：如果系统可以接收短时间的不一致，建议建议定时更新缓存就可以了。避免系统过于复杂。</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2018/08/06/fd_inode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -927,8 +1125,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-    
   </section>
 
   
@@ -999,7 +1195,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">236</span>
+                <span class="site-state-item-count">237</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

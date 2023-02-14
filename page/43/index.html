@@ -304,6 +304,251 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/02/02/gdb_tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/02/gdb_tutorial/" itemprop="url">GDB基础教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-02T12:18:54+00:00">
+                2015-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="GDB-操作提示"><a href="#GDB-操作提示" class="headerlink" title="GDB 操作提示"></a>GDB 操作提示</h1><p>在编译可执行文件时需要给 gcc 加上 “-g” 选项，这样它才会为生成的可执行文件加入额外的调试信息。<br>不要使用编译器的优化选项，比如： “-O”，”-O2”。因为编译器会为了优化而改变程序流程，那样不利于调试。<br>在 GDB 中执行 shell 命令可以使用：shell command<br>GDB 命令可以使用 TAB 键来补全。按两次 TAB 键可以看到所有可能的匹配。<br>GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。</p>
+<h1 id="启动GDB"><a href="#启动GDB" class="headerlink" title="启动GDB"></a>启动GDB</h1><ul>
+<li>gdb executable</li>
+<li>gdb -e executable -c core-file</li>
+<li>gdb executable -pid process-id （使用ps相关命令可以查看进程的 pid）</li>
+</ul>
+<h1 id="GDB常用命令"><a href="#GDB常用命令" class="headerlink" title="GDB常用命令"></a>GDB常用命令</h1><ul>
+<li>help                        列出 gdb 帮助信息。</li>
+<li>info+subcommand , 比如 :<ul>
+<li>info breakpoints    : 列出断点。</li>
+<li>info watchpoints    : 列出观察点。</li>
+<li>info threads        : 列出当前的线程。</li>
+<li>info locals        : 列出Local variables of current stack frame</li>
+<li></li>
+</ul>
+</li>
+<li>step(简写一个s也可)         进入下一行代码的执行，会进入函数内部。</li>
+<li>next(简写一个n也可)         执行下一行代码。但不会进入函数内部。</li>
+<li>finish                     跳出当前代码（之前跳入调试）</li>
+<li>continue(c)                继续执行直到下一个断点或观察点。</li>
+<li>b                          断点</li>
+<li>kill                        停止程序执行。</li>
+<li>quit(q)                    退出 GDB调试器</li>
+<li>run(r)                    从头开始执行程序，也允许进行重定向。</li>
+<li>print(p) variable            打印指定变量的值。<ul>
+<li>p variable</li>
+<li>p file::variable</li>
+<li>p ‘file’::variables</li>
+<li></li>
+</ul>
+</li>
+<li>backtrace(简写bt), 显示函数调用栈<ul>
+<li>bt :                        显示所有函数调用栈</li>
+<li>bt n :             显示程序的调用栈信息，只显示栈顶n桢(frame)</li>
+<li>bt -n :             显示程序的调用栈信息，只显示栈底部n桢(frame)</li>
+<li>set backtrace limit n :     设置bt显示的最大桢层数</li>
+<li>where 和 info stack ：        都是bt的别名，功能一样</li>
+</ul>
+</li>
+</ul>
+<h1 id="细说断点"><a href="#细说断点" class="headerlink" title="细说断点"></a>细说断点</h1><p>给 test.c 的第10行设置一个断点 : </p>
+<pre><code>b test.c:10 
+</code></pre><h2 id="断点删除"><a href="#断点删除" class="headerlink" title="断点删除"></a>断点删除</h2><p>断点的删除与断点的设置同样的重要。删除断点的命令有两个:</p>
+<ul>
+<li><a href="#delete">delete</a></li>
+<li><a href="#clear">clear</a></li>
+</ul>
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>用法：delete [breakpoints num] [range…]<br>delete可删除单个断点，也可删除一个断点的集合，这个集合用连续的断点号来描述。<br>例如：</p>
+<pre><code>delete 5
+delete 1-10
+</code></pre><h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p>用法:</p>
+<ul>
+<li>clear 删除所选定的环境中所有的断点</li>
+<li>clear location location描述具体的断点。</li>
+</ul>
+<p>clear 删除断点是基于行的，不是把所有的断点都删除。<br>例如：</p>
+<pre><code>clear list_insert         //删除函数的所有断点
+clear list.c:list_delet   //删除文件：函数的所有断点
+clear 12                  //删除行号的所有断点
+clear list.c:12           //删除文件：行号的所有断点
+</code></pre><h2 id="断点的使能和禁止"><a href="#断点的使能和禁止" class="headerlink" title="断点的使能和禁止"></a>断点的使能和禁止</h2><p>对断点的控制除了建立和删除外，还可以通过使能和禁止来控制，后一种方法更灵活。</p>
+<p>断点的四种使能操作：</p>
+<ul>
+<li>enable [breakpoints] [range…] 完全使能</li>
+<li>enable                //激活所有断点</li>
+<li>enable 4            //激活4断点</li>
+<li>enable 5-6            //激活5～6断点</li>
+<li>disable [breakpoints] [range…] 禁止</li>
+<li>enable once [breakpoints] [range…] 使能一次，触发后禁止</li>
+<li>enable delete [breakpoints] [range…]使能一次，触发后删除</li>
+</ul>
+<p>用法举例：</p>
+<pre><code>diable                //禁止所有断点
+disble 2            //禁止第二个断点
+disable 1-5            //禁止第1到第5个断点
+</code></pre><h1 id="GDB帮助"><a href="#GDB帮助" class="headerlink" title="GDB帮助"></a>GDB帮助</h1><p>GDB的命令很多, 有些用得少的命令记不住的话, 可以在进入GDB之后敲 “help”, 然后再敲 “help + command_class”,<br>比如 :</p>
+<p><strong>(gdb) help</strong><br>List of classes of commands:</p>
+<p>aliases – Aliases of other commands<br>breakpoints – Making program stop at certain points<br>data – Examining data<br>files – Specifying and examining files<br>internals – Maintenance commands<br>obscure – Obscure features<br>running – Running the program<br>stack – Examining the stack<br>status – Status inquiries<br>support – Support facilities<br>tracepoints – Tracing of program execution without stopping the program<br>user-defined – User-defined commands</p>
+<p>Type “help” followed by a class name for a list of commands in that class.<br>Type “help all” for the list of all commands.<br>Type “help” followed by command name for full documentation.<br>Type “apropos word” to search for commands related to “word”.<br>Command name abbreviations are allowed if unambiguous.</p>
+<p><strong>(gdb) help running </strong><br>Running the program.</p>
+<p>List of commands:</p>
+<p>advance – Continue the program up to the given location (same form as args for break command)<br>attach – Attach to a process or file outside of GDB<br>continue – Continue program being debugged<br>detach – Detach a process or file previously attached<br>detach checkpoint – Detach from a checkpoint (experimental)<br>detach inferiors – Detach from inferior ID (or list of IDS)<br>disconnect – Disconnect from a target<br>finish – Execute until selected stack frame returns<br>handle – Specify how to handle signals<br>inferior – Use this command to switch between inferiors<br>interrupt – Interrupt the execution of the debugged program<br>jump – Continue program being debugged at specified line or address<br>kill – Kill execution of program being debugged<br>kill inferiors – Kill inferior ID (or list of IDs)<br>next – Step program<br>nexti – Step one instruction<br>reverse-continue – Continue program being debugged but run it in reverse<br>reverse-finish – Execute backward until just before selected stack frame is called<br>reverse-next – Step program backward<br>reverse-nexti – Step backward one instruction<br>reverse-step – Step program backward until it reaches the beginning of another source line<br>reverse-stepi – Step backward exactly one instruction<br>run – Start debugged program<br>…</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/01/22/new和delete详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -824,207 +1069,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/01/07/factory_pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/01/07/factory_pattern/" itemprop="url">工厂模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-01-07T12:18:54+00:00">
-                2015-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>工厂模式主要是为创建对象提供过渡接口，以便将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。 </p>
-<p>工厂模式可以分为三类： </p>
-<ul>
-<li><p><a href="#简单工厂模式"><strong>简单工厂模式</strong></a> （Simple Factory, 简单工厂模式可看为工厂方法模式的一种特例，两者归为一类。  ） </p>
-</li>
-<li><p><a href="#工厂方法模式"><strong>工厂方法模式</strong></a> （Factory Method） </p>
-</li>
-<li><p><a href="#抽象工厂模式"><strong>抽象工厂模式</strong></a> （Abstract Factory） </p>
-</li>
-</ul>
-<p>这三种模式从上到下逐步抽象，并且更具一般性。 </p>
-<p>GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模式（Factory Method）与抽象工厂模式（Abstract Factory）。</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
-<li><p><a href="#简单工厂模式"><strong>简单工厂模式</strong></a> ：</p>
-<p>  一个工厂类, 这个工厂类能创建多个具体产品类的实例。<br>  一个抽象产品类，可以派生出多个具体产品类。   </p>
-</li>
-</ul>
-<ul>
-<li><p><a href="#工厂方法模式"><strong>工厂方法模式</strong></a> ：</p>
-<p>  一个抽象工厂类，可以派生出多个具体工厂类。<br>  一个抽象产品类，可以派生出多个具体产品类。   </p>
-<p>  每个具体工厂类只能创建一个具体产品类的实例。</p>
-</li>
-<li><p><a href="#抽象工厂模式"><strong>抽象工厂模式</strong></a> ：</p>
-<p>  一个抽象工厂类，可以派生出多个具体工厂类。<br>  多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。   </p>
-<p>  每个具体工厂类可以创建多个具体产品类的实例。   </p>
-</li>
-</ul>
-<p>区别：</p>
-<p>工厂方法模式只有一个抽象产品类，而抽象工厂模式有多个。   </p>
-<p>工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个。</p>
-<h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><figure class="highlight php"><figcaption><span>产品类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  车子系列</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">Class</span> <span class="title">BWM</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">construct</span><span class="params">($pa)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">Class</span> <span class="title">BWM320</span> <span class="keyword">extends</span> <span class="title">BWM</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">construct</span><span class="params">($pa)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">Class</span> <span class="title">BMW523</span> <span class="keyword">extends</span> <span class="title">BWM</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">construc</span><span class="params">($pb)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><figcaption><span>工厂类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  工厂创建车</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Factory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">function</span>  <span class="title">createBMW</span><span class="params">($type)</span></span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> ($type) &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="number">320</span>:</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">new</span> BWM320();</span><br><span class="line">          <span class="keyword">case</span> <span class="number">523</span>:</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">new</span> BMW523();</span><br><span class="line">        <span class="comment">//….</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><figcaption><span>客户类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  客户通过工厂获取车</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $BMW;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getBMW</span><span class="params">($type)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>¬-&gt; BMW =  Factory::createBMW($type);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><figure class="highlight php"><figcaption><span>产品类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  车子系列</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> /</span></span><br><span class="line"><span class="comment">abstract Class BWM&#123;</span></span><br><span class="line"><span class="comment">function construct($pa) &#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">Class BWM320 extends BWM&#123;</span></span><br><span class="line"><span class="comment">function construct($pa) &#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">Class BMW523 extends BWM&#123;</span></span><br><span class="line"><span class="comment">   function construc($pb)&#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><figcaption><span>创建工厂类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  创建工厂的接口</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">FactoryBMW</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">createBMW</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  创建BWM320车</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FactoryBWM320</span> <span class="keyword">implements</span> <span class="title">FactoryBMW</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">function</span>  <span class="title">createBMW</span><span class="params">($type)</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> BWM320();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">  创建BWM523车</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FactoryBWM523</span> <span class="keyword">implements</span> <span class="title">FactoryBMW</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">function</span>  <span class="title">createBMW</span><span class="params">($type)</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> BMW523();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><figcaption><span>客户类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  客户得到车</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> $BMW;</span><br><span class="line">   <span class="function"><span class="keyword">function</span>  <span class="title">getBMW</span><span class="params">($type)</span></span>&#123;</span><br><span class="line">      <span class="keyword">switch</span> ($type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">320</span>:</span><br><span class="line">           $BWM320 = <span class="keyword">new</span> FactoryBWM320();</span><br><span class="line">           <span class="keyword">return</span> $BWM320-&gt;createBMW();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">523</span>:</span><br><span class="line">           $BWM523 = <span class="keyword">new</span> FactoryBWM523();</span><br><span class="line">           <span class="keyword">return</span> $BWM320-&gt;createBMW();</span><br><span class="line">            <span class="comment">//….</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h1><figure class="highlight php"><figcaption><span>产品类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  车子系列以及型号</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span>  <span class="title">BWM</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BWM523</span> <span class="keyword">extends</span>  <span class="title">BWM</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BWM320</span> <span class="keyword">extends</span>  <span class="title">BWM</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  空调</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">aircondition</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">airconditionBWM320</span>  <span class="keyword">extends</span> <span class="title">aircondition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">airconditionBWM52</span> <span class="keyword">extends</span> <span class="title">aircondition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><figcaption><span>创建工厂类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  创建工厂的接口</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">FactoryBMW</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">createBMW</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">createAirC</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">  创建BWM320车</span></span><br><span class="line"><span class="comment"> /</span></span><br><span class="line"><span class="comment">class FactoryBWM320 implements FactoryBMW &#123;</span></span><br><span class="line"><span class="comment">    function  createBMW()&#123;</span></span><br><span class="line"><span class="comment">    return new BWM320();</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">function  createAirC()&#123; //空调</span></span><br><span class="line"><span class="comment">    return new airconditionBWM320();</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  创建BWM523车</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FactoryBWM523</span> <span class="keyword">implements</span> <span class="title">FactoryBMW</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span>  <span class="title">createBMW</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BWM523();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">createAirC</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> airconditionBWM523();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><figcaption><span>客户</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  客户得到车</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> $BMW;</span><br><span class="line">   <span class="keyword">private</span> $airC;</span><br><span class="line">   <span class="function"><span class="keyword">function</span>  <span class="title">getBMW</span><span class="params">($type)</span></span>&#123;</span><br><span class="line">       $class = <span class="keyword">new</span> ReflectionClass(‘FactoryBWM’ .$type );<span class="comment">//建立 Person这个类的反射类</span></span><br><span class="line">        $instance  = $class-&gt;newInstanceArgs();<span class="comment">//相当于实例化Person 类</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;BMW =  $instance-&gt;createBMW();</span><br><span class="line">       <span class="keyword">$this</span>-&gt;airC =  $instance-&gt;createAirC();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/01/07/observer_pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1300,7 +1344,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">236</span>
+                <span class="site-state-item-count">237</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

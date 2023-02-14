@@ -304,6 +304,174 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2018/06/20/lua_cpp_sol2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/20/lua_cpp_sol2/" itemprop="url">Sol2实现Cpp和Lua绑定</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T12:29:01+00:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="Sol2简介"><a href="#Sol2简介" class="headerlink" title="Sol2简介"></a>Sol2简介</h1><p>Sol是一个用于C++绑定Lua脚本的库，仅由头文件组成，方便集成，并提供了大量易用的API接口，可以便利地将Lua脚本与C++代码绑定起来，而不必去关心如何使用那些晦涩的Lua C API。正如其作者所言，Sol的目的就是提供极其简洁的API，并能高效到与C语言媲美，极大地来方便人们使用。</p>
+<h1 id="编译条件"><a href="#编译条件" class="headerlink" title="编译条件"></a>编译条件</h1><p>Sol支持Lua的绝大多数版本，包括 5.1、5.2、5.3和LuaJit等，但由于代码中用到了许多C++11/14特性，因此编译时需要编译器支持C++14标准甚至C++17标准, 本人测试g++4.8.2无法编译过Sol2.20+的版本, 用g++6.2方能编过.</p>
+<h1 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h1><p>去 <a href="https://github.com/ThePhD/sol2" target="_blank" rel="noopener">https://github.com/ThePhD/sol2</a> 下载一个sol.hpp , 然后放到 <code>/usr/local/include</code> 里即可</p>
+<h1 id="为什么强大"><a href="#为什么强大" class="headerlink" title="为什么强大"></a>为什么强大</h1><p>只需要包含一个sol.hpp头文件即可,需要任何其他的东西, 没有什么静态库/动态库之类的东西, 也不需要像tolua++一样那么麻烦每个类都要写pkg文件. 只需要稍微学习一下Sol2的导出API即可.</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2018/06/17/cpp11_raw_string/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1015,181 +1183,11 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2018/02/01/centos_notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/01/centos_notes/" itemprop="url">CentOS备忘</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T09:38:55+00:00">
-                2018-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="查询系统相关信息"><a href="#查询系统相关信息" class="headerlink" title="查询系统相关信息"></a>查询系统相关信息</h1><pre><code>$ cat /etc/centos-release
-CentOS release 6.7 (Final)
-
-[root@host ~]# uname -i
-i386
-</code></pre><h1 id="安装gcc4-8"><a href="#安装gcc4-8" class="headerlink" title="安装gcc4.8"></a>安装gcc4.8</h1><p>centos 6 的gcc版本太低才4.4.7, 要安装高版本的4.8才完全支持c++11</p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1246,7 +1244,7 @@ i386
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1255,7 +1253,7 @@ i386
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">235</span>
+                <span class="site-state-item-count">236</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1266,7 +1264,7 @@ i386
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

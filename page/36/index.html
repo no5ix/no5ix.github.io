@@ -304,6 +304,239 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/" itemprop="url">hash索引btree索引聚簇索引非聚簇索引</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-12T10:05:48+00:00">
+                2015-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="索引概要"><a href="#索引概要" class="headerlink" title="索引概要"></a>索引概要</h1><p>索引是帮助mysql获取数据的数据结构。最常见的索引是</p>
+<ul>
+<li>Btree索引</li>
+<li>Hash索引</li>
+</ul>
+<p>不同的引擎对于索引有不同的支持：</p>
+<ul>
+<li>Innodb和MyISAM默认的索引是Btree索引；</li>
+<li>Mermory默认的索引是Hash索引。</li>
+</ul>
+<h1 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h1><p>Mermory默认的索引是Hash索引。</p>
+<p>所谓Hash索引，当我们要给某张表某列增加索引时，将这张表的这一列进行哈希算法计算，得到哈希值，</p>
+<p>排序在哈希数组上。所以Hash索引可以一次定位，其效率很高，而Btree索引需要经过多次的磁盘IO，<br>但是innodb和myisam之所以没有采用它，是因为它存在着好多缺点.</p>
+<h2 id="Hash索引的缺点"><a href="#Hash索引的缺点" class="headerlink" title="Hash索引的缺点"></a>Hash索引的缺点</h2><ul>
+<li><p>Hash 索引仅仅能满足”=”,”IN”和”&lt;=&gt;”查询，不能使用范围查询。<br>由于 Hash 索引比较的是进行 Hash 运算之后的 Hash 值，所以它只能用于等值的过滤，不能用于基于范围的过滤，因为经过相应的 Hash 算法处理之后的 Hash 值的大小关系，并不能保证和Hash运算前完全一样。</p>
+</li>
+<li><p>Hash 索引无法被用来避免数据的排序操作。<br>由于 Hash 索引中存放的是经过 Hash 计算之后的 Hash 值，而且Hash值的大小关系并不一定和 Hash 运算前的键值完全一样，所以数据库无法利用索引的数据来避免任何排序运算；</p>
+</li>
+<li><p>Hash 索引不能利用部分索引键查询。<br>对于组合索引，Hash 索引在计算 Hash 值的时候是组合索引键合并后再一起计算 Hash 值，而不是单独计算 Hash 值，所以通过组合索引的前面一个或几个索引键进行查询的时候，Hash 索引也无法被利用。</p>
+</li>
+<li><p>Hash 索引在任何时候都不能避免表扫描。<br>前面已经知道，Hash 索引是将索引键通过 Hash 运算之后，将 Hash运算结果的 Hash 值和所对应的行指针信息存放于一个 Hash 表中，由于不同索引键存在相同 Hash 值，所以即使取满足某个 Hash 键值的数据的记录条数，也无法从 Hash 索引中直接完成查询，还是要通过访问表中的实际数据进行相应的比较，并得到相应的结果。</p>
+</li>
+<li><p>Hash 索引遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高。<br>对于选择性比较低的索引键，如果创建 Hash 索引，那么将会存在大量记录指针信息存于同一个 Hash 值相关联。这样要定位某一条记录时就会非常麻烦，会浪费多次表数据的访问，而造成整体性能低下</p>
+</li>
+</ul>
+<h1 id="Btree索引"><a href="#Btree索引" class="headerlink" title="Btree索引"></a>Btree索引</h1><p>Innodb和MyISAM默认的索引是Btree索引；<br>至于Btree索引，它是以B+树为存储结构实现的。<br>但是Btree索引的存储结构在Innodb和MyISAM中有很大区别。</p>
+<h2 id="btree索引在MyISAM中的实现"><a href="#btree索引在MyISAM中的实现" class="headerlink" title="btree索引在MyISAM中的实现"></a>btree索引在MyISAM中的实现</h2><p>在MyISAM中，我们如果要对某张表的某列建立Btree索引的话，如图：</p>
+<img src="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/index1.png">
+<p>所以我们经常会说MyISAM中数据文件和索引文件是分开的。<br>因此MyISAM的索引方式也称为非聚集,<br>至于辅助索引，类似于主索引，唯一区别就是主索引上的值不能重复，而辅助索引可以重复。</p>
+<img src="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/index2.png">
+<p>因此当我们根据Btree索引去搜索的时候，若key存在，在data域找到其地址，然后根据地址去表中查找数据记录。</p>
+<h2 id="btree索引在Innodb中的实现"><a href="#btree索引在Innodb中的实现" class="headerlink" title="btree索引在Innodb中的实现"></a>btree索引在Innodb中的实现</h2><p>至于Innodb它跟上面又有很大不同，它的叶子节点存储的并不是表的地址，而是数据</p>
+<img src="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/index3.png">
+<p>我们可以看到这里并没有将地址放入叶子节点，而是直接放入了对应的数据，</p>
+<p>这也就是我们平常说到的，Innodb的索引文件就是数据文件，</p>
+<p>那么对于Innodb的辅助索引结构跟主索引也相差很多，如图：</p>
+<img src="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/index4.png">
+<p>我们可以发现，这里叶子节点存储的是主键的信息，</p>
+<p>所以我们在利用辅助索引的时候，检索到主键信息，</p>
+<p>然后再通过主键去主索引中定位表中的数据，这就可以说明Innodb中主键之所以不宜用过长的字段，由于所有的辅助索引都包含主索引，</p>
+<p>所以很容易让辅助索引变得庞大。</p>
+<p>我们还可以发现：在Innodb中尽量使用自增的主键，</p>
+<p>这样每次增加数据时只需要在后面添加即可，</p>
+<p>非单调的主键在插入时会需要维持B+tree特性而进行分裂调整，十分低效。</p>
+<h2 id="Btree索引中的最左匹配原则："><a href="#Btree索引中的最左匹配原则：" class="headerlink" title="Btree索引中的最左匹配原则："></a>Btree索引中的最左匹配原则：</h2><p>Btree是按照从左到右的顺序来建立搜索树的。</p>
+<p>比如索引是(name,age,sex)，</p>
+<p>会先检查name字段，如果name字段相同再去检查后两个字段。</p>
+<p>所以当传进来的是后两个字段的数据（age，sex），</p>
+<p>因为建立搜索树的时候是按照第一个字段建立的，所以必须根据name字段才能知道下一个字段去哪里查询。</p>
+<p>所以传进来的是（name，sex）时，首先会根据name指定搜索方向，但是第二个字段缺失，所以将name字段正确的都找到后，然后才会去匹配sex的数据。</p>
+<h2 id="建立索引的规则："><a href="#建立索引的规则：" class="headerlink" title="建立索引的规则："></a>建立索引的规则：</h2><ul>
+<li><p>利用最左前缀：<br>Mysql会一直向右查找直到遇到范围操作（&gt;，&lt;，like、between）就停止匹配。<br>比如a=1 and b=2 and c&gt;3 and d=6；此时如果建立了（a, b, c, d）索引，那么后面的d索引是完全没有用到，当换成了（a, b, d, c）就可以用到。</p>
+</li>
+<li><p>不能过度索引：<br>在修改表内容的时候，索引必须更新或者重构，所以索引过多时，会消耗更多的时间。</p>
+</li>
+<li><p>尽量扩展索引而不要新建索引</p>
+</li>
+<li><p>最适合的索引的列是出现在where子句中的列或连接子句中指定的列。</p>
+</li>
+<li><p>不同值较少的列不必要建立索引（性别）。</p>
+</li>
+</ul>
+<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><ol>
+<li><p>数据索引的正确是(正确答案A, D)</p>
+<p> A、一个表只能有一个聚族索引，多个非聚族索引<br> B、字符串模糊查询不适合索引<br> C、哈希 索引有利于查询字段用于大小范围的比较查询<br> D、多余的索引字段会降低性能</p>
+</li>
+<li><p><code>Select A,B from Table1 where A between 60 and 100 order by B</code>，下面哪些优化sql性能(正确答案B)</p>
+<p> A、字段A 建立hash索引，字段 B不建立索引<br> B、字段 A 建立btree索引，字段 B不建立索引<br> C、字段A 不建立 索引，字段 B建立btree索引</p>
+</li>
+</ol>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/08/31/gdb_multi_thread_and_multi_process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1106,243 +1339,11 @@ chmod 400 ~/.ssh/authorized_keys
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/13/PHP的超级全局变量/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/13/PHP的超级全局变量/" itemprop="url">PHP的超级全局变量小结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-13T19:29:22+00:00">
-                2015-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Script/" itemprop="url" rel="index">
-                    <span itemprop="name">Script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="PHP-超级全局变量概绍"><a href="#PHP-超级全局变量概绍" class="headerlink" title="PHP 超级全局变量概绍"></a>PHP 超级全局变量概绍</h1><blockquote>
-<p>PHP中预定义了几个超级全局变量（superglobals） ，</p>
-</blockquote>
-<p>这意味着它们在一个脚本的全部作用域中都可用。</p>
-<p> 你不需要特别说明，就可以在函数及类中使用。</p>
-<p>PHP 超级全局变量列表:</p>
-<ul>
-<li>$GLOBALS</li>
-<li>$_SERVER</li>
-<li>$_REQUEST</li>
-<li>$_POST</li>
-<li>$_GET</li>
-<li>$_FILES</li>
-<li>$_ENV</li>
-<li>$_COOKIE</li>
-<li>$_SESSION</li>
-</ul>
-<h1 id="GLOBALS"><a href="#GLOBALS" class="headerlink" title="$GLOBALS"></a>$GLOBALS</h1><p>$GLOBALS 是PHP的一个超级全局变量组，</p>
-<p>在一个PHP脚本的全部作用域中都可以访问。</p>
-<p>$GLOBALS 是一个包含了全部变量的全局组合数组。变量的名字就是数组的键。</p>
-<p>以下实例介绍了如何使用超级全局变量 $GLOBALS:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$x = 75; </span><br><span class="line">$y = 25;</span><br><span class="line"> </span><br><span class="line">function addition() </span><br><span class="line">&#123; </span><br><span class="line">$GLOBALS[&apos;z&apos;] = $GLOBALS[&apos;x&apos;] + $GLOBALS[&apos;y&apos;]; </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">addition(); </span><br><span class="line">echo $z; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>以上实例中 z 是一个$GLOBALS数组中的超级全局变量，<br>该变量同样可以在函数外访问。</p>
-</blockquote>
-<h1 id="SERVER"><a href="#SERVER" class="headerlink" title="$_SERVER"></a>$_SERVER</h1><p>$_SERVER 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组。</p>
-<p>这个数组中的项目由 Web 服务器创建。</p>
-<p>不能保证每个服务器都提供全部项目；服务器可能会忽略一些，或</p>
-<p>者提供一些没有在这里列举出来的项目。</p>
-<p>以下实例中展示了如何使用$_SERVER中的元素:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">echo $_SERVER[&apos;PHP_SELF&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;SERVER_NAME&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;HTTP_HOST&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;HTTP_REFERER&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;HTTP_USER_AGENT&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;SCRIPT_NAME&apos;];</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="REQUEST"><a href="#REQUEST" class="headerlink" title="$_REQUEST"></a>$_REQUEST</h1><p>PHP $_REQUEST 用于收集HTML表单提交的数据。</p>
-<p>以下实例显示了一个输入字段（input）及提交按钮(submit)的表单(form)。</p>
-<p> 当用户通过点击 “Submit” 按钮提交表单数据时, </p>
-<p> 表单数据将发送至<form>标签中 action 属性中指定的脚本文件。</form></p>
-<p> 在这个实例中，我们指定文件来处理表单数据。</p>
-<p> 如果你希望其他的PHP文件来处理该数据，你可以修改该指定的脚本文件名。</p>
-<p> 然后，我们可以使用超级全局变量 $_REQUEST 来收集表单中的 input 字段数据:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> &lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method=&quot;post&quot; action=&quot;&lt;?php echo $_SERVER[&apos;PHP_SELF&apos;];?&gt;&quot;&gt;</span><br><span class="line">Name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">$name = $_REQUEST[&apos;fname&apos;]; </span><br><span class="line">echo $name; </span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="POST"><a href="#POST" class="headerlink" title="$_POST"></a>$_POST</h1><p>PHP $_POST 被广泛应用于收集表单数据，</p>
-<p>在HTML form标签的指定该属性：”method=”post”。</p>
-<p>以下实例显示了一个输入字段（input）及提交按钮(submit)的表单(form)。</p>
-<p>当用户通过点击 “Submit” 按钮提交表单数据时, </p>
-<p>表单数据将发送至<form>标签中 action 属性中指定的脚本文件。 </form></p>
-<p>在这个实例中，我们指定文件来处理表单数据。</p>
-<p>如果你希望其他的PHP文件来处理该数据，你可以修改该指定的脚本文件名。</p>
-<p>然后，我们可以使用超级全局变量 $_POST 来收集表单中的 input 字段数据:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method=&quot;post&quot; action=&quot;&lt;?php echo $_SERVER[&apos;PHP_SELF&apos;];?&gt;&quot;&gt;</span><br><span class="line">Name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">$name = $_POST[&apos;fname&apos;]; </span><br><span class="line">echo $name; </span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="GET"><a href="#GET" class="headerlink" title="$_GET"></a>$_GET</h1><p>PHP $_GET 同样被广泛应用于收集表单数据，</p>
-<p>在HTML form标签的指定该属性：”method=”get”。</p>
-<p>$_GET 也可以收集URL中发送的数据。</p>
-<p>假定我们有一个包含参数的超链接HTML页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;test_get.php?subject=PHP&amp;web=runoob.com&quot;&gt;Test $GET&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>当用户点击链接 “Test $GET”, 参数 “subject” 和 “web” 将发送至”test_get.php”,</p>
-<p>你可以在 “test_get.php” 文件中使用 $_GET 变量来获取这些数据。</p>
-<p>以下实例显示了 “test_get.php” 文件的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;Study &quot; . $_GET[&apos;subject&apos;] . &quot; at &quot; . $_GET[&apos;web&apos;];</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<h1 id="REQUEST、-POST、-GET的区别和联系小结"><a href="#REQUEST、-POST、-GET的区别和联系小结" class="headerlink" title="$_REQUEST、$_POST、$_GET的区别和联系小结"></a>$_REQUEST、$_POST、$_GET的区别和联系小结</h1><h2 id="1-REQUEST"><a href="#1-REQUEST" class="headerlink" title="1. $_REQUEST"></a>1. $_REQUEST</h2><p>php中$_REQUEST可以获取以POST方法和GET方法提交的数据，但是速度比较慢 </p>
-<h2 id="2-GET"><a href="#2-GET" class="headerlink" title="2. $_GET"></a>2. $_GET</h2><p>用来获取由浏览器通过GET方法提交的数据。GET方法他是通过把参数数据加在提交表单的action属性所指的URL中，值和表单内每个字段一一对应，然后在URL中可以看到，但是有如下缺点： </p>
-<ul>
-<li><ol>
-<li>安全性不好，在URL中可以看得到 </li>
-</ol>
-</li>
-<li><ol>
-<li>传送数据量较小，不能大于2KB。 </li>
-</ol>
-</li>
-</ul>
-<h2 id="3-POST"><a href="#3-POST" class="headerlink" title="3. $_POST"></a>3. $_POST</h2><p>用来获取由浏览器通过POST方法提交的数据。POST方法他是通过HTTP POST机制，将表单的各个字段放置在HTTP HEADER内一起传送到action属性所指的URL地址中，用户看不到这个过程。他提交的大小一般来说不受限制，但是具体根据服务器的不同，还是略有不同。相对于_GET方式安全性略高 </p>
-<h2 id="4-REQUEST、-POST、-GET-的区别和联系"><a href="#4-REQUEST、-POST、-GET-的区别和联系" class="headerlink" title="4. $_REQUEST、$_POST、$_GET 的区别和联系"></a>4. $_REQUEST、$_POST、$_GET 的区别和联系</h2><p>$_REQUEST[“参数”]具用$_POST[“参数”] $_GET[“参数”]的功能,但是$_REQUEST[“参数”]比较慢。通过post和get方法提交的所有数据都可以通过$_REQUEST数组[“参数”]获得</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/35/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/37/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/35/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/37/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1399,7 +1400,7 @@ chmod 400 ~/.ssh/authorized_keys
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1408,7 +1409,7 @@ chmod 400 ~/.ssh/authorized_keys
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">235</span>
+                <span class="site-state-item-count">236</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1419,7 +1420,7 @@ chmod 400 ~/.ssh/authorized_keys
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

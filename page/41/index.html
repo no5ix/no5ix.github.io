@@ -304,6 +304,201 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/03/02/python的struct模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/02/python的struct模块/" itemprop="url">python的struct模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-02T21:49:19+00:00">
+                2015-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Script/" itemprop="url" rel="index">
+                    <span itemprop="name">Script</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>struct, 这玩意c/c++也有, 顾名思义, 能联想到这玩意是啥了</p>
+</blockquote>
+<p>模块的主要作用就是对python基本类型值与</p>
+<p>用python字符串格式表示的C struct类型间</p>
+<p>的转化（This module performs conversions between Python values and C structs represented as Python strings.）</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">values = (<span class="number">1</span>, <span class="string">'abc'</span>, <span class="number">2.7</span>)</span><br><span class="line">s = struct.Struct(<span class="string">'I3sf'</span>)</span><br><span class="line">packed_data = s.pack(*values)</span><br><span class="line">unpacked_data = s.unpack(packed_data)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">print</span> <span class="string">'Original values:'</span>, values</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Format string :'</span>, s.format</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Uses :'</span>, s.size, <span class="string">'bytes'</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Packed Value :'</span>, binascii.hexlify(packed_data)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Unpacked Type :'</span>, type(unpacked_data), <span class="string">' Value:'</span>, unpacked_data</span><br></pre></td></tr></table></figure>
+<p>输出为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Original values: (1, &apos;abc&apos;, 2.7) </span><br><span class="line">Format string : I3sf </span><br><span class="line">Uses : 12 bytes </span><br><span class="line">Packed Value : 0100000061626300cdcc2c40 </span><br><span class="line">Unpacked Type : &lt;type &apos;tuple&apos;&gt;  Value: (1, &apos;abc&apos;, 2.700000047683716)</span><br></pre></td></tr></table></figure></p>
+<p>代码中，</p>
+<p>首先定义了一个元组数据，</p>
+<p>包含int、string、float三种数据类型，</p>
+<p>然后定义了struct对象，并制定了format‘I3sf’，</p>
+<ul>
+<li><p>I 表示int，</p>
+</li>
+<li><p>3s表示三个字符长度的字符串，</p>
+</li>
+<li><p>f 表示 float。最后通过struct的pack和unpack进行打包和解包。通过输出结果可以发现，</p>
+</li>
+</ul>
+<p>value被pack之后，</p>
+<p>转化为了一段二进制字节串，</p>
+<p>而unpack可以把该字节串再转换回一个元组，</p>
+<p>但是值得注意的是对于float的精度发生了改变，</p>
+<p>这是由一些比如操作系统等客观因素所决定的。打包之后的数据所占用的字节数与C语言中的struct十分相似。定义format可以参照官方api提供的对照表：</p>
+<img src="/2015/03/02/python的struct模块/py_struct1.png">
+<h2 id="字节序设置"><a href="#字节序设置" class="headerlink" title="字节序设置"></a>字节序设置</h2><p>另一方面，打包的后的字节顺序默认上是由操作系统的决定的，</p>
+<p>当然struct模块也提供了自定义字节顺序的功能，</p>
+<p>可以指定大端存储、小端存储等特定的字节顺序，</p>
+<p>对于底层通信的字节顺序是十分重要的，</p>
+<p>不同的字节顺序和存储方式也会导致字节大小的不同。在format字符串前面加上特定的符号即可以表示不同的字节顺序存储方式，</p>
+<p>例如采用小端存储 s = struct.Struct(‘&lt;I3sf’)就可以了。官方api library 也提供了相应的对照列表：</p>
+<img src="/2015/03/02/python的struct模块/py_struct2.png">
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/03/02/MySQL入门二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1278,188 +1473,11 @@ ggsmd
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/02/10/python中的__name__和__main()__/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/10/python中的__name__和__main()__/" itemprop="url">python中的__name__和__main()__</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-10T22:19:29+00:00">
-                2015-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Script/" itemprop="url" rel="index">
-                    <span itemprop="name">Script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#hello.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sayHello</span><span class="params">()</span>:</span></span><br><span class="line">    str=<span class="string">"hello"</span></span><br><span class="line">    print(str);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'This is main of module "hello.py"'</span>)</span><br><span class="line">    sayHello()</span><br></pre></td></tr></table></figure>
-<p>python作为一种脚本语言，我们用python写的各个module都可以包含以上那么一个累死c中的main函数，只不过python中的这种<code>__main__</code>与c中有一些区别，类似于php的魔术那一套, 主要体现在：</p>
-<p>1、当单独执行该module时，比如单独执行以上hello.py： python hello.py，则输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This is main of module &quot;hello.py&quot;</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
-<p>可以理解为<code>&quot;if __name__==&quot;__main__&quot;:&quot;</code>这一句与c中的main()函数所表述的是一致的，即作为入口；</p>
-<p>2、当该module被其它module 引入使用时，其中的<code>&quot;if __name__==&quot;__main__&quot;:&quot;</code></p>
-<p>所表示的Block不会被执行,</p>
-<p>这是因为此时module被其它module引用时，</p>
-<p>其<code>__name__</code>的值将发生变化，<code>__name__</code>的值将会是module的名字。</p>
-<p>比如在python shell中import hello后，查看<code>hello.__name__</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hello</span><br><span class="line">hello.__name__</span><br><span class="line"><span class="string">'hello'</span></span><br></pre></td></tr></table></figure>
-<p>3、因此，在python中，当一个module作为整体被执行时,moduel.<strong>name</strong>的值将是<code>&quot;__main__&quot;；</code></p>
-<p>而当一个module被其它module引用时，<code>module.__name__</code>将是module自己的名字，</p>
-<p>当然一个module被其它module引用时，其本身并不需要一个可执行的入口main了。</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/40/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/42/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/40/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/42/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1516,7 +1534,7 @@ ggsmd
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1525,7 +1543,7 @@ ggsmd
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">235</span>
+                <span class="site-state-item-count">236</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1536,7 +1554,7 @@ ggsmd
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -304,7 +304,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/python和lua数据类型的比较/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/13/PHP的超级全局变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -323,7 +323,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/07/11/python和lua数据类型的比较/" itemprop="url">python和lua数据类型的比较</a></h1>
+                <a class="post-title-link" href="/2015/07/13/PHP的超级全局变量/" itemprop="url">PHP的超级全局变量小结</a></h1>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
-                2015-07-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-13T19:29:22+00:00">
+                2015-07-13
               </time>
             
 
@@ -411,206 +411,76 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         
           
-            <h1 id="Python比较特殊的数据类型："><a href="#Python比较特殊的数据类型：" class="headerlink" title="Python比较特殊的数据类型："></a>Python比较特殊的数据类型：</h1><h2 id="List"><a href="#List" class="headerlink" title="List  []"></a>List  []</h2><p>例如 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">list = [ &apos;runoob&apos;, 786 , 2.23, &apos;john&apos;, 70.2 ]</span><br><span class="line">tinylist = [123, &apos;john&apos;]</span><br><span class="line"> </span><br><span class="line">print list               # 输出完整列表</span><br><span class="line">print list[0]            # 输出列表的第一个元素</span><br><span class="line">print list[1:3]          # 输出第二个至第三个的元素 </span><br><span class="line">print list[2:]           # 输出从第三个开始至列表末尾的所有元素</span><br><span class="line">print tinylist * 2       # 输出列表两次</span><br><span class="line">print list + tinylist    # 打印组合的列表</span><br></pre></td></tr></table></figure></p>
-<p>以上实例输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2]</span><br><span class="line">runoob</span><br><span class="line">[786, 2.23]</span><br><span class="line">[2.23, &apos;john&apos;, 70.2]</span><br><span class="line">[123, &apos;john&apos;, 123, &apos;john&apos;]</span><br><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2, 123, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
-<h2 id="Tuple（元祖）-相当于只读列表，不可以二次赋值"><a href="#Tuple（元祖）-相当于只读列表，不可以二次赋值" class="headerlink" title="Tuple（元祖）(),相当于只读列表，不可以二次赋值"></a>Tuple（元祖）(),相当于只读列表，不可以二次赋值</h2><p><code>tuple = ( &#39;runoob&#39;, 786 , 2.23, &#39;john&#39;, 70.2 )</code>, 除了元祖用()而list用[], 而且元祖只是可读的, 其他的跟list一毛一样</p>
-<h2 id="dictionary（字典）-，key值对"><a href="#dictionary（字典）-，key值对" class="headerlink" title="dictionary（字典）{}，key值对"></a>dictionary（字典）{}，key值对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">dict[&apos;one&apos;] = &quot;This is one&quot;</span><br><span class="line">dict[2] = &quot;This is two&quot;</span><br><span class="line"> </span><br><span class="line">tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print dict[&apos;one&apos;]          # 输出键为&apos;one&apos; 的值</span><br><span class="line">print dict[2]              # 输出键为 2 的值</span><br><span class="line">print tinydict             # 输出完整的字典</span><br><span class="line">print tinydict.keys()      # 输出所有键</span><br><span class="line">print tinydict.values()    # 输出所有值</span><br></pre></td></tr></table></figure>
-<p>输出结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This is one</span><br><span class="line">This is two</span><br><span class="line">&#123;&apos;dept&apos;: &apos;sales&apos;, &apos;code&apos;: 6734, &apos;name&apos;: &apos;john&apos;&#125;</span><br><span class="line">[&apos;dept&apos;, &apos;code&apos;, &apos;name&apos;]</span><br><span class="line">[&apos;sales&apos;, 6734, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
-<h1 id="lua比较特殊的数据类型"><a href="#lua比较特殊的数据类型" class="headerlink" title="lua比较特殊的数据类型"></a>lua比较特殊的数据类型</h1><h2 id="lua变量"><a href="#lua变量" class="headerlink" title="lua变量"></a>lua变量</h2><blockquote>
-<p>变量在使用前，必须在代码中进行声明，即创建该变量。</p>
+            <h1 id="PHP-超级全局变量概绍"><a href="#PHP-超级全局变量概绍" class="headerlink" title="PHP 超级全局变量概绍"></a>PHP 超级全局变量概绍</h1><blockquote>
+<p>PHP中预定义了几个超级全局变量（superglobals） ，</p>
 </blockquote>
-<p>编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。</p>
-<p>Lua 变量有三种类型：全局变量、局部变量、表中的域。</p>
+<p>这意味着它们在一个脚本的全部作用域中都可用。</p>
+<p> 你不需要特别说明，就可以在函数及类中使用。</p>
+<p>PHP 超级全局变量列表:</p>
+<ul>
+<li>$GLOBALS</li>
+<li>$_SERVER</li>
+<li>$_REQUEST</li>
+<li>$_POST</li>
+<li>$_GET</li>
+<li>$_FILES</li>
+<li>$_ENV</li>
+<li>$_COOKIE</li>
+<li>$_SESSION</li>
+</ul>
+<h1 id="GLOBALS"><a href="#GLOBALS" class="headerlink" title="$GLOBALS"></a>$GLOBALS</h1><p>$GLOBALS 是PHP的一个超级全局变量组，</p>
+<p>在一个PHP脚本的全部作用域中都可以访问。</p>
+<p>$GLOBALS 是一个包含了全部变量的全局组合数组。变量的名字就是数组的键。</p>
+<p>以下实例介绍了如何使用超级全局变量 $GLOBALS:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$x = 75; </span><br><span class="line">$y = 25;</span><br><span class="line"> </span><br><span class="line">function addition() </span><br><span class="line">&#123; </span><br><span class="line">$GLOBALS[&apos;z&apos;] = $GLOBALS[&apos;x&apos;] + $GLOBALS[&apos;y&apos;]; </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">addition(); </span><br><span class="line">echo $z; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。</p>
+<p>以上实例中 z 是一个$GLOBALS数组中的超级全局变量，<br>该变量同样可以在函数外访问。</p>
 </blockquote>
-<p>局部变量的作用域为从声明位置开始到所在语句块结束。</p>
-<p>变量的默认值均为 nil。</p>
-<figure class="highlight plain"><figcaption><span>test.lua 文件脚本</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a = 5               -- 全局变量</span><br><span class="line">local b = 5         -- 局部变量</span><br><span class="line"></span><br><span class="line">function joke()</span><br><span class="line">    c = 5           -- 全局变量</span><br><span class="line">    local d = 6     -- 局部变量</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">joke()</span><br><span class="line">print(c,d)          --&gt; 5 nil</span><br><span class="line"></span><br><span class="line">do </span><br><span class="line">    local a = 6     -- 局部变量</span><br><span class="line">    b = 6           -- 全局变量</span><br><span class="line">    print(a,b);     --&gt; 6 6</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">print(a,b)      --&gt; 5 6</span><br></pre></td></tr></table></figure>
-<p>执行以上实例输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lua test.lua </span><br><span class="line">5	nil</span><br><span class="line">6	6</span><br><span class="line">5	6</span><br></pre></td></tr></table></figure>
-<h2 id="lua的特有的东西table（表）"><a href="#lua的特有的东西table（表）" class="headerlink" title="lua的特有的东西table（表）"></a>lua的特有的东西table（表）</h2><p>在 Lua 里，table 的创建是通过”构造表达式”来完成，</p>
-<p>最简单构造表达式是{}，用来创建一个空表。</p>
-<p>也可以在表里添加一些数据，直接初始化表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 创建一个空的 table</span><br><span class="line">local tbl1 = &#123;&#125;</span><br><span class="line"> </span><br><span class="line">-- 直接初始表</span><br><span class="line">local tbl2 = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- table_test.lua 脚本文件</span><br><span class="line">a = &#123;&#125;</span><br><span class="line">a[&quot;key&quot;] = &quot;value&quot;</span><br><span class="line">key = 10</span><br><span class="line">a[key] = 22</span><br><span class="line">a[key] = a[key] + 11</span><br><span class="line">for k, v in pairs(a) do</span><br><span class="line">    print(k .. &quot; : &quot; .. v)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test.lua </span><br><span class="line">key : value</span><br><span class="line">10 : 33</span><br></pre></td></tr></table></figure></p>
-<p>不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- table_test2.lua 脚本文件</span><br><span class="line">local tbl = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br><span class="line">for key, val in pairs(tbl) do</span><br><span class="line">    print(&quot;Key&quot;, key)</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
-<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test2.lua </span><br><span class="line">Key	1</span><br><span class="line">Key	2</span><br><span class="line">Key	3</span><br><span class="line">Key	4</span><br></pre></td></tr></table></figure></p>
-<p>table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- table_test3.lua 脚本文件</span><br><span class="line">a3 = &#123;&#125;</span><br><span class="line">for i = 1, 10 do</span><br><span class="line">    a3[i] = i</span><br><span class="line">end</span><br><span class="line">a3[&quot;key&quot;] = &quot;val&quot;</span><br><span class="line">print(a3[&quot;key&quot;])</span><br><span class="line">print(a3[&quot;none&quot;])</span><br></pre></td></tr></table></figure></p>
-<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test3.lua </span><br><span class="line">val</span><br><span class="line">nil</span><br></pre></td></tr></table></figure></p>
+<h1 id="SERVER"><a href="#SERVER" class="headerlink" title="$_SERVER"></a>$_SERVER</h1><p>$_SERVER 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组。</p>
+<p>这个数组中的项目由 Web 服务器创建。</p>
+<p>不能保证每个服务器都提供全部项目；服务器可能会忽略一些，或</p>
+<p>者提供一些没有在这里列举出来的项目。</p>
+<p>以下实例中展示了如何使用$_SERVER中的元素:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">echo $_SERVER[&apos;PHP_SELF&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;SERVER_NAME&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;HTTP_HOST&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;HTTP_REFERER&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;HTTP_USER_AGENT&apos;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;SCRIPT_NAME&apos;];</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="REQUEST"><a href="#REQUEST" class="headerlink" title="$_REQUEST"></a>$_REQUEST</h1><p>PHP $_REQUEST 用于收集HTML表单提交的数据。</p>
+<p>以下实例显示了一个输入字段（input）及提交按钮(submit)的表单(form)。</p>
+<p> 当用户通过点击 “Submit” 按钮提交表单数据时, </p>
+<p> 表单数据将发送至<form>标签中 action 属性中指定的脚本文件。</form></p>
+<p> 在这个实例中，我们指定文件来处理表单数据。</p>
+<p> 如果你希望其他的PHP文件来处理该数据，你可以修改该指定的脚本文件名。</p>
+<p> 然后，我们可以使用超级全局变量 $_REQUEST 来收集表单中的 input 字段数据:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> &lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method=&quot;post&quot; action=&quot;&lt;?php echo $_SERVER[&apos;PHP_SELF&apos;];?&gt;&quot;&gt;</span><br><span class="line">Name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">$name = $_REQUEST[&apos;fname&apos;]; </span><br><span class="line">echo $name; </span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="POST"><a href="#POST" class="headerlink" title="$_POST"></a>$_POST</h1><p>PHP $_POST 被广泛应用于收集表单数据，</p>
+<p>在HTML form标签的指定该属性：”method=”post”。</p>
+<p>以下实例显示了一个输入字段（input）及提交按钮(submit)的表单(form)。</p>
+<p>当用户通过点击 “Submit” 按钮提交表单数据时, </p>
+<p>表单数据将发送至<form>标签中 action 属性中指定的脚本文件。 </form></p>
+<p>在这个实例中，我们指定文件来处理表单数据。</p>
+<p>如果你希望其他的PHP文件来处理该数据，你可以修改该指定的脚本文件名。</p>
+<p>然后，我们可以使用超级全局变量 $_POST 来收集表单中的 input 字段数据:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method=&quot;post&quot; action=&quot;&lt;?php echo $_SERVER[&apos;PHP_SELF&apos;];?&gt;&quot;&gt;</span><br><span class="line">Name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">$name = $_POST[&apos;fname&apos;]; </span><br><span class="line">echo $name; </span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="GET"><a href="#GET" class="headerlink" title="$_GET"></a>$_GET</h1><p>PHP $_GET 同样被广泛应用于收集表单数据，</p>
+<p>在HTML form标签的指定该属性：”method=”get”。</p>
+<p>$_GET 也可以收集URL中发送的数据。</p>
+<p>假定我们有一个包含参数的超链接HTML页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;test_get.php?subject=PHP&amp;web=runoob.com&quot;&gt;Test $GET&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当用户点击链接 “Test $GET”, 参数 “subject” 和 “web” 将发送至”test_get.php”,</p>
+<p>你可以在 “test_get.php” 文件中使用 $_GET 变量来获取这些数据。</p>
+<p>以下实例显示了 “test_get.php” 文件的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;Study &quot; . $_GET[&apos;subject&apos;] . &quot; at &quot; . $_GET[&apos;web&apos;];</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="REQUEST、-POST、-GET的区别和联系小结"><a href="#REQUEST、-POST、-GET的区别和联系小结" class="headerlink" title="$_REQUEST、$_POST、$_GET的区别和联系小结"></a>$_REQUEST、$_POST、$_GET的区别和联系小结</h1><h2 id="1-REQUEST"><a href="#1-REQUEST" class="headerlink" title="1. $_REQUEST"></a>1. $_REQUEST</h2><p>php中$_REQUEST可以获取以POST方法和GET方法提交的数据，但是速度比较慢 </p>
+<h2 id="2-GET"><a href="#2-GET" class="headerlink" title="2. $_GET"></a>2. $_GET</h2><p>用来获取由浏览器通过GET方法提交的数据。GET方法他是通过把参数数据加在提交表单的action属性所指的URL中，值和表单内每个字段一一对应，然后在URL中可以看到，但是有如下缺点： </p>
+<ul>
+<li><ol>
+<li>安全性不好，在URL中可以看得到 </li>
+</ol>
+</li>
+<li><ol>
+<li>传送数据量较小，不能大于2KB。 </li>
+</ol>
+</li>
+</ul>
+<h2 id="3-POST"><a href="#3-POST" class="headerlink" title="3. $_POST"></a>3. $_POST</h2><p>用来获取由浏览器通过POST方法提交的数据。POST方法他是通过HTTP POST机制，将表单的各个字段放置在HTTP HEADER内一起传送到action属性所指的URL地址中，用户看不到这个过程。他提交的大小一般来说不受限制，但是具体根据服务器的不同，还是略有不同。相对于_GET方式安全性略高 </p>
+<h2 id="4-REQUEST、-POST、-GET-的区别和联系"><a href="#4-REQUEST、-POST、-GET-的区别和联系" class="headerlink" title="4. $_REQUEST、$_POST、$_GET 的区别和联系"></a>4. $_REQUEST、$_POST、$_GET 的区别和联系</h2><p>$_REQUEST[“参数”]具用$_POST[“参数”] $_GET[“参数”]的功能,但是$_REQUEST[“参数”]比较慢。通过post和get方法提交的所有数据都可以通过$_REQUEST数组[“参数”]获得</p>
 
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/redis_hiredis_install_tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/11/redis_hiredis_install_tutorial/" itemprop="url">redis和hiredis安装教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
-                2015-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p>在ubuntu上</p>
-<p>redis安装 :  <code>sudo apt-get install redis-server</code></p>
-<p>hiredis安装 : 先到 <a href="https://github.com/redis/hiredis" target="_blank" rel="noopener">https://github.com/redis/hiredis</a> 下载 hiredis , 然后 </p>
-<pre><code>sudo make
-sudo make install
-sudo ldconfig
-</code></pre>
           
         
       
@@ -841,7 +711,7 @@ sudo ldconfig
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/redis_hiredis_install_tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -860,7 +730,7 @@ sudo ldconfig
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
+                <a class="post-title-link" href="/2015/07/11/redis_hiredis_install_tutorial/" itemprop="url">redis和hiredis安装教程</a></h1>
         
 
         <div class="post-meta">
@@ -872,8 +742,8 @@ sudo ldconfig
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T21:56:12+00:00">
-                2015-06-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
+                2015-07-11
               </time>
             
 
@@ -895,8 +765,8 @@ sudo ldconfig
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NP/" itemprop="url" rel="index">
-                    <span itemprop="name">NP</span>
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
                   </a>
                 </span>
 
@@ -947,16 +817,15 @@ sudo ldconfig
 
       
         
-          <h1 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件:"></a>socket可读的条件:</h1><ul>
-<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1.</li>
-<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
-<li><strong>给监听套接字准备好新连接</strong></li>
-<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
           
-          <!--/noindex-->
+            <p>在ubuntu上</p>
+<p>redis安装 :  <code>sudo apt-get install redis-server</code></p>
+<p>hiredis安装 : 先到 <a href="https://github.com/redis/hiredis" target="_blank" rel="noopener">https://github.com/redis/hiredis</a> 下载 hiredis , 然后 </p>
+<pre><code>sudo make
+sudo make install
+sudo ldconfig
+</code></pre>
+          
         
       
 
@@ -977,7 +846,200 @@ sudo ldconfig
         
       </footer>
       
-    </p></div>
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/python和lua数据类型的比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/11/python和lua数据类型的比较/" itemprop="url">python和lua数据类型的比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
+                2015-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Script/" itemprop="url" rel="index">
+                    <span itemprop="name">Script</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python比较特殊的数据类型："><a href="#Python比较特殊的数据类型：" class="headerlink" title="Python比较特殊的数据类型："></a>Python比较特殊的数据类型：</h1><h2 id="List"><a href="#List" class="headerlink" title="List  []"></a>List  []</h2><p>例如 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">list = [ &apos;runoob&apos;, 786 , 2.23, &apos;john&apos;, 70.2 ]</span><br><span class="line">tinylist = [123, &apos;john&apos;]</span><br><span class="line"> </span><br><span class="line">print list               # 输出完整列表</span><br><span class="line">print list[0]            # 输出列表的第一个元素</span><br><span class="line">print list[1:3]          # 输出第二个至第三个的元素 </span><br><span class="line">print list[2:]           # 输出从第三个开始至列表末尾的所有元素</span><br><span class="line">print tinylist * 2       # 输出列表两次</span><br><span class="line">print list + tinylist    # 打印组合的列表</span><br></pre></td></tr></table></figure></p>
+<p>以上实例输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2]</span><br><span class="line">runoob</span><br><span class="line">[786, 2.23]</span><br><span class="line">[2.23, &apos;john&apos;, 70.2]</span><br><span class="line">[123, &apos;john&apos;, 123, &apos;john&apos;]</span><br><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2, 123, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
+<h2 id="Tuple（元祖）-相当于只读列表，不可以二次赋值"><a href="#Tuple（元祖）-相当于只读列表，不可以二次赋值" class="headerlink" title="Tuple（元祖）(),相当于只读列表，不可以二次赋值"></a>Tuple（元祖）(),相当于只读列表，不可以二次赋值</h2><p><code>tuple = ( &#39;runoob&#39;, 786 , 2.23, &#39;john&#39;, 70.2 )</code>, 除了元祖用()而list用[], 而且元祖只是可读的, 其他的跟list一毛一样</p>
+<h2 id="dictionary（字典）-，key值对"><a href="#dictionary（字典）-，key值对" class="headerlink" title="dictionary（字典）{}，key值对"></a>dictionary（字典）{}，key值对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">dict[&apos;one&apos;] = &quot;This is one&quot;</span><br><span class="line">dict[2] = &quot;This is two&quot;</span><br><span class="line"> </span><br><span class="line">tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print dict[&apos;one&apos;]          # 输出键为&apos;one&apos; 的值</span><br><span class="line">print dict[2]              # 输出键为 2 的值</span><br><span class="line">print tinydict             # 输出完整的字典</span><br><span class="line">print tinydict.keys()      # 输出所有键</span><br><span class="line">print tinydict.values()    # 输出所有值</span><br></pre></td></tr></table></figure>
+<p>输出结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This is one</span><br><span class="line">This is two</span><br><span class="line">&#123;&apos;dept&apos;: &apos;sales&apos;, &apos;code&apos;: 6734, &apos;name&apos;: &apos;john&apos;&#125;</span><br><span class="line">[&apos;dept&apos;, &apos;code&apos;, &apos;name&apos;]</span><br><span class="line">[&apos;sales&apos;, 6734, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
+<h1 id="lua比较特殊的数据类型"><a href="#lua比较特殊的数据类型" class="headerlink" title="lua比较特殊的数据类型"></a>lua比较特殊的数据类型</h1><h2 id="lua变量"><a href="#lua变量" class="headerlink" title="lua变量"></a>lua变量</h2><blockquote>
+<p>变量在使用前，必须在代码中进行声明，即创建该变量。</p>
+</blockquote>
+<p>编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。</p>
+<p>Lua 变量有三种类型：全局变量、局部变量、表中的域。</p>
+<blockquote>
+<p>Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。</p>
+</blockquote>
+<p>局部变量的作用域为从声明位置开始到所在语句块结束。</p>
+<p>变量的默认值均为 nil。</p>
+<figure class="highlight plain"><figcaption><span>test.lua 文件脚本</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a = 5               -- 全局变量</span><br><span class="line">local b = 5         -- 局部变量</span><br><span class="line"></span><br><span class="line">function joke()</span><br><span class="line">    c = 5           -- 全局变量</span><br><span class="line">    local d = 6     -- 局部变量</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">joke()</span><br><span class="line">print(c,d)          --&gt; 5 nil</span><br><span class="line"></span><br><span class="line">do </span><br><span class="line">    local a = 6     -- 局部变量</span><br><span class="line">    b = 6           -- 全局变量</span><br><span class="line">    print(a,b);     --&gt; 6 6</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">print(a,b)      --&gt; 5 6</span><br></pre></td></tr></table></figure>
+<p>执行以上实例输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lua test.lua </span><br><span class="line">5	nil</span><br><span class="line">6	6</span><br><span class="line">5	6</span><br></pre></td></tr></table></figure>
+<h2 id="lua的特有的东西table（表）"><a href="#lua的特有的东西table（表）" class="headerlink" title="lua的特有的东西table（表）"></a>lua的特有的东西table（表）</h2><p>在 Lua 里，table 的创建是通过”构造表达式”来完成，</p>
+<p>最简单构造表达式是{}，用来创建一个空表。</p>
+<p>也可以在表里添加一些数据，直接初始化表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 创建一个空的 table</span><br><span class="line">local tbl1 = &#123;&#125;</span><br><span class="line"> </span><br><span class="line">-- 直接初始表</span><br><span class="line">local tbl2 = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- table_test.lua 脚本文件</span><br><span class="line">a = &#123;&#125;</span><br><span class="line">a[&quot;key&quot;] = &quot;value&quot;</span><br><span class="line">key = 10</span><br><span class="line">a[key] = 22</span><br><span class="line">a[key] = a[key] + 11</span><br><span class="line">for k, v in pairs(a) do</span><br><span class="line">    print(k .. &quot; : &quot; .. v)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test.lua </span><br><span class="line">key : value</span><br><span class="line">10 : 33</span><br></pre></td></tr></table></figure></p>
+<p>不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- table_test2.lua 脚本文件</span><br><span class="line">local tbl = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br><span class="line">for key, val in pairs(tbl) do</span><br><span class="line">    print(&quot;Key&quot;, key)</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test2.lua </span><br><span class="line">Key	1</span><br><span class="line">Key	2</span><br><span class="line">Key	3</span><br><span class="line">Key	4</span><br></pre></td></tr></table></figure></p>
+<p>table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- table_test3.lua 脚本文件</span><br><span class="line">a3 = &#123;&#125;</span><br><span class="line">for i = 1, 10 do</span><br><span class="line">    a3[i] = i</span><br><span class="line">end</span><br><span class="line">a3[&quot;key&quot;] = &quot;val&quot;</span><br><span class="line">print(a3[&quot;key&quot;])</span><br><span class="line">print(a3[&quot;none&quot;])</span><br></pre></td></tr></table></figure></p>
+<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test3.lua </span><br><span class="line">val</span><br><span class="line">nil</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
     
     
     
@@ -1173,7 +1235,7 @@ sudo ldconfig
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/36/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/38/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/36/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/38/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1230,7 +1292,7 @@ sudo ldconfig
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1239,7 +1301,7 @@ sudo ldconfig
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">235</span>
+                <span class="site-state-item-count">236</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1250,7 +1312,7 @@ sudo ldconfig
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

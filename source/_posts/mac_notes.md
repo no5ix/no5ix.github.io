@@ -17,6 +17,8 @@ categories:
 **. . .**<!--more -->
 
 
+
+
 # 改键Karabiner
 
 改键软件 Karabiner-Elements 的配置得直接覆盖他的配置文件 `karabiner.json` (它的配置文件路径在 app 里的 misc 里有)
@@ -270,9 +272,9 @@ Windows Registry Editor Version 5.00
 7. 如果电脑上已经装了有chrome可能会弹出来要你安装iCloud插件, 不用管, 此时因为已经点击了"应用"了, 相关设置已经保存好, 直接重启一下电脑，会自动完成同步
 
 
-## safari实现类似edge的smart-toc插件
+## safari实现类似edge的smart-toc自动生成目录大纲的插件
 
-先装上 `Macaque` 插件(类似油猴插件, 只是这个插件更加强大可以同时支持油猴脚本和 UserScript 脚本, 可以绕过网站 CSP, 把脚本注入到开了 CSP 的网站里, 如知乎/GitHub 等), 然后再把 `safari_userscript` 文件夹里的 `ex_smart_toc.js` 油猴脚本加入到这个插件里, 然后刷新页面即可
+先装上 `Macaque` 插件(类似油猴插件, 只是这个插件更加强大可以同时支持油猴脚本和 UserScript 脚本, 可以绕过网站 CSP, 把脚本注入到开了 CSP 的网站里, 如知乎/GitHub 等), 然后去[这里](https://github.com/no5ix/auto-toc) 装上 auto-toc 油猴脚本, 然后刷新页面即可
 
 - 参考: [Edge的smart-toc插件开源地址](https://github.com/FallenMax/smart-toc)
 

@@ -1102,6 +1102,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[一个优化过的NexT主题]]></title>
+    <url>%2F2018%2F01%2F18%2Foptimized_hexo_next_theme%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[A optimized hexo-theme-next一个优化过的NexT主题. 我修改了很多NexT的代码来对原版 NexT 做了优化, 如下 : 改了NexT的很多地方来优化移动端的表现 header的布局 移动端和PC端的侧边栏更加统一 移动端的文章目录列表现在可以滑动了 添加了文章加密的支持 升级到了fancybox3并完成适配, 3更流畅且拥有更多效果 重做了本地搜索引擎 现在移动端不会经常无故弹不出键盘了 也不会列出加密文章的内容了 更优雅的过渡动画 添加了headroom支持, 现在有一个可以会自动隐藏的header了, 往下滚一下鼠标则隐藏, 往上则出现 Live PreviewMy Blog Usage 0. 点击这里下载nvm-setup.zip, 解压并安装nvm之后, nvm install 10.13.0 然后再 nvm use 10.13.0则安装了node.js的10.13.0的版本, 尝试node -v和nvm ls看看版本, 这个node版本很关键, 不要乱改 1. Delete my source folder 删除我项目中的 source 文件夹 2. Create a new source folder 新建一个 source 文件夹 2.5. npm install -g hexo-cli然后再npm install --force 3. Unzip my_node_modules.tar.gz to the current directory: tar -zxvf my_node_modules.tar.gz 解压 my_node_modules.tar.gz 到当前目录(确保这一步在安装了hexo之后): tar -zxvf my_node_modules.tar.gz 4. Learn Hexo’s base usage for Writing/Generating/Deployment 学习Hexo的基本操作来写作/生成/部署 5. Learn NexT 学习 NexT 6. Modify /_config.yml &amp; /themes/next/_config.yml 修改 /_config.yml 和 /themes/next/_config.yml 7. hexo clean删除缓存 8. hexo generate生成静态文件 9. hexo server启动一个本地hexo服务器]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[两个例子对比理解Actor模型]]></title>
     <url>%2F2018%2F01%2F17%2Ftwo_example_for_understanding_actor_model%2F</url>
 
@@ -2365,20 +2376,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[C++很基础的易混淆点二]]></title>
-    <url>%2F2015%2F12%2F09%2Fcplusplus_confused_points_two%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[位操作运算符的问题二进制的100 的第0位是 01(第2位) 0(第1位) 0(第0位)，所以把一个数的第三位进行清零、置位(把某个bit置为1)、取反的操作如下：123456789101112131415161718192021#include &lt;stdio.h&gt;#define Bit3 (0X01&lt;&lt;3)/*对一个数的第三位进行清零、置位、取反*/int main()&#123; int a=15 ; // 0000 1111 printf("原大小：%d\n", a); a &amp;= ~Bit3; //清零, 0000 0111 printf("清零后：%d\n", a); a |= Bit3; //置位, 0000 1111 printf("置位后：%d\n", a); a ^= Bit3; //取反, 0000 0111 printf("取反后：%d\n", a); return 0;&#125; . . . 字符串分配的位置问题程序的存储区域分为：代码段、只读数据段、已初始化的读写数据段、未初始化的数据段、堆、栈。1、代码段、只读数据段、已初始化的读写数据段、未初始化的数据段都属于静态区域。2、堆内存只在程序运行时出现，一般有程序员分配和释放。3、栈内存只在程序运行时出现，在函数内部使用的变量，函数参数以及返回值将使用栈空间。1234567891011121314151617char* get_str()&#123; char *str = "hello"; //第一种情况：分配在静态存储区上 //char str[] = "hello"; //第二种情况分配在栈上 return str;&#125;int main()&#123; char* p = get_str(); // 如果是第一种情况，下述打印可以打印出正确的值；但是第二种情况打印结果是错的。 printf("%s/n", p); *++p = 'a'; // 如果是第一种情况，运行时将会段错误，因为不能修改它； printf("%s/n", p); return 0;&#125; 复杂类型的声明和typedef定义 用变量a给出下面的定义:一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数 int (*a[10])(int); typedef表示一个长度为4的int数组;typedef int ARR[4]; typedef表示一个函数指针有一个整型参数并返回一个整型数：typedef int（*FUNC）（int）；]]></content>
-      <categories>
-        <category>CPP</category>
-      </categories>
-      <tags>
-        <tag>CPP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[C++可变参数]]></title>
     <url>%2F2015%2F12%2F09%2Fcpp_vargs%2F</url>
 
@@ -2393,17 +2390,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
-    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
+    <title><![CDATA[C++很基础的易混淆点二]]></title>
+    <url>%2F2015%2F12%2F09%2Fcplusplus_confused_points_two%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
+    <content type="text"><![CDATA[位操作运算符的问题二进制的100 的第0位是 01(第2位) 0(第1位) 0(第0位)，所以把一个数的第三位进行清零、置位(把某个bit置为1)、取反的操作如下：123456789101112131415161718192021#include &lt;stdio.h&gt;#define Bit3 (0X01&lt;&lt;3)/*对一个数的第三位进行清零、置位、取反*/int main()&#123; int a=15 ; // 0000 1111 printf("原大小：%d\n", a); a &amp;= ~Bit3; //清零, 0000 0111 printf("清零后：%d\n", a); a |= Bit3; //置位, 0000 1111 printf("置位后：%d\n", a); a ^= Bit3; //取反, 0000 0111 printf("取反后：%d\n", a); return 0;&#125; . . . 字符串分配的位置问题程序的存储区域分为：代码段、只读数据段、已初始化的读写数据段、未初始化的数据段、堆、栈。1、代码段、只读数据段、已初始化的读写数据段、未初始化的数据段都属于静态区域。2、堆内存只在程序运行时出现，一般有程序员分配和释放。3、栈内存只在程序运行时出现，在函数内部使用的变量，函数参数以及返回值将使用栈空间。1234567891011121314151617char* get_str()&#123; char *str = "hello"; //第一种情况：分配在静态存储区上 //char str[] = "hello"; //第二种情况分配在栈上 return str;&#125;int main()&#123; char* p = get_str(); // 如果是第一种情况，下述打印可以打印出正确的值；但是第二种情况打印结果是错的。 printf("%s/n", p); *++p = 'a'; // 如果是第一种情况，运行时将会段错误，因为不能修改它； printf("%s/n", p); return 0;&#125; 复杂类型的声明和typedef定义 用变量a给出下面的定义:一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数 int (*a[10])(int); typedef表示一个长度为4的int数组;typedef int ARR[4]; typedef表示一个函数指针有一个整型参数并返回一个整型数：typedef int（*FUNC）（int）；]]></content>
       <categories>
-        <category>Script</category>
+        <category>CPP</category>
       </categories>
       <tags>
-        <tag>Lua</tag>
+        <tag>CPP</tag>
       </tags>
   </entry>
   <entry>
@@ -2418,6 +2415,20 @@
       </categories>
       <tags>
         <tag>CPP</tag>
+        <tag>Lua</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
+    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
+      <categories>
+        <category>Script</category>
+      </categories>
+      <tags>
         <tag>Lua</tag>
       </tags>
   </entry>
@@ -2508,12 +2519,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Unity中C#调用C++写的DLL之Swig篇]]></title>
-    <url>%2F2015%2F09%2F13%2Funity_cpp_swig_csharp%2F</url>
+    <title><![CDATA[安装AndroidSDK的一些坑与注意点]]></title>
+    <url>%2F2015%2F09%2F13%2Finstall_android_sdk_jdk%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[近来要用Unity打包到安卓上玩, Unity那边需要用到服务器中用C++写的库,对比了 P/Invoke 和 C++/CLI 两种方式, 都不够省心省力, 决定使用 Swig来撸. 教程基本上按照这篇文章就可以, 文章写得非常详尽, 但文中关于设置 swiglib.i 自定义生成工具的命令行的时候, 他文中的下面一段要注意 : 在常规中选择命令行并且写入： echo on $(SolutionDir)/../../thirdpart/swigwin-3.0.12/swig.exe -c++ -csharp -outdir “$(SolutionDir)/../../../UnityProj/UnityCppLearn/Assets/SwigTools/Interface” “%(FullPath)” echo off 应改成 : 我们在自己填的时候要记得改成自己项目中的路径, 以及把上面这段命令中的中文引号改成英文引号.]]></content>
+    <content type="text"><![CDATA[近来要用Unity打包到安卓上玩, 需要安装AndroidSDK. 安装教程基本上按照这篇文章A就可以, 遇到不明白的可以拿这篇B对照着看, 以A为准, 但是有几个点要注意 : jdk别装太高版本, 装个jdk-8u161的32位的即可, 别装64位, 也别装高版本的jdk10的64位, 不然 android sdk set up tool 不认识, sdk manager 也会闪退 jdk的环境变量很容易设置错, 比如环境变量JAVA_HOME应该填jdk的安装路径即 : JAVA_HOME=C:/Program Files/Java/jdk1.8.0_11而不是JAVA_HOME=C:/Program Files/Java, 填后者的话, sdk manager 会闪退 为了确保不必要的麻烦最好这样环境变量设置成类似如下 : 123JAVA_HOME=C:/Program Files/Java/jdk1.8.0_11JRE_HOME=C:/Program Files/Java/jre8Path=%JAVA_HOME%;C:... 打安卓包的时候, 如果报file not found debug.keystore 或 Unable to get debug signature key的错, 用管理员权限重新打开Unity即可.]]></content>
       <categories>
         <category>Misc</category>
       </categories>
@@ -2522,12 +2533,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[安装AndroidSDK的一些坑与注意点]]></title>
-    <url>%2F2015%2F09%2F13%2Finstall_android_sdk_jdk%2F</url>
+    <title><![CDATA[Unity中C#调用C++写的DLL之Swig篇]]></title>
+    <url>%2F2015%2F09%2F13%2Funity_cpp_swig_csharp%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[近来要用Unity打包到安卓上玩, 需要安装AndroidSDK. 安装教程基本上按照这篇文章A就可以, 遇到不明白的可以拿这篇B对照着看, 以A为准, 但是有几个点要注意 : jdk别装太高版本, 装个jdk-8u161的32位的即可, 别装64位, 也别装高版本的jdk10的64位, 不然 android sdk set up tool 不认识, sdk manager 也会闪退 jdk的环境变量很容易设置错, 比如环境变量JAVA_HOME应该填jdk的安装路径即 : JAVA_HOME=C:/Program Files/Java/jdk1.8.0_11而不是JAVA_HOME=C:/Program Files/Java, 填后者的话, sdk manager 会闪退 为了确保不必要的麻烦最好这样环境变量设置成类似如下 : 123JAVA_HOME=C:/Program Files/Java/jdk1.8.0_11JRE_HOME=C:/Program Files/Java/jre8Path=%JAVA_HOME%;C:... 打安卓包的时候, 如果报file not found debug.keystore 或 Unable to get debug signature key的错, 用管理员权限重新打开Unity即可.]]></content>
+    <content type="text"><![CDATA[近来要用Unity打包到安卓上玩, Unity那边需要用到服务器中用C++写的库,对比了 P/Invoke 和 C++/CLI 两种方式, 都不够省心省力, 决定使用 Swig来撸. 教程基本上按照这篇文章就可以, 文章写得非常详尽, 但文中关于设置 swiglib.i 自定义生成工具的命令行的时候, 他文中的下面一段要注意 : 在常规中选择命令行并且写入： echo on $(SolutionDir)/../../thirdpart/swigwin-3.0.12/swig.exe -c++ -csharp -outdir “$(SolutionDir)/../../../UnityProj/UnityCppLearn/Assets/SwigTools/Interface” “%(FullPath)” echo off 应改成 : 我们在自己填的时候要记得改成自己项目中的路径, 以及把上面这段命令中的中文引号改成英文引号.]]></content>
       <categories>
         <category>Misc</category>
       </categories>
@@ -2620,18 +2631,18 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[python和lua数据类型的比较]]></title>
-    <url>%2F2015%2F07%2F11%2Fpython%E5%92%8Clua%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%AF%94%E8%BE%83%2F</url>
+    <title><![CDATA[redis概要之数据类型]]></title>
+    <url>%2F2015%2F07%2F11%2Fredis%E6%A6%82%E8%A6%81%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[Python比较特殊的数据类型：List []例如 :123456789101112#!/usr/bin/python# -*- coding: UTF-8 -*- list = [ &apos;runoob&apos;, 786 , 2.23, &apos;john&apos;, 70.2 ]tinylist = [123, &apos;john&apos;] print list # 输出完整列表print list[0] # 输出列表的第一个元素print list[1:3] # 输出第二个至第三个的元素 print list[2:] # 输出从第三个开始至列表末尾的所有元素print tinylist * 2 # 输出列表两次print list + tinylist # 打印组合的列表 以上实例输出结果：123456[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2]runoob[786, 2.23][2.23, &apos;john&apos;, 70.2][123, &apos;john&apos;, 123, &apos;john&apos;][&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2, 123, &apos;john&apos;] Tuple（元祖）(),相当于只读列表，不可以二次赋值tuple = ( &#39;runoob&#39;, 786 , 2.23, &#39;john&#39;, 70.2 ), 除了元祖用()而list用[], 而且元祖只是可读的, 其他的跟list一毛一样 dictionary（字典）{}，key值对123456789101112131415#!/usr/bin/python# -*- coding: UTF-8 -*- dict = &#123;&#125;dict[&apos;one&apos;] = &quot;This is one&quot;dict[2] = &quot;This is two&quot; tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125; print dict[&apos;one&apos;] # 输出键为&apos;one&apos; 的值print dict[2] # 输出键为 2 的值print tinydict # 输出完整的字典print tinydict.keys() # 输出所有键print tinydict.values() # 输出所有值 输出结果为:12345This is oneThis is two&#123;&apos;dept&apos;: &apos;sales&apos;, &apos;code&apos;: 6734, &apos;name&apos;: &apos;john&apos;&#125;[&apos;dept&apos;, &apos;code&apos;, &apos;name&apos;][&apos;sales&apos;, 6734, &apos;john&apos;] lua比较特殊的数据类型lua变量 变量在使用前，必须在代码中进行声明，即创建该变量。 编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。 Lua 变量有三种类型：全局变量、局部变量、表中的域。 Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。 局部变量的作用域为从声明位置开始到所在语句块结束。 变量的默认值均为 nil。 test.lua 文件脚本123456789101112131415161718a = 5 -- 全局变量local b = 5 -- 局部变量function joke() c = 5 -- 全局变量 local d = 6 -- 局部变量endjoke()print(c,d) --&gt; 5 nildo local a = 6 -- 局部变量 b = 6 -- 全局变量 print(a,b); --&gt; 6 6endprint(a,b) --&gt; 5 6 执行以上实例输出结果为： 1234$ lua test.lua 5 nil6 65 6 lua的特有的东西table（表）在 Lua 里，table 的创建是通过”构造表达式”来完成， 最简单构造表达式是{}，用来创建一个空表。 也可以在表里添加一些数据，直接初始化表:12345-- 创建一个空的 tablelocal tbl1 = &#123;&#125; -- 直接初始表local tbl2 = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125; Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。 123456789-- table_test.lua 脚本文件a = &#123;&#125;a[&quot;key&quot;] = &quot;value&quot;key = 10a[key] = 22a[key] = a[key] + 11for k, v in pairs(a) do print(k .. &quot; : &quot; .. v)end 脚本执行结果为：123$ lua table_test.lua key : value10 : 33 不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。12345-- table_test2.lua 脚本文件local tbl = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;for key, val in pairs(tbl) do print(&quot;Key&quot;, key)end 脚本执行结果为：12345$ lua table_test2.lua Key 1Key 2Key 3Key 4 table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。12345678-- table_test3.lua 脚本文件a3 = &#123;&#125;for i = 1, 10 do a3[i] = ienda3[&quot;key&quot;] = &quot;val&quot;print(a3[&quot;key&quot;])print(a3[&quot;none&quot;]) 脚本执行结果为：123$ lua table_test3.lua valnil]]></content>
+    <content type="text"><![CDATA[Redis简介要义 Redis运行在内存中但是可以持久化到磁盘, 重启的时候可以再次加载进行使用 Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行 Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作 Redis支持数据的备份，即master-slave模式的数据备份 Redis数据类型Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好 . . . String(字符串)string是redis最基本的类型，你可以理解成与Memcached一模一样的类型， 一个key对应一个value。 string类型是二进制安全的。 二进制安全的意思是redis的string可以包含任何数据。 比如jpg图片或者序列化的对象 。 string类型是Redis最基本的数据类型，一个键最大能存储512MB。 实例 : 1234redis 127.0.0.1:6379&gt; SET name &quot;runoob&quot;OKredis 127.0.0.1:6379&gt; GET name&quot;runoob&quot; Hash（哈希表）Redis hash 是一个键名对集合。Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。 实例 :1234567891011redis&gt; HSET people jack &quot;Jack Sparrow&quot;(integer) 1redis&gt; HSET people gump &quot;Forrest Gump&quot;(integer) 1redis&gt; HGETALL people1) &quot;jack&quot; # 域2) &quot;Jack Sparrow&quot; # 值3) &quot;gump&quot;4) &quot;Forrest Gump&quot; 1234567redis&gt; HMSET pet dog &quot;doudou&quot; cat &quot;nounou&quot; # 一次设置多个域OKredis&gt; HMGET pet dog cat fake_pet # 返回值的顺序和传入参数的顺序一样1) &quot;doudou&quot;2) &quot;nounou&quot;3) (nil) # 不存在的域返回nil值 12345678redis&gt; HMSET website google www.google.com yahoo www.yahoo.comOKredis&gt; HGET website google&quot;www.google.com&quot;redis&gt; HGET website yahoo&quot;www.yahoo.com&quot; 12345redis&gt; HSET website google &quot;www.g.cn&quot; # 设置一个新域(integer) 1redis&gt; HSET website google &quot;www.google.com&quot; # 覆盖一个旧域(integer) 0 12345678910111213# 域存在redis&gt; HSET site redis redis.com(integer) 1redis&gt; HGET site redis&quot;redis.com&quot;# 域不存在redis&gt; HGET site mysql(nil) 以上实例中 hash 数据类型存储了包含用户脚本信息的用户对象。每个 hash 可以存储 232 -1 键值对（40多亿）。 List（列表）Redis 列表是简单的字符串列表，按照插入顺序排序。 你可以添加一个元素到列表的头部（左边lpush）或者尾部（右边rpush）。 实例 :1234567891011redis 127.0.0.1:6379&gt; lpush runoob redis(integer) 1redis 127.0.0.1:6379&gt; rpush runoob mongodb(integer) 2redis 127.0.0.1:6379&gt; lpush runoob rabitmq(integer) 3redis 127.0.0.1:6379&gt; lrange runoob 0 101) &quot;rabitmq&quot;2) &quot;redis&quot;3) &quot;mongodb&quot;redis 127.0.0.1:6379&gt; 列表最多可存储 232 - 1 元素 (4294967295, 每个列表可存储40多亿)。 Set（集合）Redis的Set是string类型的无序集合。 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 sadd 命令添加一个string元素到,key对应的set集合中，成功返回1, 如果元素已经在集合中返回0,key对应的set不存在返回错误。 sadd key member 实例 :12345678910111213redis 127.0.0.1:6379&gt; sadd runoob redis(integer) 1redis 127.0.0.1:6379&gt; sadd runoob mongodb(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 0redis 127.0.0.1:6379&gt; smembers runoob1) &quot;rabitmq&quot;2) &quot;mongodb&quot;3) &quot;redis&quot; 注意：以上实例中 rabitmq 添加了两次， 但根据集合内元素的唯一性，第二次插入的元素将被忽略。 集合中最大的成员数为 232 - 1(4294967295, 每个集合可存储40多亿个成员)。 zset(sorted set：有序集合)Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。 不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。 zset的成员是唯一的,但分数(score)却可以重复。 zadd 命令添加元素到集合，元素在集合中存在则更新对应scorezadd key score member实例 :12345678910111213redis 127.0.0.1:6379&gt; zadd runoob 1 redis(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 3 mongodb(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 4 rabitmq(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 7 rabitmq(integer) 0redis 127.0.0.1:6379&gt; ZRANGEBYSCORE runoob 0 10001) &quot;redis&quot;2) &quot;mongodb&quot;3) &quot;rabitmq&quot;]]></content>
       <categories>
-        <category>Script</category>
+        <category>DB</category>
       </categories>
       <tags>
-        <tag>Python</tag>
-        <tag>Lua</tag>
+        <tag>Redis</tag>
+        <tag>NoSQL</tag>
       </tags>
   </entry>
   <entry>
@@ -2650,18 +2661,18 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[redis概要之数据类型]]></title>
-    <url>%2F2015%2F07%2F11%2Fredis%E6%A6%82%E8%A6%81%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%2F</url>
+    <title><![CDATA[python和lua数据类型的比较]]></title>
+    <url>%2F2015%2F07%2F11%2Fpython%E5%92%8Clua%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%AF%94%E8%BE%83%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[Redis简介要义 Redis运行在内存中但是可以持久化到磁盘, 重启的时候可以再次加载进行使用 Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行 Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作 Redis支持数据的备份，即master-slave模式的数据备份 Redis数据类型Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好 . . . String(字符串)string是redis最基本的类型，你可以理解成与Memcached一模一样的类型， 一个key对应一个value。 string类型是二进制安全的。 二进制安全的意思是redis的string可以包含任何数据。 比如jpg图片或者序列化的对象 。 string类型是Redis最基本的数据类型，一个键最大能存储512MB。 实例 : 1234redis 127.0.0.1:6379&gt; SET name &quot;runoob&quot;OKredis 127.0.0.1:6379&gt; GET name&quot;runoob&quot; Hash（哈希表）Redis hash 是一个键名对集合。Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。 实例 :1234567891011redis&gt; HSET people jack &quot;Jack Sparrow&quot;(integer) 1redis&gt; HSET people gump &quot;Forrest Gump&quot;(integer) 1redis&gt; HGETALL people1) &quot;jack&quot; # 域2) &quot;Jack Sparrow&quot; # 值3) &quot;gump&quot;4) &quot;Forrest Gump&quot; 1234567redis&gt; HMSET pet dog &quot;doudou&quot; cat &quot;nounou&quot; # 一次设置多个域OKredis&gt; HMGET pet dog cat fake_pet # 返回值的顺序和传入参数的顺序一样1) &quot;doudou&quot;2) &quot;nounou&quot;3) (nil) # 不存在的域返回nil值 12345678redis&gt; HMSET website google www.google.com yahoo www.yahoo.comOKredis&gt; HGET website google&quot;www.google.com&quot;redis&gt; HGET website yahoo&quot;www.yahoo.com&quot; 12345redis&gt; HSET website google &quot;www.g.cn&quot; # 设置一个新域(integer) 1redis&gt; HSET website google &quot;www.google.com&quot; # 覆盖一个旧域(integer) 0 12345678910111213# 域存在redis&gt; HSET site redis redis.com(integer) 1redis&gt; HGET site redis&quot;redis.com&quot;# 域不存在redis&gt; HGET site mysql(nil) 以上实例中 hash 数据类型存储了包含用户脚本信息的用户对象。每个 hash 可以存储 232 -1 键值对（40多亿）。 List（列表）Redis 列表是简单的字符串列表，按照插入顺序排序。 你可以添加一个元素到列表的头部（左边lpush）或者尾部（右边rpush）。 实例 :1234567891011redis 127.0.0.1:6379&gt; lpush runoob redis(integer) 1redis 127.0.0.1:6379&gt; rpush runoob mongodb(integer) 2redis 127.0.0.1:6379&gt; lpush runoob rabitmq(integer) 3redis 127.0.0.1:6379&gt; lrange runoob 0 101) &quot;rabitmq&quot;2) &quot;redis&quot;3) &quot;mongodb&quot;redis 127.0.0.1:6379&gt; 列表最多可存储 232 - 1 元素 (4294967295, 每个列表可存储40多亿)。 Set（集合）Redis的Set是string类型的无序集合。 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 sadd 命令添加一个string元素到,key对应的set集合中，成功返回1, 如果元素已经在集合中返回0,key对应的set不存在返回错误。 sadd key member 实例 :12345678910111213redis 127.0.0.1:6379&gt; sadd runoob redis(integer) 1redis 127.0.0.1:6379&gt; sadd runoob mongodb(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 0redis 127.0.0.1:6379&gt; smembers runoob1) &quot;rabitmq&quot;2) &quot;mongodb&quot;3) &quot;redis&quot; 注意：以上实例中 rabitmq 添加了两次， 但根据集合内元素的唯一性，第二次插入的元素将被忽略。 集合中最大的成员数为 232 - 1(4294967295, 每个集合可存储40多亿个成员)。 zset(sorted set：有序集合)Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。 不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。 zset的成员是唯一的,但分数(score)却可以重复。 zadd 命令添加元素到集合，元素在集合中存在则更新对应scorezadd key score member实例 :12345678910111213redis 127.0.0.1:6379&gt; zadd runoob 1 redis(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 3 mongodb(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 4 rabitmq(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 7 rabitmq(integer) 0redis 127.0.0.1:6379&gt; ZRANGEBYSCORE runoob 0 10001) &quot;redis&quot;2) &quot;mongodb&quot;3) &quot;rabitmq&quot;]]></content>
+    <content type="text"><![CDATA[Python比较特殊的数据类型：List []例如 :123456789101112#!/usr/bin/python# -*- coding: UTF-8 -*- list = [ &apos;runoob&apos;, 786 , 2.23, &apos;john&apos;, 70.2 ]tinylist = [123, &apos;john&apos;] print list # 输出完整列表print list[0] # 输出列表的第一个元素print list[1:3] # 输出第二个至第三个的元素 print list[2:] # 输出从第三个开始至列表末尾的所有元素print tinylist * 2 # 输出列表两次print list + tinylist # 打印组合的列表 以上实例输出结果：123456[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2]runoob[786, 2.23][2.23, &apos;john&apos;, 70.2][123, &apos;john&apos;, 123, &apos;john&apos;][&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2, 123, &apos;john&apos;] Tuple（元祖）(),相当于只读列表，不可以二次赋值tuple = ( &#39;runoob&#39;, 786 , 2.23, &#39;john&#39;, 70.2 ), 除了元祖用()而list用[], 而且元祖只是可读的, 其他的跟list一毛一样 dictionary（字典）{}，key值对123456789101112131415#!/usr/bin/python# -*- coding: UTF-8 -*- dict = &#123;&#125;dict[&apos;one&apos;] = &quot;This is one&quot;dict[2] = &quot;This is two&quot; tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125; print dict[&apos;one&apos;] # 输出键为&apos;one&apos; 的值print dict[2] # 输出键为 2 的值print tinydict # 输出完整的字典print tinydict.keys() # 输出所有键print tinydict.values() # 输出所有值 输出结果为:12345This is oneThis is two&#123;&apos;dept&apos;: &apos;sales&apos;, &apos;code&apos;: 6734, &apos;name&apos;: &apos;john&apos;&#125;[&apos;dept&apos;, &apos;code&apos;, &apos;name&apos;][&apos;sales&apos;, 6734, &apos;john&apos;] lua比较特殊的数据类型lua变量 变量在使用前，必须在代码中进行声明，即创建该变量。 编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。 Lua 变量有三种类型：全局变量、局部变量、表中的域。 Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。 局部变量的作用域为从声明位置开始到所在语句块结束。 变量的默认值均为 nil。 test.lua 文件脚本123456789101112131415161718a = 5 -- 全局变量local b = 5 -- 局部变量function joke() c = 5 -- 全局变量 local d = 6 -- 局部变量endjoke()print(c,d) --&gt; 5 nildo local a = 6 -- 局部变量 b = 6 -- 全局变量 print(a,b); --&gt; 6 6endprint(a,b) --&gt; 5 6 执行以上实例输出结果为： 1234$ lua test.lua 5 nil6 65 6 lua的特有的东西table（表）在 Lua 里，table 的创建是通过”构造表达式”来完成， 最简单构造表达式是{}，用来创建一个空表。 也可以在表里添加一些数据，直接初始化表:12345-- 创建一个空的 tablelocal tbl1 = &#123;&#125; -- 直接初始表local tbl2 = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125; Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。 123456789-- table_test.lua 脚本文件a = &#123;&#125;a[&quot;key&quot;] = &quot;value&quot;key = 10a[key] = 22a[key] = a[key] + 11for k, v in pairs(a) do print(k .. &quot; : &quot; .. v)end 脚本执行结果为：123$ lua table_test.lua key : value10 : 33 不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。12345-- table_test2.lua 脚本文件local tbl = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;for key, val in pairs(tbl) do print(&quot;Key&quot;, key)end 脚本执行结果为：12345$ lua table_test2.lua Key 1Key 2Key 3Key 4 table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。12345678-- table_test3.lua 脚本文件a3 = &#123;&#125;for i = 1, 10 do a3[i] = ienda3[&quot;key&quot;] = &quot;val&quot;print(a3[&quot;key&quot;])print(a3[&quot;none&quot;]) 脚本执行结果为：123$ lua table_test3.lua valnil]]></content>
       <categories>
-        <category>DB</category>
+        <category>Script</category>
       </categories>
       <tags>
-        <tag>Redis</tag>
-        <tag>NoSQL</tag>
+        <tag>Python</tag>
+        <tag>Lua</tag>
       </tags>
   </entry>
   <entry>
@@ -2810,21 +2821,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[GCC的分支预测优化__builtin_expect]]></title>
-    <url>%2F2015%2F04%2F11%2Flinux_gcc_builtin_expect%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[1. 为什么需要分支预测优化 将流水线引入cpu，可以提高cpu的效率。更简单的说，让cpu可以预先取出下一条指令，可以提供cpu的效率。如下图所示： 取指令 执行指令 输出结果 取指令 执行 可见，cpu流水钱可以减少cpu等待取指令的耗时，从而提高cpu的效率。如果存在跳转指令，那么预先取出的指令就无用了。cpu在执行当前指令时，从内存中取出了当前指令的下一条指令。执行完当前指令后，cpu发现不是要执行下一条指令,而是执行offset偏移处的指令。cpu只能重新从内存中取出offset偏移处的指令。因此，跳转指令会降低流水线的效率，也就是降低cpu的效率。 综上，在写程序时应该尽量避免跳转语句。那么如何避免跳转语句呢？答案就是使用__builtin_expect。 这个指令是gcc引入的，作用是”允许程序员将最有可能执行的分支告诉编译器”。 这个指令的写法为：builtin_expect(EXP, N)。意思是：EXP==N的概率很大。一般的使用方法是将builtin_expect指令封装为LIKELY和UNLIKELY宏。这两个宏的写法如下。 12#define LIKELY(x) __builtin_expect(!!(x), 1) //x很可能为真#define UNLIKELY(x) __builtin_expect(!!(x), 0) //x很可能为假 在很多源码如Linux内核、Glib等,我们都能看到likely()和unlikely()这两个宏,通常这两个宏定义是下面这样的形式。可以看出这2个宏都是使用函数 builtin_expect()实现的, builtin_expect()函数是GCC的一个内建函数(build-in function). 2. 函数声明函数__builtin_expect()是GCC v2.96版本引入的, 其声明如下: long __builtin_expect(long exp, long c); 2.1. 功能描述由于大部分程序员在分支预测方面做得很糟糕，所以GCC 提供了这个内建函数来帮助程序员处理分支预测. 你期望 exp 表达式的值等于常量 c, 看 c 的值, 如果 c 的值为0(即期望的函数返回值), 那么 执行 if 分支的的可能性小, 否则执行 else 分支的可能性小(函数的返回值等于第一个参数 exp). GCC在编译过程中，会将可能性更大的代码紧跟着前面的代码，从而减少指令跳转带来的性能上的下降, 达到优化程序的目的. 通常，你也许会更喜欢使用 gcc 的一个参数 ‘-fprofile-arcs’ 来收集程序运行的关于执行流程和分支走向的实际反馈信息,但是对于很多程序来说,数据是很难收集的。 2.2. 参数详解 exp exp 为一个整型表达式, 例如: (ptr != NULL) c c 必须是一个编译期常量, 不能使用变量 2.3. 返回值 返回值等于 第一个参数 exp 2.4. 使用方法与关键字if一起使用.首先要明确一点就是 if (value) 等价于 if (__builtin_expert(value, x)), 与x的值无关. 例子如下: 例子1 : 期望 x == 0, 所以执行func()的可能性小 12345678if (__builtin_expect(x, 0))&#123; func();&#125;else&#123; //do someting&#125; 例子2 : 期望 ptr !=NULL这个条件成立(1), 所以执行func()的可能性小 12345678if (__builtin_expect(ptr != NULL, 1))&#123; //do something&#125;else&#123; func();&#125; 例子3 : 引言中的likely()和unlikely()宏 首先,看第一个参数!!(x), 他的作用是把(x)转变成”布尔值”, 无论(x)的值是多少 !(x)得到的是true或false, !!(x)就得到了原值的”布尔值” 使用 likely() ，执行 if 后面的语句 的机会更大，使用 unlikely()，执行 else 后面的语句的机会更大。 12345678910111213141516171819202122#define likely(x) __builtin_expect(!!(x), 1)#define unlikely(x) __builtin_expect(!!(x), 0)int main(char *argv[], int argc)&#123; int a; /* Get the value from somewhere GCC can't optimize */ a = atoi (argv[1]); if (unlikely (a == 2)) &#123; a++; &#125; else &#123; a--; &#125; printf ("%d\n", a); return 0;&#125; 3. RATIONALE(原理)if else 句型编译后, 一个分支的汇编代码紧随前面的代码,而另一个分支的汇编代码需要使用JMP指令才能访问到. 很明显通过JMP访问需要更多的时间, 在复杂的程序中,有很多的if else句型,又或者是一个有if else句型的库函数,每秒钟被调用几万次, 通常程序员在分支预测方面做得很糟糕, 编译器又不能精准的预测每一个分支,这时JMP产生的时间浪费就会很大, 函数 __builtin_expert() 就是用来解决这个问题的.]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>CPP</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[GCC的原子操作函数]]></title>
     <url>%2F2015%2F04%2F11%2Flinux_gcc_atomic%2F</url>
 
@@ -2838,6 +2834,21 @@
         <tag>CPP</tag>
         <tag>Linux</tag>
         <tag>MultiThread</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GCC的分支预测优化__builtin_expect]]></title>
+    <url>%2F2015%2F04%2F11%2Flinux_gcc_builtin_expect%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[1. 为什么需要分支预测优化 将流水线引入cpu，可以提高cpu的效率。更简单的说，让cpu可以预先取出下一条指令，可以提供cpu的效率。如下图所示： 取指令 执行指令 输出结果 取指令 执行 可见，cpu流水钱可以减少cpu等待取指令的耗时，从而提高cpu的效率。如果存在跳转指令，那么预先取出的指令就无用了。cpu在执行当前指令时，从内存中取出了当前指令的下一条指令。执行完当前指令后，cpu发现不是要执行下一条指令,而是执行offset偏移处的指令。cpu只能重新从内存中取出offset偏移处的指令。因此，跳转指令会降低流水线的效率，也就是降低cpu的效率。 综上，在写程序时应该尽量避免跳转语句。那么如何避免跳转语句呢？答案就是使用__builtin_expect。 这个指令是gcc引入的，作用是”允许程序员将最有可能执行的分支告诉编译器”。 这个指令的写法为：builtin_expect(EXP, N)。意思是：EXP==N的概率很大。一般的使用方法是将builtin_expect指令封装为LIKELY和UNLIKELY宏。这两个宏的写法如下。 12#define LIKELY(x) __builtin_expect(!!(x), 1) //x很可能为真#define UNLIKELY(x) __builtin_expect(!!(x), 0) //x很可能为假 在很多源码如Linux内核、Glib等,我们都能看到likely()和unlikely()这两个宏,通常这两个宏定义是下面这样的形式。可以看出这2个宏都是使用函数 builtin_expect()实现的, builtin_expect()函数是GCC的一个内建函数(build-in function). 2. 函数声明函数__builtin_expect()是GCC v2.96版本引入的, 其声明如下: long __builtin_expect(long exp, long c); 2.1. 功能描述由于大部分程序员在分支预测方面做得很糟糕，所以GCC 提供了这个内建函数来帮助程序员处理分支预测. 你期望 exp 表达式的值等于常量 c, 看 c 的值, 如果 c 的值为0(即期望的函数返回值), 那么 执行 if 分支的的可能性小, 否则执行 else 分支的可能性小(函数的返回值等于第一个参数 exp). GCC在编译过程中，会将可能性更大的代码紧跟着前面的代码，从而减少指令跳转带来的性能上的下降, 达到优化程序的目的. 通常，你也许会更喜欢使用 gcc 的一个参数 ‘-fprofile-arcs’ 来收集程序运行的关于执行流程和分支走向的实际反馈信息,但是对于很多程序来说,数据是很难收集的。 2.2. 参数详解 exp exp 为一个整型表达式, 例如: (ptr != NULL) c c 必须是一个编译期常量, 不能使用变量 2.3. 返回值 返回值等于 第一个参数 exp 2.4. 使用方法与关键字if一起使用.首先要明确一点就是 if (value) 等价于 if (__builtin_expert(value, x)), 与x的值无关. 例子如下: 例子1 : 期望 x == 0, 所以执行func()的可能性小 12345678if (__builtin_expect(x, 0))&#123; func();&#125;else&#123; //do someting&#125; 例子2 : 期望 ptr !=NULL这个条件成立(1), 所以执行func()的可能性小 12345678if (__builtin_expect(ptr != NULL, 1))&#123; //do something&#125;else&#123; func();&#125; 例子3 : 引言中的likely()和unlikely()宏 首先,看第一个参数!!(x), 他的作用是把(x)转变成”布尔值”, 无论(x)的值是多少 !(x)得到的是true或false, !!(x)就得到了原值的”布尔值” 使用 likely() ，执行 if 后面的语句 的机会更大，使用 unlikely()，执行 else 后面的语句的机会更大。 12345678910111213141516171819202122#define likely(x) __builtin_expect(!!(x), 1)#define unlikely(x) __builtin_expect(!!(x), 0)int main(char *argv[], int argc)&#123; int a; /* Get the value from somewhere GCC can't optimize */ a = atoi (argv[1]); if (unlikely (a == 2)) &#123; a++; &#125; else &#123; a--; &#125; printf ("%d\n", a); return 0;&#125; 3. RATIONALE(原理)if else 句型编译后, 一个分支的汇编代码紧随前面的代码,而另一个分支的汇编代码需要使用JMP指令才能访问到. 很明显通过JMP访问需要更多的时间, 在复杂的程序中,有很多的if else句型,又或者是一个有if else句型的库函数,每秒钟被调用几万次, 通常程序员在分支预测方面做得很糟糕, 编译器又不能精准的预测每一个分支,这时JMP产生的时间浪费就会很大, 函数 __builtin_expert() 就是用来解决这个问题的.]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -3012,20 +3023,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[GDB基础教程]]></title>
-    <url>%2F2015%2F02%2F02%2Fgdb_tutorial%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[GDB 操作提示在编译可执行文件时需要给 gcc 加上 “-g” 选项，这样它才会为生成的可执行文件加入额外的调试信息。不要使用编译器的优化选项，比如： “-O”，”-O2”。因为编译器会为了优化而改变程序流程，那样不利于调试。在 GDB 中执行 shell 命令可以使用：shell commandGDB 命令可以使用 TAB 键来补全。按两次 TAB 键可以看到所有可能的匹配。GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。 启动GDB gdb executable gdb -e executable -c core-file gdb executable -pid process-id （使用ps相关命令可以查看进程的 pid） GDB常用命令 help 列出 gdb 帮助信息。 info+subcommand , 比如 : info breakpoints : 列出断点。 info watchpoints : 列出观察点。 info threads : 列出当前的线程。 info locals : 列出Local variables of current stack frame step(简写一个s也可) 进入下一行代码的执行，会进入函数内部。 next(简写一个n也可) 执行下一行代码。但不会进入函数内部。 finish 跳出当前代码（之前跳入调试） continue(c) 继续执行直到下一个断点或观察点。 b 断点 kill 停止程序执行。 quit(q) 退出 GDB调试器 run(r) 从头开始执行程序，也允许进行重定向。 print(p) variable 打印指定变量的值。 p variable p file::variable p ‘file’::variables backtrace(简写bt), 显示函数调用栈 bt : 显示所有函数调用栈 bt n : 显示程序的调用栈信息，只显示栈顶n桢(frame) bt -n : 显示程序的调用栈信息，只显示栈底部n桢(frame) set backtrace limit n : 设置bt显示的最大桢层数 where 和 info stack ： 都是bt的别名，功能一样 细说断点给 test.c 的第10行设置一个断点 : b test.c:10 断点删除断点的删除与断点的设置同样的重要。删除断点的命令有两个: delete clear delete用法：delete [breakpoints num] [range…]delete可删除单个断点，也可删除一个断点的集合，这个集合用连续的断点号来描述。例如： delete 5 delete 1-10 clear用法: clear 删除所选定的环境中所有的断点 clear location location描述具体的断点。 clear 删除断点是基于行的，不是把所有的断点都删除。例如： clear list_insert //删除函数的所有断点 clear list.c:list_delet //删除文件：函数的所有断点 clear 12 //删除行号的所有断点 clear list.c:12 //删除文件：行号的所有断点 断点的使能和禁止对断点的控制除了建立和删除外，还可以通过使能和禁止来控制，后一种方法更灵活。 断点的四种使能操作： enable [breakpoints] [range…] 完全使能 enable //激活所有断点 enable 4 //激活4断点 enable 5-6 //激活5～6断点 disable [breakpoints] [range…] 禁止 enable once [breakpoints] [range…] 使能一次，触发后禁止 enable delete [breakpoints] [range…]使能一次，触发后删除 用法举例： diable //禁止所有断点 disble 2 //禁止第二个断点 disable 1-5 //禁止第1到第5个断点 GDB帮助GDB的命令很多, 有些用得少的命令记不住的话, 可以在进入GDB之后敲 “help”, 然后再敲 “help + command_class”,比如 : (gdb) helpList of classes of commands: aliases – Aliases of other commandsbreakpoints – Making program stop at certain pointsdata – Examining datafiles – Specifying and examining filesinternals – Maintenance commandsobscure – Obscure featuresrunning – Running the programstack – Examining the stackstatus – Status inquiriessupport – Support facilitiestracepoints – Tracing of program execution without stopping the programuser-defined – User-defined commands Type “help” followed by a class name for a list of commands in that class.Type “help all” for the list of all commands.Type “help” followed by command name for full documentation.Type “apropos word” to search for commands related to “word”.Command name abbreviations are allowed if unambiguous. (gdb) help running Running the program. List of commands: advance – Continue the program up to the given location (same form as args for break command)attach – Attach to a process or file outside of GDBcontinue – Continue program being debuggeddetach – Detach a process or file previously attacheddetach checkpoint – Detach from a checkpoint (experimental)detach inferiors – Detach from inferior ID (or list of IDS)disconnect – Disconnect from a targetfinish – Execute until selected stack frame returnshandle – Specify how to handle signalsinferior – Use this command to switch between inferiorsinterrupt – Interrupt the execution of the debugged programjump – Continue program being debugged at specified line or addresskill – Kill execution of program being debuggedkill inferiors – Kill inferior ID (or list of IDs)next – Step programnexti – Step one instructionreverse-continue – Continue program being debugged but run it in reversereverse-finish – Execute backward until just before selected stack frame is calledreverse-next – Step program backwardreverse-nexti – Step backward one instructionreverse-step – Step program backward until it reaches the beginning of another source linereverse-stepi – Step backward exactly one instructionrun – Start debugged program…]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>GDB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[单例模式的析构问题和线程安全问题]]></title>
     <url>%2F2015%2F02%2F02%2Fsingleton_pattern%2F</url>
 
@@ -3037,6 +3034,20 @@
       </categories>
       <tags>
         <tag>DesignPattern</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GDB基础教程]]></title>
+    <url>%2F2015%2F02%2F02%2Fgdb_tutorial%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[GDB 操作提示在编译可执行文件时需要给 gcc 加上 “-g” 选项，这样它才会为生成的可执行文件加入额外的调试信息。不要使用编译器的优化选项，比如： “-O”，”-O2”。因为编译器会为了优化而改变程序流程，那样不利于调试。在 GDB 中执行 shell 命令可以使用：shell commandGDB 命令可以使用 TAB 键来补全。按两次 TAB 键可以看到所有可能的匹配。GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。 启动GDB gdb executable gdb -e executable -c core-file gdb executable -pid process-id （使用ps相关命令可以查看进程的 pid） GDB常用命令 help 列出 gdb 帮助信息。 info+subcommand , 比如 : info breakpoints : 列出断点。 info watchpoints : 列出观察点。 info threads : 列出当前的线程。 info locals : 列出Local variables of current stack frame step(简写一个s也可) 进入下一行代码的执行，会进入函数内部。 next(简写一个n也可) 执行下一行代码。但不会进入函数内部。 finish 跳出当前代码（之前跳入调试） continue(c) 继续执行直到下一个断点或观察点。 b 断点 kill 停止程序执行。 quit(q) 退出 GDB调试器 run(r) 从头开始执行程序，也允许进行重定向。 print(p) variable 打印指定变量的值。 p variable p file::variable p ‘file’::variables backtrace(简写bt), 显示函数调用栈 bt : 显示所有函数调用栈 bt n : 显示程序的调用栈信息，只显示栈顶n桢(frame) bt -n : 显示程序的调用栈信息，只显示栈底部n桢(frame) set backtrace limit n : 设置bt显示的最大桢层数 where 和 info stack ： 都是bt的别名，功能一样 细说断点给 test.c 的第10行设置一个断点 : b test.c:10 断点删除断点的删除与断点的设置同样的重要。删除断点的命令有两个: delete clear delete用法：delete [breakpoints num] [range…]delete可删除单个断点，也可删除一个断点的集合，这个集合用连续的断点号来描述。例如： delete 5 delete 1-10 clear用法: clear 删除所选定的环境中所有的断点 clear location location描述具体的断点。 clear 删除断点是基于行的，不是把所有的断点都删除。例如： clear list_insert //删除函数的所有断点 clear list.c:list_delet //删除文件：函数的所有断点 clear 12 //删除行号的所有断点 clear list.c:12 //删除文件：行号的所有断点 断点的使能和禁止对断点的控制除了建立和删除外，还可以通过使能和禁止来控制，后一种方法更灵活。 断点的四种使能操作： enable [breakpoints] [range…] 完全使能 enable //激活所有断点 enable 4 //激活4断点 enable 5-6 //激活5～6断点 disable [breakpoints] [range…] 禁止 enable once [breakpoints] [range…] 使能一次，触发后禁止 enable delete [breakpoints] [range…]使能一次，触发后删除 用法举例： diable //禁止所有断点 disble 2 //禁止第二个断点 disable 1-5 //禁止第1到第5个断点 GDB帮助GDB的命令很多, 有些用得少的命令记不住的话, 可以在进入GDB之后敲 “help”, 然后再敲 “help + command_class”,比如 : (gdb) helpList of classes of commands: aliases – Aliases of other commandsbreakpoints – Making program stop at certain pointsdata – Examining datafiles – Specifying and examining filesinternals – Maintenance commandsobscure – Obscure featuresrunning – Running the programstack – Examining the stackstatus – Status inquiriessupport – Support facilitiestracepoints – Tracing of program execution without stopping the programuser-defined – User-defined commands Type “help” followed by a class name for a list of commands in that class.Type “help all” for the list of all commands.Type “help” followed by command name for full documentation.Type “apropos word” to search for commands related to “word”.Command name abbreviations are allowed if unambiguous. (gdb) help running Running the program. List of commands: advance – Continue the program up to the given location (same form as args for break command)attach – Attach to a process or file outside of GDBcontinue – Continue program being debuggeddetach – Detach a process or file previously attacheddetach checkpoint – Detach from a checkpoint (experimental)detach inferiors – Detach from inferior ID (or list of IDS)disconnect – Disconnect from a targetfinish – Execute until selected stack frame returnshandle – Specify how to handle signalsinferior – Use this command to switch between inferiorsinterrupt – Interrupt the execution of the debugged programjump – Continue program being debugged at specified line or addresskill – Kill execution of program being debuggedkill inferiors – Kill inferior ID (or list of IDs)next – Step programnexti – Step one instructionreverse-continue – Continue program being debugged but run it in reversereverse-finish – Execute backward until just before selected stack frame is calledreverse-next – Step program backwardreverse-nexti – Step backward one instructionreverse-step – Step program backward until it reaches the beginning of another source linereverse-stepi – Step backward exactly one instructionrun – Start debugged program…]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>GDB</tag>
       </tags>
   </entry>
   <entry>

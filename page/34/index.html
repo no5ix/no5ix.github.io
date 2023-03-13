@@ -469,6 +469,203 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/12/09/cpp_vargs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/09/cpp_vargs/" itemprop="url">C++可变参数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-09T13:35:25+00:00">
+                2015-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="可变参数的宏"><a href="#可变参数的宏" class="headerlink" title="可变参数的宏"></a>可变参数的宏</h1><p>一般在调试打印Debug信息的时候, 需要可变参数的宏. 从C99开始可以使编译器标准支持可变参数宏(variadic macros), 另外GCC也支持可变参数宏, 但是两种在细节上可能存在区别.</p>
+<p><code>__VA_ARGS__</code> 将 “…” 传递给宏 . 如</p>
+<p><code>#define debug(format, ...) fprintf(stderr, format, __VA_ARGS__)</code></p>
+<p>GCC使用一种不同的语法,从而可以给可变参数一个名字,如同其它参数一样.</p>
+<p><code>#define debug(format, args...) fprintf (stderr, format, args)</code></p>
+<p>这和第一条的宏例子是完全一样的,但是这么写可读性更强并且更容易进行描述.</p>
+<p>上面两个定义的宏,如果出现 debug(“A Message”)的时候,由于宏展开后有个多余的逗号,所以在GCC中将导致编译错误, 而VS则不会. 所以移植性更好的写法是<br>使用一个特殊的”##”操作,格式如下:</p>
+<p><code>#define debug(format, ...) fprintf (stderr, format, ## __VA_ARGS__)</code></p>
+<p>这里,如果可变参数被忽略或为空,”##”操作将使预处理器(preprocessor)去除掉它前面的那个逗号.</p>
+<h1 id="什么是可变形参函数"><a href="#什么是可变形参函数" class="headerlink" title="什么是可变形参函数"></a>什么是可变形参函数</h1><p>　　在 c++ 编程中，有时我们需要编写一些在源代码编写阶段无法确定参数个数，有时甚至无法确定参数类型的函数。</p>
+<p>　　例如，一个求和函数。可以通过重载实现若干个数的和。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int sum(int i1, int i2);</span><br><span class="line">int sum(int i1, int i2, int i3);</span><br><span class="line">...//还可以重载更多类似函数</span><br><span class="line"></span><br><span class="line">double sum(double d1, double d2);</span><br><span class="line">double sum(double d1, double d2, double d3);</span><br><span class="line">...//还可以重载更多类似函数</span><br></pre></td></tr></table></figure>
+<p>　　以上代码通过重载机制来解决变参问题。但很快我们就会发现这种方法存在的问题：必须确保所有可能的实参列表都有对应的重载声明和定义，如果上述方法如果参与运算的参数个数可能从 2——20 个不等，那么我们就需要重载 19 次同一个函数。</p>
+<p>　　我们需要的是这样一类函数：它们可以在运行时取任意的实参个数并根据实参的个数自动处理不同实参的情形，或者至少可以在运行时指定任意的实参个数。</p>
+<h1 id="实现变参函数的三种方法"><a href="#实现变参函数的三种方法" class="headerlink" title="实现变参函数的三种方法"></a>实现变参函数的三种方法</h1><p>　　在 C++ 中实现一个变参函数的方法有三种：第一种方法，将函数形参声明为 C++11 新标准中的 initializer_list 标准库类型；第二种方法继承自 C 语言，形参声明为省略符，函数实现时用参数列表宏访问参数；最后一种方法利用 C++ 泛型特性，声明一个可变参数模板来实现。</p>
+<p>　　<strong>1. 可变参数宏</strong><br>　　实现步骤如下：<br>　　　　１. 函数原型中使用省略号；<br>　　　　２. 函数定义中创建一个 va_list 变量；<br>　　　　 3. 初始化 va_list 变量；<br>　　　　 4. 访问参数列表；<br>　　　　 5. 完成清理工作；<br>　　上述步骤的实现需要使用到四个宏：<strong>_va_list、va_start(va_list, arg)、va_arg(va_list, type)、va_end(va<em>list)</em></strong> 这些宏在<strong>头文件 stdarg.h</strong> 中声明定义。因此使用时需要包含该头文件。</p>
+<p>　　以下代码使用可变参数宏实现一个函数 sum，该函数接受任意个数的整形实参，返回这些实参的和。（忽略可能存在的整形溢出）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* --sum.cpp-- 可变参数宏实现求任意个整形值得和 */</span><br><span class="line">#include &lt;stdarg.h&gt;</span><br><span class="line"></span><br><span class="line">int sum(int count, ...);    　　//原型中使用省略号</span><br><span class="line"></span><br><span class="line">int sum(int count, ...)&#123;    　　//count 表示可变参数个数</span><br><span class="line">    va_list ap;　　　　　　　　　　//声明一个va_list变量</span><br><span class="line">    va_start(ap, count);　　 　　//初始化，第二个参数为最后一个确定的形参</span><br><span class="line"></span><br><span class="line">    int sum = 0;  </span><br><span class="line">    for(int i = 0; i &lt; count; i++)          </span><br><span class="line">        sum += va_arg(ap, int); //读取可变参数，的二个参数为可变参数的类型</span><br><span class="line"></span><br><span class="line">    va_end(ap);          　　　　//清理工作 </span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　使用这种方法需要注意一下几点：<br>　　1. 函数原型中，<strong>省略号必须在参数列表的末尾</strong>：也就是说，在函数原型中参数列表省略号的右边不能再出现确定参数；<br>　　2. 运行时，函数必须能够根据已有信息（既有约定，或确定实参）<strong>确定可变参数的具体个数与类型</strong>：函数定义需要知道可变参数的具体类型、个数，这些信息是在运行时确定的，那么显然应该由实参来确定。在上面的例子中 count 传递了可变参数的个数，而参数类型则是既有约定（整形）；<br>　　3. 使用完成时需要<strong>用 va_end() 做清理工作</strong>，可变参数宏可能使用了动态分配的内存，忘记执行清理操作有可能导致内存泄漏等问题；<br>　　4. 可变参数宏只能实现顺序访问可变参数，无法后退访问，但是可以在清理操作完成后重新使用 va_start 初始化 va_list 变量，重新遍历形参表；<br>　　5. 该方法是<strong>极不安全</strong>的，宏本身无法提供任何安全性保证，他总是按照既定代码 “自作多情” 的认为实参就应该是那么多，即使实参并不是那么多。这就要求所有安全性必须由程序员来保证。例如，在以上的示例代码中，如果调用时指定 count 为 10，但实际上只给出 9 个可变形参，那么函数还是会读取 10 个参数，显然第十次读取是多余的，多余的操作一般不会有什么好结果，当然如果实参过多，多余的实参也不会被读取而是被忽略。</p>
+<p>　　使用这种方法的一个实例是 printf() 函数。printf() 函数通过分析第一个字符串参数中的占位符个数来确定形参的个数；通过占位符的不同来确定参数类型（%d 表示 int 类型、%s 表示 char *）；它也有上述提到的安全问题，如果不小心少提供了个实参，那么越界访问就会发生。</p>
+<p>　　<strong>2. initializer_list 标准库类型</strong><br>　　实现步骤如下：<br>　　　　１. 函数原型中使用实例化 <strong>initializer_list</strong> 模板代表可变参数列表；<br>　　　　２. 使用迭代器访问 initializer_list 中的参数；<br>　　　　 3. 传入实参写在 {} 之内。<br>　　以上步骤中使用到 initializer_list。这是 C++11 新标准中引入的一个标准库类型，与 vector 等容器一样 initializer_list 也支持 <strong>begin() 和 end()</strong> 操作，返回指向首元素的迭代器和尾后迭代器。initializer_list 在同名头文件中声明，其实现由编译器支持。<br>　　以下代码使用 initializer_list 实现函数 sum。（忽略可能存在的整形溢出）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* --sum.cpp-- 利用initializer_list模板实现求人一个整形值得和 */</span><br><span class="line">#include &lt;initializer_list&gt;</span><br><span class="line"></span><br><span class="line">int sum(initializer_list&lt;int&gt; il);  //函数原型用int实例化initializer_list作为形参</span><br><span class="line"></span><br><span class="line">int sum(inttializer_list&lt;int&gt; il)&#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for(auto p = il.begin(); p != il.end(); p++)   //使用迭代器访问参数</span><br><span class="line">        sum += *p;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　使用这种方法需要注意一下几点：<br>　　１. initializer_list 在 C++11 中才被引入，这意味着在编译时可能需要加上这个选项 <strong>-std=c++11</strong> 才能成功编译。上述代码中的 auto 关键字也是 C++11 的一部分；<br>　　 2. 参数必须<strong>放在一组‘{}’（大括号）内</strong>，编译器通过大括号来将这组参数转化为 initializer_list. 大括号的的一组实参与 initializer_list 形参对应；<br>　　 3. 函数原型 initializer_list 与普通形参无异。这表明形参列表中可以包含其他类型参数且位置不限，以下函数原型是正确的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void func(char c, initializer_list&lt;int&gt; il, double d);</span><br></pre></td></tr></table></figure>
+<p>　　４. 同一个 initializer_list 中的参数具有相同的类型。本质上来说 initializer_list 是一个编译器支持的容器类模板，同其他容器一样，容器中的<strong>元素具有相同的类型</strong>。</p>
+<p>　　使用这种方法的一个实例是 C++11 中 vector 的列表初始化构造函数。</p>
+<p>　　<strong>3. 可变参数模板</strong><br>　　在介绍这种方法之前需要先介绍两个并不常用的概念：模板参数包和函数参数包。<br>　　<strong>模板参数包</strong>是零个或多个类型参数的集合。模板参数列表中，class… 或 typename… 表明其后的类型参数表示一个模板参数包；<br>　　<strong>函数参数包</strong>是零个或多个非类型参数的集合。函数形参列表中类型名加省略号表明其后的参数表示一个函数参数包；另外，类型为模板参数包的函数形参是一个函数参数包。<br>　　以下引用参考书目 2 中的示例代码来直观展现这两个概念：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//args是一个模板参数包；rest是一个函数参数包</span><br><span class="line">//args表示零个或多个模板类型参数</span><br><span class="line">//rest表示零个或多个函数参数</span><br><span class="line">template&lt;typename T, typename... args&gt;</span><br><span class="line">void foo(const T &amp;t, const args&amp;... rest);</span><br></pre></td></tr></table></figure>
+<p>　　与 sizeof() 运算符类似，sizeof…() 运算符用于参数包。<strong>sizeof…() 将返回参数包中参数个数</strong>。</p>
+<p>　　利用可变参数模板实现可变参数函数的步骤如下：<br>　　１. 编写含有模板参数包和函数参数包的模板函数；<br>　　 2. 函数定义<strong>递归</strong>调用自己，每一步递归参数包中参数减一；<br>　　 3. 编写处理<strong>边界情况</strong>（参数包含有零个参数）的模板。<br>　　以下引用参考书目２中示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//用来终止递归并答应最后一个元素的函数</span><br><span class="line">//此函数必须在可变参数版本的print定义之前声明</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">std::ostream &amp;print(std::ostream &amp;os, const T &amp;t)&#123;</span><br><span class="line">    return os &lt;&lt; t;                //包中最后一个元素</span><br><span class="line">&#125;</span><br><span class="line">//包中除最后一个元素之外的其他元素都会调用这个版本的pirnt</span><br><span class="line">template &lt;typename T, typename... Args&gt;</span><br><span class="line">std::ostream &amp;print(std::ostream &amp;os, const T &amp;t, cosnt Args &amp;... rest)&#123;</span><br><span class="line">    os &lt;&lt; t &lt;&lt; &quot;,&quot;;               //打印第一个实参，包中元素减一</span><br><span class="line">    return print(os, rest...);    //递归调用，打印剩余实参</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　使用这种方法需要注意的是：<br>　　1. 必须处理边界情况。且如代码注释所示：应当首先定义处理边界情况的模板。<br>　　2. 参数包在参数列表最右侧，参数包只能从左至右展开？<br>　　3. 参数包能够实现更加复杂的模板，更多内容参考 C++ Primer(第五版) 第 16 章相关内容。</p>
+<p>　　这种实现方式的根本原理实际上与最初提到的重载是一致的。通过定义模板，让编译器根据实参类型自动生成对应的重载函数。</p>
+<h1 id="三种实现方法的比较"><a href="#三种实现方法的比较" class="headerlink" title="三种实现方法的比较"></a>三种实现方法的比较</h1><p>　　以上提到的三种方法都可以实现变参函数。但三种方法都有其各自的有点和局限性，在选择时可以从以下几个方面考虑：<br>　　1. <strong>若非必要，不要使用可变参数函数</strong>。应该首先考虑函数重载等其他方法。<br>　　2. <strong>除非需要兼容 C 语言编译器，否则不要使用可变参数宏</strong>。应为这种方法最不安全；尤其是当参数为对象时这种方法易产生各种问题。毕竟这些宏是为 C 语言设计的，C 语言中没有对象。<br>　　3. 如果参数类型相同且 C++11 可用，则通过声明形参为 <strong>initializer_list 往往是最简单、最有效的办法</strong>。<br>　　4. 变参模板看似最为强大。参数的类型可以不同、比可变参数宏更加安全并且可以自动推断参数类型和参数个数。但考虑到模板会为每一个不同的实例生成代码，如果函数的实例过多可能会<strong>使代码体积增大</strong>。另外，依靠<strong>递归</strong>使得功能<strong>具有局限性</strong>，并且<strong>效率</strong>也会受到影响。</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_cpp_bind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -576,183 +773,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         
           <p>我们用一个例子来说明.</p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_pairs_ipairs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/11/lua_pairs_ipairs/" itemprop="url">Lua中ipairs和pairs的区别与使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-11T19:29:22+00:00">
-                2015-11-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Script/" itemprop="url" rel="index">
-                    <span itemprop="name">Script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <p>关于ipairs()和pairs(),Lua官方手册是这样说明的：</p>
-<p><strong>pairs (t)</strong></p>
-<p>If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call.</p>
-<p>Otherwise, returns three values: the next function, the table t, and nil, so that the construction</p>
-<pre><code>` for k,v in pairs(t) do body end`
-</code></pre><p>will iterate over all key–value pairs of table t.</p>
-<p>See function next for the caveats of modifying the table during its traversal.</p>
-<p><strong>ipairs (t)</strong></p>
-<p>If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call.</p>
-<p>Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction</p>
-<pre><code>` for i,v in ipairs(t) do body end`
-</code></pre><p>will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table.</p>
-<p>根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。</p>
 <p><strong>. . .</strong>
           <!--noindex-->
           
@@ -984,7 +1004,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/10/kmp/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_pairs_ipairs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -1003,7 +1023,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/11/10/kmp/" itemprop="url">KMP查找子字符串</a></h1>
+                <a class="post-title-link" href="/2015/11/11/lua_pairs_ipairs/" itemprop="url">Lua中ipairs和pairs的区别与使用</a></h1>
         
 
         <div class="post-meta">
@@ -1015,8 +1035,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-10T02:11:22+00:00">
-                2015-11-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-11T19:29:22+00:00">
+                2015-11-11
               </time>
             
 
@@ -1038,8 +1058,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
+                  <a href="/categories/Script/" itemprop="url" rel="index">
+                    <span itemprop="name">Script</span>
                   </a>
                 </span>
 
@@ -1090,75 +1110,23 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
         
+          <p>关于ipairs()和pairs(),Lua官方手册是这样说明的：</p>
+<p><strong>pairs (t)</strong></p>
+<p>If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call.</p>
+<p>Otherwise, returns three values: the next function, the table t, and nil, so that the construction</p>
+<pre><code>` for k,v in pairs(t) do body end`
+</code></pre><p>will iterate over all key–value pairs of table t.</p>
+<p>See function next for the caveats of modifying the table during its traversal.</p>
+<p><strong>ipairs (t)</strong></p>
+<p>If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call.</p>
+<p>Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction</p>
+<pre><code>` for i,v in ipairs(t) do body end`
+</code></pre><p>will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table.</p>
+<p>根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
           
-            <h1 id="KMP查找子字符串"><a href="#KMP查找子字符串" class="headerlink" title="KMP查找子字符串"></a>KMP查找子字符串</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言　　"></a><a></a>前言　　</h1><p>　 KMP 算法是一种改进的字符串匹配算法，由 D.E.Knuth，J.H.Morris 和 V.R.Pratt 同时发现，因此人们称它为克努特——莫里斯——普拉特操作（简称 KMP 算法）。KMP 算法的关键是利用匹配失败后的信息（已经匹配的部分中的对称信息），尽量减少模式串（待搜索词）与文本串的匹配次数以达到快速匹配的目的。具体实现就是实现一个 next() 函数，该函数本身包含了模式串的局部匹配信息。</p>
-<h1 id="一，kmp-算法的原理："><a href="#一，kmp-算法的原理：" class="headerlink" title="一，kmp 算法的原理："></a><a></a><strong>一，kmp 算法的原理：</strong></h1><p>字符串匹配是计算机的基本任务之一。它所执行的任务就是在一个文本（较长的字符串）中查找是否包含着当前指定的模式字符串（较短的字符串），并找到其位置，这就是字符串匹配问题。<br>注：在算法导论里面待搜索的词叫 “模式” 字符串，并用 P 来表示，本文有的地方叫他“待搜索词”。如无特殊说明数组下标以 0 为起始。<br>举例来说，有一个长字符串 “BBC ABCDAB ABCDABCDABDE”（即文本串），我想知道里面是否包含另一个模式字符串 “ABCDABD”，它的位置在哪呢？</p>
-<h2 id="1，朴素匹配算法过程："><a href="#1，朴素匹配算法过程：" class="headerlink" title="1，朴素匹配算法过程："></a><a></a><strong>1，朴素匹配算法过程：</strong></h2><p>1）.</p>
-<p>首先，长字符串 “BBC ABCDAB ABCDABCDABDE” 的第一个字符与搜索词 “ABCDABD” 的第一个字符，进行比较。因为 B 与 A 不匹配，所以搜索词后移一位。</p>
-<p>2）.</p>
-<p>因为 B 与 A 不匹配，搜索词再往后移。</p>
-<p>3）.</p>
-<p>就这样，直到长字符串有一个字符，与搜索词的第一个字符相同为止（准备开始位置不变搜索下一个字符）。</p>
-<p>4）.</p>
-<p>接着比较字符串和搜索词的下一个字符，还是相同。</p>
-<p>5）.</p>
-<p>但是后面的有可能是不完全匹配的，这时在长字符串中遇到一个字符与搜索词对应的字符不相同。</p>
-<p>6）.</p>
-<p>最自然的反应是，将搜索词整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把搜索位置 BCD 这一段又要重比一次，然而它的比较在直到了后面有 “AB” 与前面的 “AB” 对称的情况下是可以避免的，直到遇到 “AB” 才萌发新的可能使整个字符匹配的可能性。</p>
-<h2 id="2，KMP-匹配算法过程："><a href="#2，KMP-匹配算法过程：" class="headerlink" title="2，KMP 匹配算法过程："></a><a></a><strong>2，KMP 匹配算法过程：</strong></h2><p>1).</p>
-<p>接着前面的匹配过程，现在来看：一个基本事实是，当空格与 D 不匹配时，你其实知道前面六个符 “ABCDAB” 已经匹配的部分。KMP 算法的想法是，设法利用这个搜索词的子串（就是搜索词的某个前缀）的已知对称值，注意这里的对称非中心对称，而是基于搜索词的某一个前缀的对称信息，在不匹配的时候跳过一些不必要的位置来加速匹配速度，这样就提高了效率。</p>
-<p>2).</p>
-<p>怎么做到这一点呢（如何跳过不必要的位置在不匹配时）？可以针对搜索词，算出一张模式字符串的前缀函数表。这张表是如何产生的，后面再介绍，这里只要知道就可以了。</p>
-<p>3).</p>
-<p>已知空格与 D 不匹配时，前面六个字符 “ABCDAB” 是匹配的。查模式串的《前缀函数表》可知，其前缀（即 ABCDAB）中的最后一个匹配字符 B 的位置对应的 “部分匹配值” 为 2，因此按照下面的公式算出向后移动的位数（直接将前面的对称信息调到后面的对称位置，跳过一些不必要的位置）：</p>
-<blockquote>
-<p>移动位数 = 已匹配的字符数 - 当前已匹配字符串的部分匹配值</p>
-</blockquote>
-<p>因为 6 - 2 等于 4，所以将搜索词向后移动 4 位（之所以移动 4，是因为搜索词的已匹配的前缀串 “ABCDAB” 的部分匹配值为 2，即有 “AB” 对称，因为当前已匹配字符串的 “AB” 始终要找到下一个 “AB” 的开始位置，而这个开始位置恰好就在本字符串中的后缀中，所以直接移动 4，我们可以最大减少匹配次数）。</p>
-<p>4).</p>
-<p>因为空格与Ｃ不匹配，搜索词还要继续往后移。这时，已匹配的字符数为 2（”AB”），对应的 “部分匹配值” 为 0。所以，移动位数 = 2 - 0，结果为 2，于是将搜索词向后移 2 位。</p>
-<p>5).</p>
-<p>因为空格与 A 不匹配，继续后移一位。</p>
-<p>6).</p>
-<p>逐位比较，直到发现 C 与 D 不匹配。于是，移动位数 = 6 - 2，继续将搜索词向后移动 4 位。</p>
-<p>7).</p>
-<p>逐位比较，直到搜索词的最后一位，发现完全匹配，于是搜索完成。如果还要继续搜索（即找出全部匹配），移动位数 = 7 - 0，再将搜索词向后移动 7 位，这里就不再重复了。</p>
-<h2 id="3-关于前缀函数表"><a href="#3-关于前缀函数表" class="headerlink" title="3, 关于前缀函数表"></a><a></a><strong>3, 关于前缀函数表</strong></h2><p>1）前缀和后缀</p>
-<p>首先，要了解两个概念：”前缀” 和 “后缀”。 “前缀” 指除了最后一个字符以外，一个字符串的全部头部组合；”后缀” 指除了第一个字符以外，一个字符串的全部尾部组合。</p>
-<p>2）. 前缀函数表的产生</p>
-<p>“前缀函数” 的对称值（也叫部分匹配值）就是模式串的对应前缀中的 “前缀” 和 “后缀” 的最长的共有元素的长度（实质是最大对称程度）。以 “ABCDABD” 为例，</p>
-<ul>
-<li>“A” 的前缀和后缀都为空集，共有元素的长度为 0；</li>
-<li>“AB” 的前缀为 [A]，后缀为 [B]，共有元素的长度为 0；</li>
-<li>“ABC” 的前缀为 [A, AB]，后缀为 [BC, C]，共有元素的长度 0；</li>
-<li>“ABCD” 的前缀为 [A, AB, ABC]，后缀为 [BCD, CD, D]，共有元素的长度为 0；</li>
-<li>“ABCDA” 的前缀为 [A, AB, ABC, ABCD]，后缀为 [BCDA, CDA, DA, A]，共有元素为 “A”，长度为 1；</li>
-<li>“ABCDAB” 的前缀为 [A, AB, ABC, ABCD, ABCDA]，后缀为[BCDAB, CDAB, DAB, AB, B]，共有元素为 “AB”，长度为 2（“AB” 是其最大对称串，长度为 2）；</li>
-<li>“ABCDABD” 的前缀为 [A, AB, ABC, ABCD, ABCDA, ABCDAB]，后缀为 [BCDABD, CDABD, DABD, ABD, BD, D]，共有元素的长度为 0。</li>
-</ul>
-<p>3）. 前缀函数表的意义</p>
-<p>A, 首相要搞清楚的是它是模式字符串的所有前缀产生的一张表，保存的值表征了最大对称度，我们一般用 next 数组来保存其某个前缀的对称值，例如 next[6]=2，代表的就是模式串的某个有 6 个字符的前缀 “ABCDAB”，这个前缀的对称度就是 2，即“AB” 是对称的。</p>
-<p>B, 模式串的某前缀的对称值的实质是，有时候，搜索词已经部分匹配了（一定是某个前缀），其某个前缀（已经匹配部分）的头部和尾部会有重复。比如，”ABCDAB” 之中前缀有 “AB”，后缀也有 “AB”，那么它的 “前缀函数对称值” 就是 2（”AB” 的长度, 且 “AB” 是 “ABCDAB” 所有前缀和后缀中的最长公有元素）。搜索词移动的时候，第一个 “AB” 向后移动 4 位（字符串长度 - 部分匹配值），就可以来到第二个 “AB” 的位置，在这个新的位置我们跳过了不必要的比较位置，并且直接就有 “AB” 匹配。</p>
-<h1 id="二，前缀函数表实现原理"><a href="#二，前缀函数表实现原理" class="headerlink" title="二，前缀函数表实现原理"></a><a></a><strong>二，前缀函数表实现原理</strong></h1><p>　　通过上文完全可以对 kmp 算法的原理有个清晰的了解，那么下一步就是编程实现了，其中最重要的就是如何根据待匹配的模式字符串求出其所有前缀函数表中的最大对称值，在下文中我们将其存储在 next 数组中。</p>
-<h2 id="1，编程策略："><a href="#1，编程策略：" class="headerlink" title="1，编程策略："></a><a></a>1，编程策略：</h2><blockquote>
-<p>1）、当前字符的前面所有字符的对称程度为 0 的时候，只要将当前字符与前面这个子串的第一个字符进行比较。这个很好理解啊，前面所有字符串的对称值都是 0，说明都不对称了，如果多加了一个字符，要对称的话只能是当前字符和前面字符串的第一个字符对称。比如 “ABCDA” 这个里面 “ABCD” 的最大对称值是 0，那么后面的 A 的对称程度只需要看它是不是等于前面字符串的第一个字符 A 相等，如果相等就增加 1，如果不相等那就保持不变，显然还是为 0。</p>
-<p>2）、按照这个推理，我们就可以总结一个规律，不仅前面是 0 呀，如果前面字符串的的最大对称值是 1（k），那么我们就把当前字符与前面字符串的第二（k）个字符即 P[1]（P[k]）进行比较，因为前面的是 1（k），说明前面的字符已经和第一（k）个字符相等了，如果这个又与第二（k+1）个相等了，说明对称程度就是 2（k+1）了。有两（k+1）个字符对称了。比如上面 “ABCDA” 的最大对称值是 1，说明它只和第一个 A 对称了，接着我们就把下一个字符 “B” 与 P[1]（即第二个字符）比较，又相等，自然对称程度就累加了，就是 2 了。</p>
-<p>但是如果不相等呢？那么这个对称值显然要减少，并且我们只能到前面去寻找对称值，而在找的过程我们同时也利用前缀函数表快速搜索找到与当前字符匹配的位置。比如假设是 “(AGCTAGC)(AGCTAGC)T”（请无视字符串中的括号，只为方便看出对称），</p>
-</blockquote>
-<pre><code>模式字符串：AGCTAGCAGCTAGCT
-模式字符串的前缀函数表：
-000012312345674
-</code></pre><blockquote>
-<p>显然最后一个 T 的前一个位置的对称度是 7, 说明 T 的前一个位置的 7 个字符的后缀必与 7 个字符的前缀相等，然而 T!=P[7]，说明 T 位置的对称度只能是比 7 小的长度的前缀，所以递减 k 值，递减为多少呢？那么我们应该利用已经得到的 next[0]···next[k-1] 来求 P[0]···P[k-1] 这个前缀中最大相同前后缀, 当前字符前一个位置的对称度为 k=next[13]=7，显然必须以 7 为基准减少，即在前缀长度为 7 以内的范围重新寻找以 T 结尾的前缀，所以 k=next[6] (即下面参考代码中的<code>k = next[k-1];</code>)，再接着判断是否相等</p>
-<p>3）、按照上面的推理，我们总是在找当前字符 P[q]（q 为遍历到的位置下标，见下面程序）通过其前一个位置的对称值判断是否与 P[k] 相等，如果相等，那么加，如果不相等，那么就减少 k 值，重新寻找与与 P[q] 相等的元素位置</p>
-</blockquote>
-<h2 id="2，参考代码："><a href="#2，参考代码：" class="headerlink" title="2，参考代码："></a><a></a>2，参考代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeNext</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> P[],<span class="keyword">int</span> next[])</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> k;<span class="comment">//k:最大对称长度</span></span><br><span class="line">     <span class="keyword">int</span> m = <span class="built_in">strlen</span>(P);<span class="comment">//模版字符串长度</span></span><br><span class="line">     next[<span class="number">0</span>] = <span class="number">0</span>;<span class="comment">//模版字符串的第一个字符的最大对称值必为0</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> q = <span class="number">1</span>,k = <span class="number">0</span>; q &lt; m; ++q)<span class="comment">//for循环，从第二个字符开始，依次计算每一个字符对应的next值</span></span><br><span class="line">     &#123;<span class="comment">//在前一个位置的k不为0，但是却不相等，那么减少k，重新寻找与P[q]相等的位置，让下面的if来增加k</span></span><br><span class="line">         <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; P[q] != P[k])<span class="comment">//</span></span><br><span class="line">             k = next[k<span class="number">-1</span>];          <span class="comment">//while循环是整段代码的精髓所在，</span></span><br><span class="line">         <span class="keyword">if</span> (P[q] == P[k])<span class="comment">//如果相等，那么最大相同前后缀长度加1</span></span><br><span class="line">             k++;<span class="comment">//增加k的唯一方式</span></span><br><span class="line">         next[q] = k;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>附完整代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"string"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算模式P的部分匹配值，保存在next数组中  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeNext</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;P, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;next)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> q, k;<span class="comment">//k记录所有前缀的对称值  </span></span><br><span class="line">	<span class="keyword">int</span> m = P.size();<span class="comment">//模式字符串的长度  </span></span><br><span class="line">	next[<span class="number">0</span>] = <span class="number">0</span>;<span class="comment">//首字符的对称值肯定为0  </span></span><br><span class="line">	<span class="keyword">for</span> (q = <span class="number">1</span>, k = <span class="number">0</span>; q &lt; m; ++q)<span class="comment">//计算每一个位置的对称值  </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//k总是用来记录上一个前缀的最大对称值  </span></span><br><span class="line">		<span class="keyword">while</span> (k &gt; <span class="number">0</span> &amp;&amp; P[q] != P[k])</span><br><span class="line">			<span class="comment">//k = next[k - 1];//k将循环递减，值得注意的是next[k]&lt;k总是成立  </span></span><br><span class="line">			--k;</span><br><span class="line">		<span class="keyword">if</span> (P[q] == P[k])</span><br><span class="line">			k++;<span class="comment">//增加k的唯一方法  </span></span><br><span class="line">		next[q] = k;<span class="comment">//获取最终值  </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KmpMatch</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;T, <span class="keyword">const</span> <span class="built_in">string</span> &amp;P, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;next)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	n = T.size();</span><br><span class="line">	m = P.size();</span><br><span class="line">	MakeNext(P, next);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, q = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (q &gt; <span class="number">0</span> &amp;&amp; P[q] != T[i])</span><br><span class="line">			q = next[q - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (P[q] == T[i])</span><br><span class="line">			q++;</span><br><span class="line">		<span class="keyword">if</span> (q == m)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"模式文本的偏移为："</span> &lt;&lt; (i - m + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			q = next[q - <span class="number">1</span>];<span class="comment">//寻找下一个匹配</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	system(<span class="string">"color 0A"</span>);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next(<span class="number">20</span>, <span class="number">0</span>);<span class="comment">//保存待搜索字符串的部分匹配表（所有前缀函数的对称值）</span></span><br><span class="line">	<span class="built_in">string</span> T = <span class="string">"BBC ABCDAB ABCDABCDABDE"</span>;<span class="comment">//文本</span></span><br><span class="line">	<span class="built_in">string</span> P = <span class="string">"ABCDABD"</span>;<span class="comment">//待搜索字符串</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"文本字符串："</span> &lt;&lt; T &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"模式字符串："</span> &lt;&lt; P &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	KmpMatch(T, P, next);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"模式字符串的前缀函数表："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; P.size(); i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; next[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <img src="/img/kmp/kmp3.jpg" alt></p>
-<h1 id="参考资源："><a href="#参考资源：" class="headerlink" title="参考资源："></a><a></a><strong>参考资源：</strong></h1><p>【1】网友，c_cloud，《KMP，深入讲解 next 数组的求解》，博客地址，<a href="http://www.cnblogs.com/c-cloud/p/3224788.html" target="_blank" rel="noopener">http://www.cnblogs.com/c-cloud/p/3224788.html</a><br>【2】网友，yearn520，《KMP 算法的前缀 next 数组最通俗的解释》，博客地址，<a href="http://blog.csdn.net/yearn520/article/details/6729426" target="_blank" rel="noopener">http://blog.csdn.net/yearn520/article/details/6729426</a><br>【3】《算法导论》，第三十二章，字符串匹配<br>【4】网友，jBoxer，《The Knuth-Morris-Pratt Algorithm in my own words》，博客地址，<a href="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/" target="_blank" rel="noopener">http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/</a><br>【5】九度 OJ，<a href="http://ac.jobdu.com/problemset.php?page=2" target="_blank" rel="noopener">http://ac.jobdu.com/problemset.php?page=2</a><br>【6】 <a href="https://blog.csdn.net/EbowTang/article/details/49129363" target="_blank" rel="noopener">https://blog.csdn.net/EbowTang/article/details/49129363</a></p>
-
-          
+          <!--/noindex-->
         
       
 
@@ -1179,7 +1147,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
       </footer>
       
-    </div>
+    </p></div>
     
     
     
@@ -1269,7 +1237,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">237</span>
+                <span class="site-state-item-count">238</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

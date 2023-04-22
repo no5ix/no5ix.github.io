@@ -304,6 +304,187 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/04/阅读开源服务器源码基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/04/阅读开源服务器源码基础/" itemprop="url">阅读开源服务器源码基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-04T19:01:46+00:00">
+                2016-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <p>当阅读一些开源服务器源码的时候, 如果不知道以下知识, 就会有知识盲点, 导致不知所云.<br>这篇博客会讲述一些相关的编程知识点, 把之前的笔记总结一下.<br>还是那句老话, <strong>带着问题阅读是最容易让人类迅速进入状态的</strong>.</p>
+<h1 id="进程的内存布局是什么样的"><a href="#进程的内存布局是什么样的" class="headerlink" title="进程的内存布局是什么样的?"></a>进程的内存布局是什么样的?</h1><p>记忆口诀 : 文初堆栈</p>
+<p><img src="http://img.blog.csdn.net/20170822215327682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbm9zaXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>每个进程所分配的内存由很多部分组成，通常称之为“段( segment)”。如下所示。</p>
+<ul>
+<li>文本段<br>  包含了进程运行的程序机器语言指令。文本段具有只读属性，以防止进程通过错<br>  误指针意外修改自身指令。因为多个进程可同时运行同一程序，所以又将文本段设为可<br>  共享，这样，一份程序代码的拷贝可以映射到所有这些进程的虚拟地址空间中。</li>
+<li>初始化数据段<br>  包含显式初始化的全局变量和静态变量。当程序加载到内存时，从可执<br>  行文件中读取这些变量的值。</li>
+<li>未初始化数据段<br>  包含了未进行显式初始化的全局变量和静态变量。程序启动之前，系统<br>  将本段内所有内存初始化为0。出于历史原因，此段常被称为BSS段，这源于老版本的<br>  汇编语言助记符“block started by symbol”o将经过初始化的全局变量和静态变量与未经<br>  初始化的全局变量和静态变量分开存放，其主要原因在于程序在磁盘上存储时，没有必<br>  要为未经初始化的变量分配存储空间。相反，可执行文件只需记录未初始化数据段的位<br>  置及所需大小，直到运行时再由程序加载器来分配这一空间。</li>
+<li>堆(heap)<br>  是可在运行时（为变量）动态进行内存分配的一块区域盛顶端称作program break。</li>
+<li>栈( stack)<br>  是一个动态增长和收缩的段，由栈帧（stack frames）组成。系统会为每个<br>  当前调用的函数分配一个栈帧。栈帧中存倍了函数的局部变量（所谓自动变量）、实<br>  参和返回值。</li>
+</ul>
+<h1 id="线程的同步机制有哪些"><a href="#线程的同步机制有哪些" class="headerlink" title="线程的同步机制有哪些?"></a>线程的同步机制有哪些?</h1><ul>
+<li>互斥量</li>
+<li>条件变量</li>
+<li>自旋锁<br>  自旋锤与互斥量类似，但它不是通过休眠使进程阻塞，而是在获取镪之前一直处于忙等（自<br>  旋）阻塞状态．自旋锁可用于“下情况锁被持有的时间短，而且线程并不希望在重新调度上花<br>  费太多的成本。</li>
+<li>读写锁(也叫做共享互斥锁)<br>  读写锁也叫做共享互斥锁( shared-exclusive lock)。当读写锁是读模式锁住时，就可以说成是<br>  以共享模式锁住的。当它是写模式锁住的时候，就可以说成是以互斥模式锁住的。</li>
+</ul>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/06/30/MongoDB能取代MySQL或者Redis能取代memcached么/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -994,177 +1175,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/05/31/UE4旋转笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/31/UE4旋转笔记/" itemprop="url">UE4旋转笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-31T18:28:21+00:00">
-                2016-05-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UE4/" itemprop="url" rel="index">
-                    <span itemprop="name">UE4</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>最近想将一个vector转化为rotator，转而需要考虑UE4到底是怎么旋转的。<br>下面我们做个实验：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20160913104257997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
-<blockquote>
-<p>我们先将两个staticMesh放入场景，并将它们的rotation调成一样，如上图。<br>上面那个为renti_a_gear，下面那个为renti_a_gear2.</p>
-</blockquote>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1235,7 +1245,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">238</span>
+                <span class="site-state-item-count">239</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1246,7 +1256,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">92</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

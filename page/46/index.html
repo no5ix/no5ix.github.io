@@ -304,6 +304,203 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/25/deque_queue_stack_comparison/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/09/25/deque_queue_stack_comparison/" itemprop="url">STL之队列和双端队列和栈的比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-25T19:11:22+00:00">
+                2014-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="队列和双端队列的比较"><a href="#队列和双端队列的比较" class="headerlink" title="队列和双端队列的比较"></a>队列和双端队列的比较</h1><p><strong>队列</strong>(queue)是一种是相对于栈的一种数据结构，它是先进先出(First In First Out)。<br>它只可以在尾部添加元素。</p>
+<img src="/2014/09/25/deque_queue_stack_comparison/deque_queue_stack_comparison_1.png" title="队列">
+<p><strong>双端队列</strong>(deque double ended queue（双端队列）)是一种相对于队列的一种数据结构。它可以在尾部和头部插入、移除和获取。</p>
+<img src="/2014/09/25/deque_queue_stack_comparison/deque_queue_stack_comparison_2.png" title="双端队列">
+<h1 id="三者成员函数的比较"><a href="#三者成员函数的比较" class="headerlink" title="三者成员函数的比较"></a>三者成员函数的比较</h1><p>通过他们各自的成员函数我们能一目了然的看出区别</p>
+<h2 id="栈的成员函数"><a href="#栈的成员函数" class="headerlink" title="栈的成员函数"></a>栈的成员函数</h2><ul>
+<li><code>stack&lt;Type&gt; s</code> : 定义一个stack的变量 </li>
+<li>s.push(x) : 入栈，如例  </li>
+<li>s.pop() : 出栈，如例 . 注意，出栈操作只是删除栈顶元素，并不返回该元素。 </li>
+<li>s.top() : 访问栈顶，如例  </li>
+<li>s.empty() : 判断栈空，如例，当栈空时，返回true。  </li>
+<li>s.size() : 访问栈中的元素个数，如例  </li>
+</ul>
+<h2 id="队列的成员函数"><a href="#队列的成员函数" class="headerlink" title="队列的成员函数"></a>队列的成员函数</h2><ul>
+<li><code>queue&lt;Type&gt; M</code> : 定义一个queue的变量    </li>
+<li>M.empty()  : 查看是否为空范例     是的话返回1，不是返回0;   </li>
+<li>M.push() : 从已有元素后面增加元素 </li>
+<li>M.size() : 输出现有元素的个数    </li>
+<li>M.front() : 显示第一个元素       </li>
+<li>M.back() : 显示最后一个元素      </li>
+<li>M.pop() : 清除第一个元素      </li>
+</ul>
+<h2 id="双端队列的成员函数"><a href="#双端队列的成员函数" class="headerlink" title="双端队列的成员函数"></a>双端队列的成员函数</h2><ul>
+<li><code>deque&lt;Type&gt; c</code> :     定义一个deque的变量</li>
+<li>c.pop_back()    :    删除最后一个数据。</li>
+<li>c.pop_front()     :   删除头部数据。</li>
+<li>c.push_back(elem) :  在尾部加入一个数据。</li>
+<li>c.push_front(elem)  : 在头部插入一个数据。</li>
+<li>c.clear()       :     移除容器中所有数据。</li>
+<li>c.front()       :     传回地一个数据。</li>
+<li>c.back()       :     传回最后一个数据，不检查这个数据是否存在。</li>
+<li>c.size()       :      返回容器中实际数据的个数。</li>
+<li>c.empty()      :     判断容器是否为空。</li>
+</ul>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/24/binary_search_tree_insert_delete_search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -980,184 +1177,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/09/cplusplus_confused_points_one/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/09/cplusplus_confused_points_one/" itemprop="url">C++很基础的易混淆点一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-09T13:35:25+00:00">
-                2014-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="2-1-1"><a href="#2-1-1" class="headerlink" title="2.1.1 :"></a>2.1.1 :</h1><ul>
-<li><p>C++标准规定的各种算术类型的尺寸的最小值, 同时允许编译器赋予这些类型更大的尺寸. 比如char的最小尺寸为8位</p>
-</li>
-<li><p>执行浮点数运算选用double ，这是因为float 通常精度不够而且双精度浮点数和单精度浮点数的计算代价相差无儿。事实上， 对于某些机器来说，双精度运算甚至比单精度还快</p>
-</li>
-</ul>
-<h1 id="2-1-2"><a href="#2-1-2" class="headerlink" title="2.1.2 :"></a>2.1.2 :</h1><ul>
-<li><p>当我们赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号类型表示数值总数取模后的余数。例如， 8 比特大小的 unsigned char 可以表示0 至<br>255 区间内的值，如果我们赋了一个区间以外的值，则实际的结果是该值对256<br>取模后所得的余数。因此，把 -1 赋给8 比特大小的 unsigned char 所得的结果<br>是255 </p>
-</li>
-<li><p>当我们赋给带符号类型一个超出它表示范围的值时，结果是未定义的( undefined )。<br>此时， 程序，可能继续工作、可能崩溃，也可能生成垃圾数据。</p>
-</li>
-<li><p>如果表达式里既有带符号类型又有无符号类型， 当带符号类型取值为负时会出现异<br>常结果， 这是因为带符号数会自动地转换成无符号数。例如，在一个形如 <code>a*b</code> 的式子<br>中，如果a = -1 , b = 1 ，而且a 和b 都是int ，则表达式的值显然为- 1. 然而，如<br>果a 是int ， 而b 是unsigned ， 则结果须视在当前机器上int 所占位数而定。在32环境里，因为2的32次方是4294967296, 所以<code>a*b</code>结果是4294967295</p>
-</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1228,7 +1247,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">239</span>
+                <span class="site-state-item-count">240</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1239,7 +1258,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -304,6 +304,221 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/08/31/gdb_multi_thread_and_multi_process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/08/31/gdb_multi_thread_and_multi_process/" itemprop="url">GDB多进程多线程调试实战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-31T14:20:23+00:00">
+                2015-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="GDB多进程-多线程调试实战例子"><a href="#GDB多进程-多线程调试实战例子" class="headerlink" title="GDB多进程/多线程调试实战例子"></a>GDB多进程/多线程调试实战例子</h1><p>在gcc编译的时候，记得附加 -lpthread参数, 否则会出现 undefined reference to ‘pthread_create’ 的错误.<br>(因为在链接的时候，无法找到phread库中哥函数的入口地址，于是链接会失败。)</p>
+<h2 id="例程"><a href="#例程" class="headerlink" title="例程"></a>例程</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processA</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processB</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">processAworker</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> pid;</span><br><span class="line"></span><br><span class="line">		pid = fork();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (pid != <span class="number">0</span>)</span><br><span class="line">				processA();</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">				processB();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processA</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">		<span class="keyword">char</span> prefix[] = <span class="string">"ProcessA: "</span>;</span><br><span class="line">		<span class="keyword">char</span> tprefix[] = <span class="string">"thread "</span>;</span><br><span class="line">		<span class="keyword">int</span> tstatus;</span><br><span class="line">		<span class="keyword">pthread_t</span> pt;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step1"</span>);</span><br><span class="line"></span><br><span class="line">		tstatus = pthread_create(&amp;pt, <span class="literal">NULL</span>, processAworker, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (tstatus != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"ProcessA: Can not create new thread."</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		processAworker(<span class="literal">NULL</span>);</span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">processAworker</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">		<span class="keyword">pthread_t</span> tid = pthread_self();</span><br><span class="line">		<span class="keyword">char</span> prefix[] = <span class="string">"ProcessA: "</span>;</span><br><span class="line">		<span class="keyword">char</span> tprefix[] = <span class="string">"thread "</span>;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s%lu %s\n"</span>, prefix, pid, tprefix, tid, <span class="string">"step2"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s%lu %s\n"</span>, prefix, pid, tprefix, tid, <span class="string">"step3"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">		<span class="keyword">char</span> prefix[] = <span class="string">"ProcessB: "</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step1"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step2"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>[cnwuwil@centos c-lab]$ ./test
+ProcessA: 802 step1
+ProcessB: 803 step1
+ProcessB: 803 step2
+ProcessB: 803 step3
+ProcessA: 802 thread 3077555904 step2
+ProcessA: 802 thread 3077555904 step3
+ProcessA: 802 thread 3077553008 step2
+ProcessA: 802 thread 3077553008 step3
+</code></pre><h1 id="GDB多进程调试命令"><a href="#GDB多进程调试命令" class="headerlink" title="GDB多进程调试命令"></a>GDB多进程调试命令</h1><ul>
+<li>set follow-fork-mode [parent|child]   set detach-on-fork [on|off]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>follow-fork-mode</th>
+<th style="text-align:center">detach-on-fork</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td style="text-align:center">on</td>
+<td>只调试主进程（GDB默认）</td>
+</tr>
+<tr>
+<td>child</td>
+<td style="text-align:center">on</td>
+<td>只调试子进程</td>
+</tr>
+<tr>
+<td>parent</td>
+<td style="text-align:center">off</td>
+<td>同时调试两个进程，GDB跟主进程，子进程block在fork位置</td>
+</tr>
+<tr>
+<td>child</td>
+<td style="text-align:center">off</td>
+<td>同时调试两个进程，GDB跟子进程，主进程block在fork位置</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>查询正在调试的进程：info inferiors</li>
+<li>切换调试的进程： inferior +inferior number</li>
+<li>catch fork命令可以捕获进程的创建</li>
+<li>attach + pid ， 可以附到一个正在运行的进程上进行调试</li>
+</ul>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/08/23/putty_config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1123,181 +1338,6 @@ chmod 400 ~/.ssh/authorized_keys
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/redis概要之数据类型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/11/redis概要之数据类型/" itemprop="url">redis概要之数据类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
-                2015-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DB/" itemprop="url" rel="index">
-                    <span itemprop="name">DB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="Redis简介要义"><a href="#Redis简介要义" class="headerlink" title="Redis简介要义"></a>Redis简介要义</h1><ul>
-<li><p>Redis运行在内存中但是可以持久化到磁盘, 重启的时候可以再次加载进行使用</p>
-</li>
-<li><p>Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行</p>
-</li>
-<li><p>Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作</p>
-</li>
-<li><p>Redis支持数据的备份，即master-slave模式的数据备份</p>
-</li>
-</ul>
-<h1 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h1><p>Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好</p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1368,7 +1408,7 @@ chmod 400 ~/.ssh/authorized_keys
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">239</span>
+                <span class="site-state-item-count">240</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1379,7 +1419,7 @@ chmod 400 ~/.ssh/authorized_keys
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

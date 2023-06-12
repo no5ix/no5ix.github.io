@@ -145,3 +145,18 @@ categories:
 - Probably not. After all he is our teacher. We should try to find something nice to say. If you can't say something nice you shouldn't say anything at all.
 - I absolutely agree. It's getting dark. We should finish our homework now.
 - All right. I want to take a shower  first. I'm exhausted!
+
+
+# Falling into love
+
+- I saw Lily for the first time and felt like I had been struck by lightning. She is the girl of my dreams. I have a date with her on Friday. but I really can't decide what to do. Any other ideas? 
+- What about taking her for a dinner or a movie?
+- Not bad. Any other ideas?
+- Well, there's a play on campus this weekend.
+- Good idea. That way she'll think that I have culture. Do you have any other suggestions?
+- What's the matter with these ideas?
+- They are good, but I still need a few more.
+- What about going on a picnic?
+- Cool, but what if the weather isn't ideal?
+- You could take her to the art museum or a cafe. Certainly I must have come up with something you can use. How do you like the ideas i've given you?
+- They're all good.

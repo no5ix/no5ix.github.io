@@ -51,7 +51,7 @@ categories:
     - We're going to camp in the mountains this weekend.
     - 我们这个周末要去山里露营。
 - `camping`: 露营的
-    - We need to buy some camping gear before we go.
+    - We need to buy some camping gear(物品/设备/齿轮) before we go.
     - 我们需要在出发前购买一些露营用品。
 - `campus`: 校园
     - The university campus is very large and has many buildings.

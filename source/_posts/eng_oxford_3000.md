@@ -1,0 +1,171 @@
+---
+title: The oxford 3000 by cefr level
+date: 2023-06-14 21:14:21
+tags:
+- English
+categories:
+- Misc
+---
+
+
+
+# A1
+
+- `concert`: 音乐会
+    - I'm going to a concert tonight featuring my favorite band.
+    - 今晚我要去看我最喜欢的乐队的音乐会。
+- `carrot`: 胡萝卜
+    - Carrots are a good source of vitamins and fiber.
+    - 胡萝卜是维生素和纤维素的良好来源。
+- `dish`: 菜肴/盘子
+    - This Italian restaurant serves delicious pasta dishes.
+    - 这家意大利餐厅供应美味的意面菜肴。
+    - Can you hand me that dish? I need to set the table.
+    - 你能递给我那个盘子吗？我需要摆餐具。
+- `euro`: 欧元
+    - The price of the item is 20 euros.
+    - 这个物品的价格是20欧元。
+- `routine`: 日常事务/例行公事
+    - I have a morning routine that helps me start the day off right.
+    - 我有一个早上的例行公事，帮助我开始美好一天。
+- `shower`: 淋浴
+    - I always take a shower in the morning to wake myself up.
+    - 我总是在早上冲个淋浴来唤醒自己。
+
+
+# A2
+
+- `airline`: 航空公司
+    - I always choose this airline for my international flights.
+    - 我总是选择这家航空公司乘坐国际航班。
+- `architect`: 建筑师
+    - The architect designed a beautiful and functional building.
+    - 建筑师设计了一座美丽而实用的建筑。
+- `architecture`: 建筑学
+    - I'm studying architecture at university.
+    - 我在大学学习建筑学。
+- `athlete`: 运动员
+    - The athlete broke the world record in the 100-meter dash.
+    - 运动员在100米短跑中打破了世界纪录。
+- `camp`: 露营
+    - We're going to camp in the mountains this weekend.
+    - 我们这个周末要去山里露营。
+- `camping`: 露营的
+    - We need to buy some camping gear before we go.
+    - 我们需要在出发前购买一些露营用品。
+- `campus`: 校园
+    - The university campus is very large and has many buildings.
+    - 这所大学的校园非常大，有很多建筑。
+- `carpet`: 地毯
+    - We're going to replace the old carpet in the living room.
+    - 我们要更换客厅里的旧地毯。
+- `charity`: 慈善机构
+    - I donate to a local charity every year.
+    - 我每年都向当地的慈善机构捐款。
+- `clerk`: 职员
+    - The clerk at the store was very helpful.
+    - 商店的职员非常乐于助人。
+- `climate`: 气候
+    - The climate in this region is very hot and dry.
+    - 这个地区的气候非常炎热和干燥。
+- `coach`: 教练
+    - The basketball coach is very strict but also very supportive.
+    - 篮球教练非常严格，但也很支持我们。
+
+- `coast`: 海岸
+    - We took a walk along the coast and watched the sunset.
+    - 我们沿着海岸散步，看着日落。
+- `compete`: 竞争
+    - The two companies are competing for the same market share.
+    - 这两家公司在争夺同一市场份额。
+- `competition`: 竞争
+    - The competition between the two teams was intense.
+    - 两支队伍之间的竞争非常激烈。
+- `conference`: 会议
+    - I'm attending a conference on renewable energy next week.
+    - 下周我将参加一场关于可再生能源的会议。
+- `continent`: 大陆
+    - Africa is the second largest continent in the world.
+    - 非洲是世界上第二大的大陆。
+- `credit`: 信用
+    - It's important to have good credit when applying for a loan.
+    - 申请贷款时拥有良好的信用记录非常重要。
+- `crowd`: 人群
+    - The crowd at the concert was enthusiastic and energetic.
+    - 演唱会上的观众热情而充满活力。
+- `crowded`: 拥挤的
+    - The subway was very crowded during rush hour.
+    - 高峰期地铁非常拥挤。
+- `curly`: 卷曲的
+    - Her hair is naturally curly and very beautiful.
+    - 她的头发天生卷曲，非常漂亮。
+- `detective`: 侦探
+    - The detective solved the case and arrested the criminal.
+    - 侦探破案并逮捕了罪犯。
+- `drama`: 戏剧
+    - I love watching dramas and going to the theater.
+    - 我喜欢看戏剧和去剧院。
+- `enormous`: 巨大的
+    - The elephant was enormous and could barely fit through the door.
+    - 大象非常巨大，几乎无法通过门口。
+
+- `essay`: 文章
+    - I have to write an essay for my English class.
+    - 我得为我的英语课写一篇文章。
+- `fiction`: 小说
+    - I enjoy reading science fiction novels.
+    - 我喜欢阅读科幻小说。
+- `figure`: 数字/人物
+    - The figure on the left represents the number of new cases.
+    - 左侧的数字代表新增病例数。
+    - The figure of a superhero stood tall in the plaza.
+    - 广场上豪杰的雕像高耸入云。
+- `grocery`: 食品杂货
+    - I need to go to the grocery store to buy some milk and bread.
+    - 我需要去杂货店买些牛奶和面包。
+- `gallery`: 画廊
+    - The art gallery features works from famous artists around the world.
+    - 这个艺术画廊展示了来自世界各地著名艺术家的作品。
+- `flu`: 流感
+    - I got the flu and had to stay home for a few days.
+    - 我得了流感，不得不在家休息几天。
+- `hockey`: 曲棍球
+    - Hockey is a popular sport in Canada.
+    - 曲棍球是加拿大的一项流行运动。
+- `insect`: 昆虫
+    - The butterfly is a beautiful insect with colorful wings.
+    - 蝴蝶是一种拥有彩色翅膀的美丽昆虫。
+- `jam`: 果酱/堵塞
+    - I like to spread jam on my toast in the morning.
+    - 我喜欢在早餐时将果酱涂在面包上。
+    - The traffic jam delayed our arrival at the airport.
+    - 交通堵塞延误了我们到达机场的时间。
+- `lamp`: 灯
+    - I need to buy a new lamp for my desk.
+    - 我需要为我的桌子买一盏新的灯。
+
+- `ordinary`: 普通的
+    - The sandwich was just an ordinary ham and cheese sandwich.
+    - 这个三明治只是一个普通的火腿芝士三明治。
+- `poster`: 海报
+    - The poster advertised a new movie coming out next month.
+    - 海报宣传了下个月即将上映的一部新电影。
+- `reception`: 接待处/招待会
+    - I went to the reception desk to check in to my hotel.
+    - 我去接待处办理入住手续。
+    - The company held a reception to welcome its new employees.
+    - 公司举行招待会欢迎新员工。
+- `refrigerator`: 冰箱
+    - I need to put the leftovers in the refrigerator to keep them fresh.
+    - 我需要把剩菜剩饭放到冰箱里保持它们的新鲜。
+- `route`: 路线
+    - We took a scenic route to enjoy the beautiful views.
+    - 我们选择了一条景色优美的路线来欣赏美景。
+- `stamp`: 邮票
+    - I collect rare stamps from around the world.
+    - 我收集来自世界各地的稀有邮票。
+- `thick`: 厚的/浓的
+    - The book was so thick that it took me weeks to finish it.
+    - 这本书太厚了，我花了几周时间才读完。
+    - The soup was too thick for my liking.
+    - 这汤太浓了，不太合我口味。

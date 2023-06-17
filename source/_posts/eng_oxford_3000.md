@@ -71,7 +71,6 @@ categories:
 - `coach`: 教练
     - The basketball coach is very strict but also very supportive.
     - 篮球教练非常严格，但也很支持我们。
-
 - `coast`: 海岸
     - We took a walk along the coast and watched the sunset.
     - 我们沿着海岸散步，看着日落。
@@ -108,7 +107,6 @@ categories:
 - `enormous`: 巨大的
     - The elephant was enormous and could barely fit through the door.
     - 大象非常巨大，几乎无法通过门口。
-
 - `essay`: 文章
     - I have to write an essay for my English class.
     - 我得为我的英语课写一篇文章。
@@ -143,7 +141,6 @@ categories:
 - `lamp`: 灯
     - I need to buy a new lamp for my desk.
     - 我需要为我的桌子买一盏新的灯。
-
 - `ordinary`: 普通的
     - The sandwich was just an ordinary ham and cheese sandwich.
     - 这个三明治只是一个普通的火腿芝士三明治。
@@ -171,312 +168,437 @@ categories:
     - 这汤太浓了，不太合我口味。
 
 
-# B1单词表
-
-- alcoholic
-- assignment
-- atmosphere
-- authority
-- clause
-- chemical
-- ceremony
-- cap
-- campaign
-- cable
-- bury
-- comparison
-- competitive
-- competitor
-- concentrate
-- conclude
-- conclusion
-- consequence
-- convince
-- corn
-- costume
-- cotton
-- cruel
-- cupboard
-- currency
-- curtain
-- departure
-- diagram
-- exhibition
-- examine
-- essential
-- episode
-- engaged
-- district
-- divide
-- documentary
-- drum
-- fasten
-- favor
-- federal
-- fence
-- fuel
-- garage
-- glove
-- grain
-- hire
-- historic
-- historical
-- hurricane
-- imaginary
-- immigrant
-- impact
-- indicate
-- indoors
-- ingredient
-- intend
-- intention
-- invest
-- investigate
-- involved
-- journal
-- killing
-- laboratory
-- lack
-- leather
-- leisure
-- literature
-- mental
-- mild
-- mixture
-- nail
-- narrative
-- neat
-- nuclear
-- occasion
-- ought
-- outdoors
-- overseas
-- participate
-- particularly
-- persuade
-- pleasant
-- plot
-- poet
-- poetry
-- poem
-- portrait
-- pot
-- pour
-- poverty
-- powder
-- prayer
-- priest
-- profit
-- promote
-- protest
-- prove
-- qualification
-- qualified
-- qualify
-- quotation
-- race
-- receipt
-- religion
-- religious
-- rent
-- represent
-- reservation
-- revise
-- rough
-- royal
-- sculpture
-- sensible
-- similarity
-- similarly
-- soil
-- spicy
-- spirit
-- spot
-- stadium
-- staff
-- statue
-- stick
-- studio
-- substance
-- summarize
-- summary
-- symptom
-- tend
-- tent
-- throughout
-- tire
-- toe
-- ton
-- tour
-- trend
-- tube
-- various
-- wing
-- worldwide
-
-
 # B1音标造句表
 
-- `alcoholic` [ˌælkəˈhɒlɪk]: 他是一个酗酒者，需要戒酒治疗。(He is an alcoholic and needs to undergo alcoholism treatment.)
-- `assignment` [əˈsaɪnmənt]: 我们的老师布置了一份作业，需要在下周之前完成。(Our teacher assigned a homework that needs to be completed before next week.)
-- `atmosphere` [ˈætməsfɪə(r)]: 这个餐厅的氛围非常舒适和宁静。(The atmosphere of this restaurant is very comfortable and peaceful.)
-- `authority` [ɔːˈθɒrəti]: 政府有权利制定法律和规定。(The government has the authority to make laws and regulations.)
-- `clause` [klɔːz]: 这个合同有一个特别的条款，需要注意。(This contract has a special clause that needs to be paid attention to.)
-- `chemical` [ˈkemɪkəl]: 这种化学物质对环境有很大的影响。(This chemical substance has a significant impact on the environment.)
-- `ceremony` [ˈserəməni]: 这个仪式非常庄重和隆重。(The ceremony is very solemn and grand.)
-- `cap` [kæp]: 他戴着一顶红色的帽子，非常醒目。(He is wearing a red cap that is very eye-catching.)
-- `campaign` [kæmˈpeɪn]: 他们正在进行一项反贪腐的宣传活动。(They are conducting an anti-corruption campaign.)
-- `cable` [ˈkeɪbl]: 他们用电缆将电视机和电脑连接起来。(They use a cable to connect the TV and the computer.)
-- `bury` [ˈberi]: 我们需要将这些垃圾埋掉，以免对环境造成污染。(We need to bury this garbage to avoid polluting the environment.)
-- `comparison` [kəmˈpærɪsn]: 这两个产品的比较非常有趣，让人可以更好地了解它们的优缺点。(The comparison between these two products is very interesting and can help people better understand their pros and cons.)
+- `alcoholic` [ˌælkəˈhɒlɪk]: 
+    - He is an alcoholic and needs to undergo alcoholism treatment.
+    - > 他是一个酗酒者，需要戒酒治疗。
+- `assignment` [əˈsaɪnmənt]: 
+    - Our teacher assigned a homework that needs to be completed before next week.
+    - > 我们的老师布置了一份作业，需要在下周之前完成。
+- `atmosphere` [ˈætməsfɪə(r)]: 
+    - The atmosphere of this restaurant is very comfortable and peaceful.
+    - > 这个餐厅的氛围非常舒适和宁静。
+- `authority` [ɔːˈθɒrəti]: 
+    - The government has the authority to make laws and regulations.
+    - > 政府有权利制定法律和规定。
+- `clause` [klɔːz]: 
+    - This contract has a special clause that needs to be paid attention to.
+    - > 这个合同有一个特别的条款，需要注意。
+- `chemical` [ˈkemɪkəl]: 
+    - This chemical substance has a significant impact on the environment.
+    - > 这种化学物质对环境有很大的影响。
+- `ceremony` [ˈserəməni]: 
+    - The ceremony is very solemn and grand.
+    - > 这个仪式非常庄重和隆重。
+- `cap` [kæp]: 
+    - He is wearing a red cap that is very eye-catching.
+    - > 他戴着一顶红色的帽子，非常醒目。
+- `campaign` [kæmˈpeɪn]: 
+    - They are conducting an anti-corruption campaign.
+    - > 他们正在进行一项反贪腐的宣传活动。
+- `cable` [ˈkeɪbl]: 
+    - They use a cable to connect the TV and the computer.
+    - > 他们用电缆将电视机和电脑连接起来。
+- `bury` [ˈberi]: 
+    - We need to bury this garbage to avoid polluting the environment.
+    - > 我们需要将这些垃圾埋掉，以免对环境造成污染。
+- `comparison` [kəmˈpærɪsn]: 
+    - The comparison between these two products is very interesting and can help people better understand their pros and cons.
+    - > 这两个产品的比较非常有趣，让人可以更好地了解它们的优缺点。
 
-- `competitive` [kəmˈpetɪtɪv]: 这是一个非常有竞争力的市场，需要不断提高自己的水平才能获得成功。(This is a very competitive market, and one needs to constantly improve oneself to achieve success.)
-- `competitor` [kəmˈpetɪtə(r)]: 这个公司的竞争对手很强大，需要制定更好的策略来应对。(The company's competitors are very powerful, and better strategies are needed to deal with them.)
-- `concentrate` [ˈkɒnsəntreɪt]: 我们需要集中精力完成这项任务。(We need to concentrate on completing this task.)
-- `conclude` [kənˈkluːd]: 经过多方考虑，我们得出了一个结论。(After considering all aspects, we have come to a conclusion.)
-- `conclusion` [kənˈkluːʒn]: 这个结论是基于事实和证据得出的。(This conclusion is based on facts and evidence.)
-- `consequence` [ˈkɒnsɪkwəns]: 不负责任的行为会带来不良后果。(Irresponsible actions will bring about adverse consequences.)
-- `convince` [kənˈvɪns]: 他用事实和逻辑说服了我，让我改变了观点。(He convinced me with facts and logic and made me change my mind.)
-- `corn` [kɔːn]: 玉米是一种非常受欢迎的粮食作物。(Corn is a very popular cereal crop.)
-- `costume` [ˈkɒstjuːm]: 这个舞台剧的服装设计非常精美，让观众可以更好地体验剧情。(The costume design of this stage play is very exquisite and allows the audience to better experience the plot.)
+- `competitive` [kəmˈpetɪtɪv]: 
+    - This is a very competitive market, and one needs to constantly improve oneself to achieve success.
+    - > 这是一个非常有竞争力的市场，需要不断提高自己的水平才能获得成功。
+- `competitor` [kəmˈpetɪtə(r)]: 
+    - The company's competitors are very powerful, and better strategies are needed to deal with them.
+    - > 这个公司的竞争对手很强大，需要制定更好的策略来应对。
+- `concentrate` [ˈkɒnsəntreɪt]: 
+    - We need to concentrate on completing this task.
+    - > 我们需要集中精力完成这项任务。
+- `conclude` [kənˈkluːd]: 
+    - After considering all aspects, we have come to a conclusion.
+    - > 经过多方考虑，我们得出了一个结论。
+- `conclusion` [kənˈkluːʒn]: 
+    - This conclusion is based on facts and evidence.
+    - > 这个结论是基于事实和证据得出的。
+- `consequence` [ˈkɒnsɪkwəns]: 
+    - Irresponsible actions will bring about adverse consequences.
+    - > 不负责任的行为会带来不良后果。
+- `convince` [kənˈvɪns]: 
+    - He convinced me with facts and logic and made me change my mind.
+    - > 他用事实和逻辑说服了我，让我改变了观点。
+- `corn` [kɔːn]: 
+    - Corn is a very popular cereal crop.
+    - > 玉米是一种非常受欢迎的粮食作物。
+- `costume` [ˈkɒstjuːm]: 
+    - The costume design of this stage play is very exquisite and allows the audience to better experience the plot.
+    - > 这个舞台剧的服装设计非常精美，让观众可以更好地体验剧情。
 
-- `cotton` [ˈkɒtn]: 这件衣服是用纯棉制成的，穿着非常舒适。(This piece of clothing is made of pure cotton and is very comfortable to wear.)
-- `cruel` [kruːəl]: 虐待动物是一种非常残忍的行为。(Animal abuse is a very cruel behavior.)
-- `cupboard` [ˈkʌbəd]: 我们需要一个储物柜来存放零散的物品。(We need a cupboard to store miscellaneous items.)
-- `currency` [ˈkʌrənsi]: 美元是世界上最流行的货币之一。(The US dollar is one of the most popular currencies in the world.)
-- `curtain` [ˈkɜːtn]: 我们需要一些窗帘来遮挡阳光和保护隐私。(We need some curtains to block the sunlight and protect the privacy.)
-- `departure` [dɪˈpɑːtʃə(r)]: 我们的航班将在明天早上出发。(Our flight will depart tomorrow morning.)
-- `diagram` [ˈdaɪəɡræm]: 这个流程图可以帮助我们更好地理解整个项目的流程。(This flowchart can help us better understand the process of the entire project.)
-- `exhibition` [ˌeksɪˈbɪʃn]: 这个博物馆正在展出一些非常珍贵的文物。(This museum is exhibiting some very precious cultural relics.)
-- `examine` [ɪɡˈzæmɪn]: 医生需要仔细检查病人的身体状况。(Doctors need to carefully examine the patient's physical condition.)
-- `essential` [ɪˈsenʃl]: 这是一个非常重要的问题，需要及时解决。(This is a very important issue that needs to be resolved in a timely manner.)
-- `episode` [ˈepɪsəʊd]: 这个电视剧的每一集都非常有趣和引人入胜。(Each episode of this TV series is very interesting and captivating.)
+- `cotton` [ˈkɒtn]: 
+    - This piece of clothing is made of pure cotton and is very comfortable to wear.
+    - > 这件衣服是用纯棉制成的，穿着非常舒适。
+- `cruel` [kruːəl]: 
+    - Animal abuse is a very cruel behavior.
+    - > 虐待动物是一种非常残忍的行为。
+- `cupboard` [ˈkʌbəd]: 
+    - We need a cupboard to store miscellaneous items.
+    - > 我们需要一个储物柜来存放零散的物品。
+- `currency` [ˈkʌrənsi]: 
+    - The US dollar is one of the most popular currencies in the world.
+    - > 美元是世界上最流行的货币之一。
+- `curtain` [ˈkɜːtn]: 
+    - We need some curtains to block the sunlight and protect the privacy.
+    - > 我们需要一些窗帘来遮挡阳光和保护隐私。
+- `departure` [dɪˈpɑːtʃə(r)]: 
+    - Our flight will depart tomorrow morning.
+    - > 我们的航班将在明天早上出发。
+- `diagram` [ˈdaɪəɡræm]: 
+    - This flowchart can help us better understand the process of the entire project.
+    - > 这个流程图可以帮助我们更好地理解整个项目的流程。
+- `exhibition` [ˌeksɪˈbɪʃn]: 
+    - This museum is exhibiting some very precious cultural relics.
+    - > 这个博物馆正在展出一些非常珍贵的文物。
+- `examine` [ɪɡˈzæmɪn]: 
+    - Doctors need to carefully examine the patient's physical condition.
+    - > 医生需要仔细检查病人的身体状况。
+- `essential` [ɪˈsenʃl]: 
+    - This is a very important issue that needs to be resolved in a timely manner.
+    - > 这是一个非常重要的问题，需要及时解决。
+- `episode` [ˈepɪsəʊd]: 
+    - Each episode of this TV series is very interesting and captivating.
+    - > 这个电视剧的每一集都非常有趣和引人入胜。
 
-- `engaged` [ɪnˈɡeɪdʒd]: 我们正在忙于一项重要的项目，暂时无法参加其他活动。(We are engaged in an important project and cannot participate in other activities for the time being.)
-- `district` [ˈdɪstrɪkt]: 这个城市分为很多个区域，每个区域都有自己的特点。(This city is divided into many districts, and each district has its own characteristics.)
-- `divide` [dɪˈvaɪd]: 我们需要将这个任务分成几个部分来完成。(We need to divide this task into several parts to complete it.)
-- `documentary` [ˌdɒkjʊˈmentəri]: 这个纪录片非常有意义，让人可以更好地了解一个历史事件。(This documentary is very meaningful and allows people to better understand a historical event.)
-- `drum` [drʌm]: 鼓声响起，让人感到非常热烈和欢快。(The sound of the drums is enthusiastic and joyous.)
-- `fasten` [ˈfɑːsn]: 请系好安全带，我们即将起飞。(Please fasten your seatbelts as we are about to take off.)
-- `favor` [ˈfeɪvə(r)]: 他向我请求一个小小的帮助，我很乐意帮助他。(He asked me for a small favor, and I am happy to help him.)
-- `federal` [ˈfedərəl]: 联邦政府有权力制定一些全国性的政策和法律。(The federal government has the power to make some national policies and laws.)
-- `fence` [fens]: 这个花园有一道美丽的篱笆，保护了花草不受外界干扰。(This garden has a beautiful fence that protects the flowers and plants from external interference.)
-- `fuel` [fjuːəl]: 汽车需要足够的燃料才能够行驶。(Cars need sufficient fuel to run.)
+- `engaged` [ɪnˈɡeɪdʒd]: 
+    - We are engaged in an important project and cannot participate in other activities for the time being.
+    - > 我们正在忙于一项重要的项目，暂时无法参加其他活动。
+- `district` [ˈdɪstrɪkt]: 
+    - This city is divided into many districts, and each district has its own characteristics.
+    - > 这个城市分为很多个区域，每个区域都有自己的特点。
+- `divide` [dɪˈvaɪd]: 
+    - We need to divide this task into several parts to complete it.
+    - > 我们需要将这个任务分成几个部分来完成。
+- `documentary` [ˌdɒkjʊˈmentəri]: 
+    - This documentary is very meaningful and allows people to better understand a historical event.
+    - > 这个纪录片非常有意义，让人可以更好地了解一个历史事件。
+- `drum` [drʌm]: 
+    - The sound of the drums is enthusiastic and joyous.
+    - > 鼓声响起，让人感到非常热烈和欢快。
+- `fasten` [ˈfɑːsn]: 
+    - Please fasten your seatbelts as we are about to take off.
+    - > 请系好安全带，我们即将起飞。
+- `favor` [ˈfeɪvə(r)]: 
+    - He asked me for a small favor, and I am happy to help him.
+    - > 他向我请求一个小小的帮助，我很乐意帮助他。
+- `federal` [ˈfedərəl]: 
+    - The federal government has the power to make some national policies and laws.
+    - > 联邦政府有权力制定一些全国性的政策和法律。
+- `fence` [fens]: 
+    - This garden has a beautiful fence that protects the flowers and plants from external interference.
+    - > 这个花园有一道美丽的篱笆，保护了花草不受外界干扰。
+- `fuel` [fjuːəl]: 
+    - Cars need sufficient fuel to run.
+    - > 汽车需要足够的燃料才能够行驶。
 
+- `garage` [ˈɡærɑːʒ]: 
+    - I parked the car in the garage.
+    - > 我把车停在了车库里。
+- `glove` [ɡlʌv]: 
+    - I need a pair of gloves to protect my hands.
+    - > 我需要一双手套来保护我的手。
+- `grain` [ɡreɪn]: 
+    - These grains are one of the essential foods in our daily life.
+    - > 这些谷物是我们日常生活中必不可少的食物之一。
+- `hire` [haɪə(r)]: 
+    - We need to hire some professional workers to help us complete this project.
+    - > 我们需要雇佣一些专业的工人来帮助我们完成这个项目。
+- `historic` [hɪˈstɒrɪk]: 
+    - This historic event will be recorded in the history books.
+    - > 这个历史性的事件将会被记录在历史书上。
+- `historical` [hɪsˈtɒrɪkəl]: 
+    - This museum has many historical relics and exhibits.
+    - > 这个博物馆收藏了很多历史性的文物和展品。
+- `hurricane` [ˈhʌrɪkən]: 
+    - A hurricane is a very strong weather phenomenon that can bring destructive impacts.
+    - > 飓风是一种非常强烈的天气现象，可以带来破坏性的影响。
+- `imaginary` [ɪˈmædʒɪnəri]: 
+    - Children often have various imaginations and fantasies.
+    - > 小孩子们常常有各种各样的幻想和想象。
+- `immigrant` [ˈɪmɪɡrənt]: 
+    - Immigrants are an important source of economic and cultural diversity for a country.
+    - > 移民是一个国家经济和文化多样性的重要来源。
+- `impact` [ˈɪmpækt]: 
+    - This event has a significant impact on our lives.
+    - > 这个事件对我们的生活产生了很大的影响。
+- `indicate` [ˈɪndɪkeɪt]: 
+    - The data indicates that the sales of this product are gradually decreasing.
+    - > 数据显示，这个产品的销售额正在逐渐下降。
 
-- `garage` [ˈɡærɑːʒ]: 我把车停在了车库里。(I parked the car in the garage.)
-- `glove` [ɡlʌv]: 我需要一双手套来保护我的手。(I need a pair of gloves to protect my hands.)
-- `grain` [ɡreɪn]: 这些谷物是我们日常生活中必不可少的食物之一。(These grains are one of the essential foods in our daily life.)
-- `hire` [haɪə(r)]: 我们需要雇佣一些专业的工人来帮助我们完成这个项目。(We need to hire some professional workers to help us complete this project.)
-- `historic` [hɪˈstɒrɪk]: 这个历史性的事件将会被记录在历史书上。(This historic event will be recorded in the history books.)
-- `historical` [hɪsˈtɒrɪkəl]: 这个博物馆收藏了很多历史性的文物和展品。(This museum has many historical relics and exhibits.)
-- `hurricane` [ˈhʌrɪkən]: 飓风是一种非常强烈的天气现象，可以带来破坏性的影响。(A hurricane is a very strong weather phenomenon that can bring destructive impacts.)
-- `imaginary` [ɪˈmædʒɪnəri]: 小孩子们常常有各种各样的幻想和想象。(Children often have various imaginations and fantasies.)
-- `immigrant` [ˈɪmɪɡrənt]: 移民是一个国家经济和文化多样性的重要来源。(Immigrants are an important source of economic and cultural diversity for a country.)
-- `impact` [ˈɪmpækt]: 这个事件对我们的生活产生了很大的影响。(This event has a significant impact on our lives.)
-- `indicate` [ˈɪndɪkeɪt]: 数据显示，这个产品的销售额正在逐渐下降。(The data indicates that the sales of this product are gradually decreasing.)
+- `indoors` [ˌɪnˈdɔːz]: 
+    - Indoor exercises are also a great way to keep fit.
+    - > 在室内运动也是一种很好的健身方式。
+- `ingredient` [ɪnˈɡriːdiənt]: 
+    - This recipe requires many different ingredients to make.
+    - > 这个菜谱需要很多不同的食材来制作。
+- `intend` [ɪnˈtend]: 
+    - I intend to go on vacation next month and enjoy some relaxing time.
+    - > 我打算下个月去旅游，享受一下放松的时光。
+- `intention` [ɪnˈtenʃən]: 
+    - My intention is to help others and make their lives better.
+    - > 我的意图是帮助别人，让他们过得更好。
+- `invest` [ɪnˈvest]: 
+    - Investing in stocks is a high-risk and high-return investment method.
+    - > 投资股票是一种风险和收益都很高的投资方式。
+- `investigate` [ɪnˈvestɪɡeɪt]: 
+    - The police are investigating this case and hope to find the murderer.
+    - > 警方正在调查这个案件，希望能够找到凶手。
+- `involved` [ɪnˈvɒlvd]: 
+    - This project requires the involvement of many people to work together to complete.
+    - > 这个项目需要很多人一起合作才能够完成。
+- `journal` [ˈdʒɜːnl]: 
+    - This scientific journal published a valuable research paper.
+    - > 这个科学杂志发表了一篇很有价值的研究论文。
+- `killing` [ˈkɪlɪŋ]: 
+    - Killing animals for meat is a very cruel and inhumane act.
+    - > 屠宰动物是一种非常残忍和不人道的行为。
+- `laboratory` [ləˈbɒrətəri]: 
+    - Science laboratories are important places for scientific research and development.
+    - > 科学实验室是进行科学研究和开发的重要场所。
 
-- `indoors` [ˌɪnˈdɔːz]: 在室内运动也是一种很好的健身方式。(Indoor exercises are also a great way to keep fit.)
-- `ingredient` [ɪnˈɡriːdiənt]: 这个菜谱需要很多不同的食材来制作。(This recipe requires many different ingredients to make.)
-- `intend` [ɪnˈtend]: 我打算下个月去旅游，享受一下放松的时光。(I intend to go on vacation next month and enjoy some relaxing time.)
-- `intention` [ɪnˈtenʃən]: 我的意图是帮助别人，让他们过得更好。(My intention is to help others and make their lives better.)
-- `invest` [ɪnˈvest]: 投资股票是一种风险和收益都很高的投资方式。(Investing in stocks is a high-risk and high-return investment method.)
-- `investigate` [ɪnˈvestɪɡeɪt]: 警方正在调查这个案件，希望能够找到凶手。(The police are investigating this case and hope to find the murderer.)
-- `involved` [ɪnˈvɒlvd]: 这个项目需要很多人一起合作才能够完成。(This project requires the involvement of many people to work together to complete.)
-- `journal` [ˈdʒɜːnl]: 这个科学杂志发表了一篇很有价值的研究论文。(This scientific journal published a valuable research paper.)
-- `killing` [ˈkɪlɪŋ]: 屠宰动物是一种非常残忍和不人道的行为。(Killing animals for meat is a very cruel and inhumane act.)
-- `laboratory` [ləˈbɒrətəri]: 科学实验室是进行科学研究和开发的重要场所。(Science laboratories are important places for scientific research and development.)
+- `lack` [læk]: 
+    - Our company lacks an effective marketing strategy.
+    - > 我们公司缺乏一个有效的市场营销策略。
+- `leather` [ˈleðə(r)]: 
+    - This leather bag is made of high-quality leather and is very durable and beautiful.
+    - > 这个皮包是用高质量的皮革制作的，非常耐用和美观。
+- `leisure` [ˈleʒə(r)]: 
+    - Leisure time can be used to do things you enjoy and relax.
+    - > 闲暇时间可以用来做一些自己喜欢的事情，放松身心。
+- `literature` [ˈlɪtərətʃə(r)]: 
+    - Literature can bring us infinite imagination and emotion.
+    - > 文学作品可以带给我们无限的想象力和感受力。
+- `mental` [ˈmentl]: 
+    - Mental health is crucial for our life and work.
+    - > 心理健康对于我们的生活和工作都非常重要。
+- `mild` [maɪld]: 
+    - The climate in this area is mild and pleasant throughout the year.
+    - > 这个地区的气候温和，四季宜人。
+- `mixture` [ˈmɪkstʃə(r)]: 
+    - This medicine is made up of a mixture of different ingredients.
+    - > 这个药是由多种不同的成分混合而成的。
+- `nail` [neɪl]: 
+    - I need a nail to fix this wooden board.
+    - > 我需要一把钉子来固定这个木板。
+- `narrative` [ˈnærətɪv]: 
+    - This novel tells a touching story that is engaging.
+    - > 这个小说讲述了一个感人的故事，引人入胜。
+- `neat` [niːt]: 
+    - This room is neat and tidy, making it very comfortable and pleasant.
+    - > 这个房间整洁有序，非常舒适宜人。
+- `nuclear` [ˈnjuːkliə(r)]: 
+    - Nuclear weapons are a very dangerous weapon, posing a great threat to humanity and the environment.
+    - > 核武器是一种非常危险的武器，对人类和生态造成极大的威胁。
 
-- `lack` [læk]: 我们公司缺乏一个有效的市场营销策略。(Our company lacks an effective marketing strategy.)
-- `leather` [ˈleðə(r)]: 这个皮包是用高质量的皮革制作的，非常耐用和美观。(This leather bag is made of high-quality leather and is very durable and beautiful.)
-- `leisure` [ˈleʒə(r)]: 闲暇时间可以用来做一些自己喜欢的事情，放松身心。(Leisure time can be used to do things you enjoy and relax.)
-- `literature` [ˈlɪtərətʃə(r)]: 文学作品可以带给我们无限的想象力和感受力。(Literature can bring us infinite imagination and emotion.)
-- `mental` [ˈmentl]: 心理健康对于我们的生活和工作都非常重要。(Mental health is crucial for our life and work.)
-- `mild` [maɪld]: 这个地区的气候温和，四季宜人。(The climate in this area is mild and pleasant throughout the year.)
-- `mixture` [ˈmɪkstʃə(r)]: 这个药是由多种不同的成分混合而成的。(This medicine is made up of a mixture of different ingredients.)
-- `nail` [neɪl]: 我需要一把钉子来固定这个木板。(I need a nail to fix this wooden board.)
-- `narrative` [ˈnærətɪv]: 这个小说讲述了一个感人的故事，引人入胜。(This novel tells a touching story that is engaging.)
-- `neat` [niːt]: 这个房间整洁有序，非常舒适宜人。(This room is neat and tidy, making it very comfortable and pleasant.)
-- `nuclear` [ˈnjuːkliə(r)]: 核武器是一种非常危险的武器，对人类和生态造成极大的威胁。(Nuclear weapons are a very dangerous weapon, posing a great threat to humanity and the environment.)
+- `occasion` [əˈkeɪʒən]: 
+    - This special occasion requires us to wear formal dress to attend.
+    - > 这个特殊的场合需要我们穿礼服出席。
+- `ought` [ɔːt]: 
+    - You ought to start preparing for the exam early so that you can achieve better results.
+    - > 你应该尽早开始准备考试，这样才能更好地取得好成绩。
+- `outdoors` [ˈaʊtdɔːz]: 
+    - Outdoor activities can allow us to breathe fresh air and enjoy the beauty of nature.
+    - > 在户外活动可以让我们呼吸新鲜空气，享受自然的美景。
+- `overseas` [ˌəʊvərˈsiːz]: 
+    - Our company has many overseas clients and needs to constantly expand our overseas market.
+    - > 我们公司有很多海外客户，需要不断拓展海外市场。
+- `participate` [pɑːˈtɪsɪpeɪt]: 
+    - Participating in community activities can help us better understand the community and interact with others.
+    - > 参与社区活动可以让我们更好地了解社区和与他人互动。
+- `particularly` [pəˈtɪkjʊlə(r)li]: 
+    - I particularly like the historical relics and culture of this city.
+    - > 我特别喜欢这个城市的历史遗迹和文化。
+- `persuade` [pəˈsweɪd]: 
+    - We need to persuade them to accept our proposal, which is crucial for the success of the project.
+    - > 我们需要说服他们接受我们的建议，这对项目的成功非常重要。
+- `pleasant` [ˈpleznt]: 
+    - The atmosphere of this restaurant is very pleasant, and the service is also attentive.
+    - > 这个餐厅的氛围非常愉快，服务也很周到。
+- `plot` [plɒt]: 
+    - This novel has a thrilling plot that keeps you wanting to read on.
+    - > 这个小说有一个扣人心弦的情节，让人一直想看下去。
 
-- `occasion` [əˈkeɪʒən]: 这个特殊的场合需要我们穿礼服出席。(This special occasion requires us to wear formal dress to attend.)
-- `ought` [ɔːt]: 你应该尽早开始准备考试，这样才能更好地取得好成绩。(You ought to start preparing for the exam early so that you can achieve better results.)
-- `outdoors` [ˈaʊtdɔːz]: 在户外活动可以让我们呼吸新鲜空气，享受自然的美景。(Outdoor activities can allow us to breathe fresh air and enjoy the beauty of nature.)
-- `overseas` [ˌəʊvərˈsiːz]: 我们公司有很多海外客户，需要不断拓展海外市场。(Our company has many overseas clients and needs to constantly expand our overseas market.)
-- `participate` [pɑːˈtɪsɪpeɪt]: 参与社区活动可以让我们更好地了解社区和与他人互动。(Participating in community activities can help us better understand the community and interact with others.)
-- `particularly` [pəˈtɪkjʊlə(r)li]: 我特别喜欢这个城市的历史遗迹和文化。(I particularly like the historical relics and culture of this city.)
-- `persuade` [pəˈsweɪd]: 我们需要说服他们接受我们的建议，这对项目的成功非常重要。(We need to persuade them to accept our proposal, which is crucial for the success of the project.)
-- `pleasant` [ˈpleznt]: 这个餐厅的氛围非常愉快，服务也很周到。(The atmosphere of this restaurant is very pleasant, and the service is also attentive.)
-- `plot` [plɒt]: 这个小说有一个扣人心弦的情节，让人一直想看下去。(This novel has a thrilling plot that keeps you wanting to read on.)
+- `poet` [ˈpəʊət]: 诗人
+    - William Shakespeare is a famous poet in England, and his poetry is still widely recited to this day.
+    - > William Shakespeare 是英国著名的诗人，他的诗歌作品至今仍然被广泛传诵。 
+- `poetry` [ˈpəʊətri]: 诗歌
+    - Poetry can express the poet's deep emotions and thoughts through words.
+    - > 诗歌可以通过文字表达出诗人内心深处的情感和思想。 
+- `poem` [ˈpəʊəm]: 诗篇
+    - This poem describes a beautiful landscape, allowing people to feel the magic and beauty of nature.
+    - > 这首诗篇描述了一个美丽的风景，让人感受到大自然的神奇和美丽。
+- `portrait` [ˈpɔːtrət]: 肖像画
+    - This portrait vividly depicts the appearance and temperament of the celebrity, and is very lifelike.
+    - > 这幅肖像画生动地展现了这位名人的面容和气质，非常逼真。
 
+- `pot` [pɒt]: 
+    - He cooked a pot of noodles in the pot.
+    - > 他在锅里煮了一锅面条。
+- `pour` [pɔːr]: 
+    - She poured a glass of water.
+    - > 她倒了一杯水。
+- `poverty` [ˈpɒvəti]: 
+    - Many people live in poverty.
+    - > 许多人生活在贫困中。
+- `powder` [ˈpaʊdə(r)]: 
+    - She made a cake with flour powder.
+    - > 她用面粉制作了蛋糕。
+- `prayer` [preə(r)]: 
+    - They prayed in the church.
+    - > 他们在教堂里祷告。
+- `priest` [priːst]: 
+    - The priest conducted mass in the church.
+    - > 牧师在教堂里主持弥撒。
+- `profit` [ˈprɒfɪt]: 
+    - This business brought in a lot of profit.
+    - > 这项业务带来了很多利润。
+- `promote` [prəˈməʊt]: 
+    - The company promoted its new product to increase sales.
+    - > 公司为了提高销售额而推广新产品。
+- `protest` [ˈprəʊtest]: 
+    - People held a protest march to protest the government's policies.
+    - > 人们举行示威游行，抗议政府的政策。
+- `prove` [pruːv]: 
+    - He proved his point with an experiment.
+    - > 他用实验证明了自己的观点。
+- `qualification` [ˌkwɒlɪfɪˈkeɪʃən]: 
+    - This job requires relevant qualifications and certifications.
+    - > 这份工作需要相关的学历和资格证书。
+- `qualified` [ˈkwɒlɪfaɪd]: 
+    - She is a qualified doctor with many years of medical experience.
+    - > 她是一名合格的医生，拥有多年的医疗经验。
+- `qualify` [ˈkwɒlɪfaɪ]: 
+    - He qualified for a driver's license by passing the exam.
+    - > 他通过考试，获得了驾驶执照。
+- `quotation` [kwəʊˈteɪʃən]: 
+    - He quoted Martin Luther King's words in his speech.
+    - > 他在演讲中引用了马丁·路德·金的名言。
 
-- `poet` [ˈpəʊət]：诗人, William Shakespeare 是英国著名的诗人，他的诗歌作品至今仍然被广泛传诵。 (William Shakespeare is a famous poet in England, and his poetry is still widely recited to this day.)
-- `poetry` [ˈpəʊətri]：诗歌, 诗歌可以通过文字表达出诗人内心深处的情感和思想。 (Poetry can express the poet's deep emotions and thoughts through words.)
-- `poem` [ˈpəʊəm]：诗篇, 这首诗篇描述了一个美丽的风景，让人感受到大自然的神奇和美丽。(This poem describes a beautiful landscape, allowing people to feel the magic and beauty of nature.)
-- `portrait` [ˈpɔːtrət]：肖像画, 这幅肖像画生动地展现了这位名人的面容和气质，非常逼真。(This portrait vividly depicts the appearance and temperament of the celebrity, and is very lifelike.)
+- `race` [reɪs]: 
+    - They raced to win first place in the competition.
+    - > 他们在比赛中争夺第一名。
+- `receipt` [rɪˈsiːt]: 
+    - She received a receipt for her purchase.
+    - > 她收到了购物小票。
+- `religion` [rɪˈlɪdʒən]: 
+    - Religious belief is a personal freedom.
+    - > 宗教信仰是个人自由。
+- `religious` [rɪˈlɪdʒəs]: 
+    - She is a devout Christian and goes to church every week.
+    - > 她是一名虔诚的基督徒，每周都会去教堂。
+- `rent` [rent]: 
+    - She rented an apartment and needs to pay rent every month.
+    - > 她租了一套公寓，每个月需要付房租。
+- `represent` [ˌreprɪˈzent]: 
+    - He represented the company and attended the international conference.
+    - > 他是公司的代表，参加了国际会议。
+- `reservation` [ˌrezəˈveɪʃən]: 
+    - We made a reservation for a dinner table.
+    - > 我们预订了一个晚餐位子。
+- `revise` [rɪˈvaɪz]: 
+    - She revised her paper to get a better grade.
+    - > 她修改了论文，以便获得更好的成绩。
+- `rough` [rʌf]: 
+    - The road is very rough and requires careful driving.
+    - > 这条路很崎岖，需要小心驾驶。
+- `royal` [ˈrɔɪəl]: 
+    - Members of the royal family attended the grand ceremony.
+    - > 王室成员出席了这次盛大的仪式。
+- `sculpture` [ˈskʌlptʃə(r)]: 
+    - The sculpture was created by a famous artist.
+    - > 这座雕塑是由著名艺术家创作的。
+- `sensible` [ˈsensəbl]: 
+    - She is sensible and doesn't act impulsively.
+    - > 她做事很明智，不会轻易冲动。
 
+- `similarity` [ˌsɪmɪˈlærəti]: 
+    - There are many similarities in the appearance of these two people.
+    - > 这两个人的外表有很多相似之处。
+- `similarly` [ˈsɪmɪləli]: 
+    - This issue applies similarly to other similar situations.
+    - > 这个问题同样适用于其他类似的情况。
+- `soil` [sɔɪl]: 
+    - The soil is very fertile and suitable for growing crops.
+    - > 这片土地很肥沃，适合种植庄稼。
+- `spicy` [ˈspaɪsi]: 
+    - This dish is very spicy and needs to be eaten carefully.
+    - > 这道菜很辣，需要小心食用。
+- `spirit` [ˈspɪrɪt]: 
+    - Her spirit is very good and she is full of energy every day.
+    - > 她的精神状态很不错，每天都充满活力。
+- `spot` [spɒt]: 
+    - We stayed at this spot for an hour.
+    - > 我们在这个景点停留了一个小时。
+- `stadium` [ˈsteɪdiəm]: 
+    - This stadium can accommodate tens of thousands of spectators.
+    - > 这个体育场可以容纳数万观众。
+- `staff` [stɑːf]: 
+    - The company has an efficient staff team.
+    - > 公司雇佣了一支高效的员工团队。
+- `statue` [ˈstætʃuː]: 
+    - The statue was built to commemorate a famous war hero.
+    - > 这座雕像是为了纪念著名的战争英雄而建造的。
+- `stick` [stɪk]: 
+    - She stirred the bonfire with a stick to make the fire stronger.
+    - > 她用树枝搅拌着火堆，让火更旺盛。
+- `studio` [ˈstjuːdiəʊ]: 
+    - The artist creates in his own studio.
+    - > 这个艺术家在自己的工作室里创作。
+- `substance`[ˈsʌbstəns]: 
+    - This medication contains active substances that can alleviate pain.
+    - > 这种药物含有有效成分，可以缓解疼痛。
 
-
-- `pot` [pɒt]: 他在锅里煮了一锅面条。(He cooked a pot of noodles in the pot.)
-pour [pɔːr]: 她倒了一杯水。(She poured a glass of water.)
-- `poverty` [ˈpɒvəti]: 许多人生活在贫困中。(Many people live in poverty.)
-- `powder` [ˈpaʊdə(r)]: 她用面粉制作了蛋糕。(She made a cake with flour powder.)
-- `prayer` [preə(r)]: 他们在教堂里祷告。(They prayed in the church.)
-- `priest` [priːst]: 牧师在教堂里主持弥撒。(The priest conducted mass in the church.)
-- `profit` [ˈprɒfɪt]: 这项业务带来了很多利润。(This business brought in a lot of profit.)
-- `promote` [prəˈməʊt]: 公司为了提高销售额而推广新产品。(The company promoted its new product to increase sales.)
-- `protest` [ˈprəʊtest]: 人们举行示威游行，抗议政府的政策。(People held a protest march to protest the government's policies.)
-- `prove` [pruːv]: 他用实验证明了自己的观点。(He proved his point with an experiment.)
-- `qualification` [ˌkwɒlɪfɪˈkeɪʃən]: 这份工作需要相关的学历和资格证书。(This job requires relevant qualifications and certifications.)
-- `qualified` [ˈkwɒlɪfaɪd]: 她是一名合格的医生，拥有多年的医疗经验。(She is a qualified doctor with many years of medical experience.)
-- `qualify` [ˈkwɒlɪfaɪ]: 他通过考试，获得了驾驶执照。(He qualified for a driver's license by passing the exam.)
-quotation [kwəʊˈteɪʃə
-胡
-继续
-- `n`]: 他在演讲中引用了马丁·路德·金的名言。(He quoted Martin Luther King's words in his speech.)
-
-- `race` [reɪs]: 他们在比赛中争夺第一名。(They raced to win first place in the competition.)
-- `receipt` [rɪˈsiːt]: 她收到了购物小票。(She received a receipt for her purchase.)
-- `religion` [rɪˈlɪdʒən]: 宗教信仰是个人自由。(Religious belief is a personal freedom.)
-- `religious` [rɪˈlɪdʒəs]: 她是一名虔诚的基督徒，每周都会去教堂。(She is a devout Christian and goes to church every week.)
-- `rent` [rent]: 她租了一套公寓，每个月需要付房租。(She rented an apartment and needs to pay rent every month.)
-- `represent` [ˌreprɪˈzent]: 他是公司的代表，参加了国际会议。(He represented the company and attended the international conference.)
-- `reservation` [ˌrezəˈveɪʃən]: 我们预订了一个晚餐位子。(We made a reservation for a dinner table.)
-- `revise` [rɪˈvaɪz]: 她修改了论文，以便获得更好的成绩。(She revised her paper to get a better grade.)
-- `rough` [rʌf]: 这条路很崎岖，需要小心驾驶。(The road is very rough and requires careful driving.)
-- `royal` [ˈrɔɪəl]: 王室成员出席了这次盛大的仪式。(Members of the royal family attended the grand ceremony.)
-- `sculpture` [ˈskʌlptʃə(r)]: 这座雕塑是由著名艺术家创作的。(The sculpture was created by a famous artist.)
-- `sensible` [ˈsensəbl]: 她做事很明智，不会轻易冲动。(She is sensible and doesn't act impulsively.)
-
-- `similarity` [ˌsɪmɪˈlærəti]: 这两个人的外表有很多相似之处。(There are many similarities in the appearance of these two people.)
-- `similarly` [ˈsɪmɪləli]: 这个问题同样适用于其他类似的情况。(This issue applies similarly to other similar situations.)
-- `soil` [sɔɪl]: 这片土地很肥沃，适合种植庄稼。(The soil is very fertile and suitable for growing crops.)
-- `spicy` [ˈspaɪsi]: 这道菜很辣，需要小心食用。(This dish is very spicy and needs to be eaten carefully.)
-- `spirit` [ˈspɪrɪt]: 她的精神状态很不错，每天都充满活力。(Her spirit is very good and she is full of energy every day.)
-- `spot` [spɒt]: 我们在这个景点停留了一个小时。(We stayed at this spot for an hour.)
-- `stadium` [ˈsteɪdiəm]: 这个体育场可以容纳数万观众。(This stadium can accommodate tens of thousands of spectators.)
-- `staff` [stɑːf]: 公司雇佣了一支高效的员工团队。(The company has an efficient staff team.)
-- `statue` [ˈstætʃuː]: 这座雕像是为了纪念著名的战争英雄而建造的。(The statue was built to commemorate a famous war hero.)
-- `stick` [stɪk]: 她用树枝搅拌着火堆，让火更旺盛。(She stirred the bonfire with a stick to make the fire stronger.)
-- `studio` [ˈstjuːdiəʊ]: 这个艺术家在自己的工作室里创作。(The artist creates in his own studio.)
-substance [
-胡
-继续
-- `substance`[ˈsʌbstəns]: 这种药物含有有效成分，可以缓解疼痛。(This medication contains active substances that can alleviate pain.)
-
-- `summarize` [ˈsʌməraɪz]: 请用一两句话简要概括你的研究成果。(Please summarize your research findings in one or two sentences.)
-- `summary` [ˈsʌməri]: 这份报告提供了对公司业绩的简要概述。(The report provides a summary of the company's performance.)
-- `symptom` [ˈsɪmptəm]: 她出现了头痛和发热的症状。(She has symptoms of headache and fever.)
-- `tend` [tend]: 她照顾得很好，让植物茁壮成长。(She tended the plants well and made them grow strong.)
-- `tent` [tent]: 他们在野外搭建了帐篷，过夜休息。(They set up a tent in the wilderness and rested overnight.)
-- `throughout` [θruːˈaʊt]: 这个项目将在全国范围内展开。(This project will be carried out throughout the country.)
-- `tire` [taɪə(r)]: 我的轮胎瘪了，需要更换。(My tire is flat and needs to be replaced.)
-- `toe` [təʊ]: 她穿着高跟鞋，脚趾很不舒服。(She is wearing high heels and her toes are uncomfortable.)
-- `ton` [tʌn]: 这辆卡车可以装载十吨货物。(This truck can carry ten tons of goods.)
-- `tour` [tʊə(r)]: 我们参加了一次城市游览。(We went on a city tour.)
-- `trend` [trend]: 这种服装风格已经成为了时尚的潮流。(This style of clothing has become a trend in fashion.)
-- `tube` [tjuːb]: 她用管子将颜料挤出来，开始涂画。(She squeezed the paint out of the tube and began painting.)
-
-- `various` [ˈveəriəs]: 这家商店有各种各样的商品，你可以挑选你喜欢的。(This store has various products, and you can choose what you like.)
-- `wing` [wɪŋ]: 这只鸟展翅高飞，翱翔在蓝天之上。(The bird spreads its wings and soars in the blue sky.)
-- `worldwide` [ˈwɜːldwaɪd]: 这个新闻事件引起了全球的关注和讨论。(This news event has attracted attention and discussion worldwide.)
+- `summarize` [ˈsʌməraɪz]: 
+    - Please summarize your research findings in one or two sentences.
+    - > 请用一两句话简要概括你的研究成果。
+- `summary` [ˈsʌməri]: 
+    - The report provides a summary of the company's performance.
+    - > 这份报告提供了对公司业绩的简要概述。
+- `symptom` [ˈsɪmptəm]: 
+    - She has symptoms of headache and fever.
+    - > 她出现了头痛和发热的症状。
+- `tend` [tend]: 
+    - She tended the plants well and made them grow strong.
+    - > 她照顾得很好，让植物茁壮成长。
+- `tent` [tent]: 
+    - They set up a tent in the wilderness and rested overnight.
+    - > 他们在野外搭建了帐篷，过夜休息。
+- `throughout` [θruːˈaʊt]: 
+    - This project will be carried out throughout the country.
+    - > 这个项目将在全国范围内展开。
+- `tire` [taɪə(r)]: 
+    - My tire is flat and needs to be replaced.
+    - > 我的轮胎瘪了，需要更换。
+- `toe` [təʊ]: 
+    - She is wearing high heels and her toes are uncomfortable.
+    - > 她穿着高跟鞋，脚趾很不舒服。
+- `ton` [tʌn]: 
+    - This truck can carry ten tons of goods.
+    - > 这辆卡车可以装载十吨货物。
+- `tour` [tʊə(r)]: 
+    - We went on a city tour.
+    - > 我们参加了一次城市游览。
+- `trend` [trend]: 
+    - This style of clothing has become a trend in fashion.
+    - > 这种服装风格已经成为了时尚的潮流。
+- `tube` [tjuːb]: 
+    - She squeezed the paint out of the tube and began painting.
+    - > 她用管子将颜料挤出来，开始涂画。
+- `various` [ˈveəriəs]: 
+    - This store has various products, and you can choose what you like.
+    - > 这家商店有各种各样的商品，你可以挑选你喜欢的。
+- `wing` [wɪŋ]: 
+    - The bird spreads its wings and soars in the blue sky.
+    - > 这只鸟展翅高飞，翱翔在蓝天之上。
+- `worldwide` [ˈwɜːldwaɪd]: 
+    - This news event has attracted attention and discussion worldwide.
+    - > 这个新闻事件引起了全球的关注和讨论。

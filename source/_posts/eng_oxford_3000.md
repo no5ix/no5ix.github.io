@@ -835,7 +835,8 @@ investigation n.
 investment n. 
 issue v.
 
-## j待续
+
+## jlmn
 
 junior adj. 
 justify v. 
@@ -879,6 +880,9 @@ nerve n.
 nevertheless adv. 
 notion n. 
 numerous adj. 
+
+
+## o
 object v. 
 objective n., adj.
 obligation n. 
@@ -901,6 +905,9 @@ outer adj.
 outline n., v. 
 overall adj., adv. 
 owe v.
+
+
+## p
 pace n., v. 
 panel n. 
 participant n. 
@@ -938,6 +945,9 @@ psychologist n.
 psychology n. 
 publication n. 
 pursue v. 
+
+
+## r
 realistic adj. 
 recall v. 
 recover v. 
@@ -967,6 +977,9 @@ routine adj.
 rub v.
 rubber n., adj.
 rural adj.
+
+
+## s
 satellite n.
 satisfied adj.
 satisfy v.
@@ -1030,6 +1043,10 @@ surrounding adj.
 survey v.
 suspect v., n. 
 sympathy n. 
+
+
+## tuvw
+
 tale n.
 term v. 
 therapy n. 
@@ -1157,291 +1174,226 @@ wrap v.
 
 - `bacteria` [bækˈtɪəriə] n. 细菌
     - Bacteria can be harmful to humans, but they also play an important role in the ecosystem.
-细菌对人类有害，但它们在生态系统中也扮演着重要的角色。
-
+    - > 细菌对人类有害，但它们在生态系统中也扮演着重要的角色。
 - `bent` [bent] adj. 弯曲的
     - The tree was bent over by the strong wind. 
-树被强风吹弯了。
-
+    - > 树被强风吹弯了。
 - `bitter` [ˈbɪtər] adj. 苦的
     - The medicine tasted very bitter, but it helped me feel better. 
-药品非常苦，但它帮助我感觉更好。
-
+    - > 药品非常苦，但它帮助我感觉更好。
 - `bond` [bɒnd] n. 债券；纽带
     - The bond between the two sisters was unbreakable. 
-两个姐妹之间的纽带是牢不可破的。
-
+    - > 两个姐妹之间的纽带是牢不可破的。
 - `breast` [brest] n. 乳房
     - Breastfeeding is a natural way to feed a newborn baby. 
-母乳喂养是一种天然的喂养新生儿的方式。
-
+    - > 母乳喂养是一种天然的喂养新生儿的方式。
 - `broad` [brɔːd] adj. 宽的；广泛的
     - The road was too narrow for the large truck, so it had to find a broad one. 
-这条路对于大卡车来说太窄了，所以它必须找到一条宽阔的路。
-
+    - > 这条路对于大卡车来说太窄了，所以它必须找到一条宽阔的路。
 - `broadcast` [ˈbrɔːdkæst] v., n. 广播
     - The news was broadcast on TV and radio. 
-新闻通过电视和广播播出。
-
+    - > 新闻通过电视和广播播出。
 - `budget` [ˈbʌdʒɪt] n. 预算
     - The company had to cut its budget because of the economic downturn. 
-由于经济下滑，公司不得不削减其预算。
-
+    - > 由于经济下滑，公司不得不削减其预算。
 - `bunch` [bʌntʃ] n. 串；一群
     - She picked a bunch of flowers from the garden to decorate the table. 
-她从花园里采了一串花来装饰桌子。
-
+    - > 她从花园里采了一串花来装饰桌子。
 - `bush` [bʊʃ] n. 灌木丛
     - The rabbit disappeared into the bush and we couldn't find it.
-兔子跑进了灌木丛中，我们找不到它了。
-
+    - > 兔子跑进了灌木丛中，我们找不到它了。
 
 ## c
 
 - `capable` [ˈkeɪpəbl] adj. 有能力的
     - She is capable of handling multiple tasks at the same time. 
-她有能力同时处理多项任务。
-
+    - > 她有能力同时处理多项任务。
 - `capacity` [kəˈpæsəti] n. 容量；能力
     - The stadium has a seating capacity of 50,000 people. 
-这个体育场有5万个座位。
-
+    - > 这个体育场有5万个座位。
 - `chief` [tʃiːf] adj., n. 主要的；首席
     - The chief executive officer of the company announced his resignation. 
-公司首席执行官宣布辞职。
-
+    - > 公司首席执行官宣布辞职。
 - `circumstance` [ˈsɜːrkəmstæns] n. 环境；情况
     - I cannot control the circumstance, but I can control my attitude towards it. 
-我无法控制环境，但我可以控制自己对它的态度。
-
+    - > 我无法控制环境，但我可以控制自己对它的态度。
 - `cite` [saɪt] v. 引用
     - He cited several examples to support his argument. 
-他引用了几个例子来支持他的论点。
-
+    - > 他引用了几个例子来支持他的论点。
 - `civil` [ˈsɪvl] adj. 文明的；民事的
     - It is important to have a civil conversation even if you disagree with someone.
-即使你不同意对方的观点，也很重要要有一次文明的对话。
-
+    - > 即使你不同意对方的观点，也很重要要有一次文明的对话。
 - `closely` [ˈkləʊsli] adv. 密切地
     - The two countries have a closely connected history. 
-这两个国家有着密切相关的历史。
-
+    - > 这两个国家有着密切相关的历史。
 - `commission` [kəˈmɪʃn] n., v. 委员会；委托
     - The commission was established to investigate the causes of the accident. 
-委员会成立以调查事故的原因。
-
+    - > 委员会成立以调查事故的原因。
 - `commitment` [kəˈmɪtmənt] n. 承诺；投入
     - He has a strong commitment to his work and always strives to do his best. 
-他对工作有很强的投入感，并始终努力做到最好。
-
+    - > 他对工作有很强的投入感，并始终努力做到最好。
 - `committee` [kəˈmɪti] n. 委员会
     - The committee meets every month to discuss current issues in the community. 
-委员会每个月都会开会讨论社区当前的问题。
-
+    - > 委员会每个月都会开会讨论社区当前的问题。
 - `commonly` [ˈkɒmənli] adv. 通常地
     - It is commonly believed that exercise is good for your health. 
-人们通常认为运动对健康有益。
-
+    - > 人们通常认为运动对健康有益。
 - `concentration` [ˌkɒnsənˈtreɪʃn] n. 集中；浓度
     - She needs to improve her concentration if she wants to do well on the exam.
-如果她想在考试中表现良好，就需要提高她的注意力集中度。
-
+    - > 如果她想在考试中表现良好，就需要提高她的注意力集中度。
 - `concept` [ˈkɒnsept] n. 概念
     - The concept of time is difficult for young children to understand. 
-时间的概念对于年幼的孩子来说是很难理解的。
-
+    - > 时间的概念对于年幼的孩子来说是很难理解的。
 - `concern` [kənˈsɜːn] n., v. 关注；担心
     - The safety of our employees is a major concern for the company. 
-员工的安全是公司的重要关注点。
-
+    - > 员工的安全是公司的重要关注点。
 - `concerned` [kənˈsɜːnd] adj. 担心的；有关的
     - I am concerned about the impact of pollution on the environment. 
-我担心污染对环境的影响。
-
+    - > 我担心污染对环境的影响。
 - `conduct` [kənˈdʌkt] v., n. 进行；行为
     - He conducted a thorough investigation into the matter. 
-他对这件事进行了彻底的调查。
-
+    - > 他对这件事进行了彻底的调查。
 - `confidence` [ˈkɒnfɪdəns] n. 自信；信心
     - Having confidence in yourself is important for achieving your goals. 
-对自己有信心对于实现目标很重要。
-
+    - > 对自己有信心对于实现目标很重要。
 - `congress` [ˈkɒŋɡres] n. 国会；代表大会
     - The congress will vote on the proposed legislation next week. 
-国会将在下周对拟议中的法案进行投票。
-
-- `conscious` [ˈkɒnʃəs] adj. 有意识的；清醒的
-    - She was conscious of
-胡
-继续
-her surroundings and knew exactly where she was. 
-她清醒地意识到周围的环境，知道自己在哪里。
-
+    - > 国会将在下周对拟议中的法案进行投票。
+- `conscious` [ˈkɒnʃəs] adj    - > . 有意识的；清醒的roundings and knew exactly where she was. 
+    - > 她清醒地意识到周围的环境知道自己在哪里。
 - `conservative` [kənˈsɜːvətɪv] adj., n. 保守的；保守主义者
     - He has conservative views on social issues such as abortion and same-sex marriage. 
-他在社会问题，如堕胎和同性婚姻方面持保守观点。
-
+    - > 他在社会问题，如堕胎和同性婚姻方面持保守观点。
 - `consideration` [kənˌsɪdəˈreɪʃn] n. 考虑；关注
     - Take all factors into consideration before making a decision. 
-在做出决定之前，考虑所有因素。
-
+    - > 在做出决定之前，考虑所有因素。
 - `consistent` [kənˈsɪstənt] adj. 一致的；持续的
     - She has been consistent in her efforts to improve her performance at work. 
-她一直致力于提高自己在工作中的表现，持续不断。
-
+    - > 她一直致力于提高自己在工作中的表现，持续不断。
 - `constant` [ˈkɒnstənt] adj. 不断的；恒定的
     - The noise from the construction site was a constant source of annoyance for the residents.
-建筑工地的噪音是居民不断的困扰。
-
+    - > 建筑工地的噪音是居民不断的困扰。
 - `constantly` [ˈkɒnstəntli] adv. 不断地；经常地
     - He is constantly looking for ways to improve his skills. 
-他经常寻找提高自己技能的方法。
-
+    - > 他经常寻找提高自己技能的方法。
 - `construct` [kənˈstrʌkt] v. 建造；构建
     - The company plans to construct a new office building next year. 
-公司计划明年建造一座新的办公楼。
-
+    - > 公司计划明年建造一座新的办公楼。
 - `construction` [kənˈstrʌkʃn] n. 建筑；构造
     - The construction of the bridge was completed ahead of schedule. 
-桥梁的建造提前完成。
-
+    - > 桥梁的建造提前完成。
 - `contemporary` [kənˈtempəreri] adj. 当代的；现代的
     - The artist's work is considered to be a masterpiece of contemporary art. 
-这位艺术家
-胡
-继续
-的作品被认为是当代艺术的杰作。
-
+    - > 这位艺术家的作品被认为是当代艺术的杰作。
 - `contest` [ˈkɒntest] n., v. 竞赛；争议
     - He won first place in the singing contest last year. 
-他去年在歌唱比赛中获得了第一名。
-
+    - > 他去年在歌唱比赛中获得了第一名。
 - `convinced` [kənˈvinst] adj. 确信的；信服的
     - I am convinced that this is the right decision. 
-我确信这是正确的决定。
-
+    - > 我确信这是正确的决定。
 - `corporate` [ˈkɔːpərət] adj. 公司的；企业的
     - The corporate culture of the company emphasizes teamwork and collaboration.
-公司的企业文化强调团队合作和协作。
-
+    - > 公司的企业文化强调团队合作和协作。
 - `council` [ˈkaʊnsəl] n. 委员会；议会
     - The city council passed a new law to protect the environment. 
-市议会通过了一项新的法律以保护环境。
-
+    - > 市议会通过了一项新的法律以保护环境。
 - `credit` [ˈkredɪt] v. 归功于；赞扬
     - She credited her success to hard work and dedication. 
-她把自己的成功归功于勤奋和专注。
-
+    - > 她把自己的成功归功于勤奋和专注。
 - `crew` [kruː] n. 全体工作人员；船员
     - The film crew worked long hours to complete the movie on time. 
-电影制作组加班赶工，按时完成了电影制作。
-
+    - > 电影制作组加班赶工，按时完成了电影制作。
 - `crisis` [ˈkraɪsɪs] n. 危机；危急关头
     - The company is facing a financial crisis and may have to lay off employees. 
-公司面临财务危机，可能不得不裁员。
-
+    - > 公司面临财务危机，可能不得不裁员。
 - `criterion` [kraɪˈtɪərɪən] n. 标准；准则
     - The selection committee used several criteria to evaluate the candidates. 
-选拔委员会使用了几个标准来评估候选人。
-
+    - > 选拔委员会使用了几个标准来评估候选人。
 - `critic` [ˈkrɪtɪk] n. 评论家；批评者
     - The film received mixed reviews from critics. 
-这部电影在评论家
-胡
-继续
-中获得了好坏参半的评价。
-
+    - > 这部电影在评论家中获得了好坏参半的评价。
 - `critical` [ˈkrɪtɪkəl] adj. 批评的；关键的
     - The project is at a critical stage and needs to be carefully managed. 
-这个项目处于关键阶段，需要仔细管理。
-
+    - > 这个项目处于关键阶段，需要仔细管理。
 - `criticism` [ˈkrɪtɪsɪzəm] n. 批评；指责
     - He faced a lot of criticism for his handling of the situation. 
-他因应对这种情况而受到了很多批评。
-
+    - > 他因应对这种情况而受到了很多批评。
 - `crucial` [ˈkruːʃl] adj. 至关重要的；决定性的
     - The next few months will be crucial for the success of the project. 
-接下来的几个月对于项目的成功至关重要。
-
+    - > 接下来的几个月对于项目的成功至关重要。
 
 ## d
 
 - `debate` [dɪˈbeɪt] n. 辩论；讨论，v. 辩论；讨论
-    - The candidates engaged in a heated debate over healthcare reform. (候选人们就医疗改革展开了激烈的辩论。)
-
+    - The candidates engaged in a heated debate over healthcare reform. 
+    - > 候选人们就医疗改革展开了激烈的辩论。
 - `decline` [dɪˈklaɪn] v. 下降；减少，n. 下降；衰退
-    - The company's profits have been declining for several years. (该公司的利润已经连续几年下降。)
-
+    - The company's profits have been declining for several years. 
+    - > 该公司的利润已经连续几年下降。
 - `defend` [dɪˈfend] v. 辩护；保卫
-    - The lawyer will defend his client in court. (律师将在法庭上为他的客户辩护。)
-
+    - The lawyer will defend his client in court. 
+    - > 律师将在法庭上为他的客户辩护。
 - `defense` [dɪˈfens] n. 防御；防护
-    - The army is responsible for the defense of the country. (军队负责国家的防卫。)
-
+    - The army is responsible for the defense of the country. 
+    - > 军队负责国家的防卫。
 - `deliberate` [dɪˈlɪbərət] adj. 故意的；深思熟虑的，v. 慎重考虑
-    - The jury took several hours to reach a deliberate verdict. (陪审团花了几个小时才作出慎重的判决。)
-
+    - The jury took several hours to reach a deliberate verdict. 
+    - > 陪审团花了几个小时才作出慎重的判决。
 - `deliberately` [dɪˈlɪbərətli] adv. 故意地；蓄意地
-    - She deliberately ignored my calls. (她故意不理我的电话。)
-
+    - She deliberately ignored my calls. 
+    - > 她故意不理我的电话。
 - `demand` [dɪˈmænd] n. 需求，v. 要求；需要
-    - The demand for organic food has increased in recent years. (近年来，有机食品的需求增加了。)
-
+    - The demand for organic food has increased in recent years. 
+    - > 近年来，有机食品的需求增加了。
 - `demonstrate` [ˈdɛmənstreɪt] v. 示范；演示
-    - The teacher demonstrated how to solve the math problem on the board. (老师在黑板上演示了如何解决数学问题。)
-
-- `depressed` [dɪˈprɛst] adj. 沮
-
-    - 继续
-丧的；消沉的
-
-She has been feeling depressed since she lost her job. (自从失业后，她一直感到沮丧。)
-
+    - The teacher demonstrated how to solve the math problem on the board. 
+    - > 老师在黑板上演示了如何解决数学问题。
+- `depressed` [dɪˈprɛst] adj. 沮丧的；消沉的
+    - She has been feeling depressed since she lost her job. 
+    - > 自从失业后，她一直感到沮丧。
 - `depressing` [dɪˈprɛsɪŋ] adj. 令人沮丧的；令人失望的
-    - The news about the economy was very depressing. (关于经济的消息非常令人沮丧。)
-
+    - The news about the economy was very depressing. 
+    - > 关于经济的消息非常令人沮丧。
 - `desert` [dɪˈzɜːt] v. 抛弃，n. 沙漠
-    - He deserted his wife and children and ran away with another woman. (他抛弃了妻子和孩子，和另一个女人私奔了。)
-
+    - He deserted his wife and children and ran away with another woman. 
+    - > 他抛弃了妻子和孩子，和另一个女人私奔了。
 - `deserve` [dɪˈzɜːv] v. 应得；值得
-    - She deserves to be praised for her hard work. (她应该因她的努力工作而受到赞扬。)
-
+    - She deserves to be praised for her hard work. 
+    - > 她应该因她的努力工作而受到赞扬。
 - `desperate` [ˈdɛspərət] adj. 绝望的；拼命的
-    - The refugees were in a desperate situation and needed immediate help. (难民们处于绝望的境地，需要立即的帮助。)
-
+    - The refugees were in a desperate situation and needed immediate help. 
+    - > 难民们处于绝望的境地，需要立即的帮助。
 - `discipline` [ˈdɪsəplɪn] n. 纪律；训练，v. 训练；惩罚
-    - The school has a strict discipline policy. (学校有一套严格的纪律政策。)
-
+    - The school has a strict discipline policy. 
+    - > 学校有一套严格的纪律政策。
 - `distribute` [dɪsˈtrɪbjuːt] v. 分发；分配
-    - The charity organization distributed food and blankets to the homeless. (慈善组织向无家可归者分发食物和毛毯。)
-
+    - The charity organization distributed food and blankets to the homeless. 
+    - > 慈善组织向无家可归者分发食物和毛毯。
 - `distribution` [ˌdɪstrɪˈbjuːʃn] n. 分配；分发
-    - The distribution of wealth in the country is very unequal. (该国的财富分配非常不均衡。)
-
+    - The distribution of wealth in the country is very unequal. 
+    - > 该国的财富分配非常不均衡。
 - `divide` [dɪˈvaɪd] n. 分开；分裂
-
-    - 继续
-The river divides the city into two parts. (这条河把城市分成了两部分。)
-
+    - The river divides the city into two parts. 
+    - > 这条河把城市分成了两部分。
 - `division` [dɪˈvɪʒn] n. 分开；分裂；部门
-    - The company has several divisions that specialize in different products. (该公司有几个专门从事不同产品的部门。)
-
+    - The company has several divisions that specialize in different products. 
+    - > 该公司有几个专门从事不同产品的部门。
 - `domestic` [dəˈmɛstɪk] adj. 国内的；家庭的
-    - She prefers to buy domestic products to support the local economy. (她更喜欢购买国内产品来支持当地经济。)
-
+    - She prefers to buy domestic products to support the local economy. 
+    - > 她更喜欢购买国内产品来支持当地经济。
 - `dominate` [ˈdɒmɪneɪt] v. 主导；占优势
-    - The team has dominated the league for the past few years. (这支队伍在过去几年里主导了联赛。)
-
+    - The team has dominated the league for the past few years. 
+    - > 这支队伍在过去几年里主导了联赛。
 - `downward` [ˈdaʊnwəd] adj. 向下的，adv. 向下地
-    - The stock market experienced a downward trend last week. (股市上周经历了一个下降趋势。)
-
+    - The stock market experienced a downward trend last week. 
+    - > 股市上周经历了一个下降趋势。
 - `dozen` [ˈdʌzn] n. 一打，det. 十二个
-    - I need a dozen eggs to make a cake. (我需要一打鸡蛋来做蛋糕。)
-
+    - I need a dozen eggs to make a cake. 
+    - > 我需要一打鸡蛋来做蛋糕。
 - `draft` [drɑːft] n. 草稿；草案，v. 起草；征召
-    - Please send me the latest draft of the report. (请把最新的报告草稿发给我。)
-
+    - Please send me the latest draft of the report. 
+    - > 请把最新的报告草稿发给我。
 - `dramatic` [drəˈmætɪk] adj. 戏剧性的；引人注目的
-    - The play had a dramatic ending that left the audience in tears. (这部戏剧有一个引人注目的结局，让观众流泪。)
-
+    - The play had a dramatic ending that left the audience in tears. 
+    - > 这部戏剧有一个引人注目的结局，让观众流泪。
 

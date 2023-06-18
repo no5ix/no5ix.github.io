@@ -1402,250 +1402,182 @@ wrap v.
 
 ## e
 
-edition [ɪˈdɪʃn] n. 版本；版本号
-
-I have the latest edition of the Oxford English Dictionary. (我有牛津英语词典的最新版本。)
-
-elderly [ˈɛldərli] adj. 年长的；年老的
-
-The elderly man needed help crossing the street. (那位年长的男子需要帮助过马路。)
-
-elect [ɪˈlɛkt] v. 选举；选择
-
-The people will elect a new president next year. (人民将在明年选举新总统。)
-
-elsewhere [ˈɛlsweə] adv. 在别处；到别处
-
-If they don't have it here, you might find it elsewhere. (如果他们这里没有，你可能会在别处找到它。)
-
-emerge [ɪˈmɜːdʒ] v. 出现；浮出水面
-
-The sun emerged from behind the clouds. (太阳从云层后面出现了。)
-
-emotional [ɪˈməʊʃənl] adj. 情绪的；感情的
-
-She gave an emotional speech at the funeral. (她在葬礼上发表了感人的演讲。)
-
-emphasis [ˈɛmfəsɪs] n. 强调；重点
-
-The emphasis in this sentence is on the word "important". (这个句子中重点在于“重要”这个词。)
-
-emphasize [ˈɛmfəsaɪz] v. 强调；着重说明
-
-The teacher emphasized the importance of studying hard. (老师强调了努力学习的重要性。)
-
-encounter [ɪnˈkaʊntə] v. 遇到；邂逅，n. 遭遇；邂逅
-
-She encountered an old friend on the street. (她在街上遇见了一位老朋友。)
-
-engage [ɪnˈɡeɪdʒ] v.
-胡
-继续
-参与；订婚
-
-I'm planning to engage in some volunteer work this summer. (我计划在这个夏天参加一些志愿者工作。)
-
-ensure [ɪnˈʃʊr] v. 确保；保证
-
-Please ensure that the door is locked before you leave. (请确保在离开前门已经锁好了。)
-
-enthusiasm [ɛnˈθjuːziæzəm] n. 热情；热忱
-
-Her enthusiasm for the project was contagious. (她对这个项目的热情是具有感染力的。)
-
-enthusiastic [ɛnˌθjuːziˈæstɪk] adj. 热情的；热心的
-
-The students were enthusiastic about the field trip. (学生们对这次实地考察充满热情。)
-
-estate [ɪˈsteɪt] n. 房地产；财产
-
-He inherited a large estate from his grandfather. (他从祖父那里继承了一大笔财产。)
-
-estimate [ˈɛstɪmeɪt] v. 估计；评估，n. 估计；评估
-
-Can you give me an estimate of how long the project will take? (你能给我一个项目需要多长时间的估计吗？)
-
-ethical [ˈɛθɪkəl] adj. 道德的；伦理的
-
-It is important to make ethical decisions in the workplace. (在工作场所做出道德决策是很重要的。)
-
-evaluate [ɪˈvæljueɪt] v. 评价；评估
-
-The teacher will evaluate the students' essays based on several criteria. (老师将根据几个标准评价学生的论文。)
-
-evil [ˈiːvl] adj. 邪恶的；恶毒的，n. 邪恶；罪恶
-
-The evil queen
-胡
-继续
-in the fairy tale was jealous of Snow White's beauty. (童话中的邪恶女王嫉妒白雪公主的美貌。)
-
-examination [ɪɡˌzæmɪˈneɪʃn] n. 考试；检查
-
-He passed the final examination with flying colors. (他以优异的成绩通过了期末考试。)
-
-executive [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的
-
-The executive team is responsible for making important decisions. (执行团队负责做出重要决策。)
-
-exhibit [ɪɡˈzɪbɪt] v. 展示；展览，n. 展览品；展览会
-
-The museum will exhibit a collection of ancient artifacts next month. (博物馆下个月将展出一组古代文物。)
-
-existence [ɪɡˈzɪstəns] n. 存在；实在
-
-The existence of aliens is still a topic of debate among scientists. (外星人的存在仍然是科学家们争论的话题。)
-
-expense [ɪkˈspɛns] n. 费用；支出
-
-The company had to cut expenses in order to stay in business. (公司不得不削减开支以保持运营。)
-
-exploration [ˌɛkspləˈreɪʃn] n. 探索；勘探
-
-The astronauts conducted an exploration of the surface of the moon. (宇航员们对月球表面进行了一次探索。)
-
-expose [ɪkˈspəʊz] v. 暴露；揭露
-
-The journalist exposed the corruption scandal. (记者揭露了腐败丑闻。)
-
-extend [ɪkˈstɛnd] v. 扩展；延伸
-
-The company plans to extend its operations to other countries. (公司计划
-胡
-继续
-将业务扩展到其他国家。)
-
-extent [ɪkˈstɛnt] n. 程度；范围
-
-The extent of the damage caused by the earthquake was enormous. (地震造成的破坏范围极大。)
-
-external [ɪkˈstɜːrnəl] adj. 外部的；外在的
-
-The company faced external pressures from competitors and economic conditions. (公司面临来自竞争对手和经济环境的外部压力。)
-
-extraordinary [ɪkˈstrɔːdnri] adj. 非凡的；特别的
-
-The athlete's performance was extraordinary and broke the world record. (这位运动员的表现非凡，打破了世界纪录。)
-
-extreme [ɪkˈstriːm] n. 极端；极度，adj. 极端的；极度的
-
-The weather conditions were extreme during the hurricane. (飓风期间天气条件极端。)
+- `edition` [ɪˈdɪʃn] n. 版本；版本号
+    - I have the latest edition of the Oxford English Dictionary.
+    - > 我有牛津英语词典的最新版本。
+- `elderly` [ˈɛldərli] adj. 年长的；年老的
+    - The elderly man needed help crossing the street.
+    - > 那位年长的男子需要帮助过马路。
+- `elect` [ɪˈlɛkt] v. 选举；选择
+    - The people will elect a new president next year.
+    - > 人民将在明年选举新总统。
+- `elsewhere` [ˈɛlsweə] adv. 在别处；到别处
+    - If they don't have it here, you might find it elsewhere.
+    - > 如果他们这里没有，你可能会在别处找到它。
+- `emerge` [ɪˈmɜːdʒ] v. 出现；浮出水面
+    - The sun emerged from behind the clouds.
+    - > 太阳从云层后面出现了。
+- `emotional` [ɪˈməʊʃənl] adj. 情绪的；感情的
+    - She gave an emotional speech at the funeral.
+    - > 她在葬礼上发表了感人的演讲。
+- `emphasis` [ˈɛmfəsɪs] n. 强调；重点
+    - The emphasis in this sentence is on the word "important".
+    - > 这个句子中重点在于“重要”这个词。
+- `emphasize` [ˈɛmfəsaɪz] v. 强调；着重说明
+    - The teacher emphasized the importance of studying hard.
+    - > 老师强调了努力学习的重要性。
+- `encounter` [ɪnˈkaʊntə] v. 遇到；邂逅，n. 遭遇；邂逅
+    - She encountered an old friend on the street.
+    - > 她在街上遇见了一位老朋友。
+- `engage` [ɪnˈɡeɪdʒ] v. 与订婚
+    - I'm planning to engage in some volunteer work this summer. 
+    - > 我计划在这个夏天参加一些志愿者工作。
+- `ensure` [ɪnˈʃʊr] v. 确保；保证
+    - Please ensure that the door is locked before you leave.
+    - > 请确保在离开前门已经锁好了。
+- `enthusiasm` [ɛnˈθjuːziæzəm] n. 热情；热忱
+    - Her enthusiasm for the project was contagious.
+    - > 她对这个项目的热情是具有感染力的。
+- `enthusiastic` [ɛnˌθjuːziˈæstɪk] adj. 热情的；热心的
+    - The students were enthusiastic about the field trip.
+    - > 学生们对这次实地考察充满热情。
+- `estate` [ɪˈsteɪt] n. 房地产；财产
+    - He inherited a large estate from his grandfather.
+    - > 他从祖父那里继承了一大笔财产。
+- `estimate` [ˈɛstɪmeɪt] v. 估计；评估，n. 估计；评估
+    - Can you give me an estimate of how long the project will take?
+    - > 你能给我一个项目需要多长时间的估计吗？
+- `ethical` [ˈɛθɪkəl] adj. 道德的；伦理的
+    - It is important to make ethical decisions in the workplace.
+    - > 在工作场所做出道德决策是很重要的。
+- `evaluate` [ɪˈvæljueɪt] v. 评价；评估
+    - The teacher will evaluate the students' essays based on several criteria.
+    - > 老师将根据几个标准评价学生的论文。
+- `evil` [ˈiːvl] adj. 邪恶的；恶毒的，n. 邪恶；罪恶
+    - The evil queen in the fairy tale was jealous of Snow White's beauty. 
+    - > 童话中的邪恶女王嫉妒白雪公主的美貌。
+- `examination` [ɪɡˌzæmɪˈneɪʃn] n. 考试；检查
+    - He passed the final examination with flying colors.
+    - > 他以优异的成绩通过了期末考试。
+- `executive` [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的
+    - The executive team is responsible for making important decisions.
+    - > 执行团队负责做出重要决策。
+- `exhibit` [ɪɡˈzɪbɪt] v. 展示；展览，n. 展览品；展览会
+    - The museum will exhibit a collection of ancient artifacts next month.
+    - > 博物馆下个月将展出一组古代文物。
+- `existence` [ɪɡˈzɪstəns] n. 存在；实在
+    - The existence of aliens is still a topic of debate among scientists.
+    - > 外星人的存在仍然是科学家们争论的话题。
+- `expense` [ɪkˈspɛns] n. 费用；支出
+    - The company had to cut expenses in order to stay in business.
+    - > 公司不得不削减开支以保持运营。
+- `exploration` [ˌɛkspləˈreɪʃn] n. 探索；勘探
+    - The astronauts conducted an exploration of the surface of the moon.
+    - > 宇航员们对月球表面进行了一次探索。
+- `expose` [ɪkˈspəʊz] v. 暴露；揭露
+    - The journalist exposed the corruption scandal.
+    - > 记者揭露了腐败丑闻。
+- `extend` [ɪkˈstɛnd] v. 扩展；延伸
+    - The company plans to extend its operations to other countries.
+    - > 公司计划将业务展到其他国家。
+- `extent` [ɪkˈstɛnt] n. 程度；范围
+    - The extent of the damage caused by the earthquake was enormous.
+    - > 地震造成的破坏范围极大。
+- `external` [ɪkˈstɜːrnəl] adj. 外部的；外在的
+    - The company faced external pressures from competitors and economic conditions.
+    - > 公司面临来自竞争对手和经济环境的外部压力。
+- `extraordinary` [ɪkˈstrɔːdnri] adj. 非凡的；特别的
+    - The athlete's performance was extraordinary and broke the world record.
+    - > 这位运动员的表现非凡，打破了世界纪录。
+- `extreme` [ɪkˈstriːm] n. 极端；极度，adj. 极端的；极度的
+    - The weather conditions were extreme during the hurricane.
+    - > 飓风期间天气条件极端。
 
 
 ## f
 
-facility [fəˈsɪlɪti] n. 设施；场所
-
-The new facility has state-of-the-art equipment. (新设施拥有最先进的设备。)
-
-favor [ˈfeɪvər] v. 偏爱；支持
-
-I would favor a candidate who has experience in the field. (我会支持一个在这个领域有经验的候选人。)
-
-feather [ˈfɛðər] n. 羽毛
-
-The bird's feathers were brightly colored. (鸟的羽毛色彩鲜艳。)
-
-fee [fiː] n. 费用；酬金
-
-The lawyer's fee for the consultation was quite high. (律师咨询的费用相当高。)
-
-feed [fiːd] n. 饲料；喂养，v. 喂食
-
-The farmer feeds the cows with fresh hay. (农民用新鲜的干草喂牛。)
-
-fellow [ˈfɛləʊ] adj. 同伴的；同事的
-
-My fellow colleagues and I worked on the project together. (我和我的同事们一起合作完成了这个项目。)
-
-figure [ˈfɪɡər] v. 认为；描绘，n. 数字；图形
-
-I can't figure out how to solve this problem. (我想不出如何解决这个问题。)
-
-finance [ˈfaɪnæns] n. 财政；金融，v. 资助；融资
-
-The company needs to finance its new project. (公司需要为新项目提供资金。)
-
-finding [ˈfaɪndɪŋ] n. 发现；调查结果
-
-The findings of the study were surprising. (研究结果令人吃惊。)
-
-firm [fɜːm] n. 公司；企业，adj. 坚定的；牢固的
-
-The law firm specializes in corporate law. (这
-胡
-继续
-个律师事务所专门从事公司法律事务。)
-
-flame [fleɪm] n. 火焰；烈焰
-
-The flame of the candle flickered in the breeze. (蜡烛的火焰在微风中摇曳。)
-
-flexible [ˈflɛksəbl] adj. 灵活的；可弯曲的
-
-The yoga instructor taught us how to be more flexible. (瑜伽教练教我们如何更加灵活。)
-
-float [fləʊt] v. 漂浮；飘动
-
-The boat floated down the river. (小船漂下了河流。)
-
-forgive [fəˈɡɪv] v. 原谅；宽恕
-
-I hope you can forgive me for my mistake. (我希望你能原谅我犯的错误。)
-
-former [ˈfɔːmər] adj. 以前的；从前的
-
-The former president was known for his diplomatic skills. (前总统以其外交手腕而著称。)
-
-fortune [ˈfɔːtʃuːn] n. 运气；财富
-
-He made his fortune in the stock market. (他在股市里赚了大钱。)
-
-forward [ˈfɔːwəd] adj. 向前的；前进的
-
-The team made a forward pass to score the winning goal. (球队进行一次向前传球以进入胜利的进球。)
-
-found [faʊnd] v. 创立；建立
-
-The company was founded in 2001. (这家公司成立于2001年。)
-
-frequency [ˈfriːkwənsi] n. 频率；频繁
-
-The frequency of earthquakes in this region is quite high. (这个地区地震的频率相当高。)
-
-fuel [fjuːəl] v. 加油；加燃料
-
-I need to fuel up my car before we
-胡
-继续
-go on our road trip. (我们去公路旅行前我需要给汽车加油。)
-
-fully [ˈfʊli] adv. 完全地；彻底地
-
-I fully support your decision. (我完全支持你的决定。)
-
-fund [fʌnd] n. 基金；资金，v. 提供资金；资助
-
-The company raised funds to support the new project. (公司筹集资金支持新项目。)
-
-fundamental [ˌfʌndəˈmɛntl] adj. 基本的；根本的
-
-The fundamental principles of mathematics are the building blocks of higher-level concepts. (数学的基本原理是高层次概念的基石。)
-
-funding [ˈfʌndɪŋ] n. 资金；资助
-
-The school received funding from the government for a new science lab. (学校获得政府的资助建设了一座新的科学实验室。)
-
-furthermore [ˌfɜːrðəˈmɔːr] adv. 而且；此外
-
-The company is expanding its operations, furthermore, it plans to enter new markets. (公司正在扩大其业务，而且计划进入新市场。)
-
+- `facility` [fəˈsɪlɪti] n. 设施；场所
+    - The new facility has state-of-the-art equipment.
+    - > 新设施拥有最先进的设备。
+- `favor` [ˈfeɪvər] v. 偏爱；支持
+    - I would favor a candidate who has experience in the field.
+    - > 我会支持一个在这个领域有经验的候选人。
+- `feather` [ˈfɛðər] n. 羽毛
+    - The bird's feathers were brightly colored.
+    - > 鸟的羽毛色彩鲜艳。
+- `fee` [fiː] n. 费用；酬金
+    - The lawyer's fee for the consultation was quite high.
+    - > 律师咨询的费用相当高。
+- `feed` [fiːd] n. 饲料；喂养，v. 喂食
+    - The farmer feeds the cows with fresh hay.
+    - > 农民用新鲜的干草喂牛。
+- `fellow` [ˈfɛləʊ] adj. 同伴的；同事的
+    - My fellow colleagues and I worked on the project together.
+    - > 我和我的同事们一起合作完成了这个项目。
+- `figure` [ˈfɪɡər] v. 认为；描绘，n. 数字；图形
+    - I can't figure out how to solve this problem.
+    - > 我想不出如何解决这个问题。
+- `finance` [ˈfaɪnæns] n. 财政；金融，v. 资助；融资
+    - The company needs to finance its new project.
+    - > 公司需要为新项目提供资金。
+- `finding` [ˈfaɪndɪŋ] n. 发现；调查结果
+    - The findings of the study were surprising.
+    - > 研究结果令人吃惊。
+- `firm` [fɜːm] n. 公司；企业，adj. 坚定的；牢固的
+    - The law firm specializes in corporate law.
+    - > 这个律师事务所专门从事公司法律事务。
+- `flame` [fleɪm] n. 火焰；烈焰
+    - The flame of the candle flickered in the breeze.
+    - > 蜡烛的火焰在微风中摇曳。
+- `flexible` [ˈflɛksəbl] adj. 灵活的；可弯曲的
+    - The yoga instructor taught us how to be more flexible.
+    - > 瑜伽教练教我们如何更加灵活。
+- `float` [fləʊt] v. 漂浮；飘动
+    - The boat floated down the river.
+    - > 小船漂下了河流。
+- `forgive` [fəˈɡɪv] v. 原谅；宽恕
+    - I hope you can forgive me for my mistake.
+    - > 我希望你能原谅我犯的错误。
+- `former` [ˈfɔːmər] adj. 以前的；从前的
+    - The former president was known for his diplomatic skills.
+    - > 前总统以其外交手腕而著称。
+- `fortune` [ˈfɔːtʃuːn] n. 运气；财富
+    - He made his fortune in the stock market.
+    - > 他在股市里赚了大钱。
+- `forward` [ˈfɔːwəd] adj. 向前的；前进的
+    - The team made a forward pass to score the winning goal.
+    - > 球队进行一次向前传球以进入胜利的进球。
+- `found` [faʊnd] v. 创立；建立
+    - The company was founded in 2001.
+    - > 这家公司成立于2001年。
+- `frequency` [ˈfriːkwənsi] n. 频率；频繁
+    - The frequency of earthquakes in this region is quite high.
+    - > 这个地区地震的频率相当高。
+- `fuel` [fjuːəl] v. 加油；加燃料
+    - I need to fuel up my car before we go on our road trip. 
+    - > 我们去公路旅行前我需要给汽车加油。
+- `fully` [ˈfʊli] adv. 完全地；彻底地
+    - I fully support your decision.
+    - > 我完全支持你的决定。
+- `fund` [fʌnd] n. 基金；资金，v. 提供资金；资助
+    - The company raised funds to support the new project.
+    - > 公司筹集资金支持新项目。
+- `fundamental` [ˌfʌndəˈmɛntl] adj. 基本的；根本的
+    - The fundamental principles of mathematics are the building blocks of higher-level concepts.
+    - > 数学的基本原理是高层次概念的基石。
+- `funding` [ˈfʌndɪŋ] n. 资金；资助
+    - The school received funding from the government for a new science lab.
+    - > 学校获得政府的资助建设了一座新的科学实验室。
+- `furthermore` [ˌfɜːrðəˈmɔːr] adv. 而且；此外
+    - The company is expanding its operations, furthermore, it plans to enter new markets.
+    - > 公司正在扩大其业务，而且计划进入新市场。
 
 ## ghi
 
-gain [ɡeɪn] v. 获得；增加，n. 增益；收益
-I hope to gain more knowledge through my studies. (我希望通过学习获得更多知识。)
-他在这笔交易中获得了很大的收益。(He gained a lot of profit from this transaction.)
+- gain [ɡeɪn] v. 获得；增加，n. 增益；收益
+Ih`ope` to gain more knowledge through my studies. (我希望通过学习获得更多知识。)
+    - 他在这笔交易中获得了很大的收益。(He gained a lot of profit from this transacti
+    -o> .
 
 gang [ɡæŋ] n. 帮派；团伙
 The police arrested several members of the gang. (警方逮捕了该团伙的几名成员。)
@@ -1669,8 +1601,6 @@ The teacher will grade our essays based on grammar and content. (老师将根据
 
 gradually [ˈɡrædʒuəli] adv. 逐渐地；逐步地
 I am gradually getting better at
-胡
-继续
 playing the piano with practice. (通过练习，我逐渐变得擅长弹钢琴。)
 通过练习，我逐渐变得更擅长弹钢琴。
 
@@ -1696,8 +1626,6 @@ She twisted her ankle when she landed on her heel. (她着陆时脚后跟着地�
 
 hire [haɪr] v. 雇佣；租借，n. 租用；雇佣
 The company decided to hire a new marketing manager. (公司决定雇佣一位新的市
-胡
-继续
 场经理。)
 公司决定雇佣一位新的市场经理。
 
@@ -1726,8 +1654,6 @@ The book contains many beautiful illustrations. (这本书包含许多漂亮的�
 这本书包含许多漂亮的插图。
 
 imagination [ɪˌmædʒɪˈneɪʃn] n. 想象力；幻想
-胡
-继续
 Her imagination was sparked by the fantasy novel. (她的想象力因为这本幻想小说而被激发。)
 她因这本幻想小说而激发了她的想象力。
 

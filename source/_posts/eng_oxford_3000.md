@@ -526,16 +526,17 @@ categories:
 - `qualification` [ˌkwɒlɪfɪˈkeɪʃən]: 
     - This job requires relevant qualifications and certifications.
     - > 这份工作需要相关的学历和`资格`证书。
-- `qualified` [ˈkwɒlɪfaɪd]:  TODO
+- `qualified` [ˈkwɒlɪfaɪd]:
     - She is a qualified doctor with many years of medical experience.
     - > 她是一名`具有资格的`医生，拥有多年的医疗经验。
 - `qualify` [ˈkwɒlɪfaɪ]: vt. 使..具有资格
-    - He qualified for a driver's license by passing the exam.
-    - > 他通过考试，获得了驾驶执照。
+    - New businesses may qualify for tax remission.
+    - > 新的企业可以有资格享受税收减免。
 - `quotation` [kwəʊˈteɪʃən]: 
     - He quoted Martin Luther King's words in his speech.
-    - > 他在演讲中引用了马丁·路德·金的名言。
+    - > 他在演讲中`引用`了马丁·路德·金的名言。
 
+  TODO
 
 ## rs
 

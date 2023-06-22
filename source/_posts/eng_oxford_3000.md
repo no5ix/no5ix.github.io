@@ -410,117 +410,126 @@ categories:
     - > 科学`实验室`是进行科学研究和开发的重要场所。
 - `lack` [læk]: 
     - Our company lacks an effective marketing strategy.
-    - > 我们公司缺乏一个有效的市场营销策略。
-- `leather` [ˈleðə(r)]: 
+    - > 我们公司`缺乏`一个有效的市场营销策略。
+- `leather` [ˈleðə(r)]: n. 皮革
     - This leather bag is made of high-quality leather and is very durable and beautiful.
-    - > 这个皮包是用高质量的皮革制作的，非常耐用和美观。
+    - > 这个`皮`包是用高质量的`皮革`制作的，非常耐用和美观。
 - `leisure` [ˈleʒə(r)]: 
     - Leisure time can be used to do things you enjoy and relax.
-    - > 闲暇时间可以用来做一些自己喜欢的事情，放松身心。
+    - > `闲暇`时间可以用来做一些自己喜欢的事情，放松身心。
 - `literature` [ˈlɪtərətʃə(r)]: 
     - Literature can bring us infinite imagination and emotion.
-    - > 文学作品可以带给我们无限的想象力和感受力。
-- `mental` [ˈmentl]: 
+    - > `文学作品`可以带给我们无限的想象力和感受力。
+- `mental` [ˈmentl]: adj. 心理的
     - Mental health is crucial for our life and work.
-    - > 心理健康对于我们的生活和工作都非常重要。
+    - > `心理的`健康对于我们的生活和工作都非常重要。
 - `mild` [maɪld]: 
     - The climate in this area is mild and pleasant throughout the year.
-    - > 这个地区的气候温和，四季宜人。
+    - > 这个地区的气候是`温和的`，四季宜人。
 - `mixture` [ˈmɪkstʃə(r)]: 
     - This medicine is made up of a mixture of different ingredients.
-    - > 这个药是由多种不同的成分混合而成的。
+    - > 这个药是由多种不同的成分的`混合体`。
 - `nail` [neɪl]: 
     - I need a nail to fix this wooden board.
-    - > 我需要一把钉子来固定这个木板。
-- `narrative` [ˈnærətɪv]: 
-    - This novel tells a touching story that is engaging.
-    - > 这个小说讲述了一个感人的故事，引人入胜。
+    - > 我需要一把`钉子`来固定这个木板。
+- `narrative` [ˈnærətɪv]: n. 记叙文，叙述；叙事技巧 adj. 叙述的；叙事体的
+    - The novel contains too much dialogue and not enough narrative.
+    - > 这部小说对话过多，而`叙述`不足。
 - `neat` [niːt]: 
-    - This room is neat and tidy, making it very comfortable and pleasant.
-    - > 这个房间整洁有序，非常舒适宜人。
+    - This room is neat, making it very comfortable and pleasant.
+    - > 这个房间是*整洁的*，非常舒适宜人。
 - `nuclear` [ˈnjuːkliə(r)]: 
     - Nuclear weapons are a very dangerous weapon, posing a great threat to humanity and the environment.
-    - > 核武器是一种非常危险的武器，对人类和生态造成极大的威胁。
+    - > `核的`武器是一种非常危险的武器，对人类和生态造成极大的威胁。
 - `occasion` [əˈkeɪʒən]: 
     - This special occasion requires us to wear formal dress to attend.
-    - > 这个特殊的场合需要我们穿礼服出席。
+    - > 这个特殊的`场合`需要我们穿礼服出席。
 - `ought` [ɔːt]: 
     - You ought to start preparing for the exam early so that you can achieve better results.
-    - > 你应该尽早开始准备考试，这样才能更好地取得好成绩。
-- `outdoors` [ˈaʊtdɔːz]: 
+    - > 你`应该`尽早开始准备考试，这样才能更好地取得好成绩。
+- `outdoors` [ˈaʊtdɔːz]: adv. 在户外 n. 野外，旷野（the outdoors）；野外活动，户外休闲 （the outdoors）
+    - I'm a lover of the outdoors.
+    - > 我是个`户外活动`爱好者。
+    - It was warm enough to be outdoors all afternoon.
+    - > 天气暖洋洋的，整个下午都可以`在户外`。
+    - Hypothermia is common among tramps sleeping outdoors.
+    - > 体温过低症在那些露宿`户外`的流浪汉中很普遍。
+- `outdoor` [ˈaʊtdɔː]: 
     - Outdoor activities can allow us to breathe fresh air and enjoy the beauty of nature.
-    - > 在户外活动可以让我们呼吸新鲜空气，享受自然的美景。
+    - > `在户外的`活动可以让我们呼吸新鲜空气，享受自然的美景。
 - `overseas` [ˌəʊvərˈsiːz]: 
     - Our company has many overseas clients and needs to constantly expand our overseas market.
-    - > 我们公司有很多海外客户，需要不断拓展海外市场。
+    - > 我们公司有很多`海外的`客户，需要不断拓展海外市场。
 
 
 ## pq
 
 - `participate` [pɑːˈtɪsɪpeɪt]: 
     - Participating in community activities can help us better understand the community and interact with others.
-    - > 参与社区活动可以让我们更好地了解社区和与他人互动。
+    - > `参与`社区活动可以让我们更好地了解社区和与他人互动。
 - `particularly` [pəˈtɪkjʊlə(r)li]: 
     - I particularly like the historical relics and culture of this city.
-    - > 我特别喜欢这个城市的历史遗迹和文化。
+    - > 我`特别地`喜欢这个城市的历史遗迹和文化。
 - `persuade` [pəˈsweɪd]: 
     - We need to persuade them to accept our proposal, which is crucial for the success of the project.
-    - > 我们需要说服他们接受我们的建议，这对项目的成功非常重要。
+    - > 我们需要`说服`他们接受我们的建议，这对项目的成功非常重要。
 - `pleasant` [ˈpleznt]: 
     - The atmosphere of this restaurant is very pleasant, and the service is also attentive.
-    - > 这个餐厅的氛围非常愉快，服务也很周到。
-- `plot` [plɒt]: 
+    - > 这个餐厅的氛围非常`愉快`，服务也很周到。
+- `plot` [plɒt]: n. 阴谋，密谋；情节；（专用的）小块地；（表现两个变量关系的）图表；<美>图表，地图；<美>底层平面图
     - This novel has a thrilling plot that keeps you wanting to read on.
     - > 这个小说有一个扣人心弦的情节，让人一直想看下去。
 - `poet` [ˈpəʊət]: 诗人
     - William Shakespeare is a famous poet in England, and his poetry is still widely recited to this day.
     - > William Shakespeare 是英国著名的诗人，他的诗歌作品至今仍然被广泛传诵。 
-- `poetry` [ˈpəʊətri]: 诗歌
+- `poetry` [ˈpəʊətri]: 诗歌 (`Poetry`指的是一类文学体裁，而 `poem` 则是指具体的一首诗)
     - Poetry can express the poet's deep emotions and thoughts through words.
     - > 诗歌可以通过文字表达出诗人内心深处的情感和思想。 
-- `poem` [ˈpəʊəm]: 诗篇
+- `poem` [ˈpəʊəm]: 诗篇 (`Poetry`指的是一类文学体裁，而 `poem` 则是指具体的一首诗)
     - This poem describes a beautiful landscape, allowing people to feel the magic and beauty of nature.
     - > 这首诗篇描述了一个美丽的风景，让人感受到大自然的神奇和美丽。
 - `portrait` [ˈpɔːtrət]: 肖像画
     - This portrait vividly depicts the appearance and temperament of the celebrity, and is very lifelike.
-    - > 这幅肖像画生动地展现了这位名人的面容和气质，非常逼真。
+    - > 这幅`肖像画`生动地展现了这位名人的面容和气质，非常逼真。
 - `pot` [pɒt]: 
     - He cooked a pot of noodles in the pot.
-    - > 他在锅里煮了一锅面条。
+    - > 他在`锅`里煮了一锅面条。
 - `pour` [pɔːr]: 
     - She poured a glass of water.
-    - > 她倒了一杯水。
+    - > 她`倒`了一杯水。
 - `poverty` [ˈpɒvəti]: 
     - Many people live in poverty.
-    - > 许多人生活在贫困中。
-- `powder` [ˈpaʊdə(r)]: 
+    - > 许多人生活在`贫困`中。
+- `powder` [ˈpaʊdə(r)]: n. 粉末
     - She made a cake with flour powder.
-    - > 她用面粉制作了蛋糕。
-- `prayer` [preə(r)]: 
+    - > 她用面`粉`制作了蛋糕。
+- `prayer` [preə(r)]: n. 祷文，祷词；祈祷，祷告；祈祷仪式，祈祷会（prayers）；愿望，祈望；极小的机会，极小的可能性
+    - We believe in the power of prayer.
+    - > 我们相信`祈祷`的力量。
     - They prayed in the church.
     - > 他们在教堂里祷告。
 - `priest` [priːst]: 
     - The priest conducted mass in the church.
-    - > 牧师在教堂里主持弥撒。
+    - > `牧师`在教堂里主持弥撒。
 - `profit` [ˈprɒfɪt]: 
     - This business brought in a lot of profit.
-    - > 这项业务带来了很多利润。
-- `promote` [prəˈməʊt]: 
+    - > 这项业务带来了很多`利润`。
+- `promote` [prəˈməʊt]: v. 促进，提倡；升职，晋升；促销，推广
     - The company promoted its new product to increase sales.
-    - > 公司为了提高销售额而推广新产品。
+    - > 公司为了提高销售额而`推广`新产品。
 - `protest` [ˈprəʊtest]: 
     - People held a protest march to protest the government's policies.
-    - > 人们举行示威游行，抗议政府的政策。
+    - > 人们举行示威游行，`抗议`政府的政策。
 - `prove` [pruːv]: 
     - He proved his point with an experiment.
-    - > 他用实验证明了自己的观点。
+    - > 他用实验`证明`了自己的观点。
 - `qualification` [ˌkwɒlɪfɪˈkeɪʃən]: 
     - This job requires relevant qualifications and certifications.
-    - > 这份工作需要相关的学历和资格证书。
-- `qualified` [ˈkwɒlɪfaɪd]: 
+    - > 这份工作需要相关的学历和`资格`证书。
+- `qualified` [ˈkwɒlɪfaɪd]:  TODO
     - She is a qualified doctor with many years of medical experience.
-    - > 她是一名合格的医生，拥有多年的医疗经验。
-- `qualify` [ˈkwɒlɪfaɪ]: 
+    - > 她是一名`具有资格的`医生，拥有多年的医疗经验。
+- `qualify` [ˈkwɒlɪfaɪ]: vt. 使..具有资格
     - He qualified for a driver's license by passing the exam.
     - > 他通过考试，获得了驾驶执照。
 - `quotation` [kwəʊˈteɪʃən]: 

@@ -221,11 +221,11 @@ categories:
     - > 我们需要集中精力完成这项任务。
 - `conclude` [kənˈkluːd]: v. 断定，推断出；结束，终止；达成，做成，完成；<美>决定
     - What do you conclude from that?
-    - > 你从这件事中**得出了什么结论**？
+    - > 你从这件事中`得出了什么结论`？
     - So what can we conclude from this debate?
-    - > 那么从这场辩论中我们能**推断**出什么呢？
+    - > 那么从这场辩论中我们能`推断`出什么呢？
     - The competitors cantered into the arena to conclude the closing ceremony.
-    - > 赛手们慢跑进入比赛场地，**结束**了闭幕式。
+    - > 赛手们慢跑进入比赛场地，`结束`了闭幕式。
 - `conclusion` [kənˈkluːʒn]: n. 结论
     - This conclusion is based on facts and evidence.
     - > 这个结论是基于事实和证据得出的。
@@ -260,7 +260,7 @@ categories:
     - > 我们需要一些窗帘来遮挡阳光和保护隐私。
 - `departure` [dɪˈpɑːtʃə(r)]: n. 离开, 出发, 骑乘
     - His departure passed unnoticed.
-    - > 他神不知、鬼不觉地**离开**了。
+    - > 他神不知、鬼不觉地`离开`了。
     - Our flight will depart tomorrow morning.
     - > 我们的航班将在明天早上出发。
 - `diagram` [ˈdaɪəɡræm]: 
@@ -278,87 +278,87 @@ categories:
     - > 医生需要仔细检查病人的身体状况。
 - `essential` [ɪˈsenʃl]: adj. 必不可少的，非常重要的；基本的，精髓的；（氨基酸、脂肪酸）必需的；（疾病）自发的，原发的; n. 必不可少的东西，必需品；要素，本质；（某学科的）基础，基本知识
     - Money is not essential to happiness.
-    - > 金钱对于幸福并非**必不可少**。
+    - > 金钱对于幸福并非`必不可少`。
     - Experience is essential for this job.
-    - > 对于这个工作，经验是**非常重要**的。
+    - > 对于这个工作，经验是`非常重要`的。
     - Let's just recapitulate the essential points.
-    - > 让我们只概述一下**基本**要点吧。
+    - > 让我们只概述一下`基本`要点吧。
 - `episode` [ˈepɪsəʊd]: n. 集
     - Each episode of this TV series is very interesting and captivating.
-    - > 这个电视剧的每一**集**都非常有趣和引人入胜。
+    - > 这个电视剧的每一`集`都非常有趣和引人入胜。
 - `engaged` [ɪnˈɡeɪdʒd]: adj. 已订婚的；从事……的，忙于……的；电话占线的；（公用卫生间）被占用的；（圆柱）附墙的，部分砌在墙内的 v. 雇用，聘请；参加，从事；吸引，引起（engage 的过去式和过去分词形式）
     - When did you get engaged ?
     - > 你们什么时候订的婚？
     - We are engaged in an important project and cannot participate in other activities for the time being.
     - > 我们正在忙于一项重要的项目，暂时无法参加其他活动。
 - `district` [ˈdɪstrɪkt]: 
-    - This city is divided into many districts, and each **district** has its own characteristics.
-    - > 这个城市分为很多个区域，每个**区域**都有自己的特点。
+    - This city is divided into many districts, and each `district` has its own characteristics.
+    - > 这个城市分为很多个区域，每个`区域`都有自己的特点。
 - `divide` [dɪˈvaɪd]: vt. 分, 分割
     - We need to divide this task into several parts to complete it.
     - > 我们需要将这个任务分成几个部分来完成。
 - `documentary` [ˌdɒkjʊˈmentəri]: 
     - This documentary is very meaningful and allows people to better understand a historical event.
-    - > 这个**纪录片**非常有意义，让人可以更好地了解一个历史事件。
+    - > 这个`纪录片`非常有意义，让人可以更好地了解一个历史事件。
 - `drum` [drʌm]: 
     - The sound of the drums is enthusiastic and joyous.
-    - > **鼓**声响起，让人感到非常热烈和欢快。
+    - > `鼓`声响起，让人感到非常热烈和欢快。
 - `fasten` [ˈfɑːsn]: 
     - Please fasten your seatbelts as we are about to take off.
-    - > 请**系**好安全带，我们即将起飞。
+    - > 请`系`好安全带，我们即将起飞。
 - `favor` [ˈfeɪvə(r)]: 
     - He asked me for a small favor, and I am happy to help him.
-    - > 他向我请求一个小小的**帮助**，我很乐意帮助他。
+    - > 他向我请求一个小小的`帮助`，我很乐意帮助他。
 - `federal` [ˈfedərəl]: 
     - The federal government has the power to make some national policies and laws.
-    - > **联邦**政府有权力制定一些全国性的政策和法律。
+    - > `联邦`政府有权力制定一些全国性的政策和法律。
 - `fence` [fens]: 
     - This garden has a beautiful fence that protects the flowers and plants from external interference.
-    - > 这个花园有一道美丽的**篱笆**，保护了花草不受外界干扰。
+    - > 这个花园有一道美丽的`篱笆`，保护了花草不受外界干扰。
 - `fuel` [fjuːəl]: 
     - Cars need sufficient fuel to run.
-    - > 汽车需要足够的**燃料**才能够行驶。
+    - > 汽车需要足够的`燃料`才能够行驶。
 - `garage` [ˈɡærɑːʒ]: 
     - I parked the car in the garage.
-    - > 我把车停在了**车库**里。
+    - > 我把车停在了`车库`里。
 - `glove` [ɡlʌv]: 
     - I need a pair of gloves to protect my hands.
-    - > 我需要一双**手套**来保护我的手。
+    - > 我需要一双`手套`来保护我的手。
 - `grain` [ɡreɪn]: 
     - These grains are one of the *essential* foods in our daily life.
-    - > 这些**谷物**是我们日常生活中*必不可少*的食物之一。
+    - > 这些`谷物`是我们日常生活中*必不可少*的食物之一。
 
 
 ## hijk
 
 - `hire` [haɪə(r)]: 
     - We need to hire some professional workers to help us complete this project.
-    - > 我们需要**雇佣**一些专业的工人来帮助我们完成这个项目。
+    - > 我们需要`雇佣`一些专业的工人来帮助我们完成这个项目。
 - `historic` [hɪˈstɒrɪk]: 
     - This historic event will be recorded in the history books.
-    - > 这个**历史性的**事件将会被记录在历史书上。
+    - > 这个`历史性的`事件将会被记录在历史书上。
 - `historical` [hɪsˈtɒrɪkəl]: 
     - This museum has many historical relics and exhibits.
-    - > 这个博物馆收藏了很多**历史学**的文物和展品。
+    - > 这个博物馆收藏了很多`历史学`的文物和展品。
 - `hurricane` [ˈhʌrɪkən]: 
     - A hurricane is a very strong weather phenomenon that can bring destructive impacts.
-    - > **飓风**是一种非常强烈的天气现象，可以带来破坏性的影响。
+    - > `飓风`是一种非常强烈的天气现象，可以带来破坏性的影响。
 - `imaginary` [ɪˈmædʒɪnəri]: adj. 想象的，虚构的；虚数的
     - Lots of children have imaginary friends.
-    - > 许多孩子都有**假想的**朋友。
+    - > 许多孩子都有`假想的`朋友。
     - Children often have various imaginations and fantasies.
     - > 小孩子们常常有各种各样的想象和幻想。
 - `immigrant` [ˈɪmɪɡrənt]: 
     - Immigrants are an important source of economic and cultural diversity for a country.
-    - > **移民**是一个国家经济和文化多样性的重要来源。
+    - > `移民`是一个国家经济和文化多样性的重要来源。
 - `impact` [ˈɪmpækt]: n. 撞击，冲击力；巨大影响，强大作用 v. 冲击，撞击；挤入，压紧；（对……）产生影响
     - The two wings of the aircraft broke off on impact.
-    - > 该飞机的两个机翼因受到**撞击**而脱落。
+    - > 该飞机的两个机翼因受到`撞击`而脱落。
     - This event has a significant impact on our lives.
-    - > 这个事件对我们的生活产生了很大的**影响**。
+    - > 这个事件对我们的生活产生了很大的`影响`。
 - `indicate` [ˈɪndɪkeɪt]: vt. 指示, 指出
     - The data indicates that the sales of this product are gradually decreasing.
-    - > 数据**指示出**，这个产品的销售额正在逐渐下降。
+    - > 数据`指示出`，这个产品的销售额正在逐渐下降。
 - `indoors` [ˌɪnˈdɔːz]: adv. 在室内，进入室内 n. 室内，户内
     - Many herbs can be grown indoors.
     - > 很多草本植物能在室内种植。
@@ -368,37 +368,37 @@ categories:
     - > 即使在室内，也要小心。
 - `Indoor` adj. 在室内的
     - Indoor exercises are also a great way to keep fit.
-    - > **在室内的**运动也是一种很好的健身方式。
+    - > `在室内的`运动也是一种很好的健身方式。
 - `ingredient` [ɪnˈɡriːdiənt]: n. 组成不分, 原料
     - This recipe requires many different ingredients to make.
-    - > 这个菜谱需要很多不同的**原料**来制作。
+    - > 这个菜谱需要很多不同的`原料`来制作。
 - `intend` [ɪnˈtend]:  v. 打算，想要；意指，意思是；准备，预留（作某种用途或给某人用）
     - I intend to go on vacation next month and enjoy some relaxing time.
-    - > 我**打算**下个月去旅游，享受一下放松的时光。
+    - > 我`打算`下个月去旅游，享受一下放松的时光。
 - `intention` [ɪnˈtenʃən]: 
     - My intention is to help others and make their lives better.
-    - > 我的**意图**是帮助别人，让他们过得更好。
+    - > 我的`意图`是帮助别人，让他们过得更好。
 - `invest` [ɪnˈvest]: 
     - Investing in stocks is a high-risk and high-return investment method.
-    - > **投资**股票是一种风险和收益都很高的投资方式。
+    - > `投资`股票是一种风险和收益都很高的投资方式。
 - `investigate` [ɪnˈvestɪɡeɪt]: 
     - The police are investigating this case and hope to find the murderer.
-    - > 警方正在**调查**这个案件，希望能够找到凶手。
+    - > 警方正在`调查`这个案件，希望能够找到凶手。
 - `involved` [ɪnˈvɒlvd]: adj. 复杂的；与……关系密切的；专心于……的，忙于……的；卷入的，参与的 v. 牵涉，包含（involve 的过去式和过去分词形式）
     - They are both heavily involved in politics.
-    - > 他们俩都深深**卷入**政治中。
+    - > 他们俩都深深`卷入`政治中。
     - We are not romantically involved.
     - > 我们没有性爱关系。
     - This project requires the involvement of many people to work together to complete.
-    - > 这个项目需要很多人一起**参与**才能够完成。
+    - > 这个项目需要很多人一起`参与`才能够完成。
 - `journal` [ˈdʒɜːnl]: n. 杂志, 期刊
     - This scientific journal published a valuable research paper.
-    - > 这个科学**杂志**发表了一篇很有价值的研究论文。
+    - > 这个科学`杂志`发表了一篇很有价值的研究论文。
 - `killing` [ˈkɪlɪŋ]: 
     - This is a brutal killing.
-    - > 这是一起残忍的**谋杀**。
+    - > 这是一起残忍的`谋杀`。
     - The killing was the act of a madman.
-    - > 这起**凶杀案**是一个疯子所为。
+    - > 这起`凶杀案`是一个疯子所为。
     - The motive for the killing is unknown.
     - > 杀人的动机不明。
 
@@ -407,7 +407,7 @@ categories:
 
 - `laboratory` [ləˈbɒrətəri]: 
     - Science laboratories are important places for scientific research and development.
-    - > 科学实验室是进行科学研究和开发的重要场所。
+    - > 科学`实验室`是进行科学研究和开发的重要场所。
 - `lack` [læk]: 
     - Our company lacks an effective marketing strategy.
     - > 我们公司缺乏一个有效的市场营销策略。

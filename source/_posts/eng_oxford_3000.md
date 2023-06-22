@@ -182,6 +182,10 @@ categories:
 - `authority` [ɔːˈθɒrəti]: 
     - The government has the authority to make laws and regulations.
     - > 政府有权利制定法律和规定。
+
+
+## cd
+
 - `clause` [klɔːz]: 
     - This contract has a special clause that needs to be paid attention to.
     - > 这个合同有一个特别的条款，需要注意。
@@ -256,6 +260,10 @@ categories:
 - `diagram` [ˈdaɪəɡræm]: 
     - This flowchart can help us better understand the process of the entire project.
     - > 这个流程图可以帮助我们更好地理解整个项目的流程。
+
+
+## edfg
+
 - `exhibition` [ˌeksɪˈbɪʃn]: 
     - This museum is exhibiting some very precious cultural relics.
     - > 这个博物馆正在展出一些非常珍贵的文物。
@@ -309,6 +317,10 @@ categories:
 - `grain` [ɡreɪn]: 
     - These grains are one of the essential foods in our daily life.
     - > 这些谷物是我们日常生活中必不可少的食物之一。
+
+
+## hijk
+
 - `hire` [haɪə(r)]: 
     - We need to hire some professional workers to help us complete this project.
     - > 我们需要雇佣一些专业的工人来帮助我们完成这个项目。
@@ -361,10 +373,13 @@ categories:
 - `killing` [ˈkɪlɪŋ]: 
     - Killing animals for meat is a very cruel and inhumane act.
     - > 屠宰动物是一种非常残忍和不人道的行为。
+
+
+## lmno
+
 - `laboratory` [ləˈbɒrətəri]: 
     - Science laboratories are important places for scientific research and development.
     - > 科学实验室是进行科学研究和开发的重要场所。
-
 - `lack` [læk]: 
     - Our company lacks an effective marketing strategy.
     - > 我们公司缺乏一个有效的市场营销策略。
@@ -411,6 +426,10 @@ categories:
 - `overseas` [ˌəʊvərˈsiːz]: 
     - Our company has many overseas clients and needs to constantly expand our overseas market.
     - > 我们公司有很多海外客户，需要不断拓展海外市场。
+
+
+## pq
+
 - `participate` [pɑːˈtɪsɪpeɪt]: 
     - Participating in community activities can help us better understand the community and interact with others.
     - > 参与社区活动可以让我们更好地了解社区和与他人互动。
@@ -482,6 +501,9 @@ categories:
 - `quotation` [kwəʊˈteɪʃən]: 
     - He quoted Martin Luther King's words in his speech.
     - > 他在演讲中引用了马丁·路德·金的名言。
+
+
+## rs
 
 - `race` [reɪs]: 
     - They raced to win first place in the competition.
@@ -556,7 +578,6 @@ categories:
 - `substance`[ˈsʌbstəns]: 
     - This medication contains active substances that can alleviate pain.
     - > 这种药物含有有效成分，可以缓解疼痛。
-
 - `summarize` [ˈsʌməraɪz]: 
     - Please summarize your research findings in one or two sentences.
     - > 请用一两句话简要概括你的研究成果。
@@ -566,6 +587,10 @@ categories:
 - `symptom` [ˈsɪmptəm]: 
     - She has symptoms of headache and fever.
     - > 她出现了头痛和发热的症状。
+
+
+## tvw
+
 - `tend` [tend]: 
     - She tended the plants well and made them grow strong.
     - > 她照顾得很好，让植物茁壮成长。

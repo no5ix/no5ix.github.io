@@ -173,7 +173,7 @@ categories:
 - `alcoholic` [ˌælkəˈhɒlɪk]: 
     - He is an alcoholic and needs to undergo alcoholism treatment.
     - > 他是一个酗酒者，需要戒酒治疗。
-- `assignment` [əˈsaɪnmənt]: 
+- `assignment` [əˈsaɪnmənt]: n. 任务, 工作
     - Our teacher assigned a homework that needs to be completed before next week.
     - > 我们的老师布置了一份作业，需要在下周之前完成。
 - `atmosphere` [ˈætməsfɪə(r)]: 
@@ -192,13 +192,13 @@ categories:
 - `chemical` [ˈkemɪkəl]: 
     - This chemical substance has a significant impact on the environment.
     - > 这种化学物质对环境有很大的影响。
-- `ceremony` [ˈserəməni]: 
+- `ceremony` [ˈserəməni]: n. 仪式
     - The ceremony is very solemn and grand.
     - > 这个仪式非常庄重和隆重。
 - `cap` [kæp]: 
     - He is wearing a red cap that is very eye-catching.
     - > 他戴着一顶红色的帽子，非常醒目。
-- `campaign` [kæmˈpeɪn]: 
+- `campaign` [kæmˈpeɪn]: n. 运动
     - They are conducting an anti-corruption campaign.
     - > 他们正在进行一项反贪腐的宣传活动。
 - `cable` [ˈkeɪbl]: 
@@ -210,7 +210,6 @@ categories:
 - `comparison` [kəmˈpærɪsn]: 
     - The comparison between these two products is very interesting and can help people better understand their pros and cons.
     - > 这两个产品的比较非常有趣，让人可以更好地了解它们的优缺点。
-
 - `competitive` [kəmˈpetɪtɪv]: 
     - This is a very competitive market, and one needs to constantly improve oneself to achieve success.
     - > 这是一个非常有竞争力的市场，需要不断提高自己的水平才能获得成功。
@@ -220,12 +219,18 @@ categories:
 - `concentrate` [ˈkɒnsəntreɪt]: 
     - We need to concentrate on completing this task.
     - > 我们需要集中精力完成这项任务。
-- `conclude` [kənˈkluːd]: 
-    - After considering all aspects, we have come to a conclusion.
-    - > 经过多方考虑，我们得出了一个结论。
-- `conclusion` [kənˈkluːʒn]: 
+- `conclude` [kənˈkluːd]: v. 断定，推断出；结束，终止；达成，做成，完成；<美>决定
+    - What do you conclude from that?
+    - > 你从这件事中**得出了什么结论**？
+    - So what can we conclude from this debate?
+    - > 那么从这场辩论中我们能**推断**出什么呢？
+    - The competitors cantered into the arena to conclude the closing ceremony.
+    - > 赛手们慢跑进入比赛场地，**结束**了闭幕式。
+- `conclusion` [kənˈkluːʒn]: n. 结论
     - This conclusion is based on facts and evidence.
     - > 这个结论是基于事实和证据得出的。
+    - After considering all aspects, we have come to a conclusion.
+    - > 经过多方考虑，我们得出了一个结论。
 - `consequence` [ˈkɒnsɪkwəns]: 
     - Irresponsible actions will bring about adverse consequences.
     - > 不负责任的行为会带来不良后果。
@@ -235,11 +240,10 @@ categories:
 - `corn` [kɔːn]: 
     - Corn is a very popular cereal crop.
     - > 玉米是一种非常受欢迎的粮食作物。
-- `costume` [ˈkɒstjuːm]: 
+- `costume` [ˈkɒstjuːm]: n. 服装
     - The costume design of this stage play is very exquisite and allows the audience to better experience the plot.
     - > 这个舞台剧的服装设计非常精美，让观众可以更好地体验剧情。
-
-- `cotton` [ˈkɒtn]: 
+- `cotton` [ˈkɒtn]: n. 棉花
     - This piece of clothing is made of pure cotton and is very comfortable to wear.
     - > 这件衣服是用纯棉制成的，穿着非常舒适。
 - `cruel` [kruːəl]: 
@@ -251,10 +255,12 @@ categories:
 - `currency` [ˈkʌrənsi]: 
     - The US dollar is one of the most popular currencies in the world.
     - > 美元是世界上最流行的货币之一。
-- `curtain` [ˈkɜːtn]: 
+- `curtain` [ˈkɜːtn]: n. 窗帘
     - We need some curtains to block the sunlight and protect the privacy.
     - > 我们需要一些窗帘来遮挡阳光和保护隐私。
-- `departure` [dɪˈpɑːtʃə(r)]: 
+- `departure` [dɪˈpɑːtʃə(r)]: n. 离开, 出发, 骑乘
+    - His departure passed unnoticed.
+    - > 他神不知、鬼不觉地**离开**了。
     - Our flight will depart tomorrow morning.
     - > 我们的航班将在明天早上出发。
 - `diagram` [ˈdaɪəɡræm]: 
@@ -264,115 +270,137 @@ categories:
 
 ## edfg
 
-- `exhibition` [ˌeksɪˈbɪʃn]: 
+- `exhibition` [ˌeksɪˈbɪʃn]: n. 展览会, 展览
     - This museum is exhibiting some very precious cultural relics.
     - > 这个博物馆正在展出一些非常珍贵的文物。
 - `examine` [ɪɡˈzæmɪn]: 
     - Doctors need to carefully examine the patient's physical condition.
     - > 医生需要仔细检查病人的身体状况。
-- `essential` [ɪˈsenʃl]: 
-    - This is a very important issue that needs to be resolved in a timely manner.
-    - > 这是一个非常重要的问题，需要及时解决。
-- `episode` [ˈepɪsəʊd]: 
+- `essential` [ɪˈsenʃl]: adj. 必不可少的，非常重要的；基本的，精髓的；（氨基酸、脂肪酸）必需的；（疾病）自发的，原发的; n. 必不可少的东西，必需品；要素，本质；（某学科的）基础，基本知识
+    - Money is not essential to happiness.
+    - > 金钱对于幸福并非**必不可少**。
+    - Experience is essential for this job.
+    - > 对于这个工作，经验是**非常重要**的。
+    - Let's just recapitulate the essential points.
+    - > 让我们只概述一下**基本**要点吧。
+- `episode` [ˈepɪsəʊd]: n. 集
     - Each episode of this TV series is very interesting and captivating.
-    - > 这个电视剧的每一集都非常有趣和引人入胜。
-
-- `engaged` [ɪnˈɡeɪdʒd]: 
+    - > 这个电视剧的每一**集**都非常有趣和引人入胜。
+- `engaged` [ɪnˈɡeɪdʒd]: adj. 已订婚的；从事……的，忙于……的；电话占线的；（公用卫生间）被占用的；（圆柱）附墙的，部分砌在墙内的 v. 雇用，聘请；参加，从事；吸引，引起（engage 的过去式和过去分词形式）
+    - When did you get engaged ?
+    - > 你们什么时候订的婚？
     - We are engaged in an important project and cannot participate in other activities for the time being.
     - > 我们正在忙于一项重要的项目，暂时无法参加其他活动。
 - `district` [ˈdɪstrɪkt]: 
-    - This city is divided into many districts, and each district has its own characteristics.
-    - > 这个城市分为很多个区域，每个区域都有自己的特点。
-- `divide` [dɪˈvaɪd]: 
+    - This city is divided into many districts, and each **district** has its own characteristics.
+    - > 这个城市分为很多个区域，每个**区域**都有自己的特点。
+- `divide` [dɪˈvaɪd]: vt. 分, 分割
     - We need to divide this task into several parts to complete it.
     - > 我们需要将这个任务分成几个部分来完成。
 - `documentary` [ˌdɒkjʊˈmentəri]: 
     - This documentary is very meaningful and allows people to better understand a historical event.
-    - > 这个纪录片非常有意义，让人可以更好地了解一个历史事件。
+    - > 这个**纪录片**非常有意义，让人可以更好地了解一个历史事件。
 - `drum` [drʌm]: 
     - The sound of the drums is enthusiastic and joyous.
-    - > 鼓声响起，让人感到非常热烈和欢快。
+    - > **鼓**声响起，让人感到非常热烈和欢快。
 - `fasten` [ˈfɑːsn]: 
     - Please fasten your seatbelts as we are about to take off.
-    - > 请系好安全带，我们即将起飞。
+    - > 请**系**好安全带，我们即将起飞。
 - `favor` [ˈfeɪvə(r)]: 
     - He asked me for a small favor, and I am happy to help him.
-    - > 他向我请求一个小小的帮助，我很乐意帮助他。
+    - > 他向我请求一个小小的**帮助**，我很乐意帮助他。
 - `federal` [ˈfedərəl]: 
     - The federal government has the power to make some national policies and laws.
-    - > 联邦政府有权力制定一些全国性的政策和法律。
+    - > **联邦**政府有权力制定一些全国性的政策和法律。
 - `fence` [fens]: 
     - This garden has a beautiful fence that protects the flowers and plants from external interference.
-    - > 这个花园有一道美丽的篱笆，保护了花草不受外界干扰。
+    - > 这个花园有一道美丽的**篱笆**，保护了花草不受外界干扰。
 - `fuel` [fjuːəl]: 
     - Cars need sufficient fuel to run.
-    - > 汽车需要足够的燃料才能够行驶。
-
+    - > 汽车需要足够的**燃料**才能够行驶。
 - `garage` [ˈɡærɑːʒ]: 
     - I parked the car in the garage.
-    - > 我把车停在了车库里。
+    - > 我把车停在了**车库**里。
 - `glove` [ɡlʌv]: 
     - I need a pair of gloves to protect my hands.
-    - > 我需要一双手套来保护我的手。
+    - > 我需要一双**手套**来保护我的手。
 - `grain` [ɡreɪn]: 
-    - These grains are one of the essential foods in our daily life.
-    - > 这些谷物是我们日常生活中必不可少的食物之一。
+    - These grains are one of the *essential* foods in our daily life.
+    - > 这些**谷物**是我们日常生活中*必不可少*的食物之一。
 
 
 ## hijk
 
 - `hire` [haɪə(r)]: 
     - We need to hire some professional workers to help us complete this project.
-    - > 我们需要雇佣一些专业的工人来帮助我们完成这个项目。
+    - > 我们需要**雇佣**一些专业的工人来帮助我们完成这个项目。
 - `historic` [hɪˈstɒrɪk]: 
     - This historic event will be recorded in the history books.
-    - > 这个历史性的事件将会被记录在历史书上。
+    - > 这个**历史性的**事件将会被记录在历史书上。
 - `historical` [hɪsˈtɒrɪkəl]: 
     - This museum has many historical relics and exhibits.
-    - > 这个博物馆收藏了很多历史性的文物和展品。
+    - > 这个博物馆收藏了很多**历史学**的文物和展品。
 - `hurricane` [ˈhʌrɪkən]: 
     - A hurricane is a very strong weather phenomenon that can bring destructive impacts.
-    - > 飓风是一种非常强烈的天气现象，可以带来破坏性的影响。
-- `imaginary` [ɪˈmædʒɪnəri]: 
+    - > **飓风**是一种非常强烈的天气现象，可以带来破坏性的影响。
+- `imaginary` [ɪˈmædʒɪnəri]: adj. 想象的，虚构的；虚数的
+    - Lots of children have imaginary friends.
+    - > 许多孩子都有**假想的**朋友。
     - Children often have various imaginations and fantasies.
-    - > 小孩子们常常有各种各样的幻想和想象。
+    - > 小孩子们常常有各种各样的想象和幻想。
 - `immigrant` [ˈɪmɪɡrənt]: 
     - Immigrants are an important source of economic and cultural diversity for a country.
-    - > 移民是一个国家经济和文化多样性的重要来源。
-- `impact` [ˈɪmpækt]: 
+    - > **移民**是一个国家经济和文化多样性的重要来源。
+- `impact` [ˈɪmpækt]: n. 撞击，冲击力；巨大影响，强大作用 v. 冲击，撞击；挤入，压紧；（对……）产生影响
+    - The two wings of the aircraft broke off on impact.
+    - > 该飞机的两个机翼因受到**撞击**而脱落。
     - This event has a significant impact on our lives.
-    - > 这个事件对我们的生活产生了很大的影响。
-- `indicate` [ˈɪndɪkeɪt]: 
+    - > 这个事件对我们的生活产生了很大的**影响**。
+- `indicate` [ˈɪndɪkeɪt]: vt. 指示, 指出
     - The data indicates that the sales of this product are gradually decreasing.
-    - > 数据显示，这个产品的销售额正在逐渐下降。
-
-- `indoors` [ˌɪnˈdɔːz]: 
+    - > 数据**指示出**，这个产品的销售额正在逐渐下降。
+- `indoors` [ˌɪnˈdɔːz]: adv. 在室内，进入室内 n. 室内，户内
+    - Many herbs can be grown indoors.
+    - > 很多草本植物能在室内种植。
+    - In view of the weather, the event will now be held indoors.
+    - > 由于天气的缘故，这项赛事将在室内进行。
+    - Even after you are indoors, be careful.
+    - > 即使在室内，也要小心。
+- `Indoor` adj. 在室内的
     - Indoor exercises are also a great way to keep fit.
-    - > 在室内运动也是一种很好的健身方式。
-- `ingredient` [ɪnˈɡriːdiənt]: 
+    - > **在室内的**运动也是一种很好的健身方式。
+- `ingredient` [ɪnˈɡriːdiənt]: n. 组成不分, 原料
     - This recipe requires many different ingredients to make.
-    - > 这个菜谱需要很多不同的食材来制作。
-- `intend` [ɪnˈtend]: 
+    - > 这个菜谱需要很多不同的**原料**来制作。
+- `intend` [ɪnˈtend]:  v. 打算，想要；意指，意思是；准备，预留（作某种用途或给某人用）
     - I intend to go on vacation next month and enjoy some relaxing time.
-    - > 我打算下个月去旅游，享受一下放松的时光。
+    - > 我**打算**下个月去旅游，享受一下放松的时光。
 - `intention` [ɪnˈtenʃən]: 
     - My intention is to help others and make their lives better.
-    - > 我的意图是帮助别人，让他们过得更好。
+    - > 我的**意图**是帮助别人，让他们过得更好。
 - `invest` [ɪnˈvest]: 
     - Investing in stocks is a high-risk and high-return investment method.
-    - > 投资股票是一种风险和收益都很高的投资方式。
+    - > **投资**股票是一种风险和收益都很高的投资方式。
 - `investigate` [ɪnˈvestɪɡeɪt]: 
     - The police are investigating this case and hope to find the murderer.
-    - > 警方正在调查这个案件，希望能够找到凶手。
-- `involved` [ɪnˈvɒlvd]: 
+    - > 警方正在**调查**这个案件，希望能够找到凶手。
+- `involved` [ɪnˈvɒlvd]: adj. 复杂的；与……关系密切的；专心于……的，忙于……的；卷入的，参与的 v. 牵涉，包含（involve 的过去式和过去分词形式）
+    - They are both heavily involved in politics.
+    - > 他们俩都深深**卷入**政治中。
+    - We are not romantically involved.
+    - > 我们没有性爱关系。
     - This project requires the involvement of many people to work together to complete.
-    - > 这个项目需要很多人一起合作才能够完成。
-- `journal` [ˈdʒɜːnl]: 
+    - > 这个项目需要很多人一起**参与**才能够完成。
+- `journal` [ˈdʒɜːnl]: n. 杂志, 期刊
     - This scientific journal published a valuable research paper.
-    - > 这个科学杂志发表了一篇很有价值的研究论文。
+    - > 这个科学**杂志**发表了一篇很有价值的研究论文。
 - `killing` [ˈkɪlɪŋ]: 
-    - Killing animals for meat is a very cruel and inhumane act.
-    - > 屠宰动物是一种非常残忍和不人道的行为。
+    - This is a brutal killing.
+    - > 这是一起残忍的**谋杀**。
+    - The killing was the act of a madman.
+    - > 这起**凶杀案**是一个疯子所为。
+    - The motive for the killing is unknown.
+    - > 杀人的动机不明。
 
 
 ## lmno
@@ -413,7 +441,6 @@ categories:
 - `nuclear` [ˈnjuːkliə(r)]: 
     - Nuclear weapons are a very dangerous weapon, posing a great threat to humanity and the environment.
     - > 核武器是一种非常危险的武器，对人类和生态造成极大的威胁。
-
 - `occasion` [əˈkeɪʒən]: 
     - This special occasion requires us to wear formal dress to attend.
     - > 这个特殊的场合需要我们穿礼服出席。
@@ -445,7 +472,6 @@ categories:
 - `plot` [plɒt]: 
     - This novel has a thrilling plot that keeps you wanting to read on.
     - > 这个小说有一个扣人心弦的情节，让人一直想看下去。
-
 - `poet` [ˈpəʊət]: 诗人
     - William Shakespeare is a famous poet in England, and his poetry is still widely recited to this day.
     - > William Shakespeare 是英国著名的诗人，他的诗歌作品至今仍然被广泛传诵。 
@@ -458,7 +484,6 @@ categories:
 - `portrait` [ˈpɔːtrət]: 肖像画
     - This portrait vividly depicts the appearance and temperament of the celebrity, and is very lifelike.
     - > 这幅肖像画生动地展现了这位名人的面容和气质，非常逼真。
-
 - `pot` [pɒt]: 
     - He cooked a pot of noodles in the pot.
     - > 他在锅里煮了一锅面条。
@@ -541,7 +566,6 @@ categories:
 - `sensible` [ˈsensəbl]: 
     - She is sensible and doesn't act impulsively.
     - > 她做事很明智，不会轻易冲动。
-
 - `similarity` [ˌsɪmɪˈlærəti]: 
     - There are many similarities in the appearance of these two people.
     - > 这两个人的外表有很多相似之处。

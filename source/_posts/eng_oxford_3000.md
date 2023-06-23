@@ -179,13 +179,15 @@ categories:
 
 - `alcoholic` [ˌælkəˈhɒlɪk]: 
     - He is an alcoholic and needs to undergo alcoholism treatment.
-    - > 他是一个酗酒者，需要戒酒治疗。
+    - > 他是一个`酗酒者`，需要戒酒治疗。
 - `assignment` [əˈsaɪnmənt]: n. 任务, 工作
-    - Our teacher assigned a homework that needs to be completed before next week.
-    - > 我们的老师布置了一份作业，需要在下周之前完成。
+    - You must complete three written assignments.
+    - 你必须完成三个书面`n. 作业`。
+    - Our teacher `assigned` a homework that needs to be completed before next week.
+    - > 我们的老师`布置`了一份作业，需要在下周之前完成。
 - `atmosphere` [ˈætməsfɪə(r)]: 
     - The atmosphere of this restaurant is very comfortable and peaceful.
-    - > 这个餐厅的氛围非常舒适和宁静。
+    - > 这个餐厅的`氛围`非常舒适和宁静。
 - `authority` [ɔːˈθɒrəti]: 
     - The government has the authority to make laws and regulations.
     - > 政府有权利制定法律和规定。
@@ -195,37 +197,37 @@ categories:
 
 - `clause` [klɔːz]: 
     - This contract has a special clause that needs to be paid attention to.
-    - > 这个合同有一个特别的条款，需要注意。
+    - > 这个合同有一个特别的`条款`，需要注意。
 - `chemical` [ˈkemɪkəl]: 
     - This chemical substance has a significant impact on the environment.
-    - > 这种化学物质对环境有很大的影响。
+    - > 这种`化学的`物质对环境有很大的影响。
 - `ceremony` [ˈserəməni]: n. 仪式
     - The ceremony is very solemn and grand.
-    - > 这个仪式非常庄重和隆重。
+    - > 这个`仪式`非常庄重和隆重。
 - `cap` [kæp]: 
     - He is wearing a red cap that is very eye-catching.
-    - > 他戴着一顶红色的帽子，非常醒目。
+    - > 他戴着一顶红色的`帽子`，非常醒目。
 - `campaign` [kæmˈpeɪn]: n. 运动
     - They are conducting an anti-corruption campaign.
-    - > 他们正在进行一项反贪腐的宣传活动。
+    - > 他们正在进行一项反贪腐的宣传`活动`。
 - `cable` [ˈkeɪbl]: 
     - They use a cable to connect the TV and the computer.
-    - > 他们用电缆将电视机和电脑连接起来。
+    - > 他们用`电缆`将电视机和电脑连接起来。
 - `bury` [ˈberi]: 
     - We need to bury this garbage to avoid polluting the environment.
-    - > 我们需要将这些垃圾埋掉，以免对环境造成污染。
+    - > 我们需要将这些垃圾`埋`掉，以免对环境造成污染。
 - `comparison` [kəmˈpærɪsn]: 
     - The comparison between these two products is very interesting and can help people better understand their pros and cons.
-    - > 这两个产品的比较非常有趣，让人可以更好地了解它们的优缺点。
+    - > 这两个产品的`比较`非常有趣，让人可以更好地了解它们的优缺点。
 - `competitive` [kəmˈpetɪtɪv]: 
     - This is a very competitive market, and one needs to constantly improve oneself to achieve success.
-    - > 这是一个非常有竞争力的市场，需要不断提高自己的水平才能获得成功。
+    - > 这是一个非常`有竞争力的`市场，需要不断提高自己的水平才能获得成功。
 - `competitor` [kəmˈpetɪtə(r)]: 
     - The company's competitors are very powerful, and better strategies are needed to deal with them.
-    - > 这个公司的竞争对手很强大，需要制定更好的策略来应对。
+    - > 这个公司的`竞争对手`很强大，需要制定更好的策略来应对。
 - `concentrate` [ˈkɒnsəntreɪt]: 
     - We need to concentrate on completing this task.
-    - > 我们需要集中精力完成这项任务。
+    - > 我们需要`集中精力`完成这项任务。
 - `conclude` [kənˈkluːd]: v. 断定，推断出；结束，终止；达成，做成，完成；<美>决定
     - What do you conclude from that?
     - > 你从这件事中`得出了什么结论`？
@@ -240,28 +242,28 @@ categories:
     - > 经过多方考虑，我们得出了一个结论。
 - `consequence` [ˈkɒnsɪkwəns]: 
     - Irresponsible actions will bring about adverse consequences.
-    - > 不负责任的行为会带来不良后果。
+    - > 不负责任的行为会带来不良`后果`。
 - `convince` [kənˈvɪns]: 
     - He convinced me with facts and logic and made me change my mind.
-    - > 他用事实和逻辑说服了我，让我改变了观点。
+    - > 他用事实和逻辑`说服`了我，让我改变了观点。
 - `corn` [kɔːn]: 
     - Corn is a very popular cereal crop.
-    - > 玉米是一种非常受欢迎的粮食作物。
+    - > `玉米`是一种非常受欢迎的粮食作物。
 - `costume` [ˈkɒstjuːm]: n. 服装
     - The costume design of this stage play is very exquisite and allows the audience to better experience the plot.
     - > 这个舞台剧的服装设计非常精美，让观众可以更好地体验剧情。
 - `cotton` [ˈkɒtn]: n. 棉花
     - This piece of clothing is made of pure cotton and is very comfortable to wear.
-    - > 这件衣服是用纯棉制成的，穿着非常舒适。
+    - > 这件衣服是用纯`棉`制成的，穿着非常舒适。
 - `cruel` [kruːəl]: 
     - Animal abuse is a very cruel behavior.
-    - > 虐待动物是一种非常残忍的行为。
+    - > 虐待动物是一种非常`残忍的`行为。
 - `cupboard` [ˈkʌbəd]: 
     - We need a cupboard to store miscellaneous items.
-    - > 我们需要一个储物柜来存放零散的物品。
+    - > 我们需要一个`储物柜`来存放零散的物品。
 - `currency` [ˈkʌrənsi]: 
     - The US dollar is one of the most popular currencies in the world.
-    - > 美元是世界上最流行的货币之一。
+    - > 美元是世界上最流行的`货币`之一。
 - `curtain` [ˈkɜːtn]: n. 窗帘
     - We need some curtains to block the sunlight and protect the privacy.
     - > 我们需要一些窗帘来遮挡阳光和保护隐私。
@@ -270,9 +272,9 @@ categories:
     - > 他神不知、鬼不觉地`离开`了。
     - Our flight will depart tomorrow morning.
     - > 我们的航班将在明天早上出发。
-- `diagram` [ˈdaɪəɡræm]: 
-    - This flowchart can help us better understand the process of the entire project.
-    - > 这个流程图可以帮助我们更好地理解整个项目的流程。
+- `diagram` [ˈdaɪəɡræm]:  n. 图表，图解；几何图形 v. 以图表示
+    - This diagram can help us better understand the process of the entire project.
+    - > 这个`n. 图表`可以帮助我们更好地理解整个项目的流程。
 
 
 ## edfg
@@ -282,7 +284,7 @@ categories:
     - > 这个博物馆正在展出一些非常珍贵的文物。
 - `examine` [ɪɡˈzæmɪn]: 
     - Doctors need to carefully examine the patient's physical condition.
-    - > 医生需要仔细检查病人的身体状况。
+    - > 医生需要仔细`检查`病人的身体状况。
 - `essential` [ɪˈsenʃl]: adj. 必不可少的，非常重要的；基本的，精髓的；（氨基酸、脂肪酸）必需的；（疾病）自发的，原发的; n. 必不可少的东西，必需品；要素，本质；（某学科的）基础，基本知识
     - Money is not essential to happiness.
     - > 金钱对于幸福并非`必不可少`。
@@ -2041,7 +2043,7 @@ categories:
     - > 她唱得比我预期的要好`很`多`。
     - The doctor's on his way.
     - > 医生正在`路`上。
-- `whereas` [wɛrˈæz] conj. （表示对比）但是，然而；鉴于（用于文件的开头）n. 序言，开场白；条件语句 ("conj." 是 "conjunction" 的缩写，表示 "连词" 的意思。在语法中，连词是用来连接词语、短语、从句或句子的词语，以便表达一定的逻辑关系，如并列、转折、因果、条件等。常见的连词包括 "and"、"but"、"or"、"if"、"because" 等等。)
+- `whereas` [wɛrˈæz] conj. （表示对比）但是，然而；鉴于（用于文件的开头）n. 序言，开场白；条件语句 *("conj." 是 "conjunction" 的缩写，表示 "连词" 的意思。在语法中，连词是用来连接词语、短语、从句或句子的词语，以便表达一定的逻辑关系，如并列、转折、因果、条件等。常见的连词包括 "and"、"but"、"or"、"if"、"because" 等等。)*
     - Whereas I understand your concerns, I think we should carry on.
     - > `鉴于`我了解你的担忧，但我认为我们应该坚持下去。
     - Some of the studies show positive results, whereas others do not.

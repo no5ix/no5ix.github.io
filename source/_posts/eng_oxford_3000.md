@@ -35,6 +35,9 @@ categories:
 
 # A2
 
+
+## ac
+
 - `airline`: 航空公司
     - I always choose this airline for my international flights.
     - > 我总是选择这家航空公司乘坐国际航班。
@@ -101,6 +104,10 @@ categories:
 - `detective`: 侦探
     - The detective solved the case and arrested the criminal.
     - > 侦探破案并逮捕了罪犯。
+
+
+## defghjloprst
+
 - `drama`: 戏剧
     - I love watching dramas and going to the theater.
     - > 我喜欢看戏剧和去剧院。
@@ -675,79 +682,96 @@ categories:
 
 ## a
 
-- `abroad` [əˈbrɔːd] adv.
+- `abroad` [əˈbrɔːd] adv. 在国外地
     - I want to study abroad to broaden my horizons and experience different cultures.
     - > 我想出国留学，开阔视野，体验不同的文化。
 - `accuse` [əˈkjuːz] v.
     - He was accused of stealing the money from the company's safe. 
-    - > 他被指控从公司保险箱里偷了钱。
-- `affair` [əˈfeə(r)] n.
+    - > 他被`指控`从公司保险箱里偷了钱。
+- `affair` [əˈfeə(r)] n. 公共事务，政治事务；事情，事件；个人的事，私事；私人业务；（尤指已婚男女的）私通，风流韵事；社交活动，喜庆事；<旧> 物件，东西；商务和金融交易
     - The scandalous affair between the two celebrities was all over the news. 
-    - > 两位名人之间的丑闻引起了媒体的广泛报道。
-- `agency` [ˈeɪdʒənsi] n.
+    - > 两位名人之间的可耻的`事件`引起了媒体的广泛报道。
+- `agency` [ˈeɪdʒənsi] n. 代理机构
     - I hired a travel agency to help me plan my vacation. 
     - > 我雇了一家旅行社帮我计划度假。
-- `agenda` [əˈdʒendə] n.
+- `agenda` [əˈdʒendə] n. 待议事项，议事日程；（政治）议题；秘密计划，秘密目标
     - The agenda for today's meeting includes discussing the new budget proposal. 
     - > 今天会议的议程包括讨论新的预算提案。
-- `aggressive` [əˈɡresɪv] adj.
+- `aggressive` [əˈɡresɪv] adj. 好斗的，挑衅的；积极进取的；非常严重的；强烈的
     - The aggressive driver cut off other cars on the highway. 
     - > 这个咄咄逼人的司机在高速公路上削减了其他车辆。
 - `aid` [eɪd] n., v.
     - The Red Cross provided aid to the victims of the natural disaster. 
-    - > 红十字会向自然灾害的受害者提供援助。
+    - > 红十字会向自然灾害的受害者提供`援助`。
+- `craft` [krɑːft] n. 工艺，手艺；船，艇，飞行器；诡计，骗术；行业，职业；手工艺品 v. 精心制作
+    - Your hand craft is very good!
+    - > 您`手艺`非常好！
+    - The pilot goosed his craft.
+    - > 飞行员发动`飞机`。
+    - It was such a smart little craft.
+    - > 那是一条那么秀丽的`小船`。
+    - This craft is priced to sell quickly!
+    - > 这种`工艺品`价格很便宜！
 - `aircraft` [ˈeəkrɑːft] n.
     - The aircraft took off from the runway and soared into the sky. 
-    - > 飞机从跑道起飞，冲上了天空。
-- `anniversary` [ˌænɪˈvɜːsəri] n.
+    - > `飞机`从跑道起飞，冲上了天空。
+- `anniversary` [ˌænɪˈvɜːsəri] n. 周年纪念（日）
     - We celebrate our wedding anniversary every year with a romantic dinner. 
-    - > 我们每年都会用浪漫的晚餐庆祝我们的结婚周年纪念日。
+    - > 我们每年都会用浪漫的晚餐庆祝我们的结婚`周年纪念日`。
 - `anxious` [ˈæŋkʃəs] adj.
     - I'm feeling anxious about the job interview tomorrow. 
-    - > 我对明天的面试感到焦虑不安。
-- `approach` [əˈprəʊtʃ] n., v.
+    - > 我对明天的面试感到`焦虑不安`。
+- `approach` [əˈprəʊtʃ] v. 靠近，临近；接洽，交谈；对付，处理；近似，接近于 n.方法，态度；靠近，接近；接洽，要求；通道，路径；进场着陆；近似物
     - We need to approach this project with a clear plan and timeline. 
-    - > 我们需要有一个清晰的计划和时间表来处理这个项目。
+    - > 我们需要有一个清晰的计划和时间表来`处理`这个项目。
 - `appropriate` [əˈprəʊpriət] adj.
     - It's not appropriate to wear casual clothes to a formal event. 
-    - > 在正式场合穿休闲服装是不合适的。
-- `approval` [əˈpruːvəl] n.
-    - I need to get my manager's approval before taking time off work. 
-    - > 在休假之前，我需要得到经理的批准。
+    - > 在正式场合穿休闲服装是不`合适的`。
 - `approve` [əˈpruːv] v.
     - The board of directors approved the new budget proposal. 
-    - > 董事会通过了新的预算提案。
-- `armed` [ɑːmd] adj.
-    - The police officers were armed with guns to protect the public. 
-    - > 警察携带着枪支来保护公众。
-- `arms` [ɑːmz] n.
+    - > 董事会`批准`了新的预算提案。
+- `approval` [əˈpruːvəl] n.
+    - I need to get my manager's approval before taking time off work. 
+    - > 在休假之前，我需要得到经理的`批准`。
+- `arm` [ɑːm] n. 手臂，上肢；武器，军备；扶手；袖子；职能部门；臂（状部件）；盾徽，纹章；狭长港湾；臂力 v. 武装，备战；提供，配备；使（炸弹等）随时爆炸，准备发射
+- `arms` [ɑːmz] n. 武器; 配备
     - The country has a large stockpile of nuclear arms as a deterrent. 
-    - > 这个国家有大量的核武器库，作为威慑力量。
+    - > 这个国家有大量的核`武器`库，作为威慑力量。
+- `armed` [ɑːmd] adj. 武装的；有扶手的；有防卫器官的（指动物）
+    - All the armed groups will be disbanded.
+    - > 所有武装团体将被解散。
 - `artificial` [ˌɑːtɪˈfɪʃəl] adj.
     - Some people prefer real flowers, while others don't mind artificial ones.
-    - > 有些人喜欢真正的花，而有些人不介意人造花。
+    - > 有些人喜欢真正的花，而有些人不介意`人造的`花。
+    - Artificial Intelligence
+    - > 人工智能
 - `artistic` [ɑːˈtɪstɪk] adj.
     - She has a natural talent for artistic expression and loves to paint. 
-    - > 她有天生的艺术表达才华，喜欢画画。
-- `aside` [əˈsaɪd] adv.
-    - Aside from his work, he enjoys playing tennis in his free time. 
-    - > 除了工作之外，他在空闲时间喜欢打网球。
+    - > 她有天生的`艺术的`表达才华，喜欢画画。
+- `aside` [əˈsaɪd] adv. 在旁边，到（或向）一边；积攒，留出；除……以外 n.（戏剧或电影中的）旁白；低语，悄悄话；离题话，题外话
+    - `Aside from` his work, he enjoys playing tennis in his free time. 
+    - > `除了`工作`之外`，他在空闲时间喜欢打网球。
+    - She pulled the curtain aside.
+    - > 她把窗帘拉向`到一边`。
 - `aspect` [ˈæspekt] n.
     - One important aspect of the job is good communication skills. 
-    - > 工作的一个重要方面是良好的沟通技巧。
-- `assess` [əˈses] v.
+    - > 工作的一个重要`方面`是良好的沟通技巧。
+- `assess` [əˈses] v. vt.
     - The teacher needs to assess the students' understanding of the material before moving on.
-    - > 老师需要评估学生对材料的理解情况，然后再继续教学。
+    - > 老师需要`评估`学生对材料的理解情况，然后再继续教学。
 - `assessment` [əˈsesmənt] n.
     - The assessment of the damage caused by the hurricane will take weeks. 
-    - > 对飓风造成的损害进行评估需要几周时间。
-- `associate` [əˈsəʊʃieɪt] v.
+    - > 对飓风造成的损害进行`评估`需要几周时间。
+- `associate` [əˈsəʊʃieɪt] v. 联想，联系；支持，同意；交往，（尤指）混在一起
     - I don't want to associate with people who are negative and bring me down. 
-    - > 我不想和那些消极的人为伍，他们会让我失落。
-- `associated` [əˈsəʊʃieɪtɪd] adj.
+    - > 我不想和那些消极的人`交往`，他们会让我失落。
+- `associated` [əˈsəʊʃieɪtɪd] adj. 有关联的，相关的；联合的，联营的
     - The company's profits are closely associated with economic conditions. 
-    - > 公司的利润与经济状况密切相关。
-- `attorney` [əˈtɜːni] n.
+    - > 公司的利润与经济状况密切`相关的`。
+- `association` n. 协会, 联盟
+    - 全美篮球协会（National Basketball Association）
+    - nba
+- `attorney` [əˈtɜːni] n. 代理人, 律师 (在美国，"attorney" 和 "lawyer" 是可以互换使用的术语，都指代执业律师。)
     - The attorney provided legal advice to his clients. 
     - > 律师为他的客户提供了法律咨询。
 
@@ -757,7 +781,7 @@ categories:
 - `bacteria` [bækˈtɪəriə] n. 细菌
     - Bacteria can be harmful to humans, but they also play an important role in the ecosystem.
     - > 细菌对人类有害，但它们在生态系统中也扮演着重要的角色。
-- `bent` [bent] adj. 弯曲的
+- `bent` [bent] adj. 弯曲的 (bend vt. 使弯曲)
     - The tree was bent over by the strong wind. 
     - > 树被强风吹弯了。
 - `bitter` [ˈbɪtər] adj. 苦的
@@ -1369,291 +1393,291 @@ categories:
 
 ## o
 
-- `object` v. - /ˈɒbdʒɛkt/ - 动词
+- `object` [ˈɒbdʒɛkt]  v.
     - She will object to the proposal at the meeting tomorrow.
     - > 她明天在会议上会反对这个提议。
-- `objective` n. - /əbˈdʒɛktɪv/ - 名词
+- `objective` [əbˈdʒɛktɪv]  n.
     - The objective of the project is to increase sales by 20%. (这个项目的目标是将销售额增加2
     - > 。
-- `objective` adj. - /əbˈdʒɛktɪv/ - 形容词
+- `objective` [əbˈdʒɛktɪv]  adj.
     - The report provides an objective analysis of the situation.
     - > 报告提供了对情况的客观分析。
-- `obligation` n. - /ˌɒblɪˈɡeɪʃən/ - 名词
+- `obligation` [ˌɒblɪˈɡeɪʃən]  n.
     - It is your obligation to pay your bills on time.
     - > 按时支付你的账单是你的义务。
-- `observation` n. - /ˌɒbzəˈveɪʃən/ - 名词
+- `observation` [ˌɒbzəˈveɪʃən]  n.
     - The scientist made some interesting observations about the behavior of the monkeys.
     - > 科学家对猴子的行为作了一些有趣的观察。
-- `observe` v. - /əbˈzɜːv/ - 动词
+- `observe` [əbˈzɜːv]  v.
     - We can observe the stars with a telescope.
     - > 我们可以用望远镜观察星星。
-- `obtain` v. - /əbˈteɪn/ - 动词
+- `obtain` [əbˈteɪn]  v.
     - It is easy to obtain a visa if you have all the necessary documents.
     - > 如果你拥有所有必要的文件，获得签证很容易。
-- `occasionally` adv. - /əˈkeɪʒənəli/ - 副词
+- `occasionally` [əˈkeɪʒənəli]  adv.
     - I occasionally go to the gym to work out.
     - > 我时不时去健身房锻炼身体。
-- `offend` v. - /əˈfɛnd/ - 动词
+- `offend` [əˈfɛnd]  v.
     - I'm sorry if I offended you with my remark.
     - > 如果我说的话冒犯了你，我很抱歉。
-- `offense` n. - /əˈfɛns/ - 名词
+- `offense` [əˈfɛns]  n.
     - Parking in a disabled spot is a serious offense.
     - > 停车在残疾人位上是一个严重的违法行为。
-- `offensive` adj. - /əˈfɛnsɪv/ - 形容词
+- `offensive` [əˈfɛnsɪv]  adj.
     - His language was very offensive and hurtful.
     - > 他的语言非常冒犯和伤人。
-- `opponent` n. - /əˈpəʊnənt/ - 名词
+- `opponent` [əˈpəʊnənt]  n.
     - The two opponents will face each other in the boxing ring tonight.
     - > 今晚两名对手将在拳击比赛中交锋。
-- `oppose` v. - /əˈpəʊz/ - 动词
+- `oppose` [əˈpəʊz]  v.
     - The protesters opposed the new law.
     - > 抗议者反对新法律。
-- `opposed` adj. - /əˈpəʊzd/ - 形容词
+- `opposed` [əˈpəʊzd]  adj.
     - The two sides were opposed to each other's plans.
     - > 双方对彼此的计划持反对态度。
-- `opposition` n. - /ˌɒpəˈzɪʃən/ - 名词
+- `opposition` [ˌɒpəˈzɪʃən]  n.
     - The opposition party has been criticizing the government's policies.
     - > 反对党一直在批评政府的政策。
-- `organ` n. - /ˈɔːɡən/ - 名词
+- `organ` [ˈɔːɡən]  n.
     - The heart is an important organ in the human body.
     - > 心脏是人体中重要的器官。
-- `origin` n. - /ˈɒrɪdʒɪn/ - 名词
+- `origin` [ˈɒrɪdʒɪn]  n.
     - The origin of the universe is still a mystery.
     - > 宇宙的起源仍然是一个谜。
-- `otherwise` adv. - /ˈʌðəwaɪz/ - 副词
+- `otherwise` [ˈʌðəwaɪz]  adv.
     - You need to finish your homework, otherwise you won't pass the test.
     - > 否则你就无法通过考试，你需要完成家庭作业。
-- `outcome` n. - /ˈaʊtkʌm/ - 名词
+- `outcome` [ˈaʊtkʌm]  n.
     - The outcome of the election was a surprise to many people.
     - > 选举的结果让许多人感到惊讶。
-- `outer` adj. - /ˈaʊtə/ - 形容词
+- `outer` [ˈaʊtə]  adj.
     - The outer planets in our solar system are all gas giants.
     - > 我们太阳系中的外行星都是气态巨型行星。
-- `outline` n. - /ˈaʊtlaɪn/ - 名词
+- `outline` [ˈaʊtlaɪn]  n.
     - The professor gave us an outline of the course syllabus.
     - > 教授给我们提供了课程大纲的概述。
-- `outline` v. - /ˈaʊtlaɪn/ - 动词
+- `outline` [ˈaʊtlaɪn]  v.
     - Please outline your proposal for the new project.
     - > 请概述你对新项目的提议。
-- `overall` adj. - /ˌəʊvərˈɔːl/ - 形容词
+- `overall` [ˌəʊvərˈɔːl]  adj.
     - The overall goal of the company is to increase profits.
     - > 公司的总体目标是增加利润。
-- `overall` adv. - /ˌəʊvərˈɔːl/ - 副词
+- `overall` [ˌəʊvərˈɔːl]  adv.
     - Overall, it was a great experience.
     - > 总的来说，这是一次很好的经历。
-- `owe` v. - /əʊ/ - 动词
+- `owe` [əʊ]  v.
     - I owe my success to my parents' support.
     - > 我把我的成功归功于父母的支持。
 
 
 ## p
 
-- `pace` n. - /peɪs/ - 名词
+- `pace` [peɪs]  n.
     - He walked at a slow pace. 
     - > 他走得很慢。
-- `pace` v. - /peɪs/ - 动词
+- `pace` [peɪs]  v.
     - She paced back and forth nervously. 
     - > 她紧张地来回踱步。
-- `panel` n. - /ˈpænəl/ - 名词
+- `panel` [ˈpænəl]  n.
     - The panel of judges will announce the winner tomorrow. 
     - > 评委会将于明天宣布获胜者。
-- `participant` n. - /pɑːˈtɪsɪpənt/ - 名词
+- `participant` [pɑːˈtɪsɪpənt]  n.
     - All participants will receive a certificate of attendance. 
     - > 所有参与者将获得出席证书。
-- `partly` adv. - /ˈpɑːtli/ - 副词
+- `partly` [ˈpɑːtli]  adv.
     - The delay was partly due to bad weather. 
     - > 延误部分是由于恶劣天气。
-- `passage` n. - /ˈpæsɪdʒ/ - 名词
+- `passage` [ˈpæsɪdʒ]  n.
     - The novel has many poetic passages. 
     - > 这部小说有许多诗意的段落。
-- `permanent` adj. - /ˈpɜːmənənt/ - 形容词
+- `permanent` [ˈpɜːmənənt]  adj.
     - The ink is permanent and cannot be erased. 
     - > 这种墨水是永久的，无法擦除。
-- `permit` v. - /pəˈmɪt/ - 动词
+- `permit` [pəˈmɪt]  v.
     - The company will not permit employees to smoke on the premises. 
     - > 公司不允许员工在场地内吸烟。
-- `permit` n. - /ˈpɜːmɪt/ - 名词
+- `permit` [ˈpɜːmɪt]  n.
     - You need a permit to park in this area. 
     - > 你需要一个许可证才能停车在这个区域内。
-- `perspective` n. - /pəˈspɛktɪv/ - 名词
+- `perspective` [pəˈspɛktɪv]  n.
     - The artist used perspective to create a sense of depth in the painting. 
     - > 艺术家利用透视法在画中营造出深度感。
-- `phase` n. - /feɪz/ - 名词
+- `phase` [feɪz]  n.
     - The project is currently in its final phase. 
     - > 该项目目前正在进行最后阶段。
-- `phenomenon` n. - /fɪˈnɒmɪnən/ - 名词
+- `phenomenon` [fɪˈnɒmɪnən]  n.
     - The aurora borealis is a natural phenomenon in the polar regions. 
     - > 极光是极地地区的自然现象。
-- `philosophy` n. - /fɪˈlɒsəfi/ - 名词
+- `philosophy` [fɪˈlɒsəfi]  n.
     - Her philosophy on life is to live in the moment. 
     - > 她的人生哲学是活在当下。
-- `pile` n. [paɪl] 名词：一堆，一叠； verb. [paɪl] 动词：堆积，积累。
+- `pile` [paɪl] n. 一堆，一叠； [paɪl] verb. 堆积，积累。
     - There was a pile of books on the table. 
     - > 桌子上堆着一叠书。
-- `pitch` n. [pɪtʃ] 名词：音高，场地，推销； verb. [pɪtʃ] 动词：投掷，推销。
+- `pitch` [pɪtʃ] n. 音高，场地，推销； [pɪtʃ] verb. 投掷，推销。
     - The pitch of the song was too high for me to sing. 
     - > 这首歌的音高对我来说太高了。
-- `plain` adj. [pleɪn] 形容词：简单的，朴素的。
+- `plain` [pleɪn] adj. 简单的，朴素的。
     - She wore a plain white shirt. 
     - > 她穿了一件朴素的白衬衫。
-- `plot` v. [plɑt] 动词：密谋，策划，绘制； 名词：情节，图表。
+- `plot` [plɑt] v. 密谋，策划，绘制； 情节，图表。
     - He is plotting revenge against his enemies. 
     - > 他正在密谋着对他的敌人复仇。
-- `pointed` adj. [pɔɪntɪd] 形容词：尖锐的，尖角的。
+- `pointed` [pɔɪntɪd] adj. 尖锐的，尖角的。
     - The pointed roof of the tower was visible from far away. 
     - > 塔楼的尖顶从远处可见。
-- `popularity` n. [ˌpɑpjuˈlærəti] 名词：受欢迎，流行。
+- `popularity` [ˌpɑpjuˈlærəti] n. 受欢迎，流行。
     - The popularity of this brand among young people is increasing. 
     - > 这个品牌在年轻人中的受欢迎程度正在增加。
-- `pose` v. [poʊz] 动词：摆姿势，引起困难，提出问题。
+- `pose` [poʊz] v. 摆姿势，引起困难，提出问题。
     - He posed for a photograph in front of the Eiffel Tower. 
     - > 他在艾菲尔铁塔前摆着姿势照相。
-- `positive` n. [ˈpɑzətɪv] 名词：肯定，正面，阳极。
+- `positive` [ˈpɑzətɪv] n. 肯定，正面，阳极。
     - He has a positive attitude towards life. 
     - > 他对生活持积极的态度。
-- `possess` v. [pəˈzɛs] 动词：拥有，具有。
+- `possess` [pəˈzɛs] v. 拥有，具有。
     - She possesses a great talent for singing. 
     - > 她具有非常出色的歌唱天赋。
-- `praise` n. [preɪz] 名词：赞扬，夸奖； verb. [preɪz] 动词：赞美，夸奖。
+- `praise` [preɪz] n. 赞扬，夸奖； [preɪz] verb. 赞美，夸奖。
     - The teacher praised the student for his hard work. 
     - > 老师因为学生的努力工作而表扬了他。
-- `presence` n. [ˈprɛzəns] 名词：出席，存在，氛围。
+- `presence` [ˈprɛzəns] n. 出席，存在，氛围。
     - His presence at the meeting was required. 
     - > 他需要出席会议。
-- `preserve` v. [prɪˈzɜrv] 动词：保存，保护，腌制。
+- `preserve` [prɪˈzɜrv] v. 保存，保护，腌制。
     - She learned how to preserve fruits and vegetables for the winter. 
     - > 她学会了如何保存水果和蔬菜过冬。
-- `prime` adj. [praɪm] 形容词：主要的，最好的，黄金时期的。
+- `prime` [praɪm] adj. 主要的，最好的，黄金时期的。
     - He was in his prime when he won the championship. 
     - > 他在赢得冠军时正值黄金年华。
-- `principal` adj. [ˈprɪnsəpl] 形容词：首要的，主要的，校长。
+- `principal` [ˈprɪnsəpl] adj. 首要的，主要的，校长。
     - The principal of the school greeted the students on the first day of class. 
     - > 学校的校长在上课的第一天向学生们问好。
-- `principle` n. [ˈprɪnsəpl] 名词：原则，准则，道义。
+- `principle` [ˈprɪnsəpl] n. 原则，准则，道义。
     - He always adheres to the principle of honesty. 
     - > 他始终坚持诚实的原则。
-- `priority` n. [praɪˈɔrəti] 名词：优先权，重要性。
+- `priority` [praɪˈɔrəti] n. 优先权，重要性。
     - Safety is our top priority. 
     - > 安全是我们最重要的事情。
-- `procedure` n. [prəˈsidʒər] 名词：程序，步骤。
+- `procedure` [prəˈsidʒər] n. 程序，步骤。
     - The procedure must be followed in a specific order. 
     - > 步骤必须按照特定的顺序进行。
-- `produce` n. [ˈprɑdus] 名词：产品，农产品； verb. [prəˈdus] 动词：生产，制造。
+- `produce` [ˈprɑdus] n. 产品，农产品； [prəˈdus] verb. 生产，制造。
     - The factory produces 1000 cars every day. 
     - > 工厂每天生产1000辆汽车。
-- `proof` n. [pruf] 名词：证明，证据，酒精度数。
+- `proof` [pruf] n. 证明，证据，酒精度数。
     - He showed me the proof of his innocence. 
     - > 他向我展示了他清白的证据。
-- `proposal` n. [prəˈpoʊzəl] 名词：提议，建议。
+- `proposal` [prəˈpoʊzəl] n. 提议，建议。
     - I accepted his proposal of marriage. 
     - > 我接受了他的求婚。
-- `propose` v. [prəˈpoʊz] 动词：建议，提议，求婚。
+- `propose` [prəˈpoʊz] v. 建议，提议，求婚。
     - He proposed a new idea for the company's marketing strategy. 
     - > 他提出了公司的市场营销策略的新想法。
-- `prospect` n. [ˈprɑspɛkt] 名词：前景，展望，可能性。
+- `prospect` [ˈprɑspɛkt] n. 前景，展望，可能性。
     - The prospect of finding a job after graduation is uncertain. 
     - > 毕业后找到工作的前景是不确定的。
-- `psychologist` n. [saɪˈkɑlədʒɪst] 名词：心理学家。
+- `psychologist` [saɪˈkɑlədʒɪst] n. 心理学家。
     - The psychologist helped him deal with his anxiety. 
     - > 心理学家帮助他处理他的焦虑。
-- `psychology` n. [saɪˈkɑlədʒi] 名词：心理学。
+- `psychology` [saɪˈkɑlədʒi] n. 心理学。
     - He studied psychology at university. 
     - > 他在大学学习了心理学。
-- `publication` n. [ˌpʌblɪˈkeɪʃn] 名词：出版物，刊物。
+- `publication` [ˌpʌblɪˈkeɪʃn] n. 出版物，刊物。
     - The publication of the new novel has been delayed. 
     - > 新小说的出版被推迟了。
-- `pursue` v. [pərˈsu] 动词：追求，追赶，继续进行。
+- `pursue` [pərˈsu] v. 追求，追赶，继续进行。
     - He decided to pursue his dreams and become a musician. 
     - > 他决定追求自己的梦想，成为一名音乐家。
 
 
 ## r
 
-- `realistic` adj. [riəˈlɪstɪk] 形容词：现实的，实际的。
+- `realistic` [riəˈlɪstɪk] adj. 现实的，实际的。
     - She has a realistic approach to problem-solving. 
     - > 她对解决问题有一种现实的方法。
-- `recall` v. [riˈkɔl] 动词：回忆起，召回。
+- `recall` [riˈkɔl] v. 回忆起，召回。
     - He couldn't recall the name of the movie he saw last night. 
     - > 他忘记了昨晚看的电影的名字。
-- `recover` v. [rɪˈkʌvər] 动词：康复，恢复。
+- `recover` [rɪˈkʌvər] v. 康复，恢复。
     - He is recovering from a cold. 
     - > 他正在从感冒中康复。
-- `reduction` n. [rɪˈdʌkʃən] 名词：减少，削减。
+- `reduction` [rɪˈdʌkʃən] n. 减少，削减。
     - The company announced a reduction in staff. 
     - > 公司宣布裁员。
-- `regard` v. [rɪˈɡɑrd] 动词：关心，看待，尊重； 名词：关注，尊敬。
+- `regard` [rɪˈɡɑrd] v. 关心，看待，尊重； 关注，尊敬。
     - He regards his family and friends as the most important thing in his life. 
     - > 他认为他的家人和朋友是他生活中最重要的事情。
-- `regional` adj. [ˈridʒənl] 形容词：地区的，区域的。
+- `regional` [ˈridʒənl] adj. 地区的，区域的。
     - The regional government is responsible for local affairs. 
     - > 地方政府负责本地事务。
-- `regulation` n. [ˌrɛɡjʊˈleɪʃn] 名词：规定，条例，管理。
+- `regulation` [ˌrɛɡjʊˈleɪʃn] n. 规定，条例，管理。
     - The government has introduced new regulations to improve traffic safety. 
     - > 政府出台了新的规定以提高交通安全。
-- `relatively` adv. [ˈrɛlətɪvli] 副词：相对地，比较地。
+- `relatively` [ˈrɛlətɪvli] adv. 副词：相对地，比较地。
     - The price of this product is relatively low. 
     - > 这种产品的价格相对较低。
-- `relevant` adj. [ˈrɛləvənt] 形容词：相关的，切题的。
+- `relevant` [ˈrɛləvənt] adj. 相关的，切题的。
     - His work experience is not relevant to the job he is applying for. 
     - > 他的工作经验与他申请的工作无关。
-- `relief` n. [rɪˈlif] 名词：宽慰，救济，浮雕。
+- `relief` [rɪˈlif] n. 宽慰，救济，浮雕。
     - He felt a sense of relief when he passed the exam. 
     - > 当他通过考试时，他感到一种宽慰的感觉。
-- `rely` v. [rɪˈlaɪ] 动词：依靠，信赖。
+- `rely` [rɪˈlaɪ] v. 依靠，信赖。
     - She can rely on her friends for help. 
     - > 她可以依靠她的朋友来寻求帮助。
-- `remark` n. [rɪˈmɑrk] 名词：备注，评论； verb. [rɪˈmɑrk] 动词：评论，谈论。
+- `remark` [rɪˈmɑrk] n. 备注，评论； [rɪˈmɑrk] verb. 评论，谈论。
     - His remark about her weight was uncalled for. 
     - > 他关于她体重的评论是不必要的。
-- `representative` n. [ˌrɛprɪˈzɛntətɪv] 名词：代表，代理人； 形容词：代表性的。
+- `representative` [ˌrɛprɪˈzɛntətɪv] n. 代表，代理人； 代表性的。
     - The representative from the company gave a presentation about their products. 
     - > 该公司的代表介绍了他们的产品。
-- `reputation` n. [ˌrɛpjʊˈteɪʃn] 名词：声誉，名誉。
+- `reputation` [ˌrɛpjʊˈteɪʃn] n. 声誉，名誉。
     - The company has a good reputation for quality products. 
     - > 该公司以产品质量好而著称。
-- `reserve` n. [rɪˈzɜrv] 名词：储备，保留； verb. [rɪˈzɜrv] 动词：预订，保留。
+- `reserve` [rɪˈzɜrv] n. 储备，保留； [rɪˈzɜrv] verb. 预订，保留。
     - She made a reservation for a hotel room. 
     - > 她预订了一间酒店房间。
-- `resident` n. [ˈrɛzədənt] 名词：居民，住户； 形容词：居住的。
+- `resident` [ˈrɛzədənt] n. 居民，住户； 居住的。
     - The residents of the neighborhood are complaining about the noise. 
     - > 社区居民正在抱怨噪音。
-- `resist` v. [rɪˈzɪst] 动词：抵抗，抗拒。
+- `resist` [rɪˈzɪst] v. 抵抗，抗拒。
     - He can't resist eating chocolate. 
     - > 他忍不住要吃巧克力。
-- `resort` n. [rɪˈzɔrt] 名词：度假胜地，手段； verb. [rɪˈzɔrt] 动词：诉诸于。
+- `resort` [rɪˈzɔrt] n. 度假胜地，手段； [rɪˈzɔrt] verb. 诉诸于。
     - They decided to take a beach resort for their holiday. 
     - > 他们决定去海滩度假。
-- `retain` v. [rɪˈteɪn] 动词：保持，保留，记住。
+- `retain` [rɪˈteɪn] v. 保持，保留，记住。
     - He has the ability to retain information easily. 
     - > 他有记忆信息的能力。
-- `reveal` v. [rɪˈvil] 动词：揭示，透露。
+- `reveal` [rɪˈvil] v. 揭示，透露。
     - The investigation revealed some surprising facts. 
     - > 调查揭示了一些令人惊讶的事实。
-- `revolution` n. [ˌrɛvəˈluʃn] 名词：革命，旋转。
+- `revolution` [ˌrɛvəˈluʃn] n. 革命，旋转。
     - The industrial revolution had a significant impact on society. 
     - > 工业革命对社会产生了重大影响。
-- `reward` n. [rɪˈwɔrd] 名词：报酬，奖励； verb. [rɪˈwɔrd] 动词：奖励，报答。
+- `reward` [rɪˈwɔrd] n. 报酬，奖励； [rɪˈwɔrd] verb. 奖励，报答。
     - He received a reward for his hard work. 
     - > 他因工作努力而获得奖励。
-- `rid` v. [rɪd] 动词：摆脱，除去。
+- `rid` [rɪd] v. 摆脱，除去。
     - He wanted to rid himself of the bad habit of smoking. 
     - > 他想摆脱吸烟的不良习惯。
-- `rise` n. [raɪz] 名词：上升，涨价； verb. [raɪz] 动词：上升，增加。
+- `rise` [raɪz] n. 上升，涨价； [raɪz] verb. 上升，增加。
     - The price of oil has risen sharply. 
     - > 油价急剧上涨。
-- `round` n. [raʊnd] 名词：圆形，回合； 形容词：圆形的； verb. [raʊnd] 动词：环绕，转一圈。
+- `round` [raʊnd] n. 圆形，回合； 圆形的； [raʊnd] verb. 环绕，转一圈。
     - The table was round and could seat eight people. 
     - > 桌子是圆形的，能坐八个人。
-- `routine` adj. [ruˈtin] 形容词：例行的，常规的。
+- `routine` [ruˈtin] adj. 例行的，常规的。
     - He followed a daily routine of exercise and healthy eating. 
     - > 他按照每天锻炼和健康饮食的例行程序进行。
-- `rub` v. [rʌb] 动词：擦，摩擦，揉。
+- `rub` [rʌb] v. 擦，摩擦，揉。
     - His sore muscles needed some rubbing to ease the pain. 
     - > 他的酸痛肌肉需要一些摩擦来缓解疼痛。
-- `rubber` n. [ˈrʌbər] 名词：橡胶，橡皮； 形容词：橡胶制的。
+- `rubber` [ˈrʌbər] n. 橡胶，橡皮； 橡胶制的。
     - He wants to replace the rubber soles on his shoes. 
     - > 他想要更换鞋子上的橡胶鞋底。
-- `rural` adj. [ˈrʊrəl] 形容词：农村的，乡下的。
+- `rural` [ˈrʊrəl] adj. 农村的，乡下的。
     - She enjoys the peace and quiet of rural life. 
     - > 她喜欢乡村生活的安静和祥和。
 

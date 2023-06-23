@@ -1393,81 +1393,82 @@ categories:
 
 ## o
 
-- `object` [ˈɒbdʒɛkt]  v.
+- `object` [ˈɒbdʒɛkt]  v. 反对  n. 物品
     - She will object to the proposal at the meeting tomorrow.
-    - > 她明天在会议上会反对这个提议。
-- `objective` [əbˈdʒɛktɪv]  n.
-    - The objective of the project is to increase sales by 20%. (这个项目的目标是将销售额增加2
-    - > 。
-- `objective` [əbˈdʒɛktɪv]  adj.
+    - > 她明天在会议上会`反对`这个提议。
+- `objective` [əbˈdʒɛktɪv]  n. 目的, 目标  adj. 客观的
+    - The objective of the project is to increase sales by 20%. 
+    - > 这个项目的`目标`是将销售额增加20%
     - The report provides an objective analysis of the situation.
-    - > 报告提供了对情况的客观分析。
+    - > 报告提供了对情况的`客观的`分析。
 - `obligation` [ˌɒblɪˈɡeɪʃən]  n.
     - It is your obligation to pay your bills on time.
-    - > 按时支付你的账单是你的义务。
+    - > 按时支付你的账单是你的`义务`。
 - `observation` [ˌɒbzəˈveɪʃən]  n.
     - The scientist made some interesting observations about the behavior of the monkeys.
-    - > 科学家对猴子的行为作了一些有趣的观察。
+    - > 科学家对猴子的行为作了一些有趣的`观察`。
 - `observe` [əbˈzɜːv]  v.
     - We can observe the stars with a telescope.
-    - > 我们可以用望远镜观察星星。
+    - > 我们可以用望远镜`观察`星星。
 - `obtain` [əbˈteɪn]  v.
     - It is easy to obtain a visa if you have all the necessary documents.
-    - > 如果你拥有所有必要的文件，获得签证很容易。
+    - > 如果你拥有所有必要的文件，`获得`签证很容易。
 - `occasionally` [əˈkeɪʒənəli]  adv.
     - I occasionally go to the gym to work out.
-    - > 我时不时去健身房锻炼身体。
+    - > 我`偶尔地`去健身房锻炼身体。
 - `offend` [əˈfɛnd]  v.
     - I'm sorry if I offended you with my remark.
-    - > 如果我说的话冒犯了你，我很抱歉。
-- `offense` [əˈfɛns]  n.
+    - > 如果我的言论`冒犯`了你，我很抱歉。
+- `offense` [əˈfɛns]  n. 违法，犯罪；冒犯，伤害；过错，不当；讨厌的东西，引起反感的事物；<正式> 进攻，攻击行为；进攻队员；（球队的）进攻
     - Parking in a disabled spot is a serious offense.
-    - > 停车在残疾人位上是一个严重的违法行为。
-- `offensive` [əˈfɛnsɪv]  adj.
+    - > 停车在残疾人位上是一个严重的`违法行为`。
+- `offensive` [əˈfɛnsɪv]  adj. 无礼的, 冒犯的
     - His language was very offensive and hurtful.
-    - > 他的语言非常冒犯和伤人。
+    - > 他的语言非常`无礼的`和伤人的。
 - `opponent` [əˈpəʊnənt]  n.
     - The two opponents will face each other in the boxing ring tonight.
-    - > 今晚两名对手将在拳击比赛中交锋。
+    - > 今晚两名`对手`将在拳击比赛中交锋。
 - `oppose` [əˈpəʊz]  v.
     - The protesters opposed the new law.
-    - > 抗议者反对新法律。
-- `opposed` [əˈpəʊzd]  adj.
-    - The two sides were opposed to each other's plans.
-    - > 双方对彼此的计划持反对态度。
+    - > 抗议者`抵制`新法律。
+- `opposed` [əˈpəʊzd]  adj. 反对的，敌对的；相反的，对立的
+    - He was strongly opposed to the idea.
+    - > 他对于那个主意是坚决地`反对的`。
 - `opposition` [ˌɒpəˈzɪʃən]  n.
     - The opposition party has been criticizing the government's policies.
-    - > 反对党一直在批评政府的政策。
+    - > `反对`党一直在批评政府的政策。
 - `organ` [ˈɔːɡən]  n.
     - The heart is an important organ in the human body.
-    - > 心脏是人体中重要的器官。
+    - > `心脏`是人体中重要的器官。
 - `origin` [ˈɒrɪdʒɪn]  n.
     - The origin of the universe is still a mystery.
-    - > 宇宙的起源仍然是一个谜。
-- `otherwise` [ˈʌðəwaɪz]  adv.
+    - > 宇宙的`起源`仍然是一个谜。
+- `otherwise` [ˈʌðəwaɪz]  adv. 否则，不然；除此以外，在其他方面；不同地，另外地；以其他方式，用别的方法 adj. 不是那样的，另外情况下的
     - You need to finish your homework, otherwise you won't pass the test.
-    - > 否则你就无法通过考试，你需要完成家庭作业。
+    - > 你需要完成家庭作业, `否则`你就无法通过考试
 - `outcome` [ˈaʊtkʌm]  n.
     - The outcome of the election was a surprise to many people.
-    - > 选举的结果让许多人感到惊讶。
+    - > 选举的`结果`让许多人感到惊讶。
 - `outer` [ˈaʊtə]  adj.
     - The outer planets in our solar system are all gas giants.
-    - > 我们太阳系中的外行星都是气态巨型行星。
-- `outline` [ˈaʊtlaɪn]  n.
+    - > 我们太阳系中的`外围的`行星都是气态巨型行星。
+- `outline` [ˈaʊtlaɪn]  n. 轮廓，外形；轮廓图，草图；提纲，大纲；梗概，要点；（词的）速记形式  v. 概述，略述；勾勒，描画……的轮廓
     - The professor gave us an outline of the course syllabus.
-    - > 教授给我们提供了课程大纲的概述。
-- `outline` [ˈaʊtlaɪn]  v.
+    - > 教授给我们提供了课程大纲的`提纲`。
+    - Outline the program's plot for their children first.
+    - > 首先为孩子`概述`节目情节。
     - Please outline your proposal for the new project.
-    - > 请概述你对新项目的提议。
-- `overall` [ˌəʊvərˈɔːl]  adj.
+    - > 请`概述`你对新项目的提议。
+- `overall` [ˌəʊvərˈɔːl]  adj. 总体的;  adv. 总的来说
     - The overall goal of the company is to increase profits.
-    - > 公司的总体目标是增加利润。
-- `overall` [ˌəʊvərˈɔːl]  adv.
+    - > 公司的`总体的`目标是增加利润。
     - Overall, it was a great experience.
-    - > 总的来说，这是一次很好的经历。
-- `owe` [əʊ]  v.
+    - > `总的来说`，这是一次很好的经历。
+- `owe` [əʊ]  v. 欠（钱），负账；应该做，应给予；欠（人情），应该感激；归因于，归功于
     - I owe my success to my parents' support.
-    - > 我把我的成功归功于父母的支持。
+    - > 我把我的成功`归功于`父母的支持。
+    - Add up all the money I owe you.
+    - > 把我`欠`你的钱全部加起来。
 
 
 ## p

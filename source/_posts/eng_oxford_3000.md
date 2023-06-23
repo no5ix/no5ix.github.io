@@ -603,13 +603,18 @@ categories:
 - `spirit` [ˈspɪrɪt]: 
     - Her spirit is very good and she is full of energy every day.
     - > 她的`精神状态`很不错，每天都充满活力。
-- `spot` [spɒt]: n. 地点，场所；（人体的）部位，地方；有某种特质的部分；点，斑点；污点，污渍
+- `spiritual` [ˈspɪrɪtʃuəl] adj. 
+    - We need some spiritual support to keep us going.
+    - > 我们需要一些`精神的`寄托来支撑我们前行。
+- `spot` [spɒt]: n. 地点，场所；（人体的）部位，地方；有某种特质的部分；点，斑点；污点，污渍  v. 看见，注意到；（对比赛对手）让分，让步；飘了几滴雨，下小雨；发现
     - We stayed at this spot for an hour.
-    - > 我们在这个`景点`停留了一个小时。
+    - > 我们在这个`n. 景点`停留了一个小时。
     - He answered the question `on the spot`.
     - > 他`当场`就回答了那个问题。
     - The male bird has a red spot on its beak.
-    - > 雄鸟喙上有一个红色`斑点`
+    - > 雄鸟喙上有一个红色`n. 斑点`
+    - Can you spot our location on the map?
+    - > 你能在地图上`vt. 找到`我们的位置吗？
 - `stadium` [ˈsteɪdiəm]: 
     - This stadium can accommodate tens of thousands of spectators.
     - > 这个`体育场`可以容纳数万观众。
@@ -661,6 +666,11 @@ categories:
 - `tour` [tʊə(r)]: 
     - We went on a city tour.
     - > 我们参加了一次城市`游览`。
+- `trip` [trɪp] n.（尤指短程往返的）旅行，旅游；出门，出行；绊倒 v. 短途旅行 ("Trip" 和 "tour" 都可以表示旅行的意思，但它们在用法和语气上有所不同。"Trip" 更常用于指个人或小组自由行的旅行，通常强调的是旅行的体验和探险性质，也可以用于形容跌倒或失足等不良事件。 而"Tour" 则通常指由旅行社组织的有计划、有安排的旅行，包括预定的行程、交通和住宿等，更加注重旅行的组织性和安排，通常在商业或官方场合使用。)
+    - We arranged a trip to relax.
+    - > 我们安排了一次`n. 旅行`来放松精神。
+    - I'm planning to trip around Europe next summer to explore different cultures and meet new people.
+    - > 我计划在明年夏天`v. 周游`欧洲，以探索不同的文化和结交新朋友。
 - `trend` [trend]: 
     - This style of clothing has become a trend in fashion.
     - > 这种服装风格已经成为了时尚的`趋势`。
@@ -670,6 +680,11 @@ categories:
 - `various` [ˈveəriəs]: 
     - This store has various products, and you can choose what you like.
     - > 这家商店有`各种各样`的商品，你可以挑选你喜欢的。
+- `vary` [ˈvɛri] v.（使）不同，（使）呈现差异；（根据情况而）变化，改变；改变，使……变化；变奏
+    - Temperatures vary in different seasons and regions.
+    - > 气温在不同季节和不同地区会有所`不同`。
+    - Prices vary according to the quantity ordered.
+    - > 价格根据所订数量而`v. 变化`。
 - `wing` [wɪŋ]: 
     - The bird spreads its wings and soars in the blue sky.
     - > 这只鸟展`翅`高飞，翱翔在蓝天之上。
@@ -1473,46 +1488,48 @@ categories:
 
 ## p
 
-- `pace` [peɪs]  n.
+- `pace` [peɪs]  n. 步速，（移动的）速度；（发生、进展、发展的）速度，节奏；v.（因担忧、紧张或不耐烦而）踱步，踱步于；（在赛跑中）为……定速度；为……领跑；
     - He walked at a slow pace. 
-    - > 他走得很慢。
-- `pace` [peɪs]  v.
+    - > 他以一个很慢的`步速`走了。
     - She paced back and forth nervously. 
-    - > 她紧张地来回踱步。
-- `panel` [ˈpænəl]  n.
+    - > 她紧张地来回`踱步`。
+- `panel` [ˈpænəl]  n. 专家咨询组，专题讨论小组；（门等的）镶板，嵌板；控制板，仪表盘； v. 用（木板、金属板等）覆盖，镶
     - The panel of judges will announce the winner tomorrow. 
-    - > 评委会将于明天宣布获胜者。
+    - > 评委`专家咨询组`将于明天宣布获胜者。
+    - control panel
+    - > [计算机]控制`面板`
 - `participant` [pɑːˈtɪsɪpənt]  n.
     - All participants will receive a certificate of attendance. 
-    - > 所有参与者将获得出席证书。
+    - > 所有`参与者`将获得出席证书。
 - `partly` [ˈpɑːtli]  adv.
     - The delay was partly due to bad weather. 
-    - > 延误部分是由于恶劣天气。
-- `passage` [ˈpæsɪdʒ]  n.
+    - > 这个延误`在一定程度上`是由于恶劣天气。
+- `passage` [ˈpæsɪdʒ]  n.（书、演讲、乐曲等的）段，章；（人生或体育赛事等中的）阶段；过道，走廊；（人群等中的）通道，通路；（人体的）管道；经过，穿过；
     - The novel has many poetic passages. 
-    - > 这部小说有许多诗意的段落。
+    - > 这部小说有许多诗意的`段落`。
 - `permanent` [ˈpɜːmənənt]  adj.
     - The ink is permanent and cannot be erased. 
-    - > 这种墨水是永久的，无法擦除。
-- `permit` [pəˈmɪt]  v.
+    - > 这种墨水是`永久的`，无法擦除。
+- `permit` [pəˈmɪt]  v. 允许; n. 许可证
     - The company will not permit employees to smoke on the premises. 
-    - > 公司不允许员工在场地内吸烟。
-- `permit` [ˈpɜːmɪt]  n.
+    - > 公司不`允许`员工在场地内吸烟。
     - You need a permit to park in this area. 
-    - > 你需要一个许可证才能停车在这个区域内。
-- `perspective` [pəˈspɛktɪv]  n.
+    - > 你需要一个`许可证`才能停车在这个区域内。
+- `perspective` [pəˈspɛktɪv]  n.（观察问题的）视角，观点；透视（画）法；（几何）透视关系，投影比例；洞察力，判断力；景观，远景；角度；（声音）立体效果; adj. 透视的
+    - Clearly, from the schools' perspective, there's a lot of money to be saved.
+    - > 显然，从学校的`视角`来看，这可以省下很多钱。
     - The artist used perspective to create a sense of depth in the painting. 
-    - > 艺术家利用透视法在画中营造出深度感。
-- `phase` [feɪz]  n.
+    - > 艺术家利用`透视法`在画中营造出深度感。
+- `phase` [feɪz]  n. 阶段, 时期
     - The project is currently in its final phase. 
-    - > 该项目目前正在进行最后阶段。
+    - > 该项目目前正在进行最后`阶段`。
 - `phenomenon` [fɪˈnɒmɪnən]  n.
     - The aurora borealis is a natural phenomenon in the polar regions. 
-    - > 极光是极地地区的自然现象。
+    - > 极光是极地地区的自然`现象`。
 - `philosophy` [fɪˈlɒsəfi]  n.
     - Her philosophy on life is to live in the moment. 
-    - > 她的人生哲学是活在当下。
-- `pile` [paɪl] n. 一堆，一叠； [paɪl] verb. 堆积，积累。
+    - > 她的人生`哲学`是活在当下。
+- `pile` [paɪl] n. 一堆，一叠； verb. 堆积，积累。
     - There was a pile of books on the table. 
     - > 桌子上堆着一叠书。
 - `pitch` [pɪtʃ] n. 音高，场地，推销； [pɪtʃ] verb. 投掷，推销。
@@ -1742,258 +1759,320 @@ categories:
 - `shift` [ʃɪft] v. 转移
     - The company will shift its focus to green energy in the future.
     - > 未来公司将转向绿色能源领域。
-- `ship` [ʃɪp] v. 
+- `ship` [ʃɪp] n.（大）船，舰；三（或多）桅帆船；<非正式> 艇（尤指赛艇）；宇宙飞船；<美> 飞机 v. （用船、飞机、卡车）运送，运输；遣送（某人）；推出（计算机商品），（使）上市；（水手）在船上工作，在船上服役；舷侧进水；把（浆架中的浆）放在船内；给船安装（舵、桅杆等）；<旧> 上船，乘船；乘船旅行；提供船只
     - We need to ship these goods overseas.
-    - > 我们需要运送这些货物到国外。
-- `shock` [ʃɑk] n., v. 
+    - > 我们需要`运送`这些货物到国外。
+    - Ship the code.
+    - > 可以理解为将代码（软件）发布、交付或部署的意思。"Ship" 在这里的意思是"发货"、"交付"的意思，
+- `shock` [ʃɑk] n. 令人震惊的事；吃惊，震惊；休克；电击，触电；减震器；（对经济、传统、生活方式的）冲击，撞击；（爆炸、地震等引起的）剧烈震动；浓密的头发；愤怒，生气；冲击力 ；（竖放在地里促使谷物更快晒干和成熟的）禾束堆  v. 使震惊，使难以置信；（言语或行为）（使）愤慨，（使）生气；使触电，使遭电击；使恐惧（或厌恶）；使生理休克；把......堆成禾束堆; adj. 令人震惊的，令人大感意外的（尤用于新闻报道）；浓密的，蓬乱的
     - The news was too much of a shock to hear.
-    - > 新闻听起来太震惊了。
-- `shocked` [ʃɑkt] adj. 
+    - > 新闻听起来是一个太`令人震惊的事`了。
+    - He is receiving treatment for shock.
+    - > 他正在接受`休克`治疗。
+- `shocked` [ʃɑkt] adj. 吃惊的，震惊的；愤慨的，十分厌恶的
     - We were all shocked when we heard the news.
-    - > 我们听到这个消息时都吓了一跳。
+    - > 我们听到这个消息时都是`震惊的`。
 - `shooting` [ˈʃutɪŋ] n. 
     - The shooting caused multiple casualties.
-    - > 那场枪击事件造成了多个人员伤亡。
+    - > 那场`枪击事件`造成了多个人员伤亡。
 - `significant` [sɪɡˈnɪfɪkənt] adj. 
     - This discovery is significant for the research findings.
     - > 这个发现对研究结果非常重要。
 - `significantly` [sɪɡˈnɪfɪkəntli] a
     - His improvement plan significantly increased efficiency.dv. 
-    - > 他的改进方案显着提高了效率。
-- `sincere` [sɪnˈsɪr] adj. 
-    - He sincerely appreciates your help.
-    - > 他发自内心地感谢你的帮助。
-- `slide` [slaɪd] v., n. 
+    - > 他的改进方案`显着地`提高了效率。
+- `sincere` [sɪnˈsɪr] adj. 真诚的
+    - He seemed sincere enough when he said he wanted to help.
+    - > 他表示愿意帮忙的时候，似乎是足够`真诚的`。
+    - He `sincerely` appreciates your help.
+    - > 他`adv. 发自内心地`感谢你的帮助。
+- `slide` [slaɪd] v.（使）滑行，滑动；滑落;  n. 滑梯；滑道；滑行，滑动；（价格、数量等的）下降，跌落，减少；幻灯片；
     - The children slid across the ice rink.
-    - > 孩子们滑过那个冰场。
+    - > 孩子们`滑`过那个冰场。
+    - The US dollar continued to slide.
+    - > 美元继续`下跌`。
+    - TCP sliding window
+    - > TCP`adj. 滑动`窗口
 - `slight` [slaɪt] adj. 
     - This issue is not very serious, just a slight misunderstanding.
-    - > 这个问题不是很严重，只是轻微的误会。
-- `slip` [slɪp] v. 
-    - The ground under her feet was a bit slippery, so she almost fell.
-    - > 她脚下的地面有些湿滑，所以她差点摔倒。
-- `slope` [sloʊp] n., v. 
+    - > 这个问题不是很严重，只是`轻微的`误会。
+- `slip` [slɪp] v. 滑倒，失足；溜走，悄悄地走；迅速放置（某物），偷偷塞；（物）滑落，脱落；滑行，打滑;  n. 滑，滑倒；滑动；（滑轮或其他装置因皮带、绳索打滑而导致的）转差，空转
+    - You slip on the banana skin.
+    - > 你被香蕉皮`滑倒`了。
+    - She allowed victory to slip from her grasp.
+    - > 她听任胜利从手中`溜走`
+    - The ground under her feet was a bit `slippery`, so she almost fell.
+    - > 她脚下的地面有些`adj. 滑的`，所以她差点摔倒。
+- `slope` [sloʊp] n. 斜坡，斜面；山坡；滑雪斜坡；斜度，坡度； v. 倾斜，成斜坡；歪斜；悄悄地走，溜
     - We hiked along the slope in the canyon.
-    - > 我们在峡谷中沿着山坡行进。
-- `solar` [ˈsoʊlər] adj. 
+    - > 我们在峡谷中沿着`n. 斜坡`行进。
+- `solar` [ˈsoʊlər] adj. 太阳的, 日光的
     - Solar energy is a very promising energy source.
-    - > 太阳能是一种非常有前途的能源。
+    - > `太阳的`能量(简称太阳能)一种非常有前途的能源。
 - `somewhat` [ˈsʌmˌwʌt] ad
     - This issue is somewhat challenging.v. 
-    - > 这个问题有些棘手。
-- `specialist` [ˈspɛʃəlɪst] n., adj.
+    - > 这个问题`有点`棘手。
+- `specialist` [ˈspɛʃəlɪst] n., adj. 
     - He is a highly experienced eye specialist.
-    - > 他是一位很有经验的眼科专家。
+    - > 他是一位很有经验的眼科`专家`。
 - `species` [ˈspiʃiz] n. 
     - Humans are one of the greatest species on the earth.
-    - > 人类是地球上最伟大的物种之一。
-- `spiritual` [ˈspɪrɪtʃuəl] adj. 
-    - We need some spiritual support to keep us going.
-    - > 我们需要一些精神寄托来支撑我们前行。
+    - > 人类是地球上最伟大的`物种`之一。
 - `split` [splɪt] v., n. 
     - The country eventually split into several independent states.
-    - > 那个国家最后分裂成了几个独立的州。
-- `sponsor` [ˈspɑnsər] v., n. 
+    - > 那个国家最后`分裂`成了几个独立的州。
+- `sponsor` [ˈspɑnsər] v. 赞助, n. 赞助者
     - That company sponsored our competition.
-    - > 那家公司赞助了我们的比赛。
-- `spot` [spɑt] v. 
-    - Can you spot our location on the map?
-    - > 你能在地图上找到我们的位置吗？
-- `spread` [sprɛd] n. 
+    - > 那家公司`v. 赞助`了我们的比赛。
+    - Adidas is an official sponsor of the World Cup, so its logo appears on the field.
+    - > 阿迪达斯是世界杯的官方`n. 赞助商`，所以，它的标志出现在赛场上
+- `spread` [sprɛd] n. 扩散，蔓延；范围，幅度;  v. 展开，打开；张开，伸开（手臂、手指、腿）；扩散，蔓延；传播，传染；散布，
+    - The bird spread its wings.
+    - > 鸟`展开`翅膀。
     - The epidemic continues to spread, and we need more preventive measures.
-    - > 这场传染病继续扩散，我们需要更多的防控措施。
+    - > 这场传染病继续`v. 扩散`，我们需要更多的防控措施。
 - `stable` [ˈsteɪbl] adj. 
     - This system is very stable.
-    - > 这个系统是非常稳定的。
-- `stage` [steɪdʒ] v. 
+    - > 这个系统是非常`稳定的`。
+- `stage` [steɪdʒ] vt.上演，演出；主办，举行；使发生；成功做成（某事;  n. 阶段，时期；旅程（或赛跑中）的一段；舞台；戏剧，戏剧表演
     - He is staging a massive banquet that requires careful preparation.
-    - > 他策划了一个巨大的宴会，需要精心筹备。
-- `stare` [stɛr] v. 
+    - > 他正在`vt. 举行`一个巨大的宴会，需要精心筹备。
+    - She stepped gracefully onto the stage.
+    - > 她步态优雅地走上`n. 舞台`。
+    - The product is at the design stage.
+    - > 产品处于设计`n. 阶段`。
+- `stare` [stɛr] v. 注视, 盯着
     - He stared at me for a long time, which made me feel uncomfortable.
-    - > 他盯着我看了好久，让我觉得很不自在。
-- `status` [ˈsteɪtəs] n. 
-    - We need a comprehensive evaluation of the status of this plan.
-    - > 我们需要对这个计划做一次全面的评估。
-- `steady` [ˈstɛdi] adj. 
+    - > 他`盯着`我看了好久，让我觉得很不自在。
+- `status` [ˈsteɪtəs] n. 法律地位（或身份）；（尤指在社会中的）地位，身份；高级职位，社会上层地位；重视（或崇尚）程度；状况，情形 [计算机科学技术] 状态, 地位,
+    - The party was denied legal status.
+    - > 那个党没有获得合法`地位`。
+    - She could see their photos and read their status updates.
+    - > 她可以看到他们的照片以及`状态`更新。
+    - Exotic pets are the latest status symbol.
+    - > 养珍禽异兽是表现`社会地位`的最时髦方式。
+    - The ads helped Nike to achieve iconic status.
+    - > 这些广告帮助耐克公司成就了偶像`地位`。
+- `steady` [ˈstɛdi] adj. 稳固的, 平稳的
     - He is always very steady and calmly faces any difficulties.
-    - > 他总是十分稳重，冷静地面对任何困难。
+    - > 他总是十分`稳重的`，冷静地面对任何困难。
 - `steel` [stil] n. 
     - Steel is one of the basic materials for modern construction.
-    - > 钢材是当代建筑的基础材料之一。
+    - > `钢材`是当代建筑的基础材料之一。
 - `steep` [stip] adj. 
     - The mountain is very steep and requires careful climbing.
-    - > 这座山非常陡峭，需要小心攀爬。
-- `step` [stɛp] v. 
+    - > 这座山非常`陡峭的`，需要小心攀爬。
+- `step` [stɛp] v. 跨步走；踏，踩；做，采取行动；（短距离）移动，行走；竖立（桅杆）于桅座上;  n. 迈步，脚步；梯级，台阶；步骤，措施；阶段，进程
     - We need to take some steps to prevent this issue from happening.
-    - > 我们需要采取一些措施来防止这个问题的发生。
-- `sticky` [ˈstɪki] adj. 
-    - The glass is sticky with some juice on it and needs to be wiped with a wet cloth.
-    - > 这个杯子粘了些果汁，需要用湿布擦拭。
+    - > 我们需要采取一些`措施`来防止这个问题的发生。
+    - She `stepped over` the puddle to avoid getting her shoes wet.
+    - > 她`跨过`水坑以避免弄湿鞋子。
+- `sticky` [ˈstɪki] adj. 黏的
+    - The glass is `sticky with` some juice on it and needs to be wiped with a wet cloth.
+    - > 这个杯子`粘了`些果汁，需要用湿布擦拭。
 - `stiff` [stɪf] adj. 
     - The wooden chair is not very comfortable, and it feels stiff to sit on.
-    - > 那个木制的椅子不太舒服，坐起来很生硬。
-- `stream` [striːm] n. 
+    - > 那个木制的椅子不太舒服，坐起来很`adj. 硬`。
+- `stream` [striːm] n. 溪流, 河流
     - Along this stream, you can see various wild animals.
-    - > 沿着这片河流，你可以看到各种各样的野生动物。
-- `stretch` [strɛtʃ] v., n. 
+    - > 沿着这片`河流`，你可以看到各种各样的野生动物。
+- `stretch` [strɛtʃ] v.（使）变大，拉长；（布料）可伸缩，有弹性；伸展肢体；伸出，伸长（胳膊或腿）；n.（土地或水域的）一片，一段；（时间）连续的一段，持续；（肢体）伸展，伸开；弹性，伸缩性；服刑期；（
     - In the morning stretching exercise, you can stretch your muscles and stay energized.
-    - > 在早晨的伸展活动中，你可以舒展肌肉，保持活力。
+    - > 在早晨的`伸展`活动中，你可以`舒展`肌肉，保持活力。
 - `strict` [strɪkt] adj. 
     - Our rules and regulations are very strict, and there can be no violation.
-    - > 我们的规章制度非常严格，不能有任何违反。
-- `strike` [straɪk] v., n. 
+    - > 我们的规章制度非常`adj. 严格的`，不能有任何违反。
+- `strike` [straɪk] v. 打，撞；（用手或武器等）打；（使）碰撞；罢工；突然想到，突然意识到；突然袭击  n. 罢工，罢市，罢课；（军事）打击；击，踢；
     - The strike affected the entire city's transportation.
-    - > 那场罢工影响了整个城市的交通。
-- `structure` [ˈstrʌktʃər] v. 
+    - > 那场`罢工`影响了整个城市的交通。
+    - The lion crouched ready to strike.
+    - > 狮子蹲身准备袭击。
+- `structure` [ˈstrʌktʃər] n. 结构  v. 构建
     - We need to structure a more stable bridge.
-    - > 我们需要构建一个更加稳固的桥梁。
-- `struggle` [ˈstrʌɡəl] v., n. 
+    - > 我们需要`v. 构建`一个更加稳固的桥梁。
+- `struggle` [ˈstrʌɡəl] v. 奋斗, 斗争  n. 奋斗，斗争；难事；搏斗，扭打 
     - The country is struggling for democracy and freedom.
-    - > 这个国家正在为民主自由而奋斗。
-- `stuff` [stʌf] v. 
+    - > 这个国家正在为民主自由而`奋斗`。
+- `stuff` [stʌf] n. 东西，物品；基本特征，特质，根本； v. 塞进，填进；填满，装满；填作料，填馅；制作（动物）标本；
     - My backpack is stuffed with essentials and common items.
-    - > 我的背包里装满了必需品和常用物品。
-- `subject` [ˈsʌbdʒɛkt] adj. 
+    - > 我的背包里`v. 装满`了必需品和常用物品。
+    - This is high quality stuff.
+    - > 这是高品质的`n. 东西`。
+- `subject` [ˈsʌbdʒɛkt] n. 主题，话题；学科，科目，课程；主语；v. 使臣服，征服，压服；使经受，使遭受  adj. 隶属的，臣服的；可能受……影响的，易遭受……的；受……支配的，服从于……的；取决于，视……而定
     - The subject discussed in the article is very important.
-    - > 那篇文章讨论的主题非常重要。
-- `surgery` [ˈsɜrdʒəri] n. 
+    - > 那篇文章讨论的`n. 主题`非常重要。
+    - Prices may be subject to alteration.
+    - > 价格可能会`受`变更`影响`。
+    - Biology is my favourite subject.
+    - > 生物是我最喜欢的学科。
+- `surgery` [ˈsɜrdʒəri] n. 外科手术
     - His surgery was very successful, and he recovered quickly.
-    - > 他的手术非常成功，恢复得很快。
-- `surround` [səˈraʊnd] v. 
-    - They stood around the room and enjoyed the beautiful view.
-    - > 他们站在房间四周欣赏那美丽的景色。
-- `surrounding` [səˈraʊndɪŋ] adj. 
+    - > 他的`手术`非常成功，恢复得很快。
+- `surround` [səˈraʊnd] v. 围绕，环绕；（军队，警察等）包围；与……紧密相连（或相关）；喜欢结交（某类人），身边总有（某类东西）n.（物品的）边，饰边；周围的事物，环境
+    - The police fanned out to surround the house.
+    - > 警察散开`v. 包围`了这座房子。
+    - How can one ever separate out the act from the attitudes that surround it?
+    - > 如何才能将行动同围绕着它的种种看法区分开来呢？
+    - I surround you with my light.
+    - > 我用我的光`v. 包围`着你。
+- `surrounding` [səˈraʊndɪŋ] adj. 周围的，附近的
     - The surrounding landscape of this city is very beautiful.
-    - > 这座城市的周边景观非常美丽。
-- `survey` [sɜrˈveɪ] v. 
+    - > 这座城市的`周边的`景观非常美丽。
+- `survey` [sɜrˈveɪ] n. 调查; v. 做民意测验，做民意调查；（尤指认真地）审视，检查；测量，
     - We need to conduct a comprehensive survey of the market.
-    - > 我们需要对市场进行一次全面的调查。
-- `suspect` [səsˈpɛkt] v., n. 
+    - > 我们需要对市场进行一次全面的`n. 调查`。
+- `suspect` [səsˈpɛkt] v. 猜想，认为（某事有可能）；怀疑……有罪，认为……有嫌疑；不信任，怀疑……的真实性  n. 嫌疑犯，可疑分子；（某坏事物的）可能导致者  adj.  不可靠的，不可信的；可疑的，可能有危险的；有问题的，运转不好的
     - The suspect was arrested by the police and jailed.
-    - > 那个嫌疑犯被警方抓捕并关进监狱。
-- `sympathy` [ˈsɪmpəθi] n. 
+    - > 那个`n. 嫌疑犯`被警方抓捕并关进监狱。
+    - Police suspect a local gang.
+    - 警方`v. 怀疑`当地的一个不良帮派。
+- `sympathy` [ˈsɪmpəθi] n. 同情, 同情心
     - We should help those in need with sympathy.
-    - > 我们应该带着同情之心帮助那些需要帮助的人。
+    - > 我们应该带着`n. 同情之心`帮助那些需要帮助的人。
 
 
 ## tuvw
 
 - `tale` [teɪl] n. 
     - Grandfather always tells some wonderful tales.
-    - > 祖父总是讲着一些奇妙的故事。
-- `term` [tɜrm] v. 
+    - > 祖父总是讲着一些奇妙的`故事`。
+- `term` [tɜrm] v. 把……称为，把……叫做  n.（某人做某事或某事发生的）时期，期限，任期；学期，开庭期；到期，期满
     - After each term, we need to summarize and evaluate.
-    - > 每个学期结束后，我们需要进行一次总结和评估。
-- `therapy` [ˈθɛrəpi] n. 
-    - Psychotherapy is a very effective way to help people deal with difficulties.
-    - > 心理治疗是一种非常有效的方式来帮助人们应对困难。
-- `thus` [ðʌs] adv. 
+    - > 每个`n. 学期`结束后，我们需要进行一次总结和评估。
+    - I termed the new product line as a game-changer for our company.
+    - > 我`把`这个新产品系列`v. 称为`我们公司的一个改变游戏规则者。
+- `therapy` [ˈθɛrəpi] n. 治疗
+    - `Psychotherapy` is a very effective way to help people deal with difficulties.
+    - > `心理治疗(psycho adj. 精神变态者的，变态人格者的)`是一种非常有效的方式来帮助人们应对困难。
+- `thus` [ðʌs] adv. adv. <正式>因此；<正式>这样，以此种方式；<正式>到如此程度
     - His logical reasoning is rigorous and thus received a high score.
-    - > 他的逻辑推理很严密，因此得到了高分。
-- `tone` [toʊn] n. 
+    - > 他的逻辑推理很严密，`因此`得到了高分。
+- `tone` [toʊn] n. 语气, 口吻; 气氛，基调，风格；（尤指乐器或电子音响设备的）音质，音色；色调
     - His tone sounded very confident and impressive.
-    - > 他的语气听起来非常自信，令人印象深刻。
-- `tough` [tʌf] adj. 
+    - > 他的`n. 语气`听起来非常自信，令人印象深刻。
+- `tough` [tʌf] adj. （物质，物体）坚韧的，坚固的；（政策或行动）强硬的，严厉的；吃苦耐劳的，坚韧不拔的；顽固的，固执的；困难的，棘手的；艰难的，困苦的，难熬的
     - This job requires tough mental and physical strength.
-    - > 这项工作需要非常坚韧的精神和体力。
+    - > 这项工作需要非常`坚韧的`精神和体力。
+    - She had a pretty tough childhood.
+    - > 她度过了一个非常`艰苦的`童年。
+    - It was a tough decision to make.
+    - > 那是个很`难`作的决定。
 - `track` [træk] v. 
     - We need to track this project to ensure that it progresses as planned.
-    - > 我们需要跟踪这个项目，确保它按计划进行。
+    - > 我们需要`跟踪`这个项目，确保它按计划进行。
 - `transform` [trænsˈfɔrm] v. 
     - We need to transform our work methods to adapt to this new market.
-    - > 我们需要改变我们的工作方式，以适应这个新市场。
+    - > 我们需要`改变`我们的工作方式，以适应这个新市场。
 - `transition` [trænˈzɪʃən] n. 
     - We must smoothly complete the transition process of this new plan.
-    - > 我们必须顺利地完成这个新计划的转型过程。
+    - > 我们必须顺利地完成这个新计划的`n. 过渡期`。
 - `trial` [ˈtraɪəl] n. 
     - This vaccine is undergoing human trials.
-    - > 这项疫苗正在进行人体试验。
-- `trip` [trɪp] v. 
-    - We arranged a trip to relax.
-    - > 我们安排了一次旅行来放松精神。
+    - > 这项疫苗正在进行人体`试验`。
 - `tropical` [ˈtrɑpɪkəl] adj. 
     - The climate in tropical regions is very comfortable.
     - > 热带地区的气候非常舒适。
-- `truly` [ˈtruːli] adv. 
-    - His words were very sincere and touched us all.
-    - > 他的话非常真诚，让我们都非常感动。
-- `tune` [tun] n. 
-    - The melody of that song is very beautiful.
-    - > 那首歌曲的旋律非常动听。
+- `truly` [ˈtruːli] adv. 真实地，如实地；真正地，完全地；诚挚地，真诚地；准确地；非常，很
+    - She was a truly remarkable woman.
+    - > 她是一位`adv. 真正地`非同凡响的女人。
+- `tune` [tun] n. 曲调，曲子；歌曲，乐段
+    - Do you recognize this tune?
+    - > 你能听出这是哪支曲子吗？
+- `dime` [daɪm] n.（美国、加拿大的）十分硬币
+    - I pressed a dime into his grubby mitt.
+    - > 我把一个`十分的硬币`塞进了他脏兮兮的手里。
+    - And I pay for every dime of it.
+    - > 我会为之花出每一`分钱`。
 - `tunnel` [ˈtʌnl] n. 
     - That tunnel is very deep and requires careful crossing.
-    - > 那个隧道非常深，需要小心穿越。
+    - > 那个`隧道`非常深，需要小心穿越。
 - `ultimately` [ˈʌltɪmətli] adv. 
     - Ultimately, they reached a compromise.
-    - > 最终，他们达成了妥协。
+    - > `最终`，他们达成了妥协。
 - `unconscious` [ʌnˈkɑnʃəs] adj. 
     - He was unconscious for several hours after the accident.
-    - > 他在车祸中昏迷了好几个小时。
-- `upper` [ˈʌpər] adj. 
-    - This room is upstairs and very quiet.
-    - > 这个房间位于楼上，很安静。
+    - > 他在车祸中`adj. 不省人事的`了好几个小时。
+- `upper` [ˈʌpər] adj. 较高的, 上面的
+    - Her novels poke fun at the upper class.
+    - > 她的小说嘲弄`adj. 上流的`社会。
+    - They should use `uppercase`.
+    - > 他们应该使用`大写字母`。
 - `upward` [ˈʌpwərd] adv. 
     - Overall, our sales are trending upward.
-    - > 总体来说，我们的销售额呈上升趋势。
-- `urban` [ˈɜrbən] adj. 
+    - > 总体来说，我们的销售额呈`adv. 向上的`趋势。
+- `urban` [ˈɜrbən] adj. 城市的
     - Urban development has brought many conveniences to people's lives.
-    - > 城市的发展为人们的生活带来了很多便利。
-- `urge` [ɜrdʒ] v. 
+    - > `adj. 城市的`发展为人们的生活带来了很多便利。
+- `urge` [ɜrdʒ] v. 催促
     - He strongly advocates environmental protection and urges the government to take action.
-    - > 他坚决主张保护环境，敦促政府采取行动。
+    - > 他坚决主张保护环境，`v. 敦促`政府采取行动。
 - `van` [væn] n. 
     - This van can be used to transport furniture and other items.
-    - > 这辆面包车可以用来搬运家具和其他物品。
-- `vary` [ˈvɛri] v. 
-    - Temperatures vary in different seasons and regions.
-    - > 气温在不同季节和不同地区会有所不同。
-- `vast` [væst] adj. 
+    - > 这辆`面包车`可以用来搬运家具和其他物品。
+- `vast` [væst] adj. 巨大的, 广大的
     - The vast grassland feels infinitely wide.
-    - > 那片广阔的草原让人感到无限宽广。
-- `venue` [ˈvɛnju] n. 
+    - > 那片`广阔的`草原让人感到无限宽广。
+- `venue` [ˈvɛnju] n.（事件的）发生地点，（活动的）场所；<英，法律>审判地（指郡或区
+    - The venue for the World Cup remains undecided.
+    - > 世界杯的`举办地点`尚未确定。
     - That venue is perfect for concerts and various other performances.
-    - > 那个场馆非常适合举办音乐会和各种其他演出活动。
-- `via` [ˈviːə] prep. 
+    - > 那个`场馆`非常适合举办音乐会和各种其他演出活动。
+- `via` [ˈviːə] prep. 经由，经过（某一地方）；通过，借助于（某种手段或人）
     - We will arrive at the destination via this route.
-    - > 我们将通过这条路线到达目的地。
+    - > 我们将`经由`这条路线到达目的地。
 - `visual` [ˈvɪʒuəl] adj. 
     - Videos, charts, and other visual elements are essential parts of this presentation.
-    - > 视频、图表和其他视觉元素是这个演示文稿的重要部分。
-- `vital` [ˈvaɪtl] adj. 
+    - > 视频、图表和其他`adj. 视觉的`元素是这个演示文稿的重要部分。
+- `vital` [ˈvaɪtl] adj. 至关重要的，必不可少的；生机勃勃的，充满活力的；生命的，维持生命所必需的  n. 身体的重要内脏，维持生命的重要器官（vitals）
     - Sleep is vital to physical health.
-    - > 睡眠对身体健康至关重要。
-- `volume` [ˈvɑljuːm] n. 
+    - > 睡眠对身体健康是`adj. 至关重要的`。
+- `volume` [ˈvɑljuːm] n. 体积，容积；总数，总量；音量，响度；（控制音量的）旋钮，控制杆；（成套图书中的）卷，册；
     - This book has three volumes and is very detailed.
-    - > 这本书有三卷，内容非常详细。
+    - > 这本书有三`卷`，内容非常详细。
+    - This knob controls the volume.
+    - > 此旋钮调节`音量`。
+    - How do you measure the volume of a gas?
+    - > 你如何计量气体的`体积`？
 - `wage` [weɪdʒ] n. 
     - We need to pay our employees a fair and reasonable wage.
-    - > 我们需要支付员工一个公平、合理的薪水。
-- `way` [weɪ] adv. 
-    - We need to develop better plans to accomplish tasks more effectively.
-    - > 我们需要制定更好的计划来更有效地完成任务。
-- `whereas` [wɛrˈæz] conj. 
+    - > 我们需要支付员工一个公平、合理的`薪水`。
+- `way` [weɪ] adv. 大大地，远远地；<美>非常，很;  n. 方法，手段；习俗，习惯，行为方式（ways）；（行事）作风，（某事发生的）方式；道路，路线；方向；……路（用于道路的名称）
+    - he sang way better than I expected.
+    - > 她唱得比我预期的要好`很`多`。
+    - The doctor's on his way.
+    - > 医生正在`路`上。
+- `whereas` [wɛrˈæz] conj. （表示对比）但是，然而；鉴于（用于文件的开头）n. 序言，开场白；条件语句 ("conj." 是 "conjunction" 的缩写，表示 "连词" 的意思。在语法中，连词是用来连接词语、短语、从句或句子的词语，以便表达一定的逻辑关系，如并列、转折、因果、条件等。常见的连词包括 "and"、"but"、"or"、"if"、"because" 等等。)
     - Whereas I understand your concerns, I think we should carry on.
-    - > 虽然我了解你的担忧，但我认为我们应该坚持下去。
-- `wherever` [wɛrˈɛvər] conj. 
+    - > `鉴于`我了解你的担忧，但我认为我们应该坚持下去。
+    - Some of the studies show positive results, whereas others do not.
+    - > 有一些研究结果令人满意，`然而`其他的则不然。
+- `wherever` [wɛrˈɛvər] conj. 无论在哪里，在任何地方；在任何情况下；不知在哪里，不知在什么地方
     - Wherever you go, keep a positive attitude.
     - > 无论你去哪里，都要保持乐观的态度。
 - `widely` [ˈwaɪdli] adv. 
     - The company's products are widely accepted and used.
-    - > 该公司的产品已经广泛被人们接受和使用。
+    - > 该公司的产品已经`广泛地`被人们接受和使用。
 - `wildlife` [ˈwaɪldlaɪf] n. 
     - The country's abundant and diverse wildlife is very attractive to tourists.
-    - > 那个国家丰富多样的野生动物对游客来说非常吸引人。
+    - > 那个国家丰富多样的`野生动物`对游客来说非常吸引人。
 - `willing` [ˈwɪlɪŋ] adj. 
     - They are very willing to help us through difficult times.
-    - > 他们非常愿意帮助我们度过难关。
-- `wire` [waɪr] n. 
+    - > 他们`非常愿意的`帮助我们度过难关。
+- `wire` [waɪr] n. 金属丝，金属线；电线，导线
     - I need to fix the wires in my apartment.
     - > 我需要修理一下公寓的电线。
-- `witness` [ˈwɪtnɪs] n., v. 
+- `wireless` [waɪr] adj. 无线的，使用无线电信号的
+    - I usually have my laptop resting on my knee and connect to the local wireless network.
+    - > 我经常把我的笔记本放在膝盖上，连接到当地的`无线的`网络。
+- `witness` [ˈwɪtnɪs] n. 目击者 v. 目击，目睹；见证，经历（事件、变化等
     - The witness proved the truth of the event.
-    - > 那个目击者证明了这个事件的真相。
-- `worst` [wɔrst] n. 
+    - > 那个`n. 目击者`证明了这个事件的真相。
+    - He has been witness to a terrible murder.
+    - > 他`v. 目睹`了一起残忍的凶杀事件。
+- `worst` [wɔrst] adj. 最差的，最糟的，最严重的  adv. 最差地，最糟地，最严重地 n. 最坏的人（或事），最糟的情况 v. 打败，击败
     - The worst injured in the squirrel attack was the little bird.
-    - > 松鼠袭击时伤势最重的是那只小鸟。
+    - > 松鼠袭击时伤势`adj. 最严重的`是那只小鸟。
+    - If the worst comes to the worst, we'll just have to sell the house.
+    - > 如果`n. 最坏的情况`发生，我们就只好把房子卖掉。
 
 

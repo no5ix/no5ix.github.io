@@ -536,131 +536,139 @@ categories:
     - He quoted Martin Luther King's words in his speech.
     - > 他在演讲中`引用`了马丁·路德·金的名言。
 
-  TODO
 
 ## rs
 
-- `race` [reɪs]: 
+- `race` [reɪs]: n. 速度竞赛, 种族 v.（和……）比赛，参加比赛；使（动物或车辆）参赛参赛；（使）快速移动，快速运转；疾走，全速行进；
     - They raced to win first place in the competition.
-    - > 他们在比赛中争夺第一名。
+    - > 他们在`比赛`中争夺第一名。
 - `receipt` [rɪˈsiːt]: 
     - She received a receipt for her purchase.
-    - > 她收到了购物小票。
-- `religion` [rɪˈlɪdʒən]: 
+    - > 她收到了购物`收据`。
+- `religion` [rɪˈlɪdʒən]: n. 宗教信仰, 宗教, 教派
+    - Do you still practise your religion?
+    - > 你还奉行你的`宗教信仰`吗？
+- `religious` [rɪˈlɪdʒəs]: adj.
     - Religious belief is a personal freedom.
-    - > 宗教信仰是个人自由。
-- `religious` [rɪˈlɪdʒəs]: 
-    - She is a devout Christian and goes to church every week.
-    - > 她是一名虔诚的基督徒，每周都会去教堂。
+    - > `宗教的`信仰是个人自由。
 - `rent` [rent]: 
     - She rented an apartment and needs to pay rent every month.
-    - > 她租了一套公寓，每个月需要付房租。
-- `represent` [ˌreprɪˈzent]: 
+    - > 她`租`了一套公寓，每个月需要付房租。
+- `represent` [ˌreprɪˈzent]: v. 代表；为……代言（辩护）；代表（选区、政党、群体）
     - He represented the company and attended the international conference.
-    - > 他是公司的代表，参加了国际会议。
+    - > 他`代表`了公司，参加了国际会议。
 - `reservation` [ˌrezəˈveɪʃən]: 
     - We made a reservation for a dinner table.
-    - > 我们预订了一个晚餐位子。
+    - > 我们`预订`了一个晚餐位子。
 - `revise` [rɪˈvaɪz]: 
     - She revised her paper to get a better grade.
-    - > 她修改了论文，以便获得更好的成绩。
+    - > 她`修正`了论文，以便获得更好的成绩。
 - `rough` [rʌf]: 
     - The road is very rough and requires careful driving.
-    - > 这条路很崎岖，需要小心驾驶。
+    - > 这条路很`粗糙表面不平的`，需要小心驾驶。
 - `royal` [ˈrɔɪəl]: 
     - Members of the royal family attended the grand ceremony.
-    - > 王室成员出席了这次盛大的仪式。
+    - > `王室的`成员出席了这次盛大的仪式。
 - `sculpture` [ˈskʌlptʃə(r)]: 
     - The sculpture was created by a famous artist.
-    - > 这座雕塑是由著名艺术家创作的。
-- `sensible` [ˈsensəbl]: 
-    - She is sensible and doesn't act impulsively.
-    - > 她做事很明智，不会轻易冲动。
-- `similarity` [ˌsɪmɪˈlærəti]: 
-    - There are many similarities in the appearance of these two people.
-    - > 这两个人的外表有很多相似之处。
-- `similarly` [ˈsɪmɪləli]: 
-    - This issue applies similarly to other similar situations.
-    - > 这个问题同样适用于其他类似的情况。
-- `soil` [sɔɪl]: 
-    - The soil is very fertile and suitable for growing crops.
-    - > 这片土地很肥沃，适合种植庄稼。
-- `spicy` [ˈspaɪsi]: 
-    - This dish is very spicy and needs to be eaten carefully.
-    - > 这道菜很辣，需要小心食用。
-- `spirit` [ˈspɪrɪt]: 
-    - Her spirit is very good and she is full of energy every day.
-    - > 她的精神状态很不错，每天都充满活力。
-- `spot` [spɒt]: 
-    - We stayed at this spot for an hour.
-    - > 我们在这个景点停留了一个小时。
-- `stadium` [ˈsteɪdiəm]: 
-    - This stadium can accommodate tens of thousands of spectators.
-    - > 这个体育场可以容纳数万观众。
-- `staff` [stɑːf]: 
-    - The company has an efficient staff team.
-    - > 公司雇佣了一支高效的员工团队。
+    - > 这座`雕塑`是由著名艺术家创作的。
 - `statue` [ˈstætʃuː]: 
     - The statue was built to commemorate a famous war hero.
-    - > 这座雕像是为了纪念著名的战争英雄而建造的。
+    - > 这座`雕像`是为了纪念著名的战争英雄而建造的。
+- `sensible` [ˈsensəbl]: 
+    - She is sensible and doesn't act impulsively.
+    - > 她做事很`明智的`，不会轻易冲动。
+- `similar` :  adj. 相似的
+    - The brothers look very similar.
+    - > 弟兄几个长得很像。
+- `similarity` [ˌsɪmɪˈlærəti]: n.
+    - There are many similarities in the appearance of these two people.
+    - > 这两个人的外表有很多`相似之处`。
+- `similarly` [ˈsɪmɪləli]: adv.
+    - Most of the men who now gathered around him again were similarly dressed.
+    - > 现在重新聚在他周围的大多数人`类似地`穿着。
+- `soil` [sɔɪl]: 
+    - The soil is very fertile and suitable for growing crops.
+    - > 这片`土壤`很肥沃，适合种植庄稼。
+- `spicy` [ˈspaɪsi]: 
+    - This dish is very spicy and needs to be eaten carefully.
+    - > 这道菜很`辣`，需要小心食用。
+- `spirit` [ˈspɪrɪt]: 
+    - Her spirit is very good and she is full of energy every day.
+    - > 她的`精神状态`很不错，每天都充满活力。
+- `spot` [spɒt]: n. 地点，场所；（人体的）部位，地方；有某种特质的部分；点，斑点；污点，污渍
+    - We stayed at this spot for an hour.
+    - > 我们在这个`景点`停留了一个小时。
+    - He answered the question `on the spot`.
+    - > 他`当场`就回答了那个问题。
+    - The male bird has a red spot on its beak.
+    - > 雄鸟喙上有一个红色`斑点`
+- `stadium` [ˈsteɪdiəm]: 
+    - This stadium can accommodate tens of thousands of spectators.
+    - > 这个`体育场`可以容纳数万观众。
+- `staff` [stɑːf]: 
+    - The company has an efficient staff team.
+    - > 公司雇佣了一支高效的`员工`团队。
 - `stick` [stɪk]: 
     - She stirred the bonfire with a stick to make the fire stronger.
-    - > 她用树枝搅拌着火堆，让火更旺盛。
+    - > 她用`树枝`搅拌着火堆，让火更旺盛。
 - `studio` [ˈstjuːdiəʊ]: 
     - The artist creates in his own studio.
-    - > 这个艺术家在自己的工作室里创作。
+    - > 这个艺术家在自己的`工作室`里创作。
 - `substance`[ˈsʌbstəns]: 
     - This medication contains active substances that can alleviate pain.
-    - > 这种药物含有有效成分，可以缓解疼痛。
-- `summarize` [ˈsʌməraɪz]: 
+    - > 这种药物含有有效`物质`，可以缓解疼痛。
+- `summarize` [ˈsʌməraɪz]: vt.
     - Please summarize your research findings in one or two sentences.
-    - > 请用一两句话简要概括你的研究成果。
-- `summary` [ˈsʌməri]: 
+    - > 请用一两句话简要`总结`你的研究成果。
+- `summary` [ˈsʌməri]: n.
     - The report provides a summary of the company's performance.
-    - > 这份报告提供了对公司业绩的简要概述。
-- `symptom` [ˈsɪmptəm]: 
+    - > 这份报告提供了对公司业绩的简要`总结`。
+- `symptom` [ˈsɪmptəm]: n.
     - She has symptoms of headache and fever.
-    - > 她出现了头痛和发热的症状。
+    - > 她出现了头痛和发热的`症状`。
 
 
 ## tvw
 
-- `tend` [tend]: 
+- `tend` [tend]: vt.
     - She tended the plants well and made them grow strong.
-    - > 她照顾得很好，让植物茁壮成长。
+    - > 她`照顾`这些植物很好，让植物茁壮成长。
 - `tent` [tent]: 
     - They set up a tent in the wilderness and rested overnight.
-    - > 他们在野外搭建了帐篷，过夜休息。
-- `throughout` [θruːˈaʊt]: 
+    - > 他们在野外搭建了`帐篷`，过夜休息。
+- `throughout` [θruːˈaʊt]: prep. 遍及，到处；自始至终，贯穿整个时期 adv. 遍及，到处；自始至终，贯穿整个时期
     - This project will be carried out throughout the country.
-    - > 这个项目将在全国范围内展开。
+    - > 这个项目将在全国范围内`遍布`。
+    - The match was finely balanced throughout.
+    - > 比赛`自始至终`不分上下。
 - `tire` [taɪə(r)]: 
     - My tire is flat and needs to be replaced.
-    - > 我的轮胎瘪了，需要更换。
+    - > 我的`轮胎`瘪了，需要更换。
 - `toe` [təʊ]: 
     - She is wearing high heels and her toes are uncomfortable.
-    - > 她穿着高跟鞋，脚趾很不舒服。
+    - > 她穿着高跟鞋，`脚趾`很不舒服。
 - `ton` [tʌn]: 
     - This truck can carry ten tons of goods.
-    - > 这辆卡车可以装载十吨货物。
+    - > 这辆卡车可以装载十`吨`货物。
 - `tour` [tʊə(r)]: 
     - We went on a city tour.
-    - > 我们参加了一次城市游览。
+    - > 我们参加了一次城市`游览`。
 - `trend` [trend]: 
     - This style of clothing has become a trend in fashion.
-    - > 这种服装风格已经成为了时尚的潮流。
+    - > 这种服装风格已经成为了时尚的`趋势`。
 - `tube` [tjuːb]: 
     - She squeezed the paint out of the tube and began painting.
-    - > 她用管子将颜料挤出来，开始涂画。
+    - > 她用`管子`将颜料挤出来，开始涂画。
 - `various` [ˈveəriəs]: 
     - This store has various products, and you can choose what you like.
-    - > 这家商店有各种各样的商品，你可以挑选你喜欢的。
+    - > 这家商店有`各种各样`的商品，你可以挑选你喜欢的。
 - `wing` [wɪŋ]: 
     - The bird spreads its wings and soars in the blue sky.
-    - > 这只鸟展翅高飞，翱翔在蓝天之上。
+    - > 这只鸟展`翅`高飞，翱翔在蓝天之上。
 - `worldwide` [ˈwɜːldwaɪd]: 
     - This news event has attracted attention and discussion worldwide.
-    - > 这个新闻事件引起了全球的关注和讨论。
+    - > 这个新闻事件引起了`全球范围的`关注和讨论。
 
 
 # B2

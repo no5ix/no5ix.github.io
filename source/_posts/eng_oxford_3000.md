@@ -280,8 +280,10 @@ categories:
 ## edfg
 
 - `exhibition` [ˌeksɪˈbɪʃn]: n. 展览会, 展览
-    - This museum is exhibiting some very precious cultural relics.
-    - > 这个博物馆正在展出一些非常珍贵的文物。
+    - The exhibition is held annually.
+    - > 这个`n. 展览`每年举行一次。
+    - This museum is `exhibiting` some very precious cultural relics.
+    - > 这个博物馆正在`v. 展览`一些非常珍贵的文物。
 - `examine` [ɪɡˈzæmɪn]: 
     - Doctors need to carefully examine the patient's physical condition.
     - > 医生需要仔细`检查`病人的身体状况。

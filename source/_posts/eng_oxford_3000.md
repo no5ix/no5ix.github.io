@@ -1822,6 +1822,18 @@ categories:
 - `species` [ˈspiʃiz] n. 
     - Humans are one of the greatest species on the earth.
     - > 人类是地球上最伟大的`物种`之一。
+- `spill` [] v. （使）洒出，泼出，溢出；（东西）倒出，洒落；涌出，蜂拥而出；（光线）透进，倾泻在……上；n. 洒出（量），溢出（量）；
+    - The water spilled out of the cup.
+    - > 水从杯子里`v. 溢`出来了。
+    - He accidentally spilled the box of nails on the floor.
+    - > 他不小心把钉子盒子`v. 洒落`在地上了。
+    - She accidentally spilled the news about the surprise party.
+    - > 她不小心`v. 泄露`了惊喜派对的消息。
+    - She spilt out her feelings to her friend.
+    - > 她向她的朋友`v. 倾诉`了自己的感受。
+- `spilt` [splɪt] v., n. **注**: "spill" 的过去分词是 "spilled" 或 "spilt"，两者都可以使用，但在美式英语中 "spilled" 更为常见，而在英式英语中 "spilt" 更为常见。
+    - Don't cry over spilt milk.
+    - > 不要因为洒了的牛奶而哭泣. (不要做无用的后悔了)
 - `split` [splɪt] v., n. 
     - The country eventually split into several independent states.
     - > 那个国家最后`分裂`成了几个独立的州。

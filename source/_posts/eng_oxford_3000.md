@@ -125,6 +125,8 @@ categories:
     - > 左侧的数字代表新增病例数。
     - The figure of a superhero stood tall in the plaza.
     - > 广场上豪杰的雕像高耸入云。
+    - figure out; I just can't figure it out.
+    - > 计算出 ; 想出 ; 理解; 我就是弄不明白。
 - `grocery`: 食品杂货
     - I need to go to the grocery store to buy some milk and bread.
     - > 我需要去杂货店买些牛奶和面包。
@@ -405,6 +407,7 @@ categories:
 - `journal` [ˈdʒɜːnl]: n. 杂志, 期刊
     - This scientific journal published a valuable research paper.
     - > 这个科学`杂志`发表了一篇很有价值的研究论文。
+- `journey` [ˈdʒɜːnl]: “Journey”（旅程, 旅途, 历程，过程），指的是从一个地方到另一个地方旅行，尤其是当旅行的距离长或困难时，它会暗示一种艰难或具有挑战性的感觉，例如：可能用来形容长途汽车或火车旅行。
 - `killing` [ˈkɪlɪŋ]: 
     - This is a brutal killing.
     - > 这是一起残忍的`谋杀`。
@@ -670,7 +673,7 @@ categories:
 - `tour` [tʊə(r)]: 
     - We went on a city tour.
     - > 我们参加了一次城市`游览`。
-- `trip` [trɪp] n.（尤指短程往返的）旅行，旅游；出门，出行；绊倒 v. 短途旅行 ("Trip" 和 "tour" 都可以表示旅行的意思，但它们在用法和语气上有所不同。"Trip" 更常用于指个人或小组自由行的旅行，通常强调的是旅行的体验和探险性质，也可以用于形容跌倒或失足等不良事件。 而"Tour" 则通常指由旅行社组织的有计划、有安排的旅行，包括预定的行程、交通和住宿等，更加注重旅行的组织性和安排，通常在商业或官方场合使用。)
+- `trip` [trɪp] n.（尤指短程往返的）旅行，旅游；出门，出行；绊倒 v. 短途旅行 ("Trip" 和 "tour" 都可以表示旅行的意思，但它们在用法和语气上有所不同。"Trip" 更常用于指个人或小组自由行的旅行，通常强调的是旅行的体验和探险性质，也可以用于形容跌倒或失足等不良事件。 而"Tour" 则通常指由旅行社组织的有计划、有安排的旅行，包括预定的行程、交通和住宿等，更加注重旅行的组织性和安排，通常在商业或官方场合使用。“Journey”（旅途, 旅程, 强调过程），指的是从一个地方到另一个地方旅行，尤其是当旅行的距离长或困难时，它会暗示一种艰难或具有挑战性的感觉，例如：可能用来形容长途汽车或火车旅行。)
     - We arranged a trip to relax.
     - > 我们安排了一次`n. 旅行`来放松精神。
     - I'm planning to trip around Europe next summer to explore different cultures and meet new people.

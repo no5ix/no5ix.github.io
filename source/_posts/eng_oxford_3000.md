@@ -841,7 +841,7 @@ categories:
     - The stadium has a seating capacity of 50,000 people. 
     - > 这个体育场有5万个座位。
 - `chief` [tʃiːf] adj., n. 主要的；首席
-    - The chief executive officer of the company announced his resignation. 
+    - The `chief executive officer`(CEO) of the company announced his resignation. 
     - > 公司首席执行官宣布辞职。
 - `circumstance` [ˈsɜːrkəmstæns] n. 环境；情况
     - I cannot control the circumstance, but I can control my attitude towards it. 
@@ -888,8 +888,9 @@ categories:
 - `congress` [ˈkɒŋɡres] n. 国会；代表大会
     - The congress will vote on the proposed legislation next week. 
     - > 国会将在下周对拟议中的法案进行投票。
-- `conscious` [ˈkɒnʃəs] adj    - > . 有意识的；清醒的roundings and knew exactly where she was. 
-    - > 她清醒地意识到周围的环境知道自己在哪里。
+- `conscious` [ˈkɒnʃəs] adj. 意识到的；神志清醒的，有知觉的；关注的；刻意的，慎重的
+    - She was fully conscious throughout the surgery and knew what was going on.
+    - 她在整个手术过程中神志完全`清醒的`，知道发生了什么。
 - `conservative` [kənˈsɜːvətɪv] adj., n. 保守的；保守主义者
     - He has conservative views on social issues such as abortion and same-sex marriage. 
     - > 他在社会问题，如堕胎和同性婚姻方面持保守观点。

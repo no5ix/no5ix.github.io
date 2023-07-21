@@ -487,6 +487,13 @@ categories:
 - `persuade` [pəˈsweɪd]: 
     - We need to persuade them to accept our proposal, which is crucial for the success of the project.
     - > 我们需要`说服`他们接受我们的建议，这对项目的成功非常重要。
+
+注:
+"Convince" 和 "persuade" 都表示试图说服别人接受某种观点或采取某种行动，但它们在用法和含义上有一些区别。  
+- "Convince"（说服）通常强调通过提供理由、证据或逻辑来改变他人的观点或信念。它侧重于使别人在思想上认同你的观点。例如："I tried to convince my friend to go on a trip with me by showing him all the amazing places we could visit."
+- "Persuade"（劝说）则强调使用说服性的手段、技巧或情感来影响别人的决策或行为。它通常涉及利用情感、感情或说服力来说服他人。例如："The salesperson persuaded me to buy the new product by highlighting its benefits and offering a special discount."
+总的来说，"convince" 更加侧重于通过理性和逻辑来说服他人，而 "persuade" 则更加强调使用情感和说服技巧来影响他人的决策。然而，这两个词在某些情境下可以互换使用，具体取决于语境和个人偏好。
+
 - `pleasant` [ˈpleznt]: 
     - The atmosphere of this restaurant is very pleasant, and the service is also attentive.
     - > 这个餐厅的氛围非常`愉快`，服务也很周到。

@@ -86,7 +86,7 @@ categories:
 - `conference`: 会议
     - I'm attending a conference on renewable energy next week.
     - > 下周我将参加一场关于可再生能源的会议。
-- `continent`: 大陆
+- `continent`: 大陆 [unfamiliar]
     - Africa is the second largest continent in the world.
     - > 非洲是世界上第二大的大陆。
 - `credit`: 信用
@@ -130,7 +130,7 @@ categories:
 - `grocery`: 食品杂货
     - I need to go to the grocery store to buy some milk and bread.
     - > 我需要去杂货店买些牛奶和面包。
-- `gallery`: 画廊
+- `gallery`: 画廊 [unfamiliar]
     - The art gallery features works from famous artists around the world.
     - > 这个艺术画廊展示了来自世界各地著名艺术家的作品。
 - `flu`: 流感
@@ -209,7 +209,7 @@ categories:
 - `cap` [kæp]: 
     - He is wearing a red cap that is very eye-catching.
     - > 他戴着一顶红色的`帽子`，非常醒目。
-- `campaign` [kæmˈpeɪn]: n. 运动
+- `campaign` [kæmˈpeɪn]: n. 运动 [unfamiliar]
     - They are conducting an anti-corruption campaign.
     - > 他们正在进行一项反贪腐的宣传`活动`。
 - `cable` [ˈkeɪbl]: 
@@ -331,7 +331,7 @@ categories:
 - `fuel` [fjuːəl]: 
     - Cars need sufficient fuel to run.
     - > 汽车需要足够的`燃料`才能够行驶。
-- `garage` [ˈɡærɑːʒ]: 
+- `garage` [ɡəˈrɑːʒ] : 
     - I parked the car in the garage.
     - > 我把车停在了`车库`里。
 - `glove` [ɡlʌv]: 
@@ -446,7 +446,7 @@ categories:
 - `nail` [neɪl]: 
     - I need a nail to fix this wooden board.
     - > 我需要一把`钉子`来固定这个木板。
-- `narrative` [ˈnærətɪv]: n. 记叙文，叙述；叙事技巧 adj. 叙述的；叙事体的
+- `narrative` [ˈnærətɪv]: n. 记叙文，叙述；叙事技巧 adj. 叙述的；叙事体的 [unfamiliar]
     - The novel contains too much dialogue and not enough narrative.
     - > 这部小说对话过多，而`叙述`不足。
 - `neat` [niːt]: 
@@ -494,7 +494,7 @@ categories:
 - `pleasant` [ˈpleznt]: 
     - The atmosphere of this restaurant is very pleasant, and the service is also attentive.
     - > 这个餐厅的氛围非常`愉快`，服务也很周到。
-- `plot` [plɒt]: n. 阴谋，密谋；情节；（专用的）小块地；（表现两个变量关系的）图表；<美>图表，地图；<美>底层平面图
+- `plot` [plɒt]: n. 阴谋，密谋；情节；（专用的）小块地；（表现两个变量关系的）图表；<美>图表，地图；<美>底层平面图 [unfamiliar]
     - This novel has a thrilling plot that keeps you wanting to read on.
     - > 这个小说有一个扣人心弦的情节，让人一直想看下去。
 - `poet` [ˈpəʊət]: 诗人
@@ -535,7 +535,7 @@ categories:
 - `promote` [prəˈməʊt]: v. 促进，提倡；升职，晋升；促销，推广
     - The company promoted its new product to increase sales.
     - > 公司为了提高销售额而`推广`新产品。
-- `protest` [ˈprəʊtest]: 
+- `protest` [ˈprəʊtest]:  [unfamiliar]
     - People held a protest march to protest the government's policies.
     - > 人们举行示威游行，`抗议`政府的政策。
 - `prove` [pruːv]: 
@@ -560,7 +560,7 @@ categories:
 - `race` [reɪs]: n. 速度竞赛, 种族 v.（和……）比赛，参加比赛；使（动物或车辆）参赛参赛；（使）快速移动，快速运转；疾走，全速行进；
     - They raced to win first place in the competition.
     - > 他们在`比赛`中争夺第一名。
-- `receipt` [rɪˈsiːt]: 
+- `receipt` [rɪˈsiːt]:  [unfamiliar]
     - She received a receipt for her purchase.
     - > 她收到了购物`收据`。
 - `religion` [rɪˈlɪdʒən]: n. 宗教信仰, 宗教, 教派
@@ -853,6 +853,9 @@ categories:
 - `cite` [saɪt] v. 引用
     - He cited several examples to support his argument. 
     - > 他引用了几个例子来支持他的论点。
+    - > `Quote` 是一个动词，通常用来引用或重述他人的话语或文字。当你引用某人的话时，你使用 `quote` 这个动词。例如，他说：“我喜欢阅读。”你可以引用他的话说：“他说他喜欢阅读。”
+    - > `Cite` 是一个动词，通常用来引用或引证参考文献、来源或权威资料，以支持你的观点或证明某个事实。当你在学术论文或研究中引用其他作者的工作时，你使用 `cite` 这个动词。例如，你可能会在论文中引用一篇研究文章以支持你的论点，并在参考文献列表中引用该文章。
+    - > 总结起来，`quote` 是引用或重述他人的话，而 `cite` 是引用或引证参考文献或来源。
 - `civil` [ˈsɪvl] adj. 文明的；民事的
     - It is important to have a civil conversation even if you disagree with someone.
     - > 即使你不同意对方的观点，也很重要要有一次文明的对话。
@@ -862,16 +865,20 @@ categories:
 - `commission` [kəˈmɪʃn] n., v. 委员会；委托
     - The commission was established to investigate the causes of the accident. 
     - > 委员会成立以调查事故的原因。
-- `commitment` [kəˈmɪtmənt] n. 承诺；投入
-    - He has a strong commitment to his work and always strives to do his best. 
-    - > 他对工作有很强的投入感，并始终努力做到最好。
 - `committee` [kəˈmɪti] n. 委员会
     - The committee meets every month to discuss current issues in the community. 
     - > 委员会每个月都会开会讨论社区当前的问题。
+    - > 注: `Commission` 和 `Committee` 都可以用来指代一组人，但是它们的含义略有不同。
+    - > `Commission` 通常指的是一个小组或委员会，负责研究某个问题并提出建议或决策。例如，政府可能会成立一个委员会来研究教育改革或税务政策等议题。`Commission` 还可以表示一份工作的费用或佣金，例如销售人员会收取销售佣金。
+    - > `Committee` 则通常指一个组织内的一组人，负责某些事项的决策、协调和执行。例如，一个公司可能会成立董事会或策略委员会来管理公司的方向和目标。`Committee` 还可以指任何类型的小组，例如社区委员会、学生委员会等。
+    - > 简而言之，`Commission` 通常用于`比较大的组织`比如`政府教育改革委员会`针对特定问题的研究和提议，而 `Committee` 通常用于`比较小的组织`比如什么`社区小组委员会`内决策和协调。
+- `commitment` [kəˈmɪtmənt] n. 承诺；投入
+    - He has a strong commitment to his work and always strives to do his best. 
+    - > 他对工作有很强的投入感，并始终努力做到最好。
 - `commonly` [ˈkɒmənli] adv. 通常地
     - It is commonly believed that exercise is good for your health. 
     - > 人们通常认为运动对健康有益。
-- `concentration` [ˌkɒnsənˈtreɪʃn] n. 集中；浓度
+- `concentration` [ˌkɒnsənˈtreɪʃn] n. 专心，专注；关注，重视；集中，聚集；含量，浓度
     - She needs to improve her concentration if she wants to do well on the exam.
     - > 如果她想在考试中表现良好，就需要提高她的注意力集中度。
 - `concept` [ˈkɒnsept] n. 概念
@@ -884,7 +891,7 @@ categories:
     - I am concerned about the impact of pollution on the environment. 
     - > 我担心污染对环境的影响。
 - `conduct` [kənˈdʌkt] v., n. 进行；行为
-    - He conducted a thorough investigation into the matter. 
+    - He conducted a thorough[ˈθɜːroʊ]  investigation into the matter. 
     - > 他对这件事进行了彻底的调查。
 - `confidence` [ˈkɒnfɪdəns] n. 自信；信心
     - Having confidence in yourself is important for achieving your goals. 
@@ -941,7 +948,7 @@ categories:
     - The company is facing a financial crisis and may have to lay off employees. 
     - > 公司面临财务危机，可能不得不裁员。
 - `criterion` [kraɪˈtɪərɪən] n. 标准；准则
-    - The selection committee used several criteria to evaluate the candidates. 
+    - The selection committee used several criteria(`criterion`的复数形式) to evaluate the candidates. 
     - > 选拔委员会使用了几个标准来评估候选人。
 - `critic` [ˈkrɪtɪk] n. 评论家；批评者
     - The film received mixed reviews from critics. 

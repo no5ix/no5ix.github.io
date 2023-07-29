@@ -996,6 +996,7 @@ categories:
 - `depressing` [dɪˈprɛsɪŋ] adj. 令人沮丧的；令人失望的
     - The news about the economy was very depressing. 
     - > 关于经济的消息非常令人沮丧。
+- `dessert` [dɪˈzɜːt] n. 甜点
 - `desert` [dɪˈzɜːt] v. 抛弃，n. 沙漠
     - He deserted his wife and children and ran away with another woman. 
     - > 他抛弃了妻子和孩子，和另一个女人私奔了。
@@ -1020,7 +1021,7 @@ categories:
 - `division` [dɪˈvɪʒn] n. 分开；分裂；部门
     - The company has several divisions that specialize in different products. 
     - > 该公司有几个专门从事不同产品的部门。
-- `domestic` [dəˈmɛstɪk] adj. 国内的；家庭的
+- `domestic` [dəˈmestɪk] adj. 国内的；家庭的
     - She prefers to buy domestic products to support the local economy. 
     - > 她更喜欢购买国内产品来支持当地经济。
 - `dominate` [ˈdɒmɪneɪt] v. 主导；占优势

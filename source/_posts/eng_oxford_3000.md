@@ -281,6 +281,9 @@ categories:
 
 ## edfg
 
+- `exhibit` [ɪɡˈzɪbɪt] v. 展示；展览，n. 展览品；展览会
+    - The museum will exhibit a collection of ancient artifacts next month.
+    - > 博物馆下个月将展出一组古代文物。
 - `exhibition` [ˌeksɪˈbɪʃn]: n. 展览会, 展览
     - The exhibition is held annually.
     - > 这个`n. 展览`每年举行一次。
@@ -299,11 +302,6 @@ categories:
 - `episode` [ˈepɪsəʊd]: n. 集
     - Each episode of this TV series is very interesting and captivating.
     - > 这个电视剧的每一`集`都非常有趣和引人入胜。
-- `engaged` [ɪnˈɡeɪdʒd]: adj. 已订婚的；从事……的，忙于……的；电话占线的；（公用卫生间）被占用的；（圆柱）附墙的，部分砌在墙内的 v. 雇用，聘请；参加，从事；吸引，引起（engage 的过去式和过去分词形式）
-    - When did you get engaged ?
-    - > 你们什么时候订的婚？
-    - We are engaged in an important project and cannot participate in other activities for the time being.
-    - > 我们正在忙于一项重要的项目，暂时无法参加其他活动。
 - `district` [ˈdɪstrɪkt]: 
     - This city is divided into many districts, and each `district` has its own characteristics.
     - > 这个城市分为很多个区域，每个`区域`都有自己的特点。
@@ -361,6 +359,9 @@ categories:
     - > 许多孩子都有`假想的`朋友。
     - Children often have various imaginations and fantasies.
     - > 小孩子们常常有各种各样的想象和幻想。
+- `imagination` [ɪˌmædʒɪˈneɪʃn] n. 想象力；幻想
+    - Her imagination was sparked by the fantasy novel.
+    - > 她的想象力因为这本幻想小说而被激发。
 - `immigrant` [ˈɪmɪɡrənt]: 
     - Immigrants are an important source of economic and cultural diversity for a country.
     - > `移民`是一个国家经济和文化多样性的重要来源。
@@ -1070,9 +1071,14 @@ categories:
 - `encounter` [ɪnˈkaʊntə] v. 遇到；邂逅，n. 遭遇；邂逅
     - She encountered an old friend on the street.
     - > 她在街上遇见了一位老朋友。
-- `engage` [ɪnˈɡeɪdʒ] v. 与订婚
-    - I'm planning to engage in some volunteer work this summer. 
-    - > 我计划在这个夏天参加一些志愿者工作。
+- `engage` [ɪnˈɡeɪdʒ] v. 雇用，聘请；参加，从事；吸引，引起；与……交战，开战；
+    - I'm planning to `engage in` some volunteer work this summer. 
+    - > 我计划在这个夏天`参加`一些志愿者工作。
+- `engaged` [ɪnˈɡeɪdʒd]: adj. 已订婚的；从事……的，忙于……的；电话占线的；（公用卫生间）被占用的；（圆柱）附墙的，部分砌在墙内的 
+    - When did you get `engaged` ?
+    - > 你们什么时候`订的婚`？
+    - We are `engaged in` an important project and cannot participate in other activities for the time being.
+    - > 我们正在`忙于`一项重要的项目，暂时无法参加其他活动。
 - `ensure` [ɪnˈʃʊr] v. 确保；保证
     - Please ensure that the door is locked before you leave.
     - > 请确保在离开前门已经锁好了。
@@ -1101,14 +1107,10 @@ categories:
     - He passed the final examination with flying colors.
     - > 他以优异的成绩通过了期末考试。
 - `executive` [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的
+    - chief executive officer
+    - > CEO
     - The executive team is responsible for making important decisions.
     - > 执行团队负责做出重要决策。
-- `exhibit` [ɪɡˈzɪbɪt] v. 展示；展览，n. 展览品；展览会
-    - The museum will exhibit a collection of ancient artifacts next month.
-    - > 博物馆下个月将展出一组古代文物。
-- `existence` [ɪɡˈzɪstəns] n. 存在；实在
-    - The existence of aliens is still a topic of debate among scientists.
-    - > 外星人的存在仍然是科学家们争论的话题。
 - `expense` [ɪkˈspɛns] n. 费用；支出
     - The company had to cut expenses in order to stay in business.
     - > 公司不得不削减开支以保持运营。
@@ -1155,9 +1157,6 @@ categories:
 - `fellow` [ˈfɛləʊ] adj. 同伴的；同事的
     - My fellow colleagues and I worked on the project together.
     - > 我和我的同事们一起合作完成了这个项目。
-- `figure` [ˈfɪɡər] v. 认为；描绘，n. 数字；图形
-    - I can't figure out how to solve this problem.
-    - > 我想不出如何解决这个问题。
 - `finance` [ˈfaɪnæns] n. 财政；金融，v. 资助；融资
     - The company needs to finance its new project.
     - > 公司需要为新项目提供资金。
@@ -1176,9 +1175,6 @@ categories:
 - `float` [fləʊt] v. 漂浮；飘动
     - The boat floated down the river.
     - > 小船漂下了河流。
-- `forgive` [fəˈɡɪv] v. 原谅；宽恕
-    - I hope you can forgive me for my mistake.
-    - > 我希望你能原谅我犯的错误。
 - `former` [ˈfɔːmər] adj. 以前的；从前的
     - The former president was known for his diplomatic skills.
     - > 前总统以其外交手腕而著称。
@@ -1216,9 +1212,6 @@ categories:
 
 ## ghi
 
-- `gain` [ɡeɪn] v. 获得；增加，n. 增益；收益
-    - I hope to gain more knowledge through my studies. 
-    - > 我希望通过学习获得更多知识。
 - `gang` [ɡæŋ] n. 帮派；团伙
     - The police arrested several members of the gang.
     - > 警方逮捕了该团伙的几名成员。
@@ -1252,9 +1245,6 @@ categories:
 - `heel` [hiːl] n. 脚后跟；鞋跟
     - She twisted her ankle when she landed on her heel.
     - > 她着陆时脚后跟着地扭伤了脚踝。
-- `hire` [haɪr] v. 雇佣；租借，n. 租用；雇佣
-    - The company decided to hire a new marketing manager.
-    - > 公司决定雇佣一位新的市场经理。
 - `hollow` [ˈhɑːloʊ] adj. 空心的；凹陷的；空洞的
     - The old tree had a hollow trunk.
     - > 那棵老树的树干是空心的。
@@ -1273,9 +1263,6 @@ categories:
 - `illustration` [ˌɪləˈstreɪʃn] n. 插图；说明；例证
     - The book contains many beautiful illustrations.
     - > 这本书包含许多漂亮的插图。
-- `imagination` [ɪˌmædʒɪˈneɪʃn] n. 想象力；幻想
-    - Her imagination was sparked by the fantasy novel.
-    - > 她的想象力因为这本幻想小说而被激发。
 - `imply` [ɪmˈplaɪ] v. 暗示；意味着
     - His tone implied that he wasn't happy with the decision.
     - > 他的语气暗示他对这个决定不满意。

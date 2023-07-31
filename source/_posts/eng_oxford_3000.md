@@ -998,7 +998,7 @@ categories:
     - The news about the economy was very depressing. 
     - > 关于经济的消息非常令人沮丧。
 - `dessert` [dɪˈzɜːt] n. 甜点
-- `desert` [dɪˈzɜːt] v. 抛弃，n. 沙漠
+- `desert` ['dezɜrt] v. 抛弃，n. 沙漠
     - He deserted his wife and children and ran away with another woman. 
     - > 他抛弃了妻子和孩子，和另一个女人私奔了。
 - `deserve` [dɪˈzɜːv] v. 应得；值得

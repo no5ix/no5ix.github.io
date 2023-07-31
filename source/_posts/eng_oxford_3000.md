@@ -1091,15 +1091,19 @@ categories:
 - `estate` [ɪˈsteɪt] n. 房地产；财产
     - He inherited a large estate from his grandfather.
     - > 他从祖父那里继承了一大笔财产。
-- `estimate` [ˈɛstɪmeɪt] v. 估计；评估，n. 估计；评估
+- `estimate` [ˈɛstɪmeɪt] v. 估计；n. 估计;
     - Can you give me an estimate of how long the project will take?
     - > 你能给我一个项目需要多长时间的估计吗？
 - `ethical` [ˈɛθɪkəl] adj. 道德的；伦理的
     - It is important to make ethical decisions in the workplace.
     - > 在工作场所做出道德决策是很重要的。
-- `evaluate` [ɪˈvæljueɪt] v. 评价；评估
+- `evaluate` [ɪˈvæljueɪt] v. 评价; 评估
     - The teacher will evaluate the students' essays based on several criteria.
     - > 老师将根据几个标准评价学生的论文。
+    - > `Assess` 是较为宽泛的`评估`, 强调`判断`, 主要用于对事物进行深入的`判断`。
+    - > `Evaluate` 是`评价`。
+    - The doctor will `assess` your health condition.（医生将`评估`您的健康状况。）
+    - The teacher will `evaluate` the students' essays.（老师将`评价`学生的论文。）
 - `evil` [ˈiːvl] adj. 邪恶的；恶毒的，n. 邪恶；罪恶
     - The evil queen in the fairy tale was jealous of Snow White's beauty. 
     - > 童话中的邪恶女王嫉妒白雪公主的美貌。

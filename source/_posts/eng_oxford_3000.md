@@ -1098,7 +1098,7 @@ categories:
 - `estimate` [ˈɛstɪmeɪt] v. 估计；n. 估计;
     - Can you give me an estimate of how long the project will take?
     - > 你能给我一个项目需要多长时间的估计吗？
-- `ethical` [ˈɛθɪkəl] adj. [unfamiliar]
+- `ethical` [ˈɛθɪkəl] adj. [unfamiliar]  通常指与特定职业、行业或社会规范相关的道德准则
     - t's not ethical to cheat on an exam.
     - > 在考试中作弊是不`道德的`。
 - `evaluate` [ɪˈvæljueɪt] v. 评价; 评估
@@ -1314,21 +1314,21 @@ categories:
 - `league` [liːɡ] n. 联盟，联合会
     - The two teams are in the same league. 
     - > 这两支队伍在同一个联盟中。
-- `lean` [liːn] v. 倾斜，靠着
+- `lean` [liːn] v. 倾斜，靠着 [unfamiliar]
     - She leaned against the wall and closed her eyes. 
-    - > 她靠在墙上闭上了眼睛。
-- `lively` [ˈlaɪvli] adj. 活泼的，热闹的
-    - The party was a lively affair. 
+    - > 她`靠`在墙上闭上了眼睛。
+- `lively` [ˈlaɪvli] adj. 活泼的，热闹的 [unfamiliar]
+    - The party was a lively affair.  
     - > 派对很热闹。
-- `loan` [ləʊn] n. 贷款，借款
+- `loan` [ləʊn] n. 贷款，借款 [unfamiliar]
     - He took out a loan to buy a new car. 
     - > 他借款买了一辆新车。
 - `logical` [ˈlɒdʒɪkl] adj. 合乎逻辑的，有道理的
     - His argument seemed logical. 
     - > 他的论点似乎是有道理的。
-- `long`-term [ˌlɒŋˈtɜːm] adj., adv. 长期的，长期地
+- `long-term` [ˌlɒŋˈtɜːm] adj., adv. 长期的，长期地
     - We need to think about the long-term consequences of our actions. 
-    - > 我们需要考虑我们行动的长期影响。
+    - > 我们需要考虑我们行动的长期的影响。
 - `loose` [luːs] adj. 宽松的，不紧的
     - The dress was too loose for her. 
     - > 这件裙子对她来说太宽松了。
@@ -1350,10 +1350,10 @@ categories:
 - `majority` [məˈdʒɒrəti] n. 大多数，大部分
     - The majority of people in this country speak English. 
     - > 这个国家的大多数人说英语。
-- `mass` [mæs] n., adj. 大量的，质量，群众
+- `mass` [mæs] n., adj. 大量的，质量，群众  [unfamiliar]
     - There was a mass of people on the street. 
     - > 街上有很多人。
-- `massive` [ˈmæsɪv] adj. 巨大的，大规模的
+- `massive` [ˈmæsɪv] adj. 巨大的，大规模的   [unfamiliar]
     - The earthquake caused massive damage. 
     - > 地震造成了巨大的破坏。
 - `matching` [ˈmætʃɪŋ] adj. 相配的，一致的
@@ -1365,25 +1365,25 @@ categories:
 - `means` [miːnz] n. 手段，方法
     - We need to find a means of solving this problem. 
     - > 我们需要找到解决这个问题的方法。
-- `measurement` [ˈmeʒəmənt] n. 测量，度量
+- `measurement` [ˈmeʒəmənt] n. 测量，度量  [unfamiliar]
     - The measurement of the room is 5 meters by 6 meters. 
     - > 房间的尺寸是5米乘6米。
-- `melt` [melt] v. 融化，熔化
+- `melt` [melt] v. 融化，熔化   [unfamiliar]
     - The ice melted in the sun. 
     - > 冰在阳光下融化了。
-- `military` [ˈmɪlɪtri] adj., n. 军事的，军队
+- `military` [ˈmɪlɪtri] adj., n. 军事的，军队   [unfamiliar]
     - He joined the military when he was 18. 
     - > 他18岁时加入了军队。
-- `mineral` [ˈmɪnərəl] n. 矿物质
+- `mineral` [ˈmɪnərəl] n. 矿物质   [unfamiliar]
     - Minerals are important for our health. 
     - > 矿物质对我们的健康很重要。
-- `minister` [ˈmɪnɪstə(r)] n. 部长，牧师
+- `minister` [ˈmɪnɪstə(r)] n. 部长，牧师   [unfamiliar]
     - The prime minister met with the foreign minister. 
     - > 总理会见了外交部长。
 - `minor` [ˈmaɪnə(r)] adj. 较小的，次要的
     - The problem was only a minor one. 
     - > 这个问题只是个小问题。
-- `minority` [maɪˈnɒrəti] n. 少数派
+- `minority` [maɪˈnɒrəti] n. 少数派   [unfamiliar]
     - The minority of people in this country speak a different language. 
     - > 这个国家的少数人说其他语言。
 - `mission` [ˈmɪʃn] n. 任务，使命
@@ -1392,31 +1392,36 @@ categories:
 - `mixed` [mɪkst] adj. 混合的，杂色的
     - The paint was a mixed color of blue and green. 
     - > 油漆是蓝色和绿色混合的颜色。
-- `moral` [ˈmɒrəl] adj., n. 道德的，寓意
+- `moral` [ˈmɒrəl] adj., n. 道德的，寓意(指个人或社会对正确和错误的标准和价值观)   [unfamiliar]
     - The story had a moral lesson. 
-    - > 这个故事有一个道德教训。
-- `motor` [ˈməʊtə(r)] n., adj. 发动机，机动的
+    - > 这个故事有一个道德的教训。
+    - > `Ethical` 通常指一些专业的行为准则，而 `moral` 更倾向于指个人内心的信念和行为。
+    - Where is the line between `ethical`, persuasive design and dark patterns?
+    - > 合乎`道德`、有说服力的设计和黑暗模式之间的界限在哪里？
+    - He has high `moral` principles.
+    - > 他很有`道德`。
+- `motor` [ˈməʊtə(r)] n., adj. 发动机，机动的   [unfamiliar]
     - The car had a problem with its motor. 
     - > 这辆车发动机有问题。
-- `mount` [maʊnt] v. 登上，安装
+- `mount` [maʊnt] v. 登上，安装  [unfamiliar]
     - He mounted the horse and rode away. 
-    - > 他骑上马匹离开了。
-- `multiply` [ˈmʌltɪplaɪ] v. 乘，增加
+    - > 他`骑上`马匹离开了。
+- `multiply` [ˈmʌltɪplaɪ] v. 乘，增加  [unfamiliar]
     - If you multiply 5 by 3, you get 15. 
     - > 如果你把5乘以3，得到15。
-- `negative` [ˈneɡətɪv] n. 否定，负数，消极的
+- `negative` [ˈneɡətɪv] n. 否定，负数，消极的  [unfamiliar]
     - He answered with a negative. 
     - > 他回答了一个否定。
-- `nerve` [nɜːv] n. 神经，勇气
+- `nerve` [nɜːv] n. 神经，勇气, 胆量  [unfamiliar]
     - He had the nerve to ask for more money. 
-    - > 他有胆量要求更多的钱。
-- `nevertheless` [ˌnevəðəˈles] adv. 然而，不过
+    - > 他有`胆量`要求更多的钱。
+- `nevertheless` [ˌnevəðəˈles] adv. 然而，不过  [unfamiliar]
     - He was injured, nevertheless he continued to play. 
     - > 他受伤了，然而他继续比赛。
-- `notion` [ˈnəʊʃn] n. 概念，想法
+- `notion` [ˈnəʊʃn] n. 概念，想法  [unfamiliar]
     - I have no notion of what to do next. 
     - > 我不知道下一步该怎么做。
-- `numerous` [ˈnjuːmərəs] adj. 众多的，许多的
+- `numerous` [ˈnjuːmərəs] adj. 众多的，许多的   [unfamiliar]
     - There are numerous reasons why I can't come. 
     - > 有很多原因我不能来。
 

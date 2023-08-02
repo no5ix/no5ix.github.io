@@ -304,7 +304,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/06/22/epoll扼要总结/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -323,7 +323,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/06/22/epoll扼要总结/" itemprop="url">epoll扼要总结</a></h1>
+                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
         
 
         <div class="post-meta">
@@ -358,8 +358,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/NP/" itemprop="url" rel="index">
+                    <span itemprop="name">NP</span>
                   </a>
                 </span>
 
@@ -410,14 +410,12 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
         
-          <h1 id="epoll-编程接口"><a href="#epoll-编程接口" class="headerlink" title="epoll 编程接口"></a>epoll 编程接口</h1><p>epoll API是Linux系统专有的，在2.6版中新增。</p>
-<p>epoll API的核心数据结构称作epoll实例，它和一个打开的文件描述符相关联。这个文件<br>描述符不是用来做I/O操作的，相反，它是内核数据结构的句柄，这些内核数据结构实现了两<br>个目的。</p>
-<ul>
-<li>记录了在进程中声明过的感兴趣的文件描述符列表-<strong>interest list（兴趣列表）</strong>。</li>
-<li>维护了处于I/O就绪态的文件描述符列表-<strong>ready list（就绪列表）</strong>。</li>
+          <h1 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件:"></a>socket可读的条件:</h1><ul>
+<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1.</li>
+<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
+<li><strong>给监听套接字准备好新连接</strong></li>
+<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
 </ul>
-<p>ready list中的成员是interest list的子集。</p>
-<p>对于由epoll检查的每一个文件描述符，我们可以指定一个位掩码来表示我们感兴趣的事<br>件。这些位掩码同poll()所使用的位掩码有着紧密的关联。</p>
 <p><strong>. . .</strong>
           <!--noindex-->
           

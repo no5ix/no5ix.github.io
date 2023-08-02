@@ -1153,9 +1153,9 @@ categories:
 - `favor` [ˈfeɪvər] v. 偏爱；支持
     - I would favor a candidate who has experience in the field.
     - > 我会支持一个在这个领域有经验的候选人。
-- `feather` [ˈfɛðər] n. 羽毛
+- `feather` [ˈfɛðər] n. [unfamiliar]
     - The bird's feathers were brightly colored.
-    - > 鸟的羽毛色彩鲜艳。
+    - > 鸟的`羽毛`色彩鲜艳。
 - `fee` [fiː] n. 费用；酬金
     - The lawyer's fee for the consultation was quite high.
     - > 律师咨询的费用相当高。
@@ -1207,9 +1207,9 @@ categories:
 - `fund` [fʌnd] n. 基金；资金，v. 提供资金；资助
     - The company raised funds to support the new project.
     - > 公司筹集资金支持新项目。
-- `fundamental` [ˌfʌndəˈmɛntl] adj. 基本的；根本的
+- `fundamental` [ˌfʌndəˈmɛntl] adj. [unfamiliar]
     - The fundamental principles of mathematics are the building blocks of higher-level concepts.
-    - > 数学的基本原理是高层次概念的基石。
+    - > 数学的`基本的`原理是高层次概念的基石。
 - `funding` [ˈfʌndɪŋ] n. 资金；资助
     - The school received funding from the government for a new science lab.
     - > 学校获得政府的资助建设了一座新的科学实验室。
@@ -1223,9 +1223,9 @@ categories:
 - `gang` [ɡæŋ] n. 帮派；团伙
     - The police arrested several members of the gang.
     - > 警方逮捕了该团伙的几名成员。
-- `genre` [ˈʒɑːnrə] n. 类型；流派
+- `genre` [ˈʒɑːnrə] n. [unfamiliar]
     - I enjoy reading books of different genres.
-    - > 我喜欢阅读不同类型的书籍。
+    - > 我喜欢阅读不同`流派`的书籍。
 - `govern` [ˈɡʌvn] v. 统治；管理
     - The government is responsible for governing the country.
     - > 政府负责管理国家。

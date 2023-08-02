@@ -712,7 +712,7 @@ categories:
 - `abroad` [əˈbrɔːd] adv. 在国外地
     - I want to study abroad to broaden my horizons and experience different cultures.
     - > 我想出国留学，开阔视野，体验不同的文化。
-- `accuse` [əˈkjuːz] v.
+- `accuse` [əˈkjuːz] v. [unfamiliar]
     - He was accused of stealing the money from the company's safe. 
     - > 他被`指控`从公司保险箱里偷了钱。
 - `affair` [əˈfeə(r)] n. 公共事务，政治事务；事情，事件；个人的事，私事；私人业务；（尤指已婚男女的）私通，风流韵事；社交活动，喜庆事；<旧> 物件，东西；商务和金融交易
@@ -805,18 +805,20 @@ categories:
 
 ## b
 
-- `bacteria` [bækˈtɪəriə] n. 细菌
+- `bacteria` [bækˈtɪəriə] n. [unfamiliar]
     - Bacteria can be harmful to humans, but they also play an important role in the ecosystem.
-    - > 细菌对人类有害，但它们在生态系统中也扮演着重要的角色。
+    - > `细菌`对人类有害，但它们在生态系统中也扮演着重要的角色。
 - `bent` [bent] adj. 弯曲的 (bend vt. 使弯曲)
     - The tree was bent over by the strong wind. 
     - > 树被强风吹弯了。
 - `bitter` [ˈbɪtər] adj. 苦的
     - The medicine tasted very bitter, but it helped me feel better. 
     - > 药品非常苦，但它帮助我感觉更好。
-- `bond` [bɒnd] n. 债券；纽带
+- `bond` [bɒnd] n.  [unfamiliar]
+    - The bond is currently priced at $900. 
+    - > 这种`债券`当前定价为$900。
     - The bond between the two sisters was unbreakable. 
-    - > 两个姐妹之间的纽带是牢不可破的。
+    - > 两个姐妹之间的`纽带`是牢不可破的。
 - `breast` [brest] n. 乳房
     - Breastfeeding is a natural way to feed a newborn baby. 
     - > 母乳喂养是一种天然的喂养新生儿的方式。
@@ -826,12 +828,12 @@ categories:
 - `broadcast` [ˈbrɔːdkæst] v., n. 广播
     - The news was broadcast on TV and radio. 
     - > 新闻通过电视和广播播出。
-- `budget` [ˈbʌdʒɪt] n. 预算
+- `budget` [ˈbʌdʒɪt] n.  [unfamiliar]
     - The company had to cut its budget because of the economic downturn. 
-    - > 由于经济下滑，公司不得不削减其预算。
-- `bunch` [bʌntʃ] n. 串；一群
+    - > 由于经济下滑，公司不得不削减其`预算`。
+- `bunch` [bʌntʃ] n.  [unfamiliar]
     - She picked a bunch of flowers from the garden to decorate the table. 
-    - > 她从花园里采了一串花来装饰桌子。
+    - > 她从花园里采了一`串`花来装饰桌子。
 - `bush` [bʊʃ] n. 灌木丛
     - The rabbit disappeared into the bush and we couldn't find it.
     - > 兔子跑进了灌木丛中，我们找不到它了。
@@ -839,9 +841,9 @@ categories:
 
 ## c
 
-- `capable` [ˈkeɪpəbl] adj. 有能力的
+- `capable` [ˈkeɪpəbl] adj.  [unfamiliar]
     - She is capable of handling multiple tasks at the same time. 
-    - > 她有能力同时处理多项任务。
+    - > 她是`有能力的`同时处理多项任务。
 - `capacity` [kəˈpæsəti] n. 容量；能力
     - The stadium has a seating capacity of 50,000 people. 
     - > 这个体育场有5万个座位。
@@ -851,9 +853,9 @@ categories:
 - `circumstance` [ˈsɜːrkəmstæns] n. 环境；情况
     - I cannot control the circumstance, but I can control my attitude towards it. 
     - > 我无法控制环境，但我可以控制自己对它的态度。
-- `cite` [saɪt] v. 引用
+- `cite` [saɪt] v.  [unfamiliar]
     - He cited several examples to support his argument. 
-    - > 他引用了几个例子来支持他的论点。
+    - > 他`引用`了几个例子来支持他的论点。
     - > `Quote` 是一个动词，通常用来引用或重述他人的话语或文字。当你引用某人的话时，你使用 `quote` 这个动词。例如，他说：“我喜欢阅读。”你可以引用他的话说：“他说他喜欢阅读。”
     - > `Cite` 是一个动词，通常用来引用或引证参考文献、来源或权威资料，以支持你的观点或证明某个事实。当你在学术论文或研究中引用其他作者的工作时，你使用 `cite` 这个动词。例如，你可能会在论文中引用一篇研究文章以支持你的论点，并在参考文献列表中引用该文章。
     - > 总结起来，`quote` 是引用或重述他人的话，而 `cite` 是引用或引证参考文献或来源。
@@ -891,21 +893,23 @@ categories:
 - `concerned` [kənˈsɜːnd] adj. 担心的；有关的
     - I am concerned about the impact of pollution on the environment. 
     - > 我担心污染对环境的影响。
-- `conduct` [kənˈdʌkt] v., n. 进行；行为
+- `conduct` [kənˈdʌkt] v., n. [unfamiliar]
     - He conducted a thorough[ˈθɜːroʊ]  investigation into the matter. 
-    - > 他对这件事进行了彻底的调查。
+    - > 他对这件事`进行`了彻底的调查。
 - `confidence` [ˈkɒnfɪdəns] n. 自信；信心
     - Having confidence in yourself is important for achieving your goals. 
     - > 对自己有信心对于实现目标很重要。
-- `congress` [ˈkɒŋɡres] n. 国会；代表大会
+- `congress` [ˈkɒŋɡres] n. [unfamiliar]
     - The congress will vote on the proposed legislation next week. 
-    - > 国会将在下周对拟议中的法案进行投票。
+    - > `国会`将在下周对拟议中的法案进行投票。
 - `conscious` [ˈkɒnʃəs] adj. 意识到的；神志清醒的，有知觉的；关注的；刻意的，慎重的
     - She was fully conscious throughout the surgery and knew what was going on.
     - 她在整个手术过程中神志完全`清醒的`，知道发生了什么。
-- `conservative` [kənˈsɜːvətɪv] adj., n. 保守的；保守主义者
+- `conservative` [kənˈsɜːvətɪv] adj., n. [unfamiliar]
     - He has conservative views on social issues such as abortion and same-sex marriage. 
-    - > 他在社会问题，如堕胎和同性婚姻方面持保守观点。
+    - > 他在社会问题，如堕胎和同性婚姻方面持`保守的`观点。
+    - Mr. Williams is a conservative who advocates fewer government controls on business. 
+    - > 威廉斯先生是一位提倡减少政府对商业的控制的`保守主义者`
 - `consideration` [kənˌsɪdəˈreɪʃn] n. 考虑；关注
     - Take all factors into consideration before making a decision. 
     - > 在做出决定之前，考虑所有因素。
@@ -924,12 +928,12 @@ categories:
 - `construction` [kənˈstrʌkʃn] n. 建筑；构造
     - The construction of the bridge was completed ahead of schedule. 
     - > 桥梁的建造提前完成。
-- `contemporary` [kənˈtempəreri] adj. 当代的；现代的
+- `contemporary` [kənˈtempəreri] adj. [unfamiliar]
     - The artist's work is considered to be a masterpiece of contemporary art. 
-    - > 这位艺术家的作品被认为是当代艺术的杰作。
-- `contest` [ˈkɒntest] n., v. 竞赛；争议
+    - > 这位艺术家的作品被认为是`当代的`艺术的杰作。
+- `contest` [ˈkɒntest] n., v. [unfamiliar]
     - He won first place in the singing contest last year. 
-    - > 他去年在歌唱比赛中获得了第一名。
+    - > 他去年在歌唱`比赛`中获得了第一名。
 - `convinced` [kənˈvinst] adj. 确信的；信服的
     - I am convinced that this is the right decision. 
     - > 我确信这是正确的决定。
@@ -939,18 +943,18 @@ categories:
 - `council` [ˈkaʊnsəl] n. 委员会；议会
     - The city council passed a new law to protect the environment. 
     - > 市议会通过了一项新的法律以保护环境。
-- `credit` [ˈkredɪt] v. 归功于；赞扬
+- `credit` [ˈkredɪt] v. [unfamiliar]
     - She credited her success to hard work and dedication. 
-    - > 她把自己的成功归功于勤奋和专注。
+    - > 她把自己的成功`归功于`勤奋和专注。
 - `crew` [kruː] n. 全体工作人员；船员
     - The film crew worked long hours to complete the movie on time. 
     - > 电影制作组加班赶工，按时完成了电影制作。
-- `crisis` [ˈkraɪsɪs] n. 危机；危急关头
+- `crisis` [ˈkraɪsɪs] n. [unfamiliar]
     - The company is facing a financial crisis and may have to lay off employees. 
-    - > 公司面临财务危机，可能不得不裁员。
-- `criterion` [kraɪˈtɪərɪən] n. 标准；准则
+    - > 公司面临财务`危机`，可能不得不裁员。
+- `criterion` [kraɪˈtɪərɪən] n. [unfamiliar]
     - The selection committee used several criteria(`criterion`的复数形式) to evaluate the candidates. 
-    - > 选拔委员会使用了几个标准来评估候选人。
+    - > 选拔委员会使用了几个`标准`来评估候选人。
 - `critic` [ˈkrɪtɪk] n. 评论家；批评者
     - The film received mixed reviews from critics. 
     - > 这部电影在评论家中获得了好坏参半的评价。
@@ -967,19 +971,19 @@ categories:
 
 ## d
 
-- `debate` [dɪˈbeɪt] n. 辩论；讨论，v. 辩论；讨论
+- `debate` [dɪˈbeɪt] n. 辩论；讨论，v. 辩论；讨论 [unfamiliar]
     - The candidates engaged in a heated debate over healthcare reform. 
     - > 候选人们就医疗改革展开了激烈的辩论。
-- `decline` [dɪˈklaɪn] v. 下降；减少，n. 下降；衰退
+- `decline` [dɪˈklaɪn] v. 下降；减少，n. 下降；衰退 [unfamiliar]
     - The company's profits have been declining for several years. 
-    - > 该公司的利润已经连续几年下降。
+    - > 该公司的利润已经连续几年`下降`。
 - `defend` [dɪˈfend] v. 辩护；保卫
     - The lawyer will defend his client in court. 
     - > 律师将在法庭上为他的客户辩护。
 - `defense` [dɪˈfens] n. 防御；防护
     - The army is responsible for the defense of the country. 
     - > 军队负责国家的防卫。
-- `deliberate` [dɪˈlɪbərət] adj. 故意的；深思熟虑的，v. 慎重考虑
+- `deliberate` [dɪˈlɪbərət] adj. 故意的；深思熟虑的，v. 慎重考虑 [unfamiliar]
     - The jury took several hours to reach a deliberate verdict. 
     - > 陪审团花了几个小时才作出慎重的判决。
 - `deliberately` [dɪˈlɪbərətli] adv. 故意地；蓄意地
@@ -988,9 +992,9 @@ categories:
 - `demand` [dɪˈmænd] n. 需求，v. 要求；需要
     - The demand for organic food has increased in recent years. 
     - > 近年来，有机食品的需求增加了。
-- `demonstrate` [ˈdɛmənstreɪt] v. 示范；演示
+- `demonstrate` [ˈdɛmənstreɪt] v.  [unfamiliar]
     - The teacher demonstrated how to solve the math problem on the board. 
-    - > 老师在黑板上演示了如何解决数学问题。
+    - > 老师在黑板上`演示`了如何解决数学问题。
 - `depressed` [dɪˈprɛst] adj. 沮丧的；消沉的
     - She has been feeling depressed since she lost her job. 
     - > 自从失业后，她一直感到沮丧。
@@ -1004,10 +1008,10 @@ categories:
 - `deserve` [dɪˈzɜːv] v. 应得；值得
     - She deserves to be praised for her hard work. 
     - > 她应该因她的努力工作而受到赞扬。
-- `desperate` [ˈdɛspərət] adj. 绝望的；拼命的
+- `desperate` [ˈdɛspərət] adj. [unfamiliar]
     - The refugees were in a desperate situation and needed immediate help. 
     - > 难民们处于绝望的境地，需要立即的帮助。
-- `discipline` [ˈdɪsəplɪn] n. 纪律；训练，v. 训练；惩罚
+- `discipline` [ˈdɪsəplɪn] n. 纪律；训练，v. 训练；惩罚 [unfamiliar]
     - The school has a strict discipline policy. 
     - > 学校有一套严格的纪律政策。
 - `distribute` [dɪsˈtrɪbjuːt] v. 分发；分配
@@ -1019,15 +1023,15 @@ categories:
 - `divide` [dɪˈvaɪd] n. 分开；分裂
     - The river divides the city into two parts. 
     - > 这条河把城市分成了两部分。
-- `division` [dɪˈvɪʒn] n. 分开；分裂；部门
+- `division` [dɪˈvɪʒn] n. 分开；分裂；部门 [unfamiliar]
     - The company has several divisions that specialize in different products. 
-    - > 该公司有几个专门从事不同产品的部门。
-- `domestic` [dəˈmestɪk] adj. 国内的；家庭的
+    - > 该公司有几个专门从事不同产品的`部门`。
+- `domestic` [dəˈmestɪk] adj. [unfamiliar]
     - She prefers to buy domestic products to support the local economy. 
-    - > 她更喜欢购买国内产品来支持当地经济。
-- `dominate` [ˈdɒmɪneɪt] v. 主导；占优势
+    - > 她更喜欢购买`国内的`产品来支持当地经济。
+- `dominate` [ˈdɒmɪneɪt] v. [unfamiliar]
     - The team has dominated the league for the past few years. 
-    - > 这支队伍在过去几年里主导了联赛。
+    - > 这支队伍在过去几年里`主导`了联赛。
 - `downward` [ˈdaʊnwəd] adj. 向下的，adv. 向下地
     - The stock market experienced a downward trend last week. 
     - > 股市上周经历了一个下降趋势。
@@ -1056,9 +1060,9 @@ categories:
 - `elsewhere` [ˈɛlsweə] adv. 在别处；到别处
     - If they don't have it here, you might find it elsewhere.
     - > 如果他们这里没有，你可能会在别处找到它。
-- `emerge` [ɪˈmɜːdʒ] v. 出现；浮出水面
+- `emerge` [ɪˈmɜːdʒ] v. 出现；浮出水面 [unfamiliar]
     - The sun emerged from behind the clouds.
-    - > 太阳从云层后面出现了。
+    - > 太阳从云层后面`浮现`了。
 - `emotional` [ɪˈməʊʃənl] adj. 情绪的；感情的
     - She gave an emotional speech at the funeral.
     - > 她在葬礼上发表了感人的演讲。
@@ -1082,27 +1086,27 @@ categories:
 - `ensure` [ɪnˈʃʊr] v. 确保；保证
     - Please ensure that the door is locked before you leave.
     - > 请确保在离开前门已经锁好了。
-- `enthusiasm` [ɛnˈθjuːziæzəm] n. 热情；热忱
+- `enthusiasm` [ɛnˈθjuːziæzəm] n. [unfamiliar]
     - Her enthusiasm for the project was contagious.
-    - > 她对这个项目的热情是具有感染力的。
+    - > 她对这个项目的`热情`是具有感染力的。
 - `enthusiastic` [ɛnˌθjuːziˈæstɪk] adj. 热情的；热心的
     - The students were enthusiastic about the field trip.
     - > 学生们对这次实地考察充满热情。
-- `estate` [ɪˈsteɪt] n. 房地产；财产
+- `estate` [ɪˈsteɪt] n. 房地产；财产 [unfamiliar]
     - He inherited a large estate from his grandfather.
-    - > 他从祖父那里继承了一大笔财产。
+    - > 他从祖父那里继承了一大笔`财产`。
 - `estimate` [ˈɛstɪmeɪt] v. 估计；n. 估计;
     - Can you give me an estimate of how long the project will take?
     - > 你能给我一个项目需要多长时间的估计吗？
-- `ethical` [ˈɛθɪkəl] adj. 道德的；伦理的
-    - It is important to make ethical decisions in the workplace.
-    - > 在工作场所做出道德决策是很重要的。
+- `ethical` [ˈɛθɪkəl] adj. [unfamiliar]
+    - t's not ethical to cheat on an exam.
+    - > 在考试中作弊是不`道德的`。
 - `evaluate` [ɪˈvæljueɪt] v. 评价; 评估
     - The teacher will evaluate the students' essays based on several criteria.
     - > 老师将根据几个标准评价学生的论文。
     - > `Assess` 是较为宽泛的`评估`, 强调`判断`, 主要用于对事物进行深入的`判断`。
-    - > `Evaluate` 是`评价`。
     - The doctor will `assess` your health condition.（医生将`评估`您的健康状况。）
+    - > `Evaluate` 是`评价`。
     - The teacher will `evaluate` the students' essays.（老师将`评价`学生的论文。）
 - `evil` [ˈiːvl] adj. 邪恶的；恶毒的，n. 邪恶；罪恶
     - The evil queen in the fairy tale was jealous of Snow White's beauty. 
@@ -1110,7 +1114,7 @@ categories:
 - `examination` [ɪɡˌzæmɪˈneɪʃn] n. 考试；检查
     - He passed the final examination with flying colors.
     - > 他以优异的成绩通过了期末考试。
-- `executive` [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的
+- `executive` [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的 [unfamiliar]
     - chief executive officer
     - > CEO
     - The executive team is responsible for making important decisions.

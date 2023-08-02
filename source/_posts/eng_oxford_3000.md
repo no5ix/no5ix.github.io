@@ -1204,9 +1204,9 @@ categories:
 - `fully` [ˈfʊli] adv. 完全地；彻底地
     - I fully support your decision.
     - > 我完全支持你的决定。
-- `fund` [fʌnd] n. 基金；资金，v. 提供资金；资助
+- `fund` [fʌnd] n. 基金；资金，v. 提供资金；资助 [unfamiliar]
     - The company raised funds to support the new project.
-    - > 公司筹集资金支持新项目。
+    - > 公司筹集`资金`支持新项目。
 - `fundamental` [ˌfʌndəˈmɛntl] adj. [unfamiliar]
     - The fundamental principles of mathematics are the building blocks of higher-level concepts.
     - > 数学的`基本的`原理是高层次概念的基石。
@@ -1235,12 +1235,12 @@ categories:
 - `grade` [ɡreɪd] v. 给…评分；分等级，n. 等级；年级
     - The teacher will grade our essays based on grammar and content.
     - > 老师将根据语法和内容为我们的文章评分。
-- `gradually` [ˈɡrædʒuəli] adv. 逐渐地；逐步地
+- `gradually` [ˈɡrædʒuəli] adv. [unfamiliar]
     - My mood gradually lightened.
-    - > 我的心情渐渐好起来。
-- `grand` [ɡrænd] adj. 壮丽的；宏伟的；重大的
+    - > 我的心情`渐渐地`好起来。
+- `grand` [ɡrænd] adj. [unfamiliar]
     - The grand entrance to the building was decorated with ornate carvings.
-    - > 建筑的宏伟入口装饰着华丽的雕刻。
+    - > 建筑的宏伟入口装饰着`华丽的`雕刻。
 - `grant` [ɡrænt] v. 授予；允许；同意，n. 拨款；授予
     - The university granted her a scholarship to study abroad.
     - > 这所大学授予她一笔留学奖学金。
@@ -1253,12 +1253,12 @@ categories:
 - `heel` [hiːl] n. 脚后跟；鞋跟
     - She twisted her ankle when she landed on her heel.
     - > 她着陆时脚后跟着地扭伤了脚踝。
-- `hollow` [ˈhɑːloʊ] adj. 空心的；凹陷的；空洞的
+- `hollow` [ˈhɑːloʊ] adj. 空心的；凹陷的；空洞的 [unfamiliar]
     - The old tree had a hollow trunk.
-    - > 那棵老树的树干是空心的。
-- `household` [ˈhaʊshoʊld] n. 家庭；家居，adj. 家庭的；家居的
+    - > 那棵老树的树干是`空心的`。
+- `household` [ˈhaʊshoʊld] n. 家庭；家居，adj. 家庭的；家居的 [unfamiliar]
     - She manages the household finances.
-    - > 她管理家庭财务。
+    - > 她管理`家庭`财务。
 - `housing` [ˈhaʊzɪŋ] n. 住房；住宅
     - The city needs more affordable housing for its residents.
     - > 这个城市需要更多供居民负担得起的住房。
@@ -1274,9 +1274,9 @@ categories:
 - `imply` [ɪmˈplaɪ] v. 暗示；意味着
     - His tone implied that he wasn't happy with the decision.
     - > 他的语气暗示他对这个决定不满意。
-- `impose` [ɪmˈpoʊz] v. 强制实行；征税；把…强加于
+- `impose` [ɪmˈpoʊz] v. 强制实行；征税；把…强加于 [unfamiliar]
     - The new law imposes stricter regulations on the industry.
-    - > 新法规对该行业实行更严格的监管。
+    - > 新法规对该行业`强制实行`更严格的监管。
 - `impress` [ɪmˈpres] v. 使印象深刻；给…留下印象
     - The teacher's dedication impressed the students.
     - > 老师的奉献精神给学生留下了深刻的印象。

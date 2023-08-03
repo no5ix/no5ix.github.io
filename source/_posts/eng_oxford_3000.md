@@ -86,7 +86,7 @@ categories:
 - `conference`: 会议
     - I'm attending a conference on renewable energy next week.
     - > 下周我将参加一场关于可再生能源的会议。
-- `continent`: 大陆 **unfamiliar**
+- `continent`: 大陆 [**unfamiliar**]
     - Africa is the second largest continent in the world.
     - > 非洲是世界上第二大的大陆。
 - `credit`: 信用
@@ -130,7 +130,7 @@ categories:
 - `grocery`: 食品杂货
     - I need to go to the grocery store to buy some milk and bread.
     - > 我需要去杂货店买些牛奶和面包。
-- `gallery`: 画廊 **unfamiliar**
+- `gallery`: 画廊 [**unfamiliar**]
     - The art gallery features works from famous artists around the world.
     - > 这个艺术画廊展示了来自世界各地著名艺术家的作品。
 - `flu`: 流感
@@ -209,7 +209,7 @@ categories:
 - `cap` [kæp]: 
     - He is wearing a red cap that is very eye-catching.
     - > 他戴着一顶红色的`帽子`，非常醒目。
-- `campaign` [kæmˈpeɪn]: n. 运动 **unfamiliar**
+- `campaign` [kæmˈpeɪn]: n. 运动 [**unfamiliar**]
     - They are conducting an anti-corruption campaign.
     - > 他们正在进行一项反贪腐的宣传`活动`。
 - `cable` [ˈkeɪbl]: 
@@ -447,7 +447,7 @@ categories:
 - `nail` [neɪl]: 
     - I need a nail to fix this wooden board.
     - > 我需要一把`钉子`来固定这个木板。
-- `narrative` [ˈnærətɪv]: n. 记叙文，叙述；叙事技巧 adj. 叙述的；叙事体的 **unfamiliar**
+- `narrative` [ˈnærətɪv]: n. 记叙文，叙述；叙事技巧 adj. 叙述的；叙事体的 [**unfamiliar**]
     - The novel contains too much dialogue and not enough narrative.
     - > 这部小说对话过多，而`叙述`不足。
 - `neat` [niːt]: 
@@ -495,7 +495,7 @@ categories:
 - `pleasant` [ˈpleznt]: 
     - The atmosphere of this restaurant is very pleasant, and the service is also attentive.
     - > 这个餐厅的氛围非常`愉快`，服务也很周到。
-- `plot` [plɒt]: n. 阴谋，密谋；情节；（专用的）小块地；（表现两个变量关系的）图表；<美>图表，地图；<美>底层平面图 v. 密谋，策划，绘制； 情节，图表。 **unfamiliar**
+- `plot` [plɒt]: n. 阴谋，密谋；情节；（专用的）小块地；（表现两个变量关系的）图表；<美>图表，地图；<美>底层平面图 v. 密谋，策划，绘制； 情节，图表。 [**unfamiliar**]
     - He is plotting revenge against his enemies. 
     - > 他正在`v. 密谋`着对他的敌人复仇。
     - This novel has a thrilling plot that keeps you wanting to read on.
@@ -538,7 +538,7 @@ categories:
 - `promote` [prəˈməʊt]: v. 促进，提倡；升职，晋升；促销，推广
     - The company promoted its new product to increase sales.
     - > 公司为了提高销售额而`推广`新产品。
-- `protest` [ˈprəʊtest]:  **unfamiliar**
+- `protest` [ˈprəʊtest]:  [**unfamiliar**]
     - People held a protest march to protest the government's policies.
     - > 人们举行示威游行，`抗议`政府的政策。
 - `prove` [pruːv]: 
@@ -563,7 +563,7 @@ categories:
 - `race` [reɪs]: n. 速度竞赛, 种族 v.（和……）比赛，参加比赛；使（动物或车辆）参赛参赛；（使）快速移动，快速运转；疾走，全速行进；
     - They raced to win first place in the competition.
     - > 他们在`比赛`中争夺第一名。
-- `receipt` [rɪˈsiːt]:  **unfamiliar**
+- `receipt` [rɪˈsiːt]:  [**unfamiliar**]
     - She received a receipt for her purchase.
     - > 她收到了购物`收据`。
 - `religion` [rɪˈlɪdʒən]: n. 宗教信仰, 宗教, 教派
@@ -714,7 +714,7 @@ categories:
 - `abroad` [əˈbrɔːd] adv. 在国外地
     - I want to study abroad to broaden my horizons and experience different cultures.
     - > 我想出国留学，开阔视野，体验不同的文化。
-- `accuse` [əˈkjuːz] v. **unfamiliar**
+- `accuse` [əˈkjuːz] v. [**unfamiliar**]
     - He was accused of stealing the money from the company's safe. 
     - > 他被`指控`从公司保险箱里偷了钱。
 - `affair` [əˈfeə(r)] n. 公共事务，政治事务；事情，事件；个人的事，私事；私人业务；（尤指已婚男女的）私通，风流韵事；社交活动，喜庆事；<旧> 物件，东西；商务和金融交易
@@ -807,7 +807,7 @@ categories:
 
 ## b
 
-- `bacteria` [bækˈtɪəriə] n. **unfamiliar**
+- `bacteria` [bækˈtɪəriə] n. [**unfamiliar**]
     - Bacteria can be harmful to humans, but they also play an important role in the ecosystem.
     - > `细菌`对人类有害，但它们在生态系统中也扮演着重要的角色。
 - `bent` [bent] adj. 弯曲的 (bend vt. 使弯曲)
@@ -816,7 +816,7 @@ categories:
 - `bitter` [ˈbɪtər] adj. 苦的
     - The medicine tasted very bitter, but it helped me feel better. 
     - > 药品非常苦，但它帮助我感觉更好。
-- `bond` [bɒnd] n.  **unfamiliar**
+- `bond` [bɒnd] n.  [**unfamiliar**]
     - The bond is currently priced at $900. 
     - > 这种`债券`当前定价为$900。
     - The bond between the two sisters was unbreakable. 
@@ -830,10 +830,10 @@ categories:
 - `broadcast` [ˈbrɔːdkæst] v., n. 广播
     - The news was broadcast on TV and radio. 
     - > 新闻通过电视和广播播出。
-- `budget` [ˈbʌdʒɪt] n.  **unfamiliar**
+- `budget` [ˈbʌdʒɪt] n.  [**unfamiliar**]
     - The company had to cut its budget because of the economic downturn. 
     - > 由于经济下滑，公司不得不削减其`预算`。
-- `bunch` [bʌntʃ] n.  **unfamiliar**
+- `bunch` [bʌntʃ] n.  [**unfamiliar**]
     - She picked a bunch of flowers from the garden to decorate the table. 
     - > 她从花园里采了一`串`花来装饰桌子。
 - `bush` [bʊʃ] n. 灌木丛
@@ -843,7 +843,7 @@ categories:
 
 ## c
 
-- `capable` [ˈkeɪpəbl] adj.  **unfamiliar**
+- `capable` [ˈkeɪpəbl] adj.  [**unfamiliar**]
     - She is capable of handling multiple tasks at the same time. 
     - > 她是`有能力的`同时处理多项任务。
 - `capacity` [kəˈpæsəti] n. 容量；能力
@@ -855,7 +855,7 @@ categories:
 - `circumstance` [ˈsɜːrkəmstæns] n. 环境；情况
     - I cannot control the circumstance, but I can control my attitude towards it. 
     - > 我无法控制环境，但我可以控制自己对它的态度。
-- `cite` [saɪt] v.  **unfamiliar**
+- `cite` [saɪt] v.  [**unfamiliar**]
     - He cited several examples to support his argument. 
     - > 他`引用`了几个例子来支持他的论点。
     - > `Quote` 是一个动词，通常用来引用或重述他人的话语或文字。当你引用某人的话时，你使用 `quote` 这个动词。例如，他说：“我喜欢阅读。”你可以引用他的话说：“他说他喜欢阅读。”
@@ -895,19 +895,19 @@ categories:
 - `concerned` [kənˈsɜːnd] adj. 担心的；有关的
     - I am concerned about the impact of pollution on the environment. 
     - > 我担心污染对环境的影响。
-- `conduct` [kənˈdʌkt] v., n. **unfamiliar**
+- `conduct` [kənˈdʌkt] v., n. [**unfamiliar**]
     - He conducted a thorough[ˈθɜːroʊ]  investigation into the matter. 
     - > 他对这件事`进行`了彻底的调查。
 - `confidence` [ˈkɒnfɪdəns] n. 自信；信心
     - Having confidence in yourself is important for achieving your goals. 
     - > 对自己有信心对于实现目标很重要。
-- `congress` [ˈkɒŋɡres] n. **unfamiliar**
+- `congress` [ˈkɒŋɡres] n. [**unfamiliar**]
     - The congress will vote on the proposed legislation next week. 
     - > `国会`将在下周对拟议中的法案进行投票。
 - `conscious` [ˈkɒnʃəs] adj. 意识到的；神志清醒的，有知觉的；关注的；刻意的，慎重的
     - She was fully conscious throughout the surgery and knew what was going on.
     - 她在整个手术过程中神志完全`清醒的`，知道发生了什么。
-- `conservative` [kənˈsɜːvətɪv] adj., n. **unfamiliar**
+- `conservative` [kənˈsɜːvətɪv] adj., n. [**unfamiliar**]
     - He has conservative views on social issues such as abortion and same-sex marriage. 
     - > 他在社会问题，如堕胎和同性婚姻方面持`保守的`观点。
     - Mr. Williams is a conservative who advocates fewer government controls on business. 
@@ -930,10 +930,10 @@ categories:
 - `construction` [kənˈstrʌkʃn] n. 建筑；构造
     - The construction of the bridge was completed ahead of schedule. 
     - > 桥梁的建造提前完成。
-- `contemporary` [kənˈtempəreri] adj. **unfamiliar**
+- `contemporary` [kənˈtempəreri] adj. [**unfamiliar**]
     - The artist's work is considered to be a masterpiece of contemporary art. 
     - > 这位艺术家的作品被认为是`当代的`艺术的杰作。
-- `contest` [ˈkɒntest] n., v. **unfamiliar**
+- `contest` [ˈkɒntest] n., v. [**unfamiliar**]
     - He won first place in the singing contest last year. 
     - > 他去年在歌唱`比赛`中获得了第一名。
 - `convinced` [kənˈvinst] adj. 确信的；信服的
@@ -945,16 +945,16 @@ categories:
 - `council` [ˈkaʊnsəl] n. 委员会；议会
     - The city council passed a new law to protect the environment. 
     - > 市议会通过了一项新的法律以保护环境。
-- `credit` [ˈkredɪt] v. **unfamiliar**
+- `credit` [ˈkredɪt] v. [**unfamiliar**]
     - She credited her success to hard work and dedication. 
     - > 她把自己的成功`归功于`勤奋和专注。
 - `crew` [kruː] n. 全体工作人员；船员
     - The film crew worked long hours to complete the movie on time. 
     - > 电影制作组加班赶工，按时完成了电影制作。
-- `crisis` [ˈkraɪsɪs] n. **unfamiliar**
+- `crisis` [ˈkraɪsɪs] n. [**unfamiliar**]
     - The company is facing a financial crisis and may have to lay off employees. 
     - > 公司面临财务`危机`，可能不得不裁员。
-- `criterion` [kraɪˈtɪərɪən] n. **unfamiliar**
+- `criterion` [kraɪˈtɪərɪən] n. [**unfamiliar**]
     - The selection committee used several criteria(`criterion`的复数形式) to evaluate the candidates. 
     - > 选拔委员会使用了几个`标准`来评估候选人。
 - `critic` [ˈkrɪtɪk] n. 评论家；批评者
@@ -973,10 +973,10 @@ categories:
 
 ## d
 
-- `debate` [dɪˈbeɪt] n. 辩论；讨论，v. 辩论；讨论 **unfamiliar**
+- `debate` [dɪˈbeɪt] n. 辩论；讨论，v. 辩论；讨论 [**unfamiliar**]
     - The candidates engaged in a heated debate over healthcare reform. 
     - > 候选人们就医疗改革展开了激烈的辩论。
-- `decline` [dɪˈklaɪn] v. 下降；减少，n. 下降；衰退 **unfamiliar**
+- `decline` [dɪˈklaɪn] v. 下降；减少，n. 下降；衰退 [**unfamiliar**]
     - The company's profits have been declining for several years. 
     - > 该公司的利润已经连续几年`下降`。
 - `defend` [dɪˈfend] v. 辩护；保卫
@@ -985,7 +985,7 @@ categories:
 - `defense` [dɪˈfens] n. 防御；防护
     - The army is responsible for the defense of the country. 
     - > 军队负责国家的防卫。
-- `deliberate` [dɪˈlɪbərət] adj. 故意的；深思熟虑的，v. 慎重考虑 **unfamiliar**
+- `deliberate` [dɪˈlɪbərət] adj. 故意的；深思熟虑的，v. 慎重考虑 [**unfamiliar**]
     - The jury took several hours to reach a deliberate verdict. 
     - > 陪审团花了几个小时才作出慎重的判决。
 - `deliberately` [dɪˈlɪbərətli] adv. 故意地；蓄意地
@@ -994,7 +994,7 @@ categories:
 - `demand` [dɪˈmænd] n. 需求，v. 要求；需要
     - The demand for organic food has increased in recent years. 
     - > 近年来，有机食品的需求增加了。
-- `demonstrate` [ˈdɛmənstreɪt] v.  **unfamiliar**
+- `demonstrate` [ˈdɛmənstreɪt] v.  [**unfamiliar**]
     - The teacher demonstrated how to solve the math problem on the board. 
     - > 老师在黑板上`演示`了如何解决数学问题。
 - `depressed` [dɪˈprɛst] adj. 沮丧的；消沉的
@@ -1010,10 +1010,10 @@ categories:
 - `deserve` [dɪˈzɜːv] v. 应得；值得
     - She deserves to be praised for her hard work. 
     - > 她应该因她的努力工作而受到赞扬。
-- `desperate` [ˈdɛspərət] adj. **unfamiliar**
+- `desperate` [ˈdɛspərət] adj. [**unfamiliar**]
     - The refugees were in a desperate situation and needed immediate help. 
     - > 难民们处于绝望的境地，需要立即的帮助。
-- `discipline` [ˈdɪsəplɪn] n. 纪律；训练，v. 训练；惩罚 **unfamiliar**
+- `discipline` [ˈdɪsəplɪn] n. 纪律；训练，v. 训练；惩罚 [**unfamiliar**]
     - The school has a strict discipline policy. 
     - > 学校有一套严格的纪律政策。
 - `distribute` [dɪsˈtrɪbjuːt] v. 分发；分配
@@ -1025,13 +1025,13 @@ categories:
 - `divide` [dɪˈvaɪd] n. 分开；分裂
     - The river divides the city into two parts. 
     - > 这条河把城市分成了两部分。
-- `division` [dɪˈvɪʒn] n. 分开；分裂；部门 **unfamiliar**
+- `division` [dɪˈvɪʒn] n. 分开；分裂；部门 [**unfamiliar**]
     - The company has several divisions that specialize in different products. 
     - > 该公司有几个专门从事不同产品的`部门`。
-- `domestic` [dəˈmestɪk] adj. **unfamiliar**
+- `domestic` [dəˈmestɪk] adj. [**unfamiliar**]
     - She prefers to buy domestic products to support the local economy. 
     - > 她更喜欢购买`国内的`产品来支持当地经济。
-- `dominate` [ˈdɒmɪneɪt] v. **unfamiliar**
+- `dominate` [ˈdɒmɪneɪt] v. [**unfamiliar**]
     - The team has dominated the league for the past few years. 
     - > 这支队伍在过去几年里`主导`了联赛。
 - `downward` [ˈdaʊnwəd] adj. 向下的，adv. 向下地
@@ -1062,7 +1062,7 @@ categories:
 - `elsewhere` [ˈɛlsweə] adv. 在别处；到别处
     - If they don't have it here, you might find it elsewhere.
     - > 如果他们这里没有，你可能会在别处找到它。
-- `emerge` [ɪˈmɜːdʒ] v. 出现；浮出水面 **unfamiliar**
+- `emerge` [ɪˈmɜːdʒ] v. 出现；浮出水面 [**unfamiliar**]
     - The sun emerged from behind the clouds.
     - > 太阳从云层后面`浮现`了。
 - `emotional` [ɪˈməʊʃənl] adj. 情绪的；感情的
@@ -1088,19 +1088,19 @@ categories:
 - `ensure` [ɪnˈʃʊr] v. 确保；保证
     - Please ensure that the door is locked before you leave.
     - > 请确保在离开前门已经锁好了。
-- `enthusiasm` [ɛnˈθjuːziæzəm] n. **unfamiliar**
+- `enthusiasm` [ɛnˈθjuːziæzəm] n. [**unfamiliar**]
     - Her enthusiasm for the project was contagious.
     - > 她对这个项目的`热情`是具有感染力的。
 - `enthusiastic` [ɛnˌθjuːziˈæstɪk] adj. 热情的；热心的
     - The students were enthusiastic about the field trip.
     - > 学生们对这次实地考察充满热情。
-- `estate` [ɪˈsteɪt] n. 房地产；财产 **unfamiliar**
+- `estate` [ɪˈsteɪt] n. 房地产；财产 [**unfamiliar**]
     - He inherited a large estate from his grandfather.
     - > 他从祖父那里继承了一大笔`财产`。
 - `estimate` [ˈɛstɪmeɪt] v. 估计；n. 估计;
     - Can you give me an estimate of how long the project will take?
     - > 你能给我一个项目需要多长时间的估计吗？
-- `ethical` [ˈɛθɪkəl] adj. **unfamiliar**  通常指与特定职业、行业或社会规范相关的道德准则
+- `ethical` [ˈɛθɪkəl] adj. [**unfamiliar**]  通常指与特定职业、行业或社会规范相关的道德准则
     - t's not ethical to cheat on an exam.
     - > 在考试中作弊是不`道德的`。
 - `evaluate` [ɪˈvæljueɪt] v. 评价; 评估
@@ -1116,7 +1116,7 @@ categories:
 - `examination` [ɪɡˌzæmɪˈneɪʃn] n. 考试；检查
     - He passed the final examination with flying colors.
     - > 他以优异的成绩通过了期末考试。
-- `executive` [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的 **unfamiliar**
+- `executive` [ɪɡˈzɛkjʊtɪv] n. 执行官；高管，adj. 行政的；执行的 [**unfamiliar**]
     - chief executive officer
     - > CEO
     - The executive team is responsible for making important decisions.
@@ -1155,7 +1155,7 @@ categories:
 - `favor` [ˈfeɪvər] v. 偏爱；支持
     - I would favor a candidate who has experience in the field.
     - > 我会支持一个在这个领域有经验的候选人。
-- `feather` [ˈfɛðər] n. **unfamiliar**
+- `feather` [ˈfɛðər] n. [**unfamiliar**]
     - The bird's feathers were brightly colored.
     - > 鸟的`羽毛`色彩鲜艳。
 - `fee` [fiː] n. 费用；酬金
@@ -1206,10 +1206,10 @@ categories:
 - `fully` [ˈfʊli] adv. 完全地；彻底地
     - I fully support your decision.
     - > 我完全支持你的决定。
-- `fund` [fʌnd] n. 基金；资金，v. 提供资金；资助 **unfamiliar**
+- `fund` [fʌnd] n. 基金；资金，v. 提供资金；资助 [**unfamiliar**]
     - The company raised funds to support the new project.
     - > 公司筹集`资金`支持新项目。
-- `fundamental` [ˌfʌndəˈmɛntl] adj. **unfamiliar**
+- `fundamental` [ˌfʌndəˈmɛntl] adj. [**unfamiliar**]
     - The fundamental principles of mathematics are the building blocks of higher-level concepts.
     - > 数学的`基本的`原理是高层次概念的基石。
 - `funding` [ˈfʌndɪŋ] n. 资金；资助
@@ -1225,7 +1225,7 @@ categories:
 - `gang` [ɡæŋ] n. 帮派；团伙
     - The police arrested several members of the gang.
     - > 警方逮捕了该团伙的几名成员。
-- `genre` [ˈʒɑːnrə] n. **unfamiliar**
+- `genre` [ˈʒɑːnrə] n. [**unfamiliar**]
     - I enjoy reading books of different genres.
     - > 我喜欢阅读不同`流派`的书籍。
 - `govern` [ˈɡʌvn] v. 统治；管理
@@ -1237,10 +1237,10 @@ categories:
 - `grade` [ɡreɪd] v. 给…评分；分等级，n. 等级；年级
     - The teacher will grade our essays based on grammar and content.
     - > 老师将根据语法和内容为我们的文章评分。
-- `gradually` [ˈɡrædʒuəli] adv. **unfamiliar**
+- `gradually` [ˈɡrædʒuəli] adv. [**unfamiliar**]
     - My mood gradually lightened.
     - > 我的心情`渐渐地`好起来。
-- `grand` [ɡrænd] adj. **unfamiliar**
+- `grand` [ɡrænd] adj. [**unfamiliar**]
     - The grand entrance to the building was decorated with ornate carvings.
     - > 建筑的宏伟入口装饰着`华丽的`雕刻。
 - `grant` [ɡrænt] v. 授予；允许；同意，n. 拨款；授予
@@ -1255,10 +1255,10 @@ categories:
 - `heel` [hiːl] n. 脚后跟；鞋跟
     - She twisted her ankle when she landed on her heel.
     - > 她着陆时脚后跟着地扭伤了脚踝。
-- `hollow` [ˈhɑːloʊ] adj. 空心的；凹陷的；空洞的 **unfamiliar**
+- `hollow` [ˈhɑːloʊ] adj. 空心的；凹陷的；空洞的 [**unfamiliar**]
     - The old tree had a hollow trunk.
     - > 那棵老树的树干是`空心的`。
-- `household` [ˈhaʊshoʊld] n. 家庭；家居，adj. 家庭的；家居的 **unfamiliar**
+- `household` [ˈhaʊshoʊld] n. 家庭；家居，adj. 家庭的；家居的 [**unfamiliar**]
     - She manages the household finances.
     - > 她管理`家庭`财务。
 - `housing` [ˈhaʊzɪŋ] n. 住房；住宅
@@ -1276,7 +1276,7 @@ categories:
 - `imply` [ɪmˈplaɪ] v. 暗示；意味着
     - His tone implied that he wasn't happy with the decision.
     - > 他的语气暗示他对这个决定不满意。
-- `impose` [ɪmˈpoʊz] v. 强制实行；征税；把…强加于 **unfamiliar**
+- `impose` [ɪmˈpoʊz] v. 强制实行；征税；把…强加于 [**unfamiliar**]
     - The new law imposes stricter regulations on the industry.
     - > 新法规对该行业`强制实行`更严格的监管。
 - `impress` [ɪmˈpres] v. 使印象深刻；给…留下印象
@@ -1298,7 +1298,7 @@ categories:
 - `junior` [ˈdʒuːniə(r)] adj. （年龄、职位等）较低的，（学校）初年级的
     - My sister is a junior in high school. 
     - > （我）妹妹在高中读初三。
-- `justify` [ˈdʒʌstɪfaɪ] v. 证明…是正当的，为…辩护 **unfamiliar**
+- `justify` [ˈdʒʌstɪfaɪ] v. 证明…是正当的，为…辩护 [**unfamiliar**]
     - Can you justify your actions? 
     - > 你能证明你的行为是正当的吗？
 - `labor` [ˈleɪbə(r)] n. 劳动，工作
@@ -1316,13 +1316,13 @@ categories:
 - `league` [liːɡ] n. 联盟，联合会
     - The two teams are in the same league. 
     - > 这两支队伍在同一个联盟中。
-- `lean` [liːn] v. 倾斜，靠着 **unfamiliar**
+- `lean` [liːn] v. 倾斜，靠着 [**unfamiliar**]
     - She leaned against the wall and closed her eyes. 
     - > 她`靠`在墙上闭上了眼睛。
-- `lively` [ˈlaɪvli] adj. 活泼的，热闹的 **unfamiliar**
+- `lively` [ˈlaɪvli] adj. 活泼的，热闹的 [**unfamiliar**]
     - The party was a lively affair.  
     - > 派对很热闹。
-- `loan` [ləʊn] n. 贷款，借款 **unfamiliar**
+- `loan` [ləʊn] n. 贷款，借款 [**unfamiliar**]
     - He took out a loan to buy a new car. 
     - > 他借款买了一辆新车。
 - `logical` [ˈlɒdʒɪkl] adj. 合乎逻辑的，有道理的
@@ -1346,10 +1346,10 @@ categories:
 - `maintain` [meɪnˈteɪn] v. 维持，保持
     - It's important to maintain a healthy lifestyle. 
     - > 保持健康的生活方式很重要。
-- `mass` [mæs] n., adj. 大量的，质量，群众  **unfamiliar**
+- `mass` [mæs] n., adj. 大量的，质量，群众  [**unfamiliar**]
     - There was a mass of people on the street. 
     - > 街上有很多人。
-- `massive` [ˈmæsɪv] adj. 巨大的，大规模的   **unfamiliar**
+- `massive` [ˈmæsɪv] adj. 巨大的，大规模的   [**unfamiliar**]
     - The earthquake caused massive damage. 
     - > 地震造成了巨大的破坏。
 - `matching` [ˈmætʃɪŋ] adj. 相配的，一致的
@@ -1361,25 +1361,25 @@ categories:
 - `means` [miːnz] n. 手段，方法
     - We need to find a means of solving this problem. 
     - > 我们需要找到解决这个问题的方法。
-- `measurement` [ˈmeʒəmənt] n. 测量，度量  **unfamiliar**
+- `measurement` [ˈmeʒəmənt] n. 测量，度量  [**unfamiliar**]
     - The measurement of the room is 5 meters by 6 meters. 
     - > 房间的尺寸是5米乘6米。
-- `melt` [melt] v. 融化，熔化   **unfamiliar**
+- `melt` [melt] v. 融化，熔化   [**unfamiliar**]
     - The ice melted in the sun. 
     - > 冰在阳光下融化了。
-- `military` [ˈmɪlɪtri] adj., n. 军事的，军队   **unfamiliar**
+- `military` [ˈmɪlɪtri] adj., n. 军事的，军队   [**unfamiliar**]
     - He joined the military when he was 18. 
     - > 他18岁时加入了军队。
-- `mineral` [ˈmɪnərəl] n. 矿物质   **unfamiliar**
+- `mineral` [ˈmɪnərəl] n. 矿物质   [**unfamiliar**]
     - Minerals are important for our health. 
     - > 矿物质对我们的健康很重要。
-- `minister` [ˈmɪnɪstə(r)] n. 部长，牧师   **unfamiliar**
+- `minister` [ˈmɪnɪstə(r)] n. 部长，牧师   [**unfamiliar**]
     - The prime minister met with the foreign minister. 
     - > 总理会见了外交部长。
 - `minor` [ˈmaɪnə(r)] adj. 较小的，次要的
     - The problem was only a minor one. 
     - > 这个问题只是个小问题。
-- `minority` [maɪˈnɒrəti] n. 少数派   **unfamiliar** (备注: 多数派是`majority`)
+- `minority` [maɪˈnɒrəti] n. 少数派   [**unfamiliar**] (备注: 多数派是`majority`)
     - The minority of people in this country speak a different language. 
     - > 这个国家的少数人说其他语言。
 - `major` [ˈmeɪdʒə(r)] n. 主修科目，少校
@@ -1394,7 +1394,7 @@ categories:
 - `mixed` [mɪkst] adj. 混合的，杂色的
     - The paint was a mixed color of blue and green. 
     - > 油漆是蓝色和绿色混合的颜色。
-- `moral` [ˈmɒrəl] adj., n. 道德的，寓意(指个人或社会对正确和错误的标准和价值观)   **unfamiliar**
+- `moral` [ˈmɒrəl] adj., n. 道德的，寓意(指个人或社会对正确和错误的标准和价值观)   [**unfamiliar**]
     - The story had a moral lesson. 
     - > 这个故事有一个道德的教训。
     - > `Ethical` 通常指一些专业的行为准则，而 `moral` 更倾向于指个人内心的信念和行为。
@@ -1402,43 +1402,43 @@ categories:
     - > 合乎`道德`、有说服力的设计和黑暗模式之间的界限在哪里？
     - He has high `moral` principles.
     - > 他很有`道德`。
-- `motor` [ˈməʊtə(r)] n., adj. 发动机，机动的   **unfamiliar**
+- `motor` [ˈməʊtə(r)] n., adj. 发动机，机动的   [**unfamiliar**]
     - The car had a problem with its motor. 
     - > 这辆车发动机有问题。
-- `mount` [maʊnt] v. 登上，骑上, 安装  **unfamiliar**
+- `mount` [maʊnt] v. 登上，骑上, 安装  [**unfamiliar**]
     - He mounted the horse and rode away. 
     - > 他`骑上`马匹离开了。
-- `multiply` [ˈmʌltɪplaɪ] v. 乘，增加  **unfamiliar**
+- `multiply` [ˈmʌltɪplaɪ] v. 乘，增加  [**unfamiliar**]
     - If you multiply 5 by 3, you get 15. 
     - > 如果你把5乘以3，得到15。
-- `negative` [ˈneɡətɪv] n. 否定，负数 adj. 消极的  **unfamiliar**
+- `negative` [ˈneɡətɪv] n. 否定，负数 adj. 消极的  [**unfamiliar**]
     - He answered with a negative. 
     - > 他回答了一个否定。
-- `nerve` [nɜːv] n. 神经，勇气, 胆量  **unfamiliar**
+- `nerve` [nɜːv] n. 神经，勇气, 胆量  [**unfamiliar**]
     - He had the nerve to ask for more money. 
     - > 他有`胆量`要求更多的钱。
-- `nevertheless` [ˌnevəðəˈles] adv. 然而，不过  **unfamiliar**
+- `nevertheless` [ˌnevəðəˈles] adv. 然而，不过  [**unfamiliar**]
     - He was injured, nevertheless he continued to play. 
     - > 他受伤了，然而他继续比赛。
-- `notion` [ˈnəʊʃn] n. 概念，想法  **unfamiliar**
+- `notion` [ˈnəʊʃn] n. 概念，想法  [**unfamiliar**]
     - I have no notion of what to do next. 
     - > 我不知道下一步该怎么做。
-- `numerous` [ˈnjuːmərəs] adj. 众多的，许多的   **unfamiliar**
+- `numerous` [ˈnjuːmərəs] adj. 众多的，许多的   [**unfamiliar**]
     - There are numerous reasons why I can't come. 
     - > 有很多原因我不能来。
 
 
 ## o
 
-- `object` [ˈɒbdʒɛkt]  v. 反对  n. 物品   **unfamiliar**
+- `object` [ˈɒbdʒɛkt]  v. 反对  n. 物品   [**unfamiliar**]
     - She will object to the proposal at the meeting tomorrow.
     - > 她明天在会议上会`反对`这个提议。
-- `objective` [əbˈdʒɛktɪv]  n. 目的, 目标  adj. 客观的   **unfamiliar**
+- `objective` [əbˈdʒɛktɪv]  n. 目的, 目标  adj. 客观的   [**unfamiliar**]
     - The objective of the project is to increase sales by 20%. 
     - > 这个项目的`目标`是将销售额增加20%
     - The report provides an objective analysis of the situation.
     - > 报告提供了对情况的`客观的`分析。
-- `obligation` [ˌɒblɪˈɡeɪʃən]  n.   **unfamiliar**
+- `obligation` [ˌɒblɪˈɡeɪʃən]  n.   [**unfamiliar**]
     - It is your obligation to pay your bills on time.
     - > 按时支付你的账单是你的`义务`。
 - `observation` [ˌɒbzəˈveɪʃən]  n.
@@ -1465,7 +1465,7 @@ categories:
 - `opponent` [əˈpəʊnənt]  n.
     - The two opponents will face each other in the boxing ring tonight.
     - > 今晚两名`对手`将在拳击比赛中交锋。
-- `oppose` [əˈpəʊz]  v.   **unfamiliar**
+- `oppose` [əˈpəʊz]  v.   [**unfamiliar**]
     - The protesters opposed the new law.
     - > 抗议者`抵制`新法律。
 - `opposed` [əˈpəʊzd]  adj. 反对的，敌对的；相反的，对立的
@@ -1474,7 +1474,7 @@ categories:
 - `opposition` [ˌɒpəˈzɪʃən]  n.
     - The opposition party has been criticizing the government's policies.
     - > `反对`党一直在批评政府的政策。
-- `organ` [ˈɔːɡən]  n.   **unfamiliar**
+- `organ` [ˈɔːɡən]  n.   [**unfamiliar**]
     - The heart is an important organ in the human body.
     - > `心脏`是人体中重要的器官。
 - `origin` [ˈɒrɪdʒɪn]  n.
@@ -1483,10 +1483,10 @@ categories:
 - `otherwise` [ˈʌðəwaɪz]  adv. 否则，不然；除此以外，在其他方面；不同地，另外地；以其他方式，用别的方法 adj. 不是那样的，另外情况下的
     - You need to finish your homework, otherwise you won't pass the test.
     - > 你需要完成家庭作业, `否则`你就无法通过考试
-- `outcome` [ˈaʊtkʌm]  n.   **unfamiliar**
+- `outcome` [ˈaʊtkʌm]  n.   [**unfamiliar**]
     - The outcome of the election was a surprise to many people.
     - > 选举的`结果`让许多人感到惊讶。
-- `outer` [ˈaʊtə]  adj.   **unfamiliar**
+- `outer` [ˈaʊtə]  adj.   [**unfamiliar**]
     - The outer planets in our solar system are all gas giants.
     - > 我们太阳系中的`外围的`行星都是气态巨型行星。
 - `outline` [ˈaʊtlaɪn]  n. 轮廓，外形；轮廓图，草图；提纲，大纲；梗概，要点；（词的）速记形式  v. 概述，略述；勾勒，描画……的轮廓
@@ -1496,7 +1496,7 @@ categories:
     - > 首先为孩子`概述`节目情节。
     - Please outline your proposal for the new project.
     - > 请`概述`你对新项目的提议。
-- `overall` [ˌəʊvərˈɔːl]  adj. 总体的;  adv. 总的来说   **unfamiliar**
+- `overall` [ˌəʊvərˈɔːl]  adj. 总体的;  adv. 总的来说   [**unfamiliar**]
     - The overall goal of the company is to increase profits.
     - > 公司的`总体的`目标是增加利润。
     - Overall, it was a great experience.
@@ -1510,7 +1510,7 @@ categories:
 
 ## p
 
-- `pace` [peɪs]  n. 步速，（移动的）速度；（发生、进展、发展的）速度，节奏；v.（因担忧、紧张或不耐烦而）踱步，踱步于；（在赛跑中）为……定速度；为……领跑；   **unfamiliar**
+- `pace` [peɪs]  n. 步速，（移动的）速度；（发生、进展、发展的）速度，节奏；v.（因担忧、紧张或不耐烦而）踱步，踱步于；（在赛跑中）为……定速度；为……领跑；   [**unfamiliar**]
     - He walked at a slow pace. 
     - > 他以一个很慢的`步速`走了。
     - She paced back and forth nervously. 
@@ -1526,19 +1526,19 @@ categories:
 - `partly` [ˈpɑːtli]  adv.
     - The delay was partly due to bad weather. 
     - > 这个延误`在一定程度上`是由于恶劣天气。
-- `passage` [ˈpæsɪdʒ]  n.（书、演讲、乐曲等的）段，章；（人生或体育赛事等中的）阶段；过道，走廊；（人群等中的）通道，通路；（人体的）管道；经过，穿过；   **unfamiliar**
+- `passage` [ˈpæsɪdʒ]  n.（书、演讲、乐曲等的）段，章；（人生或体育赛事等中的）阶段；过道，走廊；（人群等中的）通道，通路；（人体的）管道；经过，穿过；   [**unfamiliar**]
     - The novel has many poetic passages. 
     - > 这部小说有许多诗意的`段落`。
 - `passenger` 乘客
 - `permanent` [ˈpɜːmənənt]  adj.
     - The ink is permanent and cannot be erased. 
     - > 这种墨水是`永久的`，无法擦除。
-- `permit` [pəˈmɪt]  v. 允许; n. 许可证   **unfamiliar**
+- `permit` [pəˈmɪt]  v. 允许; n. 许可证   [**unfamiliar**]
     - The company will not permit employees to smoke on the premises. 
     - > 公司不`允许`员工在场地内吸烟。
     - You need a permit to park in this area. 
     - > 你需要一个`许可证`才能停车在这个区域内。
-- `perspective` [pəˈspɛktɪv]  n.（观察问题的）视角，观点；透视（画）法；（几何）透视关系，投影比例；洞察力，判断力；景观，远景；角度；（声音）立体效果; adj. 透视的  **unfamiliar**
+- `perspective` [pəˈspɛktɪv]  n.（观察问题的）视角，观点；透视（画）法；（几何）透视关系，投影比例；洞察力，判断力；景观，远景；角度；（声音）立体效果; adj. 透视的  [**unfamiliar**]
     - Clearly, from the schools' perspective, there's a lot of money to be saved.
     - > 显然，从学校的`视角`来看，这可以省下很多钱。
     - The artist used perspective to create a sense of depth in the painting. 
@@ -1546,7 +1546,7 @@ categories:
 - `phase` [feɪz]  n. 阶段, 时期
     - The project is currently in its final phase. 
     - > 该项目目前正在进行最后`阶段`。
-- `phenomenon` [fɪˈnɒmɪnən]  n.  **unfamiliar**
+- `phenomenon` [fɪˈnɒmɪnən]  n.  [**unfamiliar**]
     - The aurora borealis is a natural phenomenon in the polar regions. 
     - > 极光是极地地区的自然`现象`。
 - `philosophy` [fɪˈlɒsəfi]  n.
@@ -1555,13 +1555,13 @@ categories:
 - `pile` [paɪl] n. 一堆，一叠； verb. 堆积，积累。
     - There was a pile of books on the table. 
     - > 桌子上堆着一叠书。
-- `pitch` [pɪtʃ] n. 音高，场地，推销； v. 投掷，推销。  **unfamiliar**
+- `pitch` [pɪtʃ] n. 音高，场地，推销； v. 投掷，推销。  [**unfamiliar**]
     - The pitch of the song was too high for me to sing. 
     - > 这首歌的`音高`对我来说太高了。
-- `plain` [pleɪn] adj. 简单的，朴素的。  **unfamiliar**
+- `plain` [pleɪn] adj. 简单的，朴素的。  [**unfamiliar**]
     - She wore a plain white shirt. 
     - > 她穿了一件朴素的白衬衫。
-- `pointed` [pɔɪntɪd] adj. 尖锐的，尖角的。  **unfamiliar**
+- `pointed` [pɔɪntɪd] adj. 尖锐的，尖角的。  [**unfamiliar**]
     - The pointed roof of the tower was visible from far away. 
     - > 塔楼的尖顶从远处可见。
 - `popularity` [ˌpɑpjuˈlærəti] n. 受欢迎，流行。
@@ -1570,34 +1570,34 @@ categories:
 - `pose` [poʊz] v. 摆姿势，引起困难，提出问题。
     - He posed for a photograph in front of the Eiffel Tower. 
     - > 他在艾菲尔铁塔前摆着姿势照相。
-- `positive` [ˈpɑzətɪv] n. 肯定，正面，阳极。 adj. 正面的, 积极的  **unfamiliar**
+- `positive` [ˈpɑzətɪv] n. 肯定，正面，阳极。 adj. 正面的, 积极的  [**unfamiliar**]
     - He has a positive attitude towards life. 
     - > 他对生活持积极的态度。
-- `possess` [pəˈzɛs] v. 拥有，具有。  **unfamiliar**
+- `possess` [pəˈzɛs] v. 拥有，具有。  [**unfamiliar**]
     - She possesses a great talent for singing. 
     - > 她具有非常出色的歌唱天赋。
-- `praise` [preɪz] n. 赞扬，夸奖； v. 赞美，夸奖。   **unfamiliar**
+- `praise` [preɪz] n. 赞扬，夸奖； v. 赞美，夸奖。   [**unfamiliar**]
     - The teacher praised the student for his hard work. 
     - > 老师因为学生的努力工作而`表扬`了他。
 - `presence` [ˈprɛzəns] n. 出席，存在，氛围。
     - His presence at the meeting was required. 
     - > 他需要出席会议。
-- `preserve` [prɪˈzɜrv] v. 保存，保护，腌制。  **unfamiliar**  (`reserve` [rɪˈzɜrv] n. 储备，保留； v. 预订，保留。)
+- `preserve` [prɪˈzɜrv] v. 保存，保护，腌制。  [**unfamiliar**]  (`reserve` [rɪˈzɜrv] n. 储备，保留； v. 预订，保留。)
     - She learned how to preserve fruits and vegetables for the winter. 
     - > 她学会了如何保存水果和蔬菜过冬。
-- `prime` [praɪm] adj. 主要的，最好的，黄金时期的。  **unfamiliar**
+- `prime` [praɪm] adj. 主要的，最好的，黄金时期的。  [**unfamiliar**]
     - He was in his prime when he won the championship. 
     - > 他在赢得冠军时正值黄金年华。
-- `principal` [ˈprɪnsəpl] adj. 首要的，主要的，校长。  **unfamiliar**
+- `principal` [ˈprɪnsəpl] adj. 首要的，主要的，校长。  [**unfamiliar**]
     - The principal of the school greeted the students on the first day of class. 
     - > 学校的校长在上课的第一天向学生们问好。
-- `principle` [ˈprɪnsəpl] n. 原则，准则，道义。  **unfamiliar**
+- `principle` [ˈprɪnsəpl] n. 原则，准则，道义。  [**unfamiliar**]
     - He always adheres to the principle of honesty. 
     - > 他始终坚持诚实的原则。
 - `priority` [praɪˈɔrəti] n. 优先权，重要性。
     - Safety is our top priority. 
     - > 安全是我们最重要的事情。
-- `procedure` [prəˈsidʒər] n. 程序，步骤。  **unfamiliar**
+- `procedure` [prəˈsidʒər] n. 程序，步骤。  [**unfamiliar**]
     - The procedure must be followed in a specific order. 
     - > 步骤必须按照特定的顺序进行。
 - `produce` [ˈprɑdus] n. 产品，农产品； [prəˈdus] verb. 生产，制造。
@@ -1609,22 +1609,22 @@ categories:
 - `proposal` [prəˈpoʊzəl] n. 提议，建议。
     - I accepted his proposal of marriage. 
     - > 我接受了他的求婚。
-- `propose` [prəˈpoʊz] v. 建议，提议，求婚。  **unfamiliar**
+- `propose` [prəˈpoʊz] v. 建议，提议，求婚。  [**unfamiliar**]
     - He proposed a new idea for the company's marketing strategy. 
     - > 他提出了公司的市场营销策略的新想法。
-- `prospect` [ˈprɑspɛkt] n. 前景，展望，可能性。  **unfamiliar**
+- `prospect` [ˈprɑspɛkt] n. 前景，展望，可能性。  [**unfamiliar**]
     - The prospect of finding a job after graduation is uncertain. 
     - > 毕业后找到工作的前景是不确定的。
 - `psychologist` [saɪˈkɑlədʒɪst] n. 心理学家。
     - The psychologist helped him deal with his anxiety. 
     - > 心理学家帮助他处理他的焦虑。
-- `psychology` [saɪˈkɑlədʒi] n. 心理学。  **unfamiliar**
+- `psychology` [saɪˈkɑlədʒi] n. 心理学。  [**unfamiliar**]
     - He studied psychology at university. 
     - > 他在大学学习了心理学。
 - `publication` [ˌpʌblɪˈkeɪʃn] n. 出版物，刊物。
     - The publication of the new novel has been delayed. 
     - > 新小说的出版被推迟了。
-- `pursue` [pərˈsu] v. 追求，追赶，继续进行。  **unfamiliar**
+- `pursue` [pərˈsu] v. 追求，追赶，继续进行。  [**unfamiliar**]
     - He decided to pursue his dreams and become a musician. 
     - > 他决定追求自己的梦想，成为一名音乐家。
 
@@ -1634,22 +1634,22 @@ categories:
 - `realistic` [riəˈlɪstɪk] adj. 现实的，实际的。
     - She has a realistic approach to problem-solving. 
     - > 她对解决问题有一种现实的方法。
-- `recall` [riˈkɔl] v. 回忆起，召回。  **unfamiliar**
+- `recall` [riˈkɔl] v. 回忆起，召回。  [**unfamiliar**]
     - He couldn't recall the name of the movie he saw last night. 
     - > 他忘记了昨晚看的电影的名字。
-- `recover` [rɪˈkʌvər] v. 康复，恢复。  **unfamiliar**
+- `recover` [rɪˈkʌvər] v. 康复，恢复。  [**unfamiliar**]
     - He is recovering from a cold. 
     - > 他正在从感冒中康复。
-- `reduction` [rɪˈdʌkʃən] n. 减少，削减。  **unfamiliar**
+- `reduction` [rɪˈdʌkʃən] n. 减少，削减。  [**unfamiliar**]
     - The company announced a reduction in staff. 
     - > 公司宣布裁员。
-- `regard` [rɪˈɡɑrd] v. 关心，看待，尊重； 关注，尊敬。  **unfamiliar**
+- `regard` [rɪˈɡɑrd] v. 关心，看待，尊重； 关注，尊敬。  [**unfamiliar**]
     - He regards his family and friends as the most important thing in his life. 
     - > 他认为他的家人和朋友是他生活中最重要的事情。
-- `regional` [ˈridʒənl] adj. 地区的，区域的。  **unfamiliar**
+- `regional` [ˈridʒənl] adj. 地区的，区域的。  [**unfamiliar**]
     - The regional government is responsible for local affairs. 
     - > 地方政府负责本地事务。
-- `regulation` [ˌrɛɡjʊˈleɪʃn] n. 规定，条例，管理。  **unfamiliar**
+- `regulation` [ˌrɛɡjʊˈleɪʃn] n. 规定，条例，管理。  [**unfamiliar**]
     - The government has introduced new regulations to improve traffic safety. 
     - > 政府出台了新的规定以提高交通安全。
 - `relatively` [ˈrɛlətɪvli] adv. 副词：相对地，比较地。
@@ -1658,37 +1658,37 @@ categories:
 - `relevant` [ˈrɛləvənt] adj. 相关的，切题的。
     - His work experience is not relevant to the job he is applying for. 
     - > 他的工作经验与他申请的工作无关。
-- `relief` [rɪˈlif] n. 宽慰，救济，浮雕。  **unfamiliar**
+- `relief` [rɪˈlif] n. 宽慰，救济，浮雕。  [**unfamiliar**]
     - He felt a sense of relief when he passed the exam. 
     - > 当他通过考试时，他感到一种宽慰的感觉。
-- `rely` [rɪˈlaɪ] v. 依靠，信赖。  **unfamiliar**
+- `rely` [rɪˈlaɪ] v. 依靠，信赖。  [**unfamiliar**]
     - She can rely on her friends for help. 
     - > 她可以依靠她的朋友来寻求帮助。
-- `remark` [rɪˈmɑrk] n. 备注，评论； v. 评论，谈论。  **unfamiliar**
+- `remark` [rɪˈmɑrk] n. 备注，评论； v. 评论，谈论。  [**unfamiliar**]
     - His remark about her weight was uncalled for. 
     - > 他关于她体重的评论是不必要的。
-- `representative` [ˌrɛprɪˈzɛntətɪv] n. 代表，代理人； 代表性的。  **unfamiliar**
+- `representative` [ˌrɛprɪˈzɛntətɪv] n. 代表，代理人； 代表性的。  [**unfamiliar**]
     - The representative from the company gave a presentation about their products. 
     - > 该公司的代表介绍了他们的产品。
-- `reputation` [ˌrɛpjʊˈteɪʃn] n. 声誉，名誉。  **unfamiliar**
+- `reputation` [ˌrɛpjʊˈteɪʃn] n. 声誉，名誉。  [**unfamiliar**]
     - The company has a good reputation for quality products. 
     - > 该公司以产品质量好而著称。
-- `reserve` [rɪˈzɜrv] n. 储备，保留； v. 预订，保留。  **unfamiliar**
+- `reserve` [rɪˈzɜrv] n. 储备，保留； v. 预订，保留。  [**unfamiliar**]
     - She made a reservation for a hotel room. 
     - > 她预订了一间酒店房间。
-- `resident` [ˈrɛzədənt] n. 居民，住户； 居住的。  **unfamiliar**
+- `resident` [ˈrɛzədənt] n. 居民，住户； 居住的。  [**unfamiliar**]
     - The residents of the neighborhood are complaining about the noise. 
     - > 社区居民正在抱怨噪音。
-- `resist` [rɪˈzɪst] v. 抵抗，抗拒。  **unfamiliar**
+- `resist` [rɪˈzɪst] v. 抵抗，抗拒。  [**unfamiliar**]
     - He can't resist eating chocolate. 
     - > 他忍不住要吃巧克力。
-- `resort` [rɪˈzɔrt] n. 度假胜地，手段； v. 诉诸于。  **unfamiliar**
+- `resort` [rɪˈzɔrt] n. 度假胜地，手段； v. 诉诸于。  [**unfamiliar**]
     - They decided to take a beach resort for their holiday. 
     - > 他们决定去海滩度假。
-- `retain` [rɪˈteɪn] v. 保持，保留，记住。  **unfamiliar**
+- `retain` [rɪˈteɪn] v. 保持，保留，记住。  [**unfamiliar**]
     - He has the ability to retain information easily. 
     - > 他有记忆信息的能力。
-- `reveal` [rɪˈvil] v. 揭示，透露。  **unfamiliar**
+- `reveal` [rɪˈvil] v. 揭示，透露。  [**unfamiliar**]
     - The investigation revealed some surprising facts. 
     - > 调查揭示了一些令人惊讶的事实。
 - `revolution` [ˌrɛvəˈluʃn] n. 革命，旋转。
@@ -1697,7 +1697,7 @@ categories:
 - `reward` [rɪˈwɔrd] n. 报酬，奖励； v. 奖励，报答。
     - He received a reward for his hard work. 
     - > 他因工作努力而获得奖励。
-- `rid` [rɪd] v. 摆脱，除去。  **unfamiliar**
+- `rid` [rɪd] v. 摆脱，除去。  [**unfamiliar**]
     - He wanted to rid himself of the bad habit of smoking. 
     - > 他想摆脱吸烟的不良习惯。
 - `rise` [raɪz] n. 上升，涨价； v. 上升，增加。
@@ -1709,13 +1709,13 @@ categories:
 - `routine` [ruˈtin] adj. 例行的，常规的。 n. 常规，惯例；生活乏味，无聊；（演出中的）一套动作，一系列笑话（等）；（为达到特定目的的）老一套，俗套；（计算机）例行程序
     - He followed a daily routine of exercise and healthy eating. 
     - > 他按照每天锻炼和健康饮食的例行程序进行。
-- `rub` [rʌb] v. 擦，摩擦，揉。  **unfamiliar**
+- `rub` [rʌb] v. 擦，摩擦，揉。  [**unfamiliar**]
     - His sore muscles needed some rubbing to ease the pain. 
     - > 他的酸痛肌肉需要一些摩擦来缓解疼痛。
-- `rubber` [ˈrʌbər] n. 橡胶，橡皮； 橡胶制的。  **unfamiliar**
+- `rubber` [ˈrʌbər] n. 橡胶，橡皮； 橡胶制的。  [**unfamiliar**]
     - He wants to replace the rubber soles on his shoes. 
     - > 他想要更换鞋子上的橡胶鞋底。
-- `rural` [ˈrʊrəl] adj. 农村的，乡下的。  **unfamiliar**
+- `rural` [ˈrʊrəl] adj. 农村的，乡下的。  [**unfamiliar**]
     - She enjoys the peace and quiet of rural life. 
     - > 她喜欢乡村生活的安静和祥和。
 

@@ -134,8 +134,8 @@ b@b-VirtualBox:~/git_test_link/Flock-AI-Fish-Unreal-VR$ git branch
 `git fetch [remote]`
 
 
-- 取回远程仓库的变化，并与本地分支合并
-`git pull [remote] [branch]`
+- 取回远程仓库的变化，并与本地分支合并, 如果遇到这个报错`error: Your local changes to the following files would be overwritten by merge`, 那你应该加上`--autostash`(他会自动帮你把本地的改动`git stash`起来, 等你git pull了之后再自动帮你`git stash pop`出来)
+`git pull [remote] [branch] [--autostash]`
 
 - 上传本地指定分支到远程仓库
 `git push [remote] [branch]`

@@ -10,7 +10,9 @@ categories:
 
 # Main Body
 
+
 ## 1. Family Morning Routine
+
 - good morning, Nicholas. it's time for school.come on get out of bed.Jessica's already up and dressed.
 - good morning, mom.
 - let's check the weather out today.it's looking a bit cloudy.looks like it's gonna rain.So, we should take our umbrellas.the trees are blowing side to side. it means it's a little windy but still a lovely morning.
@@ -31,6 +33,7 @@ go to the bathroom and brush your teeth, then get dressed and come downstairs to
 
 
 ## 2. House - Cleaning Day 
+
 -it's the day we thoroughly(/ ˈθɜːrəli / 全面的) clean the whole house.
 we throw(扔) away things we don't need, pack up（打包） things to donate(捐赠) to the local(本地的) homeless(无家可归的) shelter(橱窗), clean all of the rooms and wash all of the windows.
 
@@ -99,6 +102,7 @@ i'll go check on the kids now.
 
 
 ## 3. What's for Dinner? 
+
 -mom, what's for dinner?
 
 -i could really go for something spicy（辛辣的） like chili(辣椒).
@@ -145,6 +149,7 @@ i prefer to eat fruit for dessert（甜点/ dɪˈzɜːrt /）, not with the main
 
 
 ## 4. Grocery Shopping 
+
 "Grocery store" 和 "supermarket" 都是指卖食品和日用品的商店，但它们之间有一些区别。
 "Grocery store" 通常是指规模较小、存货种类较少的商店，主要出售食品和日用品，如牛奶、面包、鸡蛋、洗衣粉等。这些商店可能只有一到两个过道，不提供购物车，而且通常只能接受现金或借记卡付款。
 "Supermarket" 是指规模较大的商店，通常有许多个过道和多个部门，如食品、药品、家居、电器等。超市通常提供购物车，并接受多种付款方式。除了食品和日用品，超市还可能售卖其他商品，如家具、玩具等。
@@ -201,6 +206,7 @@ i'll be back soon.
 -thanks.
 
 ## 5. I'll Fix It Myself 
+
 -the clothes dryer（烘干机） stopped working. 
 We need a new one.
 
@@ -236,6 +242,7 @@ you could definitely（明确地/ ˈdefɪnətli /） say that repairing（修复
 
 ## 6. Decorating the House 
 
+
 -can you hold（抓牢） the end of this tape measure（卷尺）?
 
 -sure. what's this for?
@@ -260,6 +267,7 @@ maybe we can decorate it in a more traditional（传统的） way.
 
 
 ## 7. Family's Expenses 
+
 
 -i went over the household budget and we've overspent this month.
 
@@ -306,6 +314,7 @@ and you like to cook.
 
 
 ## 8. Electricity Bill 
+
 
 -did you see our last electricity bill?
 
@@ -371,6 +380,7 @@ we'll do so from now on.
 
 
 ## 1. Family Morning Routine
+
 - @ morning, Nicholas. @@ time @ school. @ out @  bed.Jessica @@ up and dressed.
 - good morning, mom.
 -  @@ check @ weather @@ . @@ looking @@ cloudy.@ like @@ gonna rain.So, @ @ take @ umbrellas.the trees @@ side @@. @ means @@ windy but @@ lovely @.
@@ -391,6 +401,7 @@ we'll do so from now on.
 
 
 ## 2. House - Cleaning Day 
+
 -it's the day we @(/ ˈθɜːrəli / 全面的) clean @whole@
 we (扔) away things we don't need, （打包） things to (捐赠) to the(本地的) (无家可归的) (橱窗), clean @@@ rooms and @@@ the windows.
 
@@ -459,6 +470,7 @@ i'll @ check @ the kids now.
 
 
 ## 3. What's for Dinner? 
+
 -mom, @@ for dinner?
 
 -i @ really @@ something spicy（辛辣的） @ chili(辣椒).
@@ -505,6 +517,7 @@ i prefer @eat fruit @ （甜点/ dɪˈzɜːrt /）, not with the （主菜）, s
 
 
 ## 4. Grocery Shopping 
+
 "Grocery store" 和 "supermarket" 都是指卖食品和日用品的商店，但它们之间有一些区别。
 "Grocery store" 通常是指规模较小、存货种类较少的商店，主要出售食品和日用品，如牛奶、面包、鸡蛋、洗衣粉等。这些商店可能只有一到两个过道，不提供购物车，而且通常只能接受现金或借记卡付款。
 "Supermarket" 是指规模较大的商店，通常有许多个过道和多个部门，如食品、药品、家居、电器等。超市通常提供购物车，并接受多种付款方式。除了食品和日用品，超市还可能售卖其他商品，如家具、玩具等。
@@ -563,6 +576,8 @@ i'll @@ soon.
 
 
 ## 5. I'll Fix It Myself 
+
+
 -the clothes （烘干机） @ working. 
 We need a new one.
 
@@ -598,6 +613,7 @@ you could definitely（明确地/ ˈdefɪnətli /） say that repairing（修复
 
 ## 6. Decorating the House 
 
+
 -can you hold the end of this tape measure?
 
 -sure. 
@@ -629,6 +645,7 @@ maybe we can decorate it in a more traditional way.
 
 
 ## 7. Family's Expenses 
+
 
 -i went over the household budget and we've overspent this month.
 
@@ -675,6 +692,7 @@ and you like to cook.
 
 
 ## 8. Electricity Bill 
+
 
 -did you see our last electricity bill?
 

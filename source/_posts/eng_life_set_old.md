@@ -1,10 +1,10 @@
 ---
-title: 日常英语集
+title: 日常英语集deprecated
 date: 2023-06-02 22:26:21
 tags:
 - English
 categories:
-- Misc
+- English
 ---
 
 

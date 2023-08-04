@@ -1367,7 +1367,7 @@ categories:
 - `melt` [melt] v. 融化，熔化   [**unfamiliar**]
     - The ice melted in the sun. 
     - > 冰在阳光下融化了。
-- `military` [ˈmɪlɪtri] adj., n. 军事的，军队   [**unfamiliar**]
+- `military` [ˈmɪləteri] adj., n. 军事的，军队   [**unfamiliar**]
     - He joined the military when he was 18. 
     - > 他18岁时加入了军队。
 - `mineral` [ˈmɪnərəl] n. 矿物质   [**unfamiliar**]

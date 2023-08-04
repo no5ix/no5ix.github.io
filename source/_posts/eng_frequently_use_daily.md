@@ -28,8 +28,10 @@ categories:
 - have u asked the girl whom  we picked up many weeks ago on Saturday?
 
 - I have collected some sentences that we will frequently use in the future.
-- I just had diarrhea.（我刚刚拉肚子了。）
+
+- I just had `diarrhea`.（我刚刚拉肚子了。[ˌdaɪəˈriːə]）
 - I'm having diarrhea right now.（我现在正在拉肚子。）
+
 - maybe we can have some roadside deep-fried skewers tonight? (也许今晚我们可以吃路边炸串？注: 在美国，炸串通常被称为"deep-fried skewers", skewer[ˈskjuːər])
 - we'd better go to bady dragon city tomorrow bacasuse our car's battery has 184km left.
 - u 'd better ask her right now `in case` u forget later

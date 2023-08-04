@@ -16,15 +16,23 @@ categories:
 
 
 - what do u say we put a nail clipper in our car?
-- please get off of me(请从我身上下来)
+- please `get off` of me(请从我身上下来)
+- Please `get off` the vehicle/car.
+
 - have u turned on the water heater?
 - did u turn on the water heater? (你开了热水器了吗)
 - > "你开了热水器没" 可以翻译为 "Did you turn on the water heater?" 或者 "Have you turned on the water heater?"，两种方式都是可以的，视语境和口语习惯定。其中，"Did you turn on the water heater?" 更强调过去发生的动作，而"Have you turned on the water heater?" 则更强调现在的状态。
+
 - the girl we picked up this morning, have u asked her whether(if) she needs a ride tomorrow morning ?
-- have u asked the girl who we picked up this morning whether she needs a ride tomorrow morning?
+- have u asked the girl `whom` we `picked up` this morning whether she needs a ride tomorrow morning?
+- have u asked the girl whom  we picked up many weeks ago on Saturday?
+
 - I have collected some sentences that we will frequently use in the future.
 - I just had diarrhea.（我刚刚拉肚子了。）
 - I'm having diarrhea right now.（我现在正在拉肚子。）
+- maybe we can have some roadside deep-fried skewers tonight? (也许今晚我们可以吃路边炸串？注: 在美国，炸串通常被称为"deep-fried skewers", skewer[ˈskjuːər])
+- we'd better go to bady dragon city tomorrow bacasuse our car's battery has 184km left.
+- u 'd better ask her right now `in case` u forget later
 
 
 # Phrases

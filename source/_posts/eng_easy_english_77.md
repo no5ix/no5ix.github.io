@@ -371,134 +371,134 @@ we'll do so from now on.
 
 
 ## 1. Family Morning Routine
-- * morning, Nicholas. ** time * school. * out *  bed.Jessica ** up and dressed.
+- @ morning, Nicholas. @@ time @ school. @ out @  bed.Jessica @@ up and dressed.
 - good morning, mom.
--  ** check * weather ** . ** looking ** cloudy.* like ** gonna rain.So, * * take * umbrellas.the trees ** side **. * means ** windy but ** lovely *.
-*** bathroom and ** teeth, then * dressed and  * downstairs to ** breakfast
+-  @@ check @ weather @@ . @@ looking @@ cloudy.@ like @@ gonna rain.So, @ @ take @ umbrellas.the trees @@ side @@. @ means @@ windy but @@ lovely @.
+@@@ bathroom and @@ teeth, then @ dressed and  @ downstairs to @@ breakfast
 - okay, mom.
-- what * we **** breakfast?
-- we **** bagel with eggs, bacon and cream cheese this morning.and strawberry blueberry smoothie.
-- perfect.can ** the smoothie?
+- what @ we @@@@ breakfast?
+- we @@@@ bagel with eggs, bacon and cream cheese this morning.and strawberry blueberry smoothie.
+- perfect.can @@ the smoothie?
 - yeah, sure.you need frozen strawberries,blueberries, almond milk and Greek yogurt.
-- it * yummy. shall * also put * bananas?
-- no, we *** banana out ** recipe to ** flavors ** berries **. * the blender, and add almond milk first.Then, (加入) the strawberries, blueberries and Greek yogurt.blend ** smooth.you can add some cinnamon, too.
-- it * nice and (厚的, 浓稠的) and it * delicious.
-- the egg bagel sandwiches are ready too.** added tomatoes and (黄瓜).
-- ** missing **(组成部分): the ketchup.
-- that is a yummy egg bagel sandwich.it's so (让人容易填饱肚子的).(既然, 由于) we * breakfast, i guess *** going. (它看起来天气正在变好。).
-- that's right. i * it * rain.(过去将来时态)
+- it @ yummy. shall @ also put @ bananas?
+- no, we @@@ banana out @@ recipe to @@ flavors @@ berries @@. @ the blender, and add almond milk first.Then, (加入) the strawberries, blueberries and Greek yogurt.blend @@ smooth.you can add some cinnamon, too.
+- it @ nice and (厚的, 浓稠的) and it @ delicious.
+- the egg bagel sandwiches are ready too.@@ added tomatoes and (黄瓜).
+- @@ missing @@(组成部分): the ketchup.
+- that is a yummy egg bagel sandwich.it's so (让人容易填饱肚子的).(既然, 由于) we @ breakfast, i guess @@@ going. (它看起来天气正在变好。).
+- that's right. i @ it @ rain.(过去将来时态)
 
 
 
 ## 2. House - Cleaning Day 
--it's the day we *(/ ˈθɜːrəli / 全面的) clean *whole*
-we (扔) away things we don't need, （打包） things to (捐赠) to the(本地的) (无家可归的) (橱窗), clean *** rooms and *** the windows.
+-it's the day we @(/ ˈθɜːrəli / 全面的) clean @whole@
+we (扔) away things we don't need, （打包） things to (捐赠) to the(本地的) (无家可归的) (橱窗), clean @@@ rooms and @@@ the windows.
 
--what (精确地 ) ** have to do, mom?
+-what (精确地 ) @@ have to do, mom?
 
 -you must clean your rooms. 
 they are really (混乱的, 杂乱的).
-clear your beds and (椅子的复数) of all the (物品) and * sure * * them** (合适的) place.
-clean * the beds, too.
-then * your beds * fresh (linen 是亚麻布, linens 是床单).
-* the (整个的) room.
-(尘土, 除尘) the (shelf 的复数, 架子, 货架) and put the books that *** floor * their right places.
-(整理, 清理, 明白的, 易懂的) and (清洁) the (梳妆台) and * them in (顺序).
+clear your beds and (椅子的复数) of all the (物品) and @ sure @ @ them@@ (合适的) place.
+clean @ the beds, too.
+then @ your beds @ fresh (linen 是亚麻布, linens 是床单).
+@ the (整个的) room.
+(尘土, 除尘) the (shelf 的复数, 架子, 货架) and put the books that @@@ floor @ their right places.
+(整理, 清理, 明白的, 易懂的) and (清洁) the (梳妆台) and @ them in (顺序).
 
--that's a lot **.
+-that's a lot @@.
 
--we better get *. 
+-we better get @. 
 we have a lot to do,  (事实上).
 i have to do several (loads of "大量的")（待洗的衣物） and clean the kitchen and the dining room.
 
 -i'll clean the (客厅) and the （顶楼）.
-it's getting (满的   ) **.
-i don't even remember ***there anymore.
+it's getting (满的   ) @@.
+i don't even remember @@@there anymore.
 
--me *.
+-me @.
 we probably don't need a lot of that (东西).
-what * we do * it?
+what @ we do @ it?
 i think i'm gonna have a (车库) sale next weekend
 
 -yeah, that's a great idea.
-i * finished * the windows. 
+i @ finished @ the windows. 
 that was a huge job.
 
--oh, good.let me check the list and see what we** so far.
-* you cleaned the (柜台)?
+-oh, good.let me check the list and see what we@@ so far.
+@ you cleaned the (柜台)?
 
--yes, i *, so you can mark them * finished.
+-yes, i @, so you can mark them @ finished.
 
--okay, i'll (标记) the windows * the list, too.
+-okay, i'll (标记) the windows @ the list, too.
 what about the floors?
 have you (vacuum 的过去分词, 意思是用吸尘器所做的清洁) and (mop 的过去分词, n.拖把 v.用拖把清洁) them?
 
--i * done that too.
-what （其他） * we * on the list?
+-i @ done that too.
+what （其他） @ we @ on the list?
 
 -(v.除尘 n.尘土 dust 的现在进行时) the shelves.
 
--i already * that yesterday.
+-i already @ that yesterday.
 
--oh, yeah, i remember. so i'll (穿过) that * the list, too.
+-oh, yeah, i remember. so i'll (穿过) that @ the list, too.
 
--so how about you? what * you done so far?
+-so how about you? what @ you done so far?
 
 -i've cleaned the (顶楼). 
 i've made three （堆/ paɪl /）. 
 Keep, （捐赠[ˈdoʊneɪt]） or (卖), and (n. 垃圾, v. 当垃圾处理).
-i found a few （[ˌsentɪˈmentl]情感的, 多愁善感的, mental 是精神的/思想的） (物品) * I decided to *.
+i found a few （[ˌsentɪˈmentl]情感的, 多愁善感的, mental 是精神的/思想的） (物品) @ I decided to @.
 there is so much more （空间） now. 
-it * great.
+it @ great.
 
 -wonderful.
-i still have to clean the living room, then i'm *.
+i still have to clean the living room, then i'm @.
 Okay. 
-i'll * check * the kids now.
+i'll @ check @ the kids now.
 
 
 
 ## 3. What's for Dinner? 
--mom, ** for dinner?
+-mom, @@ for dinner?
 
--i * really ** something spicy（辛辣的） * chili(辣椒).
+-i @ really @@ something spicy（辛辣的） @ chili(辣椒).
 
 -spicy? i'm （不喜欢） spicy food right now.
 
--gee(（表示惊奇、感动或气恼）哇，哎呀；向右，前进，快（驾驭马牛等的吆喝声）), i ** so busy *** that i haven't ** a single(单个的, 单一的, 单身的) thought.(so ... that 结果副词从句)
-Anyway, i don't *(在这种情况下，"feel" 是指你对某个活动或行为的心理感受或倾向。所以，"I don't feel much like cooking" 的意思是你对做饭没有太大的兴趣或欲望。) much like cooking.
-i'm just ** to  (准备) a  (一餐, 进餐) even a small one, plus(加法, 加, 在这里的意思是"而且, 外加"), there's  (几乎) * in the  (冰箱) because we **** to the (杂货, 杂货店) store this weekend.
+-gee(（表示惊奇、感动或气恼）哇，哎呀；向右，前进，快（驾驭马牛等的吆喝声）), i @@ so busy @@@ that i haven't @@ a single(单个的, 单一的, 单身的) thought.(so ... that 结果副词从句)
+Anyway, i don't @(在这种情况下，"feel" 是指你对某个活动或行为的心理感受或倾向。所以，"I don't feel much like cooking" 的意思是你对做饭没有太大的兴趣或欲望。) much like cooking.
+i'm just @@ to  (准备) a  (一餐, 进餐) even a small one, plus(加法, 加, 在这里的意思是"而且, 外加"), there's  (几乎) @ in the  (冰箱) because we @@@@ to the (杂货, 杂货店) store this weekend.
 
--*** say we *(点餐; 顺序; 命令; 订购) some food?
+-@@@ say we @(点餐; 顺序; 命令; 订购) some food?
 
--good *, dad. 
-*** Chinese food.
-don't we *** somewhere?
+-good @, dad. 
+@@@ Chinese food.
+don't we @@@ somewhere?
 
--*** we ** that place the food was (油腻的) and it took them forever to *(投递, 运送).
+-@@@ we @@ that place the food was (油腻的) and it took them forever to @(投递, 运送).
 but you know what?
-** a new Greek restaurant (n. 市中心, adv.在市中心 adj. 在市中心的).
-** they deliver very *.
+@@ a new Greek restaurant (n. 市中心, adv.在市中心 adj. 在市中心的).
+@@ they deliver very @.
 
--but doesn’t Greek * have ** garlic(大蒜)?
-just the thought of garlic *** (turn sb. off 让某人扫兴了, turn sb. on 让某人来兴趣了).
-garlic's ** you. 
-i can't *** it myself.
+-but doesn’t Greek @ have @@ garlic(大蒜)?
+just the thought of garlic @@@ (turn sb. off 让某人扫兴了, turn sb. on 让某人来兴趣了).
+garlic's @@ you. 
+i can't @@@ it myself.
 
--at this * (速度) we'll never ** to eat.
-i'm *(饥饿的). 
-you two * too * (adj. 挑剔的).
+-at this @ (速度) we'll never @@ to eat.
+i'm @(饥饿的). 
+you two @ too @ (adj. 挑剔的).
 
--** better （订购） * pizza and ** a good movie.
+-@@ better （订购） @ pizza and @@ a good movie.
 
 -good idea.
-i'm crazy * pizza.
-* fact, my * is * (夏威夷的, 夏威夷人).
+i'm crazy @ pizza.
+@ fact, my @ is @ (夏威夷的, 夏威夷人).
 
--i dont like Hawaiian(夏威夷的) pizza, i can't  (站立; 忍受)  (菠萝） * pizza.
-i prefer *eat fruit * （甜点/ dɪˈzɜːrt /）, not with the （主菜）, so i'll （选择） chicken pizza.
+-i dont like Hawaiian(夏威夷的) pizza, i can't  (站立; 忍受)  (菠萝） @ pizza.
+i prefer @eat fruit @ （甜点/ dɪˈzɜːrt /）, not with the （主菜）, so i'll （选择） chicken pizza.
 
--i'll * pepperoni(/ ˌpepəˈroʊni /意大利辣香肠).
+-i'll @ pepperoni(/ ˌpepəˈroʊni /意大利辣香肠).
 
 -me too.
 
@@ -510,60 +510,60 @@ i prefer *eat fruit * （甜点/ dɪˈzɜːrt /）, not with the （主菜）, s
 "Supermarket" 是指规模较大的商店，通常有许多个过道和多个部门，如食品、药品、家居、电器等。超市通常提供购物车，并接受多种付款方式。除了食品和日用品，超市还可能售卖其他商品，如家具、玩具等。
 总的来说，"grocery store" 和 "supermarket" 的区别在于规模大小、存货种类和可接受的付款方式。
 
--mom * me to * （杂货店/ ˈɡroʊsəri /） shopping, but i need **my homework.
-can you ** me, Nicholas?
+-mom @ me to @ （杂货店/ ˈɡroʊsəri /） shopping, but i need @@my homework.
+can you @@ me, Nicholas?
 
 -i guess i can.
-what * mom want you * buy?  
+what @ mom want you @ buy?  
 
--some （猪肉）, fish, vegetables * milk. 
-You can buy some （零食） too, * chocolate cookies.
+-some （猪肉）, fish, vegetables @ milk. 
+You can buy some （零食） too, @ chocolate cookies.
 
--what ** fish * mom want?
+-what @@ fish @ mom want?
 
--mom * some （三文鱼） and some （鳕鱼/ kɑːd /
+-mom @ some （三文鱼） and some （鳕鱼/ kɑːd /
 ）.
-* sure that they * fresh.
+@ sure that they @ fresh.
 
--(为什么不用how many, 因为不知道要买多少, 因为有可能是买好多钱, 也有可能是买好多条, 或者是买多少斤, 所以不确定, 就用 how much 比较合适) salmon and cod ***?
+-(为什么不用how many, 因为不知道要买多少, 因为有可能是买好多钱, 也有可能是买好多条, 或者是买多少斤, 所以不确定, 就用 how much 比较合适) salmon and cod @@@?
 
--oh, buy four ** salmon （ fɪˈleɪ 鱼片） and four ** cod *.
-* i need * buy * （/ spaɪs /香料） so mom can （腌制/ ˈmærɪneɪt /） a fish?
+-oh, buy four @@ salmon （ fɪˈleɪ 鱼片） and four @@ cod @.
+@ i need @ buy @ （/ spaɪs /香料） so mom can （腌制/ ˈmærɪneɪt /） a fish?
 
 -Yes, get some （磨碎的） （胡椒粉/ ˈpepər /） and some （大蒜/ ˈɡɑːrlɪk /）.
 
--how * vegetables?
+-how @ vegetables?
 
--we * carrots, potatoes, （卷心菜/ ˈkæbɪdʒ /） and some （生菜/ ˈletɪs /）.
-we need * fruit also. 
-what * you want?
+-we @ carrots, potatoes, （卷心菜/ ˈkæbɪdʒ /） and some （生菜/ ˈletɪs /）.
+we need @ fruit also. 
+what @ you want?
 
 -apples and bananas.
-and how * some （柔软的） (软饮料, 意为不含酒精的饮料)?
+and how @ some （柔软的） (软饮料, 意为不含酒精的饮料)?
 
 -no, buy some （瓶装的/ ˈbɑːtld /） water instead.
-it is healthier * us.
+it is healthier @ us.
 
 -oh, i just remembered. 
 we also need bread.
-please * it * the list.
-should i  * one （条（面包）） * two?
+please @ it @ the list.
+should i  @ one （条（面包）） @ two?
 
 -two loaves.
-you have （十分，非常） **（物品, 项目，条款） to （照顾，照料）.
-you need to **.
+you have （十分，非常） @@（物品, 项目，条款） to （照顾，照料）.
+you need to @@.
 
--yes, the list * quite long.
-by the time i ** the （收银员/ kæˈʃɪr /） * pay, i will probably * a full shopping （购物车）.
+-yes, the list @ quite long.
+by the time i @@ the （收银员/ kæˈʃɪr /） @ pay, i will probably @ a full shopping （购物车）.
 Okay, i am （一切就绪） to go. 
-i'll ** soon.
+i'll @@ soon.
 
 -thanks.
 
 
 
 ## 5. I'll Fix It Myself 
--the clothes （烘干机） * working. 
+-the clothes （烘干机） @ working. 
 We need a new one.
 
 - but this one is not so old. 

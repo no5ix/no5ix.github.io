@@ -223,7 +223,7 @@ categories:
     - > 抗议者`抵制`新法律。
 - `organ` [ˈɔːɡən]  n.   [**unfamiliar**]
     - The heart is an important organ in the human body.
-    - > `心脏`是人体中重要的器官。
+    - > 心脏是人体中重要的`器官`。
 - `outcome` [ˈaʊtkʌm]  n.   [**unfamiliar**]
     - The outcome of the election was a surprise to many people.
     - > 选举的`结果`让许多人感到惊讶。
@@ -2032,7 +2032,7 @@ categories:
     - > `反对`党一直在批评政府的政策。
 - `organ` [ˈɔːɡən]  n.   [**unfamiliar**]
     - The heart is an important organ in the human body.
-    - > `心脏`是人体中重要的器官。
+    - > 心脏是人体中重要的`器官`。
 - `origin` [ˈɒrɪdʒɪn]  n.
     - The origin of the universe is still a mystery.
     - > 宇宙的`起源`仍然是一个谜。

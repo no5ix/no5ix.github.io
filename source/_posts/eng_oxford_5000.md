@@ -123,12 +123,12 @@ categories:
 - blanket [ˈblæŋkɪt] n. 毛毯；覆盖物
     - She wrapped herself in a warm blanket on the sofa. 
     - > 她在沙发上裹着一条温暖的毛毯。
-- bold [boʊld] adj. 大胆的；醒目的
+- bold [boʊld] adj. 大胆的；醒目的(`bald` [bɔːld] adj. 秃头的; n. 秃头)
     - The company made a bold decision to invest in new technology. 
     - > 公司做出了一个大胆的决定，投资新技术。
-- bound [baʊnd] adj. 有义务的；必须的
+- bound [baʊnd] adj. 有义务的；必须的; 受约束的
     - The company is bound by law to ensure the safety of its workers. 
-    - > 公司有法律责任确保员工的安全。
+    - > 公司被法律规定是`有义务的`来确保员工的安全。
 - buck [bʌk] n.雄鹿；雄性动物；v. 抵制；反对
     - We need to buck the trend and make some changes. 
     - > 我们需要反其道而行之，做出一些改变。

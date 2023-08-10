@@ -372,7 +372,7 @@ categories:
 - `sensitive` [ˈsensɪtɪv] adj. 敏感的 (`sensible`明智的)    [**unfamiliar**]
     - She is very sensitive to the cold weather.
     - > 她对寒冷的天气很敏感。
-- `sentence` [ˈsentəns] v. 宣判  [**unfamiliar**]
+- `sentence` [ˈsentəns] v. 宣判  [**unfamiliar**] n. 句子
     - The judge will sentence the criminal tomorrow.
     - > 法官将在明天宣判罪犯。
 - `settle` [ˈsetl] v. 定居  [**unfamiliar**]
@@ -403,8 +403,8 @@ categories:
     - We hiked along the slope in the canyon.
     - > 我们在峡谷中沿着`n. 斜坡`行进。
 - `somewhat` [ˈsʌmˌwʌt] adv.  [**unfamiliar**]
-    - This issue is somewhat challenging.v. 
-    - > 这个问题`有点`棘手。
+    - This issue is somewhat challengin
+    - > 这个问题`有点`
 - `spill` [] v. （使）洒出，泼出，溢出；（东西）倒出，洒落；涌出，蜂拥而出；（光线）透进，倾泻在……上；n. 洒出（量），溢出（量）；  [**unfamiliar**]
     - The water spilled out of the cup.
     - > 水从杯子里`v. 溢`出来了。
@@ -449,12 +449,11 @@ categories:
 - `stretch` [stretʃ] v.（使）变大，拉长；（布料）可伸缩，有弹性；伸展肢体；伸出，伸长（胳膊或腿）；n.（土地或水域的）一片，一段；（时间）连续的一段，持续；（肢体）伸展，伸开；弹性，伸缩性；服刑期；  [**unfamiliar**]
     - In the morning stretching exercise, you can stretch your muscles and stay energized.
     - > 在早晨的`伸展`活动中，你可以`舒展`肌肉，保持活力。
-    - > 我们的规章制度非常`adj. 严格的`，不能有任何违反。
 - `strike` [straɪk] v. 打，撞；（用手或武器等）打；（使）碰撞；罢工；突然想到，突然意识到；突然袭击  n. 罢工，罢市，罢课；（军事）打击；击，踢；  [**unfamiliar**]
     - The strike affected the entire city's transportation.
     - > 那场`罢工`影响了整个城市的交通。
     - The lion crouched ready to strike.
-    - > 狮子蹲身准备袭击。
+    - > 狮子蹲身准备`袭击`。
 - `struggle` [ˈstrʌɡəl] v. 奋斗, 斗争  n. 奋斗，斗争；难事；搏斗，扭打   [**unfamiliar**]
     - The country is struggling for democracy and freedom.
     - > 这个国家正在为民主自由而`奋斗`。
@@ -2386,7 +2385,7 @@ categories:
     - Solar energy is a very promising energy source.
     - > `太阳的`能量(简称太阳能)一种非常有前途的能源。
 - `somewhat` [ˈsʌmˌwʌt] adv.  [**unfamiliar**]
-    - This issue is somewhat challenging.v. 
+    - This issue is somewhat challenging.
     - > 这个问题`有点`棘手。
 - `specialist` [ˈspeʃəlɪst] n., adj. 
     - He is a highly experienced eye specialist.
@@ -2474,7 +2473,7 @@ categories:
     - The strike affected the entire city's transportation.
     - > 那场`罢工`影响了整个城市的交通。
     - The lion crouched ready to strike.
-    - > 狮子蹲身准备袭击。
+    - > 狮子蹲身准备`袭击`。
 - `structure` [ˈstrʌktʃər] n. 结构  v. 构建
     - We need to structure a more stable bridge.
     - > 我们需要`v. 构建`一个更加稳固的桥梁。

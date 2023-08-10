@@ -304,6 +304,186 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/02/01/bash_enhance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/02/01/bash_enhance/" itemprop="url">Bash定制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-02-01T19:38:55+00:00">
+                2014-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="profile和bashrc和bash-profile的区别"><a href="#profile和bashrc和bash-profile的区别" class="headerlink" title="profile和bashrc和bash_profile的区别"></a>profile和bashrc和bash_profile的区别</h1><ul>
+<li><code>/etc/profile</code>:此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行.并从 <code>/etc/profile.d</code> 目录的配置文件中搜集shell的设置.<br>所以如果你有对<code>/etc/profile</code>有修改的话必须得重启你的修改才会生效，此修改对每个用户都生效。</li>
+</ul>
+<ul>
+<li><p><code>/etc/bashrc</code>:为每一个运行bash shell的用户执行此文件.当bash shell被打开时,该文件被读取.<br>如果你想对所有的使用bash的用户修改某个配置并在以后打开的bash都生效的话可以修改这个文件，修改这个文件不用重启，重新打开一个bash即可生效。</p>
+</li>
+<li><p><code>~/.bash_profile</code>:每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件.<br>此文件类似于<code>/etc/profile</code>，也是需要需要重启才会生效，<code>/etc/profile</code>对所有用户生效，<code>~/.bash_profile</code>只对当前用户生效。</p>
+</li>
+<li><p><code>~/.bashrc</code>:该文件包含专用于你的bash shell的bash信息,当登录时以及每次打开新的shell时,该文件被读取.（每个用户都有一个.bashrc文件，在用户目录下）<br>此文件类似于<code>/etc/bashrc</code>，不需要重启生效，重新打开一个bash即可生效，  <code>/etc/bashrc</code>对所有用户新打开的bash都生效，但<code>~/.bashrc</code>只对当前用户新打开的bash生效。</p>
+</li>
+<li><p>~/.bash_logout:当每次退出系统(退出bash shell)时,执行该文件. </p>
+</li>
+</ul>
+<p>另外,<code>/etc/profile</code>中设定的变量(全局)的可以作用于任何用户,而<code>~/.bashrc</code>等中设定的变量(局部)只能继承<code>/etc/profile</code>中的变量,他们是”父子”关系.</p>
+<p><code>~/.bash_profile</code> 是交互式、login 方式进入bash 运行的；<br><code>~/.bashrc</code> 是交互式 non-login 方式进入bash 运行的；</p>
+<p>通常二者设置大致相同，所以通常 <code>~/.bash_profile</code> 会在其文件中加入以下代码来调用 <code>~/.bashrc</code> :<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Get the aliases and <span class="built_in">functions</span></span></span><br><span class="line">if [ -f ~/.bashrc ]; then</span><br><span class="line">        . ~/.bashrc</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2013/08/27/how_to_build_a_simple_ubuntu_server_three/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -863,7 +1043,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">243</span>
+                <span class="site-state-item-count">244</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

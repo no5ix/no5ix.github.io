@@ -304,6 +304,224 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/09/12/内零头和外零头/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/12/内零头和外零头/" itemprop="url">内零头和外零头</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-12T10:05:48+00:00">
+                2016-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题:"></a>问题:</h1><p>在内存管理中，“内零头”和“外零头”个指的是什么？在固定式分区分配、可变式分区分配、页式虚拟存储系统、段式虚拟存储系统中，各会存在何种零头？为什么？</p>
+<h1 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h1><blockquote>
+<p>在存储管理中，</p>
+<p>内零头是指分配给作业的存储空间中未被利用的部分，</p>
+<p>外零头是指系统中无法利用的小存储块。</p>
+</blockquote>
+<ul>
+<li><ol>
+<li>在固定式分区分配中，为将一个用户作业装入内存，内存分配程序从系统分区表中找出一个能满足作业要求的空闲分区分配给作业，由于一个作业的大小并不一定与分区大小相等，因此，分区中有一部分存储空间浪费掉了。</li>
+</ol>
+</li>
+</ul>
+<p>由此可知，固定式分区分配中存在内零头。</p>
+<ul>
+<li><ol>
+<li>在可变式分区分配中，为把一个作业装入内存，应按照一定的分配算法从系统中找出一个能满足作业需求的空闲分区分配给作业，如果这个空闲分区的容量比作业申 请的空间容量要大，则将该分区一分为二，一部分分配给作业，剩下的部分仍然留作系统的空闲分区。</li>
+</ol>
+</li>
+</ul>
+<p>由此可知，可变式分区分配中存在外零头。</p>
+<ul>
+<li><ol>
+<li>在页式虚拟存储系统中，用户作业的地址空间被划分成若干大小相等的页面，存储空间也分成也页大小相等的物理块，但一般情况下，作业的大小不可能都是物理块大小的整数倍，因此作业的最后一页中仍有部分空间被浪费掉了。</li>
+</ol>
+</li>
+</ul>
+<p>由此可知，页式虚拟存储系统中存在内零头。</p>
+<ul>
+<li><ol>
+<li>在段式虚拟存储系统中，作业的地址空间由若干个逻辑分段组成，每段分配一个连续的内存区，但各段之间不要求连续，其内存的分配方式类似于动态分区分配。</li>
+</ol>
+</li>
+</ul>
+<p>由此可知，段式虚拟存储系统中存在外零头。</p>
+<h1 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h1><blockquote>
+<p>操作系统在分配内存时，有时候会产生一些空闲但是无法被正常使用的内存区域，这些就是内存碎片，或者称为内存零头，这些内存零头一共分为两类：内零头和外零头。</p>
+</blockquote>
+<ul>
+<li><p>内零头是指进程在向操作系统请求内存分配时，系统满足了进程所需要的内存需求后，还额外还多分了一些内存给该进程，也就是说额外多出来的这部分内存归该进程所有，其他进程是无法访问的。</p>
+</li>
+<li><p>外零头是指内存中存在着一些空闲的内存区域，这些内存区域虽然不归任何进程所有，但是因为内存区域太小，无法满足其他进程所申请的内存大小而形成的内存零头。</p>
+</li>
+</ul>
+<h2 id="页式存储管理的情况"><a href="#页式存储管理的情况" class="headerlink" title="页式存储管理的情况"></a>页式存储管理的情况</h2><p>页式存储管理是以页为单位（页面的大小由系统确定，且大小是固定的）向进程分配内存的，</p>
+<blockquote>
+<p>例如：假设内存总共有100K,分为10页，每页大小为10K。<br>现在进程A提出申请56K内存，因为页式存储管理是以页为单位进程内存分配的，所以系统会向进程A提供6个页面，也就是60K的内存空间，那么在最后一页中进程只使用了6K，从而多出了4K的内存碎片，但是这4K的内存碎片系统已经分配给进程A了，其他进程是无法再访问这些内存区域的，</p>
+</blockquote>
+<p>这种内存碎片就是内零头。</p>
+<h2 id="段式存储管理的情况"><a href="#段式存储管理的情况" class="headerlink" title="段式存储管理的情况"></a>段式存储管理的情况</h2><p>段式存储管理是段（段的大小是程序逻辑确定，且大小不是固定的）为单位向进程进行内存分配的，进程申请多少内存，系统就给进程分配多少内存，这样就不会产生内零头，但是段式分配会产生外零头。</p>
+<blockquote>
+<p>例如：假设内存总的大小为100K，现在进程A向系统申请60K的内存，系统在满足了进程A的内存申请要求后，还剩下40K的空闲内存区域；这时如果进程B向系统申请50K的内存区域，而系统只剩下了40K的内存区域，虽然这40K的内存区域不归任何进程所有，但是因为大小无法满足进程B的要求，所以也无法分配给进程B，这样就产生了外零头。</p>
+</blockquote>
+<p>请求段式存储管理是在段式存储管理的基础上增加了请求调段功能和段置换功能。<br>所以段式和请求段式存储管理会产生外零头</p>
+<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><p>下面的内存管理模式中，会产生外零头的是(正确答案B, D)</p>
+<p>A、页式<br>B、段式<br>C、请求页式<br>D、请求段式</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/09/01/PHP的魔术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1021,185 +1239,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/08/07/reactor_intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/07/reactor_intro/" itemprop="url">Reactor模式讲解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-07T23:01:00+00:00">
-                2016-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NP/" itemprop="url" rel="index">
-                    <span itemprop="name">NP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <p>关于服务器模型总结请转 <a href="/2016/08/08/server_model_summary/" title="此文">此文</a><br>, 文中也有Reactor的讲解.</p>
-<p>对于 IO 来说，我们听得比较多的是:</p>
-<ul>
-<li>BIO: 阻塞 IO</li>
-<li>NIO: 非阻塞 IO</li>
-<li>同步 IO</li>
-<li>异步 IO</li>
-</ul>
-<p>以及其组合:</p>
-<ul>
-<li>同步阻塞 IO</li>
-<li>同步非阻塞 IO</li>
-<li>异步阻塞 IO</li>
-<li>异步非阻塞 IO</li>
-</ul>
-<p>. . .
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1270,7 +1309,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">244</span>
+                <span class="site-state-item-count">245</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

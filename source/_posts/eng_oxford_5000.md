@@ -21,7 +21,7 @@ categories:
 
 ## ab
 
-- [absorb](https://www.youdao.com/result?word=absorb&lang=en)  [əbˈsɔːrb] v. 吸收
+- [absorb](https://www.youdao.com/result?word=absorb&lang=en) [əbˈsɔːrb] v. 吸收
     - Plants absorb water and nutrients from the soil. 
     - > 植物从土壤中吸收水分和营养物质。
 - [accommodate](https://www.youdao.com/result?word=accommodate&lang=en) [əˈkɑːmədeɪt] v. 容纳；适应

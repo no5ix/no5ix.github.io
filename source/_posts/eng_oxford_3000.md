@@ -363,9 +363,12 @@ categories:
 - `satellite` [ˈsætəlaɪt] n. 卫星  [**unfamiliar**]
     - The satellite is used for communication between Earth and space.
     - > 卫星被用来进行地球和空间之间的通讯。
-- `sector` [ˈsektər] n. 部门  [**unfamiliar**]
+- `sector` [ˈsektər] n. 区域，部分；（尤指商业、贸易等的）部门，行业；小群体；（尤指军队控制的）分区，防区；（磁盘上的）扇区； 扇形，扇形面；函数尺，象限仪  [**unfamiliar**] 
     - The IT sector has been growing rapidly in recent years.
     - > 近年来IT部门一直在快速发展。
+    - > `sector`和`division`都可以表示组织或公司中的部分或部门 ; `sector`强调的是行业或领域，而`division`强调的是组织或公司内的一个具体部门
+    - the financial `sector` (金融行业)
+    - the marketing `division` (市场营销部门)
 - `senate` [ˈsenət] n. 参议院  [**unfamiliar**]
     - The bill was approved by the Senate.
     - > 这项议案已经获得参议院的批准。
@@ -403,8 +406,8 @@ categories:
     - We hiked along the slope in the canyon.
     - > 我们在峡谷中沿着`n. 斜坡`行进。
 - `somewhat` [ˈsʌmˌwʌt] adv.  [**unfamiliar**]
-    - This issue is somewhat challengin
-    - > 这个问题`有点`
+    - This issue is somewhat challenging.
+    - > 这个问题`有点`挑战性
 - `spill` [] v. （使）洒出，泼出，溢出；（东西）倒出，洒落；涌出，蜂拥而出；（光线）透进，倾泻在……上；n. 洒出（量），溢出（量）；  [**unfamiliar**]
     - The water spilled out of the cup.
     - > 水从杯子里`v. 溢`出来了。
@@ -454,7 +457,7 @@ categories:
     - > 那场`罢工`影响了整个城市的交通。
     - The lion crouched ready to strike.
     - > 狮子蹲身准备`袭击`。
-- `struggle` [ˈstrʌɡəl] v. 奋斗, 斗争  n. 奋斗，斗争；难事；搏斗，扭打   [**unfamiliar**]
+- `struggle` [ˈstrʌɡəl] v. 奋斗, 斗争, 挣扎  n. 奋斗，斗争；难事；搏斗，扭打   [**unfamiliar**]
     - The country is struggling for democracy and freedom.
     - > 这个国家正在为民主自由而`奋斗`。
 - `stuff` [stʌf] n. 东西，物品；基本特征，特质，根本； v. 塞进，填进；填满，装满；填作料，填馅；制作（动物）标本；  [**unfamiliar**]
@@ -474,7 +477,7 @@ categories:
     - > 那个`n. 嫌疑犯`被警方抓捕并关进监狱。
     - Police suspect a local gang.
     - 警方`v. 怀疑`当地的一个不良帮派。
-- `sympathy` [ˈsɪmpəθi] n. 同情, 同情心  [**unfamiliar**]
+- `sympathy` [ˈsɪmpəθi] n. 同情, 同情心 (`sympathetic` adj. 有同情心的) [**unfamiliar**]
     - We should help those in need with sympathy.
     - > 我们应该带着`n. 同情之心`帮助那些需要帮助的人。
 
@@ -501,7 +504,7 @@ categories:
     - > 我把一个`十分的硬币`塞进了他脏兮兮的手里。
     - And I pay for every dime of it.
     - > 我会为之花出每一`分钱`。
-- `ultimately` [ˈʌltɪmətli] adv.   [**unfamiliar**]
+- `ultimately` [ˈʌltɪmətli] adv. (`ultimate` adj. 最终的)  [**unfamiliar**]
     - Ultimately, they reached a compromise.
     - > `最终`，他们达成了妥协。
 - `unconscious` [ʌnˈkɑ:nʃəs] adj. (`conscious` 神志清醒的  )  [**unfamiliar**]
@@ -2292,9 +2295,12 @@ categories:
 - `scream` [skriːm] v., n. 尖叫
     - The baby started to scream when she saw the spider.
     - > 女婴看到蜘蛛就开始尖叫起来。
-- `sector` [ˈsektər] n. 部门  [**unfamiliar**]
+- `sector` [ˈsektər] n. 区域，部分；（尤指商业、贸易等的）部门，行业；小群体；（尤指军队控制的）分区，防区；（磁盘上的）扇区； 扇形，扇形面；函数尺，象限仪  [**unfamiliar**] 
     - The IT sector has been growing rapidly in recent years.
     - > 近年来IT部门一直在快速发展。
+    - > `sector`和`division`都可以表示组织或公司中的部分或部门 ; `sector`强调的是行业或领域，而`division`强调的是组织或公司内的一个具体部门
+    - the financial `sector` (金融行业)
+    - the marketing `division` (市场营销部门)
 - `senate` [ˈsenət] n. 参议院  [**unfamiliar**]
     - The bill was approved by the Senate.
     - > 这项议案已经获得参议院的批准。
@@ -2310,7 +2316,7 @@ categories:
 - `sensitive` [ˈsensɪtɪv] adj. 敏感的 (`sensible`明智的)    [**unfamiliar**]
     - She is very sensitive to the cold weather.
     - > 她对寒冷的天气很敏感。
-- `sentence` [ˈsentəns] v. 宣判  [**unfamiliar**]
+- `sentence` [ˈsentəns] v. 宣判  [**unfamiliar**] n. 句子
     - The judge will sentence the criminal tomorrow.
     - > 法官将在明天宣判罪犯。
 - `sequence` [ˈsiːkwəns] n. 顺序
@@ -2477,7 +2483,7 @@ categories:
 - `structure` [ˈstrʌktʃər] n. 结构  v. 构建
     - We need to structure a more stable bridge.
     - > 我们需要`v. 构建`一个更加稳固的桥梁。
-- `struggle` [ˈstrʌɡəl] v. 奋斗, 斗争  n. 奋斗，斗争；难事；搏斗，扭打   [**unfamiliar**]
+- `struggle` [ˈstrʌɡəl] v. 奋斗, 斗争, 挣扎  n. 奋斗，斗争；难事；搏斗，扭打   [**unfamiliar**]
     - The country is struggling for democracy and freedom.
     - > 这个国家正在为民主自由而`奋斗`。
 - `stuff` [stʌf] n. 东西，物品；基本特征，特质，根本； v. 塞进，填进；填满，装满；填作料，填馅；制作（动物）标本；  [**unfamiliar**]
@@ -2513,7 +2519,7 @@ categories:
     - > 那个`n. 嫌疑犯`被警方抓捕并关进监狱。
     - Police suspect a local gang.
     - 警方`v. 怀疑`当地的一个不良帮派。
-- `sympathy` [ˈsɪmpəθi] n. 同情, 同情心  [**unfamiliar**]
+- `sympathy` [ˈsɪmpəθi] n. 同情, 同情心 (`sympathetic` adj. 有同情心的) [**unfamiliar**]
     - We should help those in need with sympathy.
     - > 我们应该带着`n. 同情之心`帮助那些需要帮助的人。
 
@@ -2573,7 +2579,7 @@ categories:
 - `tunnel` [ˈtʌnl] n. 
     - That tunnel is very deep and requires careful crossing.
     - > 那个`隧道`非常深，需要小心穿越。
-- `ultimately` [ˈʌltɪmətli] adv.   [**unfamiliar**]
+- `ultimately` [ˈʌltɪmətli] adv. (`ultimate` adj. 最终的)  [**unfamiliar**]
     - Ultimately, they reached a compromise.
     - > `最终`，他们达成了妥协。
 - `unconscious` [ʌnˈkɑ:nʃəs] adj. (`conscious` 神志清醒的  )  [**unfamiliar**]

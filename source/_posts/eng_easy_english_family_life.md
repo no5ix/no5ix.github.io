@@ -1,5 +1,5 @@
 ---
-title: Easy English-Family Life-English Conversations
+title: Easy English - Family Life
 date: 2023-08-06 22:26:21
 tags:
 - English
@@ -13,10 +13,7 @@ categories:
 https://www.youtube.com/watch?v=J1f47XwvQYA&list=PLhPfBpTj6VpTuTSndeBBzTMxvzpYDa8UE&index=3
 
 
-# Main Body
-
-
-## 1. Family Morning Routine
+# 1. Family Morning Routine
 
 - good morning, Nicholas. it's time for school.come on get out of bed.Jessica's already up and dressed.
 - good morning, mom.
@@ -37,7 +34,7 @@ go to the bathroom and brush your teeth, then get dressed and come downstairs to
 
 
 
-## 2. House - Cleaning Day 
+# 2. House - Cleaning Day 
 
 -it's the day we thoroughly(/ ˈθɜːrəli / 全面的) clean the whole house.
 we throw(扔) away things we don't need, pack up（打包） things to donate(捐赠) to the local(本地的) homeless(无家可归的) shelter(橱窗), clean all of the rooms and wash all of the windows.
@@ -106,7 +103,7 @@ i'll go check on the kids now.
 
 
 
-## 3. What's for Dinner? 
+# 3. What's for Dinner? 
 
 -mom, what's for dinner?
 
@@ -153,7 +150,7 @@ i prefer to eat fruit for dessert（甜点/ dɪˈzɜːrt /）, not with the main
 
 
 
-## 4. Grocery Shopping 
+# 4. Grocery Shopping 
 
 "Grocery store" 和 "supermarket" 都是指卖食品和日用品的商店，但它们之间有一些区别。
 "Grocery store" 通常是指规模较小、存货种类较少的商店，主要出售食品和日用品，如牛奶、面包、鸡蛋、洗衣粉等。这些商店可能只有一到两个过道，不提供购物车，而且通常只能接受现金或借记卡付款。
@@ -210,7 +207,7 @@ i'll be back soon.
 
 -thanks.
 
-## 5. I'll Fix It Myself 
+# 5. I'll Fix It Myself 
 
 -the clothes dryer（烘干机） stopped working. 
 We need a new one.
@@ -245,7 +242,7 @@ you could definitely（明确地/ ˈdefɪnətli /） say that repairing（修复
 
 
 
-## 6. Decorating the House 
+# 6. Decorating the House 
 
 
 -can you hold（抓牢） the end of this tape measure（卷尺）?
@@ -271,7 +268,7 @@ Eh... shall we redecorate the hallway（门厅，走廊，过道）, too?
 maybe we can decorate it in a more traditional（传统的） way.
 
 
-## 7. Family's Expenses 
+# 7. Family's Expenses 
 
 
 -i went over the household budget and we've overspent this month.
@@ -318,7 +315,7 @@ and you like to cook.
 
 
 
-## 8. Electricity Bill 
+# 8. Electricity Bill 
 
 
 -did you see our last electricity bill?
@@ -384,7 +381,7 @@ we'll do so from now on.
 # Review
 
 
-## 1. Family Morning Routine
+# 1. Family Morning Routine
 
 - @ morning, Nicholas. @@ time @ school. @ out @  bed.Jessica @@ up and dressed.
 - good morning, mom.
@@ -405,7 +402,7 @@ we'll do so from now on.
 
 
 
-## 2. House - Cleaning Day 
+# 2. House - Cleaning Day 
 
 -it's the day we @(/ ˈθɜːrəli / 全面的) clean @whole@
 we (扔) away things we don't need, （打包） things to (捐赠) to the(本地的) (无家可归的) (橱窗), clean @@@ rooms and @@@ the windows.
@@ -474,7 +471,7 @@ i'll @ check @ the kids now.
 
 
 
-## 3. What's for Dinner? 
+# 3. What's for Dinner? 
 
 -mom, @@ for dinner?
 
@@ -521,7 +518,7 @@ i prefer @eat fruit @ （甜点/ dɪˈzɜːrt /）, not with the （主菜）, s
 
 
 
-## 4. Grocery Shopping 
+# 4. Grocery Shopping 
 
 "Grocery store" 和 "supermarket" 都是指卖食品和日用品的商店，但它们之间有一些区别。
 "Grocery store" 通常是指规模较小、存货种类较少的商店，主要出售食品和日用品，如牛奶、面包、鸡蛋、洗衣粉等。这些商店可能只有一到两个过道，不提供购物车，而且通常只能接受现金或借记卡付款。
@@ -580,7 +577,7 @@ i'll @@ soon.
 
 
 
-## 5. I'll Fix It Myself 
+# 5. I'll Fix It Myself 
 
 
 -the clothes （烘干机） @ working. 
@@ -616,7 +613,7 @@ you could definitely（明确地/ ˈdefɪnətli /） say that repairing（修复
 
 
 
-## 6. Decorating the House 
+# 6. Decorating the House 
 
 
 -can you hold the end of this tape measure?
@@ -649,7 +646,7 @@ maybe we can decorate it in a more traditional way.
 
 
 
-## 7. Family's Expenses 
+# 7. Family's Expenses 
 
 
 -i went over the household budget and we've overspent this month.
@@ -696,7 +693,7 @@ and you like to cook.
 
 
 
-## 8. Electricity Bill 
+# 8. Electricity Bill 
 
 
 -did you see our last electricity bill?

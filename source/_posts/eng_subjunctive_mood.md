@@ -17,6 +17,3 @@ categories:
 <!-- 第一种方式，可调整pdf显示的大小，比较灵活 -->
 <embed src="/pdf/eng_subjunctive_mood/eng_subjunctive_mood.pdf" width="100%" height="1000" type="application/pdf">
 
-
-<!-- 第二种方式 -->
-{% pdf eng_subjunctive_mood.pdf %}

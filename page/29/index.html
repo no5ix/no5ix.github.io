@@ -304,6 +304,635 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/11/14/游戏网络开发一之TCPvsUDP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/14/游戏网络开发一之TCPvsUDP/" itemprop="url">游戏网络开发一之TCPvsUDP</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-14T22:20:34+00:00">
+                2016-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h1><p><a href="https://gafferongames.com/post/udp_vs_tcp/" target="_blank" rel="noopener">原文出处</a></p>
+<p></p><h2 id="introduction">Introduction</h2><p></p>
+<p>Hi, I&rsquo;m <a href="https://gafferongames.com/about" target="_blank" rel="noopener">Glenn Fiedler</a> and welcome to <a href="https://gafferongames.com/categories/game-networking/" target="_blank" rel="noopener"><strong>Networking for Game Programmers</strong></a>.</p><br><p>In this article we start with the most basic aspect of network programming: sending and receiving data over the network. This is perhaps the simplest and most basic part of what network programmers do, but still it is quite intricate and non-obvious as to what the best course of action is.</p><br><p>You have most likely heard of sockets, and are probably aware that there are two main types: TCP and UDP. When writing a network game, we first need to choose what type of socket to use. Do we use TCP sockets, UDP sockets or a mixture of both? Take care because if you get this wrong it will have terrible effects on your multiplayer game!</p><br><p>The choice you make depends entirely on what sort of game you want to network. So from this point on and for the rest of this article series, I assume you want to network an action game. You know, games like Halo, Battlefield 1942, Quake, Unreal, CounterStrike and Team Fortress.</p><br><p>In light of the fact that we want to network an action game, we&rsquo;ll take a very close look at the properties of each protocol, and dig a bit into how the internet actually works. Once we have all this information, the correct choice is clear.</p><br><h2 id="tcp-ip">TCP/IP</h2><br><p>TCP stands for &ldquo;transmission control protocol&rdquo;. IP stands for &ldquo;internet protocol&rdquo;. Together they form the backbone for almost everything you do online, from web browsing to IRC to email, it&rsquo;s all built on top of TCP/IP.</p><br><p>If you have ever used a TCP socket, then you know it&rsquo;s a reliable connection based protocol. This means you create a connection between two machines, then you exchange data much like you&rsquo;re writing to a file on one side, and reading from a file on the other.</p><br><p>TCP connections are reliable and ordered. All data you send is guaranteed to arrive at the other side and in the order you wrote it. It&rsquo;s also a stream protocol, so TCP automatically splits your data into packets and sends them over the network for you.</p><br><h2 id="ip">IP</h2><br><p>The simplicity of TCP is in stark contrast to what actually goes on underneath TCP at the IP or &ldquo;internet protocol&rdquo; level.</p><br><p>Here there is no concept of connection, packets are simply passed from one computer to the next. You can visualize this process being somewhat like a hand-written note passed from one person to the next across a crowded room, eventually, reaching the person it&rsquo;s addressed to, but only after passing through many hands.</p><br><p>There is also no guarantee that this note will actually reach the person it is intended for. The sender just passes the note along and hopes for the best, never knowing whether or not the note was received, unless the other person decides to write back!</p><br><p>Of course IP is in reality a little more complicated than this, since no one computer knows the exact sequence of computers to pass the packet along to so that it reaches its destination quickly. Sometimes IP passes along multiple copies of the same packet and these packets make their way to the destination via different paths, causing packets to arrive out of order and in duplicate.</p><br><p>This is because the internet is designed to be self-organizing and self-repairing, able to route around connectivity problems rather than relying on direct connections between computers. It&rsquo;s actually quite cool if you think about what&rsquo;s <em>really</em> going on at the low level. You can read all about this in the classic book <a href="http://www.cs.newpaltz.edu/~pletcha/NET_PY/the-protocols-tcp-ip-illustrated-volume-1.9780201633467.24290.pdf" target="_blank" rel="noopener">TCP/IP Illustrated</a>.</p><br><h2 id="udp">UDP</h2><br><p>Instead of treating communications between computers like writing to files, what if we want to send and receive packets directly?</p><br><p>We can do this using UDP.</p><br><p>UDP stands for &ldquo;user datagram protocol&rdquo; and it&rsquo;s another protocol built on top of IP, but unlike TCP, instead of adding lots of features and complexity, UDP is a very thin layer over IP.</p><br><p>With UDP we can send a packet to a destination IP address (eg. 112.140.20.10) and port (say 52423), and it gets passed from computer to computer until it arrives at the destination or is lost along the way.</p><br><p>On the receiver side, we just sit there listening on a specific port (eg. 52423) and when a packet arrives from <em>any</em> computer (remember there are no connections!), we get notified of the address and port of the computer that sent the packet, the size of the packet, and can read the packet data.</p><br><p>Like IP, UDP is an unreliable protocol. In practice however, most packets that are sent <em>will</em> get through, but you&rsquo;ll usually have around 1-5% packet loss, and occasionally you&rsquo;ll get periods where no packets get through at all (remember there are lots of computers between you and your destination where things can go wrong&hellip;)</p><br><p>There is also no guarantee of ordering of packets with UDP. You could send 5 packets in order 1,2,3,4,5 and they could arrive completely out of order like 3,1,2,5,4. In practice, packets tend to arrive in order <em>most</em> of the time, but you cannot rely on this!</p><br><p>UDP also provides a 16 bit checksum, which in theory is meant to protect you from receiving invalid or truncated data, but you can&rsquo;t even trust this, since 16 bits is just not enough protection when you are sending UDP packets rapidly over a long period of time. Statistically, you can&rsquo;t even rely on this checksum and must add your own.</p><br><p>So in short, when you use UDP you&rsquo;re pretty much on your own!</p><br><h2 id="tcp-vs-udp">TCP vs. UDP</h2><br><p>We have a decision to make here, do we use TCP sockets or UDP sockets?</p><br><p>Lets look at the properties of each:</p><br><p>TCP:</p><br><ul><br><li>Connection based</li><br><li>Guaranteed reliable and ordered</li><br><li>Automatically breaks up your data into packets for you</li><br><li>Makes sure it doesn’t send data too fast for the internet connection to handle (flow control)</li><br><li>Easy to use, you just read and write data like its a file</li><br></ul><br><p>UDP:</p><br><ul><br><li>No concept of connection, you have to code this yourself</li><br><li>No guarantee of reliability or ordering of packets, they may arrive out of order, be duplicated, or not arrive at all!</li><br><li>You have to manually break your data up into packets and send them</li><br><li>You have to make sure you don’t send data too fast for your internet connection to handle</li><br><li>If a packet is lost, you need to devise some way to detect this, and resend that data if necessary</li><br><li>You can’t even rely on the UDP checksum so you must add your own</li><br></ul><br><p>The decision seems pretty clear then, TCP does everything we want and its super easy to use, while UDP is a huge pain in the ass and we have to code everything ourselves from scratch.</p><br><p>So obviously we just use TCP right?</p><br><p>Wrong!</p><br><p>Using TCP is the worst possible mistake you can make when developing a multiplayer game! To understand why, you need to see what TCP is actually doing above IP to make everything look so simple.</p><br><h2 id="how-tcp-really-works">How TCP really works</h2><br><p>TCP and UDP are both built on top of IP, but they are radically different. UDP behaves very much like the IP protocol underneath it, while TCP abstracts everything so it looks like you are reading and writing to a file, hiding all complexities of packets and unreliability from you.</p><br><p>So how does it do this?</p><br><p>Firstly, TCP is a stream protocol, so you just write bytes to a stream, and TCP makes sure that they get across to the other side. Since IP is built on packets, and TCP is built on top of IP, TCP must therefore break your stream of data up into packets. So, some internal TCP code queues up the data you send, then when enough data is pending the queue, it sends a packet to the other machine.</p><br><p>This can be a problem for multiplayer games if you are sending very small packets. What can happen here is that TCP may decide it&rsquo;s not going to send data until you have buffered up enough data to make a reasonably sized packet to send over the network.</p><br><p>This is a problem because you want your client player input to get to the server <em>as quickly as possible</em>, if it is delayed or &ldquo;clumped up&rdquo; like TCP can do with small packets, the client&rsquo;s user experience of the multiplayer game will be very poor. Game network updates will arrive late and infrequently, instead of on-time and frequently like we want.</p><br><p>TCP has an option to fix this behavior called <a href="https://en.wikipedia.org/wiki/Nagle%27s_algorithm" target="_blank" rel="noopener">TCP_NODELAY</a>. This option instructs TCP not to wait around until enough data is queued up, but to flush any data you write to it immediately. This is referred to as disabling Nagle&rsquo;s algorithm.</p><br><p>Unfortunately, even if you set this option TCP still has serious problems for multiplayer games and it all stems from how TCP handles lost and out of order packets to present you with the &ldquo;illusion&rdquo; of a reliable, ordered stream of data.</p><br><h2 id="how-tcp-implements-reliability">How TCP implements reliability</h2><br><p>Fundamentally TCP breaks down a stream of data into packets, sends these packets over unreliable IP, then takes the packets received on the other side and reconstructs the stream.</p><br><p>But what happens when a packet is lost?</p><br><p>What happens when packets arrive out of order or are duplicated?</p><br><p>Without going too much into the details of how TCP works because its super-complicated (please refer to <a href="http://www.cs.newpaltz.edu/~pletcha/NET_PY/the-protocols-tcp-ip-illustrated-volume-1.9780201633467.24290.pdf" target="_blank" rel="noopener">TCP/IP Illustrated</a>) in essence TCP sends out a packet, waits a while until it detects that packet was lost because it didn&rsquo;t receive an ack (or acknowledgement), then resends the lost packet to the other machine. Duplicate packets are discarded on the receiver side, and out of order packets are resequenced so everything is reliable and in order.</p><br><p>The problem is that if we were to send our time critical game data over TCP, whenever a packet is dropped it has to stop and wait for that data to be resent. Yes, even if more recent data arrives, that new data gets put in a queue, and you cannot access it until that lost packet has been retransmitted. How long does it take to resend the packet?</p><br><p>Well, it&rsquo;s going to take <em>at least</em> round trip latency for TCP to work out that data needs to be resent, but commonly it takes 2*RTT, and another one way trip from the sender to the receiver for the resent packet to get there. So if you have a 125ms ping, you&rsquo;ll be waiting roughly 1/5th of a second for the packet data to be resent <em>at best</em>, and in worst case conditions you could be waiting up to half a second or more (consider what happens if the attempt to resend the packet fails to get through?). What happens if TCP decides the packet loss indicates network congestion and it backs off? Yes it actually does this. Fun times!</p><br><h2 id="never-use-tcp-for-time-critical-data">Never use TCP for time critical data</h2><br><p>The problem with using TCP for realtime games like FPS is that unlike web browsers, or email or most other applications, these multiplayer games have a <em>real time requirement</em> on packet delivery.</p><br><p>What this means is that for many parts of a game, for example player input and character positions, it really doesn&rsquo;t matter what happened a second ago, the game only cares about the most recent data.</p><br><p>TCP was simply not designed with this in mind.</p><br><p>Consider a very simple example of a multiplayer game, some sort of action game like a shooter. You want to network this in a very simple way. Every frame you send the input from the client to the server (eg. keypresses, mouse input controller input), and each frame the server processes the input from each player, updates the simulation, then sends the current position of game objects back to the client for rendering.</p><br><p>So in our simple multiplayer game, whenever a packet is lost, everything has to <em>stop and wait</em> for that packet to be resent. On the client game objects stop receiving updates so they appear to be standing still, and on the server input stops getting through from the client, so the players cannot move or shoot. When the resent packet finally arrives, you receive this stale, out of date information that you don&rsquo;t even care about! Plus, there are packets backed up in queue waiting for the resend which arrive at same time, so you have to process all of these packets in one frame. Everything is clumped up!</p><br><p>Unfortunately, there is nothing you can do to fix this behavior, it&rsquo;s just the fundamental nature of TCP. This is just what it takes to make the unreliable, packet-based internet look like a reliable-ordered stream.</p><br><p>Thing is we don&rsquo;t want a reliable ordered stream.</p><br><p>We want our data to get as quickly as possible from client to server without having to wait for lost data to be resent.</p><br><p>This is why you should <strong>never</strong> use TCP when networking time-critical data!</p><br><h2 id="wait-why-can-t-i-use-both-udp-and-tcp">Wait? Why can&rsquo;t I use <em>both</em> UDP and TCP?</h2><br><p>For realtime game data like player input and state, only the most recent data is relevant, but for other types of data, say perhaps a sequence of commands sent from one machine to another, reliability and ordering can be very important.</p><br><p>The temptation then is to use UDP for player input and state, and TCP for the reliable ordered data. If you&rsquo;re sharp you&rsquo;ve probably even worked out that you may have multiple &ldquo;streams&rdquo; of reliable ordered commands, maybe one about level loading, and another about AI. Perhaps you think to yourself, &ldquo;Well, I&rsquo;d really not want AI commands to stall out if a packet is lost containing a level loading command - they are completely unrelated!&rdquo;. You are right, so you may be tempted to create one TCP socket for each stream of commands.</p><br><p>On the surface, this seems like a great idea. The problem is that since TCP and UDP are both built on top of IP, the underlying packets sent by each protocol will affect each other. Exactly how they affect each other is quite complicated and relates to how TCP performs reliability and flow control, but fundamentally you should remember that TCP tends to <em>induce</em> packet loss in UDP packets. For more information, read <a href="http://www.isoc.org/INET97/proceedings/F3/F3_1.HTM" target="_blank" rel="noopener">this paper</a> on the subject.</p><br><p>Also, it&rsquo;s pretty complicated to mix UDP and TCP. If you mix UDP and TCP you lose a certain amount of control. Maybe you can implement reliability in a more efficient way that TCP does, better suited to your needs? Even if you need reliable-ordered data, it&rsquo;s possible, provided that data is small relative to the available bandwidth to get that data across faster and more reliably that it would if you sent it over TCP. Plus, if you have to do NAT to enable home internet connections to talk to each other, having to do this NAT once for UDP and once for TCP (not even sure if this is possible&hellip;) is kind of painful.</p><br><h2 id="conclusion">Conclusion</h2><br><p>My recommendation is not only that you use UDP, but that you <em>only</em> use UDP for your game protocol. Don&rsquo;t mix TCP and UDP! Instead, learn how to implement the specific features of TCP that you need <em>inside</em> your own custom UDP based protocol.</p><br><p>Of course, it is no problem to use HTTP to talk to some RESTful services while your game is running. I&rsquo;m not saying you can&rsquo;t do that. A few TCP connections running while your game is running isn&rsquo;t going to bring everything down. The point is, don&rsquo;t split your <em>game protocol</em> across UDP and TCP. Keep your game protocol running over UDP so you are fully in control of the data you send and receive and how reliability, ordering and congestion avoidance are implemented.</p><br><p>The rest of this article series show you how to do this, from creating your own virtual connection on top of UDP, to creating your own reliability, flow control and congestion avoidance.</p>
+
+
+<h1 id="译文"><a href="#译文" class="headerlink" title="译文"></a>译文</h1><p><a href="http://gad.qq.com/program/translateview/7167380" target="_blank" rel="noopener">译文出处</a></p>
+<div style="display:none"><br><br><!--     把下文中的 $hhd$ 改为 <h 就可以恢复原状, 当时把 <h 改为 $hhd$ 是为了防止生成toc      --><br><br><div><div class="WordSection1">$hhd$2 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-weight: normal;font-size:medium;font-family:微软雅黑;">翻译：<a rel="noopener" href="http://www.cnblogs.com/xueweihan/p/5452873.html" target="_blank">削微寒</a>     审校：<a rel="noopener" href="http://www.cnblogs.com/xueweihan/p/5452873.html" target="_blank">削微寒</a></span><div><span style="font-family: 微软雅黑, sans-serif;"><br></span></div>$hhd$2 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-family: 微软雅黑, sans-serif;">介绍</span><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">你一定听说过<span>sokcet(</span></span><span><a rel="noopener" href="http://www.cnblogs.com/xueweihan/p/5445483.html" target="_blank"><span style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>初探socket</span></span></a></span><span style="font-family: 微软雅黑, sans-serif;">)</span><span style="font-family: 微软雅黑, sans-serif;">，它分为两种常用类型：<span>TCP</span>和<span>UDP</span>。当要写一个网络游戏，我们首先要选择使用哪种类型的<span>socket</span>。是用<span>TCP</span>、<span>UDP</span>还是两者都用？</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">选择哪种类型，完全取决于你要写的游戏的类型。后面的文章，我都将假设你要写一个<span>‘</span>动作<span>’</span>网游。就像：光环系列，战地<span>1942</span>，雷神之锤，这些游戏。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">我们将非常仔细的分析这两种<span>socket</span>类型的优劣，并且深入到底层，弄清楚互联网是如何工作的什么。当我们弄清楚这些信息后，就很容易做出正确的选择了。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$2 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-family: 微软雅黑, sans-serif;">TCP/IP</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">TCP</span><span style="font-family: 微软雅黑, sans-serif;">代表<span>“</span>传输控制协议<span>”</span>，<span>IP</span>代表：<span>“</span>互联网协议<span>”</span>，你在互联网上做任何事情，都是建立在这两者的基础上，比如：浏览网页、收发邮件等等。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">TCP</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">如果你曾经用过<span>TCP socket</span>，你肯定知道它是可靠连接的协议，面向连接的传输协议。简单的说：两台机器先建立起连接，然后两台机器相互发送数据，就像你在一台计算机上写文件，在另外一个台读文件一样。（我是这么理解的：<span>TCP socket</span>就像建立起连接的计算机，之间共享的一个<span>‘</span>文件<span>‘</span>对象，两者通过读写这个<span>‘</span>文件<span>‘</span>实现数据的传输）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">这个连接是可靠的、有序的，代表着：发送的所有的数据，保证到达传输的另一端的时候。另一端得到的数据，和发送数据一摸一样（可靠，有序。例如：<span>A</span>发送数据<span>‘abc’</span>，通过<span>TCPsocket</span>传输数据到<span>B</span>，<span>B</span>得到数据一定是：<span>‘abc’</span>。而不是<span>‘bca’</span>或者<span>‘xueweihan’</span>之类的鬼！）。传输的数据是<span>‘</span>数据流<span>’</span>的形式<span>(</span>数据流：用于操作数据集合的最小的有序单位，与操作本地文件中的<span>stream</span>一样。所以<span>TCP socket</span>和文件对象很像<span>)</span>，也就是说：<span>TCP</span>把你的数据拆分后，包装成数据包，然后通过网络发送出去。</span></p><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><strong><span style="font-family: 微软雅黑, sans-serif;">注意</span></strong><span style="font-family: 微软雅黑, sans-serif;">：就像读写文件那样，这样比较好理解。</span></p><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">IP</span><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">“IP”</span><span style="font-family: 微软雅黑, sans-serif;">协议是在<span>TCP</span>协议的下面（这个牵扯到七层互联网协议栈，我就简单的贴个图不做详细的介绍）<span><br><img width="713" height="442" id="图片 8" src="http://gameweb-img.qq.com/gad/20160809/image001.1470706683.gif" alt="游戏网络开发(一)：UDP vs. TCP"></span></span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">“IP”</span><span style="font-family: 微软雅黑, sans-serif;">协议是没有连接的概念，它做的只是把上一层<span>(</span>传输层<span>)</span>的数据包从一个计算传递到下一个计算机。你可以理解成：这个过程就像一堆人手递手传递纸条一样，传递了很多次，最终到达纸条上标记的<span>xxx</span>手里（纸条上写着<span>‘xxx</span>亲启，偷看者<span>3cm’</span>）。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">在传递的过程中，不保证这个纸条<span>(</span>信件<span>)</span>能能够准确的送到收信人的手上。发信人发送信件，但是永远不知道信件是否可以准确到达收件人的手上，除非收件人回信告诉他（发信人）：<span>“</span>兄弟我收到信了！<span>”</span>（<span>IP</span>层只是用于传递信息，并不做信息的校验等其它操作）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">当然，传递信息的这个过程还是还是很复杂的。因为，不知道具体的传递次序，也就是说，因为不知道最优的传递路线（能够让数据包快速的到达目的地的最优路径）所以，有些时候<span>“IP”</span>协议就传递多份一样的数据，这些数据通过不同的路线到达目的地，从而发现最优的传递路线。</span></p><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">这就是互联网设计中的：自动优化和自动修复，解决了连接的问题。这真的是一个很酷的设计，如果你想知道更多的底层实现，可以阅读关于<span>TCP/IP</span>的书。（推荐</span><span><a rel="noopener" href="http://item.jd.com/11519010.html" target="_blank"><span style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>上野宣的图解系列</span></span></a></span><span style="font-family: 微软雅黑, sans-serif;">)</span></p><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">UDP</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">如果我们想要直接发送和接受数据包，那么就要使用另一种<span>socket</span>。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">我们叫它<span>UDP</span>。<span>UDP</span>代表<span>“</span>用户数据包协议<span>”</span>，它是另外一种建立在<span>IP</span>协议之上的协议，就像<span>TCP</span>一样，但是没有<span>TCP</span>那么多功能（例如：建立连接，信息的校验，数据流的拆分合并等）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">使用<span>UDP</span>我们能够向目标<span>IP</span>和端口（例如<span>80</span>），发送数据包。数据包会达到目标计算机或者丢失。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">收件人（目标计算机），我们只需要监听具体的端口（例如：<span>80</span>），当从任意一台计算机（注意：<span>UDP</span>是不建立连接的）接受到数据包后，我们会得知发送数据包的计算机地址（<span>IP</span>地址）和端口、数据包的大小、内容。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">UDP</span><span style="font-family: 微软雅黑, sans-serif;">是不可靠协议。现实使用的过程中，发送的大多数的数据包都会被接收到，但是通常会丢失<span>1-5%</span>，偶尔，有的时候还可能啥都接收不到（数据包全部丢失一个都没接收到，传递数据的计算机之间的计算机的数量越多，出错的概率越大）。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">UDP</span><span style="font-family: 微软雅黑, sans-serif;">协议中的数据包也是没有顺序的。比如：你发送<span>5</span>个包，顺序是<span>1</span>，<span>2</span>，<span>3</span>，<span>4</span>，<span>5</span>。但是，即接收到的顺序可能是<span>3</span>，<span>1</span>，<span>4</span>，<span>2</span>，<span>5</span>。现实使用的过程中，大多时候，接收到的数据的顺序是正确的，但是并不是每次都是这样。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">最后，尽管<span>UDP</span>并没有比<span>“IP”</span>协议高级多少，而且不可靠。但是你发送的数据，要么全部到达，要么全部丢失。比如：你发送一个大小为<span>256 byte</span>的数据包给另外一台计算机，这台计算机不会只接收到<span>100 byte</span>的数据包，它只可能接收到<span>256 byte</span>的数据包，或者什么都没接收到。这是<span>UDP</span>唯一可以保证的事情，其它所有的事情都需要你来决定（我的理解，<span>UDP</span>协议只是个简单的传输协议，只保证数据包的完整性，注意是数据包而不是信息。其他的事情需要自己去做，完善这个协议，达到自己使用的需求。）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$2 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-family: 微软雅黑, sans-serif;">TCP vs. UDP</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">我们如何选择是使用<span>TCP socket</span>还是<span>UDPsocket</span>呢？</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">我们先看看两者的特征吧：</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">TCP</span><span style="font-family: 微软雅黑, sans-serif;">：</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">面向连接</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">可靠、有序</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">自动把数据拆分成数据包</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">确保数据的发送一直在控制中（流量控制）</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">使用简单，就像读写文件一样</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">UDP</span><span style="font-family: 微软雅黑, sans-serif;">：</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">没有连接的概念，你需要自己通过代码实现（这个我也没自己实现过，应该还会讲）</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">不可靠，数据包无序，数据包可能无序，重复，或者丢失</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">你需要手动地把数据拆分成数据包，然后发送数据包</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">你需要自己做流量控制</span></p><p style="margin: 7.5pt 0cm 7.5pt 22.5pt; t : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">      </span></span><span style="font-family: 微软雅黑, sans-serif;">如果数据包太多，你需要设计重发和统计机制</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">通过上面的描述，不难发现：<span>TCP</span>做了所有我们想做的事情，而且使用十分简单。反观<span>UDP</span>就十分难用了，我们需要自己编写设计一切。很显然，我们只要用<span>TCP</span>就好了！</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">不，你想的简单了（原来，是我太年轻了！）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">当你开发一个像上面说过的<span>FPS</span>（动作网游）的时候使用<span>TCP</span>协议，会是一个错误的决定，这个<span>TCP</span>协议就不好用了！为什么这么说？那么你就需要知道<span>TCP</span>到底做了什么，使得一起看起来十分简单。（让我们继续往下看，这是我最好奇的地方！！！有没有兴奋起来？）</span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">TCP</span><span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">内部的工作原理</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">TCP</span><span style="font-family: 微软雅黑, sans-serif;">和<span>UDP</span>都是建立在<span>“IP”</span>协议上的，但是它俩完全不同。<span>UDP</span>和<span>“IP”</span>协议很像，然而<span>TCP</span>隐藏了数据包的所有的复杂和不可靠的部分，抽象成了类似文件的对象。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">那么<span>TCP</span>是如何做到这一点呢？</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">首先，<span>TCP</span>是一个数据流的协议，所以你只需要把输入的内容变成数据流，然后<span>TCP</span>协议就会确保数据会到达发送的目的地。因为<span>“IP”</span>协议是通过数据包传递信息，<span>TCP</span>是建立在<span>“IP”</span>协议之上，所以<span>TCP</span>必须把用户输入的数据流分成数据包的形式。<span>TCP</span>协议会对需要发送的数据进行排队，然后当有足够的排除数据的时候，就发送数据包到目标计算机。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">当在多人在线的网络游戏中发送非常小的数据包的时候，这样做就有一个问题。这个时候会发生什么？如果数据没有达到缓冲区设定的数值，数据包是不会发送的。这就会出现个问题：因为客户端的用户输入请求后，需要尽快的从服务器得到响应，如果像上面<span>TCP </span>等待缓冲区满后才发送的话，就会出现延时，那么客户端的用户体验就会非常差！网络游戏几乎不能出现延时，我们希望看到的是<span>“</span>实时<span>”</span>和流畅。</span></p><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">TCP</span><span style="font-family: 微软雅黑, sans-serif;">有一个选项可以修复，上面说的那种等待缓冲区满才发送的情况，就是<strong><span style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">TCP_NODELAY</span></strong>。这个选项使得<span>TCP socket</span>不需要等待缓冲区满才发送，而是输入数据后就立即发送。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">然而，即使你已经设置了<span>TCP_NODELAY</span>选项，在多人网游中还是会有一系列的问题。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">这一切的源头都由于<span>TCP</span>处理丢包和乱序包的方式。使得你产生有序和可靠的<span>“</span>错觉<span>”</span>。</span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">TCP</span><span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">如何保证数据的可靠性</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">本质上<span>TCP</span>做的事情，分解数据流，成为数据包，使用在不可靠的<span>“IP”</span>协议，发送这些数据包。然后使得数据包到达目标计算机，然后重组成数据流。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">但是，如何处理当丢包？如何处理重复的数据包和乱序数据包？</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">这里不会介绍<span>TCP</span>处理这些事情的细节，因为这些都是非常复杂的（想弄清楚的同学可以看我上面推荐的书单），大体上：<span>TCP</span>发送一个数据包，等待一段时间，直到检测到数据包丢失了，因为没有接收到它的<span>ACK</span>（一种传输类控制符号，用于确认接收无误），接下来就重新发送丢失的数据包到目标计算机。重复的数据包将被丢弃在接收端，乱序的数据包将被重新排序。所以保证了数据包的可靠性和有序性。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">如果我们用<span>TCP</span>实现数据的实时传输，就会出现一个问题：<span>TCP</span>无论什么情况，只要数据包出错，就必须等待数据包的重发。也就是说，即使最新的数据已经到达，但还是不能访问这些数据包，新到的数据会被放在一个队列中，需要等待丢失的包重新发过来之后，所有数据没有丢失才可以访问。需要等待多长时间才能重新发送数据包？举个例子：如果的延时是<span>125ms</span>，那么需要最好的情况下重发数据包需要<span>250ms</span>，但是如果遇到糟糕的情况，将会等待<span>500ms</span>以上，比如：网络堵塞等情况。那就没救了。。。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">为什么<span>TCP</span>不应该用于对网络延时要求极高的条件下</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">如果<span>FPS</span>（第一人称射击）这类的网络游戏使用<span>TCP</span>就出现问题，但是<span>web</span>浏览器、邮箱、大多数应用就没问题，因为多人网络游戏有实时性的要求。比如：玩家输入角色的位置，重要的不是前一秒发生了什么，而是最新的情况！<span>TCP</span>并没有考虑这类需求，它并不是为这种需求而设计的。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">这里举一个简单的多人网游的例子，比如射击的游戏。对网络的要求很简单。玩家通过客户端发送给服务器的每个场景（用鼠标和键盘输入的行走的位置），服务器处理每个用户发送过来的所有场景，处理完再返回给客户端，客户端解析响应，渲染最新的场景展示给玩家。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">在上面说的哪个多人游戏的例子中，如果出现一个数据包丢失，所有事情都需要停下来等待这个数据包重发。客户端会出现等待接收数据，所以玩家操作的任务就会出现站着不动的情况（卡！卡！卡！），不能射击也不能移动。当重发的数据包到达后，你接收到这个过时的数据包，然而玩家并不关心过期的数据（激战中，卡了<span>1</span>秒，等能动了，都已经死了）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">不幸的是，没有办法修复<span>TCP</span>的这个问题，这是它本质的东西，没办法修复。这就是<span>TCP</span>如何做到让不可靠，无序的数据包，看起来像有序，可靠的数据流。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">我并不需要可靠，有序的数据流，我们希望的是客户端和服务端之间的延时越低越好，不需要等待重发丢失的包。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">所以，这就是为什么在对数据的实时性要求的下，我们不用<span>TCP</span>。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$4 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">那为什么不<span>UDP</span>和<span>TCP</span>一起用呢？</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">像玩家输入实时游戏数据和状态的变更，只和最新的数据有关（这些数据强调实时性）。但是另外的一些数据，例如，从一台计算机发送给另外一个台计算机的一些列指令（交易请求，聊天？），可靠、有序的传输还是非常重要的！</span></p><p style="margin: 0cm 0cm 0.0001pt; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">那么，用户输入和状态用<span>UDP</span>，<span>TCP</span>用于可靠、有序的数据传输，看起来是个不错的点子。但是，问题在于<span>TCP</span>和<span>UDP</span>都是建立<span>“IP”</span>协议之上，所以协议之间都是发送数据包，从而相互通信。协议之间的互相影响是相当复杂的，涉及到<span>TCP</span>性能、可靠性和流量控制。简而言之，<span>TCP</span>会导致<span>UDP</span>丢包，请参考</span><span><a rel="noopener" href="http://www.isoc.org/INET97/proceedings/F3/F3_1.HTM" target="_blank"><span style="font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>这篇论文</span></span></a></span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">此外，<span>UDP</span>和<span>TCP</span>混合使用是非常复杂的，而且实现起来是非常痛苦的。（这段我就不翻译了，总而言之：不要混用<span>UDP</span>和<span>TCP</span>，容易失去对传输数据的控制）</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$2 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size: 24pt; font-family: 微软雅黑, sans-serif;">总结</span><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">我的建议并不是就一定要使用<span>UDP</span>，但是<span>UDP</span>协议应该用于游戏。请不要混合使用<span>TCP</span>和<span>UDP</span>，你应该学习<span>TCP</span>中一些地方是如何实现的技巧，然后可以把这些技巧用在<span>UDP</span>上，从而实现适合你的需求的协议（借鉴<span>TCP</span>中的实现，在<span>UDP</span>上，完善功能，从而达到你的需求）。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;">这个系列，接下来会讲到：如何在<span>UDP</span>上创建一个虚拟的连接（因为<span>UDP</span>本身，是没有连接的概念的）、如何使得<span>UDP</span>实现可靠性，流量控制，非阻塞。</span></p><p style="margin: 7.5pt 0cm; line-height: 16.2pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: 微软雅黑, sans-serif;"> </span></p>$hhd$2 style=”margin: 11.25pt 0cm 1.5pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;”&gt;<span style="font-size: 24pt; font-family: 微软雅黑, sans-serif;">参考</span><p class="MsoNormal" align="left" style="margin-l : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">         </span></span><span><a rel="noopener" href="http://wiki.mbalib.com/wiki/%C3%A6%E2%80%A2%C2%B0%C3%A6%C2%8D%C2%AE%C3%A6%C2%B5%C2%81" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black">MBA lib</span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>数据流</span></span></a></span></p><p class="MsoNormal" align="left" style="margin-l : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">         </span></span><span><a rel="noopener" href="https://zh.wikipedia.org/wiki/TCP/IP%C3%A5%C2%8D%C2%8F%C3%A8%C2%AE%C2%AE%C3%A6%E2%80%94%C2%8F" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black">WiKi TCP/IP</span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>协议族</span></span></a></span></p><p class="MsoNormal" align="left" style="margin-l : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">         </span></span><span><a rel="noopener" href="http://www.w3school.com.cn/tcpip/tcpip_protocols.asp" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black">W3SchoolTCP/IP </span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>协议</span></span></a></span></p><p class="MsoNormal" align="left" style="margin-l : initial; background-repeat: initial;"><span style="font-size: 10pt; font-family: Symbol;">·<span style="font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &#39;Times New Roman&#39;;">         </span></span><span><a rel="noopener" href="http://liangjiabin.com/blog/2015/03/difference-between-tcp-vs-udp-protocol.html" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black">UDP</span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>和TCP</span></span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:black"><span>的区</span></span></a></span></p><p class="MsoNormal"><span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"> </span></p><p class="MsoNormal"><span style="font-size:16.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><br></span></p></div></div>                    </div><br>                
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/11/01/快速编译技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/01/快速编译技巧/" itemprop="url">快速编译技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-01T22:57:29+00:00">
+                2016-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>项目越来越大，每次需要重新编译整个项目都是一件很浪费时间的事情。Research了一下，找到以下可以帮助提高速度的方法，总结一下。</p>
+</blockquote>
+<h1 id="tmpfs"><a href="#tmpfs" class="headerlink" title="tmpfs"></a>tmpfs</h1><blockquote>
+<p>有人说在Windows下用了RAMDisk把一个项目编译时间从4.</p>
+</blockquote>
+<p>5小时减少到了5分钟，也许这个数字是有点夸张了，不过粗想想，把文件放到内存上做编译应该是比在磁盘</p>
+<p>上快多了吧，尤其如果编译器需要生成很多临时文件的话。</p>
+<p>这个做法的实现成本最低，在Linux中，直接mount一个tmpfs就可以了。而且对所编译的工程没有任何要求，也不用改动编译环境。</p>
+<p>mount -t tmpfs tmpfs ~/build -o size=1G</p>
+<p>用2.6.32.2的Linux Kernel来测试一下编译速度：</p>
+<ul>
+<li><p>用物理磁盘：40分16秒</p>
+</li>
+<li><p>用tmpfs：39分56秒</p>
+</li>
+</ul>
+<p>呃……没什么变化。看来编译慢很大程度上瓶颈并不在IO上面。但对于一个实际项目来说，</p>
+<p>编译过程中可能还会有打包等IO密集的操作，所以只要可能，用tmpfs是有</p>
+<p>益无害的。</p>
+<blockquote>
+<p>当然对于大项目来说，你需要有足够的内存才能负担得起这个tmpfs的开销。</p>
+</blockquote>
+<h1 id="make-j"><a href="#make-j" class="headerlink" title="make -j"></a>make -j</h1><blockquote>
+<p>既然IO不是瓶颈，那CPU就应该是一个影响编译速度的重要因素了。</p>
+</blockquote>
+<p>用make -j带一个参数，可以把项目在进行并行编译，比如在一台双核的机器上，完全可以用make -<br>j4，让make最多允许4个编译命令同时执行，这样可以更有效的利用CPU资源。</p>
+<p>还是用Kernel来测试：</p>
+<ul>
+<li><p>用make： 40分16秒</p>
+</li>
+<li><p>用make -j4：23分16秒</p>
+</li>
+<li><p>用make -j8：22分59秒</p>
+</li>
+</ul>
+<p>由此看来，在多核CPU上，适当的进行并行编译还是可以明显提高编译速度的。但并行的任务不宜太多，一般是以CPU的核心数目的两倍为宜。</p>
+<p>不过这个方案不是完全没有cost的，如果项目的Makefile不规范，没有正确的设置好依赖关系，并行编译的结果就是编译不能正常进行。如果依赖关系设置过于保守<br>，则可能本身编译的可并行度就下降了，也不能取得最佳的效果。</p>
+<h1 id="ccache"><a href="#ccache" class="headerlink" title="ccache"></a>ccache</h1><blockquote>
+<p>ccache用于把编译的中间结果进行缓存，以便在再次编译的时候可以节省时间。这对于玩Kernel来说实在是再好不过了，因为经常需要修改一些Kernel的代码，然后<br>再重新编译，而这两次编译大部分东西可能都没有发生变化。对于平时开发项目来说，也是一样。为什么不是直接用make所支持的增量编译呢？还是因为现实中，因<br>为Makefile的不规范，很可能这种“聪明”的方案根本不能正常工作，只有每次make clean再make才行。</p>
+</blockquote>
+<p>安装完ccache后，可以在/usr/local/bin下建立gcc，g++，c++，cc的symbolic<br>link，链到/usr/bin/ccache上。总之确认系统在调用gcc等命令时会调用到ccache就可以了（通常情况下/usr/local/bin会在PATH中排在/usr/bin前面）。</p>
+<p>继续测试：</p>
+<ul>
+<li><p>用ccache的第一次编译(make -j4)：23分38秒</p>
+</li>
+<li><p>用ccache的第二次编译(make -j4)：8分48秒</p>
+</li>
+<li><p>用ccache的第三次编译(修改若干配置，make -j4)：23分48秒</p>
+</li>
+</ul>
+<p>看来修改配置（我改了CPU类型…）对ccache的影响是很大的，因为基本头文件发生变化后，就导致所有缓存数据都无效了，必须重头来做。但如果只是修改一些.<br>c文件的代码，ccache的效果还是相当明显的。而且使用ccache对项目没有特别的依赖，布署成本很低，这在日常工作中很实用。</p>
+<p>可以用ccache -s来查看cache的使用和命中情况：</p>
+<p>cache directory                   /home/lifanxi/.ccache</p>
+<p>cache hit                           7165</p>
+<p>cache miss                         14283</p>
+<p>called for link                       71</p>
+<p>not a C/C++ file                     120</p>
+<p>no input file                       3045</p>
+<p>files in cache                     28566</p>
+<p>cache size                          81.7 Mbytes</p>
+<p>max cache size                     976.6 Mbytes</p>
+<p>可以看到，显然只有第二编次译时cache命中了，cache miss是第一次和第三次编译带来的。两次cache占用了81.7M的磁盘，还是完全可以接受的。</p>
+<h1 id="distcc"><a href="#distcc" class="headerlink" title="distcc"></a>distcc</h1><blockquote>
+<p>一台机器的能力有限，可以联合多台电脑一起来编译。这在公司的日常开发中也是可行的，因为可能每个开发人员都有自己的开发编译环境，它们的编译器版本一般<br>是一致的，公司的网络也通常具有较好的性能。这时就是distcc大显身手的时候了。</p>
+</blockquote>
+<p>使用distcc，并不像想象中那样要求每台电脑都具有完全一致的环境，它只要求源代码可以用make -j并行编译，并且参与分布式编译的电脑系统中具有相同的编译<br>器。因为它的原理只是把预处理好的源文件分发到多台计算机上，预处理、编译后的目标文件的链接和其它除编译以外的工作仍然是在发起编译的主控电脑上完成，<br>所以只要求发起编译的那台机器具备一套完整的编译环境就可以了。</p>
+<p>distcc安装后，可以启动一下它的服务：</p>
+<p>/usr/bin/distccd  –daemon –allow 10.64.0.0/16</p>
+<p>默认的3632端口允许来自同一个网络的distcc连接。</p>
+<p>然后设置一下DISTCC_HOSTS环境变量，设置可以参与编译的机器列表。</p>
+<blockquote>
+<p>通常localhost也参与编译，但如果可以参与编译的机器很多，则可以把localhost从这个列表</p>
+<p>中去掉，这样本机就完全只是进行预处理、分发和链接了，编译都在别的机器上完成。</p>
+</blockquote>
+<p>因为机器很多时，localhost的处理负担很重，所以它就不再“兼职”编译了。</p>
+<p>export DISTCC_HOSTS=&quot;localhost 10.64.25.1 10.64.25.2 10.64.25.3&quot;</p>
+<p>然后与ccache类似把g++，gcc等常用的命令链接到/usr/bin/distcc上就可以了。</p>
+<p>在make的时候，也必须用-j参数，一般是参数可以用所有参用编译的计算机CPU内核总数的两倍做为并行的任务数。</p>
+<p>同样测试一下：</p>
+<ul>
+<li><p>一台双核计算机，make -j4：23分16秒</p>
+</li>
+<li><p>两台双核计算机，make -j4：16分40秒</p>
+</li>
+<li><p>两台双核计算机，make -j8：15分49秒</p>
+</li>
+</ul>
+<p>跟最开始用一台双核时的23分钟相比，还是快了不少的。如果有更多的计算机加入，也可以得到更好的效果。</p>
+<p>在编译过程中可以用distccmon-text来查看编译任务的分配情况。distcc也可以与ccache同时使用，通过设置一个环境变量就可以做到，非常方便。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><ul>
+<li><p>tmpfs： 解决IO瓶颈，充分利用本机内存资源</p>
+</li>
+<li><p>make -j： 充分利用本机计算资源</p>
+</li>
+<li><p>distcc： 利用多台计算机资源</p>
+</li>
+<li><p>ccache： 减少重复编译相同代码的时间</p>
+</li>
+</ul>
+<blockquote>
+<p>这些工具的好处都在于布署的成本相对较低，综合利用这些工具，就可以轻轻松松的节省相当可观的时间。</p>
+</blockquote>
+<p>上面介绍的都是这些工具最基本的用法，更多的用法可以参考它们各自的man page。</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/09/13/XXTEA的python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/13/XXTEA的python实现/" itemprop="url">XXTEA的python实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-13T02:04:00+00:00">
+                2016-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Script/" itemprop="url" rel="index">
+                    <span itemprop="name">Script</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p>在数据的加解密领域，算法分为对称密钥与非对称密钥两种。</p>
+<p>对称密钥与非对称密钥由于各自的特点，所应用的领域是不尽相同的。</p>
+<p>对称密钥加密算法由于其速度快，一般用于整体数据的加密，而非对称密钥加密算法的安全性能佳，在数字签名领域得到广泛的应用。</p>
+<p>微型加密算法（TEA）及其相关变种（XTEA，Block TEA，XXTEA） 都是分组加密算法，它们很容易被描述，实现也很简单（典型的几行代码）。</p>
+<p>TEA是Tiny Encryption Algorithm的缩写，以加密解密速度快，实现简单著称。</p>
+<p>TEA 算法最初是由剑桥计算机实验室的 David Wheeler 和 Roger Needham 在 1994 年设计的。</p>
+<p>该算法使用 128 位的密钥为 64 位的信息块进行加密，它需要进行 64 轮迭代，尽管作者认为 32 轮已经足够了。</p>
+<p>该算法使用了一个神秘常数δ作为倍数，它来源于黄金比率，以保证每一轮加密都不相同。</p>
+<p>但δ的精确值似乎并不重要，这里 TEA 把它定义为 δ=「(√5 - 1)231」（也就是程序中的 0×9E3779B9）。</p>
+<p>之后 TEA 算法被发现存在缺陷，作为回应，设计者提出了一个 TEA 的升级版本——XTEA（有时也被称为“tean”）。</p>
+<p>XTEA 跟 TEA 使用了相同的简单运算，但它采用了截然不同的顺序，为了阻止密钥表攻击，四个子密钥（在加密过程中，原 128 位的密钥被拆分为 4 个 32 位的子密钥）采用了一种不太正规的方式进行混合，但速度更慢了。</p>
+<p>在跟描述 XTEA 算法的同一份报告中，还介绍了另外一种被称为 Block TEA 算法的变种，它可以对 32 位大小任意倍数的变量块进行操作。</p>
+<p>该算法将 XTEA 轮循函数依次应用于块中的每个字，并且将它附加于它的邻字。</p>
+<p>该操作重复多少轮依赖于块的大小，但至少需要 6 轮。</p>
+<p>该方法的优势在于它无需操作模式（CBC，OFB，CFB 等），密钥可直接用于信息。</p>
+<p>对于长的信息它可能比 XTEA 更有效率。</p>
+<p>在 1998 年，Markku-Juhani Saarinen 给出了一个可有效攻击 Block TEA 算法的代码，但之后很快 David J. Wheeler 和 Roger M. Needham 就给出了 Block TEA 算法的修订版，这个算法被称为 XXTEA。</p>
+<p>XXTEA 使用跟 Block TEA 相似的结构，但在处理块中每个字时利用了相邻字。</p>
+<p>它利用一个更复杂的 MX 函数代替了 XTEA 轮循函数，MX 使用 2 个输入量。</p>
+<p>XXTEA 算法很安全，而且非常快速，非常适合应用于 Web 开发中。</p>
+<img src="/2016/09/13/XXTEA的python实现/py_xxtea1.png">
+<p>TEA算法是由剑桥大学计算机实验室的David Wheeler和Roger Needham于1994年发明，</p>
+<p>TEA是Tiny Encryption Algorithm的缩写，以加密解密速度快，实现简单著称。</p>
+<p>TEA算法每一次可以操作64bit(8byte)，采用128bit(16byte)作为key，算法采用迭代的形式，推荐的迭代轮数是64轮，最少32轮。</p>
+<p>为解决TEA算法密钥表攻击的问题，TEA算法先后经历了几次改进，从XTEA到BLOCK TEA，直至最新的XXTEA。</p>
+<p>XTEA也称做TEAN，它使用与TEA相同的简单运算，但四个子密钥采取不正规的方式进行混合以阻止密钥表攻击。</p>
+<p>Block TEA算法可以对32位的任意整数倍长度的变量块进行加解密的操作，该算法将XTEA轮循函数依次应用于块中的每个字，并且将它附加于被应用字的邻字。</p>
+<p>XXTEA使用跟Block TEA相似的结构，但在处理块中每个字时利用了相邻字，且用拥有两个输入量的MX函数代替了XTEA轮循函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> struct  </span><br><span class="line">  </span><br><span class="line">_DELTA = <span class="number">0x9E3779B9</span>  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_long2str</span><span class="params">(v, w)</span>:</span>  </span><br><span class="line">    n = (len(v) - <span class="number">1</span>) &lt;&lt; <span class="number">2</span>  </span><br><span class="line">    <span class="keyword">if</span> w:  </span><br><span class="line">        m = v[<span class="number">-1</span>]  </span><br><span class="line">        <span class="keyword">if</span> (m &lt; n - <span class="number">3</span>) <span class="keyword">or</span> (m &gt; n): <span class="keyword">return</span> <span class="string">''</span>  </span><br><span class="line">        n = m  </span><br><span class="line">    s = struct.pack(<span class="string">'&lt;%iL'</span> % len(v), *v)  </span><br><span class="line">    <span class="keyword">return</span> s[<span class="number">0</span>:n] <span class="keyword">if</span> w <span class="keyword">else</span> s  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_str2long</span><span class="params">(s, w)</span>:</span>  </span><br><span class="line">    n = len(s)  </span><br><span class="line">    m = (<span class="number">4</span> - (n &amp; <span class="number">3</span>) &amp; <span class="number">3</span>) + n  </span><br><span class="line">    s = s.ljust(m, <span class="string">"\0"</span>)  </span><br><span class="line">    v = list(struct.unpack(<span class="string">'&lt;%iL'</span> % (m &gt;&gt; <span class="number">2</span>), s))  </span><br><span class="line">    <span class="keyword">if</span> w: v.append(n)  </span><br><span class="line">    <span class="keyword">return</span> v  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(str, key)</span>:</span>  </span><br><span class="line">    <span class="keyword">if</span> str == <span class="string">''</span>: <span class="keyword">return</span> str  </span><br><span class="line">    v = _str2long(str, <span class="keyword">True</span>)  </span><br><span class="line">    k = _str2long(key.ljust(<span class="number">16</span>, <span class="string">"\0"</span>), <span class="keyword">False</span>)  </span><br><span class="line">    n = len(v) - <span class="number">1</span>  </span><br><span class="line">    z = v[n]  </span><br><span class="line">    y = v[<span class="number">0</span>]  </span><br><span class="line">    sum = <span class="number">0</span>  </span><br><span class="line">    q = <span class="number">6</span> + <span class="number">52</span> // (n + <span class="number">1</span>)  </span><br><span class="line">    <span class="keyword">while</span> q &gt; <span class="number">0</span>:  </span><br><span class="line">        sum = (sum + _DELTA) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">        e = sum &gt;&gt; <span class="number">2</span> &amp; <span class="number">3</span>  </span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> xrange(n):  </span><br><span class="line">            y = v[p + <span class="number">1</span>]  </span><br><span class="line">            v[p] = (v[p] + ((z &gt;&gt; <span class="number">5</span> ^ y &lt;&lt; <span class="number">2</span>) + (y &gt;&gt; <span class="number">3</span> ^ z &lt;&lt; <span class="number">4</span>) ^ (sum ^ y) + (k[p &amp; <span class="number">3</span> ^ e] ^ z))) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">            z = v[p]  </span><br><span class="line">        y = v[<span class="number">0</span>]  </span><br><span class="line">        v[n] = (v[n] + ((z &gt;&gt; <span class="number">5</span> ^ y &lt;&lt; <span class="number">2</span>) + (y &gt;&gt; <span class="number">3</span> ^ z &lt;&lt; <span class="number">4</span>) ^ (sum ^ y) + (k[n &amp; <span class="number">3</span> ^ e] ^ z))) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">        z = v[n]  </span><br><span class="line">        q -= <span class="number">1</span>  </span><br><span class="line">    <span class="keyword">return</span> _long2str(v, <span class="keyword">False</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(str, key)</span>:</span>  </span><br><span class="line">    <span class="keyword">if</span> str == <span class="string">''</span>: <span class="keyword">return</span> str  </span><br><span class="line">    v = _str2long(str, <span class="keyword">False</span>)  </span><br><span class="line">    k = _str2long(key.ljust(<span class="number">16</span>, <span class="string">"\0"</span>), <span class="keyword">False</span>)  </span><br><span class="line">    n = len(v) - <span class="number">1</span>  </span><br><span class="line">    z = v[n]  </span><br><span class="line">    y = v[<span class="number">0</span>]  </span><br><span class="line">    q = <span class="number">6</span> + <span class="number">52</span> // (n + <span class="number">1</span>)  </span><br><span class="line">    sum = (q * _DELTA) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">    <span class="keyword">while</span> (sum != <span class="number">0</span>):  </span><br><span class="line">        e = sum &gt;&gt; <span class="number">2</span> &amp; <span class="number">3</span>  </span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> xrange(n, <span class="number">0</span>, <span class="number">-1</span>):  </span><br><span class="line">            z = v[p - <span class="number">1</span>]  </span><br><span class="line">            v[p] = (v[p] - ((z &gt;&gt; <span class="number">5</span> ^ y &lt;&lt; <span class="number">2</span>) + (y &gt;&gt; <span class="number">3</span> ^ z &lt;&lt; <span class="number">4</span>) ^ (sum ^ y) + (k[p &amp; <span class="number">3</span> ^ e] ^ z))) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">            y = v[p]  </span><br><span class="line">        z = v[n]  </span><br><span class="line">        v[<span class="number">0</span>] = (v[<span class="number">0</span>] - ((z &gt;&gt; <span class="number">5</span> ^ y &lt;&lt; <span class="number">2</span>) + (y &gt;&gt; <span class="number">3</span> ^ z &lt;&lt; <span class="number">4</span>) ^ (sum ^ y) + (k[<span class="number">0</span> &amp; <span class="number">3</span> ^ e] ^ z))) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">        y = v[<span class="number">0</span>]  </span><br><span class="line">        sum = (sum - _DELTA) &amp; <span class="number">0xffffffff</span>  </span><br><span class="line">    <span class="keyword">return</span> _long2str(v, <span class="keyword">True</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:  </span><br><span class="line">    <span class="keyword">print</span> decrypt(encrypt(<span class="string">'Hello XXTEA!'</span>, <span class="string">'16bytelongstring'</span>), <span class="string">'16bytelongstring'</span>)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/09/12/内零头和外零头/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -675,575 +1304,11 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/08/15/boost之program_options/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/15/boost之program_options/" itemprop="url">boost之program_options</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-15T15:11:26+00:00">
-                2016-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>命令行接口是普遍,基础的人机交互接口，从命令行提取程序的运行时选项的方法有很多。</p>
-<p>你可以自己编写相对应的完整的解析函数，或许你有丰富的C语言编程经验，熟知getopt()函数的用法，又或许使用Python的你已经在使用optparse库来简化这一工作。</p>
-<p>大家在平时不断地谈及到“不要重复造轮子”，那就需要掌握一些顺手的库，这里介绍一种C++方式来解析命令行选项的方法，就是使用Boost.Program_options库。</p>
-<p>program_options提供程序员一种方便的命令行和配置文件进行程序选项设置的方法。</p>
-<p>使用program_options库而不是你自己动手写相关的解析代码，因为它更简单，声明程序选项的语法简洁，并且库自身也非常小。</p>
-<p>将选项值转换为适合的类型值的工作也都能自动完成。</p>
-<p>库有着完备的错误检查机制，如果自己手写解析代码时，就可能会错过对一些出错情况的检查了。</p>
-<p>最后，选项值不仅能从命令行获取，也能从配置文件，甚至于环境变量中提取，而这些选择不会增加明显的工作量。</p>
-<h1 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h1><p>以下面简单的hello程序进行说明，默认打印hello world,如果传入-p选项，就会打印出人的姓名，另外通过传入-h选项，可以打印出帮助选项。</p>
-<p>略微看一眼代码文件和相应的屏幕输入输出，然后我们再一起来看看这些是如何发生的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//hello.cpp </span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;boost/program_options.hpp&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">int main(int argc, char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    using namespace boost::program_options;</span><br><span class="line">    //声明需要的选项</span><br><span class="line">    options_description desc(&quot;Allowed options&quot;);</span><br><span class="line">    desc.add_options()</span><br><span class="line">        (&quot;help,h&quot;, &quot;produce help message&quot;)</span><br><span class="line">        (&quot;person,p&quot;, value&lt;string&gt;()-&gt;default_value(&quot;world&quot;), &quot;who&quot;)</span><br><span class="line">        ;</span><br><span class="line"></span><br><span class="line">    variables_map vm;        </span><br><span class="line">    store(parse_command_line(argc, argv, desc), vm);</span><br><span class="line">    notify(vm);    </span><br><span class="line"></span><br><span class="line">    if (vm.count(&quot;help&quot;)) &#123;</span><br><span class="line">        cout &lt;&lt; desc;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; &quot;Hello &quot; &lt;&lt; vm[&quot;person&quot;].as&lt;string&gt;() &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下面是在Windows命令提示符窗口上的输入输出结果，其中”&gt;”表示提示符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;hello </span><br><span class="line">Hello world</span><br><span class="line"></span><br><span class="line">&gt;hello -h</span><br><span class="line">Allowed options:</span><br><span class="line">  -h [ --help ]                produce help message</span><br><span class="line">  -p [ --person ] arg (=world) who</span><br><span class="line"></span><br><span class="line">&gt;hello --person len</span><br><span class="line">Hello len</span><br></pre></td></tr></table></figure>
-<p>首先通过options_description类声明了需要的选项，add_options返回了定义了operator()的特殊的代理对象。</p>
-<p>这个调用看起来有点奇怪，其参数依次为选项名，选项值，以及选项的描述。</p>
-<p>注意到示例中的选项名为”help,h”，是因为声明了具有短选项名和长选项名的选项，这跟gnu程序的命令行具有一致性。</p>
-<p>当然你可以省略短选项名，但是这样就不能用命令选项简写了。</p>
-<p>第二个选项的声明，定义了选项值为string类型，其默认值为world.</p>
-<p>接下来,声明了variables_map类的对象，它主要用来存储选项值，并且能储存任意类型的值。</p>
-<p>然后，store,parse_command_line和notify函数使vm能存储在命令行中发现的选项。</p>
-<p>最后我们就自由地使用这些选项了，variables_map类的使用就像使用std::map一样，除了它必须用as方法去获取值。</p>
-<p>如果as方法调用的指定类型与实际存储的类型不同，就会有异常抛出。</p>
-<p>具有编程的你可能有这样的经验，使用cl或gcc对源文件进行编译时，可直接将源文件名放置在命令行中，而无需什么选项字母，如gcc a.c之类的。</p>
-<p>prgram_options也能处理这种情况，在库中被称为”positional options”(位置选项),但这需要程序员的一点儿帮助才能完成。</p>
-<p>看下面的经过对应修改的代码，我们无需传入”-p”选项，就能可指定”person”选项值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">positional_options_description p;</span><br><span class="line">p.add(&quot;person&quot;, -1);</span><br><span class="line">store(command_line_parser(argc, argv).options(desc).positional(p).run(), vm);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;hello len</span><br><span class="line">Hello len</span><br></pre></td></tr></table></figure>
-<p>前面新增的两行是为了说明所有的位置选项都应被解释成”person”选项，这里还采用了command_line_parser类来解析命令行，而不是用parse_command_line函数。</p>
-<p>后者只是对前者类的简单封装，但是现在我们需要传入一些额外的信息，所以要使用类本身。</p>
-<p>选项复合来源<br>一般来说，在命令行上指定所有选项，对用户来说是非常烦人的。</p>
-<p>如果有些选项要应用于每次运行，那该怎么办呢。</p>
-<p>我们当然希望能创建出带有些常用设置的选项文件，跟命令行一起应用于程序中。</p>
-<p>当然这一切需要将命令行与配置文件中的值结合起来。</p>
-<p>比如，在命令行中指定的某些选项值应该能覆盖配置文件中的对应值，或者将这些值组合起来。</p>
-<p>下面的代码段将选项通过文件读取，这文件是文本格式，可用”#”表示注释，格式如命令行中的参数一样，选项=值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifstream ifs(&quot;config.cfg&quot;);</span><br><span class="line">store(parse_config_file(ifs,config),vm);</span><br><span class="line">notify(vm);</span><br></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.boost.org/doc/libs/1_35_0/doc/html/program_options.html" target="_blank" rel="noopener">Boost.prgram_options库文档</a></p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/" itemprop="url">关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-11T16:07:43+00:00">
-                2016-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <ul>
-<li><p>这本书不能一次性所有都想看完。</p>
-<blockquote>
-<p>要有目的性的看，因为这本书类似于百科全书所有都讲， 不分轻重， 如果都看，硬啃，只会迷失了自己，反而不知道看了什么</p>
-</blockquote>
-</li>
-<li><p>这本书不能单独看。</p>
-<blockquote>
-<p>这本书必须配合TCP/IP详解和UNIX环境高级编程（简称APUE）以及The Linux Programming Interface（不知道这本书的译名是什么， 简称TLPI）来看</p>
-</blockquote>
-</li>
-<li><p>个人看的是卷一第三版，因当前工作经验范围和阅历受限，对于IT码农，IPv6的和SCTP的章节暂且略过，所以目前大概划出的必看章节（其他可挑选）是</p>
-<ul>
-<li>1</li>
-<li>2</li>
-<li>3</li>
-<li>4</li>
-<li>5</li>
-<li>6</li>
-<li>7</li>
-<li>8</li>
-<li>11 </li>
-<li>13</li>
-<li>16</li>
-<li>22</li>
-<li>26</li>
-<li>30</li>
-</ul>
-</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/08/08/server_model_summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/08/server_model_summary/" itemprop="url">服务器模型总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-08T13:12:08+00:00">
-                2016-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NP/" itemprop="url" rel="index">
-                    <span itemprop="name">NP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <p>关于Reactor模式讲解请转 <a href="/2016/08/07/reactor_intro/" title="此文">此文</a></p>
-<h1 id="服务器模型总结"><a href="#服务器模型总结" class="headerlink" title="服务器模型总结"></a>服务器模型总结</h1><p><img src="/img/server_model_summary/concurrent_model_summary.jpg" alt></p>
-<p>其中“互通”指的是如果开发chat服务，多个客户连接之间是否能方便地交换数据（chat也是三大TCP网络编程案例之一）。</p>
-<p>对于echo/httpd/Sudoku这类“连接相互独立”的服务程序，这个功能无足轻重，但是对于chat类服务却至关重要。</p>
-<p>“顺序性”指的是在httpd/Sudoku这类请求响应服务中，如果客户连接顺序发送多个请求，那么计算得到的多个响应是否按相同的顺序发还给客户（这里指的是在自然条件下，不含刻意同步）。</p>
-<h1 id="方案0"><a href="#方案0" class="headerlink" title="方案0"></a>方案0</h1><p>方案0 这其实不是并发服务器，而是iterative 服务器，因为它一次只能服务一个客户。代码见[UNP]中的Figure 1.9，[UNP]以此为对比其他方案的基准点。这个方案不适合长连接，倒是很适合daytime这种write-only短连接服务。</p>
-<p><strong>. . . </strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1309,7 +1374,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">245</span>
+                <span class="site-state-item-count">248</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

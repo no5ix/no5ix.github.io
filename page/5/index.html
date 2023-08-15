@@ -304,6 +304,538 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/07/21/actor_vs_csp_mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/21/actor_vs_csp_mode/" itemprop="url">Actor模型 vs. CSP模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-21T02:53:55+00:00">
+                2021-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <p>Akka/Erlang 的 actor 模型与 Go 语言的协程 Goroutine 与通道 Channel 代表的 CSP(Communicating Sequential Processes) 模型有什么区别呢？</p>
+<p>首先这两者都是并发模型的解决方案，我们看看 Actor 和 Channel 这两个方案的不同：</p>
+<h1 id="Actor-模型"><a href="#Actor-模型" class="headerlink" title="Actor 模型"></a>Actor 模型</h1><p>在 Actor 模型中，主角是 Actor，类似一种 worker，Actor 彼此之间直接发送消息，不需要经过什么中介，消息是异步发送和处理的：</p>
+<p><img src="/img/actor_vs_csp_mode/actors_mode.png" alt></p>
+<p>Actor 模型描述了一组为了避免并发编程的常见问题的公理:</p>
+<ol>
+<li>所有 Actor 状态是 Actor 本地的，外部无法访问。  </li>
+<li>Actor 必须只有通过消息传递进行通信。　　  </li>
+<li>一个 Actor 可以响应消息: 推出新 Actor, 改变其内部状态, 或将消息发送到一个或多个其他参与者。  </li>
+<li>Actor 可能会堵塞自己, 但 Actor 不应该堵塞它运行的线程。</li>
+</ol>
+<p>更多可见 <a href="http://www.jdon.com/actors.html" target="_blank" rel="noopener">Actor 模型专题</a></p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/06/11/cpp_compile_options/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/06/11/cpp_compile_options/" itemprop="url">cpp的各个编译选项备忘整理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-11T22:53:55+00:00">
+                2021-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="编译器优化级别"><a href="#编译器优化级别" class="headerlink" title="编译器优化级别"></a>编译器优化级别</h1><p>用 C/C++ 的肯定都知道编译器编译有各种优化级别，编译器优化级别大体如下：</p>
+<ul>
+<li>O0（默认选项）：不开启优化，方便功能调试</li>
+<li>Og：方便调试的优化选项（比 O1 更保守）</li>
+<li>O1：保守的优化选项，打开了四十多个优化选项</li>
+<li>O2：常用的发布优化选项，在 O1 的基础上额外打开了四十多个优化选项，包括自动内联等规则</li>
+<li>Os：产生较小代码体积的优化选项（比 O2 更保守）</li>
+<li>O3：较为激进的优化选项（对错误编码容忍度最低），在 O2 的基础上额外打开了十多个优化选项</li>
+<li>Ofast：打开可导致不符合 IEEE 浮点数等标准的性能优化选项。</li>
+</ul>
+<p>具体介绍如下：</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/05/17/self_cultivation_etcd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/05/17/self_cultivation_etcd/" itemprop="url">服务器开发自我修养专栏-etcd与raft要点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-17T19:08:06+00:00">
+                2021-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
+                    <span itemprop="name">Self-cultivation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="etcd"><a href="#etcd" class="headerlink" title="etcd"></a>etcd</h1><ul>
+<li>etcd 参考 <a href="https://wingsxdu.com/post/database/etcd/#gsc.tab=0" target="_blank" rel="noopener">https://wingsxdu.com/post/database/etcd/#gsc.tab=0</a></li>
+<li>raft 参考 <a href="https://www.jianshu.com/p/5aed73b288f7" target="_blank" rel="noopener">https://www.jianshu.com/p/5aed73b288f7</a></li>
+<li><p>重点参考 <a href="https://segmentfault.com/a/1190000022248118" target="_blank" rel="noopener">https://segmentfault.com/a/1190000022248118</a></p>
+</li>
+<li><p>etcd 是一个 Go 语言编写的分布式、高可用的<strong>强一致性</strong>键值存储系统，用于提供可靠的分布式键值(key-value)存储、配置共享和服务发现等功能。 etcd可以用于存储关键数据和实现分布式调度，它在现代化的集群运行中能够起到关键性的作用。</p>
+</li>
+<li><p>Raft用于保证分布式数据的一致性。<a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">动画演示Raft</a></p>
+</li>
+</ul>
+<h2 id="Raft选主过程"><a href="#Raft选主过程" class="headerlink" title="Raft选主过程"></a>Raft选主过程</h2><video width="100%" controls="controls"><br><source src="/img/noodle_plan/etcd/leader_election.webm" type="video/mp4"><br></video>
+
+<p><a href="http://thesecretlivesofdata.com/raft/#election" target="_blank" rel="noopener">动画演示Raft选主</a><br>前提知识:  </p>
+<ul>
+<li>Election timeout选举周期: The election timeout is the amount of time a follower waits until becoming a candidate.</li>
+<li>heartbeat timeout心跳时间间隔</li>
+</ul>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/05/08/python_reload_func_closure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -904,725 +1436,11 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/04/18/self_cultivation_encoding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/18/self_cultivation_encoding/" itemprop="url">服务器开发自我修养专栏-编码知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-18T19:08:06+00:00">
-                2021-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
-                    <span itemprop="name">Self-cultivation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="编码知识"><a href="#编码知识" class="headerlink" title="编码知识"></a>编码知识</h1><h2 id="Base64-的原理？编码后比编码前是大了还是小了。"><a href="#Base64-的原理？编码后比编码前是大了还是小了。" class="headerlink" title="Base64 的原理？编码后比编码前是大了还是小了。"></a>Base64 的原理？编码后比编码前是大了还是小了。</h2><p>结论:</p>
-<p>大了. 因为Base64 编码本质上是一种将二进制数据转成文本数据的方案。<strong>对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。</strong>也就是说, 每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。</p>
-<h3 id="base64的原理"><a href="#base64的原理" class="headerlink" title="base64的原理"></a>base64的原理</h3><p>Base64 编码之所以称为 Base64，是因为其使用 64 个字符来对任意数据进行编码，同理有 Base32、Base16 编码。标准 Base64 编码使用的 64 个字符为：<br><img src="/img/noodle_plan/http/XHFMRvxfez4OVtr.jpg" alt></p>
-<p>这 64 个字符是各种字符编码（比如 ASCII 编码）所使用字符的子集，基本，并且可打印。唯一有点特殊的是最后两个字符，因对最后两个字符的选择不同，Base64 编码又有很多变种，比如 Base64 URL 编码。</p>
-<p>Base64 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。</p>
-<p>假设我们要对 <code>Hello!</code> 进行 Base64 编码，按照 ASCII 表，其转换过程如下图所示：<br><img src="/img/noodle_plan/http/tJnClQsjc4WMGhB.jpg" alt></p>
-<p>可知 <code>Hello!</code> 的 Base64 编码结果为 <code>SGVsbG8h</code> ，原始字符串长度为 6 个字符，编码后长度为 8 个字符，每 3 个原始字符经 Base64 编码成 4 个字符，编码前后长度比 4/3，这个长度比很重要 - 比原始字符串长度短，则需要使用更大的编码字符集，这并不我们想要的；长度比越大，则需要传输越多的字符，传输时间越长。Base64 应用广泛的原因是在字符集大小与长度比之间取得一个较好的平衡，适用于各种场景。</p>
-<p>是不是觉得 Base64 编码原理很简单？</p>
-<p>但这里需要注意一个点：Base64 编码是每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。</p>
-<p>以 <code>Hello!!</code> 为例，其转换过程为：<br><img src="/img/noodle_plan/http/5URB8nVis9ljwYe.jpg" alt></p>
-<p><em>注：图表中蓝色背景的二进制 0 值是额外补充的。</em></p>
-<p><code>Hello!!</code> Base64 编码的结果为 <code>SGVsbG8hIQAA</code> 。最后 2 个零值只是为了 Base64 编码而补充的，在原始字符中并没有对应的字符，那么 Base64 编码结果中的最后两个字符 <code>AA</code> 实际不带有效信息，所以需要特殊处理，以免解码错误。</p>
-<p>标准 Base64 编码通常用 <code>=</code> 字符来替换最后的 <code>A</code>，即编码结果为 <code>SGVsbG8hIQ==</code>。因为 <code>=</code> 字符并不在 Base64 编码索引表中，其意义在于结束符号，在 Base64 解码时遇到 <code>=</code> 时即可知道一个 Base64 编码字符串结束。</p>
-<p>如果 Base64 编码字符串不会相互拼接再传输，那么最后的 <code>=</code> 也可以省略，解码时如果发现 Base64 编码字符串长度不能被 4 整除，则先补充 <code>=</code> 字符，再解码即可。</p>
-<p>解码是对编码的逆向操作，但注意一点：<strong>对于最后的两个 <code>=</code> 字符，转换成两个 <code>A</code> 字符，再转成对应的两个 6 比特二进制 0 值，接着转成原始字符之前，需要将最后的两个 6 比特二进制 0 值丢弃，因为它们实际上不携带有效信息</strong>。</p>
-<h2 id="utf8编码和unicode字符集"><a href="#utf8编码和unicode字符集" class="headerlink" title="utf8编码和unicode字符集"></a>utf8编码和unicode字符集</h2><p>总结:  </p>
-<ul>
-<li>unicode是个字符集, 只是一个符号对应表, 它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储</li>
-<li>utf8是unicode符号具体的编码方式, 规定了该怎么存储</li>
-</ul>
-<p>说到utf8，就不得不说一下unicode了。  Unicode是一个很大的集合，每一个unicode对应一个符号，不管是中文的汉字，英文字符，日文，韩文等等。现在的规模可以容纳100多万个符号。每个符号的编码都不一样，比如，U+0639表示阿拉伯字母 Ain，U+0041表示英语的大写字母A，U+4E25表示汉字“严”。具体的符号对应表，可以查询unicode.org，或者专门的汉字对应表。</p>
-<p><strong>需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。</strong></p>
-<p>比如，汉字“严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。</p>
-<p>这里就有两个严重的问题，第一个问题是：如何才能区别unicode和ascii？计算机怎么知道三个字节表示一个符号，而不是分别表示三个符号呢？第二个问题是：我们已经知道，英文字母只用一个字节表示就够了，如果unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有二到三个字节是0，这对于存储来说是极大的浪费，文本文件的大小会因此大出二三倍，这是无法接受的。</p>
-<p>它们造成的结果是：</p>
-<p>1）出现了unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示unicode。</p>
-<p>2）unicode在很长一段时间内无法推广，直到互联网的出现。</p>
-<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种unicode的实现方式。其他实现方式还包括UTF-16和UTF-32，不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。</p>
-<p>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。</p>
-<p>UTF-8的编码规则很简单，只有二条：</p>
-<ul>
-<li><p>1）对于单字节的符号，字节的第一位（字节的最高位）设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。</p>
-</li>
-<li><p>2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p>
-</li>
-</ul>
-<p>下表总结了编码规则，字母x表示可用编码的位。</p>
-<p>Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">—————+———————————————————————</span><br><span class="line">0000 0000-0000 007F | 0xxxxxxx</span><br><span class="line">0000 0080-0000 07FF | 110xxxxx 10xxxxxx</span><br><span class="line">0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br></pre></td></tr></table></figure></p>
-<p>下面，还是以汉字“严”为例，演示如何实现UTF-8编码：<br>已知“严”的unicode是4E25（100111000100101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是“11100100 10111000 10100101”，转换成十六进制就是E4B8A5。</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/04/18/cpp_func_traits_intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/18/cpp_func_traits_intro/" itemprop="url">rpclib源码阅读笔记之浅谈cpp func traits</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-18T01:59:01+00:00">
-                2021-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://light-city.club/2019/10/07/traits/#!" target="_blank" rel="noopener">原文出处</a></p>
-<hr>
-<h2 id="0-导语"><a href="#0-导语" class="headerlink" title="0. 导语"></a><strong>0. 导语</strong></h2><p>大家好，我是光城，欢迎关注公众号：<strong>guangcity</strong>。在 STL 编程中，容器和算法是独立设计的，即数据结构和算法是独立设计的，连接容器和算法的桥梁就是迭代器了，迭代器使其独立设计成为可能。如下图所示：</p>
-<p>上图给出了 STL 的目标就是要把数据和算法分开，分别对其进行设计，之后通过一种名为 iterator 的东西，把这二者再粘接到一起。</p>
-<p>设计模式中，关于 iterator 的描述为：<strong>一种能够顺序访问容器中每个元素的方法，使用该方法不能暴露容器内部的表达方式。而类型萃取技术就是为了要解决和 iterator 有关的问题的。</strong></p>
-<p>它将范型算法 (find, count, find_if) 用于某个容器中, 最重要的是要给算法提供一个访问容器元素的工具，iterator 就扮演着这个重要的角色。</p>
-<p>而在算法中我们可能会定义简单的中间变量或者设定算法的返回变量类型，这时候需要知道迭代器所指元素的类型是什么，但是由于没有 typeof 这类判断类型的函数, 我们无法直接获取，那该如何是好？本文就来具体阐述。</p>
-<p>对于迭代器来说就是一种智能指针，因此，它也就拥有了一般指针的所有特点——能够对其进行 * 和 -&gt; 操作。但是在遍历容器的时候，不可避免的要对遍历的容器内部有所了解，所以，干脆把迭代器的开发工作交给容器的设计者好了，如此以来，所有实现细节反而得以封装起来不被使用者看到，这正是为什么每一种 STL 容器都提供有专属迭代器的缘故。</p>
-<p>而 Traits 在<code>bits/stl_iterator_base_types.h</code>中：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> _<span class="title">Tp</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;_Tp*&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">ptrdiff_t</span> difference_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> _Tp::value_type value_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> _Tp::pointer pointer;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> _Tp::reference reference;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> _Tp::iterator_category iterator_category;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>看的一脸懵逼吧，没事，看完本节，入门 STL，哈哈~</p>
-<h2 id="1-template-参数推导"><a href="#1-template-参数推导" class="headerlink" title="1.template 参数推导"></a><strong>1.template 参数推导</strong></h2><p>首先，在算法中运用迭代器时，很可能会用到<strong>其相应型别（associated type）</strong>（迭代器所指之物的型别）。假设算法中有必要声明一个变量，以 “迭代器所指对象的型别” 为型别，该<strong>怎么办呢？</strong></p>
-<p><strong>解决方法是：利用 function template 的参数推导机制。</strong></p>
-<p>例如：</p>
-<p>如果 T 是某个指向特定对象的指针，那么在 func 中需要指针所指向对象的型别的时候，怎么办呢？这个还比较容易，模板的参数推导机制可以完成任务，</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span></span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">func</span>(<span class="title">I</span> <span class="title">iter</span>) &#123;</span></span><br><span class="line">    func_impl(iter, *iter); <span class="comment">// 传入iter和iter所指的值，class自动推导</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过模板的推导机制，我们轻而易举的或得了指针所指向的对象的类型。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>, <span class="title">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">func_impl</span>(<span class="title">I</span> <span class="title">iter</span>, <span class="title">T</span> <span class="title">t</span>) &#123;</span></span><br><span class="line">        T tmp; <span class="comment">// 这里就是迭代器所指物的类别</span></span><br><span class="line">        <span class="comment">// ... 功能实现</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    func(&amp;i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是，<strong>函数的 “template 参数推导机制” 推导的只是参数，无法推导函数的返回值类型。万一需要推导函数的传回值，就无能为力了</strong>。因此，我们引出下面的方法。</p>
-<h2 id="2-声明内嵌型别"><a href="#2-声明内嵌型别" class="headerlink" title="2. 声明内嵌型别"></a><strong>2. 声明内嵌型别</strong></h2><p><strong>迭代器所指对象的型别，称之为迭代器的 value type。</strong></p>
-<p>尽管在 func_impl 中我们可以把 T 作为函数的返回值，但是问题是用户需要调用的是 func。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>, <span class="title">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">func_impl</span>(<span class="title">I</span> <span class="title">iter</span>, <span class="title">T</span> <span class="title">t</span>) &#123;</span></span><br><span class="line">        T tmp; <span class="comment">// 这里就是迭代器所指物的类别</span></span><br><span class="line">        <span class="comment">// ... 功能实现</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">(*<span class="title">T</span>) <span class="title">func</span>(<span class="title">T</span> <span class="title">t</span>) &#123;</span> <span class="comment">// !!!Wrong code</span></span><br><span class="line">    <span class="keyword">return</span> func_impl(t, *t); <span class="comment">// forward the task to func_impl</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i  =<span class="number">10</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;func(&amp;i)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// !!! Can’t pass compile</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果去编译上述代码，编译失败！</p>
-<p>这个问题解决起来也不难，声明内嵌型别似乎是个好主意，这样我们就可以直接获取。只要做一个 iterator，然后在定义的时候为其指向的对象类型制定一个别名，就好了，像下面这样：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">MyIter</span> &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T value_type; <span class="comment">// 内嵌型别声明</span></span><br><span class="line">    T* ptr;</span><br><span class="line">    MyIter(T* p = <span class="number">0</span>) : ptr(p) &#123;&#125;</span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *ptr; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">typename</span> <span class="title">I</span>:</span>:value_type</span><br><span class="line">func(I ite) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"class version"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> *ite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    MyIter&lt;<span class="keyword">int</span>&gt; ite(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">8</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; func(ite);    <span class="comment">// 输出8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很漂亮的解决方案，看上去一切都很完美。但是，实际上还是有问题，因为 func 如果是一个泛型算法，那么它也绝对要接受一个原生指针作为迭代器，但是显然，你无法让下面的代码编译通过：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;func(p)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
-<p>我们的 func 无法支持原生指针，这显然是不能接受的。此时，template partial specialization 就派上了用场。</p>
-<h2 id="3-救世主-Traits"><a href="#3-救世主-Traits" class="headerlink" title="3. 救世主 Traits"></a><strong>3. 救世主 Traits</strong></h2><p>前面也提到了，如果直接使用<code>typename I::value_type</code>，算法就无法接收原生指针，因为原生指针根本就没有 value_type 这个内嵌类型。</p>
-<p>因此，我们还需要加入一个中间层对其进行判断，看它是不是原生指针，注意，这就是 traits 技法的妙处所在。</p>
-<p>如果我们只使用上面的做法，也就是内嵌 value_type，那么对于没有 value_type 的指针，我们只能对其进行偏特化，这种偏特化是针对可调用函数 func 的偏特化，假如 func 有 100 万行行代码，那么就会造成极大的视觉污染。</p>
-<p><strong>（1）函数偏特化</strong></p>
-<p>函数偏特化：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">MyIter</span> &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T value_type; <span class="comment">// 内嵌型别声明</span></span><br><span class="line">    T* ptr;</span><br><span class="line">    MyIter(T* p = <span class="number">0</span>) : ptr(p) &#123;&#125;</span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *ptr; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">typename</span> <span class="title">I</span>:</span>:value_type</span><br><span class="line">func(I ite) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"class version"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> *ite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">I</span></span></span><br><span class="line"><span class="class"><span class="title">func</span>(<span class="title">I</span>* <span class="title">ite</span>) &#123;</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"pointer version"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> *ite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">I</span> <span class="title">func</span>(<span class="title">const</span> <span class="title">I</span>* <span class="title">ite</span>) &#123;</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"const pointer version"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> *ite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    MyIter&lt;<span class="keyword">int</span>&gt; ite(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">8</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; func(ite)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">52</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;func(p)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> k = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;func(&amp;k)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class version</span><br><span class="line">8</span><br><span class="line">pointer version</span><br><span class="line">52</span><br><span class="line">const pointer version</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-<p><strong>（2）加入中间层</strong></p>
-<p>在 STL 中 Traits 是什么呢？看下图：</p>
-<p>利用一个中间层<code>iterator_traits</code>固定了<code>func</code>的形式，使得重复的代码大量减少，唯一要做的就是稍稍特化一下 iterator_tartis 使其支持 pointer 和 const pointer:)</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">MyIter</span> &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T value_type; <span class="comment">// 内嵌型别声明</span></span><br><span class="line">    T* ptr;</span><br><span class="line">    MyIter(T* p = <span class="number">0</span>) : ptr(p) &#123;&#125;</span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *ptr; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// class type</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span> &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> T::value_type value_type;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 偏特化1</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;T*&gt; &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T value_type;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 偏特化2</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;const T*&gt; &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T value_type;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">typename</span> <span class="title">iterator_traits</span>&lt;I&gt;:</span>:value_type</span><br><span class="line"><span class="comment">// 首先询问iterator_traits&lt;I&gt;::value_type,如果传递的I为指针,则进入特化版本,iterator_traits直接回答;如果传递进来的I为class type,就去询问T::value_type.</span></span><br><span class="line">func(I ite) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"normal version"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> *ite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    MyIter&lt;<span class="keyword">int</span>&gt; ite(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">8</span>));</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; func(ite)&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">52</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;func(p)&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> k = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;func(&amp;k)&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述的过程是首先询问<code>iterator_traits&lt;I&gt;::value_type</code>，如果传递的 I 为指针, 则进入特化版本,<code>iterator_traits</code>直接回答<code>T</code>; 如果传递进来的<code>I</code>为<code>class type</code>, 就去询问<code>T::value_type</code>.</p>
-<p>上述的通俗解释为算法 (func) 问 iterator_traits(我)，但是 iterator_traits(我)发现手上是指针的时候，就由我来替它回答。如果是 class type，iterator_traits(我)就继续问(他 —T::value_type)。</p>
-<p><strong>总结：通过定义内嵌类型，我们获得了知晓 iterator 所指元素类型的方法，通过 traits 技法，我们将函数模板对于原生指针和自定义 iterator 的定义都统一起来，我们使用 traits 技法主要是为了解决原生指针和自定义 iterator 之间的不同所造成的代码冗余，这就是 traits 技法的妙处所在。</strong></p>
-<p>学习书籍：</p>
-<blockquote>
-<p>侯捷《 STL 源码剖析》  </p>
-</blockquote>
-<p>学习文章：</p>
-<blockquote>
-<p><a href="https://link.zhihu.com/?target=https%3A//juejin.im/post/5b1a43fb51882513bf1795c6" target="_blank" rel="noopener">https://juejin.im/post/5b1a43fb51882513bf1795c6</a><br><a href="https://link.zhihu.com/?target=https%3A//www.cnblogs.com/mangoyuan/p/6446046.html" target="_blank" rel="noopener">https://www.cnblogs.com/mangoyuan/p/6446046.html</a><br><a href="https://link.zhihu.com/?target=http%3A//www.cppblog.com/nacci/archive/2005/11/03/911.aspx" target="_blank" rel="noopener">http://www.cppblog.com/nacci/archive/2005/11/03/911.aspx</a>  </p>
-</blockquote>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/03/27/self_cultivation_python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/27/self_cultivation_python/" itemprop="url">服务器开发自我修养专栏-Python精要</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-27T19:08:06+00:00">
-                2021-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
-                    <span itemprop="name">Self-cultivation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><ul>
-<li>mro问题</li>
-<li>怎么实现一个协程库?</li>
-<li>mock是啥: <a href="https://zhuanlan.zhihu.com/p/30380243" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30380243</a></li>
-</ul>
-<h2 id="import流程"><a href="#import流程" class="headerlink" title="import流程"></a>import流程</h2><ul>
-<li>当Python的解释器遇到import语句或者其他上述导入语句时,它会先去查看sys.modules中是否已经有同名模块被导入了,</li>
-<li>如果有就直接取来用;没有就去查阅sys.path里面所有已经储存的目录.<ul>
-<li>sys.path这个列表初始化的时候,通常包含一些来自外部的库(external libraries)或者是来自操作系统的一些库,当然也会有一些类似于dist-package的标准库在里面.这些目录通常是被按照顺序或者是直接去搜索想要的–如果说他们当中的一个包含有期望的package或者是module,这个package或者是module将会在整个过程结束的时候被直接提取出来保存在sys.modules中(sys.modules是一个模块名:模块对象的字典结构).</li>
-<li>当然，这个 sys.path 是可以修改的（正如上文提到的一种解决办法）。值得注意的是，如果当前目录包含有和标准库同名的模块，会直接使用当前目录的模块而不是标准模块。</li>
-<li>当在这些个地址中实在是找不着时,它就会抛出一个ModuleNotFoundError错误.</li>
-</ul>
-</li>
-<li>当我们要导入一个模块（比如 foo ）时，解释器首先会根据命名查找内置模块，如果没有找到，它就会去查找 sys.path 列表中的目录，看目录中是否有 foo.py 。sys.path 的初始值来自于：  <ul>
-<li>运行脚本所在的目录（如果打开的是交互式解释器则是当前目录）</li>
-<li>PYTHONPATH 环境变量（类似于 PATH 变量，也是一组目录名组成）</li>
-<li>Python 安装时的默认设置</li>
-</ul>
-</li>
-</ul>
-<h2 id="为啥字符串join比加号连接快"><a href="#为啥字符串join比加号连接快" class="headerlink" title="为啥字符串join比加号连接快"></a>为啥字符串join比加号连接快</h2><p>字符串是不可变对象，当用操作符<code>+</code>连接字符串的时候，每执行一次<code>+</code>都会申请一块新的内存，然后复制上一个<code>+</code>操作的结果和本次操作的右操作符到这块内存空间，因此用<code>+</code>连接字符串的时候会涉及好几次内存申请和复制。而<code>join</code>在连接字符串的时候，会先计算需要多大的内存存放结果，然后一次性申请所需内存并将字符串复制过去，这是为什么<code>join</code>的性能优于<code>+</code>的原因。所以在连接字符串数组的时候，我们应考虑优先使用<code>join</code>。</p>
-<h2 id="is和-的区别"><a href="#is和-的区别" class="headerlink" title="is和==的区别"></a>is和==的区别</h2><p>官方文档中说 is 表示的是对象标示符（object identity），而 == 表示的是相等（equality）。is 的作用是用来检查对象的标示符是否一致，也就是比较两个对象在内存中的地址是否一样，而 == 是用来检查两个对象是否相等。</p>
-<p>我们在检查 a is b 的时候，其实相当于检查 id(a) == id(b)。而检查 a == b 的时候，实际是调用了对象 a 的 <strong>eq()</strong> 方法，a == b 相当于 a.<strong>eq</strong>(b)。</p>
-<p>一般情况下，如果 a is b 返回True的话，即 a 和 b 指向同一块内存地址的话，a == b 也返回True，即 a 和 b 的值也相等。</p>
-<h2 id="元类"><a href="#元类" class="headerlink" title="元类"></a>元类</h2><p>参考: <a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072</a></p>
-<p>python元类的使用场景, 比如orm框架, ORM全称“Object Relational Mapping”，即对象-关系映射，就是把关系数据库的一行映射为一个对象，也就是一个类对应一个表，这样，写代码更简单，不用直接操作SQL语句。</p>
-<p><code>type()</code>函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过<code>type()</code>函数创建出<code>Hello</code>类，而无需通过<code>class Hello(object)...</code>的定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\&gt;&gt;&gt; def fn(self, name=&apos;world&apos;): # 先定义函数</span><br><span class="line">...     print(&apos;Hello, %s.&apos; % name)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; Hello = type(&apos;Hello&apos;, (object,), dict(hello=fn)) # 创建Hello class</span><br><span class="line">&gt;&gt;&gt; h = Hello()</span><br><span class="line">&gt;&gt;&gt; h.hello()</span><br><span class="line">Hello, world.</span><br><span class="line">&gt;&gt;&gt; print(type(Hello))</span><br><span class="line">&lt;class &apos;type&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; print(type(h))</span><br><span class="line">&lt;class &apos;__main__.Hello&apos;&gt;</span><br></pre></td></tr></table></figure>
-<p>要创建一个 class 对象，<code>type()</code>函数依次传入 3 个参数：</p>
-<ol>
-<li>class 的名称；</li>
-<li>继承的父类集合，注意 Python 支持多重继承，如果只有一个父类，别忘了 tuple 的单元素写法；</li>
-<li>class 的方法名称与函数绑定，这里我们把函数<code>fn</code>绑定到方法名<code>hello</code>上。</li>
-</ol>
-<p><strong>通过<code>type()</code>函数创建的类和直接写 class 是完全一样的，因为 Python 解释器遇到 class 定义时，仅仅是扫描一下 class 定义的语法，然后调用<code>type()</code>函数创建出 class</strong>。</p>
-<p>正常情况下，我们都用<code>class Xxx...</code>来定义类，但是，<code>type()</code>函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。</p>
-<h3 id="metaclass"><a href="#metaclass" class="headerlink" title="metaclass"></a>metaclass</h3><p>除了使用<code>type()</code>动态创建类以外，要控制类的创建行为，还可以使用 metaclass。<br>metaclass，直译为元类，简单的解释就是：<br>当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。<br>但是如果我们想创建出类呢？那就必须根据 metaclass 创建出类，所以：先定义 metaclass，然后创建类。<br>连接起来就是：<strong>先定义 metaclass，就可以创建类，最后创建实例。</strong><br>所以，metaclass 允许你创建类或者修改类。换句话说，你可以把类看成是 metaclass 创建出来的 “实例”。<br>我们先看一个简单的例子，这个 metaclass 可以给我们自定义的 MyList 增加一个<code>add</code>方法：<br>定义<code>ListMetaclass</code>，按照默认习惯，metaclass 的类名总是以 Metaclass 结尾，以便清楚地表示这是一个 metaclass：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListMetaclass</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, attrs)</span>:</span></span><br><span class="line">        attrs\[<span class="string">'add'</span>\] = <span class="keyword">lambda</span> self, value: self.append(value)</span><br><span class="line">        <span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</span><br></pre></td></tr></table></figure></p>
-<p>有了 ListMetaclass，我们在定义类的时候还要指示使用 ListMetaclass 来定制类，传入关键字参数<code>metaclass</code>：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span><span class="params">(list, metaclass=ListMetaclass)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
-<p>当我们传入关键字参数<code>metaclass</code>时，魔术就生效了，它指示 Python 解释器在创建<code>MyList</code>时，要通过<code>ListMetaclass.__new__()</code>来创建，在此，我们可以修改类的定义，比如，加上新的方法，然后，返回修改后的定义。</p>
-<p><code>__new__()</code>方法接收到的参数依次是：</p>
-<ol>
-<li>当前准备创建的类的对象；</li>
-<li>类的名字；</li>
-<li>类继承的父类集合；</li>
-<li>类的方法集合。</li>
-</ol>
-<p>测试一下<code>MyList</code>是否可以调用<code>add()</code>方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\&gt;&gt;&gt; L = MyList()</span><br><span class="line">&gt;&gt;&gt; L.add(1)</span><br><span class="line">&gt;&gt; L</span><br><span class="line">\[1\]</span><br></pre></td></tr></table></figure></p>
-<p>而普通的<code>list</code>没有<code>add()</code>方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\&gt;&gt;&gt; L2 = list()</span><br><span class="line">&gt;&gt;&gt; L2.add(1)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">AttributeError: &apos;list&apos; object has no attribute &apos;add&apos;</span><br></pre></td></tr></table></figure></p>
-<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        print(<span class="string">'call %s():'</span> % func.__name__)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
-<p>观察上面的log，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'2015-3-25'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">call now():</span><br><span class="line">2015-3-25</span><br></pre></td></tr></table></figure>
-<p>把@log放到now()函数的定义处，相当于执行了语句：<br><code>now = log(now)</code><br>由于log()是一个decorator，返回一个函数，所以，原来的now()函数仍然存在，只是现在同名的now变量指向了新的函数，于是调用now()将执行新函数，即在log()函数中返回的wrapper()函数。</p>
-<p>wrapper()函数的参数定义是(<em>args, *</em>kw)，因此，wrapper()函数可以接受任意参数的调用。在wrapper()函数内，首先打印日志，再紧接着调用原始函数。</p>
-<p>如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(text)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            print(<span class="string">'%s %s():'</span> % (text, func.__name__))</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> decorator</span><br></pre></td></tr></table></figure></p>
-<p>这个3层嵌套的decorator用法如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@log('execute')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'2015-3-25'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">execute now():</span><br><span class="line">2015-3-25</span><br></pre></td></tr></table></figure></p>
-<p>和两层嵌套的decorator相比，3层嵌套的效果是这样的：<br><code>now = log(&#39;execute&#39;)(now)</code><br>我们来剖析上面的语句，首先执行log(‘execute’)，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。</p>
-<h2 id="python命令行参数"><a href="#python命令行参数" class="headerlink" title="python命令行参数"></a>python命令行参数</h2><ul>
-<li>-u参数的使用：python命令加上-u（unbuffered）参数后会强制其标准输出也同标准错误一样不通过缓存直接打印到屏幕。</li>
-<li>-c参数，支持执行单行命令/脚本。如: <code>python -c &quot;import os;print(&#39;hello&#39;),print(&#39;world&#39;)&quot;</code></li>
-</ul>
-<h3 id="python-m-test-folder-test-py与python-test-folder-test有什么不同"><a href="#python-m-test-folder-test-py与python-test-folder-test有什么不同" class="headerlink" title="python -m test_folder/test.py与python test_folder/test有什么不同"></a><code>python -m test_folder/test.py</code>与<code>python test_folder/test</code>有什么不同</h3><p>桌面的test_folder文件夹下有个test.py<br><figure class="highlight python"><figcaption><span>test.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">print(sys.path)</span><br></pre></td></tr></table></figure></p>
-<p>运行看看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hulinhong@GIH-D-14531 MINGW64 ~/Desktop</span><br><span class="line">$ python test_folder/test.py</span><br><span class="line">[&apos;C:\\Users\\hulinhong\\Desktop\\test_folder&apos;, &apos;C:\\Program Files\\Python37\\python37.zip&apos;, &apos;C:\\Program Files\\Python37\\DLLs&apos;, &apos;C:\\Program Files\\Python37\\lib&apos;, &apos;C:\\Program Files\\Python37&apos;, &apos;C:\\Program Files\\Python37\\lib\\site-packages&apos;, &apos;C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg&apos;]</span><br><span class="line"></span><br><span class="line">hulinhong@GIH-D-14531 MINGW64 ~/Desktop</span><br><span class="line">$ python -m test_folder.test</span><br><span class="line">[&apos;C:\\Users\\hulinhong\\Desktop&apos;, &apos;C:\\Program Files\\Python37\\python37.zip&apos;, &apos;C:\\Program Files\\Python37\\DLLs&apos;, &apos;C:\\Program Files\\Python37\\lib&apos;, &apos;C:\\Program Files\\Python37&apos;, &apos;C:\\Program Files\\Python37\\lib\\site-packages&apos;, &apos;C:\\Program Files\\Python37\\lib\\site-packages\\redis_py_cluster-2.1.0-py3.7.egg&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>细心的同学会发现，<strong>区别</strong>就是在第一个路径:  </p>
-<ul>
-<li>python直接启动是把test.py文件所在的目录放到了sys.path属性中。</li>
-<li>模块启动是把你输入命令的目录（也就是当前路径），放到了sys.path属性中</li>
-</ul>
-<p>所以就会有下面的情况:</p>
-<p>目录结构如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">package/</span><br><span class="line">    __init__.py</span><br><span class="line">    mod1.py</span><br><span class="line">package2/</span><br><span class="line">    __init__.py</span><br><span class="line">    run.py</span><br></pre></td></tr></table></figure></p>
-<p>run.py 内容如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> package <span class="keyword">import</span> mod1</span><br><span class="line">print(sys.path)</span><br></pre></td></tr></table></figure></p>
-<p>如何才能启动run.py文件？</p>
-<ul>
-<li><p>直接启动（失败）</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  test_import_project git:(master) ✗ python package2/run.py</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;package2/run.py&quot;, line 2, in &lt;module&gt;</span><br><span class="line">    from package import mod1</span><br><span class="line">ImportError: No module named package</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>以模块方式启动（成功）</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  test_import_project git:(master) ✗ python -m package2.run</span><br><span class="line">[&apos;C:\\Users\\hulinhong\\Desktop&apos;,</span><br><span class="line">&apos;/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python27.zip&apos;,</span><br><span class="line">...]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>当需要启动的py文件引用了一个模块。你需要注意：在启动的时候需要考虑sys.path中有没有你import的模块的路径！<br>这个时候，到底是使用直接启动，还是以模块的启动？目的就是把import的那个模块的路径放到sys.path中。你是不是明白了呢？</p>
-<blockquote>
-<p>官方文档参考： <a href="http://www.pythondoc.com/pythontutorial3/modules.html" target="_blank" rel="noopener">http://www.pythondoc.com/pythontutorial3/modules.html</a></p>
-</blockquote>
-<p>导入一个叫 mod1 的模块时，解释器先在当前目录中搜索名为 mod1.py 的文件。如果没有找到的话，接着会到 sys.path 变量中给出的目录列表中查找。 sys.path 变量的初始值来自如下：</p>
-<p>输入脚本的目录（当前目录）。</p>
-<ul>
-<li>环境变量 PYTHONPATH 表示的目录列表中搜索(这和 shell 变量 PATH 具有一样的语法，即一系列目录名的列表)。</li>
-<li>Python 默认安装路径中搜索。</li>
-<li>实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。</li>
-</ul>
-<h2 id="在python程序中调用cpp的库创建的线程是否受制于GIL"><a href="#在python程序中调用cpp的库创建的线程是否受制于GIL" class="headerlink" title="在python程序中调用cpp的库创建的线程是否受制于GIL?"></a>在python程序中调用cpp的库创建的线程是否受制于GIL?</h2><p>首先要理解什么是GIL.<br>Python 的多线程是真的多线程，只不过在任意时刻，它们中只有一个线程能够取得 GIL 从而被允许执行 Python 代码。其它线程要么等着，要么干别的和 Python 无关的事情（比如等待系统 I/O，或者算点什么东西）。</p>
-<p>那如果是通过CPP扩展创建出来的线程，可以摆脱这个限制么？<br>很简单，不访问 Python 的数据和方法，就和 GIL 没任何关系。如果需要访问 Python，还是需要先取得 GIL.</p>
-<p>GIL 是为了保护 Python 数据不被并发访问破坏，所以当你不访问 Python 的数据的时候自然就可以释放（或者不取得）GIL。反过来，如果需要访问 Python 的数据，就一定要取得 GIL 再访问。PyObject 等不是线程安全的。多线程访问任何非线程安全的数据都需要先取得对应的锁。Python 所有的 PyObject 什么的都共享一个锁，它就叫 GIL。</p>
-<h2 id="new-与-del-与-init"><a href="#new-与-del-与-init" class="headerlink" title="__new__ 与 __del__ 与 __init__"></a><code>__new__</code> 与 <code>__del__</code> 与 <code>__init__</code></h2><p>先来看一个单例模式的实现<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span>:</span></span><br><span class="line">    __isinstance = <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> cls.__isinstance:  <span class="comment"># 如果被实例化了</span></span><br><span class="line">            cls.__isinstance = object.__new__(cls)  <span class="comment"># 否则实例化</span></span><br><span class="line">        <span class="keyword">return</span> cls.__isinstance  <span class="comment"># 返回实例化的对象</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        print(<span class="string">'my name is %s'</span>%(name))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'886, %s'</span>%(self.name))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">d1 = Demo(<span class="string">'Alice'</span>)</span><br><span class="line">d2 = Demo(<span class="string">'Anew'</span>)</span><br><span class="line">print(d1)</span><br><span class="line">print(d2)</span><br></pre></td></tr></table></figure></p>
-<p>打印:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">my name is Alice</span><br><span class="line">my name is Anew</span><br><span class="line">&lt;__main__.Demo object at 0x000001446604D3C8&gt;</span><br><span class="line">&lt;__main__.Demo object at 0x000001446604D3C8&gt;</span><br><span class="line">886, Anew</span><br></pre></td></tr></table></figure></p>
-<p><code>__new__</code> 是负责对当前类进行实例化，并将实例返回，并传给<code>__init__</code>方法，<code>__init__</code>方法中的self就是指代<code>__new__</code>传过来的对象，所以再次强调，<code>__init__</code>是实例化后调用的第一个方法。</p>
-<p><code>__del__</code>在对象销毁时被调用，往往用于清除数据或还原环境等操作，比如在类中的其他普通方法中实现了插入数据库的语句，当对象被销毁时我们需要将数据还原，那么这时可以在<code>__del__</code>方法中实现还原数据库数据的功能。<code>__del__</code>被成为析构方法，同样和C++中的析构方法类似。</p>
-<h2 id="python垃圾回收"><a href="#python垃圾回收" class="headerlink" title="python垃圾回收"></a>python垃圾回收</h2><p>总体来说，在Python中，主要通过引用计数进行垃圾回收；通过 “标记-清除” 解决容器对象可能产生的循环引用问题；通过 “分代回收” 以空间换时间的方法提高垃圾回收效率。</p>
-<ul>
-<li>引用计数</li>
-<li>标记清除(Mark and Sweep)</li>
-<li>分代回收</li>
-</ul>
-<h3 id="标记清除咋弄的"><a href="#标记清除咋弄的" class="headerlink" title="标记清除咋弄的"></a>标记清除咋弄的</h3><p>参考: <a href="https://zhuanlan.zhihu.com/p/83251959" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/83251959</a></p>
-<p>Python 采用了 <strong>“标记-清除”(Mark and Sweep)</strong> 算法，解决容器对象可能产生的循环引用问题。(注意，只有容器对象才会产生循环引用的情况，比如列表、字典、用户自定义类的对象、元组等。而像数字，字符串这类简单类型不会出现循环引用。作为一种优化策略，对于只包含简单类型的元组也不在标记清除算法的考虑之列)</p>
-<p>跟其名称一样，该算法在进行垃圾回收时分成了两步，分别是：</p>
-<ul>
-<li>A）标记阶段，遍历所有的对象，如果是可达的（reachable），也就是还有对象引用它，那么就标记该对象为可达；</li>
-<li>B）清除阶段，再次遍历对象，如果发现某个对象没有标记为可达，则就将其回收。</li>
-</ul>
-<p>如下图所示，在标记清除算法中，为了追踪容器对象，需要每个容器对象维护两个额外的指针，用来将容器对象组成一个双端链表，指针分别指向前后两个容器对象，方便插入和删除操作。python 解释器 (Cpython) 维护了两个这样的双端链表，一个链表存放着需要被扫描的容器对象，另一个链表存放着临时不可达对象。在图中，这两个链表分别被命名为”Object to Scan”和”Unreachable”。图中例子是这么一个情况：link1,link2,link3 组成了一个引用环，同时 link1 还被一个变量 A(其实这里称为名称 A 更好)引用。link4 自引用，也构成了一个引用环。从图中我们还可以看到，每一个节点除了有一个记录当前引用计数的变量 ref_count 还有一个 gc_ref 变量，这个 gc_ref 是 ref_count 的一个副本，所以初始值为 ref_count 的大小。</p>
-<p><img src="/img/noodle_plan/python/v2-0d5071093adaa02bc03fa3dfd91aa5bc_720w.jpg" alt></p>
-<p>gc 启动的时候，会逐个遍历”Object to Scan” 链表中的容器对象，并且将当前对象所引用的所有对象的 gc_ref 减一。(扫描到 link1 的时候，由于 link1 引用了 link2, 所以会将 link2 的 gc_ref 减一，接着扫描 link2, 由于 link2 引用了 link3, 所以会将 link3 的 gc_ref 减一…..) 像这样将”Objects to Scan” 链表中的所有对象考察一遍之后，两个链表中的对象的 ref_count 和 gc_ref 的情况如下图所示。这一步操作就相当于解除了循环引用对引用计数的影响。</p>
-<p><img src="https://pic3.zhimg.com/v2-d7314ead6b303f08a91687577c045585_b.jpg" alt></p>
-<p>接着，gc 会再次扫描所有的容器对象，如果对象的 gc_ref 值为 0，那么这个对象就被标记为 GC_TENTATIVELY_UNREACHABLE，并且被移至”Unreachable” 链表中。下图中的 link3 和 link4 就是这样一种情况。</p>
-<p><img src="https://pic1.zhimg.com/v2-d3c3f52615fb704c26bd53dbb178767c_b.jpg" alt></p>
-<p>如果对象的 gc_ref 不为 0，那么这个对象就会被标记为 GC_REACHABLE。同时当 gc 发现有一个节点是可达的，那么他会递归式的将从该节点出发可以到达的所有节点标记为 GC_REACHABLE, 这就是下图中 link2 和 link3 所碰到的情形。</p>
-<p><img src="https://pic1.zhimg.com/v2-510f4d2d37aabdbc8978d9e47630237d_b.jpg" alt></p>
-<p>除了将所有可达节点标记为 GC_REACHABLE 之外，如果该节点当前在”Unreachable” 链表中的话，还需要将其移回到”Object to Scan” 链表中，下图就是 link3 移回之后的情形。</p>
-<p><img src="/img/noodle_plan/python/v2-6fd40c055a6633c654acaf05f472c1b2_720w.jpg" alt></p>
-<p>第二次遍历的所有对象都遍历完成之后，存在于”Unreachable” 链表中的对象就是真正需要被释放的对象。如上图所示，此时 link4 存在于 Unreachable 链表中，gc 随即释放之。</p>
-<p><strong>上面描述的垃圾回收的阶段，会暂停整个应用程序，等待标记清除结束后才会恢复应用程序的运行。</strong></p>
-<h4 id="为啥标记清除回收无法回收重写了-del-方法的类对象"><a href="#为啥标记清除回收无法回收重写了-del-方法的类对象" class="headerlink" title="为啥标记清除回收无法回收重写了__del__方法的类对象"></a>为啥标记清除回收无法回收重写了<code>__del__</code>方法的类对象</h4><blockquote>
-<p>Circular references which are garbage are detected when the option cycle detector is enabled (it’s on by default), but can only be cleaned up if there are no Python-level <code>__del__</code>() methods involved.</p>
-</blockquote>
-<p>官方文档中表明启用周期检测器时会检测到垃圾的循环引用（默认情况下它是打开的)，但只有在没有涉及 Python <code>__del__()</code> 方法的情况下才能清除。Python 不知道破坏彼此保持循环引用的对象的安全顺序，因此它则不会为这些方法调用析构函数。简而言之，如果定义了 <code>__del__</code> 函数，那么在循环引用中Python解释器无法判断析构对象的顺序，因此就不做处理。</p>
-<h3 id="分代回收"><a href="#分代回收" class="headerlink" title="分代回收"></a>分代回收</h3><p>在循环引用对象的回收中，整个应用程序会被暂停，为了减少应用程序暂停的时间，Python 通过“分代回收”(Generational Collection)以空间换时间的方法提高垃圾回收效率。</p>
-<p>分代回收是基于这样的一个统计事实，对于程序，存在一定比例的内存块的生存周期比较短；而剩下的内存块，生存周期会比较长，甚至会从程序开始一直持续到程序结束。生存期较短对象的比例通常在 80%～90% 之间，这种思想简单点说就是：对象存在时间越长，越可能不是垃圾，应该越少去收集。这样在执行标记-清除算法时可以有效减小遍历的对象数，从而提高垃圾回收的速度。</p>
-<p>python gc给对象定义了三种世代(0,1,2),每一个新生对象在generation zero中，如果它在一轮gc扫描中活了下来，那么它将被移至generation one,在那里他将较少的被扫描，如果它又活过了一轮gc,它又将被移至generation two，在那里它被扫描的次数将会更少。</p>
-<p>gc的扫描在什么时候会被触发呢?答案是当某一世代中被分配的对象与被释放的对象之差达到某一阈值的时候，就会触发gc对某一世代的扫描。值得注意的是当某一世代的扫描被触发的时候，比该世代年轻的世代也会被扫描。也就是说如果世代2的gc扫描被触发了，那么世代0,世代1也将被扫描，如果世代1的gc扫描被触发，世代0也会被扫描。</p>
-<p>该阈值可以通过下面两个函数查看和调整:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gc.get_threshold() <span class="comment"># (threshold0, threshold1, threshold2).</span></span><br><span class="line">gc.set_threshold(threshold0[, threshold1[, threshold2]])</span><br></pre></td></tr></table></figure>
-<p>下面对set_threshold()中的三个参数threshold0, threshold1, threshold2进行介绍。gc会记录自从上次收集以来新分配的对象数量与释放的对象数量，当两者之差超过threshold0的值时，gc的扫描就会启动，初始的时候只有世代0被检查。如果自从世代1最近一次被检查以来，世代0被检查超过threshold1次，那么对世代1的检查将被触发。相同的，如果自从世代2最近一次被检查以来，世代1被检查超过threshold2次，那么对世代2的检查将被触发。get_threshold()是获取三者的值，默认值为(700,10,10).</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1688,7 +1506,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">245</span>
+                <span class="site-state-item-count">248</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

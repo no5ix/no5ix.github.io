@@ -86,3 +86,30 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 
 
 
+# 3. Cooking Dinner
+
+- Honey we're out of bread. Could you go to the store and buy two loaves?
+- Yeah, sure no problem.
+- And we also need some mangos, lemons and some avocados(/ ˌævəˈkɑːdəʊz /鳄梨) and two rolls of paper towels( towel巾, paper towel纸巾 ).
+- Do you need any help with dinner mom?
+- Yes, could you please make the mashed( 捣碎 ) potatoes?
+- Ok, where are the potatoes?
+- The patotoes are in the cellar(/ ˈselər /地窖,  cellular/ ˈseljələr /蜂窝式的). There are right in the middle under the cheese and between the pumpkin(南瓜) and the flour(/ ˈflaʊər /面粉) sacks(sack袋 ).
+- And how many should I peel( 剥皮 )?
+- About twenty will do.
+- Where's the peeler?
+- The peeler is in the second drawer to the right of the oven(/ ˈʌv(ə)n /烤箱 ).
+- and really, you can use any of the pods.
+- Is this one ok?
+- It's perfect.
+- Cover the potatoes with water and add a generous pinch(大捏：一种用于烹饪的量词，表示需要加入较多的调味料，但不是精确的量。pinch: 捏，掐，拧；一撮；偷窃；) of salt.
+- Bring them to the boil and cook them for 30 minutes.
+- What're you making there?
+- Turkey meatballs.
+- Wow, I love them! Please show me how to cook them!
+- In a large bowl, combine ground(切碎的) turkey, bread crumbs(面包屑), 1 onion, parsley(芹菜), 2 eggs, garlic, 1 teaspoon salt, and 1/2 teaspoon pepper. Then mix well.
+- Add oil to the pan and wait a few seconds for it to heat up. Shape(使成型) the mixture in balls and carefully place them in the hot pan. Fry the meatballs until browned on all sides.
+- That's it? It's not hard at all.
+- That's right.
+- The potatoes are really soft now.
+- We must drain them and use the potatoes masher to mash the potatoes. Pour over some warm milk, then add a little butter and sour(/ ˈsaʊər /酸的) cream.

@@ -59,9 +59,22 @@ categories:
 - `congress` [ˈkɒŋɡres] n. [**unfamiliar**]
     - The congress will vote on the proposed legislation next week. 
     - > `国会`将在下周对拟议中的法案进行投票。
-- `conservative` [kənˈsɜːvətɪv] adj., n. [**unfamiliar**]
+- `conservative` [kənˈsɜːvətɪv] adj., n. (`conservation` n. 保护, 保存) [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-1.png)
     - He has conservative views on social issues such as abortion and same-sex marriage. 
     - > 他在社会问题，如堕胎和同性婚姻方面持`保守的`观点。
+- `consistent` [kənˈsɪstənt] adj. 一致的；前后如一的, 一贯的 (`consistent` 更强调的是前后一致性，而 `constant` 更强调的是稳定性和不变性。persistent 强调持续性) [**unfamiliar**]
+    - She has been consistent in her efforts to improve her performance at work. 
+    - > 她一直致力于提高自己在工作中的表现，持续不断。
+    - She's not very consistent in the way she treats her children. 
+    - > 她对待孩子反复无常。
+- `constant` [ˈkɒnstənt] adj. 不变的；恒定的 [**unfamiliar**]
+    - The noise from the construction site was a constant source of annoyance for the residents.
+    - > 建筑工地的噪音是居民不断的困扰。
+- `persistent` [pərˈsɪstənt] 坚持不懈的, 持续的
+    - ![Alt text](../img/eng_oxford_3000/image-13.png)
+    - I had a `persistent` cough for over a month. 
+    - 我持续咳嗽已经一个多月了。
 - `contemporary` [kənˈtempəreri] adj. [**unfamiliar**]
     - The artist's work is considered to be a masterpiece of contemporary art. 
     - > 这位艺术家的作品被认为是`当代的`艺术的杰作。
@@ -72,6 +85,7 @@ categories:
     - She credited her success to hard work and dedication. 
     - > 她把自己的成功`归功于`勤奋和专注。
 - `crisis` [ˈkraɪsɪs] n. [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image.png)
     - The company is facing a financial crisis and may have to lay off employees. 
     - > 公司面临财务`危机`，可能不得不裁员。
 - `criterion` [kraɪˈtɪərɪən] n. [**unfamiliar**]
@@ -111,10 +125,11 @@ categories:
     - Her enthusiasm for the project was contagious.
     - > 她对这个项目的`热情`是具有感染力的。
 - `estate` [ɪˈsteɪt] n. 房地产；财产 [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-2.png)
     - He inherited a large estate from his grandfather.
     - > 他从祖父那里继承了一大笔`财产`。
 - `ethical` [ˈeθɪkəl] adj. [**unfamiliar**]  通常指与特定职业、行业或社会规范相关的道德准则
-    - t's not ethical to cheat on an exam.
+    - It's not ethical to cheat on an exam.
     - > 在考试中作弊是不`道德的`。
 - `executive` [ɪɡˈzekjʊtɪv] n. 执行官；高管，adj. 行政的；执行的 [**unfamiliar**]
     - chief executive officer
@@ -136,7 +151,7 @@ categories:
     - > 我的心情`渐渐地`好起来。
 - `grand` [ɡrænd] adj. [**unfamiliar**]
     - The grand entrance to the building was decorated with ornate carvings.
-    - > 建筑的宏伟入口装饰着`华丽的`雕刻。
+    - > 建筑的`宏伟的`入口装饰着华丽的雕刻。
 - `hollow` [ˈhɑːloʊ] adj. 空心的；凹陷的；空洞的 [**unfamiliar**]
     - The old tree had a hollow trunk.
     - > 那棵老树的树干是`空心的`。
@@ -144,6 +159,7 @@ categories:
     - She manages the household finances.
     - > 她管理`家庭`财务。
 - `impose` [ɪmˈpoʊz] v. 强制实行；征税；把…强加于 [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-3.png)
     - The new law imposes stricter regulations on the industry.
     - > 新法规对该行业`强制实行`更严格的监管。
 - `justify` [ˈdʒʌstɪfaɪ] v. 证明…是正当的，为…辩护 [**unfamiliar**]
@@ -168,6 +184,7 @@ categories:
     - The measurement of the room is 5 meters by 6 meters. 
     - > 房间的尺寸是5米乘6米。
 - `melt` [melt] v. 融化，熔化   [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-4.png)
     - The ice melted in the sun. 
     - > 冰在阳光下融化了。
 - `military` [ˈmɪləteri] adj., n. 军事的，军队   [**unfamiliar**]
@@ -285,6 +302,7 @@ categories:
     - He proposed a new idea for the company's marketing strategy. 
     - > 他提出了公司的市场营销策略的新想法。
 - `prospect` [ˈprɑ:spekt] n. 前景，展望，可能性。  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-5.png)
     - The prospect of finding a job after graduation is uncertain. 
     - > 毕业后找到工作的前景是不确定的。
 - `psychology` [saɪˈkɑ:lədʒi] n. 心理学。  [**unfamiliar**]
@@ -339,6 +357,7 @@ categories:
     - They decided to take a beach resort for their holiday. 
     - > 他们决定去海滩度假。
 - `retain` [rɪˈteɪn] v. 保持，保留，记住。  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-6.png)
     - He has the ability to retain information easily. 
     - > 他有记忆信息的能力。
 - `reveal` [rɪˈvil] v. 揭示，透露。  [**unfamiliar**]
@@ -351,6 +370,7 @@ categories:
     - His sore muscles needed some rubbing to ease the pain. 
     - > 他的酸痛肌肉需要一些摩擦来缓解疼痛。
 - `rubber` [ˈrʌbər] n. 橡胶，橡皮； 橡胶制的。  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-7.png)
     - He wants to replace the rubber soles on his shoes. 
     - > 他想要更换鞋子上的橡胶鞋底。
 - `rural` [ˈrʊrəl] adj. 农村的，乡下的。  [**unfamiliar**]
@@ -382,6 +402,7 @@ categories:
     - They decided to settle in a small town in the countryside.
     - > 他们决定在乡村的一个小镇上定居。
 - `severe` [sɪˈvɪr] adj. 严重的，剧烈的  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-8.png)
     - He suffered severe injuries in the car accident.
     - > 他在车祸中受了严重伤。
 - `shallow` [ˈʃæloʊ] adj. 浅的  [**unfamiliar**]
@@ -447,6 +468,9 @@ categories:
     - The glass is `sticky with` some juice on it and needs to be wiped with a wet cloth.
     - > 这个杯子`粘了`些果汁，需要用湿布擦拭。
 - `stiff` [stɪf] adj.   [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-9.png)
+    - He rubbed his arms and stiff legs. 
+    - > 他揉了揉他的两条胳膊和两条`僵硬的`腿
     - The wooden chair is not very comfortable, and it feels stiff to sit on.
     - > 那个木制的椅子不太舒服，坐起来很`adj. 硬`。
 - `stretch` [stretʃ] v.（使）变大，拉长；（布料）可伸缩，有弹性；伸展肢体；伸出，伸长（胳膊或腿）；n.（土地或水域的）一片，一段；（时间）连续的一段，持续；（肢体）伸展，伸开；弹性，伸缩性；服刑期；  [**unfamiliar**]
@@ -485,6 +509,7 @@ categories:
 ## tuvw
 
 - `therapy` [ˈθerəpi] n. 治疗  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-10.png)
     - `Psychotherapy` is a very effective way to help people deal with difficulties.
     - > `心理治疗(psycho adj. 精神变态者的，变态人格者的)`是一种非常有效的方式来帮助人们应对困难。
 - `thus` [ðʌs] adv. adv. <正式>因此；<正式>这样，以此种方式；<正式>到如此程度  [**unfamiliar**]
@@ -494,6 +519,7 @@ categories:
     - We must smoothly complete the transition process of this new plan.
     - > 我们必须顺利地完成这个新计划的`n. 过渡期`。
 - `tropical` [ˈtrɑ:pɪkəl] adj.   [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-11.png)
     - The climate in tropical regions is very comfortable.
     - > `adj. 热带的`地区的气候非常舒适。
 - `tune` [tun] n. 曲调，曲子；歌曲，乐段  [**unfamiliar**]
@@ -514,6 +540,7 @@ categories:
     - Urban development has brought many conveniences to people's lives.
     - > `adj. 城市的`发展为人们的生活带来了很多便利。
 - `urge` [ɜ:rdʒ] v. 催促  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-12.png)
     - He strongly advocates environmental protection and urges the government to take action.
     - > 他坚决主张保护环境，`v. 敦促`政府采取行动。
 - `van` [væn] n.   [**unfamiliar**]
@@ -1465,7 +1492,8 @@ categories:
 - `conscious` [ˈkɒnʃəs] adj. 意识到的；神志清醒的，有知觉的；关注的；刻意的，慎重的
     - She was fully conscious throughout the surgery and knew what was going on.
     - 她在整个手术过程中神志完全`清醒的`，知道发生了什么。
-- `conservative` [kənˈsɜːvətɪv] adj., n. [**unfamiliar**]
+- `conservative` [kənˈsɜːvətɪv] adj., n. (`conservation` n. 保护, 保存) [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-1.png)
     - He has conservative views on social issues such as abortion and same-sex marriage. 
     - > 他在社会问题，如堕胎和同性婚姻方面持`保守的`观点。
     - Mr. Williams is a conservative who advocates fewer government controls on business. 
@@ -1473,10 +1501,12 @@ categories:
 - `consideration` [kənˌsɪdəˈreɪʃn] n. 考虑；关注
     - Take all factors into consideration before making a decision. 
     - > 在做出决定之前，考虑所有因素。
-- `consistent` [kənˈsɪstənt] adj. 一致的；持续的 (consistent 更强调的是连续性和一致性，而 constant 更强调的是稳定性和永久性。)
+- `consistent` [kənˈsɪstənt] adj. 一致的；前后如一的, 一贯的 (`consistent` 更强调的是前后一致性，而 `constant` 更强调的是稳定性和不变性。persistent 强调持续性) [**unfamiliar**]
     - She has been consistent in her efforts to improve her performance at work. 
     - > 她一直致力于提高自己在工作中的表现，持续不断。
-- `constant` [ˈkɒnstənt] adj. 不变的；恒定的 (consistent 更强调的是连续性和一致性，而 constant 更强调的是稳定性和永久性。)
+    - She's not very consistent in the way she treats her children. 
+    - > 她对待孩子反复无常。
+- `constant` [ˈkɒnstənt] adj. 不变的；恒定的 (consistent 更强调的是连续性和一致性，而 constant 更强调的是稳定性和永久性。) [**unfamiliar**]
     - The noise from the construction site was a constant source of annoyance for the residents.
     - > 建筑工地的噪音是居民不断的困扰。
 - `constantly` [ˈkɒnstəntli] adv. 不断地；经常地
@@ -1510,6 +1540,7 @@ categories:
     - The film crew worked long hours to complete the movie on time. 
     - > 电影制作组加班赶工，按时完成了电影制作。
 - `crisis` [ˈkraɪsɪs] n. [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image.png)
     - The company is facing a financial crisis and may have to lay off employees. 
     - > 公司面临财务`危机`，可能不得不裁员。
 - `criterion` [kraɪˈtɪərɪən] n. [**unfamiliar**]
@@ -1589,7 +1620,7 @@ categories:
 - `domestic` [dəˈmestɪk] adj. [**unfamiliar**]
     - She prefers to buy domestic products to support the local economy. 
     - > 她更喜欢购买`国内的`产品来支持当地经济。
-- `dominate` [ˈdɒmɪneɪt] v. [**unfamiliar**]
+- `dominate` [ˈdɒmɪneɪt] v. [**unfamiliar**]  ([dominant](https://www.youdao.com/result?word=dominant&lang=en) [ˈdɑːmənənt] adj. 占优势的；支配的)
     - The team has dominated the league for the past few years. 
     - > 这支队伍在过去几年里`主导`了联赛。
 - `downward` [ˈdaʊnwəd] adj. 向下的，adv. 向下地
@@ -1653,13 +1684,14 @@ categories:
     - The students were enthusiastic about the field trip.
     - > 学生们对这次实地考察充满热情。
 - `estate` [ɪˈsteɪt] n. 房地产；财产 [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-2.png)
     - He inherited a large estate from his grandfather.
     - > 他从祖父那里继承了一大笔`财产`。
 - `estimate` [ˈestɪmeɪt] v. 估计；n. 估计;
     - Can you give me an estimate of how long the project will take?
     - > 你能给我一个项目需要多长时间的估计吗？
 - `ethical` [ˈeθɪkəl] adj. [**unfamiliar**]  通常指与特定职业、行业或社会规范相关的道德准则
-    - t's not ethical to cheat on an exam.
+    - It's not ethical to cheat on an exam.
     - > 在考试中作弊是不`道德的`。
 - `evaluate` [ɪˈvæljueɪt] v. 评价; 评估
     - The teacher will evaluate the students' essays based on several criteria.
@@ -1800,7 +1832,7 @@ categories:
     - > 我的心情`渐渐地`好起来。
 - `grand` [ɡrænd] adj. [**unfamiliar**]
     - The grand entrance to the building was decorated with ornate carvings.
-    - > 建筑的宏伟入口装饰着`华丽的`雕刻。
+    - > 建筑的`宏伟的`入口装饰着华丽的雕刻
 - `grant` [ɡrænt] v. 授予；允许；同意，n. 拨款；授予
     - The university granted her a scholarship to study abroad.
     - > 这所大学授予她一笔留学奖学金。
@@ -1835,6 +1867,7 @@ categories:
     - His tone implied that he wasn't happy with the decision.
     - > 他的语气暗示他对这个决定不满意。
 - `impose` [ɪmˈpoʊz] v. 强制实行；征税；把…强加于 [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-3.png)
     - The new law imposes stricter regulations on the industry.
     - > 新法规对该行业`强制实行`更严格的监管。
 - `impress` [ɪmˈpres] v. 使印象深刻；给…留下印象
@@ -1847,6 +1880,7 @@ categories:
     - The length of the box is twelve inches.
     - > 盒子的长度是十二英寸。
 - `incident` [ˈɪnsɪdənt] n. 事件；事故
+    - 和accident不同点: `Incident`指的是任何发生的事件，可以是好事、坏事或中立的事情。`Accident`则指的是意外事件或不可预测的情况，通常会导致损害或伤害。因此，`accident` 通常与负面结果相关联，而 `incident` 可以涵盖更广泛的情况，包括中性或积极的事件。
     - The police are investigating the incident.
     - > 警方正在调查这起事件。
 
@@ -1923,6 +1957,7 @@ categories:
     - The measurement of the room is 5 meters by 6 meters. 
     - > 房间的尺寸是5米乘6米。
 - `melt` [melt] v. 融化，熔化   [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-4.png)
     - The ice melted in the sun. 
     - > 冰在阳光下融化了。
 - `military` [ˈmɪləteri] adj., n. 军事的，军队   [**unfamiliar**]
@@ -2171,6 +2206,7 @@ categories:
     - He proposed a new idea for the company's marketing strategy. 
     - > 他提出了公司的市场营销策略的新想法。
 - `prospect` [ˈprɑ:spekt] n. 前景，展望，可能性。  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-5.png)
     - The prospect of finding a job after graduation is uncertain. 
     - > 毕业后找到工作的前景是不确定的。
 - `psychologist` [saɪˈkɑ:lədʒɪst] n. 心理学家。
@@ -2244,6 +2280,7 @@ categories:
     - They decided to take a beach resort for their holiday. 
     - > 他们决定去海滩度假。
 - `retain` [rɪˈteɪn] v. 保持，保留，记住。  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-6.png)
     - He has the ability to retain information easily. 
     - > 他有记忆信息的能力。
 - `reveal` [rɪˈvil] v. 揭示，透露。  [**unfamiliar**]
@@ -2271,6 +2308,7 @@ categories:
     - His sore muscles needed some rubbing to ease the pain. 
     - > 他的酸痛肌肉需要一些摩擦来缓解疼痛。
 - `rubber` [ˈrʌbər] n. 橡胶，橡皮； 橡胶制的。  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-7.png)
     - He wants to replace the rubber soles on his shoes. 
     - > 他想要更换鞋子上的橡胶鞋底。
 - `rural` [ˈrʊrəl] adj. 农村的，乡下的。  [**unfamiliar**]
@@ -2329,6 +2367,7 @@ categories:
     - They decided to settle in a small town in the countryside.
     - > 他们决定在乡村的一个小镇上定居。
 - `severe` [sɪˈvɪr] adj. 严重的，剧烈的  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-8.png)
     - He suffered severe injuries in the car accident.
     - > 他在车祸中受了严重伤。
 - `shall` [ʃəl] modal v. 将，应该
@@ -2464,6 +2503,9 @@ categories:
     - The glass is `sticky with` some juice on it and needs to be wiped with a wet cloth.
     - > 这个杯子`粘了`些果汁，需要用湿布擦拭。
 - `stiff` [stɪf] adj.   [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-9.png)
+    - He rubbed his arms and stiff legs. 
+    - > 他揉了揉他的两条胳膊和两条`僵硬的`腿
     - The wooden chair is not very comfortable, and it feels stiff to sit on.
     - > 那个木制的椅子不太舒服，坐起来很`adj. 硬`。
 - `stream` [striːm] n. 溪流, 河流
@@ -2535,6 +2577,7 @@ categories:
     - I termed the new product line as a game-changer for our company.
     - > 我`把`这个新产品系列`v. 称为`我们公司的一个改变游戏规则者。
 - `therapy` [ˈθerəpi] n. 治疗  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-10.png)
     - `Psychotherapy` is a very effective way to help people deal with difficulties.
     - > `心理治疗(psycho adj. 精神变态者的，变态人格者的)`是一种非常有效的方式来帮助人们应对困难。
 - `thus` [ðʌs] adv. adv. <正式>因此；<正式>这样，以此种方式；<正式>到如此程度  [**unfamiliar**]
@@ -2563,6 +2606,7 @@ categories:
     - This vaccine is undergoing human trials.
     - > 这项疫苗正在进行人体`试验`。
 - `tropical` [ˈtrɑ:pɪkəl] adj.   [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-11.png)
     - The climate in tropical regions is very comfortable.
     - > `adj. 热带的`地区的气候非常舒适。
 - `truly` [ˈtruːli] adv. 真实地，如实地；真正地，完全地；诚挚地，真诚地；准确地；非常，很
@@ -2597,6 +2641,7 @@ categories:
     - Urban development has brought many conveniences to people's lives.
     - > `adj. 城市的`发展为人们的生活带来了很多便利。
 - `urge` [ɜ:rdʒ] v. 催促  [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_3000/image-12.png)
     - He strongly advocates environmental protection and urges the government to take action.
     - > 他坚决主张保护环境，`v. 敦促`政府采取行动。
 - `van` [væn] n.   [**unfamiliar**]

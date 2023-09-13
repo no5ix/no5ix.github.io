@@ -28,6 +28,7 @@ categories:
     - The hotel can accommodate up to 200 guests. 
     - > 这家酒店可容纳多达200位客人。
 - [accommodation](https://www.youdao.com/result?word=accommodation&lang=en) [əˌkɑːməˈdeɪʃn] n. 住宿
+    - ![Alt text](/img/eng_oxford_5000/image.png)
     - The hotel offers comfortable and affordable accommodation. 
     - > 这家酒店提供舒适、实惠的住宿。
 - [accountant](https://www.youdao.com/result?word=accountant&lang=en) [əˈkaʊntənt] n. 会计师
@@ -37,6 +38,7 @@ categories:
     - Lemon contains citric acid. 
     - > 柠檬含有柠檬酸。
 - [acre](https://www.youdao.com/result?word=acre&lang=en) [ˈeɪkər] n. 英亩
+    - ![Alt text](/img/eng_oxford_5000/image-1.png)
     - The farm covers an area of 20 acres. 
     - > 这个农场占地20英亩。
 - [addiction](https://www.youdao.com/result?word=addiction&lang=en) [əˈdɪkʃn] n. 上瘾
@@ -46,6 +48,7 @@ categories:
     - Additionally, we need to consider the impact on the environment. 
     - > 此外，我们还需要考虑对环境的影响。
 - [adequate](https://www.youdao.com/result?word=adequate&lang=en) [ˈædɪkwət] adj. 足够的；适当的
+    - ![Alt text](/img/eng_oxford_5000/image-2.png)
     - The company provides its employees with adequate training. 
     - > 公司为员工提供了足够的培训。
 - [adequately](https://www.youdao.com/result?word=adequately&lang=en) [ˈædɪkwadeɪtli] adv. 充分地；适当地
@@ -61,12 +64,14 @@ categories:
     - Altogether, there were 50 people at the party. 
     - > 总共有50人参加了聚会。
 - [amusing](https://www.youdao.com/result?word=amusing&lang=en) [əˈmjuːzɪŋ] adj. 有趣的；娱乐的
+    - ![Alt text](/img/eng_oxford_5000/image-3.png)
     - The movie was very amusing and made us laugh a lot. 
     - > 这部电影非常有趣，让我们笑了很多。
 - [analyst](https://www.youdao.com/result?word=analyst&lang=en) [ˈænəlɪst] n. 分析师；专家
     - The financial analyst predicted a rise in the stock market. 
     - > 这位金融分析师预测股市将上涨。
-- [anticipate](https://www.youdao.com/result?word=anticipate&lang=en) [ænˈtɪsɪpeɪt] v. 预期；期望
+- [anticipate](https://www.youdao.com/result?word=anticipate&lang=en) [ænˈtɪsɪpeɪt] v. 预期；期望  (`participate` v. 参加, 参与)
+    - ![Alt text](/img/eng_oxford_5000/image-53.png)
     - We anticipate a busy day ahead. 
     - > 我们预计今天会很忙。
 - [anxiety](https://www.youdao.com/result?word=anxiety&lang=en) [æŋˈzaɪəti] n. 焦虑；担忧
@@ -84,7 +89,8 @@ categories:
 - [assistance](https://www.youdao.com/result?word=assistance&lang=en) [əˈsɪstəns] n. 援助；帮助
     - The government offered financial assistance to the flood victims. 
     - > 政府向洪灾受害者提供了财政援助。
-- [assumption](https://www.youdao.com/result?word=assumption&lang=en) [əˈsʌmpʃn] n. 假定；假设
+- [assumption](https://www.youdao.com/result?word=assumption&lang=en) [əˈsʌmpʃn] n. 假定；假设  (`assume` v. 假定, 假设)
+    - ![Alt text](/img/eng_oxford_5000/image-5.png)
     - The argument is based on the assumption that everyone has equal opportunities. 
     - > 这个论点基于每个人都有平等机会的假设。
 - [assure](https://www.youdao.com/result?word=assure&lang=en) [əˈʃʊr] v. 保证；确信
@@ -106,21 +112,27 @@ categories:
     - The ballet performance was beautiful and graceful. 
     - > 这场芭蕾舞表演美丽优雅。
 - [barely](https://www.youdao.com/result?word=barely&lang=en) [ˈberli] adv. 仅仅；勉强
+    - ![Alt text](/img/eng_oxford_5000/image-6.png)
     - She could barely hear what he was saying. 
     - > 她勉强听到了他在说什么。
 - [basement](https://www.youdao.com/result?word=basement&lang=en) [ˈbeɪsmənt] n. 地下室
+    - ![Alt text](/img/eng_oxford_5000/image-7.png)
     - The basement is used for storage. 
     - > 地下室用作储藏室。
 - [bat](https://www.youdao.com/result?word=bat&lang=en) [bæt] n. 球棒；蝙蝠
+    - ![Alt text](/img/eng_oxford_5000/image-8.png)
     - He hit the ball with the bat and scored a home run. 
     - > 他用球棒打中了球，得了一个本垒打。
 - [bias](https://www.youdao.com/result?word=bias&lang=en) [ˈbaɪəs] n. 偏见；偏向
+    - ![Alt text](/img/eng_oxford_5000/image-9.png)
     - The article showed a bias towards one political party. 
     - > 这篇文章表现出偏袒某个政党的偏见。
 - [bid](https://www.youdao.com/result?word=bid&lang=en) [bɪd] n. 出价；投标；v. 出价；投标
+    - ![Alt text](/img/eng_oxford_5000/image-10.png)
     - He made a bid for the painting at the auction. 
     - > 他在拍卖会上为这幅画出了一个价。
 - [blanket](https://www.youdao.com/result?word=blanket&lang=en) [ˈblæŋkɪt] n. 毛毯；覆盖物
+    - ![Alt text](/img/eng_oxford_5000/image-11.png)
     - She wrapped herself in a warm blanket on the sofa. 
     - > 她在沙发上裹着一条温暖的毛毯。
 - [bold](https://www.youdao.com/result?word=bold&lang=en) [boʊld] adj. 大胆的；醒目的(`bald` [bɔːld] adj. 秃头的; n. 秃头)
@@ -129,7 +141,8 @@ categories:
 - [bound](https://www.youdao.com/result?word=bound&lang=en) [baʊnd] adj. 有义务的；必须的; 受约束的
     - The company is bound by law to ensure the safety of its workers. 
     - > 公司被法律规定是`有义务的`来确保员工的安全。
-- [buck](https://www.youdao.com/result?word=buck&lang=en) [bʌk] n.雄鹿；雄性动物；v. 抵制；反对
+- [buck](https://www.youdao.com/result?word=buck&lang=en) [bʌk] v. 抵制；反对  n.雄鹿；雄性动物；
+    - ![Alt text](/img/eng_oxford_5000/image-12.png)
     - We need to buck the trend and make some changes. 
     - > 我们需要反其道而行之，做出一些改变。
 
@@ -137,9 +150,11 @@ categories:
 ## cd
 
 - [cabin](https://www.youdao.com/result?word=cabin&lang=en) [ˈkæbɪn] n. 小木屋
+    - ![Alt text](/img/eng_oxford_5000/image-13.png)
     - We rented a cabin in the mountains for our summer vacation. 
     - > 我们在山里租了一间小木屋度过夏季假期。
 - [canal](https://www.youdao.com/result?word=canal&lang=en) [kəˈnæl] n. 运河；水道路
+    - ![Alt text](/img/eng_oxford_5000/image-14.png)
     - The Panama Canal connects the Atlantic and Pacific Oceans. 
     - > 巴拿马运河连接着大西洋和太平洋。
 - [castle](https://www.youdao.com/result?word=castle&lang=en) [ˈkæsl] n. 城
@@ -149,6 +164,7 @@ categories:
     - He chopped the wood for the fire. 
     - > 他砍了柴火。
 - [circuit](https://www.youdao.com/result?word=circuit&lang=en) [ˈsɜːrkɪt] n. 电路；巡回赛
+    - ![Alt text](/img/eng_oxford_5000/image-15.png)
     - The circuit board controls the functions of the computer. 
     - > 电路板控制着计算机的功能。
 - [civilization](https://www.youdao.com/result?word=civilization&lang=en) [ˌsɪvəlaɪˈzeɪʃn] n. 文明
@@ -158,18 +174,22 @@ categories:
     - The books in the library are classified according to subject. 
     - > 图书馆的书籍按主题分类。
 - [cliff](https://www.youdao.com/result?word=cliff&lang=en) [klɪf] n. 悬崖
+    - ![Alt text](/img/eng_oxford_5000/image-16.png)
     - The view from the top of the cliff was breathtaking. 
     - > 从悬崖上俯瞰的景色令人惊叹。
 - [clinic](https://www.youdao.com/result?word=clinic&lang=en) [ˈklɪnɪk] n. 诊所
+    - ![Alt text](/img/eng_oxford_5000/image-26.png)
     - She went to the clinic to get a check-up. 
     - > 她去诊所做体检。
 - [clip](https://www.youdao.com/result?word=clip&lang=en) [klɪp] n. 夹子；v. 剪辑
+    - ![Alt text](/img/eng_oxford_5000/image-27.png)
     - She used a clip to hold her hair back. 
     - > 她用夹子把头发固定住。
 - [coincidence](https://www.youdao.com/result?word=coincidence&lang=en) [koʊˈɪnsɪdəns] n. 巧合
     - It was a coincidence that we both ended up at the same restaurant. 
     - > 我们两个人最终都进了同一家餐厅，真是巧合。
 - [colony](https://www.youdao.com/result?word=colony&lang=en) [ˈkɑːləni] n. 殖民地；群体
+    - ![Alt text](/img/eng_oxford_5000/image-28.png)
     - The United States was once a British colony. 
     - > 美国曾经是英国的殖民地。
 - [comic](https://www.youdao.com/result?word=comic&lang=en) adj., [ˈkɑːmɪk] n. 喜剧的；漫画
@@ -179,45 +199,60 @@ categories:
     - The commander led his troops into battle. 
     - > 指挥官带领他的部队参加战斗。
 - [comparative](https://www.youdao.com/result?word=comparative&lang=en) [kəmˈpærətɪv] adj. 比较的；相对的
+    - ![Alt text](/img/eng_oxford_5000/image-29.png)
     - She is a comparative newcomer to the company. 
     - > 她算得上公司的新人。
-- [compose](https://www.youdao.com/result?word=compose&lang=en) [kəmˈpoʊz] v. 组成；创作
+- [compose](https://www.youdao.com/result?word=compose&lang=en) [kəmˈpoʊz] v. 组成；创作;作曲
+    - ![Alt text](/img/eng_oxford_5000/image-30.png)
     - The committee is composed of six members. 
     - > 委员会由六名成员组成。
 - [composer](https://www.youdao.com/result?word=composer&lang=en) [kəmˈpoʊzər] n. 作曲家
     - Beethoven is one of the most famous composers of all time. 
     - > 贝多芬是有史以来最著名的作曲家之一。
 - [compound](https://www.youdao.com/result?word=compound&lang=en) [ˈkɑːmpaʊnd] n. 化合物；v. 混合
+    - ![Alt text](/img/eng_oxford_5000/image-31.png)
     - Salt is a compound made up of sodium and chloride. 
     - > 盐是由钠和氯化合而成的化合物。
 - [comprehensive](https://www.youdao.com/result?word=comprehensive&lang=en) [ˌkɑːmprɪˈhensɪv] adj. 全面的；综合的
     - The report provides a comprehensive analysis of thecompany's financial performance. 
     - > 这份报告对公司的财务表现进行了全面的分析。
 - [comprise](https://www.youdao.com/result?word=comprise&lang=en) [kəmˈpraɪz] v. 包括；由…组成
+    - ![Alt text](/img/eng_oxford_5000/image-32.png)
     - The committee comprises representatives from all departments. 
     - > 委员会由各部门的代表组成。
 - [compulsory](https://www.youdao.com/result?word=compulsory&lang=en) [kəmˈpʌlsəri] adj. 强制性的；必修的
+    - ![Alt text](/img/eng_oxford_5000/image-41.png)
     - Wearing a seatbelt is compulsory in most countries. 
     - > 在大多数国家，佩戴安全带是强制性的。
 - [concrete](https://www.youdao.com/result?word=concrete&lang=en) adj., [ˈkɑːnkriːt] n. 混凝土的；具体的；n. 混凝土
+    - ![Alt text](/img/eng_oxford_5000/image-42.png)
     - The building is made of concrete and steel. 
     - > 这座建筑是由混凝土和钢铁构成的。
-- [consequently](https://www.youdao.com/result?word=consequently&lang=en) [ˈkɑːnsəkwentli] adv. 因此；所以
+- [consequently](https://www.youdao.com/result?word=consequently&lang=en) [ˈkɑːnsəkwentli] adv. 因此；所以  (`consequence` n. 结果, 后果)
+    - ![Alt text](/img/eng_oxford_5000/image-43.png)
     - He didn't study for the exam, consequently he failed. 
     - > 他没有为考试学习，因此他失败了。
-- [conservation](https://www.youdao.com/result?word=conservation&lang=en) [ˌkɑːnsərˈveɪʃn] n. 保护；保存
+- [conservation](https://www.youdao.com/result?word=conservation&lang=en) [ˌkɑːnsərˈveɪʃn] n. 保护；保存  (`conservative` [kənˈsɜːvətɪv] adj., n. 保守的)
     - The conservation of natural resources is important for future generations. 
     - > 自然资源的保护对于未来的世代至关重要。
-- [considerable](https://www.youdao.com/result?word=considerable&lang=en) [kənˈsɪdərəbl] adj. 相当大的；重要的
+- [considerable](https://www.youdao.com/result?word=considerable&lang=en) [kənˈsɪdərəbl] adj. 相当大的；重要的 (`considerate` 体贴的, 考虑周到的)
+    - ![Alt text](/img/eng_oxford_5000/image-44.png)
     - The company has made a considerable investment in new technology. 
     - > 该公司在新技术上做出了相当大的投资。
 - [considerably](https://www.youdao.com/result?word=considerably&lang=en) [kənˈsɪdərəbli] adv. 相当地；非常地
     - The cost of living in this city is considerably higher than in other cities. 
     - > 这个城市的生活成本比其他城市高得多。
+- [consistent](https://www.youdao.com/result?word=consistent&lang=en) [kənˈsɪstənt] adj. 一致的；前后如一的, 一贯的 (`consistent` 更强调的是前后一致性，而 `constant` 更强调的是稳定性和不变性。persistent 强调持续性) [**unfamiliar**]
+    - ![Alt text](/img/eng_oxford_5000/image-45.png)
+    - She has been consistent in her efforts to improve her performance at work. 
+    - > 她一直致力于提高自己在工作中的表现，持续不断。
+    - She's not very consistent in the way she treats her children. 
+    - > 她对待孩子反复无常。
 - [consistently](https://www.youdao.com/result?word=consistently&lang=en) [kənˈsɪstəntli] adv. 一贯地；始终如一地
     - She consistently performs well in her job. 
     - > 她在工作中一直表现出色。
 - [conspiracy](https://www.youdao.com/result?word=conspiracy&lang=en) [kənˈspɪrəsi] n. 阴谋；密谋
+    - ![Alt text](/img/eng_oxford_5000/image-46.png)
     - The group was accused of plotting a conspiracy to overthrow the government. 
     - > 这个组织被指控策划了一场颠覆政府的阴谋。
 - [consult](https://www.youdao.com/result?word=consult&lang=en) [kənˈsʌlt] v. 咨询；请教
@@ -230,18 +265,21 @@ categories:
     - The consumption of sugary drinks is linked to obesity. 
     - > 饮用含糖饮料与肥胖有关。
 - [controversial](https://www.youdao.com/result?word=controversial&lang=en) [ˌkɑːntrəˈvɜːrʃl] adj. 有争议的；引起争议的
+    - ![Alt text](/img/eng_oxford_5000/image-47.png)
     - The new policy has been controversial from the beginning. 
     - > 新政策从一开始就引起了争议。
 - [controversy](https://www.youdao.com/result?word=controversy&lang=en) [ˈkɑːntrəvɜːrsi] n. 争议；争论
     - The issue has sparked a lot of controversy among experts. 
     - > 这个问题在专家之间引起了很多争议。
 - [convention](https://www.youdao.com/result?word=convention&lang=en) [kənˈvenʃn] n. 大会；惯例
+    - ![Alt text](/img/eng_oxford_5000/image-48.png)
     - The convention will be held in the convention center downtown. 
     - > 大会将在市中心的会议中心举行。
 - [conventional](https://www.youdao.com/result?word=conventional&lang=en) [kənˈvenʃənl] adj. 传统的；习惯的
     - She prefers a conventional style of dress. 
     - > 她更喜欢传统的服装风格。
-- [convey](https://www.youdao.com/result?word=convey&lang=en) [kənˈveɪ] v. 传达；运输
+- [convey](https://www.youdao.com/result?word=convey&lang=en) [kənˈveɪ] v. 表达, 传达；运输
+    - ![Alt text](/img/eng_oxford_5000/image-49.png)
     - The company uses trucks to convey their products to different cities. 
     - > 该公司使用卡车将产品运往不同的城市。
 - [convincing](https://www.youdao.com/result?word=convincing&lang=en) [kənˈvɪnsɪŋ] adj. 有说服力的
@@ -251,14 +289,19 @@ categories:
     - The cop chased after the thief on foot. 
     - > 警察步行追赶小偷。
 - [cope](https://www.youdao.com/result?word=cope&lang=en) [koʊp] v. 应对；处理
-    - She had to find a way to cope with the stress of her job. 
+    - ![Alt text](/img/eng_oxford_5000/image-52.png)
+    - She had to find a way to `cope with` the stress of her job. 
     - > 她必须找到应对工作压力的方法。
 - [corridor](https://www.youdao.com/result?word=corridor&lang=en) [ˈkɔːrɪdɔːr] n. 走廊
+    - ![Alt text](/img/eng_oxford_5000/image-51.png)
     - The hospital corridor was filled with patients and doctors. 
     - > 医院走廊里挤满了病人和医生。
-- [counter](https://www.youdao.com/result?word=counter&lang=en) (long flat surface) [ˈkaʊntər] n. 柜台
+- [counter](https://www.youdao.com/result?word=counter&lang=en) (long flat surface) [ˈkaʊntər] n. 柜台  v. 反驳，驳斥；抵制，抵消；（拳击）还击；逆向移动
+    - ![Alt text](/img/eng_oxford_5000/image-50.png)
     - The baker placed the freshly baked bread on the counter. 
     - > 面包师把新鲜出炉的面包放在柜台上。
+    - League of Legends Counter tips
+    - 英雄联盟反制针对tips
 - [coverage](https://www.youdao.com/result?word=coverage&lang=en) [ˈkʌvərɪdʒ] n. 覆盖范围；新闻报道
     - The insurance policy provides coverage for fire and theft. 
     - > 保险单提供火灾和盗窃的保险范围。
@@ -266,15 +309,22 @@ categories:
     - The patient was critically ill and needed immediate surgery. 
     - > 病人病情危急，需要立即手术。
 - [cruise](https://www.youdao.com/result?word=cruise&lang=en) n., [kruːz] v. 巡航；v. 巡航
+    - ![Alt text](/img/eng_oxford_5000/image-39.png)
+    - ![Alt text](/img/eng_oxford_5000/image-40.png)
     - We went on a Caribbean cruise for our honeymoon. 
     - > 我们为蜜月去了加勒比海巡航。
 - [cue](https://www.youdao.com/result?word=cue&lang=en) [kjuː] n. 暗示；线索
+    - 已死勿cue
     - The director gave the actor a cue to start the scene. 
-    - > 导演给演员一个信号开始演出。
+    - > 导演给演员一个`暗示`开始演出。
 - [curriculum](https://www.youdao.com/result?word=curriculum&lang=en) [kəˈrɪkjələm] n. 课程
+    - ![Alt text](/img/eng_oxford_5000/image-38.png)
+    - `Curriculum` 通常指的是一个学校或教育机构所规划的整个教学计划，包括教学目标、教学内容、教学方法、评估方法等。它是一个更广泛的概念，通常涵盖多个学科和课程。
+    - `Course` 则通常指的是一个特定学科或领域的单个课程，它是一个更具体的概念，通常包括一系列的教学活动和学习材料，旨在帮助学生掌握特定的知识和技能。一个课程通常是一个学期或学年内的一个单元
     - The school's curriculum includes math, science, and language classes. 
     - > 这所学校的课程包括数学、科学和语言课程。
-- [dairy](https://www.youdao.com/result?word=dairy&lang=en) n., [ˈderi] adj. 奶制品；乳制品的
+- [dairy](https://www.youdao.com/result?word=dairy&lang=en) n., [ˈderi] adj. 奶制品；乳制品的  (`diary` n. 日记)
+    - ![Alt text](/img/eng_oxford_5000/image-37.png)
     - The dairy farm produces milk, cheese, and butter. 
     - > 这家乳制品农场生产牛奶、奶酪和黄油。
 - [dare](https://www.youdao.com/result?word=dare&lang=en) [der] v. 敢；胆敢
@@ -284,6 +334,7 @@ categories:
     - The snake's venom is deadly and can kill a person within hours. 
     - > 蛇的毒液是致命的，可以在几小时内致人死亡。
 - [dealer](https://www.youdao.com/result?word=dealer&lang=en) [ˈdiːlər] n. 经销商；商人
+    - ![Alt text](/img/eng_oxford_5000/image-36.png)
     - The car dealer offered a discount on the new models. 
     - > 汽车经销商对新款车型提供了折扣。
 - [deck](https://www.youdao.com/result?word=deck&lang=en) [dek] n. 甲板；一副牌
@@ -295,13 +346,16 @@ categories:
 - [democracy](https://www.youdao.com/result?word=democracy&lang=en) [dɪˈmɑːkrəsi] n. 民主；民主制度
     - The country is transitioning to a democracy after years ofdictatorship. 
     - > 这个国家经历了多年的独裁统治后正在转型为民主制度。
-- [demonstration](https://www.youdao.com/result?word=demonstration&lang=en) [ˌdemənˈstreɪʃn] n. 示威；示范
+- [demonstration](https://www.youdao.com/result?word=demonstration&lang=en) [ˌdemənˈstreɪʃn] n. 演示;示威；示范
+    - ![Alt text](/img/eng_oxford_5000/image-35.png)
     - The protesters held a peaceful demonstration in front of the government building. 
     - > 抗议者在政府大楼前举行了和平示威。
 - [depart](https://www.youdao.com/result?word=depart&lang=en) [dɪˈpɑːrt] v. 离开；出发
+    - ![Alt text](/img/eng_oxford_5000/image-34.png)
     - The train will depart from platform 3 in 10 minutes. 
     - > 火车将在10分钟后从3号站台出发。
 - [deposit](https://www.youdao.com/result?word=deposit&lang=en) n., [dɪˈpɑːzɪt] v. 存款；押金；v. 存款；支付押金
+    - ![Alt text](/img/eng_oxford_5000/image-33.png)
     - He made a deposit of $1000 into his savings account. 
     - > 他向自己的储蓄账户存入了1000美元。
     - She paid a deposit of $50 to reserve the hotel room. 
@@ -310,18 +364,22 @@ categories:
     - The loss of her job led to a period of depression for her. 
     - > 失去工作导致她陷入了一段抑郁期。
 - [derive](https://www.youdao.com/result?word=derive&lang=en) [dɪˈraɪv] v. 源于；得自
+    - ![Alt text](/img/eng_oxford_5000/image-25.png)
     - The word "biology" is derived from the Greek words "bios" and "logos". 
     - > 单词“生物学”源自希腊词“bios”和“logos”。
 - [desperately](https://www.youdao.com/result?word=desperately&lang=en) [ˈdɛspərətli] adv. 绝望地；拼命地
     - He desperately tried to save his failing business. 
     - > 他拼命地试图挽救自己的业务。
 - [determination](https://www.youdao.com/result?word=determination&lang=en) [dɪˌtɜrmɪˈneɪʃn] n. 决心；决定
+    - ![Alt text](/img/eng_oxford_5000/image-24.png)
     - With determination andhard work, she was able to achieve her goals. 
     - > 凭借决心和努力，她成功地实现了自己的目标。
 - [devote](https://www.youdao.com/result?word=devote&lang=en) [dɪˈvoʊt] v. 献身于；致力于
+    - ![Alt text](/img/eng_oxford_5000/image-23.png)
     - He decided to devote his life to helping others. 
     - > 他决定把自己的生命献给帮助他人。
 - [dime](https://www.youdao.com/result?word=dime&lang=en) [daɪm] n. 十分硬币
+    - ![Alt text](/img/eng_oxford_5000/image-22.png)
     - She found a shiny dime on the sidewalk. 
     - > 她在人行道上发现了一枚闪亮的十分硬币。
 - [disability](https://www.youdao.com/result?word=disability&lang=en) [ˌdɪsəˈbɪləti] n. 残疾；无能
@@ -334,21 +392,26 @@ categories:
     - It can be difficult to distinguish between real and fake news these days. 
     - > 现在很难区分真假新闻。
 - [dive](https://www.youdao.com/result?word=dive&lang=en) v., [daɪv] n. 潜水；跳水；v. 跳水；潜水；n. 跳水
+    - ![Alt text](/img/eng_oxford_5000/image-21.png)
     - He loves to dive off the high diving board. 
     - > 他喜欢从高空跳水板跳水。
 - [diverse](https://www.youdao.com/result?word=diverse&lang=en) [daɪˈvɜrs] adj. 多样的；不同的
     - The city is known for its diverse population and cultures. 
     - > 这个城市以其多样化的人口和文化而闻名。
 - [diversity](https://www.youdao.com/result?word=diversity&lang=en) [daɪˈvɜrsəti] n. 多样性；差异
+    - ![Alt text](/img/eng_oxford_5000/image-20.png)
     - The company values diversity and strives to create an inclusive workplace. 
     - > 该公司重视多样性，努力创造一个包容性的工作场所。
-- [dominant](https://www.youdao.com/result?word=dominant&lang=en) [ˈdɑːmənənt] adj. 占优势的；支配的
+- [dominant](https://www.youdao.com/result?word=dominant&lang=en) [ˈdɑːmənənt] adj. 占优势的；支配的 (`dominate` v. 主宰, 主导)
+    - ![Alt text](/img/eng_oxford_5000/image-19.png)
     - The dominant team won the championship for the third year in a row. 
     - > 占优势的球队连续三年获得了冠军。
 - [drought](https://www.youdao.com/result?word=drought&lang=en) [draʊt] n. 干旱；旱灾
+    - ![Alt text](/img/eng_oxford_5000/image-18.png)
     - The drought has caused a severe shortage of water in the region. 
     - > 干旱导致该地区水资源严重短缺。
 - [dull](https://www.youdao.com/result?word=dull&lang=en) [dʌl] adj. 沉闷的；乏味的
+    - ![Alt text](/img/eng_oxford_5000/image-17.png)
     - The lecture was so dull that I fell asleep halfway through. 
     - > 那场讲座太乏味了，我半途就睡着了。
 - [dump](https://www.youdao.com/result?word=dump&lang=en) [dʌmp] v. 倾倒；丢弃

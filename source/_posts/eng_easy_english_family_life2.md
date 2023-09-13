@@ -113,3 +113,18 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - That's right.
 - The potatoes are really soft now.
 - We must drain them and use the potatoes masher to mash the potatoes. Pour over some warm milk, then add a little butter and sour(/ ˈsaʊər /酸的) cream.
+
+
+# 4. Setting The Table
+
+- Dinner is almost ready.Let's set the table, Brian!
+- Ok, dad.
+- Let's put the plates and bowls on the table.
+- Perfect. Now let's put a napkin(餐巾) on the table by each person's plate on the left side.
+- Next, let's bring the spoons and forks.
+- We're going to place the fork to the left of the plate.
+- It's ok if I put it on top of the napkin?
+- Better put it next to it. The knife will be directly to right of the plate; next to that will be spoon.
+- What about the dessert spoon? 
+- That comes above the plate.The glass should be positioned directly above the knife. Put the bread plate above the fork.The table is set. It looks very good.Let's bring the food now.
+- We have chicken soup, mashed potatoes, meatballs, pickles( 泡菜, 咸菜 ), salad and cherry cake.

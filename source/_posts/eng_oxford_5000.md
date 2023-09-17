@@ -360,14 +360,14 @@ categories:
     - > 他向自己的储蓄账户存入了1000美元。
     - She paid a deposit of $50 to reserve the hotel room. 
     - > 她支付了50美元的押金来预定酒店房间。
-- [depression](https://www.youdao.com/result?word=depression&lang=en) [dɪˈprɛʃn] n. 抑郁症；萧条
+- [depression](https://www.youdao.com/result?word=depression&lang=en) [dɪˈpreʃn] n. 抑郁症；萧条
     - The loss of her job led to a period of depression for her. 
     - > 失去工作导致她陷入了一段抑郁期。
 - [derive](https://www.youdao.com/result?word=derive&lang=en) [dɪˈraɪv] v. 源于；得自
     - ![Alt text](/img/eng_oxford_5000/image-25.png)
     - The word "biology" is derived from the Greek words "bios" and "logos". 
     - > 单词“生物学”源自希腊词“bios”和“logos”。
-- [desperately](https://www.youdao.com/result?word=desperately&lang=en) [ˈdɛspərətli] adv. 绝望地；拼命地
+- [desperately](https://www.youdao.com/result?word=desperately&lang=en) [ˈdespərətli] adv. 绝望地；拼命地
     - He desperately tried to save his failing business. 
     - > 他拼命地试图挽救自己的业务。
 - [determination](https://www.youdao.com/result?word=determination&lang=en) [dɪˌtɜrmɪˈneɪʃn] n. 决心；决定
@@ -419,7 +419,7 @@ categories:
     - > 他决定抛弃旧家具，买新的。
 
 
-## ef
+## efgh
 
 - [eager](https://www.youdao.com/result?word=eager&lang=en) [ˈiːɡər] adj. 渴望的，热切的
     - She was eager to start her new job. 
@@ -437,6 +437,7 @@ categories:
     - The new system is designed to work more efficiently. 
     - > 新系统旨在更高效地工作。
 - [elbow](https://www.youdao.com/result?word=elbow&lang=en) [ˈelboʊ] n. 肘部
+    - ![Alt text](/img/eng_oxford_5000/image-4.png)
     - I accidentally bumped my elbow on the table. 
     - > 我不小心碰到了桌子的肘部。
 - [electronics](https://www.youdao.com/result?word=electronics&lang=en) [ɪˌlekˈtrɑːnɪks] n. 电子学
@@ -446,15 +447,19 @@ categories:
     - The bride looked elegant in her wedding dress. 
     - > 新娘穿着婚纱，显得非常优美。
 - [elementary](https://www.youdao.com/result?word=elementary&lang=en) [ˌelɪˈmentəri] adj. 基本的，初级的
+    - ![Alt text](/img/eng_oxford_5000/image-54.png)
     - This book is written for elementary school children. 
     - > 这本书是为小学生写的。
-- [eliminate](https://www.youdao.com/result?word=eliminate&lang=en) [ɪˈlɪmənete] v. 消除，排除
+- [eliminate](https://www.youdao.com/result?word=eliminate&lang=en) [ɪˈlɪmɪneɪt]  v. 消除，排除
+    - ![Alt text](/img/eng_oxford_5000/image-55.png)
     - We need to eliminate all the possible causes of the problem. 
     - > 我们需要排除所有可能导致问题的原因。
 - [embrace](https://www.youdao.com/result?word=embrace&lang=en) [ɪmˈbreɪs] v. 拥抱，接受
+    - ![Alt text](/img/eng_oxford_5000/image-56.png)
     - She embraced the new idea with enthusiasm. 
     - > 她充满热情地接受了这个新想法。
-- [emission](https://www.youdao.com/result?word=emission&lang=en) [ɪˈmɪʃən] n. 排放物，散发
+- [emission](https://www.youdao.com/result?word=emission&lang=en) [ɪˈmɪʃən] n. 排放物，散发, 射精, 遗精
+    - ![Alt text](/img/eng_oxford_5000/image-57.png)
     - The factory was fined for excessive emissions of pollutants. 
     - > 工厂因过度排放污染物而被罚款。
 - [emotionally](https://www.youdao.com/result?word=emotionally&lang=en) [ɪˈmoʊʃənəli] adv. 情感上，感情上
@@ -470,6 +475,7 @@ categories:
     - The movie was very entertaining. 
     - > 这部电影非常有趣。
 - [entrepreneur](https://www.youdao.com/result?word=entrepreneur&lang=en) [ˌɑːntrəprəˈnɜːr] n. 企业家
+    - ![Alt text](/img/eng_oxford_5000/image-58.png)
     - He started his own business and became a successful entrepreneur. 
     - > 他开创自己的事业，成为了一位成功的企业家。
 - [envelope](https://www.youdao.com/result?word=envelope&lang=en) [ˈenvəloʊp] n. 信封
@@ -485,27 +491,32 @@ categories:
     - The Renaissance was a significant era in European history. 
     - > 文艺复兴是欧洲历史上一个重要的时代。
 - [erupt](https://www.youdao.com/result?word=erupt&lang=en) [ɪˈrʌpt] v. 爆发，喷发
+    - ![Alt text](/img/eng_oxford_5000/image-59.png)
     - The volcano erupted and covered the town with ash. 
     - > 火山爆发并覆盖了城镇的灰烬。
 - [essentially](https://www.youdao.com/result?word=essentially&lang=en) [ɪˈsenʃəli] adv. 本质上，基本上
+    - ![Alt text](/img/eng_oxford_5000/image-60.png)
     - The problem is essentially a lack of communication. 
     - > 问题本质上是缺乏沟通。
-- [ethic](https://www.youdao.com/result?word=ethic&lang=en) [ˈeθɪk] n. 道德规范，伦理道德
+- [ethic](https://www.youdao.com/result?word=ethic&lang=en) [ˈeθɪk] n. 道德规范，伦理道德 (`ethical` [ˈeθɪkəl] adj. 通常指与特定职业、行业或社会规范相关的道德准则)
     - The company has a strict code of ethics. 
     - > 这家公司有严格的道德准则。
 - [ethnic](https://www.youdao.com/result?word=ethnic&lang=en) [ˈeθnɪk] adj. 种族的，民族的
+    - ![Alt text](/img/eng_oxford_5000/image-61.png)
     - The neighborhood has a diverse ethnic population. 
     - > 这个社区有着多元化的民族人口。
 - [evaluation](https://www.youdao.com/result?word=evaluation&lang=en) [ɪˌvæljuˈeɪʃən] n. 评估，评价
     - The evaluation of the project was very positive. 
     - > 对这个项目的评估非常积极。
 - [evident](https://www.youdao.com/result?word=evident&lang=en) [ˈevɪdənt] adj. 明显的，显然的
+    - ![Alt text](/img/eng_oxford_5000/image-62.png)
     - It was evident that he was angry. 
     - > 很明显他很生气。
 - [evolution](https://www.youdao.com/result?word=evolution&lang=en) [ˌiːvəˈluːʃən] n. 进化，演变
     - The evolution of the human species is a fascinating topic. 
     - > 人类物种的演化是一个引人入胜的话题。
 - [evolve](https://www.youdao.com/result?word=evolve&lang=en) [ɪˈvɑːlv] v. 发展，进化
+    - ![Alt text](/img/eng_oxford_5000/image-63.png)
     - The company needs to evolve in order to stay competitive. 
     - > 公司需要发展才能保持竞争力。
 - [exceed](https://www.youdao.com/result?word=exceed&lang=en) [ɪkˈsiːd] v. 超过，超出
@@ -514,77 +525,90 @@ categories:
 - [exception](https://www.youdao.com/result?word=exception&lang=en) [ɪkˈsepʃən] n. 例外，异常
     - She's a great employee, but she's the exception rather than the rule. 
     - > 她是一名优秀的员工，但她是例外而不是常规。
-- [excessive](https://www.youdao.com/result?word=excessive&lang=en) [ɪkˈsesɪv] adj. 过度的，过分的
+- [excessive](https://www.youdao.com/result?word=excessive&lang=en) [ɪkˈsesɪv] adj. 过度的，过分的 (`excess`, n. 超过，过量；越轨行为, adj. 过多的，超额的；额外的，附加的)
+    - ![Alt text](/img/eng_oxford_5000/image-64.png)
     - The teacher thought the punishment was excessive. 
     - > 老师认为惩罚过分了。
 - [exclude](https://www.youdao.com/result?word=exclude&lang=en) [ɪkˈskluːd] v. 排除，拒绝
     - He was excluded from the team because of his bad behavior. 
     - > 他因为行为不良被排除在团队之外。
 - [exotic](https://www.youdao.com/result?word=exotic&lang=en) [ɪɡˈzɑːtɪk] adj. 异国情调的，奇异的
+    - ![Alt text](/img/eng_oxford_5000/image-65.png)
     - The restaurant serves exotic dishes from around the world. 
     - > 这家餐厅供应来自世界各地的异国情调的菜肴。
 - [expansion](https://www.youdao.com/result?word=expansion&lang=en) [ɪkˈspænʃən] n. 扩张，扩大
     - The company is planning an expansion of its operations into Asia. 
     - > 公司计划将业务扩展到亚洲。
 - [expedition](https://www.youdao.com/result?word=expedition&lang=en) [ˌekspəˈdɪʃən] n. 远征，探险
+    - ![Alt text](/img/eng_oxford_5000/image-66.png)
     - The expedition to the South Pole was a dangerous undertaking. 
     - > 南极探险是一项危险的事业。
-expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz] n. 专业知识，专长
+- [expertise](https://www.youdao.com/result?word=expertise&lang=en)[ˌekspərˈtiːz] n. 专业知识，专长 (`expert`)
     - She has a lot of expertise in the field of genetics. 
     - > 她在遗传学领域有很多专业知识。
-
 - [exploit](https://www.youdao.com/result?word=exploit&lang=en) [ɪkˈsplɔɪt] v. 利用，剥削
+    - ![Alt text](/img/eng_oxford_5000/image-67.png)
     - The company was accused of exploiting its workers for cheap labor. 
     - > 这家公司被指控剥削工人以获取廉价劳动力。
 - [exposure](https://www.youdao.com/result?word=exposure&lang=en) [ɪkˈspoʊʒər] n. 暴露，接触
+    - ![Alt text](/img/eng_oxford_5000/image-68.png)
     - Prolonged exposure to the sun can cause skin damage. 
     - > 长时间暴露在阳光下会导致皮肤损伤。
-- [extension](https://www.youdao.com/result?word=extension&lang=en) [ɪkˈstɛnʃən] n. 扩展，延伸
+- [extension](https://www.youdao.com/result?word=extension&lang=en) [ɪkˈstenʃən] n. 扩展，延伸
     - The construction of the new building required an extension of the existing road. 
     - > 新建筑的建设需要延伸现有的道路。
-- [extensive](https://www.youdao.com/result?word=extensive&lang=en) [ɪkˈstɛnsɪv] adj. 广泛的，广阔的
+- [extensive](https://www.youdao.com/result?word=extensive&lang=en) [ɪkˈstensɪv] adj. 广泛的，广阔的
     - The company has an extensive network of suppliers around the world. 
     - > 这家公司在全球拥有广泛的供应商网络。
-- [extensively](https://www.youdao.com/result?word=extensively&lang=en) [ɪkˈstɛnsɪvli] adv. 广泛地，大量地
+- [extensively](https://www.youdao.com/result?word=extensively&lang=en) [ɪkˈstensɪvli] adv. 广泛地，大量地
     - The book covers extensively the history of the region. 
     - > 这本书广泛地涵盖了该地区的历史。
-- [extract](https://www.youdao.com/result?word=extract&lang=en) [ˈɛkstrækt] n. 提取物，浓缩物
+- [extract](https://www.youdao.com/result?word=extract&lang=en) [ˈɪkstrækt] v. 提取, n. 提取物，浓缩物
     - The extract from the plant is used in traditional medicine. 
     - > 该植物的提取物被用于传统医学。
 - [fabulous](https://www.youdao.com/result?word=fabulous&lang=en) [ˈfæbjələs] adj. 极好的，极为出色的
+    - ![Alt text](/img/eng_oxford_5000/image-69.png)
     - The restaurant serves fabulous food that is known throughout the city. 
     - > 这家餐厅提供极好的食物，是整个城市所知道的。
-- [faculty](https://www.youdao.com/result?word=faculty&lang=en) [ˈfækəlti] n. 教职工，能力，才能
+- [faculty](https://www.youdao.com/result?word=faculty&lang=en) [ˈfækəlti] n.能力，才能, <美>教职工
+    - ![Alt text](/img/eng_oxford_5000/image-70.png)
     - - She has a faculty for languages and speaks five fluently. 
     - > 她有语言才能，能够流利地说五种语言。
-- [fare](https://www.youdao.com/result?word=fare&lang=en) [fɛr] n. 交通费用；乘客；饭菜；常见的东西；供大众使用的东西（尤指娱乐活动）v. 进展，表现；<古> 发生，结果
+- [fare](https://www.youdao.com/result?word=fare&lang=en) [fer] n. 交通费用；乘客；饭菜；常见的东西；供大众使用的东西（尤指娱乐活动）v. 进展，表现；<古> 发生，结果
+    - ![Alt text](/img/eng_oxford_5000/image-71.png)
     - The fare or a round-trip ticket is cheaper than buying two one-way tickets. 
     - > 往返票的费用比购买两张单程票要便宜。
 - [firefighter](https://www.youdao.com/result?word=firefighter&lang=en) [ˈfaɪərˌfaɪtər] n. 消防员
     - The firefighters rushed into the burning building to rescue the people trapped inside. 
     - > 消防员冲进着火的建筑物，营救被困在里面的人。
-- [firm](https://www.youdao.com/result?word=firm&lang=en) [fɜrm] adj. 坚定的，牢固的
+- [firm](https://www.youdao.com/result?word=firm&lang=en) [fɜrm] adj. 坚定的，牢固的; n. 公司, 商行, v. 使强壮 adv. 坚定地
+    - ![Alt text](/img/eng_oxford_5000/image-72.png)
     - The decision was made with the firm belief that it was the right thing to do. 
     - > 这个决定是基于坚定的信念做出的，认为这是正确的做法。
 - [firmly](https://www.youdao.com/result?word=firmly&lang=en) [ˈfɜrmli] adv. 坚定地，稳固地
     - She held onto the railing firmly as she climbed the stairs. 
     - > 她在爬楼梯时牢牢地抓着栏杆。
-- [fond](https://www.youdao.com/result?word=fond&lang=en) [fɑnd] adj. 喜爱的，爱好的
+- [fond](https://www.youdao.com/result?word=fond&lang=en) [fɑnd] adj. 喜爱的，爱好的, 愉悦的；慈爱的，深情的；天真的 (`font` 字体)
+    - ![Alt text](/img/eng_oxford_5000/image-73.png)
     - She has always been fond of animals and has several pets at home. 
     - > 她一直喜欢动物，在家里养了几只宠物。
 - [forecast](https://www.youdao.com/result?word=forecast&lang=en) [ˈfɔrkæst] n., v. 预测，预报
+    - ![Alt text](/img/eng_oxford_5000/image-74.png)
     - The weather forecast predicts rain for the next three days. 
     - > 天气预报预测接下来三天会下雨。
-- [formation](https://www.youdao.com/result?word=formation&lang=en) [fɔrˈmeɪʃən] n. 形成，构成
+- [formation](https://www.youdao.com/result?word=formation&lang=en) [fɔrˈmeɪʃən] n. 形成，构成, 产生；编队，队形；
+    - ![Alt text](/img/eng_oxford_5000/image-75.png)
     - The formation of the new company was announced at the press conference. 
     - > 新公司的组建在新闻发布会上宣布。
-- [formerly](https://www.youdao.com/result?word=formerly&lang=en) [ˈfɔrmərli] adv. 以前，从前
+- [formerly](https://www.youdao.com/result?word=formerly&lang=en) [ˈfɔrmərli] adv. 以前，从前 (`formel` adj. 旧时的；以前的，前……；（两者中）前者的)
+    - ![Alt text](/img/eng_oxford_5000/image-76.png)
     - The company was formerly known as ABC Corporation. 
     - > 这家公司以前被称为ABC公司。
 - [forum](https://www.youdao.com/result?word=forum&lang=en) [ˈfɔrəm] n.forum [ˈfɔrəm] n. 论坛，讨论会
     - The forum provided an opportunity for people to discuss important issues facing the community. 
     - > 这个论坛为人们提供了一个讨论社区面临的重要问题的机会。
 - [fossil](https://www.youdao.com/result?word=fossil&lang=en) [ˈfɑsl] n. 化石
+    - ![Alt text](/img/eng_oxford_5000/image-77.png)
     - The museum has an extensive collection of fossils from different periods of history. 
     - > 博物馆有来自不同历史时期的大量化石藏品。
 - [foundation](https://www.youdao.com/result?word=foundation&lang=en) [faʊnˈdeɪʃən] n. 基础，基金会
@@ -594,49 +618,55 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
     - The founder of the company started the business in his garage. 
     - > 这家公司的创始人在他的车库里创办了这个企业。
 - [fraction](https://www.youdao.com/result?word=fraction&lang=en) [ˈfrækʃən] n. 分数，碎片
-    - A fraction of the population controls the majority of the wealth. 
+    - ![Alt text](/img/eng_oxford_5000/image-78.png)
+    - A `fraction` of the population controls the majority of the wealth. 
     - > 少数人掌控着大部分的财富。
 - [fraud](https://www.youdao.com/result?word=fraud&lang=en) [frɔd] n. 欺诈，骗局
+    - ![Alt text](/img/eng_oxford_5000/image-79.png)
     - The company was investigated for fraud after it was discovered that they had been falsifying their financial statements. 
     - > 这家公司因被发现虚构财务报表而被调查涉嫌欺诈。
 - [fulfill](https://www.youdao.com/result?word=fulfill&lang=en) [fʊlˈfɪl] v. 履行，实现
+    - ![Alt text](/img/eng_oxford_5000/image-80.png)
     - The company strives to fulfill its commitment to providing high-quality products and services. 
     - > 这家公司努力履行其提供高质量产品和服务的承诺。
-- [fundamentally](https://www.youdao.com/result?word=fundamentally&lang=en) [ˌfʌndəˈmɛntəli] adv. 基本地，根本地
+- [fundamentally](https://www.youdao.com/result?word=fundamentally&lang=en) [ˌfʌndəˈmentəli] adv. 基本地，根本地
+    - ![Alt text](/img/eng_oxford_5000/image-81.png)
     - The problem is fundamentally a lack of communication between the two departments. 
     - > 这个问题根本上是两个部门之间缺乏沟通。
 - [furious](https://www.youdao.com/result?word=furious&lang=en) [ˈfjʊriəs] adj. 愤怒的，狂怒的
+    - ![Alt text](/img/eng_oxford_5000/image-82.png)
     - She was furious when she found out that her laptop had been stolen. 
     - > 当她发现自己的笔记本电脑被盗时，她非常愤怒。
 - [gallon](https://www.youdao.com/result?word=gallon&lang=en) [ˈɡælən] n. 加仑
+    - ![Alt text](/img/eng_oxford_5000/image-83.png)
     - The car's gas tank can hold up to 15 gallons of fuel. 
     - > 这辆汽车的油箱最多可以装15加仑的燃料。
 - [gaming](https://www.youdao.com/result?word=gaming&lang=en) [ˈɡeɪmɪŋ] n. 游戏，赌博
     - Online gaming has become increasingly popular in recent years. 
     - > 近年来，网上游戏越来越受欢迎。
-- [gender](https://www.youdao.com/result?word=gender&lang=en) [ˈdʒɛndər] n. 性别
+- [gender](https://www.youdao.com/result?word=gender&lang=en) [ˈdʒendər] n. 性别
+    - ![Alt text](/img/eng_oxford_5000/image-84.png)
     - The company is committed to promoting diversity and inclusivity, regardless of gender or race. 
     - > 这家公司致力于促进多样性和包容性，无论性别或种族如何。
 - [gene](https://www.youdao.com/result?word=gene&lang=en) [dʒin] n. 基因
+    - ![Alt text](/img/eng_oxford_5000/image-85.png)
     - The scientists discovered a new gene that is responsible for a rare genetic disorder. 
     - > 科学家们发现了一种新基因，它负责一种罕见的遗传疾病。
-- [genetic](https://www.youdao.com/result?word=genetic&lang=en) [dʒəˈnɛtɪk] adj. 遗传的，基因的
+- [genetic](https://www.youdao.com/result?word=genetic&lang=en) [dʒəˈnetɪk] adj. 遗传的，基因的
     - The disease is caused by a genetic mutation that is passed down from parent to child. 
     - > 这种疾病是由一种遗传突变引起的，从父母传给子女。
-- [genuine](https://www.youdao.com/result?word=genuine&lang=en) [ˈdʒɛnyuɪn] adj. 真正的，真诚的
+- [genuine](https://www.youdao.com/result?word=genuine&lang=en) [ˈdʒenjuɪn] adj. 真正的，真诚的
+    - ![Alt text](/img/eng_oxford_5000/image-86.png)
     - She has a genuine interest in helping others and volunteers at a local charity. 
     - > 她真正地关心帮助他人，并在当地慈善机构做志愿者
-
-
-## gh
-
-- [genuinely](https://www.youdao.com/result?word=genuinely&lang=en) [ˈdʒɛnjuɪnli] adv. 真诚地，真正地
+- [genuinely](https://www.youdao.com/result?word=genuinely&lang=en) [ˈdʒenjuɪnli] adv. 真诚地，真正地
     - She genuinely cares about the well-being of her employees and always listens to their concerns. 
     - > 真诚地关心员工的福利，并总是倾听他们的关切。
 - [goodness](https://www.youdao.com/result?word=goodness&lang=en) [ˈɡʊdnɪs] n. 善良，美德
+    - ![Alt text](/img/eng_oxford_5000/image-87.png)
     - The goodness of humanity can be seen in the way people come together to help each other during times of crisis. 
     - > 性的善良可以从人们在危机时期团结互助的方式中看到。
-- [graphic](https://www.youdao.com/result?word=graphic&lang=en) [ˈɡræfɪk] adj. 图像的，生动的
+- [graphic](https://www.youdao.com/result?word=graphic&lang=en) [ˈɡræfɪk] adj. 图像的，生动的 (`graph` n. 图表，曲线图；坐标图；代表声音单位（或其他言语特征）的书写符号 v. 用图表表示)
     - The graphic novel uses vivid illustrations to tell its story. 
     - > 本图像小说使用生动的插图来讲述它的故事。)
 - [graphics](https://www.youdao.com/result?word=graphics&lang=en) [ˈɡræfɪks] n. 图形，制图术
@@ -646,27 +676,35 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
     - The new policy has greatly improved the company's bottom line. 
     - > 政策大大改善了公司的底线。
 - [greenhouse](https://www.youdao.com/result?word=greenhouse&lang=en) [ˈɡrinhaʊs] n. 温室，暖房
+    - ![Alt text](/img/eng_oxford_5000/image-88.png)
     - The greenhouse is full of plants that require a warm andhumid environment to grow. 
     - > 室里种满了需要温暖潮湿环境生长的植物。) 境生长的植物
 - [habitat](https://www.youdao.com/result?word=habitat&lang=en) [ˈhæbɪtæt] n. 栖息地，生存环境
+    - ![Alt text](/img/eng_oxford_5000/image-89.png)
     - The destruction of natural habitats is a major threat to many species of animals. 
-    - > 然栖息地的破坏是许多动物物种面临的主要威胁。) 坏是许多动物物种面临的主要威胁
+    - > 然栖息地的破坏是许多动物物种面临的主要威胁
 - [harbor](https://www.youdao.com/result?word=harbor&lang=en) [ˈhɑrbər] n. 港口，避难所
+    - ![Alt text](/img/eng_oxford_5000/image-90.png)
     - The harbor was filled with boats of all sizes and shapes. 
     - > 口里停满了大小形状各异的船只。
-- [headquarters](https://www.youdao.com/result?word=headquarters&lang=en) [ˌhɛdˈkwɔrtərz] n. 总部，总公司
+- [headquarters](https://www.youdao.com/result?word=headquarters&lang=en) [ˌhedˈkwɔrtərz] n. 总部，总公司(headquarters是head和quarter的组合词，head表示头，quarter表示季节，headquarter就是四季的头一个季节，春天。一年之计在于春，万物始于春，所以headquarter可以表示最重要的意思，延伸为总部)
+    - ![Alt text](/img/eng_oxford_5000/image-91.png)
     - The company's headquarters are located in New York City. 
     - > 司的总部位于纽约市。
-- [hence](https://www.youdao.com/result?word=hence&lang=en) [hɛns] adv. 因此，所以
+- [hence](https://www.youdao.com/result?word=hence&lang=en) [hens] adv. 因此，所以 (`hence` 和 `therefore` 都是连接副词，表因果关系，均可接句子，但`hence`后可直接接名词，但`therefore`不可以，)
+    - ![Alt text](/img/eng_oxford_5000/image-92.png)
     - The weather is supposed to be bad tomorrow, hence we should plan to stay indoors. 
     - > 天天气预计会不好，因此我们应该计划呆在室内。) 不好，因此我们应该计划呆在室内
 - [herb](https://www.youdao.com/result?word=herb&lang=en) [hɜrb] n. 草本植物，药草
+    - ![Alt text](/img/eng_oxford_5000/image-93.png)
     - Sage is a commonly used herb in cooking. 
     - > 尾草是常用的烹饪草药。
 - [historian](https://www.youdao.com/result?word=historian&lang=en) [hɪˈstɔriən] n. 历史学家
+    - ![Alt text](/img/eng_oxford_5000/image-94.png)
     - The historian spent years researching and writing about the life of Abraham Lincoln. 
     - > 位历史学家花了多年时间研究和写作亚伯拉罕·林肯的生平。
 - [hypothesis](https://www.youdao.com/result?word=hypothesis&lang=en) [haɪˈpɑθəsɪs] n. 假设，假说
+    - ![Alt text](/img/eng_oxford_5000/image-95.png)
     - The scientist's hypothesis about the origin of the universe has yet to be proven. 
     - > 位科学家关于宇宙起源的假设尚未被证明。) 设尚未被证明
 
@@ -679,7 +717,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [implication](https://www.youdao.com/result?word=implication&lang=en) [ˌɪmplɪˈkeɪʃən] n. 含义，暗示
     - The implication of his words was that he didn't trust her. 
     - > 话里的含义是他不信任她。
-- [incentive](https://www.youdao.com/result?word=incentive&lang=en) [ɪnˈsɛntɪv] n. 刺激，鼓励
+- [incentive](https://www.youdao.com/result?word=incentive&lang=en) [ɪnˈsentɪv] n. 刺激，鼓励
     - The promise of a bonus served as an incentive for the employees to work harder. 
     - > 金的承诺激励着员工更加努力地工作。)
 - [incorporate](https://www.youdao.com/result?word=incorporate&lang=en) [ɪnˈkɔrpəreɪt] v. 合并，包含
@@ -688,10 +726,10 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [indication](https://www.youdao.com/result?word=indication&lang=en) [ˌɪndɪˈkeɪʃən] n. 迹象，指示
     - The dark clouds were an indication that a storm was approaching. 
     - > 云是暴风雨即将来临的迹象。
-- [inevitable](https://www.youdao.com/result?word=inevitable&lang=en) [ɪnˈɛvɪtəbl] adj. 不可避免的
+- [inevitable](https://www.youdao.com/result?word=inevitable&lang=en) [ɪnˈevɪtəbl] adj. 不可避免的
     - It was inevitable that there would be some resistance to the new policy. 
     - > 政策会遭到一些抵抗是不可避免的。)
-- [inevitably](https://www.youdao.com/result?word=inevitably&lang=en) [ɪnˈɛvɪtəbli] adv. 不可避免地
+- [inevitably](https://www.youdao.com/result?word=inevitably&lang=en) [ɪnˈevɪtəbli] adv. 不可避免地
     - If we keep polluting the environment, the consequences will inevitably be disastrous. 
     - > 果我们继续污染环境，后果不可避免地会是灾难性的。)
 - [infer](https://www.youdao.com/result?word=infer&lang=en) [ɪnˈfɜr] v. 推断，推论
@@ -709,13 +747,13 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [innovative](https://www.youdao.com/result?word=innovative&lang=en) [ˈɪnəˌveɪtɪv] adj. 创新的
     - The company's innovative approach to marketing has helped it stand out in the industry. 
     - > 公司创新的营销方式帮助它在行业中脱颖而出。) 创新的营销方式帮助它在行业中脱颖而出
-- [inspector](https://www.youdao.com/result?word=inspector&lang=en) [ɪnˈspɛktər] n. 检查员，监察员
+- [inspector](https://www.youdao.com/result?word=inspector&lang=en) [ɪnˈspektər] n. 检查员，监察员
     - The inspector checked the quality of the products before they were shipped out. 
     - > 查员在产品出货之前检查产品的质量。)
 - [integrate](https://www.youdao.com/result?word=integrate&lang=en) [ˈɪntəˌɡreɪt] v. 整合，融合
     - The new system is designed to integrate all of our data into a single platform. 
     - > 系统旨在将我们所有的数据整合到一个平台上。) 数据整合到一个平台上
-- [intellectual](https://www.youdao.com/result?word=intellectual&lang=en) [ˌɪntəˈlɛktʃuəl] adj. 知识分子的，智力的
+- [intellectual](https://www.youdao.com/result?word=intellectual&lang=en) [ˌɪntəˈlektʃuəl] adj. 知识分子的，智力的
     - The university attracts many intellectual students from around the world. 
     - > 所大学吸引了来自世界各地的许多知识分子学生。) 多知识分子学生
 - [interact](https://www.youdao.com/result?word=interact&lang=en) [ˌɪntərˈækt] v. 互动，交流
@@ -727,7 +765,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [interpretation](https://www.youdao.com/result?word=interpretation&lang=en) [ɪnˌtɜrprɪˈteɪʃən] n. 解释，说明
     - The interpretation of the data was complex and required careful analysis. 
     - > 据的解释很复杂，需要仔细分析。)
-- [investor](https://www.youdao.com/result?word=investor&lang=en) [ɪnˈvɛstər] n. 投资者
+- [investor](https://www.youdao.com/result?word=investor&lang=en) [ɪnˈvestər] n. 投资者
     - The company attracted many investors with its promising business plan. 
     - > 公司凭借有前途的商业计划吸引了许多投资者。) 者
 - [isolate](https://www.youdao.com/result?word=isolate&lang=en) [ˈaɪsəˌleɪt] v. 孤立，隔离
@@ -736,7 +774,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [isolated](https://www.youdao.com/result?word=isolated&lang=en) [ˈaɪsəˌleɪtɪd] adj. 孤立的，隔离的
     - The small town was isolated from the rest of the world by the mountains. 
     - > 个小镇被山脉隔离于世界其他地方。)
-- [jet](https://www.youdao.com/result?word=jet&lang=en) [dʒɛt] n. 喷气式飞机，喷射器
+- [jet](https://www.youdao.com/result?word=jet&lang=en) [dʒet] n. 喷气式飞机，喷射器
     - The new jet can travel at speeds of up to 600 miles per hour. 
     - > 的喷气式飞机可以以高达每小时600英里的速度飞行。)
 - [joint](https://www.youdao.com/result?word=joint&lang=en) [dʒɔɪnt] adj. 共同的，联合的；n. 关节，接头处
@@ -760,7 +798,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [lately](https://www.youdao.com/result?word=lately&lang=en) [ˈleɪtli] adv. 最近，近来
     - I haven't seen him lately, but I heard he got a new job.
     - > 我最近没见过他，但听说他找到了一份新工作。
-- [lens](https://www.youdao.com/result?word=lens&lang=en) [lɛnz] n. 镜头，透镜
+- [lens](https://www.youdao.com/result?word=lens&lang=en) [lenz] n. 镜头，透镜
     - The camera lens was cracked, so the photos came out blurry.
     - > 相机镜头破裂了，所以拍出来的照片模糊不清。
 - [likewise](https://www.youdao.com/result?word=likewise&lang=en) [ˈlaɪkˌwaɪz] adv. 同样地，也一样地
@@ -772,7 +810,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [literally](https://www.youdao.com/result?word=literally&lang=en) [ˈlɪtərəli] adv. 确实地，逐字地
     - He took the idiom "break a leg" literally and ended up injuring himself on stage.
     - > 他把俗语“祝你好运”逐字理解，结果在舞台上受伤了。）“祝你好运”逐字理解，结果在舞台上受伤了
-- [literary](https://www.youdao.com/result?word=literary&lang=en) [ˈlɪtərɛri] adj. 文学的，文艺的
+- [literary](https://www.youdao.com/result?word=literary&lang=en) [ˈlɪtəreri] adj. 文学的，文艺的
     - The literary magazine features poetry, short stories, and essays.
     - > 这本文学杂志刊登诗歌、短篇小说和散文。
 - [litter](https://www.youdao.com/result?word=litter&lang=en) [ˈlɪtər] n. 垃圾，废弃物
@@ -815,19 +853,19 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [mechanical](https://www.youdao.com/result?word=mechanical&lang=en) [məˈkænɪkəl] adj. 机械的，机械学的
     - The mechanical engineering department at the university is very prestigious.
     - > 大学的机械工程系非常有声望。
-- [mechanism](https://www.youdao.com/result?word=mechanism&lang=en) [ˈmɛkəˌnɪzəm] n. 机制，机械装置
+- [mechanism](https://www.youdao.com/result?word=mechanism&lang=en) [ˈmekəˌnɪzəm] n. 机制，机械装置
     - The mechanism for opening the door was broken, so we had to use the windowto get inside.
     - > 打开门的机制坏了，所以我们只能从窗户进去。）的机制坏了，所以我们只能从窗户进去
-- [medal](https://www.youdao.com/result?word=medal&lang=en) [ˈmɛdəl] n. 奖牌，奖章
+- [medal](https://www.youdao.com/result?word=medal&lang=en) [ˈmedəl] n. 奖牌，奖章
     - She won a gold medal in the Olympic Games for swimming.
     - > 她在奥运会游泳比赛中获得了金牌
-- [medication](https://www.youdao.com/result?word=medication&lang=en) [ˌmɛdɪˈkeɪʃən] n. 药物，药物治疗
+- [medication](https://www.youdao.com/result?word=medication&lang=en) [ˌmedɪˈkeɪʃən] n. 药物，药物治疗
     - The doctor prescribed medication to treat her high blood pressure.
     - > 医生开了药治疗她的高血压
-- [memorable](https://www.youdao.com/result?word=memorable&lang=en) [ˈmɛmərəbl] adj. 值得纪念的，难忘的
+- [memorable](https://www.youdao.com/result?word=memorable&lang=en) [ˈmemərəbl] adj. 值得纪念的，难忘的
     - Our trip to Paris was a memorable experience that we will never forget.
     - > 我们去巴黎的旅行是一次难以忘怀的经历。
-- [metaphor](https://www.youdao.com/result?word=metaphor&lang=en) [ˈmɛtəˌfɔr] n. 隐喻，比喻
+- [metaphor](https://www.youdao.com/result?word=metaphor&lang=en) [ˈmetəˌfɔr] n. 隐喻，比喻
     - The poet used a metaphor to describe the sunset as a blazing fire.
     - > 诗人用比喻来描述落日如熊熊燃烧的火焰。
 - [miserable](https://www.youdao.com/result?word=miserable&lang=en) [ˈmɪzərəbl] adj. 悲惨的，痛苦的
@@ -863,7 +901,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [nasty](https://www.youdao.com/result?word=nasty&lang=en) [ˈnæsti] adj. 令人不快的，讨厌的
     - The food at the restaurant was so nasty that we couldn't finish it. 
     - > 厅的食物非常讨厌，我们吃不完。
-- [necessity](https://www.youdao.com/result?word=necessity&lang=en) [nəˈsɛsəti] n. 必需品，必要性
+- [necessity](https://www.youdao.com/result?word=necessity&lang=en) [nəˈsesəti] n. 必需品，必要性
     - Water is a necessity for human life. 
     - > 是人类生活的必需品。
 - [neutral](https://www.youdao.com/result?word=neutral&lang=en) [ˈnutrəl] adj. 中立的，中性的
@@ -903,7 +941,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [occupation](https://www.youdao.com/result?word=occupation&lang=en) [ˌɑkjuˈpeɪʃən] n.职业，占领
     - My occupation is a teacher, and I have been teaching for 10 years.
     - > 我的职业是教师，我已经教了10年。
-- [offender](https://www.youdao.com/result?word=offender&lang=en) [əˈfɛndər] n.罪犯
+- [offender](https://www.youdao.com/result?word=offender&lang=en) [əˈfendər] n.罪犯
     - The offender was sentenced to 10 years in prison for his crime.
     - > 罪犯因犯罪被判处10年监禁。
 - [ongoing](https://www.youdao.com/result?word=ongoing&lang=en) [ˈɑnˌgoʊɪŋ] adj.正在进行的，持续存在的
@@ -945,13 +983,13 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [partnership](https://www.youdao.com/result?word=partnership&lang=en) [ˈpɑrtnərʃɪp] n.合伙，合作关系
     - The two companies formed a partnership to develop a new product.
     - > 这两家公司建立了合作关系，共同开发一款新产品。
-- [penalty](https://www.youdao.com/result?word=penalty&lang=en) [ˈpɛnlti] n.惩罚，罚款
+- [penalty](https://www.youdao.com/result?word=penalty&lang=en) [ˈpenlti] n.惩罚，罚款
     - Speeding drivers may receive a penalty of a fine or points on their license.
     - > 超速驾驶者可能会受到罚款或扣分的处罚。
 - [perceive](https://www.youdao.com/result?word=perceive&lang=en) [pərˈsiv] v.察觉，感知
     - The child could perceive the warmth of the sun on his face.
     - > 孩子能够感知阳光的温暖照在他的脸上。
-- [perception](https://www.youdao.com/result?word=perception&lang=en) [pərˈsɛpʃən] n.认知，感知
+- [perception](https://www.youdao.com/result?word=perception&lang=en) [pərˈsepʃən] n.认知，感知
     - Your perception of the situation may be different from mine.
     - > 你对这种情况的认知可能与我的不同。
 - [permanently](https://www.youdao.com/result?word=permanently&lang=en) [ˈpɜrmənəntli] adv.永久地
@@ -969,13 +1007,13 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [precede](https://www.youdao.com/result?word=precede&lang=en) [prɪˈsid] v.先于，领先
     - The opening ceremony will precede the start of the competition.
     - > 开幕式将先于比赛的开始。
-- [preference](https://www.youdao.com/result?word=preference&lang=en) [ˈprɛfərəns] n.偏好，喜好
+- [preference](https://www.youdao.com/result?word=preference&lang=en) [ˈprefərəns] n.偏好，喜好
     - My preference for coffee over tea is well-known among my friends.
     - > 对于咖啡而言，我比茶更偏好，这在我的朋友中是众所周知的。
-- [presidential](https://www.youdao.com/result?word=presidential&lang=en) [ˌprɛzɪˈdɛnʃl] adj.总统的，总统制的
+- [presidential](https://www.youdao.com/result?word=presidential&lang=en) [ˌprezɪˈdenʃl] adj.总统的，总统制的
     - The presidential election will be held next year.
     - > 总统选举将于明年举行。
-- [primarily](https://www.youdao.com/result?word=primarily&lang=en) [praɪˈmɛrəli] adv.主要地，首先
+- [primarily](https://www.youdao.com/result?word=primarily&lang=en) [praɪˈmerəli] adv.主要地，首先
     - The company is primarily focused on developing new technologies.
     - > 该公司的主要关注点是开发新技术。
 - [prior](https://www.youdao.com/result?word=prior&lang=en) [ˈpraɪər] adj.先前的，在前的
@@ -984,7 +1022,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [proceed](https://www.youdao.com/result?word=proceed&lang=en) [prəˈsid] v.继续进行，前进
     - The meeting will proceed as scheduled.
     - > 会议将按计划进行。
-- [progressive](https://www.youdao.com/result?word=progressive&lang=en) [prəˈɡrɛsɪv] adj.渐进的，进步的
+- [progressive](https://www.youdao.com/result?word=progressive&lang=en) [prəˈɡresɪv] adj.渐进的，进步的
     - The company has a progressive approach to employee training and development.
     - > 该公司在员工培训和发展方面采取了渐进的方法。
 - [prohibit](https://www.youdao.com/result?word=prohibit&lang=en) [prəˈhɪbɪt] v.禁止，阻止
@@ -999,7 +1037,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [proportion](https://www.youdao.com/result?word=proportion&lang=en) [prəˈpɔrʃən] n.比例，部分
     - The proportion of men to women in the company is almost equal.
     - > 公司男女比例几乎相等。
-- [protester](https://www.youdao.com/result?word=protester&lang=en) [prəˈtɛstər] n.抗议者，示威者
+- [protester](https://www.youdao.com/result?word=protester&lang=en) [prəˈtestər] n.抗议者，示威者
     - The protesters gathered outside the government building to demand change.
     - > 抗议者在政府大楼外集结，要求改变。
 - [publicity](https://www.youdao.com/result?word=publicity&lang=en) [pʌblɪˈsɪti] n.宣传，广告
@@ -1020,7 +1058,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [puzzle](https://www.youdao.com/result?word=puzzle&lang=en) [ˈpʌzl] n.难题，谜题
     - The crossword puzzle in the newspaper is challenging.
     - > 报纸上的填字游戏很有挑战性。
-- [questionnaire](https://www.youdao.com/result?word=questionnaire&lang=en) [ˌkwɛsʧənˈɛr] n.问卷，调查表
+- [questionnaire](https://www.youdao.com/result?word=questionnaire&lang=en) [ˌkwesʧənˈer] n.问卷，调查表
     - The company sent out a questionnaire to gather feedback from customers.
     - > 该公司发出了一份问卷，以收集客户的反馈。
 - [racial](https://www.youdao.com/result?word=racial&lang=en) [ˈreʃl] adj.种族的，人种的
@@ -1035,19 +1073,19 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [rating](https://www.youdao.com/result?word=rating&lang=en) [ˈreɪtɪŋ] n.评级，等级
     - The movie received a high rating from the critics.
     - > 这部电影受到评论家的高度评价。
-- [recession](https://www.youdao.com/result?word=recession&lang=en) [rɪˈsɛʃən] n.经济衰退，不景气
+- [recession](https://www.youdao.com/result?word=recession&lang=en) [rɪˈseʃən] n.经济衰退，不景气
     - The economy is in a recession due to the pandemic.
     - > 由于疫情，经济陷入了衰退。
-- [reckon](https://www.youdao.com/result?word=reckon&lang=en) [ˈrɛkən] v.认为，估计
+- [reckon](https://www.youdao.com/result?word=reckon&lang=en) [ˈrekən] v.认为，估计
     - I reckon we'll need about an hour to finish the project.
     - > 我估计我们需要一个小时来完成这个项目。
-- [referee](https://www.youdao.com/result?word=referee&lang=en) [ˌrɛfəˈri] n.裁判，仲裁人
+- [referee](https://www.youdao.com/result?word=referee&lang=en) [ˌrefəˈri] n.裁判，仲裁人
     - The referee made a controversial call during the game.
     - > 裁判在比赛中做出了有争议的判决。
-- [refugee](https://www.youdao.com/result?word=refugee&lang=en) [ˌrɛfjʊˈdʒi] n.难民，流亡者
+- [refugee](https://www.youdao.com/result?word=refugee&lang=en) [ˌrefjʊˈdʒi] n.难民，流亡者
     - The country granted asylum to many refugees fleeing from war-torn regions.
     - > 该国为许多逃离战乱地区的难民提供庇护。
-- [regulate](https://www.youdao.com/result?word=regulate&lang=en) [ˈrɛɡjəˌleɪt] v.调节，规范
+- [regulate](https://www.youdao.com/result?word=regulate&lang=en) [ˈreɡjəˌleɪt] v.调节，规范
     - The government needs to regulate the use of natural resources.
     - > 政府需要规范自然资源的使用。
 - [reinforce](https://www.youdao.com/result?word=reinforce&lang=en) [ˌriːɪnˈfɔrs] v.加强，增强
@@ -1065,7 +1103,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [remarkably](https://www.youdao.com/result?word=remarkably&lang=en) [rɪˈmɑrkəbli] adv.显著地，非常地
     - The team performed remarkably well and won the championship.
     - > 这个团队表现非常出色，赢得了冠军。
-- [rental](https://www.youdao.com/result?word=rental&lang=en) [ˈrɛntl] n.租赁，出租
+- [rental](https://www.youdao.com/result?word=rental&lang=en) [ˈrentl] n.租赁，出租
     - The rental fee for the apartment is quite high.
     - > 这套公寓的租金相当高。
 - [reporting](https://www.youdao.com/result?word=reporting&lang=en) [rɪˈpɔrtɪŋ] n.报道，报告
@@ -1074,7 +1112,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [resign](https://www.youdao.com/result?word=resign&lang=en) [rɪˈzaɪn] v.辞职，放弃
     - She decided to resign from her job to pursue a new opportunity.
     - > 她决定辞去工作，追求新的机会。
-- [resolution](https://www.youdao.com/result?word=resolution&lang=en) [ˌrɛzəˈluʃən] n.决定，决议
+- [resolution](https://www.youdao.com/result?word=resolution&lang=en) [ˌrezəˈluʃən] n.决定，决议
     - The company made a resolution to reduce its carbon footprint.
     - > 该公司做出了减少碳排放的决定。
 - [résumé](https://www.youdao.com/result?word=résumé&lang=en) [ˈrezjʊmeɪ] n.简历，履历
@@ -1083,7 +1121,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [retail](https://www.youdao.com/result?word=retail&lang=en) [ˈriteɪl] n.零售，零售业
     - The retail sector has been impacted by the pandemic.
     - > 零售业受到了疫情的影响。
-- [revenue](https://www.youdao.com/result?word=revenue&lang=en) [ˈrɛvənu] n.收入，财政收入
+- [revenue](https://www.youdao.com/result?word=revenue&lang=en) [ˈrevənu] n.收入，财政收入
     - The government relies on tax revenue to fund public services.
     - > 政府依靠税收收入为公共服务提供资金。
 - [revision](https://www.youdao.com/result?word=revision&lang=en) [rɪˈvɪʒən] n.修订，修改
@@ -1112,10 +1150,10 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [seeker](https://www.youdao.com/result?word=seeker&lang=en) [ˈsikər] n.寻求者，求职者
     - The job seeker submitted her resume to the company's HR department.
     - > 求职者将她的简历提交给公司的人力资源部门。
-- [seminar](https://www.youdao.com/result?word=seminar&lang=en) [ˈsɛmɪnɑr] n.研讨会，讲习班
+- [seminar](https://www.youdao.com/result?word=seminar&lang=en) [ˈsemɪnɑr] n.研讨会，讲习班
     - The professor will be leading a seminar on gender studies next week.
     - > 教授下周将主持一场关于性别研究的研讨会。
-- [settler](https://www.youdao.com/result?word=settler&lang=en) [ˈsɛtlər] n.移民，殖民者
+- [settler](https://www.youdao.com/result?word=settler&lang=en) [ˈsetlər] n.移民，殖民者
     - The settlers came to the new land in search of a better life.
     - > 移民来到新的土地上，寻找更好的生活。
 - [severely](https://www.youdao.com/result?word=severely&lang=en) [sɪˈvɪrli] adv.严重地，严厉地
@@ -1147,19 +1185,19 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
     - > 所谓的“专家”结果证明是错的。
 - [sophisticated](https://www.youdao.com/result?word=sophisticated&lang=en) [səˈfɪstɪkeɪtɪd] adj. 复杂的，精致的
     - The new software is very sophisticated and has many features.
-    - [-]((http://www.youdao.com/result?word=absorb&-]((=en) > 新软件非常复杂，具有许多功能。spare [spɛr] adj. 备用的，多余的
+    - [-]((http://www.youdao.com/result?word=absorb&-]((=en) > 新软件非常复杂，具有许多功能。spare [sper] adj. 备用的，多余的
     -Do you have a spare pen I can borrow?
     - > 你有多余的笔可以借给我吗？
-- [spectacular](https://www.youdao.com/result?word=spectacular&lang=en) [spɛkˈtækjələr] adj. 壮观的，惊人的
+- [spectacular](https://www.youdao.com/result?word=spectacular&lang=en) [spekˈtækjələr] adj. 壮观的，惊人的
     - The fireworks display was truly spectacular.
     - > 烟花表演真的很壮观。
-- [spectator](https://www.youdao.com/result?word=spectator&lang=en) [ˈspɛkteɪtər] n. 观众，旁观者
+- [spectator](https://www.youdao.com/result?word=spectator&lang=en) [ˈspekteɪtər] n. 观众，旁观者
     - The stadium was filled with thousands of spectators.
     - > 体育场里挤满了成千上万的观众。
-- [speculate](https://www.youdao.com/result?word=speculate&lang=en) [ˈspɛkjəleɪt] v. 推测，猜测
+- [speculate](https://www.youdao.com/result?word=speculate&lang=en) [ˈspekjəleɪt] v. 推测，猜测
     - People are speculating about who will win the election.
     - > 人们正在推测谁会赢得选举。
-- [speculation](https://www.youdao.com/result?word=speculation&lang=en) [ˌspɛkjəˈleɪʃən] n. 推测，猜测
+- [speculation](https://www.youdao.com/result?word=speculation&lang=en) [ˌspekjəˈleɪʃən] n. 推测，猜测
     - There is a lot of speculation about the cause of the accident.
     - > 关于事故原因有很多猜测。
 - [spice](https://www.youdao.com/result?word=spice&lang=en) [spaɪs] n. 香料，调味品
@@ -1192,13 +1230,13 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [starve](https://www.youdao.com/result?word=starve&lang=en) [stɑrv] v. 挨饿，饿死
     - Many people in the world still starve to death every year.
     - > 世界上仍有许多人每年因饥饿而死亡。
-- [steadily](https://www.youdao.com/result?word=steadily&lang=en) [ˈstɛdəli] adv. 稳定地，不断地
+- [steadily](https://www.youdao.com/result?word=steadily&lang=en) [ˈstedəli] adv. 稳定地，不断地
     - The company has been growing steadily over the past few years.
     - > 公司在过去几年稳步增长。
 - [stimulate](https://www.youdao.com/result?word=stimulate&lang=en) [ˈstɪmjəleɪt] v. 刺激，促进
     - Exercise can stimulate the production of endorphins in the brain.
     - > 运动可以刺激大脑内啡肽的产生。
-- [strengthen](https://www.youdao.com/result?word=strengthen&lang=en) [ˈstrɛŋkθən] v. 加强，巩固
+- [strengthen](https://www.youdao.com/result?word=strengthen&lang=en) [ˈstreŋkθən] v. 加强，巩固
     - The government promised to strengthen the country's economy.
     - > 政府承诺加强该国的经济。
 - [strictly](https://www.youdao.com/result?word=strictly&lang=en) [ˈstrɪktli] adv. 严格地，严密地
@@ -1243,10 +1281,10 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
     - > 她思考时轻敲着桌子上的铅笔。
     - The plumber fixed the leaky tap in the bathroom.
     - > 管道工修理了浴室里漏水的水龙头。
-- [tendency](https://www.youdao.com/result?word=tendency&lang=en) [ˈtɛndənsi] n. 倾向，趋势
+- [tendency](https://www.youdao.com/result?word=tendency&lang=en) [ˈtendənsi] n. 倾向，趋势
     - There is a tendency for people to work longer hours nowadays.
     - > 现在人们有加班的倾向。
-- [tension](https://www.youdao.com/result?word=tension&lang=en) [ˈtɛnʃən] n. 紧张，张力
+- [tension](https://www.youdao.com/result?word=tension&lang=en) [ˈtenʃən] n. 紧张，张力
     - The tension in the room was palpable as they waited for the results.
     - > 当他们等待结果时，房间里的紧张气氛是明显的。
 - [terminal](https://www.youdao.com/result?word=terminal&lang=en) [ˈtɜrmənəl] n. 航站楼，终点站
@@ -1255,25 +1293,25 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [terms](https://www.youdao.com/result?word=terms&lang=en) [tɜrmz] n. 条款，条件
     - They agreed to the terms of the contract before signing it.
     - > 他们在签署合同之前同意了合同条款。
-- [territory](https://www.youdao.com/result?word=territory&lang=en) [ˈtɛrətɔri] n. 领土，领域
+- [territory](https://www.youdao.com/result?word=territory&lang=en) [ˈterətɔri] n. 领土，领域
     - The two countries have been disputing over the territory for years.
     - > 这两个国家多年来一直在争夺领土。
-- [terror](https://www.youdao.com/result?word=terror&lang=en) [ˈtɛrər] n. 恐怖，惊恐
+- [terror](https://www.youdao.com/result?word=terror&lang=en) [ˈterər] n. 恐怖，惊恐
     - The horror movie was filled with terror and suspense.
     - > 这部恐怖电影充满了恐怖和悬念。
-- [terrorism](https://www.youdao.com/result?word=terrorism&lang=en) [ˈtɛrərɪzəm] n. 恐怖主义
+- [terrorism](https://www.youdao.com/result?word=terrorism&lang=en) [ˈterərɪzəm] n. 恐怖主义
     - The government is working to prevent terrorism and protect its citizens.
     - > 政府正在努力防止恐怖主义并保护其公民。
-- [terrorist](https://www.youdao.com/result?word=terrorist&lang=en) [ˈtɛrərɪst] n. 恐怖分子
+- [terrorist](https://www.youdao.com/result?word=terrorist&lang=en) [ˈterərɪst] n. 恐怖分子
     - The country was attacked by a group of terrorists last year.
     - > 该国去年遭到一群恐怖分子的袭击。
-- [textbook](https://www.youdao.com/result?word=textbook&lang=en) [ˈtɛkstbʊk] n. 教科书
+- [textbook](https://www.youdao.com/result?word=textbook&lang=en) [ˈtekstbʊk] n. 教科书
     - The teacher assigned several chapters from the textbook for homework.
     - > 老师布置了几章教科书作为家庭作业。
-- [theft](https://www.youdao.com/result?word=theft&lang=en) [θɛft] n. 偷窃，盗窃
+- [theft](https://www.youdao.com/result?word=theft&lang=en) [θeft] n. 偷窃，盗窃
     - The store owner reported the theft of several valuable items.
     - > 店主报告了几件贵重物品被盗窃的情况。
-- [therapist](https://www.youdao.com/result?word=therapist&lang=en) [ˈθɛrəpɪst] n. 治疗师，心理医生
+- [therapist](https://www.youdao.com/result?word=therapist&lang=en) [ˈθerəpɪst] n. 治疗师，心理医生
     - She sees a therapist once a week to help with her anxiety.
     - > 她每周看一次治疗师，以帮助她缓解焦虑。
 - [thesis](https://www.youdao.com/result?word=thesis&lang=en) [ˈθisɪs] n. 论文，论题
@@ -1327,7 +1365,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [unity](https://www.youdao.com/result?word=unity&lang=en) [ˈjuːnəti] n. 统一，团结
     - The team's unity was what helped them win the championship. 
     - > 团队的团结是帮助他们赢得冠军的关键。
-- [variation](https://www.youdao.com/result?word=variation&lang=en) [ˌvɛriˈeɪʃən] n. 变化，变异
+- [variation](https://www.youdao.com/result?word=variation&lang=en) [ˌveriˈeɪʃən] n. 变化，变异
     - There is a lot of variation in the weather patterns during this time of year. 
     - > 每年这个时候天气模式变化很大。
 - [vertical](https://www.youdao.com/result?word=vertical&lang=en) [ˈvɜrtɪkl] adj. 垂直的，竖直的
@@ -1345,7 +1383,7 @@ expertise [[]((http://www.youdao.com/result?word=absorb&[]((=en)ˌekspərˈtiːz
 - [volunteer](https://www.youdao.com/result?word=volunteer&lang=en) [ˌvɑːlənˈtɪr] n. 志愿者
     - Many volunteers showed up to help with the charity event. 
     - > 许多志愿者来帮助慈善活动。
-- [welfare](https://www.youdao.com/result?word=welfare&lang=en) [ˈwɛlfɛr] n. 福利，幸福
+- [welfare](https://www.youdao.com/result?word=welfare&lang=en) [ˈwelfer] n. 福利，幸福
     - The government provides welfare assistance to those in need. 
     - > 政府为有需要的人提供福利援助。
 - [wheat](https://www.youdao.com/result?word=wheat&lang=en) [wiːt] n. 小麦

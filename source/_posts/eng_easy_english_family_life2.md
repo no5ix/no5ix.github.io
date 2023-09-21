@@ -128,3 +128,44 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - What about the dessert spoon? 
 - That comes above the plate.The glass should be positioned directly above the knife. Put the bread plate above the fork.The table is set. It looks very good.Let's bring the food now.
 - We have chicken soup, mashed potatoes, meatballs, pickles( 泡菜, 咸菜 ), salad and cherry cake.
+
+
+# 5. Table Manners
+
+- Sit down everybody, dinner's ready. The first thing that we need to do is put our napkin on our lap. First, let's eat the soup. You need to wait to start your soup until everybody get served.
+- Lily, we don't pick up the bowl and slurp(  ) soup like this. You must use your spoon. Hold you soup spoon like you would(  ) hold it as a pencil.
+- Does the soup have any meat in it, mom?
+- No, Brian. It only has the vegetables and noodles.
+- Leticia, pass the meatballs, please.
+- Here u go, dad.
+- Brian, Don't put your elbows on the table when(为啥这里不用while) you are eating and sit straight. That's not really great manners having your elbows out. 
+- Lily, don't chew with your mouth open.
+- Sorry, mom.
+- Leticia, never reach cross a dish or someone else's plate to reach(为什么这里又有一个reach?  )something.Instead, politely ask the person next to you to "Please pass me the salt.".
+- Brian , could you hand me the pickles?
+- Would you like to have some meatballs?
+- Thank you. They are delicious, but I'm full, and I need to save room for the dessert too.
+- Lily, don't get up and leave. It's not polite.Always ask to be excused when finished.Let's clear the table now.
+
+
+# 6. Lost and Found
+
+- Have you taken my book, Prehistoric and Ancient Civilizations, Leticia?
+- No, I haven't, What should I do with such a book, I don't even like history.
+- I can't find it anywhere, It's a book that I borrowed from the library today.I think I've lost it.
+- Maybe you left it in school.
+- No, it's not there, because I went to the library after classes. Oh, it really bugs(  ) me when I lose things.
+- Have you looked into your room?
+- I've look everywhere, it's not here.I must have dropped it somewhere, but I can't figure out where.
+- Don't panic, it bound to be around here somewhere.
+- It's not, I think it's lost for good(  ) and it's such an important book! I need it for my history project.
+- Oh, chill out, Brian. Let's just try and work out(  ) where you left it. Let's see ... Where did you go from the library?
+- Well, I popped into cafe and buy some cookies, then I went directly to the bus station.
+- Did you take you book out of your backpack on the bus?
+- Yes, I did. I browsed it from a few minutes, then I put it back and prepared to(这是个短语?  ) get off the bus. 
+- Oh, I remember that right before getting off I stumbled(  ) almost fell down the stairs. But luckily, I landed on my feet. And then I came staight home. And When I wanted to take it out of my backpack and read it, it wasn't there any longer(  ), it just disappeared.
+- That must have fallen out of your backpack when you stumbled in the bus.Maybe you forgot to zip up(  ) your backpack.
+- I think you are right. It makes sense.
+- Let's tell mom about it and see what needs to be done in this case.
+- Well, Don't worry. I'm going to call the bus depot(  ) and ask if the bus driver left the book there by any chance.
+- Good news, the bus drivers found your book and will return it to you in the morning.

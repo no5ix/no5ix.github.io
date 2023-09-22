@@ -133,33 +133,33 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 # 5. Table Manners
 
 - Sit down, everybody, dinner's ready. The first thing that we need to do is put our napkin on our lap. First let's eat the soup. You need to wait to start your soup until everybody go t served.
-- > Lily, we don't pick up the bowl and `slurp`(vt.
-出声地吃或喝) the soup like this. You must use your spoon. Hold you soup spoon like you `would`( 使用“would”是因为它表达了假设的情况或条件语句，而不是未来的动作。 "Would"通常用于过去时态，以描述现在或未来的假设或不确定情况 ) hold it as a pencil.
+- > Lily, we don't pick up the bowl and `slurp(vt. 出声地吃或喝)` the soup like this. You must use your spoon. Hold you soup spoon like you `would( 使用“would”是因为它表达了假设的情况或条件语句，而不是未来的动作。 "Would"通常用于过去时态，以描述现在或未来的假设或不确定情况 )` hold it as a pencil.
 - Does the soup have any meat in it, mom?
 - > No, Brian, it doesn't. It only has the vegetables and noodles.
 - Leticia, pass the meatballs, please.
 - > Here u go, dad.
-- Brian, Don't put your elbows on the table `when`(为啥这里不用while? 使用“when”是因为它指的是进餐时具体的时间或时刻。另一方面，“while”用于描述与另一个动作同时发生的动作，并不一定指特定的时刻。例如，“我开车时听音乐”表示听音乐的动作与开车的动作同时发生。在原始句子的语境中，“when”是更合适的词，因为说话者指的是进食时的具体时刻，而不是描述两个同时发生的动作。) you are eating and sit straight. That's not really great manners to have your elbows out. 
+- Brian, Don't put your elbows on the table `when(为啥这里不用while? 使用“when”是因为它指的是进餐时具体的时间或时刻。另一方面，“while”用于描述与另一个动作同时发生的动作，并不一定指特定的时刻。例如，“我开车时听音乐”表示听音乐的动作与开车的动作同时发生。在原始句子的语境中，“when”是更合适的词，因为说话者指的是进食时的具体时刻，而不是描述两个同时发生的动作。)` you are eating and sit straight. That's not really great manners to have your elbows out. 
 - > Lily, don't chew with your mouth open.
 - Sorry, mom.
-- > Leticia, never `reach across`( `reach across`伸手过去：用手或手臂伸过去，通常是为了拿到或触摸远处的东西。ps: Across"通常作为介词使用，后面接名词或代词，表示在某个物体或空间上从一侧到另一侧移动。例如："He walked across the bridge"（他走过了桥）。"Cross"可以作为动词、名词或形容词使用，表示穿过、跨过或交叉。例如："She crossed the street"（她穿过了街道）。) a dish or someone else's plate to `reach`(为什么这里又有一个reach? 第一个`reach across`表示"伸手横跨", 第二个"reach"是作为动词使用的，表示"伸手拿"、"够到"、"抓住"等意思。)something. Instead, politely ask the person sitting next to you to "Please pass me the salt.".
+- > Leticia, never `reach across( reach across 伸手过去：用手或手臂伸过去，通常是为了拿到或触摸远处的东西。ps: Across"通常作为介词使用，后面接名词或代词，表示在某个物体或空间上从一侧到另一侧移动。例如："He walked across the bridge", 他走过了桥。"Cross"可以作为动词、名词或形容词使用，表示穿过、跨过或交叉。例如："She crossed the street" 她穿过了街道。)` a dish or someone else's plate to `reach(为什么这里又有一个reach? 第一个reach across表示"伸手横跨", 第二个"reach"是作为动词使用的，表示"伸手拿"、"够到"、"抓住"等意思。)`something. Instead, politely ask the person sitting next to you to "Please pass me the salt.".
 - Brian , could you hand me the pickles?
 - Can I have some more potatoes, mom?
 - > Would you like have some more meatballs?
 - No, mom. They are delicious but I'm full, and I need to save room for dessert too.
-- > Lily, don't get up and leave. It's not polite.Always ask to be `excused`(v.
-原谅，宽恕；辩解，开脱；`准许……离开`；同意免除) when finished.Let's clear the table now.
+- > Lily, don't get up and leave. It's not polite.Always ask to be `excused(v. 原谅，宽恕；辩解，开脱；准许……离开；同意免除)` when finished.Let's clear the table now.
 
 
 # 6. Lost and Found
 
-- Have you taken my book, `Prehistoric`(adj.史前的，有文字记载以前的；<非正式>古老的，过时的) and Ancient Civilizations, Leticia?
-- > No, I haven't, What should I do with such a book, I don't even like history.
+- Have you taken my book, `Prehistoric`
+- > (adj.史前的，有文字记载以前的；<非正式>古老的，过时的)
+- and Ancient Civilizations, Leticia?
+- No, I haven't, What should I do with such a book, I don't even like history.
 - I can't find it anywhere, It's a book that I borrowed from the library today.I think I've lost it.
 - > Maybe you left it `at` school.
-- No, it's not there, because I went to the library after classes. Oh, it really `bugs`( n.
-<美>昆虫，虫子；<非正式>小病，轻微的传染病；（计算机程序中的）漏洞，故障；窃听器；<非正式>热衷，着迷
-v. <非正式>`烦扰`，使恼怒；装窃听器；（由于吃惊或害怕）张大眼睛，瞪大双眼 ) me when I lose things.
+- No, it's not there, because I went to the library after classes. Oh, it really `bugs`
+- > ( n. <美>昆虫，虫子；<非正式>小病，轻微的传染病；（计算机程序中的）漏洞，故障；窃听器；<非正式>热衷，着迷 v. <非正式>`烦扰`，使恼怒；装窃听器；（由于吃惊或害怕）张大眼睛，瞪大双眼 ) 
+- me when I lose things.
 - > Have you `looked into`("查看"、"观察"、"研究"、"调查") your room?
 - I've look everywhere, it's not here.I must have dropped it somewhere, but I can't figure out where.
 - > Don't panic, it's `bound`(adj. 必然的，肯定的；受约束的) to be around here somewhere.
@@ -168,9 +168,12 @@ v. <非正式>`烦扰`，使恼怒；装窃听器；（由于吃惊或害怕）�
 - Well, I popped into a cafe to buy some cookies, then I went directly to the bus station.
 - > Did you take you book out of your backpack on the bus?
 - Yes, I did. I browsed it for a few minutes, then I put it back and `prepared to`(准备做某事 ; 预备做某事 ; 准备做 ; 筹备做某事  ) get off the bus. 
-- > Oh, I remember that right before getting off I `stumble`d( v.绊脚，绊跌；跌跌撞撞地走，蹒跚而行 ) almost fell down the stairs. But luckily, I landed on my feet. Then I came staight home. And When I wanted to take it out of my backpack and read it, it wasn't there `any longer`( 不再 ), it just disappeared.
+- > Oh, I remember that right before getting off I `stumble`d( v.绊脚，绊跌；跌跌撞撞地走，蹒跚而行 ) almost fell down the stairs. 
+- But luckily, I landed on my feet. Then I came staight home. And When I wanted to take it out of my backpack and read it, it wasn't there `any longer`( 不再 ), it just disappeared.
 - That must have fallen out of your backpack when you stumbled in the bus. Maybe you forgot to `zip up`( 拉上拉链, `zip` n . 拉链 v. 用拉链扣上, 拉开拉链; 压缩电脑文件 ) your backpack.
 - > I think you are right. It makes sense.
 - Let's tell mom about this and see what needs to be done in this case.
-- > Well, don't worry. I'm going to call the bus `depot`( n.仓库，库房；<美>公共汽车站，火车站，航空站；车库，修车厂 ) and ask if the bus driver left the book there by any chance.
+- > Well, don't worry. I'm going to call the bus `depot`
+- > ( n.仓库，库房；<美>公共汽车站，火车站，航空站；车库，修车厂 ) 
+- and ask if the bus driver left the book there by any chance.
 - Good news, the bus drivers found your book and will return it to you in the morning.

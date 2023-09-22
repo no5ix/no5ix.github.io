@@ -132,20 +132,23 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 
 # 5. Table Manners
 
-- Sit down everybody, dinner's ready. The first thing that we need to do is put our napkin on our lap. First, let's eat the soup. You need to wait to start your soup until everybody get served.
-- Lily, we don't pick up the bowl and slurp(  ) soup like this. You must use your spoon. Hold you soup spoon like you would(  ) hold it as a pencil.
+- Sit down, everybody, dinner's ready. The first thing that we need to do is put our napkin on our lap. First let's eat the soup. You need to wait to start your soup until everybody go t served.
+- > Lily, we don't pick up the bowl and `slurp`(vt.
+出声地吃或喝) the soup like this. You must use your spoon. Hold you soup spoon like you `would`( 使用“would”是因为它表达了假设的情况或条件语句，而不是未来的动作。 "Would"通常用于过去时态，以描述现在或未来的假设或不确定情况 ) hold it as a pencil.
 - Does the soup have any meat in it, mom?
-- No, Brian. It only has the vegetables and noodles.
+- > No, Brian, it doesn't. It only has the vegetables and noodles.
 - Leticia, pass the meatballs, please.
-- Here u go, dad.
-- Brian, Don't put your elbows on the table when(为啥这里不用while) you are eating and sit straight. That's not really great manners having your elbows out. 
-- Lily, don't chew with your mouth open.
+- > Here u go, dad.
+- Brian, Don't put your elbows on the table `when`(为啥这里不用while? 使用“when”是因为它指的是进餐时具体的时间或时刻。另一方面，“while”用于描述与另一个动作同时发生的动作，并不一定指特定的时刻。例如，“我开车时听音乐”表示听音乐的动作与开车的动作同时发生。在原始句子的语境中，“when”是更合适的词，因为说话者指的是进食时的具体时刻，而不是描述两个同时发生的动作。) you are eating and sit straight. That's not really great manners to have your elbows out. 
+- > Lily, don't chew with your mouth open.
 - Sorry, mom.
-- Leticia, never reach cross a dish or someone else's plate to reach(为什么这里又有一个reach?  )something.Instead, politely ask the person next to you to "Please pass me the salt.".
+- > Leticia, never `reach across`( `reach across`伸手过去：用手或手臂伸过去，通常是为了拿到或触摸远处的东西。ps: Across"通常作为介词使用，后面接名词或代词，表示在某个物体或空间上从一侧到另一侧移动。例如："He walked across the bridge"（他走过了桥）。"Cross"可以作为动词、名词或形容词使用，表示穿过、跨过或交叉。例如："She crossed the street"（她穿过了街道）。) a dish or someone else's plate to `reach`(为什么这里又有一个reach? 第一个`reach across`表示"伸手横跨", 第二个"reach"是作为动词使用的，表示"伸手拿"、"够到"、"抓住"等意思。)something. Instead, politely ask the person sitting next to you to "Please pass me the salt.".
 - Brian , could you hand me the pickles?
-- Would you like to have some meatballs?
-- Thank you. They are delicious, but I'm full, and I need to save room for the dessert too.
-- Lily, don't get up and leave. It's not polite.Always ask to be excused when finished.Let's clear the table now.
+- Can I have some more potatoes, mom?
+- > Would you like have some more meatballs?
+- No, mom. They are delicious but I'm full, and I need to save room for dessert too.
+- > Lily, don't get up and leave. It's not polite.Always ask to be `excused`(v.
+原谅，宽恕；辩解，开脱；`准许……离开`；同意免除) when finished.Let's clear the table now.
 
 
 # 6. Lost and Found

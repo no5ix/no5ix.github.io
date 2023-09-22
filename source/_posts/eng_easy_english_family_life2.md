@@ -153,22 +153,24 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 
 # 6. Lost and Found
 
-- Have you taken my book, Prehistoric and Ancient Civilizations, Leticia?
-- No, I haven't, What should I do with such a book, I don't even like history.
+- Have you taken my book, `Prehistoric`(adj.史前的，有文字记载以前的；<非正式>古老的，过时的) and Ancient Civilizations, Leticia?
+- > No, I haven't, What should I do with such a book, I don't even like history.
 - I can't find it anywhere, It's a book that I borrowed from the library today.I think I've lost it.
-- Maybe you left it in school.
-- No, it's not there, because I went to the library after classes. Oh, it really bugs(  ) me when I lose things.
-- Have you looked into your room?
+- > Maybe you left it `at` school.
+- No, it's not there, because I went to the library after classes. Oh, it really `bugs`( n.
+<美>昆虫，虫子；<非正式>小病，轻微的传染病；（计算机程序中的）漏洞，故障；窃听器；<非正式>热衷，着迷
+v. <非正式>`烦扰`，使恼怒；装窃听器；（由于吃惊或害怕）张大眼睛，瞪大双眼 ) me when I lose things.
+- > Have you `looked into`("查看"、"观察"、"研究"、"调查") your room?
 - I've look everywhere, it's not here.I must have dropped it somewhere, but I can't figure out where.
-- Don't panic, it bound to be around here somewhere.
-- It's not, I think it's lost for good(  ) and it's such an important book! I need it for my history project.
-- Oh, chill out, Brian. Let's just try and work out(  ) where you left it. Let's see ... Where did you go from the library?
-- Well, I popped into cafe and buy some cookies, then I went directly to the bus station.
-- Did you take you book out of your backpack on the bus?
-- Yes, I did. I browsed it from a few minutes, then I put it back and prepared to(这是个短语?  ) get off the bus. 
-- Oh, I remember that right before getting off I stumbled(  ) almost fell down the stairs. But luckily, I landed on my feet. And then I came staight home. And When I wanted to take it out of my backpack and read it, it wasn't there any longer(  ), it just disappeared.
-- That must have fallen out of your backpack when you stumbled in the bus.Maybe you forgot to zip up(  ) your backpack.
-- I think you are right. It makes sense.
-- Let's tell mom about it and see what needs to be done in this case.
-- Well, Don't worry. I'm going to call the bus depot(  ) and ask if the bus driver left the book there by any chance.
+- > Don't panic, it's `bound`(adj. 必然的，肯定的；受约束的) to be around here somewhere.
+- It's not, I think it's lost `for good`( 永久性地；彻底地；不可逆转地 ) and it's such an important book! I needed it for my history project.
+- > Oh, chill out, Brian. Let's just try and `work out`( 解决，算出，制定； ) where you left it. Let's see ... Where did you go from the library?
+- Well, I popped into a cafe to buy some cookies, then I went directly to the bus station.
+- > Did you take you book out of your backpack on the bus?
+- Yes, I did. I browsed it for a few minutes, then I put it back and `prepared to`(准备做某事 ; 预备做某事 ; 准备做 ; 筹备做某事  ) get off the bus. 
+- > Oh, I remember that right before getting off I `stumble`d( v.绊脚，绊跌；跌跌撞撞地走，蹒跚而行 ) almost fell down the stairs. But luckily, I landed on my feet. Then I came staight home. And When I wanted to take it out of my backpack and read it, it wasn't there `any longer`( 不再 ), it just disappeared.
+- That must have fallen out of your backpack when you stumbled in the bus. Maybe you forgot to `zip up`( 拉上拉链, `zip` n . 拉链 v. 用拉链扣上, 拉开拉链; 压缩电脑文件 ) your backpack.
+- > I think you are right. It makes sense.
+- Let's tell mom about this and see what needs to be done in this case.
+- > Well, don't worry. I'm going to call the bus `depot`( n.仓库，库房；<美>公共汽车站，火车站，航空站；车库，修车厂 ) and ask if the bus driver left the book there by any chance.
 - Good news, the bus drivers found your book and will return it to you in the morning.

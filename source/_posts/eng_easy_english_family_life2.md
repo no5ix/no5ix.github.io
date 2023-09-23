@@ -177,3 +177,30 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - > ( n.仓库，库房；<美>公共汽车站，火车站，航空站；车库，修车厂 ) 
 - and ask if the bus driver left the book there by any chance.
 - Good news, the bus drivers found your book and will return it to you in the morning.
+
+
+# 7. How was You Day?
+
+- Hi, I'm home, have u had a good day?
+- > No, not really. Actually it's been a bit of nightmare.
+- Oh dear, What's happened?
+- > Well, first, i waited in all morning for the new TV to be delivered, but they never showed up.
+- Oh, I don't believe it! `Hadn't` they promised to be here today?
+- > Yeah, I'm not suprised, to be honest, they didn't show up last week either. I was pretty angry, though.
+- I bet u were.
+- > Anyway, I called them and they said that they'd(would, 过去将来时态) `definitely`(肯定地) be here next Monday.
+- Next Monday? They are really `shameless`(adj. 无耻的, 不要脸的).
+- > That's the earliest day they could do, they said.
+- I told them (省略了个that, 这是个宾语从句) if they `didn't` (宾语从句这里`didn't`和前面的`told`保持时态一致) show up next time, I'd(would 虚拟语气) cancel the order.
+- > Quite right, too. That TV cost a `fortune`(n. 钱财, 财富)!
+- And then my laptop crashed while I was on the internet, I couldn't work anymore. I think it's got a virus.
+- > Didn't u install that anti-virus software?
+- I forgot to do it.
+- > No wonder u got a virus. I'll have a look at it later, if u like.
+- Then Brian's teacher called me and said he was `caught`(catch的过去式, 表示"被抓住了") fighting during the break.
+- > Fighting? That haven't happened before. I wonder What `got into`(陷入[麻烦]) him.
+- He said the other boy started it.
+- > Don't worry, we'll work it out. I'll go talk to him `in a bit`(等一下). Is anything to eat? I'm starving!
+- Dinner's in the oven. So how was your day?
+- > Well, I had a quite good day, actually.
+- At least one of us had a good day.

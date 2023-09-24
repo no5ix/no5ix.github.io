@@ -132,7 +132,7 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 
 # 5. Table Manners
 
-- Sit down, everybody, dinner's ready. The first thing that we need to do is put our napkin on our lap. First let's eat the soup. You need to wait to start your soup until everybody go t served.
+- Sit down, everybody, dinner's ready. The first thing that we need to do is put our napkin on our lap. First let's eat the soup. You need to wait to start your soup until everybody got served.
 - > Lily, we don't pick up the bowl and `slurp(vt. 出声地吃或喝)` the soup like this. You must use your spoon. Hold you soup spoon like you `would( 使用“would”是因为它表达了假设的情况或条件语句，而不是未来的动作。 "Would"通常用于过去时态，以描述现在或未来的假设或不确定情况 )` hold it as a pencil.
 - Does the soup have any meat in it, mom?
 - > No, Brian, it doesn't. It only has the vegetables and noodles.
@@ -141,7 +141,7 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - Brian, Don't put your elbows on the table `when(为啥这里不用while? 使用“when”是因为它指的是进餐时具体的时间或时刻。另一方面，“while”用于描述与另一个动作同时发生的动作，并不一定指特定的时刻。例如，“我开车时听音乐”表示听音乐的动作与开车的动作同时发生。在原始句子的语境中，“when”是更合适的词，因为说话者指的是进食时的具体时刻，而不是描述两个同时发生的动作。)` you are eating and sit straight. That's not really great manners to have your elbows out. 
 - > Lily, don't chew with your mouth open.
 - Sorry, mom.
-- > Leticia, never `reach across( reach across 伸手过去：用手或手臂伸过去，通常是为了拿到或触摸远处的东西。ps: Across"通常作为介词使用，后面接名词或代词，表示在某个物体或空间上从一侧到另一侧移动。例如："He walked across the bridge", 他走过了桥。"Cross"可以作为动词、名词或形容词使用，表示穿过、跨过或交叉。例如："She crossed the street" 她穿过了街道。)` a dish or someone else's plate to `reach(为什么这里又有一个reach? 第一个reach across表示"伸手横跨", 第二个"reach"是作为动词使用的，表示"伸手拿"、"够到"、"抓住"等意思。)`something. Instead, politely ask the person sitting next to you to "Please pass me the salt.".
+- > Leticia, never `reach across( reach across 伸手过去横跨：用手或手臂伸过去，通常是为了拿到或触摸远处的东西。ps: Across"通常作为介词使用，后面接名词或代词，表示在某个物体或空间上从一侧到另一侧移动。例如："He walked across the bridge", 他走过了桥。"Cross"可以作为动词、名词或形容词使用，表示穿过、跨过或交叉。例如："She crossed the street" 她穿过了街道。)` a `dish`(一般指的是一盘菜, dish强调的是一盘食物, 而不是碟子/盘子本身, 当然也可以指碟子/盘子, 特殊用法: 全部餐具`the dishes`) or someone else's `plate`(盘子, 碟子) to `reach(为什么这里又有一个reach? 第一个reach across表示"伸手横跨", 第二个"reach"是作为动词使用的，表示"伸手拿"、"够到"、"抓住"等意思。)`something. Instead, politely ask the person sitting next to you to "Please pass me the salt.".
 - Brian , could you hand me the pickles?
 - Can I have some more potatoes, mom?
 - > Would you like have some more meatballs?
@@ -165,7 +165,7 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - > Don't panic, it's `bound`(adj. 必然的，肯定的；受约束的) to be around here somewhere.
 - It's not, I think it's lost `for good`( 永久性地；彻底地；不可逆转地 ) and it's such an important book! I needed it for my history project.
 - > Oh, chill out, Brian. Let's just try and `work out`( 解决，算出，制定； ) where you left it. Let's see ... Where did you go from the library?
-- Well, I popped into a cafe to buy some cookies, then I went directly to the bus station.
+- Well, I `popped into`(`pop`adj. 流行音乐的;大众的 v. 迅速去;砰地爆开, 这里`pop into`表示"迅速走进") a cafe to buy some cookies, then I went directly to the bus station.
 - > Did you take you book out of your backpack on the bus?
 - Yes, I did. I browsed it for a few minutes, then I put it back and `prepared to`(准备做某事 ; 预备做某事 ; 准备做 ; 筹备做某事  ) get off the bus. 
 - > Oh, I remember that right before getting off I `stumble`d( v.绊脚，绊跌；跌跌撞撞地走，蹒跚而行 ) almost fell down the stairs. 
@@ -174,8 +174,8 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - > I think you are right. It makes sense.
 - Let's tell mom about this and see what needs to be done in this case.
 - > Well, don't worry. I'm going to call the bus `depot`
-- > ( n.仓库，库房；<美>公共汽车站，火车站，航空站；车库，修车厂 ) 
-- and ask if the bus driver left the book there by any chance.
+- > (/ ˈdiːpoʊ / n.仓库，库房；<美>公共汽车站，火车站，航空站；车库，修车厂 ) 
+- and ask them if the bus driver left the book there `by any chance`(万一).
 - Good news, the bus drivers found your book and will return it to you in the morning.
 
 
@@ -194,13 +194,138 @@ If they're still don't let them drive for about 30 minutes before putting（put�
 - I told them (省略了个that, 这是个宾语从句) if they `didn't` (宾语从句这里`didn't`和前面的`told`保持时态一致) show up next time, I'd(would 虚拟语气) cancel the order.
 - > Quite right, too. That TV cost a `fortune`(n. 钱财, 财富)!
 - And then my laptop crashed while I was on the internet, I couldn't work anymore. I think it's got a virus.
-- > Didn't u install that anti-virus software?
+- > Didn't u install that `anti`-virus(anti大多数美国人读/æntai/) software?
 - I forgot to do it.
 - > No wonder u got a virus. I'll have a look at it later, if u like.
 - Then Brian's teacher called me and said he was `caught`(catch的过去式, 表示"被抓住了") fighting during the break.
 - > Fighting? That haven't happened before. I wonder What `got into`(陷入[麻烦]) him.
 - He said the other boy started it.
-- > Don't worry, we'll work it out. I'll go talk to him `in a bit`(等一下). Is anything to eat? I'm starving!
+- > Don't worry, we'll work it out. I'll go talk to him `in a bit`(等一下). Is there anything to eat? I'm starving!
 - Dinner's in the oven. So how was your day?
 - > Well, I had a quite good day, actually.
 - At least one of us had a good day.
+
+
+# review
+
+## 5.Table Manners餐桌礼仪
+
+大家请坐，晚饭好了。我们需要做的第一件事就是把餐巾放在膝盖上。首先让我们吃汤。你需要等到每个人都有了才能开始喝汤。
+
+莉莉，我们不能像这样拿碗并咕噜咕噜地喝汤。你必须用汤匙。拿汤匙时，像拿笔一样拿着。
+
+这汤里有肉吗，妈妈？
+
+不，布莱恩，没有。只有蔬菜和面条。
+
+莱蒂西娅，请把肉丸递给我。
+
+好的，爸爸。
+
+布莱恩，在你吃饭时不要把手肘放在桌子上，要坐直。这样把手肘伸出去不太礼貌。
+
+莉莉，不要张开嘴巴嚼东西。
+
+对不起，妈妈。
+
+莱蒂西娅，不要伸手横跨盘子或别人的去够某物。相反，礼貌地向你旁边的人说“请把盐递给我。”。
+
+布莱恩，你能把泡菜递给我吗？
+
+我还能再要点土豆吗，妈妈？
+
+你想再来一些肉丸吗？
+
+不用了，妈妈。它们很好吃，但我饱了，我也需要为甜点留点地方。
+
+莉莉，不要起身离开。这不礼貌。当吃完的时候总要请求准许离开的。现在让我们收拾桌子。
+
+
+## 6.Lost And Found失物招领
+
+莱蒂西亚，你拿了我的书《史前和古代文明》吗？
+
+没有，我没有拿。我拿这书干嘛? 我甚至都不喜欢历史
+
+我找不到它了，这是我今天从图书馆借的书。我想我把它弄丢了。
+
+也许你把它落在学校了？
+
+不是，不在那儿. 因为我下课后就去了图书馆。噢，当我丢东西的时候真是让我太烦了.
+
+你在你的房间里找过了吗？
+
+我到处都找了，它不在这里。我一定是在某个地方掉了它，但我不知道在哪里。
+
+别慌，肯定在附近某个地方。
+
+不是啊，我觉得它永远都找不到了，这是一本很重要的书！我需要它做我的历史项目。
+
+冷静下来，布莱恩。我们来尝试弄清楚你把它放在哪里了。我们看看……你从图书馆去哪里了？
+
+嗯，我去了一家咖啡馆买了些饼干，然后直接去了汽车站。
+
+你在公交车上从背包里拿出书来了吗？
+
+没错，我浏览了几分钟，然后放回去准备下车。
+
+噢，我记得在下车之前，我绊倒了差点从楼梯摔下来。
+
+但幸运的是，我用脚着陆了。然后我就直接回家了。当我想从背包里拿出来看时，它已经不在那里了，它就这样消失了。
+
+它肯定是在摔倒时把它从背包里掉出去了。也许你忘记了拉上背包的拉链。
+
+我觉得你说得对，这很有道理。
+
+我们告诉妈妈这件事，看看需要采取什么措施。
+
+别担心，我会打电话给公交车站，问一下他们司机是否万一把书遗留在那里了。
+
+好消息，公交车司机找到了你的书，明天早上会把它送回来。
+
+
+## 7.How was your day?你今天过得怎么样？
+
+嗨，我回来了，你今天过得好吗？
+
+不太好，实际上有点噩梦般的一天。
+
+哦，亲爱的，发生了什么事？
+
+首先，我整个上午都在等新电视的送货，但他们没露面。
+
+哦，我不敢相信！他们不是答应今天来吗？
+
+是的，我不惊讶, 说实话，他们上周也没来。我当时很生气虽然。
+
+我猜你是的。
+
+总之，我给他们打了电话，他们说下周一他们一定会来。
+
+下周一？他们真是不知羞耻。
+
+这是他们能做到的最早的时间，他们说。
+
+我告诉他们，如果他们下次还不来，我就会取消订单。
+
+完全正确。那电视可是花了一大笔钱！
+
+然后我的笔记本电脑在我上网时崩溃了，我不能工作了。我想它中了病毒。
+
+你没有安装那个反病毒软件吗？
+
+我忘了安装。
+
+难怪你中了病毒。如果你愿意，稍后我会看看它。
+
+然后布莱恩的老师打电话给我说他在休息时间打架被抓住了。
+
+打架？这以前从来没有发生过。我想知道什么让他陷入麻烦
+
+他说是另一个男孩先动手的。
+
+别担心，我们会解决的。我一会儿去找他谈谈。有吃的吗？我饿了！
+
+晚饭放在烤箱里了。那你今天过得怎么样？
+
+嗯，实际上我今天过得还不错。至少我们中有一个人今天过得不错。

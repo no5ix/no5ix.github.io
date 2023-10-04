@@ -90,18 +90,22 @@
 
 
 
-<meta name="description" content="桂林字牌总体玩法规则https://baike.baidu.com/item/大字牌 算胡头 计分的基本单位为”胡”，每5胡为1”舵”。(桂林称”舵”为“子”). 胡牌最低胡牌数10胡10 -14胡为1舵，15-19胡为2舵，20-24胡为3舵，以下类推。(逢5进1)。 胡牌在以下几种情况要加分: 自摸+1舵;有上醒牌每一张+1舵;有下醒牌每一张+1舵;天胡、地胡、三笼五坎四种特殊胡牌+1舵  特">
+<meta name="description" content="Akka/Erlang 的 actor 模型与 Go 语言的协程 Goroutine 与通道 Channel 代表的 CSP(Communicating Sequential Processes) 模型有什么区别呢？ 首先这两者都是并发模型的解决方案，我们看看 Actor 和 Channel 这两个方案的不同： Actor 模型在 Actor 模型中，主角是 Actor，类似一种 worker，A">
 <meta name="keywords" content="Misc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Actor模型 vs. CSP模型">
 <meta property="og:url" content="https://hulinhong.com/2021/07/21/actor_vs_csp_mode/index.html">
 <meta property="og:site_name" content="烫">
-<meta property="og:description" content="桂林字牌总体玩法规则https://baike.baidu.com/item/大字牌 算胡头 计分的基本单位为”胡”，每5胡为1”舵”。(桂林称”舵”为“子”). 胡牌最低胡牌数10胡10 -14胡为1舵，15-19胡为2舵，20-24胡为3舵，以下类推。(逢5进1)。 胡牌在以下几种情况要加分: 自摸+1舵;有上醒牌每一张+1舵;有下醒牌每一张+1舵;天胡、地胡、三笼五坎四种特殊胡牌+1舵  特">
+<meta property="og:description" content="Akka/Erlang 的 actor 模型与 Go 语言的协程 Goroutine 与通道 Channel 代表的 CSP(Communicating Sequential Processes) 模型有什么区别呢？ 首先这两者都是并发模型的解决方案，我们看看 Actor 和 Channel 这两个方案的不同： Actor 模型在 Actor 模型中，主角是 Actor，类似一种 worker，A">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-04T13:50:55.302Z">
+<meta property="og:image" content="https://hulinhong.com/img/actor_vs_csp_mode/actors_mode.png">
+<meta property="og:image" content="https://hulinhong.com/img/actor_vs_csp_mode/channel.png">
+<meta property="og:image" content="https://hulinhong.com/img/actor_vs_csp_mode/csp.png">
+<meta property="og:updated_time" content="2023-10-04T15:12:43.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Actor模型 vs. CSP模型">
-<meta name="twitter:description" content="桂林字牌总体玩法规则https://baike.baidu.com/item/大字牌 算胡头 计分的基本单位为”胡”，每5胡为1”舵”。(桂林称”舵”为“子”). 胡牌最低胡牌数10胡10 -14胡为1舵，15-19胡为2舵，20-24胡为3舵，以下类推。(逢5进1)。 胡牌在以下几种情况要加分: 自摸+1舵;有上醒牌每一张+1舵;有下醒牌每一张+1舵;天胡、地胡、三笼五坎四种特殊胡牌+1舵  特">
+<meta name="twitter:description" content="Akka/Erlang 的 actor 模型与 Go 语言的协程 Goroutine 与通道 Channel 代表的 CSP(Communicating Sequential Processes) 模型有什么区别呢？ 首先这两者都是并发模型的解决方案，我们看看 Actor 和 Channel 这两个方案的不同： Actor 模型在 Actor 模型中，主角是 Actor，类似一种 worker，A">
+<meta name="twitter:image" content="https://hulinhong.com/img/actor_vs_csp_mode/actors_mode.png">
 
 
 
@@ -438,22 +442,31 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
 
       
-        <h1 id="桂林字牌总体玩法规则"><a href="#桂林字牌总体玩法规则" class="headerlink" title="桂林字牌总体玩法规则"></a>桂林字牌总体玩法规则</h1><p><a href="https://baike.baidu.com/item/大字牌" target="_blank" rel="noopener">https://baike.baidu.com/item/大字牌</a></p>
-<h1 id="算胡头"><a href="#算胡头" class="headerlink" title="算胡头"></a>算胡头</h1><ol>
-<li>计分的基本单位为”胡”，每5胡为1”舵”。(桂林称”舵”为“子”).</li>
-<li>胡牌最低胡牌数10胡10 -14胡为1舵，15-19胡为2舵，20-24胡为3舵，以下类推。(逢5进1)。</li>
-<li>胡牌在以下几种情况要加分: 自摸+1舵;有上醒牌每一张+1舵;有下醒牌每一张+1舵;天胡、地胡、三笼五坎四种特殊胡牌+1舵</li>
-</ol>
-<h1 id="特别细节项"><a href="#特别细节项" class="headerlink" title="特别细节项"></a>特别细节项</h1><h2 id="下伙"><a href="#下伙" class="headerlink" title="下伙"></a>下伙</h2><p>如果想吃上家打出的某一张牌，例如你想吃上家的1张小七，自己手中又有相同的1张或且 2张七，则手中的1张小七(或2张小七, ps:有两张相同的遇到对方打出来的小七也可以选择不碰牌的) 必须组成另外的一比并且一起亮出来 (或两比, 如”二七十”), 如不能组成另外的一比(或2比)则不能吃上家的这张牌。如果吃了而不下伙,挨发现该玩家必须付给其它玩家应的底油。</p>
-<p>举个例子: </p>
+        <p>Akka/Erlang 的 actor 模型与 Go 语言的协程 Goroutine 与通道 Channel 代表的 CSP(Communicating Sequential Processes) 模型有什么区别呢？</p>
+<p>首先这两者都是并发模型的解决方案，我们看看 Actor 和 Channel 这两个方案的不同：</p>
+<h1 id="Actor-模型"><a href="#Actor-模型" class="headerlink" title="Actor 模型"></a>Actor 模型</h1><p>在 Actor 模型中，主角是 Actor，类似一种 worker，Actor 彼此之间直接发送消息，不需要经过什么中介，消息是异步发送和处理的：</p>
+<p><img src="/img/actor_vs_csp_mode/actors_mode.png" alt></p>
+<p>Actor 模型描述了一组为了避免并发编程的常见问题的公理:</p>
 <ol>
-<li>当手上有2个小二七十和1个小八1个小九, 上家打出1个七, 此时是可以吃上家这个小七的, 当时手上的2个小二七十也要跟着一起亮出来, 这个行为就叫做下火</li>
-<li>当手上有1个小二七十和1个小八1个小九, 上家打出1个七, 此时是可以吃上家这个小七的, 当时手上的1个小二七十也要跟着一起亮出来, 这个行为就叫做下火</li>
-<li>当手上有1个小二1个小七和1个小八1个小九, 上家打出1个七, 此时是不能吃上家这个小七的, 因为吃了上家这个小七, 手上的还剩下1个小二1个小七无法组成一个比子, 无法下火, 所以吃不了</li>
+<li>所有 Actor 状态是 Actor 本地的，外部无法访问。  </li>
+<li>Actor 必须只有通过消息传递进行通信。　　  </li>
+<li>一个 Actor 可以响应消息: 推出新 Actor, 改变其内部状态, 或将消息发送到一个或多个其他参与者。  </li>
+<li>Actor 可能会堵塞自己, 但 Actor 不应该堵塞它运行的线程。</li>
 </ol>
-<h2 id="不碰但是又自己摸到了"><a href="#不碰但是又自己摸到了" class="headerlink" title="不碰但是又自己摸到了"></a>不碰但是又自己摸到了</h2><p>如果自己手中有一对（分大小写）牌，另外玩家打出相同的一张，如果不碰后，自己再摸起另外一张，则必须将这一张牌亮于桌面，两张盖于桌面（与罩和对相区别，但和牌后分数与罩一样）。若是另外一玩家再打出，则不可以碰，但可以吃。</p>
-<h2 id="起手就有两个四个的"><a href="#起手就有两个四个的" class="headerlink" title="起手就有两个四个的"></a>起手就有两个四个的</h2><p>如果起始手中有2个四个(分大小写)的, 在最后马上要听牌的时候就不要再从手牌中丢牌了,否则胡不了了. </p>
-<p>举个例子: 当起手就有两条龙, 如四个小八 和 四个大七, 当打牌打到最后手里还剩下这两条龙以及小四和小五和两个小九和两个两个大六, 当上家打出一个大六的时候, 你碰了大六, 此时可以不用从手牌里丢牌了, 直接让下家继续抓牌即可</p>
+<p>更多可见 <a href="http://www.jdon.com/actors.html" target="_blank" rel="noopener">Actor 模型专题</a></p>
+<p><strong>. . .</strong><a id="more"></a></p>
+<h1 id="Channel-模型"><a href="#Channel-模型" class="headerlink" title="Channel 模型"></a>Channel 模型</h1><p>　　Channel 模型中，worker 之间不直接彼此联系，而是通过不同 channel 进行消息发布和侦听。消息的发送者和接收者之间通过 Channel 松耦合，发送者不知道自己消息被哪个接收者消费了，接收者也不知道是哪个发送者发送的消息。</p>
+<p><img src="/img/actor_vs_csp_mode/channel.png" alt></p>
+<p>Go 语言的 CSP 模型是由协程 Goroutine 与通道 Channel 实现：</p>
+<ul>
+<li>Go 协程 goroutine: 是一种轻量线程，它不是操作系统的线程，而是将一个操作系统线程分段使用，通过调度器实现协作式调度。是一种绿色线程，微线程，它与 Coroutine 协程也有区别，能够在发现堵塞后启动新的微线程。</li>
+<li>通道 channel: 类似 Unix 的 Pipe，用于协程之间通讯和同步。协程之间虽然解耦，但是它们和 Channel 有着耦合。</li>
+</ul>
+<h1 id="Actor-模型和-CSP-区别"><a href="#Actor-模型和-CSP-区别" class="headerlink" title="Actor 模型和 CSP 区别"></a>Actor 模型和 CSP 区别</h1><p>Actor 模型和 CSP 区别图如下：</p>
+<p><img src="/img/actor_vs_csp_mode/csp.png" alt></p>
+<p>Actor 之间直接通讯，而 CSP 是通过 Channel 通讯，在耦合度上两者是有区别的，后者更加松耦合。</p>
+<p>　　同时，它们都是描述独立的流程通过消息传递进行通信。主要的区别在于：在 CSP 消息交换是同步的 (即两个流程的执行 “接触点” 的，在此他们交换消息)，而 Actor 模型是完全解耦的，可以在任意的时间将消息发送给任何未经证实的接受者。由于 Actor 享有更大的相互独立, 因为他可以根据自己的状态选择处理哪个传入消息。自主性更大些。</p>
+<p>　　在 Go 语言中为了不堵塞流程，程序员必须检查不同的传入消息，以便预见确保正确的顺序。CSP 好处是 Channel 不需要缓冲消息，而 Actor 理论上需要一个无限大小的邮箱作为消息缓冲。</p>
 
       
 
@@ -685,7 +698,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#桂林字牌总体玩法规则"><span class="nav-number">1.</span> <span class="nav-text">桂林字牌总体玩法规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算胡头"><span class="nav-number">2.</span> <span class="nav-text">算胡头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特别细节项"><span class="nav-number">3.</span> <span class="nav-text">特别细节项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下伙"><span class="nav-number">3.1.</span> <span class="nav-text">下伙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不碰但是又自己摸到了"><span class="nav-number">3.2.</span> <span class="nav-text">不碰但是又自己摸到了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#起手就有两个四个的"><span class="nav-number">3.3.</span> <span class="nav-text">起手就有两个四个的</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Actor-模型"><span class="nav-number">1.</span> <span class="nav-text">Actor 模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Channel-模型"><span class="nav-number">2.</span> <span class="nav-text">Channel 模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Actor-模型和-CSP-区别"><span class="nav-number">3.</span> <span class="nav-text">Actor 模型和 CSP 区别</span></a></li></ol></div>
             
 
           </div>

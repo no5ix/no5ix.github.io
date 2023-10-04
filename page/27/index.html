@@ -304,6 +304,185 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/23/snapshot_interpolation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/23/snapshot_interpolation/" itemprop="url">网络物理模拟四之快照插值</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-23T11:13:35+00:00">
+                2017-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h1><p>快照插值这种游戏同步技术的要点为 : </p>
+<ul>
+<li><strong>视觉模拟</strong> : 每帧从网络的发送侧捕获所有相关状态的快照，并将其传输到网络的接收侧，在那里我们将试图重建一个视觉上近似合理的模拟<ul>
+<li>缓冲区 : 内插值之前会缓冲一段合适的时间来处理网络抖动</li>
+<li>内插值Interpolation : 处理快照之间的拉扯<ul>
+<li>线性插值</li>
+<li>Hermite插值</li>
+</ul>
+</li>
+<li>外插值Extrapolation (文中翻译为”预测”或”推测”) : 不可行, 因为外插值无法精准预测刚体运动以及各种物理</li>
+</ul>
+</li>
+<li><strong>降低延迟</strong> : 因为我们发送的快照的频率比较低，这样会带来的一个问题就是对快照进行插值的话会在网络延迟的基础上还要增加插值带来的延迟. 所以我们需要增加发送速率, 为了提高发送速度我们需要压缩快照数据技术的配合, 不然占用太多带宽了</li>
+<li><strong>减少宽带占用</strong> : 因为所有需要在快照中包含所有实体信息, 所以数据量相当大, 得用各种方法压缩快照数据(<a href="/2017/01/24/snapshot_compression/" title="网络物理模拟五之快照压缩">网络物理模拟五之快照压缩</a>)</li>
+</ul>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/22/deterministic_lockstep/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -970,178 +1149,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/10/分布式具体实现重要组件之RPC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/10/分布式具体实现重要组件之RPC/" itemprop="url">分布式具体实现重要组件之RPC</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-10T13:18:12+00:00">
-                2017-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NP/" itemprop="url" rel="index">
-                    <span itemprop="name">NP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="RPC-是什么？"><a href="#RPC-是什么？" class="headerlink" title="RPC 是什么？"></a>RPC 是什么？</h1><p>RPC 的全称是 Remote Procedure Call 是一种进程间通信方式。它允许程序调用另一个地址空间（通常是共享网络的另一台机器上）的过程或函数，而不用程序员显式编码这个远程调用的细节。即程序员无论是调用本地的还是远程的，本质上编写的调用代码基本相同。 像腾讯的<a href="https://github.com/Tencent/phxrpc" target="_blank" rel="noopener">phxrpc框架</a>是使用Protobuf作为IDL用于描述RPC接口以及通信数据结构</p>
-<h1 id="c-RPC的实现"><a href="#c-RPC的实现" class="headerlink" title="c++ RPC的实现"></a>c++ RPC的实现</h1><ul>
-<li><p>1、一套完善的序列化框架；在不同的进程间传输数据，序列化是第一步，如何可靠且方便地将对象转化为二进制（或者其他格式），在对端则是如何正确且安全地将其从二进制恢复为对象。</p>
-</li>
-<li><p>2、完善的底层通信协议；其需要提供合适的语义抽象：服务端支持怎样的并发，是单客户单访问，还是多访问；而客户端的并发模型由服务端决定。当然，还需要健壮且足够的接口抽象，毕竟分布式环境，“一切皆有可能”，需要应对各种问题。</p>
-</li>
-<li><p>3、一个可用的反射系统。是的，需要在C++环境下建立一个反射系统。这一步是最为关键的，其由C++11支持。因为，我们需要注册一个类的各种信息，以供RPC调用。</p>
-</li>
-</ul>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1212,7 +1219,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">248</span>
+                <span class="site-state-item-count">249</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

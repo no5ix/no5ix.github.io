@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Easy English - 010 - Daily English Conversation Practice]]></title>
+    <url>%2F2023%2F10%2F24%2Feng_easy_english_010_daily_english_conversation_practice%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[Youtube origin URLhttps://www.youtube.com/watch?v=GAuqgOC6eKY 00:08 Let’s make breakfast let’s Surprise mom and dad with a delicious breakfast. They deserve it.They’ve worked so much this week and have been very tired. Good idea. They’ll be thrilled. So what do you have in mind? How about scrambled(adj. 炒的) eggs? We all like eggs.Let’s better make frittata( n. 菜肉馅煎蛋饼 ). Sounds perfect. How many eggs do we need? Well, I think we need eight eggs.And we need a little cheese, bacon, one onion, one pepper and heavy cream. We have all the ingredients? Let me check.Fortunately, we have everything we need. Let’s get started. Let’s pop the pan in the oven for fifteen minutes. How about we also make banana smoothie? Would you like that? I’m afraid we don’t have any bananas left. We ate them all yesterday.But We have plenty of mangoes in the fridge. Mangoes are great too.Oh, it looks amazing. It’s beautifully puffed and cooked. We can add some yogurt on top and some avocado( n. 鳄梨,牛油果 ) slices.It’s ready to be served. Something smells delicious in here. You’ve made breakfast, kids? What a pleasant surprise. I didn’t expect that. What’s the occasion( n.（某事发生的）时刻，时候；&lt;正式&gt;时机，适当的机会；特殊（或重大）场合，特殊（或重大）事件；&lt;正式&gt;理由，原因 )?And we just wanted to have a lovely saturday morning. That’s so seet ! I’m impressed, really! Thank u so much! I love you! We love u too. 02:04 What did you do for spring break. Hey Jason, hey Paul, it’s so good to see you again. Great to see you too, Jason. Did you have a good spring break? Yeah, it wasn’t too bad. Although my mom had to work a lot of it, so … I was in charge of looking after my little brother Jimmy. Oh no! well, he’s a very cool kid and great company.He’s like a mini me. I took him to the skate( n. 滑冰 ) park and some other attractions(n. 吸引力; 景点). Ah, that sounds right. I might need to meet the little dude at some point. He helps me remember to be a kid and still have fun. Nice. What about you? What did you get up to? We went to visit my aunt and uncle. They live on the other side of the country. really? Was it good? Did you have fun? Yeah, we had a great time.They live right next to a forest and me and my cousins roamed(v. 漫步) free all day.We made dens(den n. 洞穴, 兽穴, 兽窝) to shelter when the rain came, tracked animals through the Bush and saw deer and rabbits.And went canoeing(n. 划独木舟) on the river.My uncle taught me how to use the paddles(n. 桨) correctly and how to steer the canoe(n. 独木舟 /kəˈnuː/) through the water. Wow, you had so many amazing experiences! Yes, I did. And there’s more.They also have a big farm with so many animals, I took care of them too. Were there any horses at the farm? Yes, there were many beautiful horses. Wow, how cool ! Did you ride a horse? Yes I did. It was fantastic. I’ve never ridden a horse. Well, next time I’ll see if you can come too. I can show you how country folk live. Yes, that would be awesome! 04:27 Do you live here?06:30 Spending habits and saving money08:30 Plans for the weekend.09:46 Comparing Two countries11:54 Talking about life history13:51 Different life style]]></content>
+      <categories>
+        <category>English</category>
+      </categories>
+      <tags>
+        <tag>English</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[桂林字牌]]></title>
     <url>%2F2023%2F10%2F04%2Fguilin_zipai%2F</url>
 
@@ -15,8 +29,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[English Pronunciation]]></title>
-    <url>%2F2023%2F08%2F15%2Feng_pronunciation%2F</url>
+    <title><![CDATA[English SubJunctive Mood]]></title>
+    <url>%2F2023%2F08%2F15%2Feng_subjunctive_mood%2F</url>
 
     <encrypted>0</encrypted>
 
@@ -43,8 +57,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[English SubJunctive Mood]]></title>
-    <url>%2F2023%2F08%2F15%2Feng_subjunctive_mood%2F</url>
+    <title><![CDATA[English Pronunciation]]></title>
+    <url>%2F2023%2F08%2F15%2Feng_pronunciation%2F</url>
 
     <encrypted>0</encrypted>
 
@@ -920,20 +934,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Etcd安装备忘]]></title>
-    <url>%2F2019%2F06%2F27%2Fhello_etcd%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[参考https://skyao.gitbooks.io/learning-etcd3/content/installation/linux_single.html 下载/配置简而言之就是 : 先去 etcd 的 github找到他的release, 然后复制链接, 下载然后配置 注： 以 etcd-v3.2.1 为例，后续更新版本时可能细节有所不同。 . . . 下载执行下面的命令，下载(大概10M)解压即可，无需安装： 12345678910curl -L https://github.com/coreos/etcd/releases/download/v3.2.1/etcd-v3.2.1-linux-amd64.tar.gz -o etcd-v3.2.1-linux-amd64.tar.gztar xzvf etcd-v3.2.1-linux-amd64.tar.gzmv etcd-v3.2.1-linux-amd64 etcdcd etcd./etcd --versionetcd Version: 3.2.1Git SHA: 61fc123Go Version: go1.8.3Go OS/Arch: linux/amd64 安装目录文件列表如下： 123$ lsdefault.etcd etcd README-etcdctl.md READMEv2-etcdctl.mdDocumentation etcdctl README.md 运行直接运行命令 ./etcd 就可以启动了，非常简单。 默认使用2379端口为客户端提供通讯， 并使用端口2380来进行服务器间通讯。 配置为了方便使用，将 etcd 加入 PATH，另外设置 ETCDCTL_API 为3(后面解释)。 在 /etc/profile 中加入以下内容： 123# etcdexport PATH=/home/sky/work/soft/etcd:$PATHexport ETCDCTL_API=3 然后执行 source /etc/profile 重新加载。 客户端访问配置etcdctletcdctl 是 etcd 的客户端命令行。 特别提醒：使用 etcdctl 前，务必设置环境变量 ETCDCTL_API=3 ! 注意：如果不设置 ETCDCTL_API=3，则默认是的API版本是2： 123$ etcdctl versionetcdctl version: 3.2.1API version: 2 正确设置后，API版本变成3： 123$ etcdctl versionetcdctl version: 3.2.1API version: 3.2 使用etcdctl通过下面的put和get命令来验证连接并操作etcd： 12345$ ./etcdctl put aaa 1OK$ ./etcdctl get aaaaaa1 总结上面操作完成之后，就有一个可运行的简单 etcd 服务器和一个可用的 etcdctl 客户端。]]></content>
-      <categories>
-        <category>Misc</category>
-      </categories>
-      <tags>
-        <tag>Etcd</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Linux Go安装备忘]]></title>
     <url>%2F2019%2F06%2F27%2Flinux_install_go%2F</url>
 
@@ -945,6 +945,20 @@
       </categories>
       <tags>
         <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Etcd安装备忘]]></title>
+    <url>%2F2019%2F06%2F27%2Fhello_etcd%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[参考https://skyao.gitbooks.io/learning-etcd3/content/installation/linux_single.html 下载/配置简而言之就是 : 先去 etcd 的 github找到他的release, 然后复制链接, 下载然后配置 注： 以 etcd-v3.2.1 为例，后续更新版本时可能细节有所不同。 . . . 下载执行下面的命令，下载(大概10M)解压即可，无需安装： 12345678910curl -L https://github.com/coreos/etcd/releases/download/v3.2.1/etcd-v3.2.1-linux-amd64.tar.gz -o etcd-v3.2.1-linux-amd64.tar.gztar xzvf etcd-v3.2.1-linux-amd64.tar.gzmv etcd-v3.2.1-linux-amd64 etcdcd etcd./etcd --versionetcd Version: 3.2.1Git SHA: 61fc123Go Version: go1.8.3Go OS/Arch: linux/amd64 安装目录文件列表如下： 123$ lsdefault.etcd etcd README-etcdctl.md READMEv2-etcdctl.mdDocumentation etcdctl README.md 运行直接运行命令 ./etcd 就可以启动了，非常简单。 默认使用2379端口为客户端提供通讯， 并使用端口2380来进行服务器间通讯。 配置为了方便使用，将 etcd 加入 PATH，另外设置 ETCDCTL_API 为3(后面解释)。 在 /etc/profile 中加入以下内容： 123# etcdexport PATH=/home/sky/work/soft/etcd:$PATHexport ETCDCTL_API=3 然后执行 source /etc/profile 重新加载。 客户端访问配置etcdctletcdctl 是 etcd 的客户端命令行。 特别提醒：使用 etcdctl 前，务必设置环境变量 ETCDCTL_API=3 ! 注意：如果不设置 ETCDCTL_API=3，则默认是的API版本是2： 123$ etcdctl versionetcdctl version: 3.2.1API version: 2 正确设置后，API版本变成3： 123$ etcdctl versionetcdctl version: 3.2.1API version: 3.2 使用etcdctl通过下面的put和get命令来验证连接并操作etcd： 12345$ ./etcdctl put aaa 1OK$ ./etcdctl get aaaaaa1 总结上面操作完成之后，就有一个可运行的简单 etcd 服务器和一个可用的 etcdctl 客户端。]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+      <tags>
+        <tag>Etcd</tag>
       </tags>
   </entry>
   <entry>
@@ -2558,20 +2572,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
-    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
-      <categories>
-        <category>Script</category>
-      </categories>
-      <tags>
-        <tag>Lua</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[C++与Lua本质原始交互API]]></title>
     <url>%2F2015%2F11%2F11%2Flua_cpp_bind%2F</url>
 
@@ -2598,6 +2598,20 @@
       </categories>
       <tags>
         <tag>CPP</tag>
+        <tag>Lua</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
+    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
+      <categories>
+        <category>Script</category>
+      </categories>
+      <tags>
         <tag>Lua</tag>
       </tags>
   </entry>
@@ -2785,12 +2799,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[redis概要之数据类型]]></title>
-    <url>%2F2015%2F07%2F11%2Fredis%E6%A6%82%E8%A6%81%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%2F</url>
+    <title><![CDATA[redis和hiredis安装教程]]></title>
+    <url>%2F2015%2F07%2F11%2Fredis_hiredis_install_tutorial%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[Redis简介要义 Redis运行在内存中但是可以持久化到磁盘, 重启的时候可以再次加载进行使用 Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行 Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作 Redis支持数据的备份，即master-slave模式的数据备份 Redis数据类型Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好 . . . String(字符串)string是redis最基本的类型，你可以理解成与Memcached一模一样的类型， 一个key对应一个value。 string类型是二进制安全的。 二进制安全的意思是redis的string可以包含任何数据。 比如jpg图片或者序列化的对象 。 string类型是Redis最基本的数据类型，一个键最大能存储512MB。 实例 : 1234redis 127.0.0.1:6379&gt; SET name &quot;runoob&quot;OKredis 127.0.0.1:6379&gt; GET name&quot;runoob&quot; Hash（哈希表）Redis hash 是一个键名对集合。Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。 实例 :1234567891011redis&gt; HSET people jack &quot;Jack Sparrow&quot;(integer) 1redis&gt; HSET people gump &quot;Forrest Gump&quot;(integer) 1redis&gt; HGETALL people1) &quot;jack&quot; # 域2) &quot;Jack Sparrow&quot; # 值3) &quot;gump&quot;4) &quot;Forrest Gump&quot; 1234567redis&gt; HMSET pet dog &quot;doudou&quot; cat &quot;nounou&quot; # 一次设置多个域OKredis&gt; HMGET pet dog cat fake_pet # 返回值的顺序和传入参数的顺序一样1) &quot;doudou&quot;2) &quot;nounou&quot;3) (nil) # 不存在的域返回nil值 12345678redis&gt; HMSET website google www.google.com yahoo www.yahoo.comOKredis&gt; HGET website google&quot;www.google.com&quot;redis&gt; HGET website yahoo&quot;www.yahoo.com&quot; 12345redis&gt; HSET website google &quot;www.g.cn&quot; # 设置一个新域(integer) 1redis&gt; HSET website google &quot;www.google.com&quot; # 覆盖一个旧域(integer) 0 12345678910111213# 域存在redis&gt; HSET site redis redis.com(integer) 1redis&gt; HGET site redis&quot;redis.com&quot;# 域不存在redis&gt; HGET site mysql(nil) 以上实例中 hash 数据类型存储了包含用户脚本信息的用户对象。每个 hash 可以存储 232 -1 键值对（40多亿）。 List（列表）Redis 列表是简单的字符串列表，按照插入顺序排序。 你可以添加一个元素到列表的头部（左边lpush）或者尾部（右边rpush）。 实例 :1234567891011redis 127.0.0.1:6379&gt; lpush runoob redis(integer) 1redis 127.0.0.1:6379&gt; rpush runoob mongodb(integer) 2redis 127.0.0.1:6379&gt; lpush runoob rabitmq(integer) 3redis 127.0.0.1:6379&gt; lrange runoob 0 101) &quot;rabitmq&quot;2) &quot;redis&quot;3) &quot;mongodb&quot;redis 127.0.0.1:6379&gt; 列表最多可存储 232 - 1 元素 (4294967295, 每个列表可存储40多亿)。 Set（集合）Redis的Set是string类型的无序集合。 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 sadd 命令添加一个string元素到,key对应的set集合中，成功返回1, 如果元素已经在集合中返回0,key对应的set不存在返回错误。 sadd key member 实例 :12345678910111213redis 127.0.0.1:6379&gt; sadd runoob redis(integer) 1redis 127.0.0.1:6379&gt; sadd runoob mongodb(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 0redis 127.0.0.1:6379&gt; smembers runoob1) &quot;rabitmq&quot;2) &quot;mongodb&quot;3) &quot;redis&quot; 注意：以上实例中 rabitmq 添加了两次， 但根据集合内元素的唯一性，第二次插入的元素将被忽略。 集合中最大的成员数为 232 - 1(4294967295, 每个集合可存储40多亿个成员)。 zset(sorted set：有序集合)Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。 不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。 zset的成员是唯一的,但分数(score)却可以重复。 zadd 命令添加元素到集合，元素在集合中存在则更新对应scorezadd key score member实例 :12345678910111213redis 127.0.0.1:6379&gt; zadd runoob 1 redis(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 3 mongodb(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 4 rabitmq(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 7 rabitmq(integer) 0redis 127.0.0.1:6379&gt; ZRANGEBYSCORE runoob 0 10001) &quot;redis&quot;2) &quot;mongodb&quot;3) &quot;rabitmq&quot;]]></content>
+    <content type="text"><![CDATA[在ubuntu上 redis安装 : sudo apt-get install redis-server hiredis安装 : 先到 https://github.com/redis/hiredis 下载 hiredis , 然后 sudo make sudo make install sudo ldconfig]]></content>
       <categories>
         <category>DB</category>
       </categories>
@@ -2815,12 +2829,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[redis和hiredis安装教程]]></title>
-    <url>%2F2015%2F07%2F11%2Fredis_hiredis_install_tutorial%2F</url>
+    <title><![CDATA[redis概要之数据类型]]></title>
+    <url>%2F2015%2F07%2F11%2Fredis%E6%A6%82%E8%A6%81%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[在ubuntu上 redis安装 : sudo apt-get install redis-server hiredis安装 : 先到 https://github.com/redis/hiredis 下载 hiredis , 然后 sudo make sudo make install sudo ldconfig]]></content>
+    <content type="text"><![CDATA[Redis简介要义 Redis运行在内存中但是可以持久化到磁盘, 重启的时候可以再次加载进行使用 Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行 Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作 Redis支持数据的备份，即master-slave模式的数据备份 Redis数据类型Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好 . . . String(字符串)string是redis最基本的类型，你可以理解成与Memcached一模一样的类型， 一个key对应一个value。 string类型是二进制安全的。 二进制安全的意思是redis的string可以包含任何数据。 比如jpg图片或者序列化的对象 。 string类型是Redis最基本的数据类型，一个键最大能存储512MB。 实例 : 1234redis 127.0.0.1:6379&gt; SET name &quot;runoob&quot;OKredis 127.0.0.1:6379&gt; GET name&quot;runoob&quot; Hash（哈希表）Redis hash 是一个键名对集合。Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。 实例 :1234567891011redis&gt; HSET people jack &quot;Jack Sparrow&quot;(integer) 1redis&gt; HSET people gump &quot;Forrest Gump&quot;(integer) 1redis&gt; HGETALL people1) &quot;jack&quot; # 域2) &quot;Jack Sparrow&quot; # 值3) &quot;gump&quot;4) &quot;Forrest Gump&quot; 1234567redis&gt; HMSET pet dog &quot;doudou&quot; cat &quot;nounou&quot; # 一次设置多个域OKredis&gt; HMGET pet dog cat fake_pet # 返回值的顺序和传入参数的顺序一样1) &quot;doudou&quot;2) &quot;nounou&quot;3) (nil) # 不存在的域返回nil值 12345678redis&gt; HMSET website google www.google.com yahoo www.yahoo.comOKredis&gt; HGET website google&quot;www.google.com&quot;redis&gt; HGET website yahoo&quot;www.yahoo.com&quot; 12345redis&gt; HSET website google &quot;www.g.cn&quot; # 设置一个新域(integer) 1redis&gt; HSET website google &quot;www.google.com&quot; # 覆盖一个旧域(integer) 0 12345678910111213# 域存在redis&gt; HSET site redis redis.com(integer) 1redis&gt; HGET site redis&quot;redis.com&quot;# 域不存在redis&gt; HGET site mysql(nil) 以上实例中 hash 数据类型存储了包含用户脚本信息的用户对象。每个 hash 可以存储 232 -1 键值对（40多亿）。 List（列表）Redis 列表是简单的字符串列表，按照插入顺序排序。 你可以添加一个元素到列表的头部（左边lpush）或者尾部（右边rpush）。 实例 :1234567891011redis 127.0.0.1:6379&gt; lpush runoob redis(integer) 1redis 127.0.0.1:6379&gt; rpush runoob mongodb(integer) 2redis 127.0.0.1:6379&gt; lpush runoob rabitmq(integer) 3redis 127.0.0.1:6379&gt; lrange runoob 0 101) &quot;rabitmq&quot;2) &quot;redis&quot;3) &quot;mongodb&quot;redis 127.0.0.1:6379&gt; 列表最多可存储 232 - 1 元素 (4294967295, 每个列表可存储40多亿)。 Set（集合）Redis的Set是string类型的无序集合。 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 sadd 命令添加一个string元素到,key对应的set集合中，成功返回1, 如果元素已经在集合中返回0,key对应的set不存在返回错误。 sadd key member 实例 :12345678910111213redis 127.0.0.1:6379&gt; sadd runoob redis(integer) 1redis 127.0.0.1:6379&gt; sadd runoob mongodb(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 1redis 127.0.0.1:6379&gt; sadd runoob rabitmq(integer) 0redis 127.0.0.1:6379&gt; smembers runoob1) &quot;rabitmq&quot;2) &quot;mongodb&quot;3) &quot;redis&quot; 注意：以上实例中 rabitmq 添加了两次， 但根据集合内元素的唯一性，第二次插入的元素将被忽略。 集合中最大的成员数为 232 - 1(4294967295, 每个集合可存储40多亿个成员)。 zset(sorted set：有序集合)Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。 不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。 zset的成员是唯一的,但分数(score)却可以重复。 zadd 命令添加元素到集合，元素在集合中存在则更新对应scorezadd key score member实例 :12345678910111213redis 127.0.0.1:6379&gt; zadd runoob 1 redis(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 3 mongodb(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 4 rabitmq(integer) 1redis 127.0.0.1:6379&gt; zadd runoob 7 rabitmq(integer) 0redis 127.0.0.1:6379&gt; ZRANGEBYSCORE runoob 0 10001) &quot;redis&quot;2) &quot;mongodb&quot;3) &quot;rabitmq&quot;]]></content>
       <categories>
         <category>DB</category>
       </categories>
@@ -2961,6 +2975,21 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[GCC的分支预测优化__builtin_expect]]></title>
+    <url>%2F2015%2F04%2F11%2Flinux_gcc_builtin_expect%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[1. 为什么需要分支预测优化 将流水线引入cpu，可以提高cpu的效率。更简单的说，让cpu可以预先取出下一条指令，可以提供cpu的效率。如下图所示： 取指令 执行指令 输出结果 取指令 执行 可见，cpu流水钱可以减少cpu等待取指令的耗时，从而提高cpu的效率。如果存在跳转指令，那么预先取出的指令就无用了。cpu在执行当前指令时，从内存中取出了当前指令的下一条指令。执行完当前指令后，cpu发现不是要执行下一条指令,而是执行offset偏移处的指令。cpu只能重新从内存中取出offset偏移处的指令。因此，跳转指令会降低流水线的效率，也就是降低cpu的效率。 综上，在写程序时应该尽量避免跳转语句。那么如何避免跳转语句呢？答案就是使用__builtin_expect。 这个指令是gcc引入的，作用是”允许程序员将最有可能执行的分支告诉编译器”。 这个指令的写法为：builtin_expect(EXP, N)。意思是：EXP==N的概率很大。一般的使用方法是将builtin_expect指令封装为LIKELY和UNLIKELY宏。这两个宏的写法如下。 12#define LIKELY(x) __builtin_expect(!!(x), 1) //x很可能为真#define UNLIKELY(x) __builtin_expect(!!(x), 0) //x很可能为假 在很多源码如Linux内核、Glib等,我们都能看到likely()和unlikely()这两个宏,通常这两个宏定义是下面这样的形式。可以看出这2个宏都是使用函数 builtin_expect()实现的, builtin_expect()函数是GCC的一个内建函数(build-in function). 2. 函数声明函数__builtin_expect()是GCC v2.96版本引入的, 其声明如下: long __builtin_expect(long exp, long c); 2.1. 功能描述由于大部分程序员在分支预测方面做得很糟糕，所以GCC 提供了这个内建函数来帮助程序员处理分支预测. 你期望 exp 表达式的值等于常量 c, 看 c 的值, 如果 c 的值为0(即期望的函数返回值), 那么 执行 if 分支的的可能性小, 否则执行 else 分支的可能性小(函数的返回值等于第一个参数 exp). GCC在编译过程中，会将可能性更大的代码紧跟着前面的代码，从而减少指令跳转带来的性能上的下降, 达到优化程序的目的. 通常，你也许会更喜欢使用 gcc 的一个参数 ‘-fprofile-arcs’ 来收集程序运行的关于执行流程和分支走向的实际反馈信息,但是对于很多程序来说,数据是很难收集的。 2.2. 参数详解 exp exp 为一个整型表达式, 例如: (ptr != NULL) c c 必须是一个编译期常量, 不能使用变量 2.3. 返回值 返回值等于 第一个参数 exp 2.4. 使用方法与关键字if一起使用.首先要明确一点就是 if (value) 等价于 if (__builtin_expert(value, x)), 与x的值无关. 例子如下: 例子1 : 期望 x == 0, 所以执行func()的可能性小 12345678if (__builtin_expect(x, 0))&#123; func();&#125;else&#123; //do someting&#125; 例子2 : 期望 ptr !=NULL这个条件成立(1), 所以执行func()的可能性小 12345678if (__builtin_expect(ptr != NULL, 1))&#123; //do something&#125;else&#123; func();&#125; 例子3 : 引言中的likely()和unlikely()宏 首先,看第一个参数!!(x), 他的作用是把(x)转变成”布尔值”, 无论(x)的值是多少 !(x)得到的是true或false, !!(x)就得到了原值的”布尔值” 使用 likely() ，执行 if 后面的语句 的机会更大，使用 unlikely()，执行 else 后面的语句的机会更大。 12345678910111213141516171819202122#define likely(x) __builtin_expect(!!(x), 1)#define unlikely(x) __builtin_expect(!!(x), 0)int main(char *argv[], int argc)&#123; int a; /* Get the value from somewhere GCC can't optimize */ a = atoi (argv[1]); if (unlikely (a == 2)) &#123; a++; &#125; else &#123; a--; &#125; printf ("%d\n", a); return 0;&#125; 3. RATIONALE(原理)if else 句型编译后, 一个分支的汇编代码紧随前面的代码,而另一个分支的汇编代码需要使用JMP指令才能访问到. 很明显通过JMP访问需要更多的时间, 在复杂的程序中,有很多的if else句型,又或者是一个有if else句型的库函数,每秒钟被调用几万次, 通常程序员在分支预测方面做得很糟糕, 编译器又不能精准的预测每一个分支,这时JMP产生的时间浪费就会很大, 函数 __builtin_expert() 就是用来解决这个问题的.]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[智能指针笔记]]></title>
     <url>%2F2015%2F04%2F11%2Fsmart_pointer_note%2F</url>
 
@@ -2988,21 +3017,6 @@
         <tag>CPP</tag>
         <tag>Linux</tag>
         <tag>MultiThread</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[GCC的分支预测优化__builtin_expect]]></title>
-    <url>%2F2015%2F04%2F11%2Flinux_gcc_builtin_expect%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[1. 为什么需要分支预测优化 将流水线引入cpu，可以提高cpu的效率。更简单的说，让cpu可以预先取出下一条指令，可以提供cpu的效率。如下图所示： 取指令 执行指令 输出结果 取指令 执行 可见，cpu流水钱可以减少cpu等待取指令的耗时，从而提高cpu的效率。如果存在跳转指令，那么预先取出的指令就无用了。cpu在执行当前指令时，从内存中取出了当前指令的下一条指令。执行完当前指令后，cpu发现不是要执行下一条指令,而是执行offset偏移处的指令。cpu只能重新从内存中取出offset偏移处的指令。因此，跳转指令会降低流水线的效率，也就是降低cpu的效率。 综上，在写程序时应该尽量避免跳转语句。那么如何避免跳转语句呢？答案就是使用__builtin_expect。 这个指令是gcc引入的，作用是”允许程序员将最有可能执行的分支告诉编译器”。 这个指令的写法为：builtin_expect(EXP, N)。意思是：EXP==N的概率很大。一般的使用方法是将builtin_expect指令封装为LIKELY和UNLIKELY宏。这两个宏的写法如下。 12#define LIKELY(x) __builtin_expect(!!(x), 1) //x很可能为真#define UNLIKELY(x) __builtin_expect(!!(x), 0) //x很可能为假 在很多源码如Linux内核、Glib等,我们都能看到likely()和unlikely()这两个宏,通常这两个宏定义是下面这样的形式。可以看出这2个宏都是使用函数 builtin_expect()实现的, builtin_expect()函数是GCC的一个内建函数(build-in function). 2. 函数声明函数__builtin_expect()是GCC v2.96版本引入的, 其声明如下: long __builtin_expect(long exp, long c); 2.1. 功能描述由于大部分程序员在分支预测方面做得很糟糕，所以GCC 提供了这个内建函数来帮助程序员处理分支预测. 你期望 exp 表达式的值等于常量 c, 看 c 的值, 如果 c 的值为0(即期望的函数返回值), 那么 执行 if 分支的的可能性小, 否则执行 else 分支的可能性小(函数的返回值等于第一个参数 exp). GCC在编译过程中，会将可能性更大的代码紧跟着前面的代码，从而减少指令跳转带来的性能上的下降, 达到优化程序的目的. 通常，你也许会更喜欢使用 gcc 的一个参数 ‘-fprofile-arcs’ 来收集程序运行的关于执行流程和分支走向的实际反馈信息,但是对于很多程序来说,数据是很难收集的。 2.2. 参数详解 exp exp 为一个整型表达式, 例如: (ptr != NULL) c c 必须是一个编译期常量, 不能使用变量 2.3. 返回值 返回值等于 第一个参数 exp 2.4. 使用方法与关键字if一起使用.首先要明确一点就是 if (value) 等价于 if (__builtin_expert(value, x)), 与x的值无关. 例子如下: 例子1 : 期望 x == 0, 所以执行func()的可能性小 12345678if (__builtin_expect(x, 0))&#123; func();&#125;else&#123; //do someting&#125; 例子2 : 期望 ptr !=NULL这个条件成立(1), 所以执行func()的可能性小 12345678if (__builtin_expect(ptr != NULL, 1))&#123; //do something&#125;else&#123; func();&#125; 例子3 : 引言中的likely()和unlikely()宏 首先,看第一个参数!!(x), 他的作用是把(x)转变成”布尔值”, 无论(x)的值是多少 !(x)得到的是true或false, !!(x)就得到了原值的”布尔值” 使用 likely() ，执行 if 后面的语句 的机会更大，使用 unlikely()，执行 else 后面的语句的机会更大。 12345678910111213141516171819202122#define likely(x) __builtin_expect(!!(x), 1)#define unlikely(x) __builtin_expect(!!(x), 0)int main(char *argv[], int argc)&#123; int a; /* Get the value from somewhere GCC can't optimize */ a = atoi (argv[1]); if (unlikely (a == 2)) &#123; a++; &#125; else &#123; a--; &#125; printf ("%d\n", a); return 0;&#125; 3. RATIONALE(原理)if else 句型编译后, 一个分支的汇编代码紧随前面的代码,而另一个分支的汇编代码需要使用JMP指令才能访问到. 很明显通过JMP访问需要更多的时间, 在复杂的程序中,有很多的if else句型,又或者是一个有if else句型的库函数,每秒钟被调用几万次, 通常程序员在分支预测方面做得很糟糕, 编译器又不能精准的预测每一个分支,这时JMP产生的时间浪费就会很大, 函数 __builtin_expert() 就是用来解决这个问题的.]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>CPP</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>

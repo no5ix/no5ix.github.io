@@ -1411,6 +1411,7 @@ categories:
 
 # C1
 
+## a
 
 abolish v.
 abortion n.
@@ -1493,7 +1494,6 @@ array n.
 articulate v.
 ash n.
 aspiration n.
-© Oxford University Press 4 / 8 The Oxford 5000™ by CEFR level (American English)
 aspire v.
 assassination n.
 assault n., v.
@@ -1516,6 +1516,10 @@ autonomy n.
 autumn n.
 availability n.
 await v.
+
+
+## b
+
 backdrop n.
 backing n.
 backup n.
@@ -1525,7 +1529,7 @@ bankruptcy n.
 banner n.
 bare adj.
 barrel n.
-bass1 n.
+bass n.
 bat v.
 battlefield n.
 bay n.
@@ -1556,7 +1560,7 @@ booking n.
 boom n.
 bounce v.
 boundary n.
-bow1 v., n.
+bow v., n.
 breach n., v.
 breakdown n.
 breakthrough n.
@@ -1571,6 +1575,10 @@ burden n.
 bureaucracy n.
 burial n.
 burst v.
+
+
+## c
+
 cabinet n.
 calculation n.
 canvas n.
@@ -1732,6 +1740,10 @@ curiosity n.
 custody n.
 cutting n.
 cynical adj.
+
+
+## d
+
 dam n.
 damaging adj.
 dawn n.
@@ -1774,7 +1786,6 @@ detain v.
 detection n.
 detention n.
 deteriorate v.
-© Oxford University Press 5 / 8 The Oxford 5000™ by CEFR level (American English)
 devastate v.
 devil n.
 devise v.
@@ -1829,6 +1840,10 @@ dub v.
 dumb adj.
 duo n.
 dynamic n.
+
+
+## e
+
 earnings n.
 ease n., v.
 echo v., n.
@@ -1901,6 +1916,10 @@ exploitation n.
 explosive adj., n.
 extract v.
 extremist n.
+
+
+## f
+
 facilitate v.
 faction n.
 fade v.
@@ -1945,6 +1964,10 @@ frustration n.
 functional adj.
 fundraising n.
 funeral n.
+
+
+## gh
+
 gambling n.
 gathering n.
 gaze n., v.
@@ -2003,6 +2026,10 @@ humanitarian adj.
 humanity n.
 humble adj.
 hydrogen n.
+
+
+## i
+
 identification n.
 ideological adj.
 ideology n.
@@ -2055,7 +2082,6 @@ insult n., v.
 intact adj.
 intake n.
 integral adj.
-© Oxford University Press 6 / 8 The Oxford 5000™ by CEFR level (American English)
 integrated adj.
 integration n.
 integrity n.
@@ -2086,6 +2112,10 @@ ironically adv.
 irony n.
 irrelevant adj.
 isolation n.
+
+
+## jkl
+
 judicial adj.
 jurisdiction n.
 just adj.
@@ -2138,6 +2168,10 @@ longtime adj.
 loom v.
 loop n.
 loyalty n.
+
+
+## m
+
 machinery n.
 magical adj.
 magnetic adj.
@@ -2206,6 +2240,10 @@ morality n.
 motive n.
 municipal adj.
 mutual adj.
+
+
+## no
+
 namely adv.
 nationwide adj.
 naval adj.
@@ -2259,6 +2297,10 @@ oversee v.
 overturn v.
 overwhelm v.
 overwhelming adj.
+
+
+## p
+
 pad n.
 parameter n.
 parental adj.
@@ -2336,7 +2378,6 @@ processor n.
 proclaim v.
 productive adj.
 productivity n.
-© Oxford University Press 7 / 8 The Oxford 5000™ by CEFR level (American English)
 profitable adj.
 profound adj.
 projection n.
@@ -2359,6 +2400,10 @@ psychiatric adj.
 pulse n.
 pump v., n.
 punch n., v.
+
+
+## qr
+
 query n.
 quest n.
 quota n.
@@ -2448,6 +2493,10 @@ rotate v.
 rotation n.
 ruling n.
 rumor n.
+
+
+## s
+
 sacred adj.
 sacrifice n., v.
 saint n.
@@ -2593,6 +2642,10 @@ symbolic adj.
 syndrome n.
 synthesis n.
 systematic adj.
+
+
+## t
+
 tackle n.
 tactic n.
 tactical adj.
@@ -2616,7 +2669,6 @@ thereafter adv.
 thereby adv.
 thoughtful adj.
 thought-provoking adj.
-© Oxford University Press 8 / 8 The Oxford 5000™ by CEFR level (American English)
 thread n.
 threshold n.
 thrilled adj.
@@ -2661,6 +2713,10 @@ tumor n.
 turnout n.
 turnover n.
 twist v., n.
+
+
+## uvwy
+
 unconstitutional adj.
 undergraduate n.
 underlying adj.

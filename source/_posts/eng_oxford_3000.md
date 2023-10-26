@@ -283,9 +283,15 @@ categories:
 - `praise` [preɪz] n. 赞扬，夸奖； v. 赞美，夸奖。   [**unfamiliar**]
     - The teacher praised the student for his hard work. 
     - > 老师因为学生的努力工作而`表扬`了他。
-- `preserve` [prɪˈzɜ:rv] v. 保存，保护，腌制。  [**unfamiliar**]  (`reserve` [rɪˈzɜ:rv] n. 储备，保留； v. 预订，保留。)
-    - She learned how to preserve fruits and vegetables for the winter. 
+- `preserve` [prɪˈzɜ:rv] v. 维护, 保存(食品)，保护，腌制。  [**unfamiliar**]  (`reserve` [rɪˈzɜ:rv] v. 预订，保留。n. 储备，保留； `conserve` v. 保护，保存；节省，节约)
+    - We will do everything to `preserve` peace. 
+    - > 我们将竭尽全力维护和平。
+    - She learned how to `preserve` fruits and vegetables for the winter. 
     - > 她学会了如何保存水果和蔬菜过冬。
+    - I'll reserve a table for five. 
+    - > 我要预订一个5人的餐位。
+    - We should `conserve` oil and gas by making full use of other energy sources. 
+    - > 我们应该通过充分利用其他能源节约石油和天然气。
 - `prime` [praɪm] adj. 主要的，最好的，黄金时期的。  [**unfamiliar**]
     - He was in his prime when he won the championship. 
     - > 他在赢得冠军时正值黄金年华。
@@ -764,6 +770,9 @@ categories:
 
 # B1
 
+
+## acd
+
 - `alcoholic` [ˌælkəˈhɒlɪk]: 
     - He is an alcoholic and needs to undergo alcoholism treatment.
     - > 他是一个`酗酒者`，需要戒酒治疗。
@@ -778,10 +787,6 @@ categories:
 - `authority` [ɔːˈθɒrəti]: 
     - The government has the authority to make laws and regulations.
     - > 政府有权利制定法律和规定。
-
-
-## cd
-
 - `clause` [klɔːz]: 
     - This contract has a special clause that needs to be paid attention to.
     - > 这个合同有一个特别的`条款`，需要注意。
@@ -939,10 +944,10 @@ categories:
 - `hurricane` [ˈhʌrɪkən]: 
     - A hurricane is a very strong weather phenomenon that can bring destructive impacts.
     - > `飓风`是一种非常强烈的天气现象，可以带来破坏性的影响。
-- `imaginary` [ɪˈmædʒɪnəri]: adj. 想象的，虚构的；虚数的
+- `imaginary` [ɪˈmædʒɪnəri]: adj. 想象的，虚构的；虚数的 (`imagination` n. 想象力)
     - Lots of children have imaginary friends.
     - > 许多孩子都有`假想的`朋友。
-    - Children often have various imaginations and fantasies.
+    - Children often have various `imaginations` and fantasies.
     - > 小孩子们常常有各种各样的想象和幻想。
 - `imagination` [ɪˌmædʒɪˈneɪʃn] n. 想象力；幻想
     - Her imagination was sparked by the fantasy novel.
@@ -1076,7 +1081,7 @@ categories:
         - I tried to convince my friend to go on a trip with me by showing him all the amazing places we could visit.
     - `Persuade`（劝说）则强调使用说服性的手段、技巧或情感来影响别人的决策或行为。它通常涉及利用情感、感情或说服力来说服他人。例如：
         - The salesperson persuaded me to buy the new product by highlighting its benefits and offering a special discount.
-    - > 总的来说，"convince" 更加侧重于通过`理性和逻辑`(证据/理由)来说服他人，而 "persuade" 则更加强调使用`情感`和说服技巧来影响他人的决策。然而，这两个词在某些情境下可以互换使用，具体取决于语境和个人偏好。
+    - > 总的来说，"convince" 更加侧重于通过`理性和逻辑`(证据/理由)来说服他人，而 "persuade" 则更加强调使用`情感`和说服技巧来影响他人的决策。不过，这两个词在某些情境下可以互换使用，具体取决于语境和个人偏好。
 - `pleasant` [ˈpleznt]: 
     - The atmosphere of this restaurant is very pleasant, and the service is also attentive.
     - > 这个餐厅的氛围非常`愉快`，服务也很周到。

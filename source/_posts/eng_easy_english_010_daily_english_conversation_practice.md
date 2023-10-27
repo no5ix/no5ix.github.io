@@ -61,7 +61,44 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 
 
 # 04:27 Do you live here?
+
+- Excuse me. Do you live here `by any chance`( 也许[用于询问]; 万一 )?
+- > Yes, I do. How can I help you?
+- oh great my wife and i are visiting for the week and i'm looking for a local to help us get to know the town and what's good to see. is that something you can help with ?
+- > Of course I've lived here all my life. I can tell you a thing or two.
+- Wonderful.
+- > Personally, this is the most wonderful place to visit.we, `by far`(到目前为止), have the best walks because they go all along the top of the `cliffs`(n. 悬崖) and you can see the most extensive range of wildlife, we have a remarkable display of birds some leaving and other `seasonal`(adj. 季节性的). And an incredible `array`(n. 一系列, 数组) of butterflies.
+- Oh, that sounds great.We love to walk and we love nature.We'll make sure we check them out.
+- > Then, if you `stop at`(逗留在) the beach, you'll be able to feel the softest sand between your toes.
+- That sounds heavenly.
+- > And you mustn't leave without trying the `gelato`(n. 意大利式冰淇淋 /dʒəˈlɑːtəʊ/) made here in the town. I can assure you, it is the tastiest `around`(四处, 在周围). Once you've tried one, you'll be back every day of your visit.
+- Thank you so much for your help. I think we'll have a fantastic time here.I just hope the weather `holds off`(延迟行动).
+- > oh i'm sure it will. it's known as the sunniest spot around these `parts`(n. 世界、国家或城镇等的）区域，地区).
+- That's good to know. Thank you so much.
+- > You're very welcome.
+
+
 # 06:30 Spending habits and saving money
+
+- Oh wow, look at that jacket. I've wanted one like that forever(我一直都想要那样的东西。). I think i'll go buy it.Can We go into the store?
+- > Yeah, that's nice. Let's take a look. 
+- Oh, here it is. Let me try it on. 
+- > Looks good. Where is the price tag? oh my `goodness`(用作god的代替语)! 200 dollars!
+- That's a lot, but I need it. I think I'll buy it anyway. 
+- > Are you sure ? you can buy that somewhere else for a `fraction`(小数, 小部分) of the cost.
+- No, I like `splashing the cash`(挥霍钱财). Last week I went to buy some new bed `sheets`(床单). they cost 150 dollars in the end.
+- > What?
+- they were just so comfortable.
+- > that's so much money. Do you ever have any money left at the end of the month?
+- No, I usually spent it. Why? Do you?
+- > Always buy items new or at full price is not necessary.If you wait a few weeks, that jacket will be `on sale`(特价销售).
+- That's a point. how else you save money? 
+- > I only generally buy things I need, and for items I want, I looked to buy second-hand.
+- Often, they're just as good as new.
+- > If not, I `scour`(vt. 冲刷/ˈskaʊər/) the sale items.And I find it quite fun `coming across`(遇到) an absolute `Bargain`(讨价还价, 便宜货). Oh, okay, that's a good idea.It also means I can put money `aside`(adv.在旁边，到（或向）一边；积攒，留出；除……以外)],  into my savings account or towards a holiday.
+- Now we're talking(现在我们说到点子上了). Maybe I don't need this jacket after all.
+
+
 # 08:30 Plans for the weekend.
 # 09:46 Comparing Two countries
 # 11:54 Talking about life history

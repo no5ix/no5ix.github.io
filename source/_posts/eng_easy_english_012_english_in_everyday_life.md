@@ -23,14 +23,13 @@ categories:
 - > 75 dollars? Oh my goodness. It's beautiful, but I can't afford that.My mother will be disappointed, but never mind.I'll find something at another stall.Thank you very much for your help.
 - How much are you willing to pay? I can't sell myself short.
 - > Oh, I can pay a Dollar more than forty dollars.
-- Okay, that's too low. I cannot let it go for that.No problem, 
-- > I understand.
+- Okay, that's too low. I cannot let it go for that.
+- No problem, I understand.
 - How about sixty dollars?
-- > Unfortunately, that's still too much.
-- I could stretch to 45 dollars.
+- > Unfortunately, that's still too much.I could stretch to 45 dollars.
 - > 45 dollars? no, no, no.Fifty dollars, that's my final offer. Take it or leave it.
 - That's great. I'll take it. My mother will be delighted.
-- > Of course, as here, and I'll wrap it up for you.
+- > Of course, pass it here, and I'll wrap it up for you.
 - Sir, here you go.
 - > Thank you so much. Here's fifty dollars.
 - Thank you. Enjoy the rest of your day. 

@@ -304,6 +304,182 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/07/21/actor_vs_csp_mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/21/actor_vs_csp_mode/" itemprop="url">Actor模型 vs. CSP模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-21T02:53:55+00:00">
+                2021-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <p>Akka/Erlang 的 actor 模型与 Go 语言的协程 Goroutine 与通道 Channel 代表的 CSP(Communicating Sequential Processes) 模型有什么区别呢？</p>
+<p>首先这两者都是并发模型的解决方案，我们看看 Actor 和 Channel 这两个方案的不同：</p>
+<h1 id="Actor-模型"><a href="#Actor-模型" class="headerlink" title="Actor 模型"></a>Actor 模型</h1><p>在 Actor 模型中，主角是 Actor，类似一种 worker，Actor 彼此之间直接发送消息，不需要经过什么中介，消息是异步发送和处理的：</p>
+<p><img src="/img/actor_vs_csp_mode/actors_mode.png" alt></p>
+<p>Actor 模型描述了一组为了避免并发编程的常见问题的公理:</p>
+<ol>
+<li>所有 Actor 状态是 Actor 本地的，外部无法访问。  </li>
+<li>Actor 必须只有通过消息传递进行通信。　　  </li>
+<li>一个 Actor 可以响应消息: 推出新 Actor, 改变其内部状态, 或将消息发送到一个或多个其他参与者。  </li>
+<li>Actor 可能会堵塞自己, 但 Actor 不应该堵塞它运行的线程。</li>
+</ol>
+<p>更多可见 <a href="http://www.jdon.com/actors.html" target="_blank" rel="noopener">Actor 模型专题</a></p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/06/11/cpp_compile_options/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1260,208 +1436,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/04/18/self_cultivation_encoding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/18/self_cultivation_encoding/" itemprop="url">服务器开发自我修养专栏-编码知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-18T19:08:06+00:00">
-                2021-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
-                    <span itemprop="name">Self-cultivation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="编码知识"><a href="#编码知识" class="headerlink" title="编码知识"></a>编码知识</h1><h2 id="Base64-的原理？编码后比编码前是大了还是小了。"><a href="#Base64-的原理？编码后比编码前是大了还是小了。" class="headerlink" title="Base64 的原理？编码后比编码前是大了还是小了。"></a>Base64 的原理？编码后比编码前是大了还是小了。</h2><p>结论:</p>
-<p>大了. 因为Base64 编码本质上是一种将二进制数据转成文本数据的方案。<strong>对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。</strong>也就是说, 每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。</p>
-<h3 id="base64的原理"><a href="#base64的原理" class="headerlink" title="base64的原理"></a>base64的原理</h3><p>Base64 编码之所以称为 Base64，是因为其使用 64 个字符来对任意数据进行编码，同理有 Base32、Base16 编码。标准 Base64 编码使用的 64 个字符为：<br><img src="/img/noodle_plan/http/XHFMRvxfez4OVtr.jpg" alt></p>
-<p>这 64 个字符是各种字符编码（比如 ASCII 编码）所使用字符的子集，基本，并且可打印。唯一有点特殊的是最后两个字符，因对最后两个字符的选择不同，Base64 编码又有很多变种，比如 Base64 URL 编码。</p>
-<p>Base64 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（2 的 6 次方 = 64）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。</p>
-<p>假设我们要对 <code>Hello!</code> 进行 Base64 编码，按照 ASCII 表，其转换过程如下图所示：<br><img src="/img/noodle_plan/http/tJnClQsjc4WMGhB.jpg" alt></p>
-<p>可知 <code>Hello!</code> 的 Base64 编码结果为 <code>SGVsbG8h</code> ，原始字符串长度为 6 个字符，编码后长度为 8 个字符，每 3 个原始字符经 Base64 编码成 4 个字符，编码前后长度比 4/3，这个长度比很重要 - 比原始字符串长度短，则需要使用更大的编码字符集，这并不我们想要的；长度比越大，则需要传输越多的字符，传输时间越长。Base64 应用广泛的原因是在字符集大小与长度比之间取得一个较好的平衡，适用于各种场景。</p>
-<p>是不是觉得 Base64 编码原理很简单？</p>
-<p>但这里需要注意一个点：Base64 编码是每 3 个原始字符编码成 4 个字符，如果原始字符串长度不能被 3 整除，那怎么办？使用 0 值来补充原始字符串。</p>
-<p>以 <code>Hello!!</code> 为例，其转换过程为：<br><img src="/img/noodle_plan/http/5URB8nVis9ljwYe.jpg" alt></p>
-<p><em>注：图表中蓝色背景的二进制 0 值是额外补充的。</em></p>
-<p><code>Hello!!</code> Base64 编码的结果为 <code>SGVsbG8hIQAA</code> 。最后 2 个零值只是为了 Base64 编码而补充的，在原始字符中并没有对应的字符，那么 Base64 编码结果中的最后两个字符 <code>AA</code> 实际不带有效信息，所以需要特殊处理，以免解码错误。</p>
-<p>标准 Base64 编码通常用 <code>=</code> 字符来替换最后的 <code>A</code>，即编码结果为 <code>SGVsbG8hIQ==</code>。因为 <code>=</code> 字符并不在 Base64 编码索引表中，其意义在于结束符号，在 Base64 解码时遇到 <code>=</code> 时即可知道一个 Base64 编码字符串结束。</p>
-<p>如果 Base64 编码字符串不会相互拼接再传输，那么最后的 <code>=</code> 也可以省略，解码时如果发现 Base64 编码字符串长度不能被 4 整除，则先补充 <code>=</code> 字符，再解码即可。</p>
-<p>解码是对编码的逆向操作，但注意一点：<strong>对于最后的两个 <code>=</code> 字符，转换成两个 <code>A</code> 字符，再转成对应的两个 6 比特二进制 0 值，接着转成原始字符之前，需要将最后的两个 6 比特二进制 0 值丢弃，因为它们实际上不携带有效信息</strong>。</p>
-<h2 id="utf8编码和unicode字符集"><a href="#utf8编码和unicode字符集" class="headerlink" title="utf8编码和unicode字符集"></a>utf8编码和unicode字符集</h2><p>总结:  </p>
-<ul>
-<li>unicode是个字符集, 只是一个符号对应表, 它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储</li>
-<li>utf8是unicode符号具体的编码方式, 规定了该怎么存储</li>
-</ul>
-<p>说到utf8，就不得不说一下unicode了。  Unicode是一个很大的集合，每一个unicode对应一个符号，不管是中文的汉字，英文字符，日文，韩文等等。现在的规模可以容纳100多万个符号。每个符号的编码都不一样，比如，U+0639表示阿拉伯字母 Ain，U+0041表示英语的大写字母A，U+4E25表示汉字“严”。具体的符号对应表，可以查询unicode.org，或者专门的汉字对应表。</p>
-<p><strong>需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。</strong></p>
-<p>比如，汉字“严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。</p>
-<p>这里就有两个严重的问题，第一个问题是：如何才能区别unicode和ascii？计算机怎么知道三个字节表示一个符号，而不是分别表示三个符号呢？第二个问题是：我们已经知道，英文字母只用一个字节表示就够了，如果unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有二到三个字节是0，这对于存储来说是极大的浪费，文本文件的大小会因此大出二三倍，这是无法接受的。</p>
-<p>它们造成的结果是：</p>
-<p>1）出现了unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示unicode。</p>
-<p>2）unicode在很长一段时间内无法推广，直到互联网的出现。</p>
-<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种unicode的实现方式。其他实现方式还包括UTF-16和UTF-32，不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。</p>
-<p>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。</p>
-<p>UTF-8的编码规则很简单，只有二条：</p>
-<ul>
-<li><p>1）对于单字节的符号，字节的第一位（字节的最高位）设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。</p>
-</li>
-<li><p>2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p>
-</li>
-</ul>
-<p>下表总结了编码规则，字母x表示可用编码的位。</p>
-<p>Unicode符号范围 UTF-8编码方式(十六进制) | （二进制）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">—————+———————————————————————</span><br><span class="line">0000 0000-0000 007F | 0xxxxxxx</span><br><span class="line">0000 0080-0000 07FF | 110xxxxx 10xxxxxx</span><br><span class="line">0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br></pre></td></tr></table></figure></p>
-<p>下面，还是以汉字“严”为例，演示如何实现UTF-8编码：<br>已知“严”的unicode是4E25（100111000100101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是“11100100 10111000 10100101”，转换成十六进制就是E4B8A5。</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1532,7 +1506,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">252</span>
+                <span class="site-state-item-count">253</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

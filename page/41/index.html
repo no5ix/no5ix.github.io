@@ -304,7 +304,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/python和lua数据类型的比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -323,7 +323,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
+                <a class="post-title-link" href="/2015/07/11/python和lua数据类型的比较/" itemprop="url">python和lua数据类型的比较</a></h1>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T21:56:12+00:00">
-                2015-06-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
+                2015-07-11
               </time>
             
 
@@ -358,8 +358,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NP/" itemprop="url" rel="index">
-                    <span itemprop="name">NP</span>
+                  <a href="/categories/Script/" itemprop="url" rel="index">
+                    <span itemprop="name">Script</span>
                   </a>
                 </span>
 
@@ -410,16 +410,39 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
         
-          <h1 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件:"></a>socket可读的条件:</h1><ul>
-<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1.</li>
-<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
-<li><strong>给监听套接字准备好新连接</strong></li>
-<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
           
-          <!--/noindex-->
+            <h1 id="Python比较特殊的数据类型："><a href="#Python比较特殊的数据类型：" class="headerlink" title="Python比较特殊的数据类型："></a>Python比较特殊的数据类型：</h1><h2 id="List"><a href="#List" class="headerlink" title="List  []"></a>List  []</h2><p>例如 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">list = [ &apos;runoob&apos;, 786 , 2.23, &apos;john&apos;, 70.2 ]</span><br><span class="line">tinylist = [123, &apos;john&apos;]</span><br><span class="line"> </span><br><span class="line">print list               # 输出完整列表</span><br><span class="line">print list[0]            # 输出列表的第一个元素</span><br><span class="line">print list[1:3]          # 输出第二个至第三个的元素 </span><br><span class="line">print list[2:]           # 输出从第三个开始至列表末尾的所有元素</span><br><span class="line">print tinylist * 2       # 输出列表两次</span><br><span class="line">print list + tinylist    # 打印组合的列表</span><br></pre></td></tr></table></figure></p>
+<p>以上实例输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2]</span><br><span class="line">runoob</span><br><span class="line">[786, 2.23]</span><br><span class="line">[2.23, &apos;john&apos;, 70.2]</span><br><span class="line">[123, &apos;john&apos;, 123, &apos;john&apos;]</span><br><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2, 123, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
+<h2 id="Tuple（元祖）-相当于只读列表，不可以二次赋值"><a href="#Tuple（元祖）-相当于只读列表，不可以二次赋值" class="headerlink" title="Tuple（元祖）(),相当于只读列表，不可以二次赋值"></a>Tuple（元祖）(),相当于只读列表，不可以二次赋值</h2><p><code>tuple = ( &#39;runoob&#39;, 786 , 2.23, &#39;john&#39;, 70.2 )</code>, 除了元祖用()而list用[], 而且元祖只是可读的, 其他的跟list一毛一样</p>
+<h2 id="dictionary（字典）-，key值对"><a href="#dictionary（字典）-，key值对" class="headerlink" title="dictionary（字典）{}，key值对"></a>dictionary（字典）{}，key值对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">dict[&apos;one&apos;] = &quot;This is one&quot;</span><br><span class="line">dict[2] = &quot;This is two&quot;</span><br><span class="line"> </span><br><span class="line">tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print dict[&apos;one&apos;]          # 输出键为&apos;one&apos; 的值</span><br><span class="line">print dict[2]              # 输出键为 2 的值</span><br><span class="line">print tinydict             # 输出完整的字典</span><br><span class="line">print tinydict.keys()      # 输出所有键</span><br><span class="line">print tinydict.values()    # 输出所有值</span><br></pre></td></tr></table></figure>
+<p>输出结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This is one</span><br><span class="line">This is two</span><br><span class="line">&#123;&apos;dept&apos;: &apos;sales&apos;, &apos;code&apos;: 6734, &apos;name&apos;: &apos;john&apos;&#125;</span><br><span class="line">[&apos;dept&apos;, &apos;code&apos;, &apos;name&apos;]</span><br><span class="line">[&apos;sales&apos;, 6734, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
+<h1 id="lua比较特殊的数据类型"><a href="#lua比较特殊的数据类型" class="headerlink" title="lua比较特殊的数据类型"></a>lua比较特殊的数据类型</h1><h2 id="lua变量"><a href="#lua变量" class="headerlink" title="lua变量"></a>lua变量</h2><blockquote>
+<p>变量在使用前，必须在代码中进行声明，即创建该变量。</p>
+</blockquote>
+<p>编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。</p>
+<p>Lua 变量有三种类型：全局变量、局部变量、表中的域。</p>
+<blockquote>
+<p>Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。</p>
+</blockquote>
+<p>局部变量的作用域为从声明位置开始到所在语句块结束。</p>
+<p>变量的默认值均为 nil。</p>
+<figure class="highlight plain"><figcaption><span>test.lua 文件脚本</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a = 5               -- 全局变量</span><br><span class="line">local b = 5         -- 局部变量</span><br><span class="line"></span><br><span class="line">function joke()</span><br><span class="line">    c = 5           -- 全局变量</span><br><span class="line">    local d = 6     -- 局部变量</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">joke()</span><br><span class="line">print(c,d)          --&gt; 5 nil</span><br><span class="line"></span><br><span class="line">do </span><br><span class="line">    local a = 6     -- 局部变量</span><br><span class="line">    b = 6           -- 全局变量</span><br><span class="line">    print(a,b);     --&gt; 6 6</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">print(a,b)      --&gt; 5 6</span><br></pre></td></tr></table></figure>
+<p>执行以上实例输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lua test.lua </span><br><span class="line">5	nil</span><br><span class="line">6	6</span><br><span class="line">5	6</span><br></pre></td></tr></table></figure>
+<h2 id="lua的特有的东西table（表）"><a href="#lua的特有的东西table（表）" class="headerlink" title="lua的特有的东西table（表）"></a>lua的特有的东西table（表）</h2><p>在 Lua 里，table 的创建是通过”构造表达式”来完成，</p>
+<p>最简单构造表达式是{}，用来创建一个空表。</p>
+<p>也可以在表里添加一些数据，直接初始化表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 创建一个空的 table</span><br><span class="line">local tbl1 = &#123;&#125;</span><br><span class="line"> </span><br><span class="line">-- 直接初始表</span><br><span class="line">local tbl2 = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- table_test.lua 脚本文件</span><br><span class="line">a = &#123;&#125;</span><br><span class="line">a[&quot;key&quot;] = &quot;value&quot;</span><br><span class="line">key = 10</span><br><span class="line">a[key] = 22</span><br><span class="line">a[key] = a[key] + 11</span><br><span class="line">for k, v in pairs(a) do</span><br><span class="line">    print(k .. &quot; : &quot; .. v)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test.lua </span><br><span class="line">key : value</span><br><span class="line">10 : 33</span><br></pre></td></tr></table></figure></p>
+<p>不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- table_test2.lua 脚本文件</span><br><span class="line">local tbl = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br><span class="line">for key, val in pairs(tbl) do</span><br><span class="line">    print(&quot;Key&quot;, key)</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test2.lua </span><br><span class="line">Key	1</span><br><span class="line">Key	2</span><br><span class="line">Key	3</span><br><span class="line">Key	4</span><br></pre></td></tr></table></figure></p>
+<p>table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- table_test3.lua 脚本文件</span><br><span class="line">a3 = &#123;&#125;</span><br><span class="line">for i = 1, 10 do</span><br><span class="line">    a3[i] = i</span><br><span class="line">end</span><br><span class="line">a3[&quot;key&quot;] = &quot;val&quot;</span><br><span class="line">print(a3[&quot;key&quot;])</span><br><span class="line">print(a3[&quot;none&quot;])</span><br></pre></td></tr></table></figure></p>
+<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test3.lua </span><br><span class="line">val</span><br><span class="line">nil</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
 
@@ -440,7 +463,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
       </footer>
       
-    </p></div>
+    </div>
     
     
     
@@ -588,6 +611,176 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 </ul>
 <p>ready list中的成员是interest list的子集。</p>
 <p>对于由epoll检查的每一个文件描述符，我们可以指定一个位掩码来表示我们感兴趣的事<br>件。这些位掩码同poll()所使用的位掩码有着紧密的关联。</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/22/socket可读可写条件与非阻塞connect或accept浅析/" itemprop="url">socket可读可写条件与非阻塞connect或accept浅析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T21:56:12+00:00">
+                2015-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NP/" itemprop="url" rel="index">
+                    <span itemprop="name">NP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="socket可读的条件"><a href="#socket可读的条件" class="headerlink" title="socket可读的条件:"></a>socket可读的条件:</h1><ul>
+<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1.</li>
+<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0</li>
+<li><strong>给监听套接字准备好新连接</strong></li>
+<li>有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除;</li>
+</ul>
 <p><strong>. . .</strong>
           <!--noindex-->
           
@@ -1012,202 +1205,6 @@ int const nValue；    //nValue 是 const
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/05/07/编译过程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/07/编译过程/" itemprop="url">编译过程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-07T17:24:19+00:00">
-                2015-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>通常我们使用gcc来生成可执行程序，命令为：gcc hello.c，默认生成可执行文件a.out</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>其实编译（包括链接）的命令：gcc hello.c 可分解为如下4个大的步骤：</p><br><ul><br><ul><br><li><strong>预处理</strong>(Preprocessing)</li><li><strong>编译</strong>(Compilation)</li><li><strong>汇编</strong>(Assembly)</li><li><strong>链接</strong>(Linking)</li></ul><br></ul><br><br><br><img src="http://smilejay.com/wp-content/uploads/2012/01/gcc_compilation_stages.jpg" alt="gcc_compilation"><br><br><br><h1 id="预处理">预处理</h1><br><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 预处理(Preproceessing)</strong></p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong>预处理的过程主要处理包括以下过程：</strong></p><br><ul><br><li>将所有的#define删除，并且<strong>展开所有的宏定义</strong></li><li><strong>处理</strong>所有的<strong>条件预编译指令</strong>，比如#if #ifdef #elif #else #endif等</li><li><strong>处理#include</strong><span>&nbsp;</span>预编译指令，将被包含的文件插入到该预编译指令的位置。</li><li><strong>删除所有注释<span>&nbsp;</span></strong>“//”和”/<em> </em>/”.</li><li><strong>添加行号和文件标识</strong>，以便编译时产生调试用的行号及编译错误警告行号。</li><li>保留所有的<strong>#pragma编译器指令</strong>，因为编译器需要使用它们</li></ul><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>通常使用以下命令来进行预处理：</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>gcc -E hello.c -o hello.i</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>参数<strong>-E</strong>表示只进行预处理 或者也可以使用以下指令完成预处理过程</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>cpp hello.c &gt; hello.i &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<em> &nbsp;cpp – The C Preprocessor&nbsp; </em>/</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>直接cat hello.i 你就可以看到预处理后的代码</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p>
-
-
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 编译(Compilation)</strong></p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>编译过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>$gcc –S hello.i –o hello.s</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>或者</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>$ /usr/lib/gcc/i486-linux-gnu/4.4/cc1 hello.c</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>注：现在版本的GCC把预处理和编译两个步骤合成一个步骤，用cc1工具来完成。gcc其实是后台程序的一些包装，根据不同参数去调用其他的实际处理程序，比如：预编译编译程序cc1、汇编器as、连接器ld</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>可以看到编译后的汇编代码(hello.s)如下：</p>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> .file   &quot;hello.c&quot;</span><br><span class="line">    .section    .rodata</span><br><span class="line">.LC0:</span><br><span class="line">    .string &quot;Hello, world.&quot;</span><br><span class="line">    .text</span><br><span class="line">.globl main</span><br><span class="line">    .type   main, @function</span><br><span class="line">main:</span><br><span class="line">    pushl   %ebp</span><br><span class="line">    movl    %esp, %ebp</span><br><span class="line">    andl    $-16, %esp</span><br><span class="line">    subl    $16, %esp</span><br><span class="line">    movl    $.LC0, (%esp)</span><br><span class="line">    call    puts</span><br><span class="line">    movl    $0, %eax</span><br><span class="line">    leave</span><br><span class="line">    ret</span><br><span class="line">    .size   main, .-main</span><br><span class="line">    .ident  &quot;GCC: (Ubuntu 4.4.3-4ubuntu5) 4.4.3&quot;</span><br><span class="line">    .section    .note.GNU-stack,&quot;&quot;,@progbits</span><br></pre></td></tr></table></figure>
-<p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p>
-
-<h1 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h1><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 汇编(Assembly)</strong></p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>汇编器是将汇编代码转变成机器可以执行的命令，每一个汇编语句几乎都对应一条机器指令。汇编相对于编译过程比较简单，根据汇编指令和机器指令的对照表一一翻译即可。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>$ gcc –c hello.c –o hello.o</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>或者</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>$ as hello.s –o hello.co</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>由于hello.o的内容为机器码，不能以普通文本形式的查看（vi 打开看到的是乱码）。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p>
-
-<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 链接(Linking)</strong></p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>通过调用链接器ld来链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>ld -static crt1.o crti.o crtbeginT.o hello.o -start-group -lgcc -lgcc_eh -lc-end-group crtend.o crtn.o (省略了文件的路径名)。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p>
-
-<h1 id="编译器和链接器具体做了什么"><a href="#编译器和链接器具体做了什么" class="headerlink" title="编译器和链接器具体做了什么"></a>编译器和链接器具体做了什么</h1><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>helloworld的大体编译和链接过程就是这样了，那么编译器和链接器到底做了什么呢？</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong>编译过程可分为6步：</strong></p>
-
-<ul>
-<li>词法分析：扫描器（Scanner）将源代的字符序列分割成一系列的记号（Token）。lex工具可实现词法扫描。</li>
-<li>语法分析：语法分析器将记号（Token）产生语法树（Syntax Tree）。yacc工具可实现语法分析(yacc: Yet Another Compiler Compiler)。</li>
-<li>语义分析：静态语义（在编译器可以确定的语义）、动态语义（只能在运行期才能确定的语义）。</li>
-<li>源代码优化：源代码优化器(Source Code Optimizer)，将整个语法书转化为中间代码（Intermediate Code）（中间代码是与目标机器和运行环境无关的）。中间代码使得编译器被分为前端和后端。编译器前端负责产生机器无关的中间代码；编译器后端将中间代码转化为目标机器代码。</li>
-<li>目标代码生成：代码生成器(Code Generator).</li>
-<li>目标代码优化：目标代码优化器(Target Code Optimizer)。</li>
-</ul>
-<p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>链接的主要内容是把各个模块之间相互引用的部分处理好，使得各个模块之间能够正确地衔接。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>链接的主要过程包括：地址和空间分配（Address and Storage Allocation），符号决议（Symbol Resolution），重定位（Relocation）等。</p>
-
-<h1 id="链接分为静态链接和动态链接"><a href="#链接分为静态链接和动态链接" class="headerlink" title="链接分为静态链接和动态链接"></a>链接分为静态链接和动态链接</h1><ol>
-<li><p>静态链接是指在编译阶段直接把静态库加入到可执行文件中去，这样可执行文件会比较大。</p>
-</li>
-<li><p>动态链接则是指链接阶段仅仅只加入一些描述信息，而程序执行时再从系统中把相应动态库加载到内存中去。</p>
-</li>
-</ol>
-<p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>静态链接的大致过程如下图所示：</p>
-
-<p><img src="http://smilejay.com/wp-content/uploads/2012/01/linking.jpg" alt="static_linking"></p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1278,7 +1275,7 @@ int const nValue；    //nValue 是 const
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">252</span>
+                <span class="site-state-item-count">253</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

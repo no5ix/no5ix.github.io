@@ -501,7 +501,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_cpp_bind/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/12/09/cplusplus_confused_points_two/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -520,7 +520,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/11/11/lua_cpp_bind/" itemprop="url">C++与Lua本质原始交互API</a></h1>
+                <a class="post-title-link" href="/2015/12/09/cplusplus_confused_points_two/" itemprop="url">C++很基础的易混淆点二</a></h1>
         
 
         <div class="post-meta">
@@ -532,8 +532,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-11T19:29:22+00:00">
-                2015-11-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-09T13:35:25+00:00">
+                2015-12-09
               </time>
             
 
@@ -555,8 +555,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Script/" itemprop="url" rel="index">
-                    <span itemprop="name">Script</span>
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
                   </a>
                 </span>
 
@@ -607,7 +607,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
         
-          <p>我们用一个例子来说明.</p>
+          <h1 id="位操作运算符的问题"><a href="#位操作运算符的问题" class="headerlink" title="位操作运算符的问题"></a>位操作运算符的问题</h1><p>二进制的100 的第0位是 0<br>1(第2位)  0(第1位)  0(第0位)，<br>所以把一个数的第三位进行清零、置位(把某个bit置为1)、取反的操作如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Bit3 (0X01&lt;&lt;3)</span></span><br><span class="line"><span class="comment">/*对一个数的第三位进行清零、置位、取反*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">15</span> ;      <span class="comment">// 0000 1111</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"原大小：%d\n"</span>, a);</span><br><span class="line"></span><br><span class="line">	a &amp;= ~Bit3;     <span class="comment">//清零, 0000 0111</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"清零后：%d\n"</span>, a);</span><br><span class="line"></span><br><span class="line">	a |= Bit3;     <span class="comment">//置位, 0000 1111</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"置位后：%d\n"</span>, a);</span><br><span class="line"></span><br><span class="line">	a ^= Bit3;     <span class="comment">//取反, 0000 0111</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"取反后：%d\n"</span>, a);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>. . .</strong>
           <!--noindex-->
           
@@ -839,6 +839,171 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_cpp_bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/11/lua_cpp_bind/" itemprop="url">C++与Lua本质原始交互API</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-11T19:29:22+00:00">
+                2015-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Script/" itemprop="url" rel="index">
+                    <span itemprop="name">Script</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <p>我们用一个例子来说明.</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_pairs_ipairs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1002,235 +1167,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/10/kmp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/10/kmp/" itemprop="url">KMP查找子字符串</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-10T02:11:22+00:00">
-                2015-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="KMP查找子字符串"><a href="#KMP查找子字符串" class="headerlink" title="KMP查找子字符串"></a>KMP查找子字符串</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言　　"></a><a></a>前言　　</h1><p>　 KMP 算法是一种改进的字符串匹配算法，由 D.E.Knuth，J.H.Morris 和 V.R.Pratt 同时发现，因此人们称它为克努特——莫里斯——普拉特操作（简称 KMP 算法）。KMP 算法的关键是利用匹配失败后的信息（已经匹配的部分中的对称信息），尽量减少模式串（待搜索词）与文本串的匹配次数以达到快速匹配的目的。具体实现就是实现一个 next() 函数，该函数本身包含了模式串的局部匹配信息。</p>
-<h1 id="一，kmp-算法的原理："><a href="#一，kmp-算法的原理：" class="headerlink" title="一，kmp 算法的原理："></a><a></a><strong>一，kmp 算法的原理：</strong></h1><p>字符串匹配是计算机的基本任务之一。它所执行的任务就是在一个文本（较长的字符串）中查找是否包含着当前指定的模式字符串（较短的字符串），并找到其位置，这就是字符串匹配问题。<br>注：在算法导论里面待搜索的词叫 “模式” 字符串，并用 P 来表示，本文有的地方叫他“待搜索词”。如无特殊说明数组下标以 0 为起始。<br>举例来说，有一个长字符串 “BBC ABCDAB ABCDABCDABDE”（即文本串），我想知道里面是否包含另一个模式字符串 “ABCDABD”，它的位置在哪呢？</p>
-<h2 id="1，朴素匹配算法过程："><a href="#1，朴素匹配算法过程：" class="headerlink" title="1，朴素匹配算法过程："></a><a></a><strong>1，朴素匹配算法过程：</strong></h2><p>1）.</p>
-<p>首先，长字符串 “BBC ABCDAB ABCDABCDABDE” 的第一个字符与搜索词 “ABCDABD” 的第一个字符，进行比较。因为 B 与 A 不匹配，所以搜索词后移一位。</p>
-<p>2）.</p>
-<p>因为 B 与 A 不匹配，搜索词再往后移。</p>
-<p>3）.</p>
-<p>就这样，直到长字符串有一个字符，与搜索词的第一个字符相同为止（准备开始位置不变搜索下一个字符）。</p>
-<p>4）.</p>
-<p>接着比较字符串和搜索词的下一个字符，还是相同。</p>
-<p>5）.</p>
-<p>但是后面的有可能是不完全匹配的，这时在长字符串中遇到一个字符与搜索词对应的字符不相同。</p>
-<p>6）.</p>
-<p>最自然的反应是，将搜索词整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把搜索位置 BCD 这一段又要重比一次，然而它的比较在直到了后面有 “AB” 与前面的 “AB” 对称的情况下是可以避免的，直到遇到 “AB” 才萌发新的可能使整个字符匹配的可能性。</p>
-<h2 id="2，KMP-匹配算法过程："><a href="#2，KMP-匹配算法过程：" class="headerlink" title="2，KMP 匹配算法过程："></a><a></a><strong>2，KMP 匹配算法过程：</strong></h2><p>1).</p>
-<p>接着前面的匹配过程，现在来看：一个基本事实是，当空格与 D 不匹配时，你其实知道前面六个符 “ABCDAB” 已经匹配的部分。KMP 算法的想法是，设法利用这个搜索词的子串（就是搜索词的某个前缀）的已知对称值，注意这里的对称非中心对称，而是基于搜索词的某一个前缀的对称信息，在不匹配的时候跳过一些不必要的位置来加速匹配速度，这样就提高了效率。</p>
-<p>2).</p>
-<p>怎么做到这一点呢（如何跳过不必要的位置在不匹配时）？可以针对搜索词，算出一张模式字符串的前缀函数表。这张表是如何产生的，后面再介绍，这里只要知道就可以了。</p>
-<p>3).</p>
-<p>已知空格与 D 不匹配时，前面六个字符 “ABCDAB” 是匹配的。查模式串的《前缀函数表》可知，其前缀（即 ABCDAB）中的最后一个匹配字符 B 的位置对应的 “部分匹配值” 为 2，因此按照下面的公式算出向后移动的位数（直接将前面的对称信息调到后面的对称位置，跳过一些不必要的位置）：</p>
-<blockquote>
-<p>移动位数 = 已匹配的字符数 - 当前已匹配字符串的部分匹配值</p>
-</blockquote>
-<p>因为 6 - 2 等于 4，所以将搜索词向后移动 4 位（之所以移动 4，是因为搜索词的已匹配的前缀串 “ABCDAB” 的部分匹配值为 2，即有 “AB” 对称，因为当前已匹配字符串的 “AB” 始终要找到下一个 “AB” 的开始位置，而这个开始位置恰好就在本字符串中的后缀中，所以直接移动 4，我们可以最大减少匹配次数）。</p>
-<p>4).</p>
-<p>因为空格与Ｃ不匹配，搜索词还要继续往后移。这时，已匹配的字符数为 2（”AB”），对应的 “部分匹配值” 为 0。所以，移动位数 = 2 - 0，结果为 2，于是将搜索词向后移 2 位。</p>
-<p>5).</p>
-<p>因为空格与 A 不匹配，继续后移一位。</p>
-<p>6).</p>
-<p>逐位比较，直到发现 C 与 D 不匹配。于是，移动位数 = 6 - 2，继续将搜索词向后移动 4 位。</p>
-<p>7).</p>
-<p>逐位比较，直到搜索词的最后一位，发现完全匹配，于是搜索完成。如果还要继续搜索（即找出全部匹配），移动位数 = 7 - 0，再将搜索词向后移动 7 位，这里就不再重复了。</p>
-<h2 id="3-关于前缀函数表"><a href="#3-关于前缀函数表" class="headerlink" title="3, 关于前缀函数表"></a><a></a><strong>3, 关于前缀函数表</strong></h2><p>1）前缀和后缀</p>
-<p>首先，要了解两个概念：”前缀” 和 “后缀”。 “前缀” 指除了最后一个字符以外，一个字符串的全部头部组合；”后缀” 指除了第一个字符以外，一个字符串的全部尾部组合。</p>
-<p>2）. 前缀函数表的产生</p>
-<p>“前缀函数” 的对称值（也叫部分匹配值）就是模式串的对应前缀中的 “前缀” 和 “后缀” 的最长的共有元素的长度（实质是最大对称程度）。以 “ABCDABD” 为例，</p>
-<ul>
-<li>“A” 的前缀和后缀都为空集，共有元素的长度为 0；</li>
-<li>“AB” 的前缀为 [A]，后缀为 [B]，共有元素的长度为 0；</li>
-<li>“ABC” 的前缀为 [A, AB]，后缀为 [BC, C]，共有元素的长度 0；</li>
-<li>“ABCD” 的前缀为 [A, AB, ABC]，后缀为 [BCD, CD, D]，共有元素的长度为 0；</li>
-<li>“ABCDA” 的前缀为 [A, AB, ABC, ABCD]，后缀为 [BCDA, CDA, DA, A]，共有元素为 “A”，长度为 1；</li>
-<li>“ABCDAB” 的前缀为 [A, AB, ABC, ABCD, ABCDA]，后缀为[BCDAB, CDAB, DAB, AB, B]，共有元素为 “AB”，长度为 2（“AB” 是其最大对称串，长度为 2）；</li>
-<li>“ABCDABD” 的前缀为 [A, AB, ABC, ABCD, ABCDA, ABCDAB]，后缀为 [BCDABD, CDABD, DABD, ABD, BD, D]，共有元素的长度为 0。</li>
-</ul>
-<p>3）. 前缀函数表的意义</p>
-<p>A, 首相要搞清楚的是它是模式字符串的所有前缀产生的一张表，保存的值表征了最大对称度，我们一般用 next 数组来保存其某个前缀的对称值，例如 next[6]=2，代表的就是模式串的某个有 6 个字符的前缀 “ABCDAB”，这个前缀的对称度就是 2，即“AB” 是对称的。</p>
-<p>B, 模式串的某前缀的对称值的实质是，有时候，搜索词已经部分匹配了（一定是某个前缀），其某个前缀（已经匹配部分）的头部和尾部会有重复。比如，”ABCDAB” 之中前缀有 “AB”，后缀也有 “AB”，那么它的 “前缀函数对称值” 就是 2（”AB” 的长度, 且 “AB” 是 “ABCDAB” 所有前缀和后缀中的最长公有元素）。搜索词移动的时候，第一个 “AB” 向后移动 4 位（字符串长度 - 部分匹配值），就可以来到第二个 “AB” 的位置，在这个新的位置我们跳过了不必要的比较位置，并且直接就有 “AB” 匹配。</p>
-<h1 id="二，前缀函数表实现原理"><a href="#二，前缀函数表实现原理" class="headerlink" title="二，前缀函数表实现原理"></a><a></a><strong>二，前缀函数表实现原理</strong></h1><p>　　通过上文完全可以对 kmp 算法的原理有个清晰的了解，那么下一步就是编程实现了，其中最重要的就是如何根据待匹配的模式字符串求出其所有前缀函数表中的最大对称值，在下文中我们将其存储在 next 数组中。</p>
-<h2 id="1，编程策略："><a href="#1，编程策略：" class="headerlink" title="1，编程策略："></a><a></a>1，编程策略：</h2><blockquote>
-<p>1）、当前字符的前面所有字符的对称程度为 0 的时候，只要将当前字符与前面这个子串的第一个字符进行比较。这个很好理解啊，前面所有字符串的对称值都是 0，说明都不对称了，如果多加了一个字符，要对称的话只能是当前字符和前面字符串的第一个字符对称。比如 “ABCDA” 这个里面 “ABCD” 的最大对称值是 0，那么后面的 A 的对称程度只需要看它是不是等于前面字符串的第一个字符 A 相等，如果相等就增加 1，如果不相等那就保持不变，显然还是为 0。</p>
-<p>2）、按照这个推理，我们就可以总结一个规律，不仅前面是 0 呀，如果前面字符串的的最大对称值是 1（k），那么我们就把当前字符与前面字符串的第二（k）个字符即 P[1]（P[k]）进行比较，因为前面的是 1（k），说明前面的字符已经和第一（k）个字符相等了，如果这个又与第二（k+1）个相等了，说明对称程度就是 2（k+1）了。有两（k+1）个字符对称了。比如上面 “ABCDA” 的最大对称值是 1，说明它只和第一个 A 对称了，接着我们就把下一个字符 “B” 与 P[1]（即第二个字符）比较，又相等，自然对称程度就累加了，就是 2 了。</p>
-<p>但是如果不相等呢？那么这个对称值显然要减少，并且我们只能到前面去寻找对称值，而在找的过程我们同时也利用前缀函数表快速搜索找到与当前字符匹配的位置。比如假设是 “(AGCTAGC)(AGCTAGC)T”（请无视字符串中的括号，只为方便看出对称），</p>
-</blockquote>
-<pre><code>模式字符串：AGCTAGCAGCTAGCT
-模式字符串的前缀函数表：
-000012312345674
-</code></pre><blockquote>
-<p>显然最后一个 T 的前一个位置的对称度是 7, 说明 T 的前一个位置的 7 个字符的后缀必与 7 个字符的前缀相等，然而 T!=P[7]，说明 T 位置的对称度只能是比 7 小的长度的前缀，所以递减 k 值，递减为多少呢？那么我们应该利用已经得到的 next[0]···next[k-1] 来求 P[0]···P[k-1] 这个前缀中最大相同前后缀, 当前字符前一个位置的对称度为 k=next[13]=7，显然必须以 7 为基准减少，即在前缀长度为 7 以内的范围重新寻找以 T 结尾的前缀，所以 k=next[6] (即下面参考代码中的<code>k = next[k-1];</code>)，再接着判断是否相等</p>
-<p>3）、按照上面的推理，我们总是在找当前字符 P[q]（q 为遍历到的位置下标，见下面程序）通过其前一个位置的对称值判断是否与 P[k] 相等，如果相等，那么加，如果不相等，那么就减少 k 值，重新寻找与与 P[q] 相等的元素位置</p>
-</blockquote>
-<h2 id="2，参考代码："><a href="#2，参考代码：" class="headerlink" title="2，参考代码："></a><a></a>2，参考代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeNext</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> P[],<span class="keyword">int</span> next[])</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> k;<span class="comment">//k:最大对称长度</span></span><br><span class="line">     <span class="keyword">int</span> m = <span class="built_in">strlen</span>(P);<span class="comment">//模版字符串长度</span></span><br><span class="line">     next[<span class="number">0</span>] = <span class="number">0</span>;<span class="comment">//模版字符串的第一个字符的最大对称值必为0</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> q = <span class="number">1</span>,k = <span class="number">0</span>; q &lt; m; ++q)<span class="comment">//for循环，从第二个字符开始，依次计算每一个字符对应的next值</span></span><br><span class="line">     &#123;<span class="comment">//在前一个位置的k不为0，但是却不相等，那么减少k，重新寻找与P[q]相等的位置，让下面的if来增加k</span></span><br><span class="line">         <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; P[q] != P[k])<span class="comment">//</span></span><br><span class="line">             k = next[k<span class="number">-1</span>];          <span class="comment">//while循环是整段代码的精髓所在，</span></span><br><span class="line">         <span class="keyword">if</span> (P[q] == P[k])<span class="comment">//如果相等，那么最大相同前后缀长度加1</span></span><br><span class="line">             k++;<span class="comment">//增加k的唯一方式</span></span><br><span class="line">         next[q] = k;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>附完整代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"string"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"algorithm"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算模式P的部分匹配值，保存在next数组中  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeNext</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;P, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;next)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> q, k;<span class="comment">//k记录所有前缀的对称值  </span></span><br><span class="line">	<span class="keyword">int</span> m = P.size();<span class="comment">//模式字符串的长度  </span></span><br><span class="line">	next[<span class="number">0</span>] = <span class="number">0</span>;<span class="comment">//首字符的对称值肯定为0  </span></span><br><span class="line">	<span class="keyword">for</span> (q = <span class="number">1</span>, k = <span class="number">0</span>; q &lt; m; ++q)<span class="comment">//计算每一个位置的对称值  </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//k总是用来记录上一个前缀的最大对称值  </span></span><br><span class="line">		<span class="keyword">while</span> (k &gt; <span class="number">0</span> &amp;&amp; P[q] != P[k])</span><br><span class="line">			<span class="comment">//k = next[k - 1];//k将循环递减，值得注意的是next[k]&lt;k总是成立  </span></span><br><span class="line">			--k;</span><br><span class="line">		<span class="keyword">if</span> (P[q] == P[k])</span><br><span class="line">			k++;<span class="comment">//增加k的唯一方法  </span></span><br><span class="line">		next[q] = k;<span class="comment">//获取最终值  </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KmpMatch</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;T, <span class="keyword">const</span> <span class="built_in">string</span> &amp;P, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;next)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	n = T.size();</span><br><span class="line">	m = P.size();</span><br><span class="line">	MakeNext(P, next);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, q = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (q &gt; <span class="number">0</span> &amp;&amp; P[q] != T[i])</span><br><span class="line">			q = next[q - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (P[q] == T[i])</span><br><span class="line">			q++;</span><br><span class="line">		<span class="keyword">if</span> (q == m)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"模式文本的偏移为："</span> &lt;&lt; (i - m + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			q = next[q - <span class="number">1</span>];<span class="comment">//寻找下一个匹配</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	system(<span class="string">"color 0A"</span>);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next(<span class="number">20</span>, <span class="number">0</span>);<span class="comment">//保存待搜索字符串的部分匹配表（所有前缀函数的对称值）</span></span><br><span class="line">	<span class="built_in">string</span> T = <span class="string">"BBC ABCDAB ABCDABCDABDE"</span>;<span class="comment">//文本</span></span><br><span class="line">	<span class="built_in">string</span> P = <span class="string">"ABCDABD"</span>;<span class="comment">//待搜索字符串</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"文本字符串："</span> &lt;&lt; T &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"模式字符串："</span> &lt;&lt; P &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	KmpMatch(T, P, next);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"模式字符串的前缀函数表："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; P.size(); i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; next[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <img src="/img/kmp/kmp3.jpg" alt></p>
-<h1 id="参考资源："><a href="#参考资源：" class="headerlink" title="参考资源："></a><a></a><strong>参考资源：</strong></h1><p>【1】网友，c_cloud，《KMP，深入讲解 next 数组的求解》，博客地址，<a href="http://www.cnblogs.com/c-cloud/p/3224788.html" target="_blank" rel="noopener">http://www.cnblogs.com/c-cloud/p/3224788.html</a><br>【2】网友，yearn520，《KMP 算法的前缀 next 数组最通俗的解释》，博客地址，<a href="http://blog.csdn.net/yearn520/article/details/6729426" target="_blank" rel="noopener">http://blog.csdn.net/yearn520/article/details/6729426</a><br>【3】《算法导论》，第三十二章，字符串匹配<br>【4】网友，jBoxer，《The Knuth-Morris-Pratt Algorithm in my own words》，博客地址，<a href="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/" target="_blank" rel="noopener">http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/</a><br>【5】九度 OJ，<a href="http://ac.jobdu.com/problemset.php?page=2" target="_blank" rel="noopener">http://ac.jobdu.com/problemset.php?page=2</a><br>【6】 <a href="https://blog.csdn.net/EbowTang/article/details/49129363" target="_blank" rel="noopener">https://blog.csdn.net/EbowTang/article/details/49129363</a></p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1301,7 +1237,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">252</span>
+                <span class="site-state-item-count">253</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

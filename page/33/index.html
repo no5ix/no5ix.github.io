@@ -304,6 +304,173 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/11/游戏服务端常用架构三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/11/游戏服务端常用架构三/" itemprop="url">游戏服务端常用架构三</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-11T19:24:44+00:00">
+                2016-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h2 id="休闲游戏服务器"><a href="#休闲游戏服务器" class="headerlink" title="休闲游戏服务器"></a>休闲游戏服务器</h2><p>休闲游戏同战网服务器类似，都是全区架构，不同的是有房间服务器，还有具体的游戏服务器，游戏主体不再以玩家 P2P进行，而是连接到专门的游戏服务器处理：</p>
+ <img src="/2016/07/11/游戏服务端常用架构三/image014.png">
+<p>和战网一样的全区架构，用户数据不能象分区的 RPG那样一次性load到内存，然后在内存里面直接修改。全区架构下，为了应对一个用户同时玩几个游戏，用户数据需要区分基本数据和不同的游戏数据，而游戏数据又需要区分积分数据、和文档数据。胜平负之类的积分可以直接提交增量修改，而更为普遍的文档类数据则需要提供读写令牌，写令牌只有一块，读令牌有很多块。同帐号同一个游戏同时在两台电脑上玩时，最先开始的那个游戏获得写令牌，可以操作任意的用户数据。而后开始的那个游戏除了可以提交胜平负积分的增量改变外，对用户数据采用只读的方式，保证游戏能运行下去，但是会提示用户，游戏数据锁定。</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/11/游戏服务端常用架构二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -986,198 +1153,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/06/21/NAT穿越基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/06/21/NAT穿越基础/" itemprop="url">NAT穿越基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-21T12:51:46+00:00">
-                2016-06-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <ol>
-<li><a href="#NAT类型">NAT类型</a><ol>
-<li><a href="#锥NAT"><em>锥NAT</em></a></li>
-<li><a href="#对称NAT"><em>对称NAT</em></a></li>
-</ol>
-</li>
-<li><a href="#NAT作用">NAT作用</a></li>
-<li><a href="#穿透锥NAT">穿透锥NAT</a><ol>
-<li><a href="#网络拓扑结构"><em>网络拓扑结构</em></a></li>
-<li><a href="#使用UDP穿透NAT"><em>使用UDP穿透NAT</em></a></li>
-<li><a href="#使用TCP穿透NAT"><em>使用TCP穿透NAT</em></a></li>
-</ol>
-</li>
-<li><a href="#穿透对称NAT">穿透对称NAT</a><ol>
-<li><a href="#同时开放TCP（ Simultaneous TCP open ）策略"><em>同时开放TCP（ Simultaneous TCP open ）策略</em></a></li>
-<li><a href="#UDP端口猜测策略"><em>UDP端口猜测策略</em></a></li>
-</ol>
-</li>
-<li><a href="#问题总结">问题总结</a></li>
-<li><a href="#参考">参考</a></li>
-</ol>
-<h1 id="NAT类型"><a href="#NAT类型" class="headerlink" title="NAT类型"></a>NAT类型</h1><p><strong>注</strong> : 我们本文主要讨论穿越<strong>锥NAT</strong></p>
-<h2 id="锥NAT"><a href="#锥NAT" class="headerlink" title="锥NAT"></a><em>锥NAT</em></h2><ul>
-<li>全锥NAT ：全锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。任何一个外部主机均可通过该映射发送数据包到该内部主机。</li>
-<li>限制性锥NAT ：限制性锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。但是, 和全锥NAT 不同的是：只有当内部主机先给外部主机发送数据包, 该外部主机才能向该内部主机发送数据包。</li>
-<li>端口限制性锥NAT ：端口限制性锥NAT 与限制性锥NAT 类似, 只是多了端口号的限制, 即只有内部主机先向外部地址：端口号对发送数据包, 该外部主机才能使用特定的端口号向内部主机发送数据包。</li>
-</ul>
-<h2 id="对称NAT"><a href="#对称NAT" class="headerlink" title="对称NAT"></a><em>对称NAT</em></h2><p>对称NAT 与上述3 种类型都不同, 不管是全锥NAT ，限制性锥NAT 还是端口限制性锥NAT ，它们都属于锥NAT （Cone NAT ）。当同一内部主机使用相同的端口与不同地址的外部主机进行通信时, 对称NAT 会重新建立一个Session ，为这个Session 分配不同的端口号，或许还会改变IP 地址。</p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1248,7 +1223,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">251</span>
+                <span class="site-state-item-count">252</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1259,7 +1234,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-count">95</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

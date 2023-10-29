@@ -26,7 +26,7 @@
 
 <!-- 0\. Install [Hexo](https://hexo.io/docs/index.html)  
     安装 [Hexo](https://hexo.io/zh-cn/docs/) -->
-0\. [点击这里下载nvm-setup.zip](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fcoreybutler%2Fnvm-windows%2Freleases), 解压并安装nvm之后, `nvm install 10.13.0` 然后再 `nvm use 10.13.0`则安装了node.js的10.13.0的版本, 尝试`node -v`和`nvm ls`看看版本, 这个node版本很关键, 不要乱改
+0\. [点击这里下载node.js的10.13.0的版本](https://nodejs.org/en/blog/release/v10.13.0), 尝试`node -v`, 这个node版本很关键, 不要乱改
 
 1\. Delete my `source` folder  
     删除我项目中的 `source` 文件夹

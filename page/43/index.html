@@ -304,240 +304,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/11/linux_gcc_atomic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/11/linux_gcc_atomic/" itemprop="url">GCC的原子操作函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-11T12:26:26+00:00">
-                2015-04-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p>linux支持的哪些操作是具有原子特性的？知道这些东西是理解和设计无锁化编程算法的基础。</p>
-<p>下面的东西整理自网络。先感谢大家的分享！</p>
-<h1 id="原子操作的api函数"><a href="#原子操作的api函数" class="headerlink" title="原子操作的api函数"></a>原子操作的api函数</h1><p>gcc从4.1.2以后提供了 <code>__sync_*</code> 系列的下面几类的内嵌函数，提供用于针对数字或布尔型变量的原子操作。</p>
-<h2 id="n-类"><a href="#n-类" class="headerlink" title="n++类"></a>n++类</h2><p>这组返回更新前的值</p>
-<pre><code>type __sync_fetch_and_add (type *ptr, type value, ...)
-type __sync_fetch_and_sub (type *ptr, type value, ...)
-type __sync_fetch_and_or (type *ptr, type value, ...)
-type __sync_fetch_and_and (type *ptr, type value, ...)
-type __sync_fetch_and_xor (type *ptr, type value, ...)
-type __sync_fetch_and_nand (type *ptr, type value, ...)
-</code></pre><h2 id="n类"><a href="#n类" class="headerlink" title="++n类"></a>++n类</h2><p>这组返回更新后的值</p>
-<pre><code>type __sync_add_and_fetch (type *ptr, type value, ...)
-type __sync_sub_and_fetch (type *ptr, type value, ...)
-type __sync_or_and_fetch (type *ptr, type value, ...)
-type __sync_and_and_fetch (type *ptr, type value, ...)
-type __sync_xor_and_fetch (type *ptr, type value, ...)
-type __sync_nand_and_fetch (type *ptr, type value, ...)
-</code></pre><p>type可以是1,2,4或8字节长度的int类型，即：</p>
-<pre><code>int8_t / uint8_t
-int16_t / uint16_t
-int32_t / uint32_t
-int64_t / uint64_t
-</code></pre><p>后面的可扩展参数(…)用来指出哪些变量需要memory barrier,因为目前gcc实现的是full barrier（类似于linux kernel 中的mb(),表示这个操作之前的所有内存操作不会被重排序到这个操作之后）,所以可以略掉这个参数。</p>
-<h2 id="CAS类"><a href="#CAS类" class="headerlink" title="CAS类"></a>CAS类</h2><p>CAS 即 compare-and-swap , </p>
-<p>下面这两个函数提供原子的比较和交换，如果 <code>*ptr == oldval</code>,就将 <code>newval</code> 写入 <code>*ptr</code> </p>
-<ul>
-<li><p>此函数在相等并写入的情况下返回 true</p>
-<pre><code>bool __sync_bool_compare_and_swap (type *ptr, type oldval, type newval, ...)
-/* 对应的伪代码 */
-{ if (*ptr == oldval) { *ptr = newval; return true; } else { return false; } }
-</code></pre></li>
-</ul>
-<ul>
-<li><p>此函数在返回 <code>oldval</code></p>
-<pre><code>type __sync_val_compare_and_swap (type *ptr, type oldval, type newval, ...)
-/* 对应的伪代码 */
-{ if (*ptr == oldval) { *ptr = newval; } return oldval; }
-</code></pre></li>
-</ul>
-<h2 id="其他原子操作"><a href="#其他原子操作" class="headerlink" title="其他原子操作"></a>其他原子操作</h2><pre><code>type __sync_lock_test_and_set (type *ptr, type value, ...)
-</code></pre><p>将  <code>*ptr</code> 设为value并返回 <code>*ptr</code> 操作之前的值。</p>
-<pre><code>void __sync_lock_release (type *ptr, ...)
-</code></pre><p>将 <code>*ptr</code> 置 0</p>
-<h1 id="内存栅障"><a href="#内存栅障" class="headerlink" title="内存栅障"></a>内存栅障</h1><p>内存栅障主要是处理不同cpu运作时（主要是执行不同线程代码时），一个cpu对内存的操作的原子性，也就保证其他cpu见到的内存单元数据的正确性。</p>
-<h2 id="内存栅障介绍"><a href="#内存栅障介绍" class="headerlink" title="内存栅障介绍"></a>内存栅障介绍</h2><p>如果有对某一变量上写锁， 就不能在不获得相应的锁时对其进行读取操作。<br>内存栅的作用在于保证内存操作的相对顺序， 但并不保证内存操作的严格时序。 </p>
-<p>内存栅并不保证 CPU 将本地快取缓存或存储缓冲的内容刷写回内存， 而是在锁释放时确保其所保护的数据， 对于能看到刚释放的那个锁的 CPU 或设备可见。<br>持有内存栅的 CPU 可以在其快取缓存或存储缓冲中将数据保持其所希望的、 任意长的时间， 但如果其它 CPU 在同一数据元上执行原子操作，<br>则第一个 CPU 必须保证， 其所更新的数据值， 以及内存栅所要求的任何其它操作， 对第二个 CPU 可见。</p>
-<pre><code>__sync_synchronize (...)
-</code></pre><p>发出一个full barrier.</p>
-<h2 id="内存栅障应用"><a href="#内存栅障应用" class="headerlink" title="内存栅障应用"></a>内存栅障应用</h2><p>对于执行一条指令，操作到4个寄存器时，如：</p>
-<pre><code>write1(dev.register_size,size);
-write1(dev.register_addr,addr);
-write1(dev.register_cmd,READ);
-write1(dev.register_control,GO);
-</code></pre><p>最后一个寄存器是控制寄存器，在所有的参数都设置好之后向其发出指令，设备开始读取参数.</p>
-<p>如果最后一条write1被换到了前几条语句之前，那么肯定不是我们所期望的，这时候我们可以在最后一条语句之前加入一个memory barrier,强制cpu执行完前面的写入以后再执行最后一条：</p>
-<pre><code>write1(dev.register_size,size);
-write1(dev.register_addr,addr);
-write1(dev.register_cmd,READ);
-__sync_synchronize();
-write1(dev.register_control,GO);
-</code></pre><p>memory barrier有几种类型：</p>
-<ul>
-<li>acquire barrier : 不允许将barrier之后的内存读取指令移到barrier之前（linux kernel中的wmb()）。</li>
-<li>release barrier : 不允许将barrier之前的内存读取指令移到barrier之后 (linux kernel中的rmb())。</li>
-<li>full barrier    : 以上两种barrier的合集(linux kernel中的mb())。</li>
-</ul>
-<h1 id="原子操作应用范围"><a href="#原子操作应用范围" class="headerlink" title="原子操作应用范围"></a>原子操作应用范围</h1><p>原子操作只允许一次更新或读一个内存单元。 需要原子地更新多个单元时， 就必须使用锁来代替它了。 </p>
-<p>例如， 如果需要更新两个相互关联的计数器时， 就必须使用锁， 而不是两次单独的原子操作了。</p>
-<h1 id="原子操作例子"><a href="#原子操作例子" class="headerlink" title="原子操作例子"></a>原子操作例子</h1><p>例子代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">test_func</span><span class="params">(<span class="keyword">void</span> *arg)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">20000</span>;++i)&#123;  </span><br><span class="line">                __sync_fetch_and_add(&amp;count,<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">        <span class="keyword">pthread_t</span> id[<span class="number">20</span>];  </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">20</span>;++i)&#123;  </span><br><span class="line">                pthread_create(&amp;id[i],<span class="literal">NULL</span>,test_func,<span class="literal">NULL</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">20</span>;++i)&#123;  </span><br><span class="line">                pthread_join(id[i],<span class="literal">NULL</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,count);  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="原子操作封装使用"><a href="#原子操作封装使用" class="headerlink" title="原子操作封装使用"></a>原子操作封装使用</h1><p>根据常用的原子操作，封装一些实用的接口 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原子操作  </span></span><br><span class="line"><span class="comment">//设置值  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_set</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;a, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    __sync_val_compare_and_swap(&amp;a, a, value);  </span><br><span class="line">    <span class="keyword">return</span> a;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//加1  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_inc</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//减1  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_dec</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//加值value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_add</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//减值value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_sub</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位或value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_or</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_or(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位与value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_and</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_and(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//异或value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_xor</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_xor(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//无符号类型（函数重载）  </span></span><br><span class="line"><span class="comment">//设置值  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_set</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;a, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    __sync_val_compare_and_swap(&amp;a, a, value);  </span><br><span class="line">    <span class="keyword">return</span> a;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//加1  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_inc</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//减1  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_dec</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//加值value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_add</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//减值value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_sub</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位或value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_or</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_or((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位与value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_and</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_and((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//异或value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_xor</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_xor((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/11/smart_pointer_note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -899,6 +665,240 @@ test_function_bind( p, 331, 9 ) = 7
 <p>通常程序员在分支预测方面做得很糟糕, 编译器又不能精准的预测每一个分支,这时JMP产生的时间浪费就会很大,</p>
 <p>函数 <code>__builtin_expert()</code> 就是用来解决这个问题的.</p>
 
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/11/linux_gcc_atomic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/11/linux_gcc_atomic/" itemprop="url">GCC的原子操作函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-11T12:26:26+00:00">
+                2015-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p>linux支持的哪些操作是具有原子特性的？知道这些东西是理解和设计无锁化编程算法的基础。</p>
+<p>下面的东西整理自网络。先感谢大家的分享！</p>
+<h1 id="原子操作的api函数"><a href="#原子操作的api函数" class="headerlink" title="原子操作的api函数"></a>原子操作的api函数</h1><p>gcc从4.1.2以后提供了 <code>__sync_*</code> 系列的下面几类的内嵌函数，提供用于针对数字或布尔型变量的原子操作。</p>
+<h2 id="n-类"><a href="#n-类" class="headerlink" title="n++类"></a>n++类</h2><p>这组返回更新前的值</p>
+<pre><code>type __sync_fetch_and_add (type *ptr, type value, ...)
+type __sync_fetch_and_sub (type *ptr, type value, ...)
+type __sync_fetch_and_or (type *ptr, type value, ...)
+type __sync_fetch_and_and (type *ptr, type value, ...)
+type __sync_fetch_and_xor (type *ptr, type value, ...)
+type __sync_fetch_and_nand (type *ptr, type value, ...)
+</code></pre><h2 id="n类"><a href="#n类" class="headerlink" title="++n类"></a>++n类</h2><p>这组返回更新后的值</p>
+<pre><code>type __sync_add_and_fetch (type *ptr, type value, ...)
+type __sync_sub_and_fetch (type *ptr, type value, ...)
+type __sync_or_and_fetch (type *ptr, type value, ...)
+type __sync_and_and_fetch (type *ptr, type value, ...)
+type __sync_xor_and_fetch (type *ptr, type value, ...)
+type __sync_nand_and_fetch (type *ptr, type value, ...)
+</code></pre><p>type可以是1,2,4或8字节长度的int类型，即：</p>
+<pre><code>int8_t / uint8_t
+int16_t / uint16_t
+int32_t / uint32_t
+int64_t / uint64_t
+</code></pre><p>后面的可扩展参数(…)用来指出哪些变量需要memory barrier,因为目前gcc实现的是full barrier（类似于linux kernel 中的mb(),表示这个操作之前的所有内存操作不会被重排序到这个操作之后）,所以可以略掉这个参数。</p>
+<h2 id="CAS类"><a href="#CAS类" class="headerlink" title="CAS类"></a>CAS类</h2><p>CAS 即 compare-and-swap , </p>
+<p>下面这两个函数提供原子的比较和交换，如果 <code>*ptr == oldval</code>,就将 <code>newval</code> 写入 <code>*ptr</code> </p>
+<ul>
+<li><p>此函数在相等并写入的情况下返回 true</p>
+<pre><code>bool __sync_bool_compare_and_swap (type *ptr, type oldval, type newval, ...)
+/* 对应的伪代码 */
+{ if (*ptr == oldval) { *ptr = newval; return true; } else { return false; } }
+</code></pre></li>
+</ul>
+<ul>
+<li><p>此函数在返回 <code>oldval</code></p>
+<pre><code>type __sync_val_compare_and_swap (type *ptr, type oldval, type newval, ...)
+/* 对应的伪代码 */
+{ if (*ptr == oldval) { *ptr = newval; } return oldval; }
+</code></pre></li>
+</ul>
+<h2 id="其他原子操作"><a href="#其他原子操作" class="headerlink" title="其他原子操作"></a>其他原子操作</h2><pre><code>type __sync_lock_test_and_set (type *ptr, type value, ...)
+</code></pre><p>将  <code>*ptr</code> 设为value并返回 <code>*ptr</code> 操作之前的值。</p>
+<pre><code>void __sync_lock_release (type *ptr, ...)
+</code></pre><p>将 <code>*ptr</code> 置 0</p>
+<h1 id="内存栅障"><a href="#内存栅障" class="headerlink" title="内存栅障"></a>内存栅障</h1><p>内存栅障主要是处理不同cpu运作时（主要是执行不同线程代码时），一个cpu对内存的操作的原子性，也就保证其他cpu见到的内存单元数据的正确性。</p>
+<h2 id="内存栅障介绍"><a href="#内存栅障介绍" class="headerlink" title="内存栅障介绍"></a>内存栅障介绍</h2><p>如果有对某一变量上写锁， 就不能在不获得相应的锁时对其进行读取操作。<br>内存栅的作用在于保证内存操作的相对顺序， 但并不保证内存操作的严格时序。 </p>
+<p>内存栅并不保证 CPU 将本地快取缓存或存储缓冲的内容刷写回内存， 而是在锁释放时确保其所保护的数据， 对于能看到刚释放的那个锁的 CPU 或设备可见。<br>持有内存栅的 CPU 可以在其快取缓存或存储缓冲中将数据保持其所希望的、 任意长的时间， 但如果其它 CPU 在同一数据元上执行原子操作，<br>则第一个 CPU 必须保证， 其所更新的数据值， 以及内存栅所要求的任何其它操作， 对第二个 CPU 可见。</p>
+<pre><code>__sync_synchronize (...)
+</code></pre><p>发出一个full barrier.</p>
+<h2 id="内存栅障应用"><a href="#内存栅障应用" class="headerlink" title="内存栅障应用"></a>内存栅障应用</h2><p>对于执行一条指令，操作到4个寄存器时，如：</p>
+<pre><code>write1(dev.register_size,size);
+write1(dev.register_addr,addr);
+write1(dev.register_cmd,READ);
+write1(dev.register_control,GO);
+</code></pre><p>最后一个寄存器是控制寄存器，在所有的参数都设置好之后向其发出指令，设备开始读取参数.</p>
+<p>如果最后一条write1被换到了前几条语句之前，那么肯定不是我们所期望的，这时候我们可以在最后一条语句之前加入一个memory barrier,强制cpu执行完前面的写入以后再执行最后一条：</p>
+<pre><code>write1(dev.register_size,size);
+write1(dev.register_addr,addr);
+write1(dev.register_cmd,READ);
+__sync_synchronize();
+write1(dev.register_control,GO);
+</code></pre><p>memory barrier有几种类型：</p>
+<ul>
+<li>acquire barrier : 不允许将barrier之后的内存读取指令移到barrier之前（linux kernel中的wmb()）。</li>
+<li>release barrier : 不允许将barrier之前的内存读取指令移到barrier之后 (linux kernel中的rmb())。</li>
+<li>full barrier    : 以上两种barrier的合集(linux kernel中的mb())。</li>
+</ul>
+<h1 id="原子操作应用范围"><a href="#原子操作应用范围" class="headerlink" title="原子操作应用范围"></a>原子操作应用范围</h1><p>原子操作只允许一次更新或读一个内存单元。 需要原子地更新多个单元时， 就必须使用锁来代替它了。 </p>
+<p>例如， 如果需要更新两个相互关联的计数器时， 就必须使用锁， 而不是两次单独的原子操作了。</p>
+<h1 id="原子操作例子"><a href="#原子操作例子" class="headerlink" title="原子操作例子"></a>原子操作例子</h1><p>例子代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">test_func</span><span class="params">(<span class="keyword">void</span> *arg)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">20000</span>;++i)&#123;  </span><br><span class="line">                __sync_fetch_and_add(&amp;count,<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">        <span class="keyword">pthread_t</span> id[<span class="number">20</span>];  </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">20</span>;++i)&#123;  </span><br><span class="line">                pthread_create(&amp;id[i],<span class="literal">NULL</span>,test_func,<span class="literal">NULL</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">20</span>;++i)&#123;  </span><br><span class="line">                pthread_join(id[i],<span class="literal">NULL</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,count);  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="原子操作封装使用"><a href="#原子操作封装使用" class="headerlink" title="原子操作封装使用"></a>原子操作封装使用</h1><p>根据常用的原子操作，封装一些实用的接口 :</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原子操作  </span></span><br><span class="line"><span class="comment">//设置值  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_set</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;a, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    __sync_val_compare_and_swap(&amp;a, a, value);  </span><br><span class="line">    <span class="keyword">return</span> a;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//加1  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_inc</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//减1  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_dec</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//加值value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_add</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//减值value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_sub</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位或value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_or</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_or(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位与value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_and</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_and(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//异或value  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lock_xor</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_xor(&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//无符号类型（函数重载）  </span></span><br><span class="line"><span class="comment">//设置值  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_set</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;a, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    __sync_val_compare_and_swap(&amp;a, a, value);  </span><br><span class="line">    <span class="keyword">return</span> a;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//加1  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_inc</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//减1  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_dec</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub(&amp;n, <span class="number">1</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//加值value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_add</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_add((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//减值value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_sub</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_sub((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位或value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_or</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_or((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//位与value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_and</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_and((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//异或value  </span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">lock_xor</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> &amp;n, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> __sync_fetch_and_xor((<span class="keyword">int</span>*)&amp;n, value);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       

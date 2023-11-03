@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[English Plan & Thought]]></title>
+    <url>%2F2023%2F11%2F03%2Feng_plan_thought%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[W每日时间安排指引 / 周中(英语日) 周六(英语日) 周日(若有自驾游则为中文日, 否则为英文日) 08:00 起床上班 / 狂欢 08:30 / 起床上班 狂欢 早上在车上 Peppa Pig 背单词 狂欢 到公司后 ~ 开始工作前 背单词 &amp; 中译英 / 狂欢 10:00 背单词 &amp; 中译英 / 自驾游出发 &amp; 车上看美剧 18:00 ~ 上车前 背单词 &amp; 中译英 狂欢开始 / 晚上在车上 Peppa Pig 狂欢 车上看美剧 到家后(约19:30) 1. 补白天没做完的背单词&amp;中译英 2. 不洗头则打球(一周至少2次) or 炉石 狂欢 狂欢 到家一小时后(约20:30) W洗澡 W洗澡 W洗澡 洗完澡后(约21:00) 美剧 狂欢 狂欢 00:00 睡觉 睡觉 睡觉 说英语计划 我们把彼此当做一个不会说中文的外国妻子或丈夫, 这样事情就一切自然而然了, 你肯定是该交流还是要交流, 即使说的蹩脚英语, 然后做各种笔记把说不出来的不太流利的表达都记下来, 查查看看下回应该怎么说 我们一周24小时都说英语(除了有自驾游的周日), 但是因为我们情况特殊, 我们有时候是要沟通重要事情的, 虽然一周可能就只有三四次重要事务沟通, 所以我们定一个规矩: 一周夫妻互相对话提供6次说中文的机会]]></content>
+      <categories>
+        <category>English</category>
+      </categories>
+      <tags>
+        <tag>English</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Easy English-012-English in Everyday Life]]></title>
     <url>%2F2023%2F10%2F29%2Feng_easy_english_012_english_in_everyday_life%2F</url>
 
@@ -74,8 +88,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[English Clause]]></title>
-    <url>%2F2023%2F08%2F15%2Feng_clause%2F</url>
+    <title><![CDATA[English SubJunctive Mood]]></title>
+    <url>%2F2023%2F08%2F15%2Feng_subjunctive_mood%2F</url>
 
     <encrypted>0</encrypted>
 
@@ -102,8 +116,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[English SubJunctive Mood]]></title>
-    <url>%2F2023%2F08%2F15%2Feng_subjunctive_mood%2F</url>
+    <title><![CDATA[English Clause]]></title>
+    <url>%2F2023%2F08%2F15%2Feng_clause%2F</url>
 
     <encrypted>0</encrypted>
 
@@ -2461,6 +2475,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[也想做一个这样的博客吗?]]></title>
+    <url>%2F2016%2F05%2F22%2Fhow_to_make_blog_like_this%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[这是我的博客源码 ,我修改了很多NexT的代码来对原版 NexT 做了优化, 如下 : 改了NexT的很多地方来优化移动端的表现, header的布局 移动端和PC端的侧边栏更加统一 移动端的文章目录列表现在可以滑动了 重做了本地搜索引擎 现在移动端不会经常无故弹不出键盘了 也不会列出加密文章的内容了 更优雅的过渡动画 添加了headroom支持, 现在有一个可以会自动隐藏的header了, 往下滚一下鼠标则隐藏, 往上则出现 升级到了fancybox3并完成适配, 3更流畅且拥有更多效果 添加了文章加密的支持 CSDN sucks 实在是被CSDN的广告恶心到了 最近CSDN的Markdown的无序列表每一列前面的小黑点都没有了 手机网页版本的CSDN排版全无 所有博客瞬间排版全部变成一坨, 实在是不能忍. 所以才做了这个私人博客.]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[php与cgi]]></title>
     <url>%2F2016%2F05%2F22%2Fphp_cgi%2F</url>
 
@@ -2474,17 +2499,6 @@
         <tag>PHP</tag>
         <tag>CGI</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[也想做一个这样的博客吗?]]></title>
-    <url>%2F2016%2F05%2F22%2Fhow_to_make_blog_like_this%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[这是我的博客源码 ,我修改了很多NexT的代码来对原版 NexT 做了优化, 如下 : 改了NexT的很多地方来优化移动端的表现, header的布局 移动端和PC端的侧边栏更加统一 移动端的文章目录列表现在可以滑动了 重做了本地搜索引擎 现在移动端不会经常无故弹不出键盘了 也不会列出加密文章的内容了 更优雅的过渡动画 添加了headroom支持, 现在有一个可以会自动隐藏的header了, 往下滚一下鼠标则隐藏, 往上则出现 升级到了fancybox3并完成适配, 3更流畅且拥有更多效果 添加了文章加密的支持 CSDN sucks 实在是被CSDN的广告恶心到了 最近CSDN的Markdown的无序列表每一列前面的小黑点都没有了 手机网页版本的CSDN排版全无 所有博客瞬间排版全部变成一坨, 实在是不能忍. 所以才做了这个私人博客.]]></content>
-      <categories>
-        <category>Misc</category>
-      </categories>
   </entry>
   <entry>
     <title><![CDATA[vector和string的内存分配与使用注意点]]></title>
@@ -2619,20 +2633,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
-    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
-      <categories>
-        <category>Script</category>
-      </categories>
-      <tags>
-        <tag>Lua</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[C++与Lua本质原始交互API]]></title>
     <url>%2F2015%2F11%2F11%2Flua_cpp_bind%2F</url>
 
@@ -2644,6 +2644,20 @@
       </categories>
       <tags>
         <tag>CPP</tag>
+        <tag>Lua</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
+    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
+      <categories>
+        <category>Script</category>
+      </categories>
+      <tags>
         <tag>Lua</tag>
       </tags>
   </entry>
@@ -2846,21 +2860,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[redis和hiredis安装教程]]></title>
-    <url>%2F2015%2F07%2F11%2Fredis_hiredis_install_tutorial%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[在ubuntu上 redis安装 : sudo apt-get install redis-server hiredis安装 : 先到 https://github.com/redis/hiredis 下载 hiredis , 然后 sudo make sudo make install sudo ldconfig]]></content>
-      <categories>
-        <category>DB</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-        <tag>NoSQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[redis概要之数据类型]]></title>
     <url>%2F2015%2F07%2F11%2Fredis%E6%A6%82%E8%A6%81%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%2F</url>
 
@@ -2888,6 +2887,21 @@
       <tags>
         <tag>Python</tag>
         <tag>Lua</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[redis和hiredis安装教程]]></title>
+    <url>%2F2015%2F07%2F11%2Fredis_hiredis_install_tutorial%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[在ubuntu上 redis安装 : sudo apt-get install redis-server hiredis安装 : 先到 https://github.com/redis/hiredis 下载 hiredis , 然后 sudo make sudo make install sudo ldconfig]]></content>
+      <categories>
+        <category>DB</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+        <tag>NoSQL</tag>
       </tags>
   </entry>
   <entry>
@@ -3022,20 +3036,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[智能指针笔记]]></title>
-    <url>%2F2015%2F04%2F11%2Fsmart_pointer_note%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[有些错误是编译器查不到的, 这种错误是最可怕的, 当项目大了之后,即使用 Valgrind 也很难定位,因为裸指针在团队合作中使用很容易导致其他成员忘记释放或多次释放, 所以在团队合作中一般使用智能指针. 而智能指针用的不好, 结果可能适得其反. 所以我们聊一下智能指针的几点注意事项. 总结自 C++ Primer. 一个简单的包含删除器的例子演示12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include&lt;iostream&gt;#include&lt;functional&gt;#include&lt;memory&gt;using std::cout;using std::endl;using std::bind;using namespace std::placeholders;int testBind( int* a, int b, int c )&#123; cout &lt;&lt; *a + b + c &lt;&lt; endl; return *a;&#125;struct Foo&#123; Foo() = default; Foo( const Foo &amp; a ) &#123; data = a.data; std::cout &lt;&lt; "复制构造" &lt;&lt; std::endl; &#125; void print_sum( int n1, int n2 ) &#123; std::cout &lt;&lt; n1 + n2 &lt;&lt; '\n'; &#125; int data = 10;&#125;;int main()&#123; //绑定类成员函数用对象的指针 Foo foo; auto f3 = std::bind( &amp;Foo::print_sum, &amp;foo, 95, _1 ); f3( 5 ); auto check_testBind = std::bind( testBind, std::placeholders::_1, 3, 9 ); int * p = new int( 7 ); cout &lt;&lt; check_testBind( p ) &lt;&lt; endl; shared_ptr&lt;int&gt; pi( new int(), check_testBind ); *pi = 88; shared_ptr&lt;int&gt; pii( new int( 12 ), std::bind( testBind, std::placeholders::_1, 32, 19 ) ); std::function&lt; int( int* ) &gt; test_function_bind = std::bind( testBind, std::placeholders::_1, 331, 9 ); cout &lt;&lt; "test_function_bind( p, 331, 9 ) = " &lt;&lt; test_function_bind( p ) &lt;&lt; endl;; shared_ptr&lt;int&gt; piii( new int( 112 ), test_function_bind ); return 0;&#125; 打印结果 : 100 119 7 347 test_function_bind( p, 331, 9 ) = 7 452 63 100 请按任意键继续. . . 智能指针陷阱智能指针可以提供对动态分配的内存安全而又方便的管理，但这建立在正确使用的前提下 。 为了正确使用智能指针，我们必须坚持一些基本规范 : 不使用相同的内置指针值初始化(或 reset) 多个智能指针 。 不 delete get ( ) 返 回的指针 。 不使用 get () 初始化或 reset 另 一 个智能指针 。 如果你使用 get () 返 回的指针，记住当最后一个对应的智能指针销 毁 后， 你 的指 针就 变为无 效 了 。 如果你使用智能指针管理的资源不是 new 分配的内存 ， 记住传递给它一个删除器( 参见 12. 1.4 节 ， 第 415 页和 12. 1.5 节 ， 第 419 页)。 尽量用make_shared而非newshared_ptr 可以协调对象的析构 ， 但这仅限于其自身的拷贝 ( 也 是 shared_ptr)之间。 这也是为什么我们推荐使用 make_shared 而不是 new 的原因 。 这样 ， 我们就能在分配对象的同时就将 shared_ptr 与之绑定，从而避免了无意中将同一块内存绑定到多个独立创建的 shared_ptr 上 。(这是最容易犯的错) 总结 : 所以我们要尽量一开始就用make_shared来分配动态内存, 而不是先new一个出来, 再找机会将它转为智能指针. 考虑下面对 shared_ptr 进行操作的函数 : 12345// 在函数被调用时 ptr 被创建并初始化void process(shared_ptr&lt;int&gt; ptr)&#123; // 使用 ptr&#125; // ptr 离 开作用域，被销毁 process 的参数是传值方式传递的，因此实参会被拷贝到 ptr 巾 。 拷贝 一 个 shared_ptr会递增其引用讨数，因此， 在 process 运行过程中，引用七| 数值至少为 2 。 当 process结束时， ptr 的引用计数会边喊，但不会变为 0 。 因此，当用音11变 11 ptr 被销毁时， ptr指向的内存不会被释放 。 使用此函数的正确方法是传递给它一个 shared_ptr : 123shared_ptr&lt;int&gt; p(new int(42)) ; // 引用计数为 1process(p); // 拷贝 p 会递增它的引用计数 ;在 process 中引用计数位为 2int i = *p; // 正确:引用计数位为 1 虽然不能传递给 process 一 个内置指针，但可以传递 给它 一 个(临时的)shared_ptr ， 这个 shared_ptr 是用 一个内 置指针显式构造的 。 但是，这样做很可能会导致错误 : 1234int *x(new int(1024)); // 危险 x 是一个普通指针，不是一个智能指针process(x) ; // 错误 : 不能将 int* 转换为 一个 shared_ptr&lt;int&gt;process(shared_ptr&lt;int&gt;(x)); // 合法的，但内存会被释放!int j = *x ; //未定义的 x 是一个空悬指针! 在上面的调用中 ， 我们将一个临时 shared_ptr 传递给 process 。 当这个调用所在的表达式结束时，这个临时对象就被销毁了 。 销毁这个临时变量会递减引用计数，此时引用计数就变为 0 了 。 因此，当临时对象被销毁时 ， 它所指向的内存会被释放 。但 x 继续指 向 (已经释放的)内存，从而变成一个空悬指针。如果试图使用 x 的值，其行为是未定义的 。 当将一个 shared_ptr 绑定到一个普通指针时 ， 我们就将内存的管理责任交给了这个 shared_ptr 一旦这样做 了 ， 我们就不应该再使用内置指针来访问 shared_ptr 所指向的内存了 不要使用 get 初始化另一个智能指针或为智能指针赋值智能指针类型定义了 一个名为 get 的函数(参见表 1 2. J )，它返回一个内置指针，指向智能指针管理的对象 。 此函数是为了这样一种情况而设计的 : 我们需要向不能使用智能指针的代码传递一个内置指针。使用 get 返回的指告| 的代码不能 delete 此指针 。虽然编译器不会给出错误信息 ， 但将另一个智能指针也绑定到 get 返回的指针上是错误的 : 1234567shared_ptr&lt;int&gt; p(new int(42)) ; // 引 用计数为 1int *q = p . get() ; // 正确 · 但使用 q 时妥注意，不要让它管理的指针被释放&#123; // 新程序块// 未定义:两个独立的 shared_ptr 指 向 相同的内存 shared ptr&lt;int&gt; (q) ;&#125; // 程序块结束， q 被销毁 ， 它指向的内存被待放int foo = *p ; // 未定义 p 指向的内存 已 经被释放了 在本例中， p 和 q 指 向相同的内存。由于它们是相互独立创建的，因此各自的引用计数都是 1。 当 q 所在的程序块结束时 ， q 被销毁 ， 这会导致 q 指向的内存被释放 。 从而 p 变成一个空悬指针，意味着当我们试图使用 p 时，将发生未定义的行为 。 而且 ， 当 p 被销毁时 ，这块内存会被第二次 delete 。 get 用来将指针的访问权限传递给代码，你只有在确定代码不会 get.特别是，永远不要用 get 初始化另一个智能指针 del ete 指针或者为另一个智能指针赋值.]]></content>
-      <categories>
-        <category>CPP</category>
-      </categories>
-      <tags>
-        <tag>CPP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[GCC的原子操作函数]]></title>
     <url>%2F2015%2F04%2F11%2Flinux_gcc_atomic%2F</url>
 
@@ -3064,6 +3064,20 @@
       <tags>
         <tag>CPP</tag>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[智能指针笔记]]></title>
+    <url>%2F2015%2F04%2F11%2Fsmart_pointer_note%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[有些错误是编译器查不到的, 这种错误是最可怕的, 当项目大了之后,即使用 Valgrind 也很难定位,因为裸指针在团队合作中使用很容易导致其他成员忘记释放或多次释放, 所以在团队合作中一般使用智能指针. 而智能指针用的不好, 结果可能适得其反. 所以我们聊一下智能指针的几点注意事项. 总结自 C++ Primer. 一个简单的包含删除器的例子演示12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include&lt;iostream&gt;#include&lt;functional&gt;#include&lt;memory&gt;using std::cout;using std::endl;using std::bind;using namespace std::placeholders;int testBind( int* a, int b, int c )&#123; cout &lt;&lt; *a + b + c &lt;&lt; endl; return *a;&#125;struct Foo&#123; Foo() = default; Foo( const Foo &amp; a ) &#123; data = a.data; std::cout &lt;&lt; "复制构造" &lt;&lt; std::endl; &#125; void print_sum( int n1, int n2 ) &#123; std::cout &lt;&lt; n1 + n2 &lt;&lt; '\n'; &#125; int data = 10;&#125;;int main()&#123; //绑定类成员函数用对象的指针 Foo foo; auto f3 = std::bind( &amp;Foo::print_sum, &amp;foo, 95, _1 ); f3( 5 ); auto check_testBind = std::bind( testBind, std::placeholders::_1, 3, 9 ); int * p = new int( 7 ); cout &lt;&lt; check_testBind( p ) &lt;&lt; endl; shared_ptr&lt;int&gt; pi( new int(), check_testBind ); *pi = 88; shared_ptr&lt;int&gt; pii( new int( 12 ), std::bind( testBind, std::placeholders::_1, 32, 19 ) ); std::function&lt; int( int* ) &gt; test_function_bind = std::bind( testBind, std::placeholders::_1, 331, 9 ); cout &lt;&lt; "test_function_bind( p, 331, 9 ) = " &lt;&lt; test_function_bind( p ) &lt;&lt; endl;; shared_ptr&lt;int&gt; piii( new int( 112 ), test_function_bind ); return 0;&#125; 打印结果 : 100 119 7 347 test_function_bind( p, 331, 9 ) = 7 452 63 100 请按任意键继续. . . 智能指针陷阱智能指针可以提供对动态分配的内存安全而又方便的管理，但这建立在正确使用的前提下 。 为了正确使用智能指针，我们必须坚持一些基本规范 : 不使用相同的内置指针值初始化(或 reset) 多个智能指针 。 不 delete get ( ) 返 回的指针 。 不使用 get () 初始化或 reset 另 一 个智能指针 。 如果你使用 get () 返 回的指针，记住当最后一个对应的智能指针销 毁 后， 你 的指 针就 变为无 效 了 。 如果你使用智能指针管理的资源不是 new 分配的内存 ， 记住传递给它一个删除器( 参见 12. 1.4 节 ， 第 415 页和 12. 1.5 节 ， 第 419 页)。 尽量用make_shared而非newshared_ptr 可以协调对象的析构 ， 但这仅限于其自身的拷贝 ( 也 是 shared_ptr)之间。 这也是为什么我们推荐使用 make_shared 而不是 new 的原因 。 这样 ， 我们就能在分配对象的同时就将 shared_ptr 与之绑定，从而避免了无意中将同一块内存绑定到多个独立创建的 shared_ptr 上 。(这是最容易犯的错) 总结 : 所以我们要尽量一开始就用make_shared来分配动态内存, 而不是先new一个出来, 再找机会将它转为智能指针. 考虑下面对 shared_ptr 进行操作的函数 : 12345// 在函数被调用时 ptr 被创建并初始化void process(shared_ptr&lt;int&gt; ptr)&#123; // 使用 ptr&#125; // ptr 离 开作用域，被销毁 process 的参数是传值方式传递的，因此实参会被拷贝到 ptr 巾 。 拷贝 一 个 shared_ptr会递增其引用讨数，因此， 在 process 运行过程中，引用七| 数值至少为 2 。 当 process结束时， ptr 的引用计数会边喊，但不会变为 0 。 因此，当用音11变 11 ptr 被销毁时， ptr指向的内存不会被释放 。 使用此函数的正确方法是传递给它一个 shared_ptr : 123shared_ptr&lt;int&gt; p(new int(42)) ; // 引用计数为 1process(p); // 拷贝 p 会递增它的引用计数 ;在 process 中引用计数位为 2int i = *p; // 正确:引用计数位为 1 虽然不能传递给 process 一 个内置指针，但可以传递 给它 一 个(临时的)shared_ptr ， 这个 shared_ptr 是用 一个内 置指针显式构造的 。 但是，这样做很可能会导致错误 : 1234int *x(new int(1024)); // 危险 x 是一个普通指针，不是一个智能指针process(x) ; // 错误 : 不能将 int* 转换为 一个 shared_ptr&lt;int&gt;process(shared_ptr&lt;int&gt;(x)); // 合法的，但内存会被释放!int j = *x ; //未定义的 x 是一个空悬指针! 在上面的调用中 ， 我们将一个临时 shared_ptr 传递给 process 。 当这个调用所在的表达式结束时，这个临时对象就被销毁了 。 销毁这个临时变量会递减引用计数，此时引用计数就变为 0 了 。 因此，当临时对象被销毁时 ， 它所指向的内存会被释放 。但 x 继续指 向 (已经释放的)内存，从而变成一个空悬指针。如果试图使用 x 的值，其行为是未定义的 。 当将一个 shared_ptr 绑定到一个普通指针时 ， 我们就将内存的管理责任交给了这个 shared_ptr 一旦这样做 了 ， 我们就不应该再使用内置指针来访问 shared_ptr 所指向的内存了 不要使用 get 初始化另一个智能指针或为智能指针赋值智能指针类型定义了 一个名为 get 的函数(参见表 1 2. J )，它返回一个内置指针，指向智能指针管理的对象 。 此函数是为了这样一种情况而设计的 : 我们需要向不能使用智能指针的代码传递一个内置指针。使用 get 返回的指告| 的代码不能 delete 此指针 。虽然编译器不会给出错误信息 ， 但将另一个智能指针也绑定到 get 返回的指针上是错误的 : 1234567shared_ptr&lt;int&gt; p(new int(42)) ; // 引 用计数为 1int *q = p . get() ; // 正确 · 但使用 q 时妥注意，不要让它管理的指针被释放&#123; // 新程序块// 未定义:两个独立的 shared_ptr 指 向 相同的内存 shared ptr&lt;int&gt; (q) ;&#125; // 程序块结束， q 被销毁 ， 它指向的内存被待放int foo = *p ; // 未定义 p 指向的内存 已 经被释放了 在本例中， p 和 q 指 向相同的内存。由于它们是相互独立创建的，因此各自的引用计数都是 1。 当 q 所在的程序块结束时 ， q 被销毁 ， 这会导致 q 指向的内存被释放 。 从而 p 变成一个空悬指针，意味着当我们试图使用 p 时，将发生未定义的行为 。 而且 ， 当 p 被销毁时 ，这块内存会被第二次 delete 。 get 用来将指针的访问权限传递给代码，你只有在确定代码不会 get.特别是，永远不要用 get 初始化另一个智能指针 del ete 指针或者为另一个智能指针赋值.]]></content>
+      <categories>
+        <category>CPP</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
       </tags>
   </entry>
   <entry>

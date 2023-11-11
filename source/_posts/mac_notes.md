@@ -19,9 +19,12 @@ categories:
 
 
 
+
+
 # 改键Karabiner
 
-改键软件 Karabiner-Elements 的配置得直接覆盖他的配置文件 `karabiner.json` (它的配置文件路径在 app 里的 misc 里有)
+改键软件 Karabiner-Elements 的配置得直接覆盖他的配置文件 `karabiner.json` (它的配置文件路径在 app 里的 misc 里有), 
+弄完之后记得去mac的设置-Keyboard-Keyboard Shortcuts-Input Sources-Select next source in Input menu里更改快捷键为`ctrl+option+space`
 
 参考: 
 - https://github.com/pqrs-org/Karabiner-Elements/issues/2711
@@ -29,6 +32,17 @@ categories:
 - https://github.com/pqrs-org/KE-complex_modifications/issues/697#issuecomment-678677912
 - https://github.com/realliyifei/mac-karabiner-chinese-punctuations-to-halfwidth-forms
 
+
+# Mac读写NTFS格式移动硬盘(使用NTFS Disk by Omi更方便些)
+ 
+打开mac自带的`Disk Utility`这个软件 , 右键选中你的 USB 磁盘，记住这个页面的表格中的右下角的`Device`是啥(这个就是你的 NTFS 磁盘标识符, 一般叫做类似于`disk2s1`的名字), 然后点击 "Unmount", 打开 terminal , 然后在里面输入下面的命令 (记住要把里面的"disk2s1" 换成你的NTFS磁盘的标识符, ):
+
+1. `Diskutil list`
+2. `Sudo mkdir /Volumes/disk2s1`
+3. `Sudo mount -t ntfs -o rw,auto,nobrowse /dev/disk2s1 /Volumes/disk2s1`
+4. `sudo ln -s /Volumes/disk2s1 ~/Desktop/disk2s1`
+
+这是在桌面创建了一个软链接即快捷方式。但是这个软链接不管是否硬盘都会一直留在桌面，不介意的可以到此结束了。那么如何将这个桌面上的磁盘隐藏掉了呢？其实也不是隐藏，只是换了个存在的地方 —— 将快捷方式拖入 Finder 的侧边栏即可。
 
 # 科学上网
 
@@ -94,7 +108,7 @@ clion使用的时候切记: 要把项目目录以及各种觉得要mark的目录
 装好 hammerspoon 之后, 把`~`下的`.hammerspoon`文件夹里的删除, 然后将本项目中的 hammerspoon 文件夹的内容放到 `~`下的`.hammerspoon`文件夹里
 
 
-# 禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行
+# 禁止cleanmymacx即使退出它的HealthMonitor还一直后台运行(App Cleaner & Uninstaller更好用)
 
 问题：虽然CleanMyMacX软件被吹嘘的很厉害，在用起来感觉也可以帮助更好的清理电脑，但是它一直后台运行，还终止不了，一直监控Mac的信息情况，个人觉得很是鸡肋，在使用的时候打开用就行了，平常没必要一直常驻，对于内存紧张的朋友来说太吃内存了。
 
@@ -151,7 +165,7 @@ clion使用的时候切记: 要把项目目录以及各种觉得要mark的目录
 恢复原样: `defaults delete -g NSRequiresAquaSystemAppearance`
 
 
-# Mac 删除原生 ABC 英文输入法
+# Mac 删除原生 ABC 英文输入法(macos14.0实测已经失效)
 
 删除系统英文 ABC，只保留一个输入法，这样搜狗输入法只需按 Shift 即可切换中英文。
 
@@ -244,6 +258,38 @@ Restart zsh (such as by opening a new instance of your terminal emulator).
 ## tab-any-path安装与配置
 
 [tab-any-path](https://github.com/no5ix/tab-any-path)
+
+
+## terminal代理设置
+
+在`~/.zshrc` 的末尾添加以下内容
+```sh
+function on_proxy() {
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+    export http_proxy="http://127.0.0.1:7890"
+    export https_proxy=$http_proxy
+    export all_proxy=socks5://127.0.0.1:7890
+    # echo -e "\n"
+    # echo -e "\033[32m代理已开启\033[0m"
+}
+
+function off_proxy(){
+    unset http_proxy
+    unset https_proxy
+    unset all_proxy
+    # echo -e "\033[31m代理已关闭\033[0m"
+}
+
+# 加上下面这个, 这样在 terminal 打开的时候就能自动开启代理
+on_proxy
+
+```
+注意： 我这里代理端口7890改成你自己的代理端口(比如我是用 ClashX 的, 默认端口就是 7890)。windows terminal + Git Bash + zsh 的话也可以这样设置。如果没有zsh，则可以将以上内容写到 `~/.bash_profile` 文件中。
+
+然后 `source ~/.zshrc`, 然后再输入 `on_proxy`, 再 `curl -vv https://www.google.com` 测试一哈, 如果返回200，看到use proxy则表示代理可以正常使用
+
+注意： 不要使用 `ping www.google.com` 来进行测试，因为ping命令使用的是ICMP协议，是不支持代理的。 然后你就可以愉快的在终端尝试用wget下载GitHub上的东西了。 
+包括你从GitHub拉取自己的代码或者推送代码，都会加快速度，再也不用去找网上的Chrome插件来加速本地拉取GitHub代码了。
 
 
 # safari 相关

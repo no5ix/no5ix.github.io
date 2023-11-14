@@ -100,6 +100,106 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 
 
 # 08:30 Plans for the weekend.
+
+- Wow, I can't believe it's nearly the weekend again already 
+- > I know that week is `whizzing` by so fast. 
+- What have you got planned?
+- > It's a family weekend for me. 
+- I will be collecting my mom and dad early on Saturday morning and driving them to a `rental property` by the sea. 
+- > It's going to be peaceful and give everybody some real `time-out`. 
+- That sounds `divine`, I love visiting the ocean. 
+- > I think i'll be going with my family during the summer break. 
+- What are you planning for your weekend? 
+- > I'll be taking things easy 
+- this week is hard work and I need some rest and relaxation. 
+- > However, I will be going for dinner and drinks with my brothers on Saturday night. 
+- nice; Where to?
+- > Just in town, `nowhere far` or `out of my way`, I want to keep things as easy as possible. 
+- Sounds great enjoy!
+- > yeah, enjoy your weekend away too!
+- thanks!
+
+
 # 09:46 Comparing Two countries
+
+- Glen, I need your help, I'm thinking about traveling and don't know where to start. 
+- > Oh wow, that's exciting when do you want to go?
+- July.
+- > and do you have a continent in mind? 
+- Either Europe or Asia.
+- > okay cool, `that narrows it down slightly.` 
+- Kind of. 
+- > Okay, so thinking of Asia you could start Thailand. 
+- Many people do, and it's an excellent base to travel to the rest of south east Asia. 
+- > Okay, and what about Europe? 
+- I've always loved Austria, although that's very different to Thailand. 
+- > Summer in Austria is mild, It's much colder than Thailand. You definitely won't suffer from heat. 
+- That's good to know. 
+- > In the `foothill` valleys and mountains you can even freeze. 
+- really? isn't that cold there? 
+- > Yes, if you intend to visit alpine valleys you should have an autumn jacket. 
+- Obviously, Thailand is much harder, and many parts are very touristy with visitors
+- > yeah, there're two very different countries. 
+- Definitely lots of Thailand has excellent beaches but the views in Austria are stunning. 
+- > I see 
+- you may find the language barrier in Australia easier; almost everybody speaks English. 
+- > Is that so? very interesting.
+- `Sanitation` in parts of Thailand is also worse than in Austria, and you're more likely to have an upset stomach. 
+- > Hmm, that doesn't sound good. 
+- It also depends on how far you want to travel and how much you want to spend. 
+- > Australia's much closer, but Thailand will be much cheaper. 
+- You know I have a lot to think about, thank you for your help. 
+- > `No worries at all`.
+
+
 # 11:54 Talking about life history
+
+- How long have you `worked with` this company, rod?
+- > oh, I think it's 20 years this year. 
+- Wow, you don't look old enough to have worked here for that long. 
+- > haha, You're too `kind`. 
+- If you don't mind me asking , what year were you born? 
+- > No worries, I was born in 1981. 
+- I finished college and came straight here and never left, 
+- > wow, how about you? 
+- Oh, I'm much older than you, I was born in 1973 but didn't go to college. 
+- > And it's taken me a while to `work my way up`. 
+- Were you born around here?
+- > Oh yes, i've always lived here. you?
+- Yep,`as local as they come`. 
+- > What high school did you go to? 
+- redbrook high 
+- > Oh cool, I was just `down` the street at Bay view high. 
+- I had lots of friends at redbrook, though. 
+- > Nice yeah I went from redBrook Straight to Princeton, graduated in 2002, and got a job here. 
+- It's what i've always wanted to do. 
+- > That's an excellent way to do it. 
+- When I left high school, my first job was as an `apprentice` `electrician`, I did like it, but it wasn't really for me. 
+- > `Fast forward` a good few years I tried many jobs but `settled on` engineering. 
+- That's great, I love hearing the stories of how everybody comes to be where they are now. 
+- > Me too! 
+- Right, i'd best get back to my desk, catch you later. 
+- > Catch you later
+
+
 # 13:51 Different life style
+
+- are you ready to go?
+- > Go where we're meeting my parents at the new Italian place for lunch. 
+- oh, Are we?
+- > Why have you got your gym clothes on?
+- I'm booked in with my personal trainer, I'm so sorry I can't cancel , it costs me 40 dollars. 
+- > Are you joking with me? this has been on the calendar for weeks. My mom and dad have traveled two hours to meet us, and you are going to the gym?
+- I honestly can't remember you telling me, I also can't eat `pasta` or pizza on my diet
+- > okay this is going a little too far. 
+- What do you mean?
+- > yes, I love you and I love that you want to `look after` yourself
+- great I love you too. 
+- > but Your `obsession` with your health and `fitness` is going too far, you spent more time with your personal trainer than with me. 
+- No, I don't. 
+- > Well, it certainly feels like it. then your diet is so `controlled` we can't go out for meals or drinks. It's making everything so complicated.
+- I'm so sorry u feel this way. I don't know what to say.
+- > My health and fitness mean so much to me. Our lifestyles have gone in different directions.
+- Does it mean more to you than us?
+- > I'm not sure.But I don't think I should `be made to feel bad` or give it all up.
+- I understand. We'll talk about this later. Right now, I need to meet Mom and Dad. 

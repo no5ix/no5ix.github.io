@@ -481,6 +481,181 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/09/13/unity_cpp_swig_csharp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/13/unity_cpp_swig_csharp/" itemprop="url">Unity中C#调用C++写的DLL之Swig篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-13T19:18:55+00:00">
+                2015-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p>近来要用Unity打包到安卓上玩, Unity那边需要用到服务器中用C++写的库,<br>对比了 <a href="https://zhuanlan.zhihu.com/p/30746354" target="_blank" rel="noopener">P/Invoke</a> 和 <a href="https://blog.csdn.net/springberlin/article/details/9260735" target="_blank" rel="noopener">C++/CLI</a> 两种方式, 都不够省心省力, 决定使用 Swig来撸.</p>
+<p>教程基本上按照<a href="https://zhuanlan.zhihu.com/p/31162922" target="_blank" rel="noopener">这篇文章</a>就可以, 文章写得非常详尽, </p>
+<p>但文中关于设置 swiglib.i 自定义生成工具的命令行的时候, </p>
+<p>他文中的下面一段要注意 : </p>
+<blockquote>
+<p>在常规中选择命令行并且写入：</p>
+</blockquote>
+<pre><code>echo on
+$(SolutionDir)/../../thirdpart/swigwin-3.0.12/swig.exe -c++ -csharp -outdir “$(SolutionDir)/../../../UnityProj/UnityCppLearn/Assets/SwigTools/Interface” “%(FullPath)”
+echo off
+</code></pre><p>应改成 : </p>
+<p>我们在自己填的时候要记得改成自己项目中的路径, 以及把上面这段命令中的中文引号改成英文引号.</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/09/13/install_android_sdk_jdk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -601,181 +776,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 <li><p>打安卓包的时候, 如果报<code>file not found debug.keystore</code> 或 <code>Unable to get debug signature key</code>的错, 用管理员权限重新打开Unity即可.</p>
 </li>
 </ul>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/09/13/unity_cpp_swig_csharp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/13/unity_cpp_swig_csharp/" itemprop="url">Unity中C#调用C++写的DLL之Swig篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-13T19:18:55+00:00">
-                2015-09-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p>近来要用Unity打包到安卓上玩, Unity那边需要用到服务器中用C++写的库,<br>对比了 <a href="https://zhuanlan.zhihu.com/p/30746354" target="_blank" rel="noopener">P/Invoke</a> 和 <a href="https://blog.csdn.net/springberlin/article/details/9260735" target="_blank" rel="noopener">C++/CLI</a> 两种方式, 都不够省心省力, 决定使用 Swig来撸.</p>
-<p>教程基本上按照<a href="https://zhuanlan.zhihu.com/p/31162922" target="_blank" rel="noopener">这篇文章</a>就可以, 文章写得非常详尽, </p>
-<p>但文中关于设置 swiglib.i 自定义生成工具的命令行的时候, </p>
-<p>他文中的下面一段要注意 : </p>
-<blockquote>
-<p>在常规中选择命令行并且写入：</p>
-</blockquote>
-<pre><code>echo on
-$(SolutionDir)/../../thirdpart/swigwin-3.0.12/swig.exe -c++ -csharp -outdir “$(SolutionDir)/../../../UnityProj/UnityCppLearn/Assets/SwigTools/Interface” “%(FullPath)”
-echo off
-</code></pre><p>应改成 : </p>
-<p>我们在自己填的时候要记得改成自己项目中的路径, 以及把上面这段命令中的中文引号改成英文引号.</p>
 
           
         

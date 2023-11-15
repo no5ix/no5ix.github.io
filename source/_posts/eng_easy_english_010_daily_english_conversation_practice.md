@@ -102,19 +102,19 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 # 08:30 Plans for the weekend.
 
 - Wow, I can't believe it's nearly the weekend again already 
-- > I know that week is `whizzing` by so fast. 
+- > I know that week is `whizzing`(whiz [wɪz] 飕飕作声 )  by so fast. 
 - What have you got planned?
 - > It's a family weekend for me. 
-- I will be collecting my mom and dad early on Saturday morning and driving them to a `rental property` by the sea. 
-- > It's going to be peaceful and give everybody some real `time-out`. 
-- That sounds `divine`, I love visiting the ocean. 
+- I will be collecting my mom and dad early on Saturday morning and driving them to a `rental(可供租借的) property(财产, 地产;特性)` by the sea. 
+- > It's going to be peaceful and give everybody some real `time-out`(n. 休息时间，暂停). 
+- That sounds `divine`(adj. 神的，天赐的；绝妙的，极令人愉快的), I love visiting the ocean. 
 - > I think i'll be going with my family during the summer break. 
 - What are you planning for your weekend? 
 - > I'll be taking things easy 
 - this week is hard work and I need some rest and relaxation. 
 - > However, I will be going for dinner and drinks with my brothers on Saturday night. 
 - nice; Where to?
-- > Just in town, `nowhere far` or `out of my way`, I want to keep things as easy as possible. 
+- > Just in town, `nowhere(adv. 无处，哪里都不；不可能看见（或找到）的；没有任何地方；) far`(句中的 "nowhere far" 意思是 "没有远的地方"，表示不想去离得很远的地方。) or `out of my way`(句中的 "out of my way" 意思是 "不在我的路上"，表示不想偏离原来的路线或方向。), I want to keep things as easy as possible. 
 - Sounds great enjoy!
 - > yeah, enjoy your weekend away too!
 - thanks!

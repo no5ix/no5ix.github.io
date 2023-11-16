@@ -144,7 +144,7 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 - > I see 
 - you may find the language barrier in Austria easier; almost everybody speaks English. 
 - > Is that so? very interesting.
-- the `Sanitation`(n. 公共卫生, 环境卫生) in parts of Thailand is also worse than in Austria, and you're more likely to have an upset stomach. 
+- the `Sanitation`(n. 公共卫生, 环境卫生) in parts of Thailand is also worse than in Austria, and you're more `likely to`(be likely to do sth.) have an upset stomach. 
 - > Hmm, that doesn't sound good. 
 - It also depends on how far you want to travel and how much you want to spend. 
 - > Austria is much closer, but Thailand will be much cheaper. 

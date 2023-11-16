@@ -102,20 +102,20 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 # 08:30 Plans for the weekend.
 
 - Wow, I can't believe it's nearly the weekend again already 
-- > I know that week is `whizzing`(whiz [wɪz] 飕飕作声 )  by so fast. 
+- > I know, the week is `whizzing`(whiz [wɪz] 飕飕作声 )  by so fast. 
 - What have you got planned?
 - > It's a family weekend for me. 
 - I will be collecting my mom and dad early on Saturday morning and driving them to a `rental(可供租借的) property(财产, 地产;特性)` by the sea. 
 - > It's going to be peaceful and give everybody some real `time-out`(n. 休息时间，暂停). 
 - That sounds `divine`(adj. 神的，天赐的；绝妙的，极令人愉快的), I love visiting the ocean. 
-- > I think i'll be going with my family during the summer break. 
+- > I think i'll be going with my family during the summer break. (在英语中，我们通常使用"be going to" 来表达计划或预期将要发生的事情，特别是在表达将来时态的意图或计划时。所以，"I think I'll be going with my family during the summer break" 更为准确和自然，因为它明确地传达了这个意思。另一方面，"I think I will go with my family during the summer break" 也是正确的，但使用 "be going to" 更加明确地表达了你的计划或预期。总的来说，两种表达方式都是正确的，但 "be going to" 更强调计划或预期的行为。)
 - What are you planning for your weekend? 
 - > I'll be taking things easy 
 - this week is hard work and I need some rest and relaxation. 
 - > However, I will be going for dinner and drinks with my brothers on Saturday night. 
 - nice; Where to?
-- > Just in town, `nowhere(adv. 无处，哪里都不；不可能看见（或找到）的；没有任何地方；) far`(句中的 "nowhere far" 意思是 "没有远的地方"，表示不想去离得很远的地方。) or `out of my way`(句中的 "out of my way" 意思是 "不在我的路上"，表示不想偏离原来的路线或方向。), I want to keep things as easy as possible. 
-- Sounds great enjoy!
+- > Just into town, `nowhere(adv. 无处，哪里都不；不可能看见（或找到）的；没有任何地方；) far`(句中的 "nowhere far" 意思是 "没有远的地方"，表示不想去离得很远的地方。) or `out of my way`(句中的 "out of my way" 意思是 "不在我的路上"，表示不想偏离原来的路线或方向。), I want to keep things as easy as possible. 
+- Sounds great, enjoy!
 - > yeah, enjoy your weekend away too!
 - thanks!
 
@@ -123,32 +123,32 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 # 09:46 Comparing Two countries
 
 - Glen, I need your help, I'm thinking about traveling and don't know where to start. 
-- > Oh wow, that's exciting when do you want to go?
+- > Oh wow, that's exciting. when do you want to go?
 - July.
 - > and do you have a continent in mind? 
 - Either Europe or Asia.
 - > okay cool, `that narrows it down slightly.` 
 - Kind of. 
-- > Okay, so thinking of Asia you could start Thailand. 
+- > Okay, so thinking of Asia, you could start in Thailand. 
 - Many people do, and it's an excellent base to travel to the rest of south east Asia. 
 - > Okay, and what about Europe? 
 - I've always loved Austria, although that's very different to Thailand. 
 - > Summer in Austria is mild, It's much colder than Thailand. You definitely won't suffer from heat. 
 - That's good to know. 
 - > In the `foothill`(n. 丘陵地带) valleys and mountains you can even freeze. 
-- really? isn't that cold there? 
-- > Yes, if you intend to visit alpine valleys you should have an autumn jacket. 
-- Obviously, Thailand is much harder, and many parts are very touristy with visitors
+- really? is it that cold there? 
+- > Yes, if you intend to visit alpine valleys, you should have an autumn jacket. 
+- Obviously, Thailand is much hotter, and many parts are very `touristy`(adj. 适合游览的) with visitors
 - > yeah, there're two very different countries. 
-- Definitely lots of Thailand has excellent beaches but the views in Austria are stunning. 
+- Definitely. `lots of`(在句子中将"lots of"放在句首是为了强调泰国拥有许多优美的海滩。这种结构突出了泰国拥有美丽海滩的数量或范围。这样的表达方式强调了句子的主题。) Thailand has excellent beaches but the views in Austria are stunning. 
 - > I see 
-- you may find the language barrier in Australia easier; almost everybody speaks English. 
+- you may find the language barrier in Austria easier; almost everybody speaks English. 
 - > Is that so? very interesting.
-- `Sanitation`(n. 公共卫生, 环境卫生) in parts of Thailand is also worse than in Austria, and you're more likely to have an upset stomach. 
+- the `Sanitation`(n. 公共卫生, 环境卫生) in parts of Thailand is also worse than in Austria, and you're more likely to have an upset stomach. 
 - > Hmm, that doesn't sound good. 
 - It also depends on how far you want to travel and how much you want to spend. 
-- > Australia's much closer, but Thailand will be much cheaper. 
-- You know I have a lot to think about, thank you for your help. 
+- > Austria is much closer, but Thailand will be much cheaper. 
+- wow , I have a lot to think about! thank you for your help. 
 - > `No worries at all`("No worries at all"是一种口语表达，意思是“完全不用担心”或“没问题”。它用于表示对某人的感谢 or 请求、担心或道歉等情况的宽慰和放心。这个短语常用于英语国家，表示对他人的困扰或不安全感的消除。).
 
 
@@ -171,7 +171,7 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 - redbrook high 
 - > Oh cool, I was just `down`(沿着, 常见用法还有`down the hall`沿着走廊) the street at Bay view high. 
 - I had lots of friends at redbrook, though. 
-- > Nice yeah I went from redBrook Straight to Princeton, graduated in 2002, and got a job here. 
+- > Nice. yeah, I went from redBrook Straight to Princeton, graduated in 2002, and got a job here. 
 - It's what i've always wanted to do. 
 - > That's an excellent way to do it. 
 - When I left high school, my first job was as an `apprentice`(学徒) `electrician`(电工), I did like it, but it wasn't really for me. 
@@ -185,15 +185,15 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 # 13:51 Different life style
 
 - are you ready to go?
-- > Go where we're meeting my parents at the new Italian place for lunch. 
+- > Go where? we're meeting my parents at the new Italian place for lunch. 
 - oh, Are we?
 - > Why have you got your gym clothes on?
 - I'm booked in with my personal trainer, I'm so sorry I can't cancel , it costs me 40 dollars. 
 - > Are you joking with me? this has been on the calendar for weeks. My mom and dad have traveled two hours to meet us, and you are going to the gym?
 - I honestly can't remember you telling me, I also can't eat `pasta`(n.意大利面食；面团) or pizza on my diet
-- > okay this is going a little too far. 
+- > okay this is `going a little too far`(有点过分了). 
 - What do you mean?
-- > yes, I love you and I love that you want to `look after`(照顾，照料：关注某人或某物的需求、健康或安全。) yourself
+- > Jess, I love you and I love that you want to `look after`(照顾，照料：关注某人或某物的需求、健康或安全。) yourself
 - great, I love you too. 
 - > but Your `obsession`(n.痴迷，困扰；令人着迷的人或事物, obsess v.使着迷；使心神不宁；挂牵，念念不忘) with your health and `fitness`(健身; 健康) is going too far, you spent more time with your personal trainer than with me. 
 - No, I don't. 
@@ -210,64 +210,64 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 
 ## 08:30 Plans for the weekend.
 
-- 哇，我简直不敢相信周末又快到了。
-- > 是啊，这周过得太快了。
-- 你有什么计划吗？
+- 哇，我简直不敢相信周末又已经快到了。
+- > 我知道，这周飕地过去得太快了。
+- 你已经计划什么了吗？
 - > 对我来说，这是个家庭周末。
-- 我打算在星期六早上早早去接我爸妈，然后开车带他们去海边的一个度假房。
-- > 这将是宁静的，让每个人都有些真正的休息时间。
-- 听起来很美好，我喜欢去海边。
+- 我将在星期六早上早早去接我爸妈，然后开车带他们去海边的一个可供租借的房。
+- > 它将是宁静的，给每个人一些真正的休息时间。
+- 听起来绝妙，我爱游览海洋。
 - > 我想我会在暑假期间和我的家人一起去。
-- 你的周末计划是什么？
-- > 我会轻松一些，这周工作很辛苦，我需要休息和放松一下。
+- 你将给你的周末计划是什么？
+- > 我会把事情办轻松，这周工作很辛苦，我需要一些休息和放松。
 - > 不过，星期六晚上我会和我的兄弟们出去吃饭和喝酒。
 - 不错，去哪里？
-- > 就在城里，不远也不费劲，我希望保持尽可能轻松。
+- > 就在城里，不远也不偏离我的路，我想要保持事情尽可能轻松。
 - 听起来很棒，祝你玩得开心！
-- > 是的，也祝你周末愉快！
+- > 是的，也祝你周末出行愉快！
 - 谢谢！
 
 
 ## 09:46 Comparing Two countries
 
-- Glen，我需要你的帮助，我在考虑旅行，但不知道从哪里开始。
+- Glen，我需要你的帮助，我在考虑旅行并且不知道从哪里开始。
 - > 哦，哇，那太令人兴奋了，你打算什么时候去？
 - 七月。
-- > 你有考虑过去哪个大洲吗？
+- > 你有个大洲在你心里吗？
 - 要么欧洲，要么亚洲。
-- > 好的，很棒，这就稍微缩小了
-- 了解了。
-- > 对亚洲的考虑，你可以考虑去泰国。很多人都选择去那里，而且它是前往东南亚其他地方的绝佳基地。
-- 那欧洲呢？
-- > 我一直喜欢奥地利，尽管与泰国非常不同。
-- 在奥地利，夏天比较温和，比泰国冷得多。你绝对不会受热的困扰。
+- > 好的，很棒，这就稍微缩小范围了
+- 哈哈, 有一点。
+- > ok, 对亚洲的考虑，你可以从泰国开始。很多人都这样，而且它是前往东南亚其他地方的绝佳基地。
+- ok, 那欧洲呢？
+- > 我一直喜欢奥地利，尽管它与泰国非常不同。
+- 夏天在奥地利比较温和，比泰国冷得多。你绝对不会受热的苦。
 - > 那真是个好消息。
-- 在山脚的山谷和山区，甚至可能会结冰。
-- > 真的吗？那里很冷吗？
-- 是的，如果你打算去阿尔卑斯山谷，你应该带上一件秋季外套。
-- > 显然，泰国要更容易一些，很多地方都非常热门，有很多游客。
-- 是的，这两个国家确实非常不同。
-- > 泰国有许多美丽的海滩，但奥地利的风景也令人惊叹。
+- 在丘陵地带的山谷和山区，你甚至能感到很冻。
+- > 真的吗？那里那么冷吗？
+- 是的，如果你打算去游览阿尔卑斯山谷，你应该要有一件秋季外套。
+- > 显然，泰国要更热一些，很多地方对于游客都非常适合游览
+- 是的，这是两个非常不同的国家。
+- > 绝对的. 泰国有许多美丽的海滩，但奥地利的风景也令人惊叹。
 - 我明白了。
-- > 在澳大利亚，语言障碍可能会更容易一些，几乎每个人都会说英语。
-- 是吗？非常有趣。
-- > 泰国的一些地方的卫生状况也不如奥地利好，你更有可能胃口不适。
-- 嗯，听起来不太好。
+- > 你可能会发现在奥地利语言障碍会更容易一些，几乎每个人都会说英语。
+- 是这样吗？非常有趣。
+- > 泰国的一些地方的公共卫生也不如奥地利好，你更有可能肠胃不适。
+- 嗯...这听起来不太好。
 - > 这还取决于你想要旅行多远和花多少钱。
-- 澳大利亚更近一些，但泰国会更便宜。
-- > 你知道，我有很多要考虑的，谢谢你的帮助。
-- 没问题，不用担心。
+- 奥地利更近一些，但泰国会更便宜。
+- > 哇, 我有很多要考虑的，谢谢你的帮助。
+- 完全不用担心。
 
 
 ##  11:54 Talking about life history
  
 - Rod，你在这家公司工作多久了？
 - > 哦，我想今年是20年了。
-- 哇，你看上去还不够老，就已经在这里工作这么久了。
-- > 哈哈，你太好了。
+- 哇，你看上去没有在这里工作这么久那么老。
+- > 哈哈，你太好心了。
 - 如果你不介意我问，你是哪一年出生的？
 - > 没问题，我是1981年出生的。
-- 我从大学毕业后就来这里了，一直没有离开。
+- 我大学毕业后就来这里了，一直没有离开。
 - > 哇，你呢？
 - 哦，我比你大多了，我是1973年出生的，但我没有上大学。
 - > 我花了很长时间才一步步向上爬。
@@ -276,16 +276,16 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 - 是的，我是土生土长的。
 - > 你上的是哪所高中？
 - Redbrook高中。
-- > 哦，很酷，我就在街上的Bay view高中。
-- 我在Redbrook有很多朋友。
-- > 不错，是的，我从Redbrook直接进入普林斯顿大学，2002年毕业后就来这里工作了。
+- > 哦，很酷，我是沿着这条街的Bay view高中。
+- 不过我在Redbrook有很多朋友。
+- > 不错，是的，我从Redbrook直接进入普林斯顿大学，2002年毕业, 然后在这里得到了一份工作。
 - 这是我一直想做的事情。
-- > 这是一个很好的实现方式。
-- 我离开高中后，我的第一份工作是做学徒电工，我喜欢它，但那并不适合我。
-- > 过了好几年，我尝试了很多工作，最后选择了工程领域。
+- > 这是一个极好的路子去做这件事。
+- 我离开高中后，我的第一份工作是做学徒电工，我确实喜欢它，但那并不适合我。
+- > 快进好几年，我尝试了很多工作，最后选定了工程领域。
 - 那很棒，我喜欢听每个人是如何走到现在的故事。
 - > 我也是！
-- 好了，我最好回到我的办公桌上去了，待会见。
+- 好了，我最好回到我的桌上去了，待会见。
 
 
 ## 13:51 Different life style
@@ -294,18 +294,18 @@ https://www.youtube.com/watch?v=GAuqgOC6eKY
 - > 我们要去哪里？我们要在新的意大利餐厅和我的父母见面吃午饭。
 - 哦，是吗？
 - > 你为什么穿着运动服？
-- 我和我的私人教练预约了，真抱歉我不能取消，它要花费我40美元。
-- > 你在和我开玩笑吗？这个约会在日历上排定了好几周了。我的父母开了两个小时的车来见我们，而你要去健身房？
-- 实话实说，我真不记得你告诉过我，而且我在我的饮食计划中不能吃意面或披萨。
+- 我和我的私人教练预约了，真抱歉我不能取消，它花费了我40美元。
+- > 你在和我开玩笑吗？这在日历上好几周了。我的父母通行了两个小时来见我们，而你要去健身房？
+- 实话实说，我不记得你告诉过我，而且我的饮食计划中不能吃意面或披萨。
 - > 好了，这有点过分了。
-- 你是什么意思？
-- > 是的，我爱你，也爱你想要关心自己的样子。
+- 你什么意思？
+- > 是的，我爱你，也爱你想要照料自己这件事。
 - 太好了，我也爱你。
-- > 但是你对健康和健身的过度追求已经过分了，你和你的私人教练相处的时间比和我在一起的时间还多。
-- 不，不是这样的。
-- > 嗯，至少感觉是这样的。而且你的饮食如此受限，我们不能外出吃饭或喝酒。这让一切变得很复杂。
-- 对不起，你有这种感觉。我不知道该说什么。
-- > 对我来说，健康和健身意味着很多。我们的生活方式已经走向不同的方向。
-- 那对你来说比我们重要吗？
-- > 我不确定。但我不认为我应该感到糟糕或放弃它们。
-- 我理解。我们以后再谈。现在，我需要去见爸爸妈妈。
+- > 但是你对健康和健身的痴迷已经过分了，你花在和你的私人教练的时间比和我在一起的还多。
+- 不，我没有。
+- > 嗯，无疑感觉是这样的。而且你的饮食如此受限，我们不能外出吃饭或喝酒。这让一切变得很复杂。
+- 我非常抱歉你有这种感觉。我不知道该说什么了。
+- > 我健康和健身对我来说意味着很多。我们的生活方式已经走向不同的方向。
+- 那对你来说比我们意味着更多吗？
+- > 我不确定。但我不认为我应该被迫感到糟糕或完全放弃它们。
+- 我理解。我们将会以后再谈这个。就现在，我需要去见爸爸妈妈。

@@ -1627,1160 +1627,1161 @@ collaboration n.
 collective adj.
 collision n.
 colonial adj.
-columnist n.
-combat n., v.
-commence v.
-commentary n.
-commentator n.
-commerce n.
-commissioner n.
-commodity n.
-communist adj.
-companion n.
-comparable adj.
-compassion n.
-compel v.
-compelling adj.
-compensate v.
-compensation n.
-competence n.
-competent adj.
-compile v.
-complement v.
-complexity n.
-compliance n.
-complication n.
-comply v.
-composition n.
-compromise n., v.
-compute v.
-conceal v.
-concede v.
-conceive v.
-conception n.
-concession n.
-condemn v.
-confer v.
-confession n.
-configuration n.
-confine v.
-confirmation n.
-confront v.
-confrontation n.
-congratulate v.
-congregation n.
-congressional adj.
-conquer v.
-conscience n.
-consciousness n.
-consecutive adj.
-consensus n.
-consent n., v.
-conserve v.
-consistency n.
-consolidate v.
-constitute v.
-constitution n.
-constitutional adj.
-constraint n.
-consultation n.
-contemplate v.
-contempt n.
-contend v.
-contender n.
-content2 adj.
-contention n.
-continually adv.
-contractor n.
-contradiction n.
-contrary adj., n.
-contributor n.
-conversion n.
-convict v.
-conviction n.
-cooperate v.
-cooperative adj.
-coordinate v.
-coordination n.
-coordinator n.
-copper n.
-copyright n.
-correction n.
-correlate v.
-correlation n.
-correspond v.
-correspondence n.
-correspondent n.
-corresponding adj.
-corrupt adj.
-corruption n.
-costly adj.
-councilor n.
-counseling n.
-counselor n.
-counter (argue against) v.
-counterpart n.
-countless adj.
-coup n.
-courtesy n.
-craft v.
-crawl v.
-creator n.
-credibility n.
-credible adj.
-creep v.
-critique n.
-crown n.
-crude adj.
-crush v.
-crystal n.
-cult n., adj.
-cultivate v.
-curiosity n.
-custody n.
-cutting n.
-cynical adj.
+
+- [columnist](https://www.youdao.com/result?word=columnist&lang=en) n.
+- [combat](https://www.youdao.com/result?word=combat&lang=en) n., v.
+- [commence](https://www.youdao.com/result?word=commence&lang=en) v.
+- [commentary](https://www.youdao.com/result?word=commentary&lang=en) n.
+- [commentator](https://www.youdao.com/result?word=commentator&lang=en) n.
+- [commerce](https://www.youdao.com/result?word=commerce&lang=en) n.
+- [commissioner](https://www.youdao.com/result?word=commissioner&lang=en) n.
+- [commodity](https://www.youdao.com/result?word=commodity&lang=en) n.
+- [communist](https://www.youdao.com/result?word=communist&lang=en) adj.
+- [companion](https://www.youdao.com/result?word=companion&lang=en) n.
+- [comparable](https://www.youdao.com/result?word=comparable&lang=en) adj.
+- [compassion](https://www.youdao.com/result?word=compassion&lang=en) n.
+- [compel](https://www.youdao.com/result?word=compel&lang=en) v.
+- [compelling](https://www.youdao.com/result?word=compelling&lang=en) adj.
+- [compensate](https://www.youdao.com/result?word=compensate&lang=en) v.
+- [compensation](https://www.youdao.com/result?word=compensation&lang=en) n.
+- [competence](https://www.youdao.com/result?word=competence&lang=en) n.
+- [competent](https://www.youdao.com/result?word=competent&lang=en) adj.
+- [compile](https://www.youdao.com/result?word=compile&lang=en) v.
+- [complement](https://www.youdao.com/result?word=complement&lang=en) v.
+- [complexity](https://www.youdao.com/result?word=complexity&lang=en) n.
+- [compliance](https://www.youdao.com/result?word=compliance&lang=en) n.
+- [complication](https://www.youdao.com/result?word=complication&lang=en) n.
+- [comply](https://www.youdao.com/result?word=comply&lang=en) v.
+- [composition](https://www.youdao.com/result?word=composition&lang=en) n.
+- [compromise](https://www.youdao.com/result?word=compromise&lang=en) n., v.
+- [compute](https://www.youdao.com/result?word=compute&lang=en) v.
+- [conceal](https://www.youdao.com/result?word=conceal&lang=en) v.
+- [concede](https://www.youdao.com/result?word=concede&lang=en) v.
+- [conceive](https://www.youdao.com/result?word=conceive&lang=en) v.
+- [conception](https://www.youdao.com/result?word=conception&lang=en) n.
+- [concession](https://www.youdao.com/result?word=concession&lang=en) n.
+- [condemn](https://www.youdao.com/result?word=condemn&lang=en) v.
+- [confer](https://www.youdao.com/result?word=confer&lang=en) v.
+- [confession](https://www.youdao.com/result?word=confession&lang=en) n.
+- [configuration](https://www.youdao.com/result?word=configuration&lang=en) n.
+- [confine](https://www.youdao.com/result?word=confine&lang=en) v.
+- [confirmation](https://www.youdao.com/result?word=confirmation&lang=en) n.
+- [confront](https://www.youdao.com/result?word=confront&lang=en) v.
+- [confrontation](https://www.youdao.com/result?word=confrontation&lang=en) n.
+- [congratulate](https://www.youdao.com/result?word=congratulate&lang=en) v.
+- [congregation](https://www.youdao.com/result?word=congregation&lang=en) n.
+- [congressional](https://www.youdao.com/result?word=congressional&lang=en) adj.
+- [conquer](https://www.youdao.com/result?word=conquer&lang=en) v.
+- [conscience](https://www.youdao.com/result?word=conscience&lang=en) n.
+- [consciousness](https://www.youdao.com/result?word=consciousness&lang=en) n.
+- [consecutive](https://www.youdao.com/result?word=consecutive&lang=en) adj.
+- [consensus](https://www.youdao.com/result?word=consensus&lang=en) n.
+- [consent](https://www.youdao.com/result?word=consent&lang=en) n., v.
+- [conserve](https://www.youdao.com/result?word=conserve&lang=en) v.
+- [consistency](https://www.youdao.com/result?word=consistency&lang=en) n.
+- [consolidate](https://www.youdao.com/result?word=consolidate&lang=en) v.
+- [constitute](https://www.youdao.com/result?word=constitute&lang=en) v.
+- [constitution](https://www.youdao.com/result?word=constitution&lang=en) n.
+- [constitutional](https://www.youdao.com/result?word=constitutional&lang=en) adj.
+- [constraint](https://www.youdao.com/result?word=constraint&lang=en) n.
+- [consultation](https://www.youdao.com/result?word=consultation&lang=en) n.
+- [contemplate](https://www.youdao.com/result?word=contemplate&lang=en) v.
+- [contempt](https://www.youdao.com/result?word=contempt&lang=en) n.
+- [contend](https://www.youdao.com/result?word=contend&lang=en) v.
+- [contender](https://www.youdao.com/result?word=contender&lang=en) n.
+- [content2](https://www.youdao.com/result?word=content2&lang=en) adj.
+- [contention](https://www.youdao.com/result?word=contention&lang=en) n.
+- [continually](https://www.youdao.com/result?word=continually&lang=en) adv.
+- [contractor](https://www.youdao.com/result?word=contractor&lang=en) n.
+- [contradiction](https://www.youdao.com/result?word=contradiction&lang=en) n.
+- [contrary](https://www.youdao.com/result?word=contrary&lang=en) adj., n.
+- [contributor](https://www.youdao.com/result?word=contributor&lang=en) n.
+- [conversion](https://www.youdao.com/result?word=conversion&lang=en) n.
+- [convict](https://www.youdao.com/result?word=convict&lang=en) v.
+- [conviction](https://www.youdao.com/result?word=conviction&lang=en) n.
+- [cooperate](https://www.youdao.com/result?word=cooperate&lang=en) v.
+- [cooperative](https://www.youdao.com/result?word=cooperative&lang=en) adj.
+- [coordinate](https://www.youdao.com/result?word=coordinate&lang=en) v.
+- [coordination](https://www.youdao.com/result?word=coordination&lang=en) n.
+- [coordinator](https://www.youdao.com/result?word=coordinator&lang=en) n.
+- [copper](https://www.youdao.com/result?word=copper&lang=en) n.
+- [copyright](https://www.youdao.com/result?word=copyright&lang=en) n.
+- [correction](https://www.youdao.com/result?word=correction&lang=en) n.
+- [correlate](https://www.youdao.com/result?word=correlate&lang=en) v.
+- [correlation](https://www.youdao.com/result?word=correlation&lang=en) n.
+- [correspond](https://www.youdao.com/result?word=correspond&lang=en) v.
+- [correspondence](https://www.youdao.com/result?word=correspondence&lang=en) n.
+- [correspondent](https://www.youdao.com/result?word=correspondent&lang=en) n.
+- [corresponding](https://www.youdao.com/result?word=corresponding&lang=en) adj.
+- [corrupt](https://www.youdao.com/result?word=corrupt&lang=en) adj.
+- [corruption](https://www.youdao.com/result?word=corruption&lang=en) n.
+- [costly](https://www.youdao.com/result?word=costly&lang=en) adj.
+- [councilor](https://www.youdao.com/result?word=councilor&lang=en) n.
+- [counseling](https://www.youdao.com/result?word=counseling&lang=en) n.
+- [counselor](https://www.youdao.com/result?word=counselor&lang=en) n.
+- [counter](https://www.youdao.com/result?word=counter&lang=en) (argue against) v.
+- [counterpart](https://www.youdao.com/result?word=counterpart&lang=en) n.
+- [countless](https://www.youdao.com/result?word=countless&lang=en) adj.
+- [coup](https://www.youdao.com/result?word=coup&lang=en) n.
+- [courtesy](https://www.youdao.com/result?word=courtesy&lang=en) n.
+- [craft](https://www.youdao.com/result?word=craft&lang=en) v.
+- [crawl](https://www.youdao.com/result?word=crawl&lang=en) v.
+- [creator](https://www.youdao.com/result?word=creator&lang=en) n.
+- [credibility](https://www.youdao.com/result?word=credibility&lang=en) n.
+- [credible](https://www.youdao.com/result?word=credible&lang=en) adj.
+- [creep](https://www.youdao.com/result?word=creep&lang=en) v.
+- [critique](https://www.youdao.com/result?word=critique&lang=en) n.
+- [crown](https://www.youdao.com/result?word=crown&lang=en) n.
+- [crude](https://www.youdao.com/result?word=crude&lang=en) adj.
+- [crush](https://www.youdao.com/result?word=crush&lang=en) v.
+- [crystal](https://www.youdao.com/result?word=crystal&lang=en) n.
+- [cult](https://www.youdao.com/result?word=cult&lang=en) n., adj.
+- [cultivate](https://www.youdao.com/result?word=cultivate&lang=en) v.
+- [curiosity](https://www.youdao.com/result?word=curiosity&lang=en) n.
+- [custody](https://www.youdao.com/result?word=custody&lang=en) n.
+- [cutting](https://www.youdao.com/result?word=cutting&lang=en) n.
+- [cynical](https://www.youdao.com/result?word=cynical&lang=en) adj.[
 
 
 ## d
 
-dam n.
-damaging adj.
-dawn n.
-debris n.
-debut n.
-decision-making n.
-decisive adj.
-declaration n.
-dedicated adj.
-dedication n.
-deed n.
-deem v.
-default n.
-defect n.
-defensive adj.
-deficiency n.
-deficit n.
-defy v.
-delegate n.
-delegation n.
-delicate adj.
-demon n.
-denial n.
-denounce v.
-dense adj.
-density n.
-dependence n.
-depict v.
-deploy v.
-deployment n.
-deprive v.
-deputy n.
-descend v.
-descent n.
-designate v.
-desirable adj.
-desktop n.
-destructive adj.
-detain v.
-detection n.
-detention n.
-deteriorate v.
-devastate v.
-devil n.
-devise v.
-diagnose v.
-diagnosis n.
-dictate v.
-dictator n.
-differentiate v.
-dignity n.
-dilemma n.
-dimension n.
-diminish v.
-dip v.
-diplomat n.
-diplomatic n.
-directory n.
-disastrous adj.
-discard v.
-discharge v.
-disclose v.
-disclosure n.
-discourse n.
-discretion n.
-discrimination n.
-dismissal n.
-displace v.
-disposal n.
-dispose v.
-dispute n., v.
-disrupt v.
-disruption n.
-dissolve v.
-distinction n.
-distinctive adj.
-distort v.
-distress n., v.
-disturbing adj.
-divert v.
-divine adj.
-doctrine n.
-documentation n.
-domain n.
-dominance n.
-donor n.
-dose n.
-drain v.
-drift v.
-driving adj.
-drown v.
-dual adj.
-dub v.
-dumb adj.
-duo n.
-dynamic n.
+- [dam](https://www.youdao.com/result?word=dam&lang=en) n.
+- [damaging](https://www.youdao.com/result?word=damaging&lang=en) adj.
+- [dawn](https://www.youdao.com/result?word=dawn&lang=en) n.
+- [debris](https://www.youdao.com/result?word=debris&lang=en) n.
+- [debut](https://www.youdao.com/result?word=debut&lang=en) n.
+- [decision](https://www.youdao.com/result?word=decision&lang=en)-making n.
+- [decisive](https://www.youdao.com/result?word=decisive&lang=en) adj.
+- [declaration](https://www.youdao.com/result?word=declaration&lang=en) n.
+- [dedicated](https://www.youdao.com/result?word=dedicated&lang=en) adj.
+- [dedication](https://www.youdao.com/result?word=dedication&lang=en) n.
+- [deed](https://www.youdao.com/result?word=deed&lang=en) n.
+- [deem](https://www.youdao.com/result?word=deem&lang=en) v.
+- [default](https://www.youdao.com/result?word=default&lang=en) n.
+- [defect](https://www.youdao.com/result?word=defect&lang=en) n.
+- [defensive](https://www.youdao.com/result?word=defensive&lang=en) adj.
+- [deficiency](https://www.youdao.com/result?word=deficiency&lang=en) n.
+- [deficit](https://www.youdao.com/result?word=deficit&lang=en) n.
+- [defy](https://www.youdao.com/result?word=defy&lang=en) v.
+- [delegate](https://www.youdao.com/result?word=delegate&lang=en) n.
+- [delegation](https://www.youdao.com/result?word=delegation&lang=en) n.
+- [delicate](https://www.youdao.com/result?word=delicate&lang=en) adj.
+- [demon](https://www.youdao.com/result?word=demon&lang=en) n.
+- [denial](https://www.youdao.com/result?word=denial&lang=en) n.
+- [denounce](https://www.youdao.com/result?word=denounce&lang=en) v.
+- [dense](https://www.youdao.com/result?word=dense&lang=en) adj.
+- [density](https://www.youdao.com/result?word=density&lang=en) n.
+- [dependence](https://www.youdao.com/result?word=dependence&lang=en) n.
+- [depict](https://www.youdao.com/result?word=depict&lang=en) v.
+- [deploy](https://www.youdao.com/result?word=deploy&lang=en) v.
+- [deployment](https://www.youdao.com/result?word=deployment&lang=en) n.
+- [deprive](https://www.youdao.com/result?word=deprive&lang=en) v.
+- [deputy](https://www.youdao.com/result?word=deputy&lang=en) n.
+- [descend](https://www.youdao.com/result?word=descend&lang=en) v.
+- [descent](https://www.youdao.com/result?word=descent&lang=en) n.
+- [designate](https://www.youdao.com/result?word=designate&lang=en) v.
+- [desirable](https://www.youdao.com/result?word=desirable&lang=en) adj.
+- [desktop](https://www.youdao.com/result?word=desktop&lang=en) n.
+- [destructive](https://www.youdao.com/result?word=destructive&lang=en) adj.
+- [detain](https://www.youdao.com/result?word=detain&lang=en) v.
+- [detection](https://www.youdao.com/result?word=detection&lang=en) n.
+- [detention](https://www.youdao.com/result?word=detention&lang=en) n.
+- [deteriorate](https://www.youdao.com/result?word=deteriorate&lang=en) v.
+- [devastate](https://www.youdao.com/result?word=devastate&lang=en) v.
+- [devil](https://www.youdao.com/result?word=devil&lang=en) n.
+- [devise](https://www.youdao.com/result?word=devise&lang=en) v.
+- [diagnose](https://www.youdao.com/result?word=diagnose&lang=en) v.
+- [diagnosis](https://www.youdao.com/result?word=diagnosis&lang=en) n.
+- [dictate](https://www.youdao.com/result?word=dictate&lang=en) v.
+- [dictator](https://www.youdao.com/result?word=dictator&lang=en) n.
+- [differentiate](https://www.youdao.com/result?word=differentiate&lang=en) v.
+- [dignity](https://www.youdao.com/result?word=dignity&lang=en) n.
+- [dilemma](https://www.youdao.com/result?word=dilemma&lang=en) n.
+- [dimension](https://www.youdao.com/result?word=dimension&lang=en) n.
+- [diminish](https://www.youdao.com/result?word=diminish&lang=en) v.
+- [dip](https://www.youdao.com/result?word=dip&lang=en) v.
+- [diplomat](https://www.youdao.com/result?word=diplomat&lang=en) n.
+- [diplomatic](https://www.youdao.com/result?word=diplomatic&lang=en) n.
+- [directory](https://www.youdao.com/result?word=directory&lang=en) n.
+- [disastrous](https://www.youdao.com/result?word=disastrous&lang=en) adj.
+- [discard](https://www.youdao.com/result?word=discard&lang=en) v.
+- [discharge](https://www.youdao.com/result?word=discharge&lang=en) v.
+- [disclose](https://www.youdao.com/result?word=disclose&lang=en) v.
+- [disclosure](https://www.youdao.com/result?word=disclosure&lang=en) n.
+- [discourse](https://www.youdao.com/result?word=discourse&lang=en) n.
+- [discretion](https://www.youdao.com/result?word=discretion&lang=en) n.
+- [discrimination](https://www.youdao.com/result?word=discrimination&lang=en) n.
+- [dismissal](https://www.youdao.com/result?word=dismissal&lang=en) n.
+- [displace](https://www.youdao.com/result?word=displace&lang=en) v.
+- [disposal](https://www.youdao.com/result?word=disposal&lang=en) n.
+- [dispose](https://www.youdao.com/result?word=dispose&lang=en) v.
+- [dispute](https://www.youdao.com/result?word=dispute&lang=en) n., v.
+- [disrupt](https://www.youdao.com/result?word=disrupt&lang=en) v.
+- [disruption](https://www.youdao.com/result?word=disruption&lang=en) n.
+- [dissolve](https://www.youdao.com/result?word=dissolve&lang=en) v.
+- [distinction](https://www.youdao.com/result?word=distinction&lang=en) n.
+- [distinctive](https://www.youdao.com/result?word=distinctive&lang=en) adj.
+- [distort](https://www.youdao.com/result?word=distort&lang=en) v.
+- [distress](https://www.youdao.com/result?word=distress&lang=en) n., v.
+- [disturbing](https://www.youdao.com/result?word=disturbing&lang=en) adj.
+- [divert](https://www.youdao.com/result?word=divert&lang=en) v.
+- [divine](https://www.youdao.com/result?word=divine&lang=en) adj.
+- [doctrine](https://www.youdao.com/result?word=doctrine&lang=en) n.
+- [documentation](https://www.youdao.com/result?word=documentation&lang=en) n.
+- [domain](https://www.youdao.com/result?word=domain&lang=en) n.
+- [dominance](https://www.youdao.com/result?word=dominance&lang=en) n.
+- [donor](https://www.youdao.com/result?word=donor&lang=en) n.
+- [dose](https://www.youdao.com/result?word=dose&lang=en) n.
+- [drain](https://www.youdao.com/result?word=drain&lang=en) v.
+- [drift](https://www.youdao.com/result?word=drift&lang=en) v.
+- [driving](https://www.youdao.com/result?word=driving&lang=en) adj.
+- [drown](https://www.youdao.com/result?word=drown&lang=en) v.
+- [dual](https://www.youdao.com/result?word=dual&lang=en) adj.
+- [dub](https://www.youdao.com/result?word=dub&lang=en) v.
+- [dumb](https://www.youdao.com/result?word=dumb&lang=en) adj.
+- [duo](https://www.youdao.com/result?word=duo&lang=en) n.
+- [dynamic](https://www.youdao.com/result?word=dynamic&lang=en) n.
 
 
 ## e
 
-earnings n.
-ease n., v.
-echo v., n.
-ecological adj.
-educator n.
-effectiveness n.
-efficiency n.
-ego n.
-elaborate adj.
-electoral adj.
-elevate v.
-eligible adj.
-elite n.
-embark v.
-embarrassment n.
-embassy n.
-embed v.
-embody v.
-emergence n.
-empirical adj.
-empower v.
-enact v.
-encompass v.
-encouragement n.
-encouraging adj.
-endeavor n.
-endless adj.
-endorse v.
-endorsement n.
-endure v.
-enforce v.
-enforcement n.
-engagement n.
-engaging adj.
-enrich v.
-enroll v.
-ensue v.
-enterprise n.
-enthusiast n.
-entitle v.
-entity n.
-epidemic n.
-equality n.
-equation n.
-erect v.
-escalate v.
-essence n.
-establishment n.
-eternal adj.
-evacuate v.
-evoke v.
-evolutionary adj.
-exaggerate v.
-excellence n.
-exceptional adj.
-excess n., adj.
-exclusion n.
-exclusive adj.
-exclusively adv.
-execute v.
-execution n.
-exert v.
-exile n.
-expenditure n.
-experimental adj.
-expire v.
-explicit adj.
-explicitly adv.
-exploitation n.
-explosive adj., n.
-extract v.
-extremist n.
+- [earnings](https://www.youdao.com/result?word=earnings&lang=en) n.
+- [ease](https://www.youdao.com/result?word=ease&lang=en) n., v.
+- [echo](https://www.youdao.com/result?word=echo&lang=en) v., n.
+- [ecological](https://www.youdao.com/result?word=ecological&lang=en) adj.
+- [educator](https://www.youdao.com/result?word=educator&lang=en) n.
+- [effectiveness](https://www.youdao.com/result?word=effectiveness&lang=en) n.
+- [efficiency](https://www.youdao.com/result?word=efficiency&lang=en) n.
+- [ego](https://www.youdao.com/result?word=ego&lang=en) n.
+- [elaborate](https://www.youdao.com/result?word=elaborate&lang=en) adj.
+- [electoral](https://www.youdao.com/result?word=electoral&lang=en) adj.
+- [elevate](https://www.youdao.com/result?word=elevate&lang=en) v.
+- [eligible](https://www.youdao.com/result?word=eligible&lang=en) adj.
+- [elite](https://www.youdao.com/result?word=elite&lang=en) n.
+- [embark](https://www.youdao.com/result?word=embark&lang=en) v.
+- [embarrassment](https://www.youdao.com/result?word=embarrassment&lang=en) n.
+- [embassy](https://www.youdao.com/result?word=embassy&lang=en) n.
+- [embed](https://www.youdao.com/result?word=embed&lang=en) v.
+- [embody](https://www.youdao.com/result?word=embody&lang=en) v.
+- [emergence](https://www.youdao.com/result?word=emergence&lang=en) n.
+- [empirical](https://www.youdao.com/result?word=empirical&lang=en) adj.
+- [empower](https://www.youdao.com/result?word=empower&lang=en) v.
+- [enact](https://www.youdao.com/result?word=enact&lang=en) v.
+- [encompass](https://www.youdao.com/result?word=encompass&lang=en) v.
+- [encouragement](https://www.youdao.com/result?word=encouragement&lang=en) n.
+- [encouraging](https://www.youdao.com/result?word=encouraging&lang=en) adj.
+- [endeavor](https://www.youdao.com/result?word=endeavor&lang=en) n.
+- [endless](https://www.youdao.com/result?word=endless&lang=en) adj.
+- [endorse](https://www.youdao.com/result?word=endorse&lang=en) v.
+- [endorsement](https://www.youdao.com/result?word=endorsement&lang=en) n.
+- [endure](https://www.youdao.com/result?word=endure&lang=en) v.
+- [enforce](https://www.youdao.com/result?word=enforce&lang=en) v.
+- [enforcement](https://www.youdao.com/result?word=enforcement&lang=en) n.
+- [engagement](https://www.youdao.com/result?word=engagement&lang=en) n.
+- [engaging](https://www.youdao.com/result?word=engaging&lang=en) adj.
+- [enrich](https://www.youdao.com/result?word=enrich&lang=en) v.
+- [enroll](https://www.youdao.com/result?word=enroll&lang=en) v.
+- [ensue](https://www.youdao.com/result?word=ensue&lang=en) v.
+- [enterprise](https://www.youdao.com/result?word=enterprise&lang=en) n.
+- [enthusiast](https://www.youdao.com/result?word=enthusiast&lang=en) n.
+- [entitle](https://www.youdao.com/result?word=entitle&lang=en) v.
+- [entity](https://www.youdao.com/result?word=entity&lang=en) n.
+- [epidemic](https://www.youdao.com/result?word=epidemic&lang=en) n.
+- [equality](https://www.youdao.com/result?word=equality&lang=en) n.
+- [equation](https://www.youdao.com/result?word=equation&lang=en) n.
+- [erect](https://www.youdao.com/result?word=erect&lang=en) v.
+- [escalate](https://www.youdao.com/result?word=escalate&lang=en) v.
+- [essence](https://www.youdao.com/result?word=essence&lang=en) n.
+- [establishment](https://www.youdao.com/result?word=establishment&lang=en) n.
+- [eternal](https://www.youdao.com/result?word=eternal&lang=en) adj.
+- [evacuate](https://www.youdao.com/result?word=evacuate&lang=en) v.
+- [evoke](https://www.youdao.com/result?word=evoke&lang=en) v.
+- [evolutionary](https://www.youdao.com/result?word=evolutionary&lang=en) adj.
+- [exaggerate](https://www.youdao.com/result?word=exaggerate&lang=en) v.
+- [excellence](https://www.youdao.com/result?word=excellence&lang=en) n.
+- [exceptional](https://www.youdao.com/result?word=exceptional&lang=en) adj.
+- [excess](https://www.youdao.com/result?word=excess&lang=en) n., adj.
+- [exclusion](https://www.youdao.com/result?word=exclusion&lang=en) n.
+- [exclusive](https://www.youdao.com/result?word=exclusive&lang=en) adj.
+- [exclusively](https://www.youdao.com/result?word=exclusively&lang=en) adv.
+- [execute](https://www.youdao.com/result?word=execute&lang=en) v.
+- [execution](https://www.youdao.com/result?word=execution&lang=en) n.
+- [exert](https://www.youdao.com/result?word=exert&lang=en) v.
+- [exile](https://www.youdao.com/result?word=exile&lang=en) n.
+- [expenditure](https://www.youdao.com/result?word=expenditure&lang=en) n.
+- [experimental](https://www.youdao.com/result?word=experimental&lang=en) adj.
+- [expire](https://www.youdao.com/result?word=expire&lang=en) v.
+- [explicit](https://www.youdao.com/result?word=explicit&lang=en) adj.
+- [explicitly](https://www.youdao.com/result?word=explicitly&lang=en) adv.
+- [exploitation](https://www.youdao.com/result?word=exploitation&lang=en) n.
+- [explosive](https://www.youdao.com/result?word=explosive&lang=en) adj., n.
+- [extract](https://www.youdao.com/result?word=extract&lang=en) v.
+- [extremist](https://www.youdao.com/result?word=extremist&lang=en) n.
 
 
 ## f
 
-facilitate v.
-faction n.
-fade v.
-fairness n.
-fatal adj.
-fate n.
-favorable adj.
-feat n.
-felony n.
-feminist adj., n.
-fiber n.
-fierce adj.
-filmmaker n.
-filter n., v.
-fine n., v.
-firearm n.
-fiscal adj.
-fit n.
-flaw n.
-flawed adj.
-flee v.
-fleet n.
-flesh n.
-flexibility n.
-flourish v.
-fluid n.
-footage n.
-foreigner n.
-forge v.
-formula n.
-formulate v.
-forth adv.
-forthcoming adj.
-foster v.
-fragile adj.
-franchise n.
-frankly adv.
-freshman n.
-frustrated adj.
-frustrating adj.
-frustration n.
-functional adj.
-fundraising n.
-funeral n.
+- [facilitate](https://www.youdao.com/result?word=screening&lang=en) v.
+- [faction](https://www.youdao.com/result?word=faction&lang=en) n.
+- [fade](https://www.youdao.com/result?word=fade&lang=en) v.
+- [fairness](https://www.youdao.com/result?word=fairness&lang=en) n.
+- [fatal](https://www.youdao.com/result?word=fatal&lang=en) adj.
+- [fate](https://www.youdao.com/result?word=fate&lang=en) n.
+- [favorable](https://www.youdao.com/result?word=favorable&lang=en) adj.
+- [feat](https://www.youdao.com/result?word=feat&lang=en) n.
+- [felony](https://www.youdao.com/result?word=felony&lang=en) n.
+- [feminist](https://www.youdao.com/result?word=feminist&lang=en) adj., n.
+- [fiber](https://www.youdao.com/result?word=fiber&lang=en) n.
+- [fierce](https://www.youdao.com/result?word=fierce&lang=en) adj.
+- [filmmaker](https://www.youdao.com/result?word=filmmaker&lang=en) n.
+- [filter](https://www.youdao.com/result?word=filter&lang=en) n., v.
+- [fine](https://www.youdao.com/result?word=fine&lang=en) n., v.
+- [firearm](https://www.youdao.com/result?word=firearm&lang=en) n.
+- [fiscal](https://www.youdao.com/result?word=fiscal&lang=en) adj.
+- [fit](https://www.youdao.com/result?word=fit&lang=en) n.
+- [flaw](https://www.youdao.com/result?word=flaw&lang=en) n.
+- [flawed](https://www.youdao.com/result?word=flawed&lang=en) adj.
+- [flee](https://www.youdao.com/result?word=flee&lang=en) v.
+- [fleet](https://www.youdao.com/result?word=fleet&lang=en) n.
+- [flesh](https://www.youdao.com/result?word=flesh&lang=en) n.
+- [flexibility](https://www.youdao.com/result?word=flexibility&lang=en) n.
+- [flourish](https://www.youdao.com/result?word=flourish&lang=en) v.
+- [fluid](https://www.youdao.com/result?word=fluid&lang=en) n.
+- [footage](https://www.youdao.com/result?word=footage&lang=en) n.
+- [foreigner](https://www.youdao.com/result?word=foreigner&lang=en) n.
+- [forge](https://www.youdao.com/result?word=forge&lang=en) v.
+- [formula](https://www.youdao.com/result?word=formula&lang=en) n.
+- [formulate](https://www.youdao.com/result?word=formulate&lang=en) v.
+- [forth](https://www.youdao.com/result?word=forth&lang=en) adv.
+- [forthcoming](https://www.youdao.com/result?word=forthcoming&lang=en) adj.
+- [foster](https://www.youdao.com/result?word=foster&lang=en) v.
+- [fragile](https://www.youdao.com/result?word=fragile&lang=en) adj.
+- [franchise](https://www.youdao.com/result?word=franchise&lang=en) n.
+- [frankly](https://www.youdao.com/result?word=frankly&lang=en) adv.
+- [freshman](https://www.youdao.com/result?word=freshman&lang=en) n.
+- [frustrated](https://www.youdao.com/result?word=frustrated&lang=en) adj.
+- [frustrating](https://www.youdao.com/result?word=frustrating&lang=en) adj.
+- [frustration](https://www.youdao.com/result?word=frustration&lang=en) n.
+- [functional](https://www.youdao.com/result?word=functional&lang=en) adj.
+- [fundraising](https://www.youdao.com/result?word=fundraising&lang=en) n.
+- [funeral](https://www.youdao.com/result?word=funeral&lang=en) n.
 
 
 ## gh
 
-gambling n.
-gathering n.
-gaze n., v.
-gear n.
-generic adj.
-genocide n.
-gig n.
-glance n., v.
-glimpse n.
-glorious adj.
-glory n.
-governance n.
-grace n.
-grasp v.
-grave (for dead person) n.
-grave (serious) adj.
-gravity n.
-grid n.
-grief n.
-grin v., n.
-grind v.
-grip n., v.
-gross adj.
-guerrilla n.
-guidance n.
-guilt n.
-gut n.
-hail v.
-halfway adv.
-halt v., n.
-handful n.
-handling n.
-handy adj.
-harassment n.
-hardware n.
-harmony n.
-harsh adj.
-harvest n., v.
-hatred n.
-haunt v.
-hazard n.
-heighten v.
-heritage n.
-hierarchy n.
-high-profile adj.
-hint n., v.
-homeland n.
-hook v.
-hopeful adj.
-horizon n.
-horn n.
-hostage n.
-hostile adj.
-hostility n.
-humanitarian adj.
-humanity n.
-humble adj.
-hydrogen n.
+- [gambling](https://www.youdao.com/result?word=screening&lang=en) n.
+- [gathering](https://www.youdao.com/result?word=gathering&lang=en) n.
+- [gaze](https://www.youdao.com/result?word=gaze&lang=en) n., v.
+- [gear](https://www.youdao.com/result?word=gear&lang=en) n.
+- [generic](https://www.youdao.com/result?word=generic&lang=en) adj.
+- [genocide](https://www.youdao.com/result?word=genocide&lang=en) n.
+- [gig](https://www.youdao.com/result?word=gig&lang=en) n.
+- [glance](https://www.youdao.com/result?word=glance&lang=en) n., v.
+- [glimpse](https://www.youdao.com/result?word=glimpse&lang=en) n.
+- [glorious](https://www.youdao.com/result?word=glorious&lang=en) adj.
+- [glory](https://www.youdao.com/result?word=glory&lang=en) n.
+- [governance](https://www.youdao.com/result?word=governance&lang=en) n.
+- [grace](https://www.youdao.com/result?word=grace&lang=en) n.
+- [grasp](https://www.youdao.com/result?word=grasp&lang=en) v.
+- [grave](https://www.youdao.com/result?word=grave&lang=en) (for dead person) n.
+- [grave](https://www.youdao.com/result?word=grave&lang=en) (serious) adj.
+- [gravity](https://www.youdao.com/result?word=gravity&lang=en) n.
+- [grid](https://www.youdao.com/result?word=grid&lang=en) n.
+- [grief](https://www.youdao.com/result?word=grief&lang=en) n.
+- [grin](https://www.youdao.com/result?word=grin&lang=en) v., n.
+- [grind](https://www.youdao.com/result?word=grind&lang=en) v.
+- [grip](https://www.youdao.com/result?word=grip&lang=en) n., v.
+- [gross](https://www.youdao.com/result?word=gross&lang=en) adj.
+- [guerrilla](https://www.youdao.com/result?word=guerrilla&lang=en) n.
+- [guidance](https://www.youdao.com/result?word=guidance&lang=en) n.
+- [guilt](https://www.youdao.com/result?word=guilt&lang=en) n.
+- [gut](https://www.youdao.com/result?word=gut&lang=en) n.
+- [hail](https://www.youdao.com/result?word=hail&lang=en) v.
+- [halfway](https://www.youdao.com/result?word=halfway&lang=en) adv.
+- [halt](https://www.youdao.com/result?word=halt&lang=en) v., n.
+- [handful](https://www.youdao.com/result?word=handful&lang=en) n.
+- [handling](https://www.youdao.com/result?word=handling&lang=en) n.
+- [handy](https://www.youdao.com/result?word=handy&lang=en) adj.
+- [harassment](https://www.youdao.com/result?word=harassment&lang=en) n.
+- [hardware](https://www.youdao.com/result?word=hardware&lang=en) n.
+- [harmony](https://www.youdao.com/result?word=harmony&lang=en) n.
+- [harsh](https://www.youdao.com/result?word=harsh&lang=en) adj.
+- [harvest](https://www.youdao.com/result?word=harvest&lang=en) n., v.
+- [hatred](https://www.youdao.com/result?word=hatred&lang=en) n.
+- [haunt](https://www.youdao.com/result?word=haunt&lang=en) v.
+- [hazard](https://www.youdao.com/result?word=hazard&lang=en) n.
+- [heighten](https://www.youdao.com/result?word=heighten&lang=en) v.
+- [heritage](https://www.youdao.com/result?word=heritage&lang=en) n.
+- [hierarchy](https://www.youdao.com/result?word=hierarchy&lang=en) n.
+- [high](https://www.youdao.com/result?word=high&lang=en)-profile adj.
+- [hint](https://www.youdao.com/result?word=hint&lang=en) n., v.
+- [homeland](https://www.youdao.com/result?word=homeland&lang=en) n.
+- [hook](https://www.youdao.com/result?word=hook&lang=en) v.
+- [hopeful](https://www.youdao.com/result?word=hopeful&lang=en) adj.
+- [horizon](https://www.youdao.com/result?word=horizon&lang=en) n.
+- [horn](https://www.youdao.com/result?word=horn&lang=en) n.
+- [hostage](https://www.youdao.com/result?word=hostage&lang=en) n.
+- [hostile](https://www.youdao.com/result?word=hostile&lang=en) adj.
+- [hostility](https://www.youdao.com/result?word=hostility&lang=en) n.
+- [humanitarian](https://www.youdao.com/result?word=humanitarian&lang=en) adj.
+- [humanity](https://www.youdao.com/result?word=humanity&lang=en) n.
+- [humble](https://www.youdao.com/result?word=humble&lang=en) adj.
+- [hydrogen](https://www.youdao.com/result?word=hydrogen&lang=en) n.
 
 
 ## i
 
-identification n.
-ideological adj.
-ideology n.
-idiot n.
-ignorance n.
-imagery n.
-immense adj.
-imminent adj.
-implementation n.
-imprison v.
-inability n.
-inadequate adj.
-inappropriate adj.
-incarcerate v.
-incarceration n.
-incidence n.
-inclined adj.
-inclusion n.
-incur v.
-indicator n.
-indictment n.
-indigenous adj.
-induce v.
-indulge v.
-inequality n.
-infamous adj.
-infant n.
-infect v.
-inflict v.
-influential adj.
-inherent adj.
-inhibit v.
-initiate v.
-inject v.
-injection n.
-injustice n.
-inmate n.
-inquire v.
-insertion n.
-insider n.
-inspect v.
-inspection n.
-inspiration n.
-instinct n.
-institutional adj.
-instruct v.
-instrumental adj.
-insufficient adj.
-insult n., v.
-intact adj.
-intake n.
-integral adj.
-integrated adj.
-integration n.
-integrity n.
-intellectual n.
-intensify v.
-intensity n.
-intensive adj.
-intent n.
-interactive adj.
-interface n.
-interfere v.
-interference n.
-interim adj.
-interior adj., n.
-intermediate adj.
-intersection n.
-intervene v.
-intervention n.
-intimate adj.
-intriguing adj.
-inventory n.
-investigator n.
-invisible adj.
-invoke v.
-involvement n.
-ironic adj.
-ironically adv.
-irony n.
-irrelevant adj.
-isolation n.
+- [identification](https://www.youdao.com/result?word=screening&lang=en) n.
+- [ideological](https://www.youdao.com/result?word=ideological&lang=en) adj.
+- [ideology](https://www.youdao.com/result?word=ideology&lang=en) n.
+- [idiot](https://www.youdao.com/result?word=idiot&lang=en) n.
+- [ignorance](https://www.youdao.com/result?word=ignorance&lang=en) n.
+- [imagery](https://www.youdao.com/result?word=imagery&lang=en) n.
+- [immense](https://www.youdao.com/result?word=immense&lang=en) adj.
+- [imminent](https://www.youdao.com/result?word=imminent&lang=en) adj.
+- [implementation](https://www.youdao.com/result?word=implementation&lang=en) n.
+- [imprison](https://www.youdao.com/result?word=imprison&lang=en) v.
+- [inability](https://www.youdao.com/result?word=inability&lang=en) n.
+- [inadequate](https://www.youdao.com/result?word=inadequate&lang=en) adj.
+- [inappropriate](https://www.youdao.com/result?word=inappropriate&lang=en) adj.
+- [incarcerate](https://www.youdao.com/result?word=incarcerate&lang=en) v.
+- [incarceration](https://www.youdao.com/result?word=incarceration&lang=en) n.
+- [incidence](https://www.youdao.com/result?word=incidence&lang=en) n.
+- [inclined](https://www.youdao.com/result?word=inclined&lang=en) adj.
+- [inclusion](https://www.youdao.com/result?word=inclusion&lang=en) n.
+- [incur](https://www.youdao.com/result?word=incur&lang=en) v.
+- [indicator](https://www.youdao.com/result?word=indicator&lang=en) n.
+- [indictment](https://www.youdao.com/result?word=indictment&lang=en) n.
+- [indigenous](https://www.youdao.com/result?word=indigenous&lang=en) adj.
+- [induce](https://www.youdao.com/result?word=induce&lang=en) v.
+- [indulge](https://www.youdao.com/result?word=indulge&lang=en) v.
+- [inequality](https://www.youdao.com/result?word=inequality&lang=en) n.
+- [infamous](https://www.youdao.com/result?word=infamous&lang=en) adj.
+- [infant](https://www.youdao.com/result?word=infant&lang=en) n.
+- [infect](https://www.youdao.com/result?word=infect&lang=en) v.
+- [inflict](https://www.youdao.com/result?word=inflict&lang=en) v.
+- [influential](https://www.youdao.com/result?word=influential&lang=en) adj.
+- [inherent](https://www.youdao.com/result?word=inherent&lang=en) adj.
+- [inhibit](https://www.youdao.com/result?word=inhibit&lang=en) v.
+- [initiate](https://www.youdao.com/result?word=initiate&lang=en) v.
+- [inject](https://www.youdao.com/result?word=inject&lang=en) v.
+- [injection](https://www.youdao.com/result?word=injection&lang=en) n.
+- [injustice](https://www.youdao.com/result?word=injustice&lang=en) n.
+- [inmate](https://www.youdao.com/result?word=inmate&lang=en) n.
+- [inquire](https://www.youdao.com/result?word=inquire&lang=en) v.
+- [insertion](https://www.youdao.com/result?word=insertion&lang=en) n.
+- [insider](https://www.youdao.com/result?word=insider&lang=en) n.
+- [inspect](https://www.youdao.com/result?word=inspect&lang=en) v.
+- [inspection](https://www.youdao.com/result?word=inspection&lang=en) n.
+- [inspiration](https://www.youdao.com/result?word=inspiration&lang=en) n.
+- [instinct](https://www.youdao.com/result?word=instinct&lang=en) n.
+- [institutional](https://www.youdao.com/result?word=institutional&lang=en) adj.
+- [instruct](https://www.youdao.com/result?word=instruct&lang=en) v.
+- [instrumental](https://www.youdao.com/result?word=instrumental&lang=en) adj.
+- [insufficient](https://www.youdao.com/result?word=insufficient&lang=en) adj.
+- [insult](https://www.youdao.com/result?word=insult&lang=en) n., v.
+- [intact](https://www.youdao.com/result?word=intact&lang=en) adj.
+- [intake](https://www.youdao.com/result?word=intake&lang=en) n.
+- [integral](https://www.youdao.com/result?word=integral&lang=en) adj.
+- [integrated](https://www.youdao.com/result?word=integrated&lang=en) adj.
+- [integration](https://www.youdao.com/result?word=integration&lang=en) n.
+- [integrity](https://www.youdao.com/result?word=integrity&lang=en) n.
+- [intellectual](https://www.youdao.com/result?word=intellectual&lang=en) n.
+- [intensify](https://www.youdao.com/result?word=intensify&lang=en) v.
+- [intensity](https://www.youdao.com/result?word=intensity&lang=en) n.
+- [intensive](https://www.youdao.com/result?word=intensive&lang=en) adj.
+- [intent](https://www.youdao.com/result?word=intent&lang=en) n.
+- [interactive](https://www.youdao.com/result?word=interactive&lang=en) adj.
+- [interface](https://www.youdao.com/result?word=interface&lang=en) n.
+- [interfere](https://www.youdao.com/result?word=interfere&lang=en) v.
+- [interference](https://www.youdao.com/result?word=interference&lang=en) n.
+- [interim](https://www.youdao.com/result?word=interim&lang=en) adj.
+- [interior](https://www.youdao.com/result?word=interior&lang=en) adj., n.
+- [intermediate](https://www.youdao.com/result?word=intermediate&lang=en) adj.
+- [intersection](https://www.youdao.com/result?word=intersection&lang=en) n.
+- [intervene](https://www.youdao.com/result?word=intervene&lang=en) v.
+- [intervention](https://www.youdao.com/result?word=intervention&lang=en) n.
+- [intimate](https://www.youdao.com/result?word=intimate&lang=en) adj.
+- [intriguing](https://www.youdao.com/result?word=intriguing&lang=en) adj.
+- [inventory](https://www.youdao.com/result?word=inventory&lang=en) n.
+- [investigator](https://www.youdao.com/result?word=investigator&lang=en) n.
+- [invisible](https://www.youdao.com/result?word=invisible&lang=en) adj.
+- [invoke](https://www.youdao.com/result?word=invoke&lang=en) v.
+- [involvement](https://www.youdao.com/result?word=involvement&lang=en) n.
+- [ironic](https://www.youdao.com/result?word=ironic&lang=en) adj.
+- [ironically](https://www.youdao.com/result?word=ironically&lang=en) adv.
+- [irony](https://www.youdao.com/result?word=irony&lang=en) n.
+- [irrelevant](https://www.youdao.com/result?word=irrelevant&lang=en) adj.
+- [isolation](https://www.youdao.com/result?word=isolation&lang=en) n.
 
 
 ## jkl
 
-judicial adj.
-jurisdiction n.
-just adj.
-justification n.
-keen adj.
-kidnap v.
-kidney n.
-kingdom n.
-landlord n.
-landmark n.
-lap n.
-large-scale adj.
-laser n.
-latter adj., n.
-lawmaker n.
-lawn n.
-lawsuit n.
-layout n.
-leak v., n.
-leap v., n.
-legacy n.
-legendary adj.
-legislation n.
-legislative adj.
-legislature n.
-legitimate adj.
-lengthy adj.
-lesbian adj.
-lesser adj.
-lethal adj.
-liable adj.
-liberal adj., n.
-liberation n.
-liberty n.
-lifelong adj.
-likelihood n.
-limb n.
-linear adj.
-lineup n.
-linger v.
-listing n.
-liter n.
-literacy n.
-liver n.
-lobby n., v.
-log n., v.
-logic n.
-long-standing adj.
-longtime adj.
-loom v.
-loop n.
-loyalty n.
+- [judicial](https://www.youdao.com/result?word=screening&lang=en) adj.
+- [jurisdiction](https://www.youdao.com/result?word=jurisdiction&lang=en) n.
+- [just](https://www.youdao.com/result?word=just&lang=en) adj.
+- [justification](https://www.youdao.com/result?word=justification&lang=en) n.
+- [keen](https://www.youdao.com/result?word=keen&lang=en) adj.
+- [kidnap](https://www.youdao.com/result?word=kidnap&lang=en) v.
+- [kidney](https://www.youdao.com/result?word=kidney&lang=en) n.
+- [kingdom](https://www.youdao.com/result?word=kingdom&lang=en) n.
+- [landlord](https://www.youdao.com/result?word=landlord&lang=en) n.
+- [landmark](https://www.youdao.com/result?word=landmark&lang=en) n.
+- [lap](https://www.youdao.com/result?word=lap&lang=en) n.
+- [large](https://www.youdao.com/result?word=large&lang=en)-scale adj.
+- [laser](https://www.youdao.com/result?word=laser&lang=en) n.
+- [latter](https://www.youdao.com/result?word=latter&lang=en) adj., n.
+- [lawmaker](https://www.youdao.com/result?word=lawmaker&lang=en) n.
+- [lawn](https://www.youdao.com/result?word=lawn&lang=en) n.
+- [lawsuit](https://www.youdao.com/result?word=lawsuit&lang=en) n.
+- [layout](https://www.youdao.com/result?word=layout&lang=en) n.
+- [leak](https://www.youdao.com/result?word=leak&lang=en) v., n.
+- [leap](https://www.youdao.com/result?word=leap&lang=en) v., n.
+- [legacy](https://www.youdao.com/result?word=legacy&lang=en) n.
+- [legendary](https://www.youdao.com/result?word=legendary&lang=en) adj.
+- [legislation](https://www.youdao.com/result?word=legislation&lang=en) n.
+- [legislative](https://www.youdao.com/result?word=legislative&lang=en) adj.
+- [legislature](https://www.youdao.com/result?word=legislature&lang=en) n.
+- [legitimate](https://www.youdao.com/result?word=legitimate&lang=en) adj.
+- [lengthy](https://www.youdao.com/result?word=lengthy&lang=en) adj.
+- [lesbian](https://www.youdao.com/result?word=lesbian&lang=en) adj.
+- [lesser](https://www.youdao.com/result?word=lesser&lang=en) adj.
+- [lethal](https://www.youdao.com/result?word=lethal&lang=en) adj.
+- [liable](https://www.youdao.com/result?word=liable&lang=en) adj.
+- [liberal](https://www.youdao.com/result?word=liberal&lang=en) adj., n.
+- [liberation](https://www.youdao.com/result?word=liberation&lang=en) n.
+- [liberty](https://www.youdao.com/result?word=liberty&lang=en) n.
+- [lifelong](https://www.youdao.com/result?word=lifelong&lang=en) adj.
+- [likelihood](https://www.youdao.com/result?word=likelihood&lang=en) n.
+- [limb](https://www.youdao.com/result?word=limb&lang=en) n.
+- [linear](https://www.youdao.com/result?word=linear&lang=en) adj.
+- [lineup](https://www.youdao.com/result?word=lineup&lang=en) n.
+- [linger](https://www.youdao.com/result?word=linger&lang=en) v.
+- [listing](https://www.youdao.com/result?word=listing&lang=en) n.
+- [liter](https://www.youdao.com/result?word=liter&lang=en) n.
+- [literacy](https://www.youdao.com/result?word=literacy&lang=en) n.
+- [liver](https://www.youdao.com/result?word=liver&lang=en) n.
+- [lobby](https://www.youdao.com/result?word=lobby&lang=en) n., v.
+- [log](https://www.youdao.com/result?word=log&lang=en) n., v.
+- [logic](https://www.youdao.com/result?word=logic&lang=en) n.
+- [long](https://www.youdao.com/result?word=long&lang=en)-standing adj.
+- [longtime](https://www.youdao.com/result?word=longtime&lang=en) adj.
+- [loom](https://www.youdao.com/result?word=loom&lang=en) v.
+- [loop](https://www.youdao.com/result?word=loop&lang=en) n.
+- [loyalty](https://www.youdao.com/result?word=loyalty&lang=en) n.
 
 
 ## m
 
-machinery n.
-magical adj.
-magnetic adj.
-magnificent adj.
-magnitude n.
-mainland n.
-mainstream n., adj.
-maintenance n.
-mandate n.
-mandatory adj.
-manifest v.
-manipulate v.
-manipulation n.
-manuscript n.
-march n., v.
-marginal adj.
-marine adj.
-marketplace n.
-mask n.
-massacre n.
-mathematical adj.
-mature adj., v.
-maximize v.
-meaningful adj.
-meantime n.
-medieval adj.
-meditation n.
-melody n.
-memo n.
-memoir n.
-memorial n.
-mentor n.
-merchant n.
-mercy n.
-mere adj.
-merely adv.
-merge v.
-merger n.
-merit n.
-methodology n.
-midst n.
-migration n.
-militant n., adj.
-militia n.
-mill n.
-minimal adj.
-minimize v.
-mining n.
-ministry n.
-minute2 adj.
-miracle n.
-misery n.
-misleading adj.
-missile n.
-mob n.
-mobile adj.
-mobility n.
-mobilize v.
-moderate adj.
-modification n.
-module n.
-momentum n.
-monk n.
-monopoly n.
-morality n.
-motive n.
-municipal adj.
-mutual adj.
+- [machinery](https://www.youdao.com/result?word=screening&lang=en) n.
+- [magical](https://www.youdao.com/result?word=magical&lang=en) adj.
+- [magnetic](https://www.youdao.com/result?word=magnetic&lang=en) adj.
+- [magnificent](https://www.youdao.com/result?word=magnificent&lang=en) adj.
+- [magnitude](https://www.youdao.com/result?word=magnitude&lang=en) n.
+- [mainland](https://www.youdao.com/result?word=mainland&lang=en) n.
+- [mainstream](https://www.youdao.com/result?word=mainstream&lang=en) n., adj.
+- [maintenance](https://www.youdao.com/result?word=maintenance&lang=en) n.
+- [mandate](https://www.youdao.com/result?word=mandate&lang=en) n.
+- [mandatory](https://www.youdao.com/result?word=mandatory&lang=en) adj.
+- [manifest](https://www.youdao.com/result?word=manifest&lang=en) v.
+- [manipulate](https://www.youdao.com/result?word=manipulate&lang=en) v.
+- [manipulation](https://www.youdao.com/result?word=manipulation&lang=en) n.
+- [manuscript](https://www.youdao.com/result?word=manuscript&lang=en) n.
+- [march](https://www.youdao.com/result?word=march&lang=en) n., v.
+- [marginal](https://www.youdao.com/result?word=marginal&lang=en) adj.
+- [marine](https://www.youdao.com/result?word=marine&lang=en) adj.
+- [marketplace](https://www.youdao.com/result?word=marketplace&lang=en) n.
+- [mask](https://www.youdao.com/result?word=mask&lang=en) n.
+- [massacre](https://www.youdao.com/result?word=massacre&lang=en) n.
+- [mathematical](https://www.youdao.com/result?word=mathematical&lang=en) adj.
+- [mature](https://www.youdao.com/result?word=mature&lang=en) adj., v.
+- [maximize](https://www.youdao.com/result?word=maximize&lang=en) v.
+- [meaningful](https://www.youdao.com/result?word=meaningful&lang=en) adj.
+- [meantime](https://www.youdao.com/result?word=meantime&lang=en) n.
+- [medieval](https://www.youdao.com/result?word=medieval&lang=en) adj.
+- [meditation](https://www.youdao.com/result?word=meditation&lang=en) n.
+- [melody](https://www.youdao.com/result?word=melody&lang=en) n.
+- [memo](https://www.youdao.com/result?word=memo&lang=en) n.
+- [memoir](https://www.youdao.com/result?word=memoir&lang=en) n.
+- [memorial](https://www.youdao.com/result?word=memorial&lang=en) n.
+- [mentor](https://www.youdao.com/result?word=mentor&lang=en) n.
+- [merchant](https://www.youdao.com/result?word=merchant&lang=en) n.
+- [mercy](https://www.youdao.com/result?word=mercy&lang=en) n.
+- [mere](https://www.youdao.com/result?word=mere&lang=en) adj.
+- [merely](https://www.youdao.com/result?word=merely&lang=en) adv.
+- [merge](https://www.youdao.com/result?word=merge&lang=en) v.
+- [merger](https://www.youdao.com/result?word=merger&lang=en) n.
+- [merit](https://www.youdao.com/result?word=merit&lang=en) n.
+- [methodology](https://www.youdao.com/result?word=methodology&lang=en) n.
+- [midst](https://www.youdao.com/result?word=midst&lang=en) n.
+- [migration](https://www.youdao.com/result?word=migration&lang=en) n.
+- [militant](https://www.youdao.com/result?word=militant&lang=en) n., adj.
+- [militia](https://www.youdao.com/result?word=militia&lang=en) n.
+- [mill](https://www.youdao.com/result?word=mill&lang=en) n.
+- [minimal](https://www.youdao.com/result?word=minimal&lang=en) adj.
+- [minimize](https://www.youdao.com/result?word=minimize&lang=en) v.
+- [mining](https://www.youdao.com/result?word=mining&lang=en) n.
+- [ministry](https://www.youdao.com/result?word=ministry&lang=en) n.
+- [minute2](https://www.youdao.com/result?word=minute2&lang=en) adj.
+- [miracle](https://www.youdao.com/result?word=miracle&lang=en) n.
+- [misery](https://www.youdao.com/result?word=misery&lang=en) n.
+- [misleading](https://www.youdao.com/result?word=misleading&lang=en) adj.
+- [missile](https://www.youdao.com/result?word=missile&lang=en) n.
+- [mob](https://www.youdao.com/result?word=mob&lang=en) n.
+- [mobile](https://www.youdao.com/result?word=mobile&lang=en) adj.
+- [mobility](https://www.youdao.com/result?word=mobility&lang=en) n.
+- [mobilize](https://www.youdao.com/result?word=mobilize&lang=en) v.
+- [moderate](https://www.youdao.com/result?word=moderate&lang=en) adj.
+- [modification](https://www.youdao.com/result?word=modification&lang=en) n.
+- [module](https://www.youdao.com/result?word=module&lang=en) n.
+- [momentum](https://www.youdao.com/result?word=momentum&lang=en) n.
+- [monk](https://www.youdao.com/result?word=monk&lang=en) n.
+- [monopoly](https://www.youdao.com/result?word=monopoly&lang=en) n.
+- [morality](https://www.youdao.com/result?word=morality&lang=en) n.
+- [motive](https://www.youdao.com/result?word=motive&lang=en) n.
+- [municipal](https://www.youdao.com/result?word=municipal&lang=en) adj.
+- [mutual](https://www.youdao.com/result?word=mutual&lang=en) adj.
 
 
 ## no
 
-namely adv.
-nationwide adj.
-naval adj.
-neglect v.
-neighboring adj.
-nest n.
-net adj.
-newsletter n.
-niche n.
-noble adj.
-nod v.
-nominate v.
-nomination n.
-nominee n.
-nonetheless adv.
-nonprofit adj.
-nonsense n.
-noon n.
-notable adj.
-notably adv.
-notify v.
-notorious adj.
-novel adj.
-nursery n.
-objection n.
-oblige v.
-obsess v.
-obsession n.
-occasional adj.
-occurrence n.
-odds n.
-offering n.
-offspring n.
-operational adj.
-opt v.
-optical adj.
-optimism n.
-oral adj.
-organizational adj.
-orientation n.
-originate v.
-outbreak n.
-outing n.
-outlet n.
-outlook n.
-outrage n., v.
-outsider n.
-overlook v.
-overly adv.
-oversee v.
-overturn v.
-overwhelm v.
-overwhelming adj.
+- [namely](https://www.youdao.com/result?word=screening&lang=en) adv.
+- [nationwide](https://www.youdao.com/result?word=nationwide&lang=en) adj.
+- [naval](https://www.youdao.com/result?word=naval&lang=en) adj.
+- [neglect](https://www.youdao.com/result?word=neglect&lang=en) v.
+- [neighboring](https://www.youdao.com/result?word=neighboring&lang=en) adj.
+- [nest](https://www.youdao.com/result?word=nest&lang=en) n.
+- [net](https://www.youdao.com/result?word=net&lang=en) adj.
+- [newsletter](https://www.youdao.com/result?word=newsletter&lang=en) n.
+- [niche](https://www.youdao.com/result?word=niche&lang=en) n.
+- [noble](https://www.youdao.com/result?word=noble&lang=en) adj.
+- [nod](https://www.youdao.com/result?word=nod&lang=en) v.
+- [nominate](https://www.youdao.com/result?word=nominate&lang=en) v.
+- [nomination](https://www.youdao.com/result?word=nomination&lang=en) n.
+- [nominee](https://www.youdao.com/result?word=nominee&lang=en) n.
+- [nonetheless](https://www.youdao.com/result?word=nonetheless&lang=en) adv.
+- [nonprofit](https://www.youdao.com/result?word=nonprofit&lang=en) adj.
+- [nonsense](https://www.youdao.com/result?word=nonsense&lang=en) n.
+- [noon](https://www.youdao.com/result?word=noon&lang=en) n.
+- [notable](https://www.youdao.com/result?word=notable&lang=en) adj.
+- [notably](https://www.youdao.com/result?word=notably&lang=en) adv.
+- [notify](https://www.youdao.com/result?word=notify&lang=en) v.
+- [notorious](https://www.youdao.com/result?word=notorious&lang=en) adj.
+- [novel](https://www.youdao.com/result?word=novel&lang=en) adj.
+- [nursery](https://www.youdao.com/result?word=nursery&lang=en) n.
+- [objection](https://www.youdao.com/result?word=objection&lang=en) n.
+- [oblige](https://www.youdao.com/result?word=oblige&lang=en) v.
+- [obsess](https://www.youdao.com/result?word=obsess&lang=en) v.
+- [obsession](https://www.youdao.com/result?word=obsession&lang=en) n.
+- [occasional](https://www.youdao.com/result?word=occasional&lang=en) adj.
+- [occurrence](https://www.youdao.com/result?word=occurrence&lang=en) n.
+- [odds](https://www.youdao.com/result?word=odds&lang=en) n.
+- [offering](https://www.youdao.com/result?word=offering&lang=en) n.
+- [offspring](https://www.youdao.com/result?word=offspring&lang=en) n.
+- [operational](https://www.youdao.com/result?word=operational&lang=en) adj.
+- [opt](https://www.youdao.com/result?word=opt&lang=en) v.
+- [optical](https://www.youdao.com/result?word=optical&lang=en) adj.
+- [optimism](https://www.youdao.com/result?word=optimism&lang=en) n.
+- [oral](https://www.youdao.com/result?word=oral&lang=en) adj.
+- [organizational](https://www.youdao.com/result?word=organizational&lang=en) adj.
+- [orientation](https://www.youdao.com/result?word=orientation&lang=en) n.
+- [originate](https://www.youdao.com/result?word=originate&lang=en) v.
+- [outbreak](https://www.youdao.com/result?word=outbreak&lang=en) n.
+- [outing](https://www.youdao.com/result?word=outing&lang=en) n.
+- [outlet](https://www.youdao.com/result?word=outlet&lang=en) n.
+- [outlook](https://www.youdao.com/result?word=outlook&lang=en) n.
+- [outrage](https://www.youdao.com/result?word=outrage&lang=en) n., v.
+- [outsider](https://www.youdao.com/result?word=outsider&lang=en) n.
+- [overlook](https://www.youdao.com/result?word=overlook&lang=en) v.
+- [overly](https://www.youdao.com/result?word=overly&lang=en) adv.
+- [oversee](https://www.youdao.com/result?word=oversee&lang=en) v.
+- [overturn](https://www.youdao.com/result?word=overturn&lang=en) v.
+- [overwhelm](https://www.youdao.com/result?word=overwhelm&lang=en) v.
+- [overwhelming](https://www.youdao.com/result?word=overwhelming&lang=en) adj.
 
 
 ## p
 
-pad n.
-parameter n.
-parental adj.
-parliament n.
-partial adj.
-partially adv.
-passing n.
-passive adj.
-pastor n.
-patent n.
-pathway n.
-patrol n., v.
-patron n.
-peak n.
-peasant n.
-peculiar adj.
-pension1 n.
-persist v.
-persistent adj.
-personnel n.
-petition n.
-philosopher n.
-philosophical adj.
-pioneer n., v.
-pipeline n.
-pirate n.
-pit n.
-plea n.
-plead v.
-pledge v., n.
-plug v., n.
-plunge v.
-pole n.
-poll n.
-pond n.
-pop v.
-portfolio n.
-portray v.
-postpone v.
-postwar adj.
-practitioner n.
-preach v.
-precedent n.
-precision n.
-predator n.
-predecessor n.
-predominantly adv.
-pregnancy n.
-prejudice n.
-preliminary adj.
-premier n.
-premise n.
-premium n.
-prescribe v.
-prescription n.
-presently adv.
-preservation n.
-preside v.
-presidency n.
-prestigious adj.
-presumably adv.
-presume v.
-prevail v.
-prevalence n.
-prevention n.
-prey n.
-privatization n.
-privilege n.
-probe n., v.
-problematic adj.
-proceeding n.
-proceeds n.
-processing n.
-processor n.
-proclaim v.
-productive adj.
-productivity n.
-profitable adj.
-profound adj.
-projection n.
-prominent adj.
-pronounced adj.
-propaganda n.
-proposition n.
-prosecute v.
-prosecution n.
-prosecutor n.
-prospective adj.
-prosperity n.
-protective adj.
-protocol n.
-province n.
-provincial adj.
-provision n.
-provoke v.
-psychiatric adj.
-pulse n.
-pump v., n.
-punch n., v.
+- [pad](https://www.youdao.com/result?word=screening&lang=en) n.
+- [parameter](https://www.youdao.com/result?word=parameter&lang=en) n.
+- [parental](https://www.youdao.com/result?word=parental&lang=en) adj.
+- [parliament](https://www.youdao.com/result?word=parliament&lang=en) n.
+- [partial](https://www.youdao.com/result?word=partial&lang=en) adj.
+- [partially](https://www.youdao.com/result?word=partially&lang=en) adv.
+- [passing](https://www.youdao.com/result?word=passing&lang=en) n.
+- [passive](https://www.youdao.com/result?word=passive&lang=en) adj.
+- [pastor](https://www.youdao.com/result?word=pastor&lang=en) n.
+- [patent](https://www.youdao.com/result?word=patent&lang=en) n.
+- [pathway](https://www.youdao.com/result?word=pathway&lang=en) n.
+- [patrol](https://www.youdao.com/result?word=patrol&lang=en) n., v.
+- [patron](https://www.youdao.com/result?word=patron&lang=en) n.
+- [peak](https://www.youdao.com/result?word=peak&lang=en) n.
+- [peasant](https://www.youdao.com/result?word=peasant&lang=en) n.
+- [peculiar](https://www.youdao.com/result?word=peculiar&lang=en) adj.
+- [pension1](https://www.youdao.com/result?word=pension1&lang=en) n.
+- [persist](https://www.youdao.com/result?word=persist&lang=en) v.
+- [persistent](https://www.youdao.com/result?word=persistent&lang=en) adj.
+- [personnel](https://www.youdao.com/result?word=personnel&lang=en) n.
+- [petition](https://www.youdao.com/result?word=petition&lang=en) n.
+- [philosopher](https://www.youdao.com/result?word=philosopher&lang=en) n.
+- [philosophical](https://www.youdao.com/result?word=philosophical&lang=en) adj.
+- [pioneer](https://www.youdao.com/result?word=pioneer&lang=en) n., v.
+- [pipeline](https://www.youdao.com/result?word=pipeline&lang=en) n.
+- [pirate](https://www.youdao.com/result?word=pirate&lang=en) n.
+- [pit](https://www.youdao.com/result?word=pit&lang=en) n.
+- [plea](https://www.youdao.com/result?word=plea&lang=en) n.
+- [plead](https://www.youdao.com/result?word=plead&lang=en) v.
+- [pledge](https://www.youdao.com/result?word=pledge&lang=en) v., n.
+- [plug](https://www.youdao.com/result?word=plug&lang=en) v., n.
+- [plunge](https://www.youdao.com/result?word=plunge&lang=en) v.
+- [pole](https://www.youdao.com/result?word=pole&lang=en) n.
+- [poll](https://www.youdao.com/result?word=poll&lang=en) n.
+- [pond](https://www.youdao.com/result?word=pond&lang=en) n.
+- [pop](https://www.youdao.com/result?word=pop&lang=en) v.
+- [portfolio](https://www.youdao.com/result?word=portfolio&lang=en) n.
+- [portray](https://www.youdao.com/result?word=portray&lang=en) v.
+- [postpone](https://www.youdao.com/result?word=postpone&lang=en) v.
+- [postwar](https://www.youdao.com/result?word=postwar&lang=en) adj.
+- [practitioner](https://www.youdao.com/result?word=practitioner&lang=en) n.
+- [preach](https://www.youdao.com/result?word=preach&lang=en) v.
+- [precedent](https://www.youdao.com/result?word=precedent&lang=en) n.
+- [precision](https://www.youdao.com/result?word=precision&lang=en) n.
+- [predator](https://www.youdao.com/result?word=predator&lang=en) n.
+- [predecessor](https://www.youdao.com/result?word=predecessor&lang=en) n.
+- [predominantly](https://www.youdao.com/result?word=predominantly&lang=en) adv.
+- [pregnancy](https://www.youdao.com/result?word=pregnancy&lang=en) n.
+- [prejudice](https://www.youdao.com/result?word=prejudice&lang=en) n.
+- [preliminary](https://www.youdao.com/result?word=preliminary&lang=en) adj.
+- [premier](https://www.youdao.com/result?word=premier&lang=en) n.
+- [premise](https://www.youdao.com/result?word=premise&lang=en) n.
+- [premium](https://www.youdao.com/result?word=premium&lang=en) n.
+- [prescribe](https://www.youdao.com/result?word=prescribe&lang=en) v.
+- [prescription](https://www.youdao.com/result?word=prescription&lang=en) n.
+- [presently](https://www.youdao.com/result?word=presently&lang=en) adv.
+- [preservation](https://www.youdao.com/result?word=preservation&lang=en) n.
+- [preside](https://www.youdao.com/result?word=preside&lang=en) v.
+- [presidency](https://www.youdao.com/result?word=presidency&lang=en) n.
+- [prestigious](https://www.youdao.com/result?word=prestigious&lang=en) adj.
+- [presumably](https://www.youdao.com/result?word=presumably&lang=en) adv.
+- [presume](https://www.youdao.com/result?word=presume&lang=en) v.
+- [prevail](https://www.youdao.com/result?word=prevail&lang=en) v.
+- [prevalence](https://www.youdao.com/result?word=prevalence&lang=en) n.
+- [prevention](https://www.youdao.com/result?word=prevention&lang=en) n.
+- [prey](https://www.youdao.com/result?word=prey&lang=en) n.
+- [privatization](https://www.youdao.com/result?word=privatization&lang=en) n.
+- [privilege](https://www.youdao.com/result?word=privilege&lang=en) n.
+- [probe](https://www.youdao.com/result?word=probe&lang=en) n., v.
+- [problematic](https://www.youdao.com/result?word=problematic&lang=en) adj.
+- [proceeding](https://www.youdao.com/result?word=proceeding&lang=en) n.
+- [proceeds](https://www.youdao.com/result?word=proceeds&lang=en) n.
+- [processing](https://www.youdao.com/result?word=processing&lang=en) n.
+- [processor](https://www.youdao.com/result?word=processor&lang=en) n.
+- [proclaim](https://www.youdao.com/result?word=proclaim&lang=en) v.
+- [productive](https://www.youdao.com/result?word=productive&lang=en) adj.
+- [productivity](https://www.youdao.com/result?word=productivity&lang=en) n.
+- [profitable](https://www.youdao.com/result?word=profitable&lang=en) adj.
+- [profound](https://www.youdao.com/result?word=profound&lang=en) adj.
+- [projection](https://www.youdao.com/result?word=projection&lang=en) n.
+- [prominent](https://www.youdao.com/result?word=prominent&lang=en) adj.
+- [pronounced](https://www.youdao.com/result?word=pronounced&lang=en) adj.
+- [propaganda](https://www.youdao.com/result?word=propaganda&lang=en) n.
+- [proposition](https://www.youdao.com/result?word=proposition&lang=en) n.
+- [prosecute](https://www.youdao.com/result?word=prosecute&lang=en) v.
+- [prosecution](https://www.youdao.com/result?word=prosecution&lang=en) n.
+- [prosecutor](https://www.youdao.com/result?word=prosecutor&lang=en) n.
+- [prospective](https://www.youdao.com/result?word=prospective&lang=en) adj.
+- [prosperity](https://www.youdao.com/result?word=prosperity&lang=en) n.
+- [protective](https://www.youdao.com/result?word=protective&lang=en) adj.
+- [protocol](https://www.youdao.com/result?word=protocol&lang=en) n.
+- [province](https://www.youdao.com/result?word=province&lang=en) n.
+- [provincial](https://www.youdao.com/result?word=provincial&lang=en) adj.
+- [provision](https://www.youdao.com/result?word=provision&lang=en) n.
+- [provoke](https://www.youdao.com/result?word=provoke&lang=en) v.
+- [psychiatric](https://www.youdao.com/result?word=psychiatric&lang=en) adj.
+- [pulse](https://www.youdao.com/result?word=pulse&lang=en) n.
+- [pump](https://www.youdao.com/result?word=pump&lang=en) v., n.
+- [punch](https://www.youdao.com/result?word=punch&lang=en) n., v.
 
 
 ## qr
 
-query n.
-quest n.
-quota n.
-radar n.
-radical adj.
-rage n.
-raid n., v.
-rally n., v.
-ranking n.
-rape n., v.
-ratio n.
-rational adj.
-ray n.
-readily adv.
-realization n.
-realm n.
-rear adj., n.
-reasoning n.
-reassure v.
-rebel n.
-rebellion n.
-recipient n.
-reconstruction n.
-recount1 v.
-recruitment n.
-referendum n.
-reflection n.
-reform n., v.
-refuge n.
-refusal n.
-regain v.
-regardless adv.
-regime n.
-regulator n.
-regulatory adj.
-rehabilitation n.
-reign n., v.
-rejection n.
-relevance n.
-reliability n.
-reluctant adj.
-remainder n.
-remains n.
-remedy n.
-reminder n.
-removal n.
-render v.
-renew v.
-renowned adj.
-replacement n.
-reportedly adv.
-representation n.
-reproduce v.
-reproduction n.
-republic n.
-resemble v.
-reside v.
-residence n.
-residential adj.
-residue n.
-resignation n.
-resistance n.
-respective adj.
-respectively adv.
-restoration n.
-restraint n.
-resume v.
-retreat n., v.
-retrieve v.
-revelation n.
-revenge n.
-reverse v., n., adj.
-revival n.
-revive v.
-revolutionary adj.
-rhetoric n.
-rifle n.
-riot n.
-rip v.
-ritual n.
-robust adj.
-rock v.
-rod n.
-rookie n.
-roster n.
-rotate v.
-rotation n.
-ruling n.
-rumor n.
+- [query](https://www.youdao.com/result?word=screening&lang=en) n.
+- [quest](https://www.youdao.com/result?word=quest&lang=en) n.
+- [quota](https://www.youdao.com/result?word=quota&lang=en) n.
+- [radar](https://www.youdao.com/result?word=radar&lang=en) n.
+- [radical](https://www.youdao.com/result?word=radical&lang=en) adj.
+- [rage](https://www.youdao.com/result?word=rage&lang=en) n.
+- [raid](https://www.youdao.com/result?word=raid&lang=en) n., v.
+- [rally](https://www.youdao.com/result?word=rally&lang=en) n., v.
+- [ranking](https://www.youdao.com/result?word=ranking&lang=en) n.
+- [rape](https://www.youdao.com/result?word=rape&lang=en) n., v.
+- [ratio](https://www.youdao.com/result?word=ratio&lang=en) n.
+- [rational](https://www.youdao.com/result?word=rational&lang=en) adj.
+- [ray](https://www.youdao.com/result?word=ray&lang=en) n.
+- [readily](https://www.youdao.com/result?word=readily&lang=en) adv.
+- [realization](https://www.youdao.com/result?word=realization&lang=en) n.
+- [realm](https://www.youdao.com/result?word=realm&lang=en) n.
+- [rear](https://www.youdao.com/result?word=rear&lang=en) adj., n.
+- [reasoning](https://www.youdao.com/result?word=reasoning&lang=en) n.
+- [reassure](https://www.youdao.com/result?word=reassure&lang=en) v.
+- [rebel](https://www.youdao.com/result?word=rebel&lang=en) n.
+- [rebellion](https://www.youdao.com/result?word=rebellion&lang=en) n.
+- [recipient](https://www.youdao.com/result?word=recipient&lang=en) n.
+- [reconstruction](https://www.youdao.com/result?word=reconstruction&lang=en) n.
+- [recount1](https://www.youdao.com/result?word=recount1&lang=en) v.
+- [recruitment](https://www.youdao.com/result?word=recruitment&lang=en) n.
+- [referendum](https://www.youdao.com/result?word=referendum&lang=en) n.
+- [reflection](https://www.youdao.com/result?word=reflection&lang=en) n.
+- [reform](https://www.youdao.com/result?word=reform&lang=en) n., v.
+- [refuge](https://www.youdao.com/result?word=refuge&lang=en) n.
+- [refusal](https://www.youdao.com/result?word=refusal&lang=en) n.
+- [regain](https://www.youdao.com/result?word=regain&lang=en) v.
+- [regardless](https://www.youdao.com/result?word=regardless&lang=en) adv.
+- [regime](https://www.youdao.com/result?word=regime&lang=en) n.
+- [regulator](https://www.youdao.com/result?word=regulator&lang=en) n.
+- [regulatory](https://www.youdao.com/result?word=regulatory&lang=en) adj.
+- [rehabilitation](https://www.youdao.com/result?word=rehabilitation&lang=en) n.
+- [reign](https://www.youdao.com/result?word=reign&lang=en) n., v.
+- [rejection](https://www.youdao.com/result?word=rejection&lang=en) n.
+- [relevance](https://www.youdao.com/result?word=relevance&lang=en) n.
+- [reliability](https://www.youdao.com/result?word=reliability&lang=en) n.
+- [reluctant](https://www.youdao.com/result?word=reluctant&lang=en) adj.
+- [remainder](https://www.youdao.com/result?word=remainder&lang=en) n.
+- [remains](https://www.youdao.com/result?word=remains&lang=en) n.
+- [remedy](https://www.youdao.com/result?word=remedy&lang=en) n.
+- [reminder](https://www.youdao.com/result?word=reminder&lang=en) n.
+- [removal](https://www.youdao.com/result?word=removal&lang=en) n.
+- [render](https://www.youdao.com/result?word=render&lang=en) v.
+- [renew](https://www.youdao.com/result?word=renew&lang=en) v.
+- [renowned](https://www.youdao.com/result?word=renowned&lang=en) adj.
+- [replacement](https://www.youdao.com/result?word=replacement&lang=en) n.
+- [reportedly](https://www.youdao.com/result?word=reportedly&lang=en) adv.
+- [representation](https://www.youdao.com/result?word=representation&lang=en) n.
+- [reproduce](https://www.youdao.com/result?word=reproduce&lang=en) v.
+- [reproduction](https://www.youdao.com/result?word=reproduction&lang=en) n.
+- [republic](https://www.youdao.com/result?word=republic&lang=en) n.
+- [resemble](https://www.youdao.com/result?word=resemble&lang=en) v.
+- [reside](https://www.youdao.com/result?word=reside&lang=en) v.
+- [residence](https://www.youdao.com/result?word=residence&lang=en) n.
+- [residential](https://www.youdao.com/result?word=residential&lang=en) adj.
+- [residue](https://www.youdao.com/result?word=residue&lang=en) n.
+- [resignation](https://www.youdao.com/result?word=resignation&lang=en) n.
+- [resistance](https://www.youdao.com/result?word=resistance&lang=en) n.
+- [respective](https://www.youdao.com/result?word=respective&lang=en) adj.
+- [respectively](https://www.youdao.com/result?word=respectively&lang=en) adv.
+- [restoration](https://www.youdao.com/result?word=restoration&lang=en) n.
+- [restraint](https://www.youdao.com/result?word=restraint&lang=en) n.
+- [resume](https://www.youdao.com/result?word=resume&lang=en) v.
+- [retreat](https://www.youdao.com/result?word=retreat&lang=en) n., v.
+- [retrieve](https://www.youdao.com/result?word=retrieve&lang=en) v.
+- [revelation](https://www.youdao.com/result?word=revelation&lang=en) n.
+- [revenge](https://www.youdao.com/result?word=revenge&lang=en) n.
+- [reverse](https://www.youdao.com/result?word=reverse&lang=en) v., n., adj.
+- [revival](https://www.youdao.com/result?word=revival&lang=en) n.
+- [revive](https://www.youdao.com/result?word=revive&lang=en) v.
+- [revolutionary](https://www.youdao.com/result?word=revolutionary&lang=en) adj.
+- [rhetoric](https://www.youdao.com/result?word=rhetoric&lang=en) n.
+- [rifle](https://www.youdao.com/result?word=rifle&lang=en) n.
+- [riot](https://www.youdao.com/result?word=riot&lang=en) n.
+- [rip](https://www.youdao.com/result?word=rip&lang=en) v.
+- [ritual](https://www.youdao.com/result?word=ritual&lang=en) n.
+- [robust](https://www.youdao.com/result?word=robust&lang=en) adj.
+- [rock](https://www.youdao.com/result?word=rock&lang=en) v.
+- [rod](https://www.youdao.com/result?word=rod&lang=en) n.
+- [rookie](https://www.youdao.com/result?word=rookie&lang=en) n.
+- [roster](https://www.youdao.com/result?word=roster&lang=en) n.
+- [rotate](https://www.youdao.com/result?word=rotate&lang=en) v.
+- [rotation](https://www.youdao.com/result?word=rotation&lang=en) n.
+- [ruling](https://www.youdao.com/result?word=ruling&lang=en) n.
+- [rumor](https://www.youdao.com/result?word=rumor&lang=en) n.
 
 
 ## s
 
-sacred adj.
-sacrifice n., v.
-saint n.
-sake n.
-sanction n.
-say n.
-scattered adj.
-scope n.
-screw v., n.
-scrutiny n.
-seal v., n.
-secondly adv.
-secular adj.
-seemingly adv.
-segment n.
-seize v.
-seldom adv. selective adj.
-sensation n.
-sensitivity n.
-sentiment n.
-separation n.
-serial adj.
-settlement n.
-setup n.
-sexuality n.
-shareholder n.
-shatter v.
-shed v.
-sheer adj.
-shipping n.
-shoot n.
-shrink v.
-shrug v.
-sigh v., n.
-simulate v.
-simulation n.
-simultaneously adv.
-sin n.
-situated adj.
-skeptical adj.
-sketch n.
-skip v.
-slam v.
-slap v.
-slash v.
-slavery n.
-slot n.
-smash v.
-snap v.
-soak v.
-soar v.
-socialist adj.
-sole adj.
-solely adv.
-solidarity n.
-solo adj., n.
-sophomore n.
-sound adj.
-sovereignty n.
-spam n.
-span v., n.
-spare v.
-spark v.
-specialized adj.
-specification n.
-specimen n.
-spectacle n.
-spectrum n.
-spell n.
-sphere n.
-spin v., n.
-spine n.
-spotlight n.
-spouse n.
-spy n., v.
-squad n.
-squeeze v.
-stab v.
-stability n.
-stabilize v.
-stake n.
-standing adj.
-stark adj.
-statistical adj.
-steer v.
-stem n., v.
-stereotype n.
-stimulus n.
-stir v.
-storage n.
-straightforward adj.
-strain n.
-strand n.
-strategic adj.
-striking adj.
-strip (long narrow piece) n.
-strip (remove clothes/a layer) v.
-strive v.
-structural adj.
-stumble v.
-stun v.
-submission n.
-subscriber n.
-subscription n.
-subsidy n.
-substantial adj.
-substantially adv.
-substitute n., v.
-substitution n.
-subtle adj.
-suburban adj.
-succession n.
-successive adj.
-successor n.
-suck v.
-sue v.
-suicide n.
-suite n.
-summit n.
-superb adj.
-superintendent n.
-superior adj.
-supervise v.
-supervision n.
-supervisor n.
-supplement n., v.
-supportive adj.
-supposedly adv.
-suppress v.
-supreme adj.
-surge n., v.
-surgical adj.
-surplus n.
-surrender v.
-surveillance n.
-suspension n.
-suspicion n.
-suspicious adj.
-sustain v.
-swing v., n.
-sword n.
-symbolic adj.
-syndrome n.
-synthesis n.
-systematic adj.
+- [sacred](https://www.youdao.com/result?word=screening&lang=en) adj.
+- [sacrifice](https://www.youdao.com/result?word=sacrifice&lang=en) n., v.
+- [saint](https://www.youdao.com/result?word=saint&lang=en) n.
+- [sake](https://www.youdao.com/result?word=sake&lang=en) n.
+- [sanction](https://www.youdao.com/result?word=sanction&lang=en) n.
+- [say](https://www.youdao.com/result?word=say&lang=en) n.
+- [scattered](https://www.youdao.com/result?word=scattered&lang=en) adj.
+- [scope](https://www.youdao.com/result?word=scope&lang=en) n.
+- [screw](https://www.youdao.com/result?word=screw&lang=en) v., n.
+- [scrutiny](https://www.youdao.com/result?word=scrutiny&lang=en) n.
+- [seal](https://www.youdao.com/result?word=seal&lang=en) v., n.
+- [secondly](https://www.youdao.com/result?word=secondly&lang=en) adv.
+- [secular](https://www.youdao.com/result?word=secular&lang=en) adj.
+- [seemingly](https://www.youdao.com/result?word=seemingly&lang=en) adv.
+- [segment](https://www.youdao.com/result?word=segment&lang=en) n.
+- [seize](https://www.youdao.com/result?word=seize&lang=en) v.
+- [seldom](https://www.youdao.com/result?word=seldom&lang=en) adv. selective adj.
+- [sensation](https://www.youdao.com/result?word=sensation&lang=en) n.
+- [sensitivity](https://www.youdao.com/result?word=sensitivity&lang=en) n.
+- [sentiment](https://www.youdao.com/result?word=sentiment&lang=en) n.
+- [separation](https://www.youdao.com/result?word=separation&lang=en) n.
+- [serial](https://www.youdao.com/result?word=serial&lang=en) adj.
+- [settlement](https://www.youdao.com/result?word=settlement&lang=en) n.
+- [setup](https://www.youdao.com/result?word=setup&lang=en) n.
+- [sexuality](https://www.youdao.com/result?word=sexuality&lang=en) n.
+- [shareholder](https://www.youdao.com/result?word=shareholder&lang=en) n.
+- [shatter](https://www.youdao.com/result?word=shatter&lang=en) v.
+- [shed](https://www.youdao.com/result?word=shed&lang=en) v.
+- [sheer](https://www.youdao.com/result?word=sheer&lang=en) adj.
+- [shipping](https://www.youdao.com/result?word=shipping&lang=en) n.
+- [shoot](https://www.youdao.com/result?word=shoot&lang=en) n.
+- [shrink](https://www.youdao.com/result?word=shrink&lang=en) v.
+- [shrug](https://www.youdao.com/result?word=shrug&lang=en) v.
+- [sigh](https://www.youdao.com/result?word=sigh&lang=en) v., n.
+- [simulate](https://www.youdao.com/result?word=simulate&lang=en) v.
+- [simulation](https://www.youdao.com/result?word=simulation&lang=en) n.
+- [simultaneously](https://www.youdao.com/result?word=simultaneously&lang=en) adv.
+- [sin](https://www.youdao.com/result?word=sin&lang=en) n.
+- [situated](https://www.youdao.com/result?word=situated&lang=en) adj.
+- [skeptical](https://www.youdao.com/result?word=skeptical&lang=en) adj.
+- [sketch](https://www.youdao.com/result?word=sketch&lang=en) n.
+- [skip](https://www.youdao.com/result?word=skip&lang=en) v.
+- [slam](https://www.youdao.com/result?word=slam&lang=en) v.
+- [slap](https://www.youdao.com/result?word=slap&lang=en) v.
+- [slash](https://www.youdao.com/result?word=slash&lang=en) v.
+- [slavery](https://www.youdao.com/result?word=slavery&lang=en) n.
+- [slot](https://www.youdao.com/result?word=slot&lang=en) n.
+- [smash](https://www.youdao.com/result?word=smash&lang=en) v.
+- [snap](https://www.youdao.com/result?word=snap&lang=en) v.
+- [soak](https://www.youdao.com/result?word=soak&lang=en) v.
+- [soar](https://www.youdao.com/result?word=soar&lang=en) v.
+- [socialist](https://www.youdao.com/result?word=socialist&lang=en) adj.
+- [sole](https://www.youdao.com/result?word=sole&lang=en) adj.
+- [solely](https://www.youdao.com/result?word=solely&lang=en) adv.
+- [solidarity](https://www.youdao.com/result?word=solidarity&lang=en) n.
+- [solo](https://www.youdao.com/result?word=solo&lang=en) adj., n.
+- [sophomore](https://www.youdao.com/result?word=sophomore&lang=en) n.
+- [sound](https://www.youdao.com/result?word=sound&lang=en) adj.
+- [sovereignty](https://www.youdao.com/result?word=sovereignty&lang=en) n.
+- [spam](https://www.youdao.com/result?word=spam&lang=en) n.
+- [span](https://www.youdao.com/result?word=span&lang=en) v., n.
+- [spare](https://www.youdao.com/result?word=spare&lang=en) v.
+- [spark](https://www.youdao.com/result?word=spark&lang=en) v.
+- [specialized](https://www.youdao.com/result?word=specialized&lang=en) adj.
+- [specification](https://www.youdao.com/result?word=specification&lang=en) n.
+- [specimen](https://www.youdao.com/result?word=specimen&lang=en) n.
+- [spectacle](https://www.youdao.com/result?word=spectacle&lang=en) n.
+- [spectrum](https://www.youdao.com/result?word=spectrum&lang=en) n.
+- [spell](https://www.youdao.com/result?word=spell&lang=en) n.
+- [sphere](https://www.youdao.com/result?word=sphere&lang=en) n.
+- [spin](https://www.youdao.com/result?word=spin&lang=en) v., n.
+- [spine](https://www.youdao.com/result?word=spine&lang=en) n.
+- [spotlight](https://www.youdao.com/result?word=spotlight&lang=en) n.
+- [spouse](https://www.youdao.com/result?word=spouse&lang=en) n.
+- [spy](https://www.youdao.com/result?word=spy&lang=en) n., v.
+- [squad](https://www.youdao.com/result?word=squad&lang=en) n.
+- [squeeze](https://www.youdao.com/result?word=squeeze&lang=en) v.
+- [stab](https://www.youdao.com/result?word=stab&lang=en) v.
+- [stability](https://www.youdao.com/result?word=stability&lang=en) n.
+- [stabilize](https://www.youdao.com/result?word=stabilize&lang=en) v.
+- [stake](https://www.youdao.com/result?word=stake&lang=en) n.
+- [standing](https://www.youdao.com/result?word=standing&lang=en) adj.
+- [stark](https://www.youdao.com/result?word=stark&lang=en) adj.
+- [statistical](https://www.youdao.com/result?word=statistical&lang=en) adj.
+- [steer](https://www.youdao.com/result?word=steer&lang=en) v.
+- [stem](https://www.youdao.com/result?word=stem&lang=en) n., v.
+- [stereotype](https://www.youdao.com/result?word=stereotype&lang=en) n.
+- [stimulus](https://www.youdao.com/result?word=stimulus&lang=en) n.
+- [stir](https://www.youdao.com/result?word=stir&lang=en) v.
+- [storage](https://www.youdao.com/result?word=storage&lang=en) n.
+- [straightforward](https://www.youdao.com/result?word=straightforward&lang=en) adj.
+- [strain](https://www.youdao.com/result?word=strain&lang=en) n.
+- [strand](https://www.youdao.com/result?word=strand&lang=en) n.
+- [strategic](https://www.youdao.com/result?word=strategic&lang=en) adj.
+- [striking](https://www.youdao.com/result?word=striking&lang=en) adj.
+- [strip](https://www.youdao.com/result?word=strip&lang=en) (long narrow piece) n.
+- [strip](https://www.youdao.com/result?word=strip&lang=en) (remove clothes/a layer) v.
+- [strive](https://www.youdao.com/result?word=strive&lang=en) v.
+- [structural](https://www.youdao.com/result?word=structural&lang=en) adj.
+- [stumble](https://www.youdao.com/result?word=stumble&lang=en) v.
+- [stun](https://www.youdao.com/result?word=stun&lang=en) v.
+- [submission](https://www.youdao.com/result?word=submission&lang=en) n.
+- [subscriber](https://www.youdao.com/result?word=subscriber&lang=en) n.
+- [subscription](https://www.youdao.com/result?word=subscription&lang=en) n.
+- [subsidy](https://www.youdao.com/result?word=subsidy&lang=en) n.
+- [substantial](https://www.youdao.com/result?word=substantial&lang=en) adj.
+- [substantially](https://www.youdao.com/result?word=substantially&lang=en) adv.
+- [substitute](https://www.youdao.com/result?word=substitute&lang=en) n., v.
+- [substitution](https://www.youdao.com/result?word=substitution&lang=en) n.
+- [subtle](https://www.youdao.com/result?word=subtle&lang=en) adj.
+- [suburban](https://www.youdao.com/result?word=suburban&lang=en) adj.
+- [succession](https://www.youdao.com/result?word=succession&lang=en) n.
+- [successive](https://www.youdao.com/result?word=successive&lang=en) adj.
+- [successor](https://www.youdao.com/result?word=successor&lang=en) n.
+- [suck](https://www.youdao.com/result?word=suck&lang=en) v.
+- [sue](https://www.youdao.com/result?word=sue&lang=en) v.
+- [suicide](https://www.youdao.com/result?word=suicide&lang=en) n.
+- [suite](https://www.youdao.com/result?word=suite&lang=en) n.
+- [summit](https://www.youdao.com/result?word=summit&lang=en) n.
+- [superb](https://www.youdao.com/result?word=superb&lang=en) adj.
+- [superintendent](https://www.youdao.com/result?word=superintendent&lang=en) n.
+- [superior](https://www.youdao.com/result?word=superior&lang=en) adj.
+- [supervise](https://www.youdao.com/result?word=supervise&lang=en) v.
+- [supervision](https://www.youdao.com/result?word=supervision&lang=en) n.
+- [supervisor](https://www.youdao.com/result?word=supervisor&lang=en) n.
+- [supplement](https://www.youdao.com/result?word=supplement&lang=en) n., v.
+- [supportive](https://www.youdao.com/result?word=supportive&lang=en) adj.
+- [supposedly](https://www.youdao.com/result?word=supposedly&lang=en) adv.
+- [suppress](https://www.youdao.com/result?word=suppress&lang=en) v.
+- [supreme](https://www.youdao.com/result?word=supreme&lang=en) adj.
+- [surge](https://www.youdao.com/result?word=surge&lang=en) n., v.
+- [surgical](https://www.youdao.com/result?word=surgical&lang=en) adj.
+- [surplus](https://www.youdao.com/result?word=surplus&lang=en) n.
+- [surrender](https://www.youdao.com/result?word=surrender&lang=en) v.
+- [surveillance](https://www.youdao.com/result?word=surveillance&lang=en) n.
+- [suspension](https://www.youdao.com/result?word=suspension&lang=en) n.
+- [suspicion](https://www.youdao.com/result?word=suspicion&lang=en) n.
+- [suspicious](https://www.youdao.com/result?word=suspicious&lang=en) adj.
+- [sustain](https://www.youdao.com/result?word=sustain&lang=en) v.
+- [swing](https://www.youdao.com/result?word=swing&lang=en) v., n.
+- [sword](https://www.youdao.com/result?word=sword&lang=en) n.
+- [symbolic](https://www.youdao.com/result?word=symbolic&lang=en) adj.
+- [syndrome](https://www.youdao.com/result?word=syndrome&lang=en) n.
+- [synthesis](https://www.youdao.com/result?word=synthesis&lang=en) n.
+- [systematic](https://www.youdao.com/result?word=systematic&lang=en) adj.
 
 
 ## t
 
-tackle n.
-tactic n.
-tactical adj.
-taxpayer n.
-tempt v.
-tenant n.
-tender adj.
-tenure n.
-terminal adj.
-terminate v.
-terrain n.
-terrific adj.
-testify v.
-testimony n.
-texture n.
-thankfully adv.
-theatrical adj.
-theology n.
-theoretical adj.
-thereafter adv.
-thereby adv.
-thoughtful adj.
-thought-provoking adj.
-thread n.
-threshold n.
-thrilled adj.
-thrive v.
-tide n.
-tighten v.
-timber n.
-timely adj.
-tobacco n.
-tolerance n.
-tolerate v.
-toll n.
-top v.
-torture n., v.
-toss v.
-total v.
-toxic adj.
-trace n.
-trademark n.
-trail n., v.
-trailer n.
-transaction n.
-transcript n.
-transformation n.
-transit n.
-transmission n.
-transparency n.
-transparent adj.
-trauma n.
-treaty n.
-tremendous adj.
-tribal adj.
-tribute n.
-trigger n.
-trio n.
-triumph n.
-trophy n.
-troubled adj.
-trustee n.
-tuition n.
-tumor n.
-turnout n.
-turnover n.
-twist v., n.
+- [tackle](https://www.youdao.com/result?word=screening&lang=en) n.
+- [tactic](https://www.youdao.com/result?word=tactic&lang=en) n.
+- [tactical](https://www.youdao.com/result?word=tactical&lang=en) adj.
+- [taxpayer](https://www.youdao.com/result?word=taxpayer&lang=en) n.
+- [tempt](https://www.youdao.com/result?word=tempt&lang=en) v.
+- [tenant](https://www.youdao.com/result?word=tenant&lang=en) n.
+- [tender](https://www.youdao.com/result?word=tender&lang=en) adj.
+- [tenure](https://www.youdao.com/result?word=tenure&lang=en) n.
+- [terminal](https://www.youdao.com/result?word=terminal&lang=en) adj.
+- [terminate](https://www.youdao.com/result?word=terminate&lang=en) v.
+- [terrain](https://www.youdao.com/result?word=terrain&lang=en) n.
+- [terrific](https://www.youdao.com/result?word=terrific&lang=en) adj.
+- [testify](https://www.youdao.com/result?word=testify&lang=en) v.
+- [testimony](https://www.youdao.com/result?word=testimony&lang=en) n.
+- [texture](https://www.youdao.com/result?word=texture&lang=en) n.
+- [thankfully](https://www.youdao.com/result?word=thankfully&lang=en) adv.
+- [theatrical](https://www.youdao.com/result?word=theatrical&lang=en) adj.
+- [theology](https://www.youdao.com/result?word=theology&lang=en) n.
+- [theoretical](https://www.youdao.com/result?word=theoretical&lang=en) adj.
+- [thereafter](https://www.youdao.com/result?word=thereafter&lang=en) adv.
+- [thereby](https://www.youdao.com/result?word=thereby&lang=en) adv.
+- [thoughtful](https://www.youdao.com/result?word=thoughtful&lang=en) adj.
+- [thought](https://www.youdao.com/result?word=thought&lang=en)-provoking adj.
+- [thread](https://www.youdao.com/result?word=thread&lang=en) n.
+- [threshold](https://www.youdao.com/result?word=threshold&lang=en) n.
+- [thrilled](https://www.youdao.com/result?word=thrilled&lang=en) adj.
+- [thrive](https://www.youdao.com/result?word=thrive&lang=en) v.
+- [tide](https://www.youdao.com/result?word=tide&lang=en) n.
+- [tighten](https://www.youdao.com/result?word=tighten&lang=en) v.
+- [timber](https://www.youdao.com/result?word=timber&lang=en) n.
+- [timely](https://www.youdao.com/result?word=timely&lang=en) adj.
+- [tobacco](https://www.youdao.com/result?word=tobacco&lang=en) n.
+- [tolerance](https://www.youdao.com/result?word=tolerance&lang=en) n.
+- [tolerate](https://www.youdao.com/result?word=tolerate&lang=en) v.
+- [toll](https://www.youdao.com/result?word=toll&lang=en) n.
+- [top](https://www.youdao.com/result?word=top&lang=en) v.
+- [torture](https://www.youdao.com/result?word=torture&lang=en) n., v.
+- [toss](https://www.youdao.com/result?word=toss&lang=en) v.
+- [total](https://www.youdao.com/result?word=total&lang=en) v.
+- [toxic](https://www.youdao.com/result?word=toxic&lang=en) adj.
+- [trace](https://www.youdao.com/result?word=trace&lang=en) n.
+- [trademark](https://www.youdao.com/result?word=trademark&lang=en) n.
+- [trail](https://www.youdao.com/result?word=trail&lang=en) n., v.
+- [trailer](https://www.youdao.com/result?word=trailer&lang=en) n.
+- [transaction](https://www.youdao.com/result?word=transaction&lang=en) n.
+- [transcript](https://www.youdao.com/result?word=transcript&lang=en) n.
+- [transformation](https://www.youdao.com/result?word=transformation&lang=en) n.
+- [transit](https://www.youdao.com/result?word=transit&lang=en) n.
+- [transmission](https://www.youdao.com/result?word=transmission&lang=en) n.
+- [transparency](https://www.youdao.com/result?word=transparency&lang=en) n.
+- [transparent](https://www.youdao.com/result?word=transparent&lang=en) adj.
+- [trauma](https://www.youdao.com/result?word=trauma&lang=en) n.
+- [treaty](https://www.youdao.com/result?word=treaty&lang=en) n.
+- [tremendous](https://www.youdao.com/result?word=tremendous&lang=en) adj.
+- [tribal](https://www.youdao.com/result?word=tribal&lang=en) adj.
+- [tribute](https://www.youdao.com/result?word=tribute&lang=en) n.
+- [trigger](https://www.youdao.com/result?word=trigger&lang=en) n.
+- [trio](https://www.youdao.com/result?word=trio&lang=en) n.
+- [triumph](https://www.youdao.com/result?word=triumph&lang=en) n.
+- [trophy](https://www.youdao.com/result?word=trophy&lang=en) n.
+- [troubled](https://www.youdao.com/result?word=troubled&lang=en) adj.
+- [trustee](https://www.youdao.com/result?word=trustee&lang=en) n.
+- [tuition](https://www.youdao.com/result?word=tuition&lang=en) n.
+- [tumor](https://www.youdao.com/result?word=tumor&lang=en) n.
+- [turnout](https://www.youdao.com/result?word=turnout&lang=en) n.
+- [turnover](https://www.youdao.com/result?word=turnover&lang=en) n.
+- [twist](https://www.youdao.com/result?word=twist&lang=en) v., n.
 
 
 ## uvwy
 
-unconstitutional adj.
-undergraduate n.
-underlying adj.
-undermine v.
-undoubtedly adv.
-unify v.
-unprecedented adj.
-unveil v.
-upcoming adj.
-upgrade v., n.
-uphold v.
-utility n.
-utilize v.
-utterly adv.
-vacuum n.
-vague adj.
-validity n.
-vanish v.
-variable n., adj.
-varied adj.
-vein n.
-venture n., v.
-verbal adj.
-verdict n.
-verify v.
-verse n.
-versus conj.
-vessel n.
-veteran n.
-viable adj.
-vibrant adj.
-vice n.
-vicious adj.
-violate v.
-violation n.
-virtue n.
-vocal adj.
-vow v.
-vulnerability n.
-vulnerable adj.
-ward n.
-warehouse n.
-warfare n.
-warrant n., v.
-warrior n.
-weaken v.
-weave v.
-weed n.
-well n.
-well-being n.
-whatsoever adv.
-whereby adv.
-whip v.
-wholly adv.
-widen v.
-widow n.
-width n.
-willingness n.
-wipe v.
-wit n.
-withdrawal n.
-workout n.
-worship n., v.
-worthwhile adj.
-worthy adj.
-yell v.
-yield n., v.
+- [unconstitutional](https://www.youdao.com/result?word=screening&lang=en) adj.
+- [undergraduate](https://www.youdao.com/result?word=undergraduate&lang=en) n.
+- [underlying](https://www.youdao.com/result?word=underlying&lang=en) adj.
+- [undermine](https://www.youdao.com/result?word=undermine&lang=en) v.
+- [undoubtedly](https://www.youdao.com/result?word=undoubtedly&lang=en) adv.
+- [unify](https://www.youdao.com/result?word=unify&lang=en) v.
+- [unprecedented](https://www.youdao.com/result?word=unprecedented&lang=en) adj.
+- [unveil](https://www.youdao.com/result?word=unveil&lang=en) v.
+- [upcoming](https://www.youdao.com/result?word=upcoming&lang=en) adj.
+- [upgrade](https://www.youdao.com/result?word=upgrade&lang=en) v., n.
+- [uphold](https://www.youdao.com/result?word=uphold&lang=en) v.
+- [utility](https://www.youdao.com/result?word=utility&lang=en) n.
+- [utilize](https://www.youdao.com/result?word=utilize&lang=en) v.
+- [utterly](https://www.youdao.com/result?word=utterly&lang=en) adv.
+- [vacuum](https://www.youdao.com/result?word=vacuum&lang=en) n.
+- [vague](https://www.youdao.com/result?word=vague&lang=en) adj.
+- [validity](https://www.youdao.com/result?word=validity&lang=en) n.
+- [vanish](https://www.youdao.com/result?word=vanish&lang=en) v.
+- [variable](https://www.youdao.com/result?word=variable&lang=en) n., adj.
+- [varied](https://www.youdao.com/result?word=varied&lang=en) adj.
+- [vein](https://www.youdao.com/result?word=vein&lang=en) n.
+- [venture](https://www.youdao.com/result?word=venture&lang=en) n., v.
+- [verbal](https://www.youdao.com/result?word=verbal&lang=en) adj.
+- [verdict](https://www.youdao.com/result?word=verdict&lang=en) n.
+- [verify](https://www.youdao.com/result?word=verify&lang=en) v.
+- [verse](https://www.youdao.com/result?word=verse&lang=en) n.
+- [versus](https://www.youdao.com/result?word=versus&lang=en) conj.
+- [vessel](https://www.youdao.com/result?word=vessel&lang=en) n.
+- [veteran](https://www.youdao.com/result?word=veteran&lang=en) n.
+- [viable](https://www.youdao.com/result?word=viable&lang=en) adj.
+- [vibrant](https://www.youdao.com/result?word=vibrant&lang=en) adj.
+- [vice](https://www.youdao.com/result?word=vice&lang=en) n.
+- [vicious](https://www.youdao.com/result?word=vicious&lang=en) adj.
+- [violate](https://www.youdao.com/result?word=violate&lang=en) v.
+- [violation](https://www.youdao.com/result?word=violation&lang=en) n.
+- [virtue](https://www.youdao.com/result?word=virtue&lang=en) n.
+- [vocal](https://www.youdao.com/result?word=vocal&lang=en) adj.
+- [vow](https://www.youdao.com/result?word=vow&lang=en) v.
+- [vulnerability](https://www.youdao.com/result?word=vulnerability&lang=en) n.
+- [vulnerable](https://www.youdao.com/result?word=vulnerable&lang=en) adj.
+- [ward](https://www.youdao.com/result?word=ward&lang=en) n.
+- [warehouse](https://www.youdao.com/result?word=warehouse&lang=en) n.
+- [warfare](https://www.youdao.com/result?word=warfare&lang=en) n.
+- [warrant](https://www.youdao.com/result?word=warrant&lang=en) n., v.
+- [warrior](https://www.youdao.com/result?word=warrior&lang=en) n.
+- [weaken](https://www.youdao.com/result?word=weaken&lang=en) v.
+- [weave](https://www.youdao.com/result?word=weave&lang=en) v.
+- [weed](https://www.youdao.com/result?word=weed&lang=en) n.
+- [well](https://www.youdao.com/result?word=well&lang=en) n.
+- [well](https://www.youdao.com/result?word=well&lang=en)-being n.
+- [whatsoever](https://www.youdao.com/result?word=whatsoever&lang=en) adv.
+- [whereby](https://www.youdao.com/result?word=whereby&lang=en) adv.
+- [whip](https://www.youdao.com/result?word=whip&lang=en) v.
+- [wholly](https://www.youdao.com/result?word=wholly&lang=en) adv.
+- [widen](https://www.youdao.com/result?word=widen&lang=en) v.
+- [widow](https://www.youdao.com/result?word=widow&lang=en) n.
+- [width](https://www.youdao.com/result?word=width&lang=en) n.
+- [willingness](https://www.youdao.com/result?word=willingness&lang=en) n.
+- [wipe](https://www.youdao.com/result?word=wipe&lang=en) v.
+- [wit](https://www.youdao.com/result?word=wit&lang=en) n.
+- [withdrawal](https://www.youdao.com/result?word=withdrawal&lang=en) n.
+- [workout](https://www.youdao.com/result?word=workout&lang=en) n.
+- [worship](https://www.youdao.com/result?word=worship&lang=en) n., v.
+- [worthwhile](https://www.youdao.com/result?word=worthwhile&lang=en) adj.
+- [worthy](https://www.youdao.com/result?word=worthy&lang=en) adj.
+- [yell](https://www.youdao.com/result?word=yell&lang=en) v.
+- [yield](https://www.youdao.com/result?word=yield&lang=en) n., v.

@@ -62,7 +62,7 @@ file:///D:/SVP/common
 
 然后勾选 Use temporary repositories only，确认安装
 
-![Alt text](../img/svp_megui/image.png)
+![Alt text](/img/svp_megui/image.png)
 
 4. 定义安装目录，这个装哪都行，但是要尽量在纯英文的路径，避免不必要的麻烦
 
@@ -72,10 +72,10 @@ file:///D:/SVP/common
 
 如果有补帧视频输出需求的，点击 switch to components selection
 
-![Alt text](../img/svp_megui/image-1.png)
+![Alt text](/img/svp_megui/image-1.png)
 
 6. 对着下图勾选，SVP Manager(pro) 只勾选前两项，3rd-party software (mandatory) 里全选，其他都不需要。
-![Alt text](../img/svp_megui/image-2.png)
+![Alt text](/img/svp_megui/image-2.png)
 
 7. 一直点，最后先不运行，将 SVPManager.exe 替换安装目录的原文件,。
 
@@ -87,12 +87,12 @@ file:///D:/SVP/common
 
 9. 点击滤镜 - 全局滤镜优先权 - 添加系统滤镜
 
-![Alt text](../img/svp_megui/image-3.png)
+![Alt text](/img/svp_megui/image-3.png)
 
 10. 选择 ffdshow raw video filter，并将强制使用
 
-![Alt text](../img/svp_megui/image-4.png)
-![Alt text](../img/svp_megui/image-5.png)
+![Alt text](/img/svp_megui/image-4.png)
+![Alt text](/img/svp_megui/image-5.png)
 
 11. 这时候打开或右下角找到之前已经打开的 SVP4，使用可以跳过性能测试。
 
@@ -101,7 +101,7 @@ SVP 啥都不用调就可以直接在播放器用了。（也不建议小白随�
 一般成功后会左下角会有显示
 
 ![](http://i0.hdslb.com/bfs/article/watermark/e9be45769453ee76e27260c1a71076d21ac7754d.png) 
-![Alt text](../img/svp_megui/image-6.png)
+![Alt text](/img/svp_megui/image-6.png)
 
 如果只是单纯插帧观看，那教程到此结束，成功后别忘了给 UP 主三连！！！！！！！！这对我真的很重要啊啊啊啊
 
@@ -117,7 +117,7 @@ SVP 啥都不用调就可以直接在播放器用了。（也不建议小白随�
 12. 将 LSMASHSource-AviSynth-plugin-r929-msvc-32bit.7zLSM.7z 解压缩，的下图文件，将这些文件复制到 C:\Program Files (x86)\AviSynth+\plugins
 
 （若后面出现如函数无法被识别等奇奇怪怪的情况，可以把这些文件都复制进 C:\Program Files (x86)\AviSynth+ 里所有的 plugins 前缀文件夹）
-![Alt text](../img/svp_megui/image-7.png)
+![Alt text](/img/svp_megui/image-7.png)
 
 13. 解压 AvsPmod.7z，点击里面的 AvsPmod.exe 即可直接使用 Avspmod（当然也是建议在全英文路径下打开）
 
@@ -127,17 +127,17 @@ SVP 啥都不用调就可以直接在播放器用了。（也不建议小白随�
 
 15. 点击 avisynth 的帮助文件 / URL，选择刚刚复制的 C:\Program Files (x86)\AviSynth+\plugins 文件夹的 Microsoft Visual C++ 2015 Redistributable x86 文件
 
-![Alt text](../img/svp_megui/image-8.png) 
+![Alt text](/img/svp_megui/image-8.png) 
 
-![Alt text](../img/svp_megui/image-9.png)
+![Alt text](/img/svp_megui/image-9.png)
 
 16. 新建文件中输入 “version()” 后，按 F5 得到下图信息即可配置正确：
 
-![Alt text](../img/svp_megui/image-10.png)
+![Alt text](/img/svp_megui/image-10.png)
 
 17. 再次打开 SVP 和 potplayer 播放视频，右下角托盘应该会有如图图标，点击 ffdshow raw video filter ，打开后的界面在 Avisynth 里复制路径去打开
-![Alt text](../img/svp_megui/image-11.png)
-![Alt text](../img/svp_megui/image-12.png)
+![Alt text](/img/svp_megui/image-11.png)
+![Alt text](/img/svp_megui/image-12.png)
 18. 打开 scripts 文件夹
 
 把里面的 avs 后缀文件复制出来（因为 SVP 一退出文件夹会被清空）
@@ -167,7 +167,7 @@ LoadPlugin("D:\Program Files\SVP\SVP4\plugins\svpflow2.dll")
 之后保存
 
 “注意是英文字符的双引号，如果视频和 avs 文件在同一个文件夹可以省略路径。图中的路径已省略。按 F5 可检查错误。
-![Alt text](../img/svp_megui/image-13.png)
+![Alt text](/img/svp_megui/image-13.png)
 
 20. 解压 MeGUI_2814.7z
 
@@ -180,14 +180,14 @@ LoadPlugin("D:\Program Files\SVP\SVP4\plugins\svpflow2.dll")
 
 　　下面音频部分，选择原视频文件，设置好格式（格式根据自己需求，因为上面转出来的视频是没有声音的所以需要这里单独把音频文件转出来）
 
-![Alt text](../img/svp_megui/image-14.png)
+![Alt text](/img/svp_megui/image-14.png)
 
 　　2. 点击上方队列按钮，点左下角开始，然后得到两个文件，一个视频文件（没有声音）一个音频文件（转码过程中只是调用 SVP4 的文件，与 SVP4 本身是否开启没有影响）
 
-![Alt text](../img/svp_megui/image-15.png)
+![Alt text](/img/svp_megui/image-15.png)
 
 　　3. 当导出完毕之后, 可以把视频+音频合并, 步骤: 点击上方功能栏的 [工具]-[混流器]，选择对应格式的混流器，设置好需要合成的视频和音频文件，检查帧率是否正确，如果不一样就点右边按钮调整，然后点右下角的队列，开始混流
-![Alt text](../img/svp_megui/image-16.png)
+![Alt text](/img/svp_megui/image-16.png)
 
 　　之后等待混流完成就可以了
 

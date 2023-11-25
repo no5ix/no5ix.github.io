@@ -638,7 +638,7 @@ categories:
 ## 00:05:08,760 --> 00:05:14,080
 
 - > 它们进去时还好  出来是却毛绒绒的
-- and they're goin' in fine, but they're comin' out all....`fluffy`.
+- and they're goin' in fine, but they're comin' out all....`fluffy`(`fluff`n. 绒毛 `fluffy`adj. 毛茸茸的).
 
 79
 
@@ -646,7 +646,7 @@ categories:
 ## 00:05:16,590 --> 00:05:19,540
 
 - > -7点左右见  -好吧
-- - Anyway, say, sevenish? - Sure.
+- - Anyway, say, `sevenish`(口语: 七点左右)? - Sure.
 
 80
 
@@ -686,7 +686,7 @@ categories:
 ## 00:05:32,240 --> 00:05:34,330
 
 - > 而你一个月面试三次
-- You, you go on three auditions a month
+- You, you go on three `audition`s(n.（对演艺人员的）面试，试演；<古>听觉，听能 v.试镜，试演；对（某人）进行面试，让（某人）试演) a month
 
 85
 
@@ -824,7 +824,7 @@ categories:
 ## 00:06:13,200 --> 00:06:15,410
 
 - > 惊天地泣鬼神的表哥  你就别妄想了
-- who could belch the alphabet.
+- who could `belch`(v. 打嗝 n. 打嗝) the `alphabet`(n. 字母表).
 
 102
 
@@ -880,7 +880,7 @@ categories:
 ## 00:06:31,470 --> 00:06:34,440
 
 - > -什么  -丑裸男在铺厨房瓷砖
-- - What? - Ugly Naked Guy's laying kitchen tile.
+- - What? - Ugly Naked Guy's `lay`ing(v. 放置) kitchen `tile`(n. 瓷砖, 棋子 v. 铺砖).
 
 109
 
@@ -976,7 +976,7 @@ categories:
 ## 00:07:13,780 --> 00:07:15,000
 
 - > 等等  老兄
-- Oh. Well, hold on camper, are you sure
+- Oh. Well, hold on `camper`(n. 露营者), are you sure
 
 121
 
@@ -1080,7 +1080,7 @@ categories:
 ## 00:07:53,620 --> 00:07:55,940
 
 - > 还有衣物柔顺剂
-- Oh, and uh, the fabric softener?
+- Oh, and uh, the fabric `softener`(n. 软化剂)?
 
 134
 
@@ -1088,7 +1088,7 @@ categories:
 ## 00:07:56,260 --> 00:07:59,350
 
 - > 我的"衣柔"牌柔顺剂有什么问题
-- Ok, ok, now what is wrong with my Snuggles?
+- Ok, ok, now what is wrong with my `Snuggle`s(vt.使舒适温暖；紧抱；偎依 vi.偎依；舒服地蜷伏)?
 
 135
 
@@ -1111,7 +1111,7 @@ categories:
 ## 00:08:04,500 --> 00:08:06,790
 
 - > 一只温和  毛毛的大熊
-- like a warm, fuzzy bear.
+- like a warm, fuzzy(`fuzz`n. 茸毛, `fuzzy`adj. 毛茸茸的) bear.
 
 138
 
@@ -1193,7 +1193,7 @@ categories:
 ## 00:08:32,000 --> 00:08:33,810
 
 - > 乔伊  这家伙可能会超级
-- Joey, for all we know this guy could be horribly...
+- Joey, `for all we know`(据我们所知) this guy could be horribly...
 
 148
 
@@ -1281,7 +1281,7 @@ categories:
 ## 00:09:07,080 --> 00:09:11,090
 
 - > 我从来没有过如此悲惨的一天
-- I had the most supremely awful day.
+- I had the most `supremely`(`supreme`: adj.最高的，至高无上的；（政府、司法或军事机构）拥有最高权力的；极大的，极度的；（处罚，牺牲）涉及死的；杰出的) awful day.
 
 159
 
@@ -1297,7 +1297,7 @@ categories:
 ## 00:09:14,910 --> 00:09:18,090
 
 - > 一杯浓缩咖啡  一杯拿铁  谢谢
-- Can I get an espresso and a latte over here, please?
+- Can I get an `espresso`(/eˈspresoʊ/ n. 浓缩咖啡) and a latte over here, please?
 
 161
 
@@ -1305,7 +1305,7 @@ categories:
 ## 00:09:18,210 --> 00:09:20,080
 
 - > 我们刚去摄影店把照片取了回来
-- We got the proofs back from that photo shoot, you know,
+- We got the `proof`s(n.证明，证据；检验，证实；（数学）验算，验证；校样，样张；（酒的）标准酒精度) back from that photo shoot with the vegetables, they `suck`ed(v. 吮吸;糟透了),
 
 162
 
@@ -1425,7 +1425,7 @@ categories:
 ## 00:09:54,360 --> 00:09:59,990
 
 - > 或混着穿  一脚鹿一脚鼠  随便你
-- or, you can mix and match, moose and squirrel. Whatever you want.
+- or, you can mix and match, `moose`(鹿) and `squirrel`(松鼠). Whatever you want.
 
 177
 
@@ -1795,7 +1795,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:14:16,930 --> 00:14:20,390
 
 - > 她轻啃东西的声音
-- That cute nibbly noise when she eats.
+- That cute `nibbly`(`nibble`adj. 一点一点地咬) noise when she eats.
 
 242
 
@@ -1803,7 +1803,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:14:20,400 --> 00:14:25,590
 
 - > 好像是快乐的小松鼠或是鼬
-- Like a happy little squirrel, or a weasel.
+- Like a happy little squirrel, or a `weasel`(n. 黄鼠狼, 鼬).
 
 243
 
@@ -1965,7 +1965,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:15:44,340 --> 00:15:47,290
 
 - > 管他的  我想我们不该再交往下去了
-- Ok, here we go. I don't think we should go out anymore.
+- Ok, here we go. I don't think we should `go out` anymore.
 
 263
 

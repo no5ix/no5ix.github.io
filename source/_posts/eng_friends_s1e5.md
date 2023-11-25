@@ -9,6 +9,7 @@ categories:
 ---
 
 
+
 1
 
 
@@ -1477,366 +1478,215 @@ categories:
 # 00:10:29,030 --> 00:10:31,640
 
 - > 自助洗衣店
-- 
+
+
 185
 
+# 洗衣店
 
-# 00:10:37,710 --> 00:10:39,870
+# 00:11:26,35 --> 00:11:29,32
 
-- > 借过  让开  让开
-- Come in  through. Move, move.
+- Coming through. Move. Move!
+- > 借过，让开让开…
 
-186
-
-
-# 00:10:44,930 --> 00:10:48,920
-
-- > 不好意思  这台洗衣机是我用的
-- Oh, 'Excuse me. I was kinda using that machine.
-
-187
+155
 
 
-# 00:10:48,920 --> 00:10:51,180
+# 00:11:33,89 --> 00:11:37,29
 
-- > 是吗  不过现在不是了
-- Yeah, well, now you're kind not.
+- Excuse me! I was kind of using that
+- > machine（/məˈʃiːn/）.
+抱歉，我用这台洗衣机
 
-188
+156
 
 
-# 00:10:52,580 --> 00:10:55,690
+# 00:11:37,56 --> 00:11:39,92
 
-- > 但是我占位置了  我放了篮子在上面
+- Yeah,well,now you’ re kind of not.
+- > 是吗?不过现在不是了
+
+157
+
+
+# 00:11:41,13 --> 00:11:44,03
+
 - But I saved it. I put my basket on top.
+- > 但是我占位置了, 我放了篮子在上面
 
-189
+158
 
 
-# 00:10:55,690 --> 00:10:58,730
+# 00:11:44,27 --> 00:11:46,76
 
-- > -抱歉  这是你的篮子吗  -对
-- - Oh, I'm sorry, is that your basket? - Yeah.
+- I’m sorry. Is that your basket? It’s pretty. Unfortunately,I don’t see
+- > suds(/sʌdz/肥皂水, 洗衣水)!
+真漂亮， 但是我没看到洗衣水
+
+160
+
+
+# 00:11:52,47 --> 00:11:53,57
+
+- What?
+- > 什么?
+
+161
+
+
+# 00:11:54,68 --> 00:11:57,94
+
+- No suds,no save,okay?
+- > 没肥皂水就不算保留，行吗?
+
+162
+
+
+# 00:12:00,72 --> 00:12:02,18
+
+- What’s going on?
+- > 怎么了?
+
+163
+
+
+# 00:12:02,38 --> 00:12:06,22
+
+- Nothing. This horrible（/ˈhɔːrəb(ə)l/不友好的） woman just took my
+- > machine.
+
+没什么 这位凶婆娘抢了我的洗衣机164
+
+
+# 00:12:06,42 --> 00:12:07,89
+
+- Was your basket on top?
+- > 你有把篮子放上面吗?
+
+165
+
+
+# 00:12:08,16 --> 00:12:10,35
+
+- -Yeah,but there were no suds. -So?
+- > -有，但是没有肥皂水? -然后呢?
+
+166
+
+
+# 00:12:10,66 --> 00:12:14,39
+
+- -You know,no suds,no save. -No suds,no
+- > Excuse me.
+
+-没肥皂水就不算保留 -没肥皂水,抱歉167
+
+
+# 00:12:14,60 --> 00:12:18,53
+
+- Hold on a second! This is my friend’s
+- > machine.
+
+等等 这是我朋友用的机器168
+
+
+# 00:12:18,80 --> 00:12:21,06
+
+- Hey,hey,hey! Her stuff wasn’t in it!
+- > 她的东西没在里面
+
+169
+
+
+# 00:12:21,24 --> 00:12:25,23
+
+- Hey,hey,hey! That’s not the rule（/ruːl/条例, 规则）,and you
+- > know it! All right. Show’s over.Nothing to see here.Okay. Let’s do laundry.
+洗衣服吧
+
+173
+
+
+# 00:12:47,26 --> 00:12:51,10
+
+- That was amazing! I can’t even send back
+- > soup.
+
+这简直是太神奇了 我连汤都不敢退174
+
+
+# 00:12:51,30 --> 00:12:56,60
+
+- Well,that’s because you’ re such a sweet,
+- > gentle（/ˈdʒent(ə)l/温柔的）…Do you? Do you? Oh,hey. You must need
+detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
+
+你?你? 你得用洗衣粉176
+
+
+# 00:13:05,91 --> 00:13:08,61
+
+- -What’s that? 
+- > -那是什么? 乌伯怀斯
+
+177
+
+
+# 00:13:08,82 --> 00:13:12,12
+
+- It’s new. It’s German. It’s extra（/ˈekstrə/格外） tough（/tʌf/顽固的）! Rach,are you gonna separate(分开
+- > / ˈseprət /) those?
+瑞秋，你准备分开洗吗?
+
+179
+
+
+# 00:13:17,83 --> 00:13:22,52
+
+- Oh,God. Am I being like a total（完全的/ˈtoʊt(ə)l/） laundry spaz(笨蛋, 怪人/ spæz /)?Am I supposed（/səˈpoʊzɪd/应当的） to use one machine for
+- > shirts and another for pants（/pænts/裤子）?
+
+我得用一台洗衬衣 用另一台洗裤子吗?181
+
+
+# 00:13:30,27 --> 00:13:33,33
+
+- Have you never done this before?
+- > 你没洗过衣服?
+
+182
+
+
+# 00:13:33,51 --> 00:13:37,77
+
+- Well,not myself. But I know other people that have.Okay. You caught（/kɔːt/捕捉，catch的过去分词） me. I’m a laundry(/ ˈlɔːndri /) virgin(处女, 新手/ ˈvɜːrdʒɪn /).
+- > 好吧，被你逮到了 我没洗过衣服
+
+184
+
+
+# 00:13:43,05 --> 00:13:47,61
+
+- Don’t worry. I’ll use the gentle(gentle man的那个gentle, 温柔的, 文静的) cycle.Basically（/ˈbeɪsɪkli/基本上）,you wanna use one machine for
+- > all your whites.A whole other machine for your colors.And a third for your……delicates(精致的,精致的衣物/ ˈdelɪkət /). That would be your bras……and your underpanty(内裤/ˈpænti/
+) things.
+…内裤之类的
 
 190
 
 
-# 00:10:58,730 --> 00:11:02,340
+# 00:14:11,65 --> 00:14:14,67
 
-- > 真漂亮  但是我没看到肥皂液
-- It's really pretty. Unfortunately, I don't see suds.
-
-191
-
-
-# 00:11:03,910 --> 00:11:05,360
-
-- > 什么
-- What?
+- What about These white cotton（/ˈkɑːt(ə)n/棉的） panties(panty女裤).Would they go with whites or with delicates（/ˈdelɪkət/精致的）?
+- > 与白衣还是贴身衣物一起洗?
 
 192
 
 
-# 00:11:06,080 --> 00:11:09,980
+# 00:14:17,99 --> 00:14:20,65
 
-- > 没肥皂液就不算占位  懂吗
-- No suds, no save. Ok?
-
-193
-
-
-# 00:11:12,180 --> 00:11:12,800
-
-- > 怎么了
-- What's goin' on?-
-
-194
-
-
-# 00:11:12,810 --> 00:11:15,030
-
-- > 没什么
-- Hi, uh, nothing.
-
-195
-
-
-# 00:11:15,280 --> 00:11:17,890
-
-- > 那个凶婆娘抢了我的洗衣机
-- That horrible woman just took my machine.
-
-196
-
-
-# 00:11:17,950 --> 00:11:19,590
-
-- > 你有把篮子放上面吗
-- Was your basket on top?
-
-197
-
-
-# 00:11:19,590 --> 00:11:21,190
-
-- > 有  但是没有肥皂液
-- Yeah, but, there were no suds.
-
-198
-
-
-# 00:11:21,190 --> 00:11:23,690
-
-- > -然后呢  -没肥皂液就不算占位啊
-- - So? - Well, you know, no suds, no save.
-
-199
-
-
-# 00:11:23,690 --> 00:11:24,730
-
-- > 没肥皂液
-- No suds?
-
-200
-
-
-# 00:11:24,740 --> 00:11:30,020
-
-- > 不好意思等一下  这是我朋友要用的
-- Excuse me, hold on a second. That's my friend's machine.
-
-201
-
-
-# 00:11:30,020 --> 00:11:32,560
-
-- > 喂喂喂  她的东西没在里面
-- Hey, hey, hey, her stuff wasn't in it.
-
-202
-
-
-# 00:11:32,560 --> 00:11:36,940
-
-- > 喂喂喂  你明知规矩不是这样的
-- Hey, hey, hey, that's not the rule and you know it.
-
-203
-
-
-# 00:11:47,160 --> 00:11:49,370
-
-- > 表演结束
-- All right, show's over.
-
-204
-
-
-# 00:11:51,710 --> 00:11:53,760
-
-- > 没什么好看的
-- Nothing to see here.
-
-205
-
-
-# 00:11:56,270 --> 00:11:58,790
-
-- > 洗衣服吧
-- Ok, let's do laundry.
-
-206
-
-
-# 00:11:58,800 --> 00:12:00,750
-
-- > 这简直是太神奇了
-- That was amazing.
-
-207
-
-
-# 00:12:00,750 --> 00:12:02,800
-
-- > 我连多点的汤都不敢退
-- I can't even send back soup.
-
-208
-
-
-# 00:12:02,800 --> 00:12:06,490
-
-- > 因为你是个即温柔又可爱的
-- Well, that's because you're such a sweet, gentle,
-
-209
-
-
-# 00:12:08,130 --> 00:12:13,640
-
-- > 你要不要  你得用洗衣粉
-- uh...Do you, uh, do you...Oh, hey, uh you must need detergent.
-
-210
-
-
-# 00:12:17,390 --> 00:12:17,980
-
-- > 那是什么
-- What's that?
-
-211
-
-
-# 00:12:17,980 --> 00:12:22,080
-
-- > "雕牌"  新产品  德国牌子
-- Uberveiss. It's new, it's German,
-
-212
-
-
-# 00:12:22,080 --> 00:12:24,680
-
-- > 清洁力超强
-- it's extra-tough.
-
-213
-
-
-# 00:12:25,740 --> 00:12:28,860
-
-- > 瑞秋  你要不要分开洗
-- Rach, do you uh, are you gonna separate those?
-
-214
-
-
-# 00:12:29,330 --> 00:12:34,350
-
-- > 上帝啊  我是不是像洗衣大白痴
-- Oh God. Oh, am I being like a total laundry spaz?
-
-215
-
-
-# 00:12:34,350 --> 00:12:36,520
-
-- > 我得用一台洗衬衣
-- I mean, am I supposed to use like one machine for shirts
-
-216
-
-
-# 00:12:36,520 --> 00:12:38,600
-
-- > 用另一台洗裤子吗
-- and another machine for pants?
-
-217
-
-
-# 00:12:41,620 --> 00:12:44,890
-
-- > 瑞秋  你从未没洗过衣服吗
-- Rach, have you never done this before?
-
-218
-
-
-# 00:12:44,890 --> 00:12:48,360
-
-- > 不是我  但我认识这样洗衣的人
-- Well, not myself, but I know other people that have.
-
-219
-
-
-# 00:12:49,840 --> 00:12:51,350
-
-- > 好吧  被你发现了
-- Ok, you caught me.
-
-220
-
-
-# 00:12:51,360 --> 00:12:53,330
-
-- > 这次是我的"处次"洗衣日
-- I'm a laundry virgin.
-
-221
-
-
-# 00:12:54,660 --> 00:12:58,320
-
-- > 别担心  我会选用"轻柔循环"模式
-- Uh, well, don't worry, I'll use the gentle cycle.
-
-222
-
-
-# 00:12:59,800 --> 00:13:05,410
-
-- > 好吧  你得用一台洗你
-- Ok, um, basically you wanna use one machine for
-
-223
-
-
-# 00:13:05,410 --> 00:13:07,480
-
-- > 全部的白衣  明白吗
-- all your whites, Ok?
-
-224
-
-
-# 00:13:07,480 --> 00:13:10,080
-
-- > 另一台  洗其他颜色的衣服
-- a whole another machine for colors,
-
-225
-
-
-# 00:13:10,080 --> 00:13:13,380
-
-- > 第三台洗你的  你的
-- and a third for your uh, your uh,
-
-226
-
-
-# 00:13:14,700 --> 00:13:21,520
-
-- > 私密小件  比如文胸和内裤之类的
-- delicates, and that would be your bras and your under-panty things.
-
-227
-
-
-# 00:13:23,030 --> 00:13:26,450
-
-- > 好  那这些棉质的白色内裤怎么洗
-- Ok, Well, what about these are white cotton panties.
-
-228
-
-
-# 00:13:26,450 --> 00:13:28,000
-
-- > 与白衣一起还是贴身衣物
-- Would they go with whites or delicates?
-
-229
-
-
-# 00:13:28,000 --> 00:13:31,490
-
-- > 那个啊  那个随便你
-- Uh, that, that, that would be a judgment call.
+- That would be a judgment(/ˈdʒʌdʒmənt/判断力) call(电话, 抉择).
+- > 随便你罗
 
 230
 

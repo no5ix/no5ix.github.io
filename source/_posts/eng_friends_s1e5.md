@@ -2183,7 +2183,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:17:17,710 --> 00:17:21,290
 
 - > 我穿这些看来会像一大团粉红棉花糖
-- Oh, God, I'm gonna look like a big marshmallow peep.
+- Oh, God, I'm gonna look like a big `marshmallow`(n.棉花软糖；) `peep`(n. 一瞥 网络用语: 猫, Little Bo Peep小波皮普：一首英语童谣 ).
 
 290
 
@@ -2215,7 +2215,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:17:41,050 --> 00:17:43,110
 
 - > 超能狗的头坏了
-- Something went wrong with Underdog,
+- Something went wrong with Underdog(n.比赛中不被看好者；失败者；受压迫者；斗败了的狗；黑马),
 
 294
 
@@ -2226,7 +2226,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:17:43,110 --> 00:17:45,730
 
 - > 导致充不进去气
-- and they couldn't get his head to inflate.
+- and they couldn't get his head to `inflate`(v.（使）充气，（使）膨胀；使（价格、成本等）上涨；夸大，吹嘘).
 
 295
 
@@ -2234,7 +2234,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:17:46,560 --> 00:17:53,340
 
 - > 于是呢  他的头就在百老汇上掉下来了
-- So anyway, um, his head is like flopping down Broadway, right,
+- So anyway, um, his head is like `flopping down`(`flop` v.（尤指疲劳时）扑通坐下，猛然倒下；（沉重、笨拙或不自主地）落下，悬挂；) `Broadway`(n.百老汇（美国纽约市戏院集中的一条大街）), right,
 
 296
 
@@ -2242,7 +2242,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:17:53,340 --> 00:17:57,950
 
 - > 我心想  这实在太不像话了
-- and I'm just thinking...how inappropriate this is.
+- and I'm just thinking...how `inappropriate`(adj. 不恰当的) this is.
 
 297
 
@@ -2258,7 +2258,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:18:00,050 --> 00:18:02,660
 
 - > 乔伊  能到灯下帮我看看吗
-- uh, Joey, could we check it in the light, please?
+- uh, Joey, could we check it `in the light`, please?
 
 299
 
@@ -2282,7 +2282,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:18:09,850 --> 00:18:13,170
 
 - > 这真是  太离谱了
-- It's like... cocktails in Appalachia.
+- It's like... `cocktail`s(n. 鸡尾酒) in `Appalachia`(美国东部的一个贫穷地带, 这里想表达的就是"在山区里喝鸡尾酒, 太离谱了").
 
 302
 
@@ -2306,7 +2306,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:18:22,480 --> 00:18:26,420
 
 - > 你和罗斯就不会有小动作
-- Oh, like you've never gotten a little rambunctious with Ross.
+- Oh, like you've never gotten a little `rambunctious`(adj.难控制的；喧闹的；粗暴的；骚乱的) with Ross.
 
 305
 
@@ -2394,7 +2394,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:18:52,780 --> 00:18:54,600
 
 - > 我想着  只要我们同心协力
-- I'm thinking, if we put our heads together,
+- I'm thinking, if we `put our heads together`,
 
 316
 
@@ -2402,7 +2402,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:18:54,600 --> 00:18:57,800
 
 - > 就能让他们劳燕分飞
-- between the two of us, we can break them up.
+- `between the two of us`(我们两个之间：表示两个人之间的事情或秘密，不想让其他人知道。), we can break them up.
 
 317
 
@@ -2482,7 +2482,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:19:32,730 --> 00:19:36,340
 
 - > 没事  只是我的隐形眼镜
-- Ow. Um, it's just my lens.
+- Ow. Um, it's just my `lens`(n. 镜头; 隐形眼镜).
 
 327
 
@@ -2508,7 +2508,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:19:44,140 --> 00:19:47,740
 
 - > 这是有史以来世上最糟糕的分手
-- This is the worst break-up in the history of the world.
+- This is the worst `breakup` in the history of the world.
 
 330
 
@@ -2630,7 +2630,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:20:45,350 --> 00:20:48,000
 
 - > 只是所有的衣服都成了睡衣
-- Except everything looks like jammies now.
+- Except everything looks like `jammies`(n. 睡衣裤) now.
 
 345
 
@@ -2645,15 +2645,15 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 
 ## 00:20:57,930 --> 00:20:59,950
 
-- > 是吗  我的腰围也曾是一尺八
-- Yeah, well, I had a 24-inch waist.
+- > 是吗  我的腰围也曾是24寸
+- Yeah, well, I had a 24-inch `waist`(n. 腰围, 腰).
 
 347
 
 
 ## 00:20:59,950 --> 00:21:01,240
 
-- > 但是时过境迁
+- > 你丢失东西了
 - You lose things.
 
 348
@@ -2662,7 +2662,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:21:01,240 --> 00:21:03,420
 
 - > 现在  给我让开
-- Now come on, get outta my way.
+- Now come on, get out of my way.
 
 349
 
@@ -2694,7 +2694,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:21:09,500 --> 00:21:12,340
 
 - > 喂喂喂喂  你又再乱编规矩了
-- Hey, hey, hey, hey, quit making up rules!
+- Hey, hey, hey, hey, quit `making up`(`make up`1．弥补，弥合；2．编造，虚构；3．化妆；4．和解，和好) rules!
 
 353
 
@@ -2710,7 +2710,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:21:16,010 --> 00:21:18,280
 
 - > 好吧  小姐  你想用这辆车
-- All right, listen, missy. If you want this cart,
+- All right, listen, `missy`(n.小姐；少女，小姑娘). If you want this cart,
 
 355
 
@@ -2734,7 +2734,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:21:31,890 --> 00:21:33,630
 
 - > 一位脱胎换骨的新女性
-- Brand new woman, ladies and gentlemen.
+- `Brand new`(adj. 崭新的) woman, ladies and gentlemen.
 
 358
 
@@ -2790,7 +2790,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:22:03,150 --> 00:22:05,610
 
 - > 真是聪明  衣服颜色都一样
-- What a neat idea. All your clothes match.
+- What a `neat`(adj.整齐的；爱整洁的；巧妙的，简洁的；灵巧的，利落的；精致的，小巧的；) idea. All your clothes `match`(v.比得上，敌得过；使成对，`使相配`，使相称；`与……一致`，与……相符；使较量，使竞赛；适应，满足；等额提供).
 
 365
 
@@ -2814,7 +2814,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:22:12,550 --> 00:22:14,320
 
 - > 我们把拆散了一对情侣
-- We ripped that couple apart,
+- We `ripped`(v.`（使）撕裂`，（使）划破；迅速扯开，猛力去除；；`抢掠`，剥夺；`rip off`: 宰客) that couple apart,
 
 368
 
@@ -2854,7 +2854,7 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:22:26,400 --> 00:22:28,360
 
 - > 他需要一点时间疗伤
-- Oh, he needed some time to grieve.
+- Oh, he needed some time to `grieve`(v.（尤指因某人亡故而）感到悲痛；使伤心).
 
 373
 
@@ -2870,4 +2870,4 @@ detergent(洗涤剂/ dɪˈtɜːrdʒənt /).
 ## 00:22:32,720 --> 00:22:34,460
 
 - > 他应该复原了
-- That oughta do it.
+- That `oughta`(=ought to; 应该, 应当) do it.

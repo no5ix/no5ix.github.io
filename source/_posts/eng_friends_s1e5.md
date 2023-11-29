@@ -1304,23 +1304,23 @@ categories:
 
 ## 00:09:18,210 --> 00:09:20,080
 
-- > 我们刚去摄影店把照片取了回来
-- We got the `proof`s(n.证明，证据；检验，证实；（数学）验算，验证；校样，样张；（酒的）标准酒精度) back from that photo shoot with the vegetables, they `suck`ed(v. 吮吸;糟透了),
+- > 我们刚去把那个摄影活动的样张取了回来
+- We got the `proof`s(n.证明，证据；检验，证实；（数学）验算，验证；校样，样张；（酒的）标准酒精度) back from that `photo shoot`(n. 摄影活动),
 
 162
 
 
 ## 00:09:20,080 --> 00:09:21,540
 
-- > 就是那家有很多小蔬菜的店
-- the one with the little vegetables.
+- > 你懂的, 就是那家有一些蔬菜的店
+- you know , the one with a little vegetables.
 
 163
 
 
 ## 00:09:21,540 --> 00:09:22,890
 
-- > 总之  照片烂透了
+- > 总之  它们烂透了
 - Anyway, they pretty much sucked,
 
 164
@@ -1329,7 +1329,7 @@ categories:
 ## 00:09:22,890 --> 00:09:24,290
 
 - > 我的整个下午就这样毁了
-- so, I blew off the rest of the day,
+- so, I blew off the rest of the day,(意思是在下午剩下的时间中放弃了原本计划做的事情)
 
 165
 

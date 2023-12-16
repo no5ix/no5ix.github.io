@@ -2032,7 +2032,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #bebbe9;
+  background: #bdd600;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2454,28 +2454,28 @@ input[id$=local-search-input] {
   border: none;
   text-indent: 14px;
   border-radius: 0;
-  width: 88px;
+  width: 98px;
 /* background: inherit;  */
   outline: none;
 /* border-bottom: 1px solid $grey-dark; */
-/* 
+/*
   mobile() {
     @media (max-width: 767px) {
       {block}
     }
   }
-  
+
   tablet() {
     @media (min-width: 768px) and (max-width: 991px) {
       {block}
     }
   }
-  
+
   desktop() {
     @media (min-width: 992px) {
       {block}
     }
-  } 
+  }
   */
 }
 @media (min-width: 768px) {
@@ -2518,8 +2518,8 @@ input[id$=local-search-input] {
 #local-search-close {
   content: 'x';
   position: absolute;
-  right: 0;
-  top: 10px;
+  right: -11px;
+  top: 13px;
   opacity: 1;
   background: #888;
   color: #fff;
@@ -2678,8 +2678,8 @@ input[id$=local-search-input] {
 }
 .search-icon {
   position: absolute;
-  top: 10px;
-  left: -5px;
+  top: 13px;
+  left: -16px;
 }
 @media (max-width: 767px) {
   .search-icon {
@@ -3120,6 +3120,11 @@ hr {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
+@media (min-width: 768px) and (max-width: 991px) {
+  .site-meta {
+    margin-left: 56px;
+  }
+}
 @media (max-width: 767px) {
   .site-meta {
     margin-left: 10px;
@@ -3197,7 +3202,6 @@ hr {
   float: left;
 }
 .menu {
-  float: right;
   margin: 4px 0 0 0;
 }
 @media (max-width: 767px) {
@@ -3320,7 +3324,6 @@ hr {
   }
 }
 .menu-left {
-  float: left;
   margin-left: 20px;
 }
 @media (max-width: 767px) {

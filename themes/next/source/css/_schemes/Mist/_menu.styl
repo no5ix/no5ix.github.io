@@ -7,8 +7,12 @@
 
 
 .menu {
+  float: right;
   margin: 4px 0 0 0;
 
+  +tablet() {
+    float: none;
+  }
   +mobile() {
     margin: 20px 0 0 0;
     padding: 0;
@@ -127,7 +131,12 @@
 }
 
 .menu-left {
-  margin-left: 20px;
+  float: left;
+  margin-left: 66px;
+  +tablet() {
+    float: none;
+  }
+
   +mobile()
   {
     float: none;

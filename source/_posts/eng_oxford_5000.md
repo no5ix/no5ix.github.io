@@ -1185,7 +1185,8 @@ categories:
     - > 所谓的“专家”结果证明是错的。
 - [sophisticated](https://www.youdao.com/result?word=sophisticated&lang=en) [səˈfɪstɪkeɪtɪd] adj. 复杂的，精致的
     - The new software is very sophisticated and has many features.
-    - [-]((http://www.youdao.com/result?word=absorb&-]((=en) > 新软件非常复杂，具有许多功能。spare [sper] adj. 备用的，多余的
+    - 新软件非常复杂，具有许多功能。
+- [spare](https://www.youdao.com/result?word=spare&lang=en) [sper] adj. 备用的，多余的
     -Do you have a spare pen I can borrow?
     - > 你有多余的笔可以借给我吗？
 - [spectacular](https://www.youdao.com/result?word=spectacular&lang=en) [spekˈtækjələr] adj. 壮观的，惊人的

@@ -304,6 +304,267 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/05/02/valgrind_tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/02/valgrind_tutorial/" itemprop="url">关于Valgrind所报的4种内存丢失</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-02T17:56:12+00:00">
+                2015-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="官方解释及分析"><a href="#官方解释及分析" class="headerlink" title="官方解释及分析"></a>官方解释及分析</h1><p>摘自<a href="http://valgrind.org/docs/manual/faq.html#faq.deflost" target="_blank" rel="noopener">http://valgrind.org/docs/manual/faq.html#faq.deflost</a></p>
+<p><strong>5.2.With Memcheck’s memory leak detector, what’s the difference between “definitely lost”, “indirectly lost”, “possibly lost”, “still reachable”, and “suppressed”?
+</strong></p>
+<p>The details are in the Memcheck section of the user manual.<br>In short:</p>
+<ul>
+<li><p>“definitely lost” means your program is leaking memory – fix those leaks!</p>
+</li>
+<li><p>“indirectly lost” means your program is leaking memory in a pointer-based structure. (E.g. if the root node of a binary tree is “definitely lost”, all the children will be “indirectly lost”.) If you fix the “definitely lost” leaks, the “indirectly lost” leaks should go away.</p>
+</li>
+<li><p>“possibly lost” means your program is leaking memory, unless you’re doing unusual things with pointers that could cause them to point into the middle of an allocated block; see the user manual for some possible causes. Use –show-possibly-lost=no if you don’t want to see these reports.</p>
+</li>
+<li><p>“still reachable” means your program is probably ok – it didn’t free some memory it could have. This is quite common and often reasonable. Don’t use –show-reachable=yes if you don’t want to see these reports.</p>
+</li>
+<li><p>“suppressed” means that a leak error has been suppressed. There are some suppressions in the default suppression files. You can ignore suppressed errors.</p>
+</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li><p>“definitely lost”：确认丢失。程序中存在内存泄露，应尽快修复。当程序结束时如果一块动态分配的内存没有被释放且通过程序内的指针变量均无法访问这块内存则会报这个错误。</p>
+</li>
+<li><p>“indirectly lost”：间接丢失。当使用了含有指针成员的类或结构时可能会报这个错误。这类错误无需直接修复，他们总是与”definitely lost”一起出现，只要修复”definitely lost”即可。例子可参考我的例程。</p>
+</li>
+<li><p>“possibly lost”：可能丢失。大多数情况下应视为与”definitely lost”一样需要尽快修复，除非你的程序让一个指针指向一块动态分配的内存（但不是这块内存起始地址），然后通过运算得到这块内存起始地址，再释放它。例子可参考我的例程。当程序结束时如果一块动态分配的内存没有被释放且通过程序内的指针变量均无法访问这块内存的起始地址，但可以访问其中的某一部分数据，则会报这个错误。</p>
+</li>
+<li><p>“still reachable”：可以访问，未丢失但也未释放。如果程序是正常结束的，那么它可能不会造成程序崩溃，但长时间运行有可能耗尽系统资源，因此笔者建议修复它。如果程序是崩溃（如访问非法的地址而崩溃）而非正常结束的，则应当暂时忽略它，先修复导致程序崩溃的错误，然后重新检测。</p>
+</li>
+<li><p>“suppressed”：已被解决。出现了内存泄露但系统自动处理了。可以无视这类错误。这类错误我没能用例程触发，看官方的解释也不太清楚是操作系统处理的还是valgrind，也没有遇到过。所以无视他吧~</p>
+</li>
+</ul>
+<h1 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *g_p1;</span><br><span class="line"><span class="keyword">int</span> *g_p2;</span><br><span class="line"><span class="function"><span class="keyword">int</span> ** <span class="title">fun1</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//付给了局部变量, 函数结束而不释放,为肯定丢失.</span></span><br><span class="line">    <span class="comment">//把函数尾部语句return p; 改为return 0;更能说明这个问题.</span></span><br><span class="line">    <span class="keyword">int</span> **p=(<span class="keyword">int</span> **)<span class="built_in">malloc</span>(<span class="number">16</span>); </span><br><span class="line">    g_p1=<span class="built_in">malloc</span>(<span class="number">20</span>);  <span class="comment">//付给了全局变量, 内存可以访问</span></span><br><span class="line">    g_p2=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="number">30</span>);</span><br><span class="line">    g_p2++;            <span class="comment">//付给了全局变量, 内存可以访问,但是指针被移动过,为可能丢失</span></span><br><span class="line">    p[<span class="number">1</span>]=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="number">40</span>); <span class="comment">//如果p丢失了,则p[1]为间接丢失.</span></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> **p=fun1();</span><br><span class="line"><span class="comment">//  free(g_p1);  //如果不free, 将会有 still reachable 内存泄露</span></span><br><span class="line"><span class="comment">//  free(--g_p2);//如果不free, 将会有 possibly lost 内存泄露</span></span><br><span class="line"><span class="comment">//  free(p[1]);  //如果不free, 将会有 indirectly lost 内存泄露</span></span><br><span class="line"><span class="comment">//  free(p);     //如果不free, 将会有 definitely lost内存泄露</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行编译命令<code>g++ val_test.cpp -o v</code>, 然后</p>
+<p>当执行<code>valgrind ./v</code> 命令之后的<strong>简易</strong>内存错误报告 :</p>
+<pre><code>==4765== Memcheck, a memory error detector
+==4765== Copyright (C) 2002-2013, and GNU GPL&apos;d, by Julian Seward et al.
+==4765== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==4765== Command: ./v
+==4765== 
+==4765== 
+==4765== HEAP SUMMARY:
+==4765==     in use at exit: 106 bytes in 4 blocks
+==4765==   total heap usage: 4 allocs, 0 frees, 106 bytes allocated
+==4765== 
+==4765== LEAK SUMMARY:
+==4765==    definitely lost: 16 bytes in 1 blocks
+==4765==    indirectly lost: 40 bytes in 1 blocks
+==4765==      possibly lost: 30 bytes in 1 blocks
+==4765==    still reachable: 20 bytes in 1 blocks
+==4765==         suppressed: 0 bytes in 0 blocks
+==4765== Rerun with --leak-check=full to see details of leaked memory
+==4765== 
+==4765== For counts of detected and suppressed errors, rerun with: -v
+==4765== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+b@b-VirtualBox:~/tc/valgrind_test$ valgrind --leak-check=full
+valgrind: no program specified
+valgrind: Use --help for more information.
+</code></pre><p>当执行<code>valgrind --leak-check=full ./v</code> 命令之后的<strong>详细</strong>内存错误报告 :</p>
+<pre><code>==4767== Memcheck, a memory error detector
+==4767== Copyright (C) 2002-2013, and GNU GPL&apos;d, by Julian Seward et al.
+==4767== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==4767== Command: ./v
+==4767== 
+==4767== 
+==4767== HEAP SUMMARY:
+==4767==     in use at exit: 106 bytes in 4 blocks
+==4767==   total heap usage: 4 allocs, 0 frees, 106 bytes allocated
+==4767== 
+==4767== 30 bytes in 1 blocks are possibly lost in loss record 2 of 4
+==4767==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4767==    by 0x40055E: fun1() (val_test.cpp:12)
+==4767==    by 0x4005AB: main (val_test.cpp:20)
+==4767== 
+==4767== 56 (16 direct, 40 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 4
+==4767==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4767==    by 0x40053F: fun1() (val_test.cpp:10)
+==4767==    by 0x4005AB: main (val_test.cpp:20)
+==4767== 
+==4767== LEAK SUMMARY:
+==4767==    definitely lost: 16 bytes in 1 blocks
+==4767==    indirectly lost: 40 bytes in 1 blocks
+==4767==      possibly lost: 30 bytes in 1 blocks
+==4767==    still reachable: 20 bytes in 1 blocks
+==4767==         suppressed: 0 bytes in 0 blocks
+==4767== Reachable blocks (those to which a pointer was found) are not shown.
+==4767== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==4767== 
+==4767== For counts of detected and suppressed errors, rerun with: -v
+==4767== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>由局部变量指向的内存,如果不释放为肯定丢失, </li>
+<li>由此指针而引起的后续内存泄露,为间接丢失.</li>
+<li>由全局变量指向的内存如果不被释放,为still reachable, </li>
+<li>如果该变量改动过, 为可能丢失.</li>
+</ul>
+<p>是啊,局部变量是栈变量,如果你不能把这个栈变量处理好,出了这个函数,指针地址就丢失了,这时那是肯定丢失了.</p>
+<p>如果你付给的地址是全局变量,倒是可以访问,叫still reachable</p>
+<p>但是如果你这个全局变量的值改动过, 那只有你知道怎样正确访问这块内存,别人可能就访问不到了,这叫可能丢失.</p>
+<p>由肯定丢失而引起的进一步的内存丢失为间接丢失.</p>
+<h1 id="解决内存泄漏的顺序"><a href="#解决内存泄漏的顺序" class="headerlink" title="解决内存泄漏的顺序"></a>解决内存泄漏的顺序</h1><p><strong>所以碰到问题你首先要解决什么问题?</strong></p>
+<p>肯定丢失,<br>然后是可能丢失,<br>然后间接丢失,<br>然后still reachable!!!</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/27/multi_thread_dev_base_concept/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1002,209 +1263,6 @@ C = 结构(或联合)中最大数据成员长度
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/11/smart_pointer_note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/11/smart_pointer_note/" itemprop="url">智能指针笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-11T12:26:26+00:00">
-                2015-04-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p>有些错误是编译器查不到的, 这种错误是最可怕的, 当项目大了之后,<br>即使用 Valgrind 也很难定位,<br>因为裸指针在团队合作中使用很容易导致其他成员忘记释放或多次释放, 所以在团队合作中一般使用智能指针. </p>
-<p>而智能指针用的不好, 结果可能适得其反.</p>
-<p>所以我们聊一下智能指针的几点注意事项.</p>
-<p>总结自 C++ Primer.</p>
-<h1 id="一个简单的包含删除器的例子演示"><a href="#一个简单的包含删除器的例子演示" class="headerlink" title="一个简单的包含删除器的例子演示"></a>一个简单的包含删除器的例子演示</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::bind;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">testBind</span><span class="params">( <span class="keyword">int</span>* a, <span class="keyword">int</span> b, <span class="keyword">int</span> c )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *a + b + c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> *a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	Foo() = <span class="keyword">default</span>;</span><br><span class="line">	Foo( <span class="keyword">const</span> Foo &amp; a )</span><br><span class="line">	&#123;</span><br><span class="line">		data = a.data;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"复制构造"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print_sum</span><span class="params">( <span class="keyword">int</span> n1, <span class="keyword">int</span> n2 )</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n1 + n2 &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> data = <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//绑定类成员函数用对象的指针</span></span><br><span class="line">	Foo foo;</span><br><span class="line">	<span class="keyword">auto</span> f3 = <span class="built_in">std</span>::bind( &amp;Foo::print_sum, &amp;foo, <span class="number">95</span>, _1 );</span><br><span class="line">	f3( <span class="number">5</span> );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> check_testBind = <span class="built_in">std</span>::bind( testBind, <span class="built_in">std</span>::placeholders::_1, <span class="number">3</span>, <span class="number">9</span> );</span><br><span class="line">	<span class="keyword">int</span> * p = <span class="keyword">new</span> <span class="keyword">int</span>( <span class="number">7</span> );</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; check_testBind( p ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pi( <span class="keyword">new</span> <span class="keyword">int</span>(),</span><br><span class="line">		check_testBind );</span><br><span class="line">	*pi = <span class="number">88</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pii( <span class="keyword">new</span> <span class="keyword">int</span>( <span class="number">12</span> ),</span><br><span class="line">		<span class="built_in">std</span>::bind( testBind, <span class="built_in">std</span>::placeholders::_1, <span class="number">32</span>, <span class="number">19</span> ) );</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::function&lt; <span class="keyword">int</span>( <span class="keyword">int</span>* ) &gt; test_function_bind =</span><br><span class="line">		<span class="built_in">std</span>::bind( testBind, <span class="built_in">std</span>::placeholders::_1, <span class="number">331</span>, <span class="number">9</span> );</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"test_function_bind( p, 331, 9 ) = "</span> &lt;&lt; test_function_bind( p ) &lt;&lt; <span class="built_in">endl</span>;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; piii( <span class="keyword">new</span> <span class="keyword">int</span>( <span class="number">112</span> ),</span><br><span class="line">		test_function_bind );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印结果 :</p>
-<pre><code>100
-119
-7
-347
-test_function_bind( p, 331, 9 ) = 7
-452
-63
-100
-请按任意键继续. . .
-</code></pre><h1 id="智能指针陷阱"><a href="#智能指针陷阱" class="headerlink" title="智能指针陷阱"></a>智能指针陷阱</h1><p>智能指针可以提供对动态分配的内存安全而又方便的管理，但这建立在正确使用的<br>前提下 。 为了正确使用智能指针，我们必须坚持一些基本规范 :</p>
-<ul>
-<li>不使用相同的内置指针值初始化(或 reset) 多个智能指针 。</li>
-<li>不 delete get ( ) 返 回的指针 。</li>
-<li>不使用 get () 初始化或 reset 另 一 个智能指针 。</li>
-<li>如果你使用 get () 返 回的指针，记住当最后一个对应的智能指针销 毁 后， 你 的<br>指 针就 变为无 效 了 。</li>
-<li>如果你使用智能指针管理的资源不是 new 分配的内存 ， 记住传递给它一个删除<br>器( 参见 12. 1.4 节 ， 第 415 页和 12. 1.5 节 ， 第 419 页)。</li>
-</ul>
-<h1 id="尽量用make-shared而非new"><a href="#尽量用make-shared而非new" class="headerlink" title="尽量用make_shared而非new"></a>尽量用make_shared而非new</h1><p>shared_ptr 可以协调对象的析构 ， 但这仅限于其自身的拷贝 ( 也 是 shared_ptr)<br>之间。</p>
-<p><strong>这也是为什么我们推荐使用 make_shared 而不是 new 的原因 。</strong></p>
-<p><strong>这样 ， 我们就能在分配对象的同时就将 shared_ptr 与之绑定，</strong><br><strong>从而避免了无意中将同一块内存绑定到多个独立创建的 shared_ptr 上 。(这是最容易犯的错)</strong></p>
-<p><strong>总结 : 所以我们要尽量一开始就用make_shared来分配动态内存, 而不是先new一个出来, 再找机会将它转为智能指针.</strong></p>
-<p>考虑下面对 shared_ptr 进行操作的函数 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在函数被调用时 ptr 被创建并初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">(<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 使用 ptr</span></span><br><span class="line">&#125; <span class="comment">// ptr 离 开作用域，被销毁</span></span><br></pre></td></tr></table></figure>
-<p>process 的参数是传值方式传递的，因此实参会被拷贝到 ptr 巾 。 拷贝 一 个 shared_ptr<br>会递增其引用讨数，因此， 在 process 运行过程中，引用七| 数值至少为 2 。 当 process<br>结束时， ptr 的引用计数会边喊，但不会变为 0 。 因此，当用音11变 11 ptr 被销毁时， ptr<br>指向的内存不会被释放 。</p>
-<p>使用此函数的正确方法是传递给它一个 shared_ptr :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>)) ; <span class="comment">// 引用计数为 1</span></span><br><span class="line">process(p); <span class="comment">// 拷贝 p 会递增它的引用计数 ;在 process 中引用计数位为 2</span></span><br><span class="line"><span class="keyword">int</span> i = *p; <span class="comment">// 正确:引用计数位为 1</span></span><br></pre></td></tr></table></figure>
-<p>虽然不能传递给 process 一 个内置指针，但可以传递 给它 一 个(临时的)<br>shared_ptr ， 这个 shared_ptr 是用 一个内 置指针显式构造的 。 但是，这样做很可能<br>会导致错误 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int *x(new int(1024)); // 危险 x 是一个普通指针，不是一个智能指针</span><br><span class="line">process(x) ; <span class="comment">// 错误 : 不能将 int* 转换为 一个 shared_ptr&lt;int&gt;</span></span><br><span class="line">process(<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt;(x)); <span class="comment">// 合法的，但内存会被释放!</span></span><br><span class="line"><span class="keyword">int</span> j = *x ; <span class="comment">//未定义的 x 是一个空悬指针!</span></span><br></pre></td></tr></table></figure>
-<p>在上面的调用中 ， 我们将一个临时 shared_ptr 传递给 process 。 当这个调用所在的表<br>达式结束时，这个临时对象就被销毁了 。 销毁这个临时变量会递减引用计数，此时引用计<br>数就变为 0 了 。 因此，当临时对象被销毁时 ， 它所指向的内存会被释放 。<br>但 x 继续指 向 (已经释放的)内存，从而变成一个空悬指针。如果试图使用 x 的值，<br>其行为是未定义的 。</p>
-<p>当将一个 shared_ptr 绑定到一个普通指针时 ， 我们就将内存的管理责任交给了这<br>个 shared_ptr 一旦这样做 了 ， 我们就不应该再使用内置指针来访问 shared_ptr 所<br>指向的内存了 </p>
-<h1 id="不要使用-get-初始化另一个智能指针或为智能指针赋值"><a href="#不要使用-get-初始化另一个智能指针或为智能指针赋值" class="headerlink" title="不要使用 get 初始化另一个智能指针或为智能指针赋值"></a>不要使用 get 初始化另一个智能指针或为智能指针赋值</h1><p>智能指针类型定义了 一个名为 get 的函数(参见表 1 2. J )，它返回一个内置指针，<br>指向智能指针管理的对象 。 此函数是为了这样一种情况而设计的 : 我们需要向不能使用智<br>能指针的代码传递一个内置指针。使用 get 返回的指告| 的代码不能 delete 此指针 。<br>虽然编译器不会给出错误信息 ， 但将另一个智能指针也绑定到 get 返回的指针上是<br>错误的 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>)) ; <span class="comment">// 引 用计数为 1</span></span><br><span class="line"><span class="keyword">int</span> *q = p . get() ; <span class="comment">// 正确 · 但使用 q 时妥注意，不要让它管理的指针被释放</span></span><br><span class="line">&#123; <span class="comment">// 新程序块</span></span><br><span class="line"><span class="comment">// 未定义:两个独立的 shared_ptr 指 向 相同的内存</span></span><br><span class="line">    shared ptr&lt;<span class="keyword">int</span>&gt; (q) ;</span><br><span class="line">&#125; <span class="comment">// 程序块结束， q 被销毁 ， 它指向的内存被待放</span></span><br><span class="line"><span class="keyword">int</span> foo = *p ; <span class="comment">// 未定义 p 指向的内存 已 经被释放了</span></span><br></pre></td></tr></table></figure>
-<p>在本例中， p 和 q 指 向相同的内存。由于它们是相互独立创建的，因此各自的引用计数都<br>是 1。 当 q 所在的程序块结束时 ， q 被销毁 ， 这会导致 q 指向的内存被释放 。 从而 p 变成<br>一个空悬指针，意味着当我们试图使用 p 时，将发生未定义的行为 。 而且 ， 当 p 被销毁时 ，<br>这块内存会被第二次 delete 。</p>
-<p>get 用来将指针的访问权限传递给代码，你只有在确定代码不会 get.<br>特别是，永远不要用 get 初始化另一个智能指针 del ete 指针或者为另一个智能指针赋值.</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/11/linux_gcc_atomic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1495,7 +1553,7 @@ write1(dev.register_control,GO);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">256</span>
+                <span class="site-state-item-count">257</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

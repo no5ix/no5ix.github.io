@@ -304,6 +304,174 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/11/18/游戏网络开发五之每个游戏开发者都需要知道的游戏网络知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/18/游戏网络开发五之每个游戏开发者都需要知道的游戏网络知识/" itemprop="url">游戏网络开发五之每个游戏开发者都需要知道的游戏网络知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-18T22:20:34+00:00">
+                2016-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h1><p><a href="https://gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/" target="_blank" rel="noopener">原文出处</a></p>
+<p></p><h2 id="introduction">Introduction</h2><p></p>
+<p>Hi, I&rsquo;m <a href="https://gafferongames.com/about" target="_blank" rel="noopener">Glenn Fiedler</a> and welcome to <a href="https://gafferongames.com/categories/game-networking/" target="_blank" rel="noopener"><strong>Networking for Game Programmers</strong></a>.</p><br><p>Have you ever wondered how multiplayer games work?</p><br><p>From the outside it seems magical: two or more players sharing a consistent experience across the network like they actually exist together in the same virtual world.</p><br><p>But as programmers we know the truth of what is actually going on underneath is quite different from what you see. It turns out it&rsquo;s all an illusion. A massive sleight-of-hand. What you perceive as a shared reality is only an approximation unique to your own point of view and place in time.</p><br><h2 id="peer-to-peer-lockstep">Peer-to-Peer Lockstep</h2><br><p>In the beginning games were networked peer-to-peer, with each each computer exchanging information with each other in a fully connected mesh topology. You can still see this model alive today in RTS games, and interestingly for some reason, perhaps because it was the first way - it&rsquo;s still how most people think that game networking works.</p><br><p>The basic idea is to abstract the game into a series of turns and a set of command messages when processed at the beginning of each turn direct the evolution of the game state. For example: move unit, attack unit, construct building. All that is needed to network this is to run exactly the same set of commands and turns on each player&rsquo;s machine starting from a common initial state.</p><br><p>Of course this is an overly simplistic explanation and glosses over many subtle points, but it gets across the basic idea of how networking for RTS games work. You can read more about this networking model here: <a href="http://www.gamasutra.com/view/feature/3094/1500_archers_on_a_288_network_.php" target="_blank" rel="noopener">1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond</a>.</p><br><p>It seems so simple and elegant, but unfortunately there are several limitations.</p><br><p>First, it&rsquo;s exceptionally difficult to ensure that a game is completely deterministic; that each turn plays out identically on each machine. For example, one unit could take slightly a different path on two machines, arriving sooner to a battle and saving the day on one machine, while arriving later on the other and erm. not saving the day. Like a butterfly flapping it&rsquo;s wings and causing a hurricane on the other side of the world, one <i>tiny difference</i> results in complete desynchronization over time.</p><br><p>The next limitation is that in order to ensure that the game plays out identically on all machines it is necessary to wait until all player&rsquo;s commands for that turn are received <i>before</i> simulating that turn. This means that each player in the game has latency equal to the most lagged player. RTS games typically hide this by providing audio feedback immediately and/or playing cosmetic animation, but ultimately any truly game affecting action may occur only after this delay has passed.</p><br><p>The final limitation occurs because of the way the game synchronizes by sending just the command messages which change the state. In order for this to work it is necessary for all players to start from the same initial state. Typically this means that each player must join up in a lobby before commencing play, although it is technically possible to support late join, this is not common due to the difficulty of capturing and transmitting a completely deterministic starting point in the middle of a live game.</p><br><p>Despite these limitations this model naturally suits RTS games and it still lives on today in games like &ldquo;Command and Conquer&rdquo;, &ldquo;Age of Empires&rdquo; and &ldquo;Starcraft&rdquo;. The reason being that in RTS games the game state consists of many thousands of units and is simply too large to exchange between players. These games have no choice but to exchange the commands which drive the evolution of the game state.</p><br><p>But for other genres, the state of the art has moved on. So that&rsquo;s it for the deterministic peer-to-peer lockstep networking model. Now lets look at the evolution of action games starting with Doom, Quake and Unreal.</p><br><h2 id="client-server">Client/Server</h2><br><p>In the era of action games, the limitations of peer-to-peer lockstep became apparent in Doom, which despite playing well over the LAN played <i>terribly</i> over the internet for typical users:</p><br><blockquote>Although it is possible to connect two DOOM machines together across the Internet using a modem link, the resulting game will be slow, ranging from the unplayable (e.g. a 14.4Kbps PPP connection) to the marginally playable (e.g. a 28.8Kbps modem running a Compressed SLIP driver). Since these sorts of connections are of only marginal utility, this document will focus only on direct net connections.</blockquote><br><p>The problem of course was that Doom was designed for networking over LAN only, and used the peer-to-peer lockstep model described previously for RTS games. Each turn player inputs (key presses etc.) were exchanged with other peers, and before any player could simulate a frame all other player&rsquo;s key presses needed to be received.</p><br><p>In other words, before you could turn, move or shoot you had to wait for the inputs from the most lagged modem player. Just imagine the wailing and gnashing of teeth that this would have resulted in for the sort of folks with internet connections that were &ldquo;of only marginal utility&rdquo;. :)</p><br><p>In order to move beyond the LAN and the well connected elite at university networks and large companies, it was necessary to change the model. And in 1996, that&rsquo;s exactly what John Carmack and his team did when he released Quake using client/server instead of peer-to-peer.</p><br><p>Now instead of each player running the same game code and communicating directly with each other, each player was now a &ldquo;client&rdquo; and they all communicated with just one computer called the &ldquo;server&rdquo;. There was no longer any need for the game to be deterministic across all machines, because the game really only existed on the server. Each client effectively acted as a <i>dumb terminal</i> showing an approximation of the game as it played out on the server.</p><br><p>In a pure client/server model you run no game code locally, instead sending your inputs such as key presses, mouse movement, clicks to the server. In response the server updates the state of your character in the world and replies with a packet containing the state of your character and other players near you. All the client has to do is interpolate between these updates to provide the illusion of smooth movement and <em>BAM</em> you have a networked game.</p><br><p>This was a great step forward. The quality of the game experience now depended on the connection between the client and the server instead of the most lagged peer in the game. It also became possible for players to come and go in the middle of the game, and the number of players increased as client/server reduced the bandwidth required on average per-player.</p><br><p>But there were still problems with the pure client/server model:</p><br><blockquote>While I can remember and justify all of my decisions about networking from DOOM through Quake, the bottom line is that I was working with the wrong basic assumptions for doing a good internet game. My original design was targeted at &lt; 200ms connection latencies. People that have a digital connection to the internet through a good provider get a pretty good game experience. Unfortunately, 99% of the world gets on with a slip or ppp connection over a modem, often through a crappy overcrowded ISP. This gives 300+ ms latencies, minimum. Client. User&#39;s modem. ISP&#39;s modem. Server. ISP&#39;s modem. User&#39;s modem. Client. God, that sucks.<br>Ok, I made a bad call. I have a T1 to my house, so I just wasn&#39;t familliar with PPP life. I&#39;m addressing it now.</blockquote><br><p>The problem was of course latency.</p><br><p>What happened next would change the industry forever.</p><br><h2 id="client-side-prediction">Client-Side Prediction</h2><br><p>In the original Quake you felt the latency between your computer and the server. Press forward and you&rsquo;d wait however long it took for packets to travel to the server and back to you before you&rsquo;d actually start moving. Press fire and you wait for that same delay before shooting.</p><br><p>If you&rsquo;ve played any modern FPS like Call of Duty: Modern Warfare, you know this is no longer what happens. So how exactly do modern FPS games remove the latency on your own actions in multiplayer?</p><br><p>When writing about his plans for the soon to be released QuakeWorld, John Carmack said:</p><br><blockquote> I am now allowing the client to guess at the results of the users movement until the authoritative response from the server comes through. This is a biiiig architectural change. The client now needs to know about solidity of objects, friction, gravity, etc. I am sad to see the elegant client-as-terminal setup go away, but I am practical above idealistic.</blockquote><br><p>So now in order to remove the latency, the client runs more code than it previously did. It is no longer a dumb terminal sending inputs to the server and interpolating between state sent back. Instead it is able to predict the movement of your character locally and <i>immediately</i> in response to your input, running a subset of the game code for your player character on the client machine.</p><br><p>Now as soon as you press forward, there is no wait for a round trip between client and server - your character start moving forward right away.</p><br><p>The difficulty of this approach is not in the prediction, for the prediction works just as normal game code does - evolving the state of the game character forward in time according to the player&rsquo;s input. The difficulty is in applying the correction back from the server to resolve cases when the client and server disagree about where the player character should be and what it is doing.</p><br><p>Now at this point you might wonder. Hey, if you are running code on the client - why not just make the client authoritative over their player character? The client could run the simulation code for their own character and simply tell the server where they are each time they send a packet. The problem with this is that if each player were able to simply tell the server &ldquo;here is my current position&rdquo; it would be trivially easy to hack the client such that a cheater could instantly dodge the RPG about to hit them, or teleport instantly behind you to shoot you in the back.</p><br><p>So in FPS games it is absolutely necessary that the server is the authoritative over the state of each player character, in-spite of the fact that each player is locally predicting the motion of their own character to hide latency. As Tim Sweeney writes in <a href="https://docs.unrealengine.com/udk/Three/NetworkingOverview.html" target="_blank" rel="noopener">The Unreal Networking Architecture</a>: &ldquo;The Server Is The Man&rdquo;.</p><br><p>Here is where it gets interesting. If the client and the server disagree, the client <i>must</i> accept the update for the position from the server, but due to latency between the client and server this correction is necessarily in the past. For example, if it takes 100ms from client to server and 100ms back, then any server correction for the player character position will appear to be 200ms in the past, relative to the time up to which the client has predicted their own movement.</p><br><p>If the client were to simply apply this server correction update verbatim, it would yank the client back in time, completely undoing any client-side prediction. How then to solve this while still allowing the client to predict ahead?</p><br><p>The solution is to keep a circular buffer of past character state and input for the local player on the client, then when the client receives a correction from the server, it first discards any buffered state older than the corrected state from the server, and replays the state starting from the corrected state back to the present &ldquo;predicted&rdquo; time on the client using player inputs stored in the circular buffer. In effect the client invisibly &ldquo;rewinds and replays&rdquo; the last n frames of local player character movement while holding the rest of the world fixed.</p><br><p>This way the player appears to control their own character without any latency, and provided that the client and server character simulation code is reasonable, giving roughly exactly the same result for the same inputs on the client and server, it is rarely corrected. It is as Tim Sweeney describes:</p><br><blockquote>… the best of both worlds: In all cases, the server remains completely authoritative. Nearly all the time, the client movement simulation exactly mirrors the client movement carried out by the server, so the client’s position is seldom corrected. Only in the rare case, such as a player getting hit by a rocket, or bumping into an enemy, will the client’s location need to be corrected.</blockquote><br><p>In other words, only when the player&rsquo;s character is affected by something external to the local player&rsquo;s input, which cannot possibly be predicted on the client, will the player&rsquo;s position need to be corrected. That and of course, if the player is attempting to cheat :)</p>
+
+<h1 id="译文"><a href="#译文" class="headerlink" title="译文"></a>译文</h1><p><a href="http://gad.qq.com/program/translateview/7161836" target="_blank" rel="noopener">译文出处</a></p>
+<div style="display:none"><br><br><div class="WordSection1"><p class="MsoNormal" align="center" style="text-align: left;"><span style="font-family: 微软雅黑, sans-serif; font-size: 12pt;">翻译：黄威（横写、意气风发）</span><span style="font-family: 微软雅黑, sans-serif; font-size: 12pt;">  </span><span style="font-family: 微软雅黑, sans-serif; font-size: 12pt;">审校：艾涛（轻描一个世界）</span></p><p class="MsoNormal" style="line-height:400%"><span style="font-size:16.0pt;line-height:400%;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><b>介绍</b></span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">作为一名程序员，你是否曾想过多人游戏是如何运作的呢？</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">从表面来看这是非常奇妙：两个或者更多的玩家通过网络能够拥有相同的游戏体验，就像他们确实存在于同一个虚拟世界一样。但是作为程序员，我们知道底层运行的情况与你看到的完全不同。事实证明，这完全是一种错觉，是一个精妙的戏法。你能感受到游戏中的玩家都处于同一个世界中，但其实这只是在各个时间点，你自己独有的视角与位置和其他玩家的视角与位置相似。</span></p><p class="MsoNormal" style="text-align: center; text-indent: 24pt;"><img src="http://gameweb-img.qq.com/gad/20160628/phpEw63Qf.1467079995.jpg" alt="游戏网络开发(六)：每个游戏开发者都需要知道的游戏网络知识"></p><p class="MsoNormal" style="line-height:400%"><span style="font-size:16.0pt;line-height:400%;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><b>对等同步</b></span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">起初，网络游戏形成一个对等的网络，在这个网络中每台电脑在一个完全连接的网状拓扑结构中互相交换信息。如今在<span>RTS</span>游戏（即时战略游戏）中你仍能够看到这一模型，有趣的是，因为某种原因，可能因为它是第一种网络连接方式——大多数人仍认为游戏网络是这样运作的。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">基本思想就是在处理数据时将游戏抽象化成一系列的数据改变与一组命令消息，每一个数据改变都决定了游戏状态的演变。例如：移动单位、攻击单位、建造建筑。所有的这一切都要求网络让每一位玩家的机器都从相同的初始状态开始，并且运行完全相同的命令，数据的改变也完全相同。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">当然，这只是一个过于简单并且忽略掉了许多微妙细节的解释，但这个解释向我们解释了<span>RTS</span>游戏网络工作的基本原理。你可以点击</span><span><a rel="noopener" href="http://www.gamasutra.com/view/feature/3094/1500_archers_on_a_288_network_.php" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><span>这里</span></span></a></span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">了解更多关于这个网络模型的细节。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这看起来是如此简单而又巧妙，但是不幸的是这个模型有几个限制因素。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">首先，要想保证游戏状态完全确定是非常困难的；即每台机器都进行着相同的变动。比如说，一个单位可以在两台机器上走略微不同的道路，在一台机器上玩家更早进入战斗并反败为胜，而在另一台机器上玩家到达的更晚，然后，嗯，没有取得胜利。就像一只蝴蝶扇动了翅膀，然后在世界的另一边导致了飓风的出现，随着时间的过去，一个微小的区别会导致两边完全的不同步。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">另一个限制因素就是为了保证游戏在所有机器上表现同步，就有必要在游戏操作在设备上模拟之前进行等待，直到设备接收到了所有玩家对于那个变动的指令。这就意味着游戏中的每一个玩家的延迟都等于延迟最高玩家的延迟。<span>RTS</span>游戏通常代表性地通过立即提供音频反馈与（或是）播放过渡动画来掩盖这段延迟，但是最终真正影响游戏的操作要在这段延迟过去之后才能进行。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">最后一个限制因素就在于游戏的同步方式是通过发送改变当前状态的命令消息。为了让其正常工作就有必要让所有的玩家由同一初始状态开始游戏。通常来说，这就意味着每个玩家都要在开始游戏之前进入房间准备游戏，尽管支持让玩家随后加入游戏从技术上来说是可行的，但是由于在一场进行中的游戏中间捕获与传输一个完全确定的起始点的难度很大，所以这种情况并不常见。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">尽管有这些限制，这个模型还是很适合<span>RTS</span>游戏的，并且在现代的游戏中它仍然存在，例如“命令与征服”、“帝国时代”与“星际争霸”等。原因就是在<span>RTS</span>游戏中，游戏状态包含了成千上万的单位，并且通常游戏状态太大而不能在玩家之间交换。这些游戏别无选择，只能交换这些驱动着游戏状态改变的指令。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">但是对于其他类别的游戏，美工的状态已经改变了。所以对于确定的对等网络同步模型就讲到这里。现在让我们从<span>Doom</span>（毁灭战士）、<span>Quake</span>（雷神之锤）以及<span>Unreal</span>（魔域幻境）中看看动作类游戏的演变。</span></p><p class="MsoNormal" style="line-height:400%"><span style="font-size:15.0pt;line-height:400%;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><b>客户端<span>/</span>服务器（<span>C/S</span>结构）</b></span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">在动作游戏的时代，对等同步的限制因素在<span>Doom</span>中表现得更加明显，尽管它在局域网中表现很好，但是在面对互联网中的普通用户时表现得很糟糕：</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">“虽然可以通过调制解调器将两个运行<span>DOOM</span>的设备在互联网上连接在一起，最终游戏将会变得缓慢，延迟的情况在完全不能进行游戏（例如一个<span>14.4Kbps</span>的<span>P2P</span>连接）到略微可玩（例如一个<span>28.8Kbps</span>的调制解调器运行一个压缩驱动程序）之间不等。<u>因为这些类型的连接只有边际效用，本文将只关注于网络连接。</u>（</span><span><a rel="noopener" href="http://www.faqs.org/faqs/games/doom/howto-tcp/#ixzz0daOnpBYn" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">faqs.org</span></a></span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">）”</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这个问题显然就是<span>Doom</span>本来就是只为局域网设计的，并且使用了前面描述的为<span>RTS</span>游戏制作的对等同步模型。每一个玩家输入的行为（关键按键等等）与其他人进行信息交换，只有在所有其他玩家的关键按键都被接收到之后，玩家才能够进行游戏画面的模拟。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">换句话说，在你能够操作、移动或是射击之前，你必须等待延迟最高的玩家进行连入。想想这上述的所谓“这些连接只有边际效用”将会导致的令人咬牙切齿的情况。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">现在的游戏局限于局域网游戏以及拥有良好连接条件的大学网络或是大公司的精英之间的游戏，为了改变这种情况，是时候改变这个模型了。这就是<span>John Carmack 1996</span>年在发布雷神之锤时所做的事情——他使用客户端<span>/</span>服务器（<span>C/S</span>结构）代替了对等同步模型（<span>P2P</span>）。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">现在，玩家们不再运行相同的游戏代码，直接地互相交换数据，如今每个玩家都是一个客户端，他们都与一台叫做<span>“</span>服务器<span>”</span>的电脑进行数据交换。现在的游戏不再有任何对于所有机器都要进行确定的要求，因为游戏实际上只存在于服务器上。每个客户端实际上都是作为哑终端，用来显示出一个游戏的近似情况，因为游戏实际上只在服务器上发生。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">在一个纯粹的客户端<span>/</span>服务器模型中你没有在本地运行游戏代码，而是将你的操作例如按键、鼠标移动、点击等发送到服务器。服务器响应并更新了虚拟世界中你的角色状态，然后将一个包含着你与你周围角色状态的数据包传回。所有客户端要做的事情就是在这些数据更新之间插入自己的数据，然后给你一种流畅移动的假象，然后，<span>boom</span>！你就有了一个联网的客户端<span>/</span>服务器游戏了。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这是一个伟大的进步。游戏体验的质量现在取决于客户端与服务器之间的连接，而不是取决于游戏中延迟最高的玩家。这同时让玩家在游戏进行中的加入变成了可能，并且随着客户端<span>/</span>服务器结构对于每位玩家需要的平均带宽减少，游戏玩家也在逐渐增长。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">但是对于纯粹的客户端<span>/</span>服务器模型仍然存在一些问题。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">“尽管我能记得并整理出我从<span>DOOM</span>到<span>Quake</span>做出的所有关于网络的决定，结果就是尽管我为了做出一个好的网络游戏而努力着，但这些努力都是基于一个错误的基础假设。我原先的设计目标就是使延迟低于<span>200ms</span>。这样的话通过一个好的供应商数字连接到网络的人，就能有一个很好的游戏体验。很不幸，世界上百分之九十就都是通过调制解调器进行<span>SLIP</span>连接或是<span>PPP</span>连接，它们通常是通过一个糟糕拥挤的<span>ISP</span>（网络服务提供者）进行连接的。这就导致了<span>300ms</span>以上的延迟，并且这只是最低值。客户端，使用者的调制解调器，<span>ISP</span>的调制解调器，服务器，再回到<span>ISP</span>的调制解调器，使用者的调制解调器，最后再回到客户端。天呐，这真是糟透了！</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">好吧，我做了一件错误的事。我在家里都使用<span>T1</span>载体进行联网，所以我对使用<span>P2P</span>的生活并不了解，我现在就解决这个问题。”</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">问题当然就是延迟。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">接下来<span>John</span>在他发布<span>QuakeWorld</span>（雷神世界）时做的事情将永久改变这个行业。</span></p><p class="MsoNormal" style="line-height:400%"><span style="font-size:15.0pt;line-height:400%;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><b>客户端预测</b></span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">在最初的雷神之锤中，你可以明显感受到你的电脑与服务器之间的延迟。在你向前点击之后，你需要等待数据包发送至服务器然后再传回到你的电脑，然后你才能够开始移动。点击开火，然后你在射击之前同样需要等待上述延迟。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">如果你玩过任何像《使命召唤<span>4</span>：现代战争》之类的现代<span>FPS</span>游戏，你就会知道这种情况现在已经不会再出现了。那么现代<span>FPS</span>游戏到底是如何做到在多人游戏中看似消除了你自己行为的延迟呢？</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这个问题在历史上分两个部分来解决。第一部分就是<span>JohnCarmack</span>为雷神世界开发的客户端移动预测，它后来被合并作为<span>Tim Sweeney</span>的魔域幻境网络模型的一部分。第二部分就是维尔福公司的<span>Yahn Bernier</span>为反恐精英开发的延迟补偿。在本节中，我们将主要讨论第一部分<span>——</span>如何隐藏玩家移动的延迟。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">当谈到他对于即将发布的雷神世界的计划时，<span>JohnCarmack</span>说：</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">“我们现在允许客户端预测使用者行动的结果，直到服务器传来命令式回复。这是一个非常非常大的架构变化。客户端现在需要知道物体的硬度、摩擦力、重力之类的数据。对于简洁的客户端作为终端计划我们已经不再采用了，我对此表示遗憾，但我是一个实用主义者而不是一个理想主义者。”</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">所以为了消除延迟，客户端需要比之前运行更多的代码。它现在不再是一个向服务器发送输入内容并在状态发回之前进行数据插入的哑终端，它现在能够在本地预测你的角色移动，并且对你的输入迅速做出反应，在客户端设备上为你的游戏角色运行一部分游戏代码。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">现在只要你向前点击，不需要再等待客户端与服务器之间的信息往返——你的角色立即开始向前移动。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这种方法的难点不在于预测，因为预测就像是普通游戏代码做的那样——根据玩家的操作随时间发展游戏角色状态。难点就在于，当客户端和服务器对于游戏角色所处的位置及所做的事情有分歧时，客户端如何以服务器传来的信息为基础进行修正。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">对于这一点，你可能会想，嘿，如果你在客户端运行游戏代码——为什么不以客户端的情况作为游戏角色的标准呢。客户端可以为自己的角色运行仿真代码，并在每次发送数据包时告诉服务器现在的情况。那么问题就是，如果每个玩家都可以简单地告诉服务器“这就是我现在的情况”，那就非常容易黑进客户端进行作弊，例如作弊者可以瞬间躲开将要射向他们的子弹，或者立即传送到你身后从后方射击你。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">所以在<span>FPS</span>游戏中，尽管每个玩家在本地预测自己角色的运动，从表面上隐藏了延迟，但以服务器状态作为每个玩家角色状态的标准是绝对有必要的。就像<span>Tim Sweeney</span>在</span><span><a rel="noopener" href="http://unreal.epicgames.com/Network.htm" target="_blank"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">UE</span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"><span>网络架构</span></span></a></span><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">里写到的：“服务器才是大哥！”</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这就是有趣的地方。如果客户端和服务器信息不一致，客户端就必须接受来自服务器的位置更新，但是由于客户端与服务器之间的延迟，这个对过去修正是必然的。举个例子，如果从客户端到服务器要消耗<span>100ms</span>，再经过<span>100ms</span>回来，那么任何服务器对于玩家角色位置的修正就会有<span>200ms</span>的延迟，这个时间是相对于客户端开始预测自己移动的时间。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">如果客户端连续接收服务器的修正更新，这就会及时拉回客户端，这就会导致客户端完全不能做任何客户端预测。怎么解决这个问题的同时仍然允许客户端进行超前预测呢？</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">解决方法就是在客户端为过去的角色状态以及本地玩家的输入创建一个循环缓冲区，然后当客户端收到一个来自服务器的修正，（首先它丢弃比服务器的修正状态更早的缓冲状态）依据玩家储存在循环缓冲区的输入对由上一次的正确状态开始到现在预测时间的状态进行重放。实际上客户端在等待接下来的情况匹配完成之前悄悄地“倒放与重放”当地的玩家角色移动的最后几帧。</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">这个方法可以让玩家看似无延迟地控制他们的角色，并且如果客户端与服务器的角色模拟代码一致的话——由于在客户端与服务器上相同的输入可以准确给出相同的结果——这就很少出现要修正的情况。这就像是<span>Tim Sweeney</span>描述的那样：</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">“<span>……</span>最好的两个世界：在所有情况下，服务器都是绝对权威。在几乎任何时间内，客户端的移动模拟都与服务器计算出的客户端移动完全相同，所以客户端的情况很少需要修正。只有在极少的情况，例如玩家被一枚火箭击中，或是撞上一名敌人，客户端的情况将被修正。”</span></p><p class="MsoNormal" style="text-indent:24.0pt"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;">换句话说，只有当玩家的角色被一些外部事情影响到了玩家的输入，并且这些不能被客户端所预测时，玩家的情况需要被修正。当然，如果玩家试图作弊时亦然。</span></p><p class="MsoNormal" align="left" style="line-height: 18.4pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-size:12.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;"> </span></p><p class="MsoNormal" align="left" style="line-height: 18.4pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-size:14.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">【版权声明】</span></p><p class="MsoNormal" align="left" style="line-height: 18.4pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-size:14.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333">原文作者未做权利声明，视为共享知识产权进入公共领域，自动获得授权。</span><span style="font-size:9.0pt;font-family:&quot;微软雅黑&quot;,&quot;sans-serif&quot;;color:#333333"> </span></p><p class="MsoNormal" align="left" style="text-indent: 24pt;"><span style="font-family:&quot;Lucida Sans Unicode&quot;,&quot;sans-serif&quot;;color:#222222"> </span></p></div>                    </div><br>                
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/11/17/游戏网络开发四之基于UDP的可靠性与排序和避免拥堵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -981,273 +1149,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/11/01/快速编译技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/01/快速编译技巧/" itemprop="url">快速编译技巧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-01T22:57:29+00:00">
-                2016-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>项目越来越大，每次需要重新编译整个项目都是一件很浪费时间的事情。Research了一下，找到以下可以帮助提高速度的方法，总结一下。</p>
-</blockquote>
-<h1 id="tmpfs"><a href="#tmpfs" class="headerlink" title="tmpfs"></a>tmpfs</h1><blockquote>
-<p>有人说在Windows下用了RAMDisk把一个项目编译时间从4.</p>
-</blockquote>
-<p>5小时减少到了5分钟，也许这个数字是有点夸张了，不过粗想想，把文件放到内存上做编译应该是比在磁盘</p>
-<p>上快多了吧，尤其如果编译器需要生成很多临时文件的话。</p>
-<p>这个做法的实现成本最低，在Linux中，直接mount一个tmpfs就可以了。而且对所编译的工程没有任何要求，也不用改动编译环境。</p>
-<p>mount -t tmpfs tmpfs ~/build -o size=1G</p>
-<p>用2.6.32.2的Linux Kernel来测试一下编译速度：</p>
-<ul>
-<li><p>用物理磁盘：40分16秒</p>
-</li>
-<li><p>用tmpfs：39分56秒</p>
-</li>
-</ul>
-<p>呃……没什么变化。看来编译慢很大程度上瓶颈并不在IO上面。但对于一个实际项目来说，</p>
-<p>编译过程中可能还会有打包等IO密集的操作，所以只要可能，用tmpfs是有</p>
-<p>益无害的。</p>
-<blockquote>
-<p>当然对于大项目来说，你需要有足够的内存才能负担得起这个tmpfs的开销。</p>
-</blockquote>
-<h1 id="make-j"><a href="#make-j" class="headerlink" title="make -j"></a>make -j</h1><blockquote>
-<p>既然IO不是瓶颈，那CPU就应该是一个影响编译速度的重要因素了。</p>
-</blockquote>
-<p>用make -j带一个参数，可以把项目在进行并行编译，比如在一台双核的机器上，完全可以用make -<br>j4，让make最多允许4个编译命令同时执行，这样可以更有效的利用CPU资源。</p>
-<p>还是用Kernel来测试：</p>
-<ul>
-<li><p>用make： 40分16秒</p>
-</li>
-<li><p>用make -j4：23分16秒</p>
-</li>
-<li><p>用make -j8：22分59秒</p>
-</li>
-</ul>
-<p>由此看来，在多核CPU上，适当的进行并行编译还是可以明显提高编译速度的。但并行的任务不宜太多，一般是以CPU的核心数目的两倍为宜。</p>
-<p>不过这个方案不是完全没有cost的，如果项目的Makefile不规范，没有正确的设置好依赖关系，并行编译的结果就是编译不能正常进行。如果依赖关系设置过于保守<br>，则可能本身编译的可并行度就下降了，也不能取得最佳的效果。</p>
-<h1 id="ccache"><a href="#ccache" class="headerlink" title="ccache"></a>ccache</h1><blockquote>
-<p>ccache用于把编译的中间结果进行缓存，以便在再次编译的时候可以节省时间。这对于玩Kernel来说实在是再好不过了，因为经常需要修改一些Kernel的代码，然后<br>再重新编译，而这两次编译大部分东西可能都没有发生变化。对于平时开发项目来说，也是一样。为什么不是直接用make所支持的增量编译呢？还是因为现实中，因<br>为Makefile的不规范，很可能这种“聪明”的方案根本不能正常工作，只有每次make clean再make才行。</p>
-</blockquote>
-<p>安装完ccache后，可以在/usr/local/bin下建立gcc，g++，c++，cc的symbolic<br>link，链到/usr/bin/ccache上。总之确认系统在调用gcc等命令时会调用到ccache就可以了（通常情况下/usr/local/bin会在PATH中排在/usr/bin前面）。</p>
-<p>继续测试：</p>
-<ul>
-<li><p>用ccache的第一次编译(make -j4)：23分38秒</p>
-</li>
-<li><p>用ccache的第二次编译(make -j4)：8分48秒</p>
-</li>
-<li><p>用ccache的第三次编译(修改若干配置，make -j4)：23分48秒</p>
-</li>
-</ul>
-<p>看来修改配置（我改了CPU类型…）对ccache的影响是很大的，因为基本头文件发生变化后，就导致所有缓存数据都无效了，必须重头来做。但如果只是修改一些.<br>c文件的代码，ccache的效果还是相当明显的。而且使用ccache对项目没有特别的依赖，布署成本很低，这在日常工作中很实用。</p>
-<p>可以用ccache -s来查看cache的使用和命中情况：</p>
-<p>cache directory                   /home/lifanxi/.ccache</p>
-<p>cache hit                           7165</p>
-<p>cache miss                         14283</p>
-<p>called for link                       71</p>
-<p>not a C/C++ file                     120</p>
-<p>no input file                       3045</p>
-<p>files in cache                     28566</p>
-<p>cache size                          81.7 Mbytes</p>
-<p>max cache size                     976.6 Mbytes</p>
-<p>可以看到，显然只有第二编次译时cache命中了，cache miss是第一次和第三次编译带来的。两次cache占用了81.7M的磁盘，还是完全可以接受的。</p>
-<h1 id="distcc"><a href="#distcc" class="headerlink" title="distcc"></a>distcc</h1><blockquote>
-<p>一台机器的能力有限，可以联合多台电脑一起来编译。这在公司的日常开发中也是可行的，因为可能每个开发人员都有自己的开发编译环境，它们的编译器版本一般<br>是一致的，公司的网络也通常具有较好的性能。这时就是distcc大显身手的时候了。</p>
-</blockquote>
-<p>使用distcc，并不像想象中那样要求每台电脑都具有完全一致的环境，它只要求源代码可以用make -j并行编译，并且参与分布式编译的电脑系统中具有相同的编译<br>器。因为它的原理只是把预处理好的源文件分发到多台计算机上，预处理、编译后的目标文件的链接和其它除编译以外的工作仍然是在发起编译的主控电脑上完成，<br>所以只要求发起编译的那台机器具备一套完整的编译环境就可以了。</p>
-<p>distcc安装后，可以启动一下它的服务：</p>
-<p>/usr/bin/distccd  –daemon –allow 10.64.0.0/16</p>
-<p>默认的3632端口允许来自同一个网络的distcc连接。</p>
-<p>然后设置一下DISTCC_HOSTS环境变量，设置可以参与编译的机器列表。</p>
-<blockquote>
-<p>通常localhost也参与编译，但如果可以参与编译的机器很多，则可以把localhost从这个列表</p>
-<p>中去掉，这样本机就完全只是进行预处理、分发和链接了，编译都在别的机器上完成。</p>
-</blockquote>
-<p>因为机器很多时，localhost的处理负担很重，所以它就不再“兼职”编译了。</p>
-<p>export DISTCC_HOSTS=&quot;localhost 10.64.25.1 10.64.25.2 10.64.25.3&quot;</p>
-<p>然后与ccache类似把g++，gcc等常用的命令链接到/usr/bin/distcc上就可以了。</p>
-<p>在make的时候，也必须用-j参数，一般是参数可以用所有参用编译的计算机CPU内核总数的两倍做为并行的任务数。</p>
-<p>同样测试一下：</p>
-<ul>
-<li><p>一台双核计算机，make -j4：23分16秒</p>
-</li>
-<li><p>两台双核计算机，make -j4：16分40秒</p>
-</li>
-<li><p>两台双核计算机，make -j8：15分49秒</p>
-</li>
-</ul>
-<p>跟最开始用一台双核时的23分钟相比，还是快了不少的。如果有更多的计算机加入，也可以得到更好的效果。</p>
-<p>在编译过程中可以用distccmon-text来查看编译任务的分配情况。distcc也可以与ccache同时使用，通过设置一个环境变量就可以做到，非常方便。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><ul>
-<li><p>tmpfs： 解决IO瓶颈，充分利用本机内存资源</p>
-</li>
-<li><p>make -j： 充分利用本机计算资源</p>
-</li>
-<li><p>distcc： 利用多台计算机资源</p>
-</li>
-<li><p>ccache： 减少重复编译相同代码的时间</p>
-</li>
-</ul>
-<blockquote>
-<p>这些工具的好处都在于布署的成本相对较低，综合利用这些工具，就可以轻轻松松的节省相当可观的时间。</p>
-</blockquote>
-<p>上面介绍的都是这些工具最基本的用法，更多的用法可以参考它们各自的man page。</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1318,7 +1219,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">256</span>
+                <span class="site-state-item-count">257</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

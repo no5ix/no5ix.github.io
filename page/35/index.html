@@ -304,6 +304,198 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/06/21/NAT穿越基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/21/NAT穿越基础/" itemprop="url">NAT穿越基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-21T12:51:46+00:00">
+                2016-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <ol>
+<li><a href="#NAT类型">NAT类型</a><ol>
+<li><a href="#锥NAT"><em>锥NAT</em></a></li>
+<li><a href="#对称NAT"><em>对称NAT</em></a></li>
+</ol>
+</li>
+<li><a href="#NAT作用">NAT作用</a></li>
+<li><a href="#穿透锥NAT">穿透锥NAT</a><ol>
+<li><a href="#网络拓扑结构"><em>网络拓扑结构</em></a></li>
+<li><a href="#使用UDP穿透NAT"><em>使用UDP穿透NAT</em></a></li>
+<li><a href="#使用TCP穿透NAT"><em>使用TCP穿透NAT</em></a></li>
+</ol>
+</li>
+<li><a href="#穿透对称NAT">穿透对称NAT</a><ol>
+<li><a href="#同时开放TCP（ Simultaneous TCP open ）策略"><em>同时开放TCP（ Simultaneous TCP open ）策略</em></a></li>
+<li><a href="#UDP端口猜测策略"><em>UDP端口猜测策略</em></a></li>
+</ol>
+</li>
+<li><a href="#问题总结">问题总结</a></li>
+<li><a href="#参考">参考</a></li>
+</ol>
+<h1 id="NAT类型"><a href="#NAT类型" class="headerlink" title="NAT类型"></a>NAT类型</h1><p><strong>注</strong> : 我们本文主要讨论穿越<strong>锥NAT</strong></p>
+<h2 id="锥NAT"><a href="#锥NAT" class="headerlink" title="锥NAT"></a><em>锥NAT</em></h2><ul>
+<li>全锥NAT ：全锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。任何一个外部主机均可通过该映射发送数据包到该内部主机。</li>
+<li>限制性锥NAT ：限制性锥NAT 把所有来自相同内部IP 地址和端口的请求映射到相同的外部IP 地址和端口。但是, 和全锥NAT 不同的是：只有当内部主机先给外部主机发送数据包, 该外部主机才能向该内部主机发送数据包。</li>
+<li>端口限制性锥NAT ：端口限制性锥NAT 与限制性锥NAT 类似, 只是多了端口号的限制, 即只有内部主机先向外部地址：端口号对发送数据包, 该外部主机才能使用特定的端口号向内部主机发送数据包。</li>
+</ul>
+<h2 id="对称NAT"><a href="#对称NAT" class="headerlink" title="对称NAT"></a><em>对称NAT</em></h2><p>对称NAT 与上述3 种类型都不同, 不管是全锥NAT ，限制性锥NAT 还是端口限制性锥NAT ，它们都属于锥NAT （Cone NAT ）。当同一内部主机使用相同的端口与不同地址的外部主机进行通信时, 对称NAT 会重新建立一个Session ，为这个Session 分配不同的端口号，或许还会改变IP 地址。</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/06/16/MySQL进阶二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -977,194 +1169,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/05/22/how_to_make_blog_like_this/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/22/how_to_make_blog_like_this/" itemprop="url">也想做一个这样的博客吗?</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-22T21:22:26+00:00">
-                2016-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p>这是我的<a href="https://github.com/no5ix/hexo-theme-next-optimized" target="_blank" rel="noopener">博客源码</a> ,<br>我修改了很多<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">NexT</a>的代码来对原版 NexT 做了优化, 如下 : </p>
-<ul>
-<li>改了NexT的很多地方来优化移动端的表现,<ul>
-<li>header的布局</li>
-<li>移动端和PC端的侧边栏更加统一</li>
-<li>移动端的文章目录列表现在可以滑动了</li>
-</ul>
-</li>
-<li>重做了本地搜索引擎<ul>
-<li>现在移动端不会经常无故弹不出键盘了</li>
-<li>也不会列出加密文章的内容了</li>
-<li>更优雅的过渡动画</li>
-</ul>
-</li>
-<li>添加了headroom支持, 现在有一个可以会自动隐藏的header了, 往下滚一下鼠标则隐藏, 往上则出现</li>
-<li>升级到了fancybox3并完成适配, 3更流畅且拥有更多效果</li>
-<li>添加了文章加密的支持</li>
-</ul>
-<h1 id="CSDN-sucks"><a href="#CSDN-sucks" class="headerlink" title="CSDN sucks"></a>CSDN sucks</h1><ul>
-<li>实在是被CSDN的广告恶心到了</li>
-<li>最近CSDN的Markdown的无序列表每一列前面的小黑点都没有了</li>
-<li>手机网页版本的CSDN排版全无</li>
-</ul>
-<p>所有博客瞬间排版全部变成一坨, 实在是不能忍.</p>
-<p>所以才做了这个私人博客.</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1235,7 +1239,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">256</span>
+                <span class="site-state-item-count">257</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

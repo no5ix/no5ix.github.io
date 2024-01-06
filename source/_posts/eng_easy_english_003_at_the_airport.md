@@ -79,7 +79,7 @@ https://www.youtube.com/watch?v=jiBHZ_rqHB8
 
 - Excuse me, miss.
 - > yes?
-- My window shade is broken and I cannot open it to see out the window, would it be possible to `switch seats`(change seats) so I can have a window with a view? This is my first flight and I want to be able to see everything. 
+- My window `shade`(/ʃeɪd/ n. 背阴处，阴凉处；（图画中的）暗处；遮光物，灯罩；<美>（能上下卷叠的）窗帘，百叶窗；v. 为……遮阳（挡光），遮蔽（光线）；) is broken and I cannot open it to see out the window, would it be possible to `switch seats`(change seats) so I can have a window with a view? This is my first flight and I want to be able to see everything. 
 - > Of course! let's move you to row 38 seat B. 
 - You'll be able to see out from that window. 
 - > Thank you, could you tell me how long this flight will take?

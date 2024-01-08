@@ -17,7 +17,7 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 # Make a appointment
 
 - hello hi my name is sophia
-- > i'm a student at brandy's university and i want to rent an apartment, i saw your listing for an apartment on `oak` street
+- > i'm a student at brandy's university and i want to rent an apartment, i saw your listing for an apartment on `oak`(/oʊk/ n. 橡树，栎树；橡木，) street
 - hi sophia i'm cynthia, the landlord
 - > did you want to schedule a viewing?
 - yes, that's right the earliest appointment to view the apartment is 1pm tomorrow
@@ -26,7 +26,7 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - > hi sophia , nice to meet you come in
 - hi , nice to meet you too, thank you
 - > wow, this is very nice and clean
-- yes i always have it cleaned when a `tenant` moves out, besides the apartment was recently `renovated`
+- yes i always have it cleaned when a `tenant`(/ˈtenənt/ n. 房客，租户；<法律>业主 v. （作为租赁者）居住，工作) moves out, besides the apartment was recently `renovated`(/ˈrenəveɪtɪd/ v. 更新，革新；修复；重新布置（renovate 的过去式和过去分词）).
 - > let me show you around.
 - that would be great, thank you
 - > like the listing said it's a one-bedroom one-bathroom apartment
@@ -34,9 +34,9 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 
 # Viewing the rooms
 
-- this is the bedroom it is fully `furnished` with a bed `wardrobe` and two bedside tables.
+- this is the bedroom it is fully `furnished`(/ˈfɜːrnɪʃt/ adj. 家具，有家具的 v. 供应；装备（furnish 的过去分词）) with a bed `wardrobe`(/ˈwɔːrdroʊb/ n. 衣柜，衣橱；（某人的）全部服装；（剧院、电视台等的）服装部，戏装管理部) and two bedside tables.
 - > there is also a desk for study in a bookshelf an lcd tv and wi-fi connection.
-- i love this room it looks really `cozy` and `stylish`
+- i love this room it looks really `cozy`(/ˈkoʊzi/ adj. 舒适的，温暖的；友好的，亲密无间的；密切的) and `stylish`(/ˈstaɪlɪʃ/ adj. 时髦的，流行的，有格调的；潇洒的)
 - > is there air conditioning?
 - no there isn't, but this building stays pretty cool when it's hot outside
 - > is it okay if i hang some things on the walls?
@@ -44,16 +44,16 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - > i don't want you to make any major changes to the apartment
 - what if something in the apartment stops  working or breaks?
 - > you can call me immediately and i will come over to look at it.
-- i live right down the street i will pay for any `ongoing` repairs.
+- i live right down the street i will pay for any `ongoing`(/ˈɑːnɡoʊɪŋ/ adj. 持续存在的，仍在进行的，不断发展的)repairs.
 - > well, all of that sounds perfect.
 - the bathroom is attached to the bedroom, it's over here
 - > the toilet and shower are a little older, but they are in excellent condition
 - yes, they look almost new. is there a washer and dryer ?
-- > there's no washing machine or dryer in the apartment, but there's a `laundromat` in the basement
+- > there's no washing machine or dryer in the apartment, but there's a `laundromat`(/ˈlɔːndrəmæt/ n. （美）自助洗衣店) in the basement
 - you will have to get a laundry card from a machine down there.
 - > you can load some money onto it to do your laundry.
 - i see. it's perfectly fine.
-- > let me show you now the kitchen, it is a fully equipped kitchen it has a `stove` top and oven microwave and refrigerator. the oven and `stovetop` use gas
+- > let me show you now the kitchen, it is a fully equipped kitchen it has a `stove`(/stoʊv/ n. （取暖或烹饪用的）炉子，火炉；厨灶，炉头；窑；<英>温室) top and oven microwave and refrigerator. the oven and `stovetop`(/ˈstoʊvtɑːp/ n. （炉具上的）炉盘) use gas
 
 
 # Talk about what she can do
@@ -92,14 +92,14 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - you can also get easily to the grocery store from here.
 - > perfect ~ what are the neighbors like? i hope they're not noisy because i need to study a lot.
 - no they're not so you shouldn't worry about that. 
-- they are very friendly and `sociable` and this street is pretty quiet. there's not much noise.
+- they are very friendly and `sociable`(/ˈsoʊʃəb(ə)l/ adj. 好交际的，合群的，友善的；（地方，场合，活动）气氛友好的) and this street is pretty quiet. there's not much noise.
 
 
 # Sign a contract
 
 - > would you like to rent the apartment ? i have the lease right here.
 - if you don't sign now there are other students who might take this apartment by tomorrow. 
-- places in this area get `snapped up` fast.
+- places in this area get `snapped up`(`snap up`: 迅速购买：迅速或热切地购买或抢占（某物或某人）, 放在`get`后面表示被动, 所以 `get snapped up`表示 `被抢购`) fast.
 - yes, i will sign right now.
 - > when can i move in ?
 - if you want you could move in tomorrow .
@@ -108,8 +108,8 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - welcome to the building i'm sure you'll love it here.
 - thanks for watching if you like this video please subscribe to our youtube channel.
 
-
 # 预约
+
 
 - 你好，嗨，我叫索菲亚。
 - 我是布兰迪大学的学生，我想租一套公寓，我看到你在橡树街有一套公寓的房源。

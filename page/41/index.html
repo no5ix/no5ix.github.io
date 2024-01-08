@@ -939,7 +939,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/redis_hiredis_install_tutorial/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/redis概要之数据类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -958,7 +958,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/07/11/redis_hiredis_install_tutorial/" itemprop="url">redis和hiredis安装教程</a></h1>
+                <a class="post-title-link" href="/2015/07/11/redis概要之数据类型/" itemprop="url">redis概要之数据类型</a></h1>
         
 
         <div class="post-meta">
@@ -1045,15 +1045,21 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
         
+          <h1 id="Redis简介要义"><a href="#Redis简介要义" class="headerlink" title="Redis简介要义"></a>Redis简介要义</h1><ul>
+<li><p>Redis运行在内存中但是可以持久化到磁盘, 重启的时候可以再次加载进行使用</p>
+</li>
+<li><p>Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行</p>
+</li>
+<li><p>Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作</p>
+</li>
+<li><p>Redis支持数据的备份，即master-slave模式的数据备份</p>
+</li>
+</ul>
+<h1 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h1><p>Redis的数据类型很重要, 这是他做很多事情的基础, 不理解的话很难用好</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
           
-            <p>在ubuntu上</p>
-<p>redis安装 :  <code>sudo apt-get install redis-server</code></p>
-<p>hiredis安装 : 先到 <a href="https://github.com/redis/hiredis" target="_blank" rel="noopener">https://github.com/redis/hiredis</a> 下载 hiredis , 然后 </p>
-<pre><code>sudo make
-sudo make install
-sudo ldconfig
-</code></pre>
-          
+          <!--/noindex-->
         
       
 
@@ -1074,7 +1080,7 @@ sudo ldconfig
         
       </footer>
       
-    </div>
+    </p></div>
     
     
     

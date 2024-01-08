@@ -304,6 +304,177 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2013/08/27/how_to_build_a_simple_ubuntu_server_three/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2013/08/27/how_to_build_a_simple_ubuntu_server_three/" itemprop="url">从零开始搭建一台简易Ubuntu服务器三</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-08-27T15:11:26+00:00">
+                2013-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><p>执行命令安装MySQL：sudo apt-get install mysql-server<br>安装的时候会提示填入一个root的初始密码，先输入个8做初始密码吧</p>
+<h1 id="导入客户数据库base-account"><a href="#导入客户数据库base-account" class="headerlink" title="导入客户数据库base_account"></a>导入客户数据库base_account</h1><p>mysql -uroot -p &lt; <strong>*</strong>.sql(某个sql文件)</p>
+<h1 id="安装svn并checkout一个svn服务器上的目录"><a href="#安装svn并checkout一个svn服务器上的目录" class="headerlink" title="安装svn并checkout一个svn服务器上的目录"></a>安装svn并checkout一个svn服务器上的目录</h1><ol>
+<li>进入 /data/www目录下 ：cd /data/www</li>
+<li>执行命令安装：sudo apt-get install subversion</li>
+<li>checkout一个目录（比如svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg），<br>执行命令：svn checkout svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg （或者 svn co svn://112.124.26.188/myapp/td/01CServer_PHP/errorMsg）</li>
+</ol>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2013/08/25/how_to_build_a_simple_ubuntu_server_two/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -692,7 +863,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">257</span>
+                <span class="site-state-item-count">258</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

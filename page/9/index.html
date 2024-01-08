@@ -304,6 +304,270 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/03/13/self_cultivation_cpp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/13/self_cultivation_cpp/" itemprop="url">服务器开发自我修养专栏-CPP要点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-13T19:08:06+00:00">
+                2021-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
+                    <span itemprop="name">Self-cultivation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>参考: 看之前一个哥们总结的c++要点 <a href="https://interview.huihut.com/" target="_blank" rel="noopener">https://interview.huihut.com/</a></p>
+<ul>
+<li><p><code>new</code> 和 <code>delete</code> 为什么要配对用:</p>
+<ul>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line">A *pa = <span class="keyword">new</span> A();</span><br><span class="line">A *pas = <span class="keyword">new</span> A[NUM]();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>delete []pas; //详细流程: delete[] pas 用来释放pas指向的内存！！还逐一调用数组中每个对象的destructor！！</p>
+</li>
+<li>delete []pa; //会发生什么, 答案是调用未知次数的A的析构函数. 因为delete[]会去通过pa+offset找一个基于pa的偏移量找一个内存里的数据, 他假定这个内存里放了要调用析构的次数n这个数据, 而这个内存里到底是多少是未知的.</li>
+<li>delete pas; //哪些指针会变成野指针, 答案是pas和A[0]中的指针会变成野指针. 因为只有这两个指针指向的内存被释放了, 也就是说, 仅释放了pas指针指向的这个数组的全部内存空间, 以及只调用了a[0]对象的析构函数</li>
+</ul>
+</li>
+<li>cqq vec set map list<ul>
+<li><a href="/2016/05/17/stl_vector_string/" title="vector和string的内存分配与使用注意点">vector和string的内存分配与使用注意点</a></li>
+<li><a href="/2016/04/26/stll_set_map_tutorial/" title="stl关联容器的特性">stl关联容器的特性</a></li>
+</ul>
+</li>
+<li>map的<code>[]</code>和insert的区别?<ul>
+<li>insert 含义是：如果key存在，则插入失败，如果key不存在，就创建这个key－value。实例: <code>map.insert((key, value))</code></li>
+<li>利用下标操作的含义是：如果这个key存在，就更新value；如果key不存在，就创建这个key－value对 实例：<code>map[key] = value</code></li>
+</ul>
+</li>
+<li>vector的resize和reserve的区别?<ul>
+<li>总结: <ul>
+<li>resize既分配了空间，也创建了对象，可以通过下标访问。当new_size大于原size, 则resize既修改capacity大小，也修改size大小。否则只修改size大小.</li>
+<li>reserve只分配了空间, 也就是说它只修改capacity大小，不修改size大小, 若 new_cap 小于等于当前的 capacity(), 它啥也不干.</li>
+</ul>
+</li>
+<li>resize: 重设容器大小以容纳 count 个元素。<br>  若当前大小大于 count ，则减小容器为其首 count 个元素。<br>  若当前大小小于 count:<ul>
+<li>则后附额外的默认插入的元素</li>
+<li>则后附额外的 value 的副本</li>
+</ul>
+</li>
+<li>reserve: 增加 vector 的容量到大于或等于 new_cap 的值。若 new_cap 大于当前的 capacity() ，则分配新存储，<strong>否则该方法不做任何事</strong>。reserve() 不更改 vector 的 size 。若 new_cap 大于 capacity() ，则所有迭代器，包含尾后迭代器和所有到元素的引用都被非法化。否则，没有迭代器或引用被非法化。</li>
+</ul>
+</li>
+<li>字节对齐<ul>
+<li><a href="/2015/04/12/sizeof_struct/" title="对象模型之内存对齐基础">对象模型之内存对齐基础</a></li>
+</ul>
+</li>
+<li><p>定位new </p>
+<ul>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">512</span>];   <span class="comment">//chunk of memory内存池</span></span><br><span class="line">    <span class="keyword">int</span> *p2, *p3;</span><br><span class="line">    <span class="comment">//定位new:</span></span><br><span class="line">    p2 = <span class="keyword">new</span> (buffer) <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">    p2[<span class="number">0</span>] = <span class="number">99</span>;</span><br><span class="line">    p2[<span class="number">1</span>] = <span class="number">88</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"buffer = "</span> &lt;&lt;(<span class="keyword">void</span> *)buffer &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//内存池地址</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p2 = "</span> &lt;&lt; p2 &lt;&lt; <span class="built_in">endl</span>;             <span class="comment">//定位new指向的地址</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p2[0] = "</span> &lt;&lt; p2[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    p3 = <span class="keyword">new</span> (buffer) <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    p3[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    p3[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p3 = "</span> &lt;&lt; p3 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p2[0] = "</span> &lt;&lt; p2[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p2[1] = "</span> &lt;&lt; p2[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p2[2] = "</span> &lt;&lt; p2[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"p2[3] = "</span> &lt;&lt; p2[<span class="number">3</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果发现p3和p2还有buffer都是使用同样的内存地址，符合指定地址的内存块，而且p3在指定位置覆盖了p2的前两处的值。</p>
+</li>
+</ul>
+</li>
+<li>c++一个空类会生成什么 (答: 默认构造/析构(非虚)/赋值运算符/默认拷贝/取地址/const取地址) </li>
+<li><p>虚函数（virtual）可以是内联函数（inline）吗？</p>
+<ul>
+<li>虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。</li>
+<li>内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。</li>
+<li>inline virtual 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 Base::who()），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。<br>虚函数内联使用:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此处的虚函数 who()，是通过类（Base）的具体对象（b）来调用的，</span></span><br><span class="line"><span class="comment">// 编译期间就能确定了，所以它可以是内联的，</span></span><br><span class="line"><span class="comment">// 但最终是否内联取决于编译器。 </span></span><br><span class="line">Base b;</span><br><span class="line">b.who();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此处的虚函数是通过指针调用的，呈现多态性，</span></span><br><span class="line"><span class="comment">// 需要在运行时期间才能确定，所以不能为内联。  </span></span><br><span class="line">Base *ptr = <span class="keyword">new</span> Derived();</span><br><span class="line">ptr-&gt;who();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>虚函数指针、虚函数表</p>
+<ul>
+<li>虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定。</li>
+<li>虚函数表：在程序内存的<code>只读数据段</code>（.rodata section，见：<a href="#CPP目标文件内存布局">CPP目标文件内存布局</a>），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建。</li>
+<li>virtual修饰符:<br>  如果一个类是局部变量则该类数据存储在栈区，如果一个类是通过new/malloc动态申请的，则该类数据存储在堆区。<br>  如果该类是virutal继承而来的子类，则该类的虚函数表指针和该类其他成员一起存储。虚函数表指针指向只读数据段中的类虚函数表，虚函数表中存放着一个个函数指针，函数指针指向代码段中的具体函数。</li>
+<li><img src="/img/noodle_plan/cpp/virtual_func_1.jpg" alt></li>
+</ul>
+</li>
+<li><p>内存泄漏的工具 vargrid..? 还有啥工具</p>
+</li>
+<li>了解ASAN查找内存越界问题 </li>
+<li>cpp找找冰川, 大梦龙图的面试题，网上常用题</li>
+<li>gdb怎么切换线程</li>
+<li>C++ 的动态多态怎么实现的？</li>
+<li>C++ 的构造函数可以是虚函数吗？</li>
+<li>无锁队列原理是否一定比有锁快?(不一定, 如果临界区小因为有上下文切换则mutex慢, 再来看lockfree的spin，一般都遵循一个固定的格式：先把一个不变的值X存到某个局部变量A里，然后做一些计算，计算/生成一个新的对象，然后做一个CAS操作，判断A和X还是不是相等的，如果是，那么这次CAS就算成功了，否则再来一遍。如果上面这个loop里面“计算/生成一个新的对象”非常耗时并且contention很严重，那么lockfree性能有时会比mutex差。另外lockfree不断地spin引起的CPU同步cacheline的开销也比mutex版本的大。关于ABA问题)</li>
+</ul>
+<h2 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h2><img src="http://www.plantuml.com/plantuml/svg/YzQALT3LjLF8ICt9oTTBveg6yejBKZBpzJAueE8AkaMPwHabG8cNYrgUBcbvFg6D2we4h1mX2cSXj43Co5JWWZ7WCi_tJ7knVY8NX4BNa0XLduYGUBQn7QYM2qAXgy-7gi-7k6ZolcTzIxboCfEIGIOWH20KGdEYNdvf2G00">
+<ol>
+<li>预处理(Preprocessing): 做一些类似于将所有的<code>#define</code>删除，并且展开所有的宏定义的操作, 然后生成hello.i</li>
+<li>编译(Compilation): 编译过程就是把预处理完的文件进行一系列的词法分析，语法分析，语义分析及优化后生成相应的汇编代码。得到hello.a</li>
+<li>汇编(Assembly): 汇编器是将汇编代码转变成机器可以执行的命令，每一个汇编语句几乎都对应一条机器指令。汇编相对于编译过程比较简单，根据汇编指令和机器指令的对照表一一翻译即可。得到hello.o</li>
+<li>链接(Linking): 通过调用链接器ld来链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件<ul>
+<li>静态链接: 指在编译阶段直接把静态库加入到可执行文件中去，这样可执行文件会比较大</li>
+<li>动态链接: 指链接阶段仅仅只加入一些描述信息，而程序执行时再从系统中把相应动态库加载到内存中去。</li>
+</ul>
+</li>
+</ol>
+<h2 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h2><p>编译器编译源代码后生成的文件叫做目标文件。目标文件从结构上讲，它是已经编译后的可执行文件格式，只是还没有经过链接的过程，其中可能有些符号或有些地址还没有被调整。</p>
+<blockquote>
+<p>可执行文件（Windows 的 <code>.exe</code> 和 Linux 的 <code>ELF</code>）、动态链接库（Windows 的 <code>.dll</code> 和 Linux 的 <code>.so</code>）、静态链接库（Windows 的 <code>.lib</code> 和 Linux 的 <code>.a</code>）都是按照可执行文件格式存储（Windows 按照 PE-COFF，Linux 按照 ELF）</p>
+</blockquote>
+<p>目标文件格式:  </p>
+<ul>
+<li>Windows 的 PE（Portable Executable），或称为 PE-COFF，<code>.obj</code> 格式</li>
+<li>Linux 的 ELF（Executable Linkable Format），<code>.o</code> 格式</li>
+<li>Intel/Microsoft 的 OMF（Object Module Format）</li>
+<li>Unix 的 <code>a.out</code> 格式</li>
+<li>MS-DOS 的 <code>.COM</code> 格式</li>
+</ul>
+<blockquote>
+<p>PE 和 ELF 都是 COFF（Common File Format）的变种</p>
+</blockquote>
+<h3 id="CPP目标文件内存布局"><a href="#CPP目标文件内存布局" class="headerlink" title="CPP目标文件内存布局"></a>CPP目标文件内存布局</h3><table><thead><tr><th>段</th><th>功能</th></tr></thead><tbody><tr><td>File Header</td><td>文件头，描述整个文件的文件属性（包括文件是否可执行、是静态链接或动态连接及入口地址、目标硬件、目标操作系统等）</td></tr><tr><td>.text section</td><td>代码段，执行语句编译成的机器代码</td></tr><tr><td>.data section</td><td>数据段，已初始化的全局变量和局部静态变量</td></tr><tr><td>.bss section</td><td>BSS 段（Block Started by Symbol），未初始化的全局变量和局部静态变量（因为默认值为 0，所以只是在此预留位置，不占空间）</td></tr><tr><td>.rodata section</td><td>只读数据段，存放只读数据，一般是程序里面的只读变量（如 const 修饰的变量）和字符串常量</td></tr><tr><td>.comment section</td><td>注释信息段，存放编译器版本信息</td></tr><tr><td>.note.GNU-stack section</td><td>堆栈提示段</td></tr></tbody></table>
+
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/03/08/self_cultivation_linux_process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1584,178 +1848,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/02/06/self_cultivation_linux_timer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/02/06/self_cultivation_linux_timer/" itemprop="url">服务器开发自我修养专栏-Linux高低精度定时器实现原理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-06T13:08:06+00:00">
-                2021-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
-                    <span itemprop="name">Self-cultivation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="Linux定时器实现原理"><a href="#Linux定时器实现原理" class="headerlink" title="Linux定时器实现原理"></a>Linux定时器实现原理</h1><h2 id="时间轮定时器-低分辨率实现"><a href="#时间轮定时器-低分辨率实现" class="headerlink" title="时间轮定时器-低分辨率实现"></a>时间轮定时器-低分辨率实现</h2><p>Linux 2.6.16之前，内核只支持低精度时钟，内核定时器的<strong>工作方式</strong>：  </p>
-<ol>
-<li>系统启动后，会读取时钟源设备(RTC,HPET，PIT…)，初始化当前系统时间。</li>
-<li>内核会根据HZ(系统定时器频率，节拍率)参数值，设置时钟事件设备，启动tick(节拍)中断。HZ表示1秒种产生多少个时钟硬件中断，tick就表示连续两个中断的间隔时间。</li>
-<li>设置时钟事件设备后，时钟事件设备会定时产生一个tick中断，触发时钟中断处理函数，更新系统时钟,并检测timer wheel，进行超时事件的处理。</li>
-</ol>
-<p>在上面工作方式下，Linux 2.6.16 之前，内核软件定时器采用timer wheel多级时间轮的实现机制，维护操作系统的所有定时事件。timer wheel的触发是基于系统tick周期性中断。所以说这之前，linux只能支持ms级别的时钟，随着时钟源硬件设备的精度提高和软件高精度计时的需求，有了高精度时钟的内核设计。</p>
-<p>所谓低分辨率定时器，是指这种定时器的计时单位基于jiffies值的计数，也就是说，它的精度只有1HZ，假如你的内核配置的HZ是1000，那意味着系统中的低分辨率定时器的精度就是1ms。早期的内核版本中，内核并不支持高精度定时器，理所当然只能使用这种低分辨率定时器, 后来随着时钟源硬件设备的精度提高和软件高精度计时的需求，才有了<a href="#红黑树定时器-高精度实现">高精度时钟的内核设计</a></p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1826,7 +1918,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">257</span>
+                <span class="site-state-item-count">258</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

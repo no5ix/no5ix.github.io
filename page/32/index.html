@@ -304,6 +304,206 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/08/15/boost之program_options/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/15/boost之program_options/" itemprop="url">boost之program_options</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-15T15:11:26+00:00">
+                2016-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>命令行接口是普遍,基础的人机交互接口，从命令行提取程序的运行时选项的方法有很多。</p>
+<p>你可以自己编写相对应的完整的解析函数，或许你有丰富的C语言编程经验，熟知getopt()函数的用法，又或许使用Python的你已经在使用optparse库来简化这一工作。</p>
+<p>大家在平时不断地谈及到“不要重复造轮子”，那就需要掌握一些顺手的库，这里介绍一种C++方式来解析命令行选项的方法，就是使用Boost.Program_options库。</p>
+<p>program_options提供程序员一种方便的命令行和配置文件进行程序选项设置的方法。</p>
+<p>使用program_options库而不是你自己动手写相关的解析代码，因为它更简单，声明程序选项的语法简洁，并且库自身也非常小。</p>
+<p>将选项值转换为适合的类型值的工作也都能自动完成。</p>
+<p>库有着完备的错误检查机制，如果自己手写解析代码时，就可能会错过对一些出错情况的检查了。</p>
+<p>最后，选项值不仅能从命令行获取，也能从配置文件，甚至于环境变量中提取，而这些选择不会增加明显的工作量。</p>
+<h1 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h1><p>以下面简单的hello程序进行说明，默认打印hello world,如果传入-p选项，就会打印出人的姓名，另外通过传入-h选项，可以打印出帮助选项。</p>
+<p>略微看一眼代码文件和相应的屏幕输入输出，然后我们再一起来看看这些是如何发生的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//hello.cpp </span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;boost/program_options.hpp&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">int main(int argc, char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    using namespace boost::program_options;</span><br><span class="line">    //声明需要的选项</span><br><span class="line">    options_description desc(&quot;Allowed options&quot;);</span><br><span class="line">    desc.add_options()</span><br><span class="line">        (&quot;help,h&quot;, &quot;produce help message&quot;)</span><br><span class="line">        (&quot;person,p&quot;, value&lt;string&gt;()-&gt;default_value(&quot;world&quot;), &quot;who&quot;)</span><br><span class="line">        ;</span><br><span class="line"></span><br><span class="line">    variables_map vm;        </span><br><span class="line">    store(parse_command_line(argc, argv, desc), vm);</span><br><span class="line">    notify(vm);    </span><br><span class="line"></span><br><span class="line">    if (vm.count(&quot;help&quot;)) &#123;</span><br><span class="line">        cout &lt;&lt; desc;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; &quot;Hello &quot; &lt;&lt; vm[&quot;person&quot;].as&lt;string&gt;() &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是在Windows命令提示符窗口上的输入输出结果，其中”&gt;”表示提示符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;hello </span><br><span class="line">Hello world</span><br><span class="line"></span><br><span class="line">&gt;hello -h</span><br><span class="line">Allowed options:</span><br><span class="line">  -h [ --help ]                produce help message</span><br><span class="line">  -p [ --person ] arg (=world) who</span><br><span class="line"></span><br><span class="line">&gt;hello --person len</span><br><span class="line">Hello len</span><br></pre></td></tr></table></figure>
+<p>首先通过options_description类声明了需要的选项，add_options返回了定义了operator()的特殊的代理对象。</p>
+<p>这个调用看起来有点奇怪，其参数依次为选项名，选项值，以及选项的描述。</p>
+<p>注意到示例中的选项名为”help,h”，是因为声明了具有短选项名和长选项名的选项，这跟gnu程序的命令行具有一致性。</p>
+<p>当然你可以省略短选项名，但是这样就不能用命令选项简写了。</p>
+<p>第二个选项的声明，定义了选项值为string类型，其默认值为world.</p>
+<p>接下来,声明了variables_map类的对象，它主要用来存储选项值，并且能储存任意类型的值。</p>
+<p>然后，store,parse_command_line和notify函数使vm能存储在命令行中发现的选项。</p>
+<p>最后我们就自由地使用这些选项了，variables_map类的使用就像使用std::map一样，除了它必须用as方法去获取值。</p>
+<p>如果as方法调用的指定类型与实际存储的类型不同，就会有异常抛出。</p>
+<p>具有编程的你可能有这样的经验，使用cl或gcc对源文件进行编译时，可直接将源文件名放置在命令行中，而无需什么选项字母，如gcc a.c之类的。</p>
+<p>prgram_options也能处理这种情况，在库中被称为”positional options”(位置选项),但这需要程序员的一点儿帮助才能完成。</p>
+<p>看下面的经过对应修改的代码，我们无需传入”-p”选项，就能可指定”person”选项值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">positional_options_description p;</span><br><span class="line">p.add(&quot;person&quot;, -1);</span><br><span class="line">store(command_line_parser(argc, argv).options(desc).positional(p).run(), vm);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;hello len</span><br><span class="line">Hello len</span><br></pre></td></tr></table></figure>
+<p>前面新增的两行是为了说明所有的位置选项都应被解释成”person”选项，这里还采用了command_line_parser类来解析命令行，而不是用parse_command_line函数。</p>
+<p>后者只是对前者类的简单封装，但是现在我们需要传入一些额外的信息，所以要使用类本身。</p>
+<p>选项复合来源<br>一般来说，在命令行上指定所有选项，对用户来说是非常烦人的。</p>
+<p>如果有些选项要应用于每次运行，那该怎么办呢。</p>
+<p>我们当然希望能创建出带有些常用设置的选项文件，跟命令行一起应用于程序中。</p>
+<p>当然这一切需要将命令行与配置文件中的值结合起来。</p>
+<p>比如，在命令行中指定的某些选项值应该能覆盖配置文件中的对应值，或者将这些值组合起来。</p>
+<p>下面的代码段将选项通过文件读取，这文件是文本格式，可用”#”表示注释，格式如命令行中的参数一样，选项=值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifstream ifs(&quot;config.cfg&quot;);</span><br><span class="line">store(parse_config_file(ifs,config),vm);</span><br><span class="line">notify(vm);</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.boost.org/doc/libs/1_35_0/doc/html/program_options.html" target="_blank" rel="noopener">Boost.prgram_options库文档</a></p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/08/11/关于UNP与APUE与TLPI三本大部头的阅读建议(着重讲UNP)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1004,179 +1204,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/30/how_to_implement_a_slg_two/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/30/how_to_implement_a_slg_two/" itemprop="url">快速完成一个简易SLG游戏思路二</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-30T22:57:29+00:00">
-                2016-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GS/" itemprop="url" rel="index">
-                    <span itemprop="name">GS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="ChatServer"><a href="#ChatServer" class="headerlink" title="ChatServer"></a>ChatServer</h1><p>从登录成功就开始连接,<br>注册一个Chat_ID,<br>Player_ID 和 Chat_ID相互对应,<br>会注册相应的房间频道,<br>并为每位 Player 存了一份黑名单,<br>在客户端做了本地黑名单,<br>聊天服务器也做了黑名单二次验证处理.</p>
-<ul>
-<li>世界频道 : 则用MsgServer的非实时推送思路</li>
-<li>私密聊天 : 则选择 WorkerMan 的TCP, </li>
-</ul>
-<h1 id="MsgServer"><a href="#MsgServer" class="headerlink" title="MsgServer"></a>MsgServer</h1><ul>
-<li>实时推送 : WorkerMan 的 TCP</li>
-<li>非实时推送 : 客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1247,7 +1274,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">257</span>
+                <span class="site-state-item-count">258</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

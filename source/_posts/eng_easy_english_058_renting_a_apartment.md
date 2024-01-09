@@ -26,8 +26,8 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - > hi sophia , nice to meet you come in
 - hi , nice to meet you too, thank you
 - > wow, this is very nice and clean
-- yes i always have it cleaned when a `tenant`(/ˈtenənt/ n. 房客，租户；<法律>业主 v. （作为租赁者）居住，工作) moves out, besides the apartment was recently `renovated`(/ˈrenəveɪtɪd/ v. 更新，革新；修复；重新布置（renovate 的过去式和过去分词）).
-- > let me show you around.
+- yes i always have it cleaned when a `tenant`(/ˈtenənt/ n. 房客，租户；<法律>业主 v. （作为租赁者）居住，工作) `moves out`(leave the apartment and go to live somewhere else), besides the apartment was recently `renovated`(/ˈrenəveɪtɪd/ v. 更新，革新；修复；重新布置（renovate 的过去式和过去分词）).
+- > let me `show you around`(ead someone around a place for the first time).
 - that would be great, thank you
 - > like the listing said it's a one-bedroom one-bathroom apartment
 
@@ -53,7 +53,7 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - you will have to get a laundry card from a machine down there.
 - > you can load some money onto it to do your laundry.
 - i see. it's perfectly fine.
-- > let me show you now the kitchen, it is a fully equipped kitchen it has a `stove`(/stoʊv/ n. （取暖或烹饪用的）炉子，火炉；厨灶，炉头；窑；<英>温室) top and oven microwave and refrigerator. the oven and `stovetop`(/ˈstoʊvtɑːp/ n. （炉具上的）炉盘) use gas
+- > let me show you now the kitchen, it is a fully equipped(provided with whatever is needed for use) kitchen it has a `stove`(/stoʊv/ n. （取暖或烹饪用的）炉子，火炉；厨灶，炉头；窑；<英>温室) top and oven microwave and refrigerator. the oven and `stovetop`(/ˈstoʊvtɑːp/ n. （炉具上的）炉盘) use gas
 
 
 # Talk about what she can do
@@ -101,7 +101,7 @@ https://www.youtube.com/watch?v=0TBsMgwQaE8
 - if you don't sign now there are other students who might take this apartment by tomorrow. 
 - places in this area get `snapped up`(`snap up`: 迅速购买：迅速或热切地购买或抢占（某物或某人）, 放在`get`后面表示被动, 所以 `get snapped up`表示 `被抢购`) fast.
 - yes, i will sign right now.
-- > when can i move in ?
+- > when can i `move in`(tart living in a different apartment or house) ?
 - if you want you could move in tomorrow .
 - > perfect ~ thank you. who should i make the checkout to ?
 - cynthia bowers .

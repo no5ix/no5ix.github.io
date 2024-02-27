@@ -304,6 +304,342 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/19/多人快节奏游戏四之延迟补偿实现爆头/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/19/多人快节奏游戏四之延迟补偿实现爆头/" itemprop="url">多人快节奏游戏四之延迟补偿实现爆头</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T22:20:34+00:00">
+                2016-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://www.gabrielgambetta.com/lag-compensation.html" target="_blank" rel="noopener">原文出处</a></p>
+<h1 class="title">Fast-Paced Multiplayer (Part IV): Lag Compensation</h1>
+
+<hr>
+<p></p><h2 id="introduction">Introduction</h2><p></p>
+<p>The previous three articles explained a client-server game architecture which can be summarized as follows:</p><br><ul><br><li><p>Server gets inputs from all the clients, with timestamps</p></li><br><li><p>Server processes inputs and updates world status</p></li><br><li><p>Server sends regular world snapshots to all clients</p></li><br><li><p>Client sends input and simulates their effects locally</p></li><br><li><p>Client get world updates and</p><br><ul><br><li><p>Syncs predicted state to authoritative state</p></li><br><li><p>Interpolates known past states for other entities</p></li><br></ul></li><br></ul><br><p>From a player’s point of view, this has two important consequences:</p><br><ul><br><li><p>Player sees <strong>himself</strong> in the <strong>present</strong></p></li><br><li><p>Player sees <strong>other entities</strong> in the <strong>past</strong></p></li><br></ul><br><p>This situation is generally fine, but it’s quite problematic for very time- and space-sensitive events; for example, shooting your enemy in the head!</p><br><h2 id="lag-compensation">Lag Compensation</h2><br><p>So you’re aiming perfectly at the target’s head with your sniper rifle. You shoot - it’s a shot you can’t miss.</p><br><p>But you miss.</p><br><p>Why does this happen?</p><br><p>Because of the client-server architecture explained before, you were aiming at where the enemy’s head was 100ms <em>before</em> you shot - <em>not</em> when you shot!</p><br><p>In a way, it’s like playing in an universe where the speed of light is really, really slow; you’re aiming at the past position of your enemy, but he’s long gone by the time you squeeze the trigger.</p><br><p>Fortunately, there’s a relatively simple solution for this, which is also pleasant for <em>most</em> players <em>most</em> of the time (with the one exception discussed below).</p><br><p>Here’s how it works:</p><br><ul><br><li><p>When you shoot, client sends this event to the server with full information: the exact timestamp of your shot, and the exact aim of the weapon.</p></li><br><li><p><strong>Here’s the crucial step</strong>. Since the server gets all the input with timestamps, it can authoritatively reconstruct the world at any instant in the past. In particular, it can reconstruct the world exactly as it looked like to any client at any point in time.</p></li><br><li><p>This means the server can know exactly what was on your weapon’s sights the instant you shot. It was the <em>past</em> position of your enemy’s head, but the server knows it was the position of his head in <em>your</em> present.</p></li><br><li><p>The server processes the shot <em>at that point in time</em>, and updates the clients.</p></li><br></ul><br><p>And everyone is happy!</p><br><p>The server is happy because he’s the server. He’s always happy.</p><br><p>You’re happy because you were aiming at your enemy’s head, shot, and got a rewarding headshot!</p><br><p>The enemy may be the only one not entirely happy. If he was standing still when he got shot, it’s his fault, right? If he was moving… wow, you’re a really awesome sniper.</p><br><p>But what if he was in an open position, got behind a wall, and <em>then</em> got shot, a fraction of a second later, when he thought he was safe?</p><br><p>Well, that can happen. That’s the tradeoff you make. Because you shoot at him in the past, he may still be shot up to a few milliseconds after he took cover.</p><br><p>It is somewhat unfair, but it’s the most agreeable solution for everyone involved. It would be much worse to miss an unmissable shot!</p><br><h2 id="conclusion">Conclusion</h2><br><p>This ends my series on Fast-paced Multiplayer. This kind of thing is clearly tricky to get right, but with a clear conceptual understanding about what’s going on, it’s not exceedingly difficult.</p><br><p>Although the audience of these articles were game developers, it found another group of interested readers: gamers! From a gamer point of view it’s also interesting to understand why some things happen the way they happen.</p><br><h3 id="further-reading">Further Reading</h3><br><p>As clever as these techniques are, I can’t claim any credit for them; these articles are just an easy to understand guide to some concepts I’ve learned from other sources, including articles and source code, and some experimentation.</p>
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/18/多人快节奏游戏三之实体插值/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/18/多人快节奏游戏三之实体插值/" itemprop="url">多人快节奏游戏三之实体插值</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-18T22:20:34+00:00">
+                2016-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://www.gabrielgambetta.com/entity-interpolation.html" target="_blank" rel="noopener">原文出处</a></p>
+<h1 class="title">Fast-Paced Multiplayer (Part III): Entity Interpolation</h1>
+
+<hr>
+<p></p><h2 id="introduction">Introduction</h2><p></p>
+<p>In the <a href="client-server-game-architecture.html">first article</a> of the series, we introduced the concept of an <em>authoritative server</em> and its usefulness to prevent client cheats. However, using this technique naively can lead to potentially showstopper issues regarding playability and responsiveness. In the <a href="client-side-prediction-server-reconciliation.html">second article</a>, we proposed <em>client-side prediction</em> as a way to overcome these limitations.</p><br><p>The net result of these two articles is a set of concepts and techniques that allow a player to control an in-game character in a way that feels exactly like a single-player game, even when connected to an authoritative server through an internet connection with transmission delays.</p><br><p>In this article, we’ll explore the consequences of having other player-controled characters connected to the same server.</p><br><h2 id="server-time-step">Server time step</h2><br><p>In the previous article, the behavior of the server we described was pretty simple – it read client inputs, updated the game state, and sent it back to the client. When more than one client is connected, though, the main server loop is somewhat different.</p><br><p>In this scenario, several clients may be sending inputs simultaneously, and at a fast pace (as fast as the player can issue commands, be it pressing arrow keys, moving the mouse or clicking the screen). Updating the game world every time inputs are received from each client and then broadcasting the game state would consume too much CPU and bandwidth.</p><br><p>A better approach is to queue the client inputs as they are received, without any processing. Instead, the game world is updated periodically at low frequency, for example 10 times per second. The delay between every update, 100ms in this case, is called the<em>time step</em>. In every update loop iteration, all the unprocessed client input is applied (possibly in smaller time increments than the time step, to make physics more predictable), and the new game state is broadcast to the clients.</p><br><p>In summary, the game world updates independent of the presence and amount of client input, at a predictable rate.</p><br><h2 id="dealing-with-low-frequency-updates">Dealing with low-frequency updates</h2><br><p>From the point of view of a client, this approach works as smoothly as before – client-side prediction works independently of the update delay, so it clearly also works under predictable, if relatively infrequent, state updates. However, since the game state is broadcast at a low frequency (continuing with the example, every 100ms), the client has very sparse information about the other entities that may be moving throughout the world.</p><br><p>A first implementation would update the position of other characters when it receives a state update; this immediately leads to very choppy movement, that is, discrete jumps every 100ms instead of smooth movement.</p><br><figure><br><img src="/img/fpm3-01.png" alt="Client 1 as seen by Client 2."><figcaption>Client 1 as seen by Client 2.</figcaption><br></figure><br><p>Depending on the type of game you’re developing there are many ways to deal with this; in general, the more predictable your game entities are, the easier it is to get it right.</p><br><h2 id="dead-reckoning">Dead reckoning</h2><br><p>Suppose you’re making a car racing game. A car that goes really fast is pretty predictable – for example, if it’s running at 100 meters per second, a second later it will be roughly 100 meters ahead of where it started.</p><br><p>Why “roughly”? During that second the car could have accelerated or decelerated a bit, or turned to the right or to the left a bit – the key word here is “a bit”. The maneuverability of a car is such that at high speeds its position at any point in time is highly dependent on its previous position, speed and direction, regardless of what the player actually does. In other words, a racing car can’t do a 180º turn instantly.</p><br><p>How does this work with a server that sends updates every 100 ms? The client receives authoritative speed and heading for every competing car; for the next 100 ms it won’t receive any new information, but it still needs to show them running. The simplest thing to do is to assume the car’s heading and acceleration will remain constant during that 100 ms, and run the car physics locally with that parameters. Then, 100 ms later, when the server update arrives, the car’s position is corrected.</p><br><p>The correction can be big or relatively small depending on a lot of factors. If the player does keep the car on a straight line and doesn’t change the car speed, the predicted position will be exactly like the corrected position. On the other hand, if the player crashes against something, the predicted position will be extremely wrong.</p><br><p>Note that dead reckoning can be applied to low-speed situations – battleships, for example. In fact, the term “dead reckoning” has its origins in marine navigation.</p><br><h2 id="entity-interpolation">Entity interpolation</h2><br><p>There are some situations where dead reckoning can’t be applied at all – in particular, all scenarios where the player’s direction and speed can change instantly. For example, in a 3D shooter, players usually run, stop, and turn corners at very high speeds, making dead reckoning essentially useless, as positions and speeds can no longer be predicted from previous data.</p><br><p>You can’t just update player positions when the server sends authoritative data; you’d get players who teleport short distances every 100 ms, making the game unplayable.</p><br><p>What you do have is authoritative position data every 100 ms; the trick is how to show the player what happens inbetween. The key to the solution is to show the other players <em>in the past</em> relative to the user’s player.</p><br><p>Say you receive position data at <strong>t = 1000</strong>. You already had received data at <strong>t = 900</strong>, so you know where the player was at <strong>t = 900</strong> and <strong>t = 1000</strong>. So, from <strong>t = 1000</strong> and <strong>t = 1100</strong>, you show what the other player did from <strong>t = 900</strong> to <strong>t = 1000</strong>. This way you’re always showing the user <em>actual movement data</em>, except you’re showing it 100 ms “late”.</p><br><figure><br><img src="/img/fpm3-02.png" alt="Client 2 renders Client 1 in the past, interpolating last known positions."><figcaption>Client 2 renders Client 1 “in the past”, interpolating last known positions.</figcaption><br></figure><br><p>The position data you use to interpolate from <strong>t = 900</strong> to <strong>t = 1000</strong> depends on the game. Interpolation usually works well enough. If it doesn’t, you can have the server send more detailed movement data with each update – for example, a sequence of straight segments followed by the player, or positions sampled every 10 ms which look better when interpolated (you don’t need to send 10 times more data – since you’re sending deltas for small movements, the format on the wire can be heavily optimized for this particular case).</p><br><p>Note that using this technique, every player sees a slightly different rendering of the game world, because each player sees itself <em>in the present</em> but sees the other entities <em>in the past</em>. Even for a fast paced game, however, seeing other entities with a 100 ms isn’t generally noticeable.</p><br><p>There are exceptions – when you need a lot of spatial and temporal accuracy, such as when the player shoots at another player. Since the other players are seen in the past, you’re aiming with a 100 ms delay – that is, you’re shooting where your target was 100 ms ago! We’ll deal with this in the next article.</p><br><h2 id="summary">Summary</h2><br><p>In a client-server environment with an authoritative server, infrequent updates and network delay, you must still give players the illusion of continuity and smooth movement. In <a href="client-side-prediction-server-reconciliation.html">part 2 of the series</a> we explored a way to show the user controlled player’s movement in real time using client-side prediction and server reconciliation; this ensures user input has an immediate effect on the local player, removing a delay that would render the game unplayable.</p><br><p>Other entities are still a problem, however. In this article we explored two ways of dealing with them.</p><br><p>The first one, <em>dead reckoning</em>, applies to certain kinds of simulations where entity position can be acceptably estimated from previous entity data such as position, speed and acceleration. This approach fails when these conditions aren’t met.</p><br><p>The second one, <em>entity interpolation</em>, doesn’t predict future positions at all – it uses only real entity data provided by the server, thus showing the other entities slightly delayed in time.</p><br><p>The net effect is that the user’s player is seen <em>in the present</em> and the other entities are seen <em>in the past</em>. This usually creates an incredibly seamless experience.</p><br><p>However, if nothing else is done, the illusion breaks down when an event needs high spatial and temporal accuracy, such as shooting at a moving target: the position where Client 2 renders Client 1 doesn’t match the server’s nor Client 1′s position, so headshots become impossible! Since no game is complete without headshots, we’ll deal with this issue in the next article.</p>
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/17/多人快节奏游戏二之客户端预测与服务器修正/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -793,355 +1129,11 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/11/游戏服务端常用架构二/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/11/游戏服务端常用架构二/" itemprop="url">游戏服务端常用架构二</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-11T15:27:44+00:00">
-                2016-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GS/" itemprop="url" rel="index">
-                    <span itemprop="name">GS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h2 id="第三代游戏服务器-2007"><a href="#第三代游戏服务器-2007" class="headerlink" title="第三代游戏服务器 2007"></a>第三代游戏服务器 2007</h2><p>从魔兽世界开始无缝世界地图已经深入人心，比较以往游戏玩家走个几步还需要切换场景，每次切换就要等待 LOADING个几十秒是一件十分破坏游戏体验的事情。于是对于 2005年以后的大型 MMORPG来说，无缝地图已成为一个标准配置。比较以往按照地图来切割游戏而言，无缝世界并不存在一块地图上面的人有且只由一台服务器处理了：</p>
- <img src="/2016/07/11/游戏服务端常用架构二/image008.png">
-<p>每台 Node服务器用来管理一块地图区域，由 NodeMaster（NM）来为他们提供总体管理。更高层次的 World则提供大陆级别的管理服务。这里省略若干细节服务器，比如传统数据库前端，登录服务器，日志和监控等，统统用 ADMIN概括。在这样的结构下，玩家从一块区域走向另外一块区域需要简单处理一下：</p>
- <img src="/2016/07/11/游戏服务端常用架构二/image009.png">
-<p>玩家1完全由节点A控制，玩家3完全由节点B控制。而处在两个节点边缘的2号玩家，则同时由A和B提供服务。玩家2从A移动到B的过程中，会同时向A请求左边的情况，并向B请求右边的情况。但是此时玩家2还是属于A管理。直到玩家2彻底离开AB边界很远，才彻底交由B管理。按照这样的逻辑将世界地图分割为一块一块的区域，交由不同的 Node去管理。</p>
-<p>对于一个 Node所负责的区域，地理上没必要连接在一起，比如大陆的四周边缘部分和高山部分的区块人比较少，可以统一交给一个Node去管理，而这些区块在地理上并没有联系在一起的必要性。一个 Node到底管理哪些区块，可以根据游戏实时运行的负载情况，定时维护的时候进行更改 NodeMaster 上面的配置。</p>
-<p>于是碰到第一个问题是很多 Node服务器需要和玩家进行通信，需要问管理服务器特定UID为多少的玩家到底在哪台 Gate上，以前按场景切割的服务器这个问题不大，问了一次以后就可以缓存起来了，但是现在服务器种类增加不少，玩家又会飘来飘去，按UID查找玩家比较麻烦；另外一方面 GATE需要动态根据坐标计算和哪些 Node通信，导致逻辑越来越厚，于是把：“用户对象”从负责连接管理的 GATE中切割出来势在必行于是有了下面的模型：</p>
- <img src="/2016/07/11/游戏服务端常用架构二/image010.png">
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/11/游戏服务端常用架构一/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/11/游戏服务端常用架构一/" itemprop="url">游戏服务端常用架构一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-11T12:24:44+00:00">
-                2016-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GS/" itemprop="url" rel="index">
-                    <span itemprop="name">GS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h2 id="卡牌、跑酷等弱交互服务端"><a href="#卡牌、跑酷等弱交互服务端" class="headerlink" title="卡牌、跑酷等弱交互服务端"></a>卡牌、跑酷等弱交互服务端</h2><p>卡牌跑酷类因为交互弱，玩家和玩家之间不需要实时面对面PK，打一下对方的离线数据，计算下排行榜，买卖下道具即可，所以实现往往使用简单的 HTTP服务器：</p>
-<img src="/2016/07/11/游戏服务端常用架构一/image001.png">
-<p>登录时可以使用非对称加密（RSA, DH），服务器根据客户端uid，当前时间戳还有服务端私钥，计算哈希得到的加密 key 并发送给客户端。之后双方都用 HTTP通信，并用那个key进行RC4加密。客户端收到key和时间戳后保存在内存，用于之后通信，服务端不需要保存 key，因为每次都可以根据客户端传上来的 uid 和时间戳以及服务端自己的私钥计算得到。用模仿 TLS的行为，来保证多次 HTTP请求间的客户端身份，并通过时间戳保证同一人两次登录密钥不同。</p>
-<p>每局开始时，访问一下，请求一下关卡数据，玩完了又提交一下，验算一下是否合法，获得什么奖励，数据库用单台 MySQL或者 MongoDB即可，后端的 Redis做缓存（可选）。如果要实现通知，那么让客户端定时15秒轮询一下服务器，如果有消息就取下来，如果没消息可以逐步放长轮询时间，比如30秒；如果有消息，就缩短轮询时间到10秒，5秒，即便两人聊天，延迟也能自适应。</p>
-<p>此类服务器用来实现一款三国类策略或者卡牌及酷跑的游戏已经绰绰有余，这类游戏因为逻辑简单，玩家之间交互不强，使用 HTTP来开发的话，开发速度快，调试只需要一个浏览器就可以把逻辑调试清楚了。</p>
-<h2 id="第一代游戏服务器-1978"><a href="#第一代游戏服务器-1978" class="headerlink" title="第一代游戏服务器 1978"></a>第一代游戏服务器 1978</h2><p>1978年，英国著名的财经学校University of Essex的学生 Roy Trubshaw编写了世界上第一个MUD程序《MUD1》，在University of Essex于1980年接入 ARPANET之后加入了不少外部的玩家，甚至包括国外的玩家。《MUD1》程序的源代码在 ARPANET共享之后出现了众多的改编版本，至此MUD才在全世界广泛流行起来。不断完善的 MUD1的基础上产生了开源的 MudOS（1991），成为众多网游的鼻祖：</p>
- <img src="/2016/07/11/游戏服务端常用架构一/image002.png">
-<p>MUDOS采用 C语言开发，因为玩家和玩家之间有比较强的交互（聊天，交易，PK），MUDOS使用单线程无阻塞套接字来服务所有玩家，所有玩家的请求都发到同一个线程去处理，主线程每隔1秒钟更新一次所有对象（网络收发，更新对象状态机，处理超时，刷新地图，刷新NPC）。</p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/33/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="extend next" rel="next" href="/page/35/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/33/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="extend next" rel="next" href="/page/35/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1207,7 +1199,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">259</span>
+                <span class="site-state-item-count">261</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

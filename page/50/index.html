@@ -304,6 +304,420 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/29/some_common_examination/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/09/29/some_common_examination/" itemprop="url">一些常见的笔试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-29T02:11:22+00:00">
+                2014-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="考察cpp的静态绑定"><a href="#考察cpp的静态绑定" class="headerlink" title="考察cpp的静态绑定"></a>考察cpp的静态绑定</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MMPA</span>&#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;v_; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">tvalue</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> v_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">const</span> MMPA* p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="comment">// 		std::cout &lt;&lt; p-&gt;v_ &lt;&lt; std::endl;</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;tvalue() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		getchar(); <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会打印什么?</p>
+<h2 id="答案以及分析"><a href="#答案以及分析" class="headerlink" title="答案以及分析"></a>答案以及分析</h2><p><strong>答案</strong>: 打印1之后崩溃</p>
+<p><strong>真正的原因是</strong>：</p>
+<p>因为对于非虚成员函数，Ｃ++这门语言是静态绑定的。这也是Ｃ++语言和其它语言Java, Python的一个显著区别。以此下面的语句为例：somenull-&gt;foo();这语句的意图是：调用对象somenull的foo成员函数。如果这句话在Java或Python等动态绑定的语言之中，编译器生成的代码大概是：找到somenull的foo成员函数，调用它。</p>
+<p>（注意，这里的找到是程序运行的时候才找的，这也是所谓动态绑定的含义：运行时才绑定这个函数名与其对应的实际代码。有些地方也称这种机制为迟绑定，晚绑定。）但是对于C++。为了保证程序的运行时效率，Ｃ++的设计者认为凡是编译时能确定的事情，就不要拖到运行时再查找了。</p>
+<p>所以C++的编译器看到这句话会这么干：</p>
+<ol>
+<li>查找somenull的类型，发现它有一个非虚的成员函数叫foo。（编译器干的）</li>
+<li>找到了，在这里生成一个函数调用，直接调B::foo(somenull)。</li>
+</ol>
+<p>所以到了运行时，由于foo()函数里面并没有任何需要解引用somenull指针的代码，所以真实情况下也不会引发segment fault。这里对成员函数的解析，和查找其对应的代码的工作都是在编译阶段完成而非运行时完成的，这就是所谓的静态绑定，也叫早绑定。正确理解C++的静态绑定可以理解一些特殊情况下C++的行为。</p>
+<h1 id="求最大公约数"><a href="#求最大公约数" class="headerlink" title="求最大公约数"></a>求最大公约数</h1><p>求 a 和 b 的最大公约数<br><img src="/img/some_common_examination/greatest_common_divisor.png" alt="辗转相除法"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">measure</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> product = a * b;</span><br><span class="line">	<span class="keyword">if</span> (a == <span class="number">0</span> || b == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (a &lt; b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = a;</span><br><span class="line">		a = b;</span><br><span class="line">		b = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (<span class="keyword">int</span> mod = a % b)</span><br><span class="line">	&#123;</span><br><span class="line">		a = b;</span><br><span class="line">		b = mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//return b; // 最大公约数</span></span><br><span class="line">	<span class="keyword">return</span> product / b; <span class="comment">// 记住这个公式： a*b=最小公倍数*最大公约数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="棋盘-格子问题"><a href="#棋盘-格子问题" class="headerlink" title="棋盘/格子问题"></a>棋盘/格子问题</h1><p>在如下7*5的棋盘中，请计算从A移动到B一共有多少走法？要求每次只能向上或向右移动一格，并且不能经过P。(答案为492)</p>
+<p><img src="/img/some_common_examination/SumWaysOfMoveOnChessBoard.jpg" alt></p>
+<p>给定一个M*N的格子或棋盘，从左下角走到右上角的走法总数（每次只能向右或向上移动一个方格边长的距离）   </p>
+<p>运用动态规划来解答 :<br>我们可以把棋盘的左下角看做二维坐标的原点(0,0)，把棋盘的右上角看做二维坐标(M,N)(坐标系的单位长度为小方格的变长)<br>用f(i,j)表示移动到坐标f(i,j)的走法总数，其中0=&lt;i,j&lt;=n，设f(m,n)代表从坐标（0,0）到坐标（m,n）的移动方法，则<br>    <code>f(m,n)=f(m-1,n)+f(m,n-1).</code><br>于是状态f(i,j)的状态转移方程为：   </p>
+<pre><code>f(i,j)=f(i-1,j)+f(i,j-1)   if i,j&gt;0
+f(i,j)=f(i,j-1)            if i=0
+f(i,j)=f(i-1,j)            if j=0
+</code></pre><p>初始情况就为：f(0,0)=0, f(0,1)=1, f(1,0)=1，这个问题可以在时间O(n^2)，空间O(n^2)内求解，非递归解.   </p>
+<p>所以答案为     492 =     </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SumWaysOfMoveOnChessBoard(<span class="number">7</span>, <span class="number">5</span>) - SumWaysOfMoveOnChessBoard(<span class="number">3</span>, <span class="number">3</span>) * SumWaysOfMoveOnChessBoard(<span class="number">7</span> - <span class="number">3</span>, <span class="number">5</span> - <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="递归解"><a href="#递归解" class="headerlink" title="递归解"></a>递归解</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SumWaysOfMoveOnChessBoard_Recursion</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (m == <span class="number">0</span> &amp;&amp; n == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (m==<span class="number">0</span> || n==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> SumWaysOfMoveOnChessBoard_Recursion(m, n - <span class="number">1</span>) + SumWaysOfMoveOnChessBoard_Recursion(m - <span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="非递归解"><a href="#非递归解" class="headerlink" title="非递归解"></a>非递归解</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SumWaysOfMoveOnChessBoard_NonRecursion_RawArray</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (m == <span class="number">0</span> || n == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span> (m == <span class="number">0</span> &amp;&amp; n == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> xSize = m + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> ySize = n + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>** arr = <span class="keyword">new</span> <span class="keyword">int</span>*[xSize];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; xSize; ++i)</span><br><span class="line">		arr[i] = <span class="keyword">new</span> <span class="keyword">int</span>[ySize];</span><br><span class="line"></span><br><span class="line">	arr[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; xSize; ++i) arr[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ySize; ++i) arr[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; xSize; ++i)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; ySize; ++j)</span><br><span class="line">			arr[i][j] = arr[i - <span class="number">1</span>][j] + arr[i][j - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; xSize; ++i)</span><br><span class="line">		<span class="keyword">delete</span>[] arr[i];</span><br><span class="line">	<span class="keyword">delete</span>[] arr;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> arr[m][n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SumWaysOfMoveOnChessBoard_NonRecursion_STL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (m == <span class="number">0</span> &amp;&amp; n == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> xSize = m + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> ySize = n + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; ChessBoardArray(xSize, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(ySize));;</span><br><span class="line">	ChessBoardArray[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; xSize; ++i) ChessBoardArray[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; ySize; ++j) ChessBoardArray[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; xSize; ++i)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; ySize; ++j)</span><br><span class="line">			ChessBoardArray[i][j] = ChessBoardArray[i][j - <span class="number">1</span>] + ChessBoardArray[i - <span class="number">1</span>][j];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ChessBoardArray[m][n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="大数加法-乘法"><a href="#大数加法-乘法" class="headerlink" title="大数加法/乘法"></a>大数加法/乘法</h1><p><strong>大数加法思路</strong> :<br>模拟小学列竖式</p>
+<pre><code>        9  8
++       2  1
+-------------
+    (1)(1)(9)
+</code></pre><p><strong>大数乘法思路</strong> :</p>
+<p>模拟乘法累加 - 改进<br>简单来说，方法二就是先不算任何的进位，也就是说，将每一位相乘，相加的结果保存到同一个位置，到最后才计算进位。</p>
+<p>例如：计算98×21,步骤如下</p>
+<pre><code>        9  8
+×       2  1
+-------------
+       (9)(8)   &lt;---- 第1趟: 98×1的每一位结果 
+   (18)(16)     &lt;---- 第2趟: 98×2的每一位结果 
+-------------
+   (18)(25)(8)  &lt;---- 这里就是相对位的和，还没有累加进位
+</code></pre><p>这里唯一要注意的便是进位问题，我们可以先不考虑进位，当所有位对应相加，产生结果之后，再考虑。<br>从右向左依次累加，如果该位的数字大于10，那么我们用取余运算，在该位上只保留取余后的个位数，而将十位数进位（通过模运算得到）累加到高位便可，循环直到累加完毕。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BigIntAddition</span><span class="params">(<span class="keyword">char</span>* bigIntA, <span class="keyword">char</span>* bigIntB)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!bigIntA || !bigIntB)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">size_t</span> strlenA = <span class="built_in">strlen</span>(bigIntA);</span><br><span class="line">	<span class="keyword">size_t</span> strlenB = <span class="built_in">strlen</span>(bigIntB);</span><br><span class="line">	<span class="keyword">size_t</span> biggerStrlen = strlenA &gt; strlenB ? strlenA : strlenB;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* reversedA = <span class="keyword">new</span> <span class="keyword">int</span>[biggerStrlen];</span><br><span class="line">	<span class="keyword">int</span>* reversedB = <span class="keyword">new</span> <span class="keyword">int</span>[biggerStrlen];</span><br><span class="line">	<span class="comment">// 先将例子中的 1234 和 98765 逆序存储, 不够的补零, 方便计算</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//cout &lt;&lt; int(strlenA - 1 - i) &lt;&lt; endl;</span></span><br><span class="line">		reversedA[i] = (<span class="keyword">int</span>(strlenA - <span class="number">1</span> - i) &gt;= <span class="number">0</span>) ? (bigIntA[strlenA - <span class="number">1</span> - i] - <span class="string">'0'</span>) : <span class="number">0</span>;</span><br><span class="line">		reversedB[i] = (<span class="keyword">int</span>(strlenB - <span class="number">1</span> - i) &gt;= <span class="number">0</span>) ? (bigIntB[strlenB - <span class="number">1</span> - i] - <span class="string">'0'</span>) : <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; reversedA[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// --&gt; 43210</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; reversedB[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// --&gt; 98765</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* bigIntSum = <span class="keyword">new</span> <span class="keyword">int</span>[biggerStrlen + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>; <span class="comment">// 进位</span></span><br><span class="line">						 <span class="comment">// 模拟小学的列竖式加法, 满10进1</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		bigIntSum[i] = reversedA[i] + reversedB[i] + x;</span><br><span class="line">		x = bigIntSum[i] / <span class="number">10</span>;</span><br><span class="line">		bigIntSum[i] %= <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">size_t</span> printLen = biggerStrlen;</span><br><span class="line">	<span class="comment">// 查看最后一个进位是否 &gt; 0, 大于零则最高位为1</span></span><br><span class="line">	<span class="keyword">if</span> (x &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		bigIntSum[biggerStrlen] = x;</span><br><span class="line">		printLen = biggerStrlen + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; printLen; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; bigIntSum[printLen - <span class="number">1</span> - i]; <span class="comment">// --&gt; 58023</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] bigIntSum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BigIntMultiplication</span><span class="params">(<span class="keyword">char</span>* bigIntA, <span class="keyword">char</span>* bigIntB)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!bigIntA || !bigIntB)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> strlenA = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(<span class="built_in">strlen</span>(bigIntA));</span><br><span class="line">	<span class="keyword">int</span> strlenB = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(<span class="built_in">strlen</span>(bigIntB));</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; strlenA &lt;&lt; <span class="string">", "</span> &lt;&lt; strlenB &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> biggerStrlen = strlenA &gt; strlenB ? strlenA : strlenB;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* reversedA = <span class="keyword">new</span> <span class="keyword">int</span>[biggerStrlen];</span><br><span class="line">	<span class="keyword">int</span>* reversedB = <span class="keyword">new</span> <span class="keyword">int</span>[biggerStrlen];</span><br><span class="line">	<span class="comment">// 先将例子中的 1234 和 98765 逆序存储, 不够的补零, 方便计算</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		reversedA[i] = (<span class="keyword">int</span>(strlenA - <span class="number">1</span> - i) &gt;= <span class="number">0</span>) ? (bigIntA[strlenA - <span class="number">1</span> - i] - <span class="string">'0'</span>) : <span class="number">0</span>;</span><br><span class="line">		reversedB[i] = (<span class="keyword">int</span>(strlenB - <span class="number">1</span> - i) &gt;= <span class="number">0</span>) ? (bigIntB[strlenB - <span class="number">1</span> - i] - <span class="string">'0'</span>) : <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; reversedA[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// --&gt; 43210</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; biggerStrlen; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; reversedB[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// --&gt; 98765</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配一个空间，用来存储运算的结果，num1长的数 * num2长的数，</span></span><br><span class="line">	<span class="comment">// 结果不会超过num1+num2长</span></span><br><span class="line">	<span class="keyword">int</span>* bigIntProduct = <span class="keyword">new</span> <span class="keyword">int</span>[strlenA + strlenB];</span><br><span class="line">	<span class="comment">// 比如防止下面执行 bigIntSum[i + j] += reversedA[i] * reversedB[j]; 这句的时候</span></span><br><span class="line">	<span class="comment">// i+j = 0 时 出错, 因为 bigIntSum[0] 为一个未初始化的值</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA + strlenB; ++i)</span><br><span class="line">		bigIntProduct[i] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> carry = <span class="number">0</span>; <span class="comment">// 进位</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 先不考虑进位问题，根据竖式的乘法运算，</span></span><br><span class="line">	<span class="comment">// num1的第i位与num2的第j位相乘，结果应该存放在结果的第i+j位上</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA; ++i)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; strlenB; ++j)</span><br><span class="line">			bigIntProduct[i + j] += reversedA[i] * reversedB[j];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA + strlenB; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; bigIntProduct[i] &lt;&lt; <span class="string">", "</span>; <span class="comment">// --&gt; 3659707060341650</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//单独处理进位</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA + strlenB - <span class="number">1</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		bigIntProduct[i] += carry;</span><br><span class="line">		carry = bigIntProduct[i] / <span class="number">10</span>;</span><br><span class="line">		bigIntProduct[i] %= <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA + strlenB; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; bigIntProduct[i] &lt;&lt; <span class="string">", "</span>; <span class="comment">// --&gt; 626770070</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> printLen = strlenA + strlenB - <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// 查看最后一个进位是否 &gt; 0, 大于零则最高位为1</span></span><br><span class="line">	<span class="keyword">if</span> (carry &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		bigIntProduct[strlenA + strlenB - <span class="number">1</span>] = carry;</span><br><span class="line">		printLen = strlenA + strlenB;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; printLen; ++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; bigIntProduct[printLen - <span class="number">1</span> - i]; <span class="comment">// --&gt; 70077626</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">delete</span>[] bigIntProduct;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *bigIntA = <span class="string">"1234"</span>;</span><br><span class="line">	<span class="keyword">char</span> *bigIntB = <span class="string">"56789"</span>;</span><br><span class="line">	BigIntAddition(bigIntA, bigIntB);</span><br><span class="line">	BigIntMultiplication(bigIntA, bigIntB);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="最长公共子串"><a href="#最长公共子串" class="headerlink" title="最长公共子串"></a>最长公共子串</h1><p>问题：有两个字符串str和str2，求出两个字符串中最长公共子串长度。</p>
+<p>比如：str=acbcbcef，str2=abcbced，则str和str2的最长公共子串为bcbce，最长公共子串长度为5。</p>
+<p>算法思路：</p>
+<p>1、把两个字符串分别以行和列组成一个二维矩阵。<br>2、比较二维矩阵中每个点对应行列字符中否相等，相等的话值设置为1，否则设置为0。<br>3、通过查找出值为1的最长对角线就能找到最长公共子串。</p>
+<p>针对于上面的两个字符串我们可以得到的二维矩阵如下：<br><img src="/img/some_common_examination/LongestCommonSubstring1.jpg" alt></p>
+<p>从上图可以看到，str和str2共有5个公共子串，但最长的公共子串长度为5。</p>
+<p>为了进一步优化算法的效率，我们可以再计算某个二维矩阵的值的时候顺便计算出来当前最长的公共子串的长度，<br>即某个二维矩阵元素的值由 <code>item[i][j]=1</code> 演变为 <code>item[i][j]=1 +item[i-1][j-1]</code> ，这样就避免了后续查找对角线长度的操作了。修改后的二维矩阵如下：<br><img src="/img/some_common_examination/LongestCommonSubstring2.jpg" alt></p>
+<p>故状态转移方程</p>
+<pre><code>X[i] == Y[j]，dp[i][j] = dp[i-1][j-1] + 1
+X[i] != Y[j]，dp[i][j] = 0
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LongestCommonSubstring</span><span class="params">(<span class="keyword">char</span>* strA, <span class="keyword">char</span>* strB)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!strA || !strB)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> strlenA = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(<span class="built_in">strlen</span>(strA));</span><br><span class="line">	<span class="keyword">int</span> strlenB = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(<span class="built_in">strlen</span>(strB));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> biggerStrlen = strlenA &gt; strlenB ? (strlenA + <span class="number">1</span>) : (strlenB + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">char</span> * lcs = <span class="keyword">new</span> <span class="keyword">char</span>[biggerStrlen];</span><br><span class="line">	<span class="keyword">int</span> lcsMaxIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>** temp = <span class="keyword">new</span> <span class="keyword">int</span>*[strlenA];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA; ++i)</span><br><span class="line">		temp[i] = <span class="keyword">new</span> <span class="keyword">int</span>[strlenB];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; strlenB; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (strA[i] == strB[j])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; j &gt; <span class="number">0</span>)</span><br><span class="line">					temp[i][j] = temp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					temp[i][j] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				temp[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (temp[i][j] &gt; maxLen)</span><br><span class="line">			&#123;</span><br><span class="line">				maxLen = temp[i][j];</span><br><span class="line">				lcsMaxIndex = i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; maxLen; ++i)</span><br><span class="line">		*(lcs + maxLen - i - <span class="number">1</span>) = strA[lcsMaxIndex--];</span><br><span class="line">	*(lcs+maxLen) = <span class="string">'\0'</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; lcs &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strlenA; ++i)</span><br><span class="line">		<span class="keyword">delete</span>[] temp[i];</span><br><span class="line">	<span class="keyword">delete</span>[] temp;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] lcs;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"maxLen = "</span> &lt;&lt;</span><br><span class="line">		LongestCommonSubstring(<span class="string">"wwwadfabcdeasdf"</span>, <span class="string">"wwweoruqpeorqabcdezcvnz"</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/25/deque_queue_stack_comparison/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/09/25/deque_queue_stack_comparison/" itemprop="url">STL之队列和双端队列和栈的比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-25T19:11:22+00:00">
+                2014-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="队列和双端队列的比较"><a href="#队列和双端队列的比较" class="headerlink" title="队列和双端队列的比较"></a>队列和双端队列的比较</h1><p><strong>队列</strong>(queue)是一种是相对于栈的一种数据结构，它是先进先出(First In First Out)。<br>它只可以在尾部添加元素。</p>
+<img src="/2014/09/25/deque_queue_stack_comparison/deque_queue_stack_comparison_1.png" title="队列">
+<p><strong>双端队列</strong>(deque double ended queue（双端队列）)是一种相对于队列的一种数据结构。它可以在尾部和头部插入、移除和获取。</p>
+<img src="/2014/09/25/deque_queue_stack_comparison/deque_queue_stack_comparison_2.png" title="双端队列">
+<h1 id="三者成员函数的比较"><a href="#三者成员函数的比较" class="headerlink" title="三者成员函数的比较"></a>三者成员函数的比较</h1><p>通过他们各自的成员函数我们能一目了然的看出区别</p>
+<h2 id="栈的成员函数"><a href="#栈的成员函数" class="headerlink" title="栈的成员函数"></a>栈的成员函数</h2><ul>
+<li><code>stack&lt;Type&gt; s</code> : 定义一个stack的变量 </li>
+<li>s.push(x) : 入栈，如例  </li>
+<li>s.pop() : 出栈，如例 . 注意，出栈操作只是删除栈顶元素，并不返回该元素。 </li>
+<li>s.top() : 访问栈顶，如例  </li>
+<li>s.empty() : 判断栈空，如例，当栈空时，返回true。  </li>
+<li>s.size() : 访问栈中的元素个数，如例  </li>
+</ul>
+<h2 id="队列的成员函数"><a href="#队列的成员函数" class="headerlink" title="队列的成员函数"></a>队列的成员函数</h2><ul>
+<li><code>queue&lt;Type&gt; M</code> : 定义一个queue的变量    </li>
+<li>M.empty()  : 查看是否为空范例     是的话返回1，不是返回0;   </li>
+<li>M.push() : 从已有元素后面增加元素 </li>
+<li>M.size() : 输出现有元素的个数    </li>
+<li>M.front() : 显示第一个元素       </li>
+<li>M.back() : 显示最后一个元素      </li>
+<li>M.pop() : 清除第一个元素      </li>
+</ul>
+<h2 id="双端队列的成员函数"><a href="#双端队列的成员函数" class="headerlink" title="双端队列的成员函数"></a>双端队列的成员函数</h2><ul>
+<li><code>deque&lt;Type&gt; c</code> :     定义一个deque的变量</li>
+<li>c.pop_back()    :    删除最后一个数据。</li>
+<li>c.pop_front()     :   删除头部数据。</li>
+<li>c.push_back(elem) :  在尾部加入一个数据。</li>
+<li>c.push_front(elem)  : 在头部插入一个数据。</li>
+<li>c.clear()       :     移除容器中所有数据。</li>
+<li>c.front()       :     传回地一个数据。</li>
+<li>c.back()       :     传回最后一个数据，不检查这个数据是否存在。</li>
+<li>c.size()       :      返回容器中实际数据的个数。</li>
+<li>c.empty()      :     判断容器是否为空。</li>
+</ul>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/24/binary_search_tree_insert_delete_search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -794,375 +1208,11 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/12/面向对象的四大特征以及五大原则/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/12/面向对象的四大特征以及五大原则/" itemprop="url">面向对象的四大特征以及五大原则</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-12T10:05:48+00:00">
-                2014-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="面向对象的四大特征"><a href="#面向对象的四大特征" class="headerlink" title="面向对象的四大特征"></a>面向对象的四大特征</h1><ul>
-<li><p>封装：<br>封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面，面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治，封装的对象，这些对象通过一个受保护的接口访问其他对象</p>
-</li>
-<li><p>继承：<br>继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表达共性的方法，对象的一个新类可以从现在的类中派生，这个过程成为继承，新类继承了原始类的特性，新类成为原始类的派生类，而原始类称为新类的基类，派生类可以从他的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更加适合特殊的需求</p>
-</li>
-<li><p>抽象：<br>抽象就是忽略一个主题中与当前目标无关的那些方面，以便充分的注意与当前目标有关的方面，抽象包括两个方面，一个是过程抽象，二是数据抽象</p>
-</li>
-<li><p>多态性：<br>多态性是指允许不同类的对象对同一消息作出响应，多态性包括参数化多态性和包含多态性，多态性语言具有灵活，抽象，行为共享，代码共享的优势，很好的解决了应用程序函数同名的问题</p>
-</li>
-</ul>
-<h1 id="面向对象的五大原则"><a href="#面向对象的五大原则" class="headerlink" title="面向对象的五大原则"></a>面向对象的五大原则</h1><p>记忆口诀 : 替开依(“凯隐”, 一个英雄联盟英雄名字)接单</p>
-<ul>
-<li><p><strong>单一职责原则（Single-Resposibility Principle）</strong><br>其核心思想为：一个类，最好只做一件事，只有一个引起它的变化。单一职责原则可以看做是低耦合、高内聚在面向对象原则上的引申，将职责定义为引起变化的原因，以提高内聚性来减少引起变化的原因。职责过多，可能引起它变化的原因就越多，这将导致职责依赖，相互之间就产生影响，从而大大损伤其内聚性和耦合度。通常意义下的单一职责，就是指只有一种单一功能，不要为类实现过多的功能点，以保证实体只有一个引起它变化的原因。<br>专注，是一个人优良的品质；同样的，单一也是一个类的优良设计。交杂不清的职责将使得代码看起来特别别扭牵一发而动全身，有失美感和必然导致丑陋的系统错误风险。</p>
-</li>
-<li><p><strong>开放封闭原则（Open-Closed principle）</strong><br>其核心思想是：软件实体应该是可扩展的，而不可修改的。也就是，对扩展开放，对修改封闭的。开放封闭原则主要体现在两个方面1、对扩展开放，意味着有新的需求或变化时，可以对现有代码进行扩展，以适应新的情况。2、对修改封闭，意味着类一旦设计完成，就可以独立完成其工作，而不要对其进行任何尝试的修改。<br>实现开开放封闭原则的核心思想就是对抽象编程，而不对具体编程，因为抽象相对稳定。让类依赖于固定的抽象，所以修改就是封闭的；而通过面向对象的继承和多态机制，又可以实现对抽象类的继承，通过覆写其方法来改变固有行为，实现新的拓展方法，所以就是开放的。<br>“需求总是变化”没有不变的软件，所以就需要用封闭开放原则来封闭变化满足需求，同时还能保持软件内部的封装体系稳定，不被需求的变化影响。</p>
-</li>
-<li><p><strong>替换原则（Liskov-Substituion Principle）</strong><br>其核心思想是：子类必须能够替换其基类。这一思想体现为对继承机制的约束规范，只有子类能够替换基类时，才能保证系统在运行期内识别子类，这是保证继承复用的基础。在父类和子类的具体行为中，必须严格把握继承层次中的关系和特征，将基类替换为子类，程序的行为不会发生任何变化。同时，这一约束反过来则是不成立的，子类可以替换基类，但是基类不一定能替换子类。<br>Liskov替换原则，主要着眼于对抽象和多态建立在继承的基础上，因此只有遵循了Liskov替换原则，才能保证继承复用是可靠地。实现的方法是面向接口编程：将公共部分抽象为基类接口或抽象类，通过Extract Abstract Class，在子类中通过覆写父类的方法实现新的方式支持同样的职责。<br>Liskov替换原则是关于继承机制的设计原则，违反了Liskov替换原则就必然导致违反开放封闭原则。<br>Liskov替换原则能够保证系统具有良好的拓展性，同时实现基于多态的抽象机制，能够减少代码冗余，避免运行期的类型判别。</p>
-</li>
-<li><p><strong>依赖倒置原则（Dependecy-Inversion Principle）</strong><br>其核心思想是：依赖于抽象。具体而言就是高层模块不依赖于底层模块，二者都同依赖于抽象；抽象不依赖于具体，具体依赖于抽象。<br>我们知道，依赖一定会存在于类与类、模块与模块之间。当两个模块之间存在紧密的耦合关系时，最好的方法就是分离接口和实现：在依赖之间定义一个抽象的接口使得高层模块调用接口，而底层模块实现接口的定义，以此来有效控制耦合关系，达到依赖于抽象的设计目标。<br>抽象的稳定性决定了系统的稳定性，因为抽象是不变的，依赖于抽象是面向对象设计的精髓，也是依赖倒置原则的核心。<br>依赖于抽象是一个通用的原则，而某些时候依赖于细节则是在所难免的，必须权衡在抽象和具体之间的取舍，方法不是一层不变的。依赖于抽象，就是对接口编程，不要对实现编程。</p>
-</li>
-<li><p><strong>接口隔离原则（Interface-Segregation Principle）</strong><br>其核心思想是：使用多个小的专门的接口，而不要使用一个大的总接口。<br>具体而言，接口隔离原则体现在：接口应该是内聚的，应该避免“胖”接口。一个类对另外一个类的依赖应该建立在最小的接口上，不要强迫依赖不用的方法，这是一种接口污染。<br>接口有效地将细节和抽象隔离，体现了对抽象编程的一切好处，接口隔离强调接口的单一性。而胖接口存在明显的弊端，会导致实现的类型必须完全实现接口的所有方法、属性等；而某些时候，实现类型并非需要所有的接口定义，在设计上这是“浪费”，而且在实施上这会带来潜在的问题，对胖接口的修改将导致一连串的客户端程序需要修改，有时候这是一种灾难。在这种情况下，将胖接口分解为多个特点的定制化方法，使得客户端仅仅依赖于它们的实际调用的方法，从而解除了客户端不会依赖于它们不用的方法。<br>分离的手段主要有以下两种：1、委托分离，通过增加一个新的类型来委托客户的请求，隔离客户和接口的直接依赖，但是会增加系统的开销。2、多重继承分离，通过接口多继承来实现客户的需求，这种方式是较好的。</p>
-</li>
-</ul>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/09/09/cplusplus_confused_points_one/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/09/cplusplus_confused_points_one/" itemprop="url">C++很基础的易混淆点一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-09-09T13:35:25+00:00">
-                2014-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="2-1-1"><a href="#2-1-1" class="headerlink" title="2.1.1 :"></a>2.1.1 :</h1><ul>
-<li><p>C++标准规定的各种算术类型的尺寸的最小值, 同时允许编译器赋予这些类型更大的尺寸. 比如char的最小尺寸为8位</p>
-</li>
-<li><p>执行浮点数运算选用double ，这是因为float 通常精度不够而且双精度浮点数和单精度浮点数的计算代价相差无儿。事实上， 对于某些机器来说，双精度运算甚至比单精度还快</p>
-</li>
-</ul>
-<h1 id="2-1-2"><a href="#2-1-2" class="headerlink" title="2.1.2 :"></a>2.1.2 :</h1><ul>
-<li><p>当我们赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号类型表示数值总数取模后的余数。例如， 8 比特大小的 unsigned char 可以表示0 至<br>255 区间内的值，如果我们赋了一个区间以外的值，则实际的结果是该值对256<br>取模后所得的余数。因此，把 -1 赋给8 比特大小的 unsigned char 所得的结果<br>是255 </p>
-</li>
-<li><p>当我们赋给带符号类型一个超出它表示范围的值时，结果是未定义的( undefined )。<br>此时， 程序，可能继续工作、可能崩溃，也可能生成垃圾数据。</p>
-</li>
-<li><p>如果表达式里既有带符号类型又有无符号类型， 当带符号类型取值为负时会出现异<br>常结果， 这是因为带符号数会自动地转换成无符号数。例如，在一个形如 <code>a*b</code> 的式子<br>中，如果a = -1 , b = 1 ，而且a 和b 都是int ，则表达式的值显然为- 1. 然而，如<br>果a 是int ， 而b 是unsigned ， 则结果须视在当前机器上int 所占位数而定。在32环境里，因为2的32次方是4294967296, 所以<code>a*b</code>结果是4294967295</p>
-</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/49/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><span class="page-number current">50</span><a class="page-number" href="/page/51/">51</a><a class="page-number" href="/page/52/">52</a><a class="extend next" rel="next" href="/page/51/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/49/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><span class="page-number current">50</span><a class="page-number" href="/page/51/">51</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="extend next" rel="next" href="/page/51/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1228,7 +1278,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">259</span>
+                <span class="site-state-item-count">261</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

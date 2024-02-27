@@ -304,6 +304,714 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/03/08/self_cultivation_linux_process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/08/self_cultivation_linux_process/" itemprop="url">服务器开发自我修养专栏-Linux进程管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-08T19:08:06+00:00">
+                2021-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
+                    <span itemprop="name">Self-cultivation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux进程管理"><a href="#Linux进程管理" class="headerlink" title="Linux进程管理"></a>Linux进程管理</h1><h2 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h2><p>定义： 允许多个进程同时对数据进行读操作，但是不允许读和写以及写和写操作同时发生。</p>
+<p>解决方案：  </p>
+<ul>
+<li>读者优先<br>  读进程只要看到有其他读进程正在访问文件，就可以继续作读访问；写进程必须等待所有读进程都不访问时才能写文件，即使写进程可能比一些读进程更早提出申请。</li>
+<li>读者写者公平竞争，老实排队<br>  因为读者优先的方案如果在读访问非常频繁的场合，有可能造成写进程一直无法访问文件的局面….为了避免这种情况的产生，读者写者请求都老实排队， 排到谁就执行谁， 不准读者插队</li>
+<li>写者优先<br>  如果有写者申请写文件，那么在申请之前已经开始读取文件的可以继续读取，但是如果再有读者申请读取文件，则不能够读取，只有在所有的写者写完之后才可以读取</li>
+</ul>
+<h2 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h2><p><img src="/img/noodle_plan/linux/an_illustration_of_the_dining_philosophers_problem.png" alt></p>
+<p>5 个沉默寡言的哲学家围坐在圆桌前，每人面前一盘意面。叉子放在哲学家之间的桌面上。（5 个哲学家，5 根叉子）</p>
+<p>所有的哲学家都只会在思考和进餐两种行为间交替。哲学家只有同时拿到左边和右边的叉子才能吃到面，而同一根叉子在同一时间只能被一个哲学家使用。每个哲学家吃完面后都需要把叉子放回桌面以供其他哲学家吃面。只要条件允许，哲学家可以拿起左边或者右边的叉子，但在没有同时拿到左右叉子时不能进食。</p>
+<p>设计一个进餐规则（并行算法）使得每个哲学家都不会挨饿；也就是说，在没有人知道别人什么时候想吃东西或思考的情况下，每个哲学家都可以在吃饭和思考之间一直交替下去。</p>
+<p>显而易见，<strong>如果不小心处理会有死锁现象</strong>， 比如：当每个科学家都同时拿起了左边的筷子时候死锁发生了，都想拿自己右边的筷子，但是科学家每个人左手都不松手。导致都吃不了饭</p>
+<p><a href="https://zhuanlan.zhihu.com/p/34553097" target="_blank" rel="noopener">参考</a><br>解决方案：  </p>
+<ul>
+<li>规定奇数号科学家先拿左边的筷子，然后拿右边的筷子。偶数号科学家先拿右边的筷子，然后那左边的筷子。导致0，1科学家竞争1号筷子，2，3科学家竞争3号筷子。四号科学家无人竞争。最后总有一个科学家能获得两只筷子。</li>
+<li>仅当科学家左右两只筷子都能用的时候，才允许他进餐，代码里的用trylock来实现</li>
+<li>至多允许四个哲学家同时去拿左边的筷子，最终保证至少有一个科学家能进餐，并且用完之后释放筷子，从而使更多的哲学家能够拿到筷子。</li>
+</ul>
+<h2 id="活锁"><a href="#活锁" class="headerlink" title="活锁"></a>活锁</h2><p>在某种情形下，轮询（忙等待）可用于进入临界区或存取资源。采用这一策略的主要原因是，相比所做的工作而言，互斥的时间很短而挂起等待的时间开销很大。考虑一个原语，通过该原语，调用进程测试一个互斥信号量，然后或者得到该信号量或者返回失败信息。</p>
+<p>现在假设有一对进程使用两种资源。每个进程需要两种资源，它们利用轮询原语enter_region去尝试取得必要的锁，如果尝试失败，则该进程继续尝试。如果进程A先运行并得到资源1，然后进程2运行并得到资源2，以后不管哪一个进程运行，都不会有任何进展，但是哪一个进程也没有被阻塞。结果是两个进程总是一再消耗完分配给它们的CPU配额，<strong>但是没有进展也没有阻塞</strong>。因此，没有出现死锁现象（因为没有进程阻塞），但是从现象上看好像死锁发生了，这就是活锁（livelock）。</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p><a href="https://www.cyc2018.xyz/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20-%20%E6%AD%BB%E9%94%81.html" target="_blank" rel="noopener">参考</a></p>
+<h3 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h3><p><img src="/img/noodle_plan/linux/dead_lock/dead_lock1.png" alt></p>
+<p>(口诀互占不还？233):  </p>
+<ul>
+<li>互斥：每个资源要么已经分配给了一个进程，要么就是可用的。</li>
+<li>占有和等待：已经得到了某个资源的进程可以再请求新的资源。</li>
+<li>不可抢占：已经分配给一个进程的资源不能强制性地被抢占，它只能被占有它的进程显式地释放。</li>
+<li>环路等待：有两个或者两个以上的进程组成一条环路，该环路中的每个进程都在等待下一个进程所占有的资源。</li>
+</ul>
+<h3 id="死锁处理方法大纲"><a href="#死锁处理方法大纲" class="headerlink" title="死锁处理方法大纲"></a>死锁处理方法大纲</h3><p>主要有以下四种方法：  </p>
+<ul>
+<li>鸵鸟策略</li>
+<li>死锁检测与死锁恢复</li>
+<li>死锁预防</li>
+<li>死锁避免</li>
+</ul>
+<h3 id="鸵鸟策略"><a href="#鸵鸟策略" class="headerlink" title="鸵鸟策略"></a>鸵鸟策略</h3><p>把头埋在沙子里，假装根本没发生问题。<br>因为解决死锁问题的代价很高，因此鸵鸟策略这种不采取任务措施的方案会获得更高的性能。当发生死锁时不会对用户造成多大影响，或发生死锁的概率很低，可以采用鸵鸟策略。大多数操作系统，包括 Unix，Linux 和 Windows，处理死锁问题的办法仅仅是忽略它。</p>
+<h3 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h3><p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复。</p>
+<h4 id="每种类型一个资源的死锁检测"><a href="#每种类型一个资源的死锁检测" class="headerlink" title="每种类型一个资源的死锁检测"></a>每种类型一个资源的死锁检测</h4><p><img src="/img/noodle_plan/linux/dead_lock/dead_lock2.png" alt></p>
+<p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。</p>
+<p>图 a 可以抽取出环，如图 b，它满足了环路等待条件，因此会发生死锁。</p>
+<p>每种类型一个资源的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。（当然也可以用拓扑排序思路来检测哈）</p>
+<h4 id="每种类型多个资源的死锁检测"><a href="#每种类型多个资源的死锁检测" class="headerlink" title="每种类型多个资源的死锁检测"></a>每种类型多个资源的死锁检测</h4><p><img src="/img/noodle_plan/linux/dead_lock/dead_lock3.png" alt></p>
+<p>上图中，有三个进程四个资源，每个数据代表的含义如下：</p>
+<ul>
+<li>E 向量：资源总量</li>
+<li>A 向量：资源剩余量</li>
+<li>C 矩阵：每个进程所拥有的资源数量，每一行都代表一个进程拥有资源的数量</li>
+<li>R 矩阵：每个进程请求的资源数量</li>
+</ul>
+<p>进程 P<sub>1</sub> 和 P<sub>2</sub> 所请求的资源都得不到满足，只有进程 P<sub>3</sub> 可以，让 P<sub>3</sub> 执行，之后释放 P<sub>3</sub> 拥有的资源，此时 A = (2 2 2 0)。P<sub>2</sub> 可以执行，执行后释放 P<sub>2</sub> 拥有的资源，A = (4 2 2 1) 。P<sub>1</sub> 也可以执行。所有进程都可以顺利执行，没有死锁。</p>
+<p>算法总结如下：</p>
+<p>每个进程最开始时都不被标记，执行过程有可能被标记。当算法结束时，任何没有被标记的进程都是死锁进程。</p>
+<ol>
+<li>寻找一个没有标记的进程 P<sub>i</sub>，它所请求的资源小于等于 A。</li>
+<li>如果找到了这样一个进程，那么将 C 矩阵的第 i 行向量加到 A 中，标记该进程，并转回 1。</li>
+<li>如果没有这样一个进程，算法终止。</li>
+</ol>
+<h4 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h4><ul>
+<li>利用抢占恢复</li>
+<li>利用回滚恢复</li>
+<li>通过杀死进程恢复</li>
+</ul>
+<h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><p>在程序运行之前预防发生死锁。</p>
+<ul>
+<li>破坏互斥条件<br>  例如假脱机打印机技术允许若干个进程同时输出，唯一真正请求物理打印机的进程是打印机守护进程。</li>
+<li>破坏占有和等待条件<br>  一种实现方式是规定所有进程在开始执行前请求所需要的全部资源。</li>
+<li>破坏不可抢占条件</li>
+<li>破坏环路等待<br>  给资源统一编号，进程只能按编号顺序来请求资源。</li>
+</ul>
+<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>在程序运行时避免发生死锁。避免死锁的主要算法是基于一个安全状态的概念。在描述算法前，我们先讨论有关安全的概念。</p>
+<h4 id="安全状态的检测"><a href="#安全状态的检测" class="headerlink" title="安全状态的检测"></a>安全状态的检测</h4><p><img src="/img/noodle_plan/linux/dead_lock/dead_lock4.png" alt></p>
+<p>图 a 的第二列 Has 表示已拥有的资源数，第三列 Max 表示总共需要的资源数，Free 表示还有可以使用的资源数。从图 a 开始出发，先让 B 拥有所需的所有资源（图 b），运行结束后释放 B，此时 Free 变为 5（图 c）；接着以同样的方式运行 C 和 A，使得所有进程都能成功运行，因此可以称图 a 所示的状态时安全的。</p>
+<p><strong>安全状态的定义</strong>：如果没有死锁发生，并且即使所有进程突然请求对资源的最大需求，也仍然<strong>存在某种调度次序</strong>能够使得每一个进程运行完毕，则称该状态是安全的。</p>
+<p>安全状态的检测与死锁的检测类似，因为安全状态必须要求不能发生死锁。下面的银行家算法与死锁检测算法非常类似，可以结合着做参考对比。</p>
+<h4 id="单个资源的银行家算法"><a href="#单个资源的银行家算法" class="headerlink" title="单个资源的银行家算法"></a>单个资源的银行家算法</h4><p>Dijkstra（1965）提出了一种能够避免死锁的调度算法，称为银行家算法（banker’s algorithm），<br>一个小城镇的银行家，他向一群客户分别承诺了一定的贷款额度，算法要做的是判断对请求的满足是否会进入不安全状态，如果是，就拒绝请求；否则予以分配。</p>
+<p><img src="/img/noodle_plan/linux/dead_lock/dead_lock5.png" alt></p>
+<p>客户们各自做自己的生意，在某些时刻需要贷款（相当于请求资源）。在某一时刻，具体情况如图b所示。这个状态是安全的，由于保留着2个单位，银行家能够拖延除了C以外的其他请求。因而可以让C先完成，然后释放C所占的4个单位资源。有了这4个单位资源，银行家就可以给D或B分配所需的贷款单位，以此类推。</p>
+<p>考虑假如向B提供了另一个他所请求的贷款单位，如图b所示，那么我们就有如图c所示的状态，该状态是不安全的。如果忽然所有的客户都请求最大的限额，而银行家无法满足其中任何一个的要求，那么就会产生死锁。不安全状态并不一定引起死锁，由于客户不一定需要其最大贷款额度，但银行家不敢抱这种侥幸心理。</p>
+<p><strong>银行家算法就是对每一个请求进行检查，检查如果满足这一请求是否会达到安全状态。若是，那么就满足该请求；若否，那么就推迟对这一请求的满足。</strong>为了看状态是否安全，银行家看他是否有足够的资源满足某一个客户。如果可以，那么这笔投资认为是能够收回的，并且接着检查最接近最大限额的一个客户，以此类推。如果所有投资最终都被收回，那么该状态是安全的，最初的请求可以批准。</p>
+<p>上图 c 为不安全状态，因此算法会拒绝之前的请求，从而避免进入图 c 中的状态。</p>
+<h4 id="多个资源的银行家算法"><a href="#多个资源的银行家算法" class="headerlink" title="多个资源的银行家算法"></a>多个资源的银行家算法</h4><p><img src="/img/noodle_plan/linux/dead_lock/dead_lock6.png" alt></p>
+<p>可以把银行家算法进行推广以处理多个资源  </p>
+<p>上图中有五个进程，四个资源。左边的图表示已经分配的资源，右边的图表示还需要分配的资源。最右边的 E、P 以及 A 分别表示：总资源、已分配资源以及可用资源，注意这三个为向量，而不是具体数值，例如 A=(1020)，表示 4 个资源分别还剩下 1/0/2/0。</p>
+<p>检查一个状态是否安全的算法如下：</p>
+<ul>
+<li>查找右边的矩阵是否存在一行小于等于向量 A。如果不存在这样的行，那么系统将会发生死锁，状态是不安全的。</li>
+<li>假若找到这样一行，将该进程标记为终止，并将其已分配资源加到 A 中。</li>
+<li>重复以上两步，直到所有进程都标记为终止，则状态时安全的。</li>
+</ul>
+<p>如果一个状态不是安全的，需要拒绝进入这个状态。</p>
+<h2 id="linux进程调度"><a href="#linux进程调度" class="headerlink" title="linux进程调度"></a>linux进程调度</h2><p>参考 <a href="https://juejin.im/post/6844903568613310477" target="_blank" rel="noopener">https://juejin.im/post/6844903568613310477</a></p>
+<p>在Linux中，线程和进程一视同仁，所以讲到进程调度，也包含了线程调度。</p>
+<p>调度分两种:  </p>
+<ul>
+<li>非抢占式多任务<br>  除非任务自己结束，否则将会一直执行。</li>
+<li><strong>抢占式多任务（Linux用的是这种)</strong><br>  这种情况下，由调度程序来决定什么时候停止一个进程的运行，这个强制的挂起动作即为<strong>抢占</strong>。采用抢占式多任务的基础是使用时间片轮转机制来为每个进程分配可以运行的时间单位。</li>
+</ul>
+<p>Linux有两种不同的进程优先级范围:</p>
+<ul>
+<li>使用nice值：越大的nice值意味着更低的优先级。 (-19 ~ 20之间)</li>
+<li>实时优先级：可配置(通过实时调度API)，越高意味着进程优先级越高。</li>
+</ul>
+<p>任何实时的进程优先级都高于普通的进程，因此上面的两种优先级范围处于互不相交的范畴。</p>
+<p>时间片：Linux中并不是以固定的时间值(如10ms)来分配时间片的，而是将处理器的使用比作为“时间片”划分给进程。这样，进程所获得的实际CPU时间就和系统的负载密切相关。</p>
+<p>Linux内核有两个调度类：</p>
+<ul>
+<li>CFS(完全公平调度器Completely Fair Scheduler)</li>
+<li>实时调度类。</li>
+</ul>
+<h3 id="公平调度CFS"><a href="#公平调度CFS" class="headerlink" title="公平调度CFS"></a>公平调度CFS</h3><p>举个例子来区分Unix调度和CFS, 有两个运行的优先级相同的进程:</p>
+<ul>
+<li>在Unix中可能是每个各执行5ms，执行期间完全占用处理器，但在“理想情况”下，应该是，能够在10ms内同时运行两个进程，每个占用处理器一半的能力。</li>
+<li>CFS的做法是：CFS 调度程序并不采用严格规则来为一个优先级分配某个长度的时间片, 在所有可运行进程的总数上计算出一个进程应该运行的时间，nice值不再作为时间片分配的标准，而是用于处理计算获得的处理器使用权重。</li>
+</ul>
+<p>现在我们来看一个简单的例子，假设我们的系统只有两个进程在运行，一个是文本编辑器（I/O消耗型），另一个是视频解码器（处理器消耗型）。<br>理想的情况下，文本编辑器应该得到更多的处理器时间，至少当它需要处理器时，处理器应该立刻被分配给它（这样才能完成用户的交互），这也就意味着当文本编辑器被唤醒的时候，它应该抢占视频解码程序。<br>按照普通的情况，OS应该分配给文本编辑器更大的优先级和更多的时间片，但在Linux中，这两个进程都是普通进程，他们具有相同的nice值，因此它们将得到相同的处理器使用比（50%）。<br>但实际的运行过程中会发生什么呢？CFS将能够注意到，文本编辑器使用的处理器时间比分配给它的要少得多（因为大多时间在等待I/O），这种情况下，要实现所有进程“公平”地分享处理器，就会让文本编辑器在需要运行时立刻抢占视频解码器（每次都是如此）。</p>
+<h3 id="实时调度"><a href="#实时调度" class="headerlink" title="实时调度"></a>实时调度</h3><p>Linux还实现了 POS1X实时调度扩展。这些扩展允许应用程序精确地控制如何分配CPU<br>给进程。运作在两个实时调度策略</p>
+<ul>
+<li>SCHED RR （循环）</li>
+<li>SCHED FIFO （先入先出）</li>
+</ul>
+<p>下的进程的优先级总是高于运作在非实时策略下的进程。实时进程优先级的取值范围为1 （低）〜99<br>（高）。只有进程处于可运行状态，那么优先级更高的进程就会完全将优先级低的进程排除在<br>CPU之外。运作在SCHED_FIFO策略下的进程会互斥地访问CPU直到它执行终止或自动释放<br>CPU或被进入可运行状态的优先级更高的进程抢占。类似的规则同样适用于SCHED RR策略,<br>但在该策略下，如果存在多个进程运行于同样的优先级下，那么CPU就会以循环的方式被这<br>些进程共享。</p>
+<p>实时调度采用 SCHED_FIFO 或 SCHED_RR 实时策略来调度的任何任务，与普通（非实时的）任务相比，具有更高的优先级。</p>
+<p>Linux 采用两个单独的优先级范围，一个用于实时任务，另一个用于正常任务。实时任务分配的静态优先级为 0〜99，而正常任务分配的优先级为 100〜139。</p>
+<p>这两个值域合并成为一个全局的优先级方案，其中较低数值表明较高的优先级。正常任务，根据它们的nice值，分配一个优先级；这里 -20 的nice值映射到优先级 100，而 +19 的nice值映射到 139。下图显示了这个方案。</p>
+<p><img src="/img/noodle_plan/linux/process_scheduler.jpg" alt></p>
+<h2 id="linux轻量级进程LWP"><a href="#linux轻量级进程LWP" class="headerlink" title="linux轻量级进程LWP"></a>linux轻量级进程LWP</h2><p>对于Linux操作系统而言，它对Thread的实现方式比较特殊。在Linux内核中，其实是没有线程的概念的，它把所有的线程当做标准的进程来实现，也就是说<strong>Linux内核，并没有为线程提供任何特殊的调度语义，也没有为线程实现特定的数据结构。取而代之的是，线程只是一个与其他进程共享某些资源的进程。</strong>每一个线程拥有一个唯一的task_struct结构，Linux内核它仅仅把线程当做一个正常的进程，或者说是轻量级进程，LWP(Lightweight processes)。</p>
+<p>Linux线程与进程的区别，主要体现在资源共享、调度、性能几个方面，首先看一下资源共享方面。上面也提到，线程其实是共享了某一个进程的资源，这些资源包括：</p>
+<ul>
+<li>内存地址空间</li>
+<li>进程基础信息</li>
+<li>大部分数据</li>
+<li>打开的文件</li>
+<li>信号处理</li>
+<li>当前工作目录</li>
+<li>用户和用户组属性</li>
+<li>…</li>
+</ul>
+<p>哪些是线程独自拥有的呢？</p>
+<ul>
+<li>线程ID</li>
+<li>一系列的寄存器</li>
+<li>栈的局部变量和返回地址</li>
+<li>错误码 errno</li>
+<li>信号掩码</li>
+<li>优先级</li>
+<li>…</li>
+</ul>
+<p>这里说一个黑科技，线程拥有独立的调用栈，除了栈之外共享了其他所有的段segment。但是由于线程间共享了内存，也就是说一个线程，理论上是可以访问到其他线程的调用栈的，可以用一个指针变量，去访问其他线程的局部栈帧，以访问其他线程的局部变量。</p>
+<h3 id="LWP如何创建出来"><a href="#LWP如何创建出来" class="headerlink" title="LWP如何创建出来"></a>LWP如何创建出来</h3><p>那么Linux中线程是如何创建出来的呢？上面也提到，在Linux中线程是一种资源共享的方式，可以在创建进程的时候，指定某些资源是从其他进程共享的，从而在概念上创建了一个线程。在Linux中，可以通过clone系统调用来创建一个进程，它的函数签名如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sched.h&gt;</span></span></span><br><span class="line">int clone(int (*fn)(void *), void *child_stack, int flags, void *arg, ...);</span><br></pre></td></tr></table></figure></p>
+<p>我们在使用clone创建进程的过程中，可以指明相应的参数，来决定共享某些资源，比如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clone(CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>这个clone系统调用的行为类似于fork，不过新创建出来的进程，它的内存地址、文件系统资源、打开的文件描述符和信号处理器，都是共享父进程的。换句话说，这个新创建出来的进程，也被叫做Linux Thread</strong>。从这个例子中，也可以看出<strong>Linux中，线程其实是进程实现资源共享的一种方式。</strong></p>
+<p>在内核中，clone调用经过参数传递和解释后会调用do_fork，这个核内函数同时也是fork、vfork系统调用的最终实现：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_fork</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> clone_flags, <span class="keyword">unsigned</span> <span class="keyword">long</span> stack_start, struct pt_regs* regs,<span class="keyword">unsigned</span> <span class="keyword">long</span> stack_size)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>在do_fork中，不同的clone_flags将导致不同的行为（共享不同的资源），下面列举几个flag的作用。 </p>
+<ul>
+<li>CLONE_VM<br>  如果do_fork时指定了CLONE_VM开关，创建的轻量级进程的内存空间将会和父进程指向同一个地址，即创建的轻量级进程将与父进程共享内存地址空间。</li>
+<li>CLONE_FS<br>  如果do_fork时指定了CLONE_FS开关，对于轻量级进程则会与父进程共享相同的所在文件系统的根目录和当前目录信息。也就是说，轻量级进程没有独立的文件系统相关的信息，进程中任何一个线程改变当前目录、根目录等信息都将直接影响到其他线程。</li>
+<li>CLONE_FILES<br>  如果do_fork时指定了CLONE_FILES开关，创建的轻量级进程与父进程将会共享已经打开的文件。这一共享使得任何线程都能访问进程所维护的打开文件，对它们的操作会直接反映到进程中的其他线程。</li>
+<li>CLONE_SIGHAND<br>  如果do_fork时指定了CLONE_FILES开关，轻量级进程与父进程将会共享对信号的处理方式。也就是说，子进程与父进程的信号处理方式完全相同，而且可以相互更改。</li>
+</ul>
+<p>尽管linux支持轻量级进程，但并不能说它就支持内核线程，因为linux的”线程”和”进程”实际上处于一个调度层次，共享一个进程标识符空间，这种限制使得不可能在linux上实现完全意义上的POSIX线程机制，因此众多的linux线程库实现尝试都只能尽可能实现POSIX的绝大部分语义，并在功能上尽可能逼近。</p>
+<h2 id="多核CPU是否能同时执行多个进程？"><a href="#多核CPU是否能同时执行多个进程？" class="headerlink" title="多核CPU是否能同时执行多个进程？"></a>多核CPU是否能同时执行多个进程？</h2><p>多核的作用就是每个CPU可以调度不同的任务“并行”执行。注意，这里说的是“并行”，而不是“并发”，所以问题的回答是“能”。</p>
+<p>第二个问题，“同时最多执行几个进程“?<br>这里你想描述的“同时”的意思，是某一个特定时刻吗？如果是，很明显，在某一特定时刻，每个核只能调度一个任务执行，所以有多少个核最多就可以调度多少个进程（或者说成线程比较准确些）。但在一段时间之内，每个核可以“并发”调度多个任务执行。如何“并发”，这就是由不同操作系统的进程调度策略规定的了，比如常见Linux的CFS调度算法和Windows的抢占式调度算法。</p>
+<h2 id="创建守护进程的步骤"><a href="#创建守护进程的步骤" class="headerlink" title="创建守护进程的步骤"></a>创建守护进程的步骤</h2><p>(两fork一set, u工文dev)<br>最关键的三步骤:</p>
+<ol>
+<li><p>调用fork，然后使父进程exit。<br>虽然子进程继承了父进程的进程组ID，但获得了一个新的进程ID，这就保证了子进程不是一个进程组的组长进程。这是下面将要进行的setsid调用的先决条件。</p>
+</li>
+<li><p>调用setsid创建一个新会话。<br>使调用进程：(a)成为新会话的首进程，(b)成为一个新进程组的组长进程．(c)没有控制终端。也可概括为 : 开启一个新会话并释放它与控制终端之间的所有关联关系</p>
+</li>
+<li><p>再次fork并杀掉首进程.<br>这样就确保了子进程不是一个会话首进程， 根据linux中获取终端的规则（只有会话首进程才能请求一个控制终端）， 这样进程永远不会重新请求一个控制终端</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">                   会      话</span><br><span class="line">                 /     |      \</span><br><span class="line">               /       |       \</span><br><span class="line">             /         |         \</span><br><span class="line">     前台进程组     后台进程组1     后台进程组2 ...</span><br><span class="line">   /    |   \     /    |   \      /    |   \</span><br><span class="line">进程1 进程2 ...  进程3 进程4 ...       ...</span><br></pre></td></tr></table></figure>
+<h2 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h2><p>进程组就是一系列相互关联的进程集合，系统中的每一个进程也必须从属于某一个进程组；每个进程组中都会有一个唯一的 ID(process group id)，简称 PGID；PGID 一般等同于进程组的创建进程的 Process ID，而这个进进程一般也会被称为进程组先导 (process group leader)</p>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p>会话（session）是一个若干进程组的集合，同样的，系统中每一个进程组也都必须从属于某一个会话；一个会话只拥有最多一个控制终端（也可以没有），该终端为会话中所有进程组中的进程所共用。一个会话中前台进程组只会有一个，只有其中的进程才可以和控制终端进行交互；除了前台进程组外的进程组，都是后台进程组；和进程组先导类似，会话中也有会话先导 (session leader) 的概念，用来表示建立起到控制终端连接的进程。在拥有控制终端的会话中，session leader 也被称为控制进程(controlling process)，一般来说控制进程也就是登入系统的 shell 进程(login shell)；</p>
+<h2 id="杀死进程组或会话中的所有进程"><a href="#杀死进程组或会话中的所有进程" class="headerlink" title="杀死进程组或会话中的所有进程"></a>杀死进程组或会话中的所有进程</h2><p>我们可以使用该 PGID，通过 kill 命令向整个进程组发送信号：</p>
+<p><code>kill -SIGTERM -- -19701</code></p>
+<p>我们用一个负数 -19701 向进程组发送信号。如果我们传递的是一个正数，这个数将被视为进程 ID 用于终止进程。如果我们传递的是一个负数，它被视为 PGID，用于终止整个进程组。<br>负数来自系统调用的直接定义。</p>
+<p>杀死会话中的所有进程与之完全不同。有些系统没有会话 ID 的概念。即使是具有会话 ID 的系统，例如 Linux，也没有提供系统调用来终止会话中的所有进程。你需要遍历 /proc 输出的进程树，收集所有的 SID，然后一一终止进程。<br>Pgrep 实现了遍历、收集并通过会话 ID 杀死进程的算法。使用以下命令：</p>
+<p><code>pkill -s &lt;SID&gt;</code></p>
+<h2 id="SIGHUP"><a href="#SIGHUP" class="headerlink" title="SIGHUP"></a>SIGHUP</h2><p>SIGHUP 会在以下 3 种情况下被发送给相应的进程：</p>
+<ul>
+<li>终端关闭时，该信号被发送到 session 首进程以及作为 job 提交的进程（即用 &amp; 符号提交的进程）；</li>
+<li>session 首进程退出时，该信号被发送到该 session 中的前台进程组中的每一个进程；</li>
+<li>若父进程退出导致进程组成为孤儿进程组，且该进程组中有进程处于停止状态（收到 SIGSTOP 或 SIGTSTP 信号），该信号会被发送到该进程组中的每一个进程。</li>
+</ul>
+<p>例如：在我们登录 Linux 时，系统会分配给登录用户一个终端 (Session)。在这个终端运行的所有程序，包括前台进程组和后台进程组，一般都属于这个 Session。当用户退出 Linux 登录时，前台进程组和后台有对终端输出的进程将会收到 SIGHUP 信号。这个信号的默认操作为终止进程，因此前台进程组和后台有终端输出的进程就会中止。<br><strong>此外，对于与终端脱离关系的守护进程，正常情况下是永远都收不到这个信号的, 所以可以人为的发SIGHUP信号给她用于通知它做一些想要的自定义的操作</strong>, 比较常见的如重新读取配置文件操作。 比如 xinetd 超级服务程序。</p>
+<h2 id="SIGCHLD与僵死进程"><a href="#SIGCHLD与僵死进程" class="headerlink" title="SIGCHLD与僵死进程"></a>SIGCHLD与僵死进程</h2><p>SIGCHLD信号,子进程结束时, 父进程会收到这个信号。如果父进程没有处理这个信号，也没有等待(waitpid)子进程，子进程虽然终止，但是还会在内核进程表中占有表项，这时的子进程称为僵尸进程。这种情 况我们应该捕捉它，或者wait它派生的子进程，或者父进程先终止，这时子进程的终止自动由init进程 来接管</p>
+<h2 id="SIGPIPE"><a href="#SIGPIPE" class="headerlink" title="SIGPIPE"></a>SIGPIPE</h2><p>在网络编程中，SIGPIPE 这个信号是很常见的。当往一个写端关闭的管道或 socket 连接中连续写入数据时会引发 SIGPIPE 信号, 引发 SIGPIPE 信号的写操作将设置 errno 为 EPIPE。在 TCP 通信中，当通信的双方中的一方 close 一个连接时，若另一方接着发数据，根据 TCP 协议的规定，会收到一个 RST 响应报文，若再往这个服务器发送数据时，系统会发出一个 SIGPIPE 信号给进程，告诉进程这个连接已经断开了，不能再写入数据。</p>
+<p>因为 SIGPIPE 信号的默认行为是结束进程，而我们绝对不希望因为写操作的错误而导致程序退出，尤其是作为服务器程序来说就更恶劣了。所以我们应该对这种信号加以处理，在这里，介绍处理 SIGPIPE 信号的方式：</p>
+<p>一般给 SIGPIPE 设置 SIG_IGN 信号处理函数，忽略该信号:</p>
+<p><code>signal(SIGPIPE, SIG_IGN);</code></p>
+<p>前文说过，引发 SIGPIPE 信号的写操作将设置 errno 为 EPIPE,。所以，第二次往关闭的 socket 中写入数据时, 会返回 - 1, 同时 errno 置为 EPIPE. 这样，便能知道对端已经关闭，然后进行相应处理，而不会导致整个进程退出.</p>
+<h2 id="内核态与用户态的区别"><a href="#内核态与用户态的区别" class="headerlink" title="内核态与用户态的区别"></a>内核态与用户态的区别</h2><ul>
+<li>内核态：cpu可以访问内存的所有数据，包括外围设备，例如硬盘，网卡，cpu也可以将自己从一个程序切换到另一个程序。</li>
+<li>用户态：只能受限的访问内存，且不允许访问外围设备，占用cpu的能力被剥夺，cpu资源可以被其他程序获取。</li>
+</ul>
+<p>从用户态到内核态切换可以通过三种方式：</p>
+<ul>
+<li>系统调用: 其实系统调用本身就是中断，但是软件中断，跟硬中断不同。</li>
+<li>异常：如果当前进程运行在用户态，如果这个时候发生了异常事件，就会触发切换。例如：缺页异常。</li>
+<li>外设中断：当外设完成用户的请求时，会向CPU发送中断信号。</li>
+</ul>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/02/26/quic_intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/26/quic_intro/" itemprop="url">QUIC原理与KCP会话握手借鉴</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-26T18:08:06+00:00">
+                2021-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NP/" itemprop="url" rel="index">
+                    <span itemprop="name">NP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p>参考: </p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/142794794" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/142794794</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32553477" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32553477</a></li>
+</ul>
+<p>本文主要介绍 QUIC 协议产生的背景和核心特性。</p>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>如果你的 App，在不需要任何修改的情况下就能提升 15% 以上的访问速度。特别是弱网络的时候能够提升 20% 以上的访问速度。</p>
+<p>如果你的 App，在频繁切换 4G 和 WIFI 网络的情况下，不会断线，不需要重连，用户无任何感知。如果你的 App，既需要 TLS 的安全，也想实现 HTTP2 多路复用的强大。</p>
+<p>如果你刚刚才听说 HTTP2 是下一代互联网协议，如果你刚刚才关注到 TLS1.3 是一个革命性具有里程碑意义的协议，但是这两个协议却一直在被另一个更新兴的协议所影响和挑战。</p>
+<p>如果这个新兴的协议，它的名字就叫做 “快”，并且正在标准化为新一代的互联网传输协议。</p>
+<p>你愿意花一点点时间了解这个协议吗？你愿意投入精力去研究这个协议吗？你愿意全力推动业务来使用这个协议吗？</p>
+<h1 id="QUIC-概述"><a href="#QUIC-概述" class="headerlink" title="QUIC 概述"></a>QUIC 概述</h1><p>Quic 全称 quick udp internet connection [1]，“快速 UDP 互联网连接”，（和英文 quick 谐音，简称 “快”）是由 google 提出的使用 udp 进行多路并发传输的协议。</p>
+<p>Quic 相比现在广泛应用的 http2+tcp+tls 协议有如下优势 [2]：</p>
+<ol>
+<li>减少了 TCP 三次握手及 TLS 握手时间。</li>
+<li>改进的拥塞控制。</li>
+<li>避免队头阻塞的多路复用。</li>
+<li>连接迁移。</li>
+<li>前向冗余纠错。</li>
+</ol>
+<h1 id="TCP的缺陷"><a href="#TCP的缺陷" class="headerlink" title="TCP的缺陷"></a>TCP的缺陷</h1><p>从上个世纪 90 年代互联网开始兴起一直到现在，大部分的互联网流量传输只使用了几个网络协议。使用 IPv4 进行路由，使用 TCP 进行连接层面的流量控制，使用 SSL/TLS 协议实现传输安全，使用 DNS 进行域名解析，使用 HTTP 进行应用数据的传输。</p>
+<p>而且近三十年来，这几个协议的发展都非常缓慢。TCP 主要是拥塞控制算法的改进，SSL/TLS 基本上停留在原地，几个小版本的改动主要是密码套件的升级，TLS1.3[3] 是一个飞跃式的变化，但截止到今天，还没有正式发布。IPv4 虽然有一个大的进步，实现了 IPv6，DNS 也增加了一个安全的 DNSSEC，但和 IPv6 一样，部署进度较慢。</p>
+<p>随着移动互联网快速发展以及物联网的逐步兴起，网络交互的场景越来越丰富，网络传输的内容也越来越庞大，用户对网络传输效率和 WEB 响应速度的要求也越来越高。</p>
+<p>一方面是历史悠久使用广泛的古老协议，另外一方面用户的使用场景对传输性能的要求又越来越高。如下几个由来已久的问题和矛盾就变得越来越突出。</p>
+<ol>
+<li>协议历史悠久导致中间设备僵化。</li>
+<li>依赖于操作系统的实现导致协议本身僵化。</li>
+<li>建立连接的握手延迟大。</li>
+<li>队头阻塞。</li>
+</ol>
+<p>这里分小节简单说明一下：</p>
+<h2 id="中间设备的僵化"><a href="#中间设备的僵化" class="headerlink" title="中间设备的僵化"></a>中间设备的僵化</h2><p>可能是 TCP 协议使用得太久，也非常可靠。所以我们很多中间设备，包括防火墙、NAT 网关，整流器等出现了一些约定俗成的动作。</p>
+<p>比如有些防火墙只允许通过 80 和 443，不放通其他端口。NAT 网关在转换网络地址时重写传输层的头部，有可能导致双方无法使用新的传输格式。整流器和中间代理有时候出于安全的需要，会删除一些它们不认识的选项字段。</p>
+<p>TCP 协议本来是支持端口、选项及特性的增加和修改。但是由于 TCP 协议和知名端口及选项使用的历史太悠久，中间设备已经依赖于这些潜规则，所以对这些内容的修改很容易遭到中间环节的干扰而失败。</p>
+<p>而这些干扰，也导致很多在 TCP 协议上的优化变得小心谨慎，步履维艰。</p>
+<h2 id="依赖于操作系统的实现导致协议僵化"><a href="#依赖于操作系统的实现导致协议僵化" class="headerlink" title="依赖于操作系统的实现导致协议僵化"></a>依赖于操作系统的实现导致协议僵化</h2><p>TCP 是由操作系统在内核西方栈层面实现的，应用程序只能使用，不能直接修改。虽然应用程序的更新迭代非常快速和简单。但是 TCP 的迭代却非常缓慢，原因就是操作系统升级很麻烦。</p>
+<p>现在移动终端更加流行，但是移动端部分用户的操作系统升级依然可能滞后数年时间。PC 端的系统升级滞后得更加严重，windows xp 现在还有大量用户在使用，尽管它已经存在快 20 年。</p>
+<p>服务端系统不依赖用户升级，但是由于操作系统升级涉及到底层软件和运行库的更新，所以也比较保守和缓慢。</p>
+<p>这也就意味着即使 TCP 有比较好的特性更新，也很难快速推广。比如 TCP Fast Open。它虽然 2013 年就被提出了，但是 Windows 很多系统版本依然不支持它。</p>
+<h2 id="建立连接的握手延迟大"><a href="#建立连接的握手延迟大" class="headerlink" title="建立连接的握手延迟大"></a>建立连接的握手延迟大</h2><p>不管是 HTTP1.0/1.1 还是 HTTPS，HTTP2，都使用了 TCP 进行传输。HTTPS 和 HTTP2 还需要使用 TLS 协议来进行安全传输。这就出现了两个握手延迟：</p>
+<p>1.TCP 三次握手导致的 TCP 连接建立的延迟。</p>
+<p>2.TLS 完全握手需要至少 2 个 RTT 才能建立，简化握手需要 1 个 RTT 的握手延迟。</p>
+<p>对于很多短连接场景，这样的握手延迟影响很大，且无法消除。</p>
+<h2 id="队头阻塞"><a href="#队头阻塞" class="headerlink" title="队头阻塞"></a>队头阻塞</h2><p>队头阻塞主要是 TCP 协议的可靠性机制引入的。TCP 使用序列号来标识数据的顺序，数据必须按照顺序处理，如果前面的数据丢失，后面的数据就算到达了也不会通知应用层来处理。</p>
+<p>另外 TLS 协议层面也有一个队头阻塞，因为 TLS 协议都是按照 record 来处理数据的，如果一个 record 中丢失了数据，也会导致整个 record 无法正确处理。</p>
+<p>概括来讲，TCP 和 TLS1.2 之前的协议存在着结构性的问题，如果继续在现有的 TCP、TLS 协议之上实现一个全新的应用层协议，依赖于操作系统、中间设备还有用户的支持。部署成本非常高，阻力非常大。</p>
+<p>所以 QUIC 协议选择了 UDP，因为 UDP 本身没有连接的概念，不需要三次握手，优化了连接建立的握手延迟，同时在应用程序层面实现了 TCP 的可靠性，TLS 的安全性和 HTTP2 的并发性，只需要用户端和服务端的应用程序支持 QUIC 协议，完全避开了操作系统和中间设备的限制。</p>
+<h1 id="0RTT建立连接"><a href="#0RTT建立连接" class="headerlink" title="0RTT建立连接"></a>0RTT建立连接</h1><p>现如今，高速且安全的网络接入服务已经成为人们的必须。传统 TCP+TLS 构建的安全互联服务，升级与补丁更新时有提出（如 TCP Fastopen，新的 TLS 1.3），但是由于基础设施僵化，升级与应用困难。为解决这个问题，Google 另辟蹊径在 UDP 的基础上实现了带加密的更好的 TCP–QUIC（Quick UDP Internet Connection), 一种基于 UDP 的低时延的互联网传输层协议。近期成立了 Working Group 也将 QUIC 作为制定 HTTP 3.0 的标准的基础, 说明 QUIC 的应用前景美好。本文单独就网络传输的建连问题展开了分析, 浅析了建连时间对传输的影响, 以及 QUIC 的 0-RTT 建连是如何解决建连耗时长的问题的。在此基础上, 结合 QUIC 的源码, 浅析了 QUIC 的基本实现, 并描述一种可供参考的分布式环境下的 0-RTT 的落地实践方案。</p>
+<p>以一次简单的 HTTPS 请求（example.com）为例（假设访问 example.com 时返回的内容较小，server 端可以在一个数据包里返回响应），为获取请求资源。需要经过以下 4 个步骤：</p>
+<ol>
+<li>DNS 查询 example.com 获取 IP。DNS 服务一般默认是由你的 ISP 提供，ISP 通常都会有缓存的，这部分时间能适当减少；</li>
+<li>TCP 握手，我们熟悉的 TCP 三次握手需要需要 1 个 RTT；</li>
+<li>TLS 握手，以目前应用最广泛的 TLS 1.2 而言，需要 2 个 RTT。对于非首次建连, 可以选择启用会话重用 (Session Resumption)，则可缩小握手时间到 1 个 RTT；</li>
+<li>HTTP 业务数据交互，假设 example.com 的数据在一次交互就能取回来。那么业务数据的交互需要 1 个 RTT； 经过上面的过程分析可知，要完成一次简短的 HTTPS 业务数据交互，需要经历：</li>
+</ol>
+<ul>
+<li>新连接：4RTT + DNS。</li>
+<li>会话重用：3RTT + DNS</li>
+</ul>
+<p>尤其对于小数据量的交互而言，抛开 DNS 查询时间, 建连时间占剩下的总时间的 2/3 至 3/4 不等，影响不可小觑。加之如果用户网络不好，RTT 延时大的话，建连时间可能耗费数百毫秒至数秒不等，这将极大的影响用户体验。究其原因一方面是 TCP 和 TLS 分层设计导致的：分层的设计需要每个逻辑层次分别建立自己的连接状态。另一方面是 TLS 的握手阶段复杂的密钥协商机制导致的。要降低建连耗时，需要从这两方面着手。</p>
+<p>针对 TLS 的握手阶段复杂的密钥协商机问题, TLS 1.3 精简了握手交互过程, 实现了 1-RTT 握手。在会话重用类似的理念的基础上, 对非首次握手会话, 可以进一步实现 0-RTT 握手 (在刚开始 TLS 密钥协商的时候，就能附送一部分经过加密的数据传递给对方)。由于 TLS 是建立在 TCP 之上的, 0-RTT 没有计算 TCP 层的握手开销, 因而对用户来说, 发送数据之前还是要经历 TCP 层的 1RTT 握手, 因而不是真正的 0-RTT 握手。</p>
+<blockquote>
+<p>TLS 1.3 为实现 0-RTT，需要双方在刚开始建立连接的时候就已经持有一个对称密钥，这个密钥在 TLS 1.3 中称为 PSK（Pre-Shared-Key）。PSK 是 TLS 1.2 中的会话重用 (Session Resumption) 机制的一个升级，TLS 1.3 握手结束后，服务器可以发送一个 NST（New-Session-Ticket）的报文给客户端，该报文中记录 PSK 的值、名字和有效期等信息，双方下一次建立连接可以使用该 PSK 值作为初始密钥材料。因为 PSK 是从以前建立的安全信道中获得的，只要证明了双方都持有相同的 PSK，不再需要证书认证，就可以证明双方的身份(因此 PSK 也是一种身份认证机制)。TLS 1.3 新加了 Early Data 类型的报文, 用于在 0-RTT 的握手阶段传递应用层数据, 实现了握手的同时就能附带加密的应用层数据从而实现 0-RTT。</p>
+<p>TLS 1.3 的 0-RTT 特性不能防止重放攻击, 需要业务在使用时评估是否有重放攻击风险。如有相关风险的话, 可能需要酌情考虑禁用 0-RTT 特性。</p>
+</blockquote>
+<p>下图对比了 TLS 各版本与场景下的延时对比:<br><img src="/img/quic_intro/quic_intro_1.jpg" alt></p>
+<p>TLS 各版本与场景下的耗时</p>
+<p>从对比我们可以看到, 即使用上了 TLS 1.3, 精简了握手过程, 最快能做到 0-RTT 握手 (首次是 1-RTT), 但是对用户感知而言, 还要加上 1RTT 的 TCP 握手开销。 Google 有提出 Fastopen 的方案来使得 TCP 非首次握手就能附带用户数据, 但是由于 TCP 实现僵化, 无法升级应用, 相关 RFC 到现今都是 experimental 状态。这种分层设计带来的延时, 有没有办法进一步降低呢? QUIC 通过合并加密与连接管理解决了这个问题, 我们来看看其是如何实现真正意义上的 0-RTT 的握手, 让与 server 进行第一个数据包的交互就能带上用户数据。</p>
+<p>QUIC 为规避 TCP 协议僵化的问题，将 QUIC 协议建立在了 UDP 之上。考虑到安全性是网络的必备选项，加密在 QUIC 里强制的。传输方面参考 TCP 并充分优化了 TCP 多年发现的缺陷和不足, 实现了一套端到端的可靠加密传输。通过将加密和连接管理两层合二为一，消除了当前 TCP+TLS 的分层设计传输引入的时延。</p>
+<p>同 TLS 的握手一样, QUIC 的加密握手的核心在于协商出一个加密会话数据的对称密钥。QUIC 的握手使用了 DH 密钥协商算法来协商一个对称密钥。DH 密钥协商算法简单来讲, 需要通信双方各自生成自己的非对称公私钥对, 双发各自保留自己的私钥, 将公钥发给对方, 利用对方的公钥和自己的私钥可以运算出同一个对称密钥。详细的原理这里不展开叙述, 有专业的<a href="https://book.douban.com/subject/19986936/" target="_blank" rel="noopener">密码学书籍</a>对其原理有详细的论述, 网上也有很多好的教程对其由深入浅出的总结, 如<a href="https://labuladong.gitbook.io/algo/di-wu-zhang-ji-suan-ji-ji-shu/mi-ma-ji-shu" target="_blank" rel="noopener">这一篇</a>。</p>
+<p>如上所述, DH 密钥协商需要通行双方各自生成自己的非对称公私钥对。server 端与客户端的关系是 1 对 N 的关系, 明显 server 端生成一份公私钥对, 让 N 个客户端公用, 能明显减少生成开销, 降低管理的成本。server 端的这份公私钥对就是专门用于握手使用的, 客户端一经获取, 就可以缓存下来后续建连时继续使用, 这个就是达成 0-RTT 握手的关键, 因此 server 生成的这份公钥称为 0-RTT 握手公钥。真正的握手过程是这样 (简化了实现细节):</p>
+<ol>
+<li>server 端在握手开始前，server 端需要首先生成 (或加载使用上次保存下来的) 握手公私钥对, 该份公私钥对是所有客户端共享的。</li>
+<li>client 端首次握手时, client 对 server 一无所知, 需要 1 个 RTT 来询问 server 端的握手公钥 (实际的握手交互还会发送诸如版本等其他数据) 并缓存下来。本步骤只在首次建连时发生(0-RTT 握手公钥的过期也会导致需要重走这一步), 但这种情况很少发生, 影响很小(也没办法避免)。</li>
+<li>client 收到 server 端返回这份握手公钥后，生成自己的临时公私钥对后, 计算出共享的对称密钥后, 加密好数据, 并连同 client 的公钥一并发给 server 端。照 DH 密钥协商的原理, 此处已经可以协商出每条会话不一样的会话密钥了 (因为每个 client 生成的公私钥是不同的), 是不是拿这个来加密会话数据就行了呢? 真实的情况不是这样的!</li>
+<li>server 端会再次生成一份临时的公私钥对，使用这份临时的私钥与客户端的公钥运算出最终的会话对称密钥。接下来 server 会拿这个最终的会话密钥加密应用层数据, 连同这份临时的 server 端公钥一并发给 client 端, client 端收到后可以按照 DH 的原理依瓢画葫会恢复出最终的会话对称密钥。后续所有的数据都是用最终的会话对称密钥进行加密。server 侧这个动作是不是多此一举呢? 不是的, 这么做的目的是为了获取所谓的前向安全特性: 因为 server 端的后面生成的这份公私钥是临时生成的, 不会保存下来，也就杜绝了密钥泄漏导致会话数据被恶意收集后的被解密掉的风险。</li>
+</ol>
+<p>首次握手要多一个 RTT 询问 server 端的 0-RTT 握手公钥, 此询问过程不携带任何应用层数据, 因此是 1-RTT 握手。在首次握手完成后, client 端可以缓存下第一次询问获知的 server 端的公钥信息, 后续的连接过程可以跳过询问，直接使用缓存的 server 端的公钥。公钥信息在 QUIC 的实现里是保存在握手数据包里的 SCFG 中的 (Server Config), 获取 0-RTT 握手公钥就是要获取 SCFG, 后续均以获取 SCFG 代替。详细的握手过程, 可以参见 <a href="https://blog.csdn.net/dog250/article/details/80935534" target="_blank" rel="noopener">dog250</a> 博客文章的详细叙述。</p>
+<blockquote>
+<p>从上面的分析可知，0-RTT 握手的首次交互，server 端使用的是保存下来的握手密钥，因而没有无法做到前向安全，不能防止重放攻击, 需要业务在使用时评估是否有重放攻击风险。</p>
+</blockquote>
+<p><img src="/img/quic_intro/quic_intro_1_2.jpg" alt></p>
+<p>QUIC 0-RTT 握手</p>
+<p>上文简述了 QUIC 握手的密钥协商过程，首次需要询问一次 Server 以获取 SCFG, 从而获取存储于其中的 0-RTT 握手公钥。这一交互过程中 client 和 server 在 QUIC 的握手协议发送的报文中分别叫 Inchoate Client hello message (inchoate CHLO) 和 Rejection message (REJ)。因而包含 server 端的握手公钥的 SCFG 是在 REJ 报文中发给客户端的。有了 SCFG，接下来就能发起 0-RTT 握手。这一过程中 client 和 server 端在 QUIC 的握手协议发送的报文中分别叫 Full Client Hello message (full CHLO) 和 Server Hello message (SHLO)。下图摘自 Google QUIC 握手协议的官方文档，详细叙述了握手过程 client 侧的处理流程：</p>
+<p>QUIC 握手客户端侧处理流程<br><img src="/img/quic_intro/quic_intro_1_3.jpg" alt></p>
+<h2 id="0RTT的重放攻击风险"><a href="#0RTT的重放攻击风险" class="headerlink" title="0RTT的重放攻击风险"></a>0RTT的重放攻击风险</h2><p>0-RTT连接恢复并非那么简单，它会带来许多意外风险及警告，这正是为什么有些默认程序不启用0-RTT连接恢复的原因。用户必须提前考虑所涉及的风险，并做出决定是否使用此功能。可以在应用程序层面使用预防措施来减轻这种情况。</p>
+<p>首先，0-RTT连接恢复是不提供forwardsecrecy的，针对连接的secret parameters的妥协将微不足道地允许恢复新连接0-RTT阶段期间，发送applicationdata 进行特定的妥协。</p>
+<p>在0-RTT阶段之后、或握手之后发送的数据，仍然是安全的。这是因为TLS1.3 (及QUIC)还是会对handshakecompletion之后发送的数据执行normal key exchange algorithm (这是forwardsecret) 。</p>
+<p>值得注意的是，在0-RTT期间发送的applicationdata 可以被路径上的on-path attacker 捕获，然后多次重播到同一个服务器。这个在大部分情况下也许不是问题，因为attacker无法解密数据，0-RTT连接恢复还是非常有用的。在其他的情况下，这可能会引起出乎意料的风险。</p>
+<p>举个比例，假设一家银行允许authenticated user (e.g using HTTPcookie, 或其他HTTP身份验证机制)通过specificAPI endpoint发出HTTP请求将资金从其账户发送到另一个用户。</p>
+<p>如果attacker能够在使用0-RTT连接恢复时捕获该请求，他们将无法看到plaintext并且获取用户的凭据，原因是因为他们不知道用于加密数据的secretkey；但是他们仍然有可能一直散发重复性地请求，耗尽该用户的银行账户里的钱。</p>
+<p><img src="/img/quic_intro/quic_intro_1_4.jpg" alt></p>
+<h1 id="改进的拥塞控制"><a href="#改进的拥塞控制" class="headerlink" title="改进的拥塞控制"></a>改进的拥塞控制</h1><p>TCP 的拥塞控制实际上包含了四个算法：慢启动，拥塞避免，快速重传，快速恢复 [22]。</p>
+<p>QUIC 协议当前默认使用了 TCP 协议的 Cubic 拥塞控制算法 [6]，同时也支持 CubicBytes, Reno, RenoBytes, BBR, PCC 等拥塞控制算法。</p>
+<p>从拥塞算法本身来看，QUIC 只是按照 TCP 协议重新实现了一遍，那么 QUIC 协议到底改进在哪些方面呢？主要有如下几点：</p>
+<h1 id="可插拔"><a href="#可插拔" class="headerlink" title="可插拔"></a>可插拔</h1><p>什么叫可插拔呢？就是能够非常灵活地生效，变更和停止。体现在如下方面：</p>
+<ol>
+<li>应用程序层面就能实现不同的拥塞控制算法，不需要操作系统，不需要内核支持。这是一个飞跃，因为传统的 TCP 拥塞控制，必须要端到端的网络协议栈支持，才能实现控制效果。而内核和操作系统的部署成本非常高，升级周期很长，这在产品快速迭代，网络爆炸式增长的今天，显然有点满足不了需求。</li>
+<li>即使是单个应用程序的不同连接也能支持配置不同的拥塞控制。就算是一台服务器，接入的用户网络环境也千差万别，结合大数据及人工智能处理，我们能为各个用户提供不同的但又更加精准更加有效的拥塞控制。比如 BBR 适合，Cubic 适合。</li>
+<li>应用程序不需要停机和升级就能实现拥塞控制的变更，我们在服务端只需要修改一下配置，reload 一下，完全不需要停止服务就能实现拥塞控制的切换。</li>
+</ol>
+<p>STGW 在配置层面进行了优化，我们可以针对不同业务，不同网络制式，甚至不同的 RTT，使用不同的拥塞控制算法。</p>
+<h1 id="单调递增的-Packet-Number"><a href="#单调递增的-Packet-Number" class="headerlink" title="单调递增的 Packet Number"></a>单调递增的 Packet Number</h1><p>TCP 为了保证可靠性，使用了基于字节序号的 Sequence Number 及 Ack 来确认消息的有序到达。</p>
+<p>QUIC 同样是一个可靠的协议，它使用 Packet Number 代替了 TCP 的 sequence number，并且每个 Packet Number 都严格递增，也就是说就算 Packet N 丢失了，重传的 Packet N 的 Packet Number 已经不是 N，而是一个比 N 大的值。而 TCP 呢，重传 segment 的 sequence number 和原始的 segment 的 Sequence Number 保持不变，也正是由于这个特性，引入了 Tcp 重传的歧义问题。</p>
+<p><img src="/img/quic_intro/quic_intro_2.jpg" alt></p>
+<p>如上图所示，超时事件 RTO 发生后，客户端发起重传，然后接收到了 Ack 数据。由于序列号一样，这个 Ack 数据到底是原始请求的响应还是重传请求的响应呢？不好判断。</p>
+<p>如果算成原始请求的响应，但实际上是重传请求的响应（上图左），会导致采样 RTT 变大。如果算成重传请求的响应，但实际上是原始请求的响应，又很容易导致采样 RTT 过小。</p>
+<p>由于 Quic 重传的 Packet 和原始 Packet 的 Pakcet Number 是严格递增的，所以很容易就解决了这个问题。</p>
+<p><img src="/img/quic_intro/quic_intro_3.jpg" alt></p>
+<p>如上图所示，RTO 发生后，根据重传的 Packet Number 就能确定精确的 RTT 计算。如果 Ack 的 Packet Number 是 N+M，就根据重传请求计算采样 RTT。如果 Ack 的 Pakcet Number 是 N，就根据原始请求的时间计算采样 RTT，没有歧义性。</p>
+<p>但是单纯依靠严格递增的 Packet Number 肯定是无法保证数据的顺序性和可靠性。QUIC 又引入了一个 Stream Offset 的概念。</p>
+<p>即一个 Stream 可以经过多个 Packet 传输，Packet Number 严格递增，没有依赖。但是 Packet 里的 Payload 如果是 Stream 的话，就需要依靠 Stream 的 Offset 来保证应用数据的顺序。如错误! 未找到引用源。所示，发送端先后发送了 Pakcet N 和 Pakcet N+1，Stream 的 Offset 分别是 x 和 x+y。</p>
+<p>假设 Packet N 丢失了，发起重传，重传的 Packet Number 是 N+2，但是它的 Stream 的 Offset 依然是 x，这样就算 Packet N + 2 是后到的，依然可以将 Stream x 和 Stream x+y 按照顺序组织起来，交给应用程序处理。</p>
+<p><img src="/img/quic_intro/quic_intro_4.jpg" alt></p>
+<h1 id="不允许-Reneging"><a href="#不允许-Reneging" class="headerlink" title="不允许 Reneging"></a>不允许 Reneging</h1><p>什么叫 Reneging 呢？就是接收方丢弃已经接收并且上报给 SACK 选项的内容 [8]。TCP 协议不鼓励这种行为，但是协议层面允许这样的行为。主要是考虑到服务器资源有限，比如 Buffer 溢出，内存不够等情况。</p>
+<p>Reneging 对数据重传会产生很大的干扰。因为 Sack 都已经表明接收到了，但是接收端事实上丢弃了该数据。</p>
+<p>QUIC 在协议层面禁止 Reneging，一个 Packet 只要被 Ack，就认为它一定被正确接收，减少了这种干扰。</p>
+<h1 id="更多的-Ack-块"><a href="#更多的-Ack-块" class="headerlink" title="更多的 Ack 块"></a>更多的 Ack 块</h1><p>TCP 的 Sack 选项能够告诉发送方已经接收到的连续 Segment 的范围，方便发送方进行选择性重传。</p>
+<p>由于 TCP 头部最大只有 60 个字节，标准头部占用了 20 字节，所以 Tcp Option 最大长度只有 40 字节，再加上 Tcp Timestamp option 占用了 10 个字节 [25]，所以留给 Sack 选项的只有 30 个字节。</p>
+<p>每一个 Sack Block 的长度是 8 个，加上 Sack Option 头部 2 个字节，也就意味着 Tcp Sack Option 最大只能提供 3 个 Block。</p>
+<p>但是 Quic Ack Frame 可以同时提供 256 个 Ack Block，在丢包率比较高的网络下，更多的 Sack Block 可以提升网络的恢复速度，减少重传量。</p>
+<h1 id="Ack-Delay-时间"><a href="#Ack-Delay-时间" class="headerlink" title="Ack Delay 时间"></a>Ack Delay 时间</h1><p>Tcp 的 Timestamp 选项存在一个问题 [25]，它只是回显了发送方的时间戳，但是没有计算接收端接收到 segment 到发送 Ack 该 segment 的时间。这个时间可以简称为 Ack Delay。</p>
+<p>这样就会导致 RTT 计算误差。如下图：</p>
+<p><img src="/img/quic_intro/quic_intro_5.jpg" alt></p>
+<ul>
+<li>可以认为 TCP 的 RTT 计算：<code>RTT = timestamp2 - timestamp1</code></li>
+<li>而 Quic 计算如下：<code>RTT = timestamp2 - timestamp1 - AckDelay</code></li>
+</ul>
+<p><img src="/img/quic_intro/quic_intro_3.jpg" alt></p>
+<p>当然 RTT 的具体计算没有这么简单，需要采样，参考历史数值进行平滑计算，参考如下公式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SRTT = SRTT + α(RTT - SRTT)</span><br><span class="line">RTO = μ * SRTT + δ*DevRTT</span><br></pre></td></tr></table></figure></p>
+<h1 id="基于-stream-和-connecton-级别的流量控制"><a href="#基于-stream-和-connecton-级别的流量控制" class="headerlink" title="基于 stream 和 connecton 级别的流量控制"></a>基于 stream 和 connecton 级别的流量控制</h1><p>QUIC 的流量控制 [22] 类似 HTTP2，即在 Connection 和 Strea6 级别提供了两种流量控制。为什么需要两类流量控制呢？主要是因为 QUIC 支持多路复用。</p>
+<ol>
+<li>Stream 可以认为就是一条 HTTP 请求。</li>
+<li>Connection 可以类比一条 TCP 连接。多路复用意味着在一7 Connetion 上会同时存在多条 Stream。既需要对单个 Stream 进行控制，又需要针对所有 Stream 进行总体控制。</li>
+</ol>
+<p>QUIC 实现流量控制的原理比较简单：</p>
+<p>通过 window_update 帧告诉对端自己可以接收的字节数，这样发送方就不会发送超过这个数量的数据。</p>
+<p>通过 BlockFrame 告诉对端由于流量控制被阻塞了，无法发送数据。</p>
+<p>QUIC 的流量控制和 TCP 有点区别，TCP 为了保证可靠性，窗口左边沿向右滑动时的长度取决于已经确认的字节数。如果中间出现丢包，就算接收到了更大序号的 Segment，窗口也无法超过这个序列号。</p>
+<p>但 QUIC 不同，就算此前有些 packet 没有接收到，它的滑动只取决于接收到的最大偏移字节数。</p>
+<p><img src="/img/quic_intro/quic_intro_6.jpg" alt></p>
+<ul>
+<li>针对 Stream：<code>可用窗口 = 最大窗口数 - 接收到的最大偏移数</code></li>
+<li>针对 Connection：<code>可用窗口 = stream1可用窗口 + stream2可用窗口 + ... + streamN可用窗口</code></li>
+</ul>
+<p>同样地，STGW 也在连接和 Stream 级别设置了不同的窗口数。</p>
+<p>最重要的是，我们可以在内存不足或者上游处理性能出现问题时，通过流量控制来限制传输速率，保障服务可用性。</p>
+<h1 id="没有队头阻塞的多路复用"><a href="#没有队头阻塞的多路复用" class="headerlink" title="没有队头阻塞的多路复用"></a>没有队头阻塞的多路复用</h1><p>QUIC 的多路复用和 HTTP2 类似。在一条 QUIC 连接上可以并发发送多个 HTTP 请求 (stream)。但是 QUIC 的多路复用相比 HTTP2 有一个很大的优势。</p>
+<p>QUIC 一个连接上的多个 stream 之间没有依赖。这样假如 stream2 丢了一个 udp packet，也只会影响 stream2 的处理。不会影响 stream2 之前及之后的 stream 的处理。</p>
+<p>这也就在很大程度上缓解甚至消除了队头阻塞的影响。</p>
+<p>多路复用是 HTTP2 最强大的特性 [7]，能够将多条请求在一条 TCP 连接上同时发出去。但也恶化了 TCP 的一个问题，队头阻塞 [11]，如下图示：</p>
+<p><img src="/img/quic_intro/quic_intro_7.jpg" alt></p>
+<p>HTTP2 在一个 TCP 连接上同时发送 4 个 Stream。其中 Stream1 已经正确到达，并被应用层读取。但是 Stream2 的第三个 tcp segment 丢失了，TCP 为了保证数据的可靠性，需要发送端重传第 3 个 segment 才能通知应用层读取接下去的数据，虽然这个时候 Stream3 和 Stream4 的全部数据已经到达了接收端，但都被阻塞住了。</p>
+<p>不仅如此，由于 HTTP2 强制使用 TLS，还存在一个 TLS 协议层面的队头阻塞 [12]。</p>
+<p><img src="/img/quic_intro/quic_intro_8.jpg" alt></p>
+<p>Record 是 TLS 协议处理的最小单位，最大不能超过 16K，一些服务器比如 Nginx 默认的大小就是 16K。由于一个 record 必须经过数据一致性校验才能进行加解密，所以一个 16K 的 record，就算丢了一个字节，也会导致已经接收到的 15.99K 数据无法处理，因为它不完整。</p>
+<p>那 QUIC 多路复用为什么能避免上述问题呢？</p>
+<ol>
+<li>QUIC 最基本的传输单元是 Packet，不会超过 MTU 的大小，整个加密和认证过程都是基于 Packet 的，不会跨越多个 Packet。这样就能避免 TLS 协议存在的队头阻塞。</li>
+<li>Stream 之间相互独立，比如 Stream2 丢了一个 Pakcet，不会影响 Stream3 和 Stream4。不存在 TCP 队头阻塞。</li>
+</ol>
+<p><img src="/img/quic_intro/quic_intro_9.jpg" alt></p>
+<p>当然，并不是所有的 QUIC 数据都不会受到队头阻塞的影响，比如 QUIC 当前也是使用 Hpack 压缩算法 [10]，由于算法的限制，丢失一个头部数据时，可能遇到队头阻塞。</p>
+<p>总体来说，QUIC 在传输大量数据时，比如视频，受到队头阻塞的影响很小。</p>
+<h1 id="加密认证的报文"><a href="#加密认证的报文" class="headerlink" title="加密认证的报文"></a>加密认证的报文</h1><p>TCP 协议头部没有经过任何加密和认证，所以在传输过程中很容易被中间网络设备篡改，注入和窃听。比如修改序列号、滑动窗口。这些行为有可能是出于性能优化，也有可能是主动攻击。</p>
+<p>但是 QUIC 的 packet 可以说是武装到了牙齿。除了个别报文比如 PUBLIC_RESET 和 CHLO，所有报文头部都是经过认证的，报文 Body 都是经过加密的。</p>
+<p>这样只要对 QUIC 报文任何修改，接收端都能够及时发现，有效地降低了安全风险。</p>
+<p>如下图所示，红色部分是 Stream Frame 的报文头部，有认证。绿色部分是报文内容，全部经过加密。</p>
+<p><img src="/img/quic_intro/quic_intro_10.jpg" alt></p>
+<h1 id="连接迁移"><a href="#连接迁移" class="headerlink" title="连接迁移"></a>连接迁移</h1><p>一条 TCP 连接 [17] 是由四元组标识的（源 IP，源端口，目的 IP，目的端口）。什么叫连接迁移呢？就是当其中任何一个元素发生变化时，这条连接依然维持着，能够保持业务逻辑不中断。当然这里面主要关注的是客户端的变化，因为客户端不可控并且网络环境经常发生变化，而服务端的 IP 和端口一般都是固定的。</p>
+<p>比如大家使用手机在 WIFI 和 4G 移动网络切换时，客户端的 IP 肯定会发生变化，需要重新建立和服务端的 TCP 连接。</p>
+<p>又比如大家使用公共 NAT 出口时，有些连接竞争时需要重新绑定端口，导致客户端的端口发生变化，同样需要重新建立 TCP 连接。</p>
+<p>针对 TCP 的连接变化，MPTCP[5] 其实已经有了解决方案，但是由于 MPTCP 需要操作系统及网络协议栈支持，部署阻力非常大，目前并不适用。</p>
+<p>所以从 TCP 连接的角度来讲，这个问题是无解的。</p>
+<p>那 QUIC 是如何做到连接迁移呢？很简单，任何一条 QUIC 连接不再以 IP 及端口四元组标识，而是以一个 64 位的随机数作为 ID 来标识，这样就算 IP 或者端口发生变化时，只要 ID 不变，这条连接依然维持着，上层业务逻辑感知不到变化，不会中断，也就不需要重连。</p>
+<p>由于这个 ID 是客户端随机产生的，并且长度有 64 位，所以冲突概率非常低。</p>
+<h1 id="其他亮点"><a href="#其他亮点" class="headerlink" title="其他亮点"></a>其他亮点</h1><p>此外，QUIC 还能实现前向冗余纠错，在重要的包比如握手消息发生丢失时，能够根据冗余信息还原出握手消息。</p>
+<p>QUIC 还能实现证书压缩，减少证书传输量，针对包头进行验证等。</p>
+<p>限于篇幅，本文不再详细介绍，有兴趣的可以参考文档 [23] 和文档 [4] 和文档 [26]。</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/02/16/self_cultivation_tcp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1106,304 +1814,11 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2021/01/12/self_cultivation_http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/self_cultivation_http/" itemprop="url">服务器开发自我修养专栏-HTTP深入浅出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T19:08:06+00:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Self-cultivation/" itemprop="url" rel="index">
-                    <span itemprop="name">Self-cultivation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTTP与HTTPS"><a href="#HTTP与HTTPS" class="headerlink" title="HTTP与HTTPS"></a>HTTP与HTTPS</h1><p>HTTP 协议考察 HTTP 协议的返回码、HTTP 的方法等。需要特别指出的是 HTTPS 加密的详细过程要非常透彻，不然容易产生一种感觉好像都清楚了，但是一问就有点说不清楚。</p>
-<p>下面实例是一点典型的使用GET来传递数据的实例,<br>客户端请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /hello.txt HTTP/1.1</span><br><span class="line">User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3</span><br><span class="line">Host: www.example.com</span><br><span class="line">Accept-Language: en, mi</span><br></pre></td></tr></table></figure></p>
-<p>服务端响应:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 27 Jul 2009 12:28:53 GMT</span><br><span class="line">Server: Apache</span><br><span class="line">Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT</span><br><span class="line">ETag: &quot;34aa387-d-1568eb00&quot;</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 51</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World! My payload includes a trailing CRLF.</span><br></pre></td></tr></table></figure></p>
-<h2 id="客户端请求消息"><a href="#客户端请求消息" class="headerlink" title="客户端请求消息"></a>客户端请求消息</h2><p>客户端发送一个HTTP请求到服务器的请求消息包括以下格式:  </p>
-<ul>
-<li>请求行（request line）</li>
-<li>请求头部（header）</li>
-<li>空行</li>
-<li>请求数据</li>
-</ul>
-<p>由四个部分组成，下图给出了请求报文的一般格式。<br><img src="/img/noodle_plan/http/client_request_header.png" alt></p>
-<h2 id="服务器响应消息"><a href="#服务器响应消息" class="headerlink" title="服务器响应消息"></a>服务器响应消息</h2><p>HTTP响应也由四个部分组成，分别是:  </p>
-<ul>
-<li>状态行</li>
-<li>消息报头</li>
-<li>空行</li>
-<li>响应正文</li>
-</ul>
-<p><img src="/img/noodle_plan/http/server_response_header.jpg" alt></p>
-<h2 id="https"><a href="#https" class="headerlink" title="https"></a>https</h2><p>HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。</p>
-<p>那么SSL/TLS又是什么？</p>
-<ul>
-<li>SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研发，SSL 协议位于 TCP/IP 协议与各种应用层协议之间，为数据通讯提供安全支持。</li>
-<li>TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。</li>
-</ul>
-<p>https 不是一种新的协议，只是 http 的通信接口部分使用了 ssl 和 tsl 协议替代，加入了加密、证书、完整性保护的功能，下面解释一下加密和证书，如下图所示<br><img src="/img/noodle_plan/http/https_ssl.png" alt></p>
-<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>也叫<strong>共享密钥加密</strong>, 加密和解密公用一套秘钥，这样就会产生问题，已共享秘钥加密方式必须将秘钥传送给对方，但如果通信被监听，那么秘钥可能会被泄漏产生危险。<br>常见对称加密算法有des, aes</p>
-<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>也叫<strong>公开秘钥加密</strong>, 使用一种非对称加密的算法，使用一对非对称的秘钥，一把叫做公有秘钥，一把叫做私有秘钥，在加密的时候，通信的一方使用公有秘钥进行加密，通信的另一方使用私有秘钥进行解密，利用这种方式不需要发送私有秘钥，也就不存在泄漏的风险了。<br>常见非对称加密算法有rsa</p>
-<h3 id="https-加密方式"><a href="#https-加密方式" class="headerlink" title="https 加密方式"></a>https 加密方式</h3><p>因为公开秘钥加密的方式比共享秘钥加密的方式钥消耗 cpu 资源，https 采取了混合加密的方式，来结合两者的优点。</p>
-<p>在秘钥交换阶段使用公开加密的方式，之后建立连接后使用共享秘钥加密方式进行加密，如下图。</p>
-<p><img src="/img/noodle_plan/http/https_proc.png" alt></p>
-<h3 id="为什么要使用证书"><a href="#为什么要使用证书" class="headerlink" title="为什么要使用证书"></a>为什么要使用证书</h3><p>因为公开加密还存在一些问题就是无法证明公开秘钥的正确性(有可能被黑客中间替换成了黑客自己的公钥, 然后黑客伪装成服务器/客户端做中间转发)，为了解决这个问题，https 采取了有数字证实认证机构和其相关机构颁发的公开秘钥证书，通信过程如下图所示。</p>
-<p><img src="/img/noodle_plan/http/https_ca.png" alt></p>
-<p>解释一下上图的步骤：  </p>
-<ol>
-<li>服务器将自己的公开秘钥传到数字证书认证机构  </li>
-<li>数字证书认证机构使用自己的秘钥来对传来的服务器公钥进行加密，并颁发数字证书  </li>
-<li>服务器将传回的公钥证书发送给客户端，客户端使用数字机构颁发的公开秘钥来验证证书的有效性，以及公开秘钥的真实性<ul>
-<li><img src="/img/noodle_plan/linux/https_pub_key_credential_verify.jpg" alt></li>
-<li>证书签名是先将证书信息（证书机构名称、有效期、拥有者、拥有者公钥）进行hash，再用CA的私有密钥对hash值加密而生成的。</li>
-<li>所以拦截者虽然可以拦截并篡改证书信息（主要是拥有者和拥有者的公钥），但是由于拦截者没有CA的私钥，所以无法生成正确的签名，从而导致客户端拿到签名后，用CA公有密钥对证书签名解密后值与用证书计算出来的实际hash值不一样，从而得不到客户端信任。(其实这个ca公钥和私钥也就是非对称加密的思想了)</li>
-</ul>
-</li>
-<li>客户端使用服务器的公开秘钥进行消息加密，后发送给服务器。  </li>
-<li>服务器使用私有秘钥进行解密。</li>
-</ol>
-<p>浏览器在安装的时候会内置可信的数字证书机构的公开秘钥，如下图所示。</p>
-<p><img src="/img/noodle_plan/http/https_browser_ca.png" alt></p>
-<p>这就是为什么我们使用自己生成的证书的时候会产生安全警告的原因。</p>
-<p>再附一张 https 的具体通信步骤和图解。</p>
-<p><img src="/img/noodle_plan/http/https_hand_shake2.png" alt></p>
-<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><p>服务器发送的响应报文包含 Set-Cookie 首部字段，客户端得到响应报文后把 Cookie 内容保存到浏览器中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.0 200 OK</span><br><span class="line">Content-type: text/html</span><br><span class="line">Set-Cookie: yummy_cookie=choco</span><br><span class="line">Set-Cookie: tasty_cookie=strawberry</span><br></pre></td></tr></table></figure></p>
-<p>客户端之后对同一个服务器发送请求时，会从浏览器中取出 Cookie 信息并通过 Cookie 请求首部字段发送给服务器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /sample_page.html HTTP/1.1</span><br><span class="line">Host: www.example.org</span><br><span class="line">Cookie: yummy_cookie=choco; tasty_cookie=strawberry</span><br></pre></td></tr></table></figure></p>
-<p>Domain 标识指定了哪些主机可以接受 Cookie。如果不指定，默认为当前文档的主机（不包含子域名）。如果指定了 Domain，则一般包含子域名。例如，如果设置 Domain=mozilla.org，则 Cookie 也包含在子域名中（如 developer.mozilla.org）。</p>
-<p>Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径必须存在于请求 URL 中）。以字符 %x2F (“/“) 作为路径分隔符，子路径也会被匹配。例如，设置 Path=/docs，则以下地址都会匹配：</p>
-<ul>
-<li><code>/docs</code></li>
-<li><code>/docs/Web/</code></li>
-<li><code>/docs/Web/HTTP</code></li>
-</ul>
-<h2 id="session如何保存较好"><a href="#session如何保存较好" class="headerlink" title="session如何保存较好"></a>session如何保存较好</h2><p><img src="/img/noodle_plan/http/session_server.jpg" alt></p>
-<p>一个用户的 Session 信息如果存储在一个服务器上，那么当负载均衡器把用户的下一个请求转发到另一个服务器，由于服务器没有用户的 Session 信息，那么该用户就需要重新进行登录等操作..有什么好的解决方案呢?<br>Session Server使用一个单独的服务器存储 Session 数据，可以使用传统的 MySQL，也使用 Redis 或者 Memcached 这种内存型数据库。  </p>
-<ul>
-<li>优点：<br>  为了使得大型网站具有伸缩性，集群中的应用服务器通常需要保持无状态，那么应用服务器不能存储用户的会话信息。Session Server 将用户的会话信息单独进行存储，从而保证了应用服务器的无状态。</li>
-<li>缺点：<br>  需要去实现存取 Session 的代码</li>
-</ul>
-<h2 id="cookie和session和token的区别"><a href="#cookie和session和token的区别" class="headerlink" title="cookie和session和token的区别"></a>cookie和session和token的区别</h2><p><img src="/img/noodle_plan/http/cookie_session.png" alt></p>
-<ul>
-<li><strong>由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session</strong>.典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。</li>
-<li><strong>思考一下服务端如何识别特定的客户？这个时候Cookie就登场了</strong>。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。</li>
-<li><strong>Cookie其实还可以用在一些方便用户的场景下</strong>，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。所以，总结一下：Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。</li>
-<li><strong>为什么需要token来替代session机制? 因为session的存储对服务器说是一个巨大的开销</strong>， 严重的限制了服务器扩展能力， 比如说我用两个机器组成了一个集群， 小 F 通过机器 A 登录了系统， 那 session id 会保存在机器 A 上， 假设小 F 的下一次请求被转发到机器 B 怎么办？ 机器 B 可没有小 F 的 session id 啊。有时候会采用一点小伎俩： session sticky ， 就是让小 F 的请求一直粘连在机器 A 上， 但是这也不管用， 要是机器 A 挂掉了， 还得转到机器 B 去。 </li>
-</ul>
-<p>接下来我们介绍事实上的token标准<a href="#JWT">JWT</a></p>
-<h3 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h3><p>sessionId 的方式本质是把用户状态信息维护在 server 端，token 的方式就是把用户的状态信息加密成一串 token 传给前端，然后每次发请求时把 token 带上，传回给服务器端；服务器端收到请求之后，解析 token 并且验证相关信息(用jwt的header里的加密方式然后根据自己的不公开的密钥把jwt中的payload用加密一下得到一个签名 s, 然后用s对比看看是不是跟jwt里的signature相等, 相等则说明token对了)；</p>
-<p>备注: 对于数据校验，专门的消息认证码生成算法, HMAC - 一种使用单向散列函数构造消息认证码的方法，其过程是不可逆的、唯一确定的，并且使用密钥来生成认证码，其目的是防止数据在传输过程中被篡改或伪造。将原始数据与认证码一起传输，数据接收端将原始数据使用相同密钥和相同算法再次生成认证码，与原有认证码进行比对，校验数据的合法性。</p>
-<p>所以跟第一种登录方式最本质的区别是：通过解析 token 的计算时间换取了 session 的存储空间</p>
-<p>业界通用的加密方式是 jwt, jwt 的具体格式如图：<br><img src="/img/noodle_plan/http/jwt1.png" alt><br>简单的介绍一下 jwt，它主要由 3 部分组成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">header 头部</span><br><span class="line">&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br><span class="line">payload 负载</span><br><span class="line">&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;iat&quot;: 1516239022,</span><br><span class="line">  &quot;exp&quot;: 1555341649998</span><br><span class="line">&#125;</span><br><span class="line">signature 签名</span><br><span class="line">&#123;</span><br><span class="line">  HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; +</span><br><span class="line">  base64UrlEncode(payload),</span><br><span class="line">  your-256-bit-secret</span><br><span class="line">  ) secret base64 encoded</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>header<br>  header 里面描述加密算法和 token 的类型，类型一般都是 JWT；</li>
-<li>payload<br>  里面放的是用户的信息，也就是第一种登录方式中需要维护在服务器端 session 中的信息；</li>
-<li>signature<br>  是对前两部分的签名，也可以理解为加密；实现需要一个密钥（secret），这个 secret 只有服务器才知道，然后使用 header 里面的算法按照如下方法来加密：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(</span><br><span class="line">base64UrlEncode(header) + <span class="string">"."</span> +</span><br><span class="line">base64UrlEncode(payload),</span><br><span class="line">secret)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>总之，最后的 <code>jwt = base64url(header) + &quot;.&quot; + base64url(payload) + &quot;.&quot; + signature</code><br>jwt 可以放在 response 中返回，也可以放在 cookie 中返回，这都是具体的返回方式，并不重要。<br>客户端发起请求时，官方推荐放在 HTTP header 中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure></p>
-<p>这样子确实也可以解决 cookie 跨域(比如移动平台上对cookie支持不好)的问题，不过具体放在哪儿还是根据业务场景来定，并没有一定之规。</p>
-<h4 id="jwt过期了如何刷新"><a href="#jwt过期了如何刷新" class="headerlink" title="jwt过期了如何刷新"></a>jwt过期了如何刷新</h4><p><strong>前面讲的 Token，都是 Access Token，也就是访问资源接口时所需要的 Token，还有另外一种 Token，Refresh Token，</strong>通常情况下，Refresh Token 的有效期会比较长，而 Access Token 的有效期比较短，当 Access Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Access Token，如果 Refresh Token 也失效了，用户就只能重新登录了。</p>
-<p>在 JWT 的实践中，引入 Refresh Token，将会话管理流程改进如下:</p>
-<ol>
-<li>客户端使用用户名密码进行认证</li>
-<li>服务端生成有效时间较短的 Access Token（例如 10 分钟），和有效时间较长的 Refresh Token（例如 7 天）</li>
-<li>客户端访问需要认证的接口时，携带 Access Token</li>
-<li>如果 Access Token 没有过期，服务端鉴权后返回给客户端需要的数据</li>
-<li>如果携带 Access Token 访问需要认证的接口时鉴权失败（例如返回 401 错误），则客户端使用 Refresh Token 向刷新接口申请新的 Access Token</li>
-<li>如果 Refresh Token 没有过期，服务端向客户端下发新的 Access Token</li>
-<li>客户端使用新的 Access Token 访问需要认证的接口</li>
-</ol>
-<h2 id="常见的HTTP相应状态码"><a href="#常见的HTTP相应状态码" class="headerlink" title="常见的HTTP相应状态码"></a>常见的HTTP相应状态码</h2><p>总之：(一般标准用法是这样用哈, 但是真的写代码的时候其实跟get/post/put一样, 想怎么用全看自己, 前后端开发人员协商好就行)</p>
-<ul>
-<li>1XX：消息</li>
-<li>2XX：成功</li>
-<li>3XX：重定向</li>
-<li>4XX：请求错误</li>
-<li>5XX、6XX：服务器错误</li>
-</ul>
-<p>常见状态代码、状态描述的说明如下:</p>
-<ul>
-<li>200 OK:<br>请求已成功，请求所希望的响应头或数据体将随此响应返回。实际的响应将取决于所使用的请求方法。在GET请求中，响应将包含与请求的资源相对应的实体。在POST请求中，响应将包含描述或操作结果的实体。[7]</li>
-<li>301 Moved Permanently:<br>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个URI之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。[19]除非额外指定，否则这个响应也是可缓存的。<br>新的永久性的URI应当在响应的Location域中返回。除非这是一个HEAD请求，否则响应的实体中应当包含指向新的URI的超链接及简短说明。<br>如果这不是一个GET或者HEAD请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。<br>注意：对于某些使用HTTP/1.0协议的浏览器，当它们发送的POST请求得到了一个301响应的话，接下来的重定向请求将会变成GET方式。</li>
-<li>400 Bad Request<br>由于明显的客户端错误（例如，格式错误的请求语法，太大的大小，无效的请求消息或欺骗性路由请求），服务器不能或不会处理该请求。[31]</li>
-<li>401 Unauthorized（RFC 7235）<br>参见：HTTP基本认证、HTTP摘要认证<br>类似于403 Forbidden，401语义即“未认证”，即用户没有必要的凭据。[32]该状态码表示当前请求需要用户验证。该响应必须包含一个适用于被请求资源的WWW-Authenticate信息头用以询问用户信息。客户端可以重复提交一个包含恰当的Authorization头信息的请求。[33]如果当前请求已经包含了Authorization证书，那么401响应代表着服务器验证已经拒绝了那些证书。如果401响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。<br>注意：当网站（通常是网站域名）禁止IP地址时，有些网站状态码显示的401，表示该特定地址被拒绝访问网站。</li>
-<li>403 Forbidden<br>主条目：HTTP 403<br>服务器已经理解请求，但是拒绝执行它。与401响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。如果这不是一个HEAD请求，而且服务器希望能够讲清楚为何请求不能被执行，那么就应该在实体内描述拒绝的原因。当然服务器也可以返回一个404响应，假如它不希望让客户端获得任何信息。</li>
-<li>404 Not Found<br>主条目：HTTP 404<br>请求失败，请求所希望得到的资源未被在服务器上发现，但允许用户的后续请求。[35]没有信息能够告诉用户这个状况到底是暂时的还是永久的。假如服务器知道情况的话，应当使用410状态码来告知旧资源因为某些内部的配置机制问题，已经永久的不可用，而且没有任何可以跳转的地址。404这个状态码被广泛应用于当服务器不想揭示到底为何请求被拒绝或者没有其他适合的响应可用的情况下。</li>
-<li>500 Internal Server Error<br>通用错误消息，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。没有给出具体错误信息。[59]</li>
-<li>503 Service Unavailable<br>由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是暂时的，并且将在一段时间以后恢复。[62]如果能够预计延迟时间，那么响应中可以包含一个Retry-After头用以标明这个延迟时间。如果没有给出这个Retry-After信息，那么客户端应当以处理500响应的方式处理它。</li>
-</ul>
-<h2 id="get和post的本质区别"><a href="#get和post的本质区别" class="headerlink" title="get和post的本质区别"></a>get和post的本质区别</h2><p>从设计初衷上来说，GET 用来实现从服务端取数据，POST 用来实现向服务端提出请求对数据做某些修改，也因此如果你向nginx用post请求静态文件，nginx会直接返回 405 not allowed，但是服务端毕竟是人实现的，你可以让 POST 做 GET 相同的事情</p>
-<p>get请求的参数一般放在url中，但是浏览器和服务器程序对url长度还是有限制的。<br>post请求的参数一般放在body，你硬要放到url中也可以。</p>
-<p>在RESTful风格中，get用于从服务器获获取数据，而post用于创建数据</p>
-<h2 id="Connection-keep-alive"><a href="#Connection-keep-alive" class="headerlink" title="Connection: keep-alive"></a>Connection: keep-alive</h2><p>在早期的HTTP/1.0中，每次http请求都要创建一个连接，而创建连接的过程需要消耗资源和时间，为了减少资源消耗，缩短响应时间，就需要重用连接。在后来的HTTP/1.0中以及HTTP/1.1中，引入了重用连接的机制，就是在http请求头中加入Connection: keep-alive来告诉对方这个请求响应完成后不要关闭，下一次咱们还用这个请求继续交流。协议规定HTTP/1.0如果想要保持长连接，需要在请求头中加上Connection: keep-alive，而HTTP/1.1默认是支持长连接的，有没有这个请求头都行。</p>
-<p>要实现长连接很简单，只要客户端和服务端都保持这个http长连接即可。但问题的关键在于保持长连接后，浏览器如何知道服务器已经响应完成？在使用短连接的时候，服务器完成响应后即关闭http连接，这样浏览器就能知道已接收到全部的响应，同时也关闭连接（TCP连接是双向的）。</p>
-<p>在使用长连接的时候，响应完成后服务器是不能关闭连接的，那么它就要在响应头中加上特殊标志告诉浏览器已响应完成。一般情况下这个特殊标志就是Content-Length，来指明响应体的数据大小，比如Content-Length: 120表示响应体内容有120个字节，这样浏览器接收到120个字节的响应体后就知道了已经响应完成。</p>
-<p>由于Content-Length字段必须真实反映响应体长度，但实际应用中，有些时候响应体长度并没那么好获得，例如响应体来自于网络文件，或者由动态语言生成。这时候要想准确获取长度，只能先开一个足够大的内存空间，等内容全部生成好再计算。但这样做一方面需要更大的内存开销，另一方面也会让客户端等更久。这时候Transfer-Encoding: chunked响应头就派上用场了，该响应头表示响应体内容用的是分块传输，此时服务器可以将数据一块一块地分块响应给浏览器而不必一次性全部响应，待浏览器接收到全部分块后就表示响应结束。</p>
-<p>以分块传输一段文本内容：“人的一生总是在追求自由的一生 So easy”来说明分块传输的过程，如下图所示:<br><img src="/img/noodle_plan/http/http_alive.png" alt></p>
-<h2 id="url编码urlencode是什么"><a href="#url编码urlencode是什么" class="headerlink" title="url编码urlencode是什么"></a>url编码urlencode是什么</h2><p>RFC3986文档规定，Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符。<br>那如何对Url中的非法字符进行编码呢?<br>  <br><strong>Url编码通常也被称为百分号编码（Url Encoding，also known as percent-encoding），是因为它的编码方式非常简单，使用%百分号加上两位的字符——0123456789ABCDEF——代表一个字节的十六进制形式</strong>。Url编码默认使用的字符集是US-ASCII。例如a在US-ASCII码中对应的字节是0x61，那么Url编码之后得到的就是%61，我们在地址栏上输入<a href="http://g.cn/search?q=%61%62%63，" target="_blank" rel="noopener">http://g.cn/search?q=%61%62%63，</a></p>
-<p>实际上就等同于在google上搜索abc了。又如@符号在ASCII字符集中对应的字节为0x40，经过Url编码之后得到的是%40。<br>  <br>  对于非ASCII字符，需要使用ASCII字符集的超集进行编码得到相应的字节，然后对每个字节执行百分号编码。对于Unicode字符，RFC文档建议使用utf-8对其进行编码得到相应的字节，然后对每个字节执行百分号编码。如”中文”使用UTF-8字符集得到的字节为0xE4 0xB8 0xAD 0xE6 0x96 0x87，经过Url编码之后得到”%E4%B8%AD%E6%96%87”。<br>  <br>  如果某个字节对应着ASCII字符集中的某个非保留字符，则此字节无需使用百分号表示。例如”Url编码”，使用UTF-8编码得到的字节是0x55 0x72 0x6C 0xE7 0xBC 0x96 0xE7 0xA0 0x81，由于前三个字节对应着ASCII中的非保留字符”Url”，因此这三个字节可以用非保留字符”Url”表示。最终的Url编码可以简化成”Url%E7%BC%96%E7%A0%81” ，当然，如果你用”%55%72%6C%E7%BC%96%E7%A0%81”也是可以的。</p>
-<p>很多HTTP监视工具或者浏览器地址栏等在显示Url的时候会自动将Url进行一次解码（使用UTF-8字符集），这就是为什么当你在Firefox中访问Google搜索中文的时候，地址栏显示的Url包含中文的缘故。但实际上发送给服务端的原始Url还是经过编码的。</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1469,7 +1884,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">259</span>
+                <span class="site-state-item-count">261</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

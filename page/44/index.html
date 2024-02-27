@@ -304,6 +304,474 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/27/multi_thread_dev_base_concept/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/27/multi_thread_dev_base_concept/" itemprop="url">多线程开发的一些基本概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-27T18:31:26+00:00">
+                2015-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="竞态（race-condition）"><a href="#竞态（race-condition）" class="headerlink" title="竞态（race condition）"></a>竞态（race condition）</h1><p>软件层面上，竞态是指多个线程或进程读写一个共享资源 (或共享设备) 时的输出结果依赖于线程或进程的先后执行顺序或者时间；<br>（ 更权威的介绍可以看 <a href="https://en.wikipedia.org/wiki/Race_condition" target="_blank" rel="noopener">wiki</a> )</p>
+<p>至于为什么会发生竞态呢？很简单，因为并发，并发使多线程，多进程环境变成可能。</p>
+<p>竞态具体场景：假如我们有 2 个进程会对一个全局变量进行 ++ 操作，理想时，程序会这样执行：</p>
+<table><tbody><tr><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;">Thread 1</span></p><br></td><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;">Thread 2</span></p><br></td><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;">Integer value</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">read value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">←</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(245,222,179);"><br><p><span style="font-size:24px;">increase value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">write back</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">→</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">1</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">read value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">←</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">1</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(245,222,179);"><br><p><span style="font-size:24px;">increase value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">1</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">write back</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">→</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">2</span></p><br></td></tr></tbody></table>
+
+<p>   然而，由于并发的普遍存在，使得情况有时” 不受控制”（不如工程师预期那样工作），可能会变成这样：</p>
+<table><tbody><tr><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;">Thread 1</span></p><br></td><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;">Thread 2</span></p><br></td><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(242,242,242);"><br><p><span style="font-size:24px;">Integer value</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">read value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">←</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">read value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">←</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(245,222,179);"><br><p><span style="font-size:24px;">increase value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(245,222,179);"><br><p><span style="font-size:24px;">increase value</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">0</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">write back</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">→</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">1</span></p><br></td></tr><tr><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;"> </span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">write back</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">→</span></p><br></td><td style="background:rgb(249,249,249);"><br><p><span style="font-size:24px;">1</span></p><br></td></tr></tbody></table>
+
+
+<h1 id="并发（concurrency）"><a href="#并发（concurrency）" class="headerlink" title="并发（concurrency）"></a>并发（concurrency）</h1><p>并发 (concurrency) 指的是多个执行单元同时、并行被执行。而并发的执行单元对共享资源 (硬件资源和软件上的全局、静态变量) 的访问则容易导致竞态 (race conditions), 可能导致并发 (即竞态?) 的情况有：</p>
+<ul>
+<li><p>SMP（Symmetric Multi-Processing），对称多处理结构。SMP 是一种紧耦合、共享存储的系统模型，它的特点是多个 CPU 使用共同的系统总线，因此可访问共同的外设和存储器。</p>
+</li>
+<li><p>中断. 中断可以打断正在执行的进程 (哪怕是在中断上下文)，若中断处理程序对共享资源进程访问，则竞态也会发生.</p>
+</li>
+<li><p>内核抢占.2.6 以后内核提供了内核可抢占特性，虽然是作为一个配置选项，但我们写程序时还是要考虑周全，故内核抢占也是作为伪并发的表现，也可能发生竞态；</p>
+</li>
+</ul>
+<h1 id="临界区（critical-section）"><a href="#临界区（critical-section）" class="headerlink" title="临界区（critical section）"></a>临界区（critical section）</h1><p>多个线程进程对共享资源进行访问在软件表现为一个程序片段，如何避免竞态的发生呢？</p>
+<p>一个执行路径在对共享资源进行访问时禁止其他执行路径进行访问，当有一个执行路径（A）对共享资源进行访问时，如有其他执行路径想访问共享资源，须睡眠等待 A 执行路径退出。</p>
+<p>那么这时这个程序片段就是临界区。那么具体如何来实现临界区呢？linux 内核提供了多种同步互斥机制.（如信号量，互斥量，自旋锁，RCU，原子操作等）.</p>
+<h1 id="什么是RAII技术"><a href="#什么是RAII技术" class="headerlink" title="什么是RAII技术"></a>什么是RAII技术</h1><p>我们在C++中经常使用new申请了内存空间，但是却也经常忘记delete回收申请的空间，容易造成内存溢出，于是RAII技术就诞生了，来解决这样的问题。</p>
+<p>RAII（Resource Acquisition Is Initialization）机制是Bjarne Stroustrup首先提出的，是一种利用对象生命周期来控制程序资源（如内存、文件句柄、网络连接、互斥量等等）的简单技术。 我们知道在函数内部的一些成员是放置在栈空间上的，当函数返回时，这些栈上的局部变量就会立即释放空间，于是Bjarne Stroustrup就想到确保能运行资源释放代码的地方就是在这个程序段（栈）中放置的对象的析构函数了，因为stack winding会保证它们的析构函数都会被执行。RAII就利用了栈里面的变量的这一特点。</p>
+<p>RAII 的一般做法是这样的：在对象构造时获取资源，接着控制对资源的访问使之在对象的生命周期内始终保持有效，最后在对象析构的时候释放资源。</p>
+<p>借此，我们实际上把管理一份资源的责任托管给了一个存放在栈空间上的局部对象。<br>这种做法有两大好处： </p>
+<ul>
+<li>(1)不需要显式地释放资源。 </li>
+<li>(2)采用这种方式，对象所需的资源在其生命期内始终保持有效。</li>
+</ul>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/17/MySQL入门三之GroupBy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/17/MySQL入门三之GroupBy/" itemprop="url">MySQL入门三之GroupBy</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-17T12:11:21+00:00">
+                2015-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="SQL-GROUP-BY-实例"><a href="#SQL-GROUP-BY-实例" class="headerlink" title="SQL GROUP BY 实例"></a>SQL GROUP BY 实例</h1><p>我们拥有下面这个 “Orders” 表：</p>
+<table>
+<thead>
+<tr>
+<th>O_Id</th>
+<th>OrderDate</th>
+<th>OrderPrice</th>
+<th>Customer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2008/12/29</td>
+<td>1000</td>
+<td>Bush</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2008/11/23</td>
+<td>1600</td>
+<td>Carter</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2008/10/05</td>
+<td>700</td>
+<td>Bush</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2008/09/28</td>
+<td>300</td>
+<td>Bush</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2008/08/06</td>
+<td>2000</td>
+<td>Adams</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2008/07/21</td>
+<td>100</td>
+<td>Carter</td>
+</tr>
+</tbody>
+</table>
+<p>现在，我们希望查找每个客户的总金额（总订单）。<br>我们想要使用 GROUP BY 语句对客户进行组合。<br>我们使用下列 SQL 语句：</p>
+<p><code>SELECT Customer,SUM(OrderPrice) FROM Orders GROUP BY Customer</code></p>
+<p>结果集类似这样：</p>
+<table>
+<thead>
+<tr>
+<th>Customer</th>
+<th>SUM(OrderPrice)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bush</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>Carter</td>
+<td>1700</td>
+</tr>
+<tr>
+<td>Adams</td>
+<td>2000</td>
+</tr>
+</tbody>
+</table>
+<p>很棒吧，对不对？<br>让我们看一下如果省略 GROUP BY 会出现什么情况：</p>
+<p><code>SELECT Customer,SUM(OrderPrice) FROM Orders</code></p>
+<p>结果集类似这样：</p>
+<table>
+<thead>
+<tr>
+<th>Customer</th>
+<th>SUM(OrderPrice)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bush</td>
+<td>5700</td>
+</tr>
+<tr>
+<td>Carter</td>
+<td>5700</td>
+</tr>
+<tr>
+<td>Bush</td>
+<td>5700</td>
+</tr>
+<tr>
+<td>Bush</td>
+<td>5700</td>
+</tr>
+<tr>
+<td>Adams</td>
+<td>5700</td>
+</tr>
+<tr>
+<td>Carter</td>
+<td>5700</td>
+</tr>
+</tbody>
+</table>
+<p>上面的结果集不是我们需要的。<br>那么为什么不能使用上面这条 SELECT 语句呢？</p>
+<p>解释如下：<br>上面的 SELECT 语句指定了两列（Customer 和 SUM(OrderPrice)）。<br>“SUM(OrderPrice)” 返回一个单独的值（”OrderPrice” 列的总计），而 “Customer” 返回 6 个值（每个值对应 “Orders” 表中的每一行）。<br>因此，我们得不到正确的结果。不过，您已经看到了，GROUP BY 语句解决了这个问题。</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/12/sizeof_struct/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -479,209 +947,6 @@ C = 结构(或联合)中最大数据成员长度
 <p>为什么呢?<br>注意看共用体 test_union 和枚举 test_enum其实并没有声明变量, 如果写成<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">pragma</span> pack(2)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test_class</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">float</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">union</span> test_union</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> bb;</span><br><span class="line">		<span class="keyword">char</span> aa[<span class="number">13</span>];</span><br><span class="line">		<span class="keyword">short</span> cc;</span><br><span class="line">	&#125;uVar;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">enum</span> test_enum</span><br><span class="line">	&#123;</span><br><span class="line">		monday,</span><br><span class="line">		tuesday,</span><br><span class="line">		sunday</span><br><span class="line">	&#125;eVar;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">testFunc</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> xmly;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta"># <span class="meta-keyword">pragma</span> pack()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> enum_x </span><br><span class="line">&#123; </span><br><span class="line">	x1=<span class="number">5</span>, </span><br><span class="line">	x2, </span><br><span class="line">	x3, </span><br><span class="line">	x4, </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">enum</span> enum_x x=x3; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(test_class) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(test_class) &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"x : "</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	test_class::test_enum i;</span><br><span class="line">	i = test_class::monday;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"i : "</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	test_class test_obj;</span><br><span class="line">	test_obj.eVar = test_class::sunday;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; test_obj.monday &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; test_class::sunday &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>打印结果就为 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sizeof(test_class) : 24</span><br><span class="line">x : 7</span><br><span class="line">i : 0</span><br><span class="line">0</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/04/11/smart_pointer_note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/11/smart_pointer_note/" itemprop="url">智能指针笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-11T12:26:26+00:00">
-                2015-04-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CPP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <p>有些错误是编译器查不到的, 这种错误是最可怕的, 当项目大了之后,<br>即使用 Valgrind 也很难定位,<br>因为裸指针在团队合作中使用很容易导致其他成员忘记释放或多次释放, 所以在团队合作中一般使用智能指针. </p>
-<p>而智能指针用的不好, 结果可能适得其反.</p>
-<p>所以我们聊一下智能指针的几点注意事项.</p>
-<p>总结自 C++ Primer.</p>
-<h1 id="一个简单的包含删除器的例子演示"><a href="#一个简单的包含删除器的例子演示" class="headerlink" title="一个简单的包含删除器的例子演示"></a>一个简单的包含删除器的例子演示</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::bind;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">testBind</span><span class="params">( <span class="keyword">int</span>* a, <span class="keyword">int</span> b, <span class="keyword">int</span> c )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *a + b + c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> *a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	Foo() = <span class="keyword">default</span>;</span><br><span class="line">	Foo( <span class="keyword">const</span> Foo &amp; a )</span><br><span class="line">	&#123;</span><br><span class="line">		data = a.data;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"复制构造"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print_sum</span><span class="params">( <span class="keyword">int</span> n1, <span class="keyword">int</span> n2 )</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n1 + n2 &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> data = <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//绑定类成员函数用对象的指针</span></span><br><span class="line">	Foo foo;</span><br><span class="line">	<span class="keyword">auto</span> f3 = <span class="built_in">std</span>::bind( &amp;Foo::print_sum, &amp;foo, <span class="number">95</span>, _1 );</span><br><span class="line">	f3( <span class="number">5</span> );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> check_testBind = <span class="built_in">std</span>::bind( testBind, <span class="built_in">std</span>::placeholders::_1, <span class="number">3</span>, <span class="number">9</span> );</span><br><span class="line">	<span class="keyword">int</span> * p = <span class="keyword">new</span> <span class="keyword">int</span>( <span class="number">7</span> );</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; check_testBind( p ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pi( <span class="keyword">new</span> <span class="keyword">int</span>(),</span><br><span class="line">		check_testBind );</span><br><span class="line">	*pi = <span class="number">88</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pii( <span class="keyword">new</span> <span class="keyword">int</span>( <span class="number">12</span> ),</span><br><span class="line">		<span class="built_in">std</span>::bind( testBind, <span class="built_in">std</span>::placeholders::_1, <span class="number">32</span>, <span class="number">19</span> ) );</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::function&lt; <span class="keyword">int</span>( <span class="keyword">int</span>* ) &gt; test_function_bind =</span><br><span class="line">		<span class="built_in">std</span>::bind( testBind, <span class="built_in">std</span>::placeholders::_1, <span class="number">331</span>, <span class="number">9</span> );</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"test_function_bind( p, 331, 9 ) = "</span> &lt;&lt; test_function_bind( p ) &lt;&lt; <span class="built_in">endl</span>;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; piii( <span class="keyword">new</span> <span class="keyword">int</span>( <span class="number">112</span> ),</span><br><span class="line">		test_function_bind );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印结果 :</p>
-<pre><code>100
-119
-7
-347
-test_function_bind( p, 331, 9 ) = 7
-452
-63
-100
-请按任意键继续. . .
-</code></pre><h1 id="智能指针陷阱"><a href="#智能指针陷阱" class="headerlink" title="智能指针陷阱"></a>智能指针陷阱</h1><p>智能指针可以提供对动态分配的内存安全而又方便的管理，但这建立在正确使用的<br>前提下 。 为了正确使用智能指针，我们必须坚持一些基本规范 :</p>
-<ul>
-<li>不使用相同的内置指针值初始化(或 reset) 多个智能指针 。</li>
-<li>不 delete get ( ) 返 回的指针 。</li>
-<li>不使用 get () 初始化或 reset 另 一 个智能指针 。</li>
-<li>如果你使用 get () 返 回的指针，记住当最后一个对应的智能指针销 毁 后， 你 的<br>指 针就 变为无 效 了 。</li>
-<li>如果你使用智能指针管理的资源不是 new 分配的内存 ， 记住传递给它一个删除<br>器( 参见 12. 1.4 节 ， 第 415 页和 12. 1.5 节 ， 第 419 页)。</li>
-</ul>
-<h1 id="尽量用make-shared而非new"><a href="#尽量用make-shared而非new" class="headerlink" title="尽量用make_shared而非new"></a>尽量用make_shared而非new</h1><p>shared_ptr 可以协调对象的析构 ， 但这仅限于其自身的拷贝 ( 也 是 shared_ptr)<br>之间。</p>
-<p><strong>这也是为什么我们推荐使用 make_shared 而不是 new 的原因 。</strong></p>
-<p><strong>这样 ， 我们就能在分配对象的同时就将 shared_ptr 与之绑定，</strong><br><strong>从而避免了无意中将同一块内存绑定到多个独立创建的 shared_ptr 上 。(这是最容易犯的错)</strong></p>
-<p><strong>总结 : 所以我们要尽量一开始就用make_shared来分配动态内存, 而不是先new一个出来, 再找机会将它转为智能指针.</strong></p>
-<p>考虑下面对 shared_ptr 进行操作的函数 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在函数被调用时 ptr 被创建并初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">(<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 使用 ptr</span></span><br><span class="line">&#125; <span class="comment">// ptr 离 开作用域，被销毁</span></span><br></pre></td></tr></table></figure>
-<p>process 的参数是传值方式传递的，因此实参会被拷贝到 ptr 巾 。 拷贝 一 个 shared_ptr<br>会递增其引用讨数，因此， 在 process 运行过程中，引用七| 数值至少为 2 。 当 process<br>结束时， ptr 的引用计数会边喊，但不会变为 0 。 因此，当用音11变 11 ptr 被销毁时， ptr<br>指向的内存不会被释放 。</p>
-<p>使用此函数的正确方法是传递给它一个 shared_ptr :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>)) ; <span class="comment">// 引用计数为 1</span></span><br><span class="line">process(p); <span class="comment">// 拷贝 p 会递增它的引用计数 ;在 process 中引用计数位为 2</span></span><br><span class="line"><span class="keyword">int</span> i = *p; <span class="comment">// 正确:引用计数位为 1</span></span><br></pre></td></tr></table></figure>
-<p>虽然不能传递给 process 一 个内置指针，但可以传递 给它 一 个(临时的)<br>shared_ptr ， 这个 shared_ptr 是用 一个内 置指针显式构造的 。 但是，这样做很可能<br>会导致错误 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int *x(new int(1024)); // 危险 x 是一个普通指针，不是一个智能指针</span><br><span class="line">process(x) ; <span class="comment">// 错误 : 不能将 int* 转换为 一个 shared_ptr&lt;int&gt;</span></span><br><span class="line">process(<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt;(x)); <span class="comment">// 合法的，但内存会被释放!</span></span><br><span class="line"><span class="keyword">int</span> j = *x ; <span class="comment">//未定义的 x 是一个空悬指针!</span></span><br></pre></td></tr></table></figure>
-<p>在上面的调用中 ， 我们将一个临时 shared_ptr 传递给 process 。 当这个调用所在的表<br>达式结束时，这个临时对象就被销毁了 。 销毁这个临时变量会递减引用计数，此时引用计<br>数就变为 0 了 。 因此，当临时对象被销毁时 ， 它所指向的内存会被释放 。<br>但 x 继续指 向 (已经释放的)内存，从而变成一个空悬指针。如果试图使用 x 的值，<br>其行为是未定义的 。</p>
-<p>当将一个 shared_ptr 绑定到一个普通指针时 ， 我们就将内存的管理责任交给了这<br>个 shared_ptr 一旦这样做 了 ， 我们就不应该再使用内置指针来访问 shared_ptr 所<br>指向的内存了 </p>
-<h1 id="不要使用-get-初始化另一个智能指针或为智能指针赋值"><a href="#不要使用-get-初始化另一个智能指针或为智能指针赋值" class="headerlink" title="不要使用 get 初始化另一个智能指针或为智能指针赋值"></a>不要使用 get 初始化另一个智能指针或为智能指针赋值</h1><p>智能指针类型定义了 一个名为 get 的函数(参见表 1 2. J )，它返回一个内置指针，<br>指向智能指针管理的对象 。 此函数是为了这样一种情况而设计的 : 我们需要向不能使用智<br>能指针的代码传递一个内置指针。使用 get 返回的指告| 的代码不能 delete 此指针 。<br>虽然编译器不会给出错误信息 ， 但将另一个智能指针也绑定到 get 返回的指针上是<br>错误的 :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>)) ; <span class="comment">// 引 用计数为 1</span></span><br><span class="line"><span class="keyword">int</span> *q = p . get() ; <span class="comment">// 正确 · 但使用 q 时妥注意，不要让它管理的指针被释放</span></span><br><span class="line">&#123; <span class="comment">// 新程序块</span></span><br><span class="line"><span class="comment">// 未定义:两个独立的 shared_ptr 指 向 相同的内存</span></span><br><span class="line">    shared ptr&lt;<span class="keyword">int</span>&gt; (q) ;</span><br><span class="line">&#125; <span class="comment">// 程序块结束， q 被销毁 ， 它指向的内存被待放</span></span><br><span class="line"><span class="keyword">int</span> foo = *p ; <span class="comment">// 未定义 p 指向的内存 已 经被释放了</span></span><br></pre></td></tr></table></figure>
-<p>在本例中， p 和 q 指 向相同的内存。由于它们是相互独立创建的，因此各自的引用计数都<br>是 1。 当 q 所在的程序块结束时 ， q 被销毁 ， 这会导致 q 指向的内存被释放 。 从而 p 变成<br>一个空悬指针，意味着当我们试图使用 p 时，将发生未定义的行为 。 而且 ， 当 p 被销毁时 ，<br>这块内存会被第二次 delete 。</p>
-<p>get 用来将指针的访问权限传递给代码，你只有在确定代码不会 get.<br>特别是，永远不要用 get 初始化另一个智能指针 del ete 指针或者为另一个智能指针赋值.</p>
-
           
         
       
@@ -1170,176 +1435,11 @@ write1(dev.register_control,GO);
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/03/18/linux_directory_permission/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/03/18/linux_directory_permission/" itemprop="url">linux一些不要想当然的事(一)之目录权限</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-18T17:11:52+00:00">
-                2015-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="目录的可读-可写-可执行权限"><a href="#目录的可读-可写-可执行权限" class="headerlink" title="目录的可读/可写/可执行权限"></a>目录的可读/可写/可执行权限</h1><p>不要把目录的这几个权限和档案的这几个权限混淆了, 不要想当然的以为是差不多的, 差很多!<br>记忆技巧 : <strong>档案的rwx是针对于档案的内容来设计的, 而目录的rwx是针对于目录的文件名列表来设计的</strong></p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/43/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><span class="page-number current">44</span><a class="page-number" href="/page/45/">45</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="extend next" rel="next" href="/page/45/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/43/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><span class="page-number current">44</span><a class="page-number" href="/page/45/">45</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="extend next" rel="next" href="/page/45/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1405,7 +1505,7 @@ write1(dev.register_control,GO);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">259</span>
+                <span class="site-state-item-count">261</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

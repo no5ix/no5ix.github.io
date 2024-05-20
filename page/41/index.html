@@ -304,7 +304,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/09/13/install_android_sdk_jdk/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/09/13/unity_cpp_swig_csharp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -323,7 +323,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/13/install_android_sdk_jdk/" itemprop="url">安装AndroidSDK的一些坑与注意点</a></h1>
+                <a class="post-title-link" href="/2015/09/13/unity_cpp_swig_csharp/" itemprop="url">Unity中C#调用C++写的DLL之Swig篇</a></h1>
         
 
         <div class="post-meta">
@@ -411,19 +411,18 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         
           
-            <p>近来要用Unity打包到安卓上玩, 需要安装AndroidSDK.</p>
-<p>安装教程基本上按照<a href="https://blog.csdn.net/love4399/article/details/77164500" target="_blank" rel="noopener">这篇文章A</a>就可以, 遇到不明白的可以拿<a href="https://blog.csdn.net/Fhujinwu/article/details/79072526" target="_blank" rel="noopener">这篇B</a>对照着看, 以A为准, 但是有几个点要注意 : </p>
-<ul>
-<li><p>jdk别装太高版本, 装个jdk-8u161的32位的即可, 别装64位, 也别装高版本的jdk10的64位, 不然 android sdk set up tool 不认识, sdk manager 也会闪退</p>
-</li>
-<li><p>jdk的环境变量很容易设置错, 比如环境变量<code>JAVA_HOME</code>应该填jdk的安装路径即 : <code>JAVA_HOME=C:/Program Files/Java/jdk1.8.0_11</code>而不是<code>JAVA_HOME=C:/Program Files/Java</code>, 填后者的话, sdk manager 会闪退</p>
-</li>
-<li><p>为了确保不必要的麻烦最好这样环境变量设置成类似如下 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=C:/Program Files/Java/jdk1.8.0_11</span><br><span class="line">JRE_HOME=C:/Program Files/Java/jre8</span><br><span class="line">Path=%JAVA_HOME%;C:...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>打安卓包的时候, 如果报<code>file not found debug.keystore</code> 或 <code>Unable to get debug signature key</code>的错, 用管理员权限重新打开Unity即可.</p>
-</li>
-</ul>
+            <p>近来要用Unity打包到安卓上玩, Unity那边需要用到服务器中用C++写的库,<br>对比了 <a href="https://zhuanlan.zhihu.com/p/30746354" target="_blank" rel="noopener">P/Invoke</a> 和 <a href="https://blog.csdn.net/springberlin/article/details/9260735" target="_blank" rel="noopener">C++/CLI</a> 两种方式, 都不够省心省力, 决定使用 Swig来撸.</p>
+<p>教程基本上按照<a href="https://zhuanlan.zhihu.com/p/31162922" target="_blank" rel="noopener">这篇文章</a>就可以, 文章写得非常详尽, </p>
+<p>但文中关于设置 swiglib.i 自定义生成工具的命令行的时候, </p>
+<p>他文中的下面一段要注意 : </p>
+<blockquote>
+<p>在常规中选择命令行并且写入：</p>
+</blockquote>
+<pre><code>echo on
+$(SolutionDir)/../../thirdpart/swigwin-3.0.12/swig.exe -c++ -csharp -outdir “$(SolutionDir)/../../../UnityProj/UnityCppLearn/Assets/SwigTools/Interface” “%(FullPath)”
+echo off
+</code></pre><p>应改成 : </p>
+<p>我们在自己填的时候要记得改成自己项目中的路径, 以及把上面这段命令中的中文引号改成英文引号.</p>
 
           
         

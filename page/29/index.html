@@ -304,6 +304,263 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/02/08/多级指针与多维数组详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/08/多级指针与多维数组详解/" itemprop="url">多级指针与多维数组详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-08T21:10:10+00:00">
+                2017-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p>指针与数组是 C/C++ 编程中非常重要的元素，同时也是较难以理解的。其中，多级指针与 “多维” 数组更是让很多人云里雾里，其实，只要掌握一定的方法，理解多级指针和 “多维” 数组完全可以像理解一级指针和一维数组那样简单。</p>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>首先，先声明一些常识，如果你对这些常识还不理解，请先去弥补一下基础知识：</p>
+<ul>
+<li><p>实际上并不存在多维数组，所谓的多维数组本质上是用一维数组模拟的。</p>
+</li>
+<li><p>数组名是一个常量（意味着不允许对其进行赋值操作），其代表数组首元素的地址。</p>
+</li>
+<li><p>数组与指针的关系是因为数组下标操作符[]，比如，int a[3][2]相当于<em>(</em>(a+3)+2) 。</p>
+</li>
+<li><p>指针是一种变量，也具有类型，其占用内存空间大小和系统有关，一般32位系统下，sizeof(指针变量)=4。</p>
+</li>
+<li><p>指针可以进行加减算术运算，加减的基本单位是sizeof(指针所指向的数据类型)。</p>
+</li>
+<li><p>对数组的数组名进行取地址(&amp;)操作，其类型为整个数组类型。</p>
+</li>
+<li><p>对数组的数组名进行sizeof运算符操作，其值为整个数组的大小(以字节为单位)。</p>
+</li>
+<li><p>数组作为函数形参时会<strong>退化</strong>为指针。</p>
+</li>
+</ul>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><p>一个指针包含两方面：</p>
+<ul>
+<li>地址值；</li>
+<li>所指向的数据类型。</li>
+</ul>
+<p>解引用操作符（dereference operator）会根据指针当前的地址值，以及所指向的数据类型，访问一块连续的内存空间（大小由指针所指向的数据类型决定），将这块空间的内容转换成相应的数据类型，并返回左值。</p>
+<p>有时候，两个指针的值相同，但数据类型不同，解引用取到的值也是不同的，例如，<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[] =&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;       <span class="comment">/* 以字符的 ASCII 码初始化 */</span>  </span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * pc = &amp;str[<span class="number">0</span>];        <span class="comment">/* pc 指向 str[0]，即 0 */</span>  </span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> * pi = (<span class="keyword">int</span> *) pc;      <span class="comment">/* 指针的 “值” 是个地址，32 位。 */</span></span><br></pre></td></tr></table></figure></p>
+<p>此时，pc 和 pi 同时指向 str[0]，但 <em> pc 的值为 0（即，ASCII 码值为 0 的字符）；而 </em> pi 的值为 50462976。或许把它写成十六进制会更容易理解：0x03020100（4 个字节分别为 3,2,1,0）。我想你已经明白了，因为小端字节序, 且指针 pi 指向的类型为 int，因此在解引用时，需要访问 4 个字节的连续空间，并将其转换为 int 返回。</p>
+<h1 id="一维数组与数组指针"><a href="#一维数组与数组指针" class="headerlink" title="一维数组与数组指针"></a>一维数组与数组指针</h1><p>假如有一维数组如下：</p>
+<p><code>char a[3];</code></p>
+<p>该数组一共有 3 个元素，元素的类型为 char，如果想定义一个指针指向该数组，也就是如果想把数组名 a 赋值给一个指针变量，那么该指针变量的类型应该是什么呢？前文说过，一个数组的数组名代表其首元素的地址，也就是相当于 &amp; a[0]，而 a[0] 的类型为 char，因此 &amp; a[0] 类型为 <code>char *</code>，因此，可以定义如下的指针变量：  </p>
+<p><code>char * p = a;//相当于char * p = &amp;a[0]</code></p>
+<p>以上文字可用如下内存模型图表示。</p>
+<img src="/2017/02/08/多级指针与多维数组详解/1.png">
+<p>大家都应该知道，a 和 &amp; a[0] 代表的都是数组首元素的地址，而如果你将 &amp; a 的值打印出来，会发现<strong>该值也等于数组首元素的地址</strong>。请注意我这里的措辞，也就是说，&amp;a 虽然在数值上也等于数组首元素地址的值，但是其类型并不是数组首元素地址类型，也就是<code>char *p = &amp;a</code>是错误的。</p>
+<p>前文第 6 条常识已经说过，对数组名进行取地址操作，其类型为整个数组，因此，&amp;a 的类型是 char (*)[3]，所以正确的赋值方式如下: </p>
+<p><code>char (*p)[3] = &amp;a;</code></p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>很多人对类似于<code>a+1,&amp;a+1,&amp;a[0]+1,sizeof(a),sizeof(&amp;a)</code>等感到迷惑，其实只要搞清楚指针的类型就可以迎刃而解。比如在面对 a+1 和 &amp; a+1 的区别时，由于 a 表示数组首元素地址，其类型为 <code>char *</code>，因此 a+1 相当于数组首地址值 + sizeof(char)；而 &amp; a 的类型为<code>char (*)[3]</code>，代表整个数组，因此 &amp; a+1 相当于数组首地址值 + sizeof(a)。</li>
+<li>sizeof(a) 代表整个数组大小，前文第 7 条说明，但是无论数组大小如何，sizeof(&amp;a) 永远等于一个指针变量占用空间的大小，具体与系统平台有关</li>
+</ul>
+<h1 id="二维数组与数组指针"><a href="#二维数组与数组指针" class="headerlink" title="二维数组与数组指针"></a>二维数组与数组指针</h1><p>假如有如下二维数组：</p>
+<p><code>char a[3][2];</code></p>
+<p>由于实际上并不存在多维数组，因此，可以将 a[3][2] 看成是一个具有 3 个元素的一维数组，只是这三个元素分别又是一个一维数组。实际上，在内存中，该数组的确是按照一维数组的形式存储的，存储顺序为 (低地址在前)：a[0][0]、a[0][1]、a[1][0]、a[1][1]、a[2][0]、a[2][1]。(此种方式也不是绝对，也有按列优先存储的模式)</p>
+<p>为了方便理解，我画了一张逻辑上的内存图，之所以说是逻辑上的，是因为该图只是便于理解，并不是数组在内存中实际的存储模型（实际模型为前文所述）。</p>
+<img src="/2017/02/08/多级指针与多维数组详解/2.png">
+<p>如上图所示，我们可以将数组分成两个维度来看，首先是第一维，将 a[3][2] 看成一个具有三个元素的一维数组，元素分别为：a[0]、a[1]、a[2]，其中，a[0]、a[1]、a[2] 又分别是一个具有两个元素的一维数组 (元素类型为 char)。从第二个维度看，此处可以<strong>将 a[0]、a[1]、a[2] 看成自己代表” 第二维” 数组的数组名，</strong>以 a[0]为例，<code>a[0]</code>(数组名)代表的一维数组是一个具有两个 char 类型元素的数组，而 a[0]是这个数组的数组名 (代表数组首元素地址)，因此 a[0] 类型为 <code>char *</code>，同理 a[1]和 a[2]类型都是 <code>char *</code>。而 a 是第一维数组的数组名，代表首元素地址，而首元素是一个具有两个 char 类型元素的一维数组，因此 a 就是一个指向具有两个 char 类型元素数组的数组指针，也就是 char(*)[2]。</p>
+<p>也就是说，如下的赋值是正确的:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> (*p)[<span class="number">2</span>]  = a;  <span class="comment">//a为第一维数组的数组名，类型为char (*)[2]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * p = a[<span class="number">0</span>];   <span class="comment">//a[0]维第二维数组的数组名，类型为char *</span></span><br></pre></td></tr></table></figure>
+<p>同样，对 a 取地址操作代表整个数组的首地址，类型为数组类型 (请允许我暂且这么称呼)，也就是 char (*)[3][2]，所以如下赋值是正确的：  </p>
+<p><code>char (*p)[3][2] = &amp;a;</code></p>
+<p>若做如下定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>&#125;;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ** p;  </span><br><span class="line"></span><br><span class="line">p = (<span class="keyword">int</span>**)a;       <span class="comment">// 不做强制类型转换会报错</span></span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li><p>p 是一个二级指针，它首先是一个指针，指向一个 int*；</p>
+</li>
+<li><p>a 是二维数组名，它首先是一个指针，指向一个含有 4 个元素的 int 数组；</p>
+</li>
+</ul>
+<p>由此可见，a 和 p 的类型并不相同，如果想将 a 赋值给 p，需要强制类型转换。</p>
+<h2 id="为什么二维数组名传递给二级指针是不安全的？"><a href="#为什么二维数组名传递给二级指针是不安全的？" class="headerlink" title="为什么二维数组名传递给二级指针是不安全的？"></a>为什么二维数组名传递给二级指针是不安全的？</h2><p>假如我们将 a 强制转换之后赋值给 p : </p>
+<p><code>p = (int**)a;</code></p>
+<p>既然 p 是二级指针，那么 当 <code>**p</code> 时会出什么问题呢？</p>
+<ul>
+<li><p>首先看一下 p 的值，p 指向 a[0][0]，即 p 的值为 a[0][0] 的地址；</p>
+</li>
+<li><p>再看一下 <em> p 的值，p 所指向的类型是 int</em>，占 4 字节，根据前面所讲的解引用操作符的过程：从 p 指向的地址开始，取连续 4 个字节的内容。 * p得到的正式 a[0][0] 的值，即 0。</p>
+</li>
+<li><p>再看一下 **p 的值，诶，报错了？当然报错了，因为你访问了地址为 0 的空间，而这个空间你是没有权限访问的。</p>
+</li>
+</ul>
+<h2 id="二维数组和二级指针相关的参数匹配"><a href="#二维数组和二级指针相关的参数匹配" class="headerlink" title="二维数组和二级指针相关的参数匹配"></a>二维数组和二级指针相关的参数匹配</h2><p><img src="http://img.blog.csdn.net/20160623113621428?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
+<h1 id="三维数组与数组指针"><a href="#三维数组与数组指针" class="headerlink" title="三维数组与数组指针"></a>三维数组与数组指针</h1><p>假设有三维数组：</p>
+<p><code>char a[3][2][2];</code></p>
+<p>同样，为了便于理解，特意画了如下的逻辑内存图。分析方法和二维数组类似，首先，从第一维角度看过去，a[3][2][2] 是一个具有三个元素 a[0]、a[1]、a[2] 的一维数组，只是这三个元素分别又是一个 “二维” 数组, a 作为第一维数组的数组名，代表数组首元素的地址，也就是一个指向一个二维数组的数组指针，其类型为 char (<em>)[2][2]。从第二维角度看过去，a[0]、a[1]、a[2] 分别是第二维数组的数组名，代表第二维数组的首元素的地址，也就是一个指向一维数组的数组指针，类型为 char(</em>)[2]；同理，从第三维角度看过去，a[0][0]、a[0][1]、a[1][0]、a[1][1]、a[2][0]、a[2][1] 又分别是第三维数组的数组名，代表第三维数组的首元素的地址，也就是一个指向 char 类型的指针，类型为 char *。</p>
+<img src="/2017/02/08/多级指针与多维数组详解/3.png">
+<p>由上可知，以下的赋值是正确的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> (*p)[<span class="number">3</span>][<span class="number">2</span>][<span class="number">2</span>] = &amp;a;<span class="comment">//对数组名取地址类型为整个数组</span></span><br><span class="line"><span class="keyword">char</span> (*p)[<span class="number">2</span>][<span class="number">2</span>]  = a;</span><br><span class="line"><span class="keyword">char</span> (*p) [<span class="number">2</span>]  = a[<span class="number">0</span>];<span class="comment">//或者a[1]、a[2]</span></span><br><span class="line"><span class="keyword">char</span> *p = a[<span class="number">0</span>][<span class="number">0</span>];<span class="comment">//或者a[0][1]、a[1][0]...</span></span><br></pre></td></tr></table></figure>
+<h1 id="多级指针"><a href="#多级指针" class="headerlink" title="多级指针"></a>多级指针</h1><p>所谓的多级指针，就是一个指向指针的指针，比如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = <span class="string">"my name is chenyang."</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> **pp = &amp;p;<span class="comment">//二级指针</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> ***ppp = &amp;pp;<span class="comment">//三级指针</span></span><br></pre></td></tr></table></figure>
+<p>假设以上语句都位于函数体内，则可以使用下面的简化图来表达多级指针之间的指向关系。</p>
+<img src="/2017/02/08/多级指针与多维数组详解/4.png">
+<p>多级指针通常用来作为函数的形参，比如常见的 main 函数声明如下:</p>
+<p><code>int main(int argc,char ** argv)</code></p>
+<p>因为当数组用作函数的形参的时候，会退化为指针来处理，所以上面的形式和下面是一样的。</p>
+<p><code>int main(int argc,char* argv[])</code></p>
+<p>argv 用于接收用户输入的命令参数，这些参数会以字符串数组的形式传入，类似于:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模拟用户传入的参数</span></span><br><span class="line"><span class="keyword">char</span> * parm[] = &#123;<span class="string">"parm1"</span>,<span class="string">"parm2"</span>,<span class="string">"parm3"</span>,<span class="string">"parm4"</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模拟调用main函数，实际中main函数是由入口函数调用的(glibc中的入口函数默认为_start)</span></span><br><span class="line">main(<span class="keyword">sizeof</span>(parm)/<span class="keyword">sizeof</span>(<span class="keyword">char</span> *),parm);</span><br></pre></td></tr></table></figure>
+<p>多级指针的另一种常见用法是，假设用户想调用一个函数分配一段内存，那么分配的内存地址可以有两种方式拿到：第一种是通过函数的返回值，该种方式的函数声明如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">get_memery</span><span class="params">(<span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *p = <span class="built_in">malloc</span>(size);</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二种获取地址的方法是使用二级指针，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_memery</span><span class="params">(<span class="keyword">int</span>** buf,<span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    *buf = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(size);</span><br><span class="line">    <span class="keyword">if</span>(*buf == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">get_memery(&amp;p,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/27/ipc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1298,186 +1555,6 @@ msqid    owner      send                 recv                 change
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/22/deterministic_lockstep/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/22/deterministic_lockstep/" itemprop="url">网络物理模拟三之具有确定性的帧同步</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-22T11:13:35+00:00">
-                2017-01-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GS/" itemprop="url" rel="index">
-                    <span itemprop="name">GS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h1><p>帧同步要点如下 : </p>
-<ul>
-<li><strong>确定性</strong> : 去除随机数</li>
-<li><strong>缓冲</strong> : 因为数据包并不是均匀地到达, 所以要做一个缓冲区, 然后再均匀地取出</li>
-<li><strong>不用TCP</strong> : 因为我们的数据对时间非常敏感, 不接受到第n个输入包就无法继续模拟第n帧, 而TCP的确认机制以及重传机制当我们丢包时, 我们只能暂停等待它重发造成卡顿</li>
-<li><strong>用UDP</strong> :<ul>
-<li><strong>发送冗余数据</strong> : 因为帧同步只发送玩家input数据, 而input包是很小的, 所以发冗余也不会很大</li>
-<li><strong>增量包</strong> : 加一个bit来标志跟上一个包的比较结果, 如果这个包跟上个包一致则只发送一个1, 如果不一致则发送0和这个包的完整数据</li>
-</ul>
-</li>
-<li><strong>帧同步的缺点</strong> : <ul>
-<li><strong>等的人太多</strong> : 因为你要收到所有玩家对应帧的输入才能对这一帧进行模拟.在实践中，这意味着每个人必须等待最滞后的那个玩家.人越多等得越久, 所以帧同步不适合mmo.</li>
-<li><strong>比较耗性能</strong> : 因为帧同步技术的话, 在客户端中，每个对象都要执行所有的物理之类的运算; 而状态同步可以只同步当前玩家周围对象的状态, 不需要同步所有对象</li>
-</ul>
-</li>
-</ul>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1548,7 +1625,7 @@ msqid    owner      send                 recv                 change
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">262</span>
+                <span class="site-state-item-count">263</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

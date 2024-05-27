@@ -304,6 +304,247 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/02/23/protobuf_tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/23/protobuf_tutorial/" itemprop="url">ProtoBuf的安装与使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-23T12:06:56+00:00">
+                2015-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>与 JSON 相比， Protobuf 的序列化和反序列化的速度更快，而且传输的数据会先压缩，<br>使得传输的效率更高些 。<br>Protobuf ， 全称 Protocol Buffer ， 是 Google 公司内部的混合语言数据标准，是一种轻便<br>高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。 它很适合做数据<br>存储或 RPC 数据交换格式 。 Protobuf是可用于通信协议、数据存储等领域的语言无关、平台<br>无关、可扩展的序列化结构数据格式 。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>谷歌的东西要想在大陆安装起来总是有点那啥, 你懂的.</p>
+<h2 id="需要的依赖"><a href="#需要的依赖" class="headerlink" title="需要的依赖"></a>需要的依赖</h2><pre><code>sudo apt-get install curl
+
+sudo apt-get install autoconf autogen
+
+sudo apt-get install libtool
+</code></pre><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>下载自github的代码需要首先执行 $ ./autogen.sh 生成configure文件 </p>
+<p>注意autogen.sh 需要gtest包，默认是从 googletest.googlecode.com下载，国内需要翻墙才能访问，很多人问autogen.sh运行失败，这里我补充一下 </p>
+<p>修改一下autogen.sh , 将这段:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Google Test not present.  Fetching gtest-1.5.0 from the web...&quot;</span><br><span class="line">curl http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2 | tar jx</span><br><span class="line">mv gtest-1.5.0 gtest</span><br></pre></td></tr></table></figure></p>
+<p>修改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/google/googletest/archive/release-1.5.0.tar.gz</span><br><span class="line">tar xzvf release-1.5.0.tar.gz</span><br><span class="line">mv googletest-release-1.5.0 gtest</span><br></pre></td></tr></table></figure></p>
+<p>再执行 autogen.sh，这样就不会报错了</p>
+<pre><code>$ ./configure
+$ make
+$ make check
+$ make install
+</code></pre><p>默认是装在</p>
+<pre><code>usr/local/bin
+usr/local/lib,
+usr/local/include 
+</code></pre><h2 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h2><pre><code>protoc --version
+</code></pre><p>如果安装成功,会出现版本号 如</p>
+<pre><code>libprotoc 2.6.1
+</code></pre><p>如果有问题，会输出错误内容, 最后我安装完成,用上述命令检查版本号时出现如下问题</p>
+<pre><code>protoc: error while loading shared libraries: libprotocbuf.so.9: cannot open shared
+</code></pre><p>错误原因</p>
+<p>protobuf的默认安装路径是/usr/local/lib,而/usr/local/lib不在ubuntu体系默认的LD_LIBRARY_PATH里,所以就找不到lib</p>
+<p>解决办法 : </p>
+<p>1 - 在 /etc/ld.so.conf.d/目录下创建文件 bprotobuf.conf文件,文件内容如下</p>
+<p><code>/usr/local/lib</code></p>
+<p>2 - 输入命令</p>
+<pre><code>sudo ldconfig
+</code></pre><p>这时,再输入<code>protoc --version</code>就可以正常看到版本号了</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight c++"><figcaption><span>Writer.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Mymessage.pb.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Im::Content msg1;</span><br><span class="line">	msg1.set_id(<span class="number">101</span>);</span><br><span class="line">	msg1.set_str(<span class="string">"ggsmd"</span>);</span><br><span class="line">	<span class="function">fstream <span class="title">output</span><span class="params">(<span class="string">"./log"</span>, ios::out | ios::trunc | ios::binary)</span></span>; </span><br><span class="line">	<span class="keyword">if</span> (!msg1.SerializeToOstream(&amp;output)) &#123;</span><br><span class="line">		<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Failed to write msg."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>Reader.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Mymessage.pb.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListMsg</span><span class="params">(<span class="keyword">const</span> Im::Content &amp; msg)</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; msg.id() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; msg.str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">	Im::Content msg1;</span><br><span class="line">	<span class="function">fstream <span class="title">input</span><span class="params">(<span class="string">"./log"</span>, ios::in | ios::binary)</span></span>;</span><br><span class="line">	<span class="keyword">if</span> (!msg1.ParseFromIstream(&amp;input)) &#123;</span><br><span class="line">		<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Failed to parse address book."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125; </span><br><span class="line">	ListMsg(msg1);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><figcaption><span>makefile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">INC=/usr/local/include</span><br><span class="line">LIB=/usr/local/lib</span><br><span class="line">lib=protobuf</span><br><span class="line"></span><br><span class="line">all:Writer Reader</span><br><span class="line"></span><br><span class="line">Writer.o:Writer.cpp</span><br><span class="line">	g++ -g -c Writer.cpp -I$(INC) -L$(LIB) -l$(lib)</span><br><span class="line">Reader.o:Reader.cpp</span><br><span class="line">	g++ -g -c Reader.cpp -I$(INC) -L$(LIB) -l$(lib)	</span><br><span class="line"></span><br><span class="line">Writer:Writer.o Mymessage.pb.o </span><br><span class="line">	g++ -g -o Writer Writer.o Mymessage.pb.o -I$(INC) -L$(LIB) -l$(lib)</span><br><span class="line">Reader:Reader.o Mymessage.pb.o </span><br><span class="line">	g++ -g -o Reader Reader.o Mymessage.pb.o -I$(INC) -L$(LIB) -l$(lib)</span><br><span class="line">Mymessage.pb.o:Mymessage.pb.cc</span><br><span class="line">	g++ -g -c Mymessage.pb.cc -I$(INC) -L$(LIB) -l$(lib)	</span><br><span class="line"></span><br><span class="line">clean:Writer Reader Writer.o Reader.o Mymessage.pb.o</span><br><span class="line">	rm Writer Reader Writer.o Reader.o Mymessage.pb.o</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>Mymessage.proto</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package Im; </span><br><span class="line">message Content </span><br><span class="line">&#123; </span><br><span class="line">    required int32   id = <span class="number">1</span>;  <span class="comment">// ID </span></span><br><span class="line">    required <span class="built_in">string</span>  str = <span class="number">2</span>;  <span class="comment">// str </span></span><br><span class="line">    optional int32   opt = <span class="number">3</span>;  <span class="comment">//optional field </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打印结果"><a href="#打印结果" class="headerlink" title="打印结果"></a>打印结果</h2><p>执行<br><code>protoc -I=./ --cpp_out=./ Mymessage.proto</code><br> 命令后，会生成 Mymessage.pb.h 和 Mymessage.pb.cc 文件。 再执行 <code>make</code> 命令，生成<br>Writer 和 Reader 文件 。 执行 <code>./Writer</code> 命令后，再执行<code>./Reader</code> 命令，终端上输出：</p>
+<pre><code>b@b-VirtualBox:~/tc$ protoc -I=./ --cpp_out=./ Mymessage.proto
+b@b-VirtualBox:~/tc$ ll
+total 44
+drwxrwxr-x 2 b b  4096  5月 19 22:43 ./
+drwxr-xr-x 4 b b  4096  5月 19 22:35 ../
+-rw-rw-r-- 1 b b   647  5月 19 22:36 makefile
+-rw-rw-r-- 1 b b 12214  5月 19 22:43 Mymessage.pb.cc
+-rw-rw-r-- 1 b b  7762  5月 19 22:43 Mymessage.pb.h
+-rw-rw-r-- 1 b b   161  5月 19 22:36 Mymessage.proto
+-rw-rw-r-- 1 b b   421  5月 19 22:36 Reader.cpp
+-rw-rw-r-- 1 b b   340  5月 19 22:35 Writer.cpp
+
+b@b-VirtualBox:~/tc$ make
+g++ -g -c Writer.cpp -I/home/sharexu/charpter13/1302/include -L/home/sharexu/charpter13/1302/lib -lprotobuf
+g++ -g -c Mymessage.pb.cc -I/home/sharexu/charpter13/1302/include -L/home/sharexu/charpter13/1302/lib -lprotobuf    
+g++ -g -o Writer Writer.o Mymessage.pb.o -I/home/sharexu/charpter13/1302/include -L/home/sharexu/charpter13/1302/lib -lprotobuf
+g++ -g -c Reader.cpp -I/home/sharexu/charpter13/1302/include -L/home/sharexu/charpter13/1302/lib -lprotobuf    
+g++ -g -o Reader Reader.o Mymessage.pb.o -I/home/sharexu/charpter13/1302/include -L/home/sharexu/charpter13/1302/lib -lprotobuf
+
+b@b-VirtualBox:~/tc$ ll
+total 772
+drwxrwxr-x 2 b b   4096  5月 19 22:43 ./
+drwxr-xr-x 4 b b   4096  5月 19 22:35 ../
+-rw-rw-r-- 1 b b    647  5月 19 22:36 makefile
+-rw-rw-r-- 1 b b  12214  5月 19 22:43 Mymessage.pb.cc
+-rw-rw-r-- 1 b b   7762  5月 19 22:43 Mymessage.pb.h
+-rw-rw-r-- 1 b b 244112  5月 19 22:43 Mymessage.pb.o
+-rw-rw-r-- 1 b b    161  5月 19 22:36 Mymessage.proto
+-rwxrwxr-x 1 b b 188430  5月 19 22:43 Reader*
+-rw-rw-r-- 1 b b    421  5月 19 22:36 Reader.cpp
+-rw-rw-r-- 1 b b  57656  5月 19 22:43 Reader.o
+-rwxrwxr-x 1 b b 184244  5月 19 22:43 Writer*
+-rw-rw-r-- 1 b b    340  5月 19 22:35 Writer.cpp
+-rw-rw-r-- 1 b b  59232  5月 19 22:43 Writer.o
+
+b@b-VirtualBox:~/tc$ ./Writer    
+
+b@b-VirtualBox:~/tc$ ./Reader 
+101
+ggsmd
+</code></pre>
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/02/21/cpp_object_model_conclusion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -983,251 +1224,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/02/02/gdb_tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/02/gdb_tutorial/" itemprop="url">GDB基础教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-02T12:18:54+00:00">
-                2015-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="GDB-操作提示"><a href="#GDB-操作提示" class="headerlink" title="GDB 操作提示"></a>GDB 操作提示</h1><p>在编译可执行文件时需要给 gcc 加上 “-g” 选项，这样它才会为生成的可执行文件加入额外的调试信息。<br>不要使用编译器的优化选项，比如： “-O”，”-O2”。因为编译器会为了优化而改变程序流程，那样不利于调试。<br>在 GDB 中执行 shell 命令可以使用：shell command<br>GDB 命令可以使用 TAB 键来补全。按两次 TAB 键可以看到所有可能的匹配。<br>GDB 命令缩写：例如 info bre 中的 bre 相当于 breakpoints。</p>
-<h1 id="启动GDB"><a href="#启动GDB" class="headerlink" title="启动GDB"></a>启动GDB</h1><ul>
-<li>gdb executable</li>
-<li>gdb -e executable -c core-file</li>
-<li>gdb executable -pid process-id （使用ps相关命令可以查看进程的 pid）</li>
-</ul>
-<h1 id="GDB常用命令"><a href="#GDB常用命令" class="headerlink" title="GDB常用命令"></a>GDB常用命令</h1><ul>
-<li>help                        列出 gdb 帮助信息。</li>
-<li>info+subcommand , 比如 :<ul>
-<li>info breakpoints    : 列出断点。</li>
-<li>info watchpoints    : 列出观察点。</li>
-<li>info threads        : 列出当前的线程。</li>
-<li>info locals        : 列出Local variables of current stack frame</li>
-<li></li>
-</ul>
-</li>
-<li>step(简写一个s也可)         进入下一行代码的执行，会进入函数内部。</li>
-<li>next(简写一个n也可)         执行下一行代码。但不会进入函数内部。</li>
-<li>finish                     跳出当前代码（之前跳入调试）</li>
-<li>continue(c)                继续执行直到下一个断点或观察点。</li>
-<li>b                          断点</li>
-<li>kill                        停止程序执行。</li>
-<li>quit(q)                    退出 GDB调试器</li>
-<li>run(r)                    从头开始执行程序，也允许进行重定向。</li>
-<li>print(p) variable            打印指定变量的值。<ul>
-<li>p variable</li>
-<li>p file::variable</li>
-<li>p ‘file’::variables</li>
-<li></li>
-</ul>
-</li>
-<li>backtrace(简写bt), 显示函数调用栈<ul>
-<li>bt :                        显示所有函数调用栈</li>
-<li>bt n :             显示程序的调用栈信息，只显示栈顶n桢(frame)</li>
-<li>bt -n :             显示程序的调用栈信息，只显示栈底部n桢(frame)</li>
-<li>set backtrace limit n :     设置bt显示的最大桢层数</li>
-<li>where 和 info stack ：        都是bt的别名，功能一样</li>
-</ul>
-</li>
-</ul>
-<h1 id="细说断点"><a href="#细说断点" class="headerlink" title="细说断点"></a>细说断点</h1><p>给 test.c 的第10行设置一个断点 : </p>
-<pre><code>b test.c:10 
-</code></pre><h2 id="断点删除"><a href="#断点删除" class="headerlink" title="断点删除"></a>断点删除</h2><p>断点的删除与断点的设置同样的重要。删除断点的命令有两个:</p>
-<ul>
-<li><a href="#delete">delete</a></li>
-<li><a href="#clear">clear</a></li>
-</ul>
-<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>用法：delete [breakpoints num] [range…]<br>delete可删除单个断点，也可删除一个断点的集合，这个集合用连续的断点号来描述。<br>例如：</p>
-<pre><code>delete 5
-delete 1-10
-</code></pre><h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p>用法:</p>
-<ul>
-<li>clear 删除所选定的环境中所有的断点</li>
-<li>clear location location描述具体的断点。</li>
-</ul>
-<p>clear 删除断点是基于行的，不是把所有的断点都删除。<br>例如：</p>
-<pre><code>clear list_insert         //删除函数的所有断点
-clear list.c:list_delet   //删除文件：函数的所有断点
-clear 12                  //删除行号的所有断点
-clear list.c:12           //删除文件：行号的所有断点
-</code></pre><h2 id="断点的使能和禁止"><a href="#断点的使能和禁止" class="headerlink" title="断点的使能和禁止"></a>断点的使能和禁止</h2><p>对断点的控制除了建立和删除外，还可以通过使能和禁止来控制，后一种方法更灵活。</p>
-<p>断点的四种使能操作：</p>
-<ul>
-<li>enable [breakpoints] [range…] 完全使能</li>
-<li>enable                //激活所有断点</li>
-<li>enable 4            //激活4断点</li>
-<li>enable 5-6            //激活5～6断点</li>
-<li>disable [breakpoints] [range…] 禁止</li>
-<li>enable once [breakpoints] [range…] 使能一次，触发后禁止</li>
-<li>enable delete [breakpoints] [range…]使能一次，触发后删除</li>
-</ul>
-<p>用法举例：</p>
-<pre><code>diable                //禁止所有断点
-disble 2            //禁止第二个断点
-disable 1-5            //禁止第1到第5个断点
-</code></pre><h1 id="GDB帮助"><a href="#GDB帮助" class="headerlink" title="GDB帮助"></a>GDB帮助</h1><p>GDB的命令很多, 有些用得少的命令记不住的话, 可以在进入GDB之后敲 “help”, 然后再敲 “help + command_class”,<br>比如 :</p>
-<p><strong>(gdb) help</strong><br>List of classes of commands:</p>
-<p>aliases – Aliases of other commands<br>breakpoints – Making program stop at certain points<br>data – Examining data<br>files – Specifying and examining files<br>internals – Maintenance commands<br>obscure – Obscure features<br>running – Running the program<br>stack – Examining the stack<br>status – Status inquiries<br>support – Support facilities<br>tracepoints – Tracing of program execution without stopping the program<br>user-defined – User-defined commands</p>
-<p>Type “help” followed by a class name for a list of commands in that class.<br>Type “help all” for the list of all commands.<br>Type “help” followed by command name for full documentation.<br>Type “apropos word” to search for commands related to “word”.<br>Command name abbreviations are allowed if unambiguous.</p>
-<p><strong>(gdb) help running </strong><br>Running the program.</p>
-<p>List of commands:</p>
-<p>advance – Continue the program up to the given location (same form as args for break command)<br>attach – Attach to a process or file outside of GDB<br>continue – Continue program being debugged<br>detach – Detach a process or file previously attached<br>detach checkpoint – Detach from a checkpoint (experimental)<br>detach inferiors – Detach from inferior ID (or list of IDS)<br>disconnect – Disconnect from a target<br>finish – Execute until selected stack frame returns<br>handle – Specify how to handle signals<br>inferior – Use this command to switch between inferiors<br>interrupt – Interrupt the execution of the debugged program<br>jump – Continue program being debugged at specified line or address<br>kill – Kill execution of program being debugged<br>kill inferiors – Kill inferior ID (or list of IDs)<br>next – Step program<br>nexti – Step one instruction<br>reverse-continue – Continue program being debugged but run it in reverse<br>reverse-finish – Execute backward until just before selected stack frame is called<br>reverse-next – Step program backward<br>reverse-nexti – Step backward one instruction<br>reverse-step – Step program backward until it reaches the beginning of another source line<br>reverse-stepi – Step backward exactly one instruction<br>run – Start debugged program<br>…</p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1298,7 +1294,7 @@ disable 1-5            //禁止第1到第5个断点
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">262</span>
+                <span class="site-state-item-count">263</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

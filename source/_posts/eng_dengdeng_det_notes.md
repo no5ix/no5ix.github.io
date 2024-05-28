@@ -24,13 +24,13 @@ categories:
     - n. 气，冰冻；霜；冷淡；（非正式）失败 
     - v. 结霜于；结霜；受冻，冻坏；在……上撒糖霜
     - n. (Frost) （英、美、德）弗罗斯特（ 
-- `iris`/ /ˈaɪrɪs/
+- `iris` /ˈaɪrɪs/
     - n. [解剖] 虹膜；鸢尾属植物
     - adj. 鸢尾属植物的
-- `transplant`/ /trænsˈplæntˌtrænzˈplænt/
+- `transplant` /trænsˈplæntˌtrænzˈplænt/
     - v. 移植（器官、皮肤等）；（使）迁移，（使）移居；移栽，移植（植物）
     - n. （器官、皮肤等的）移植（手术）；移植的器官，移植物；移居者，迁居者
-- `jewelry`/ /ˈdʒuːəlri/
+- `jewelry` /ˈdʒuːəlri/
     - n. 珠宝，首饰
 - `perform` /pərˈfɔːrm/
     - vt. 执行；完成；演奏
@@ -64,7 +64,7 @@ categories:
 - `perceive` /pərˈsiːv/
     - vt. 察觉，感觉；理解；认知
     - vi. 感到，感知；认识到
-- `lure`/ /lʊr/
+- `lure` /lʊr/
     - vt. 劝诱；引诱；诱惑
     - n. 诱惑；饵；诱惑物
     - n. （Lure）卢尔（人名）
@@ -72,7 +72,7 @@ categories:
     - n. 膨胀；阐述；扩张物
 - `balcony` /ˈbælkəni/
     - n. 阳台；包厢；戏院楼厅
-- `slender`)/ /ˈslendər/
+- `slender`) /ˈslendər/
     - adj. 细长的；苗条的；微薄的
 - `due` /duː/
     - adj. 到期的，预期的；应有的，应得的；应付的，应给的；适当的
@@ -84,46 +84,64 @@ categories:
 
 # 1 
 
-- c_ _ can
-- n_ _ new
-- w_ _ who
-- t_ _ the
-- h_ _ how/his/her/him/has
-- i_ is/in
-- o_ on/of/or
-- t_ to
-- s_ so
-- b_ _ but
-- a_ _ and/age
+- `c_ _` can
+- `n_ _` new
+- `w_ _` who
+- `t_ _` the
+- `h_ _` how/his/her/him/has
+- `i_` is/in
+- `o_` on/of/or
+- `t_` to
+- `s_` so
+- `b_ _` but
+- `a_ _` and/age
 
 
 # 2
-- fi_ _ _ first
-- la_ _ last
-- st_ _ _ stops/still
-- ea_ _ _ early
-- un_ _ _ until
-- mo_ _ more
-- ho_ _ hold
-- le_ _ leaf
-- lu_ _ lure
-- po_ _ _ power
-- bl_ _ _ blind
+
+- `fi_ _ _` first
+- `la_ _` last
+- `st_ _ _` stops/still
+- `ea_ _ _` early
+- `un_ _ _` until
+- `mo_ _` more
+- `ho_ _` hold
+- `le_ _` leaf
+- `lu_ _` lure
+- `po_ _ _` power
+- `bl_ _ _` blind
+- `br_ _ _` broad
+- `re_ _ _` relax
+- `im_ _ _` image
+- `hu_ _` huge
+- `do_ _` dose
+- `id_ _` idol
+- `da_ _` dark
 
 
 # 3
 
-- gro_ _ _ ground
-- wor_ work
-- wit_ _ _ within
-- res_ _ _ result
-- reo_ _ _ reopen
-- gar_ _ _ garage/garden
-- sle_ _ _ _ _ sleeping
-- bal_ _ _ _ balcony
-- pur_ _ _ pursue
-- med_ _ _ medium
+- `end_ _ _ _ _` endanger
+- `gro_ _ _` ground
+- `wor_` work
+- `wit_ _ _` within
+- `res_ _ _` result
+- `reo_ _ _` reopen
+- `gar_ _ _` garage/garden
+- `sle_ _ _ _ _` sleeping
+- `bal_ _ _ _` balcony
+- `pur_ _ _` pursue
+- `med_ _ _` medium
+- `dom_ _ _ _ _` dominance
+- `out_ _ _ _ _` outfit
+- `con_ _ _ _` contest
+- `sho_ _` shout
+- `thr_ _ _` thrill
+- `ple_ _ _ _` pleased
 
 
 # 4
-- reco_ _ _ _ _ recommend/recognize
+
+- `reco_ _ _ _ _` recommend/recognize
+- `oppo_ _ _ _ _ _ _` opportunity 
+- `belo_ _ _ _ _ _ _` belongings 

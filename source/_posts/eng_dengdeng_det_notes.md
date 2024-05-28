@@ -78,6 +78,8 @@ categories:
     - adj. 到期的，预期的；应有的，应得的；应付的，应给的；适当的
     - adv. 正对着
     - n. 应得，所得；会费
+- `ever since` 从那时起一直：表示从过去的某个时间开始一直持续到现在。
+- `apply in` 适用于：指某个规则、政策、法律等适用于某个特定的情况或对象。
 
 
 # 单词填空
@@ -91,10 +93,12 @@ categories:
 - `h_ _` how/his/her/him/has
 - `i_` is/in
 - `o_` on/of/or
+- `o_ _` one
 - `t_` to
 - `s_` so
 - `b_ _` but
 - `a_ _` and/age
+- `a_` at
 
 
 # 2
@@ -107,6 +111,7 @@ categories:
 - `mo_ _` more
 - `ho_ _` hold
 - `le_ _` leaf
+- `li_ _` list/line
 - `lu_ _` lure
 - `po_ _ _` power
 - `bl_ _ _` blind
@@ -117,6 +122,11 @@ categories:
 - `do_ _` dose
 - `id_ _` idol
 - `da_ _` dark
+- `on_ _` only
+- `wo_ _ _` words
+- `ea_ _` each
+- `wi_ _` will
+- `th_ _` this/that/them
 
 
 # 3
@@ -138,6 +148,8 @@ categories:
 - `sho_ _` shout
 - `thr_ _ _` thrill
 - `ple_ _ _ _` pleased
+- `sou_ _ _` sounds
+- `pro_ _ _ _` process
 
 
 # 4

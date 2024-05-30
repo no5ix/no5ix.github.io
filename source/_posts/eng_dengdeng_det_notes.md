@@ -152,7 +152,7 @@ categories:
 - `w_ _` who
 - `t_ _` the
 - `h_ _` how/his/her/him/has
-- `i_` is/in
+- `i_` is/in/it
 - `o_` on/of/or
 - `o_ _` one
 - `t_` to
@@ -188,6 +188,12 @@ categories:
 - `ea_ _` each
 - `wi_ _` will
 - `th_ _` this/that/them
+- `si_ _ ` sigh
+- `te_ _` team
+- `ch_ _ _` choir
+- `wh_ _ _` while
+- `le_ _ _` least
+- `fa_ _` fact
 
 
 ## 3
@@ -211,6 +217,9 @@ categories:
 - `ple_ _ _ _` pleased
 - `sou_ _ _` sounds
 - `pro_ _ _ _` process
+- `hol_ _ _ _` holiday
+- `lea_ _` learn/leave
+- `pub_ _ _` public/publish
 
 
 ## 4
@@ -328,3 +337,23 @@ categories:
 
 
 ## 写作模板
+
+### 看图写句
+
+- 第一句 
+    - This chromatic `/krəˈmætɪk/ adj. 彩色的；色品的；易染色的` and vivacious `/vɪˈveɪʃəs/ adj. 活泼的；快活的；有生气的` image depicts that
+    - We can see in this intriguing `/ɪnˈtriːɡɪŋ/ adj. 非常有趣的，引人入胜的` and quaint `/kweɪnt/ adj. 奇特有趣的，古色古香的；做得很精巧的` picture that 
+    - It can be manifestly `/ˈmænɪfestli/ adv. 显然地；明白地` seen in this fabulous snapshot that
+- 第二句强调人物状态
+    - ●男人: personable `/ˈpɜːrsənəbl/ adj. 品貌兼优的；英俊潇洒的；和蔼可亲的`, muscular `/ˈmʌskjələr/ adj. 肌肉的，影响肌肉的；肌肉发达的，强壮的；强劲有力的`
+    - ○女人: winsome `/ˈwɪnsəm/ adj. 迷人的；可爱的；引人注目的`
+    - ○妈妈: affectionate `/əˈfekʃənət/ adj. 表达爱意的，深情的`
+    - ○小孩: cunning `/ˈkʌnɪŋ/ adj. 狡猾的，诡诈的；灵巧的，巧妙的；<美>可爱的，好看的`, lovable
+    - ○黑人: dark-skinned
+    - ○工人: wholehearted
+    - ○老人: grizzled `ˈɡrɪzld/ adj. 灰色的；头发斑白的 , grizle n. 灰色` elderly
+- ●强调景色
+    - ●The weather outside is
+    - ○It is tranquil `/ˈtræŋkwɪl/ adj. 平静的，宁静的` with serenity `/səˈrenəti/ n. 平静，宁静`
+    - ○The scenery is extremely fascinating, presenting a piece of enchanting `/ɪnˈtʃæntɪŋ/ adj. 迷人的；妩媚的` beauty.
+    - ●This vivacious/black/white picture depicts a fabulous situation 

@@ -151,7 +151,7 @@ categories:
 - `n_ _` new
 - `w_ _` who
 - `t_ _` the
-- `h_ _` how/his/her/him/has
+- `h_ _` how/his/her/him/has/had
 - `i_` is/in/it
 - `o_` on/of/or
 - `o_ _` one
@@ -159,18 +159,30 @@ categories:
 - `s_` so
 - `b_ _` but
 - `a_ _` and/age
-- `a_` at
+- `a_` at/as/an
 
 
 ## 2
 
 - `fi_ _ _` first
-- `la_ _` last
-- `st_ _ _` stops/still
-- `ea_ _ _` early
+- `wo_ _ _` words/would
+- `wo_ _` work/word
+- `co_ _ _` could
 - `un_ _ _` until
+- `on_ _` only
+- `al_ _` also
+- `ea_ _` each
+- `wi_ _` will
+- `th_ _` this/that/them/then
+- `th_ _ _` think
+- `wh_ _ _` while
 - `mo_ _` more
-- `ho_ _` hold
+- `la_ _` last
+- `so_ _` some
+- `st_ _ _` stops/still
+- `fl_ _` flew/flys
+- `ea_ _ _` early
+- `ho_ _` hold/hour
 - `le_ _` leaf
 - `li_ _` list/line
 - `lu_ _` lure
@@ -180,24 +192,20 @@ categories:
 - `re_ _ _` relax
 - `im_ _ _` image
 - `hu_ _` huge
-- `do_ _` dose
+- `do_ _` dose/done
 - `id_ _` idol
 - `da_ _` dark
-- `on_ _` only
-- `wo_ _ _` words
-- `ea_ _` each
-- `wi_ _` will
-- `th_ _` this/that/them
 - `si_ _ ` sigh
 - `te_ _` team
 - `ch_ _ _` choir
-- `wh_ _ _` while
 - `le_ _ _` least
 - `fa_ _` fact
+- `gr_ _` grass
 
 
 ## 3
 
+- `loo_` look
 - `end_ _ _ _ _` endanger
 - `gro_ _ _` ground
 - `wor_` work
@@ -350,7 +358,7 @@ categories:
     - ○妈妈: affectionate `/əˈfekʃənət/ adj. 表达爱意的，深情的`
     - ○小孩: cunning `/ˈkʌnɪŋ/ adj. 狡猾的，诡诈的；灵巧的，巧妙的；<美>可爱的，好看的`, lovable
     - ○黑人: dark-skinned
-    - ○工人: wholehearted
+    - ○工人: wholehearted 
     - ○老人: grizzled `ˈɡrɪzld/ adj. 灰色的；头发斑白的 , grizle n. 灰色` elderly
 - ●强调景色
     - ●The weather outside is

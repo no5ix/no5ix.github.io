@@ -27,6 +27,7 @@
 <!-- 0\. Install [Hexo](https://hexo.io/docs/index.html)  
     安装 [Hexo](https://hexo.io/zh-cn/docs/) -->
 0\. [点击这里下载node.js的10.13.0的版本](https://nodejs.org/en/blog/release/v10.13.0), 尝试`node -v`, 这个node版本很关键, 不要乱改
+0.5\. node 10.13.0觉得太老, 也可尝试 node 16.18.1这个版本
 
 1\. Delete my `source` folder  
     删除我项目中的 `source` 文件夹

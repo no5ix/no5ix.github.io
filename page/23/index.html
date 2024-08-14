@@ -304,6 +304,171 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/11/14/next的文章使用自定义的css/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/14/next的文章使用自定义的css/" itemprop="url">next的文章使用自定义的css</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T23:42:44+00:00">
+                2017-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p>  今天，创建自己的about页面的时候，像使用自定义的css样式，就像这是不是NexT可以使用自定义的CSS样式，片尝试了一下，还是可以的，因为markdown支持html标签，使用自定义的CSS样式还是不错的。下面总结一下具体的使用过程：</p><br><h2 id="添加样式支持"><a href="#添加样式支持" class="headerlink" title="添加样式支持"></a>添加样式支持</h2><p>  为了不吧原先的像是文件搞得太乱，这里，添加子集的样式文件。<br>  首先，在样式文件的<code>source</code>文件夹下找到<code>css</code>文件夹，打开<code>main.styl</code>文件，在最后添加：</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//My Layer</div><div class="line">//————————————————–</div><div class="line">@import &quot;_my/mycss&quot;;</div></pre></td></tr></table></figure><br><h2 id="新建自定义样式"><a href="#新建自定义样式" class="headerlink" title="新建自定义样式"></a>新建自定义样式</h2><p>找到样式文件夹<code>css</code> 新建<code>_my</code>文件夹，在其中新建<code>mycss.styl</code>文件，之后就可以按照stylus的格式自定义样式了。</p><br><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>例如：我想在文章中添加个自定义样式的按钮，怎么做呢？？？</p><br><p>打开新建的<code>mycss.styl</code>文件，在其中添加样式：</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">.myButton &#123;</div><div class="line">    background-color:#0f94bd;</div><div class="line">    -moz-border-radius:15px;</div><div class="line">    -webkit-border-radius:15px;</div><div class="line">    border-radius:15px;</div><div class="line">    display:inline-block;</div><div class="line">    cursor:pointer;</div><div class="line">    color:#ffffff;</div><div class="line">    font-family:Arial;</div><div class="line">    font-size:17px;</div><div class="line">    padding:11px 27px;</div><div class="line">    text-decoration:none;</div><div class="line">    text-shadow:0px 1px 0px #2f6627;</div><div class="line">&#125;</div><div class="line">.myButton:hover &#123;</div><div class="line">    background-color:#5cbf2a;</div><div class="line">&#125;</div><div class="line">.myButton:active &#123;</div><div class="line">    position:relative;</div><div class="line">    top:1px;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><p>(ps:这里直接使用的css的格式写的，因为css的代码在网上很好找到，而stylus预处理器的就不那么容易找到了，stylus一样支持css格式，所以在这里直接使用了css文件，没有写成stylus语法。其实让我写我也不会，哈哈！)<br>  引用：在想要引用的时候添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;#&quot; class=&quot;myButton&quot;&gt;MyButton&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+
+<!-- 具体示例可参考本博客内的<a href="/2016/11/15/游戏网络开发二之数据的发送与接收/" title="此篇文章">此篇文章</a>,<br>此文中的代码段样式都是用Gad的两个css控制的,<br>所以跟我其他文章的代码段样式都不同. –&gt;-->
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/11/07/修复next搜索框弹不出手机键盘bug和更简洁的搜索框/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -966,184 +1131,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/10/13/Base64编码原理与应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/13/Base64编码原理与应用/" itemprop="url">Base64编码原理与应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T12:22:54+00:00">
-                2017-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Misc/" itemprop="url" rel="index">
-                    <span itemprop="name">Misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <h1 id="简单解释"><a href="#简单解释" class="headerlink" title="简单解释"></a>简单解释</h1><p>作者：郭无心<br>链接：<a href="https://www.zhihu.com/question/36306744/answer/71626823" target="_blank" rel="noopener">https://www.zhihu.com/question/36306744/answer/71626823</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<blockquote>
-<p>我们知道在计算机中任何数据都是按ascii码存储的，而ascii码的128～255之间的值是不可见字符。而在网络上交换数据时，比如说从A地传到B地，往往要经过多个路由设备，由于不同的设备对字符的处理方式有一些不同，这样那些不可见字符就有可能被处理错误，这是不利于传输的。</p>
-<p>所以就先把数据先做一个Base64编码，统统变成可见字符，这样出错的可能性就大降低了。</p>
-<p>对证书来说，特别是根证书，一般都是作Base64编码的，因为它要在网上被许多人下载。</p>
-<p>电子邮件的附件一般也作Base64编码的，因为一个附件数据往往是有不可见字符的。</p>
-<p>那么Base64到底是怎样编码的呢？简单来说，任何一个数据无非可以看作一个比特流，如01000100010011101100111010111100011001010……那么我们取6个比特为一组，计算它的ascii值，得到一个字符，这个字符肯定是可见字符，好，把它对应的字符写出来，再取6个比特，计算…，如此下去，直到最后，就完成了编码。</p>
-<p>1.标准base64只有64个字符（英文大小写、数字和+、/）以及用作后缀等号；2.base64是把3个字节变成4个可打印字符，所以base64编码后的字符串一定能被4整除（不算用作后缀的等号）；3.等号一定用作后缀，且数目一定是0个、1个或2个。</p>
-<p>这是因为如果原文长度不能被3整除，base64要在后面添加\0凑齐3n位。</p>
-<p>为了正确还原，添加了几个\0就加上几个等号。</p>
-<p>显然添加等号的数目只能是0、1或2；4.严格来说base64不能算是一种加密，只能说是编码转换。</p>
-<p>使用base64的初衷。</p>
-<p>是为了方便把含有不可见字符串的信息用可见字符串表示出来，以便复制粘贴</p>
-</blockquote>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1214,7 +1201,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">264</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

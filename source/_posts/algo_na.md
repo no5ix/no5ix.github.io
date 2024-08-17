@@ -7,13 +7,20 @@ tags:
 - LeetCode
 categories:
 - Algo
-password: '0622'
 ---
 
 
 # 算法白话总结
 
 推荐参考**本博客总结**的 {% post_link algo_newbie %}
+
+
+# 本文完整参考代码
+
+<https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_na.java>
+
+
+**. . .**<!-- more -->
 
 
 # 概绍
@@ -172,7 +179,7 @@ public class test{
 }
 ```
 
-# lc59 - Spiral Matrix 2 - 20240917
+## lc59 - Spiral Matrix 2 - 20240917
 
 - https://programmercarl.com/0059.螺旋矩阵II.html#算法公开课
 - https://leetcode.com/problems/spiral-matrix-ii/description/

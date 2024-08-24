@@ -304,199 +304,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/python和lua数据类型的比较/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/11/python和lua数据类型的比较/" itemprop="url">python和lua数据类型的比较</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T09:29:22+00:00">
-                2015-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Script/" itemprop="url" rel="index">
-                    <span itemprop="name">Script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          
-            <h1 id="Python比较特殊的数据类型："><a href="#Python比较特殊的数据类型：" class="headerlink" title="Python比较特殊的数据类型："></a>Python比较特殊的数据类型：</h1><h2 id="List"><a href="#List" class="headerlink" title="List  []"></a>List  []</h2><p>例如 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">list = [ &apos;runoob&apos;, 786 , 2.23, &apos;john&apos;, 70.2 ]</span><br><span class="line">tinylist = [123, &apos;john&apos;]</span><br><span class="line"> </span><br><span class="line">print list               # 输出完整列表</span><br><span class="line">print list[0]            # 输出列表的第一个元素</span><br><span class="line">print list[1:3]          # 输出第二个至第三个的元素 </span><br><span class="line">print list[2:]           # 输出从第三个开始至列表末尾的所有元素</span><br><span class="line">print tinylist * 2       # 输出列表两次</span><br><span class="line">print list + tinylist    # 打印组合的列表</span><br></pre></td></tr></table></figure></p>
-<p>以上实例输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2]</span><br><span class="line">runoob</span><br><span class="line">[786, 2.23]</span><br><span class="line">[2.23, &apos;john&apos;, 70.2]</span><br><span class="line">[123, &apos;john&apos;, 123, &apos;john&apos;]</span><br><span class="line">[&apos;runoob&apos;, 786, 2.23, &apos;john&apos;, 70.2, 123, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
-<h2 id="Tuple（元祖）-相当于只读列表，不可以二次赋值"><a href="#Tuple（元祖）-相当于只读列表，不可以二次赋值" class="headerlink" title="Tuple（元祖）(),相当于只读列表，不可以二次赋值"></a>Tuple（元祖）(),相当于只读列表，不可以二次赋值</h2><p><code>tuple = ( &#39;runoob&#39;, 786 , 2.23, &#39;john&#39;, 70.2 )</code>, 除了元祖用()而list用[], 而且元祖只是可读的, 其他的跟list一毛一样</p>
-<h2 id="dictionary（字典）-，key值对"><a href="#dictionary（字典）-，key值对" class="headerlink" title="dictionary（字典）{}，key值对"></a>dictionary（字典）{}，key值对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">dict[&apos;one&apos;] = &quot;This is one&quot;</span><br><span class="line">dict[2] = &quot;This is two&quot;</span><br><span class="line"> </span><br><span class="line">tinydict = &#123;&apos;name&apos;: &apos;john&apos;,&apos;code&apos;:6734, &apos;dept&apos;: &apos;sales&apos;&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print dict[&apos;one&apos;]          # 输出键为&apos;one&apos; 的值</span><br><span class="line">print dict[2]              # 输出键为 2 的值</span><br><span class="line">print tinydict             # 输出完整的字典</span><br><span class="line">print tinydict.keys()      # 输出所有键</span><br><span class="line">print tinydict.values()    # 输出所有值</span><br></pre></td></tr></table></figure>
-<p>输出结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This is one</span><br><span class="line">This is two</span><br><span class="line">&#123;&apos;dept&apos;: &apos;sales&apos;, &apos;code&apos;: 6734, &apos;name&apos;: &apos;john&apos;&#125;</span><br><span class="line">[&apos;dept&apos;, &apos;code&apos;, &apos;name&apos;]</span><br><span class="line">[&apos;sales&apos;, 6734, &apos;john&apos;]</span><br></pre></td></tr></table></figure></p>
-<h1 id="lua比较特殊的数据类型"><a href="#lua比较特殊的数据类型" class="headerlink" title="lua比较特殊的数据类型"></a>lua比较特殊的数据类型</h1><h2 id="lua变量"><a href="#lua变量" class="headerlink" title="lua变量"></a>lua变量</h2><blockquote>
-<p>变量在使用前，必须在代码中进行声明，即创建该变量。</p>
-</blockquote>
-<p>编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。</p>
-<p>Lua 变量有三种类型：全局变量、局部变量、表中的域。</p>
-<blockquote>
-<p>Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。</p>
-</blockquote>
-<p>局部变量的作用域为从声明位置开始到所在语句块结束。</p>
-<p>变量的默认值均为 nil。</p>
-<figure class="highlight plain"><figcaption><span>test.lua 文件脚本</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a = 5               -- 全局变量</span><br><span class="line">local b = 5         -- 局部变量</span><br><span class="line"></span><br><span class="line">function joke()</span><br><span class="line">    c = 5           -- 全局变量</span><br><span class="line">    local d = 6     -- 局部变量</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">joke()</span><br><span class="line">print(c,d)          --&gt; 5 nil</span><br><span class="line"></span><br><span class="line">do </span><br><span class="line">    local a = 6     -- 局部变量</span><br><span class="line">    b = 6           -- 全局变量</span><br><span class="line">    print(a,b);     --&gt; 6 6</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">print(a,b)      --&gt; 5 6</span><br></pre></td></tr></table></figure>
-<p>执行以上实例输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lua test.lua </span><br><span class="line">5	nil</span><br><span class="line">6	6</span><br><span class="line">5	6</span><br></pre></td></tr></table></figure>
-<h2 id="lua的特有的东西table（表）"><a href="#lua的特有的东西table（表）" class="headerlink" title="lua的特有的东西table（表）"></a>lua的特有的东西table（表）</h2><p>在 Lua 里，table 的创建是通过”构造表达式”来完成，</p>
-<p>最简单构造表达式是{}，用来创建一个空表。</p>
-<p>也可以在表里添加一些数据，直接初始化表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 创建一个空的 table</span><br><span class="line">local tbl1 = &#123;&#125;</span><br><span class="line"> </span><br><span class="line">-- 直接初始表</span><br><span class="line">local tbl2 = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- table_test.lua 脚本文件</span><br><span class="line">a = &#123;&#125;</span><br><span class="line">a[&quot;key&quot;] = &quot;value&quot;</span><br><span class="line">key = 10</span><br><span class="line">a[key] = 22</span><br><span class="line">a[key] = a[key] + 11</span><br><span class="line">for k, v in pairs(a) do</span><br><span class="line">    print(k .. &quot; : &quot; .. v)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test.lua </span><br><span class="line">key : value</span><br><span class="line">10 : 33</span><br></pre></td></tr></table></figure></p>
-<p>不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- table_test2.lua 脚本文件</span><br><span class="line">local tbl = &#123;&quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;, &quot;grape&quot;&#125;</span><br><span class="line">for key, val in pairs(tbl) do</span><br><span class="line">    print(&quot;Key&quot;, key)</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
-<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test2.lua </span><br><span class="line">Key	1</span><br><span class="line">Key	2</span><br><span class="line">Key	3</span><br><span class="line">Key	4</span><br></pre></td></tr></table></figure></p>
-<p>table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- table_test3.lua 脚本文件</span><br><span class="line">a3 = &#123;&#125;</span><br><span class="line">for i = 1, 10 do</span><br><span class="line">    a3[i] = i</span><br><span class="line">end</span><br><span class="line">a3[&quot;key&quot;] = &quot;val&quot;</span><br><span class="line">print(a3[&quot;key&quot;])</span><br><span class="line">print(a3[&quot;none&quot;])</span><br></pre></td></tr></table></figure></p>
-<p>脚本执行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lua table_test3.lua </span><br><span class="line">val</span><br><span class="line">nil</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/07/11/redis_hiredis_install_tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1167,6 +974,213 @@ int const nValue；    //nValue 是 const
 
       
     
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/05/20/关系型数据库与NoSQL的爱恨情仇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/20/关系型数据库与NoSQL的爱恨情仇/" itemprop="url">关系型数据库与NoSQL的爱恨情仇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-20T13:18:17+00:00">
+                2015-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="NoSQL因关系数据库的不足而生"><a href="#NoSQL因关系数据库的不足而生" class="headerlink" title="NoSQL因关系数据库的不足而生"></a>NoSQL因关系数据库的不足而生</h1><p>随着互联网的不断发展，各种类型的应用层出不穷，所以导致在这个云计算的时代，</p>
+<p>对技术提出了更多的需求，主要体现在下面这四个方面：</p>
+<ul>
+<li>低延迟的读写速度：应用快速地反应能极大地提升用户的满意度; </li>
+<li>支撑海量的数据和流量：对于搜索这样大型应用而言，需要利用PB级别的数据和能应对百万级的流量; </li>
+<li>大规模集群的管理：系统管理员希望分布式应用能更简单的部署和管理;</li>
+</ul>
+<p>庞大运营成本的考量：IT经理们希望在硬件成本、软件成本和人力成本能够有大幅度地降低;</p>
+<p>目前世界上主流的存储系统大部分还是采用了关系型数据库，其主要有一下优点：</p>
+<ul>
+<li>事务处理—保持数据的一致性；</li>
+<li>由于以标准化为前提，数据更新的开销很小（相同的字段基本上只有一处）；</li>
+<li>可以进行Join等复杂查询。</li>
+</ul>
+<p>虽然关系型数据库已经在业界的数据存储方面占据不可动摇的地位，但是由于其天生的几个限制，</p>
+<p>使其很难满足上面这几个需求： </p>
+<ul>
+<li>扩展困难：由于存在类似Join这样多表查询机制，使得数据库在扩展方面很艰难; </li>
+<li>读写慢：这种情况主要发生在数据量达到一定规模时由于关系型数据库的系统逻辑非常复杂，使得其非常容易发生死锁等的并发问题，所以导致其读写速度下滑非常严重; </li>
+<li>成本高：企业级数据库的License价格很惊人，并且随着系统的规模，而不断上升; </li>
+<li>有限的支撑容量：现有关系型解决方案还无法支撑Google这样海量的数据存储; </li>
+</ul>
+<blockquote>
+<p>业界为了解决上面提到的几个需求，推出了多款新类型的数据库，并且由于它们在设计上和传统的NoSQL数据库相比有很大的不同，<br>所以被统称为“NoSQL”系列数据库。</p>
+</blockquote>
+<p>总的来说，在设计上，它们非常关注对数据高并发地读写和对海量数据的存储等，与关系型数据库相比，它们在架构和数据模型方量面做了“减法”，</p>
+<p>而在扩展和并发等方面做了“加法”。</p>
+<blockquote>
+<p>现在主流的NoSQL数据库有<strong>MongoDB</strong>和<strong>Redis</strong>以及BigTable、Hbase、Cassandra、SimpleDB、CouchDB、等。</p>
+</blockquote>
+<p>接下来，将关注NoSQL数据库到底存在哪些优缺点。</p>
+<h1 id="NoSQL的优缺点"><a href="#NoSQL的优缺点" class="headerlink" title="NoSQL的优缺点"></a>NoSQL的优缺点</h1><p>在优势方面，主要体现在下面这三点： </p>
+<ul>
+<li>简单的扩展：典型例子是Cassandra，由于其架构是类似于经典的P2P，所以能通过轻松地添加新的节点来扩展这个集群; </li>
+<li>快速的读写：主要例子有redis，由于其逻辑简单，而且纯内存操作，使得其性能非常出色，单节点每秒可以处理超过10万次读写操作; </li>
+<li>低廉的成本：这是大多数分布式数据库共有的特点，因为主要都是开源软件，没有昂贵的License成本; </li>
+</ul>
+<p>但瑕不掩瑜，NoSQL数据库还存在着很多的不足，常见主要有下面这几个： </p>
+<ul>
+<li>不提供对SQL的支持：如果不支持SQL这样的工业标准，将会对用户产生一定的学习和应用迁移成本; </li>
+<li>支持的特性不够丰富：现有产品所提供的功能都比较有限，大多数NoSQL数据库都不支持事务，也不像MS SQL Server和Oracle那样能提供各种附加功能，比如BI和报表等; </li>
+<li>现有产品的不够成熟：大多数产品都还处于初创期，和关系型数据库几十年的完善不可同日而语; </li>
+</ul>
+<p>上面NoSQL产品的优缺点都是些比较共通的，在实际情况下，每个产品都会根据自己所遵从的数据模型和CAP理念而有所不同.</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
   </section>
 
   
@@ -1237,7 +1251,7 @@ int const nValue；    //nValue 是 const
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">264</span>
+                <span class="site-state-item-count">263</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

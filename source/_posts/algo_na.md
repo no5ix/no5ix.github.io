@@ -15,19 +15,21 @@ categories:
 推荐参考**本博客总结**的 {% post_link algo_newbie %}
 
 
+# 概绍
+
+本群的每日刷题打卡活动, 按照 GitHub 49k star的项目 https://github.com/youngyangyang04/leetcode-master 的刷题顺序.
+跟着群里有个伴一起刷题或许更容易坚持达成每日一题的目标. 做完题目之后可以在群里的小程序"今日leetcode刷题打卡"里打卡. 
+
+- 网页版: 代码随想录 https://programmercarl.com/
+- 本博客只记录那些有明显自我疑问而<<代码随想录>>没有说明清楚的题目, 会标识出来并注释
+
+
 # 本文完整参考代码
 
 <https://github.com/no5ix/no5ix.github.io/blob/source/source/code/test_algo_na.java>
 
 
 **. . .**<!-- more -->
-
-
-# 概绍
-
-本群的每日刷题打卡活动, 按照 GitHub 49k star的项目 https://github.com/youngyangyang04/leetcode-master 的刷题顺序.
-跟着群里有个伴一起刷题或许更容易坚持达成每日一题的目标. 做完题目之后可以在群里的小程序"今日leetcode刷题打卡"里打卡. 
-
 
 # 数组
 
@@ -77,37 +79,6 @@ public class test{
 }
 ```
 
-## lc27 - 移除元素 - 20240815
-
-- https://programmercarl.com/0027.移除元素.html
-- https://leetcode.com/problems/remove-element/
-
-``` java
-class Solution {  // lc27
-    public int removeElement(int[] nums, int val) {
-        int newArrayIndex = 0;
-        for (int searchingIndex = 0; searchingIndex < nums.length; ++searchingIndex) {
-            if (nums[searchingIndex] != val) {
-                nums[newArrayIndex++] = nums[searchingIndex];
-            }
-        }
-        return newArrayIndex;
-    }
-}
-
-public class test{
-    public static void main(String[] args){
-        Solution solution = new Solution();
-        int[] myList = {1, 2, 3, 5, 6, 7, 8, 9, 11};
-        int ret = solution.removeElement(myList, 7);
-        System.out.println(ret);
-        for (int i = 0; i < myList.length; ++i) {
-            System.out.println(myList[i]);
-        }
-    }
-}
-```
-
 ## lc977 - 有序数组的平房 - 20240916
 
 - https://programmercarl.com/0977.有序数组的平方.html#算法公开课
@@ -146,89 +117,42 @@ public class test{
 }
 ```
 
-## lc977 - 有序数组的平房 - 20240917
+# 字符串
 
-- https://programmercarl.com/0209.长度最小的子数组.html#思路
+## lc28 - 实现strStr() - 20240923 - KMP
 
-``` java
-class Solution {  // lc209
-    public int minSubArrayLen(int target, int[] nums) {
-        int left = 0;
-        int sum = 0;
-        int subLength = 0;
-        int result = Integer.MAX_VALUE;
-        for (int right = 0; right < nums.length; ++right) {
-            sum += nums[right];
-            while (sum >= target) {
-                subLength = right - left + 1;
-                result = subLength > result ? result : subLength;
-                sum -= nums[left++];
-            }
-        }
-        return result == Integer.MAX_VALUE ? 0 : result;
-    }
-}
-
-public class test{
-    public static void main(String[] args){
-        Solution solution = new Solution();
-        int[] myList = {1, 2, 3, 5, 6};
-        int ret = solution.minSubArrayLen(11, myList);
-        System.out.println(ret);
-    }
-}
-```
-
-## lc59 - Spiral Matrix 2 - 20240917
-
-- https://programmercarl.com/0059.螺旋矩阵II.html#算法公开课
-- https://leetcode.com/problems/spiral-matrix-ii/description/
+https://programmercarl.com/0028.实现strStr.html#算法公开课
 
 ``` java
-class Solution {  // lc59
-    public int[][] generateMatrix(int n) {
-        int[][] result = new int[n][n];
-        int loop = n / 2;
-        int startX = 0;
-        int startY = 0;
-        int num = 1;
-        int offset = 1;
-        int i, j;
-        while (loop-- > 0) {
-            i = startX;
-            j = startY;
-            for (; j < n - offset; ++j) {
-                result[i][j] = num++;
-            }
-            for (; i < n - offset; ++i) {
-                result[i][j] = num++;
-            }
-            for (; j > startX; --j) {
-                result[i][j] = num++;
-            }
-            for (; i > startY; --i) {
-                result[i][j] = num++;
-            }
-            ++startX;
-            ++startY;
-            ++offset;
-        }
-        if (n % 2 != 0) {
-            result[n/2][n/2] = n * n;
-        }
-        return result;
-    }
-}
+class Solution {
+    //前缀表（不减一）Java实现
+    public int strStr(String haystack, String needle) {
+        if (needle.length() == 0) return 0;
+        int[] next = new int[needle.length()];  // 前缀表
+        getNext(next, needle);
 
-public class test{
-    public static void main(String[] args){
-        Solution solution = new Solution();
-        int[][] ret = solution.generateMatrix(3);
-        System.out.println(ret);
-        for (int i = 0; i < ret.length; ++i) {
-            for (int j = 0; j < ret.length; ++j) {
-                System.out.println(ret[i][j]);
-            }
+        int j = 0;  // 此处 j 指向 基于模式串 needle 的 内部的起始位置
+        for (int i = 0; i < haystack.length(); i++) {  // i 指向 基于文本串 haystack 内部的起始位置。
+            while (j > 0 && needle.charAt(j) != haystack.charAt(i)) 
+                j = next[j - 1];  // strStr 里匹配过程里的寻找前一位来继续匹配; 不懂的话看视频 https://www.bilibili.com/video/BV1PD4y1o7nd/?vd_source=8a83b38420b65ac33aa101b7754630f6 里的 "使用前缀表的匹配过程" 环节
+            if (needle.charAt(j) == haystack.charAt(i)) 
+                j++;
+            if (j == needle.length())  // 当 j 等于needle 长度的时候, 说明 j 指向了模式串t的末尾的后面，那么就说明模式串t完全匹配文本串s里的某个子串了。
+                return i - needle.length() + 1;
+        }
+        return -1;
+
+    }
+    
+    private void getNext(int[] next, String s) {
+        int j = 0;  // 此处 j 是 前缀 的末尾位置, 也是前缀的长度
+        next[0] = 0;
+        for (int i = 1; i < s.length(); i++) {  // i 是后缀的末尾位置
+            while (j > 0 && s.charAt(j) != s.charAt(i))  // 此时前后缀不相等; (j要保证大于0，因为下面有取j-1作为数组下标的操作
+                j = next[j - 1];  // 注意这里，是要找前一位的对应的回退位置了; 为什么这里要找前一位的对应的回退位置呢? 因为和 上面 strStr 里匹配过程里的寻找前一位来继续匹配是一样一样的
+            if (s.charAt(j) == s.charAt(i))   // 此时前后缀相等
+                j++;
+            next[i] = j;  // 因为 j 即是前缀 的末尾位置, 又是前缀的长度, 所以此处直接在 next 表里存下 j
         }
     }
 }

@@ -304,7 +304,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_pairs_ipairs/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_cpp_bind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -323,7 +323,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/11/11/lua_pairs_ipairs/" itemprop="url">Lua中ipairs和pairs的区别与使用</a></h1>
+                <a class="post-title-link" href="/2015/11/11/lua_cpp_bind/" itemprop="url">C++与Lua本质原始交互API</a></h1>
         
 
         <div class="post-meta">
@@ -410,19 +410,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 
       
         
-          <p>关于ipairs()和pairs(),Lua官方手册是这样说明的：</p>
-<p><strong>pairs (t)</strong></p>
-<p>If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call.</p>
-<p>Otherwise, returns three values: the next function, the table t, and nil, so that the construction</p>
-<pre><code>` for k,v in pairs(t) do body end`
-</code></pre><p>will iterate over all key–value pairs of table t.</p>
-<p>See function next for the caveats of modifying the table during its traversal.</p>
-<p><strong>ipairs (t)</strong></p>
-<p>If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call.</p>
-<p>Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction</p>
-<pre><code>` for i,v in ipairs(t) do body end`
-</code></pre><p>will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table.</p>
-<p>根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。</p>
+          <p>我们用一个例子来说明.</p>
 <p><strong>. . .</strong>
           <!--noindex-->
           

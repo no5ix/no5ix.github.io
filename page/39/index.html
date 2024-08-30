@@ -304,6 +304,210 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/01/06/latency_compensating_methods_in_client_server_in_game_protocol_design_and_optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/01/06/latency_compensating_methods_in_client_server_in_game_protocol_design_and_optimization/" itemprop="url">C/S游戏架构中延迟补偿的设计和优化方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-06T20:37:38+00:00">
+                2016-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h1><p>注 : V社这篇文章相当有价值, 所以会有尽可能详细的注解以及对原译文各种翻译纰漏的修正.</p>
+<p>广义的延迟补偿主要包括两个方面 :</p>
+<ul>
+<li><strong>A 如何显示目标</strong><ul>
+<li><strong>a. 对于本玩家自己</strong><ul>
+<li><strong>客户端预表现</strong>(本文翻译为”客户端预测”) : 比如对于玩家移动的预测, 可以把服务器确认过的movement信息作为开始, 然后使用自己本地的movement input来进行预表现, 服务器跟客户端共享同一套move代码, 当服务器的确认信息过来之后就直接使用服务器发过来的from state进行修正并以from state为基础执行之后的预测.</li>
+</ul>
+</li>
+<li><strong>b. 对于其他玩家</strong><ul>
+<li><strong>i. 外推法</strong> : 即航位推测法, 外推法把其它玩家/物体看作一个点，这个点开始的位置、方向、速度已知，沿着自己的弹道向前移动。因此，假设延时是100ms，最新的协议通知客户端这个玩家奔跑速度是500单位每秒，方向垂直于玩家视线，客户端就可以假设事实上这个玩家当前实际的位置已经向前移动了50个单位。客户端可以在这个外推的位置渲染这个玩家. 这个方法不适用于FPS游戏, 因为大部分FPS游戏采用非现实的玩家系统，玩家可以随时转弯，可以在任意角度作用不现实的加速度，因此外推法得到的结果经常是错误地</li>
+<li><strong>ii. 内推法</strong> : 即影子跟随法, 这种方法是用延时来换取平滑, 客户端物体实际移动位置总是滞后一段时间。举个例子，如果服务器每秒同步10次世界信息，客户端渲染的时候会有100ms滞后。这样，每一帧渲染的时候，我们通过最新收到的位置信息和前100ms的位置信息（或者上一帧渲染位置）进行差值得到结果.<ul>
+<li><strong>如果一个更新包没有收到，有2种处理方法</strong> : <ul>
+<li>用上面介绍的外推法（有可能产生较大误差）；</li>
+<li>保持玩家位于当前位置直到收到下一个更新包(会导致玩家移动顿挫)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>B. 延迟补偿</strong>, 步骤如下 : </p>
+<ol>
+<li>为玩家计算一个相当精确的延迟时间</li>
+<li>对每个玩家，从服务器历史信息中找一个已发送给这个玩家并且这个玩家已收到的的world update, 这个world update是在这个玩家将要执行这个movement command之前的world update</li>
+<li>对于每一个玩家，将其从上述的world update处拉回到这个玩家生成此user command的更新时间中执行用户命令。这个回退时间需要考虑到命令执行的时候的网络延时和插值量</li>
+<li>执行玩家命令（包括武器开火等。）</li>
+<li>将所有移动的、错位的玩家移动到他们当前正确位置</li>
+</ol>
+</li>
+</ul>
+<h1 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h1><p><a href="https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization" target="_blank" rel="noopener">原文出处</a></p>
+<p>原文标题 : <strong>Latency Compensating Methods in Client/Server In-game Protocol Design and Optimization</strong></p>
+<hr>
+<div id="toc" class="toc" style="display:none"><br>    <div id="toctitle"><br>        <h2 id="Contents">Contents</h2><br>    </div><br>    <ul><br>        <li class="toclevel-1 tocsection-1"><a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li><br>        <li class="toclevel-1 tocsection-2"><a href="#Basic_Architecture_of_a_Client_.2F_Server_Game"><span class="tocnumber">2</span> <span class="toctext">Basic Architecture of a Client / Server Game</span></a></li><br>        <li class="toclevel-1 tocsection-3"><a href="#Contents_of_the_User_Input_messages"><span class="tocnumber">3</span> <span class="toctext">Contents of the User Input messages</span></a></li><br>        <li class="toclevel-1 tocsection-4"><a href="#Client_Side_Prediction"><span class="tocnumber">4</span> <span class="toctext">Client Side Prediction</span></a></li><br>        <li class="toclevel-1 tocsection-5"><a href="#Client-Side_Prediction_of_Weapon_Firing"><span class="tocnumber">5</span> <span class="toctext">Client-Side Prediction of Weapon Firing</span></a></li><br>        <li class="toclevel-1 tocsection-6"><a href="#Umm.2C_This_is_a_Lot_of_Work"><span class="tocnumber">6</span> <span class="toctext">Umm, This is a Lot of Work</span></a></li><br>        <li class="toclevel-1 tocsection-7"><a href="#Display_of_Targets"><span class="tocnumber">7</span> <span class="toctext">Display of Targets</span></a></li><br>        <li class="toclevel-1 tocsection-8"><a href="#Lag_Compensation"><span class="tocnumber">8</span> <span class="toctext">Lag Compensation</span></a></li><br>        <li class="toclevel-1 tocsection-9"><a href="#Game_Design_Implications_of_Lag_Compensation"><span class="tocnumber">9</span> <span class="toctext">Game Design Implications of Lag Compensation</span></a></li><br>        <li class="toclevel-1 tocsection-10"><a href="#Conclusion"><span class="tocnumber">10</span> <span class="toctext">Conclusion</span></a></li><br>        <li class="toclevel-1 tocsection-11"><a href="#Footnotes"><span class="tocnumber">11</span> <span class="toctext">Footnotes</span></a></li><br>    </ul><br></div>
+
+<p></p><h2 id="Overview">Overview</h2><p></p>
+<p>Dsigning first-person action games for Internet play is a challenging process. Having robust on-line gameplay in your action title, however, is becoming essential to the success and longevity of the title. In addition, the PC space is well known for requiring developers to support a wide variety of customer setups. Often, customers are running on less than state-of-the-art hardware. The same holds true for their network connections.<br></p><p>While broadband has been held out as a panacea for all of the current woes of on-line gaming, broadband is not a simple solution allowing developers to ignore the implications of latency and other network factors in game designs. It will be some time before broadband truly becomes adopted in the United States, and much longer before it can be assumed to exist for your clients in the rest of the world. In addition, there are a lot of poor broadband solutions, where users may occasionally have high bandwidth, but more often than not also have significant latency and packet loss in their connections.<br></p><p>Your game must behave well in this world. This discussion will give you a sense of some of the tradeoffs required to deliver a cutting-edge action experience on the Internet. The discussion will provide some background on how client / server architectures work in many on-line action games. In addition, the discussion will show how predictive modeling can be used to mask the effects of latency. Finally, the discussion will describe a specific mechanism, lag compensation, for allowing the game to compensate for connection quality.<br></p>
+
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/01/06/Source引擎多人游戏网络设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -851,7 +1055,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_pairs_ipairs/">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_cpp_bind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="no5ix">
@@ -870,184 +1074,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/11/11/lua_pairs_ipairs/" itemprop="url">Lua中ipairs和pairs的区别与使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-11T19:29:22+00:00">
-                2015-11-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Script/" itemprop="url" rel="index">
-                    <span itemprop="name">Script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-
-      
-      
-
-      
-        
-          <p>关于ipairs()和pairs(),Lua官方手册是这样说明的：</p>
-<p><strong>pairs (t)</strong></p>
-<p>If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call.</p>
-<p>Otherwise, returns three values: the next function, the table t, and nil, so that the construction</p>
-<pre><code>` for k,v in pairs(t) do body end`
-</code></pre><p>will iterate over all key–value pairs of table t.</p>
-<p>See function next for the caveats of modifying the table during its traversal.</p>
-<p><strong>ipairs (t)</strong></p>
-<p>If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call.</p>
-<p>Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction</p>
-<pre><code>` for i,v in ipairs(t) do body end`
-</code></pre><p>will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table.</p>
-<p>根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。</p>
-<p><strong>. . .</strong>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-
-
-      
-
-    
-      <footer class="post-footer">
-        
-
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </footer>
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/11/11/lua_cpp_toluapp_tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="no5ix">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="烫">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/11/lua_cpp_toluapp_tutorial/" itemprop="url">tolua++安装</a></h1>
+                <a class="post-title-link" href="/2015/11/11/lua_cpp_bind/" itemprop="url">C++与Lua本质原始交互API</a></h1>
         
 
         <div class="post-meta">
@@ -1135,14 +1162,6 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         
           <p>我们用一个例子来说明.</p>
-<p>本文环境为 : </p>
-<ul>
-<li>ubuntu1404</li>
-<li>g++ 4.8.4</li>
-<li>python</li>
-<li>git</li>
-<li>lua5.1( 因为tolua++只支持到5.1, 安装5.1教程看 <a href="/2015/11/08/lua_install_tutorial/" title="Lua的win和linux环境简单安装">Lua的win和linux环境简单安装</a> )</li>
-</ul>
 <p><strong>. . .</strong>
           <!--noindex-->
           
@@ -1257,7 +1276,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">263</span>
+                <span class="site-state-item-count">264</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[nvt]]></title>
+    <url>%2F2024%2F08%2F29%2Fna_vlog_text%2F</url>
+
+    <encrypted>1</encrypted>
+
+    <content type="text"><![CDATA[. . . 20240829 为什么30多岁放弃当前的一切去美国: 这个没什么好说的, 每个人各不相同 为什么不早点去? 为什么不20几岁就去: 这个对于一个十八线小城市的农村人来说有点难了, 估计面签都面不过 什么时候有这个想法的: 我可能从小就有这个想法了? 从小就喜欢到处闯, 北上广深杭成苏除了北和苏基本都, 我知道有挺多人想出去闯的, 但是基于各种原因没有去做, 或者不敢去做, 这一次我算是他们的闯替吧, 有类似想法的朋友可以参考我一路上的经历, 也算是我一路上的各种经历的vlog记录, 但愿以后老了再看会微笑着不后悔吧 做了的: 有一定的服务器基础, 想转java, 所以之前找了一些开源的java网站成品项目看了些源码, 基本上找的都是技术选型为:后端java(springboot)+前端js(react) 目前过完了java语言和spring+springboot 也看了一本北美的系统设计的相关的书, 为了尽快看完, 看的中文版, 之后到美国练好口语, 再看英语版背一下 之后查阅面签F1签证相关面试资料,模拟签证面试, 写了很长的英文稿子, 问AI弄了些回答, 然后工具转成语音来复习, 去北京面签的, 住得远当天都没睡着复习到4点半, 5点半出发了, 这就是那天早上的出发时候的视频, 目前在过算法, 很多年没刷题了, 用的代码随想录来复习, 目前复习到了二叉树 后来8月查阅飞机票以及落地地点,目前买好了10.15到洛杉矶的飞机票, 2500元而且只用国内转一次机行李直达还可以中转厦门玩玩 之后做: 提前查美国租房信息,找工信息,预估耗时一周 穿插学习算法+JVM+java面试题+英语面试口语(systemdesign+behavior question), 耗时预估一个月 入境后租房,买电话卡,预估耗时2-5日 投简历找工,社交练口语 不确定什么时候能找到工作, 找不到会找点兼职苟着继续找工]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+      <tags>
+        <tag>Youtube</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[algo na]]></title>
     <url>%2F2024%2F08%2F15%2Falgo_na%2F</url>
 
@@ -1142,20 +1156,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Etcd安装备忘]]></title>
-    <url>%2F2019%2F06%2F27%2Fhello_etcd%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[参考https://skyao.gitbooks.io/learning-etcd3/content/installation/linux_single.html 下载/配置简而言之就是 : 先去 etcd 的 github找到他的release, 然后复制链接, 下载然后配置 注： 以 etcd-v3.2.1 为例，后续更新版本时可能细节有所不同。 . . . 下载执行下面的命令，下载(大概10M)解压即可，无需安装： 12345678910curl -L https://github.com/coreos/etcd/releases/download/v3.2.1/etcd-v3.2.1-linux-amd64.tar.gz -o etcd-v3.2.1-linux-amd64.tar.gztar xzvf etcd-v3.2.1-linux-amd64.tar.gzmv etcd-v3.2.1-linux-amd64 etcdcd etcd./etcd --versionetcd Version: 3.2.1Git SHA: 61fc123Go Version: go1.8.3Go OS/Arch: linux/amd64 安装目录文件列表如下： 123$ lsdefault.etcd etcd README-etcdctl.md READMEv2-etcdctl.mdDocumentation etcdctl README.md 运行直接运行命令 ./etcd 就可以启动了，非常简单。 默认使用2379端口为客户端提供通讯， 并使用端口2380来进行服务器间通讯。 配置为了方便使用，将 etcd 加入 PATH，另外设置 ETCDCTL_API 为3(后面解释)。 在 /etc/profile 中加入以下内容： 123# etcdexport PATH=/home/sky/work/soft/etcd:$PATHexport ETCDCTL_API=3 然后执行 source /etc/profile 重新加载。 客户端访问配置etcdctletcdctl 是 etcd 的客户端命令行。 特别提醒：使用 etcdctl 前，务必设置环境变量 ETCDCTL_API=3 ! 注意：如果不设置 ETCDCTL_API=3，则默认是的API版本是2： 123$ etcdctl versionetcdctl version: 3.2.1API version: 2 正确设置后，API版本变成3： 123$ etcdctl versionetcdctl version: 3.2.1API version: 3.2 使用etcdctl通过下面的put和get命令来验证连接并操作etcd： 12345$ ./etcdctl put aaa 1OK$ ./etcdctl get aaaaaa1 总结上面操作完成之后，就有一个可运行的简单 etcd 服务器和一个可用的 etcdctl 客户端。]]></content>
-      <categories>
-        <category>Misc</category>
-      </categories>
-      <tags>
-        <tag>Etcd</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Linux Go安装备忘]]></title>
     <url>%2F2019%2F06%2F27%2Flinux_install_go%2F</url>
 
@@ -1167,6 +1167,20 @@
       </categories>
       <tags>
         <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Etcd安装备忘]]></title>
+    <url>%2F2019%2F06%2F27%2Fhello_etcd%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[参考https://skyao.gitbooks.io/learning-etcd3/content/installation/linux_single.html 下载/配置简而言之就是 : 先去 etcd 的 github找到他的release, 然后复制链接, 下载然后配置 注： 以 etcd-v3.2.1 为例，后续更新版本时可能细节有所不同。 . . . 下载执行下面的命令，下载(大概10M)解压即可，无需安装： 12345678910curl -L https://github.com/coreos/etcd/releases/download/v3.2.1/etcd-v3.2.1-linux-amd64.tar.gz -o etcd-v3.2.1-linux-amd64.tar.gztar xzvf etcd-v3.2.1-linux-amd64.tar.gzmv etcd-v3.2.1-linux-amd64 etcdcd etcd./etcd --versionetcd Version: 3.2.1Git SHA: 61fc123Go Version: go1.8.3Go OS/Arch: linux/amd64 安装目录文件列表如下： 123$ lsdefault.etcd etcd README-etcdctl.md READMEv2-etcdctl.mdDocumentation etcdctl README.md 运行直接运行命令 ./etcd 就可以启动了，非常简单。 默认使用2379端口为客户端提供通讯， 并使用端口2380来进行服务器间通讯。 配置为了方便使用，将 etcd 加入 PATH，另外设置 ETCDCTL_API 为3(后面解释)。 在 /etc/profile 中加入以下内容： 123# etcdexport PATH=/home/sky/work/soft/etcd:$PATHexport ETCDCTL_API=3 然后执行 source /etc/profile 重新加载。 客户端访问配置etcdctletcdctl 是 etcd 的客户端命令行。 特别提醒：使用 etcdctl 前，务必设置环境变量 ETCDCTL_API=3 ! 注意：如果不设置 ETCDCTL_API=3，则默认是的API版本是2： 123$ etcdctl versionetcdctl version: 3.2.1API version: 2 正确设置后，API版本变成3： 123$ etcdctl versionetcdctl version: 3.2.1API version: 3.2 使用etcdctl通过下面的put和get命令来验证连接并操作etcd： 12345$ ./etcdctl put aaa 1OK$ ./etcdctl get aaaaaa1 总结上面操作完成之后，就有一个可运行的简单 etcd 服务器和一个可用的 etcdctl 客户端。]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+      <tags>
+        <tag>Etcd</tag>
       </tags>
   </entry>
   <entry>
@@ -2545,9 +2559,9 @@
         <category>DB</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
         <tag>MongoDB</tag>
         <tag>Redis</tag>
+        <tag>MySQL</tag>
         <tag>Memcached</tag>
       </tags>
   </entry>
@@ -2780,16 +2794,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
-    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
+    <title><![CDATA[C++与Lua本质原始交互API]]></title>
+    <url>%2F2015%2F11%2F11%2Flua_cpp_bind%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
+    <content type="text"><![CDATA[我们用一个例子来说明. . . . 创建c++主程序首先, 我们需要创建一个 C++ 的主程序，以便同 Lua 进行通信. 如下 : lua_test.cpp123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475extern "C" &#123; #include "lua.h" #include "lualib.h" #include "lauxlib.h"&#125;; // 注意 : 这个extern "C" &#123;&#125; 非常重要, 不然会找不到相关库函数#include &lt;iostream&gt;#include &lt;lua.hpp&gt;extern "C" &#123; static int l_cppfunction(lua_State *L) &#123; double arg = luaL_checknumber(L,1); lua_pushnumber(L, arg * 0.5); return 1; &#125;&#125;using namespace std;int main(int argc, const char * argv[])&#123; lua_State *L; L = luaL_newstate(); cout &lt;&lt; "&gt;&gt; 载入（可选）标准库，以便使用打印功能" &lt;&lt; endl; luaL_openlibs(L); cout &lt;&lt; "&gt;&gt; 载入文件，暂不执行" &lt;&lt; endl; if (luaL_loadfile(L, "luascript.lua")) &#123; cerr &lt;&lt; "载入文件出现错误" &lt;&lt; endl; cerr &lt;&lt; lua_tostring(L, -1) &lt;&lt; endl; lua_pop(L,1); &#125; cout &lt;&lt; "&gt;&gt; 从 C++ 写入数据 cppvar" &lt;&lt; endl; lua_pushnumber(L, 1.1); lua_setglobal(L, "cppvar"); cout &lt;&lt; "&gt;&gt; 执行 lua 文件" &lt;&lt; endl &lt;&lt; endl; if (lua_pcall(L,0, LUA_MULTRET, 0)) &#123; cerr &lt;&lt; "执行过程中出现错误" &lt;&lt; endl; cerr &lt;&lt; lua_tostring(L, -1) &lt;&lt; endl; lua_pop(L,1); &#125; cout &lt;&lt; "&gt;&gt; 从 Lua 读取全局变量 luavar 到 C++" &lt;&lt; endl; lua_getglobal(L, "luavar"); double luavar = lua_tonumber(L,-1); lua_pop(L,1); cout &lt;&lt; "C++ 从 Lua 读取到的 luavar = " &lt;&lt; luavar &lt;&lt; endl &lt;&lt; endl; cout &lt;&lt; "&gt;&gt; 从 C++ 执行 Lua 的方法 myfunction" &lt;&lt; endl; lua_getglobal(L, "myluafunction"); lua_pushnumber(L, 5); lua_pcall(L, 1, 1, 0); cout &lt;&lt; "函数返回值是：" &lt;&lt; lua_tostring(L, -1) &lt;&lt; endl &lt;&lt; endl; lua_pop(L,1); cout &lt;&lt; "&gt;&gt; 从 Lua 执行 C++ 的方法" &lt;&lt; endl; cout &lt;&lt; "&gt;&gt;&gt;&gt; 首先在 Lua 中注册 C++ 方法" &lt;&lt; endl; lua_pushcfunction(L,l_cppfunction); lua_setglobal(L, "cppfunction"); cout &lt;&lt; "&gt;&gt;&gt;&gt; 调用 Lua 函数以执行 C++ 函数" &lt;&lt; endl; lua_getglobal(L, "myfunction"); lua_pushnumber(L, 5); lua_pcall(L, 1, 1, 0); cout &lt;&lt; "函数返回值是：" &lt;&lt; lua_tonumber(L, -1) &lt;&lt; endl &lt;&lt; endl; lua_pop(L,1); cout &lt;&lt; "&gt;&gt; 释放 Lua 资源" &lt;&lt; endl; lua_close(L); return 0;&#125; 编译命令 : g++ lua_test.cpp -o ltest -llua -ldl 创建Lua文件其次，是 lua 文件，我们将它命名为 luascript.lua luascript.lua1234567891011print("Hello from Lua")print("Lua code is capable of reading the value set from C++", cppvar)luavar = cppvar * 3function myluafunction(times) return string.rep("(-)", times)endfunction myfunction(arg) return cppfunction(arg)end 打印结果运行 cpp 文件，结果如下： &gt;&gt; 载入（可选）标准库，以便使用打印功能 &gt;&gt; 载入文件，暂不执行 &gt;&gt; 从 C++ 写入数据 cppvar &gt;&gt; 执行 lua 文件 Hello from Lua Lua code is capable of reading the value set from C++ 1.1 &gt;&gt; 从 Lua 读取全局变量 luavar 到 C++ C++ 从 Lua 读取到的 luavar = 3.3 &gt;&gt; 从 C++ 执行 Lua 的方法 myfunction 函数返回值是：(-)(-)(-)(-)(-) &gt;&gt; 从 Lua 执行 C++ 的方法 &gt;&gt;&gt;&gt; 首先在 Lua 中注册 C++ 方法 &gt;&gt;&gt;&gt; 调用 Lua 函数以执行 C++ 函数 函数返回值是：2.5 &gt;&gt; 释放 Lua 资源 参考参考]]></content>
       <categories>
         <category>Script</category>
       </categories>
       <tags>
+        <tag>CPP</tag>
         <tag>Lua</tag>
       </tags>
   </entry>
@@ -2809,17 +2824,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[C++与Lua本质原始交互API]]></title>
-    <url>%2F2015%2F11%2F11%2Flua_cpp_bind%2F</url>
+    <title><![CDATA[Lua中ipairs和pairs的区别与使用]]></title>
+    <url>%2F2015%2F11%2F11%2Flua_pairs_ipairs%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[我们用一个例子来说明. . . . 创建c++主程序首先, 我们需要创建一个 C++ 的主程序，以便同 Lua 进行通信. 如下 : lua_test.cpp123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475extern "C" &#123; #include "lua.h" #include "lualib.h" #include "lauxlib.h"&#125;; // 注意 : 这个extern "C" &#123;&#125; 非常重要, 不然会找不到相关库函数#include &lt;iostream&gt;#include &lt;lua.hpp&gt;extern "C" &#123; static int l_cppfunction(lua_State *L) &#123; double arg = luaL_checknumber(L,1); lua_pushnumber(L, arg * 0.5); return 1; &#125;&#125;using namespace std;int main(int argc, const char * argv[])&#123; lua_State *L; L = luaL_newstate(); cout &lt;&lt; "&gt;&gt; 载入（可选）标准库，以便使用打印功能" &lt;&lt; endl; luaL_openlibs(L); cout &lt;&lt; "&gt;&gt; 载入文件，暂不执行" &lt;&lt; endl; if (luaL_loadfile(L, "luascript.lua")) &#123; cerr &lt;&lt; "载入文件出现错误" &lt;&lt; endl; cerr &lt;&lt; lua_tostring(L, -1) &lt;&lt; endl; lua_pop(L,1); &#125; cout &lt;&lt; "&gt;&gt; 从 C++ 写入数据 cppvar" &lt;&lt; endl; lua_pushnumber(L, 1.1); lua_setglobal(L, "cppvar"); cout &lt;&lt; "&gt;&gt; 执行 lua 文件" &lt;&lt; endl &lt;&lt; endl; if (lua_pcall(L,0, LUA_MULTRET, 0)) &#123; cerr &lt;&lt; "执行过程中出现错误" &lt;&lt; endl; cerr &lt;&lt; lua_tostring(L, -1) &lt;&lt; endl; lua_pop(L,1); &#125; cout &lt;&lt; "&gt;&gt; 从 Lua 读取全局变量 luavar 到 C++" &lt;&lt; endl; lua_getglobal(L, "luavar"); double luavar = lua_tonumber(L,-1); lua_pop(L,1); cout &lt;&lt; "C++ 从 Lua 读取到的 luavar = " &lt;&lt; luavar &lt;&lt; endl &lt;&lt; endl; cout &lt;&lt; "&gt;&gt; 从 C++ 执行 Lua 的方法 myfunction" &lt;&lt; endl; lua_getglobal(L, "myluafunction"); lua_pushnumber(L, 5); lua_pcall(L, 1, 1, 0); cout &lt;&lt; "函数返回值是：" &lt;&lt; lua_tostring(L, -1) &lt;&lt; endl &lt;&lt; endl; lua_pop(L,1); cout &lt;&lt; "&gt;&gt; 从 Lua 执行 C++ 的方法" &lt;&lt; endl; cout &lt;&lt; "&gt;&gt;&gt;&gt; 首先在 Lua 中注册 C++ 方法" &lt;&lt; endl; lua_pushcfunction(L,l_cppfunction); lua_setglobal(L, "cppfunction"); cout &lt;&lt; "&gt;&gt;&gt;&gt; 调用 Lua 函数以执行 C++ 函数" &lt;&lt; endl; lua_getglobal(L, "myfunction"); lua_pushnumber(L, 5); lua_pcall(L, 1, 1, 0); cout &lt;&lt; "函数返回值是：" &lt;&lt; lua_tonumber(L, -1) &lt;&lt; endl &lt;&lt; endl; lua_pop(L,1); cout &lt;&lt; "&gt;&gt; 释放 Lua 资源" &lt;&lt; endl; lua_close(L); return 0;&#125; 编译命令 : g++ lua_test.cpp -o ltest -llua -ldl 创建Lua文件其次，是 lua 文件，我们将它命名为 luascript.lua luascript.lua1234567891011print("Hello from Lua")print("Lua code is capable of reading the value set from C++", cppvar)luavar = cppvar * 3function myluafunction(times) return string.rep("(-)", times)endfunction myfunction(arg) return cppfunction(arg)end 打印结果运行 cpp 文件，结果如下： &gt;&gt; 载入（可选）标准库，以便使用打印功能 &gt;&gt; 载入文件，暂不执行 &gt;&gt; 从 C++ 写入数据 cppvar &gt;&gt; 执行 lua 文件 Hello from Lua Lua code is capable of reading the value set from C++ 1.1 &gt;&gt; 从 Lua 读取全局变量 luavar 到 C++ C++ 从 Lua 读取到的 luavar = 3.3 &gt;&gt; 从 C++ 执行 Lua 的方法 myfunction 函数返回值是：(-)(-)(-)(-)(-) &gt;&gt; 从 Lua 执行 C++ 的方法 &gt;&gt;&gt;&gt; 首先在 Lua 中注册 C++ 方法 &gt;&gt;&gt;&gt; 调用 Lua 函数以执行 C++ 函数 函数返回值是：2.5 &gt;&gt; 释放 Lua 资源 参考参考]]></content>
+    <content type="text"><![CDATA[关于ipairs()和pairs(),Lua官方手册是这样说明的： pairs (t) If t has a metamethod __pairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: the next function, the table t, and nil, so that the construction ` for k,v in pairs(t) do body end` will iterate over all key–value pairs of table t. See function next for the caveats of modifying the table during its traversal. ipairs (t) If t has a metamethod __ipairs, calls it with t as argument and returns the first three results from the call. Otherwise, returns three values: an iterator function, the table t, and 0, so that the construction ` for i,v in ipairs(t) do body end` will iterate over the pairs (1,t[1]), (2,t[2]), …, up to the first integer key absent from the table. 根据官方手册的描述，pairs会遍历表中所有的key-value值，而pairs会根据key的数值从1开始加1递增遍历对应的table[i]值，直到出现第一个不是按1递增的数值时候退出。 . . . 例子下面我们以例子说明一下吧1234stars = &#123;[1] = "Sun", [2] = "Moon", [5] = 'Earth'&#125;for i, v in pairs(stars) do print(i, v)end 使用pairs()将会遍历表中所有的数据，输出结果是： 1 Sun 2 Moon 5 Earth 如果使用ipairs（）的话， 12345for i, v in ipairs(stars) do print(i, v)end 当i的值遍历到第三个元素时，i的值为5，此时i并不是上一个次i值（2）的+1递增，所以遍历结束，结果则会是： 1 Sun 2 Moon ipairs()和pairs()的区别就是这么简单。 还有一个要注意的是pairs()的一个问题，用pairs()遍历是[key]-[value]形式的表是随机的，跟key的哈希值有关系。看以下这个例子： 1234567stars = &#123;[1] = "Sun", [2] = "Moon", [3] = "Earth", [4] = "Mars", [5] = "Venus"&#125;for i, v in pairs(stars) do print(i, v)end 结果是： 2 Moon 3 Earth 1 Sun 4 Mars 5 Venus 并没有按照其在表中的顺序输出。 但是如果是这样定义表stars的话 stars = {&quot;Sun&quot;, &quot;Moon&quot;, “Earth”, &quot;Mars&quot;, &quot;Venus&quot;} 结果则会是 1 Sun 2 Moon 3 Earth 4 Mars 5 Venus 你清楚了吗？:)]]></content>
       <categories>
         <category>Script</category>
       </categories>
       <tags>
-        <tag>CPP</tag>
         <tag>Lua</tag>
       </tags>
   </entry>
@@ -2992,6 +3006,21 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[redis和hiredis安装教程]]></title>
+    <url>%2F2015%2F07%2F11%2Fredis_hiredis_install_tutorial%2F</url>
+
+    <encrypted>0</encrypted>
+
+    <content type="text"><![CDATA[在ubuntu上 redis安装 : sudo apt-get install redis-server hiredis安装 : 先到 https://github.com/redis/hiredis 下载 hiredis , 然后 sudo make sudo make install sudo ldconfig]]></content>
+      <categories>
+        <category>DB</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+        <tag>NoSQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python和lua数据类型的比较]]></title>
     <url>%2F2015%2F07%2F11%2Fpython%E5%92%8Clua%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%AF%94%E8%BE%83%2F</url>
 
@@ -3022,18 +3051,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[redis和hiredis安装教程]]></title>
-    <url>%2F2015%2F07%2F11%2Fredis_hiredis_install_tutorial%2F</url>
+    <title><![CDATA[socket可读可写条件与非阻塞connect或accept浅析]]></title>
+    <url>%2F2015%2F06%2F22%2Fsocket%E5%8F%AF%E8%AF%BB%E5%8F%AF%E5%86%99%E6%9D%A1%E4%BB%B6%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9Econnect%E6%88%96accept%E6%B5%85%E6%9E%90%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[在ubuntu上 redis安装 : sudo apt-get install redis-server hiredis安装 : 先到 https://github.com/redis/hiredis 下载 hiredis , 然后 sudo make sudo make install sudo ldconfig]]></content>
+    <content type="text"><![CDATA[socket可读的条件: socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0 给监听套接字准备好新连接 有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除; . . . socket可写的条件: socket的发送缓冲区中的可用空间字节数大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用SO_SNDLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为2048 该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。 使用非阻塞connect的套接字已建立连接, 或者connect已经以失败告终 有一个socket异常错误条件待处理.对于这样的socket的写操作将不会阻塞并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可以通过指定socket选项SO_ERROR调用getsockopt函数来取得并清除; 非阻塞connect/accept相关上述的各种条件可以大体总结为下图 注意 : 当socket异常错误的时候socket是可读并可写的, 所以在非阻塞connect(判断是否可写)/accept(判断是否可读)的时候要特别注意这种情况, 要用getsockopt函数, 使用SO_ERROR选项来检查处理.]]></content>
       <categories>
-        <category>DB</category>
+        <category>NP</category>
       </categories>
       <tags>
-        <tag>Redis</tag>
-        <tag>NoSQL</tag>
+        <tag>NP</tag>
       </tags>
   </entry>
   <entry>
@@ -3049,20 +3077,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>noodle</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[socket可读可写条件与非阻塞connect或accept浅析]]></title>
-    <url>%2F2015%2F06%2F22%2Fsocket%E5%8F%AF%E8%AF%BB%E5%8F%AF%E5%86%99%E6%9D%A1%E4%BB%B6%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9Econnect%E6%88%96accept%E6%B5%85%E6%9E%90%2F</url>
-
-    <encrypted>0</encrypted>
-
-    <content type="text"><![CDATA[socket可读的条件: socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用SO_RCVLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1. 该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0 给监听套接字准备好新连接 有一个socket有异常错误条件待处理.对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除; . . . socket可写的条件: socket的发送缓冲区中的可用空间字节数大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用SO_SNDLOWAT这个socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为2048 该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。 使用非阻塞connect的套接字已建立连接, 或者connect已经以失败告终 有一个socket异常错误条件待处理.对于这样的socket的写操作将不会阻塞并且返回一个错误(-1),errno则设置成明确的错误条件.这些待处理的错误也可以通过指定socket选项SO_ERROR调用getsockopt函数来取得并清除; 非阻塞connect/accept相关上述的各种条件可以大体总结为下图 注意 : 当socket异常错误的时候socket是可读并可写的, 所以在非阻塞connect(判断是否可写)/accept(判断是否可读)的时候要特别注意这种情况, 要用getsockopt函数, 使用SO_ERROR选项来检查处理.]]></content>
-      <categories>
-        <category>NP</category>
-      </categories>
-      <tags>
-        <tag>NP</tag>
       </tags>
   </entry>
   <entry>
@@ -3455,12 +3469,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[观察者模式]]></title>
-    <url>%2F2015%2F01%2F07%2Fobserver_pattern%2F</url>
+    <title><![CDATA[工厂模式]]></title>
+    <url>%2F2015%2F01%2F07%2Ffactory_pattern%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[概述一些面向对象的编程方式，提供了一种构建对象间复杂网络互连的能力。当对象们连接在一起时，它们就可以相互提供服务和信息。 通常来说，当某个对象的状态发生改变时，你仍然需要对象之间能互相通信。但是出于各种原因，你也许并不愿意因为代码环境的改变而对代码做大的修改。也许，你只想根据你的具体应用环境而改进通信代码。或者，你只想简单的重新构造通信代码来避免类和类之间的相互依赖与相互从属。 问题当一个对象的状态发生改变时，你如何通知其他对象？是否需要一个动态方案――一个就像允许脚本的执行一样，允许自由连接的方案？ 解决方案观察者模式 ：定义对象间的一种一对多的依赖关系, 当一个对象的状态发生改变时, 所有依赖于它的对象都得到通知并被自动更新。 观察者模式允许一个对象关注其他对象的状态，并且，观察者模式还为被观测者提供了一种观测结构，或者说是一个主体和一个客体。主体，也就是被观测者，可以用来联系所有的观测它的观测者。客体，也就是观测者，用来接受主体状态的改变 观测就是一个可被观测的类（也就是主题）与一个或多个观测它的类（也就是客体）的协作。不论什么时候，当被观测对象的状态变化时，所有注册过的观测者都会得到通知。 观察者模式将被观测者（主体）从观测者（客体）种分离出来。这样，每个观测者都可以根据主体的变化分别采取各自的操作。（观察者模式和 Publish/Subscribe 模式一样，也是一种有效描述对象间相互作用的模式。）观察者模式灵活而且功能强大。对于被观测者来说，那些查询哪些类需要自己的状态信息和每次使用那些状态信息的额外资源开销已经不存在了。另外，一个观测者可以在任何合适的时候进行注册和取消注册。你也可以定义多个具体的观测类，以便在实际应用中执行不同的操作。 将一个系统分割成一系列相互协作的类有一个常见的副作用：需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，因为这样降低了它们的可重用性。 适用性在以下任一情况下可以使用观察者模式: 当一个抽象模型有两个方面, 其中一个方面依赖于另一方面。将这二者封装在独立的对象中以使它们可以各自独立地改变和复用。 当对一个对象的改变需要同时改变其它对象 , 而不知道具体有多少对象有待改变。 当一个对象必须通知其它对象，而它又不能假定其它对象是谁。换言之 , 你不希望这些对象是紧密耦合的。 结构 模式的组成观察者模式包含如下角色： 目标（Subject）: 目标知道它的观察者。可以有任意多个观察者观察同一个目标。 提供注册和删除观察者对象的接口。 具体目标（ConcreteSubject）: 将有关状态存入各 ConcreteObserver 对象。 观察者 (Observer): 为那些在目标发生改变时需获得通知的对象定义一个更新接口。当它的状态发生改变时, 向它的各个观察者发出通知。 具体观察者 (ConcreteObserver): 维护一个指向 ConcreteSubject 对象的引用。存储有关状态，这些状态应与目标的状态保持一致。实现 O b s e r v e r 的更新接口以使自身状态与目标的状态保持一致。 观察者模式的优缺点Observer 模式允许你独立的改变目标和观察者。你可以单独复用目标对象而无需同时复用其观察者, 反之亦然。它也使你可以在不改动目标和其他的观察者的前提下增加观察者。 下面是观察者模式其它一些优点 : 观察者模式可以实现表示层和数据逻辑层的分离, 并定义了稳定的消息更新传递机制，抽象了更新接口，使得可以有各种各样不同的表示层作为具体观察者角色。 在观察目标和观察者之间建立一个抽象的耦合 ：一个目标所知道的仅仅是它有一系列观察者 , 每个都符合抽象的 Observer 类的简单接口。目标不知道任何一个观察者属于哪一个具体的类。这样目标和观察者之间的耦合是抽象的和最小的。因为目标和观察者不是紧密耦合的, 它们可以属于一个系统中的不同抽象层次。一个处于较低层次的目标对象可与一个处于较高层次的观察者通信并通知它 , 这样就保持了系统层次的完整。如果目标和观察者混在一块 , 那么得到的对象要么横贯两个层次 (违反了层次性), 要么必须放在这两层的某一层中 (这可能会损害层次抽象)。 支持广播通信 : 不像通常的请求, 目标发送的通知不需指定它的接收者。通知被自动广播给所有已向该目标对象登记的有关对象。目标对象并不关心到底有多少对象对自己感兴趣 ; 它唯一的责任就是通知它的各观察者。这给了你在任何时刻增加和删除观察者的自由。处理还是忽略一个通知取决于观察者。 观察者模式符合 “开闭原则” 的要求。 观察者模式的缺点 : 如果一个观察目标对象有很多直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。 如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。 观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。 意外的更新 因为一个观察者并不知道其它观察者的存在 , 它可能对改变目标的最终代价一无所知。在目标上一个看似无害的的操作可能会引起一系列对观察者以及依赖于这些观察者的那些对象的更新。此外 , 如果依赖准则的定义或维护不当，常常会引起错误的更新 , 这种错误通常很难捕捉。 简单的更新协议不提供具体细节说明目标中什么被改变了 , 这就使得上述问题更加严重。如果没有其他协议帮助观察者发现什么发生了改变，它们可能会被迫尽力减少改变。 实现在 php 的 SPL 支持观察者模式，SPL 提供了 SplSubject 和 SplObserver 接口。 SplSubject 接口提供了 attach()、detach()、notify() 三个方法。而 SplObserver 接口则提供了 update() 方法。 SplSubject 派生类维护了一个状态，当状态发生变化时 - 比如属性变化等，就会调用 notify() 方法，这时，之前在 attach() 方法中注册的所有 SplObserver 实例的 update() 方法就会被调用。接口定义如下： 1234567891011121314&lt;?php /** * 这一模式的概念是 SplSubject 类维护了一个特定状态，当这个状态发生变化时，它就会调用 notify() 方法。 * 调用 notify() 方法时，所有之前使用 attach() 方法注册的 SplObserver 实例的 update 方法都会被调用。 * */ interface SplSubject&#123; public function attach(SplObserver $observer);// 注册观察者 public function detach(SplObserver $observer);// 释放观察者 public function notify();// 通知所有注册的观察者 &#125; interface SplObserver&#123; public function update(SplSubject $subject);// 观察者进行更新状态 &#125; 实现代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667&lt;?php /** * 具体目标 * */ class ConcreteSubject implements SplSubject &#123; private $observers, $value; public function __construct() &#123; $this-&gt;observers = array(); &#125; public function attach(SplObserver $observer) &#123; // 注册观察者 $this-&gt;observers[] = $observer; &#125; public function detach(SplObserver $observer) &#123; // 释放观察者 if($idx = array_search($observer,$this-&gt;observers,true)) &#123; unset($this-&gt;observers[$idx]); &#125; &#125; public function notify() &#123; // 通知所有观察者 foreach($this-&gt;observers as $observer) &#123; $observer-&gt;update($this); &#125; &#125; public function setValue($value) &#123; $this-&gt;value = $value; $this-&gt;notify(); &#125; public function getValue() &#123; return $this-&gt;value; &#125; &#125; /** * 具体观察者 * */ class ConcreteObserver1 implements SplObserver &#123; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver1 value is',$subject-&gt;getValue(), '&lt;br&gt;'; &#125; &#125; /** * 具体观察者 * */ class ConcreteObserver2 implements SplObserver &#123; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver2 value is', $subject-&gt;getValue(), '&lt;br&gt;'; &#125; &#125; $subject = new ConcreteSubject(); $observer1 = new ConcreteObserver1(); $observer2 = new ConcreteObserver2(); $subject-&gt;attach($observer1); $subject-&gt;attach($observer2); $subject-&gt;setValue(5); ?&gt; 我们扩展上面的例子，根据目标状态而更新不同的观察者： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136&lt;?php /** * 具体目标 * */ class ConcreteSubject implements SplSubject &#123; private $observers, $_state; public function __construct() &#123; $this-&gt;observers = array(); &#125; /** * 注册观察者 * * @param SplObserver $observer */ public function attach(SplObserver $observer) &#123; $this-&gt;observers[] = $observer; &#125; /** * // 释放观察者 * * @param SplObserver $observer */ public function detach(SplObserver $observer) &#123; if($idx = array_search($observer,$this-&gt;observers,true)) &#123; unset($this-&gt;observers[$idx]); &#125; &#125; /** * 通知所有观察者 * */ public function notify() &#123; /** * 只要状态改变，就通知观察者 */ foreach($this-&gt;observers as $observer) &#123; if ($observer-&gt;getState() == $this-&gt;_state) &#123; $observer-&gt;update($this); &#125; &#125; &#125; /** * 设置状态 * * @param unknown_type $state */ public function setState($state) &#123; $this-&gt;_state = $state; $this-&gt;notify(); &#125; public function getState() &#123; return $this-&gt;_state; &#125; &#125; /** * 抽象观摩者 * */ abstract class observer&#123; private $_state; function __construct($state) &#123; $this-&gt;_state = $state; &#125; public function setState($state) &#123; $this-&gt;_state = $state; $this-&gt;notify(); &#125; public function getState() &#123; return $this-&gt;_state; &#125; &#125; /** * 具体观察者 1 * */ class ConcreteObserver1 extends observer implements SplObserver &#123; function __construct($state) &#123; parent::__construct($state); &#125; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver1 state is',$subject-&gt;getState(), '&lt;br&gt;'; &#125; &#125; /** * 具体观察者 2 * */ class ConcreteObserver2 extends observer implements SplObserver &#123; function __construct($state) &#123; parent::__construct($state); &#125; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver2 state is', $subject-&gt;getState(), '&lt;br&gt;'; &#125; &#125; /** * 具体观察者 3 * */ class ConcreteObserver3 extends observer implements SplObserver &#123; function __construct($state) &#123; parent::__construct($state); &#125; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver3 state is', $subject-&gt;getState(), '&lt;br&gt;'; &#125; &#125; $subject = new ConcreteSubject(); $observer1 = new ConcreteObserver1(1); $observer2 = new ConcreteObserver2(1); $observer3 = new ConcreteObserver3(2); $subject-&gt;attach($observer1); $subject-&gt;attach($observer2); $subject-&gt;attach($observer3); echo 'Subject state is 1', '&lt;br&gt;'; $subject-&gt;setState(1); echo 'Subject state is 2', '&lt;br&gt;'; $subject-&gt;setState(2); ?&gt; 与其他相关模式 终结者模式 Mediator: 通过封装复杂的更新语义 , ChangeManager 充当目标和观察者之间的中介者。 单例模式 Singleton: ChangeManager 可使用 Singleton 模式来保证它是唯一的并且是可全局访问的。 总结与分析通过 Observer 模式，把一对多对象之间的通知依赖关系的变得更为松散，大大地提高了程序的可维护性和可扩展性，也很好的符合了开放 - 封闭原则。]]></content>
+    <content type="text"><![CDATA[分类工厂模式主要是为创建对象提供过渡接口，以便将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。 工厂模式可以分为三类： 简单工厂模式 （Simple Factory, 简单工厂模式可看为工厂方法模式的一种特例，两者归为一类。 ） 工厂方法模式 （Factory Method） 抽象工厂模式 （Abstract Factory） 这三种模式从上到下逐步抽象，并且更具一般性。 GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模式（Factory Method）与抽象工厂模式（Abstract Factory）。 区别 简单工厂模式 ： 一个工厂类, 这个工厂类能创建多个具体产品类的实例。 一个抽象产品类，可以派生出多个具体产品类。 工厂方法模式 ： 一个抽象工厂类，可以派生出多个具体工厂类。 一个抽象产品类，可以派生出多个具体产品类。 每个具体工厂类只能创建一个具体产品类的实例。 抽象工厂模式 ： 一个抽象工厂类，可以派生出多个具体工厂类。 多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。 每个具体工厂类可以创建多个具体产品类的实例。 区别： 工厂方法模式只有一个抽象产品类，而抽象工厂模式有多个。 工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个。 简单工厂模式产品类1234567891011121314151617181920&lt;?php/** 车子系列 */abstract Class BWM&#123; function construct($pa) &#123; &#125;&#125;Class BWM320 extends BWM&#123; function construct($pa) &#123; &#125;&#125;Class BMW523 extends BWM&#123; function construc($pb)&#123; &#125;&#125; 工厂类12345678910111213141516/** 工厂创建车 */class Factory &#123; static function createBMW($type)&#123; switch ($type) &#123; case 320: return new BWM320(); case 523: return new BMW523(); //…. &#125;&#125; 客户类12345678910/** 客户通过工厂获取车 */class Customer &#123; private $BMW; function getBMW($type)&#123; $this¬-&gt; BMW = Factory::createBMW($type); &#125;&#125; 工厂方法模式产品类1234567891011121314151617181920&lt;?php/** 车子系列 /abstract Class BWM&#123;function construct($pa) &#123;&#125;&#125;Class BWM320 extends BWM&#123;function construct($pa) &#123;&#125;&#125;Class BMW523 extends BWM&#123; function construc($pb)&#123;&#125;&#125; 创建工厂类123456789101112131415161718192021222324252627282930/** 创建工厂的接口 */interface FactoryBMW &#123; function createBMW();&#125;/** 创建BWM320车 **/class FactoryBWM320 implements FactoryBMW &#123; function createBMW($type)&#123; return new BWM320(); &#125;&#125;/** 创建BWM523车 **/class FactoryBWM523 implements FactoryBMW &#123; function createBMW($type)&#123; return new BMW523(); &#125;&#125; 客户类12345678910111213141516171819/** 客户得到车 */class Customer &#123; private $BMW; function getBMW($type)&#123; switch ($type) &#123; case 320: $BWM320 = new FactoryBWM320(); return $BWM320-&gt;createBMW(); case 523: $BWM523 = new FactoryBWM523(); return $BWM320-&gt;createBMW(); //…. &#125; &#125;&#125; 抽象工厂模式产品类123456789101112131415161718192021222324252627&lt;?php/** 车子系列以及型号 */abstract class BWM&#123;&#125;class BWM523 extends BWM &#123;&#125;class BWM320 extends BWM &#123;&#125;/* 空调 */abstract class aircondition&#123;&#125;class airconditionBWM320 extends aircondition &#123;&#125;class airconditionBWM52 extends aircondition &#123;&#125; 创建工厂类123456789101112131415161718192021222324252627282930313233343536/* 创建工厂的接口 */interface FactoryBMW &#123; function createBMW(); function createAirC();&#125;/** 创建BWM320车 /class FactoryBWM320 implements FactoryBMW &#123; function createBMW()&#123; return new BWM320();&#125;function createAirC()&#123; //空调 return new airconditionBWM320();&#125;&#125;/* 创建BWM523车 */class FactoryBWM523 implements FactoryBMW &#123; function createBMW()&#123; return new BWM523();&#125;function createAirC()&#123; return new airconditionBWM523();&#125;&#125; 客户1234567891011121314/* 客户得到车 */class Customer &#123; private $BMW; private $airC; function getBMW($type)&#123; $class = new ReflectionClass(‘FactoryBWM’ .$type );//建立 Person这个类的反射类 $instance = $class-&gt;newInstanceArgs();//相当于实例化Person 类 $this-&gt;BMW = $instance-&gt;createBMW(); $this-&gt;airC = $instance-&gt;createAirC(); &#125;&#125;]]></content>
       <categories>
         <category>Misc</category>
       </categories>
@@ -3469,12 +3483,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[工厂模式]]></title>
-    <url>%2F2015%2F01%2F07%2Ffactory_pattern%2F</url>
+    <title><![CDATA[观察者模式]]></title>
+    <url>%2F2015%2F01%2F07%2Fobserver_pattern%2F</url>
 
     <encrypted>0</encrypted>
 
-    <content type="text"><![CDATA[分类工厂模式主要是为创建对象提供过渡接口，以便将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。 工厂模式可以分为三类： 简单工厂模式 （Simple Factory, 简单工厂模式可看为工厂方法模式的一种特例，两者归为一类。 ） 工厂方法模式 （Factory Method） 抽象工厂模式 （Abstract Factory） 这三种模式从上到下逐步抽象，并且更具一般性。 GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模式（Factory Method）与抽象工厂模式（Abstract Factory）。 区别 简单工厂模式 ： 一个工厂类, 这个工厂类能创建多个具体产品类的实例。 一个抽象产品类，可以派生出多个具体产品类。 工厂方法模式 ： 一个抽象工厂类，可以派生出多个具体工厂类。 一个抽象产品类，可以派生出多个具体产品类。 每个具体工厂类只能创建一个具体产品类的实例。 抽象工厂模式 ： 一个抽象工厂类，可以派生出多个具体工厂类。 多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。 每个具体工厂类可以创建多个具体产品类的实例。 区别： 工厂方法模式只有一个抽象产品类，而抽象工厂模式有多个。 工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个。 简单工厂模式产品类1234567891011121314151617181920&lt;?php/** 车子系列 */abstract Class BWM&#123; function construct($pa) &#123; &#125;&#125;Class BWM320 extends BWM&#123; function construct($pa) &#123; &#125;&#125;Class BMW523 extends BWM&#123; function construc($pb)&#123; &#125;&#125; 工厂类12345678910111213141516/** 工厂创建车 */class Factory &#123; static function createBMW($type)&#123; switch ($type) &#123; case 320: return new BWM320(); case 523: return new BMW523(); //…. &#125;&#125; 客户类12345678910/** 客户通过工厂获取车 */class Customer &#123; private $BMW; function getBMW($type)&#123; $this¬-&gt; BMW = Factory::createBMW($type); &#125;&#125; 工厂方法模式产品类1234567891011121314151617181920&lt;?php/** 车子系列 /abstract Class BWM&#123;function construct($pa) &#123;&#125;&#125;Class BWM320 extends BWM&#123;function construct($pa) &#123;&#125;&#125;Class BMW523 extends BWM&#123; function construc($pb)&#123;&#125;&#125; 创建工厂类123456789101112131415161718192021222324252627282930/** 创建工厂的接口 */interface FactoryBMW &#123; function createBMW();&#125;/** 创建BWM320车 **/class FactoryBWM320 implements FactoryBMW &#123; function createBMW($type)&#123; return new BWM320(); &#125;&#125;/** 创建BWM523车 **/class FactoryBWM523 implements FactoryBMW &#123; function createBMW($type)&#123; return new BMW523(); &#125;&#125; 客户类12345678910111213141516171819/** 客户得到车 */class Customer &#123; private $BMW; function getBMW($type)&#123; switch ($type) &#123; case 320: $BWM320 = new FactoryBWM320(); return $BWM320-&gt;createBMW(); case 523: $BWM523 = new FactoryBWM523(); return $BWM320-&gt;createBMW(); //…. &#125; &#125;&#125; 抽象工厂模式产品类123456789101112131415161718192021222324252627&lt;?php/** 车子系列以及型号 */abstract class BWM&#123;&#125;class BWM523 extends BWM &#123;&#125;class BWM320 extends BWM &#123;&#125;/* 空调 */abstract class aircondition&#123;&#125;class airconditionBWM320 extends aircondition &#123;&#125;class airconditionBWM52 extends aircondition &#123;&#125; 创建工厂类123456789101112131415161718192021222324252627282930313233343536/* 创建工厂的接口 */interface FactoryBMW &#123; function createBMW(); function createAirC();&#125;/** 创建BWM320车 /class FactoryBWM320 implements FactoryBMW &#123; function createBMW()&#123; return new BWM320();&#125;function createAirC()&#123; //空调 return new airconditionBWM320();&#125;&#125;/* 创建BWM523车 */class FactoryBWM523 implements FactoryBMW &#123; function createBMW()&#123; return new BWM523();&#125;function createAirC()&#123; return new airconditionBWM523();&#125;&#125; 客户1234567891011121314/* 客户得到车 */class Customer &#123; private $BMW; private $airC; function getBMW($type)&#123; $class = new ReflectionClass(‘FactoryBWM’ .$type );//建立 Person这个类的反射类 $instance = $class-&gt;newInstanceArgs();//相当于实例化Person 类 $this-&gt;BMW = $instance-&gt;createBMW(); $this-&gt;airC = $instance-&gt;createAirC(); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[概述一些面向对象的编程方式，提供了一种构建对象间复杂网络互连的能力。当对象们连接在一起时，它们就可以相互提供服务和信息。 通常来说，当某个对象的状态发生改变时，你仍然需要对象之间能互相通信。但是出于各种原因，你也许并不愿意因为代码环境的改变而对代码做大的修改。也许，你只想根据你的具体应用环境而改进通信代码。或者，你只想简单的重新构造通信代码来避免类和类之间的相互依赖与相互从属。 问题当一个对象的状态发生改变时，你如何通知其他对象？是否需要一个动态方案――一个就像允许脚本的执行一样，允许自由连接的方案？ 解决方案观察者模式 ：定义对象间的一种一对多的依赖关系, 当一个对象的状态发生改变时, 所有依赖于它的对象都得到通知并被自动更新。 观察者模式允许一个对象关注其他对象的状态，并且，观察者模式还为被观测者提供了一种观测结构，或者说是一个主体和一个客体。主体，也就是被观测者，可以用来联系所有的观测它的观测者。客体，也就是观测者，用来接受主体状态的改变 观测就是一个可被观测的类（也就是主题）与一个或多个观测它的类（也就是客体）的协作。不论什么时候，当被观测对象的状态变化时，所有注册过的观测者都会得到通知。 观察者模式将被观测者（主体）从观测者（客体）种分离出来。这样，每个观测者都可以根据主体的变化分别采取各自的操作。（观察者模式和 Publish/Subscribe 模式一样，也是一种有效描述对象间相互作用的模式。）观察者模式灵活而且功能强大。对于被观测者来说，那些查询哪些类需要自己的状态信息和每次使用那些状态信息的额外资源开销已经不存在了。另外，一个观测者可以在任何合适的时候进行注册和取消注册。你也可以定义多个具体的观测类，以便在实际应用中执行不同的操作。 将一个系统分割成一系列相互协作的类有一个常见的副作用：需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，因为这样降低了它们的可重用性。 适用性在以下任一情况下可以使用观察者模式: 当一个抽象模型有两个方面, 其中一个方面依赖于另一方面。将这二者封装在独立的对象中以使它们可以各自独立地改变和复用。 当对一个对象的改变需要同时改变其它对象 , 而不知道具体有多少对象有待改变。 当一个对象必须通知其它对象，而它又不能假定其它对象是谁。换言之 , 你不希望这些对象是紧密耦合的。 结构 模式的组成观察者模式包含如下角色： 目标（Subject）: 目标知道它的观察者。可以有任意多个观察者观察同一个目标。 提供注册和删除观察者对象的接口。 具体目标（ConcreteSubject）: 将有关状态存入各 ConcreteObserver 对象。 观察者 (Observer): 为那些在目标发生改变时需获得通知的对象定义一个更新接口。当它的状态发生改变时, 向它的各个观察者发出通知。 具体观察者 (ConcreteObserver): 维护一个指向 ConcreteSubject 对象的引用。存储有关状态，这些状态应与目标的状态保持一致。实现 O b s e r v e r 的更新接口以使自身状态与目标的状态保持一致。 观察者模式的优缺点Observer 模式允许你独立的改变目标和观察者。你可以单独复用目标对象而无需同时复用其观察者, 反之亦然。它也使你可以在不改动目标和其他的观察者的前提下增加观察者。 下面是观察者模式其它一些优点 : 观察者模式可以实现表示层和数据逻辑层的分离, 并定义了稳定的消息更新传递机制，抽象了更新接口，使得可以有各种各样不同的表示层作为具体观察者角色。 在观察目标和观察者之间建立一个抽象的耦合 ：一个目标所知道的仅仅是它有一系列观察者 , 每个都符合抽象的 Observer 类的简单接口。目标不知道任何一个观察者属于哪一个具体的类。这样目标和观察者之间的耦合是抽象的和最小的。因为目标和观察者不是紧密耦合的, 它们可以属于一个系统中的不同抽象层次。一个处于较低层次的目标对象可与一个处于较高层次的观察者通信并通知它 , 这样就保持了系统层次的完整。如果目标和观察者混在一块 , 那么得到的对象要么横贯两个层次 (违反了层次性), 要么必须放在这两层的某一层中 (这可能会损害层次抽象)。 支持广播通信 : 不像通常的请求, 目标发送的通知不需指定它的接收者。通知被自动广播给所有已向该目标对象登记的有关对象。目标对象并不关心到底有多少对象对自己感兴趣 ; 它唯一的责任就是通知它的各观察者。这给了你在任何时刻增加和删除观察者的自由。处理还是忽略一个通知取决于观察者。 观察者模式符合 “开闭原则” 的要求。 观察者模式的缺点 : 如果一个观察目标对象有很多直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。 如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。 观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。 意外的更新 因为一个观察者并不知道其它观察者的存在 , 它可能对改变目标的最终代价一无所知。在目标上一个看似无害的的操作可能会引起一系列对观察者以及依赖于这些观察者的那些对象的更新。此外 , 如果依赖准则的定义或维护不当，常常会引起错误的更新 , 这种错误通常很难捕捉。 简单的更新协议不提供具体细节说明目标中什么被改变了 , 这就使得上述问题更加严重。如果没有其他协议帮助观察者发现什么发生了改变，它们可能会被迫尽力减少改变。 实现在 php 的 SPL 支持观察者模式，SPL 提供了 SplSubject 和 SplObserver 接口。 SplSubject 接口提供了 attach()、detach()、notify() 三个方法。而 SplObserver 接口则提供了 update() 方法。 SplSubject 派生类维护了一个状态，当状态发生变化时 - 比如属性变化等，就会调用 notify() 方法，这时，之前在 attach() 方法中注册的所有 SplObserver 实例的 update() 方法就会被调用。接口定义如下： 1234567891011121314&lt;?php /** * 这一模式的概念是 SplSubject 类维护了一个特定状态，当这个状态发生变化时，它就会调用 notify() 方法。 * 调用 notify() 方法时，所有之前使用 attach() 方法注册的 SplObserver 实例的 update 方法都会被调用。 * */ interface SplSubject&#123; public function attach(SplObserver $observer);// 注册观察者 public function detach(SplObserver $observer);// 释放观察者 public function notify();// 通知所有注册的观察者 &#125; interface SplObserver&#123; public function update(SplSubject $subject);// 观察者进行更新状态 &#125; 实现代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667&lt;?php /** * 具体目标 * */ class ConcreteSubject implements SplSubject &#123; private $observers, $value; public function __construct() &#123; $this-&gt;observers = array(); &#125; public function attach(SplObserver $observer) &#123; // 注册观察者 $this-&gt;observers[] = $observer; &#125; public function detach(SplObserver $observer) &#123; // 释放观察者 if($idx = array_search($observer,$this-&gt;observers,true)) &#123; unset($this-&gt;observers[$idx]); &#125; &#125; public function notify() &#123; // 通知所有观察者 foreach($this-&gt;observers as $observer) &#123; $observer-&gt;update($this); &#125; &#125; public function setValue($value) &#123; $this-&gt;value = $value; $this-&gt;notify(); &#125; public function getValue() &#123; return $this-&gt;value; &#125; &#125; /** * 具体观察者 * */ class ConcreteObserver1 implements SplObserver &#123; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver1 value is',$subject-&gt;getValue(), '&lt;br&gt;'; &#125; &#125; /** * 具体观察者 * */ class ConcreteObserver2 implements SplObserver &#123; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver2 value is', $subject-&gt;getValue(), '&lt;br&gt;'; &#125; &#125; $subject = new ConcreteSubject(); $observer1 = new ConcreteObserver1(); $observer2 = new ConcreteObserver2(); $subject-&gt;attach($observer1); $subject-&gt;attach($observer2); $subject-&gt;setValue(5); ?&gt; 我们扩展上面的例子，根据目标状态而更新不同的观察者： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136&lt;?php /** * 具体目标 * */ class ConcreteSubject implements SplSubject &#123; private $observers, $_state; public function __construct() &#123; $this-&gt;observers = array(); &#125; /** * 注册观察者 * * @param SplObserver $observer */ public function attach(SplObserver $observer) &#123; $this-&gt;observers[] = $observer; &#125; /** * // 释放观察者 * * @param SplObserver $observer */ public function detach(SplObserver $observer) &#123; if($idx = array_search($observer,$this-&gt;observers,true)) &#123; unset($this-&gt;observers[$idx]); &#125; &#125; /** * 通知所有观察者 * */ public function notify() &#123; /** * 只要状态改变，就通知观察者 */ foreach($this-&gt;observers as $observer) &#123; if ($observer-&gt;getState() == $this-&gt;_state) &#123; $observer-&gt;update($this); &#125; &#125; &#125; /** * 设置状态 * * @param unknown_type $state */ public function setState($state) &#123; $this-&gt;_state = $state; $this-&gt;notify(); &#125; public function getState() &#123; return $this-&gt;_state; &#125; &#125; /** * 抽象观摩者 * */ abstract class observer&#123; private $_state; function __construct($state) &#123; $this-&gt;_state = $state; &#125; public function setState($state) &#123; $this-&gt;_state = $state; $this-&gt;notify(); &#125; public function getState() &#123; return $this-&gt;_state; &#125; &#125; /** * 具体观察者 1 * */ class ConcreteObserver1 extends observer implements SplObserver &#123; function __construct($state) &#123; parent::__construct($state); &#125; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver1 state is',$subject-&gt;getState(), '&lt;br&gt;'; &#125; &#125; /** * 具体观察者 2 * */ class ConcreteObserver2 extends observer implements SplObserver &#123; function __construct($state) &#123; parent::__construct($state); &#125; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver2 state is', $subject-&gt;getState(), '&lt;br&gt;'; &#125; &#125; /** * 具体观察者 3 * */ class ConcreteObserver3 extends observer implements SplObserver &#123; function __construct($state) &#123; parent::__construct($state); &#125; public function update(SplSubject $subject) &#123; echo 'ConcreteObserver3 state is', $subject-&gt;getState(), '&lt;br&gt;'; &#125; &#125; $subject = new ConcreteSubject(); $observer1 = new ConcreteObserver1(1); $observer2 = new ConcreteObserver2(1); $observer3 = new ConcreteObserver3(2); $subject-&gt;attach($observer1); $subject-&gt;attach($observer2); $subject-&gt;attach($observer3); echo 'Subject state is 1', '&lt;br&gt;'; $subject-&gt;setState(1); echo 'Subject state is 2', '&lt;br&gt;'; $subject-&gt;setState(2); ?&gt; 与其他相关模式 终结者模式 Mediator: 通过封装复杂的更新语义 , ChangeManager 充当目标和观察者之间的中介者。 单例模式 Singleton: ChangeManager 可使用 Singleton 模式来保证它是唯一的并且是可全局访问的。 总结与分析通过 Observer 模式，把一对多对象之间的通知依赖关系的变得更为松散，大大地提高了程序的可维护性和可扩展性，也很好的符合了开放 - 封闭原则。]]></content>
       <categories>
         <category>Misc</category>
       </categories>

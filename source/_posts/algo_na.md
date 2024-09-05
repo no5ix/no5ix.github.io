@@ -157,3 +157,142 @@ class Solution {
     }
 }
 ```
+
+
+# 二叉树
+
+## 前序
+
+
+## 中序
+
+``` java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;  // 左
+            } else {
+                cur = stack.pop();
+                result.add(cur.val);  // 中
+                cur = cur.right;  // 右
+            }
+        }
+        return result;
+    }
+}
+```
+
+## 后序
+
+## 层序
+
+``` java
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> resultList = new ArrayList<List<Integer>>();
+        if (root == null ) {
+            return resultList;
+        }
+        Queue<TreeNode> que = new LinkedList<TreeNode>();
+        que.offer(root);
+
+        while (!que.isEmpty()) {
+            List<Integer> itemList = new ArrayList<Integer>();
+            int len = que.size();
+
+            while (len > 0) {
+                TreeNode tmpNode = que.poll();
+                itemList.add(tmpNode.val);
+
+                if (tmpNode.left != null) { que.offer(tmpNode.left); }
+                if (tmpNode.right != null) { que.offer(tmpNode.right); }
+                len--;
+            }
+            resultList.add(itemList);
+        }
+
+        return resultList;
+    }
+}
+```
+
+## 高度
+
+- 二叉树节点的高度：指从`该节点`到叶子节点的最长简单路径边的条数或者节点数（取决于高度从0开始还是从1开始）
+- 二叉树节点的深度：指从`根节点`到该节点的最长简单路径边的条数或者节点数（取决于深度从0开始还是从1开始）
+- 而根节点的高度就是二叉树的最大深度
+
+## 深度
+
+- 二叉树的深度: 根节点到最远叶子节点的最长路径上的节点数。
+- 叶子节点: 是指没有子节点的节点。
+
+### 最大深度
+
+使用迭代法的话，使用层序遍历是最为合适的，因为最大的深度就是二叉树的层数，和层序遍历的方式极其吻合。
+在二叉树中，一层一层的来遍历二叉树，记录一下遍历的层数就是二叉树的深度，
+
+``` java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int depth = 0;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while (!que.isEmpty()) {
+            int len = que.size();
+            depth++;
+            while (len > 0) {
+                TreeNode tmpNode = que.poll();
+                if (tmpNode.left != null) { que.offer(tmpNode.left); }
+                if (tmpNode.right != null) { que.offer(tmpNode.right); }
+                len--;
+            }
+        }
+        return depth;
+    }
+}
+```
+
+### 最小深度
+
+最小深度: 是从根节点到最近叶子节点的最短路径上的节点数量。
+
+``` java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int depth = 0;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while (!que.isEmpty()) {
+            int len = que.size();
+            depth++;
+            while (len > 0) {
+                TreeNode tmpNode = que.poll();
+                if (tmpNode.left == null && tmpNode.right == null) {
+                    // 当左右孩子都为空的时候，说明是最低点的一层了，退出
+                    return depth;
+                }
+                if (tmpNode.left != null) { que.offer(tmpNode.left); }
+                if (tmpNode.right != null) { que.offer(tmpNode.right); }
+                len--;
+            }
+        }
+        return depth;
+    }
+}
+```
+

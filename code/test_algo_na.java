@@ -3,6 +3,11 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Stack;
+import java.util.Collections;
+import java.util.Queue;
 
 // class Solution {  // lc704
 //     public int search(int[] numbers, int targetNumber) {
@@ -326,31 +331,162 @@ class MyQueue {  // lc239
     }
 }
 
+// class Solution {
+//     public int[] maxSlidingWindow(int[] nums, int k) {
+//         if (nums.length == 1) {
+//             return nums;
+//         }
+//         int len = nums.length - k + 1;
+//         //存放结果元素的数组
+//         int[] res = new int[len];
+//         int num = 0;
+//         //自定义队列
+//         MyQueue myQueue = new MyQueue();
+//         //先将前k的元素放入队列
+//         for (int i = 0; i < k; i++) {
+//             myQueue.add(nums[i]);
+//         }
+//         res[num++] = myQueue.peek();
+//         for (int i = k; i < nums.length; i++) {
+//             //滑动窗口移除最前面的元素，移除是判断该元素是否放入队列
+//             myQueue.poll(nums[i - k]);
+//             //滑动窗口加入最后面的元素
+//             myQueue.add(nums[i]);
+//             //记录对应的最大值
+//             res[num++] = myQueue.peek();
+//         }
+//         return res;
+//     }
+// }
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+// class Solution {
+//     public List<Integer> preorderTraversal(TreeNode root) {
+//         List<Integer> result = new ArrayList<>();
+//         if (root == null) {
+//             return result;
+//         }
+//         Stack<TreeNode> stack = new Stack<>();
+//         stack.push(root);
+//         while (!stack.isEmpty()) {
+//             TreeNode node = stack.pop();
+//             result.add(node.val);
+//             if (node.right != null) {
+//                 stack.push(node.right);
+//             }
+//             if (node.left != null) {
+//                 stack.push(node.left);
+//             }
+//         }
+//         return result;
+//     }
+// }
+
+// class Solution {
+//     public List<Integer> postorderTraversal(TreeNode root) {
+//         List<Integer> result = new ArrayList<>();
+//         if (root == null) {
+//             return result;
+//         }
+//         Stack<TreeNode> stack = new Stack<>();
+//         stack.push(root);
+//         while (!stack.isEmpty()) {
+//             TreeNode node = stack.pop();
+//             result.add(node.val);
+//             if (node.left != null) {
+//                 stack.push(node.left);
+//             }
+//             if (node.right != null) {
+//                 stack.push(node.right);
+//             }
+//         }
+//         Collections.reverse(result);
+//         return result;
+//     }
+// }
+
+// class Solution {
+//     public List<Integer> inorderTraversal(TreeNode root) {
+//         List<Integer> result = new ArrayList<>();
+//         if (root == null) {
+//             return result;
+//         }
+//         Stack<TreeNode> stack = new Stack<>();
+//         TreeNode cur = root;
+//         while (cur != null || !stack.isEmpty()) {
+//             if (cur != null) {
+//                 stack.push(cur);
+//                 cur = cur.left;  // 左
+//             } else {
+//                 cur = stack.pop();
+//                 result.add(cur.val);  // 中
+//                 cur = cur.right;  // 右
+//             }
+//         }
+//         return result;
+//     }
+// }
+
+// class Solution {
+//     public List<List<Integer>> levelOrder(TreeNode root) {
+//         List<List<Integer>> resultList = new ArrayList<List<Integer>>();
+//         if (root == null ) {
+//             return resultList;
+//         }
+//         Queue<TreeNode> que = new LinkedList<TreeNode>();
+//         que.offer(root);
+
+//         while (!que.isEmpty()) {
+//             List<Integer> itemList = new ArrayList<Integer>();
+//             int len = que.size();
+
+//             while (len > 0) {
+//                 TreeNode tmpNode = que.poll();
+//                 itemList.add(tmpNode.val);
+
+//                 if (tmpNode.left != null) { que.offer(tmpNode.left); }
+//                 if (tmpNode.right != null) { que.offer(tmpNode.right); }
+//                 len--;
+//             }
+//             resultList.add(itemList);
+//         }
+
+//         return resultList;
+//     }
+// }
+
 class Solution {
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums.length == 1) {
-            return nums;
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
         }
-        int len = nums.length - k + 1;
-        //存放结果元素的数组
-        int[] res = new int[len];
-        int num = 0;
-        //自定义队列
-        MyQueue myQueue = new MyQueue();
-        //先将前k的元素放入队列
-        for (int i = 0; i < k; i++) {
-            myQueue.add(nums[i]);
+        int depth = 0;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while (!que.isEmpty()) {
+            int len = que.size();
+            depth++;
+            while (len > 0) {
+                TreeNode tmpNode = que.poll();
+                if (tmpNode.left != null) { que.offer(tmpNode.left); }
+                if (tmpNode.right != null) { que.offer(tmpNode.right); }
+                len--;
+            }
         }
-        res[num++] = myQueue.peek();
-        for (int i = k; i < nums.length; i++) {
-            //滑动窗口移除最前面的元素，移除是判断该元素是否放入队列
-            myQueue.poll(nums[i - k]);
-            //滑动窗口加入最后面的元素
-            myQueue.add(nums[i]);
-            //记录对应的最大值
-            res[num++] = myQueue.peek();
-        }
-        return res;
+        return depth;
     }
 }
 
@@ -382,10 +518,10 @@ public class test_algo_na{
         // int[] ret = solution.intersection(myList, myList2);
         
     
-        int[] myList = {1,3,-1,-3,5,3,6,7};
-        int[] ret = solution.maxSlidingWindow(myList, 3);
-        for (int j = 0; j < ret.length; ++j) {
-            System.out.println(ret[j]);
-        }
+        // int[] myList = {1,3,-1,-3,5,3,6,7};
+        // int[] ret = solution.maxSlidingWindow(myList, 3);
+        // for (int j = 0; j < ret.length; ++j) {
+        //     System.out.println(ret[j]);
+        // }
     }
 }

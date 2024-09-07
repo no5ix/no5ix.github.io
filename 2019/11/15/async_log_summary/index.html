@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,7 +96,7 @@
 <meta property="og:url" content="https://hulinhong.com/2019/11/15/async_log_summary/index.html">
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="最近工作涉及到生产环境的日志系统, 小结一波, 其实践为:   cpp高性能的异步日志系统模块导出给py使用 此cpp模块另起线程 logger通过unix socket连接上address 为 “/dev/log”，与 rsyslogd 程序通信 log先缓存在一个buffer中, 通过一个任务来把log存入syslog这一事件封装起来 把这个任务加入一个线程间可保序输出的任务队列(常用asio">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="https://hulinhong.com/img/syslog_intro/1089769-20170323140416611-1663002555.png">
 <meta property="og:image" content="https://hulinhong.com/img/syslog_intro/1089769-20170321200554424-555977189.png">
 <meta property="og:image" content="https://hulinhong.com/img/syslog_intro/1089769-20170321200742736-1156458900.png">
@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://hulinhong.com/img/syslog_intro/1089769-20170323165530158-761295228.png">
 <meta property="og:image" content="https://hulinhong.com/img/syslog_intro/1089769-20170410132458782-973391177.png">
 <meta property="og:image" content="https://hulinhong.com/img/syslog_intro/1089769-20170323163540080-1733313578.png">
-<meta property="og:updated_time" content="2024-09-05T15:48:51.462Z">
+<meta property="og:updated_time" content="2024-09-07T13:58:02.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异步日志小结">
 <meta name="twitter:description" content="最近工作涉及到生产环境的日志系统, 小结一波, 其实践为:   cpp高性能的异步日志系统模块导出给py使用 此cpp模块另起线程 logger通过unix socket连接上address 为 “/dev/log”，与 rsyslogd 程序通信 log先缓存在一个buffer中, 通过一个任务来把log存入syslog这一事件封装起来 把这个任务加入一个线程间可保序输出的任务队列(常用asio">
@@ -127,7 +127,7 @@
     motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -164,7 +164,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -242,7 +242,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -252,7 +252,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -262,7 +262,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -272,7 +272,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -340,9 +340,9 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-15T16:31:26+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-15T16:31:26+00:00">
                 2019-11-15
               </time>
             
@@ -361,7 +361,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -643,10 +643,10 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -670,7 +670,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">分类</span>
+                <span class="site-state-item-name">categories</span>
               </a>
             </div>
           
@@ -679,7 +679,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">264</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -690,7 +690,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">97</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           

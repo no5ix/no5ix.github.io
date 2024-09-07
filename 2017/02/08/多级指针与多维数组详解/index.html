@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -97,13 +97,13 @@
 <meta property="og:url" content="https://hulinhong.com/2017/02/08/多级指针与多维数组详解/index.html">
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="指针与数组是 C/C++ 编程中非常重要的元素，同时也是较难以理解的。其中，多级指针与 “多维” 数组更是让很多人云里雾里，其实，只要掌握一定的方法，理解多级指针和 “多维” 数组完全可以像理解一级指针和一维数组那样简单。 基础知识首先，先声明一些常识，如果你对这些常识还不理解，请先去弥补一下基础知识：  实际上并不存在多维数组，所谓的多维数组本质上是用一维数组模拟的。  数组名是一个常量（意味着">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="https://hulinhong.com/2017/02/08/多级指针与多维数组详解/1.png">
 <meta property="og:image" content="https://hulinhong.com/2017/02/08/多级指针与多维数组详解/2.png">
 <meta property="og:image" content="http://img.blog.csdn.net/20160623113621428?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="https://hulinhong.com/2017/02/08/多级指针与多维数组详解/3.png">
 <meta property="og:image" content="https://hulinhong.com/2017/02/08/多级指针与多维数组详解/4.png">
-<meta property="og:updated_time" content="2024-09-05T15:48:51.522Z">
+<meta property="og:updated_time" content="2024-09-07T13:58:02.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多级指针与多维数组详解">
 <meta name="twitter:description" content="指针与数组是 C/C++ 编程中非常重要的元素，同时也是较难以理解的。其中，多级指针与 “多维” 数组更是让很多人云里雾里，其实，只要掌握一定的方法，理解多级指针和 “多维” 数组完全可以像理解一级指针和一维数组那样简单。 基础知识首先，先声明一些常识，如果你对这些常识还不理解，请先去弥补一下基础知识：  实际上并不存在多维数组，所谓的多维数组本质上是用一维数组模拟的。  数组名是一个常量（意味着">
@@ -123,7 +123,7 @@
     motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -160,7 +160,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -238,7 +238,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -248,7 +248,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -258,7 +258,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -268,7 +268,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -336,9 +336,9 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-08T21:10:10+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-08T21:10:10+00:00">
                 2017-02-08
               </time>
             
@@ -357,7 +357,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -654,10 +654,10 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -681,7 +681,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">分类</span>
+                <span class="site-state-item-name">categories</span>
               </a>
             </div>
           
@@ -690,7 +690,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">264</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -701,7 +701,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">97</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           

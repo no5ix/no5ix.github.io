@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -97,8 +97,8 @@
 <meta property="og:url" content="https://hulinhong.com/2016/08/02/重新看unix网络编程的一些心得/index.html">
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="老书新看, 有了许多不同的见解, 也准备拿出以前自己私人的老笔记做修正放到博客里, 加深理解. 在这个浮躁人人都能写书的时代基本要看一本书需要挑很久, 谁写的, 写得怎么样, 是否是业界经典, 都要需要一一斟酌各种查证方可, 不然看一本烂书事半功倍, 浪费生命,影响效率, 被误导跑偏, 能让人静下心来的书籍不多, 能让人看好几遍仍回味无穷的经典就更少了 陈硕说过, 学东西不要只是从网上看点大牛的">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-09-05T15:48:51.526Z">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-09-07T13:58:02.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重新看unix网络编程的一些心得">
 <meta name="twitter:description" content="老书新看, 有了许多不同的见解, 也准备拿出以前自己私人的老笔记做修正放到博客里, 加深理解. 在这个浮躁人人都能写书的时代基本要看一本书需要挑很久, 谁写的, 写得怎么样, 是否是业界经典, 都要需要一一斟酌各种查证方可, 不然看一本烂书事半功倍, 浪费生命,影响效率, 被误导跑偏, 能让人静下心来的书籍不多, 能让人看好几遍仍回味无穷的经典就更少了 陈硕说过, 学东西不要只是从网上看点大牛的">
@@ -117,7 +117,7 @@
     motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -154,7 +154,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -232,7 +232,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -242,7 +242,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -252,7 +252,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -262,7 +262,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -330,9 +330,9 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T12:01:21+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-02T12:01:21+00:00">
                 2016-08-02
               </time>
             
@@ -351,7 +351,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -580,7 +580,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">分类</span>
+                <span class="site-state-item-name">categories</span>
               </a>
             </div>
           
@@ -589,7 +589,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">264</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -600,7 +600,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">97</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           

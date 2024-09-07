@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -97,8 +97,8 @@
 <meta property="og:url" content="https://hulinhong.com/2017/02/28/sending_large_blocks_of_data/index.html">
 <meta property="og:site_name" content="烫">
 <meta property="og:description" content="本篇自我总结有了本系列上篇文章中的分包和重组系统为何还要这个发送大块数据系统?是否是多余的?是雷同的吗?请看总结概要理清思路, 再细看文章. 为什么需要做这个发送大块数据系统第一眼看上去，这种替代性的技术似乎非常类似于数据包的分包和重组，但是它的实现是完全不同的。这种实现上的差异的目的是为了解决数据包分包和重组的一个关键弱点 : 一个片段的丢失就会导致整个数据包都要被丢弃掉然后重新分包重发。 你可">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-09-05T15:48:51.510Z">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-09-07T13:58:02.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建游戏网络协议四之发送大块数据">
 <meta name="twitter:description" content="本篇自我总结有了本系列上篇文章中的分包和重组系统为何还要这个发送大块数据系统?是否是多余的?是雷同的吗?请看总结概要理清思路, 再细看文章. 为什么需要做这个发送大块数据系统第一眼看上去，这种替代性的技术似乎非常类似于数据包的分包和重组，但是它的实现是完全不同的。这种实现上的差异的目的是为了解决数据包分包和重组的一个关键弱点 : 一个片段的丢失就会导致整个数据包都要被丢弃掉然后重新分包重发。 你可">
@@ -117,7 +117,7 @@
     motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -154,7 +154,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -232,7 +232,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -242,7 +242,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -252,7 +252,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -262,7 +262,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -330,9 +330,9 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T15:13:35+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T15:13:35+00:00">
                 2017-02-28
               </time>
             
@@ -351,7 +351,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -597,10 +597,10 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -624,7 +624,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">分类</span>
+                <span class="site-state-item-name">categories</span>
               </a>
             </div>
           
@@ -633,7 +633,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">264</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -644,7 +644,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">97</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           

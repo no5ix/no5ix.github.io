@@ -468,27 +468,54 @@ class TreeNode {
 //     }
 // }
 
+// class Solution {
+//     public int maxDepth(TreeNode root) {
+//         if (root == null) {
+//             return 0;
+//         }
+//         int depth = 0;
+//         Queue<TreeNode> que = new LinkedList<>();
+//         que.offer(root);
+//         while (!que.isEmpty()) {
+//             int len = que.size();
+//             depth++;
+//             while (len > 0) {
+//                 TreeNode tmpNode = que.poll();
+//                 if (tmpNode.left != null) { que.offer(tmpNode.left); }
+//                 if (tmpNode.right != null) { que.offer(tmpNode.right); }
+//                 len--;
+//             }
+//         }
+//         return depth;
+//     }
+// }
+
 class Solution {
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
+    // ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();和    ArrayList<ArrayList<Integer>> resultArr = new ArrayList<ArrayList<Integer>>();有啥区别? 
+    // 完全等价的, `ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();`
+    // - 这是Java 7引入的“钻石操作符”的用法。
+    // - 使用钻石操作符可以简化泛型类型的实例化，特别是当构造函数右侧的类型已经由变量声明时。
+    // - 它允许编译器自动推断出泛型类型参数，从而使代码更简洁、易读。
+    ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public ArrayList<ArrayList<Integer>> combine(int n, int k) {
+        backTracking(n, k, 1);
+        return resultArr;
+    }
+
+    void backTracking(int n, int k, int startIndex) {
+        if (path.size() == k) {
+            resultArr.add(new ArrayList<>(path));
+            return;
         }
-        int depth = 0;
-        Queue<TreeNode> que = new LinkedList<>();
-        que.offer(root);
-        while (!que.isEmpty()) {
-            int len = que.size();
-            depth++;
-            while (len > 0) {
-                TreeNode tmpNode = que.poll();
-                if (tmpNode.left != null) { que.offer(tmpNode.left); }
-                if (tmpNode.right != null) { que.offer(tmpNode.right); }
-                len--;
-            }
+        for (int i = startIndex; i <= n; ++i) {
+            path.add(i);
+            backTracking(n, k, i+1);
+            path.removeLast();
         }
-        return depth;
     }
 }
+
 
 public class test_algo_na{
     public static void main(String[] args){

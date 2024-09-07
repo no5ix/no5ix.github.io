@@ -2032,7 +2032,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7761b6;
+  background: #422a6a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2058,7 +2058,7 @@ pre .javascript .function {
   display: inline-block;
   cursor: pointer;
   border-bottom: 1px solid transparent;
-  font-size: 14px;
+  font-size: 13px;
   color: #555;
 }
 .sidebar-nav li:hover {

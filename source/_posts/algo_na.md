@@ -12,7 +12,8 @@ categories:
 
 # 算法白话总结
 
-推荐参考**本博客总结**的 {% post_link algo_newbie %}
+参考: https://programmercarl.com/
+推荐参考**本博客总结**的 {% post_link algo_newbie %} , 和本文对照着看
 
 
 # 概绍
@@ -121,7 +122,23 @@ public class test{
 
 ## lc28 - 实现strStr() - 20240923 - KMP
 
-https://programmercarl.com/0028.实现strStr.html#算法公开课
+
+- https://programmercarl.com/0028.实现strStr.html#算法公开课
+- https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
+
+![](/img/algo_na/KMP精讲2.gif)
+
+看一下如何利用 前缀表找到 当字符不匹配的时候应该指针应该移动的位置。如上动画所示：
+
+找到的不匹配的位置， 那么此时我们要看它的前一个字符的前缀表的数值是多少。
+
+为什么要前一个字符的前缀表的数值呢，因为要找前面字符串的最长相同的前缀和后缀。
+
+所以要看前一位的 前缀表的数值。
+
+前一个字符的前缀表的数值是2， 所以把下标移动到下标2的位置继续比配。 可以再反复看一下上面的动画。
+
+最后就在文本串中找到了和模式串匹配的子串了。
 
 ``` java
 class Solution {
@@ -152,7 +169,7 @@ class Solution {
                 j = next[j - 1];  // 注意这里，是要找前一位的对应的回退位置了; 为什么这里要找前一位的对应的回退位置呢? 因为和 上面 strStr 里匹配过程里的寻找前一位来继续匹配是一样一样的
             if (s.charAt(j) == s.charAt(i))   // 此时前后缀相等
                 j++;
-            next[i] = j;  // 因为 j 即是前缀 的末尾位置, 又是前缀的长度, 所以此处直接在 next 表里存下 j
+            next[i] = j;  // 因为 j 既是前缀 的末尾位置, 又是前缀的长度, 所以此处直接在 next 表里存下 j
         }
     }
 }
@@ -163,8 +180,38 @@ class Solution {
 
 ## 前序
 
+![](/img/algo_na/二叉树前序遍历（迭代法）.gif)
+
+前序遍历是中左右，每次先处理的是中间节点，那么先将根节点放入栈中，然后将右孩子加入栈，再加入左孩子。
+
+为什么要先加入 右孩子，再加入左孩子呢？ 因为这样出栈的时候才是中左右的顺序。
+
+``` java
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) { return result; }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            result.add(node.val);
+            if (node.right != null) { stack.push(node.right); }
+            if (node.left != null) { stack.push(node.left); }
+        }
+        return result;
+    }
+}
+```
 
 ## 中序
+
+![](/img/algo_na/二叉树中序遍历（迭代法）.gif)
+
+中序遍历是左中右，先访问的是二叉树顶部的节点，然后一层一层向下访问，直到到达树左面的最底部，再开始处理节点（也就是在把节点的数值放进result数组中），这就造成了处理顺序和访问顺序是不一致的。
+
+那么在使用迭代法写中序遍历，就需要借用指针的遍历来帮助访问节点，栈则用来处理节点上的元素。
+
 
 ``` java
 class Solution {
@@ -192,11 +239,19 @@ class Solution {
 
 ## 后序
 
+1. 先序遍历是`中左右`
+2. 调整代码左右循序
+3. 变成`中右左` -> 反转result数组 -> `左右中`
+4. 后序遍历是`左右中`
+
 ## 层序
+
+![](/img/algo_na/binary_tree_level_order.gif)
 
 ``` java
 class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    // // 注意返回值是List<List<Integer>>不是单List<Integer>, 因为层序遍历一个二叉树。就是从左到右一层一层的去遍历二叉树, 每一层都是一个 List<Integer>, 所以每一层加起来组成一个大的 List<List<Integer>>
+    public List<List<Integer>> levelOrder(TreeNode root) {  
         List<List<Integer>> resultList = new ArrayList<List<Integer>>();
         if (root == null ) {
             return resultList;
@@ -206,7 +261,7 @@ class Solution {
 
         while (!que.isEmpty()) {
             List<Integer> itemList = new ArrayList<Integer>();
-            int len = que.size();
+            int len = que.size();  // 注意这个len, 这里一定要使用固定大小 len，不要使用que.size()，因为que.size是不断变化的
 
             while (len > 0) {
                 TreeNode tmpNode = que.poll();
@@ -232,12 +287,13 @@ class Solution {
 
 ## 深度
 
+- 求深度用`层序遍历`是最适合的最直观容易理解
 - 二叉树的深度: 根节点到最远叶子节点的最长路径上的节点数。
 - 叶子节点: 是指没有子节点的节点。
 
 ### 最大深度
 
-使用迭代法的话，使用层序遍历是最为合适的，因为最大的深度就是二叉树的层数，和层序遍历的方式极其吻合。
+使用迭代法的话，**使用层序遍历是最为合适的**，因为最大的深度就是二叉树的层数，和层序遍历的方式极其吻合。
 在二叉树中，一层一层的来遍历二叉树，记录一下遍历的层数就是二叉树的深度，
 
 ``` java
@@ -296,3 +352,115 @@ class Solution {
 }
 ```
 
+# 回溯
+
+## 模板
+
+``` cpp
+void backtracking(参数) {
+    if (终止条件) {
+        存放结果;
+        return;
+    }
+
+    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {
+        处理节点;
+        backtracking(路径，选择列表); // 递归
+        回溯，撤销处理结果
+    }
+}
+```
+
+## 组合
+
+- https://leetcode.com/problems/combinations/
+- https://programmercarl.com/0077.组合.html#算法公开课
+
+## 没有剪枝的版本
+
+![](/img/algo_na/20201123195242899.png)
+
+``` java
+class Solution {
+    // ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();和    ArrayList<ArrayList<Integer>> resultArr = new ArrayList<ArrayList<Integer>>();有啥区别? 
+    // 完全等价的, `ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();`
+    // - 这是Java 7引入的“钻石操作符”的用法。
+    // - 使用钻石操作符可以简化泛型类型的实例化，特别是当构造函数右侧的类型已经由变量声明时。
+    // - 它允许编译器自动推断出泛型类型参数，从而使代码更简洁、易读。
+    ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public ArrayList<ArrayList<Integer>> combine(int n, int k) {
+        backTracking(n, k, 1);
+        return resultArr;
+    }
+
+    void backTracking(int n, int k, int startIndex) {
+        if (path.size() == k) {
+            resultArr.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = startIndex; i <= n; ++i) {
+            path.add(i);
+            backTracking(n, k, i+1);
+            path.removeLast();
+        }
+    }
+}
+```
+
+## 剪枝的版本
+
+![](/img/algo_na/20210130194335207-20230310134409532.png)
+
+图中每一个节点（图中为矩形），就代表本层的一个for循环，那么每一层的for循环从第二个数开始遍历的话，都没有意义，都是无效遍历。
+
+所以，可以剪枝的地方就在递归中每一层的for循环所选择的起始位置。
+
+如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了。
+
+注意代码中i，就是for循环里选择的起始位置。
+
+`for (int i = startIndex; i <= n; i++) {`
+
+接下来看一下优化过程如下：
+
+- 已经选择的元素个数：`path.size();`
+- 还需要的元素个数为:`k - path.size();`
+- 在集合n中i最大可以从该起始位置开始遍历 : `n - (k - path.size()) + 1` (备注: `n - (k - path.size())` 就是表示从已经最大的数n往回退几个数再开始搜索遍历, 退几个数呢? 退 `k - path.size()` 个数, 后面多出来的那个 `+1`是因为要包括起始位置，我们要是一个左闭的集合)
+
+那为什么有个+1呢? 因为包括起始位置，我们要是一个左闭的集合。
+
+举个例子，`n = 4，k = 3`， 目前已经选取的元素为0个（即path.size()为0），`n - (k - 0) + 1` 即 `4 - ( 3 - 0) + 1 = 2`。
+
+从2开始搜索都是合理的，可以是组合`[2, 3, 4]`。从"3"开始就不合理了, 因为只能`[3, 4, ?]`, "4"后面没有了, 只有2个数字"3"和"4"能用.
+
+这里大家想不懂的话，建议也举一个例子，就知道是不是要+1了。
+
+所以优化之后的for循环是：
+
+`for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) // i为本次搜索的起始位置`
+
+优化后整体代码 diff 如下：
+
+``` diff java
+class Solution {
+    ArrayList<ArrayList<Integer>> resultArr = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public ArrayList<ArrayList<Integer>> combine(int n, int k) {
+        backTracking(n, k, 1);
+        return resultArr;
+    }
+    void backTracking(int n, int k, int startIndex) {
+        if (path.size() == k) {
+            resultArr.add(new ArrayList<>(path));
+            return;
+        }
+-       for (int i = startIndex; i <= n; ++i) {
++       for (int i = startIndex; i <= n - (k - path.size()) + 1; ++i) {
+            path.add(i);
+            backTracking(n, k, i+1);
+            path.removeLast();
+        }
+    }
+}
+```

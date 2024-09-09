@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://hulinhong.com/img/algo_na/binary_tree_level_order.gif">
 <meta property="og:image" content="https://hulinhong.com/img/algo_na/20201123195242899.png">
 <meta property="og:image" content="https://hulinhong.com/img/algo_na/20210130194335207-20230310134409532.png">
-<meta property="og:updated_time" content="2024-09-07T13:58:02.781Z">
+<meta property="og:updated_time" content="2024-09-09T16:58:17.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="algo na">
 <meta name="twitter:description" content="算法白话总结参考: https://programmercarl.com/推荐参考本博客总结的 algo_newbie , 和本文对照着看 概绍本群的每日刷题打卡活动, 按照 GitHub 49k star的项目 https://github.com/youngyangyang04/leetcode-master 的刷题顺序.跟着群里有个伴一起刷题或许更容易坚持达成每日一题的目标. 做完题目之后可">
@@ -528,7 +528,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
 <li>还需要的元素个数为:<code>k - path.size();</code></li>
 <li>在集合n中i最大可以从该起始位置开始遍历 : <code>n - (k - path.size()) + 1</code> (备注: <code>n - (k - path.size())</code> 就是表示从已经最大的数n往回退几个数再开始搜索遍历, 退几个数呢? 退 <code>k - path.size()</code> 个数, 后面多出来的那个 <code>+1</code>是因为要包括起始位置，我们要是一个左闭的集合)</li>
 </ul>
-<p>那为什么有个+1呢? 因为包括起始位置，我们要是一个左闭的集合。</p>
+<p>那为什么 <code>n - (k - path.size()) + 1</code> 有个+1呢? 因为包括起始位置，我们要是一个左闭的集合。</p>
 <p>举个例子，<code>n = 4，k = 3</code>， 目前已经选取的元素为0个（即path.size()为0），<code>n - (k - 0) + 1</code> 即 <code>4 - ( 3 - 0) + 1 = 2</code>。</p>
 <p>从2开始搜索都是合理的，可以是组合<code>[2, 3, 4]</code>。从”3”开始就不合理了, 因为只能<code>[3, 4, ?]</code>, “4”后面没有了, 只有2个数字”3”和”4”能用.</p>
 <p>这里大家想不懂的话，建议也举一个例子，就知道是不是要+1了。</p>

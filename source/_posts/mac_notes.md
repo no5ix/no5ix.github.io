@@ -1,5 +1,5 @@
 ---
-title: mac笔记
+title: mac stuff
 date: 2022-05-07 03:02:22
 tags:
 - Mac
@@ -16,12 +16,7 @@ categories:
 
 **. . .**<!--more -->
 
-
-
-
-
-
-# 改键Karabiner
+# 改键Karabiner(已经用hammerspoon完全替代)
 
 改键软件 Karabiner-Elements 的配置得直接覆盖他的配置文件 `karabiner.json` (它的配置文件路径在 app 里的 misc 里有), 
 弄完之后记得去mac的设置-Keyboard-Keyboard Shortcuts-Input Sources-Select next source in Input menu里更改快捷键为`ctrl+option+space`
@@ -33,7 +28,7 @@ categories:
 - https://github.com/realliyifei/mac-karabiner-chinese-punctuations-to-halfwidth-forms
 
 
-# Mac读写NTFS格式移动硬盘(使用NTFS Disk by Omi更方便些)
+# Mac读写NTFS格式移动硬盘(使用NTFS Disk by Omi也可以, 但是buhoNTFS更好因为免费)
  
 打开mac自带的`Disk Utility`这个软件 , 右键选中你的 USB 磁盘，记住这个页面的表格中的右下角的`Device`是啥(这个就是你的 NTFS 磁盘标识符, 一般叫做类似于`disk2s1`的名字), 然后点击 "Unmount", 打开 terminal , 然后在里面输入下面的命令 (记住要把里面的"disk2s1" 换成你的NTFS磁盘的标识符, ):
 

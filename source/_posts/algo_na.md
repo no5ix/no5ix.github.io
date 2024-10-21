@@ -52,12 +52,19 @@ class Solution {
             url: https://stackoverflow.com/questions/27167943/why-leftright-left-2-will-not-overflow
             Q: why left+(right-left)/2 can avoid overflow?
             A: 
-                You have left < right by definition.
-                As a consequence, right - left > 0, and furthermore left + (right - left) = right (follows from basic algebra).
-                And consequently left + (right - left) / 2 <= right. So no overflow can happen since every step of the operation is bounded by the value of right.
-                By contrast, consider the buggy expression, (left + right) / 2. left + right >= right, and since we don’t know the values of left and right, it’s entirely possible that that value overflows.
+                Suppose (to make the example easier) the maximum integer is 100, left = 50, and right = 80. If you use the naive formula:
+
+                int mid = (left + right)/2;
+                the addition will result in 130, which overflows.
+
+                If you instead do:
+
+                int mid = left + (right - left)/2;
+                you can't overflow in (right - left) because you're subtracting a smaller number from a larger number. That always results in an even smaller number, so it can't possibly go over the maximum. E.g. 80 - 50 = 30.
+
+                And since the result is the average of left and right, it must be between them. Since these are both less than the maximum integer, anything between them is also less than the maximum, so there's no overflow.
             */
-            int midIndex = leftIndex + ((rightIndex - leftIndex) >> 2);  // >> 2 等同于 除以 2
+            int midIndex = leftIndex + ((rightIndex - leftIndex) >> 1);  // >> 1 等同于 除以 2
             if (numbers[midIndex] == targetNumber) {
                 return midIndex;
             } else if (numbers[midIndex] < targetNumber) {
@@ -178,8 +185,17 @@ class Solution {
 
 # 二叉树
 
-## 前序
+## 二叉树递归解法的写法窍门
+    
+再来看返回值，递归函数什么时候需要返回值？什么时候不需要返回值？这里总结如下三点：
 
+- 如果需要搜索**整棵**二叉树且不用处理递归返回值，递归函数就不要返回值。（这种情况就是本文下半部分介绍的113.路径总和ii, https://programmercarl.com/0112.路径总和.html#相关题目推荐）
+- 如果需要搜索**整棵**二叉树且需要处理递归返回值，递归函数就需要返回值。 （这种情况我们在236. 二叉树的最近公共祖先, https://programmercarl.com/0236.二叉树的最近公共祖先.html#算法公开课）
+- 如果要搜索**其中一条**符合条件的路径，那么递归一定需要返回值，因为遇到符合条件的路径了就要及时返回。（这种情况符合: https://programmercarl.com/0112.路径总和.html#算法公开课）
+
+
+## 前序
+     
 ![](/img/algo_na/二叉树前序遍历（迭代法）.gif)
 
 前序遍历是中左右，每次先处理的是中间节点，那么先将根节点放入栈中，然后将右孩子加入栈，再加入左孩子。

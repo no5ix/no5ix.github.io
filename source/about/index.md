@@ -21,7 +21,7 @@ type: "about"
 
 # 交流一哈?
 
-- <i class="fa fa-fw fa-envelope fa-2x"></i>Email : no5ix#foxmail.com (将#替换为@)
+- <i class="fa fa-fw fa-envelope fa-2x"></i>Email :  (将#替换为@)
 
 - <i class="fa fa-fw fa-github fa-2x"></i>GitHub : https://github.com/no5ix
     - [sux](https://github.com/no5ix/sux) : 一个只有2M+大小的强大效率工具.

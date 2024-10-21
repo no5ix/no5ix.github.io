@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+          // alert('此文章并不公开, 输入文章密码方可阅读');
+          var password = prompt('此文章并不公开, 输入文章密码方可阅读');
+          if (password !== ''){
+            if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+            {
+              alert('Error!');
+            }
+            if (history.length > 1)
+            {
+              history.back();
+            }
+            else
+            {
+              window.location.href = "about:blank";
+            }
+          }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/dist/jquery.fancybox.css?v=3.2.10" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Algo,English,Subtitle,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="URLhttps://www.youtube.com/watch?v=s4DPM8ct1pI&amp;amp;list=WL&amp;amp;index=1&amp;amp;t=106s Read the problem100:00:00,000 –&amp;gt; 00:00:01,680hey everyone welcome back and let’s 200:00:01,680 –&amp;gt; 00:00:03,439wr">
+<meta name="keywords" content="Algo,English,Subtitle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yt neetcode lc704 binary search">
+<meta property="og:url" content="https://hulinhong.com/2024/10/21/eng_youtube_neetcode_704_binary_search/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="URLhttps://www.youtube.com/watch?v=s4DPM8ct1pI&amp;amp;list=WL&amp;amp;index=1&amp;amp;t=106s Read the problem100:00:00,000 –&amp;gt; 00:00:01,680hey everyone welcome back and let’s 200:00:01,680 –&amp;gt; 00:00:03,439wr">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-10-21T10:12:01.177Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yt neetcode lc704 binary search">
+<meta name="twitter:description" content="URLhttps://www.youtube.com/watch?v=s4DPM8ct1pI&amp;amp;list=WL&amp;amp;index=1&amp;amp;t=106s Read the problem100:00:00,000 –&amp;gt; 00:00:01,680hey everyone welcome back and let’s 200:00:01,680 –&amp;gt; 00:00:03,439wr">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>yt neetcode lc704 binary search | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <form class="site-search-form">
+    <span class="search-icon fa fa-search"></span>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </form>
+
+
+<script type="text/javascript" id="local.search.active">
+var inputArea       = document.querySelector("#local-search-input");
+inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2024/10/21/eng_youtube_neetcode_704_binary_search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="no5ix">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">yt neetcode lc704 binary search</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2024-10-21T02:34:21+00:00">
+                2024-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/English/" itemprop="url" rel="index">
+                    <span itemprop="name">English</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/Algo/" rel="tag"><i class="fa fa-tag"></i> Algo</a>
+              
+                <a href="/tags/English/" rel="tag"><i class="fa fa-tag"></i> English</a>
+              
+                <a href="/tags/Subtitle/" rel="tag"><i class="fa fa-tag"></i> Subtitle</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/08/29/na_vlog_text/" rel="next" title="nvt">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  nvt
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><p><a href="https://www.youtube.com/watch?v=s4DPM8ct1pI&amp;list=WL&amp;index=1&amp;t=106s" target="_blank" rel="noopener">https://www.youtube.com/watch?v=s4DPM8ct1pI&amp;list=WL&amp;index=1&amp;t=106s</a></p>
+<h1 id="Read-the-problem"><a href="#Read-the-problem" class="headerlink" title="Read the problem"></a>Read the problem</h1><p>1<br>00:00:00,000 –&gt; 00:00:01,680<br>hey everyone welcome back and let’s</p>
+<p>2<br>00:00:01,680 –&gt; 00:00:03,439<br>write some more neat code today so today</p>
+<p>3<br>00:00:03,439 –&gt; 00:00:05,520<br>let’s solve the problem binary search</p>
+<p>4<br>00:00:05,520 –&gt; 00:00:08,080<br>we’re given an array of integers nums</p>
+<p>5<br>00:00:08,080 –&gt; 00:00:09,599<br>which are going to be sorted in</p>
+<p>6<br>00:00:09,599 –&gt; 00:00:12,160<br>ascending order and we’re also given a</p>
+<p>7<br>00:00:12,160 –&gt; 00:00:13,920<br>target integer that we’re going to look</p>
+<p>8<br>00:00:13,920 –&gt; 00:00:16,800<br>for if the target exists in the array</p>
+<p>9<br>00:00:16,800 –&gt; 00:00:18,720<br>then we can return the index of it if it</p>
+<p>10<br>00:00:18,720 –&gt; 00:00:21,439<br>does not exist then we return one the</p>
+<p>11<br>00:00:21,439 –&gt; 00:00:23,680<br>goal is to create an efficient algorithm</p>
+<p>12<br>00:00:23,680 –&gt; 00:00:26,400<br>that can run in log n time so what</p>
+<p>13<br>00:00:26,400 –&gt; 00:00:28,400<br>algorithm are we going to use well the</p>
+<p>14<br>00:00:28,400 –&gt; 00:00:30,480<br>problem pretty much tells you binary</p>
+<p>15<br>00:00:30,480 –&gt; 00:00:33,440<br>search so while this is self-explanatory</p>
+<p>16<br>00:00:33,440 –&gt; 00:00:35,760<br>and a pretty basic algorithm i still</p>
+<p>17<br>00:00:35,760 –&gt; 00:00:38,000<br>think it’s really important because a</p>
+<p>18<br>00:00:38,000 –&gt; 00:00:40,960<br>lot of problems kind of extend the idea</p>
+<p>19<br>00:00:40,960 –&gt; 00:00:42,800<br>of binary search and then make it even</p>
+<p>20<br>00:00:42,800 –&gt; 00:00:44,640<br>harder and this is actually a pretty</p>
+<p>21<br>00:00:44,640 –&gt; 00:00:47,039<br>common interview question to be asked</p>
+<p>22<br>00:00:47,039 –&gt; 00:00:49,520<br>some variation of binary search so this</p>
+<p>23<br>00:00:49,520 –&gt; 00:00:51,360<br>is a very good problem to practice and</p>
+<p>24<br>00:00:51,360 –&gt; 00:00:53,199<br>your goal should be able to implement</p>
+<p>25<br>00:00:53,199 –&gt; 00:00:55,840<br>binary search very quickly basically as</p>
+<p>26<br>00:00:55,840 –&gt; 00:00:57,760<br>if you were doing it in your sleep so</p>
+<h1 id="Drawing-explanation"><a href="#Drawing-explanation" class="headerlink" title="Drawing explanation"></a>Drawing explanation</h1><p>27<br>00:00:57,760 –&gt; 00:00:59,520<br>i’ll try to explain this quickly but</p>
+<p>28<br>00:00:59,520 –&gt; 00:01:02,399<br>also in a beginner-friendly way so the</p>
+<p>29<br>00:01:02,399 –&gt; 00:01:05,199<br>input array is sorted the target value</p>
+<p>30<br>00:01:05,199 –&gt; 00:01:08,400<br>could exist anywhere in this array or it</p>
+<p>31<br>00:01:08,400 –&gt; 00:01:11,200<br>might not exist at all when we start we</p>
+<p>32<br>00:01:11,200 –&gt; 00:01:13,840<br>are considering the entire input array</p>
+<p>33<br>00:01:13,840 –&gt; 00:01:15,280<br>how are we going to do that well we’re</p>
+<p>34<br>00:01:15,280 –&gt; 00:01:17,600<br>going to have two pointers one pointer</p>
+<p>35<br>00:01:17,600 –&gt; 00:01:20,479<br>is going to be at the leftmost index</p>
+<p>36<br>00:01:20,479 –&gt; 00:01:22,720<br>which is initially index zero another</p>
+<p>37<br>00:01:22,720 –&gt; 00:01:24,400<br>pointer is going to be at the rightmost</p>
+<p>38<br>00:01:24,400 –&gt; 00:01:27,040<br>index these pointers mean that we are</p>
+<p>39<br>00:01:27,040 –&gt; 00:01:29,920<br>considering the entire range now if we</p>
+<p>40<br>00:01:29,920 –&gt; 00:01:33,200<br>could only look at one of these values</p>
+<p>41<br>00:01:33,200 –&gt; 00:01:35,119<br>which one should we look at should we</p>
+<p>42<br>00:01:35,119 –&gt; 00:01:38,000<br>look at the leftmost if we do that and</p>
+<p>43<br>00:01:38,000 –&gt; 00:01:40,159<br>we see that it’s not equal to the target</p>
+<p>44<br>00:01:40,159 –&gt; 00:01:42,159<br>then we’ve only eliminated one</p>
+<p>45<br>00:01:42,159 –&gt; 00:01:44,159<br>possibility and we still have to search</p>
+<p>46<br>00:01:44,159 –&gt; 00:01:47,200<br>all of these if we look at the rightmost</p>
+<p>47<br>00:01:47,200 –&gt; 00:01:49,119<br>similarly it’s not the target so we’ve</p>
+<p>48<br>00:01:49,119 –&gt; 00:01:51,040<br>only eliminated one possibility we still</p>
+<p>49<br>00:01:51,040 –&gt; 00:01:52,720<br>have to look at the rest of them but if</p>
+<p>50<br>00:01:52,720 –&gt; 00:01:54,720<br>we look at the midway point and</p>
+<p>51<br>00:01:54,720 –&gt; 00:01:56,240<br>technically either of these could be the</p>
+<p>52<br>00:01:56,240 –&gt; 00:01:58,479<br>midway point the way we calculate it</p>
+<p>53<br>00:01:58,479 –&gt; 00:02:00,719<br>though is going to be literally taking</p>
+<p>54<br>00:02:00,719 –&gt; 00:02:02,960<br>the left and right indexes and dividing</p>
+<p>55<br>00:02:02,960 –&gt; 00:02:04,960<br>them by two which i think will lead us</p>
+<p>56<br>00:02:04,960 –&gt; 00:02:07,680<br>to this position but approximately the</p>
+<p>57<br>00:02:07,680 –&gt; 00:02:10,479<br>halfway point why should we look here</p>
+<p>58<br>00:02:10,479 –&gt; 00:02:12,480<br>well we can compare it to the target</p>
+<p>59<br>00:02:12,480 –&gt; 00:02:14,879<br>it’s not equal to the target so what</p>
+<p>60<br>00:02:14,879 –&gt; 00:02:16,480<br>does that tell us have we only</p>
+<p>61<br>00:02:16,480 –&gt; 00:02:19,440<br>eliminated one possibility no because</p>
+<p>62<br>00:02:19,440 –&gt; 00:02:23,120<br>remember the input array is sorted so if</p>
+<p>63<br>00:02:23,120 –&gt; 00:02:25,520<br>this is not equal to the target we</p>
+<p>64<br>00:02:25,520 –&gt; 00:02:28,000<br>should also ask is it smaller than the</p>
+<p>65<br>00:02:28,000 –&gt; 00:02:30,480<br>target or is it larger than the target</p>
+<p>66<br>00:02:30,480 –&gt; 00:02:32,239<br>in this case it’s smaller than the</p>
+<p>67<br>00:02:32,239 –&gt; 00:02:34,560<br>target so if this is smaller than the</p>
+<p>68<br>00:02:34,560 –&gt; 00:02:37,519<br>target then everything to the left of it</p>
+<p>69<br>00:02:37,519 –&gt; 00:02:40,080<br>is also going to be smaller than the</p>
+<p>70<br>00:02:40,080 –&gt; 00:02:42,239<br>target so this was our midway point</p>
+<p>71<br>00:02:42,239 –&gt; 00:02:45,120<br>we’ll call it m and we found that it’s</p>
+<p>72<br>00:02:45,120 –&gt; 00:02:46,959<br>smaller than the target so we can</p>
+<p>73<br>00:02:46,959 –&gt; 00:02:49,680<br>eliminate these three values from</p>
+<p>74<br>00:02:49,680 –&gt; 00:02:52,000<br>consideration everything over here how</p>
+<p>75<br>00:02:52,000 –&gt; 00:02:53,760<br>are we gonna you know represent that in</p>
+<p>76<br>00:02:53,760 –&gt; 00:02:55,760<br>code well we’re gonna take this left</p>
+<p>77<br>00:02:55,760 –&gt; 00:02:58,480<br>pointer and then shift it to be m</p>
+<p>78<br>00:02:58,480 –&gt; 00:03:01,280<br>plus one so now our left pointer is</p>
+<p>79<br>00:03:01,280 –&gt; 00:03:03,680<br>gonna be over here this represents</p>
+<p>80<br>00:03:03,680 –&gt; 00:03:05,840<br>possible range of solutions is going to</p>
+<p>81<br>00:03:05,840 –&gt; 00:03:08,400<br>lie within you know these two pointers</p>
+<p>82<br>00:03:08,400 –&gt; 00:03:10,319<br>so at this point we’re just going to</p>
+<p>83<br>00:03:10,319 –&gt; 00:03:12,400<br>repeat the algorithm repeat what i</p>
+<p>84<br>00:03:12,400 –&gt; 00:03:14,560<br>pretty much just did now if we take</p>
+<p>85<br>00:03:14,560 –&gt; 00:03:16,720<br>these two add them together divide by</p>
+<p>86<br>00:03:16,720 –&gt; 00:03:19,200<br>two the middle is going to be over here</p>
+<p>87<br>00:03:19,200 –&gt; 00:03:20,800<br>so then we’re going to check is this</p>
+<p>88<br>00:03:20,800 –&gt; 00:03:22,159<br>equal to the target that we’re looking</p>
+<p>89<br>00:03:22,159 –&gt; 00:03:25,120<br>for in this case yes it is so now we can</p>
+<p>90<br>00:03:25,120 –&gt; 00:03:27,440<br>return the index because that’s what we</p>
+<p>91<br>00:03:27,440 –&gt; 00:03:29,280<br>were trying to do we can return m</p>
+<p>92<br>00:03:29,280 –&gt; 00:03:30,720<br>whatever it happened to be i think it’s</p>
+<p>93<br>00:03:30,720 –&gt; 00:03:33,280<br>4 in this case so that is pretty much</p>
+<p>94<br>00:03:33,280 –&gt; 00:03:36,480<br>the idea of binary search okay so now</p>
+<p>95<br>00:03:36,480 –&gt; 00:03:38,720<br>the time complexity if you know binary</p>
+<p>96<br>00:03:38,720 –&gt; 00:03:40,480<br>search you already know that it runs in</p>
+<p>97<br>00:03:40,480 –&gt; 00:03:42,799<br>log in time but let’s quickly understand</p>
+<p>98<br>00:03:42,799 –&gt; 00:03:44,560<br>why so we’re not considering this</p>
+<p>99<br>00:03:44,560 –&gt; 00:03:47,120<br>example anymore but suppose we had 16</p>
+<p>100<br>00:03:47,120 –&gt; 00:03:49,840<br>values in the input array every time we</p>
+<p>101<br>00:03:49,840 –&gt; 00:03:53,120<br>go to the midway point we either find</p>
+<p>102<br>00:03:53,120 –&gt; 00:03:55,360<br>the target but if we don’t find the</p>
+<p>103<br>00:03:55,360 –&gt; 00:03:56,959<br>target we know we’re at least going to</p>
+<p>104<br>00:03:56,959 –&gt; 00:04:00,159<br>eliminate half of the possibilities so</p>
+<p>105<br>00:04:00,159 –&gt; 00:04:02,239<br>we would eliminate this down to a now</p>
+<p>106<br>00:04:02,239 –&gt; 00:04:04,239<br>we’re only looking at eight values we</p>
+<p>107<br>00:04:04,239 –&gt; 00:04:06,159<br>still don’t find the result we keep</p>
+<p>108<br>00:04:06,159 –&gt; 00:04:09,200<br>dividing it by two make it two remaining</p>
+<p>109<br>00:04:09,200 –&gt; 00:04:12,000<br>and then finally there would only be</p>
+<p>110<br>00:04:12,000 –&gt; 00:04:15,040<br>one value remaining and either that’s</p>
+<p>111<br>00:04:15,040 –&gt; 00:04:16,959<br>going to be the target or it’s not going</p>
+<p>112<br>00:04:16,959 –&gt; 00:04:18,639<br>to be the target and then we’re pretty</p>
+<p>113<br>00:04:18,639 –&gt; 00:04:20,798<br>much done with the algorithm anyway so</p>
+<p>114<br>00:04:20,798 –&gt; 00:04:23,840<br>the question is if we have a while loop</p>
+<p>115<br>00:04:23,840 –&gt; 00:04:26,400<br>the while loop is going to run as many</p>
+<p>116<br>00:04:26,400 –&gt; 00:04:29,680<br>times as we can divide the length of the</p>
+<p>117<br>00:04:29,680 –&gt; 00:04:32,720<br>input array by two how many times can we</p>
+<p>118<br>00:04:32,720 –&gt; 00:04:34,880<br>divide it by two well if you remember</p>
+<p>119<br>00:04:34,880 –&gt; 00:04:37,440<br>from your math class that is a math</p>
+<p>120<br>00:04:37,440 –&gt; 00:04:41,919<br>equation called log base two of n this</p>
+<p>121<br>00:04:41,919 –&gt; 00:04:44,320<br>evaluates to how many times can we</p>
+<p>122<br>00:04:44,320 –&gt; 00:04:48,000<br>divide n by 2. and you know suppose it</p>
+<p>123<br>00:04:48,000 –&gt; 00:04:50,400<br>evaluates to be x that’s equivalent to</p>
+<p>124<br>00:04:50,400 –&gt; 00:04:52,320<br>saying that 2 to the power of x is going</p>
+<p>125<br>00:04:52,320 –&gt; 00:04:54,000<br>to be equal to n okay but this is too</p>
+<p>126<br>00:04:54,000 –&gt; 00:04:55,759<br>much math maybe you don’t even care but</p>
+<p>127<br>00:04:55,759 –&gt; 00:04:58,080<br>that’s pretty much the idea that’s why</p>
+<p>128<br>00:04:58,080 –&gt; 00:05:00,639<br>our loop is going to run x times which</p>
+<p>129<br>00:05:00,639 –&gt; 00:05:02,720<br>is going to be equal to log n so it’s</p>
+<p>130<br>00:05:02,720 –&gt; 00:05:05,440<br>not a big o of n algorithm it’s a log</p>
+<p>131<br>00:05:05,440 –&gt; 00:05:09,360<br>base 2 n algorithm which is much much</p>
+<p>132<br>00:05:09,360 –&gt; 00:05:10,560<br>more efficient</p>
+<h1 id="Coding-explanation"><a href="#Coding-explanation" class="headerlink" title="Coding explanation"></a>Coding explanation</h1><p>133<br>00:05:10,560 –&gt; 00:05:13,280<br>okay so now let’s code it up and like i</p>
+<p>134<br>00:05:13,280 –&gt; 00:05:14,880<br>did in the drawing initially we’re</p>
+<p>135<br>00:05:14,880 –&gt; 00:05:18,080<br>considering the entire input array as</p>
+<p>136<br>00:05:18,080 –&gt; 00:05:20,560<br>our search area so our left pointer is</p>
+<p>137<br>00:05:20,560 –&gt; 00:05:22,240<br>going to be at zero our right pointer is</p>
+<p>138<br>00:05:22,240 –&gt; 00:05:24,080<br>going to be at the last index which is</p>
+<p>139<br>00:05:24,080 –&gt; 00:05:26,560<br>just the length of the array minus 1.</p>
+<p>140<br>00:05:26,560 –&gt; 00:05:28,960<br>now we want to continue going until</p>
+<p>141<br>00:05:28,960 –&gt; 00:05:31,440<br>there’s no more possibilities left or we</p>
+<p>142<br>00:05:31,440 –&gt; 00:05:33,520<br>have maybe found the result so the way</p>
+<p>143<br>00:05:33,520 –&gt; 00:05:35,199<br>to do that is to basically say that</p>
+<p>144<br>00:05:35,199 –&gt; 00:05:37,759<br>while our left pointer is less than or</p>
+<p>145<br>00:05:37,759 –&gt; 00:05:40,240<br>equal to our right pointer because i</p>
+<p>146<br>00:05:40,240 –&gt; 00:05:41,680<br>didn’t show it in the drawing picture</p>
+<p>147<br>00:05:41,680 –&gt; 00:05:43,840<br>but suppose we just had a very small</p>
+<p>148<br>00:05:43,840 –&gt; 00:05:45,360<br>input array just to illustrate the</p>
+<p>149<br>00:05:45,360 –&gt; 00:05:47,199<br>example our left and right pointers</p>
+<p>150<br>00:05:47,199 –&gt; 00:05:49,840<br>would both point here our midpointer</p>
+<p>151<br>00:05:49,840 –&gt; 00:05:52,880<br>would also point here but suppose our</p>
+<p>152<br>00:05:52,880 –&gt; 00:05:55,759<br>target is actually equal to two okay</p>
+<p>153<br>00:05:55,759 –&gt; 00:05:58,080<br>we’d say okay this is too small for our</p>
+<p>154<br>00:05:58,080 –&gt; 00:06:00,479<br>target so we’re gonna set our left</p>
+<p>155<br>00:06:00,479 –&gt; 00:06:04,000<br>pointer to be equal to mid plus one so</p>
+<p>156<br>00:06:04,000 –&gt; 00:06:06,240<br>that means our left pointer would be one</p>
+<p>157<br>00:06:06,240 –&gt; 00:06:08,639<br>and our right pointer would be zero that</p>
+<p>158<br>00:06:08,639 –&gt; 00:06:10,560<br>basically means our left pointer has</p>
+<p>159<br>00:06:10,560 –&gt; 00:06:12,639<br>crossed our right pointer and that’s how</p>
+<p>160<br>00:06:12,639 –&gt; 00:06:15,120<br>you know that we have no more values</p>
+<p>161<br>00:06:15,120 –&gt; 00:06:17,039<br>left to search we did not find the</p>
+<p>162<br>00:06:17,039 –&gt; 00:06:19,360<br>result so that’s why we’re doing less</p>
+<p>163<br>00:06:19,360 –&gt; 00:06:21,280<br>than or equal if they’re both equal</p>
+<p>164<br>00:06:21,280 –&gt; 00:06:22,880<br>though if they’re both pointing at this</p>
+<p>165<br>00:06:22,880 –&gt; 00:06:24,800<br>value that means we haven’t looked at</p>
+<p>166<br>00:06:24,800 –&gt; 00:06:27,520<br>this value yet so that’s the idea so</p>
+<p>167<br>00:06:27,520 –&gt; 00:06:28,880<br>each iteration of the loop we’re just</p>
+<p>168<br>00:06:28,880 –&gt; 00:06:30,560<br>going to find the midway point which we</p>
+<p>169<br>00:06:30,560 –&gt; 00:06:34,479<br>can get by taking l plus r and dividing</p>
+<p>170<br>00:06:34,479 –&gt; 00:06:38,400<br>by two if the value that this index is</p>
+<p>171<br>00:06:38,400 –&gt; 00:06:41,199<br>at is greater than the target then we</p>
+<p>172<br>00:06:41,199 –&gt; 00:06:43,280<br>want to look at all values to the left</p>
+<p>173<br>00:06:43,280 –&gt; 00:06:44,880<br>of it so we’re gonna take our right</p>
+<p>174<br>00:06:44,880 –&gt; 00:06:47,199<br>pointer and set it to m minus one we</p>
+<p>175<br>00:06:47,199 –&gt; 00:06:49,360<br>wanna look at all values to the left</p>
+<p>176<br>00:06:49,360 –&gt; 00:06:51,840<br>we’re basically shrinking our criteria</p>
+<p>177<br>00:06:51,840 –&gt; 00:06:54,880<br>and in the other case else if that num</p>
+<p>178<br>00:06:54,880 –&gt; 00:06:56,880<br>is smaller than our target then we’re</p>
+<p>179<br>00:06:56,880 –&gt; 00:06:58,319<br>gonna do the opposite we’re gonna set</p>
+<p>180<br>00:06:58,319 –&gt; 00:07:00,960<br>left equal to mid plus one just like in</p>
+<p>181<br>00:07:00,960 –&gt; 00:07:03,440<br>the drawing explanation the last case is</p>
+<p>182<br>00:07:03,440 –&gt; 00:07:05,680<br>if neither of those are true that must</p>
+<p>183<br>00:07:05,680 –&gt; 00:07:07,840<br>mean that we found the target if it’s</p>
+<p>184<br>00:07:07,840 –&gt; 00:07:10,080<br>not greater and not smaller that means</p>
+<p>185<br>00:07:10,080 –&gt; 00:07:12,000<br>it must be equal that means we can</p>
+<p>186<br>00:07:12,000 –&gt; 00:07:14,639<br>return m which is the result but if we</p>
+<p>187<br>00:07:14,639 –&gt; 00:07:16,639<br>went through every iteration of the loop</p>
+<p>188<br>00:07:16,639 –&gt; 00:07:18,560<br>and we didn’t find the result then</p>
+<p>189<br>00:07:18,560 –&gt; 00:07:21,199<br>outside of it we are told that we should</p>
+<p>190<br>00:07:21,199 –&gt; 00:07:23,280<br>return negative one to indicate we did</p>
+<p>191<br>00:07:23,280 –&gt; 00:07:25,680<br>not find a result so that’s the solution</p>
+<p>192<br>00:07:25,680 –&gt; 00:07:27,520<br>let’s run it to make sure that it works</p>
+<p>193<br>00:07:27,520 –&gt; 00:07:29,280<br>and as you can see on the left yes it</p>
+<p>194<br>00:07:29,280 –&gt; 00:07:31,120<br>does and it’s very efficient there’s one</p>
+<p>195<br>00:07:31,120 –&gt; 00:07:32,720<br>more thing though that i want to mention</p>
+<p>196<br>00:07:32,720 –&gt; 00:07:34,800<br>to you which probably won’t come up in</p>
+<p>197<br>00:07:34,800 –&gt; 00:07:36,639<br>your interview to be honest it’s never</p>
+<p>198<br>00:07:36,639 –&gt; 00:07:38,880<br>come up in mine but there’s actually one</p>
+<p>199<br>00:07:38,880 –&gt; 00:07:41,120<br>little bug here i mean technically the</p>
+<p>200<br>00:07:41,120 –&gt; 00:07:43,440<br>bug doesn’t exist in python because</p>
+<p>201<br>00:07:43,440 –&gt; 00:07:44,479<br>python</p>
+<p>202<br>00:07:44,479 –&gt; 00:07:46,560<br>integers are unbounded they can pretty</p>
+<p>203<br>00:07:46,560 –&gt; 00:07:48,960<br>much be infinitely large but in most</p>
+<p>204<br>00:07:48,960 –&gt; 00:07:51,599<br>languages like java and c plus plus you</p>
+<p>205<br>00:07:51,599 –&gt; 00:07:54,400<br>might encounter an overflow because</p>
+<p>206<br>00:07:54,400 –&gt; 00:07:57,440<br>suppose we had a very large input array</p>
+<p>207<br>00:07:57,440 –&gt; 00:08:00,639<br>and then these two integers were very</p>
+<p>208<br>00:08:00,639 –&gt; 00:08:04,000<br>close to the 32-bit integer max which is</p>
+<p>209<br>00:08:04,000 –&gt; 00:08:05,120<br>something like</p>
+<p>210<br>00:08:05,120 –&gt; 00:08:07,840<br>2 to the power of 31 suppose they were</p>
+<p>211<br>00:08:07,840 –&gt; 00:08:09,599<br>both close to that then adding them</p>
+<p>212<br>00:08:09,599 –&gt; 00:08:12,879<br>together would possibly overflow and</p>
+<p>213<br>00:08:12,879 –&gt; 00:08:15,599<br>then we would get the wrong result in</p>
+<p>214<br>00:08:15,599 –&gt; 00:08:16,400<br>this</p>
+<p>215<br>00:08:16,400 –&gt; 00:08:18,800<br>value so possibly your interviewer might</p>
+<p>216<br>00:08:18,800 –&gt; 00:08:20,479<br>ask you something about that and how</p>
+<p>217<br>00:08:20,479 –&gt; 00:08:22,479<br>would you go about fixing that well</p>
+<p>218<br>00:08:22,479 –&gt; 00:08:24,639<br>there’s actually a way to do that we can</p>
+<p>219<br>00:08:24,639 –&gt; 00:08:26,879<br>still calculate the midway point between</p>
+<p>220<br>00:08:26,879 –&gt; 00:08:28,879<br>left and right without adding them</p>
+<p>221<br>00:08:28,879 –&gt; 00:08:31,360<br>together because we can take the</p>
+<p>222<br>00:08:31,360 –&gt; 00:08:34,000<br>distance between them we can get the</p>
+<p>223<br>00:08:34,000 –&gt; 00:08:36,479<br>distance between them by taking right</p>
+<p>224<br>00:08:36,479 –&gt; 00:08:40,958<br>minus left and then dividing that by two</p>
+<p>225<br>00:08:40,958 –&gt; 00:08:42,958<br>right that will give us half of the</p>
+<p>226<br>00:08:42,958 –&gt; 00:08:45,519<br>distance between them and we can take</p>
+<p>227<br>00:08:45,519 –&gt; 00:08:49,279<br>that and add it to the left index</p>
+<p>228<br>00:08:49,279 –&gt; 00:08:51,200<br>because if this is halfway of the</p>
+<p>229<br>00:08:51,200 –&gt; 00:08:53,120<br>distance between them and then this is</p>
+<p>230<br>00:08:53,120 –&gt; 00:08:55,680<br>the left index by adding these together</p>
+<p>231<br>00:08:55,680 –&gt; 00:08:58,080<br>we are getting the midway point this is</p>
+<p>232<br>00:08:58,080 –&gt; 00:09:00,000<br>just a way to do the exact same</p>
+<p>233<br>00:09:00,000 –&gt; 00:09:03,440<br>calculation but this way it will never</p>
+<p>234<br>00:09:03,440 –&gt; 00:09:05,760<br>overflow because right is always going</p>
+<p>235<br>00:09:05,760 –&gt; 00:09:08,320<br>to be greater than or equal to left and</p>
+<p>236<br>00:09:08,320 –&gt; 00:09:09,920<br>in this case we’re not adding them</p>
+<p>237<br>00:09:09,920 –&gt; 00:09:11,680<br>together we’re subtracting them so this</p>
+<p>238<br>00:09:11,680 –&gt; 00:09:13,680<br>will always be positive or it will be</p>
+<p>239<br>00:09:13,680 –&gt; 00:09:16,240<br>zero so i’ll run it and it does work</p>
+<p>240<br>00:09:16,240 –&gt; 00:09:18,399<br>pretty much exactly the same as you can</p>
+<p>241<br>00:09:18,399 –&gt; 00:09:19,920<br>see on the left but this is just</p>
+<p>242<br>00:09:19,920 –&gt; 00:09:21,360<br>something i think a lot of people don’t</p>
+<p>243<br>00:09:21,360 –&gt; 00:09:22,800<br>talk about and actually i pretty much</p>
+<p>244<br>00:09:22,800 –&gt; 00:09:24,720<br>never implement it this way people have</p>
+<p>245<br>00:09:24,720 –&gt; 00:09:26,320<br>actually mentioned that in my comments</p>
+<p>246<br>00:09:26,320 –&gt; 00:09:27,680<br>before which is kind of why i’m talking</p>
+<p>247<br>00:09:27,680 –&gt; 00:09:29,200<br>about it today but i really hope that</p>
+<p>248<br>00:09:29,200 –&gt; 00:09:31,200<br>this was helpful if it was please like</p>
+<p>249<br>00:09:31,200 –&gt; 00:09:32,640<br>and subscribe it really supports the</p>
+<p>250<br>00:09:32,640 –&gt; 00:09:34,240<br>channel a lot consider checking out my</p>
+<p>251<br>00:09:34,240 –&gt; 00:09:35,600<br>patreon where you can further support</p>
+<p>252<br>00:09:35,600 –&gt; 00:09:37,440<br>the channel and hopefully i’ll see you</p>
+<p>253<br>00:09:37,440 –&gt; 00:09:41,040<br>pretty soon thanks for watching</p>
+<h1 id="中文翻译"><a href="#中文翻译" class="headerlink" title="中文翻译"></a>中文翻译</h1><h2 id="Read-the-problem-1"><a href="#Read-the-problem-1" class="headerlink" title="Read the problem"></a>Read the problem</h2><p>1<br>00:00:00,000 –&gt; 00:00:01,680<br>嘿大家欢迎回来，今天让我们</p>
+<p>2<br>00:00:01,680 –&gt; 00:00:03,439<br>写一些更简洁的代码，所以今天</p>
+<p>3<br>00:00:03,439 –&gt; 00:00:05,520<br>让我们解决二分搜索问题，</p>
+<p>4<br>00:00:05,520 –&gt; 00:00:08,080<br>我们给出了一个整数数组 nums ，</p>
+<p>5<br>00:00:08,080 –&gt; 00:00:09,599<br>这些整数将按</p>
+<p>6<br>00:00:09,599 –&gt; 00:00:12,160<br>升序排序，我们还给出了一个</p>
+<p>7<br>00:00:12,160 –&gt; 00:00:13,920<br>目标整数，我们’ 我们将</p>
+<p>8<br>00:00:13,920 –&gt; 00:00:16,800<br>查找目标是否存在于数组中，</p>
+<p>9<br>00:00:16,800 –&gt; 00:00:18,720<br>然后我们可以返回它的索引，如果它</p>
+<p>10<br>00:00:18,720 –&gt; 00:00:21,439<br>不存在，那么我们返回一个</p>
+<p>11<br>00:00:21,439 –&gt; 00:00:23,680<br>目标是创建一种</p>
+<p>12<br>00:00:23,680 –&gt; 00:00:26,400<br>可以在 log n 时间内运行的高效算法，那么</p>
+<p>13<br>00:00:26,400 –&gt; 00:00:28,400<br>我们要采用什么算法 很好地使用这个</p>
+<p>14<br>00:00:28,400 –&gt; 00:00:30,480<br>问题几乎告诉你二分</p>
+<p>15<br>00:00:30,480 –&gt; 00:00:33,440<br>搜索，所以虽然这是不言自明的，</p>
+<p>16<br>00:00:33,440 –&gt; 00:00:35,760<br>也是一个非常基本的算法，但我仍然</p>
+<p>17<br>00:00:35,760 –&gt; 00:00:38,000<br>认为它非常重要，因为</p>
+<p>18<br>00:00:38,000 –&gt; 00:00:40,960<br>很多问题都扩展了</p>
+<p>19<br>00:00:40,960 –&gt; 00:00:42,800<br>二分搜索的想法，然后使它变得更加</p>
+<p>20<br>00:00:42,800 –&gt; 00:00:44,640<br>困难，这 实际上是一个非常</p>
+<p>21<br>00:00:44,640 –&gt; 00:00:47,039<br>常见的面试问题，会被问到</p>
+<p>22<br>00:00:47,039 –&gt; 00:00:49,520<br>一些二分搜索的变体，所以这</p>
+<p>23<br>00:00:49,520 –&gt; 00:00:51,360<br>是一个非常好的练习问题，</p>
+<p>24<br>00:00:51,360 –&gt; 00:00:53,199<br>你的目标应该能够</p>
+<p>25<br>00:00:53,199 –&gt; 00:00:55,840<br>非常快地实现二分搜索，基本上就像</p>
+<p>26<br>00:00:55,840 –&gt; 00:00:57,760<br>你在睡觉时做的那样，所以</p>
+<h2 id="Drawing-explanation-1"><a href="#Drawing-explanation-1" class="headerlink" title="Drawing explanation"></a>Drawing explanation</h2><p>27<br>00:00:57,760 –&gt; 00:00:59,520<br>我会 尝试</p>
+<p>28<br>00:00:59,520 –&gt; 00:01:02,399<br>以初学者友好的方式快速解释这一点，以便对</p>
+<p>29<br>00:01:02,399 –&gt; 00:01:05,199<br>输入数组进行排序，目标值</p>
+<p>30<br>00:01:05,199 –&gt; 00:01:08,400<br>可能存在于该数组中的任何位置，或者</p>
+<p>31<br>00:01:08,400 –&gt; 00:01:11,200<br>可能根本不存在，当我们开始时，我们</p>
+<p>32<br>00:01:11,200 –&gt; 00:01:13,840<br>正在考虑整个输入数组，</p>
+<p>33<br>00:01:13,840 –&gt; 00:01:15,280<br>我们将如何 做得好，我们</p>
+<p>34<br>00:01:15,280 –&gt; 00:01:17,600<br>将有两个指针，一个指针</p>
+<p>35<br>00:01:17,600 –&gt; 00:01:20,479<br>将位于最左边的索引，</p>
+<p>36<br>00:01:20,479 –&gt; 00:01:22,720<br>最初索引为零，另一个</p>
+<p>37<br>00:01:22,720 –&gt; 00:01:24,400<br>指针将位于最右边的索引，</p>
+<p>38<br>00:01:24,400 –&gt; 00:01:27,040<br>这些指针意味着我们</p>
+<p>39<br>00:01:27,040 –&gt; 00:01:29,920<br>现在正在考虑整个范围，如果我们</p>
+<p>40<br>00:01:29,920 –&gt; 00:01:33,200<br>可以的话 只看这些值之一，</p>
+<p>41<br>00:01:33,200 –&gt; 00:01:35,119<br>我们应该看哪一个，我们应该</p>
+<p>42<br>00:01:35,119 –&gt; 00:01:38,000<br>看最左边的值吗？如果我们这样做，并且</p>
+<p>43<br>00:01:38,000 –&gt; 00:01:40,159<br>发现它不等于目标，</p>
+<p>44<br>00:01:40,159 –&gt; 00:01:42,159<br>那么我们只消除了一种</p>
+<p>45<br>00:01:42,159 –&gt; 00:01:44,159<br>可能性，我们仍然需要搜索</p>
+<p>46<br>00:01:44,159 –&gt; 00:01:47,200<br>所有这些值 如果我们看最右边的</p>
+<p>47<br>00:01:47,200 –&gt; 00:01:49,119<br>类似，它不是目标，所以我们</p>
+<p>48<br>00:01:49,119 –&gt; 00:01:51,040<br>只消除了一种可能性，我们仍然</p>
+<p>49<br>00:01:51,040 –&gt; 00:01:52,720<br>必须看其余的，但如果</p>
+<p>50<br>00:01:52,720 –&gt; 00:01:54,720<br>我们看中间点，从</p>
+<p>51<br>00:01:54,720 –&gt; 00:01:56,240<br>技术上讲，其中任何一个都可能是</p>
+<p>52<br>00:01:56,240 –&gt; 00:01:58,479<br>我们的中间点 计算它</p>
+<p>53<br>00:01:58,479 –&gt; 00:02:00,719<br>实际上是取</p>
+<p>54<br>00:02:00,719 –&gt; 00:02:02,960<br>左索引和右索引并将</p>
+<p>55<br>00:02:02,960 –&gt; 00:02:04,960<br>它们除以二，我认为这将导致我们</p>
+<p>56<br>00:02:04,960 –&gt; 00:02:07,680<br>到达这个位置，但大约是</p>
+<p>57<br>00:02:07,680 –&gt; 00:02:10,479<br>中间点为什么我们应该在这里</p>
+<p>58<br>00:02:10,479 –&gt; 00:02:12,480<br>仔细观察我们可以将它与</p>
+<p>59<br>00:02:12,480 –&gt; 00:02:14,879<br>它不等于的目标进行比较 目标那么这</p>
+<p>60<br>00:02:14,879 –&gt; 00:02:16,480<br>告诉我们我们是否</p>
+<p>61<br>00:02:16,480 –&gt; 00:02:19,440<br>只消除了一种可能性“否”，因为</p>
+<p>62<br>00:02:19,440 –&gt; 00:02:23,120<br>记住输入数组是排序的，所以如果</p>
+<p>63<br>00:02:23,120 –&gt; 00:02:25,520<br>它不等于目标，我们</p>
+<p>64<br>00:02:25,520 –&gt; 00:02:28,000<br>还应该问它是小于</p>
+<p>65<br>00:02:28,000 –&gt; 00:02:30,480<br>目标还是大</p>
+<p>66<br>00:02:30,480 –&gt; 00:02:32,239<br>于此中的目标 如果它小于</p>
+<p>67<br>00:02:32,239 –&gt; 00:02:34,560<br>目标，那么如果它小于</p>
+<p>68<br>00:02:34,560 –&gt; 00:02:37,519<br>目标，那么它左边的所有内容</p>
+<p>69<br>00:02:37,519 –&gt; 00:02:40,080<br>也将小于</p>
+<p>70<br>00:02:40,080 –&gt; 00:02:42,239<br>目标，所以这是我们的中点，</p>
+<p>71<br>00:02:42,239 –&gt; 00:02:45,120<br>我们将其称为 m，我们发现它</p>
+<p>72<br>00:02:45,120 –&gt; 00:02:46,959<br>小于 目标，这样我们就可以</p>
+<p>73<br>00:02:46,959 –&gt; 00:02:49,680<br>从考虑这里的所有内容中消除这三个值，</p>
+<p>74<br>00:02:49,680 –&gt; 00:02:52,000</p>
+<p>75<br>00:02:52,000 –&gt; 00:02:53,760<br>我们如何知道在代码中表示，</p>
+<p>76<br>00:02:53,760 –&gt; 00:02:55,760<br>我们将采用这个左</p>
+<p>77<br>00:02:55,760 –&gt; 00:02:58,480<br>指针，然后将其移动为 m</p>
+<p>78<br>00:02:58,480 –&gt; 00:03:01,280<br>加一，所以现在我们的左指针</p>
+<p>79<br>00:03:01,280 –&gt; 00:03:03,680<br>将结束 这里这表示</p>
+<p>80<br>00:03:03,680 –&gt; 00:03:05,840<br>可能的解决方案范围将</p>
+<p>81<br>00:03:05,840 –&gt; 00:03:08,400<br>位于您知道这两个指针的范围内，</p>
+<p>82<br>00:03:08,400 –&gt; 00:03:10,319<br>因此此时我们只需</p>
+<p>83<br>00:03:10,319 –&gt; 00:03:12,400<br>重复该算法，重复我</p>
+<p>84<br>00:03:12,400 –&gt; 00:03:14,560<br>现在所做的，如果我们将这</p>
+<p>85<br>00:03:14,560 –&gt; 00:03:16,720<br>两个值相加，然后除以</p>
+<p>86<br>00:03:16,720 –&gt; 00:03:19,200<br>二 中间将在这里，</p>
+<p>87<br>00:03:19,200 –&gt; 00:03:20,800<br>所以我们将检查这是否</p>
+<p>88<br>00:03:20,800 –&gt; 00:03:22,159<br>等于我们</p>
+<p>89<br>00:03:22,159 –&gt; 00:03:25,120<br>在本例中寻找的目标，是的，所以现在我们可以</p>
+<p>90<br>00:03:25,120 –&gt; 00:03:27,440<br>返回索引，因为这就是我们</p>
+<p>91<br>00:03:27,440 –&gt; 00:03:29,280<br>想要做的，我们可以 返回 m</p>
+<p>92<br>00:03:29,280 –&gt; 00:03:30,720<br>无论它发生了什么我认为</p>
+<p>93<br>00:03:30,720 –&gt; 00:03:33,280<br>在这种情况下它是 4 所以这几乎是</p>
+<p>94<br>00:03:33,280 –&gt; 00:03:36,480<br>二分搜索的想法好吧所以现在</p>
+<p>95<br>00:03:36,480 –&gt; 00:03:38,720<br>时间复杂度如果你知道二分</p>
+<p>96<br>00:03:38,720 –&gt; 00:03:40,480<br>搜索你已经知道它在</p>
+<p>97<br>00:03:40,480 –&gt; 00:03:42,799<br>登录时间内运行但让我们快速理解</p>
+<p>98<br>00:03:42,799 –&gt; 00:03:44,560<br>为什么 所以我们不再考虑这个</p>
+<p>99<br>00:03:44,560 –&gt; 00:03:47,120<br>例子，但假设</p>
+<p>100<br>00:03:47,120 –&gt; 00:03:49,840<br>每次我们到达中点时，输入数组中有 16 个值，</p>
+<p>101<br>00:03:49,840 –&gt; 00:03:53,120<br>我们要么找到</p>
+<p>102<br>00:03:53,120 –&gt; 00:03:55,360<br>目标，但如果找不到</p>
+<p>103<br>00:03:55,360 –&gt; 00:03:56,959<br>目标，我们知道我们至少会去</p>
+<p>104<br>00:03:56,959 –&gt; 00:04:00,159<br>消除一半的可能性，所以</p>
+<p>105<br>00:04:00,159 –&gt; 00:04:02,239<br>我们将消除这种情况现在</p>
+<p>106<br>00:04:02,239 –&gt; 00:04:04,239<br>我们只查看八个值我们</p>
+<p>107<br>00:04:04,239 –&gt; 00:04:06,159<br>仍然找不到结果我们继续将</p>
+<p>108<br>00:04:06,159 –&gt; 00:04:09,200<br>其除以二使其剩下两个</p>
+<p>109<br>00:04:09,200 –&gt; 00:04:12,000<br>然后最后只剩下</p>
+<p>110<br>00:04:12,000 –&gt; 00:04:15,040<br>一个值 要么这</p>
+<p>111<br>00:04:15,040 –&gt; 00:04:16,959<br>将成为目标，要么它不会</p>
+<p>112<br>00:04:16,959 –&gt; 00:04:18,639<br>成为目标，然后我们就基本上</p>
+<p>113<br>00:04:18,639 –&gt; 00:04:20,798<br>完成了算法，所以</p>
+<p>114<br>00:04:20,798 –&gt; 00:04:23,840<br>问题是，如果我们有一个 while 循环，那么</p>
+<p>115<br>00:04:23,840 –&gt; 00:04:26,400<br>while 循环将运行与</p>
+<p>116<br>00:04:26,400 –&gt; 00:04:29,680<br>我们一样多的次数 可以将</p>
+<p>117<br>00:04:29,680 –&gt; 00:04:32,720<br>输入数组的长度除以二</p>
+<p>118<br>00:04:32,720 –&gt; 00:04:34,880<br>如果你记得</p>
+<p>119<br>00:04:34,880 –&gt; 00:04:37,440<br>数学课上有一个数学</p>
+<p>120<br>00:04:37,440 –&gt; 00:04:41,919<br>方程，称为对数以 n 为底的二，那么我们可以将它除以多少次，它的</p>
+<p>121<br>00:04:41,919 –&gt; 00:04:44,320<br>计算结果是我们可以</p>
+<p>122<br>00:04:44,320 –&gt; 00:04:48,000<br>将 n 除以 2 多少次 你知道，假设它的</p>
+<p>123<br>00:04:48,000 –&gt; 00:04:50,400<br>计算结果是 x，这相当于</p>
+<p>124<br>00:04:50,400 –&gt; 00:04:52,320<br>说 2 的 x 次方将</p>
+<p>125<br>00:04:52,320 –&gt; 00:04:54,000<br>等于 n 好吧，但这</p>
+<p>126<br>00:04:54,000 –&gt; 00:04:55,759<br>太多了，也许你甚至不关心，但这</p>
+<p>127<br>00:04:55,759 –&gt; 00:04:58,080<br>就是为什么的想法。</p>
+<p>128<br>00:04:58,080 –&gt; 00:05:00,639<br>我们的循环将运行 x 次，这</p>
+<p>129<br>00:05:00,639 –&gt; 00:05:02,720<br>将等于 log n，所以它</p>
+<p>130<br>00:05:02,720 –&gt; 00:05:05,440<br>不是一个很大的 o of n 算法，而是一个以 log</p>
+<p>131<br>00:05:05,440 –&gt; 00:05:09,360<br>为底的 2 n 算法，</p>
+<p>132<br>00:05:09,360 –&gt; 00:05:10,560<br>效率要高得多，</p>
+<h2 id="Coding-explanation-1"><a href="#Coding-explanation-1" class="headerlink" title="Coding explanation"></a>Coding explanation</h2><p>133<br>00:05:10,560 –&gt; 00:05:13,280<br>好吧，现在让我们像我一样对其进行编码</p>
+<p>134<br>00:05:13,280 –&gt; 00:05:14,880<br>在图中，最初我们将</p>
+<p>135<br>00:05:14,880 –&gt; 00:05:18,080<br>整个输入数组视为</p>
+<p>136<br>00:05:18,080 –&gt; 00:05:20,560<br>我们的搜索区域，因此我们的左指针</p>
+<p>137<br>00:05:20,560 –&gt; 00:05:22,240<br>将为零，我们的右指针</p>
+<p>138<br>00:05:22,240 –&gt; 00:05:24,080<br>将位于最后一个索引，</p>
+<p>139<br>00:05:24,080 –&gt; 00:05:26,560<br>即数组的长度减 1。</p>
+<p>140<br>00:05:26,560 –&gt; 00:05:28,960<br>现在我们 想要继续下去，直到</p>
+<p>141<br>00:05:28,960 –&gt; 00:05:31,440<br>没有更多的可能性，或者我们</p>
+<p>142<br>00:05:31,440 –&gt; 00:05:33,520<br>可能找到了结果，所以</p>
+<p>143<br>00:05:33,520 –&gt; 00:05:35,199<br>这样做的方法基本上是说，</p>
+<p>144<br>00:05:35,199 –&gt; 00:05:37,759<br>虽然我们的左指针小于或</p>
+<p>145<br>00:05:37,759 –&gt; 00:05:40,240<br>等于我们的右指针，因为我</p>
+<p>146<br>00:05:40,240 –&gt; 00:05:41,680<br>没有在 画图</p>
+<p>147<br>00:05:41,680 –&gt; 00:05:43,840<br>但是假设我们只有一个非常小的</p>
+<p>148<br>00:05:43,840 –&gt; 00:05:45,360<br>输入数组只是为了说明这个</p>
+<p>149<br>00:05:45,360 –&gt; 00:05:47,199<br>例子我们的左指针和右指针</p>
+<p>150<br>00:05:47,199 –&gt; 00:05:49,840<br>都会指向这里我们的中指针</p>
+<p>151<br>00:05:49,840 –&gt; 00:05:52,880<br>也会指向这里但是假设我们的</p>
+<p>152<br>00:05:52,880 –&gt; 00:05:55,759<br>目标实际上等于二好吧</p>
+<p>153<br>00:05:55,759 –&gt; 00:05:58,080<br>我们会说好吧这也是 对于我们的目标来说很小，</p>
+<p>154<br>00:05:58,080 –&gt; 00:06:00,479<br>所以我们将把左</p>
+<p>155<br>00:06:00,479 –&gt; 00:06:04,000<br>指针设置为等于 mid 加一，</p>
+<p>156<br>00:06:04,000 –&gt; 00:06:06,240<br>这意味着我们的左指针将是 1</p>
+<p>157<br>00:06:06,240 –&gt; 00:06:08,639<br>，我们的右指针将是 0，这</p>
+<p>158<br>00:06:08,639 –&gt; 00:06:10,560<br>基本上意味着我们的左指针已经</p>
+<p>159<br>00:06:10,560 –&gt; 00:06:12,639<br>穿过了我们的右指针，这就是如何</p>
+<p>160<br>00:06:12,639 –&gt; 00:06:15,120<br>你知道我们没有更多的值可供</p>
+<p>161<br>00:06:15,120 –&gt; 00:06:17,039<br>搜索，我们没有找到</p>
+<p>162<br>00:06:17,039 –&gt; 00:06:19,360<br>结果，所以这就是为什么</p>
+<p>163<br>00:06:19,360 –&gt; 00:06:21,280<br>如果它们都相等，我们就会做小于或等于，</p>
+<p>164<br>00:06:21,280 –&gt; 00:06:22,880<br>但如果它们都指向这个</p>
+<p>165<br>00:06:22,880 –&gt; 00:06:24,800<br>值，这意味着我们还没有 查看了</p>
+<p>166<br>00:06:24,800 –&gt; 00:06:27,520<br>这个值，这就是想法，因此</p>
+<p>167<br>00:06:27,520 –&gt; 00:06:28,880<br>循环的每次迭代我们只需</p>
+<p>168<br>00:06:28,880 –&gt; 00:06:30,560<br>找到中间点，</p>
+<p>169<br>00:06:30,560 –&gt; 00:06:34,479</p>
+<p>170<br>00:06:34,479 –&gt; 00:06:38,400<br>如果该索引所在的值</p>
+<p>171<br>00:06:38,400 –&gt; 00:06:41,199<br>大于 目标然后我们</p>
+<p>172<br>00:06:41,199 –&gt; 00:06:43,280<br>想要查看它左侧的所有值，</p>
+<p>173<br>00:06:43,280 –&gt; 00:06:44,880<br>因此我们将使用右</p>
+<p>174<br>00:06:44,880 –&gt; 00:06:47,199<br>指针并将其设置为 m 减一我们</p>
+<p>175<br>00:06:47,199 –&gt; 00:06:49,360<br>想要查看左侧的所有值</p>
+<p>176<br>00:06:49,360 –&gt; 00:06:51,840<br>我们基本上缩小了我们的标准，</p>
+<p>177<br>00:06:51,840 –&gt; 00:06:54,880<br>而在另一个 否则，如果该 num</p>
+<p>178<br>00:06:54,880 –&gt; 00:06:56,880<br>小于我们的目标，那么我们</p>
+<p>179<br>00:06:56,880 –&gt; 00:06:58,319<br>将做相反的事情，我们将设置</p>
+<p>180<br>00:06:58,319 –&gt; 00:07:00,960<br>left 等于 mid 加一，就像</p>
+<p>181<br>00:07:00,960 –&gt; 00:07:03,440<br>绘图中的解释一样，最后一种情况是，</p>
+<p>182<br>00:07:03,440 –&gt; 00:07:05,680<br>如果这两个都不成立，那一定</p>
+<p>183<br>00:07:05,680 –&gt; 00:07:07,840<br>意味着我们 找到目标，如果它</p>
+<p>184<br>00:07:07,840 –&gt; 00:07:10,080<br>不大于也不小于，这意味着</p>
+<p>185<br>00:07:10,080 –&gt; 00:07:12,000<br>它必须相等，这意味着我们可以</p>
+<p>186<br>00:07:12,000 –&gt; 00:07:14,639<br>返回 m，它是结果，但如果我们</p>
+<p>187<br>00:07:14,639 –&gt; 00:07:16,639<br>经历了循环的每次迭代</p>
+<p>188<br>00:07:16,639 –&gt; 00:07:18,560<br>并且我们没有找到结果，那么</p>
+<p>189<br>00:07:18,560 –&gt; 00:07:21,199<br>我们就在它之外 告诉我们应该</p>
+<p>190<br>00:07:21,199 –&gt; 00:07:23,280<br>返回负数以表明我们</p>
+<p>191<br>00:07:23,280 –&gt; 00:07:25,680<br>没有找到结果，这就是解决方案</p>
+<p>192<br>00:07:25,680 –&gt; 00:07:27,520<br>让我们运行它以确保它有效，</p>
+<p>193<br>00:07:27,520 –&gt; 00:07:29,280<br>正如您在左侧看到的那样，是</p>
+<p>194<br>00:07:29,280 –&gt; 00:07:31,120<br>的，它确实有效，而且非常有效，</p>
+<p>195<br>00:07:31,120 –&gt; 00:07:32,720<br>但还有一件事我 我想向</p>
+<p>196<br>00:07:32,720 –&gt; 00:07:34,800<br>你提一下，这可能不会在</p>
+<p>197<br>00:07:34,800 –&gt; 00:07:36,639<br>你的面试中出现，说实话，它从来没有</p>
+<p>198<br>00:07:36,639 –&gt; 00:07:38,880<br>出现在我的面试中，但这里实际上有一个</p>
+<p>199<br>00:07:38,880 –&gt; 00:07:41,120<br>小错误，我的意思是从技术上讲，这个</p>
+<p>200<br>00:07:41,120 –&gt; 00:07:43,440<br>错误在 python 中不存在，因为</p>
+<p>201<br>00:07:43,440 –&gt; 00:07:44,479<br>python</p>
+<p>202<br>00:07:44,479 –&gt; 00:07:46,560<br>整数是无界的，它们可以很漂亮。</p>
+<p>203<br>00:07:46,560 –&gt; 00:07:48,960<br>很多是无限大的，但在大多数</p>
+<p>204<br>00:07:48,960 –&gt; 00:07:51,599<br>语言中，如 java 和 c plus plus，你</p>
+<p>205<br>00:07:51,599 –&gt; 00:07:54,400<br>可能会遇到溢出，因为</p>
+<p>206<br>00:07:54,400 –&gt; 00:07:57,440<br>假设我们有一个非常大的输入数组</p>
+<p>207<br>00:07:57,440 –&gt; 00:08:00,639<br>，然后这两个整数非常</p>
+<p>208<br>00:08:00,639 –&gt; 00:08:04,000<br>接近 32 位整数最大值，类似于</p>
+<p>209<br>00:08:04,000 –&gt; 00:08:05,120</p>
+<p>210<br>00:08:05,120 –&gt; 00:08:07,840<br>2 的 31 的幂假设它们都</p>
+<p>211<br>00:08:07,840 –&gt; 00:08:09,599<br>接近这个值，那么将它们加</p>
+<p>212<br>00:08:09,599 –&gt; 00:08:12,879<br>在一起可能会溢出，</p>
+<p>213<br>00:08:12,879 –&gt; 00:08:15,599<br>然后我们会得到</p>
+<p>214<br>00:08:15,599 –&gt; 00:08:16,400<br>这个</p>
+<p>215<br>00:08:16,400 –&gt; 00:08:18,800<br>值的错误结果，所以你的面试官可能会</p>
+<p>216<br>00:08:18,800 –&gt; 00:08:20,479<br>问你一些关于这个的问题，</p>
+<p>217<br>00:08:20,479 –&gt; 00:08:22,479<br>你会如何解决这个问题，</p>
+<p>218<br>00:08:22,479 –&gt; 00:08:24,639<br>实际上有一个 为此，我们</p>
+<p>219<br>00:08:24,639 –&gt; 00:08:26,879<br>仍然可以计算</p>
+<p>220<br>00:08:26,879 –&gt; 00:08:28,879<br>左和右之间的中点，而无需将它们加</p>
+<p>221<br>00:08:28,879 –&gt; 00:08:31,360<br>在一起，因为我们可以计算</p>
+<p>222<br>00:08:31,360 –&gt; 00:08:34,000<br>它们之间的距离，我们可以</p>
+<p>223<br>00:08:34,000 –&gt; 00:08:36,479<br>通过右</p>
+<p>224<br>00:08:36,479 –&gt; 00:08:40,958<br>减左，然后除以</p>
+<p>225<br>00:08:40,958 –&gt; 00:08:42,958<br>右二来得到它们之间的距离</p>
+<p>226<br>00:08:42,958 –&gt; 00:08:45,519<br>它们之间距离的一半，我们可以将</p>
+<p>227<br>00:08:45,519 –&gt; 00:08:49,279<br>其添加到左侧索引，</p>
+<p>228<br>00:08:49,279 –&gt; 00:08:51,200<br>因为如果这是</p>
+<p>229<br>00:08:51,200 –&gt; 00:08:53,120<br>它们之间距离的一半，那么这是</p>
+<p>230<br>00:08:53,120 –&gt; 00:08:55,680<br>左侧索引，通过将它们加在一起，</p>
+<p>231<br>00:08:55,680 –&gt; 00:08:58,080<br>我们得到中点，这</p>
+<p>232<br>00:08:58,080 –&gt; 00:09:00,000<br>只是一种方法 进行完全相同的</p>
+<p>233<br>00:09:00,000 –&gt; 00:09:03,440<br>计算，但这样它就永远不会</p>
+<p>234<br>00:09:03,440 –&gt; 00:09:05,760<br>溢出，因为右总是</p>
+<p>235<br>00:09:05,760 –&gt; 00:09:08,320<br>大于或等于左，</p>
+<p>236<br>00:09:08,320 –&gt; 00:09:09,920<br>在这种情况下，我们不会将它们加</p>
+<p>237<br>00:09:09,920 –&gt; 00:09:11,680<br>在一起，而是将它们相减，所以这</p>
+<p>238<br>00:09:11,680 –&gt; 00:09:13,680<br>将始终是正数，或者它 将</p>
+<p>239<br>00:09:13,680 –&gt; 00:09:16,240<br>为零，所以我将运行它，它的工作原理与</p>
+<p>240<br>00:09:16,240 –&gt; 00:09:18,399<br>您</p>
+<p>241<br>00:09:18,399 –&gt; 00:09:19,920<br>在左侧看到的几乎完全相同，但这只是</p>
+<p>242<br>00:09:19,920 –&gt; 00:09:21,360<br>我认为很多人不会</p>
+<p>243<br>00:09:21,360 –&gt; 00:09:22,800<br>谈论的事情，实际上我几乎</p>
+<p>244<br>00:09:22,800 –&gt; 00:09:24,720<br>从未实现过它 人们</p>
+<p>245<br>00:09:24,720 –&gt; 00:09:26,320<br>实际上在我之前的评论中提到过这一点，</p>
+<p>246<br>00:09:26,320 –&gt; 00:09:27,680<br>这就是我</p>
+<p>247<br>00:09:27,680 –&gt; 00:09:29,200<br>今天谈论它的原因，但我真的希望</p>
+<p>248<br>00:09:29,200 –&gt; 00:09:31,200<br>这会有所帮助，如果它是请喜欢</p>
+<p>249<br>00:09:31,200 –&gt; 00:09:32,640<br>并订阅它真的支持该</p>
+<p>250<br>00:09:32,640 –&gt; 00:09:34,240<br>频道，请考虑查看我的</p>
+<p>251<br>00:09:34,240 –&gt; 00:09:35,600<br>赞助人在哪里 您可以进一步支持</p>
+<p>252<br>00:09:35,600 –&gt; 00:09:37,440<br>该频道，希望很快就能见到您，</p>
+<p>253<br>00:09:37,440 –&gt; 00:09:41,040<br>感谢您的观看</p>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Algo/" rel="tag"><i class="fa fa-tag"></i> Algo</a>
+            
+              <a href="/tags/English/" rel="tag"><i class="fa fa-tag"></i> English</a>
+            
+              <a href="/tags/Subtitle/" rel="tag"><i class="fa fa-tag"></i> Subtitle</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2024/08/29/na_vlog_text/" rel="next" title="nvt">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    nvt
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="no5ix">
+          </a>
+          <p class="site-author-name" itemprop="name">no5ix</p>
+           
+              <p class="site-description motion-element" itemprop="description">推荐使用Chrome/Firefox/Safari阅读本博客. 以前的老笔记将会一篇一篇慢慢整理为博客, 这既启发了他人, 也锻炼了自己的描述交流能力.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">265</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">97</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">关于</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://119.23.17.57" title="ksun的博客" target="_blank">ksun的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect" title="你有图么我有故事" target="_blank">你有图么我有故事</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#URL"><span class="nav-number">1.</span> <span class="nav-text">URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Read-the-problem"><span class="nav-number">2.</span> <span class="nav-text">Read the problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Drawing-explanation"><span class="nav-number">3.</span> <span class="nav-text">Drawing explanation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Coding-explanation"><span class="nav-number">4.</span> <span class="nav-text">Coding explanation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中文翻译"><span class="nav-number">5.</span> <span class="nav-text">中文翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-the-problem-1"><span class="nav-number">5.1.</span> <span class="nav-text">Read the problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drawing-explanation-1"><span class="nav-number">5.2.</span> <span class="nav-text">Drawing explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding-explanation-1"><span class="nav-number">5.3.</span> <span class="nav-text">Coding explanation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">no5ix</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/dist/jquery.fancybox.js?v=3.2.10"></script>
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+
+    var is_load_xml_finished = 0;
+
+    var searchFunc = function (path, search_id, content_id) {
+      // 0x00. environment initialization
+      'use strict';
+
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      // var datas = [];
+
+      /* loading css1 : Dot Css Loader*/
+      var DotLoader = "<div class='loader'>Loading...</div>";
+
+      /* loading css2 : Pure Css Loader - Square */
+      var SquareLoader = 
+        "<div class='loader'>" +
+          "<div class='square' ></div>" +
+          "<div class='square'></div>" +
+          "<div class='square last'></div>" +
+          "<div class='square clear'></div>" +
+          "<div class='square'></div>" +
+          "<div class='square last'></div>" +
+          "<div class='square clear'></div>" +
+          "<div class='square '></div>" +
+          "<div class='square last'></div>" +
+        "</div>";
+
+      var ProgressBar = 
+          "<div class='progress-bar'>" +
+            "<div class='progress-bar-charge'></div>" +
+          "</div>";
+
+      var str = "";
+      var keywords = [];
+      var temp_keyword = "";
+
+      // 是否为第一个字母被键入的标志位
+      var first_char_flag = 0;
+
+      // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+      var last_page_x = 0;
+      var last_page_y = 0;
+
+      var local_search_tips = 
+            "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+            "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+
+      function CloseLocalSearch()
+      {
+        first_char_flag = 0;
+
+        $('#local-search-input').val('');
+        $('#local-search-close').hide();
+
+        // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+
+        $('#' + content_id).attr("headroom_special_attr","true"); 
+        
+        if (isMobile())
+        {
+          // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+          scrollTo(last_page_x, last_page_y);
+
+          $('#' + content_id).hide();
+        }
+        else
+        {
+          $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 200 );
+        }
+
+        // $('#' + content_id).velocity('stop').velocity( isMobile() ? 'transition.fadeOut' : 'transition.bounceUpOut', {
+        //   // delay: isMobile() ? 50 : 0,
+        //   duration: isMobile() ? 500 : 200,
+        //   // begin: function() { 
+        //   //   if (isMobile())
+        //   //   {
+        //   //     $('body').scrollTop(last_page_y);
+        //   //   } 
+        //   // }
+        //   complete: function () {
+        //     if (isMobile())
+        //     {
+        //       if (last_page_y < 20000)
+        //       {
+        //         $('body').velocity('scroll', { offset: last_page_y+"px", duration: last_page_y < 10000 ? 1000 : 2000 });
+        //       }
+        //       else
+        //       {
+        //         $('body').scrollTop(last_page_y);
+        //       }
+        //       // $('body').velocity('scroll');
+
+        //       // $('html,body').animate({
+        //       //   scrollTop: last_page_y
+        //       // },400);
+        //       // $('body').velocity('transition.slideDownIn', 1000);
+        //       // $('body').velocity('scroll', { offset: last_page_y+"px", duration: document.body.scrollHeight < 20000 ? 1500 : 3000 });
+        //     }
+        //   }
+        // });
+      }
+
+      function handleSearch()
+      {
+        if (keywords.length <= 0) {
+          return;
+        }
+        $resultContent.innerHTML = "";
+        $('#local-search-close').show();
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+          $resultContent.innerHTML = 
+            "<ul class='local-search-empty-ul'>" + 
+            local_search_tips +
+            ProgressBar;
+        }
+        else
+        {
+          // Retrieve the object from local storage
+          var xml_resp = retrieve_search_xml()
+
+          xml_resp.forEach(function (data) {
+          // datas.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+              data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+              keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);
+
+                if (index_title < 0 && index_content < 0) {
+                  isMatch = false;
+                } else {
+                  if (index_content < 0) {
+                    index_content = 0;
+                  }
+                  if (i == 0) {
+                    first_occur = index_content;
+                  }
+                  // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+              });
+            } else {
+              isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+              var content = orig_data_content;
+              if (first_occur >= 0) {
+                var match_content = "";
+                if (!is_sensitive && !is_encrypted)
+                {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  match_content = content.substr(start, end);
+                }
+
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                else
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+              }
+              str += "</li>";
+            }
+          });
+
+          str += "</ul>";
+          if (str.indexOf('<li>') === -1) {
+            return $resultContent.innerHTML = 
+              "<ul class='local-search-empty-ul'><span class='local-search-empty'>找不到, 换个搜索关键字试一哈.<span></ul>";
+          }
+          $resultContent.innerHTML = str;
+        }
+      }
+
+      $input.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+          CloseLocalSearch();
+          return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+          if (isMobile())
+          {
+            last_page_x = window.pageXOffset;
+            last_page_y = window.pageYOffset;
+            // $('body').scrollTop(0);
+            scrollTo(0,0);
+
+          }
+          first_char_flag = 1;
+          $('#' + content_id).removeAttr("headroom_special_attr");
+          
+          $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', 300);
+
+          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 1000);
+        }
+      });
+
+
+      var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+      if (!local_search_xml_data) {
+        $.ajax({
+          // 0x01. load xml file
+          url: path,
+          dataType: "xml",
+          success: function (xmlResponse) {
+            store_search_xml(xmlResponse);
+
+            // setTimeout(function(){
+            //   is_load_xml_finished = 1;
+
+            //   handleSearch();
+            //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+            // }, 2000);
+            
+            // is_load_xml_finished = 1;
+
+            handleSearch();
+            $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+          }
+        });
+      }
+
+      $(document).on('click', '#local-search-close', function() {
+        CloseLocalSearch();
+      });
+
+      $(document).keyup(function(event){
+        switch(event.keyCode) {
+          case 27:
+            // alert("ESC");
+            CloseLocalSearch();
+        }
+      });
+
+      // $(document).on('blur', '#local-search-input', function(e) {
+      //   // console.log(document.activeElement.getAttribute('class'));
+        
+      //   if (isMobile() == false)
+      //   {
+      //     CloseLocalSearch();
+      //   }
+      // });
+    }
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+
+      // var userAgent = window.navigator.userAgent;
+
+      // var isiPad = userAgent.match(/iPad/i) !== null;
+      // var mobileUA = [
+      //   'iphone', 'android', 'phone', 'mobile',
+      //   'wap', 'netfront', 'x11', 'java', 'opera mobi',
+      //   'opera mini', 'ucweb', 'windows ce', 'symbian',
+      //   'symbianos', 'series', 'webos', 'sony',
+      //   'blackberry', 'dopod', 'nokia', 'samsung',
+      //   'palmsource', 'xda', 'pieplus', 'meizu',
+      //   'midp' ,'cldc' , 'motorola', 'foma',
+      //   'docomo', 'up.browser', 'up.link', 'blazer',
+      //   'helio', 'hosin', 'huawei', 'novarra',
+      //   'coolpad', 'webos', 'techfaith', 'palmsource',
+      //   'alcatel', 'amoi', 'ktouch', 'nexian',
+      //   'ericsson', 'philips', 'sagem', 'wellcom',
+      //   'bunjalloo', 'maui', 'smartphone', 'iemobile',
+      //   'spice', 'bird', 'zte-', 'longcos',
+      //   'pantech', 'gionee', 'portalmmm', 'jig browser',
+      //   'hiptop', 'benq', 'haier', '^lct',
+      //   '320x320', '240x320', '176x220'
+      // ];
+      // var pattern = new RegExp(mobileUA.join('|'), 'i');
+
+      // return !isiPad && userAgent.match(pattern);
+    }
+
+    function store_search_xml(xmlResponse) {
+        datas = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(datas));
+        is_load_xml_finished = 1;
+
+        console.log("store search.xml finished.");
+    }
+
+    function ajax_store_search_xml() {
+      $.ajax({
+        url: "/search.xml",
+        dataType: "xml",
+        success: function (xmlResponse) {
+            store_search_xml(xmlResponse);
+        }
+      });
+    }
+
+    function retrieve_search_xml() {
+        // Retrieve the object from local storage
+        var retrievedObject = localStorage.getItem('local_search_xml_data');
+        var xml_resp = JSON.parse(retrievedObject)
+        return xml_resp
+    }
+
+    var getSearchFile = function(){
+      var path = "/search.xml";
+      var local_search_result_name = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+      searchFunc(path, 'local-search-input', local_search_result_name);
+    }
+
+    var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    if (local_search_xml_data) {
+      is_load_xml_finished = 1;
+      console.log("load search.xml finished.");
+    }
+    var last_use_local_search_date = localStorage.getItem('last_use_local_search_date');
+    var curDate = new Date();
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_use_local_search_date != curDate.getDate() || !local_search_xml_data) {
+      // preload search.xml
+      ajax_store_search_xml();
+    }
+
+    localStorage.setItem('last_use_local_search_date', curDate.getDate());
+    
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

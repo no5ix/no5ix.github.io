@@ -62,7 +62,7 @@ class Solution {
                 int mid = left + (right - left)/2;
                 you can't overflow in (right - left) because you're subtracting a smaller number from a larger number. That always results in an even smaller number, so it can't possibly go over the maximum. E.g. 80 - 50 = 30.
 
-                And since the result is the average of left and right, it must be between them. Since these are both less than the maximum integer, anything between them is also less than the maximum, so there's no overflow.
+                LLLLLynx said: Since (right - left) is the distance between left and right, so `left + (right - left)/2` will not be larger than the right. Furthermore, it will not be larger than the maximum integer.
             */
             int midIndex = leftIndex + ((rightIndex - leftIndex) >> 1);  // >> 1 等同于 除以 2
             if (numbers[midIndex] == targetNumber) {
@@ -87,7 +87,7 @@ public class test{
 }
 ```
 
-## lc977 - 有序数组的平房 - 20240916
+## lc977 - 有序数组的平方 - 20240916
 
 - https://programmercarl.com/0977.有序数组的平方.html#算法公开课
 - https://leetcode.com/problems/squares-of-a-sorted-array/description/

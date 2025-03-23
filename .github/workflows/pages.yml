@@ -190,13 +190,13 @@ jobs:
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: ./public
-      - name: 6. 部署到另一个仓库blog_pub的github page  # 关键步骤：利用这个 action 将生成的静态资源 push 到另一个指定仓库并部署, 参考链接：http://hulinhong.com/2025/02/14/github_pages_deployment_tricks/ 和 https://juejin.cn/post/7312035956189020169
+      - name: 6. 部署到另一个仓库 bup-golb 的github page  # 关键步骤：利用这个 action 将生成的静态资源 push 到另一个指定仓库并部署, 参考链接：http://hulinhong.com/2025/02/14/github_pages_deployment_tricks/ 和 https://juejin.cn/post/7312035956189020169
         uses: peaceiris/actions-gh-pages@v3
         with:
           # Personal Access Token 
           personal_token: ${{ secrets.PUBLISH_BLOG }}
           # 指定push的仓库  
-          external_repository: no5ix/blog_pub
+          external_repository: no5ix/bup-golb
           # 指定push的分支
           publish_branch: main
           # push 的目录

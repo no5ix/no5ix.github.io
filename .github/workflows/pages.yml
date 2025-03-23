@@ -167,6 +167,7 @@ jobs:
           hexo generate
           echo "<root><publish_date>$(date '+%Y-%m-%d %H:%M:%S')</publish_date><publish_timestamp>$(date +%s)</publish_timestamp></root>" > publish_time.xml
           mv publish_time.xml ./public
+          mv blog-post-source_repo/interview_questions ./public
       # - name: 7. 部署到 github page # Deploy：github.io仓库中日志只保留最新
       #   run: |
       #     cd ./public

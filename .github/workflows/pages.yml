@@ -119,10 +119,10 @@ on:
       - source  # default branch
   workflow_dispatch:  # 允许手动触发, blog-post-source那边的github actions workflow 会触发这里来部署
 
-# 使用 concurrency 限制并发, GitHub Actions 允许设置 互斥锁 来避免多个 workflow 并行执行。
+# 使用 concurrency 限制并发, GitHub Actions 允许设置 互斥锁 来避免多个 workflow 并行执行, cancel-in-progress: true 可以让后来的 workflow 直接 取消前一个未完成的 workflow，并执行最新的
 concurrency:
   group: my-blog-no-concurrency
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   pages:

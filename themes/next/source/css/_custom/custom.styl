@@ -103,14 +103,11 @@ code {
 
 
 /*代码块复制按钮*/
-.highlight-wrap{
-    position: relative;
-}
 .btn-copy {
     display: inline-block;
     cursor: pointer;
     background-color: #b6aeae;
-    /* background-image: linear-gradient(#fcfcfc,#eee); */
+    /* background-image: linear-gradient(#fcfcfc, #eee); */
     border: none;
     border-radius: 6px;
     -webkit-user-select: none;
@@ -120,29 +117,23 @@ code {
     -webkit-appearance: none;
     font-size: 13px;
     font-weight: 700;
-    line-height: 20px;
+    /* line-height: 8px; */
     outline: none;
     color: #333;
-    -webkit-transition: opacity .5s ease-in-out;
-    -o-transition: opacity .5s ease-in-out;
-    transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
     padding: 2px 6px;
     position: absolute;
-    right: 7px;
-    top: 7px;
-    opacity: 0;
-    width: 28px;
-    height: 28px;
+    right: 4px;
+    top: 3px;
+    /* opacity: 1; */
+    width: 26px;
+    height: 19px;
 
     &:hover {
         background-color: #e4d8d8;
     }
-}
-.btn-copy span {
-    margin-left: 5px;
-}
-.highlight-wrap:hover .btn-copy{
-    opacity: 1;
 }
 
 button.darkmode-toggle {

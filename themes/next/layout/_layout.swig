@@ -99,4 +99,4 @@
 <script type="text/javascript" src="/js/src/headroom.js"></script> 
 
 <!-- 代码块复制功能 -->
-<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script type="text/javascript" src="/js/src/code-highlight-modification.js"></script>

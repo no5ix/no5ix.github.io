@@ -51,7 +51,7 @@ $('.btn-copy').on('click', function (ee) {
 			// $b.find('i.fa-check-square').remove();
 			// $b.find('i.fa-check-square-o').remove();
 			$b.append($('<i class="fa fa-copy" aria-hidden="true"></i>'));
-		}, 800);
+		}, 2800);
 	}
 	$(this).blur();
 });

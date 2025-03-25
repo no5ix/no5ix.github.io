@@ -37,10 +37,10 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
-highlight:
+highlight:  # after modification, should stop hexo server, and run `hexo clean & hexo g` and reboot hexo 
   enable: true
-  line_number: true
-  auto_detect: false
+  line_number: false
+  auto_detect: false  # auto_detect can not be `false` when line_number is `false`
   tab_replace:
   
 # Home page setting
@@ -61,7 +61,7 @@ tag_map:
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: YYYY-MM-DD
+date_format: MM-DD-YYYY
 time_format: HH:mm:ss
 
 # Pagination

@@ -12,85 +12,33 @@
 <script>
     (function(){
         if('{{ page.password }}'){
+            let localStoragePasswdKey = '{{ page.title }}' + '_last_passwd';
             function checkPassword(password) {
-              password = password == null ? null : password.trim();
-              if (password !== '{{ page.password }}'){
-                if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
-                {
-                  alert('Error!');
+                password = password == null ? null : password.trim();
+                if (password !== '{{ page.password }}') {
+                    if (password != null) {
+                        // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+                        alert('Error!');
+                    }
+                    if (history.length > 1) {
+                        history.back();
+                    } else {
+                        window.location.href = "about:blank";
+                    }
+                } else {
+                    localStorage.setItem(localStoragePasswdKey, password);
                 }
-                if (history.length > 1)
-                {
-                  history.back();
-                }
-                else
-                {
-                  window.location.href = "about:blank";
-                }
-              }
             }
 
-            var password_verify_on_local = false;
+            var password_verify_on_local = true;
             const hostname = window.location.hostname;
             if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
-              
-              // if (window.innerWidth < 768) {
-
-              // 	window.onload = function () {
-              // 		// 创建遮罩层
-              // 		const overlay = document.createElement("div");
-              // 		// 创建输入框容器
-              // 		overlay.innerHTML = `
-              // 			<div class="password-input-box">
-              // 				<p>Open Sesame</p>
-              // 				<input type="password" id="passwordInput" style="padding: 10px; width: 200px;">
-              // 				<div style="margin-top: 10px;">
-              // 				<button id="confirmBtn">ok</button>
-              // 				<button id="cancelBtn" style="margin-left: 10px;">cancel</button>
-              // 				</div>
-              // 			</div>
-              // 			`;
-              // 		overlay.classList.add("password-overlay");
-              // 		document.body.style.overflow = "hidden"; // 禁止body滚动
-              // 		document.body.appendChild(overlay);
-
-              // 		setTimeout(() => {
-              // 			const input = document.getElementById("passwordInput");
-              // 			input.focus(); // 自动弹出键盘, 经测试, 手机上弹不出来, 所以放弃
-              // 			// console.log("asdfasdfa??tantantan");
-
-              // 			function confirmPassword() {
-              // 				const password = input.value;
-              // 				if (password) {
-              // 					alert("你输入的密码是: " + password);
-              // 					document.body.removeChild(overlay);
-              // 				} else {
-              // 					alert("请输入密码");
-              // 				}
-              // 			}
-
-              // 			// 按回车确认
-              // 			input.addEventListener("keydown", function (event) {
-              // 				if (event.key === "Enter") {
-              // 					confirmPassword();
-              // 				}
-              // 			});
-              // 			// 点击确定按钮
-              // 			document.getElementById("confirmBtn").onclick = confirmPassword;
-              // 			// 点击取消按钮
-              // 			document.getElementById("cancelBtn").onclick = function () {
-              // 				document.body.removeChild(overlay);
-              // 			};
-              // 		}, 1000);
-              // 	};
-
-              // } else {
-                var password = prompt('Open Sesame');
-                checkPassword(password);
-              // }
-
+                const lspk = localStorage.getItem(localStoragePasswdKey) || "";
+                if (lspk !== '{{ page.password }}') {
+                    var password = prompt('Open Sesame');
+                    checkPassword(password);
+                }
             }
-
         }
     })();
 </script>

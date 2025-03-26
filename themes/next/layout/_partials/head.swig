@@ -30,7 +30,7 @@
                 }
             }
 
-            var password_verify_on_local = true;
+            var password_verify_on_local = false;
             const hostname = window.location.hostname;
             if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
                 const lspk = localStorage.getItem(localStoragePasswdKey) || "";

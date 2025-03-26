@@ -6,7 +6,7 @@ $('.highlight').each(function (i, e) {
 	if ($(e).children('figcaption').length > 0) {
 		let curSpan = $(e).children('figcaption').children('span');
 		let codeName = curSpan.text();
-		curSpan.text(" ● " + language + " ● " + codeName);
+		curSpan.html(" ● " + language + "&nbsp;&nbsp;&nbsp; ● " + codeName);
 		curSpan.after(copyHtml);
 	} else {
 		let figcaption = $("<figcaption><span>" + " ● " + language + "</span>" + copyHtml + "</figcaption>");

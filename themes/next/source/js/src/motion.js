@@ -258,9 +258,9 @@ $(document).ready(function () {
           .prop('type', 'text/css')
           .html('.site-title.loaded::after { transform: translateX(-3px); }')
           .appendTo('head');
-        }, document.body.clientWidth < 768 ? 1000 : 200);  // 这个1200 + 800 和 200 + 800 得大于 .site-title 相关transition 的时间
+        }, document.body.clientWidth < 768 ? 1000 : 200);  // 这个1200 + 800 和 200 + 800 得大于 .site-title 相关transition 的时间, 否则小车动画有问题
 
-      }, 800); 
+      }, 200); 
       
       // $('.site-title').attr('data-after', 'active');
       // var $logoTransition = CONFIG.motion.transition.logo;

@@ -68,22 +68,15 @@ img {
 
 hr {
   margin: 40px 0;
-  height: 3px;
+  height: 8px;
   border: none;
-  background-color: $gray-lighter;
-  background-image: repeating-linear-gradient(
-    -45deg,
-    white,
-    white 4px,
-    transparent 4px,
-    transparent 8px
-  );
+  border-top: 6px dashed var(--header-bg-color);
 }
 
 blockquote {
   padding: 0 15px;
   color: $grey-dim;
-  border-left: 4px solid $gray-lighter;
+  border-left: 4px solid gray;
 
   cite::before {
     content: "-";

@@ -10,6 +10,8 @@ $(document).ready(function () {
   initTOCDimension();
 
 
+
+
   var $itemHasChild = $(".post-toc-content .nav-item:has(> .nav-child)");
   var $titleHasChild = $itemHasChild.children(".nav-link");
   // $itemHasChild.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
@@ -33,39 +35,37 @@ $(document).ready(function () {
   var temp_timer = null;
   var temp_timer2 = null;
 
-  function () {
-    $titleHasChild.dblclick(function () {
-      clearTimeout(temp_timer);
-      clearTimeout(temp_timer2);
-      $(this).siblings(".nav-child").hide(100);
-      // $(this).siblings("i").toggleClass("hide");
-    });
-    // After dblclick enent
-    $titleHasChild.click(function () {
-      clearTimeout(temp_timer);
-      var that = this;
-      temp_timer = setTimeout(function () {
-
-        // 展开当前toc下的所有toc
-        var $curentTocChild = $(that).siblings(".nav-child");
-        if ($curentTocChild.is(":hidden")) {
-          $curentTocChild.show(100);
-          // $(that).siblings("i").toggleClass("hide");
-        }
-        // var $subToc = $titleHasChild.next(".nav-child");
-        // alert(1);
-        var $currentSubToc = $(that).siblings(".nav-child").find(".nav-link").next(".nav-child");
-        // if ($(that).siblings(".nav-child").is(":hidden")) {
-        if ($currentSubToc.is(":hidden")) {
-          // $curentTocChild.show(100);
-          $currentSubToc.show(100);
-          // $(that).siblings("i").toggleClass("hide");
-        }
-      }, 250);
+  var clickTitle = function(){
+    $titleHasChild.dblclick(function(){
+          clearTimeout(temp_timer);
+          clearTimeout(temp_timer2);
+          $(this).siblings(".nav-child").hide(100);
+          // $(this).siblings("i").toggleClass("hide");
     })
-  }
+    // After dblclick enent
+    $titleHasChild.click(function(){
+        clearTimeout(temp_timer);
+        var that = this;
+        temp_timer = setTimeout(function() {
 
-  ()
+            // 展开当前toc下的所有toc
+            var $curentTocChild = $(that).siblings(".nav-child");
+            if ($curentTocChild.is(":hidden")) {
+                $curentTocChild.show(100);
+                // $(that).siblings("i").toggleClass("hide");
+            }
+            // var $subToc = $titleHasChild.next(".nav-child");
+            // alert(1);
+            var $currentSubToc = $(that).siblings(".nav-child").find(".nav-link").next(".nav-child");
+            // if ($(that).siblings(".nav-child").is(":hidden")) {
+            if ($currentSubToc.is(":hidden")) {
+                // $curentTocChild.show(100);
+                $currentSubToc.show(100);
+                // $(that).siblings("i").toggleClass("hide");
+            }
+        }, 250);
+    })
+  }()
 
 
   // TOC item animation navigate & prevent #item selector in adress bar.
@@ -78,33 +78,33 @@ $(document).ready(function () {
 
     clearTimeout(temp_timer2);
     var that = this;
-    temp_timer2 = setTimeout(function () {
-      var cur_href = that.getAttribute('href');
-      if (window.history) {
-        // 如果支持History API
-        // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
-        // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
-        var state = {title: '', url: cur_href.split("#")[0]};
-        history.pushState(state, '', "#" + cur_href.split("#")[1]);
-        //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
-      }
-      // 处理滚动动画
-      var targetSelector = NexT.utils.escapeSelector(cur_href);
-      var offset = $(targetSelector).offset().top - 170; // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
+    temp_timer2 = setTimeout(function() {
+        var cur_href = that.getAttribute('href');
+        if (window.history){
+          // 如果支持History API
+          // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+          // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
+          var state = {title:'',url:cur_href.split("#")[0]};
+          history.pushState(state, '', "#" + cur_href.split("#")[1]);
+          //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+        }
+        // 处理滚动动画
+        var targetSelector = NexT.utils.escapeSelector(cur_href);
+        var offset = $(targetSelector).offset().top - 170; // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题
+        hasVelocity ?
+          html.velocity('stop').velocity('scroll', {
+            offset: offset  + 'px',
+            mobileHA: false
+          }) :
+          $('html, body').stop().animate({
+            scrollTop: offset
+          }, 500);
     }, 250);
 
   });
 
 
-  function () {
+  var clickTocTitle = function(){
     // var $iconToExpand = $(".sidebar-nav-toc > .fa-caret-right");
     // var $iconToFold = $(".sidebar-nav-toc > .fa-caret-down");
 
@@ -119,32 +119,31 @@ $(document).ready(function () {
     }
 
     if ($titleHasChild.length) {
-      // $titleHasChild.click(showSubToc);
+        // $titleHasChild.click(showSubToc);
 
-      // $tocTitle.addClass("clickable");
-      $(".sidebar-nav-toc > i").click(function () {
-        if ($iconToFold.is(":hidden")) {
-          showSubToc();
-          // $(this).toggleClass("hide");
+        // $tocTitle.addClass("clickable");
+        $(".sidebar-nav-toc > i").click(function(){
+            if ($iconToFold.is(":hidden")) {
+                showSubToc();
+                // $(this).toggleClass("hide");
 
-          // $subToc.show(150, scrollToCenter);
-          // $iconToExpand.removeClass("hide");
-          // $iconToFold.addClass("hide");
-        } else {
-          $subToc.hide(100, scrollToCenter);
-          $iconToFold.addClass("hide");
-          $iconToExpand.removeClass("hide");
-        }
-      })
-      // // TOC on mobile
-      // if ($(".left-col").is(":hidden")) {
-      //     $("#container .toc-article .toc").css("padding-left", "1.4em");
-      //     $("#container .toc-article .toc-title").css("display", "initial");
-      // }
+                // $subToc.show(150, scrollToCenter);
+                // $iconToExpand.removeClass("hide");
+                // $iconToFold.addClass("hide");
+            } else {
+                $subToc.hide(100, scrollToCenter);
+                $iconToFold.addClass("hide");
+                $iconToExpand.removeClass("hide");
+            }
+        })
+        // // TOC on mobile
+        // if ($(".left-col").is(":hidden")) {
+        //     $("#container .toc-article .toc").css("padding-left", "1.4em");
+        //     $("#container .toc-article .toc-title").css("display", "initial");
+        // }
     }
-  }
+  }()
 
-  ()
 
 
   function scrollToCenter() {
@@ -161,7 +160,7 @@ $(document).ready(function () {
     $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
   }
 
-  function initScrollSpy() {
+  function initScrollSpy () {
     var tocSelector = '.post-toc';
     var $tocElement = $(tocSelector);
     var activeCurrentSelector = '.active-current';
@@ -191,36 +190,36 @@ $(document).ready(function () {
         // 展开当前toc下的所有toc
         var $curentTocChild = $(that).siblings(".nav-child");
         if ($curentTocChild.is(":hidden")) {
-          $curentTocChild.show(100);
-          // $(that).siblings("i").toggleClass("hide");
+            $curentTocChild.show(100);
+            // $(that).siblings("i").toggleClass("hide");
         }
         // var $subToc = $titleHasChild.next(".nav-child");
         // alert(1);
         var $currentSubToc = $(that).siblings(".nav-child").find(".nav-link").next(".nav-child");
         // if ($(that).siblings(".nav-child").is(":hidden")) {
         if ($currentSubToc.is(":hidden")) {
-          // $curentTocChild.show(100);
-          $currentSubToc.show(100);
-          // $(that).siblings("i").toggleClass("hide");
+            // $curentTocChild.show(100);
+            $currentSubToc.show(100);
+            // $(that).siblings("i").toggleClass("hide");
         }
 
       })
       // .on('clear.bs.scrollspy', removeCurrentActiveClass);
-      .on('clear.bs.scrollspy', function () {
+      .on('clear.bs.scrollspy', function() {
         // $(tocSelector + ' .active').first().children(".nav-link").siblings(".nav-child").hide(100);
         removeCurrentActiveClass();
       });
 
-    $('body').scrollspy({target: tocSelector});
+    $('body').scrollspy({ target: tocSelector });
 
-    function removeCurrentActiveClass() {
+    function removeCurrentActiveClass () {
       $(tocSelector + ' ' + activeCurrentSelector)
         .removeClass(activeCurrentSelector.substring(1));
     }
   }
 
   // Sidebar float
-  function initAffix() {
+  function initAffix () {
     var headerHeight = $('.header-inner').height();
     var footerOffset = parseInt($('.main').css('padding-bottom'), 10);
 
@@ -243,7 +242,7 @@ $(document).ready(function () {
       });
   }
 
-  function initTOCDimension() {
+  function initTOCDimension () {
     var updateTOCHeightTimer;
 
     $(window).on('resize', function () {
@@ -264,7 +263,7 @@ $(document).ready(function () {
     // $('.post-toc').css('width', 'calc(100% + ' + scrollbarWidth + 'px)');
   }
 
-  function updateTOCHeight(height) {
+  function updateTOCHeight (height) {
     // 为了防止toc sidebar底部有一些目录看不见 被 挡住
     if (document.body.clientWidth < 768) {
       height = height - 128;
@@ -296,17 +295,17 @@ $(document).ready(function () {
       currentTarget
         .removeClass(activePanelClassName)
         .velocity('stop').velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-        target
-          .velocity('stop')
-          .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-          .addClass(activePanelClassName);
-      }) :
-      currentTarget.animate({opacity: 0}, TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+      currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
         currentTarget.hide();
         target
           .stop()
           .css({'opacity': 0, 'display': 'block'})
-          .animate({opacity: 1}, TAB_ANIMATE_DURATION, function () {
+          .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
             currentTarget.removeClass(activePanelClassName);
             target.addClass(activePanelClassName);
           });
@@ -319,12 +318,12 @@ $(document).ready(function () {
   // Expand sidebar on post detail page by default, when post has a toc.
   var $tocContent = $('.post-toc-content');
   var isSidebarCouldDisplay = CONFIG.sidebar.display === 'post' ||
-    CONFIG.sidebar.display === 'always';
+      CONFIG.sidebar.display === 'always';
   var hasTOC = $tocContent.length > 0 && $tocContent.html().trim().length > 0;
   if (isSidebarCouldDisplay && hasTOC) {
     CONFIG.motion ?
       (NexT.motion.middleWares.sidebar = function () {
-        NexT.utils.displaySidebar();
+          NexT.utils.displaySidebar();
       }) : NexT.utils.displaySidebar();
   }
 });

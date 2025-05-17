@@ -6,7 +6,7 @@
 
 .post-toc-wrap { overflow: hidden; }
 
-.post-toc { 
+.post-toc {
   overflow: auto;
   overscroll-behavior: contain;
 }
@@ -85,13 +85,30 @@
   font-size: 90%;
 }
 
-.post-toc .nav .nav-child { display: none; }
+.post-toc .nav .nav-child {
+  //display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+}
 
-.post-toc .nav .active > .nav-child { display: block; }
+.post-toc .nav .nav-expand > .nav-child {
+  //display: block;
+  max-height: 5000px;
+}
+
+.post-toc .nav .active > .nav-child {
+  //display: block;
+  max-height: 5000px;
+}
 
 .post-toc .nav .active-current > .nav-child {
-  display: block;
-  & > .nav-item { display: block; }
+  //display: block;
+  max-height: 5000px;
+  & > .nav-item {
+    //display: block;
+    max-height: 5000px;
+  }
 }
 
 .post-toc .nav .active > a {

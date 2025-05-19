@@ -1,6 +1,6 @@
 //Custom styles.
 
- /* 
+ /*
 code {
     color: #ff7600;
     background: #fbf7f8;
@@ -26,7 +26,7 @@ code {
 } */
 
 /* 文章的TOC全部展开 */
-.post-toc .nav .nav-child { 
+.post-toc .nav .nav-child {
     show() if not hexo-config('toc.collapse_all');
 }
 
@@ -151,17 +151,17 @@ button.darkmode-toggle {
     scrollbar-width: thin; /* 适用于 Firefox */
     scrollbar-color: transparent transparent;
 }
-  
+
 *::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
-  
+
 *::-webkit-scrollbar-thumb {
     background-color: transparent; /* 默认隐藏 */
     transition: background-color 0.3s;
 }
-  
+
 *:hover::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.4); /* 悬停或滚动时显示 */
 }
@@ -191,3 +191,158 @@ button.darkmode-toggle {
     background: rgba(0, 0, 0, 0.5);
     pointer-events: auto; /* 不让点击穿透 */
   }
+
+
+/* Flashcards Styles */
+.flashcard-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.flashcard-btn:hover {
+  background-color: #555;
+  transform: scale(1.1);
+}
+
+.flashcard-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 2000;
+  overflow: auto;
+}
+
+.flashcard-container {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  max-width: 800px;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  padding: 20px;
+}
+
+.flashcard {
+  width: 100%;
+  height: 90%;
+  perspective: 1000px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  height: 85%;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  overflow-y: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.flashcard-front {
+  //padding: 20px;
+  width: 100%;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.flashcard-front h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.flashcard-back {
+  background-color: #fff;
+  transform: rotateY(180deg);
+  padding: 30px;
+}
+
+.flashcard.flipped .flashcard-front {
+  transform: rotateY(180deg);
+}
+
+.flashcard.flipped .flashcard-back {
+  transform: rotateY(0);
+}
+
+.flashcard-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.flashcard-nav-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.flashcard-nav-btn:hover {
+  background-color: #45a049;
+}
+
+#card-counter {
+  font-size: 16px;
+  color: #666;
+}
+
+.close-flashcard {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-flashcard:hover {
+  color: #333;
+}
+
+/* Make flashcards responsive */
+@media (max-width: 768px) {
+  .flashcard-container {
+    width: 95%;
+    margin: 30px auto;
+  }
+
+  .flashcard {
+    height: 300px;
+  }
+
+  .flashcard-front h2 {
+    font-size: 20px;
+  }
+}

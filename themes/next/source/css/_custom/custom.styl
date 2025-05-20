@@ -208,56 +208,144 @@ button.darkmode-toggle {
 }
 
 .flashcard-modal {
-  //display: none;
   display: flex;
-  //align-items: center;
   justify-content: center;
+  align-items: flex-start; // Align to top to allow scrolling if content overflows
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.85);
   z-index: 3000;
-  overflow: auto;
+  overflow-y: auto; // Allow modal itself to scroll if container is too tall
+  padding-top: 5vh; // Add some top padding
+  padding-bottom: 5vh;
 }
 
 .flashcard-container {
   position: relative;
-  width: 75%;
-  height: 70%;
-  //max-width: 800px;
-  margin: 120px 15px;
+  width: 80%;
+  max-width: 900px;
+  min-height: 400px; // Ensure a minimum height
+  max-height: 90vh; // Max height relative to viewport
   background-color: var(--body-bg-color);
   border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  padding: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  padding: 25px;
+  display: flex;
+  flex-direction: column; // Stack views vertically
+}
+
+/* H1 Selection View */
+#h1-selection-view {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto; // Allow H1 list to scroll if long
+  max-height: calc(90vh - 100px); // Adjust based on padding and other elements
+}
+
+.h1-selection-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: var(--text-color);
+}
+
+.h1-list-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.h1-list-item {
+  background-color: var(--content-bg-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--table-border-color);
+  font-size: 1.1em;
+}
+
+.h1-list-item:hover {
+  background-color: var(--sidebar-highlight);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Flashcard View */
+#flashcard-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Take available height in container
+}
+
+.flashcard-back-btn {
+  position: absolute; // Position relative to flashcard-container
+  top: 15px;
+  left: 15px;
+  background-color: var(--toc-link-color);
+  color: var(--selection-color);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  z-index: 10; // Above flashcard content
+  display: flex;
+  align-items: center;
+}
+
+.flashcard-back-btn i {
+  margin-right: 6px;
+}
+
+.flashcard-back-btn:hover {
+  background-color: var(--link-hover-color);
+}
+
+.flashcard-content-area {
+  flex-grow: 1; // Allow this area to take up space
+  display: flex;
+  flex-direction: column;
+  position: relative; // For perspective
+  margin-top: 30px; // Space for back button
+}
+.flashcard-current-h1-title {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  font-style: italic;
+  height: 20px; // Reserve space
 }
 
 .flashcard {
   width: 100%;
-  height: 80%;
+  // height: 100%; // Removed, let parent dictate
+  flex-grow: 1; // Take remaining space in content-area
   perspective: 1000px;
   cursor: pointer;
-  //margin-bottom: 20px;
-  margin-top: 30px;
+  margin-top: 5px; // Small top margin
+  position: relative; // Ensure front/back are positioned within this
+  min-height: 200px; // Min height for the card itself
 
-  // Add base transition for slide animations
-  // Use a cubic-bezier for a smoother feel, adjust duration as needed
   transition: transform 0.15s cubic-bezier(0.15, 0.8, 0.25, 1), opacity 0.15s ease;
 }
 
-// Helper class to disable transitions for instant repositioning
 .flashcard.is-sliding-no-transition {
   transition: none !important;
 }
-
-// Classes for slide-out animations
 .flashcard.slide-out-left {
   transform: translateX(-100%);
   opacity: 0;
 }
-
 .flashcard.slide-out-right {
   transform: translateX(100%);
   opacity: 0;
@@ -265,20 +353,21 @@ button.darkmode-toggle {
 
 .flashcard-front, .flashcard-back {
   position: absolute;
-  height: 85%;
-  width: 100%; // 确保 front 和 back 都占满 .flashcard 的宽度
+  top: 0; left: 0; // Anchor to top-left of .flashcard
+  width: 100%;
+  height: 100%; // Fill the .flashcard parent
   backface-visibility: hidden;
-  transition: transform 0.8s;
+  transition: transform 0.7s; // Slightly faster flip
   overflow-y: auto;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px 8px rgba(0,0,0,0.1);
-  padding: 20px;
-  box-sizing: border-box; /*  <-- 添加这一行是为了解决: 当你给一个元素设置 width: 100%; 并同时设置 padding 时，默认情况下（box-sizing: content-box;），padding 会被加到 width 之外，导致元素的实际渲染宽度超出其父容器的100%。  */
+  border-radius: 0.8rem; // Slightly smaller radius
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  padding: 25px; // Increased padding
+  box-sizing: border-box;
+  background-color: var(--content-bg-color);
+  color: var(--text-color); // Ensure text color is set
 }
 
 .flashcard-front {
-  width: 100%;
-  background-color: var(--content-bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -287,19 +376,34 @@ button.darkmode-toggle {
 
 .flashcard-front h2 {
   margin: 0;
-  font-size: 24px;
+  font-size: 1.8em; // Responsive font size
   color: var(--bold-text-color);
 }
 
 .flashcard-back {
-  background-color: var(--content-bg-color);
   transform: rotateY(180deg);
+  // Ensure back content styling is good
 }
+.flashcard-back p, .flashcard-back div, .flashcard-back ul, .flashcard-back ol, .flashcard-back pre {
+  margin-bottom: 1em;
+}
+.flashcard-back h1, .flashcard-back h2, .flashcard-back h3, .flashcard-back h4, .flashcard-back h5, .flashcard-back h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: var(--bold-text-color);
+}
+.flashcard-back pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: var(--body-bg-color); // Different background for code blocks
+  padding: 10px;
+  border-radius: 5px;
+}
+
 
 .flashcard.flipped .flashcard-front {
   transform: rotateY(180deg);
 }
-
 .flashcard.flipped .flashcard-back {
   transform: rotateY(0);
 }
@@ -308,46 +412,80 @@ button.darkmode-toggle {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 20px; // Increased margin
+  padding: 10px 0;
+  width: 100%;
+  flex-shrink: 0; // Prevent shrinking
 }
 
 .flashcard-nav-btn {
-  //background-color: #4caf50;
   background-color: var(--toc-link-color);
-  //color: white;
   color: var(--selection-color);
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px; // Adjusted padding
   border-radius: 2rem;
   cursor: pointer;
   font-size: 14px;
   font-weight: 900;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.1s;
+  min-width: 40px; // For icon-only buttons
+  text-align: center;
+}
+.flashcard-nav-btn:hover:not(:disabled) {
+  background-color: var(--link-hover-color);
+  transform: translateY(-1px);
+}
+.flashcard-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.flashcard-nav-btn i { // For shuffle icon
+  font-size: 1.1em;
 }
 
-//.flashcard-nav-btn:hover {
-//  //background-color: #45a049;
-//  background-color: var(--link-hover-color);
-//}
 
-#card-counter {
+.card-counter-container {
+  display: flex;
+  align-items: center;
   font-size: 16px;
   font-family: monospace;
   color: var(--text-color);
-  width: 90px;
-  text-align : center;
+  // width: 120px; // Increased width for input
+  text-align: center;
+}
+
+.flashcard-jump-input {
+  width: 45px; // Width for number input
+  padding: 6px 8px;
+  margin-right: 5px;
+  border: 1px solid var(--table-border-color);
+  border-radius: 4px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 15px;
+  background-color: var(--content-bg-color);
+  color: var(--text-color);
+  -moz-appearance: textfield; // Hide spinners in Firefox
+}
+.flashcard-jump-input::-webkit-outer-spin-button,
+.flashcard-jump-input::-webkit-inner-spin-button {
+  -webkit-appearance: none; // Hide spinners in Chrome/Safari
+  margin: 0;
+}
+
+
+#card-counter-total {
+  min-width: 40px; // Ensure space for "/ XX"
 }
 
 .close-flashcard {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
-  //color: white;
+  top: 15px; // Align with back button
+  right: 15px;
+  width: 32px; // Slightly larger
+  height: 32px;
+  font-size: 18px;
   color: var(--selection-color);
-  //background-color: #ff3547;
   background-color: var(--link-color);
   border-radius: 50%;
   cursor: pointer;
@@ -359,19 +497,57 @@ button.darkmode-toggle {
   transition: background-color 0.3s, transform 0.2s;
   border: none;
   outline: none;
-  text-decoration: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 .close-flashcard:hover {
-  background-color: #ff0a1f;
+  background-color: #ff3547; // More distinct hover
   transform: scale(1.1);
 }
 
-/* Make flashcards responsive */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .flashcard-container {
+    width: 95%;
+    padding: 15px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    max-height: 96vh;
+  }
+  .flashcard-front h2 {
+    font-size: 1.5em;
+  }
+  .flashcard-nav-btn {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .flashcard-jump-input {
+    width: 35px;
+    font-size: 14px;
+  }
+  .h1-selection-title {
+    font-size: 1.3em;
+  }
+  .h1-list-item {
+    font-size: 1em;
+    padding: 12px 15px;
+  }
+  .flashcard-back-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flashcard-navigation {
+    flex-wrap: wrap; // Allow wrapping on very small screens
+    justify-content: center;
+  }
+  .flashcard-nav-btn {
+    margin: 5px;
+  }
+  .card-counter-container {
     width: 100%;
+    justify-content: center;
+    margin: 5px 0;
   }
 }

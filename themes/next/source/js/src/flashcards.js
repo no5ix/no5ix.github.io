@@ -200,6 +200,18 @@
     $modal.fadeIn(400);
   };
 
+  Flashcards.prototype.hideFlashcardModal = function() {
+    $('#flashcard-modal').fadeOut(400, () => {
+      if ($('body').hasClass('flashcard-modal-open')) {
+        $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
+      }
+      // Reset views to hidden for next open
+      $('#h1-selection-view, #flashcard-view')
+        .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
+        .addClass('view-hidden');
+    });
+  };
+
   Flashcards.prototype._updateH1SelectionViewContent = function() {
     var $h1List = $('#h1-list').empty();
     if (this.h1Sections.length === 0) {
@@ -300,18 +312,6 @@
       $h1View.addClass('view-hidden').removeClass('view-sliding-out-left');
       this.isViewAnimating = false;
     }, this.animationViewDuration);
-  };
-
-  Flashcards.prototype.hideFlashcardModal = function() {
-    $('#flashcard-modal').fadeOut(200, () => {
-      if ($('body').hasClass('flashcard-modal-open')) {
-        $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
-      }
-      // Reset views to hidden for next open
-      $('#h1-selection-view, #flashcard-view')
-        .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
-        .addClass('view-hidden');
-    });
   };
 
   Flashcards.prototype.updateCardContent = function() {

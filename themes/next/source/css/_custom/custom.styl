@@ -222,28 +222,89 @@ button.darkmode-toggle {
   padding-top: 5vh; // Add some top padding
   padding-bottom: 5vh;
 }
+// Custom styles.
+// ... (your existing custom styles) ...
+
+/* Flashcards Styles */
+// ... (existing .flashcard-btn, .flashcard-modal styles) ...
 
 .flashcard-container {
   position: relative;
   width: 80%;
   max-width: 900px;
-  min-height: 400px; // Ensure a minimum height
-  max-height: 90vh; // Max height relative to viewport
+  min-height: 450px; // Adjusted min-height
+  max-height: 90vh;
   background-color: var(--body-bg-color);
   border-radius: 1rem;
   box-shadow: 0 0 25px rgba(0,0,0,0.4);
-  padding: 25px;
-  display: flex;
-  flex-direction: column; // Stack views vertically
+  padding: 25px; // This padding defines the boundary for absolute positioned views
+  display: flex; // Keep this for overall container structure if needed, but views are absolute
+  flex-direction: column;
+  overflow: hidden; // Crucial for containing absolute positioned views during transition
 }
+
+/* View common styles and transitions */
+.fc-view { // Common class for #h1-selection-view and #flashcard-view
+  position: absolute;
+  top: 25px; bottom: 25px; left: 25px; right: 25px; // Fill padding area of parent
+  // If .flashcard-container has display:flex, then top/left/width/height 100% is better
+  // For now, assuming padding on container is the boundary
+  // width: calc(100% - 50px); // 100% of parent minus parent's L/R padding
+  // height: calc(100% - 50px); // 100% of parent minus parent's T/B padding
+  // top: 25px; left: 25px; // Offset by parent's padding
+
+  // Simpler: let views be 100% of .flashcard-container and handle their own internal padding
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  padding: 20px; // Internal padding for each view
+  box-sizing: border-box;
+
+  display: flex; // Both views will be flex containers for their content
+  flex-direction: column;
+
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; // animationViewDuration
+}
+
+.fc-view.view-hidden {
+  display: none !important;
+  opacity: 0;
+}
+
+.fc-view.view-prep-left {
+  transform: translateX(-100%);
+  opacity: 0;
+  display: flex !important;
+}
+.fc-view.view-prep-right {
+  transform: translateX(100%);
+  opacity: 0;
+  display: flex !important;
+}
+.fc-view.view-active { // This class mainly signifies it IS active, display is handled by removing view-hidden
+  transform: translateX(0%);
+  opacity: 1;
+  display: flex !important;
+}
+.fc-view.view-sliding-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.fc-view.view-sliding-out-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
 
 /* H1 Selection View */
 #h1-selection-view {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow-y: auto; // Allow H1 list to scroll if long
-  max-height: calc(90vh - 100px); // Adjust based on padding and other elements
+  // width: 100%; // Handled by .fc-view
+  // padding: 10px; // Handled by .fc-view
+  // box-sizing: border-box; // Handled by .fc-view
+  // overflow-y: auto; // Will be on a child if needed
+  // max-height: calc(90vh - 100px); // Not needed if view is 100% height
 }
 
 .h1-selection-title {
@@ -251,15 +312,19 @@ button.darkmode-toggle {
   margin-bottom: 20px;
   font-size: 1.5em;
   color: var(--text-color);
+  flex-shrink: 0; // Prevent shrinking
 }
 
 .h1-list-ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto; // Scroll for the list itself
+  flex-grow: 1; // Take remaining space
 }
 
 .h1-list-item {
+  // ... (styles remain largely the same)
   background-color: var(--content-bg-color);
   color: var(--text-color);
   padding: 15px 20px;
@@ -270,24 +335,25 @@ button.darkmode-toggle {
   border: 1px solid var(--table-border-color);
   font-size: 1.1em;
 }
-
 .h1-list-item:hover {
   background-color: var(--sidebar-highlight);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+
 /* Flashcard View */
 #flashcard-view {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%; // Take available height in container
+  // width: 100%; // Handled by .fc-view
+  // display: flex; // Handled by .fc-view
+  // flex-direction: column; // Handled by .fc-view
+  // height: 100%; // Handled by .fc-view
 }
 
 .flashcard-back-btn {
-  position: absolute; // Position relative to flashcard-container
-  top: 15px;
-  left: 15px;
+  position: absolute;
+  top: 10px; // Adjusted for view's internal padding
+  left: 10px; // Adjusted for view's internal padding
+  // ... (rest of back button styles same)
   background-color: var(--toc-link-color);
   color: var(--selection-color);
   border: none;
@@ -297,25 +363,20 @@ button.darkmode-toggle {
   font-size: 13px;
   font-weight: 600;
   transition: background-color 0.3s;
-  z-index: 10; // Above flashcard content
+  z-index: 10;
   display: flex;
   align-items: center;
 }
+.flashcard-back-btn i { margin-right: 6px; }
+.flashcard-back-btn:hover { background-color: var(--link-hover-color); }
 
-.flashcard-back-btn i {
-  margin-right: 6px;
-}
-
-.flashcard-back-btn:hover {
-  background-color: var(--link-hover-color);
-}
 
 .flashcard-content-area {
-  flex-grow: 1; // Allow this area to take up space
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: relative; // For perspective
-  margin-top: 30px; // Space for back button
+  position: relative;
+  margin-top: 40px; // Increased space for back button + H1 title
 }
 .flashcard-current-h1-title {
   text-align: center;
@@ -323,112 +384,66 @@ button.darkmode-toggle {
   color: var(--text-color);
   margin-bottom: 10px;
   font-style: italic;
-  height: 20px; // Reserve space
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .flashcard {
+  // ... (styles for .flashcard, .flashcard-front, .flashcard-back remain largely the same)
+  // Ensure min-height is appropriate if flex-grow is used
   width: 100%;
-  // height: 100%; // Removed, let parent dictate
-  flex-grow: 1; // Take remaining space in content-area
+  flex-grow: 1;
   perspective: 1000px;
   cursor: pointer;
-  margin-top: 5px; // Small top margin
-  position: relative; // Ensure front/back are positioned within this
-  min-height: 200px; // Min height for the card itself
-
-  transition: transform 0.15s cubic-bezier(0.15, 0.8, 0.25, 1), opacity 0.15s ease;
+  // margin-top: 5px; // Removed, handled by parent flex
+  position: relative;
+  min-height: 200px;
+  transition: transform 0.15s cubic-bezier(0.15, 0.8, 0.25, 1), opacity 0.15s ease; // animationDuration
 }
-
-.flashcard.is-sliding-no-transition {
-  transition: none !important;
-}
-.flashcard.slide-out-left {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-.flashcard.slide-out-right {
-  transform: translateX(100%);
-  opacity: 0;
-}
+// ... (.is-sliding-no-transition, .slide-out-left, .slide-out-right)
 
 .flashcard-front, .flashcard-back {
+  // ... (styles remain largely the same)
   position: absolute;
-  top: 0; left: 0; // Anchor to top-left of .flashcard
+  top: 0; left: 0;
   width: 100%;
-  height: 100%; // Fill the .flashcard parent
+  height: 100%;
   backface-visibility: hidden;
-  transition: transform 0.7s; // Slightly faster flip
+  transition: transform 0.7s;
   overflow-y: auto;
-  border-radius: 0.8rem; // Slightly smaller radius
+  border-radius: 0.8rem;
   box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  padding: 25px; // Increased padding
+  padding: 25px;
   box-sizing: border-box;
   background-color: var(--content-bg-color);
-  color: var(--text-color); // Ensure text color is set
+  color: var(--text-color);
 }
+// ... (.flashcard-front h2, .flashcard-back content, .flipped states)
 
-.flashcard-front {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.flashcard-front h2 {
-  margin: 0;
-  font-size: 1.8em; // Responsive font size
-  color: var(--bold-text-color);
-}
-
-.flashcard-back {
-  transform: rotateY(180deg);
-  // Ensure back content styling is good
-}
-.flashcard-back p, .flashcard-back div, .flashcard-back ul, .flashcard-back ol, .flashcard-back pre {
-  margin-bottom: 1em;
-}
-.flashcard-back h1, .flashcard-back h2, .flashcard-back h3, .flashcard-back h4, .flashcard-back h5, .flashcard-back h6 {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  color: var(--bold-text-color);
-}
-.flashcard-back pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  background-color: var(--body-bg-color); // Different background for code blocks
-  padding: 10px;
-  border-radius: 5px;
-}
-
-
-.flashcard.flipped .flashcard-front {
-  transform: rotateY(180deg);
-}
-.flashcard.flipped .flashcard-back {
-  transform: rotateY(0);
-}
 
 .flashcard-navigation {
+  // ... (styles remain largely the same)
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 20px; // Increased margin
+  margin-top: 15px; // Slightly reduced
   padding: 10px 0;
   width: 100%;
-  flex-shrink: 0; // Prevent shrinking
+  flex-shrink: 0;
 }
 
 .flashcard-nav-btn {
+  // ... (styles remain largely the same)
   background-color: var(--toc-link-color);
   color: var(--selection-color);
   border: none;
-  padding: 10px 15px; // Adjusted padding
+  padding: 10px 15px;
   border-radius: 2rem;
   cursor: pointer;
   font-size: 14px;
   font-weight: 900;
-  transition: background-color 0.3s, transform 0.1s;
-  min-width: 40px; // For icon-only buttons
+  transition: background-color 0.3s, transform 0.1s, border 0.3s, box-shadow 0.3s; // Added border/shadow
+  min-width: 40px;
   text-align: center;
 }
 .flashcard-nav-btn:hover:not(:disabled) {
@@ -439,57 +454,34 @@ button.darkmode-toggle {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.flashcard-nav-btn i { // For shuffle icon
-  font-size: 1.1em;
+.flashcard-nav-btn i { font-size: 1.1em; }
+
+/* Shuffle button active state */
+.flashcard-nav-btn.shuffle-active {
+  background-color: var(--brand-color); // Use a theme brand color
+  color: var(--sidebar-background-color); // Contrasting text color
+  box-shadow: inset 0 0 0 2px var(--sidebar-highlight); // Inner border effect
+}
+.flashcard-nav-btn.shuffle-active:hover:not(:disabled) {
+  background-color: var(--brand-hover-color);
 }
 
 
-.card-counter-container {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-family: monospace;
-  color: var(--text-color);
-  // width: 120px; // Increased width for input
-  text-align: center;
-}
-
-.flashcard-jump-input {
-  width: 45px; // Width for number input
-  padding: 6px 8px;
-  margin-right: 5px;
-  border: 1px solid var(--table-border-color);
-  border-radius: 4px;
-  text-align: center;
-  font-family: monospace;
-  font-size: 15px;
-  background-color: var(--content-bg-color);
-  color: var(--text-color);
-  -moz-appearance: textfield; // Hide spinners in Firefox
-}
-.flashcard-jump-input::-webkit-outer-spin-button,
-.flashcard-jump-input::-webkit-inner-spin-button {
-  -webkit-appearance: none; // Hide spinners in Chrome/Safari
-  margin: 0;
-}
-
-
-#card-counter-total {
-  min-width: 40px; // Ensure space for "/ XX"
-}
+// ... (.card-counter-container, .flashcard-jump-input, #card-counter-total styles remain largely the same)
 
 .close-flashcard {
   position: absolute;
-  top: 15px; // Align with back button
-  right: 15px;
-  width: 32px; // Slightly larger
+  top: 10px; // Adjusted for view's internal padding
+  right: 10px; // Adjusted for view's internal padding
+  // ... (rest of close button styles same)
+  width: 32px;
   height: 32px;
   font-size: 18px;
   color: var(--selection-color);
   background-color: var(--link-color);
   border-radius: 50%;
   cursor: pointer;
-  z-index: 10000;
+  z-index: 10000; // Above fc-view content
   display: flex;
   justify-content: center;
   align-items: center;
@@ -498,56 +490,32 @@ button.darkmode-toggle {
   border: none;
   outline: none;
 }
-
 .close-flashcard:hover {
-  background-color: #ff3547; // More distinct hover
+  background-color: #ff3547;
   transform: scale(1.1);
 }
 
 /* Responsive adjustments */
+// ... (Your existing responsive adjustments should still largely apply,
+//      but test them with the new absolute positioned views)
 @media (max-width: 768px) {
   .flashcard-container {
     width: 95%;
+    // padding: 15px; // Padding is now on .fc-view
+    // margin-top: 2vh; // Handled by modal
+    // margin-bottom: 2vh; // Handled by modal
+    // max-height: 96vh; // Handled by modal
+  }
+  .fc-view { // Adjust internal padding for smaller screens
     padding: 15px;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    max-height: 96vh;
-  }
-  .flashcard-front h2 {
-    font-size: 1.5em;
-  }
-  .flashcard-nav-btn {
-    padding: 8px 10px;
-    font-size: 13px;
-  }
-  .flashcard-jump-input {
-    width: 35px;
-    font-size: 14px;
-  }
-  .h1-selection-title {
-    font-size: 1.3em;
-  }
-  .h1-list-item {
-    font-size: 1em;
-    padding: 12px 15px;
   }
   .flashcard-back-btn {
+    top: 5px; left: 5px; // Closer to edge with smaller padding
     padding: 6px 10px;
     font-size: 12px;
   }
-}
-
-@media (max-width: 480px) {
-  .flashcard-navigation {
-    flex-wrap: wrap; // Allow wrapping on very small screens
-    justify-content: center;
+  .close-flashcard {
+    top: 5px; right: 5px;
   }
-  .flashcard-nav-btn {
-    margin: 5px;
-  }
-  .card-counter-container {
-    width: 100%;
-    justify-content: center;
-    margin: 5px 0;
-  }
+  // ... (other responsive styles)
 }

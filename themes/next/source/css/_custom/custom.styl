@@ -240,6 +240,26 @@ button.darkmode-toggle {
   cursor: pointer;
   margin-bottom: 20px;
   margin-top: 20px;
+
+  // Add base transition for slide animations
+  // Use a cubic-bezier for a smoother feel, adjust duration as needed
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease-out;
+}
+
+// Helper class to disable transitions for instant repositioning
+.flashcard.is-sliding-no-transition {
+  transition: none !important;
+}
+
+// Classes for slide-out animations
+.flashcard.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.flashcard.slide-out-right {
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 .flashcard-front, .flashcard-back {

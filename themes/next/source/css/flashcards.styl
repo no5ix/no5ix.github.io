@@ -59,15 +59,34 @@
 
 .flashcard-front {
   display: flex;
+  flex-direction: column; /* Changed to column to allow positioning of title and icon */
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* This will center the h2 title vertically */
   text-align: center;
+  position: relative; /* Needed for absolute positioning of the hint icon */
+  /* Ensure padding is still applied if it was here before, or on .flashcard-front, .flashcard- */
 }
 
 .flashcard-front h2 {
   margin: 0;
-  font-size: 1.8em; // Responsive font size
+  font-size: 1.8em;
   color: var(--bold-text-color);
+  /* If you want the h2 to take up most space and hint icon at bottom,
+     you might need to adjust flex properties or use margin-bottom on h2 */
+}
+
+.flashcard-hint-icon {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  font-size: 2em;
+  color: var(--text-color);
+  opacity: 0.7; /* Slightly transparent to be less obtrusive */
+  cursor: help;
+}
+
+.flashcard-hint-icon:hover {
+  opacity: 1;
 }
 
 .flashcard-back {
@@ -437,4 +456,5 @@
 //    margin: 5px 0;
 //  }
 //}
+
 

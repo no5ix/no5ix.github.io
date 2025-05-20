@@ -329,7 +329,13 @@
     var flashcardElement = $('#flashcard-modal .flashcard');
     this.isFlipped = false;
     flashcardElement.removeClass('flipped');
-    flashcardElement.find('.flashcard-front').html('<h2>' + card.front + '</h2>');
+
+    // Add the hint icon div along with the h2 title
+    flashcardElement.find('.flashcard-front').html(
+      `<h2>${card.front}</h2>
+       <div class="flashcard-hint-icon"><i class="fa fa-lightbulb-o"></i></div>`
+    );
+
     flashcardElement.find('.flashcard-back').html(card.back);
     $('#jump-to-card-input').val(this.currentIndex + 1);
     $('#jump-to-card-input').attr('max', this.currentCardsSet.length);

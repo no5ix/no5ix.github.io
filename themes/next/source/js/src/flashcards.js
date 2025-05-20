@@ -11,6 +11,7 @@
     this.isFlipped = false;
     this.isAnimating = false; // Flag to prevent animation overlaps
     this.animationDuration = 400; // ms, should match CSS transition duration for transform
+    this.originalBodyOverflow = ''; // To store the original body overflow style
   };
 
   Flashcards.prototype.generateCards = function() {
@@ -53,7 +54,7 @@
 
   Flashcards.prototype.showFlashcardModal = function() {
     // ... (keep most of showFlashcardModal method as is, just ensure isAnimating is reset)
-    var self = this;
+    var self = this; // Keep self reference
 
     if (!this.generateCards()) {
       alert('No headings found to create flashcards!');
@@ -129,12 +130,23 @@
       'opacity': '1'
     });
 
+    // Prevent body scroll when modal is open
+    if (!$('body').hasClass('flashcard-modal-open')) {
+      this.originalBodyOverflow = $('body').css('overflow');
+      $('body').css('overflow', 'hidden').addClass('flashcard-modal-open');
+    }
+
     this.updateCardContent();
     $('#flashcard-modal').fadeIn();
   };
 
   Flashcards.prototype.hideFlashcardModal = function() {
-    $('#flashcard-modal').fadeOut();
+    // Restore body scroll after modal is hidden
+    $('#flashcard-modal').fadeOut(() => {
+      if ($('body').hasClass('flashcard-modal-open')) {
+        $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
+      }
+    });
   };
 
   Flashcards.prototype.updateCardContent = function() {

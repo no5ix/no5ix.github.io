@@ -10,7 +10,7 @@
     this.currentIndex = 0;
     this.isFlipped = false;
     this.isAnimating = false; // Flag to prevent animation overlaps
-    this.animationDuration = 400; // ms, should match CSS transition duration for transform
+    this.animationDuration = 100; // ms, should match CSS transition duration for transform
     this.originalBodyOverflow = ''; // To store the original body overflow style
   };
 

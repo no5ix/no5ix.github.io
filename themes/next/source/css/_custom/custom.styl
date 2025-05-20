@@ -224,9 +224,9 @@ button.darkmode-toggle {
 .flashcard-container {
   position: relative;
   width: 75%;
-  height: 75%;
+  height: 70%;
   //max-width: 800px;
-  margin: 100px 30px 100px 30px;
+  margin: 120px 15px;
   background-color: var(--body-bg-color);
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
@@ -243,7 +243,7 @@ button.darkmode-toggle {
 
   // Add base transition for slide animations
   // Use a cubic-bezier for a smoother feel, adjust duration as needed
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease-out;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
 }
 
 // Helper class to disable transitions for instant repositioning
@@ -322,10 +322,10 @@ button.darkmode-toggle {
   transition: background-color 0.3s;
 }
 
-.flashcard-nav-btn:hover {
-  //background-color: #45a049;
-  background-color: var(--link-hover-color);
-}
+//.flashcard-nav-btn:hover {
+//  //background-color: #45a049;
+//  background-color: var(--link-hover-color);
+//}
 
 #card-counter {
   font-size: 16px;

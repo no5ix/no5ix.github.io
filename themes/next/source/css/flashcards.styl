@@ -16,7 +16,7 @@
 .flashcard-modal {
   display: flex;
   justify-content: center;
-  align-items: flex-start; // Align to top to allow scrolling if content overflows
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -32,6 +32,7 @@
 .flashcard-container {
   position: relative;
   width: 80%;
+  height: 70%;
   max-width: 900px;
   min-height: 450px; // Adjusted min-height
   max-height: 90vh;
@@ -50,7 +51,6 @@
   font-size: 1.5em;
   color: var(--text-color);
 }
-
 
 .flashcard.is-sliding-no-transition {
   transition: none !important;
@@ -116,14 +116,14 @@
 }
 
 .flashcard-jump-input {
-  width: 45px; // Width for number input
+  width: 35px; // Width for number input
   padding: 6px 8px;
-  margin-right: 5px;
+  margin-right: 8px;
   border: 1px solid var(--table-border-color);
-  border-radius: 4px;
+  border-radius: 8px;
   text-align: center;
   font-family: monospace;
-  font-size: 15px;
+  font-size: 11px;
   background-color: var(--content-bg-color);
   color: var(--text-color);
   -moz-appearance: textfield; // Hide spinners in Firefox
@@ -226,13 +226,16 @@
   margin-bottom: 10px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   border: 1px solid var(--table-border-color);
   font-size: 1.1em;
 }
 .h1-list-item:hover {
-  background-color: var(--sidebar-highlight);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  //background-color: var(--content-bg-color);
+  //color: var(--text-color);
+  background-color: var(--toc-link-color);
+  color: var(--selection-color);
+  //box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 
@@ -255,14 +258,14 @@
   padding: 8px 12px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 600;
   transition: background-color 0.3s;
   z-index: 10;
   display: flex;
   align-items: center;
 }
-.flashcard-back-btn i { margin-right: 6px; }
+//.flashcard-back-btn i { margin-right: 6px; }
 .flashcard-back-btn:hover { background-color: var(--link-hover-color); }
 
 
@@ -275,10 +278,10 @@
 }
 .flashcard-current-h1-title {
   text-align: center;
-  font-size: 0.9em;
+  font-size: 1em;
   color: var(--text-color);
   margin-bottom: 10px;
-  font-style: italic;
+  font-family: monospace;
   height: 20px;
   flex-shrink: 0;
 }
@@ -335,7 +338,7 @@
   padding: 10px 15px;
   border-radius: 2rem;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 900;
   transition: background-color 0.3s, transform 0.1s, border 0.3s, box-shadow 0.3s; // Added border/shadow
   min-width: 40px;
@@ -353,16 +356,14 @@
 
 /* Shuffle button active state */
 .flashcard-nav-btn.shuffle-active {
-  background-color: var(--brand-color); // Use a theme brand color
-  color: var(--sidebar-background-color); // Contrasting text color
-  box-shadow: inset 0 0 0 2px var(--sidebar-highlight); // Inner border effect
+  background-color: var(--link-hover-color);
+  //color: var(--sidebar-background-color); // Contrasting text color
+  //box-shadow: inset 0 0 0 2px var(--sidebar-highlight); // Inner border effect
 }
 .flashcard-nav-btn.shuffle-active:hover:not(:disabled) {
-  background-color: var(--brand-hover-color);
+  //background-color: var(--brand-hover-color);
+  background-color: var(--link-hover-color);
 }
-
-
-// ... (.card-counter-container, .flashcard-jump-input, #card-counter-total styles remain largely the same)
 
 .close-flashcard {
   position: absolute;
@@ -394,35 +395,31 @@
 // ... (Your existing responsive adjustments should still largely apply,
 //      but test them with the new absolute positioned views)
 @media (max-width: 768px) {
-  .fc-view { // Adjust internal padding for smaller screens
-    padding: 15px;
-  }
-  .flashcard-back-btn {
-    top: 5px; left: 5px; // Closer to edge with smaller padding
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-  .close-flashcard {
-    top: 5px; right: 5px;
-  }
   .flashcard-container {
-    width: 95%;
+    width: 90%;
     padding: 15px;
     margin-top: 2vh;
     margin-bottom: 2vh;
     max-height: 96vh;
   }
+  .fc-view { // Adjust internal padding for smaller screens
+    padding: 15px;
+  }
+  //.flashcard-back-btn {
+  //  top: 5px; left: 5px; // Closer to edge with smaller padding
+  //  padding: 6px 10px;
+  //  font-size: 12px;
+  //}
+  //.close-flashcard {
+  //  top: 5px; right: 5px;
+  //}
   .flashcard-front h2 {
     font-size: 1.5em;
   }
-  .flashcard-nav-btn {
-    padding: 8px 10px;
-    font-size: 13px;
-  }
-  .flashcard-jump-input {
-    width: 35px;
-    font-size: 14px;
-  }
+  //.flashcard-nav-btn {
+  //  padding: 8px 10px;
+  //  font-size: 13px;
+  //}
   .h1-selection-title {
     font-size: 1.3em;
   }
@@ -433,19 +430,19 @@
   // ... (other responsive styles)
 }
 
-@media (max-width: 480px) {
-  .flashcard-navigation {
-    flex-wrap: wrap; // Allow wrapping on very small screens
-    justify-content: center;
-  }
-  .flashcard-nav-btn {
-    margin: 5px;
-  }
-  .card-counter-container {
-    width: 100%;
-    justify-content: center;
-    margin: 5px 0;
-  }
-}
+//@media (max-width: 480px) {
+//  .flashcard-navigation {
+//    flex-wrap: wrap; // Allow wrapping on very small screens
+//    justify-content: center;
+//  }
+//  .flashcard-nav-btn {
+//    margin: 5px;
+//  }
+//  .card-counter-container {
+//    width: 100%;
+//    justify-content: center;
+//    margin: 5px 0;
+//  }
+//}
 
 

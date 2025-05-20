@@ -57,7 +57,7 @@
           }
         });
         if (allCardsCombined.length > 0) {
-          this.h1Sections.unshift({ h1Title: "All Cards (Combined)", cards: allCardsCombined, isCombined: true });
+          this.h1Sections.unshift({ h1Title: "All Cards", cards: allCardsCombined, isCombined: true });
         }
       }
 
@@ -113,7 +113,7 @@
             </div>
             <div id="flashcard-view" class="fc-view view-hidden">
               <button id="back-to-h1-selection" class="flashcard-back-btn" title="Back to Sections">
-                <i class="fa fa-arrow-left"></i> Sections
+                <i class="fa fa-arrow-left"></i>
               </button>
               <div class="flashcard-content-area">
                 <div class="flashcard-current-h1-title"></div>
@@ -210,7 +210,7 @@
     this.h1Sections.forEach((section) => {
       const $li = $('<li>')
         .addClass('h1-list-item')
-        .text(`${section.h1Title} (${section.cards.length} cards)`)
+        .text(`${section.h1Title} (${section.cards.length})`)
         .on('click', () => {
           if (this.isViewAnimating) return;
           this._transitionToFlashcardView(section);

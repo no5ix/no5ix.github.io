@@ -359,6 +359,37 @@
   width: 40px;
   height: 40px;
 }
+
+#auto-read-btn i.fa-volume-up {
+  /* Default icon style if needed */
+}
+
+#auto-read-btn.active {
+  background-color: var(--brand-color); /* Or your theme's primary/active color */
+  color: #fff; /* Ensure icon is visible on active background */
+}
+
+#auto-read-btn.active:hover {
+  background-color: var(--brand-hover-color); /* Darken or lighten the active color on hover */
+}
+
+.flashcard-nav-btn {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;     /* 垂直居中 */
+  text-align: center;
+  background-color: var(--toc-link-color);
+  color: var(--selection-color);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+  transition: background-color 0.3s, transform 0.1s, border 0.3s, box-shadow 0.3s;
+  width: 40px;
+  height: 40px;
+}
 .flashcard-nav-btn:hover:not(:disabled) {
   background-color: var(--link-hover-color);
   transform: translateY(-1px);

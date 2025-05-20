@@ -20,6 +20,9 @@
     this.currentView = 'h1Selection'; // 'h1Selection' or 'flashcards'
     this.isShuffled = false; // For shuffle state
     this.isTouchingCodeBlock = false; // NEW: Flag for touch on code block
+
+    this.isAutoReadActive = false;
+    this.speechSynthesis = window.speechSynthesis || null;
   };
 
   Flashcards.prototype._parseAllHeadingsAndCards = function() {
@@ -103,6 +106,10 @@
     var $modal = $('#flashcard-modal');
     const $h1View = $('#h1-selection-view'); // Cache these
     const $flashcardView = $('#flashcard-view');
+    this.isShuffled = false; // Reset shuffle on modal open
+
+    this.isAutoReadActive = false; // always start with auto-read off
+    $('#auto-read-btn').removeClass('active'); // Match the state above
 
     if (!$modal.length) {
       // ... (modalHtml definition) ...
@@ -124,6 +131,9 @@
                 </div>
               </div>
               <div class="flashcard-navigation">
+                <button id="auto-read-btn" class="flashcard-nav-btn" title="Toggle Auto Read">
+                  <i class="fa fa-volume-up"></i>
+                </button>
                 <button id="prev-card" class="flashcard-nav-btn">❮</button>
                 <div class="card-counter-container">
                   <input type="number" id="jump-to-card-input" min="1" class="flashcard-jump-input">
@@ -270,6 +280,11 @@
           }
         }
       });
+
+      $('#auto-read-btn').off('click.flashcards').on('click.flashcards', function(e) {
+        e.stopPropagation();
+        self.toggleAutoRead();
+      });
     }
 
     // ... (rest of showFlashcardModal logic) ...
@@ -306,6 +321,13 @@
 
 
   Flashcards.prototype.hideFlashcardModal = function() {
+    if (this.speechSynthesis) {
+      this.speechSynthesis.cancel();
+    }
+    // It might also be good to reset isAutoReadActive and button state here
+    this.isAutoReadActive = false;
+    $('#auto-read-btn').removeClass('active');
+    // However, the user might want it to persist for the next session. Let's leave it for now.
     $('#flashcard-modal').fadeOut(400, () => {
       if ($('body').hasClass('flashcard-modal-open')) {
         $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
@@ -340,6 +362,9 @@
   };
 
   Flashcards.prototype._transitionToH1SelectionView = function() {
+    if (this.speechSynthesis) {
+      this.speechSynthesis.cancel();
+    }
     if (this.isViewAnimating) return;
     this.isViewAnimating = true;
     this.currentView = 'h1Selection';
@@ -419,23 +444,60 @@
     }, this.animationViewDuration);
   };
 
-  Flashcards.prototype.updateCardContent = function() {
-    if (!this.currentCardsSet || this.currentCardsSet.length === 0) {
-      $('#flashcard-modal .flashcard-front').html('<h2>No cards in this section.</h2>');
-      $('#flashcard-modal .flashcard-back').html('');
-      $('#jump-to-card-input').val('');
-      $('#card-counter-total').text('/ 0');
-      $('#prev-card, #next-card, #shuffle-cards-btn').prop('disabled', true);
+  Flashcards.prototype._speak = function (text) {
+    if (!this.speechSynthesis || !text) {
       return;
     }
-    $('#prev-card, #next-card, #shuffle-cards-btn').prop('disabled', false);
+    // Cancel any ongoing speech
+    this.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    // Attempt to use the document's language, fallback to English
+    utterance.lang = document.documentElement.lang || 'en-US';
+    // You can add more configurations to utterance if needed (e.g., rate, pitch)
+
+    this.speechSynthesis.speak(utterance);
+  };
+
+  Flashcards.prototype.toggleAutoRead = function () {
+    if (!this.speechSynthesis) {
+      alert('Sorry, your browser does not support text-to-speech.');
+      return;
+    }
+    this.isAutoReadActive = !this.isAutoReadActive;
+    const $button = $('#auto-read-btn');
+    $button.toggleClass('active', this.isAutoReadActive);
+
+    if (this.isAutoReadActive) {
+      // If turning on and a card is visible, read its front
+      if (this.currentView === 'flashcards' && this.currentCardsSet.length > 0) {
+        const currentCard = this.currentCardsSet[this.currentIndex];
+        // card.front should be the raw text for the question
+        if (currentCard && currentCard.front) {
+          // Extract text if H2 contains icons or other HTML
+          const frontText = $('<div>').html(currentCard.front).text(); // Get clean text
+          this._speak(frontText);
+        }
+      }
+    } else {
+      // If turning off, cancel any speech
+      this.speechSynthesis.cancel();
+    }
+  };
+
+  Flashcards.prototype.updateCardContent = function () {
+    if (!this.currentCardsSet || this.currentCardsSet.length === 0) {
+      // ... (handle no cards) ...
+      if (this.speechSynthesis) this.speechSynthesis.cancel(); // Stop speech if no cards
+      return;
+    }
+    // ... (enable buttons) ...
 
     var card = this.currentCardsSet[this.currentIndex];
     var flashcardElement = $('#flashcard-modal .flashcard');
     this.isFlipped = false;
     flashcardElement.removeClass('flipped');
 
-    // Add the hint icon div along with the h2 title
     flashcardElement.find('.flashcard-front').html(
       `<h2>${card.front}</h2>
        <div class="flashcard-hint-icon"><i class="fa fa-lightbulb-o"></i></div>`
@@ -445,6 +507,14 @@
     $('#jump-to-card-input').val(this.currentIndex + 1);
     $('#jump-to-card-input').attr('max', this.currentCardsSet.length);
     $('#card-counter-total').text('/ ' + this.currentCardsSet.length);
+
+    // --- NEW: Auto Read ---
+    if (this.isAutoReadActive && card && card.front) {
+      this._speak(card.front); // Assuming card.front is clean text
+    } else if (this.speechSynthesis) { // If auto-read is off, ensure any previous speech is cancelled
+      this.speechSynthesis.cancel();
+    }
+    // --- END NEW ---
   };
 
   Flashcards.prototype.flipCard = function() {

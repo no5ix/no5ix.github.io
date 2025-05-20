@@ -52,13 +52,13 @@
     /* width: calc(var(--local-search-width) + 82px); */
     height: 100%;
     /* 取消双击点击时的黑色高亮, 防止在触摸屏设备上双击时出现黑框。 */
-    -webkit-tap-highlight-color: transparent; 
+    -webkit-tap-highlight-color: transparent;
   }
-  /* @media (hover: hover) {
+  //@media (hover: hover) {
     &:hover {
       color: var(--link-hover-color);
     }
-  } */
+  //}
 }
 
 .search-icon i {
@@ -83,7 +83,7 @@ input[id$=local-search-input] {
   outline: none;
   box-shadow: none;
   /* 取消双击点击时的黑色高亮, 防止在触摸屏设备上双击时出现黑框。 */
-  -webkit-tap-highlight-color: transparent; 
+  -webkit-tap-highlight-color: transparent;
 
   /* border-bottom: 1px solid $grey-dark; */
   /* z-index: 9999; */
@@ -133,7 +133,7 @@ input[id$=local-search-input] {
     border-radius: 12px;
     background: var(--local-search-bg-color);
     /* box-shadow: inset 0.475em 0.375em 0.45em 0 #808080; */
-    
+
     opacity: 0;
     /* padding: 0 0px 0 0px; */
     padding: 0 41px 0 41px;
@@ -227,7 +227,7 @@ input[id$=local-search-input].expanded {
 
   +mobile() {
     /* right: -75px; */
-    right: calc(100% - var(--local-search-width) - 41px - 30px);  /* 这个41px是input框的左padding, 30px是close该有的offset */ 
+    right: calc(100% - var(--local-search-width) - 41px - 30px);  /* 这个41px是input框的左padding, 30px是close该有的offset */
     top: 11px;
     z-index: 2;
     transform: translateX(0);

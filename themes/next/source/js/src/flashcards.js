@@ -209,7 +209,11 @@
     this.h1Sections.forEach((section) => {
       const $li = $('<li>')
         .addClass('h1-list-item')
-        .text(`${section.h1Title} (${section.cards.length})`)
+        // --- BEGIN MODIFICATION ---
+        // Use .html() instead of .text() to include the icon HTML
+        // Add the icon HTML before the text content
+        .html(`<i class="fa fa-tag"></i> ${section.h1Title} (${section.cards.length})`)
+        // --- END MODIFICATION ---
         .on('click', () => {
           if (this.isViewAnimating) return;
           this._transitionToFlashcardView(section);
@@ -243,7 +247,10 @@
   };
 
   Flashcards.prototype._updateFlashcardViewContent = function() {
-    $('.flashcard-current-h1-title').text(this.currentH1Title);
+    // --- BEGIN MODIFICATION ---
+    // Use .html() and add the icon before the title
+    $('.flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
+    // --- END MODIFICATION ---
 
     let showBackButton = false;
     const hasCombined = this.h1Sections.some(s => s.isCombined);

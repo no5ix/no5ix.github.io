@@ -207,7 +207,11 @@ button.darkmode-toggle {
 }
 
 .flashcard-modal {
-  display: none;
+  //display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -220,7 +224,7 @@ button.darkmode-toggle {
 
 .flashcard-container {
   position: relative;
-  //width: 80%;
+  width: 75%;
   height: 75%;
   //max-width: 800px;
   margin: 100px 30px 100px 30px;
@@ -287,8 +291,10 @@ button.darkmode-toggle {
 }
 
 .flashcard-nav-btn {
-  background-color: #4caf50;
-  color: white;
+  //background-color: #4caf50;
+  background-color: var(--link-color);
+  //color: white;
+  color: var(--selection-color);
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -298,7 +304,8 @@ button.darkmode-toggle {
 }
 
 .flashcard-nav-btn:hover {
-  background-color: #45a049;
+  //background-color: #45a049;
+  background-color: var(--link-hover-color);
 }
 
 #card-counter {
@@ -313,8 +320,10 @@ button.darkmode-toggle {
   width: 28px;
   height: 28px;
   font-size: 16px;
-  color: white;
-  background-color: #ff3547;
+  //color: white;
+  color: var(--selection-color);
+  //background-color: #ff3547;
+  background-color: var(--link-color);
   border-radius: 50%;
   cursor: pointer;
   z-index: 10000;
@@ -336,17 +345,8 @@ button.darkmode-toggle {
 }
 
 /* Make flashcards responsive */
-//@media (max-width: 768px) {
-//  .flashcard-container {
-//    width: 95%;
-//    margin: 30px auto;
-//  }
-//
-//  .flashcard {
-//    height: 300px;
-//  }
-//
-//  .flashcard-front h2 {
-//    font-size: 20px;
-//  }
-//}
+@media (max-width: 768px) {
+  .flashcard-container {
+    width: 100%;
+  }
+}

@@ -108,7 +108,6 @@
         <div id="flashcard-modal" class="flashcard-modal">
           <div class="flashcard-container">
             <div id="h1-selection-view" class="fc-view view-hidden">
-              <h3 class="h1-selection-title">Select a Section:</h3>
               <ul id="h1-list" class="h1-list-ul"></ul>
             </div>
             <div id="flashcard-view" class="fc-view view-hidden">

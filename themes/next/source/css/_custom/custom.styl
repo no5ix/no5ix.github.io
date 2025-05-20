@@ -220,11 +220,11 @@ button.darkmode-toggle {
 
 .flashcard-container {
   position: relative;
-  width: 80%;
+  //width: 80%;
   height: 75%;
   //max-width: 800px;
   margin: 100px 30px 100px 30px;
-  background: #fff;
+  background-color: var(--body-bg-color);
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
   padding: 20px;
@@ -252,7 +252,7 @@ button.darkmode-toggle {
 .flashcard-front {
   //padding: 20px;
   width: 100%;
-  background-color: #f9f9f9;
+  background-color: var(--content-bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -262,11 +262,11 @@ button.darkmode-toggle {
 .flashcard-front h2 {
   margin: 0;
   font-size: 24px;
-  color: #333;
+  color: #f90cf9;
 }
 
 .flashcard-back {
-  background-color: #fff;
+  background-color: var(--content-bg-color);
   transform: rotateY(180deg);
   padding: 30px;
 }

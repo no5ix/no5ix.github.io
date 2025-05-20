@@ -165,8 +165,8 @@
 
   // Add button to sidebar
   $(document).ready(function() {
-    var flashcardBtn = '<div class="flashcard-btn" title="Generate Flashcards"><i class="fa fa-clone"></i></div>';
-    $('.sidebar-inner').append(flashcardBtn);
+    var flashcardBtn = '<i class="flashcard-btn fa fa-clone" title="Generate Flashcards"></i>';
+    $('.sidebar-nav-toc').append(flashcardBtn);
 
     $('.flashcard-btn').on('click', function() {
       window.NexT.flashcards.showFlashcardModal();
@@ -174,3 +174,4 @@
   });
 
 })();
+

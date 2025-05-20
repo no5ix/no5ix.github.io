@@ -34,7 +34,7 @@ code {
 .sidebar-nav-toc i,
 .post-toc-content ol.nav li.nav-item i {
     display: inline-block;
-    margin-left: -0.9em;
+    margin-left: 0.1em;
     width: 1.6em;
     color: #b3b3b3;
     font-weight: bold;
@@ -195,25 +195,15 @@ button.darkmode-toggle {
 
 /* Flashcards Styles */
 .flashcard-btn {
-  position: fixed;
-  bottom: 100px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #222;
-  color: #fff;
-  text-align: center;
-  line-height: 40px;
+  margin-left: 5px;
+  color: #b3b3b3;
+  font-weight: bold;
   cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .flashcard-btn:hover {
-  background-color: #555;
-  transform: scale(1.1);
+  color: var(--text-color);
 }
 
 .flashcard-modal {
@@ -231,9 +221,9 @@ button.darkmode-toggle {
 .flashcard-container {
   position: relative;
   width: 80%;
-  height: 80%;
-  max-width: 800px;
-  margin: 50px auto;
+  height: 75%;
+  //max-width: 800px;
+  margin: 100px 30px 100px 30px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
@@ -322,7 +312,7 @@ button.darkmode-toggle {
   right: 10px;
   width: 28px;
   height: 28px;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
   background-color: #ff3547;
   border-radius: 50%;

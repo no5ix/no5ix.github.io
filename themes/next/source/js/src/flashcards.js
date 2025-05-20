@@ -5,7 +5,7 @@
 (function() {
   'use strict';
 
-  var Flashcards = function() {
+  var Flashcards = function () {
     this.h1Sections = []; // Array of { h1Title: string, cards: [], isFlatList?: boolean, isCombined?: boolean }
     this.currentCardsSet = [];
     this.originalCardsSetOrder = []; // For un-shuffling
@@ -19,6 +19,7 @@
     this.originalBodyOverflow = '';
     this.currentView = 'h1Selection'; // 'h1Selection' or 'flashcards'
     this.isShuffled = false; // For shuffle state
+    this.isTouchingCodeBlock = false; // NEW: Flag for touch on code block
   };
 
   Flashcards.prototype._parseAllHeadingsAndCards = function() {
@@ -83,7 +84,8 @@
     return this.h1Sections.length > 0;
   };
 
-  Flashcards.prototype.showFlashcardModal = function() {
+
+  Flashcards.prototype.showFlashcardModal = function () {
     var self = this;
 
     if (this.h1Sections.length === 0) {
@@ -103,6 +105,7 @@
     const $flashcardView = $('#flashcard-view');
 
     if (!$modal.length) {
+      // ... (modalHtml definition) ...
       var modalHtml = `
         <div id="flashcard-modal" class="flashcard-modal">
           <div class="flashcard-container">
@@ -115,7 +118,7 @@
               </button>
               <div class="flashcard-content-area">
                 <div class="flashcard-current-h1-title"></div>
-                <div class="flashcard"> {/* 滑动事件将绑定到这个元素 */}
+                <div class="flashcard">
                   <div class="flashcard-front"></div>
                   <div class="flashcard-back"></div>
                 </div>
@@ -136,13 +139,17 @@
           </div>
         </div>`;
       $('body').append(modalHtml);
-      $modal = $('#flashcard-modal').hide(); // jQuery hide() 会设置 display: none
-      // $container = $modal.find('.flashcard-container'); // 如果后面需要用 $container
+      $modal = $('#flashcard-modal').hide();
 
-      // --- 事件监听器绑定 ---
-      var $flashcardElement = $modal.find('.flashcard'); // 获取卡片元素
+      var $flashcardElement = $modal.find('.flashcard');
 
       $flashcardElement.off('click.flashcards').on('click.flashcards', function () {
+        // Prevent flip if a swipe was just handled on a code block,
+        // or if a swipe is in progress that didn't originate from a code block
+        // but we want to give swipe precedence.
+        if (self.isTouchingCodeBlock) { // If touch started on code block, click might be unintentional
+          return;
+        }
         if (!self.isAnimating && !self.isViewAnimating) {
           self.flipCard();
         }
@@ -152,55 +159,70 @@
       var touchstartX = 0;
       var touchstartY = 0;
       var touchendX = 0;
-      // var touchendY = 0; // touchendY is not strictly needed for horizontal swipe decision
       var touchstartTime = 0;
-      var minSwipeDistance = 50;    // 滑动的最小距离 (像素)
-      var maxSwipeTime = 700;       // 完成滑动的最大时间 (毫秒)
-      var maxVerticalOffset = 75;   // 水平滑动时允许的最大垂直偏移量
+      var minSwipeDistance = 50;
+      var maxSwipeTime = 700;
+      var maxVerticalOffset = 75;
 
-      $flashcardElement.off('touchstart.flashcardsSwipe touchend.flashcardsSwipe') // 清除旧的滑动事件监听器
+      $flashcardElement.off('touchstart.flashcardsSwipe touchend.flashcardsSwipe')
         .on('touchstart.flashcardsSwipe', function (event) {
-          // jQuery 将原生事件包装在 originalEvent 中
+          const target = event.target;
+          // Check if the touch started on a <pre> tag or its descendant,
+          // but only if the card is currently flipped to the back.
+          if (self.isFlipped && $(target).closest('pre').length > 0) {
+            self.isTouchingCodeBlock = true;
+          } else {
+            self.isTouchingCodeBlock = false;
+          }
+
+          if (self.isTouchingCodeBlock) {
+            // If on a code block, don't record swipe details for card navigation
+            return;
+          }
+
           touchstartX = event.originalEvent.changedTouches[0].screenX;
           touchstartY = event.originalEvent.changedTouches[0].screenY;
           touchstartTime = new Date().getTime();
-          // 注意：这里不立即 event.preventDefault()，
-          // 因为如果卡片内容本身需要垂直滚动，这会阻止它。
-          // 我们只在确定是水平滑动时考虑是否阻止默认行为（如果需要）。
         })
         .on('touchend.flashcardsSwipe', function (event) {
+          if (self.isTouchingCodeBlock) {
+            // Reset flag and do nothing if the touch started on a code block
+            self.isTouchingCodeBlock = false;
+            return;
+          }
+
+          // If touchstartX was not set (because touch started on code block and returned early)
+          if (touchstartX === 0 && touchstartY === 0) return;
+
+
           touchendX = event.originalEvent.changedTouches[0].screenX;
-          const touchendY = event.originalEvent.changedTouches[0].screenY; // 获取 Y 坐标用于计算垂直偏移
+          const touchendY = event.originalEvent.changedTouches[0].screenY;
 
           var elapsedTime = new Date().getTime() - touchstartTime;
           var deltaX = touchendX - touchstartX;
           var deltaY = touchendY - touchstartY;
 
-          if (elapsedTime <= maxSwipeTime) { // 检查滑动是否足够快
-            // 检查是否主要是水平滑动，并且达到最小滑动距离
+          if (elapsedTime <= maxSwipeTime) {
             if (Math.abs(deltaX) >= minSwipeDistance && Math.abs(deltaY) <= maxVerticalOffset) {
-              if (deltaX > 0) { //向右滑动 (手指从左向右移动)
+              if (deltaX > 0) {
                 if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcards') {
                   self.prevCard();
                 }
-              } else { // 向左滑动 (手指从右向左移动)
+              } else {
                 if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcards') {
                   self.nextCard();
                 }
               }
-              // 如果滑动成功切换了卡片，可以考虑阻止此触摸事件触发翻转卡片的 click 事件
-              // 但通常如果滑动距离足够，click 事件可能不会被触发，或者影响不大。
-              // 如果确实有冲突，可以在这里设置一个短时间的标志位来忽略接下来的 click。
             }
           }
-          // 重置触摸起始点，为下一次滑动做准备 (虽然在此简单实现中，每次 touchend 后都会重置)
-          // touchstartX = 0;
-          // touchstartY = 0;
+          // Reset for next swipe
+          touchstartX = 0;
+          touchstartY = 0;
+          touchstartTime = 0;
         });
       // --- END SWIPE FUNCTIONALITY ---
 
-
-      // 其他按钮的事件监听器 (确保使用 .off().on() 模式)
+      // ... (rest of the event listeners: prev-card, next-card, etc.)
       $('#prev-card').off('click.flashcards').on('click.flashcards', function (e) {
         e.stopPropagation();
         self.prevCard();
@@ -232,7 +254,6 @@
         });
 
       $(document).off('keydown.flashcards').on('keydown.flashcards', function (e) {
-        // ... (键盘事件处理逻辑不变) ...
         if ($modal.is(':visible') && !self.isViewAnimating) {
           if (e.key === 'Escape') self.hideFlashcardModal();
           if ($('#flashcard-view').hasClass('view-active')) {
@@ -240,6 +261,8 @@
             else if (e.key === 'ArrowRight') self.nextCard();
             else if (e.key === ' ') {
               if (!self.isAnimating && !$(e.target).is('input, textarea, button')) {
+                // Also check isTouchingCodeBlock here if spacebar flip is an issue
+                if (self.isTouchingCodeBlock) return;
                 self.flipCard();
                 e.preventDefault();
               }
@@ -247,22 +270,18 @@
           }
         }
       });
-      // --- 事件监听器绑定结束 ---
     }
 
-    // ... (showFlashcardModal 方法的其余部分不变) ...
-    // Reset views to a known state (hidden, not in transition)
+    // ... (rest of showFlashcardModal logic) ...
     $('#h1-selection-view, #flashcard-view')
       .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
       .addClass('view-hidden');
     $('#shuffle-cards-btn').removeClass('shuffle-active');
 
-
-    // Determine initial view (no animation for initial load)
     if (this.h1Sections.length === 1 && (this.h1Sections[0].isFlatList || this.h1Sections.length === 1 && !this.h1Sections[0].isCombined)) {
       const section = this.h1Sections[0];
-      this.currentCardsSet = [...section.cards]; // Create a copy
-      this.originalCardsSetOrder = [...section.cards]; // Store original order
+      this.currentCardsSet = [...section.cards];
+      this.originalCardsSetOrder = [...section.cards];
       this.currentH1Title = section.h1Title;
       this.currentIndex = 0;
       this.currentView = 'flashcards';
@@ -282,8 +301,9 @@
       this.originalBodyOverflow = $('body').css('overflow');
       $('body').css('overflow', 'hidden').addClass('flashcard-modal-open');
     }
-    $modal.fadeIn(400); // Or your preferred animation for the modal itself
+    $modal.fadeIn(400);
   };
+
 
   Flashcards.prototype.hideFlashcardModal = function() {
     $('#flashcard-modal').fadeOut(400, () => {
@@ -509,11 +529,13 @@
   window.NexT = window.NexT || {};
   window.NexT.flashcards = new Flashcards();
 
-  $(document).ready(function() {
+  $(document).ready(function () {
     if ($('.sidebar-nav-toc').length) {
       var flashcardBtn = '<i class="flashcard-btn fa fa-clone" title="Generate Flashcards"></i>';
       $('.sidebar-nav-toc').append(flashcardBtn);
-      $('.flashcard-btn').on('click', function() { window.NexT.flashcards.showFlashcardModal(); });
+      $('.flashcard-btn').on('click', function () {
+        window.NexT.flashcards.showFlashcardModal();
+      });
     }
   });
 })();

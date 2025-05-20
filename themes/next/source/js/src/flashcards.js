@@ -71,11 +71,11 @@
         '      <div class="flashcard-back"></div>' +
         '    </div>' +
         '    <div class="flashcard-navigation">' +
-        '      <button id="prev-card" class="flashcard-nav-btn">Previous</button>' +
+        '      <button id="prev-card" class="flashcard-nav-btn">←</button>' +
         '      <span id="card-counter"></span>' +
-        '      <button id="next-card" class="flashcard-nav-btn">Next</button>' +
+        '      <button id="next-card" class="flashcard-nav-btn">→</button>' +
         '    </div>' +
-        '    <button id="close-flashcard" class="close-flashcard">×</button>' +
+        '    <button id="close-flashcard" class="close-flashcard"><i class="fa fa-times"></i></button>' +
         '  </div>' +
         '</div>';
 

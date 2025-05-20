@@ -197,7 +197,7 @@
       this.originalBodyOverflow = $('body').css('overflow');
       $('body').css('overflow', 'hidden').addClass('flashcard-modal-open');
     }
-    $modal.fadeIn(600);
+    $modal.fadeIn(400);
   };
 
   Flashcards.prototype._updateH1SelectionViewContent = function() {

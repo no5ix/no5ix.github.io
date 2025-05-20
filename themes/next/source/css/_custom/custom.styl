@@ -246,6 +246,7 @@ button.darkmode-toggle {
   perspective: 1000px;
   cursor: pointer;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .flashcard-front, .flashcard-back {
@@ -318,17 +319,30 @@ button.darkmode-toggle {
 .close-flashcard {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
   font-size: 24px;
-  background: none;
-  border: none;
-  color: #999;
+  color: white;
+  background-color: #ff3547;
+  border-radius: 50%;
   cursor: pointer;
-  transition: color 0.3s;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s, transform 0.2s;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .close-flashcard:hover {
-  color: #333;
+  background-color: #ff0a1f;
+  transform: scale(1.1);
 }
 
 /* Make flashcards responsive */

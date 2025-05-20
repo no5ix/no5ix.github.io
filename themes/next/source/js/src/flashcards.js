@@ -10,12 +10,13 @@
     this.currentIndex = 0;
     this.isFlipped = false;
     this.isAnimating = false; // Flag to prevent animation overlaps
-    this.animationDuration = 100; // ms, should match CSS transition duration for transform
+    this.animationDuration = 150; // ms, for card sliding. Should match CSS transform transition.
+                                  // Note: CSS for .flashcard has 0.2s (200ms)
     this.originalBodyOverflow = ''; // To store the original body overflow style
   };
 
   Flashcards.prototype.generateCards = function() {
-    // ... (keep existing generateCards method as is)
+    // ... (existing code)
     var self = this;
     var headings = $('.post-body h2');
 
@@ -53,8 +54,7 @@
   };
 
   Flashcards.prototype.showFlashcardModal = function() {
-    // ... (keep most of showFlashcardModal method as is, just ensure isAnimating is reset)
-    var self = this; // Keep self reference
+    var self = this;
 
     if (!this.generateCards()) {
       alert('No headings found to create flashcards!');
@@ -63,33 +63,43 @@
 
     this.currentIndex = 0;
     this.isFlipped = false;
-    this.isAnimating = false; // Reset animation flag
+    this.isAnimating = false;
 
-    if (!$('#flashcard-modal').length) {
+    var $modal = $('#flashcard-modal'); // Cache selector
+
+    if (!$modal.length) {
       var modalHtml =
         '<div id="flashcard-modal" class="flashcard-modal">' +
         '  <div class="flashcard-container">' +
-        '    <div class="flashcard">' + // This is the element we'll animate
+        '    <div class="flashcard">' +
         '      <div class="flashcard-front"></div>' +
         '      <div class="flashcard-back"></div>' +
         '    </div>' +
         '    <div class="flashcard-navigation">' +
-        '      <button id="prev-card" class="flashcard-nav-btn">←</button>' +
+        '      <button id="prev-card" class="flashcard-nav-btn">❮</button>' +
         '      <span id="card-counter"></span>' +
-        '      <button id="next-card" class="flashcard-nav-btn">→</button>' +
+        '      <button id="next-card" class="flashcard-nav-btn">❯</button>' +
         '    </div>' +
         '    <button id="close-flashcard" class="close-flashcard"><i class="fa fa-times"></i></button>' +
         '  </div>' +
         '</div>';
 
       $('body').append(modalHtml);
+      $modal = $('#flashcard-modal'); // Re-select after appending
 
-      $('#flashcard-modal .flashcard').on('click', function() {
-        if (!self.isAnimating) { // Prevent flipping during slide animation
+      // --- BEGIN MODIFICATION ---
+      $modal.hide(); // Explicitly hide the modal before the first fadeIn
+      // --- END MODIFICATION ---
+
+      // Attach event listeners
+      // Use $modal.find() for better scoping if elements are inside the modal
+      $modal.find('.flashcard').on('click', function() {
+        if (!self.isAnimating) {
           self.flipCard();
         }
       });
 
+      // IDs are unique, so direct selection is fine, but can also scope if preferred
       $('#prev-card').on('click', function(e) {
         e.stopPropagation();
         self.prevCard();
@@ -104,8 +114,9 @@
         self.hideFlashcardModal();
       });
 
+      // Keydown listener is global
       $(document).on('keydown', function(e) {
-        if ($('#flashcard-modal').is(':visible')) {
+        if ($modal.is(':visible')) { // Use $modal here
           if (e.key === 'Escape') {
             self.hideFlashcardModal();
           } else if (e.key === 'ArrowLeft') {
@@ -113,7 +124,7 @@
           } else if (e.key === 'ArrowRight') {
             self.nextCard();
           } else if (e.key === ' ') {
-            if (!self.isAnimating) { // Prevent flipping during slide animation
+            if (!self.isAnimating) {
               self.flipCard();
             }
             e.preventDefault();
@@ -122,8 +133,8 @@
       });
     }
 
-    // Ensure the card is in its default position when first shown
-    var flashcardElement = $('#flashcard-modal .flashcard');
+    // Ensure the card is in its default position when first shown or when navigating
+    var flashcardElement = $modal.find('.flashcard');
     flashcardElement.removeClass('slide-out-left slide-out-right is-sliding-no-transition');
     flashcardElement.css({
       'transform': 'translateX(0)',
@@ -137,27 +148,30 @@
     }
 
     this.updateCardContent();
-    $('#flashcard-modal').fadeIn();
+    $modal.fadeIn(); // Default duration is 400ms, or you can specify e.g., $modal.fadeIn(300);
   };
 
   Flashcards.prototype.hideFlashcardModal = function() {
+    var $modal = $('#flashcard-modal');
     // Restore body scroll after modal is hidden
-    $('#flashcard-modal').fadeOut(() => {
+    $modal.fadeOut(() => { // fadeOut will set display: none at the end
       if ($('body').hasClass('flashcard-modal-open')) {
         $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
       }
     });
   };
 
+  // ... (rest of the Flashcards.prototype methods: updateCardContent, flipCard, _animateCardSwitch, nextCard, prevCard) ...
+  // Make sure they use $modal.find() or specific IDs as appropriate.
+  // For example, in updateCardContent:
   Flashcards.prototype.updateCardContent = function() {
     var card = this.cards[this.currentIndex];
-    var flashcardElement = $('#flashcard-modal .flashcard');
+    // Ensure $modal is defined or select it again if not passed/cached at this scope
+    var flashcardElement = $('#flashcard-modal .flashcard'); // Or use a cached $modal.find()
 
     this.isFlipped = false;
     flashcardElement.removeClass('flipped');
 
-    // It's important that .flashcard-front and .flashcard-back are direct children
-    // or that their container doesn't interfere with the .flashcard's transform.
     flashcardElement.find('.flashcard-front').html('<h2>' + card.front + '</h2>');
     flashcardElement.find('.flashcard-back').html(card.back);
 
@@ -165,56 +179,43 @@
   };
 
   Flashcards.prototype.flipCard = function() {
-    if (this.isAnimating) return; // Don't allow flip if sliding
+    if (this.isAnimating) return;
     this.isFlipped = !this.isFlipped;
-    $('#flashcard-modal .flashcard').toggleClass('flipped');
+    $('#flashcard-modal .flashcard').toggleClass('flipped'); // Or use a cached $modal.find()
   };
 
   Flashcards.prototype._animateCardSwitch = function(direction) {
     if (this.isAnimating) {
       return;
     }
-
+    // Or use a cached $modal.find()
     var flashcardElement = $('#flashcard-modal .flashcard');
     var slideOutClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
     var slideInStartTransform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
 
     this.isAnimating = true;
 
-    // 1. Apply slide-out animation class
     flashcardElement.addClass(slideOutClass);
 
-    // 2. Wait for slide-out animation to complete
     setTimeout(() => {
-      // 3. Update card index
       if (direction === 'next') {
         this.currentIndex++;
       } else {
         this.currentIndex--;
       }
-      // 4. Update card content (this also resets flip state)
       this.updateCardContent();
 
-      // 5. Prepare for slide-in:
-      //    a. Add class to disable transition for instant repositioning
       flashcardElement.addClass('is-sliding-no-transition');
-      //    b. Instantly move card off-screen to the opposite side and make it transparent
       flashcardElement.css({
         'transform': slideInStartTransform,
         'opacity': '0'
       });
 
-      //    c. Force reflow/repaint. Accessing offsetHeight is a common trick.
       flashcardElement[0].offsetHeight;
 
-      //    d. Remove helper class to re-enable transitions for slide-in
       flashcardElement.removeClass('is-sliding-no-transition');
-      //    e. Remove the slide-out class (it's done its job)
       flashcardElement.removeClass(slideOutClass);
 
-      // 6. Trigger slide-in animation (back to default state: translateX(0), opacity: 1)
-      //    Using requestAnimationFrame can sometimes help ensure the style changes for
-      //    instant positioning are rendered before the transition for slide-in starts.
       requestAnimationFrame(() => {
         flashcardElement.css({
           'transform': 'translateX(0)',
@@ -222,13 +223,11 @@
         });
       });
 
-
-      // 7. After slide-in animation duration, reset isAnimating flag
       setTimeout(() => {
         this.isAnimating = false;
-      }, this.animationDuration);
+      }, this.animationDuration); // This duration is for card slide
 
-    }, this.animationDuration); // This timeout is for the slide-out
+    }, this.animationDuration); // This duration is for card slide
   };
 
   Flashcards.prototype.nextCard = function() {
@@ -243,13 +242,13 @@
     }
   };
 
+
   // Initialize and expose to window
-  window.NexT = window.NexT || {}; // Ensure NexT object exists
+  window.NexT = window.NexT || {};
   window.NexT.flashcards = new Flashcards();
 
   // Add button to sidebar
   $(document).ready(function() {
-    // Ensure sidebar-nav-toc exists before appending
     if ($('.sidebar-nav-toc').length) {
       var flashcardBtn = '<i class="flashcard-btn fa fa-clone" title="Generate Flashcards"></i>';
       $('.sidebar-nav-toc').append(flashcardBtn);

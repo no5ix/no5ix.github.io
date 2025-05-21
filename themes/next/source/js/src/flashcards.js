@@ -28,35 +28,100 @@
   Flashcards.prototype._parseAllHeadingsAndCards = function() {
     this.h1Sections = [];
     const postBody = $('.post-body');
-    const $headingsAndContentNodes = postBody.children();
+    const $children = postBody.children(); // Get all direct children of post-body
 
     if (postBody.find('h1').length > 0) {
       let currentH1Section = null;
-      $headingsAndContentNodes.each((index, element) => {
-        const $el = $(element);
+      let h1ContentBuffer = ''; // Buffer for content between H1 and first H2
+
+      for (let i = 0; i < $children.length; i++) {
+        const $el = $($children[i]);
+
         if ($el.is('h1')) {
+          // Finalize previous H1 section if it exists and had buffered content
+          if (currentH1Section && h1ContentBuffer.trim() !== '') {
+            currentH1Section.cards.unshift({ // Add to the beginning of the section's cards
+              front: currentH1Section.h1Title, // Or a more generic title
+              back: h1ContentBuffer.trim()
+            });
+          }
+          h1ContentBuffer = ''; // Reset buffer for new H1
+
+          // Start new H1 section
           currentH1Section = { h1Title: $el.text().trim(), cards: [] };
           this.h1Sections.push(currentH1Section);
-        } else if ($el.is('h2') && currentH1Section) {
-          const cardTitle = $el.text().trim();
-          let cardContent = '';
-          let node = $el.next();
-          while (node.length && !node.is('h1') && !node.is('h2')) {
-            cardContent += node.prop('nodeType') === 1 ? node.clone().prop('outerHTML') : node.text();
-            node = node.next();
+
+          // Check for content immediately after H1 before any H2 (for H1-only cards)
+          let nextNodeIndex = i + 1;
+          let h1OnlyContent = '';
+          while (nextNodeIndex < $children.length && !$($children[nextNodeIndex]).is('h1') && !$($children[nextNodeIndex]).is('h2')) {
+            const $contentNode = $($children[nextNodeIndex]);
+            h1OnlyContent += $contentNode.prop('nodeType') === 1 ? $contentNode.clone().prop('outerHTML') : $contentNode.text();
+            nextNodeIndex++;
           }
-          if (cardTitle) {
-            currentH1Section.cards.push({ front: cardTitle, back: cardContent });
+          // If this H1 is followed by another H1 or end of content without any H2s,
+          // and h1OnlyContent is not empty, create a card for it.
+          if (h1OnlyContent.trim() !== '' && (nextNodeIndex === $children.length || $($children[nextNodeIndex]).is('h1'))) {
+            if (currentH1Section.cards.length === 0) { // Only add if no H2 cards were found yet for this H1
+              currentH1Section.cards.push({
+                front: currentH1Section.h1Title,
+                back: h1OnlyContent.trim()
+              });
+            }
+          }
+
+
+        } else if (currentH1Section) { // If we are inside an H1 section
+          if ($el.is('h2')) {
+            // If there was content buffered before this H2, create a card for it
+            if (h1ContentBuffer.trim() !== '') {
+              currentH1Section.cards.push({
+                front: currentH1Section.h1Title,
+                back: h1ContentBuffer.trim()
+              });
+              h1ContentBuffer = ''; // Clear buffer as we've now hit an H2
+            }
+
+            // Process H2 card
+            const cardTitle = $el.text().trim();
+            let cardContent = '';
+            let h2ContentNodeIndex = i + 1;
+            while (h2ContentNodeIndex < $children.length && !$($children[h2ContentNodeIndex]).is('h1') && !$($children[h2ContentNodeIndex]).is('h2')) {
+              const $contentNode = $($children[h2ContentNodeIndex]);
+              cardContent += $contentNode.prop('nodeType') === 1 ? $contentNode.clone().prop('outerHTML') : $contentNode.text();
+              h2ContentNodeIndex++;
+            }
+            if (cardTitle) {
+              currentH1Section.cards.push({ front: cardTitle, back: cardContent.trim() });
+            }
+            i = h2ContentNodeIndex - 1; // Advance main loop counter past H2 content
+          } else {
+            // Accumulate content for h1ContentBuffer (if no H2 encountered yet in this section)
+            // or for general content if H2s are already being processed (though current logic processes H2 content immediately)
+            if (currentH1Section.cards.length === 0 || h1ContentBuffer !== '') { // only buffer if no H2s processed yet or if we are actively buffering for intro
+              h1ContentBuffer += $el.prop('nodeType') === 1 ? $el.clone().prop('outerHTML') : $el.text();
+            }
           }
         }
-      });
+      }
+      // After loop, check if the last H1 section had buffered content
+      if (currentH1Section && h1ContentBuffer.trim() !== '' && !currentH1Section.cards.some(card => card.back === h1ContentBuffer.trim())) {
+        // Add only if this content wasn't already added as part of an "H1-only" card logic
+        if (currentH1Section.cards.length === 0 || currentH1Section.cards[0].front !== currentH1Section.h1Title) {
+          currentH1Section.cards.unshift({
+            front: currentH1Section.h1Title,
+            back: h1ContentBuffer.trim()
+          });
+        }
+      }
+
+
       this.h1Sections = this.h1Sections.filter(section => section.cards.length > 0);
 
-      // Add "All Cards (Combined)" if multiple actual H1 sections exist
       if (this.h1Sections.filter(s => !s.isFlatList).length > 1) {
         let allCardsCombined = [];
         this.h1Sections.forEach(section => {
-          if (!section.isFlatList) { // Exclude any potential flat list if logic changes
+          if (!section.isFlatList) {
             allCardsCombined = allCardsCombined.concat(section.cards);
           }
         });
@@ -65,19 +130,21 @@
         }
       }
 
-    } else {
+    } else { // No H1 tags, treat all H2s as flat list
       const flatCards = [];
-      postBody.find('h2').each((index, element) => {
+      $children.each((index, element) => {
         const $el = $(element);
-        const cardTitle = $el.text().trim();
-        let cardContent = '';
-        let node = $el.next();
-        while (node.length && !node.is('h2')) {
-          cardContent += node.prop('nodeType') === 1 ? node.clone().prop('outerHTML') : node.text();
-          node = node.next();
-        }
-        if (cardTitle) {
-          flatCards.push({ front: cardTitle, back: cardContent });
+        if ($el.is('h2')) {
+          const cardTitle = $el.text().trim();
+          let cardContent = '';
+          let node = $el.next();
+          while (node.length && !node.is('h2')) { // Collect content until next H2 or end
+            cardContent += node.prop('nodeType') === 1 ? node.clone().prop('outerHTML') : node.text();
+            node = node.next();
+          }
+          if (cardTitle) {
+            flatCards.push({ front: cardTitle, back: cardContent.trim() });
+          }
         }
       });
       if (flatCards.length > 0) {
@@ -86,7 +153,6 @@
     }
     return this.h1Sections.length > 0;
   };
-
 
   Flashcards.prototype.showFlashcardModal = function () {
     var self = this;

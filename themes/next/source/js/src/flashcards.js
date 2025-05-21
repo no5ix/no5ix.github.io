@@ -28,12 +28,17 @@
   Flashcards.prototype._parseAllHeadingsAndCards = function() {
     this.h1Sections = [];
     const postBody = $('.post-body');
-    const $children = postBody.children(); // Get all direct children of post-body
-    const introIcon = '<i class="fa fa-sticky-note-o" title="引言"></i> '; // Icon for intro cards
+    if (!postBody.length) return false; // Guard: Ensure .post-body exists
+
+    const $children = postBody.children();
+    const introIcon = '<i class="fa fa-sticky-note-o" title="引言"></i> ';
+
+    // 注意：之前版本中的 STOP_SELECTORS_STRING 及其相关逻辑已被移除或调整，
+    // 现在主要通过 H1/H2 结构以及对 <footer> 标签的特殊处理来界定内容。
 
     if (postBody.find('h1').length > 0) {
       let currentH1Section = null;
-      let h1ContentBuffer = ''; // Buffer for content between H1 and first H2
+      let h1ContentBuffer = ''; // Buffer for content between H1 and first H2, or after last H2
 
       for (let i = 0; i < $children.length; i++) {
         const $el = $($children[i]);
@@ -52,20 +57,26 @@
           currentH1Section = { h1Title: $el.text().trim(), cards: [] };
           this.h1Sections.push(currentH1Section);
 
-          // Check for content immediately after H1 before any H2 (for H1-only cards)
+          // Check for content immediately after H1 before any H2 or footer (for H1-only cards)
           let nextNodeIndex = i + 1;
           let h1OnlyContent = '';
-          while (nextNodeIndex < $children.length && !$($children[nextNodeIndex]).is('h1') && !$($children[nextNodeIndex]).is('h2')) {
+          while (nextNodeIndex < $children.length) {
             const $contentNode = $($children[nextNodeIndex]);
+            // MODIFIED: Stop if next H1, H2, or a footer is encountered
+            if ($contentNode.is('h1') || $contentNode.is('h2') || $contentNode.is('footer')) {
+              break;
+            }
             h1OnlyContent += $contentNode.prop('nodeType') === 1 ? $contentNode.clone().prop('outerHTML') : $contentNode.text();
             nextNodeIndex++;
           }
-          // If this H1 is followed by another H1 or end of content without any H2s,
+
+          // If this H1 is followed by another H1, end of content, or a footer,
           // and h1OnlyContent is not empty, create a card for it.
-          if (h1OnlyContent.trim() !== '' && (nextNodeIndex === $children.length || $($children[nextNodeIndex]).is('h1'))) {
+          if (h1OnlyContent.trim() !== '' &&
+            (nextNodeIndex === $children.length || $($children[nextNodeIndex]).is('h1') || $($children[nextNodeIndex]).is('footer'))) {
             if (currentH1Section.cards.length === 0) { // Only add if no H2 cards were found yet for this H1
               currentH1Section.cards.push({
-                front: currentH1Section.h1Title, // H1-only card, front is just H1 title
+                front: currentH1Section.h1Title,
                 back: h1OnlyContent.trim()
               });
             }
@@ -85,8 +96,12 @@
             const cardTitle = $el.text().trim();
             let cardContent = '';
             let h2ContentNodeIndex = i + 1;
-            while (h2ContentNodeIndex < $children.length && !$($children[h2ContentNodeIndex]).is('h1') && !$($children[h2ContentNodeIndex]).is('h2')) {
+            while (h2ContentNodeIndex < $children.length) {
               const $contentNode = $($children[h2ContentNodeIndex]);
+              // MODIFIED: Stop if next H1, H2, or a footer is encountered
+              if ($contentNode.is('h1') || $contentNode.is('h2') || $contentNode.is('footer')) {
+                break;
+              }
               cardContent += $contentNode.prop('nodeType') === 1 ? $contentNode.clone().prop('outerHTML') : $contentNode.text();
               h2ContentNodeIndex++;
             }
@@ -95,28 +110,25 @@
             }
             i = h2ContentNodeIndex - 1; // Advance main loop counter past H2 content
           } else {
-            // Accumulate content for h1ContentBuffer (if no H2 encountered yet in this section)
-            if (currentH1Section.cards.length === 0 || h1ContentBuffer !== '' || (currentH1Section.cards.length > 0 && currentH1Section.cards[0].front.includes(introIcon))) {
-              // This condition means:
-              // 1. No cards yet in this H1 section (so it must be intro content)
-              // OR 2. We are already actively buffering (h1ContentBuffer is not empty)
-              // OR 3. The first card created was an intro card, so subsequent non-H2 content before the *first real H2* is still part of the intro.
-              h1ContentBuffer += $el.prop('nodeType') === 1 ? $el.clone().prop('outerHTML') : $el.text();
+            // Accumulate content for h1ContentBuffer (if no H2 encountered yet in this section, or after last H2)
+            // MODIFIED: Do not add if the element itself is a footer
+            if (!$el.is('footer')) {
+              if (currentH1Section.cards.length === 0 || h1ContentBuffer !== '' || (currentH1Section.cards.length > 0 && currentH1Section.cards[0].front.includes(introIcon))) {
+                h1ContentBuffer += $el.prop('nodeType') === 1 ? $el.clone().prop('outerHTML') : $el.text();
+              }
             }
           }
         }
       }
       // After loop, check if the last H1 section had buffered content that wasn't part of an H1-only card
       if (currentH1Section && h1ContentBuffer.trim() !== '') {
-        // Check if the last card made was an H1-only card for this H1. If so, this buffer is redundant or part of it.
         const isLastCardH1Only = currentH1Section.cards.length > 0 &&
           currentH1Section.cards[currentH1Section.cards.length -1].front === currentH1Section.h1Title;
 
         if (!isLastCardH1Only) {
-          // Check if an intro card for this exact buffer already exists (e.g. from an H1 followed immediately by another H1)
-          const introCardExists = currentH1Section.cards.some(card => card.front === currentH1Section.h1Title + introIcon && card.back === h1ContentBuffer.trim());
+          const introCardExists = currentH1Section.cards.some(card => card.front === introIcon + currentH1Section.h1Title && card.back === h1ContentBuffer.trim());
           if (!introCardExists) {
-            currentH1Section.cards.unshift({ // Add to the beginning if it's new intro content
+            currentH1Section.cards.unshift({
               front: introIcon + currentH1Section.h1Title,
               back: h1ContentBuffer.trim()
             });
@@ -126,10 +138,11 @@
 
       this.h1Sections = this.h1Sections.filter(section => section.cards.length > 0);
 
+      // Create "All Cards" section if multiple H1 sections exist
       if (this.h1Sections.filter(s => !s.isFlatList).length > 1) {
         let allCardsCombined = [];
         this.h1Sections.forEach(section => {
-          if (!section.isFlatList) {
+          if (!section.isFlatList) { // Only combine cards from actual H1 sections, not flat lists
             allCardsCombined = allCardsCombined.concat(section.cards);
           }
         });
@@ -146,7 +159,11 @@
           const cardTitle = $el.text().trim();
           let cardContent = '';
           let node = $el.next();
-          while (node.length && !node.is('h2')) { // Collect content until next H2 or end
+          while (node.length) {
+            // MODIFIED: Stop if next H2 or a footer is encountered
+            if (node.is('h2') || node.is('footer')) {
+              break;
+            }
             cardContent += node.prop('nodeType') === 1 ? node.clone().prop('outerHTML') : node.text();
             node = node.next();
           }

@@ -29,6 +29,7 @@
     this.h1Sections = [];
     const postBody = $('.post-body');
     const $children = postBody.children(); // Get all direct children of post-body
+    const introIcon = '<i class="fa fa-sticky-note-o" title="引言"></i> '; // Icon for intro cards
 
     if (postBody.find('h1').length > 0) {
       let currentH1Section = null;
@@ -41,7 +42,7 @@
           // Finalize previous H1 section if it exists and had buffered content
           if (currentH1Section && h1ContentBuffer.trim() !== '') {
             currentH1Section.cards.unshift({ // Add to the beginning of the section's cards
-              front: currentH1Section.h1Title, // Or a more generic title
+              front: introIcon + currentH1Section.h1Title,
               back: h1ContentBuffer.trim()
             });
           }
@@ -64,19 +65,17 @@
           if (h1OnlyContent.trim() !== '' && (nextNodeIndex === $children.length || $($children[nextNodeIndex]).is('h1'))) {
             if (currentH1Section.cards.length === 0) { // Only add if no H2 cards were found yet for this H1
               currentH1Section.cards.push({
-                front: currentH1Section.h1Title,
+                front: currentH1Section.h1Title, // H1-only card, front is just H1 title
                 back: h1OnlyContent.trim()
               });
             }
           }
-
-
         } else if (currentH1Section) { // If we are inside an H1 section
           if ($el.is('h2')) {
             // If there was content buffered before this H2, create a card for it
             if (h1ContentBuffer.trim() !== '') {
               currentH1Section.cards.push({
-                front: currentH1Section.h1Title,
+                front: introIcon + currentH1Section.h1Title,
                 back: h1ContentBuffer.trim()
               });
               h1ContentBuffer = ''; // Clear buffer as we've now hit an H2
@@ -97,24 +96,33 @@
             i = h2ContentNodeIndex - 1; // Advance main loop counter past H2 content
           } else {
             // Accumulate content for h1ContentBuffer (if no H2 encountered yet in this section)
-            // or for general content if H2s are already being processed (though current logic processes H2 content immediately)
-            if (currentH1Section.cards.length === 0 || h1ContentBuffer !== '') { // only buffer if no H2s processed yet or if we are actively buffering for intro
+            if (currentH1Section.cards.length === 0 || h1ContentBuffer !== '' || (currentH1Section.cards.length > 0 && currentH1Section.cards[0].front.includes(introIcon))) {
+              // This condition means:
+              // 1. No cards yet in this H1 section (so it must be intro content)
+              // OR 2. We are already actively buffering (h1ContentBuffer is not empty)
+              // OR 3. The first card created was an intro card, so subsequent non-H2 content before the *first real H2* is still part of the intro.
               h1ContentBuffer += $el.prop('nodeType') === 1 ? $el.clone().prop('outerHTML') : $el.text();
             }
           }
         }
       }
-      // After loop, check if the last H1 section had buffered content
-      if (currentH1Section && h1ContentBuffer.trim() !== '' && !currentH1Section.cards.some(card => card.back === h1ContentBuffer.trim())) {
-        // Add only if this content wasn't already added as part of an "H1-only" card logic
-        if (currentH1Section.cards.length === 0 || currentH1Section.cards[0].front !== currentH1Section.h1Title) {
-          currentH1Section.cards.unshift({
-            front: currentH1Section.h1Title,
-            back: h1ContentBuffer.trim()
-          });
+      // After loop, check if the last H1 section had buffered content that wasn't part of an H1-only card
+      if (currentH1Section && h1ContentBuffer.trim() !== '') {
+        // Check if the last card made was an H1-only card for this H1. If so, this buffer is redundant or part of it.
+        const isLastCardH1Only = currentH1Section.cards.length > 0 &&
+          currentH1Section.cards[currentH1Section.cards.length -1].front === currentH1Section.h1Title;
+
+        if (!isLastCardH1Only) {
+          // Check if an intro card for this exact buffer already exists (e.g. from an H1 followed immediately by another H1)
+          const introCardExists = currentH1Section.cards.some(card => card.front === currentH1Section.h1Title + introIcon && card.back === h1ContentBuffer.trim());
+          if (!introCardExists) {
+            currentH1Section.cards.unshift({ // Add to the beginning if it's new intro content
+              front: introIcon + currentH1Section.h1Title,
+              back: h1ContentBuffer.trim()
+            });
+          }
         }
       }
-
 
       this.h1Sections = this.h1Sections.filter(section => section.cards.length > 0);
 

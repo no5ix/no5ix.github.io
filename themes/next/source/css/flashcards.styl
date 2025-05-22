@@ -12,8 +12,9 @@
   color: var(--text-color);
 }
 
+/* Styles for the modal overlay (background) */
 .flashcard-modal {
-  display: flex; /* Keep as flex, JS will toggle display none/flex */
+  display: flex; /* JS will toggle display none/flex */
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -23,26 +24,26 @@
   height: 100%;
   background-color: rgba(0,0,0,0.85);
   z-index: 3000;
-  overflow-y: auto; // Allow modal itself to scroll if container is too tall
-  padding-top: 5vh; // Add some top padding
+  overflow-y: auto;
+  padding-top: 5vh;
   padding-bottom: 5vh;
 
-  /* --- Animation properties --- */
+  /* --- Animation properties for MODAL OVERLAY (fade-in/out) --- */
   opacity: 0;
-  transform: scale(0.85); /* Initial scale for zoom-in effect */
   visibility: hidden;
-  /* Transition for opacity, transform, and visibility (visibility changes after others) */
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0s linear 0.25s;
+  /* Transition for opacity and visibility */
+  /* visibility changes after opacity transition to prevent interaction during fade-out */
+  transition: opacity 0.25s ease-out, visibility 0s linear 0.25s;
 }
 
+/* When modal overlay becomes visible */
 .flashcard-modal.modal-visible {
   opacity: 1;
-  transform: scale(1);
   visibility: visible;
-  /* Ensure transition delays are reset when becoming visible */
-  transition-delay: 0s;
+  transition-delay: 0s; /* Ensure opacity/visibility apply immediately */
 }
 
+/* Styles for the flashcard panel (content area) */
 .flashcard-container {
   position: relative;
   width: 80%;
@@ -53,10 +54,22 @@
   background-color: var(--body-bg-color);
   border-radius: 1rem;
   box-shadow: 0 0 25px rgba(0,0,0,0.4);
-  padding: 25px; // This padding defines the boundary for absolute positioned views
-  display: flex; // Keep this for overall container structure if needed, but views are absolute
+  padding: 25px;
+  display: flex;
   flex-direction: column;
   overflow: hidden; // Crucial for containing absolute positioned views during transition
+
+  /* --- Animation properties for PANEL (zoom-in/out) --- */
+  opacity: 0; /* Start transparent */
+  transform: scale(0.85); /* Start scaled down */
+  /* Transition for opacity and transform */
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* When the modal is visible, the container animates to its final state */
+.flashcard-modal.modal-visible .flashcard-container {
+  opacity: 1; /* Fade in */
+  transform: scale(1); /* Zoom to normal size */
 }
 
 .flashcard.is-sliding-no-transition {
@@ -515,5 +528,3 @@
 //    margin: 5px 0;
 //  }
 //}
-
-

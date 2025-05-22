@@ -145,7 +145,7 @@ links:
   # Title: http://example.com/
   # ksun's blog: http://119.23.17.57
   # 你有图么我有故事: https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect
-  
+
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
@@ -191,7 +191,7 @@ sidebar:
 
   # Scroll percent label in b2t button
   scrollpercent: true
-  
+
   # Enable sidebar on narrow view
   onmobile: true
 
@@ -405,7 +405,7 @@ changyan:
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
-# 此处设置成true之后，将themes/next/layout/_partials/head.swig 
+# 此处设置成true之后，将themes/next/layout/_partials/head.swig
 # 下把默认的百度和 google 验证值替换为搜索引擎为你提供的完整HTML标签即可
 # 作者：小矮人Ethan
 # 链接：http://www.jianshu.com/p/8c0707ce5da4
@@ -548,7 +548,7 @@ local_search:
   trigger: auto
   # show top n results per article, show all results by setting to -1
   top_n_per_article: 1
-  # if contain sensitive word, don't show content 
+  # if contain sensitive word, don't show content
   # sensitive_word: "encrypted"
 
 # ---------------------------------------------------------------
@@ -684,7 +684,7 @@ vendors:
   fancybox:
   fancybox_css:
 
-  # Internal version: 1.1.0 
+  # Internal version: 1.1.0
   # See: https://github.com/francoischalifour/medium-zoom
   mediumzoom:
 
@@ -705,10 +705,6 @@ vendors:
   # See: https://github.com/ftlabs/fastclick
   fastclick:
 
-  # Internal version: 1.9.7
-  # See: https://github.com/tuupola/jquery_lazyload
-  lazyload:
-
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
   velocity:
@@ -724,7 +720,7 @@ vendors:
   # Internal version: 4.6.2
   # See: http://fontawesome.io/
   # fontawesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css
-  fontawesome: 
+  fontawesome:
 
   # Internal version: 1
   # https://www.algolia.com

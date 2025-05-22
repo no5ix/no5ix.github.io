@@ -21,10 +21,10 @@ NexT.utils = NexT.$u = {
         if (!$imageWrapLink.attr('data-fancybox')) {
           $imageWrapLink.attr('data-fancybox', 'group');
         }
-      
+
         if (imageTitle) {
           $imageWrapLink.append('<p class="image-caption">' + imageTitle + '</p>');
-  
+
           //make sure img title tag will show correctly in fancybox
           $imageWrapLink.attr('title', imageTitle);
         }
@@ -91,11 +91,31 @@ NexT.utils = NexT.$u = {
   },
 
   lazyLoadPostsImages: function () {
-    $('#posts').find('img').lazyload({
-      //placeholder: '/images/loading.gif',
-      effect: 'fadeIn',
-      threshold : 0
-    });
+    // $('#posts').find('img').lazyload({
+    //   placeholder: '/images/loading.gif',
+    //   effect: 'fadeIn',
+    //   threshold : 0
+    // });
+      $('#posts img').each(function () {
+        const $img = $(this);
+
+        // Skip if already has loading attribute
+        if (!$img.attr('loading')) {
+          $img.attr('loading', 'lazy');
+        }
+
+        // $img.on('load', function () {
+        //   $(this).addClass('lazy-loaded');
+        //   console.log('loaded 12ijoaijsodjfa');
+        // });
+        //
+        // // If the image was already loaded before .on('load') was attached
+        // if ($img[0].complete) {
+        //   $img.addClass('lazy-loaded');
+        //   console.log('loaded 122223332ijoaijsodjfa');
+        // }
+
+      });
   },
 
   /**

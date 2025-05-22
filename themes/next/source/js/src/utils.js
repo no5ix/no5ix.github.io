@@ -90,33 +90,33 @@ NexT.utils = NexT.$u = {
 
   },
 
-  lazyLoadPostsImages: function () {
-    // $('#posts').find('img').lazyload({
-    //   placeholder: '/images/loading.gif',
-    //   effect: 'fadeIn',
-    //   threshold : 0
-    // });
-      $('#posts img').each(function () {
-        const $img = $(this);
-
-        // Skip if already has loading attribute
-        if (!$img.attr('loading')) {
-          $img.attr('loading', 'lazy');
-        }
-
-        // $img.on('load', function () {
-        //   $(this).addClass('lazy-loaded');
-        //   console.log('loaded 12ijoaijsodjfa');
-        // });
-        //
-        // // If the image was already loaded before .on('load') was attached
-        // if ($img[0].complete) {
-        //   $img.addClass('lazy-loaded');
-        //   console.log('loaded 122223332ijoaijsodjfa');
-        // }
-
-      });
-  },
+  // lazyLoadPostsImages: function () {
+  //   // $('#posts').find('img').lazyload({
+  //   //   placeholder: '/images/loading.gif',
+  //   //   effect: 'fadeIn',
+  //   //   threshold : 0
+  //   // });
+  //     $('#posts img').each(function () {
+  //       const $img = $(this);
+  //
+  //       // // Skip if already has loading attribute
+  //       // if (!$img.attr('loading')) {
+  //       //   $img.attr('loading', 'lazy');
+  //       // }
+  //
+  //       $img.on('load', function () {
+  //         $(this).addClass('lazy-loaded');
+  //         console.log('loaded 12ijoaijsodjfa');
+  //       });
+  //
+  //       // If the image was already loaded before .on('load') was attached
+  //       if ($img[0].complete) {
+  //         $img.addClass('lazy-loaded');
+  //         console.log('loaded 122223332ijoaijsodjfa');
+  //       }
+  //
+  //     });
+  // },
 
   /**
    * Tabs tag listener (without twitter bootstrap).

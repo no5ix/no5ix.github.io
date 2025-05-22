@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   NexT.utils.isMobile() && window.FastClick.attach(document.body);
 
-  NexT.utils.lazyLoadPostsImages();
+  // NexT.utils.lazyLoadPostsImages();
 
   NexT.utils.registerESCKeyEvent();
 
@@ -29,7 +29,7 @@ $(document).ready(function () {
    * Register JS handlers by condition option.
    * Need to add config option in Front-End at 'layout/_partials/head.swig' file.
    */
-  if (document.body.clientWidth > 768) {  // Mobile devices don't need to use the zoom function for images; they usually pinch directly. 
+  if (document.body.clientWidth > 768) {  // Mobile devices don't need to use the zoom function for images; they usually pinch directly.
     CONFIG.fancybox && NexT.utils.wrapImageWithFancyBox();  // 经测试: 下方的mediumZoom放大图片的效果更好
     CONFIG.mediumzoom && window.mediumZoom('.post-body :not(a) > img, .post-body > img', {
       // background: 'var(--content-bg-color)',

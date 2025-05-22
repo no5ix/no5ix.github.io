@@ -200,7 +200,7 @@
     this.isShuffled = false; // Reset shuffle on modal open
 
     this.isAutoReadActive = false; // always start with auto-read off
-    $('#auto-read-btn').removeClass('active'); // Match the state above
+    $('#auto-read-btn').removeClass('auto-read-active'); // Match the state above
 
     if (!$modal.length) {
       // ... (modalHtml definition) ...
@@ -417,7 +417,7 @@
     }
     // It might also be good to reset isAutoReadActive and button state here
     this.isAutoReadActive = false;
-    $('#auto-read-btn').removeClass('active');
+    $('#auto-read-btn').removeClass('auto-read-active');
     // However, the user might want it to persist for the next session. Let's leave it for now.
     $('#flashcard-modal').fadeOut(400, () => {
       if ($('body').hasClass('flashcard-modal-open')) {
@@ -557,7 +557,7 @@
     }
     this.isAutoReadActive = !this.isAutoReadActive;
     const $button = $('#auto-read-btn');
-    $button.toggleClass('active', this.isAutoReadActive);
+    $button.toggleClass('auto-read-active', this.isAutoReadActive);
 
     if (this.isAutoReadActive) {
       // If turning on and a card is visible, read its front

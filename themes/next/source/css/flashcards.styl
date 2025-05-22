@@ -83,6 +83,7 @@
   color: var(--text-color);
   opacity: 0.7; /* Slightly transparent to be less obtrusive */
   cursor: help;
+  padding: 0 2px;
 }
 
 .flashcard-hint-icon:hover {
@@ -361,19 +362,6 @@
   height: 40px;
 }
 
-#auto-read-btn i.fa-volume-up {
-  /* Default icon style if needed */
-}
-
-#auto-read-btn.active {
-  background-color: var(--brand-color); /* Or your theme's primary/active color */
-  color: #fff; /* Ensure icon is visible on active background */
-}
-
-#auto-read-btn.active:hover {
-  background-color: var(--brand-hover-color); /* Darken or lighten the active color on hover */
-}
-
 .flashcard-nav-btn {
   display: flex;
   justify-content: center; /* 水平居中 */
@@ -391,10 +379,6 @@
   width: 40px;
   height: 40px;
 }
-.flashcard-nav-btn:hover:not(:disabled) {
-  background-color: var(--link-hover-color);
-  transform: translateY(-1px);
-}
 .flashcard-nav-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -407,8 +391,37 @@
   //color: var(--sidebar-background-color); // Contrasting text color
   //box-shadow: inset 0 0 0 2px var(--sidebar-highlight); // Inner border effect
 }
-.flashcard-nav-btn.shuffle-active:hover:not(:disabled) {
-  //background-color: var(--brand-hover-color);
+
+.flashcard-nav-btn.auto-read-active {
+  background-color: var(--link-hover-color);
+}
+
+@media (hover: hover) and (pointer: fine) {  // disable the :hover effect on mobile devices
+  .flashcard-nav-btn:hover:not(:disabled) {
+    background-color: var(--link-hover-color);
+    transform: translateY(-2px);
+  }
+
+  .flashcard-nav-btn.shuffle-active:hover:not(:disabled) {
+    background-color: var(--link-hover-color);
+  }
+
+  .flashcard-nav-btn.auto-read-active:hover:not(:disabled) {
+    background-color: var(--link-hover-color);
+  }
+}
+
+// :active applies only while the button is pressed/touched.
+.flashcard-nav-btn:active:not(:disabled) {
+  background-color: var(--link-hover-color);
+  transform: translateY(-2px);
+}
+
+.flashcard-nav-btn.shuffle-active:active:not(:disabled) {
+  background-color: var(--link-hover-color);
+}
+
+.flashcard-nav-btn.auto-read-active:active:not(:disabled) {
   background-color: var(--link-hover-color);
 }
 

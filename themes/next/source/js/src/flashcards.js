@@ -16,6 +16,7 @@
     this.isViewAnimating = false; // For H1/Flashcard view transition
     this.animationDuration = 150; // ms, for card sliding
     this.animationViewDuration = 300; // ms, for view transitions
+    this.modalAnimationDuration = 250; // ms, for modal zoom animation (matches CSS)
     this.originalBodyOverflow = '';
     this.currentView = 'h1Selection'; // 'h1Selection' or 'flashcards'
     this.isShuffled = false; // For shuffle state
@@ -195,15 +196,15 @@
     this.isShuffled = false; // Reset shuffle on modal open
 
     var $modal = $('#flashcard-modal');
-    const $h1View = $('#h1-selection-view'); // Cache these
+    const $h1View = $('#h1-selection-view');
     const $flashcardView = $('#flashcard-view');
-    this.isShuffled = false; // Reset shuffle on modal open
+    this.isShuffled = false;
 
-    this.isAutoReadActive = false; // always start with auto-read off
-    $('#auto-read-btn').removeClass('auto-read-active'); // Match the state above
+    this.isAutoReadActive = false;
+    $('#auto-read-btn').removeClass('auto-read-active');
 
     if (!$modal.length) {
-      // ... (modalHtml definition) ...
+      // ... (modalHtml definition remains the same) ...
       var modalHtml = `
         <div id="flashcard-modal" class="flashcard-modal">
           <div class="flashcard-container">
@@ -240,15 +241,13 @@
           </div>
         </div>`;
       $('body').append(modalHtml);
-      $modal = $('#flashcard-modal').hide();
+      $modal = $('#flashcard-modal'); // .hide() is removed, CSS handles initial hidden state
 
+      // ... (event listeners remain the same) ...
       var $flashcardElement = $modal.find('.flashcard');
 
       $flashcardElement.off('click.flashcards').on('click.flashcards', function () {
-        // Prevent flip if a swipe was just handled on a code block,
-        // or if a swipe is in progress that didn't originate from a code block
-        // but we want to give swipe precedence.
-        if (self.isTouchingCodeBlock) { // If touch started on code block, click might be unintentional
+        if (self.isTouchingCodeBlock) {
           return;
         }
         if (!self.isAnimating && !self.isViewAnimating) {
@@ -268,41 +267,29 @@
       $flashcardElement.off('touchstart.flashcardsSwipe touchend.flashcardsSwipe')
         .on('touchstart.flashcardsSwipe', function (event) {
           const target = event.target;
-          // Check if the touch started on a <pre> tag or its descendant,
-          // but only if the card is currently flipped to the back.
           if (self.isFlipped && $(target).closest('pre').length > 0) {
             self.isTouchingCodeBlock = true;
           } else {
             self.isTouchingCodeBlock = false;
           }
-
           if (self.isTouchingCodeBlock) {
-            // If on a code block, don't record swipe details for card navigation
             return;
           }
-
           touchstartX = event.originalEvent.changedTouches[0].screenX;
           touchstartY = event.originalEvent.changedTouches[0].screenY;
           touchstartTime = new Date().getTime();
         })
         .on('touchend.flashcardsSwipe', function (event) {
           if (self.isTouchingCodeBlock) {
-            // Reset flag and do nothing if the touch started on a code block
             self.isTouchingCodeBlock = false;
             return;
           }
-
-          // If touchstartX was not set (because touch started on code block and returned early)
           if (touchstartX === 0 && touchstartY === 0) return;
-
-
           touchendX = event.originalEvent.changedTouches[0].screenX;
           const touchendY = event.originalEvent.changedTouches[0].screenY;
-
           var elapsedTime = new Date().getTime() - touchstartTime;
           var deltaX = touchendX - touchstartX;
           var deltaY = touchendY - touchstartY;
-
           if (elapsedTime <= maxSwipeTime) {
             if (Math.abs(deltaX) >= minSwipeDistance && Math.abs(deltaY) <= maxVerticalOffset) {
               if (deltaX > 0) {
@@ -316,14 +303,12 @@
               }
             }
           }
-          // Reset for next swipe
           touchstartX = 0;
           touchstartY = 0;
           touchstartTime = 0;
         });
       // --- END SWIPE FUNCTIONALITY ---
 
-      // ... (rest of the event listeners: prev-card, next-card, etc.)
       $('#prev-card').off('click.flashcards').on('click.flashcards', function (e) {
         e.stopPropagation();
         self.prevCard();
@@ -355,18 +340,17 @@
         });
 
       $(document).off('keydown.flashcards').on('keydown.flashcards', function (e) {
-        if ($modal.is(':visible') && !self.isViewAnimating) {
-          if (e.key === 'Escape') self.hideFlashcardModal();
-          if ($('#flashcard-view').hasClass('view-active')) {
-            if (e.key === 'ArrowLeft') self.prevCard();
-            else if (e.key === 'ArrowRight') self.nextCard();
-            else if (e.key === ' ') {
-              if (!self.isAnimating && !$(e.target).is('input, textarea, button')) {
-                // Also check isTouchingCodeBlock here if spacebar flip is an issue
-                if (self.isTouchingCodeBlock) return;
-                self.flipCard();
-                e.preventDefault();
-              }
+        if (!$modal.hasClass('modal-visible') || self.isViewAnimating) return; // Check .modal-visible
+
+        if (e.key === 'Escape') self.hideFlashcardModal();
+        if ($('#flashcard-view').hasClass('view-active')) {
+          if (e.key === 'ArrowLeft') self.prevCard();
+          else if (e.key === 'ArrowRight') self.nextCard();
+          else if (e.key === ' ') {
+            if (!self.isAnimating && !$(e.target).is('input, textarea, button')) {
+              if (self.isTouchingCodeBlock) return;
+              self.flipCard();
+              e.preventDefault();
             }
           }
         }
@@ -378,13 +362,13 @@
       });
     }
 
-    // ... (rest of showFlashcardModal logic) ...
     $('#h1-selection-view, #flashcard-view')
       .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
       .addClass('view-hidden');
     $('#shuffle-cards-btn').removeClass('shuffle-active');
 
     if (this.h1Sections.length === 1 && (this.h1Sections[0].isFlatList || this.h1Sections.length === 1 && !this.h1Sections[0].isCombined)) {
+      // ... (logic for single section remains the same) ...
       const section = this.h1Sections[0];
       this.currentCardsSet = [...section.cards];
       this.originalCardsSetOrder = [...section.cards];
@@ -394,6 +378,7 @@
       $('#flashcard-view').removeClass('view-hidden').addClass('view-active');
       this._updateFlashcardViewContent();
     } else if (this.h1Sections.length > 0) {
+      // ... (logic for multiple sections remains the same) ...
       this.currentView = 'h1Selection';
       $('#h1-selection-view').removeClass('view-hidden').addClass('view-active');
       this._updateH1SelectionViewContent();
@@ -407,19 +392,30 @@
       this.originalBodyOverflow = $('body').css('overflow');
       $('body').css('overflow', 'hidden').addClass('flashcard-modal-open');
     }
-    $modal.fadeIn(400);
-  };
 
+    // --- MODIFIED: Show modal with CSS transition ---
+    // $modal.fadeIn(400); // Old way
+    $modal.css('display', 'flex'); // Ensure it's display:flex (it should be by default from CSS)
+    // Force a reflow to ensure initial CSS (opacity 0, scaled down) is applied before adding class
+    $modal[0].offsetHeight;
+    $modal.addClass('modal-visible');
+    // --- END MODIFICATION ---
+  };
 
   Flashcards.prototype.hideFlashcardModal = function() {
     if (this.speechSynthesis) {
       this.speechSynthesis.cancel();
     }
-    // It might also be good to reset isAutoReadActive and button state here
     this.isAutoReadActive = false;
     $('#auto-read-btn').removeClass('auto-read-active');
-    // However, the user might want it to persist for the next session. Let's leave it for now.
-    $('#flashcard-modal').fadeOut(400, () => {
+
+    var $modal = $('#flashcard-modal');
+
+    // --- MODIFIED: Hide modal with CSS transition ---
+    // $('#flashcard-modal').fadeOut(400, () => { ... }); // Old way
+    $modal.removeClass('modal-visible');
+    setTimeout(() => {
+      $modal.css('display', 'none'); // Set display to none after transition
       if ($('body').hasClass('flashcard-modal-open')) {
         $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
       }
@@ -427,7 +423,8 @@
       $('#h1-selection-view, #flashcard-view')
         .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
         .addClass('view-hidden');
-    });
+    }, this.modalAnimationDuration); // Use the defined duration (e.g., 250ms)
+    // --- END MODIFICATION ---
   };
 
   Flashcards.prototype._updateH1SelectionViewContent = function() {

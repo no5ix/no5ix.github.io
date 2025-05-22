@@ -47,7 +47,7 @@
 .flashcard-container {
   position: relative;
   width: 80%;
-  height: 70%;
+  height: 75%;
   max-width: 900px;
   min-height: 450px; // Adjusted min-height
   max-height: 90vh;
@@ -275,19 +275,10 @@
   //box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-
-/* Flashcard View */
-#flashcard-view {
-  // width: 100%; // Handled by .fc-view
-  // display: flex; // Handled by .fc-view
-  // flex-direction: column; // Handled by .fc-view
-  // height: 100%; // Handled by .fc-view
-}
-
 .flashcard-back-btn {
   position: absolute;
-  top: 10px; // Adjusted for view's internal padding
-  left: 10px; // Adjusted for view's internal padding
+  top: 20px; // Adjusted for view's internal padding
+  left: 20px; // Adjusted for view's internal padding
   // ... (rest of back button styles same)
   background-color: var(--toc-link-color);
   color: var(--selection-color);
@@ -315,14 +306,13 @@
   position: relative;
   //margin-top: 40px; // Increased space for back button + H1 title
 }
+
 .flashcard-current-h1-title {
   text-align: center;
   font-size: 1em;
   color: var(--text-color);
-  margin-bottom: 10px;
+  margin: 0 0 15px 0;
   padding: 0 50px;
-  //font-family: math;
-  //height: 20px;
   flex-shrink: 0;
   font-weight: 500;
 }
@@ -365,8 +355,8 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 15px; // Slightly reduced
-  padding: 10px 0;
+  margin-top: 20px; // Slightly reduced
+  //padding: 10px 0;
   width: 100%;
   flex-shrink: 0;
 }
@@ -454,8 +444,8 @@
 
 .close-flashcard {
   position: absolute;
-  top: 10px; // Adjusted for view's internal padding
-  right: 10px; // Adjusted for view's internal padding
+  top: 20px; // Adjusted for view's internal padding
+  right: 20px; // Adjusted for view's internal padding
   // ... (rest of close button styles same)
   width: 32px;
   height: 32px;
@@ -484,22 +474,29 @@
 @media (max-width: 768px) {
   .flashcard-container {
     width: 90%;
-    padding: 15px;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    //padding: 15px;
+    margin: 2vh;
+    //margin-bottom: 2vh;
     max-height: 96vh;
   }
-  .fc-view { // Adjust internal padding for smaller screens
-    padding: 15px;
+
+  .flashcard-current-h1-title {
+    margin: 5px 0 20px 0;
   }
+  //.fc-view { // Adjust internal padding for smaller screens
+  //  padding: 15px;
+  //}
   //.flashcard-back-btn {
-  //  top: 5px; left: 5px; // Closer to edge with smaller padding
-  //  padding: 6px 10px;
-  //  font-size: 12px;
+  //  top: 15px;
+  //  left: 15px; // Closer to edge with smaller padding
+  //  //padding: 6px 10px;
+  //  //font-size: 12px;
   //}
   //.close-flashcard {
-  //  top: 5px; right: 5px;
+  //  top: 15px;
+  //  right: 15px; // Closer to edge with smaller padding
   //}
+
   .flashcard-front h2 {
     font-size: 1.5em;
   }

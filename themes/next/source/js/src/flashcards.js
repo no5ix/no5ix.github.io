@@ -32,7 +32,7 @@
     if (!postBody.length) return false; // Guard: Ensure .post-body exists
 
     const $children = postBody.children();
-    const introIcon = '<i class="fa fa-sticky-note-o" title="引言"></i> ';
+    const introIcon = '<i class="fa fa-sticky-note" title="引言"></i> &nbsp;&nbsp;&nbsp;';
 
     // 注意：之前版本中的 STOP_SELECTORS_STRING 及其相关逻辑已被移除或调整，
     // 现在主要通过 H1/H2 结构以及对 <footer> 标签的特殊处理来界定内容。

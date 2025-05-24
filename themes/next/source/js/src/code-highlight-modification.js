@@ -18,61 +18,101 @@ $('.highlight').each(function (i, e) {
 });
 
 // $('.btn-copy').on('click', function (ee) {  // f the .btn-copy click logic isn't running, it's likely due to event delegation context, timing, or DOM structure issues.
-$(document).on('click', '.btn-copy', function (ee) {  // With this (using event delegation and a more robust code fetching):
-	ee.stopPropagation(); // Prevent the click from bubbling up
+// With this (using event delegation and a more robust code fetching):
+$(document).on('click', '.btn-copy', async function (ee) { // Make the handler async
+  ee.stopPropagation(); // CRITICAL: Prevent the click from bubbling up to the flashcard
 
+  var $button = $(this);
+  var $highlightBlock = $button.closest('.highlight');
+
+  if (!$highlightBlock.length) {
+    console.warn('.btn-copy clicked but could not find parent .highlight block.');
+    updateCopyButtonIcon($button, false);
+    $button.blur();
+    return;
+  }
+
+  var codeToCopy = '';
+  // ... (your existing code extraction logic remains the same)
+  var $codeLines = $highlightBlock.find('.code .line');
+  if ($codeLines.length > 0) {
+    codeToCopy = $codeLines.map(function() {
+      return $(this).text();
+    }).get().join('\n');
+  } else {
+    var $codeElement = $highlightBlock.find('pre code, td.code code')
+      .not($highlightBlock.find('figcaption code'));
+    if (!$codeElement.length) {
+      $codeElement = $highlightBlock.find('pre').not($highlightBlock.find('figcaption pre'));
+    }
     if ($codeElement.length) {
-      // If multiple code elements are found (e.g. in tables), take the first one
       codeToCopy = $codeElement.first().text();
     } else {
-      // Last resort: clone the highlight block, remove its figcaption, and get the text.
-      // This is less precise and might grab unwanted text if the structure is very complex.
       var $tempDiv = $highlightBlock.clone();
       $tempDiv.find('figcaption').remove();
       codeToCopy = $tempDiv.text();
     }
   }
-
-  codeToCopy = codeToCopy.trim(); // Clean up any extra whitespace
+  codeToCopy = codeToCopy.trim();
 
   if (!codeToCopy) {
     console.warn('Could not extract code to copy from .highlight block.');
-    $button.find('i').removeClass('fa-copy fa-check').addClass('fa-times');
-    setTimeout(function() {
-      $button.find('i').removeClass('fa-times').addClass('fa-copy');
-    }, 2000);
+    updateCopyButtonIcon($button, false);
     $button.blur();
     return;
   }
 
-  var ta = document.createElement('textarea');
-  document.body.appendChild(ta);
-  ta.style.position = 'fixed'; // Use 'fixed' to ensure it's in the viewport for execCommand
-  ta.style.top = '-9999px';    // Position off-screen
-  ta.style.left = '-9999px';
-  ta.value = codeToCopy;
-  ta.select();
-  ta.focus(); // Focus is important for execCommand to work
-  var result = false;
-  try {
-    result = document.execCommand('copy');
-  } catch (err) {
-    console.error('Copy command failed:', err);
-    result = false; // Ensure result is false on error
-  }
-  document.body.removeChild(ta);
-
-  if(result) {
-    $button.find('i').removeClass('fa-copy').addClass('fa-check');
-    setTimeout(function () {
-      $button.find('i').removeClass('fa-check').addClass('fa-copy');
-    }, 2800);
+  let result = false;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(codeToCopy);
+      result = true;
+    } catch (err) {
+      console.error('Async: Could not copy text: ', err);
+      result = false;
+    }
   } else {
-    // If copy failed, show a failure icon briefly
-    $button.find('i').removeClass('fa-copy fa-check').addClass('fa-times');
-    setTimeout(function() {
-      $button.find('i').removeClass('fa-times').addClass('fa-copy');
-    }, 2000);
+    // Fallback to the old method
+    // Create and reuse a hidden textarea for copying
+    let ta = document.getElementById('hidden-copy-textarea');  // reuse the `ta`
+    if (!ta) {
+      ta = document.createElement('textarea');
+      ta.id = 'hidden-copy-textarea';
+      ta.style.position = 'fixed';
+      ta.style.top = '-9999px';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+    }
+    // Set content and perform copy
+    ta.value = codeToCopy;
+    ta.select();
+    ta.focus(); // Focus is important for execCommand to work
+    try {
+      result = document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback: Could not copy text: ', err);
+      result = false;
+    }
+    // document.body.removeChild(ta);
   }
+
+  updateCopyButtonIcon($button, result);
   $button.blur(); // Remove focus from the button
 });
+
+// Helper function to update button icon
+function updateCopyButtonIcon($button, success) {
+  const $icon = $button.find('i');
+  if (success) {
+    $icon.removeClass('fa-copy fa-times').addClass('fa-check');
+    setTimeout(function () {
+      $icon.removeClass('fa-check').addClass('fa-copy');
+    }, 2800);
+  } else {
+    $icon.removeClass('fa-copy fa-check').addClass('fa-times');
+    setTimeout(function() {
+      $icon.removeClass('fa-times').addClass('fa-copy');
+    }, 2000);
+  }
+}
+

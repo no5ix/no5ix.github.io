@@ -5,16 +5,22 @@ $('.highlight').each(function (i, e) {
 	let language = $(e).attr("class").split(" ")[1]; // 获取第二个类名
 	if ($(e).children('figcaption').length > 0) {
 		let curSpan = $(e).children('figcaption').children('span');
-		let codeName = curSpan.text();
-		curSpan.html(" ● " + language + "&nbsp;&nbsp;&nbsp; ● " + codeName);
-		curSpan.after(copyHtml);
+		let fileNameStr = curSpan.text();
+		// curSpan.html(" ● " + language + "&nbsp;&nbsp;&nbsp; ● " + fileNameStr);
+		curSpan.html(" ● " + language);
+		let fileName = $("<span> ● " + fileNameStr + "</span>");
+		curSpan.after(fileName);
+		fileName.after(copyHtml);
 	} else {
 		let figcaption = $("<figcaption><span>" + " ● " + language + "</span>" + copyHtml + "</figcaption>");
 		$(e).prepend(figcaption);
 	}
 });
 
-$('.btn-copy').on('click', function (ee) {
+// $('.btn-copy').on('click', function (ee) {  // f the .btn-copy click logic isn't running, it's likely due to event delegation context, timing, or DOM structure issues.
+$(document).on('click', '.btn-copy', function (ee) {  // With this (using event delegation and a more robust code fetching):
+	ee.stopPropagation(); // Prevent the click from bubbling up
+
 	var code = $(this).parent().parent().find('.code').find('.line').map(function (i, eee) {
 		return $(eee).text();
 	}).toArray().join('\n');
@@ -29,7 +35,7 @@ $('.btn-copy').on('click', function (ee) {
 	ta.focus();
 	var result = document.execCommand('copy');
 	document.body.removeChild(ta);
-	console.log("ccccccc?");
+	// console.log("ccccccc?");
 
 	// 点击了之后则复制按钮显示 "√"图标, 800毫秒后恢复原样
 	if(result) {

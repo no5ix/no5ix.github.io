@@ -246,7 +246,11 @@
       // ... (event listeners remain the same) ...
       var $flashcardElement = $modal.find('.flashcard');
 
-      $flashcardElement.off('click.flashcards').on('click.flashcards', function () {
+      $flashcardElement.off('click.flashcards').on('click.flashcards', function (event) {
+        if ($(event.target).closest('.btn-copy').length) {
+          // Click was on or inside a .btn-copy, so do nothing
+          return;
+        }
         if (self.isTouchingCodeBlock) {
           return;
         }

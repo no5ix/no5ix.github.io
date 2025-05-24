@@ -21,43 +21,58 @@ $('.highlight').each(function (i, e) {
 $(document).on('click', '.btn-copy', function (ee) {  // With this (using event delegation and a more robust code fetching):
 	ee.stopPropagation(); // Prevent the click from bubbling up
 
-	var code = $(this).parent().parent().find('.code').find('.line').map(function (i, eee) {
-		return $(eee).text();
-	}).toArray().join('\n');
+    if ($codeElement.length) {
+      // If multiple code elements are found (e.g. in tables), take the first one
+      codeToCopy = $codeElement.first().text();
+    } else {
+      // Last resort: clone the highlight block, remove its figcaption, and get the text.
+      // This is less precise and might grab unwanted text if the structure is very complex.
+      var $tempDiv = $highlightBlock.clone();
+      $tempDiv.find('figcaption').remove();
+      codeToCopy = $tempDiv.text();
+    }
+  }
 
-	var ta = document.createElement('textarea');
-	document.body.appendChild(ta);
-	ta.style.position = 'absolute';
-	ta.style.top = '0px';
-	ta.style.left = '0px';
-	ta.value = code;
-	ta.select();
-	ta.focus();
-	var result = document.execCommand('copy');
-	document.body.removeChild(ta);
-	// console.log("ccccccc?");
+  codeToCopy = codeToCopy.trim(); // Clean up any extra whitespace
 
-	// 点击了之后则复制按钮显示 "√"图标, 800毫秒后恢复原样
-	if(result) {
-		var $b = $(this).parent().find('.btn-copy')
-		// $(this).text('√');
-		// $(this).text('✓');
-		// $(this).text('✅');
-		// $(this).text('✔');
-		$b.find('i.fa-copy').remove();
-		$b.append($('<i class="fa fa-check" aria-hidden="true"></i>'));
-		// $b.append($('<i class="fa fa-check-circle" aria-hidden="true"></i>'));
-		// $b.append($('<i class="fa fa-check-circle-o" aria-hidden="true"></i>'));
-		// $b.append($('<i class="fa fa-check-square" aria-hidden="true"></i>'));
-		// $b.append($('<i class="fa fa-check-square-o" aria-hidden="true"></i>'));
-		setTimeout(function () {
-			$b.find('i.fa-check').remove();
-			// $b.find('i.fa-check-circle').remove();
-			// $b.find('i.fa-check-circle-o').remove();
-			// $b.find('i.fa-check-square').remove();
-			// $b.find('i.fa-check-square-o').remove();
-			$b.append($('<i class="fa fa-copy" aria-hidden="true"></i>'));
-		}, 2800);
-	}
-	$(this).blur();
+  if (!codeToCopy) {
+    console.warn('Could not extract code to copy from .highlight block.');
+    $button.find('i').removeClass('fa-copy fa-check').addClass('fa-times');
+    setTimeout(function() {
+      $button.find('i').removeClass('fa-times').addClass('fa-copy');
+    }, 2000);
+    $button.blur();
+    return;
+  }
+
+  var ta = document.createElement('textarea');
+  document.body.appendChild(ta);
+  ta.style.position = 'fixed'; // Use 'fixed' to ensure it's in the viewport for execCommand
+  ta.style.top = '-9999px';    // Position off-screen
+  ta.style.left = '-9999px';
+  ta.value = codeToCopy;
+  ta.select();
+  ta.focus(); // Focus is important for execCommand to work
+  var result = false;
+  try {
+    result = document.execCommand('copy');
+  } catch (err) {
+    console.error('Copy command failed:', err);
+    result = false; // Ensure result is false on error
+  }
+  document.body.removeChild(ta);
+
+  if(result) {
+    $button.find('i').removeClass('fa-copy').addClass('fa-check');
+    setTimeout(function () {
+      $button.find('i').removeClass('fa-check').addClass('fa-copy');
+    }, 2800);
+  } else {
+    // If copy failed, show a failure icon briefly
+    $button.find('i').removeClass('fa-copy fa-check').addClass('fa-times');
+    setTimeout(function() {
+      $button.find('i').removeClass('fa-times').addClass('fa-copy');
+    }, 2000);
+  }
+  $button.blur(); // Remove focus from the button
 });

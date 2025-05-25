@@ -329,7 +329,7 @@ NexT.utils = NexT.$u = {
     if ($currentActiveElement.offset() === undefined) {
       return;
     }
-    $tocElement.animate({ scrollTop: $currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2) }, 100); // 300ms 动画滚动到 200px
+    $tocElement.animate({ scrollTop: $currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2) }, 600); // 600ms 动画滚动
     // $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
   },
 

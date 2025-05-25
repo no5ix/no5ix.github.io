@@ -39,9 +39,13 @@ $(document).ready(function () {
     allNavItem.toggleClass("nav-expand");
     $iconToFold.toggleClass("hide");
     $iconToExpand.toggleClass("hide");
+    let delay = 300;
+    if ($iconToFold.is(":hidden")) {
+      delay = 600;  // this delay for collapse all the toc
+    } 
     setTimeout(function () {
       NexT.utils.sidebarScrollToCenter();
-    }, 200);  // 因为 .post-toc .nav .nav-child 里有个动画
+    }, delay);  // 因为 .post-toc .nav .nav-child 里有个动画
   });
 
 

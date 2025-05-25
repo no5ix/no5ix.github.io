@@ -148,6 +148,8 @@ $(document).ready(function () {
           complete: function () {
             self.sidebarEl.addClass('sidebar-active');
             self.sidebarEl.trigger('sidebar.didShow');
+
+            NexT.utils.sidebarScrollToCenter();
           }
         }
       );

@@ -40,7 +40,7 @@ $(document).ready(function () {
     $iconToFold.toggleClass("hide");
     $iconToExpand.toggleClass("hide");
     setTimeout(function () {
-      scrollToCenter();
+      NexT.utils.sidebarScrollToCenter();
     }, 200);  // 因为 .post-toc .nav .nav-child 里有个动画
   });
 

@@ -318,6 +318,21 @@ NexT.utils = NexT.$u = {
     $('.sidebar-toggle').trigger('click');
   },
 
+  sidebarScrollToCenter: function() {
+    var tocSelector = '.post-toc';
+    var $tocElement = $(tocSelector);
+    // var activeCurrentSelector = '.active-current';
+    var $currentActiveElement = $(tocSelector + ' .active').last();
+    // removeCurrentActiveClass();
+    // $currentActiveElement.addClass('active-current');
+    // Scrolling to center active TOC element if TOC content is taller then viewport.
+    if ($currentActiveElement.offset() === undefined) {
+      return;
+    }
+    $tocElement.animate({ scrollTop: $currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2) }, 100); // 300ms 动画滚动到 200px
+    // $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
+  },
+
   isMist: function () {
     return CONFIG.scheme === 'Mist';
   },

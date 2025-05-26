@@ -13,7 +13,7 @@
 
 .post-toc ol {
   margin: 0;
-  padding: 0 2px 5px 10px;
+  padding: 0 2px 0px 10px;
   text-align: left;
   list-style: none;
   font-size: 14px;
@@ -86,28 +86,28 @@
 }
 
 .post-toc .nav .nav-child {
-  //display: none;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.6s ease;
+  display: none;
+  /* max-height: 0;
+  overflow: hidden; */
+  /* transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);  (I commented out this line because it causes some TOC items to jump) */
 }
 
 .post-toc .nav .nav-expand > .nav-child {
-  //display: block;
-  max-height: 5000px;
+  display: block;
+  /* max-height: 2000px; */
 }
 
 .post-toc .nav .active > .nav-child {
-  //display: block;
-  max-height: 5000px;
+  display: block;
+  /* max-height: 2000px; */
 }
 
 .post-toc .nav .active-current > .nav-child {
-  //display: block;
-  max-height: 5000px;
+  display: block;
+  max-height: 2000px;
   & > .nav-item {
-    //display: block;
-    max-height: 5000px;
+    display: block;
+    /* max-height: 2000px; */
   }
 }
 

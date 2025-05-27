@@ -481,10 +481,8 @@
   };
 
   Flashcards.prototype._updateFlashcardViewContent = function() {
-    // --- BEGIN MODIFICATION ---
     // Use .html() and add the icon before the title
     $('.flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
-    // --- END MODIFICATION ---
 
     let showBackButton = false;
     const hasCombined = this.h1Sections.some(s => s.isCombined);
@@ -587,8 +585,25 @@
 
     var card = this.currentCardsSet[this.currentIndex];
     var flashcardElement = $('#flashcard-modal .flashcard');
-    this.isFlipped = false;
-    flashcardElement.removeClass('flipped');
+
+    var frontFace = flashcardElement.find('.flashcard-front');
+    var backFace = flashcardElement.find('.flashcard-back');
+    var oldFrontTransition, oldBackTransition;
+
+    // we need to prevent the flip animation
+    oldFrontTransition = frontFace.css('transition');
+    oldBackTransition = backFace.css('transition');
+    frontFace.css('transition', 'none');
+    backFace.css('transition', 'none');
+
+    this.isFlipped = false; // Set state to not flipped for the new card
+    flashcardElement.removeClass('flipped'); // Remove the class. If transitions were 'none', it won't animate.
+
+    // Force a reflow to ensure the 'transition: none' and class removal are applied
+    // before restoring transitions.
+    flashcardElement[0].offsetHeight;
+    frontFace.css('transition', oldFrontTransition);
+    backFace.css('transition', oldBackTransition);
 
     flashcardElement.find('.flashcard-front').html(
       `<h2>${card.front}</h2>

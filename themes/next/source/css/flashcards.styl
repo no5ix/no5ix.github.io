@@ -361,23 +361,6 @@
   height: 40px;
 }
 
-.flashcard-nav-btn {
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center;     /* 垂直居中 */
-  text-align: center;
-  background-color: var(--toc-link-color);
-  color: var(--selection-color);
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 900;
-  transition: background-color 0.3s, transform 0.1s, border 0.3s, box-shadow 0.3s;
-  width: 40px;
-  height: 40px;
-}
 .flashcard-nav-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -398,7 +381,7 @@
 @media (hover: hover) and (pointer: fine) {  // disable the :hover effect on mobile devices
   .flashcard-nav-btn:hover:not(:disabled) {
     background-color: var(--link-hover-color);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   .flashcard-nav-btn.shuffle-active:hover:not(:disabled) {
@@ -413,7 +396,7 @@
 // :active applies only while the button is pressed/touched.
 .flashcard-nav-btn:active:not(:disabled) {
   background-color: var(--link-hover-color);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .flashcard-nav-btn.shuffle-active:active:not(:disabled) {

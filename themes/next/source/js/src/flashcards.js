@@ -24,6 +24,10 @@
 
     this.isAutoReadActive = false;
     this.speechSynthesis = window.speechSynthesis || null;
+
+    // Keep state in memory
+    this.modalInitialized = false; // To track if modal has been opened and set up once
+    // Keep state in memory
   };
 
   Flashcards.prototype._parseAllHeadingsAndCards = function() {
@@ -180,31 +184,12 @@
     return this.h1Sections.length > 0;
   };
 
+
   Flashcards.prototype.showFlashcardModal = function () {
     var self = this;
-
-    if (this.h1Sections.length === 0) {
-      if (!this._parseAllHeadingsAndCards()) {
-        alert('No H2 headings found to create flashcards!');
-        return;
-      }
-    }
-
-    this.isFlipped = false;
-    this.isAnimating = false;
-    this.isViewAnimating = false;
-    this.isShuffled = false; // Reset shuffle on modal open
-
     var $modal = $('#flashcard-modal');
-    const $h1View = $('#h1-selection-view');
-    const $flashcardView = $('#flashcard-view');
-    this.isShuffled = false;
-
-    this.isAutoReadActive = false;
-    $('#auto-read-btn').removeClass('auto-read-active');
 
     if (!$modal.length) {
-      // ... (modalHtml definition remains the same) ...
       var modalHtml = `
         <div id="flashcard-modal" class="flashcard-modal">
           <div class="flashcard-container">
@@ -243,7 +228,6 @@
       $('body').append(modalHtml);
       $modal = $('#flashcard-modal'); // .hide() is removed, CSS handles initial hidden state
 
-      // ... (event listeners remain the same) ...
       var $flashcardElement = $modal.find('.flashcard');
 
       $flashcardElement.off('click.flashcards').on('click.flashcards', function (event) {
@@ -366,31 +350,91 @@
       });
     }
 
-    $('#h1-selection-view, #flashcard-view')
-      .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
-      .addClass('view-hidden');
-    $('#shuffle-cards-btn').removeClass('shuffle-active');
+    // Keep state in memory - Logic for initializing or restoring view
+    if (!this.modalInitialized) { // First time opening or needs full re-initialization
+      if (this.h1Sections.length === 0) { // Always parse if no sections (e.g. first time)
+        if (!this._parseAllHeadingsAndCards()) {
+          alert('No H2 headings found to create flashcards!');
+          return;
+        }
+      }
 
-    if (this.h1Sections.length === 1 && (this.h1Sections[0].isFlatList || this.h1Sections.length === 1 && !this.h1Sections[0].isCombined)) {
-      // ... (logic for single section remains the same) ...
-      const section = this.h1Sections[0];
-      this.currentCardsSet = [...section.cards];
-      this.originalCardsSetOrder = [...section.cards];
-      this.currentH1Title = section.h1Title;
-      this.currentIndex = 0;
-      this.currentView = 'flashcards';
-      $('#flashcard-view').removeClass('view-hidden').addClass('view-active');
-      this._updateFlashcardViewContent();
-    } else if (this.h1Sections.length > 0) {
-      // ... (logic for multiple sections remains the same) ...
-      this.currentView = 'h1Selection';
-      $('#h1-selection-view').removeClass('view-hidden').addClass('view-active');
-      this._updateH1SelectionViewContent();
+      // Reset states for a fresh start
+      this.isFlipped = false;
+      this.isAnimating = false;
+      this.isViewAnimating = false;
+      this.isShuffled = false;
+      this.isAutoReadActive = false;
+
+      $('#auto-read-btn').removeClass('auto-read-active');
+      $('#shuffle-cards-btn').removeClass('shuffle-active');
+
+      $('#h1-selection-view, #flashcard-view')
+        .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
+        .addClass('view-hidden');
+
+      if (this.h1Sections.length === 1 && (this.h1Sections[0].isFlatList || (this.h1Sections.length === 1 && !this.h1Sections[0].isCombined))) {
+        const section = this.h1Sections[0];
+        this.currentCardsSet = [...section.cards];
+        this.originalCardsSetOrder = [...section.cards];
+        this.currentH1Title = section.h1Title;
+        this.currentIndex = 0;
+        this.currentView = 'flashcards';
+        $('#flashcard-view').removeClass('view-hidden').addClass('view-active');
+        this._updateFlashcardViewContent(); // Sets up card, this.isFlipped = false
+      } else if (this.h1Sections.length > 0) {
+        this.currentView = 'h1Selection';
+        this.currentCardsSet = [];
+        this.originalCardsSetOrder = [];
+        this.currentH1Title = '';
+        this.currentIndex = 0;
+        $('#h1-selection-view').removeClass('view-hidden').addClass('view-active');
+        this._updateH1SelectionViewContent();
+      } else {
+        alert('No flashcards could be generated.');
+        return;
+      }
+      this.modalInitialized = true;
     } else {
-      alert('No flashcards could be generated.');
-      this.hideFlashcardModal();
-      return;
+      // Modal is being re-shown. State is in memory.
+      $('#auto-read-btn').toggleClass('auto-read-active', this.isAutoReadActive);
+      $('#shuffle-cards-btn').toggleClass('shuffle-active', this.isShuffled);
+
+      if (this.currentView === 'flashcards') {
+        if (this.currentCardsSet.length === 0 || this.currentIndex >= this.currentCardsSet.length) {
+          // Inconsistent state. Attempt to recover.
+          if (this.h1Sections.length === 0) { // If no sections at all, try parsing
+            if (!this._parseAllHeadingsAndCards() || this.h1Sections.length === 0) {
+              alert('Error: Flashcard data lost. No content found.');
+              this.hideFlashcardModal();
+              this.modalInitialized = false; // Force full re-init next time
+              return;
+            }
+          }
+          // If sections exist or parsing succeeded, switch to H1 selection view.
+          this.currentView = 'h1Selection';
+          // Fall through to the 'h1Selection' logic below.
+        }
+      }
+
+      if (this.currentView === 'flashcards') {
+        $('#h1-selection-view').addClass('view-hidden').removeClass('view-active');
+        $('#flashcard-view').removeClass('view-hidden').addClass('view-active');
+
+        const intendedFlipState = this.isFlipped;
+        this._updateFlashcardViewContent(); // Displays current card, sets this.isFlipped = false.
+
+        if (intendedFlipState) {
+          this.isFlipped = true; // Restore state variable
+          $('#flashcard-modal .flashcard').addClass('flipped'); // Re-apply class
+        }
+      } else { // currentView is 'h1Selection'
+        $('#flashcard-view').addClass('view-hidden').removeClass('view-active');
+        $('#h1-selection-view').removeClass('view-hidden').addClass('view-active');
+        this._updateH1SelectionViewContent();
+      }
     }
+    // Keep state in memory - Logic for initializing or restoring view
 
     if (!$('body').hasClass('flashcard-modal-open')) {
       this.originalBodyOverflow = $('body').css('overflow');
@@ -409,8 +453,7 @@
     if (this.speechSynthesis) {
       this.speechSynthesis.cancel();
     }
-    this.isAutoReadActive = false;
-    $('#auto-read-btn').removeClass('auto-read-active');
+    // this.isAutoReadActive state is preserved. Button UI will be updated on next show.
 
     var $modal = $('#flashcard-modal');
 
@@ -422,11 +465,13 @@
       if ($('body').hasClass('flashcard-modal-open')) {
         $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
       }
-      // Reset views to hidden for next open
-      $('#h1-selection-view, #flashcard-view')
-        .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
-        .addClass('view-hidden');
-    }, this.modalAnimationDuration); // Use the defined duration (e.g., 250ms)
+      // Keep state in memory
+      // Views retain their 'view-active'/'view-hidden' classes for state preservation.
+      // The actual hiding/showing of internal views is now handled by showFlashcardModal
+      // based on this.currentView and this.modalInitialized.
+      // No explicit class changes here for #h1-selection-view or #flashcard-view when hiding.
+      // Keep state in memory
+    }, this.modalAnimationDuration);
   };
 
   Flashcards.prototype._updateH1SelectionViewContent = function() {

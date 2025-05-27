@@ -13,18 +13,33 @@
     (function(){
         if('{{ page.password }}'){
             let localStoragePasswdKey = '{{ page.title }}' + '_last_passwd';
+            let tryCnt = 0;
             function checkPassword(password) {
                 password = password == null ? null : password.trim();
                 if (password !== '{{ page.password }}') {
                     if (password != null) {
                         // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
                         alert('Error!');
+                        if (++tryCnt < 3) {
+                            password = prompt('Open Sesame');
+                            checkPassword(password);
+                            return;
+                        }
                     }
-                    if (history.length > 1) {
-                        history.back();
+
+                    // if (history.length > 1) {
+                    //     alert('back!');
+                    //     history.back();
+                    // } else {
+                        // alert('blankkkk!');
+                    //     window.location.href = "about:blank";
+                    // }
+                    if (document.referrer) {
+                        window.location.href = document.referrer;
                     } else {
-                        window.location.href = "about:blank";
+                        window.location.href = "about:blank";; // fallback if no referrer
                     }
+
                 } else {
                     localStorage.setItem(localStoragePasswdKey, password);
                 }

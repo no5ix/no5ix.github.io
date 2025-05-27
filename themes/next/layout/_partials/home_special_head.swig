@@ -4,7 +4,7 @@
 <meta name="theme-color" content="{{ theme.android_chrome_color }}">
 
 <script>
-    (function(){
+    {/* (function(){
         if('{{ page.password }}'){
             let localStoragePasswdKey = '{{ page.title }}' + '_last_passwd';
             function checkPassword(password) {
@@ -24,7 +24,7 @@
                 }
               }
 
-            var password_verify_on_local = false;
+            var password_verify_on_local = true;
             const hostname = window.location.hostname;
             if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
               
@@ -89,7 +89,7 @@
             }
 
         }
-    })();
+    })(); */}
 </script>
 
 {% if theme.pace %}

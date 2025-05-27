@@ -587,7 +587,7 @@
     var flashcardElement = $('#flashcard-modal .flashcard');
 
     var frontFace = flashcardElement.find('.flashcard-front');
-    var backFace = flashcardElement.find('.flashcard-back');
+    var backFace = flashcardElement.find('.flashcard-back'); // Get the jQuery object for the back face
     var oldFrontTransition, oldBackTransition;
 
     // we need to prevent the flip animation
@@ -611,17 +611,20 @@
     );
 
     flashcardElement.find('.flashcard-back').html(card.back);
+    backFace.scrollTop(0); // <--- ADD THIS LINE: Reset scroll position of the back face
+
     $('#jump-to-card-input').val(this.currentIndex + 1);
     $('#jump-to-card-input').attr('max', this.currentCardsSet.length);
     $('#card-counter-total').text('/ ' + this.currentCardsSet.length);
 
-    // --- NEW: Auto Read ---
+    // --- Auto Read ---
     if (this.isAutoReadActive && card && card.front) {
-      this._speak(card.front); // Assuming card.front is clean text
+      // Extract text if H2 contains icons or other HTML
+      const frontText = $('<div>').html(card.front).text(); // Get clean text
+      this._speak(frontText);
     } else if (this.speechSynthesis) { // If auto-read is off, ensure any previous speech is cancelled
       this.speechSynthesis.cancel();
     }
-    // --- END NEW ---
   };
 
   Flashcards.prototype.flipCard = function() {

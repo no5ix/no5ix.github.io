@@ -615,22 +615,41 @@
     $('#flashcard-modal .flashcard').toggleClass('flipped');
   };
 
-  Flashcards.prototype._animateCardSwitch = function(direction) {
+  Flashcards.prototype._animateCardSwitch = function(newIndex, maintainFlipState = true) {
     if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
+    if (newIndex < 0 || newIndex >= this.currentCardsSet.length || newIndex === this.currentIndex) return; // Boundary and no-change check
+
     var flashcardElement = $('#flashcard-modal .flashcard');
+    const direction = newIndex > this.currentIndex ? 'next' : 'prev';
     var slideOutClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
     var slideInStartTransform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
+
     this.isAnimating = true;
+    const cardWasFlipped = this.isFlipped; // Remember current flip state
+
     flashcardElement.addClass(slideOutClass);
+
     setTimeout(() => {
-      if (direction === 'next') this.currentIndex++; else this.currentIndex--;
+      this.currentIndex = newIndex; // Set to the target index
+
+      // updateCardContent will set this.isFlipped = false and remove 'flipped' class
       this.updateCardContent();
+
+      // If we need to maintain the flip state (for next/prev) and the card was indeed flipped
+      // if (maintainFlipState && cardWasFlipped) {
+      //   this.isFlipped = true;
+      //   flashcardElement.addClass('flipped');
+      // }
+      // If maintainFlipState is false (e.g., for a jump),
+      // updateCardContent has already ensured the card is front-facing.
+
       flashcardElement.addClass('is-sliding-no-transition');
       flashcardElement.css({'transform': slideInStartTransform, 'opacity': '0'});
-      flashcardElement[0].offsetHeight;
+      flashcardElement[0].offsetHeight; // Force reflow
       flashcardElement.removeClass('is-sliding-no-transition');
+
       requestAnimationFrame(() => {
-        flashcardElement.removeClass(slideOutClass);
+        flashcardElement.removeClass(slideOutClass); // Remove the specific slide-out class
         flashcardElement.css({'transform': 'translateX(0)', 'opacity': '1'});
       });
       setTimeout(() => { this.isAnimating = false; }, this.animationDuration);
@@ -639,13 +658,13 @@
 
   Flashcards.prototype.nextCard = function() {
     if (this.currentCardsSet && this.currentIndex < this.currentCardsSet.length - 1) {
-      this._animateCardSwitch('next');
+      this._animateCardSwitch(this.currentIndex + 1, true); // maintainFlipState is true
     }
   };
 
   Flashcards.prototype.prevCard = function() {
     if (this.currentCardsSet && this.currentIndex > 0) {
-      this._animateCardSwitch('prev');
+      this._animateCardSwitch(this.currentIndex - 1, true); // maintainFlipState is true
     }
   };
 
@@ -677,15 +696,21 @@
 
   Flashcards.prototype.jumpToCard = function(cardNumber) {
     if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
+
     var num = parseInt(cardNumber);
     if (isNaN(num) || num < 1 || num > this.currentCardsSet.length) {
-      $('#jump-to-card-input').val(this.currentIndex + 1); return;
+      $('#jump-to-card-input').val(this.currentIndex + 1); // Reset input to current card if invalid
+      return;
     }
-    this.currentIndex = num - 1;
-    this.isFlipped = false;
-    $('#flashcard-modal .flashcard').removeClass('flipped slide-out-left slide-out-right is-sliding-no-transition')
-      .css({'transform': 'translateX(0)', 'opacity': '1'});
-    this.updateCardContent();
+
+    const newIndex = num - 1;
+    if (newIndex === this.currentIndex) { // If jumping to the same card
+      $('#jump-to-card-input').val(this.currentIndex + 1); // Ensure input is correct
+      return;
+    }
+
+    // For jumps, always show the front of the card, so maintainFlipState is false.
+    this._animateCardSwitch(newIndex, false);
   };
 
   window.NexT = window.NexT || {};

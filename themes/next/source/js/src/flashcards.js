@@ -397,13 +397,12 @@
       $('body').css('overflow', 'hidden').addClass('flashcard-modal-open');
     }
 
-    // --- MODIFIED: Show modal with CSS transition ---
+    // --- Show modal with CSS transition ---
     // $modal.fadeIn(400); // Old way
     $modal.css('display', 'flex'); // Ensure it's display:flex (it should be by default from CSS)
     // Force a reflow to ensure initial CSS (opacity 0, scaled down) is applied before adding class
     $modal[0].offsetHeight;
     $modal.addClass('modal-visible');
-    // --- END MODIFICATION ---
   };
 
   Flashcards.prototype.hideFlashcardModal = function() {
@@ -415,7 +414,7 @@
 
     var $modal = $('#flashcard-modal');
 
-    // --- MODIFIED: Hide modal with CSS transition ---
+    // --- Hide modal with CSS transition ---
     // $('#flashcard-modal').fadeOut(400, () => { ... }); // Old way
     $modal.removeClass('modal-visible');
     setTimeout(() => {
@@ -428,7 +427,6 @@
         .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
         .addClass('view-hidden');
     }, this.modalAnimationDuration); // Use the defined duration (e.g., 250ms)
-    // --- END MODIFICATION ---
   };
 
   Flashcards.prototype._updateH1SelectionViewContent = function() {
@@ -440,11 +438,9 @@
     this.h1Sections.forEach((section) => {
       const $li = $('<li>')
         .addClass('h1-list-item')
-        // --- BEGIN MODIFICATION ---
         // Use .html() instead of .text() to include the icon HTML
         // Add the icon HTML before the text content
         .html(`<i class="fa fa-tag"></i> ${section.h1Title} (${section.cards.length})`)
-        // --- END MODIFICATION ---
         .on('click', () => {
           if (this.isViewAnimating) return;
           this._transitionToFlashcardView(section);

@@ -213,16 +213,16 @@
                 </div>
               </div>
               <div class="flashcard-navigation">
+                <button id="prev-card" class="flashcard-nav-btn">❮</button>
+                <button id="next-card" class="flashcard-nav-btn">❯</button>
+                <button id="show-card-menu-btn" class="flashcard-nav-btn" title="Show Card List">
+                  <i class="fa fa-list-ul"></i>
+                </button>
                 <button id="auto-read-btn" class="flashcard-nav-btn" title="Toggle Auto Read">
                   <i class="fa fa-volume-up"></i>
                 </button>
-                <button id="prev-card" class="flashcard-nav-btn">❮</button>
-                <button id="next-card" class="flashcard-nav-btn">❯</button>
                 <button id="shuffle-cards-btn" class="flashcard-nav-btn" title="Shuffle Cards">
                   <i class="fa fa-random"></i>
-                </button>
-                <button id="show-card-menu-btn" class="flashcard-nav-btn" title="Show Card List">
-                  <i class="fa fa-list-ul"></i>
                 </button>
               </div>
             </div>
@@ -584,11 +584,11 @@
     }
 
     this.currentCardsSet.forEach((card, index) => {
-      const frontText = '● ' + $('<div>').html(card.front).text();
+      const frontText = $('<div>').html(card.front).text();
       const $li = $('<li>')
         .addClass('h1-list-item')
         // .html(`${frontText} <span class="cards-index">(${index + 1}/${this.currentCardsSet.length})</span>`)
-        .html(`${frontText} <span class="cards-index">(${index + 1})</span>`)
+        .html(`<span class="cards-index">${index + 1}. </span> ${frontText}`)
         .on('click', function () {
           if (self.isViewAnimating) return;
           self.jumpToCard(index + 1);

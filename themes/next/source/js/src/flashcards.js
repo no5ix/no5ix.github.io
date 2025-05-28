@@ -203,9 +203,6 @@
               <div class="flashcard-content-area">
                 <div class="flashcard-header-info">
                   <div class="flashcard-current-h1-title"></div>
-                  <div class="card-counter-display">
-                    <i class="fa fa-file-text"></i> <span id="card-current-display"></span> / <span id="card-total-display"></span>
-                  </div>
                 </div>
                 <div class="flashcard">
                   <div class="flashcard-front"></div>
@@ -684,8 +681,10 @@
       if (this.speechSynthesis) this.speechSynthesis.cancel();
       $('#flashcard-modal .flashcard-front').html('<h2>No card to display</h2>');
       $('#flashcard-modal .flashcard-back').html('');
-      $('#card-current-display').text('0');
-      $('#card-total-display').text('0');
+      // The old counter display elements are no longer in the header for flashcard-view.
+      // The new counter elements on the front face won't be created if there's no card, which is fine.
+      // $('#card-current-display').text('0'); // This would target the (now removed) header counter
+      // $('#card-total-display').text('0');   // This would target the (now removed) header counter
       return;
     }
 
@@ -707,15 +706,23 @@
     frontFace.css('transition', oldFrontTransition);
     backFace.css('transition', oldBackTransition);
 
+    // Add card counter HTML to the front face
+    // Added some inline style for positioning. You might want to move this to your .styl file.
     flashcardElement.find('.flashcard-front').html(
       `<h2>${card.front}</h2>
-       <div class="flashcard-hint-icon"><i class="fa fa-lightbulb-o"></i></div>`
+       <div class="flashcard-hint-icon"><i class="fa fa-lightbulb-o"></i></div>
+       <div class="card-counter-display">
+         <i class="fa fa-file-text"></i> <span id="card-current-display-on-front"></span> / <span id="card-total-display-on-front"></span>
+       </div>`
     );
     flashcardElement.find('.flashcard-back').html(card.back);
     backFace.scrollTop(0);
 
-    $('#card-current-display').text(this.currentIndex + 1);
-    $('#card-total-display').text(this.currentCardsSet.length);
+    // Update the new counter display elements on the front face
+    $('#card-current-display-on-front').text(this.currentIndex + 1);
+    $('#card-total-display-on-front').text(this.currentCardsSet.length);
+
+    // The original #card-total-display in card-menu-view is updated by _populateCardMenuView
 
     if (this.isAutoReadActive && card && card.front) {
       const frontText = $('<div>').html(card.front).text();
@@ -746,7 +753,7 @@
 
     setTimeout(() => {
       this.currentIndex = newIndex;
-      this.updateCardContent();
+      this.updateCardContent(); // This will now also correctly set up the counter on the new card's front
 
       flashcardElement.addClass('is-sliding-no-transition');
       flashcardElement.css({'transform': slideInStartTransform, 'opacity': '0'});
@@ -797,7 +804,7 @@
     this.isFlipped = false;
     $('#flashcard-modal .flashcard').removeClass('flipped slide-out-left slide-out-right is-sliding-no-transition')
       .css({'transform': 'translateX(0)', 'opacity': '1'});
-    this.updateCardContent();
+    this.updateCardContent(); // This will correctly update the card and its front-face counter
   };
 
   Flashcards.prototype.jumpToCard = function (cardNumber) {

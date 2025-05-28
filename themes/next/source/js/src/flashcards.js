@@ -2,10 +2,10 @@
  * Enhanced with H1 sections, shuffle, jump-to-card, and view transitions.
  */
 
-(function() {
+(function () {
   'use strict';
 
-  var Flashcards = function() {
+  var Flashcards = function () {
     this.h1Sections = []; // Array of { h1Title: string, cards: [], isFlatList?: boolean, isCombined?: boolean }
     this.currentCardsSet = [];
     this.originalCardsSetOrder = []; // For un-shuffling
@@ -30,7 +30,7 @@
     // Keep state in memory
   };
 
-  Flashcards.prototype._parseAllHeadingsAndCards = function() {
+  Flashcards.prototype._parseAllHeadingsAndCards = function () {
     this.h1Sections = [];
     const postBody = $('.post-body');
     if (!postBody.length) return false; // Guard: Ensure .post-body exists
@@ -185,7 +185,7 @@
   };
 
 
-  Flashcards.prototype.showFlashcardModal = function() {
+  Flashcards.prototype.showFlashcardModal = function () {
     var self = this;
     var $modal = $('#flashcard-modal');
 
@@ -201,14 +201,10 @@
                 <i class="fa fa-arrow-left"></i>
               </button>
               <div class="flashcard-content-area">
-                <!-- REQ_MODIFIED START -->
-                <div class="flashcard-header-info"> <!-- Wrapper for title and new counter -->
-                  <div class="flashcard-current-h1-title"></div>
-                  <div class="card-counter-display">
-                    Card <span id="card-current-display"></span> / <span id="card-total-display"></span>
-                  </div>
+                <div class="flashcard-current-h1-title"></div>
+                <div class="card-counter-display">
+                  Card <span id="card-current-display"></span> / <span id="card-total-display"></span>
                 </div>
-                <!-- REQ_MODIFIED END -->
                 <div class="flashcard">
                   <div class="flashcard-front"></div>
                   <div class="flashcard-back"></div>
@@ -219,9 +215,7 @@
                   <i class="fa fa-volume-up"></i>
                 </button>
                 <button id="prev-card" class="flashcard-nav-btn">❮</button>
-                <!-- REQ_MODIFIED START -->
                 <!-- Removed: card-counter-container with jump-to-card-input and card-counter-total -->
-                <!-- REQ_MODIFIED END -->
                 <button id="next-card" class="flashcard-nav-btn">❯</button>
                 <button id="shuffle-cards-btn" class="flashcard-nav-btn" title="Shuffle Cards">
                   <i class="fa fa-random"></i>
@@ -318,7 +312,7 @@
         e.stopPropagation();
         self.nextCard();
       });
-      $('#close-flashcard').off('click.flashcards').on('click.flashcards', function() {
+      $('#close-flashcard').off('click.flashcards').on('click.flashcards', function () {
         self.hideFlashcardModal();
       });
       $('#shuffle-cards-btn').off('click.flashcards').on('click.flashcards', function (e) {
@@ -338,7 +332,6 @@
         self._transitionFromCardMenuToDisplayView();
       });
 
-      // REQ_MODIFIED START
       // Removed event listeners for #jump-to-card-input
       // $('#jump-to-card-input').off('change.flashcards keypress.flashcards')
       //   .on('change.flashcards', function() {
@@ -350,7 +343,6 @@
       //       $(this).blur();
       //     }
       //   });
-      // REQ_MODIFIED END
 
       $(document).off('keydown.flashcards').on('keydown.flashcards', function (e) {
         if (!$modal.hasClass('modal-visible') || self.isViewAnimating) return;
@@ -465,7 +457,7 @@
     $modal.addClass('modal-visible');
   };
 
-  Flashcards.prototype.hideFlashcardModal = function() {
+  Flashcards.prototype.hideFlashcardModal = function () {
     if (this.speechSynthesis) {
       this.speechSynthesis.cancel();
     }
@@ -480,7 +472,7 @@
     }, this.modalAnimationDuration);
   };
 
-  Flashcards.prototype._updateH1SelectionViewContent = function() {
+  Flashcards.prototype._updateH1SelectionViewContent = function () {
     var $h1List = $('#h1-list').empty();
     if (this.h1Sections.length === 0) {
       $h1List.append('<li>No sections found.</li>');
@@ -499,7 +491,7 @@
     });
   };
 
-  Flashcards.prototype._transitionToH1SelectionView = function() {
+  Flashcards.prototype._transitionToH1SelectionView = function () {
     if (this.speechSynthesis) {
       this.speechSynthesis.cancel();
     }
@@ -530,7 +522,7 @@
     }, this.animationViewDuration);
   };
 
-  Flashcards.prototype._updateFlashcardViewContent = function() {
+  Flashcards.prototype._updateFlashcardViewContent = function () {
     $('#flashcard-modal .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
 
     let showBackButton = false;
@@ -583,7 +575,7 @@
     }, this.animationViewDuration);
   };
 
-  Flashcards.prototype._populateCardMenuView = function() {
+  Flashcards.prototype._populateCardMenuView = function () {
     var self = this;
     var $cardListUl = $('#card-menu-list-ul').empty();
     $('#card-menu-view .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
@@ -599,7 +591,7 @@
       const $li = $('<li>')
         .addClass('h1-list-item')
         .html(`<span style="font-weight:normal;">${index + 1}.</span> ${frontText} <span style="font-size:0.8em; opacity:0.7;">(${index + 1}/${this.currentCardsSet.length})</span>`)
-        .on('click', function() {
+        .on('click', function () {
           if (self.isViewAnimating) return;
           self.jumpToCard(index + 1);
           self._transitionFromCardMenuToDisplayView();
@@ -608,7 +600,7 @@
     });
   };
 
-  Flashcards.prototype._transitionToCardMenuView = function() {
+  Flashcards.prototype._transitionToCardMenuView = function () {
     if (this.isViewAnimating) return;
     this.isViewAnimating = true;
     this.currentView = 'card-menu';
@@ -642,17 +634,16 @@
 
     this._updateFlashcardViewContent();
 
-
-    $cardMenuView.removeClass('view-active').addClass('view-sliding-out-left');
-    $flashcardView.removeClass('view-hidden view-sliding-out-left view-sliding-out-right').addClass('view-prep-right');
+    $cardMenuView.removeClass('view-active').addClass('view-sliding-out-right'); // Card menu slides out to the right
+    $flashcardView.removeClass('view-hidden view-sliding-out-left view-sliding-out-right').addClass('view-prep-left'); // Flashcard view prepares from the left
 
     requestAnimationFrame(() => {
       $flashcardView[0].offsetHeight;
-      $flashcardView.removeClass('view-prep-right').addClass('view-active');
+      $flashcardView.removeClass('view-prep-left').addClass('view-active'); // Flashcard view slides in from the left (movement towards right)
     });
 
     setTimeout(() => {
-      $cardMenuView.addClass('view-hidden').removeClass('view-sliding-out-left');
+      $cardMenuView.addClass('view-hidden').removeClass('view-sliding-out-right'); // Clean up card menu view class
       this.isViewAnimating = false;
     }, this.animationViewDuration);
   };
@@ -668,7 +659,7 @@
     this.speechSynthesis.speak(utterance);
   };
 
-  Flashcards.prototype.toggleAutoRead = function() {
+  Flashcards.prototype.toggleAutoRead = function () {
     if (!this.speechSynthesis) {
       alert('Sorry, your browser does not support text-to-speech.');
       return;
@@ -690,15 +681,13 @@
     }
   };
 
-  Flashcards.prototype.updateCardContent = function() {
+  Flashcards.prototype.updateCardContent = function () {
     if (!this.currentCardsSet || this.currentCardsSet.length === 0) {
       if (this.speechSynthesis) this.speechSynthesis.cancel();
       $('#flashcard-modal .flashcard-front').html('<h2>No card to display</h2>');
       $('#flashcard-modal .flashcard-back').html('');
-      // REQ_MODIFIED START
       $('#card-current-display').text('0');
       $('#card-total-display').text('0');
-      // REQ_MODIFIED END
       return;
     }
 
@@ -727,12 +716,10 @@
     flashcardElement.find('.flashcard-back').html(card.back);
     backFace.scrollTop(0);
 
-    // REQ_MODIFIED START
     // Removed updates for #jump-to-card-input and #card-counter-total
     // Added updates for new card counter display
     $('#card-current-display').text(this.currentIndex + 1);
     $('#card-total-display').text(this.currentCardsSet.length);
-    // REQ_MODIFIED END
 
     if (this.isAutoReadActive && card && card.front) {
       const frontText = $('<div>').html(card.front).text();
@@ -742,7 +729,7 @@
     }
   };
 
-  Flashcards.prototype.flipCard = function() {
+  Flashcards.prototype.flipCard = function () {
     if (this.isAnimating || this.isViewAnimating || this.currentView !== 'flashcard' || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
     this.isFlipped = !this.isFlipped;
     $('#flashcard-modal .flashcard').toggleClass('flipped');
@@ -780,21 +767,21 @@
     }, this.animationDuration);
   };
 
-  Flashcards.prototype.nextCard = function() {
+  Flashcards.prototype.nextCard = function () {
     if (this.currentView !== 'flashcard') return;
     if (this.currentCardsSet && this.currentIndex < this.currentCardsSet.length - 1) {
       this._animateCardSwitch(this.currentIndex + 1, false);
     }
   };
 
-  Flashcards.prototype.prevCard = function() {
+  Flashcards.prototype.prevCard = function () {
     if (this.currentView !== 'flashcard') return;
     if (this.currentCardsSet && this.currentIndex > 0) {
       this._animateCardSwitch(this.currentIndex - 1, false);
     }
   };
 
-  Flashcards.prototype.toggleShuffle = function() {
+  Flashcards.prototype.toggleShuffle = function () {
     if (this.isAnimating || this.isViewAnimating || this.currentView !== 'flashcard' || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
 
     this.isShuffled = !this.isShuffled;
@@ -818,7 +805,6 @@
   };
 
   Flashcards.prototype.jumpToCard = function (cardNumber) {
-    // REQ_MODIFIED START (Removed logic related to #jump-to-card-input)
     if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
 
     var num = parseInt(cardNumber);
@@ -830,7 +816,6 @@
     if (newIndex === this.currentIndex && this.currentView === 'flashcard') {
       return; // No change if already on the card and in display view
     }
-    // REQ_MODIFIED END
 
     if (this.currentView !== 'flashcard' && this.currentView !== 'card-menu') {
       console.warn("Jump initiated from unexpected view:", this.currentView);
@@ -847,11 +832,11 @@
   window.NexT = window.NexT || {};
   window.NexT.flashcards = new Flashcards();
 
-  $(document).ready(function() {
+  $(document).ready(function () {
     if ($('.sidebar-nav-toc').length) {
       var flashcardBtn = '<i class="flashcard-btn fa fa-clone" title="Generate Flashcards"></i>';
       $('.sidebar-nav-toc').append(flashcardBtn);
-      $('.flashcard-btn').on('click', function() {
+      $('.flashcard-btn').on('click', function () {
         window.NexT.flashcards.showFlashcardModal();
       });
     }

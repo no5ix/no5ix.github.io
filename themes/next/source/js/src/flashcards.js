@@ -5,7 +5,7 @@
 (function() {
   'use strict';
 
-  var Flashcards = function () {
+  var Flashcards = function() {
     this.h1Sections = []; // Array of { h1Title: string, cards: [], isFlatList?: boolean, isCombined?: boolean }
     this.currentCardsSet = [];
     this.originalCardsSetOrder = []; // For un-shuffling
@@ -18,7 +18,7 @@
     this.animationViewDuration = 300; // ms, for view transitions
     this.modalAnimationDuration = 250; // ms, for modal zoom animation (matches CSS)
     this.originalBodyOverflow = '';
-    this.currentView = 'h1Selection'; // 'h1Selection' or 'flashcards'
+    this.currentView = 'h1-selection'; // 'h1-selection', 'flashcard', or 'card-menu'
     this.isShuffled = false; // For shuffle state
     this.isTouchingCodeBlock = false; // NEW: Flag for touch on code block
 
@@ -59,7 +59,7 @@
           h1ContentBuffer = ''; // Reset buffer for new H1
 
           // Start new H1 section
-          currentH1Section = { h1Title: $el.text().trim(), cards: [] };
+          currentH1Section = {h1Title: $el.text().trim(), cards: []};
           this.h1Sections.push(currentH1Section);
 
           // Check for content immediately after H1 before any H2 or footer (for H1-only cards)
@@ -111,7 +111,7 @@
               h2ContentNodeIndex++;
             }
             if (cardTitle) {
-              currentH1Section.cards.push({ front: cardTitle, back: cardContent.trim() });
+              currentH1Section.cards.push({front: cardTitle, back: cardContent.trim()});
             }
             i = h2ContentNodeIndex - 1; // Advance main loop counter past H2 content
           } else {
@@ -128,7 +128,7 @@
       // After loop, check if the last H1 section had buffered content that wasn't part of an H1-only card
       if (currentH1Section && h1ContentBuffer.trim() !== '') {
         const isLastCardH1Only = currentH1Section.cards.length > 0 &&
-          currentH1Section.cards[currentH1Section.cards.length -1].front === currentH1Section.h1Title;
+          currentH1Section.cards[currentH1Section.cards.length - 1].front === currentH1Section.h1Title;
 
         if (!isLastCardH1Only) {
           const introCardExists = currentH1Section.cards.some(card => card.front === introIcon + currentH1Section.h1Title && card.back === h1ContentBuffer.trim());
@@ -152,7 +152,7 @@
           }
         });
         if (allCardsCombined.length > 0) {
-          this.h1Sections.unshift({ h1Title: "All Cards", cards: allCardsCombined, isCombined: true });
+          this.h1Sections.unshift({h1Title: "All Cards", cards: allCardsCombined, isCombined: true});
         }
       }
 
@@ -173,19 +173,19 @@
             node = node.next();
           }
           if (cardTitle) {
-            flatCards.push({ front: cardTitle, back: cardContent.trim() });
+            flatCards.push({front: cardTitle, back: cardContent.trim()});
           }
         }
       });
       if (flatCards.length > 0) {
-        this.h1Sections.push({ h1Title: "All Flashcards", cards: flatCards, isFlatList: true });
+        this.h1Sections.push({h1Title: "All Flashcards", cards: flatCards, isFlatList: true});
       }
     }
     return this.h1Sections.length > 0;
   };
 
 
-  Flashcards.prototype.showFlashcardModal = function () {
+  Flashcards.prototype.showFlashcardModal = function() {
     var self = this;
     var $modal = $('#flashcard-modal');
 
@@ -201,7 +201,14 @@
                 <i class="fa fa-arrow-left"></i>
               </button>
               <div class="flashcard-content-area">
-                <div class="flashcard-current-h1-title"></div>
+                <!-- REQ_MODIFIED START -->
+                <div class="flashcard-header-info"> <!-- Wrapper for title and new counter -->
+                  <div class="flashcard-current-h1-title"></div>
+                  <div class="card-counter-display">
+                    Card <span id="card-current-display"></span> / <span id="card-total-display"></span>
+                  </div>
+                </div>
+                <!-- REQ_MODIFIED END -->
                 <div class="flashcard">
                   <div class="flashcard-front"></div>
                   <div class="flashcard-back"></div>
@@ -212,38 +219,45 @@
                   <i class="fa fa-volume-up"></i>
                 </button>
                 <button id="prev-card" class="flashcard-nav-btn">❮</button>
-                <div class="card-counter-container">
-                  <input type="number" id="jump-to-card-input" min="1" class="flashcard-jump-input">
-                  <span id="card-counter-total"></span>
-                </div>
+                <!-- REQ_MODIFIED START -->
+                <!-- Removed: card-counter-container with jump-to-card-input and card-counter-total -->
+                <!-- REQ_MODIFIED END -->
                 <button id="next-card" class="flashcard-nav-btn">❯</button>
                 <button id="shuffle-cards-btn" class="flashcard-nav-btn" title="Shuffle Cards">
                   <i class="fa fa-random"></i>
                 </button>
+                <button id="show-card-menu-btn" class="flashcard-nav-btn" title="Show Card List">
+                  <i class="fa fa-list-ul"></i>
+                </button>
               </div>
+            </div>
+            <div id="card-menu-view" class="fc-view view-hidden">
+              <button id="back-to-card-display" class="flashcard-back-btn" title="Back to Card">
+                <i class="fa fa-arrow-left"></i>
+              </button>
+              <div class="flashcard-current-h1-title" style="margin-top: 5px; margin-bottom: 10px;"></div>
+              <ul id="card-menu-list-ul" class="h1-list-ul"></ul>
             </div>
             <button id="close-flashcard" class="close-flashcard"><i class="fa fa-times"></i></button>
           </div>
         </div>`;
       $('body').append(modalHtml);
-      $modal = $('#flashcard-modal'); // .hide() is removed, CSS handles initial hidden state
+      $modal = $('#flashcard-modal');
 
       var $flashcardElement = $modal.find('.flashcard');
 
       $flashcardElement.off('click.flashcards').on('click.flashcards', function (event) {
         if ($(event.target).closest('.btn-copy').length) {
-          // Click was on or inside a .btn-copy, so do nothing
           return;
         }
         if (self.isTouchingCodeBlock) {
           return;
         }
-        if (!self.isAnimating && !self.isViewAnimating) {
+        if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcard') {
           self.flipCard();
         }
       });
 
-      // --- BEGIN SWIPE FUNCTIONALITY ---
       var touchstartX = 0;
       var touchstartY = 0;
       var touchendX = 0;
@@ -281,11 +295,11 @@
           if (elapsedTime <= maxSwipeTime) {
             if (Math.abs(deltaX) >= minSwipeDistance && Math.abs(deltaY) <= maxVerticalOffset) {
               if (deltaX > 0) {
-                if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcards') {
+                if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcard') {
                   self.prevCard();
                 }
               } else {
-                if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcards') {
+                if (!self.isAnimating && !self.isViewAnimating && self.currentView === 'flashcard') {
                   self.nextCard();
                 }
               }
@@ -295,7 +309,6 @@
           touchstartY = 0;
           touchstartTime = 0;
         });
-      // --- END SWIPE FUNCTIONALITY ---
 
       $('#prev-card').off('click.flashcards').on('click.flashcards', function (e) {
         e.stopPropagation();
@@ -305,7 +318,7 @@
         e.stopPropagation();
         self.nextCard();
       });
-      $('#close-flashcard').off('click.flashcards').on('click.flashcards', function () {
+      $('#close-flashcard').off('click.flashcards').on('click.flashcards', function() {
         self.hideFlashcardModal();
       });
       $('#shuffle-cards-btn').off('click.flashcards').on('click.flashcards', function (e) {
@@ -316,22 +329,34 @@
         e.stopPropagation();
         self._transitionToH1SelectionView();
       });
-      $('#jump-to-card-input').off('change.flashcards keypress.flashcards')
-        .on('change.flashcards', function () {
-          self.jumpToCard(parseInt($(this).val()));
-        })
-        .on('keypress.flashcards', function (e) {
-          if (e.which === 13) {
-            self.jumpToCard(parseInt($(this).val()));
-            $(this).blur();
-          }
-        });
+      $('#show-card-menu-btn').off('click.flashcards').on('click.flashcards', function (e) {
+        e.stopPropagation();
+        self._transitionToCardMenuView();
+      });
+      $('#back-to-card-display').off('click.flashcards').on('click.flashcards', function (e) {
+        e.stopPropagation();
+        self._transitionFromCardMenuToDisplayView();
+      });
+
+      // REQ_MODIFIED START
+      // Removed event listeners for #jump-to-card-input
+      // $('#jump-to-card-input').off('change.flashcards keypress.flashcards')
+      //   .on('change.flashcards', function() {
+      //     self.jumpToCard(parseInt($(this).val()));
+      //   })
+      //   .on('keypress.flashcards', function (e) {
+      //     if (e.which === 13) { // Enter key
+      //       self.jumpToCard(parseInt($(this).val()));
+      //       $(this).blur();
+      //     }
+      //   });
+      // REQ_MODIFIED END
 
       $(document).off('keydown.flashcards').on('keydown.flashcards', function (e) {
-        if (!$modal.hasClass('modal-visible') || self.isViewAnimating) return; // Check .modal-visible
+        if (!$modal.hasClass('modal-visible') || self.isViewAnimating) return;
 
         if (e.key === 'Escape') self.hideFlashcardModal();
-        if ($('#flashcard-view').hasClass('view-active')) {
+        if (self.currentView === 'flashcard') {
           if (e.key === 'ArrowLeft') self.prevCard();
           else if (e.key === 'ArrowRight') self.nextCard();
           else if (e.key === ' ') {
@@ -344,22 +369,20 @@
         }
       });
 
-      $('#auto-read-btn').off('click.flashcards').on('click.flashcards', function(e) {
+      $('#auto-read-btn').off('click.flashcards').on('click.flashcards', function (e) {
         e.stopPropagation();
         self.toggleAutoRead();
       });
     }
 
-    // Keep state in memory - Logic for initializing or restoring view
-    if (!this.modalInitialized) { // First time opening or needs full re-initialization
-      if (this.h1Sections.length === 0) { // Always parse if no sections (e.g. first time)
+    if (!this.modalInitialized) {
+      if (this.h1Sections.length === 0) {
         if (!this._parseAllHeadingsAndCards()) {
           alert('No H2 headings found to create flashcards!');
           return;
         }
       }
 
-      // Reset states for a fresh start
       this.isFlipped = false;
       this.isAnimating = false;
       this.isViewAnimating = false;
@@ -369,7 +392,7 @@
       $('#auto-read-btn').removeClass('auto-read-active');
       $('#shuffle-cards-btn').removeClass('shuffle-active');
 
-      $('#h1-selection-view, #flashcard-view')
+      $('#h1-selection-view, #flashcard-view, #card-menu-view')
         .removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right')
         .addClass('view-hidden');
 
@@ -379,11 +402,11 @@
         this.originalCardsSetOrder = [...section.cards];
         this.currentH1Title = section.h1Title;
         this.currentIndex = 0;
-        this.currentView = 'flashcards';
+        this.currentView = 'flashcard';
         $('#flashcard-view').removeClass('view-hidden').addClass('view-active');
-        this._updateFlashcardViewContent(); // Sets up card, this.isFlipped = false
+        this._updateFlashcardViewContent();
       } else if (this.h1Sections.length > 0) {
-        this.currentView = 'h1Selection';
+        this.currentView = 'h1-selection';
         this.currentCardsSet = [];
         this.originalCardsSetOrder = [];
         this.currentH1Title = '';
@@ -396,55 +419,48 @@
       }
       this.modalInitialized = true;
     } else {
-      // Modal is being re-shown. State is in memory.
       $('#auto-read-btn').toggleClass('auto-read-active', this.isAutoReadActive);
       $('#shuffle-cards-btn').toggleClass('shuffle-active', this.isShuffled);
 
-      if (this.currentView === 'flashcards') {
+      $('#h1-selection-view, #flashcard-view, #card-menu-view').addClass('view-hidden').removeClass('view-active');
+
+      if (this.currentView === 'flashcard') {
         if (this.currentCardsSet.length === 0 || this.currentIndex >= this.currentCardsSet.length) {
-          // Inconsistent state. Attempt to recover.
-          if (this.h1Sections.length === 0) { // If no sections at all, try parsing
+          if (this.h1Sections.length === 0) {
             if (!this._parseAllHeadingsAndCards() || this.h1Sections.length === 0) {
               alert('Error: Flashcard data lost. No content found.');
               this.hideFlashcardModal();
-              this.modalInitialized = false; // Force full re-init next time
+              this.modalInitialized = false;
               return;
             }
           }
-          // If sections exist or parsing succeeded, switch to H1 selection view.
-          this.currentView = 'h1Selection';
-          // Fall through to the 'h1Selection' logic below.
+          this.currentView = 'h1-selection';
         }
       }
 
-      if (this.currentView === 'flashcards') {
-        $('#h1-selection-view').addClass('view-hidden').removeClass('view-active');
+      if (this.currentView === 'flashcard') {
         $('#flashcard-view').removeClass('view-hidden').addClass('view-active');
-
         const intendedFlipState = this.isFlipped;
-        this._updateFlashcardViewContent(); // Displays current card, sets this.isFlipped = false.
-
+        this._updateFlashcardViewContent();
         if (intendedFlipState) {
-          this.isFlipped = true; // Restore state variable
-          $('#flashcard-modal .flashcard').addClass('flipped'); // Re-apply class
+          this.isFlipped = true;
+          $('#flashcard-modal .flashcard').addClass('flipped');
         }
-      } else { // currentView is 'h1Selection'
-        $('#flashcard-view').addClass('view-hidden').removeClass('view-active');
+      } else if (this.currentView === 'h1-selection') {
         $('#h1-selection-view').removeClass('view-hidden').addClass('view-active');
         this._updateH1SelectionViewContent();
+      } else if (this.currentView === 'card-menu') {
+        $('#card-menu-view').removeClass('view-hidden').addClass('view-active');
+        this._populateCardMenuView();
       }
     }
-    // Keep state in memory - Logic for initializing or restoring view
 
     if (!$('body').hasClass('flashcard-modal-open')) {
       this.originalBodyOverflow = $('body').css('overflow');
       $('body').css('overflow', 'hidden').addClass('flashcard-modal-open');
     }
 
-    // --- Show modal with CSS transition ---
-    // $modal.fadeIn(400); // Old way
-    $modal.css('display', 'flex'); // Ensure it's display:flex (it should be by default from CSS)
-    // Force a reflow to ensure initial CSS (opacity 0, scaled down) is applied before adding class
+    $modal.css('display', 'flex');
     $modal[0].offsetHeight;
     $modal.addClass('modal-visible');
   };
@@ -453,38 +469,27 @@
     if (this.speechSynthesis) {
       this.speechSynthesis.cancel();
     }
-    // this.isAutoReadActive state is preserved. Button UI will be updated on next show.
 
     var $modal = $('#flashcard-modal');
-
-    // --- Hide modal with CSS transition ---
-    // $('#flashcard-modal').fadeOut(400, () => { ... }); // Old way
     $modal.removeClass('modal-visible');
     setTimeout(() => {
-      $modal.css('display', 'none'); // Set display to none after transition
+      $modal.css('display', 'none');
       if ($('body').hasClass('flashcard-modal-open')) {
         $('body').css('overflow', this.originalBodyOverflow).removeClass('flashcard-modal-open');
       }
-      // Keep state in memory
-      // Views retain their 'view-active'/'view-hidden' classes for state preservation.
-      // The actual hiding/showing of internal views is now handled by showFlashcardModal
-      // based on this.currentView and this.modalInitialized.
-      // No explicit class changes here for #h1-selection-view or #flashcard-view when hiding.
-      // Keep state in memory
     }, this.modalAnimationDuration);
   };
 
   Flashcards.prototype._updateH1SelectionViewContent = function() {
     var $h1List = $('#h1-list').empty();
     if (this.h1Sections.length === 0) {
-      $h1List.append('<li>No sections found.</li>'); return;
+      $h1List.append('<li>No sections found.</li>');
+      return;
     }
 
     this.h1Sections.forEach((section) => {
       const $li = $('<li>')
         .addClass('h1-list-item')
-        // Use .html() instead of .text() to include the icon HTML
-        // Add the icon HTML before the text content
         .html(`<i class="fa fa-tag"></i> ${section.h1Title} (${section.cards.length})`)
         .on('click', () => {
           if (this.isViewAnimating) return;
@@ -500,42 +505,43 @@
     }
     if (this.isViewAnimating) return;
     this.isViewAnimating = true;
-    this.currentView = 'h1Selection';
 
-    const $flashcardView = $('#flashcard-view');
+    const $currentActiveView = $('#' + this.currentView + '-view');
     const $h1View = $('#h1-selection-view');
+    this.currentView = 'h1-selection';
 
-    this._updateH1SelectionViewContent(); // Populate list before animation
+    this._updateH1SelectionViewContent();
 
-    $flashcardView.removeClass('view-active').addClass('view-sliding-out-right');
+    if ($currentActiveView.length) {
+      $currentActiveView.removeClass('view-active').addClass('view-sliding-out-right');
+    }
     $h1View.removeClass('view-hidden view-sliding-out-left view-sliding-out-right').addClass('view-prep-left');
 
-    requestAnimationFrame(() => { // Ensures prep class is applied before active
-      $h1View[0].offsetHeight; // Force reflow
+    requestAnimationFrame(() => {
+      $h1View[0].offsetHeight;
       $h1View.removeClass('view-prep-left').addClass('view-active');
     });
 
     setTimeout(() => {
-      $flashcardView.addClass('view-hidden').removeClass('view-sliding-out-right');
+      if ($currentActiveView.length) {
+        $currentActiveView.addClass('view-hidden').removeClass('view-sliding-out-right');
+      }
       this.isViewAnimating = false;
     }, this.animationViewDuration);
   };
 
   Flashcards.prototype._updateFlashcardViewContent = function() {
-    // Use .html() and add the icon before the title
-    $('.flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
+    $('#flashcard-modal .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
 
     let showBackButton = false;
     const hasCombined = this.h1Sections.some(s => s.isCombined);
     const actualH1Count = this.h1Sections.filter(s => !s.isFlatList && !s.isCombined).length;
 
-    if (hasCombined) { // If "All Cards" exists, we can always go back to the list that includes it
+    if (hasCombined) {
       showBackButton = true;
-    } else if (actualH1Count > 1) { // Multiple actual H1s (and no "All Cards" was made)
+    } else if (actualH1Count > 1) {
       showBackButton = true;
     }
-    // If it's a single H1 section (not flatlist, not combined), showBackButton remains false.
-    // If it's a flatlist, showBackButton remains false.
     $('#back-to-h1-selection').toggle(showBackButton);
 
     var flashcardElement = $('#flashcard-modal .flashcard');
@@ -544,28 +550,30 @@
     this.updateCardContent();
   };
 
-  Flashcards.prototype._transitionToFlashcardView = function(selectedSection) {
+  Flashcards.prototype._transitionToFlashcardView = function (selectedSection) {
     if (this.isViewAnimating) return;
     this.isViewAnimating = true;
-    this.currentView = 'flashcards';
+    this.currentView = 'flashcard';
 
-    this.currentCardsSet = [...selectedSection.cards]; // Create a copy
-    this.originalCardsSetOrder = [...selectedSection.cards]; // Store original order for this new set
+    this.currentCardsSet = [...selectedSection.cards];
+    this.originalCardsSetOrder = [...selectedSection.cards];
     this.currentH1Title = selectedSection.h1Title;
     this.currentIndex = 0;
-    this.isShuffled = false; // Reset shuffle for new section
+    this.isShuffled = false;
     $('#shuffle-cards-btn').removeClass('shuffle-active');
 
-    this._updateFlashcardViewContent(); // Populate card content before animation
+    this._updateFlashcardViewContent();
 
     const $flashcardView = $('#flashcard-view');
     const $h1View = $('#h1-selection-view');
+    const $cardMenuView = $('#card-menu-view');
+    $cardMenuView.addClass('view-hidden').removeClass('view-active view-prep-left view-prep-right view-sliding-out-left view-sliding-out-right');
 
     $h1View.removeClass('view-active').addClass('view-sliding-out-left');
     $flashcardView.removeClass('view-hidden view-sliding-out-left view-sliding-out-right').addClass('view-prep-right');
 
     requestAnimationFrame(() => {
-      $flashcardView[0].offsetHeight; // Force reflow
+      $flashcardView[0].offsetHeight;
       $flashcardView.removeClass('view-prep-right').addClass('view-active');
     });
 
@@ -575,22 +583,92 @@
     }, this.animationViewDuration);
   };
 
+  Flashcards.prototype._populateCardMenuView = function() {
+    var self = this;
+    var $cardListUl = $('#card-menu-list-ul').empty();
+    $('#card-menu-view .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
+
+
+    if (!this.currentCardsSet || this.currentCardsSet.length === 0) {
+      $cardListUl.append('<li class="h1-list-item">No cards in this section.</li>');
+      return;
+    }
+
+    this.currentCardsSet.forEach((card, index) => {
+      const frontText = $('<div>').html(card.front).text();
+      const $li = $('<li>')
+        .addClass('h1-list-item')
+        .html(`<span style="font-weight:normal;">${index + 1}.</span> ${frontText} <span style="font-size:0.8em; opacity:0.7;">(${index + 1}/${this.currentCardsSet.length})</span>`)
+        .on('click', function() {
+          if (self.isViewAnimating) return;
+          self.jumpToCard(index + 1);
+          self._transitionFromCardMenuToDisplayView();
+        });
+      $cardListUl.append($li);
+    });
+  };
+
+  Flashcards.prototype._transitionToCardMenuView = function() {
+    if (this.isViewAnimating) return;
+    this.isViewAnimating = true;
+    this.currentView = 'card-menu';
+
+    const $flashcardView = $('#flashcard-view');
+    const $cardMenuView = $('#card-menu-view');
+
+    this._populateCardMenuView();
+
+    $flashcardView.removeClass('view-active').addClass('view-sliding-out-left');
+    $cardMenuView.removeClass('view-hidden view-sliding-out-left view-sliding-out-right').addClass('view-prep-right');
+
+    requestAnimationFrame(() => {
+      $cardMenuView[0].offsetHeight;
+      $cardMenuView.removeClass('view-prep-right').addClass('view-active');
+    });
+
+    setTimeout(() => {
+      $flashcardView.addClass('view-hidden').removeClass('view-sliding-out-left');
+      this.isViewAnimating = false;
+    }, this.animationViewDuration);
+  };
+
+  Flashcards.prototype._transitionFromCardMenuToDisplayView = function (cardIndexToShow) {
+    if (this.isViewAnimating) return;
+    this.isViewAnimating = true;
+    this.currentView = 'flashcard';
+
+    const $flashcardView = $('#flashcard-view');
+    const $cardMenuView = $('#card-menu-view');
+
+    this._updateFlashcardViewContent();
+
+
+    $cardMenuView.removeClass('view-active').addClass('view-sliding-out-left');
+    $flashcardView.removeClass('view-hidden view-sliding-out-left view-sliding-out-right').addClass('view-prep-right');
+
+    requestAnimationFrame(() => {
+      $flashcardView[0].offsetHeight;
+      $flashcardView.removeClass('view-prep-right').addClass('view-active');
+    });
+
+    setTimeout(() => {
+      $cardMenuView.addClass('view-hidden').removeClass('view-sliding-out-left');
+      this.isViewAnimating = false;
+    }, this.animationViewDuration);
+  };
+
+
   Flashcards.prototype._speak = function (text) {
     if (!this.speechSynthesis || !text) {
       return;
     }
-    // Cancel any ongoing speech
     this.speechSynthesis.cancel();
-
     const utterance = new SpeechSynthesisUtterance(text);
-    // Attempt to use the document's language, fallback to English
     utterance.lang = document.documentElement.lang || 'en-US';
-    // You can add more configurations to utterance if needed (e.g., rate, pitch)
-
     this.speechSynthesis.speak(utterance);
   };
 
-  Flashcards.prototype.toggleAutoRead = function () {
+  Flashcards.prototype.toggleAutoRead = function() {
     if (!this.speechSynthesis) {
       alert('Sorry, your browser does not support text-to-speech.');
       return;
@@ -600,48 +678,44 @@
     $button.toggleClass('auto-read-active', this.isAutoReadActive);
 
     if (this.isAutoReadActive) {
-      // If turning on and a card is visible, read its front
-      if (this.currentView === 'flashcards' && this.currentCardsSet.length > 0) {
+      if (this.currentView === 'flashcard' && this.currentCardsSet.length > 0) {
         const currentCard = this.currentCardsSet[this.currentIndex];
-        // card.front should be the raw text for the question
         if (currentCard && currentCard.front) {
-          // Extract text if H2 contains icons or other HTML
-          const frontText = $('<div>').html(currentCard.front).text(); // Get clean text
+          const frontText = $('<div>').html(currentCard.front).text();
           this._speak(frontText);
         }
       }
     } else {
-      // If turning off, cancel any speech
       this.speechSynthesis.cancel();
     }
   };
 
-  Flashcards.prototype.updateCardContent = function () {
+  Flashcards.prototype.updateCardContent = function() {
     if (!this.currentCardsSet || this.currentCardsSet.length === 0) {
-      // ... (handle no cards) ...
-      if (this.speechSynthesis) this.speechSynthesis.cancel(); // Stop speech if no cards
+      if (this.speechSynthesis) this.speechSynthesis.cancel();
+      $('#flashcard-modal .flashcard-front').html('<h2>No card to display</h2>');
+      $('#flashcard-modal .flashcard-back').html('');
+      // REQ_MODIFIED START
+      $('#card-current-display').text('0');
+      $('#card-total-display').text('0');
+      // REQ_MODIFIED END
       return;
     }
-    // ... (enable buttons) ...
 
     var card = this.currentCardsSet[this.currentIndex];
     var flashcardElement = $('#flashcard-modal .flashcard');
-
     var frontFace = flashcardElement.find('.flashcard-front');
-    var backFace = flashcardElement.find('.flashcard-back'); // Get the jQuery object for the back face
+    var backFace = flashcardElement.find('.flashcard-back');
     var oldFrontTransition, oldBackTransition;
 
-    // we need to prevent the flip animation
     oldFrontTransition = frontFace.css('transition');
     oldBackTransition = backFace.css('transition');
     frontFace.css('transition', 'none');
     backFace.css('transition', 'none');
 
-    this.isFlipped = false; // Set state to not flipped for the new card
-    flashcardElement.removeClass('flipped'); // Remove the class. If transitions were 'none', it won't animate.
+    this.isFlipped = false;
+    flashcardElement.removeClass('flipped');
 
-    // Force a reflow to ensure the 'transition: none' and class removal are applied
-    // before restoring transitions.
     flashcardElement[0].offsetHeight;
     frontFace.css('transition', oldFrontTransition);
     backFace.css('transition', oldBackTransition);
@@ -650,33 +724,33 @@
       `<h2>${card.front}</h2>
        <div class="flashcard-hint-icon"><i class="fa fa-lightbulb-o"></i></div>`
     );
-
     flashcardElement.find('.flashcard-back').html(card.back);
-    backFace.scrollTop(0); // <--- ADD THIS LINE: Reset scroll position of the back face
+    backFace.scrollTop(0);
 
-    $('#jump-to-card-input').val(this.currentIndex + 1);
-    $('#jump-to-card-input').attr('max', this.currentCardsSet.length);
-    $('#card-counter-total').text('/ ' + this.currentCardsSet.length);
+    // REQ_MODIFIED START
+    // Removed updates for #jump-to-card-input and #card-counter-total
+    // Added updates for new card counter display
+    $('#card-current-display').text(this.currentIndex + 1);
+    $('#card-total-display').text(this.currentCardsSet.length);
+    // REQ_MODIFIED END
 
-    // --- Auto Read ---
     if (this.isAutoReadActive && card && card.front) {
-      // Extract text if H2 contains icons or other HTML
-      const frontText = $('<div>').html(card.front).text(); // Get clean text
+      const frontText = $('<div>').html(card.front).text();
       this._speak(frontText);
-    } else if (this.speechSynthesis) { // If auto-read is off, ensure any previous speech is cancelled
+    } else if (this.speechSynthesis) {
       this.speechSynthesis.cancel();
     }
   };
 
   Flashcards.prototype.flipCard = function() {
-    if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
+    if (this.isAnimating || this.isViewAnimating || this.currentView !== 'flashcard' || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
     this.isFlipped = !this.isFlipped;
     $('#flashcard-modal .flashcard').toggleClass('flipped');
   };
 
-  Flashcards.prototype._animateCardSwitch = function(newIndex, maintainFlipState = true) {
-    if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
-    if (newIndex < 0 || newIndex >= this.currentCardsSet.length || newIndex === this.currentIndex) return; // Boundary and no-change check
+  Flashcards.prototype._animateCardSwitch = function (newIndex, maintainFlipState = true) {
+    if (this.isAnimating || this.isViewAnimating || this.currentView !== 'flashcard' || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
+    if (newIndex < 0 || newIndex >= this.currentCardsSet.length || newIndex === this.currentIndex) return;
 
     var flashcardElement = $('#flashcard-modal .flashcard');
     const direction = newIndex > this.currentIndex ? 'next' : 'prev';
@@ -684,65 +758,55 @@
     var slideInStartTransform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
 
     this.isAnimating = true;
-    const cardWasFlipped = this.isFlipped; // Remember current flip state
 
     flashcardElement.addClass(slideOutClass);
 
     setTimeout(() => {
-      this.currentIndex = newIndex; // Set to the target index
-
-      // updateCardContent will set this.isFlipped = false and remove 'flipped' class
+      this.currentIndex = newIndex;
       this.updateCardContent();
-
-      // If we need to maintain the flip state (for next/prev) and the card was indeed flipped
-      // if (maintainFlipState && cardWasFlipped) {
-      //   this.isFlipped = true;
-      //   flashcardElement.addClass('flipped');
-      // }
-      // If maintainFlipState is false (e.g., for a jump),
-      // updateCardContent has already ensured the card is front-facing.
 
       flashcardElement.addClass('is-sliding-no-transition');
       flashcardElement.css({'transform': slideInStartTransform, 'opacity': '0'});
-      flashcardElement[0].offsetHeight; // Force reflow
+      flashcardElement[0].offsetHeight;
       flashcardElement.removeClass('is-sliding-no-transition');
 
       requestAnimationFrame(() => {
-        flashcardElement.removeClass(slideOutClass); // Remove the specific slide-out class
+        flashcardElement.removeClass(slideOutClass);
         flashcardElement.css({'transform': 'translateX(0)', 'opacity': '1'});
       });
-      setTimeout(() => { this.isAnimating = false; }, this.animationDuration);
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, this.animationDuration);
     }, this.animationDuration);
   };
 
   Flashcards.prototype.nextCard = function() {
+    if (this.currentView !== 'flashcard') return;
     if (this.currentCardsSet && this.currentIndex < this.currentCardsSet.length - 1) {
-      this._animateCardSwitch(this.currentIndex + 1, true); // maintainFlipState is true
+      this._animateCardSwitch(this.currentIndex + 1, false);
     }
   };
 
   Flashcards.prototype.prevCard = function() {
+    if (this.currentView !== 'flashcard') return;
     if (this.currentCardsSet && this.currentIndex > 0) {
-      this._animateCardSwitch(this.currentIndex - 1, true); // maintainFlipState is true
+      this._animateCardSwitch(this.currentIndex - 1, false);
     }
   };
 
   Flashcards.prototype.toggleShuffle = function() {
-    if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
+    if (this.isAnimating || this.isViewAnimating || this.currentView !== 'flashcard' || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
 
     this.isShuffled = !this.isShuffled;
     const $shuffleButton = $('#shuffle-cards-btn');
 
     if (this.isShuffled) {
-      // this.originalCardsSetOrder is already a copy of the true original when section was loaded
-      // Shuffle currentCardsSet (which might be original or already a copy if un-shuffled previously)
       for (let i = this.currentCardsSet.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [this.currentCardsSet[i], this.currentCardsSet[j]] = [this.currentCardsSet[j], this.currentCardsSet[i]];
       }
       $shuffleButton.addClass('shuffle-active');
     } else {
-      // Restore from the pristine original order for this section
       this.currentCardsSet = [...this.originalCardsSetOrder];
       $shuffleButton.removeClass('shuffle-active');
     }
@@ -753,33 +817,41 @@
     this.updateCardContent();
   };
 
-  Flashcards.prototype.jumpToCard = function(cardNumber) {
+  Flashcards.prototype.jumpToCard = function (cardNumber) {
+    // REQ_MODIFIED START (Removed logic related to #jump-to-card-input)
     if (this.isAnimating || this.isViewAnimating || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
 
     var num = parseInt(cardNumber);
     if (isNaN(num) || num < 1 || num > this.currentCardsSet.length) {
-      $('#jump-to-card-input').val(this.currentIndex + 1); // Reset input to current card if invalid
-      return;
+      return; // Invalid card number
     }
 
     const newIndex = num - 1;
-    if (newIndex === this.currentIndex) { // If jumping to the same card
-      $('#jump-to-card-input').val(this.currentIndex + 1); // Ensure input is correct
+    if (newIndex === this.currentIndex && this.currentView === 'flashcard') {
+      return; // No change if already on the card and in display view
+    }
+    // REQ_MODIFIED END
+
+    if (this.currentView !== 'flashcard' && this.currentView !== 'card-menu') {
+      console.warn("Jump initiated from unexpected view:", this.currentView);
       return;
     }
 
-    // For jumps, always show the front of the card, so maintainFlipState is false.
-    this._animateCardSwitch(newIndex, false);
+    if (this.currentView === 'flashcard') {
+      this._animateCardSwitch(newIndex, false);
+    } else if (this.currentView === 'card-menu') {
+      this.currentIndex = newIndex;
+    }
   };
 
   window.NexT = window.NexT || {};
   window.NexT.flashcards = new Flashcards();
 
-  $(document).ready(function () {
+  $(document).ready(function() {
     if ($('.sidebar-nav-toc').length) {
       var flashcardBtn = '<i class="flashcard-btn fa fa-clone" title="Generate Flashcards"></i>';
       $('.sidebar-nav-toc').append(flashcardBtn);
-      $('.flashcard-btn').on('click', function () {
+      $('.flashcard-btn').on('click', function() {
         window.NexT.flashcards.showFlashcardModal();
       });
     }

@@ -36,7 +36,7 @@
     if (!postBody.length) return false; // Guard: Ensure .post-body exists
 
     const $children = postBody.children();
-    const introIcon = '<i class="fa fa-sticky-note" title="引言"></i> &nbsp;&nbsp;&nbsp;';
+    const introIcon = '<i class="fa fa-sticky-note"></i> &nbsp;&nbsp;&nbsp;';
 
     // 注意：之前版本中的 STOP_SELECTORS_STRING 及其相关逻辑已被移除或调整，
     // 现在主要通过 H1/H2 结构以及对 <footer> 标签的特殊处理来界定内容。
@@ -201,9 +201,11 @@
                 <i class="fa fa-arrow-left"></i>
               </button>
               <div class="flashcard-content-area">
-                <div class="flashcard-current-h1-title"></div>
-                <div class="card-counter-display">
-                  Card <span id="card-current-display"></span> / <span id="card-total-display"></span>
+                <div class="flashcard-header-info">
+                  <div class="flashcard-current-h1-title"></div>
+                  <div class="card-counter-display">
+                    <i class="fa fa-file-text"></i> <span id="card-current-display"></span> / <span id="card-total-display"></span>
+                  </div>
                 </div>
                 <div class="flashcard">
                   <div class="flashcard-front"></div>
@@ -215,7 +217,6 @@
                   <i class="fa fa-volume-up"></i>
                 </button>
                 <button id="prev-card" class="flashcard-nav-btn">❮</button>
-                <!-- Removed: card-counter-container with jump-to-card-input and card-counter-total -->
                 <button id="next-card" class="flashcard-nav-btn">❯</button>
                 <button id="shuffle-cards-btn" class="flashcard-nav-btn" title="Shuffle Cards">
                   <i class="fa fa-random"></i>
@@ -229,7 +230,12 @@
               <button id="back-to-card-display" class="flashcard-back-btn" title="Back to Card">
                 <i class="fa fa-arrow-left"></i>
               </button>
-              <div class="flashcard-current-h1-title" style="margin-top: 5px; margin-bottom: 10px;"></div>
+              <div class="flashcard-header-info">
+                <div class="flashcard-current-h1-title"></div>
+                <div class="card-counter-display">
+                  <i class="fa fa-file-text"></i> <span id="card-total-display"></span>
+                </div>
+              </div>
               <ul id="card-menu-list-ul" class="h1-list-ul"></ul>
             </div>
             <button id="close-flashcard" class="close-flashcard"><i class="fa fa-times"></i></button>
@@ -331,18 +337,6 @@
         e.stopPropagation();
         self._transitionFromCardMenuToDisplayView();
       });
-
-      // Removed event listeners for #jump-to-card-input
-      // $('#jump-to-card-input').off('change.flashcards keypress.flashcards')
-      //   .on('change.flashcards', function() {
-      //     self.jumpToCard(parseInt($(this).val()));
-      //   })
-      //   .on('keypress.flashcards', function (e) {
-      //     if (e.which === 13) { // Enter key
-      //       self.jumpToCard(parseInt($(this).val()));
-      //       $(this).blur();
-      //     }
-      //   });
 
       $(document).off('keydown.flashcards').on('keydown.flashcards', function (e) {
         if (!$modal.hasClass('modal-visible') || self.isViewAnimating) return;
@@ -482,7 +476,7 @@
     this.h1Sections.forEach((section) => {
       const $li = $('<li>')
         .addClass('h1-list-item')
-        .html(`<i class="fa fa-tag"></i> ${section.h1Title} (${section.cards.length})`)
+        .html(`<i class="fa fa-tag"></i> ${section.h1Title} <span class="cards-index">(${section.cards.length})</span>`)
         .on('click', () => {
           if (this.isViewAnimating) return;
           this._transitionToFlashcardView(section);
@@ -523,7 +517,10 @@
   };
 
   Flashcards.prototype._updateFlashcardViewContent = function () {
-    $('#flashcard-modal .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
+    // The line below was: $('#flashcard-modal .flashcard-current-h1-title').html(...);
+    // It's now updated inside the new wrapper, so this specific line targets the correct element.
+    $('#flashcard-view .flashcard-header-info .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
+
 
     let showBackButton = false;
     const hasCombined = this.h1Sections.some(s => s.isCombined);
@@ -579,7 +576,7 @@
     var self = this;
     var $cardListUl = $('#card-menu-list-ul').empty();
     $('#card-menu-view .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
-
+    $('#card-menu-view #card-total-display').text(this.currentCardsSet.length);
 
     if (!this.currentCardsSet || this.currentCardsSet.length === 0) {
       $cardListUl.append('<li class="h1-list-item">No cards in this section.</li>');
@@ -587,10 +584,11 @@
     }
 
     this.currentCardsSet.forEach((card, index) => {
-      const frontText = $('<div>').html(card.front).text();
+      const frontText = '● ' + $('<div>').html(card.front).text();
       const $li = $('<li>')
         .addClass('h1-list-item')
-        .html(`<span style="font-weight:normal;">${index + 1}.</span> ${frontText} <span style="font-size:0.8em; opacity:0.7;">(${index + 1}/${this.currentCardsSet.length})</span>`)
+        // .html(`${frontText} <span class="cards-index">(${index + 1}/${this.currentCardsSet.length})</span>`)
+        .html(`${frontText} <span class="cards-index">(${index + 1})</span>`)
         .on('click', function () {
           if (self.isViewAnimating) return;
           self.jumpToCard(index + 1);
@@ -716,8 +714,6 @@
     flashcardElement.find('.flashcard-back').html(card.back);
     backFace.scrollTop(0);
 
-    // Removed updates for #jump-to-card-input and #card-counter-total
-    // Added updates for new card counter display
     $('#card-current-display').text(this.currentIndex + 1);
     $('#card-total-display').text(this.currentCardsSet.length);
 
@@ -826,6 +822,9 @@
       this._animateCardSwitch(newIndex, false);
     } else if (this.currentView === 'card-menu') {
       this.currentIndex = newIndex;
+      // If jumping from card menu, the transition to flashcard view will handle content update.
+      // However, if the request implies just updating the index for when it transitions back,
+      // this is sufficient. The _transitionFromCardMenuToDisplayView calls _updateFlashcardViewContent.
     }
   };
 

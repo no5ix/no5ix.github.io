@@ -229,9 +229,20 @@
 .h1-list-ul {
   list-style: none;
   padding: 0;
-  margin-top: 50px;
+  //margin-top: 50px;
   overflow-y: auto; // Scroll for the list itself
   flex-grow: 1; // Take remaining space
+}
+#h1-selection-view .h1-list-ul {
+  margin-top: 50px;
+}
+#card-menu-view .h1-list-ul {
+  margin-top: 0px;
+}
+
+.cards-index {
+  font-size: 0.8em;
+  opacity: 0.7;
 }
 
 .h1-list-item {
@@ -291,14 +302,30 @@
   //margin-top: 40px; // Increased space for back button + H1 title
 }
 
-.flashcard-current-h1-title {
-  text-align: center;
-  font-size: 1em;
-  color: var(--text-color);
-  margin: 0 0 15px 0;
+// New wrapper for title and counter
+.flashcard-header-info {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0px 0 15px 0;
   padding: 0 50px;
-  flex-shrink: 0;
-  font-weight: 500;
+}
+
+// Styles for the card-counter-display div itself
+.card-counter-display {
+  font-size: 0.9em;
+  color: var(--text-color);
+  white-space: nowrap;
+  flex-shrink: 1;
+  margin: 0 10px;
+  opacity: 0.8;
+}
+
+.flashcard-current-h1-title {
+    font-size: 1.2em;
+    color: var(--text-color);
+    flex-shrink: 1;
+    font-weight: 500;
 }
 
 .flashcard {
@@ -416,7 +443,7 @@
   height: 32px;
   font-size: 18px;
   color: var(--selection-color);
-  background-color: var(--link-color);
+  background-color: var(--toc-link-color);
   border-radius: 50%;
   cursor: pointer;
   z-index: 10000; // Above fc-view content
@@ -445,7 +472,7 @@
     max-height: 96vh;
   }
 
-  .flashcard-current-h1-title {
+  .flashcard-header-info {
     margin: 5px 0 20px 0;
   }
   //.fc-view { // Adjust internal padding for smaller screens

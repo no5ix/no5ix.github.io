@@ -274,7 +274,6 @@
   position: absolute;
   top: 20px; // Adjusted for view's internal padding
   left: 20px; // Adjusted for view's internal padding
-  // ... (rest of back button styles same)
   background-color: var(--toc-link-color);
   color: var(--selection-color);
   border: none;
@@ -290,7 +289,6 @@
   justify-content: center;
   text-align: center;
 }
-//.flashcard-back-btn i { margin-right: 6px; }
 .flashcard-back-btn:hover { background-color: var(--link-hover-color); }
 
 
@@ -307,13 +305,15 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin: 0px 0 20px 0;
-  padding: 0 50px;
+  margin: 5px 0 25px 0;
+  /* padding: 0 50px; */
+  padding: 0 50px 0 60px;
+  flex-wrap: wrap;
 }
 
 // Styles for the card-counter-display div itself
 .card-counter-display {
-  font-size: 0.9em;
+  font-size: 11px;
   color: var(--text-color);
   white-space: nowrap;
   flex-shrink: 1;
@@ -328,7 +328,7 @@
 }
 
 .flashcard-current-h1-title {
-  font-size: 17px;
+  font-size: 13px;
   color: var(--text-color);
   flex-shrink: 1;
   font-weight: 500;
@@ -468,8 +468,6 @@
 }
 
 /* Responsive adjustments */
-// ... (Your existing responsive adjustments should still largely apply,
-//      but test them with the new absolute positioned views)
 @media (max-width: 768px) {
   .flashcard-container {
     width: 90%;
@@ -479,45 +477,13 @@
     max-height: 96vh;
   }
 
-  //.fc-view { // Adjust internal padding for smaller screens
-  //  padding: 15px;
-  //}
-  //.flashcard-back-btn {
-  //  top: 15px;
-  //  left: 15px; // Closer to edge with smaller padding
-  //  //padding: 6px 10px;
-  //  //font-size: 12px;
-  //}
-  //.close-flashcard {
-  //  top: 15px;
-  //  right: 15px; // Closer to edge with smaller padding
-  //}
-
   .flashcard-front h2 {
     font-size: 1.5em;
   }
-  //.flashcard-nav-btn {
-  //  padding: 8px 10px;
-  //  font-size: 13px;
-  //}
+
   .h1-list-item {
     font-size: 1em;
     padding: 12px 15px;
   }
-  // ... (other responsive styles)
 }
 
-//@media (max-width: 480px) {
-//  .flashcard-navigation {
-//    flex-wrap: wrap; // Allow wrapping on very small screens
-//    justify-content: center;
-//  }
-//  .flashcard-nav-btn {
-//    margin: 5px;
-//  }
-//  .card-counter-container {
-//    width: 100%;
-//    justify-content: center;
-//    margin: 5px 0;
-//  }
-//}

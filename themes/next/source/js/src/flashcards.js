@@ -518,7 +518,6 @@
     // It's now updated inside the new wrapper, so this specific line targets the correct element.
     $('#flashcard-view .flashcard-header-info .flashcard-current-h1-title').html(`<i class="fa fa-tag"></i> ${this.currentH1Title}`);
 
-
     let showBackButton = false;
     const hasCombined = this.h1Sections.some(s => s.isCombined);
     const actualH1Count = this.h1Sections.filter(s => !s.isFlatList && !s.isCombined).length;
@@ -641,6 +640,9 @@
       $cardMenuView.addClass('view-hidden').removeClass('view-sliding-out-right'); // Clean up card menu view class
       this.isViewAnimating = false;
     }, this.animationViewDuration);
+
+    // fix: the back of flashcard doesn't scroll to the top when I click a flashcard from card-menu-list-ul
+    $('#flashcard-modal .flashcard .flashcard-back').scrollTop(0);
   };
 
 

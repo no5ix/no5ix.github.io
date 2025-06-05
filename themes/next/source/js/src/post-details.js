@@ -88,7 +88,7 @@ $(document).ready(function () {
       // because when I click the TOC, I hope it will jump to the right place, but it didn't. it's because of the lazy load img thing, so we have to scroll again to the right place.
       setTimeout(function () {
         scrollToHref();
-      }, 800);
+      }, 1888);
   });
 
 

@@ -48,8 +48,7 @@
 
 hexo.extend.filter.register('after_render:html', function (str) {
   // Use a regex to add loading="lazy" to <img> tags that don't have it
-  // Comment out the below line, because when I click the TOC, I hope it will jump to the right place, but now it doesn't. it's because of the lazy load img thing, and it's complicated to fix it.
-  // return str.replace(/<img(?![^>]*loading=)([^>]*?)>/g, '<img width="800" height="600" loading="lazy"$1>');
+  return str.replace(/<img(?![^>]*loading=)([^>]*?)>/g, '<img width="800" height="600" loading="lazy"$1>');
 });
 
 

@@ -56,11 +56,9 @@ $(document).ready(function () {
   // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
 
   $('a[href^=#],area[href^=#]').on('click', function (e) {
-    e.preventDefault();  // 取消事件的默认动作。注释这一行则可以在浏览器URL处显示锚点(即#之后的内容)
+    e.preventDefault();  // 取消事件的默认动作。
   
-    // clearTimeout(temp_timer2);
     var that = this;
-    // temp_timer2 = setTimeout(function () {
       var cur_href = that.getAttribute('href');
       if (window.history) {
         // 如果支持History API
@@ -71,19 +69,26 @@ $(document).ready(function () {
         //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
       }
   
-      // 处理滚动动画
-      var targetSelector = NexT.utils.escapeSelector(cur_href);
-      // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
-      var offset = $(targetSelector).offset().top - 170;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    // }, 250);
+      const scrollToHref = function() {
+        // 处理滚动动画
+        const targetSelector = NexT.utils.escapeSelector(cur_href);
+        // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
+        let offset = $(targetSelector).offset().top - 170;
+        hasVelocity ?
+          html.velocity('stop').velocity('scroll', {
+            offset: offset + 'px',
+            mobileHA: false
+          }) :
+          $('html, body').stop().animate({
+            scrollTop: offset
+          }, 500);
+      }
+
+      scrollToHref();
+      // because when I click the TOC, I hope it will jump to the right place, but it didn't. it's because of the lazy load img thing, so we have to scroll again to the right place.
+      setTimeout(function () {
+        scrollToHref();
+      }, 600);
   });
 
 

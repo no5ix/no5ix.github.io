@@ -9,6 +9,76 @@ $(document).ready(function () {
   NexT.utils.needAffix() && initAffix();
   initTOCDimension();
 
+  // if (document.body.clientWidth >= 768) {
+  //   // 找出页面上所有 lazy-load 图片
+  //   document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  //     img.removeAttribute('loading'); // 立即触发加载
+  //   });
+  // }
+
+  // $('a[href^=#],area[href^=#]') 表示 href开头为#的元素
+  // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      let cur_href = this.getAttribute('href');
+      const targetId = cur_href.slice(1);
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+
+      if (window.history) {
+        // 如果支持History API
+        // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+        // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
+        let state = {title: '', url: cur_href.split("#")[0]};
+        history.pushState(state, '', "#" + cur_href.split("#")[1]);
+        //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+      }
+
+      // 获取目标标题相对于文档顶部的偏移
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
+      let imgCount = 0;
+      // 找出页面上所有在当前位置与目标标题之间的 lazy-load 图片
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        const imgTop = img.getBoundingClientRect().top + window.scrollY;
+        if (imgTop <= targetTop && imgTop >= window.pageYOffset) {
+          img.removeAttribute('loading'); // 立即触发加载
+          imgCount++;
+        }
+      });
+      console.log("imgCount=", imgCount);
+      const targetSelector = NexT.utils.escapeSelector(cur_href);
+
+      const scrollToHref = function() {
+        // 处理滚动动画
+        // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
+        let offset = $(targetSelector).offset().top - 170;
+        // $('html, body').stop().animate({
+        //   scrollTop: offset
+        // }, 600);
+        window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+      }
+
+      // if (document.body.clientWidth >= 768) {
+      //     scrollToHref();
+      // } else {
+        // 延迟跳转，等待浏览器加载图片并重排
+        setTimeout(() => {
+          scrollToHref();
+          setTimeout(() => {
+            if (window.pageYOffset != $(targetSelector).offset().top - 170) {
+              scrollToHref();  // double check and scroll to the right place
+            }
+          }, 300);
+        }, imgCount > 0 ? 300 : 0);
+      // }
+    });
+  });
 
   function scrollToCenter() {
     var tocSelector = '.post-toc';
@@ -49,59 +119,6 @@ $(document).ready(function () {
   });
 
 
-  // $('a[href^=#],area[href^=#]') 表示 href开头为#的元素
-  // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
-
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      let cur_href = this.getAttribute('href');
-      const targetId = cur_href.slice(1);
-      const target = document.getElementById(targetId);
-      if (!target) return;
-
-      e.preventDefault();
-
-      if (window.history) {
-        // 如果支持History API
-        // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
-        // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
-        let state = {title: '', url: cur_href.split("#")[0]};
-        history.pushState(state, '', "#" + cur_href.split("#")[1]);
-        //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
-      }
-
-      // 获取目标标题相对于文档顶部的偏移
-      const targetTop = target.getBoundingClientRect().top + window.scrollY;
-
-      // 找出页面上所有在当前位置与目标标题之间的 lazy-load 图片
-      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        const imgTop = img.getBoundingClientRect().top + window.scrollY;
-        if (imgTop <= targetTop && imgTop >= window.pageYOffset) {
-          img.removeAttribute('loading'); // 立即触发加载
-        }
-      });
-
-      const targetSelector = NexT.utils.escapeSelector(cur_href);
-
-      const scrollToHref = function(compensation=170) {
-        // 处理滚动动画
-        // 此处减去 compensation 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
-        let offset = $(targetSelector).offset().top - compensation;
-        // $('html, body').stop().animate({
-        //   scrollTop: offset
-        // }, 600);
-        window.scrollTo({
-          top: offset,
-          behavior: 'smooth'
-        });
-      }
-
-      // 延迟跳转，等待浏览器加载图片并重排
-      setTimeout(() => {
-        scrollToHref();
-      }, 300);
-    });
-  });
 
 
 

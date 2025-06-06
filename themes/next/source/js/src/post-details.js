@@ -63,7 +63,9 @@ $(document).ready(function () {
           behavior: 'smooth'
         });
       }
-
+      // because the browser only requests 6 ~ 8 images at a time
+      // we assume one request costs 60 ms
+      let delay = imgCount / 6 * 60;
       // if (document.body.clientWidth >= 768) {
       //     scrollToHref();
       // } else {
@@ -75,7 +77,7 @@ $(document).ready(function () {
               scrollToHref();  // double check and scroll to the right place
             }
           }, 300);
-        }, imgCount > 0 ? 300 : 0);
+        }, delay);
       // }
     });
   });

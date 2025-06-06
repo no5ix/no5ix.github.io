@@ -49,47 +49,56 @@ $(document).ready(function () {
   });
 
 
-  // TOC item animation navigate & prevent #item selector in address bar.
-  // $('.post-toc a').on('click', function (e) {
-  // 上面两行的注释已无效, 下面这段代码用于实现锚点链接的平滑滚动, 且在浏览器URL处不显示锚点(即#之后的内容), 即URL地址不会发生变化
   // $('a[href^=#],area[href^=#]') 表示 href开头为#的元素
   // $('a[href*=#],area[href*=#]') 表示 href含有#的元素
 
-  $('a[href^=#],area[href^=#]').on('click', function (e) {
-    e.preventDefault();  // 取消事件的默认动作。
-  
-    var that = this;
-      var cur_href = that.getAttribute('href');
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      let cur_href = this.getAttribute('href');
+      const targetId = cur_href.slice(1);
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+
       if (window.history) {
         // 如果支持History API
         // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
         // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
-        var state = {title: '', url: cur_href.split("#")[0]};
+        let state = {title: '', url: cur_href.split("#")[0]};
         history.pushState(state, '', "#" + cur_href.split("#")[1]);
         //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
       }
-  
-      const scrollToHref = function() {
+
+      // 获取目标标题相对于文档顶部的偏移
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
+
+      // 找出页面上所有在当前位置与目标标题之间的 lazy-load 图片
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        const imgTop = img.getBoundingClientRect().top + window.scrollY;
+        if (imgTop <= targetTop && imgTop >= window.pageYOffset) {
+          img.removeAttribute('loading'); // 立即触发加载
+        }
+      });
+
+      const targetSelector = NexT.utils.escapeSelector(cur_href);
+
+      const scrollToHref = function(duration=600, compensation=170) {
         // 处理滚动动画
-        const targetSelector = NexT.utils.escapeSelector(cur_href);
-        // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
-        let offset = $(targetSelector).offset().top - 170;
-        hasVelocity ?
-          html.velocity('stop').velocity('scroll', {
-            offset: offset + 'px',
-            mobileHA: false
-          }) :
-          $('html, body').stop().animate({
-            scrollTop: offset
-          }, 500);
+        // 此处减去 compensation 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
+        let offset = $(targetSelector).offset().top - compensation;
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, duration);
       }
 
-      scrollToHref();
-      // because when I click the TOC, I hope it will jump to the right place, but it didn't. it's because of the lazy load img thing, so we have to scroll again to the right place.
-      setTimeout(function () {
+      // 延迟跳转，等待浏览器加载图片并重排
+      setTimeout(() => {
         scrollToHref();
-      }, 1888);
+      }, 300);
+    });
   });
+
 
 
   function initScrollSpy() {

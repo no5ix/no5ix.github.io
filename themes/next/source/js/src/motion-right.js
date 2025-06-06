@@ -209,12 +209,22 @@ $(document).ready(function () {
             integrator.next();
             
             // 此处动画是为了防止有锚点的页面加载时候被 headroom 挡住的问题, 所以播了一个网上滚动170px的动画
+            // 延迟跳转，等待浏览器加载lazy load的图片再滚动
             if(window.location.hash) {
-              window.scrollTo({ top: window.pageYOffset - 170 });
-            //   $('html,body').animate({
-            //     scrollTop: window.pageYOffset - 170
-            //   },
-            //   400);
+              setTimeout(() => {
+                // window.scrollTo({ top: window.pageYOffset - 170 });  // 另一个在post-details.js里搜 170
+                const id = window.location.hash.slice(1); // 去掉 #
+                const target = document.getElementById(decodeURIComponent(id));
+                if (target) {
+                  const scrollY = target.getBoundingClientRect().top + window.scrollY;
+                  const offset = scrollY - 170;
+                  window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                  });
+                }
+              }, 1600);
+            }
 
           }
         });

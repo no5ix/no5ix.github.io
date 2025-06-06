@@ -83,13 +83,17 @@ $(document).ready(function () {
 
       const targetSelector = NexT.utils.escapeSelector(cur_href);
 
-      const scrollToHref = function(duration=600, compensation=170) {
+      const scrollToHref = function(compensation=170) {
         // 处理滚动动画
         // 此处减去 compensation 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
         let offset = $(targetSelector).offset().top - compensation;
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, duration);
+        // $('html, body').stop().animate({
+        //   scrollTop: offset
+        // }, 600);
+        window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
       }
 
       // 延迟跳转，等待浏览器加载图片并重排

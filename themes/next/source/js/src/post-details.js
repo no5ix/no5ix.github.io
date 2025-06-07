@@ -21,6 +21,7 @@ $(document).ready(function () {
 
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function (e) {
+
       let cur_href = this.getAttribute('href');
       const targetId = cur_href.slice(1);
       const target = document.getElementById(targetId);
@@ -43,7 +44,7 @@ $(document).ready(function () {
       // 找出页面上所有在当前位置与目标标题之间的 lazy-load 图片
       document.querySelectorAll('img[loading="lazy"]').forEach(img => {
         const imgTop = img.getBoundingClientRect().top + window.scrollY;
-        if (imgTop <= targetTop && imgTop >= window.pageYOffset) {
+        if (imgTop <= targetTop && imgTop >= window.scrollY) {
           img.removeAttribute('loading'); // 立即触发加载
           imgCount++;
         }
@@ -51,17 +52,29 @@ $(document).ready(function () {
       // console.log("imgCount=", imgCount);
       const targetSelector = NexT.utils.escapeSelector(cur_href);
 
+      const duration = 300;
       const scrollToHref = function() {
         // 处理滚动动画
         // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
         let offset = $(targetSelector).offset().top - 170;
-        // $('html, body').stop().animate({
-        //   scrollTop: offset
-        // }, 600);
-        window.scrollTo({
-          top: offset,
-          behavior: 'smooth'
-        });
+
+        // disable scrollspy temporarily to avoid conflict about the animations about `scrollspy` and `scrollToHref`
+        $('body').removeData('bs.scrollspy'); // 移除 scrollspy 插件的数据
+        $(window).off('scroll'); // 取消绑定在 window 上的 scroll 事件监听器
+
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, duration);
+
+        // enable scrollspy again
+        setTimeout(() => {
+            $('body').scrollspy({target: '.post-toc'});
+        }, duration + 60);
+
+        // window.scrollTo({
+        //   top: offset,
+        //   behavior: 'smooth'
+        // });
       }
       // because the browser only requests 6 ~ 8 images at a time
       // we assume one request costs 60 ms
@@ -69,33 +82,18 @@ $(document).ready(function () {
       // if (document.body.clientWidth >= 768) {
       //     scrollToHref();
       // } else {
-        // 延迟跳转，等待浏览器加载图片并重排
+        // 延迟跳转，等待浏览器加载图片
         setTimeout(() => {
           scrollToHref();
           setTimeout(() => {
-            if (window.pageYOffset != $(targetSelector).offset().top - 170) {
+            if (window.scrollY !== $(targetSelector).offset().top - 170) {
               scrollToHref();  // double check and scroll to the right place
             }
-          }, 300);
+          }, duration + 100);
         }, delay);
       // }
     });
   });
-
-  function scrollToCenter() {
-    var tocSelector = '.post-toc';
-    var $tocElement = $(tocSelector);
-    // var activeCurrentSelector = '.active-current';
-    var $currentActiveElement = $(tocSelector + ' .active').last();
-    // removeCurrentActiveClass();
-    // $currentActiveElement.addClass('active-current');
-    // Scrolling to center active TOC element if TOC content is taller then viewport.
-    if ($currentActiveElement.offset() === undefined) {
-      return;
-    }
-    $tocElement.animate({ scrollTop: $currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2) }, 100); // 300ms 动画滚动到 200px
-    // $tocElement.scrollTop($currentActiveElement.offset().top - $tocElement.offset().top + $tocElement.scrollTop() - ($tocElement.height() / 2));
-  }
 
   var $tocTitle = $(".sidebar-nav-toc");
   // $tocTitle.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
@@ -119,10 +117,6 @@ $(document).ready(function () {
       NexT.utils.sidebarScrollToCenter();
     // }, delay);  // 因为 .post-toc .nav .nav-child 里有个动画
   });
-
-
-
-
 
   function initScrollSpy() {
     var tocSelector = '.post-toc';
@@ -153,7 +147,6 @@ $(document).ready(function () {
         // $(tocSelector + ' .active').first().children(".nav-link").siblings(".nav-child").hide(100);
         removeCurrentActiveClass();
       });
-
     $('body').scrollspy({target: tocSelector});
 
     function removeCurrentActiveClass() {

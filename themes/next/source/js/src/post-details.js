@@ -48,7 +48,7 @@ $(document).ready(function () {
           imgCount++;
         }
       });
-      console.log("imgCount=", imgCount);
+      // console.log("imgCount=", imgCount);
       const targetSelector = NexT.utils.escapeSelector(cur_href);
 
       const scrollToHref = function() {

@@ -81,20 +81,22 @@ $(document).ready(function () {
       }
       // because the browser only requests 6 ~ 8 images at a time
       // we assume one request costs 60 ms
-      let delay = imgCount / 6 * 60;
+      let originalDelay = (imgCount / 6 * 60);
+      let delay = originalDelay > 300 ? 300 : originalDelay;
       // if (document.body.clientWidth >= 768) {
       //     scrollToHref();
       // } else {
         // 延迟跳转，等待浏览器加载图片
         setTimeout(() => {
           scrollToHref();
+          let secondDelay = 100 + (duration > originalDelay - delay ? duration : originalDelay - delay);
           setTimeout(() => {
             let targetOffset = $(targetSelector).offset().top - 170;
             let diff = window.scrollY - targetOffset;
             if (diff < -100 || diff > 100) {
               scrollToHref();  // double check and scroll to the right place
             }
-          }, duration + 100);
+          }, secondDelay);
         }, delay);
       // }
     });

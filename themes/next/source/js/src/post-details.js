@@ -93,7 +93,7 @@ $(document).ready(function () {
           setTimeout(() => {
             let targetOffset = $(targetSelector).offset().top - 170;
             let diff = window.scrollY - targetOffset;
-            if (diff < -100 || diff > 100) {
+            if (diff > 100 || diff < 0) {  // `diff < 0` to avoid that we scroll to position above we what, that way the display of toc would be wrong
               scrollToHref();  // double check and scroll to the right place
             }
           }, secondDelay);

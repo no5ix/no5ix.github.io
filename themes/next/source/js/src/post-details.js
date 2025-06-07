@@ -182,7 +182,7 @@ $(document).ready(function () {
 
     $(document)
       .on('affixed.bs.affix', function () {
-        updateTOCHeight(document.body.clientHeight);
+        updateTOCHeight(window.innerHeight);
       });
   }
 
@@ -193,17 +193,15 @@ $(document).ready(function () {
       updateTOCHeightTimer && clearTimeout(updateTOCHeightTimer);
 
       updateTOCHeightTimer = setTimeout(function () {
-        var tocWrapperHeight = document.body.clientHeight;
-
-        updateTOCHeight(tocWrapperHeight);
+        updateTOCHeight(window.innerHeight);
       }, 0);
     });
 
     // Initialize TOC Height.
-    updateTOCHeight(document.body.clientHeight);
+    updateTOCHeight(window.innerHeight);
 
     // Initialize TOC Width.
-    var scrollbarWidth = NexT.utils.getScrollbarWidth();
+    // var scrollbarWidth = NexT.utils.getScrollbarWidth();
     // $('.post-toc').css('width', 'calc(100% + ' + scrollbarWidth + 'px)');
   }
 

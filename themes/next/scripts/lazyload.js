@@ -48,7 +48,7 @@
 
 hexo.extend.filter.register('after_render:html', function (str) {
   // Use a regex to add loading="lazy" to <img> tags that don't have it
-  // return str.replace(/<img(?![^>]*loading=)([^>]*?)>/g, '<img width="800" height="600" loading="lazy"$1>');
+  return str.replace(/<img(?![^>]*loading=)([^>]*?)>/g, '<img width="800" height="600" loading="lazy"$1>');
 });
 
 

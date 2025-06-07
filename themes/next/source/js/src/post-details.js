@@ -52,16 +52,19 @@ $(document).ready(function () {
       // console.log("imgCount=", imgCount);
       const targetSelector = NexT.utils.escapeSelector(cur_href);
 
-      const duration = 300;
+      let duration = 300;
       const scrollToHref = function() {
         // 处理滚动动画
         // 此处减去 170 是为了防止页面滚动后  headroom 会挡住锚点跳转之后的标题, 另一个搜 motion.js里的 170
         let offset = $(targetSelector).offset().top - 170;
+        // console.log("window.scrollY - offset", window.scrollY - offset);
 
         // disable scrollspy temporarily to avoid conflict about the animations about `scrollspy` and `scrollToHref`
         $('body').removeData('bs.scrollspy'); // 移除 scrollspy 插件的数据
         $(window).off('scroll'); // 取消绑定在 window 上的 scroll 事件监听器
-
+        if (window.scrollY - offset < 1000 || window.scrollY - offset > -1000) {
+          duration = 100;
+        }
         $('html, body').stop().animate({
           scrollTop: offset
         }, duration);
@@ -86,7 +89,9 @@ $(document).ready(function () {
         setTimeout(() => {
           scrollToHref();
           setTimeout(() => {
-            if (window.scrollY !== $(targetSelector).offset().top - 170) {
+            let targetOffset = $(targetSelector).offset().top - 170;
+            let diff = window.scrollY - targetOffset;
+            if (diff < -100 || diff > 100) {
               scrollToHref();  // double check and scroll to the right place
             }
           }, duration + 100);

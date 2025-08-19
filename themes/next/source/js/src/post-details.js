@@ -9,6 +9,11 @@ $(document).ready(function () {
   NexT.utils.needAffix() && initAffix();
   initTOCDimension();
   initDelayedImageLoader();
+  
+  // 页面加载完成后立即检查当前视口内的图片
+  setTimeout(() => {
+    triggerImageLoadCheck();
+  }, 100);
 
   // if (document.body.clientWidth >= 768) {
   //   // 找出页面上所有 lazy-load 图片
@@ -74,6 +79,8 @@ $(document).ready(function () {
         // enable scrollspy again
         setTimeout(() => {
             $('body').scrollspy({target: '.post-toc'});
+            // 触发图片加载检查，传入目标选择器用于位置修正
+            triggerImageLoadCheck(targetSelector);
         }, duration + 60);
 
         // window.scrollTo({
@@ -221,22 +228,93 @@ $(document).ready(function () {
     $('.post-toc').css('max-height', height);
   }
   // 使用 Intersection Observer 监听带有 data-src 属性的图片，
-  // 当图片在视口停留1秒后，将 data-src 的值赋给 src 属性来触发加载
+  // 当图片在视口停留200ms后，将 data-src 的值赋给 src 属性来触发加载
+  // 主动触发当前视口内图片的加载检查
+  function triggerImageLoadCheck(targetSelector) {
+    let loadedCount = 0;
+    const imagesToLoad = [];
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      const rect = img.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight + 800 && rect.bottom > -800;
+      if (isInViewport) {
+        const dataSrc = img.getAttribute('data-src');
+        if (dataSrc) {
+          imagesToLoad.push(img);
+        }
+      }
+    });
+
+    if (imagesToLoad.length === 0) return;
+
+    imagesToLoad.forEach(img => {
+      const dataSrc = img.getAttribute('data-src');
+      img.src = dataSrc;
+      img.removeAttribute('data-src');
+      loadedCount++;
+      
+      // 如果是点击跳转触发的加载，需要重新调整位置
+      if (targetSelector && loadedCount === imagesToLoad.length) {
+        img.onload = () => {
+          setTimeout(() => {
+            const newOffset = $(targetSelector).offset().top - 170;
+            const currentScroll = window.scrollY;
+            const diff = Math.abs(currentScroll - newOffset);
+            if (diff > 50) {
+              $('html, body').stop().animate({scrollTop: newOffset}, 200);
+            }
+          }, 100);
+        };
+      }
+    });
+  }
+
   function initDelayedImageLoader() {
     const timers = new Map();
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = Date.now();
+    let isScrollingFast = false;
+
+    // 监听滚动速度
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const currentTime = Date.now();
+      const scrollDistance = Math.abs(currentScrollY - lastScrollY);
+      const timeDiff = currentTime - lastScrollTime;
+
+      if (timeDiff > 0) {
+        const scrollSpeed = scrollDistance / timeDiff; // pixels per ms
+        // console.log("scrollSpeed = " + scrollSpeed);
+        isScrollingFast = scrollSpeed > 100; // 超过 100 px/ms认为是快速滚动
+      }
+
+      lastScrollY = currentScrollY;
+      lastScrollTime = currentTime;
+
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        isScrollingFast = false; // 停止滚动后重置
+      }, 150);
+    });
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // 如果图片在1秒内离开视口，定时器被取消，图片不会加载
-        // 只有图片在视口中停留满1秒，定时器才会执行，触发图片加载
-        if (entry.isIntersecting) {  // 进入视口时（entry.isIntersecting 为 true）
+        if (entry.isIntersecting) {
+          // 如果正在快速滚动，不加载图片
+          if (isScrollingFast) {
+            return;
+          }
+
           const timer = setTimeout(() => {
             const dataSrc = entry.target.getAttribute('data-src');
             if (dataSrc) {
               entry.target.src = dataSrc;
+              entry.target.removeAttribute('data-src');
               observer.unobserve(entry.target);
             }
             timers.delete(entry.target);
-          }, 1000);
+          }, 200);
           timers.set(entry.target, timer);
         } else {  // 离开视口时（entry.isIntersecting 为 false）
           const timer = timers.get(entry.target);
@@ -246,6 +324,8 @@ $(document).ready(function () {
           }
         }
       });
+    }, {
+      rootMargin: '800px' // 提前 800px开始观察，这样缓慢滚动时图片能提前加载
     });
 
     document.querySelectorAll('img[data-src]').forEach(img => {

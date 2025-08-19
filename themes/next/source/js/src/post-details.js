@@ -8,6 +8,7 @@ $(document).ready(function () {
   initScrollSpy();
   NexT.utils.needAffix() && initAffix();
   initTOCDimension();
+  initDelayedImageLoader();
 
   // if (document.body.clientWidth >= 768) {
   //   // 找出页面上所有 lazy-load 图片
@@ -39,16 +40,17 @@ $(document).ready(function () {
       }
 
       // 获取目标标题相对于文档顶部的偏移
-      const targetTop = target.getBoundingClientRect().top + window.scrollY;
-      let imgCount = 0;
-      // 找出页面上所有在当前位置与目标标题之间的 lazy-load 图片
-      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        const imgTop = img.getBoundingClientRect().top + window.scrollY;
-        if (imgTop <= targetTop && imgTop >= window.scrollY) {
-          img.removeAttribute('loading'); // 立即触发加载
-          imgCount++;
-        }
-      });
+      // const targetTop = target.getBoundingClientRect().top + window.scrollY;
+      // let imgCount = 0;
+      // // 找出页面上所有在当前位置与目标标题之间的 lazy-load 图片
+      // document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      //   const imgTop = img.getBoundingClientRect().top + window.scrollY;
+      //   if (imgTop <= targetTop && imgTop >= window.scrollY) {
+      //     img.removeAttribute('loading'); // 立即触发加载
+      //     imgCount++;
+      //   }
+      // });
+
       // console.log("imgCount=", imgCount);
       const targetSelector = NexT.utils.escapeSelector(cur_href);
 
@@ -79,26 +81,29 @@ $(document).ready(function () {
         //   behavior: 'smooth'
         // });
       }
-      // because the browser only requests 6 ~ 8 images at a time
-      // we assume one request costs 60 ms
-      let originalDelay = (imgCount / 6 * 60);
-      let delay = originalDelay > 300 ? 300 : originalDelay;
-      // if (document.body.clientWidth >= 768) {
+
+      scrollToHref();
+
+      // // because the browser only requests 6 ~ 8 images at a time
+      // // we assume one request costs 60 ms
+      // let originalDelay = (imgCount / 6 * 60);
+      // let delay = originalDelay > 300 ? 300 : originalDelay;
+      // // if (document.body.clientWidth >= 768) {
+      // //     scrollToHref();
+      // // } else {
+      //   // 延迟跳转，等待浏览器加载图片
+      //   setTimeout(() => {
       //     scrollToHref();
-      // } else {
-        // 延迟跳转，等待浏览器加载图片
-        setTimeout(() => {
-          scrollToHref();
-          let secondDelay = 100 + (duration > originalDelay - delay ? duration : originalDelay - delay);
-          setTimeout(() => {
-            let targetOffset = $(targetSelector).offset().top - 170;
-            let diff = window.scrollY - targetOffset;
-            if (diff > 100 || diff < 0) {  // `diff < 0` to avoid that we scroll to position above we what, that way the display of toc would be wrong
-              scrollToHref();  // double check and scroll to the right place
-            }
-          }, secondDelay);
-        }, delay);
-      // }
+      //     let secondDelay = 100 + (duration > originalDelay - delay ? duration : originalDelay - delay);
+      //     setTimeout(() => {
+      //       let targetOffset = $(targetSelector).offset().top - 170;
+      //       let diff = window.scrollY - targetOffset;
+      //       if (diff > 100 || diff < 0) {  // `diff < 0` to avoid that we scroll to position above we what, that way the display of toc would be wrong
+      //         scrollToHref();  // double check and scroll to the right place
+      //       }
+      //     }, secondDelay);
+      //   }, delay);
+      // // }
     });
   });
 
@@ -214,6 +219,38 @@ $(document).ready(function () {
     }
     // height = height || 'auto';
     $('.post-toc').css('max-height', height);
+  }
+  // 使用 Intersection Observer 监听带有 data-src 属性的图片，
+  // 当图片在视口停留1秒后，将 data-src 的值赋给 src 属性来触发加载
+  function initDelayedImageLoader() {
+    const timers = new Map();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // 如果图片在1秒内离开视口，定时器被取消，图片不会加载
+        // 只有图片在视口中停留满1秒，定时器才会执行，触发图片加载
+        if (entry.isIntersecting) {  // 进入视口时（entry.isIntersecting 为 true）
+          const timer = setTimeout(() => {
+            const dataSrc = entry.target.getAttribute('data-src');
+            if (dataSrc) {
+              entry.target.src = dataSrc;
+              observer.unobserve(entry.target);
+            }
+            timers.delete(entry.target);
+          }, 1000);
+          timers.set(entry.target, timer);
+        } else {  // 离开视口时（entry.isIntersecting 为 false）
+          const timer = timers.get(entry.target);
+          if (timer) {
+            clearTimeout(timer);
+            timers.delete(entry.target);
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      observer.observe(img);
+    });
   }
 
 });

@@ -47,8 +47,10 @@
 // });
 
 hexo.extend.filter.register('after_render:html', function (str) {
-  // Use a regex to add loading="lazy" to <img> tags that don't have it
-  return str.replace(/<img(?![^>]*loading=)([^>]*?)>/g, '<img width="800" height="600" loading="lazy"$1>');
+  // 这个代码似乎会执行两遍, 所以得: 现在添加了 (?![^>]*data-src) 负向前瞻，只处理没有 data-src 属性的图片，避免重复处理。
+  // Replace src with data-src and add placeholder, but only if data-src doesn't exist
+  const placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik0zNSAyNUg0NVYzNUgzNVYyNVoiIGZpbGw9IiNEREREREQiLz4KPC9zdmc+';
+  return str.replace(/<img(?![^>]*data-src)([^>]*)\ssrc="([^"]+)"([^>]*)>/g, '<img$1 src="' + placeholder + '" data-src="$2"$3>');
 });
 
 

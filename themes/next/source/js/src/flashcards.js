@@ -738,6 +738,16 @@
     if (this.isAnimating || this.isViewAnimating || this.currentView !== 'flashcard' || !this.currentCardsSet || this.currentCardsSet.length === 0) return;
     this.isFlipped = !this.isFlipped;
     $('#flashcard-modal .flashcard').toggleClass('flipped');
+    
+    // Load images when flipping to back side
+    if (this.isFlipped) {
+      $('#flashcard-modal .flashcard-back img[data-src]').each(function() {
+        const dataSrc = $(this).attr('data-src');
+        if (dataSrc) {
+          $(this).attr('src', dataSrc);
+        }
+      });
+    }
   };
 
   Flashcards.prototype._animateCardSwitch = function (newIndex, maintainFlipState = true) {

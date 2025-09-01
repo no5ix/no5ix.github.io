@@ -33,7 +33,7 @@
 .search-icon {
   position: absolute;
   left: -20px;
-  top: -3px;
+  top: -1px;
   background: transparent;
   border: none;
   font-size: 18px;
@@ -53,6 +53,9 @@
     height: 100%;
     /* 取消双击点击时的黑色高亮, 防止在触摸屏设备上双击时出现黑框。 */
     -webkit-tap-highlight-color: transparent;
+  }
+  +desktop-large() {
+    top: 2px;
   }
   //@media (hover: hover) {
     &:hover {

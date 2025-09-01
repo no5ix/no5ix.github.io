@@ -3,16 +3,17 @@ var copyHtml = '<button class="btn-copy" data-clipboard-snippet> <i class="fa fa
 
 $('.highlight').each(function (i, e) {
 	let language = $(e).attr("class").split(" ")[1]; // 获取第二个类名
+  let langSpanStr = language ? " ● " + language : " ●"
 	if ($(e).children('figcaption').length > 0) {
 		let curSpan = $(e).children('figcaption').children('span');
 		let fileNameStr = curSpan.text();
-		// curSpan.html(" ● " + language + "&nbsp;&nbsp;&nbsp; ● " + fileNameStr);
-		curSpan.html(" ● " + language);
+		// curSpan.html(langSpanStr + "&nbsp;&nbsp;&nbsp; ● " + fileNameStr);
+		curSpan.html(langSpanStr);
 		let fileName = $("<span> ● " + fileNameStr + "</span>");
 		curSpan.after(fileName);
 		fileName.after(copyHtml);
 	} else {
-		let figcaption = $("<figcaption><span>" + " ● " + language + "</span>" + copyHtml + "</figcaption>");
+		let figcaption = $("<figcaption><span>" + langSpanStr + "</span>" + copyHtml + "</figcaption>");
 		$(e).prepend(figcaption);
 	}
 });

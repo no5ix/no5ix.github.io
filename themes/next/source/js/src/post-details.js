@@ -35,14 +35,14 @@ $(document).ready(function () {
 
       e.preventDefault();
 
-      if (window.history) {
-        // 如果支持History API
-        // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
-        // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
-        let state = {title: '', url: cur_href.split("#")[0]};
-        history.pushState(state, '', "#" + cur_href.split("#")[1]);
-        //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
-      }
+      // if (window.history) {
+      //   // 如果支持History API
+      //   // 比如此时window.location为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+      //   // 但因为 `e.preventDefault();`导致浏览器的地址还是http://localhost:9009/2018/10/23/algo_newbie/
+      //   let state = {title: '', url: cur_href.split("#")[0]};
+      //   history.pushState(state, '', "#" + cur_href.split("#")[1]);
+      //   //现在浏览器的地址变为http://localhost:9009/2018/10/23/algo_newbie/#快速排序
+      // }
 
       // 获取目标标题相对于文档顶部的偏移
       // const targetTop = target.getBoundingClientRect().top + window.scrollY;

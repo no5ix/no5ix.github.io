@@ -47,7 +47,7 @@ I've optimized the [original NexT theme](https://github.com/iissnan/hexo-theme-n
 
 # Usage
 
-1. Download Node.js version 10.13.0 here and verify with `node -v`. Using this specific version is crucial—do not modify it.
+1. Install Node.js version 10.13.0 and verify with `node -v`. Using this specific version is crucial—do not modify it.
 2. Delete the `source` folder in this project.
 3. Create a new `source` folder.
 4. Run `npm install -g hexo-cli`, then `npm install --force`.
@@ -55,14 +55,14 @@ I've optimized the [original NexT theme](https://github.com/iissnan/hexo-theme-n
 6. Learn [Hexo's base usage](https://hexo.io/docs/index.html) for Writing/Generating/Deployment .
 7. Learn [NexT](http://theme-next.iissnan.com/getting-started.html). Explore NexT’s documentation for theme-specific configurations.
 8. Modify the configuration files: `/_config.yml` and `/themes/next/_config.yml`
-9. Run `hexo clean` to remove cached files.
+9.  Run `hexo clean` to remove cached files.
 10. Run `hexo generate` to generate static files.
 11. Run `hexo server` to start a local Hexo server.
 
 
 # 用法
 
-1. 这里下载node.js的 10.13.0 的版本](https://nodejs.org/en/blog/release/v10.13.0), 尝试`node -v`, 这个node版本很关键, 不要乱改
+1. 安装node.js的 10.13.0 的版本, 尝试`node -v`, 这个node版本很关键, 不要乱改
 2. 删除我项目中的 `source` 文件夹
 3. 新建一个 `source` 文件夹
 4. `npm install -g hexo-cli`然后再`npm install --force`

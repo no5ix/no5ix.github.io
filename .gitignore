@@ -45,5 +45,4 @@ node_modules/*
 .history/
 .vscode/
 
-alice*.md
 tempCodeRunnerFile*.*

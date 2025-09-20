@@ -47,7 +47,10 @@ I've optimized the [original NexT theme](https://github.com/iissnan/hexo-theme-n
 
 # Usage
 
-1. Install Node.js version 10.13.0 and verify with `node -v`. Using this specific version is crucial—do not modify it.
+1. Install Node.js version 10.13.0 ~ 22.19.0  and verify with `node -v`. Using this specific version is crucial—do not modify it.
+    1. if you use mac, you can run `brew install nvm`
+    2. `nvm install 22.19.0`
+    3. `nvm use 22.19.0`
 2. Delete the `source` folder in this project.
 3. Create a new `source` folder.
 4. Run `npm install -g hexo-cli`, then `npm install --force`.
@@ -62,7 +65,10 @@ I've optimized the [original NexT theme](https://github.com/iissnan/hexo-theme-n
 
 # 用法
 
-1. 安装node.js的 10.13.0 的版本, 尝试`node -v`, 这个node版本很关键, 不要乱改
+1. 安装node.js的 最低10.13.0 到 最高22.19.0 的版本, 尝试`node -v`, 这个node版本很关键, 不要乱改
+    1. if you use mac, you can run `brew install nvm`
+    2. `nvm install 22.19.0`
+    3. `nvm use 22.19.0`
 2. 删除我项目中的 `source` 文件夹
 3. 新建一个 `source` 文件夹
 4. `npm install -g hexo-cli`然后再`npm install --force`
